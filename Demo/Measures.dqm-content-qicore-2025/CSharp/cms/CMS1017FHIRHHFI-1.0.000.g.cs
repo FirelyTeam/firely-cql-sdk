@@ -21,124 +21,124 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
     #region ValueSets (28)
 
     [CqlValueSetDefinition("Abnormal Weight Loss", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1258.2", valueSetVersion: null)]
-    public CqlValueSet? Abnormal_Weight_Loss(CqlContext _) => _Abnormal_Weight_Loss;
-    private static readonly CqlValueSet? _Abnormal_Weight_Loss = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1258.2", null);
+    public CqlValueSet Abnormal_Weight_Loss(CqlContext _) => _Abnormal_Weight_Loss;
+    private static readonly CqlValueSet _Abnormal_Weight_Loss = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1258.2", null);
 
     [CqlValueSetDefinition("Anticoagulants for All Indications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.22", valueSetVersion: null)]
-    public CqlValueSet? Anticoagulants_for_All_Indications(CqlContext _) => _Anticoagulants_for_All_Indications;
-    private static readonly CqlValueSet? _Anticoagulants_for_All_Indications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.22", null);
+    public CqlValueSet Anticoagulants_for_All_Indications(CqlContext _) => _Anticoagulants_for_All_Indications;
+    private static readonly CqlValueSet _Anticoagulants_for_All_Indications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.22", null);
 
     [CqlValueSetDefinition("Antidepressants", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163", valueSetVersion: null)]
-    public CqlValueSet? Antidepressants(CqlContext _) => _Antidepressants;
-    private static readonly CqlValueSet? _Antidepressants = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163", null);
+    public CqlValueSet Antidepressants(CqlContext _) => _Antidepressants;
+    private static readonly CqlValueSet _Antidepressants = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163", null);
 
     [CqlValueSetDefinition("Antihypertensives", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.164", valueSetVersion: null)]
-    public CqlValueSet? Antihypertensives(CqlContext _) => _Antihypertensives;
-    private static readonly CqlValueSet? _Antihypertensives = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.164", null);
+    public CqlValueSet Antihypertensives(CqlContext _) => _Antihypertensives;
+    private static readonly CqlValueSet _Antihypertensives = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.164", null);
 
     [CqlValueSetDefinition("Central Nervous System Depressants", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134", valueSetVersion: null)]
-    public CqlValueSet? Central_Nervous_System_Depressants(CqlContext _) => _Central_Nervous_System_Depressants;
-    private static readonly CqlValueSet? _Central_Nervous_System_Depressants = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134", null);
+    public CqlValueSet Central_Nervous_System_Depressants(CqlContext _) => _Central_Nervous_System_Depressants;
+    private static readonly CqlValueSet _Central_Nervous_System_Depressants = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134", null);
 
     [CqlValueSetDefinition("Coagulation Disorders", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.23", valueSetVersion: null)]
-    public CqlValueSet? Coagulation_Disorders(CqlContext _) => _Coagulation_Disorders;
-    private static readonly CqlValueSet? _Coagulation_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.23", null);
+    public CqlValueSet Coagulation_Disorders(CqlContext _) => _Coagulation_Disorders;
+    private static readonly CqlValueSet _Coagulation_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.23", null);
 
     [CqlValueSetDefinition("Delirium, Dementia, and Other Psychoses", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168", valueSetVersion: null)]
-    public CqlValueSet? Delirium__Dementia__and_Other_Psychoses(CqlContext _) => _Delirium__Dementia__and_Other_Psychoses;
-    private static readonly CqlValueSet? _Delirium__Dementia__and_Other_Psychoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168", null);
+    public CqlValueSet Delirium__Dementia__and_Other_Psychoses(CqlContext _) => _Delirium__Dementia__and_Other_Psychoses;
+    private static readonly CqlValueSet _Delirium__Dementia__and_Other_Psychoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168", null);
 
     [CqlValueSetDefinition("Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.169", valueSetVersion: null)]
-    public CqlValueSet? Depression(CqlContext _) => _Depression;
-    private static readonly CqlValueSet? _Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.169", null);
+    public CqlValueSet Depression(CqlContext _) => _Depression;
+    private static readonly CqlValueSet _Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.169", null);
 
     [CqlValueSetDefinition("Diuretics", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.170", valueSetVersion: null)]
-    public CqlValueSet? Diuretics(CqlContext _) => _Diuretics;
-    private static readonly CqlValueSet? _Diuretics = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.170", null);
+    public CqlValueSet Diuretics(CqlContext _) => _Diuretics;
+    private static readonly CqlValueSet _Diuretics = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.170", null);
 
     [CqlValueSetDefinition("Epilepsy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.171", valueSetVersion: null)]
-    public CqlValueSet? Epilepsy(CqlContext _) => _Epilepsy;
-    private static readonly CqlValueSet? _Epilepsy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.171", null);
+    public CqlValueSet Epilepsy(CqlContext _) => _Epilepsy;
+    private static readonly CqlValueSet _Epilepsy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.171", null);
 
     [CqlValueSetDefinition("Inpatient Falls", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171", valueSetVersion: null)]
-    public CqlValueSet? Inpatient_Falls(CqlContext _) => _Inpatient_Falls;
-    private static readonly CqlValueSet? _Inpatient_Falls = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171", null);
+    public CqlValueSet Inpatient_Falls(CqlContext _) => _Inpatient_Falls;
+    private static readonly CqlValueSet _Inpatient_Falls = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171", null);
 
     [CqlValueSetDefinition("Leukemia or Lymphoma", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.136", valueSetVersion: null)]
-    public CqlValueSet? Leukemia_or_Lymphoma(CqlContext _) => _Leukemia_or_Lymphoma;
-    private static readonly CqlValueSet? _Leukemia_or_Lymphoma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.136", null);
+    public CqlValueSet Leukemia_or_Lymphoma(CqlContext _) => _Leukemia_or_Lymphoma;
+    private static readonly CqlValueSet _Leukemia_or_Lymphoma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.136", null);
 
     [CqlValueSetDefinition("Liver Disease Moderate to Severe", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137", valueSetVersion: null)]
-    public CqlValueSet? Liver_Disease_Moderate_to_Severe(CqlContext _) => _Liver_Disease_Moderate_to_Severe;
-    private static readonly CqlValueSet? _Liver_Disease_Moderate_to_Severe = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137", null);
+    public CqlValueSet Liver_Disease_Moderate_to_Severe(CqlContext _) => _Liver_Disease_Moderate_to_Severe;
+    private static readonly CqlValueSet _Liver_Disease_Moderate_to_Severe = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137", null);
 
     [CqlValueSetDefinition("Major Injuries", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.120", valueSetVersion: null)]
-    public CqlValueSet? Major_Injuries(CqlContext _) => _Major_Injuries;
-    private static readonly CqlValueSet? _Major_Injuries = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.120", null);
+    public CqlValueSet Major_Injuries(CqlContext _) => _Major_Injuries;
+    private static readonly CqlValueSet _Major_Injuries = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.120", null);
 
     [CqlValueSetDefinition("Malignant Bone Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24", valueSetVersion: null)]
-    public CqlValueSet? Malignant_Bone_Disease(CqlContext _) => _Malignant_Bone_Disease;
-    private static readonly CqlValueSet? _Malignant_Bone_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24", null);
+    public CqlValueSet Malignant_Bone_Disease(CqlContext _) => _Malignant_Bone_Disease;
+    private static readonly CqlValueSet _Malignant_Bone_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24", null);
 
     [CqlValueSetDefinition("Malnutrition", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1272.1", valueSetVersion: null)]
-    public CqlValueSet? Malnutrition(CqlContext _) => _Malnutrition;
-    private static readonly CqlValueSet? _Malnutrition = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1272.1", null);
+    public CqlValueSet Malnutrition(CqlContext _) => _Malnutrition;
+    private static readonly CqlValueSet _Malnutrition = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1272.1", null);
 
     [CqlValueSetDefinition("Moderate Injuries", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.205", valueSetVersion: null)]
-    public CqlValueSet? Moderate_Injuries(CqlContext _) => _Moderate_Injuries;
-    private static readonly CqlValueSet? _Moderate_Injuries = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.205", null);
+    public CqlValueSet Moderate_Injuries(CqlContext _) => _Moderate_Injuries;
+    private static readonly CqlValueSet _Moderate_Injuries = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.205", null);
 
     [CqlValueSetDefinition("Neurologic Movement and Related Disorders", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174", valueSetVersion: null)]
-    public CqlValueSet? Neurologic_Movement_and_Related_Disorders(CqlContext _) => _Neurologic_Movement_and_Related_Disorders;
-    private static readonly CqlValueSet? _Neurologic_Movement_and_Related_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174", null);
+    public CqlValueSet Neurologic_Movement_and_Related_Disorders(CqlContext _) => _Neurologic_Movement_and_Related_Disorders;
+    private static readonly CqlValueSet _Neurologic_Movement_and_Related_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174", null);
 
     [CqlValueSetDefinition("Not Present On Admission or Documentation Insufficient to Determine", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", valueSetVersion: null)]
-    public CqlValueSet? Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(CqlContext _) => _Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine;
-    private static readonly CqlValueSet? _Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", null);
+    public CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(CqlContext _) => _Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine;
+    private static readonly CqlValueSet _Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", null);
 
     [CqlValueSetDefinition("Obesity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162", valueSetVersion: null)]
-    public CqlValueSet? Obesity(CqlContext _) => _Obesity;
-    private static readonly CqlValueSet? _Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162", null);
+    public CqlValueSet Obesity(CqlContext _) => _Obesity;
+    private static readonly CqlValueSet _Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162", null);
 
     [CqlValueSetDefinition("Opioids", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.120", valueSetVersion: null)]
-    public CqlValueSet? Opioids(CqlContext _) => _Opioids;
-    private static readonly CqlValueSet? _Opioids = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.120", null);
+    public CqlValueSet Opioids(CqlContext _) => _Opioids;
+    private static readonly CqlValueSet _Opioids = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.120", null);
 
     [CqlValueSetDefinition("Osteoporosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1200.147", valueSetVersion: null)]
-    public CqlValueSet? Osteoporosis(CqlContext _) => _Osteoporosis;
-    private static readonly CqlValueSet? _Osteoporosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1200.147", null);
+    public CqlValueSet Osteoporosis(CqlContext _) => _Osteoporosis;
+    private static readonly CqlValueSet _Osteoporosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1200.147", null);
 
     [CqlValueSetDefinition("Peripheral Neuropathy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175", valueSetVersion: null)]
-    public CqlValueSet? Peripheral_Neuropathy(CqlContext _) => _Peripheral_Neuropathy;
-    private static readonly CqlValueSet? _Peripheral_Neuropathy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175", null);
+    public CqlValueSet Peripheral_Neuropathy(CqlContext _) => _Peripheral_Neuropathy;
+    private static readonly CqlValueSet _Peripheral_Neuropathy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175", null);
 
     [CqlValueSetDefinition("Present on Admission or Clinically Undetermined", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", valueSetVersion: null)]
-    public CqlValueSet? Present_on_Admission_or_Clinically_Undetermined(CqlContext _) => _Present_on_Admission_or_Clinically_Undetermined;
-    private static readonly CqlValueSet? _Present_on_Admission_or_Clinically_Undetermined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
+    public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext _) => _Present_on_Admission_or_Clinically_Undetermined;
+    private static readonly CqlValueSet _Present_on_Admission_or_Clinically_Undetermined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
 
     [CqlValueSetDefinition("Stroke", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176", valueSetVersion: null)]
-    public CqlValueSet? Stroke(CqlContext _) => _Stroke;
-    private static readonly CqlValueSet? _Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176", null);
+    public CqlValueSet Stroke(CqlContext _) => _Stroke;
+    private static readonly CqlValueSet _Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176", null);
 
     [CqlValueSetDefinition("Suicide Attempt", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.130", valueSetVersion: null)]
-    public CqlValueSet? Suicide_Attempt(CqlContext _) => _Suicide_Attempt;
-    private static readonly CqlValueSet? _Suicide_Attempt = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.130", null);
+    public CqlValueSet Suicide_Attempt(CqlContext _) => _Suicide_Attempt;
+    private static readonly CqlValueSet _Suicide_Attempt = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.130", null);
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
-    private static readonly CqlValueSet? _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+    public CqlValueSet Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
+    private static readonly CqlValueSet _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     #endregion ValueSets
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, []);
 
     #endregion CodeSystems
@@ -157,7 +157,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS1017FHIRHHFI-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -246,7 +246,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
         Condition? b_(ResourceReference? EncDiag) {
             IEnumerable<Condition?>? d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition?>? e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, e_ as IEnumerable<Condition?>?);
 
             bool? g_(Condition? Cond) {
                 Id? j_ = Cond?.IdElement;
@@ -260,7 +260,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             return i_;
         }
 
-        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<ResourceReference, Condition>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<ResourceReference, Condition>((IEnumerable<ResourceReference?>?)a_, b_);
         return c_;
     }
 
@@ -283,7 +283,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return o_;
             }
 
-            IEnumerable<CqlConcept?>? f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)d_, e_);
+            IEnumerable<CqlConcept?>? f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)d_, e_);
             CqlValueSet? g_ = this.Inpatient_Falls(context);
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
             IEnumerable<Condition?>? i_ = this.encountersDiagnosis(context, QualifyingFall);
@@ -380,11 +380,11 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
             bool? q_(Claim.ItemComponent? I) {
                 List<ResourceReference?>? t_ = I?.Encounter;
-                bool? u_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)t_, encounter);
+                bool? u_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)t_, encounter);
                 return u_;
             }
 
-            bool? r_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)p_, q_);
+            bool? r_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)p_, q_);
             bool? s_ = context.Operators.And(o_, r_);
             return s_;
         }
@@ -398,7 +398,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 bool? z_(Claim.ItemComponent? I) {
                     List<ResourceReference?>? al_ = I?.Encounter;
-                    bool? am_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)al_, encounter);
+                    bool? am_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)al_, encounter);
                     PositiveInt? an_ = D?.SequenceElement;
                     int? ao_ = an_?.Value;
                     List<PositiveInt?>? ap_ = I?.DiagnosisSequenceElement;
@@ -408,13 +408,13 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                         return au_;
                     }
 
-                    IEnumerable<int?>? ar_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)ap_, aq_);
+                    IEnumerable<int?>? ar_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt?>?)ap_, aq_);
                     bool? as_ = context.Operators.In<int?>(ao_, ar_);
                     bool? at_ = context.Operators.And(am_, as_);
                     return at_;
                 }
 
-                bool? aa_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)y_, z_);
+                bool? aa_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)y_, z_);
                 CodeableConcept? ab_ = D?.OnAdmission;
                 CqlConcept? ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_);
                 CqlValueSet? ad_ = this.Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(context);
@@ -423,12 +423,12 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = D?.Diagnosis;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                bool? aj_ = context.Operators.ConceptInValueSet(ai_ as CqlConcept, diagnosisValueSet);
+                bool? aj_ = context.Operators.ConceptInValueSet(ai_ as CqlConcept?, diagnosisValueSet);
                 bool? ak_ = context.Operators.And(ag_, aj_);
                 return ak_;
             }
 
-            IEnumerable<Claim.DiagnosisComponent?>? x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)v_, w_);
+            IEnumerable<Claim.DiagnosisComponent?>? x_ = context.Operators.Where<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent?>?)v_, w_);
             return x_;
         }
 
@@ -482,8 +482,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 DataType? l_ = MajorFallOccurred?.Diagnosis;
                 object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 CqlValueSet? n_ = this.Major_Injuries(context);
-                bool? o_ = context.Operators.ConceptInValueSet(m_ as CqlConcept, n_);
-                Condition? p_ = CQMCommon_4_1_000.Instance.getCondition(context, m_ as ResourceReference);
+                bool? o_ = context.Operators.ConceptInValueSet(m_ as CqlConcept?, n_);
+                Condition? p_ = CQMCommon_4_1_000.Instance.getCondition(context, m_ as ResourceReference?);
                 CodeableConcept? q_ = p_?.Code;
                 CqlConcept? r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 bool? s_ = context.Operators.ConceptInValueSet(r_, n_);
@@ -523,8 +523,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 DataType? l_ = ModerateFallOccurred?.Diagnosis;
                 object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
                 CqlValueSet? n_ = this.Moderate_Injuries(context);
-                bool? o_ = context.Operators.ConceptInValueSet(m_ as CqlConcept, n_);
-                Condition? p_ = CQMCommon_4_1_000.Instance.getCondition(context, m_ as ResourceReference);
+                bool? o_ = context.Operators.ConceptInValueSet(m_ as CqlConcept?, n_);
+                Condition? p_ = CQMCommon_4_1_000.Instance.getCondition(context, m_ as ResourceReference?);
                 CodeableConcept? q_ = p_?.Code;
                 CqlConcept? r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
                 bool? s_ = context.Operators.ConceptInValueSet(r_, n_);
@@ -626,7 +626,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 CqlInterval<CqlDateTime?>? m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
                 bool? n_ = context.Operators.In<CqlDateTime>(l_, m_, (string)default);
                 DataType? o_ = BMI?.Value;
-                CqlQuantity? p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_ as Quantity);
+                CqlQuantity? p_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, o_ as Quantity?);
                 bool? q_ = context.Operators.Not((bool?)(p_ is null));
                 bool? r_ = context.Operators.And(n_, q_);
                 Code<ObservationStatus>? s_ = BMI?.StatusElement;
@@ -637,7 +637,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "amended",
                     "corrected",
                 ];
-                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string>)v_);
+                bool? w_ = context.Operators.In<string>(u_, (IEnumerable<string?>?)v_);
                 bool? x_ = context.Operators.And(r_, w_);
                 return x_;
             }
@@ -649,8 +649,8 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
         CqlQuantity? c_(Observation? BMI) {
             DataType? y_ = BMI?.Value;
-            CqlQuantity? z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
-            return z_ as CqlQuantity;
+            CqlQuantity? z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity?);
+            return z_ as CqlQuantity?;
         }
 
         IEnumerable<CqlQuantity?>? d_ = context.Operators.WhereSelect<Observation, CqlQuantity>(a_, b_, c_);
@@ -660,16 +660,16 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
 
     [CqlExpressionDefinition("Risk Variable All Encounter Diagnoses with Rank and POA Indication")]
-    public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>? Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? encounterId, IEnumerable<Claim.DiagnosisComponent?>? diagnosis, IEnumerable<int?>? rank, IEnumerable<Claim.DiagnosisComponent?>? POA)?>? Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication, Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication_Compute);
 
     private const long _cacheIndex_Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication = 7202944664208919231L;
 
-    private IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>? Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? encounterId, IEnumerable<Claim.DiagnosisComponent?>? diagnosis, IEnumerable<int?>? rank, IEnumerable<Claim.DiagnosisComponent?>? POA)?>? Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Qualifying_Encounter(context);
 
-        (CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)? b_(Encounter? InpatientEncounter) {
+        (CqlTupleMetadata, string? encounterId, IEnumerable<Claim.DiagnosisComponent?>? diagnosis, IEnumerable<int?>? rank, IEnumerable<Claim.DiagnosisComponent?>? POA)? b_(Encounter? InpatientEncounter) {
             Id? d_ = InpatientEncounter?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Claim?>? f_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-claim"));
@@ -688,11 +688,11 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 bool? ao_(Claim.ItemComponent? ClaimItem) {
                     List<ResourceReference?>? ar_ = ClaimItem?.Encounter;
-                    bool? as_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ar_, InpatientEncounter);
+                    bool? as_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)ar_, InpatientEncounter);
                     return as_;
                 }
 
-                bool? ap_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)an_, ao_);
+                bool? ap_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)an_, ao_);
                 bool? aq_ = context.Operators.And(am_, ap_);
                 return aq_;
             }
@@ -712,7 +712,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             }
 
             IEnumerable<List<Claim.DiagnosisComponent?>?>? k_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(h_, i_, j_);
-            IEnumerable<Claim.DiagnosisComponent?>? l_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)k_);
+            IEnumerable<Claim.DiagnosisComponent?>? l_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>?)k_);
 
             bool? m_(Claim? C) {
                 Code<FinancialResourceStatusCodes>? aw_ = C?.StatusElement;
@@ -728,11 +728,11 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 bool? bg_(Claim.ItemComponent? ClaimItem) {
                     List<ResourceReference?>? bj_ = ClaimItem?.Encounter;
-                    bool? bk_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bj_, InpatientEncounter);
+                    bool? bk_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)bj_, InpatientEncounter);
                     return bk_;
                 }
 
-                bool? bh_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bf_, bg_);
+                bool? bh_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)bf_, bg_);
                 bool? bi_ = context.Operators.And(be_, bh_);
                 return bi_;
             }
@@ -752,7 +752,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             }
 
             IEnumerable<List<Claim.DiagnosisComponent?>?>? q_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(n_, o_, p_);
-            IEnumerable<Claim.DiagnosisComponent?>? r_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)q_);
+            IEnumerable<Claim.DiagnosisComponent?>? r_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>?)q_);
 
             bool? s_(Claim.DiagnosisComponent? @this) {
                 PositiveInt? bo_ = @this?.SequenceElement;
@@ -784,11 +784,11 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
                 bool? cd_(Claim.ItemComponent? ClaimItem) {
                     List<ResourceReference?>? cg_ = ClaimItem?.Encounter;
-                    bool? ch_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)cg_, InpatientEncounter);
+                    bool? ch_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)cg_, InpatientEncounter);
                     return ch_;
                 }
 
-                bool? ce_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)cc_, cd_);
+                bool? ce_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)cc_, cd_);
                 bool? cf_ = context.Operators.And(cb_, ce_);
                 return cf_;
             }
@@ -808,7 +808,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             }
 
             IEnumerable<List<Claim.DiagnosisComponent?>?>? z_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(w_, x_, y_);
-            IEnumerable<Claim.DiagnosisComponent?>? aa_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)z_);
+            IEnumerable<Claim.DiagnosisComponent?>? aa_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>?)z_);
 
             bool? ab_(Claim.DiagnosisComponent? Diag) {
                 CodeableConcept? cl_ = Diag?.OnAdmission;
@@ -822,11 +822,11 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             }
 
             IEnumerable<Claim.DiagnosisComponent?>? ac_ = context.Operators.Where<Claim.DiagnosisComponent>(aa_, ab_);
-            (CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)? ad_ = (CqlTupleMetadata_DSSBhUTbQjBZiPCFMDNfdCQVg, e_, l_, u_, ac_);
+            (CqlTupleMetadata, string? encounterId, IEnumerable<Claim.DiagnosisComponent?>? diagnosis, IEnumerable<int?>? rank, IEnumerable<Claim.DiagnosisComponent?>? POA)? ad_ = (CqlTupleMetadata_DSSBhUTbQjBZiPCFMDNfdCQVg, e_, l_, u_, ac_);
             return ad_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? encounterId, IEnumerable<Claim.DiagnosisComponent?>? diagnosis, IEnumerable<int?>? rank, IEnumerable<Claim.DiagnosisComponent?>? POA)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string encounterId, IEnumerable<Claim.DiagnosisComponent> diagnosis, IEnumerable<int?> rank, IEnumerable<Claim.DiagnosisComponent> POA)?>(a_, b_);
         return c_;
     }
 
@@ -875,7 +875,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -903,7 +903,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = Anticoagulants?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -919,7 +919,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -930,7 +930,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
                 CqlDate? av_ = au_?.low;
@@ -975,7 +975,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1009,7 +1009,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "in-progress",
                     "completed",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string?>?)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 return aj_;
             }
@@ -1042,7 +1042,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1070,7 +1070,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = AntidepressantMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -1086,7 +1086,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -1097,7 +1097,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
                 CqlDate? av_ = au_?.low;
@@ -1142,7 +1142,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1170,7 +1170,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = BPMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -1186,7 +1186,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -1197,7 +1197,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
                 CqlDate? av_ = au_?.low;
@@ -1242,7 +1242,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1270,7 +1270,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = CNSMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -1286,7 +1286,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -1297,7 +1297,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
                 CqlDate? av_ = au_?.low;
@@ -1342,7 +1342,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1370,7 +1370,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = DiureticMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -1386,7 +1386,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -1397,7 +1397,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
                 CqlDate? av_ = au_?.low;
@@ -1442,7 +1442,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1470,7 +1470,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = OpioidMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -1486,7 +1486,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 if (bh_)
                 {
                     Patient? bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    am_ = (bi_ as Resource?).IdElement;
                 }
                 else
                 {
@@ -1497,7 +1497,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? ap_ = context.Operators.And(ah_, ao_);
                 bool? aq_ = context.Operators.Or(ag_, ap_);
                 bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
+                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest?);
                 bool? at_ = context.Operators.And(ar_, as_);
                 CqlInterval<CqlDate?>? au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
                 CqlDate? av_ = au_?.low;
@@ -1826,40 +1826,40 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -7188146491602681279L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -6065141591157605130L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -2041073189866593713L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

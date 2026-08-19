@@ -326,10 +326,11 @@ internal partial class CSharpEmitter
 
         var atom = child(cast.Operand);
         var operand = atom.Code.ParenthesizeIfNeeded();
-        var typeName = _typeToCSharpConverter.ToCSharp(cast.Type);
 
         if (cast.Kind == CodeCastKind.As)
-            return $"{operand} as {typeName}";
+            return $"{operand} as {_typeToCSharpConverter.ToCSharp(cast.Type)}";
+
+        var typeName = _typeToCSharpConverter.ToCSharpDeclaration(cast.Type);
 
         // When no direct C# conversion exists from the printed operand's type to the target
         // type (e.g. a bool constant typed as object printing as its literal), route the cast

@@ -21,28 +21,28 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     #region ValueSets (6)
 
     [CqlValueSetDefinition("Female Administrative Sex", valueSetId: "2.16.840.1.113883.3.560.100.2", valueSetVersion: null)]
-    public CqlValueSet? Female_Administrative_Sex(CqlContext _) => _Female_Administrative_Sex;
-    private static readonly CqlValueSet? _Female_Administrative_Sex = new CqlValueSet("2.16.840.1.113883.3.560.100.2", null);
+    public CqlValueSet Female_Administrative_Sex(CqlContext _) => _Female_Administrative_Sex;
+    private static readonly CqlValueSet _Female_Administrative_Sex = new CqlValueSet("2.16.840.1.113883.3.560.100.2", null);
 
     [CqlValueSetDefinition("Other Female Reproductive Conditions", valueSetId: "2.16.840.1.113883.3.464.1003.111.12.1006", valueSetVersion: null)]
-    public CqlValueSet? Other_Female_Reproductive_Conditions(CqlContext _) => _Other_Female_Reproductive_Conditions;
-    private static readonly CqlValueSet? _Other_Female_Reproductive_Conditions = new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", null);
+    public CqlValueSet Other_Female_Reproductive_Conditions(CqlContext _) => _Other_Female_Reproductive_Conditions;
+    private static readonly CqlValueSet _Other_Female_Reproductive_Conditions = new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", null);
 
     [CqlValueSetDefinition("Genital Herpes", valueSetId: "2.16.840.1.113883.3.464.1003.110.12.1049", valueSetVersion: null)]
-    public CqlValueSet? Genital_Herpes(CqlContext _) => _Genital_Herpes;
-    private static readonly CqlValueSet? _Genital_Herpes = new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", null);
+    public CqlValueSet Genital_Herpes(CqlContext _) => _Genital_Herpes;
+    private static readonly CqlValueSet _Genital_Herpes = new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", null);
 
     [CqlValueSetDefinition("Genococcal Infections and Venereal Diseases", valueSetId: "2.16.840.1.113883.3.464.1003.112.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Genococcal_Infections_and_Venereal_Diseases(CqlContext _) => _Genococcal_Infections_and_Venereal_Diseases;
-    private static readonly CqlValueSet? _Genococcal_Infections_and_Venereal_Diseases = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", null);
+    public CqlValueSet Genococcal_Infections_and_Venereal_Diseases(CqlContext _) => _Genococcal_Infections_and_Venereal_Diseases;
+    private static readonly CqlValueSet _Genococcal_Infections_and_Venereal_Diseases = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", null);
 
     [CqlValueSetDefinition("Inflammatory Diseases of Female Reproductive Organs", valueSetId: "2.16.840.1.113883.3.464.1003.112.12.1004", valueSetVersion: null)]
-    public CqlValueSet? Inflammatory_Diseases_of_Female_Reproductive_Organs(CqlContext _) => _Inflammatory_Diseases_of_Female_Reproductive_Organs;
-    private static readonly CqlValueSet? _Inflammatory_Diseases_of_Female_Reproductive_Organs = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", null);
+    public CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs(CqlContext _) => _Inflammatory_Diseases_of_Female_Reproductive_Organs;
+    private static readonly CqlValueSet _Inflammatory_Diseases_of_Female_Reproductive_Organs = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", null);
 
     [CqlValueSetDefinition("Chlamydia", valueSetId: "2.16.840.1.113883.3.464.1003.112.12.1003", valueSetVersion: null)]
-    public CqlValueSet? Chlamydia(CqlContext _) => _Chlamydia;
-    private static readonly CqlValueSet? _Chlamydia = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", null);
+    public CqlValueSet Chlamydia(CqlContext _) => _Chlamydia;
+    private static readonly CqlValueSet _Chlamydia = new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", null);
 
     #endregion ValueSets
 

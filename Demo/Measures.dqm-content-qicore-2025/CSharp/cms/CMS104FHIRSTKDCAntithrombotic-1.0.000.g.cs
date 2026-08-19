@@ -21,20 +21,20 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
     #region ValueSets (4)
 
     [CqlValueSetDefinition("Antithrombotic Therapy for Ischemic Stroke", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", valueSetVersion: null)]
-    public CqlValueSet? Antithrombotic_Therapy_for_Ischemic_Stroke(CqlContext _) => _Antithrombotic_Therapy_for_Ischemic_Stroke;
-    private static readonly CqlValueSet? _Antithrombotic_Therapy_for_Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", null);
+    public CqlValueSet Antithrombotic_Therapy_for_Ischemic_Stroke(CqlContext _) => _Antithrombotic_Therapy_for_Ischemic_Stroke;
+    private static readonly CqlValueSet _Antithrombotic_Therapy_for_Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", null);
 
     [CqlValueSetDefinition("Medical Reason For Not Providing Treatment", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", valueSetVersion: null)]
-    public CqlValueSet? Medical_Reason_For_Not_Providing_Treatment(CqlContext _) => _Medical_Reason_For_Not_Providing_Treatment;
-    private static readonly CqlValueSet? _Medical_Reason_For_Not_Providing_Treatment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext _) => _Medical_Reason_For_Not_Providing_Treatment;
+    private static readonly CqlValueSet _Medical_Reason_For_Not_Providing_Treatment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
 
     [CqlValueSetDefinition("Patient Refusal", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", valueSetVersion: null)]
-    public CqlValueSet? Patient_Refusal(CqlContext _) => _Patient_Refusal;
-    private static readonly CqlValueSet? _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+    public CqlValueSet Patient_Refusal(CqlContext _) => _Patient_Refusal;
+    private static readonly CqlValueSet _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
 
     [CqlValueSetDefinition("Pharmacological Contraindications For Antithrombotic Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", valueSetVersion: null)]
-    public CqlValueSet? Pharmacological_Contraindications_For_Antithrombotic_Therapy(CqlContext _) => _Pharmacological_Contraindications_For_Antithrombotic_Therapy;
-    private static readonly CqlValueSet? _Pharmacological_Contraindications_For_Antithrombotic_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", null);
+    public CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy(CqlContext _) => _Pharmacological_Contraindications_For_Antithrombotic_Therapy;
+    private static readonly CqlValueSet _Pharmacological_Contraindications_For_Antithrombotic_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", null);
 
     #endregion ValueSets
 
@@ -52,7 +52,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS104FHIRSTKDCAntithrombotic-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -134,7 +134,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -162,7 +162,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = DischargeAntithrombotic?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -173,10 +173,10 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     "filler-order",
                     "instance-order",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string?>?)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
-                bool? aj_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest);
-                bool? ak_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest);
+                bool? aj_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest?);
+                bool? ak_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest?);
                 bool? al_ = context.Operators.Or(aj_, ak_);
                 bool? am_ = context.Operators.And(ai_, al_);
                 FhirDateTime? an_ = DischargeAntithrombotic?.AuthoredOnElement;
@@ -234,7 +234,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            IEnumerable<CqlConcept?>? p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
+            IEnumerable<CqlConcept?>? p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)n_, o_);
             CqlValueSet? q_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
             bool? r_ = context.Operators.ConceptsInValueSet(p_, q_);
 
@@ -243,12 +243,12 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return ao_;
             }
 
-            IEnumerable<CqlConcept?>? t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, s_);
+            IEnumerable<CqlConcept?>? t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)n_, s_);
             CqlValueSet? u_ = this.Patient_Refusal(context);
             bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
             bool? w_ = context.Operators.Or(r_, v_);
-            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest);
-            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest);
+            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest?);
+            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest?);
             bool? z_ = context.Operators.Or(x_, y_);
             bool? aa_ = context.Operators.And(w_, z_);
             Code<MedicationRequest.MedicationrequestStatus>? ab_ = NoAntithromboticDischarge?.StatusElement;
@@ -258,7 +258,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
             bool? ag_ = context.Operators.And(aa_, af_);
             Code<MedicationRequest.MedicationRequestIntent>? ah_ = NoAntithromboticDischarge?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -270,7 +270,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string?>?)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
             return am_;
         }
@@ -284,7 +284,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             bool? aq_(Medication? M) {
                 object? as_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? at_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? au_ = context.Operators.Split((string)at_, "/");
+                IEnumerable<string?>? au_ = context.Operators.Split((string?)at_, "/");
                 string? av_ = context.Operators.Last<string>(au_);
                 bool? aw_ = context.Operators.Equal(as_, av_);
                 CodeableConcept? ax_ = M?.Code;
@@ -324,7 +324,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
+                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string?>?)bs_);
                 bool? bu_ = context.Operators.And(bo_, bt_);
                 CodeableConcept? bv_ = TaskReject?.Code;
                 CqlConcept? bw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bv_);
@@ -340,7 +340,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         }
 
         IEnumerable<MedicationRequest?>? l_ = context.Operators.Where<MedicationRequest>(j_, k_);
-        IEnumerable<MedicationRequest?>? m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest>, l_ as IEnumerable<MedicationRequest>);
+        IEnumerable<MedicationRequest?>? m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest?>?, l_ as IEnumerable<MedicationRequest?>?);
         return m_;
     }
 
@@ -392,7 +392,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             bool? j_(Medication? M) {
                 object? l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? n_ = context.Operators.Split((string)m_, "/");
+                IEnumerable<string?>? n_ = context.Operators.Split((string?)m_, "/");
                 string? o_ = context.Operators.Last<string>(n_);
                 bool? p_ = context.Operators.Equal(l_, o_);
                 CodeableConcept? q_ = M?.Code;
@@ -413,8 +413,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest?>? f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest? PharmacologicalContraindications) {
-            bool? v_ = QICoreCommon_4_0_000.Instance.isCommunity(context, PharmacologicalContraindications as MedicationRequest);
-            bool? w_ = QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest);
+            bool? v_ = QICoreCommon_4_0_000.Instance.isCommunity(context, PharmacologicalContraindications as MedicationRequest?);
+            bool? w_ = QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest?);
             bool? x_ = context.Operators.Or(v_, w_);
             Code<MedicationRequest.MedicationrequestStatus>? y_ = PharmacologicalContraindications?.StatusElement;
             MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
@@ -423,7 +423,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+            bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             Code<MedicationRequest.MedicationRequestIntent>? ae_ = PharmacologicalContraindications?.IntentElement;
             MedicationRequest.MedicationRequestIntent? af_ = ae_?.Value;
@@ -435,7 +435,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+            bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string?>?)ah_);
             bool? aj_ = context.Operators.And(ad_, ai_);
             return aj_;
         }
@@ -492,40 +492,40 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -359088283904004804L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -2063428192400241437L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -1708161774006754230L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

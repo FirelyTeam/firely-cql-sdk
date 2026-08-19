@@ -75,6 +75,8 @@ internal record TypeCSharpFormat(
     bool NoNullableOperator = false,          // e.g. Nullable<int> instead of int?
     bool NoGenericTypeParameterNames = false, // e.g. IDictionary<,> instead of  IDictionary<TKey,TValue>
     bool UseRefOperator = false,              // e.g. int& instead of only int
+    bool NullableReferenceTypes = false,      // e.g. string? instead of string
+    Func<Type, bool>? RendersItsOwnNullOperator = null, // types whose FormatName already appends '?'
     ListTokens? GenericArgumentTokens = null,
     ListTokens? ArrayTokens = null,
     string NestedTypeSeparator = ".")         // A.Nested.Nested
@@ -103,6 +105,7 @@ internal record TypeCSharpFormat(
         if (UseKeywords && type.GetCSharpKeyword() is { } keyword)
         {
             textWriter.Write(keyword);
+            WriteNullableReferenceOperator(type, textWriter);
             return;
         }
 
@@ -117,7 +120,10 @@ internal record TypeCSharpFormat(
                 DeclaringType: {} declaringType
             })
         {
-            WriteTo(declaringType, textWriter);
+            // The declaring type appears purely as a name qualifier (A.Nested), so it never
+            // carries a nullable annotation of its own.
+            (NullableReferenceTypes ? this with { NullableReferenceTypes = false } : this)
+                .WriteTo(declaringType, textWriter);
             textWriter.Write(NestedTypeSeparator);
             hideNamespaces = true; // Nested types are always in the same namespace.
         }
@@ -228,10 +234,33 @@ internal record TypeCSharpFormat(
         if (type.IsPointer)
             textWriter.Write(PointerOperator);
 
+        // Blanket nullable annotation for reference types, written last so it lands after any
+        // array brackets and generic arguments.
+        WriteNullableReferenceOperator(type, textWriter);
+
         return;
 
         void WriteShortName() =>
             FormatName(new TypeNameCSharpFormatContext(type, this with {NoNamespaces = hideNamespaces})).WriteTo(textWriter);
+    }
+
+    private void WriteNullableReferenceOperator(
+        Type type,
+        IBasicTextWriter textWriter)
+    {
+        if (!NullableReferenceTypes)
+            return;
+
+        // Value types carry their own nullability (the NullOperator written above); pointers and
+        // byrefs cannot be annotated, and an unconstrained generic parameter has no meaningful
+        // annotation without a constraint.
+        if (type.IsValueType || type.IsPointer || type.IsByRef || type.IsGenericParameter)
+            return;
+
+        if (RendersItsOwnNullOperator?.Invoke(type) == true)
+            return;
+
+        textWriter.Write(NullOperator);
     }
 }
 

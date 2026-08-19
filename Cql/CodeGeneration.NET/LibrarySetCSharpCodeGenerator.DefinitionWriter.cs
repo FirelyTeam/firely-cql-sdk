@@ -60,7 +60,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             var quotedCodeId = cd.Code.code!.QuoteString();
             var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
-            var cqlCodeType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharpDeclaration(typeof(CqlCode));
+            var cqlCodeType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlCode));
             ISB.AppendLine(
                 $$"""
                   [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
@@ -75,7 +75,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
             string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
-            var cqlCodeSystemType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharpDeclaration(typeof(CqlCodeSystem));
+            var cqlCodeSystemType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlCodeSystem));
             string arrayOfCodes = string.Join(
                 ",",
                 csd.CodeSystem.codes.Select(code =>
@@ -103,7 +103,7 @@ partial class LibrarySetCSharpCodeGenerator
         {
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedConceptDisplay = ccd.Display.QuoteOrNullString();
-            var cqlConceptType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharpDeclaration(typeof(CqlConcept));
+            var cqlConceptType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlConcept));
             string arrayOfCodes = string.Join(
                 ",",
                 ccd.Codes.Select(code =>
@@ -133,7 +133,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedValueSetId = vsd.ValueSetId.QuoteString();
             string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
-            var cqlValueSetType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharpDeclaration(typeof(CqlValueSet));
+            var cqlValueSetType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlValueSet));
             ISB.AppendLine(
                 $$"""
                   [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]

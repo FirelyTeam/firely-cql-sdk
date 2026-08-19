@@ -21,32 +21,32 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
     #region ValueSets (3)
 
     [CqlValueSetDefinition("Palliative Care Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Encounter(CqlContext _) => _Palliative_Care_Encounter;
-    private static readonly CqlValueSet? _Palliative_Care_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", null);
+    public CqlValueSet Palliative_Care_Encounter(CqlContext _) => _Palliative_Care_Encounter;
+    private static readonly CqlValueSet _Palliative_Care_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", null);
 
     [CqlValueSetDefinition("Palliative Care Intervention", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Intervention(CqlContext _) => _Palliative_Care_Intervention;
-    private static readonly CqlValueSet? _Palliative_Care_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", null);
+    public CqlValueSet Palliative_Care_Intervention(CqlContext _) => _Palliative_Care_Intervention;
+    private static readonly CqlValueSet _Palliative_Care_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", null);
 
     [CqlValueSetDefinition("Palliative Care Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Diagnosis(CqlContext _) => _Palliative_Care_Diagnosis;
-    private static readonly CqlValueSet? _Palliative_Care_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", null);
+    public CqlValueSet Palliative_Care_Diagnosis(CqlContext _) => _Palliative_Care_Diagnosis;
+    private static readonly CqlValueSet _Palliative_Care_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", null);
 
     #endregion ValueSets
 
     #region Codes (1)
 
     [CqlCodeDefinition("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)", codeId: "71007-9", codeSystem: "http://loinc.org")]
-    public CqlCode? Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
-    private static readonly CqlCode? _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
+    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
+    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_]);
 
@@ -63,7 +63,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("PalliativeCare-1.18.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -111,7 +111,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
         CqlValueSet? g_ = this.Palliative_Care_Diagnosis(context);
         IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? j_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? j_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition?>?, i_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? k_ = Status_1_15_000.Instance.verified(context, j_);
 
         bool? l_(Condition? PalliativeDiagnosis) {
@@ -150,7 +150,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             {
                 DataType? at_ = PalliativeIntervention?.Performed;
                 object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                am_ = au_ as CqlDateTime;
+                am_ = au_ as CqlDateTime?;
             }
             else
             {
@@ -161,7 +161,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                 {
                     DataType? ay_ = PalliativeIntervention?.Performed;
                     object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                    am_ = az_ as CqlQuantity;
+                    am_ = az_ as CqlQuantity?;
                 }
                 else
                 {
@@ -172,7 +172,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                     {
                         DataType? bd_ = PalliativeIntervention?.Performed;
                         object? be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                        am_ = be_ as CqlInterval<CqlDateTime>;
+                        am_ = be_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -183,7 +183,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
                         {
                             DataType? bi_ = PalliativeIntervention?.Performed;
                             object? bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                            am_ = bj_ as CqlInterval<CqlQuantity>;
+                            am_ = bj_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {

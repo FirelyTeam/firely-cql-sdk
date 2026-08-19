@@ -136,7 +136,7 @@ public class CSharpEmitterTests
         var lambda = new CodeLambda([], array);
 
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-5);\n    int[] b_ = [\n        a_,\n        a_,\n    ];\n    return b_;\n}",
+            "{\n    int a_ = Math.Abs(-5);\n    int[]? b_ = [\n        a_,\n        a_,\n    ];\n    return b_;\n}",
             EmitBody(lambda));
     }
 
@@ -373,7 +373,7 @@ public class CSharpEmitterTests
             "    }\n" +
             "    else\n" +
             "    {\n" +
-            "        string a_ = string.Concat(s, s);\n" +
+            "        string? a_ = string.Concat(s, s);\n" +
             "        bool b_ = string.IsNullOrEmpty(a_);\n" +
             "        if (b_)\n" +
             "        {\n" +
@@ -623,7 +623,7 @@ public class CSharpEmitterTests
         // rendering that never matched the old pipeline (found via the HEDIS 2025 corpus —
         // ResultParameters/HFS_Elements construct a FHIR Parameters resource this way).
         Assert.AreEqual(
-            "{\n    CSharpEmitterTestWidget a_ = new CSharpEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
+            "{\n    CSharpEmitterTestWidget? a_ = new CSharpEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
             EmitBody(new CodeLambda([], memberInit)));
     }
 
@@ -634,7 +634,7 @@ public class CSharpEmitterTests
         // the old writer's array format (see CSharpEmitter.Print.cs PrintNewArray).
         var newArray = new CodeNewArray(typeof(int), new CodeConstant(1, typeof(int)), new CodeConstant(2, typeof(int)));
         Assert.AreEqual(
-            "{\n    int[] a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
+            "{\n    int[]? a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
             EmitBody(new CodeLambda([], newArray)));
 
         // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
@@ -644,7 +644,7 @@ public class CSharpEmitterTests
         // build an empty typed array this way, e.g. "Immunization[] k_ = [];").
         var newArrayBounds = new CodeNewArrayBounds(typeof(string), new CodeConstant(0, typeof(int)));
         Assert.AreEqual(
-            "{\n    string[] a_ = [];\n    return a_;\n}",
+            "{\n    string?[]? a_ = [];\n    return a_;\n}",
             EmitBody(new CodeLambda([], newArrayBounds)));
 
         // A non-zero length has no print form (no builder path produces one); the emitter
@@ -662,7 +662,7 @@ public class CSharpEmitterTests
         var lambda = new CodeLambda([], tupleInit);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
             EmitBody(lambda));
     }
 
@@ -678,7 +678,7 @@ public class CSharpEmitterTests
             [("B", new CodeConstant("x", typeof(string))), ("A", new CodeConstant(1, typeof(int?)))]);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
             EmitBody(new CodeLambda([], tupleInit)));
     }
 
@@ -691,7 +691,7 @@ public class CSharpEmitterTests
         var tupleInit = new CodeTupleInit(tupleType, [("B", new CodeConstant("x", typeof(string)))]);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, default, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, default, \"x\");\n    return a_;\n}",
             EmitBody(new CodeLambda([], tupleInit)));
     }
 
@@ -746,7 +746,7 @@ public class CSharpEmitterTests
             "FHIRHelpers", "4.0.1", "ToCode", isLocalLibrary: false,
             [CodeContextParameter.Instance, innerArgument], typeof(string));
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-3);\n    string b_ = FHIRHelpers_4_0_1.Instance.ToCode(context, a_);\n    return b_;\n}",
+            "{\n    int a_ = Math.Abs(-3);\n    string? b_ = FHIRHelpers_4_0_1.Instance.ToCode(context, a_);\n    return b_;\n}",
             EmitBody(new CodeLambda([], foreignCall)));
     }
 

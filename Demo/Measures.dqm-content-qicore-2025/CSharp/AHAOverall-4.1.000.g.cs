@@ -21,76 +21,76 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     #region ValueSets (14)
 
     [CqlValueSetDefinition("Care Services in Long Term Residential Facility", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", valueSetVersion: null)]
-    public CqlValueSet? Care_Services_in_Long_Term_Residential_Facility(CqlContext _) => _Care_Services_in_Long_Term_Residential_Facility;
-    private static readonly CqlValueSet? _Care_Services_in_Long_Term_Residential_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
+    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext _) => _Care_Services_in_Long_Term_Residential_Facility;
+    private static readonly CqlValueSet _Care_Services_in_Long_Term_Residential_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
 
     [CqlValueSetDefinition("Ejection Fraction", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", valueSetVersion: null)]
-    public CqlValueSet? Ejection_Fraction(CqlContext _) => _Ejection_Fraction;
-    private static readonly CqlValueSet? _Ejection_Fraction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", null);
+    public CqlValueSet Ejection_Fraction(CqlContext _) => _Ejection_Fraction;
+    private static readonly CqlValueSet _Ejection_Fraction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1134", null);
 
     [CqlValueSetDefinition("Heart Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", valueSetVersion: null)]
-    public CqlValueSet? Heart_Failure(CqlContext _) => _Heart_Failure;
-    private static readonly CqlValueSet? _Heart_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", null);
+    public CqlValueSet Heart_Failure(CqlContext _) => _Heart_Failure;
+    private static readonly CqlValueSet _Heart_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", null);
 
     [CqlValueSetDefinition("Heart Transplant", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", valueSetVersion: null)]
-    public CqlValueSet? Heart_Transplant(CqlContext _) => _Heart_Transplant;
-    private static readonly CqlValueSet? _Heart_Transplant = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", null);
+    public CqlValueSet Heart_Transplant(CqlContext _) => _Heart_Transplant;
+    private static readonly CqlValueSet _Heart_Transplant = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.33", null);
 
     [CqlValueSetDefinition("Heart Transplant Complications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", valueSetVersion: null)]
-    public CqlValueSet? Heart_Transplant_Complications(CqlContext _) => _Heart_Transplant_Complications;
-    private static readonly CqlValueSet? _Heart_Transplant_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", null);
+    public CqlValueSet Heart_Transplant_Complications(CqlContext _) => _Heart_Transplant_Complications;
+    private static readonly CqlValueSet _Heart_Transplant_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.56", null);
 
     [CqlValueSetDefinition("Home Healthcare Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", valueSetVersion: null)]
-    public CqlValueSet? Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
-    private static readonly CqlValueSet? _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+    public CqlValueSet Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
+    private static readonly CqlValueSet _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
 
     [CqlValueSetDefinition("Left Ventricular Assist Device Complications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", valueSetVersion: null)]
-    public CqlValueSet? Left_Ventricular_Assist_Device_Complications(CqlContext _) => _Left_Ventricular_Assist_Device_Complications;
-    private static readonly CqlValueSet? _Left_Ventricular_Assist_Device_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", null);
+    public CqlValueSet Left_Ventricular_Assist_Device_Complications(CqlContext _) => _Left_Ventricular_Assist_Device_Complications;
+    private static readonly CqlValueSet _Left_Ventricular_Assist_Device_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.58", null);
 
     [CqlValueSetDefinition("Left Ventricular Assist Device Placement", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", valueSetVersion: null)]
-    public CqlValueSet? Left_Ventricular_Assist_Device_Placement(CqlContext _) => _Left_Ventricular_Assist_Device_Placement;
-    private static readonly CqlValueSet? _Left_Ventricular_Assist_Device_Placement = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", null);
+    public CqlValueSet Left_Ventricular_Assist_Device_Placement(CqlContext _) => _Left_Ventricular_Assist_Device_Placement;
+    private static readonly CqlValueSet _Left_Ventricular_Assist_Device_Placement = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61", null);
 
     [CqlValueSetDefinition("Moderate or Severe", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", valueSetVersion: null)]
-    public CqlValueSet? Moderate_or_Severe(CqlContext _) => _Moderate_or_Severe;
-    private static readonly CqlValueSet? _Moderate_or_Severe = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", null);
+    public CqlValueSet Moderate_or_Severe(CqlContext _) => _Moderate_or_Severe;
+    private static readonly CqlValueSet _Moderate_or_Severe = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1092", null);
 
     [CqlValueSetDefinition("Moderate or Severe LVSD", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", valueSetVersion: null)]
-    public CqlValueSet? Moderate_or_Severe_LVSD(CqlContext _) => _Moderate_or_Severe_LVSD;
-    private static readonly CqlValueSet? _Moderate_or_Severe_LVSD = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", null);
+    public CqlValueSet Moderate_or_Severe_LVSD(CqlContext _) => _Moderate_or_Severe_LVSD;
+    private static readonly CqlValueSet _Moderate_or_Severe_LVSD = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", null);
 
     [CqlValueSetDefinition("Nursing Facility Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", valueSetVersion: null)]
-    public CqlValueSet? Nursing_Facility_Visit(CqlContext _) => _Nursing_Facility_Visit;
-    private static readonly CqlValueSet? _Nursing_Facility_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
+    public CqlValueSet Nursing_Facility_Visit(CqlContext _) => _Nursing_Facility_Visit;
+    private static readonly CqlValueSet _Nursing_Facility_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
 
     [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Office_Visit(CqlContext _) => _Office_Visit;
-    private static readonly CqlValueSet? _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Outpatient Consultation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", valueSetVersion: null)]
-    public CqlValueSet? Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
-    private static readonly CqlValueSet? _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+    public CqlValueSet Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
+    private static readonly CqlValueSet _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
 
     [CqlValueSetDefinition("Patient Provider Interaction", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", valueSetVersion: null)]
-    public CqlValueSet? Patient_Provider_Interaction(CqlContext _) => _Patient_Provider_Interaction;
-    private static readonly CqlValueSet? _Patient_Provider_Interaction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", null);
+    public CqlValueSet Patient_Provider_Interaction(CqlContext _) => _Patient_Provider_Interaction;
+    private static readonly CqlValueSet _Patient_Provider_Interaction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1012", null);
 
     #endregion ValueSets
 
     #region Codes (1)
 
     [CqlCodeDefinition("Left ventricular systolic dysfunction (disorder)", codeId: "134401001", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Left_ventricular_systolic_dysfunction__disorder_(CqlContext _) => _Left_ventricular_systolic_dysfunction__disorder_;
-    private static readonly CqlCode? _Left_ventricular_systolic_dysfunction__disorder_ = new CqlCode("134401001", "http://snomed.info/sct");
+    public CqlCode Left_ventricular_systolic_dysfunction__disorder_(CqlContext _) => _Left_ventricular_systolic_dysfunction__disorder_;
+    private static readonly CqlCode _Left_ventricular_systolic_dysfunction__disorder_ = new CqlCode("134401001", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Left_ventricular_systolic_dysfunction__disorder_]);
 
@@ -107,7 +107,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("AHAOverall-4.1.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -228,7 +228,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlValueSet? f_ = this.Heart_Failure(context);
             IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition?>?, h_ as IEnumerable<Condition?>?);
 
             bool? j_(Condition? HeartFailure) {
                 CqlInterval<CqlDateTime?>? l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HeartFailure);
@@ -277,7 +277,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             DataType? t_ = EjectionFraction?.Value;
             object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
             CqlQuantity? v_ = context.Operators.Quantity(40m, "%");
-            bool? w_ = context.Operators.LessOrEqual(u_ as CqlQuantity, v_);
+            bool? w_ = context.Operators.LessOrEqual(u_ as CqlQuantity?, v_);
             Code<ObservationStatus>? x_ = EjectionFraction?.StatusElement;
             ObservationStatus? y_ = x_?.Value;
             string? z_ = context.Operators.Convert<string>(y_);
@@ -286,7 +286,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "amended",
                 "corrected",
             ];
-            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string?>?)aa_);
             bool? ac_ = context.Operators.And(w_, ab_);
             return ac_;
         }
@@ -295,12 +295,12 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet? e_ = this.Moderate_or_Severe_LVSD(context);
         IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition?>?, g_ as IEnumerable<Condition?>?);
         CqlCode? i_ = this.Left_ventricular_systolic_dysfunction__disorder_(context);
         IEnumerable<CqlCode?>? j_ = context.Operators.ToList<CqlCode>(i_);
         IEnumerable<Condition?>? k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? m_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? m_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition?>?, l_ as IEnumerable<Condition?>?);
 
         bool? n_(Condition? LVSDDiagnosis) {
             CodeableConcept? ad_ = LVSDDiagnosis?.Severity;
@@ -319,7 +319,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         }
 
         IEnumerable<Condition?>? r_ = context.Operators.Where<Condition>(p_, q_);
-        IEnumerable<object?>? s_ = context.Operators.Union<object>(d_ as IEnumerable<object>, r_ as IEnumerable<object>);
+        IEnumerable<object?>? s_ = context.Operators.Union<object>(d_ as IEnumerable<object?>?, r_ as IEnumerable<object?>?);
         return s_;
     }
 
@@ -339,7 +339,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             IEnumerable<object?>? d_ = this.Moderate_or_Severe_LVSD_Findings(context);
 
             bool? e_(object? LVSDFindings) {
-                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
+                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition?);
                 object? h_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
                 object? i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
@@ -372,7 +372,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet? a_ = this.Heart_Transplant_Complications(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
 
         bool? e_(Condition? HeartTransplantComplications) {
             IEnumerable<Encounter?>? i_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
@@ -431,7 +431,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 {
                     DataType? t_ = LVADPlacement?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlDateTime;
+                    j_ = u_ as CqlDateTime?;
                 }
                 else
                 {
@@ -442,7 +442,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     {
                         DataType? y_ = LVADPlacement?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlQuantity?;
                     }
                     else
                     {
@@ -453,7 +453,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         {
                             DataType? ad_ = LVADPlacement?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlInterval<CqlDateTime>;
+                            j_ = ae_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -464,7 +464,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                             {
                                 DataType? ai_ = LVADPlacement?.Performed;
                                 object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                                j_ = aj_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -513,7 +513,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet? a_ = this.Left_Ventricular_Assist_Device_Complications(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
 
         bool? e_(Condition? LVADComplications) {
             IEnumerable<Encounter?>? i_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
@@ -614,7 +614,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 {
                     DataType? t_ = HeartTransplant?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlDateTime;
+                    j_ = u_ as CqlDateTime?;
                 }
                 else
                 {
@@ -625,7 +625,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     {
                         DataType? y_ = HeartTransplant?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = z_ as CqlQuantity?;
                     }
                     else
                     {
@@ -636,7 +636,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         {
                             DataType? ad_ = HeartTransplant?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlInterval<CqlDateTime>;
+                            j_ = ae_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -647,7 +647,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                             {
                                 DataType? ai_ = HeartTransplant?.Performed;
                                 object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                                j_ = aj_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -749,7 +749,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "active",
                 "completed",
             ];
-            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string?>?)l_);
             bool? n_ = context.Operators.And(h_, m_);
             Code<MedicationRequest.MedicationRequestIntent>? o_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? p_ = o_?.Value;
@@ -761,7 +761,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "filler-order",
                 "instance-order",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string?>?)r_);
             bool? t_ = context.Operators.And(n_, s_);
             IEnumerable<Task?>? u_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -807,7 +807,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "completed",
                 "active",
             ];
-            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string>)l_);
+            bool? m_ = context.Operators.In<string>(k_, (IEnumerable<string?>?)l_);
             bool? n_ = context.Operators.And(h_, m_);
             Code<MedicationRequest.MedicationRequestIntent>? o_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? p_ = o_?.Value;
@@ -819,7 +819,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "filler-order",
                 "instance-order",
             ];
-            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string?>?)r_);
             bool? t_ = context.Operators.And(n_, s_);
             IEnumerable<Task?>? u_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -905,7 +905,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             {
                 DataType? q_ = Procedure?.Performed;
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                d_ = r_ as CqlDateTime;
+                d_ = r_ as CqlDateTime?;
             }
             else
             {
@@ -916,7 +916,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 {
                     DataType? v_ = Procedure?.Performed;
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    d_ = w_ as CqlQuantity;
+                    d_ = w_ as CqlQuantity?;
                 }
                 else
                 {
@@ -927,7 +927,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                     {
                         DataType? aa_ = Procedure?.Performed;
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        d_ = ab_ as CqlInterval<CqlDateTime>;
+                        d_ = ab_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -938,7 +938,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                         {
                             DataType? af_ = Procedure?.Performed;
                             object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            d_ = ag_ as CqlInterval<CqlQuantity>;
+                            d_ = ag_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -1014,7 +1014,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return ap_;
             }
 
-            IEnumerable<Timing?>? g_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)d_, e_, f_);
+            IEnumerable<Timing?>? g_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)d_, e_, f_);
 
             bool? h_(Timing? @this) {
                 Timing.RepeatComponent? aq_ = @this?.Repeat;
@@ -1073,7 +1073,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "active",
                 "completed",
             ];
-            bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
+            bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string?>?)z_);
             bool? ab_ = context.Operators.And(v_, aa_);
             Code<MedicationRequest.MedicationRequestIntent>? ac_ = MedicationRequest?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
@@ -1085,7 +1085,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "filler-order",
                 "instance-order",
             ];
-            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
             bool? ah_ = context.Operators.And(ab_, ag_);
             IEnumerable<Task?>? ai_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
@@ -1134,7 +1134,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(i_, n_);
             return o_;
         }
@@ -1149,26 +1149,26 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     {
         if (choice is CqlInterval<CqlDateTime>)
         {
-            return choice as CqlInterval<CqlDateTime>;
+            return choice as CqlInterval<CqlDateTime?>?;
         }
         else if (choice is CqlInterval<CqlQuantity>)
         {
             object? a_ = context.Operators.LateBoundProperty<object>(choice, "low");
-            CqlDateTime? b_ = context.Operators.Add(startDate, a_ as CqlQuantity);
+            CqlDateTime? b_ = context.Operators.Add(startDate, a_ as CqlQuantity?);
             object? c_ = context.Operators.LateBoundProperty<object>(choice, "high");
-            CqlDateTime? d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
+            CqlDateTime? d_ = context.Operators.Add(startDate, c_ as CqlQuantity?);
             CqlInterval<CqlDateTime?>? e_ = context.Operators.Interval(b_, d_, true, true);
             return e_;
         }
         else if (choice is CqlQuantity)
         {
-            CqlDateTime? f_ = context.Operators.Add(startDate, choice as CqlQuantity);
+            CqlDateTime? f_ = context.Operators.Add(startDate, choice as CqlQuantity?);
             CqlInterval<CqlDateTime?>? g_ = context.Operators.Interval(startDate, f_, true, false);
             return g_;
         }
         else
         {
-            return null as CqlInterval<CqlDateTime>;
+            return null as CqlInterval<CqlDateTime?>?;
         }
     }
 

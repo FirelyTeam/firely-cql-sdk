@@ -21,24 +21,24 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
     #region Codes (3)
 
     [CqlCodeDefinition("Diabetes Mellitus", codeId: "44054006", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Diabetes_Mellitus(CqlContext _) => _Diabetes_Mellitus;
-    private static readonly CqlCode? _Diabetes_Mellitus = new CqlCode("44054006", "http://snomed.info/sct");
+    public CqlCode Diabetes_Mellitus(CqlContext _) => _Diabetes_Mellitus;
+    private static readonly CqlCode _Diabetes_Mellitus = new CqlCode("44054006", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Hypertension Example", codeId: "38341003", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Hypertension_Example(CqlContext _) => _Hypertension_Example;
-    private static readonly CqlCode? _Hypertension_Example = new CqlCode("38341003", "http://snomed.info/sct");
+    public CqlCode Hypertension_Example(CqlContext _) => _Hypertension_Example;
+    private static readonly CqlCode _Hypertension_Example = new CqlCode("38341003", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Medication Example", codeId: "763158003", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Medication_Example(CqlContext _) => _Medication_Example;
-    private static readonly CqlCode? _Medication_Example = new CqlCode("763158003", "http://snomed.info/sct");
+    public CqlCode Medication_Example(CqlContext _) => _Medication_Example;
+    private static readonly CqlCode _Medication_Example = new CqlCode("763158003", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMED", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMED(CqlContext _) => _SNOMED;
-    private static readonly CqlCodeSystem? _SNOMED =
+    public CqlCodeSystem SNOMED(CqlContext _) => _SNOMED;
+    private static readonly CqlCodeSystem _SNOMED =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Diabetes_Mellitus,
           _Hypertension_Example,
@@ -49,22 +49,22 @@ public partial class ConceptDefTest_1_0_0 : ILibrary, ISingleton<ConceptDefTest_
     #region Concepts (3)
 
     [CqlConceptDefinition("Diabetes")]
-    public CqlConcept? Diabetes(CqlContext _) => _Diabetes;
-    private static readonly CqlConcept? _Diabetes =
+    public CqlConcept Diabetes(CqlContext _) => _Diabetes;
+    private static readonly CqlConcept _Diabetes =
       new CqlConcept([
           _Diabetes_Mellitus],
           null);
 
     [CqlConceptDefinition("Hypertension")]
-    public CqlConcept? Hypertension(CqlContext _) => _Hypertension;
-    private static readonly CqlConcept? _Hypertension =
+    public CqlConcept Hypertension(CqlContext _) => _Hypertension;
+    private static readonly CqlConcept _Hypertension =
       new CqlConcept([
           _Hypertension_Example],
           null);
 
     [CqlConceptDefinition("Medication")]
-    public CqlConcept? Medication(CqlContext _) => _Medication;
-    private static readonly CqlConcept? _Medication =
+    public CqlConcept Medication(CqlContext _) => _Medication;
+    private static readonly CqlConcept _Medication =
       new CqlConcept([
           _Medication_Example],
           null);

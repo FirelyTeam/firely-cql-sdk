@@ -21,43 +21,43 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
     #region Codes (6)
 
     [CqlCodeDefinition("exam", codeId: "exam", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? exam(CqlContext _) => _exam;
-    private static readonly CqlCode? _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode exam(CqlContext _) => _exam;
+    private static readonly CqlCode _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("imaging", codeId: "imaging", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? imaging(CqlContext _) => _imaging;
-    private static readonly CqlCode? _imaging = new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode imaging(CqlContext _) => _imaging;
+    private static readonly CqlCode _imaging = new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? confirmed(CqlContext _) => _confirmed;
-    private static readonly CqlCode? _confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode confirmed(CqlContext _) => _confirmed;
+    private static readonly CqlCode _confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? unconfirmed(CqlContext _) => _unconfirmed;
-    private static readonly CqlCode? _unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode unconfirmed(CqlContext _) => _unconfirmed;
+    private static readonly CqlCode _unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("provisional", codeId: "provisional", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? provisional(CqlContext _) => _provisional;
-    private static readonly CqlCode? _provisional = new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode provisional(CqlContext _) => _provisional;
+    private static readonly CqlCode _provisional = new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("differential", codeId: "differential", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? differential(CqlContext _) => _differential;
-    private static readonly CqlCode? _differential = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode differential(CqlContext _) => _differential;
+    private static readonly CqlCode _differential = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
-    public CqlCodeSystem? ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
-    private static readonly CqlCodeSystem? _ObservationCategoryCodes =
+    public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
+    private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
           _exam,
           _imaging]);
 
     [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
-    public CqlCodeSystem? ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
-    private static readonly CqlCodeSystem? _ConditionVerificationStatusCodes =
+    public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
+    private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
           _confirmed,
           _unconfirmed,
@@ -127,7 +127,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -149,7 +149,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -161,7 +161,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
@@ -184,7 +184,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -196,7 +196,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
@@ -219,7 +219,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -231,7 +231,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
@@ -254,7 +254,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -266,7 +266,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(h_, n_);
             return o_;
         }
@@ -289,7 +289,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             List<CodeableConcept?>? h_ = O?.Category;
 
             CqlConcept? i_(CodeableConcept? @this) {
@@ -305,7 +305,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return q_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)h_, i_, j_);
             bool? l_ = context.Operators.Exists<CqlConcept>(k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
@@ -397,7 +397,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -425,7 +425,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             bool? l_ = context.Operators.And(f_, k_);
             return l_;
         }
@@ -448,7 +448,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "in-progress",
                 "on-hold",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -469,7 +469,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "active",
                 "completed",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             Code<MedicationRequest.MedicationRequestIntent>? h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
             string? j_ = context.Operators.Convert<string>(i_);
@@ -480,7 +480,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "filler-order",
                 "instance-order",
             ];
-            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string?>?)k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
         }
@@ -503,7 +503,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             List<CodeableConcept?>? h_ = O?.Category;
 
             CqlConcept? i_(CodeableConcept? @this) {
@@ -519,7 +519,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 return q_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)h_, i_, j_);
+            IEnumerable<CqlConcept?>? k_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)h_, i_, j_);
             bool? l_ = context.Operators.Exists<CqlConcept>(k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
@@ -543,7 +543,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -565,7 +565,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -587,7 +587,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -609,7 +609,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -631,7 +631,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -671,7 +671,7 @@ public partial class Status_1_15_000 : ILibrary, ISingleton<Status_1_15_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 

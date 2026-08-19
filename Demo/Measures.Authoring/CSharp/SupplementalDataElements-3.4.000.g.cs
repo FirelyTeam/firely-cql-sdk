@@ -21,20 +21,20 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     #region ValueSets (4)
 
     [CqlValueSetDefinition("Ethnicity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", valueSetVersion: null)]
-    public CqlValueSet? Ethnicity(CqlContext _) => _Ethnicity;
-    private static readonly CqlValueSet? _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+    public CqlValueSet Ethnicity(CqlContext _) => _Ethnicity;
+    private static readonly CqlValueSet _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
 
     [CqlValueSetDefinition("ONC Administrative Sex", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", valueSetVersion: null)]
-    public CqlValueSet? ONC_Administrative_Sex(CqlContext _) => _ONC_Administrative_Sex;
-    private static readonly CqlValueSet? _ONC_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+    public CqlValueSet ONC_Administrative_Sex(CqlContext _) => _ONC_Administrative_Sex;
+    private static readonly CqlValueSet _ONC_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
 
     [CqlValueSetDefinition("Payer Type", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", valueSetVersion: null)]
-    public CqlValueSet? Payer_Type(CqlContext _) => _Payer_Type;
-    private static readonly CqlValueSet? _Payer_Type = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+    public CqlValueSet Payer_Type(CqlContext _) => _Payer_Type;
+    private static readonly CqlValueSet _Payer_Type = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
 
     [CqlValueSetDefinition("Race", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", valueSetVersion: null)]
-    public CqlValueSet? Race(CqlContext _) => _Race;
-    private static readonly CqlValueSet? _Race = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+    public CqlValueSet Race(CqlContext _) => _Race;
+    private static readonly CqlValueSet _Race = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
 
     #endregion ValueSets
 
@@ -55,12 +55,12 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -5377255478558118731L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
         List<Extension?>? a_;
         Patient? i_ = this.Patient(context);
@@ -68,7 +68,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         if (j_)
         {
             Patient? k_ = this.Patient(context);
-            a_ = (k_ as DomainResource).Extension;
+            a_ = (k_ as DomainResource?).Extension;
         }
         else
         {
@@ -82,13 +82,13 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             return n_;
         }
 
-        IEnumerable<Extension?>? c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
+        IEnumerable<Extension?>? c_ = context.Operators.Where<Extension>((IEnumerable<Extension?>?)a_, b_);
         Extension? d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension?[]? e_ = [
             d_,
         ];
 
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension? E) {
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? f_(Extension? E) {
 
             bool? o_(Extension? @this) {
                 FhirUri? ag_ = @this?.UrlElement;
@@ -103,11 +103,11 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return aj_;
             }
 
-            IEnumerable<object?>? q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(E is Element
-                ? (E as Element).Extension
+            IEnumerable<object?>? q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(E is Element
+                ? (E as Element?).Extension
                 : default), o_, p_);
             object? r_ = context.Operators.SingletonFrom<object>(q_);
-            CqlCode? s_ = FHIRHelpers_4_3_000.Instance.ToCode(context, r_ as Coding);
+            CqlCode? s_ = FHIRHelpers_4_3_000.Instance.ToCode(context, r_ as Coding?);
             CqlCode?[]? t_ = [
                 s_,
             ];
@@ -125,17 +125,17 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return an_;
             }
 
-            IEnumerable<object?>? w_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(E is Element
-                ? (E as Element).Extension
+            IEnumerable<object?>? w_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(E is Element
+                ? (E as Element?).Extension
                 : default), u_, v_);
 
             CqlCode? x_(object? @this) {
-                CqlCode? ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode? ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding?);
                 return ao_;
             }
 
             IEnumerable<CqlCode?>? y_ = context.Operators.Select<object, CqlCode>(w_, x_);
-            IEnumerable<CqlCode?>? z_ = context.Operators.ValueSetUnion((IEnumerable<CqlCode>)t_, y_);
+            IEnumerable<CqlCode?>? z_ = context.Operators.ValueSetUnion((IEnumerable<CqlCode?>?)t_, y_);
 
             bool? aa_(Extension? @this) {
                 FhirUri? ap_ = @this?.UrlElement;
@@ -150,53 +150,53 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return as_;
             }
 
-            IEnumerable<DataType?>? ac_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(E is Element
-                ? (E as Element).Extension
+            IEnumerable<DataType?>? ac_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension?>?)(E is Element
+                ? (E as Element?).Extension
                 : default), aa_, ab_);
             DataType? ad_ = context.Operators.SingletonFrom<DataType>(ac_);
             string? ae_ = context.Operators.Convert<string>(ad_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? af_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, z_, ae_);
+            (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? af_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, z_, ae_);
             return af_;
         }
 
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>? g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)?>? g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension?>?)e_, f_);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
         return h_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 441587053582915267L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Payer_Type(context);
         IEnumerable<Coverage?>? b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 
-        (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage? Payer) {
+        (CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)? c_(Coverage? Payer) {
             CodeableConcept? e_ = Payer?.Type;
             CqlConcept? f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
             Period? g_ = Payer?.Period;
             CqlInterval<CqlDateTime?>? h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
-            (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? i_ = (CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ, f_, h_);
+            (CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)? i_ = (CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ, f_, h_);
             return i_;
         }
 
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? d_ = context.Operators.SelectDistinct<Coverage, (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(b_, c_);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? d_ = context.Operators.SelectDistinct<Coverage, (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(b_, c_);
         return d_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 611400612990559444L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
         List<Extension?>? a_;
         Patient? i_ = this.Patient(context);
@@ -204,7 +204,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         if (j_)
         {
             Patient? k_ = this.Patient(context);
-            a_ = (k_ as DomainResource).Extension;
+            a_ = (k_ as DomainResource?).Extension;
         }
         else
         {
@@ -218,13 +218,13 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             return n_;
         }
 
-        IEnumerable<Extension?>? c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
+        IEnumerable<Extension?>? c_ = context.Operators.Where<Extension>((IEnumerable<Extension?>?)a_, b_);
         Extension? d_ = context.Operators.SingletonFrom<Extension>(c_);
         Extension?[]? e_ = [
             d_,
         ];
 
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension? R) {
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? f_(Extension? R) {
 
             bool? o_(Extension? @this) {
                 FhirUri? af_ = @this?.UrlElement;
@@ -239,12 +239,12 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return ai_;
             }
 
-            IEnumerable<object?>? q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(R is Element
-                ? (R as Element).Extension
+            IEnumerable<object?>? q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(R is Element
+                ? (R as Element?).Extension
                 : default), o_, p_);
 
             CqlCode? r_(object? @this) {
-                CqlCode? aj_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode? aj_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding?);
                 return aj_;
             }
 
@@ -263,12 +263,12 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return an_;
             }
 
-            IEnumerable<object?>? v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(R is Element
-                ? (R as Element).Extension
+            IEnumerable<object?>? v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(R is Element
+                ? (R as Element?).Extension
                 : default), t_, u_);
 
             CqlCode? w_(object? @this) {
-                CqlCode? ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                CqlCode? ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding?);
                 return ao_;
             }
 
@@ -288,17 +288,17 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 return as_;
             }
 
-            IEnumerable<DataType?>? ab_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(R is Element
-                ? (R as Element).Extension
+            IEnumerable<DataType?>? ab_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension?>?)(R is Element
+                ? (R as Element?).Extension
                 : default), z_, aa_);
             DataType? ac_ = context.Operators.SingletonFrom<DataType>(ab_);
             string? ad_ = context.Operators.Convert<string>(ac_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ae_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, y_, ad_);
+            (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? ae_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, y_, ad_);
             return ae_;
         }
 
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>? g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
+        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)?>? g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension?>?)e_, f_);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
         return h_;
     }
 

@@ -21,87 +21,87 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     #region ValueSets (11)
 
     [CqlValueSetDefinition("Adolescent Depression Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1567", valueSetVersion: null)]
-    public CqlValueSet? Adolescent_Depression_Medications(CqlContext _) => _Adolescent_Depression_Medications;
-    private static readonly CqlValueSet? _Adolescent_Depression_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1567", null);
+    public CqlValueSet Adolescent_Depression_Medications(CqlContext _) => _Adolescent_Depression_Medications;
+    private static readonly CqlValueSet _Adolescent_Depression_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1567", null);
 
     [CqlValueSetDefinition("Adult Depression Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1566", valueSetVersion: null)]
-    public CqlValueSet? Adult_Depression_Medications(CqlContext _) => _Adult_Depression_Medications;
-    private static readonly CqlValueSet? _Adult_Depression_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1566", null);
+    public CqlValueSet Adult_Depression_Medications(CqlContext _) => _Adult_Depression_Medications;
+    private static readonly CqlValueSet _Adult_Depression_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1566", null);
 
     [CqlValueSetDefinition("Bipolar Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", valueSetVersion: null)]
-    public CqlValueSet? Bipolar_Disorder(CqlContext _) => _Bipolar_Disorder;
-    private static readonly CqlValueSet? _Bipolar_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", null);
+    public CqlValueSet Bipolar_Disorder(CqlContext _) => _Bipolar_Disorder;
+    private static readonly CqlValueSet _Bipolar_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", null);
 
     [CqlValueSetDefinition("Encounter to Screen for Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1916", valueSetVersion: null)]
-    public CqlValueSet? Encounter_to_Screen_for_Depression(CqlContext _) => _Encounter_to_Screen_for_Depression;
-    private static readonly CqlValueSet? _Encounter_to_Screen_for_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1916", null);
+    public CqlValueSet Encounter_to_Screen_for_Depression(CqlContext _) => _Encounter_to_Screen_for_Depression;
+    private static readonly CqlValueSet _Encounter_to_Screen_for_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1916", null);
 
     [CqlValueSetDefinition("Follow Up for Adolescent Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1569", valueSetVersion: null)]
-    public CqlValueSet? Follow_Up_for_Adolescent_Depression(CqlContext _) => _Follow_Up_for_Adolescent_Depression;
-    private static readonly CqlValueSet? _Follow_Up_for_Adolescent_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1569", null);
+    public CqlValueSet Follow_Up_for_Adolescent_Depression(CqlContext _) => _Follow_Up_for_Adolescent_Depression;
+    private static readonly CqlValueSet _Follow_Up_for_Adolescent_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1569", null);
 
     [CqlValueSetDefinition("Follow Up for Adult Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1568", valueSetVersion: null)]
-    public CqlValueSet? Follow_Up_for_Adult_Depression(CqlContext _) => _Follow_Up_for_Adult_Depression;
-    private static readonly CqlValueSet? _Follow_Up_for_Adult_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1568", null);
+    public CqlValueSet Follow_Up_for_Adult_Depression(CqlContext _) => _Follow_Up_for_Adult_Depression;
+    private static readonly CqlValueSet _Follow_Up_for_Adult_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1568", null);
 
     [CqlValueSetDefinition("Medical Reason", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", valueSetVersion: null)]
-    public CqlValueSet? Medical_Reason(CqlContext _) => _Medical_Reason;
-    private static readonly CqlValueSet? _Medical_Reason = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
+    public CqlValueSet Medical_Reason(CqlContext _) => _Medical_Reason;
+    private static readonly CqlValueSet _Medical_Reason = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", null);
 
     [CqlValueSetDefinition("Physical Therapy Evaluation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", valueSetVersion: null)]
-    public CqlValueSet? Physical_Therapy_Evaluation(CqlContext _) => _Physical_Therapy_Evaluation;
-    private static readonly CqlValueSet? _Physical_Therapy_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", null);
+    public CqlValueSet Physical_Therapy_Evaluation(CqlContext _) => _Physical_Therapy_Evaluation;
+    private static readonly CqlValueSet _Physical_Therapy_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", null);
 
     [CqlValueSetDefinition("Referral for Adolescent Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1570", valueSetVersion: null)]
-    public CqlValueSet? Referral_for_Adolescent_Depression(CqlContext _) => _Referral_for_Adolescent_Depression;
-    private static readonly CqlValueSet? _Referral_for_Adolescent_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1570", null);
+    public CqlValueSet Referral_for_Adolescent_Depression(CqlContext _) => _Referral_for_Adolescent_Depression;
+    private static readonly CqlValueSet _Referral_for_Adolescent_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1570", null);
 
     [CqlValueSetDefinition("Referral for Adult Depression", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1571", valueSetVersion: null)]
-    public CqlValueSet? Referral_for_Adult_Depression(CqlContext _) => _Referral_for_Adult_Depression;
-    private static readonly CqlValueSet? _Referral_for_Adult_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1571", null);
+    public CqlValueSet Referral_for_Adult_Depression(CqlContext _) => _Referral_for_Adult_Depression;
+    private static readonly CqlValueSet _Referral_for_Adult_Depression = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1571", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
-    public CqlValueSet? Telephone_Visits(CqlContext _) => _Telephone_Visits;
-    private static readonly CqlValueSet? _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+    public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
+    private static readonly CqlValueSet _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     #endregion ValueSets
 
     #region Codes (5)
 
     [CqlCodeDefinition("Adolescent depression screening assessment", codeId: "73831-0", codeSystem: "http://loinc.org")]
-    public CqlCode? Adolescent_depression_screening_assessment(CqlContext _) => _Adolescent_depression_screening_assessment;
-    private static readonly CqlCode? _Adolescent_depression_screening_assessment = new CqlCode("73831-0", "http://loinc.org");
+    public CqlCode Adolescent_depression_screening_assessment(CqlContext _) => _Adolescent_depression_screening_assessment;
+    private static readonly CqlCode _Adolescent_depression_screening_assessment = new CqlCode("73831-0", "http://loinc.org");
 
     [CqlCodeDefinition("Adult depression screening assessment", codeId: "73832-8", codeSystem: "http://loinc.org")]
-    public CqlCode? Adult_depression_screening_assessment(CqlContext _) => _Adult_depression_screening_assessment;
-    private static readonly CqlCode? _Adult_depression_screening_assessment = new CqlCode("73832-8", "http://loinc.org");
+    public CqlCode Adult_depression_screening_assessment(CqlContext _) => _Adult_depression_screening_assessment;
+    private static readonly CqlCode _Adult_depression_screening_assessment = new CqlCode("73832-8", "http://loinc.org");
 
     [CqlCodeDefinition("Depression screening declined (situation)", codeId: "720834000", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Depression_screening_declined__situation_(CqlContext _) => _Depression_screening_declined__situation_;
-    private static readonly CqlCode? _Depression_screening_declined__situation_ = new CqlCode("720834000", "http://snomed.info/sct");
+    public CqlCode Depression_screening_declined__situation_(CqlContext _) => _Depression_screening_declined__situation_;
+    private static readonly CqlCode _Depression_screening_declined__situation_ = new CqlCode("720834000", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Depression screening negative (finding)", codeId: "428171000124102", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Depression_screening_negative__finding_(CqlContext _) => _Depression_screening_negative__finding_;
-    private static readonly CqlCode? _Depression_screening_negative__finding_ = new CqlCode("428171000124102", "http://snomed.info/sct");
+    public CqlCode Depression_screening_negative__finding_(CqlContext _) => _Depression_screening_negative__finding_;
+    private static readonly CqlCode _Depression_screening_negative__finding_ = new CqlCode("428171000124102", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Depression screening positive (finding)", codeId: "428181000124104", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Depression_screening_positive__finding_(CqlContext _) => _Depression_screening_positive__finding_;
-    private static readonly CqlCode? _Depression_screening_positive__finding_ = new CqlCode("428181000124104", "http://snomed.info/sct");
+    public CqlCode Depression_screening_positive__finding_(CqlContext _) => _Depression_screening_positive__finding_;
+    private static readonly CqlCode _Depression_screening_positive__finding_ = new CqlCode("428181000124104", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Adolescent_depression_screening_assessment,
           _Adult_depression_screening_assessment]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Depression_screening_declined__situation_,
           _Depression_screening_negative__finding_,
@@ -123,7 +123,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS2FHIRPCSDepScreenAndFollowUp-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -245,7 +245,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Encounter?>? e_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 
             bool? f_(Encounter? QualifyingEncounter) {
-                CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BipolarDiagnosis as Condition);
+                CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BipolarDiagnosis as Condition?);
                 CqlDateTime? i_ = context.Operators.Start(h_);
                 Period? j_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime?>? k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
@@ -340,7 +340,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
                 bool? ah_ = context.Operators.And(ab_, ag_);
                 return ah_;
             }
@@ -383,11 +383,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlCode? i_ = this.Depression_screening_negative__finding_(context);
             CqlConcept? j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept?, j_);
             return k_;
         }
 
-        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
+        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation>((IEnumerable<Observation?>?)b_, c_);
         Observation? e_ = context.Operators.SingletonFrom<Observation>(d_);
         bool? f_ = context.Operators.Not((bool?)(e_ is null));
         return f_;
@@ -410,7 +410,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? t_(Medication? M) {
                 object? v_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? w_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? x_ = context.Operators.Split((string)w_, "/");
+                IEnumerable<string?>? x_ = context.Operators.Split((string?)w_, "/");
                 string? y_ = context.Operators.Last<string>(x_);
                 bool? z_ = context.Operators.Equal(v_, y_);
                 CodeableConcept? aa_ = M?.Code;
@@ -449,12 +449,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 bool? au_ = context.Operators.Not((bool?)(ap_ is null));
                 bool? av_ = context.Operators.And(at_, au_);
                 CqlInterval<CqlDate?>? aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdolescentMed);
-                CqlDate? ax_ = (aw_ as CqlInterval<CqlDate>)?.low;
+                CqlDate? ax_ = (aw_ as CqlInterval<CqlDate?>?)?.low;
                 CqlDateTime? ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                CqlDate? az_ = (aw_ as CqlInterval<CqlDate>)?.high;
+                CqlDate? az_ = (aw_ as CqlInterval<CqlDate?>?)?.high;
                 CqlDateTime? ba_ = context.Operators.ConvertDateToDateTime(az_);
-                bool? bb_ = (aw_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bc_ = (aw_ as CqlInterval<CqlDate>)?.highClosed;
+                bool? bb_ = (aw_ as CqlInterval<CqlDate?>?)?.lowClosed;
+                bool? bc_ = (aw_ as CqlInterval<CqlDate?>?)?.highClosed;
                 CqlInterval<CqlDateTime?>? bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
                 CqlInterval<CqlDateTime?>? be_ = QICoreCommon_4_0_000.Instance.toInterval(context, bd_);
                 bool? bf_ = context.Operators.OverlapsAfter(be_, ao_, "day");
@@ -463,7 +463,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
                 CqlCode? bj_ = this.Depression_screening_positive__finding_(context);
                 CqlConcept? bk_ = context.Operators.ConvertCodeToConcept(bj_);
-                bool? bl_ = context.Operators.Equivalent(bi_ as CqlConcept, bk_);
+                bool? bl_ = context.Operators.Equivalent(bi_ as CqlConcept?, bk_);
                 bool? bm_ = context.Operators.And(bg_, bl_);
                 Code<MedicationRequest.MedicationrequestStatus>? bn_ = AdolescentMed?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? bo_ = bn_?.Value;
@@ -472,7 +472,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "active",
                     "completed",
                 ];
-                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
+                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string?>?)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
                 Code<MedicationRequest.MedicationRequestIntent>? bt_ = AdolescentMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? bu_ = bt_?.Value;
@@ -484,7 +484,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
+                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string?>?)bw_);
                 bool? by_ = context.Operators.And(bs_, bx_);
                 return by_;
             }
@@ -506,12 +506,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
+            bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string?>?)cd_);
             return ce_;
         }
 
         IEnumerable<ServiceRequest?>? l_ = context.Operators.Where<ServiceRequest>(j_, k_);
-        IEnumerable<object?>? m_ = context.Operators.Union<object>(h_ as IEnumerable<object>, l_ as IEnumerable<object>);
+        IEnumerable<object?>? m_ = context.Operators.Union<object>(h_ as IEnumerable<object?>?, l_ as IEnumerable<object?>?);
         CqlValueSet? n_ = this.Follow_Up_for_Adolescent_Depression(context);
         IEnumerable<Procedure?>? o_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -524,18 +524,18 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<Procedure?>? q_ = context.Operators.Where<Procedure>(o_, p_);
-        IEnumerable<object?>? r_ = context.Operators.Union<object>(m_ as IEnumerable<object>, q_ as IEnumerable<object>);
+        IEnumerable<object?>? r_ = context.Operators.Union<object>(m_ as IEnumerable<object?>?, q_ as IEnumerable<object?>?);
         return r_;
     }
 
 
     [CqlExpressionDefinition("Most Recent Adolescent Depression Screening Positive and Follow Up Provided")]
-    public IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>? Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)?>? Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided, Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute);
 
     private const long _cacheIndex_Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided = -3834289523634019273L;
 
-    private IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>? Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)?>? Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
     {
         Observation? a_ = this.Most_Recent_Adolescent_Depression_Screening(context);
         Observation?[]? b_ = [
@@ -543,15 +543,15 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         ];
         IEnumerable<object?>? c_ = this.Follow_Up_Intervention_for_Positive_Adolescent_Depression_Screening(context);
         IEnumerable<Encounter?>? d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
-        IEnumerable<ValueTuple<Observation?, object?, Encounter?>>? e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
+        IEnumerable<ValueTuple<Observation?, object?, Encounter?>>? e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation?>?)b_, c_, d_);
 
-        (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? f_(ValueTuple<Observation?, object?, Encounter?> _valueTuple) {
-            (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? k_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+        (CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? f_(ValueTuple<Observation?, object?, Encounter?> _valueTuple) {
+            (CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? k_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
             return k_;
         }
 
 
-        bool? g_((CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? tuple_ewmohjtdtinujhphqjvbwmmhh) {
+        bool? g_((CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? tuple_ewmohjtdtinujhphqjvbwmmhh) {
             DataType? l_ = tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen?.Effective;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             CqlInterval<CqlDateTime?>? n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
@@ -569,7 +569,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
             CqlCode? aa_ = this.Depression_screening_positive__finding_(context);
             CqlConcept? ab_ = context.Operators.ConvertCodeToConcept(aa_);
-            bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept, ab_);
+            bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept?, ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object? ae_;
             object? az_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
@@ -579,7 +579,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             {
                 object? bc_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                ae_ = bd_ as CqlDateTime;
+                ae_ = bd_ as CqlDateTime?;
             }
             else
             {
@@ -590,7 +590,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 {
                     object? bh_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    ae_ = bi_ as CqlQuantity;
+                    ae_ = bi_ as CqlQuantity?;
                 }
                 else
                 {
@@ -601,7 +601,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     {
                         object? bm_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                        ae_ = bn_ as CqlInterval<CqlDateTime>;
+                        ae_ = bn_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -612,7 +612,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         {
                             object? br_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                             object? bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                            ae_ = bs_ as CqlInterval<CqlQuantity>;
+                            ae_ = bs_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -643,7 +643,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             {
                 object? bw_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                at_ = bx_ as CqlDateTime;
+                at_ = bx_ as CqlDateTime?;
             }
             else
             {
@@ -654,7 +654,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 {
                     object? cb_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                    at_ = cc_ as CqlQuantity;
+                    at_ = cc_ as CqlQuantity?;
                 }
                 else
                 {
@@ -665,7 +665,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     {
                         object? cg_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                        at_ = ch_ as CqlInterval<CqlDateTime>;
+                        at_ = ch_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -676,7 +676,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         {
                             object? cl_ = context.Operators.LateBoundProperty<object>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                             object? cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                            at_ = cm_ as CqlInterval<CqlQuantity>;
+                            at_ = cm_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -693,14 +693,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             return ay_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>? h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)?>? h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
 
-        (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? i_((CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? tuple_ewmohjtdtinujhphqjvbwmmhh) {
-            (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)? cn_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter);
+        (CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? i_((CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? tuple_ewmohjtdtinujhphqjvbwmmhh) {
+            (CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)? cn_ = (CqlTupleMetadata_ZRHehPJEDEeRJPiLbCPjUggS, tuple_ewmohjtdtinujhphqjvbwmmhh?.LastAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, tuple_ewmohjtdtinujhphqjvbwmmhh?.QualifyingEncounter);
             return cn_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>? j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(h_, i_);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)?>? j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(h_, i_);
         return j_;
     }
 
@@ -767,7 +767,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
                 bool? ah_ = context.Operators.And(ab_, ag_);
                 return ah_;
             }
@@ -810,11 +810,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlCode? i_ = this.Depression_screening_negative__finding_(context);
             CqlConcept? j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept?, j_);
             return k_;
         }
 
-        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation>((IEnumerable<Observation>)b_, c_);
+        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation>((IEnumerable<Observation?>?)b_, c_);
         Observation? e_ = context.Operators.SingletonFrom<Observation>(d_);
         bool? f_ = context.Operators.Not((bool?)(e_ is null));
         return f_;
@@ -837,7 +837,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? t_(Medication? M) {
                 object? v_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? w_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? x_ = context.Operators.Split((string)w_, "/");
+                IEnumerable<string?>? x_ = context.Operators.Split((string?)w_, "/");
                 string? y_ = context.Operators.Last<string>(x_);
                 bool? z_ = context.Operators.Equal(v_, y_);
                 CodeableConcept? aa_ = M?.Code;
@@ -876,12 +876,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 bool? au_ = context.Operators.Not((bool?)(ap_ is null));
                 bool? av_ = context.Operators.And(at_, au_);
                 CqlInterval<CqlDate?>? aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdultMed);
-                CqlDate? ax_ = (aw_ as CqlInterval<CqlDate>)?.low;
+                CqlDate? ax_ = (aw_ as CqlInterval<CqlDate?>?)?.low;
                 CqlDateTime? ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                CqlDate? az_ = (aw_ as CqlInterval<CqlDate>)?.high;
+                CqlDate? az_ = (aw_ as CqlInterval<CqlDate?>?)?.high;
                 CqlDateTime? ba_ = context.Operators.ConvertDateToDateTime(az_);
-                bool? bb_ = (aw_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bc_ = (aw_ as CqlInterval<CqlDate>)?.highClosed;
+                bool? bb_ = (aw_ as CqlInterval<CqlDate?>?)?.lowClosed;
+                bool? bc_ = (aw_ as CqlInterval<CqlDate?>?)?.highClosed;
                 CqlInterval<CqlDateTime?>? bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
                 CqlInterval<CqlDateTime?>? be_ = QICoreCommon_4_0_000.Instance.toInterval(context, bd_);
                 bool? bf_ = context.Operators.OverlapsAfter(be_, ao_, "day");
@@ -890,7 +890,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
                 CqlCode? bj_ = this.Depression_screening_positive__finding_(context);
                 CqlConcept? bk_ = context.Operators.ConvertCodeToConcept(bj_);
-                bool? bl_ = context.Operators.Equivalent(bi_ as CqlConcept, bk_);
+                bool? bl_ = context.Operators.Equivalent(bi_ as CqlConcept?, bk_);
                 bool? bm_ = context.Operators.And(bg_, bl_);
                 Code<MedicationRequest.MedicationrequestStatus>? bn_ = AdultMed?.StatusElement;
                 MedicationRequest.MedicationrequestStatus? bo_ = bn_?.Value;
@@ -899,7 +899,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "active",
                     "completed",
                 ];
-                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
+                bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string?>?)bq_);
                 bool? bs_ = context.Operators.And(bm_, br_);
                 Code<MedicationRequest.MedicationRequestIntent>? bt_ = AdultMed?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? bu_ = bt_?.Value;
@@ -911,7 +911,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "filler-order",
                     "instance-order",
                 ];
-                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
+                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string?>?)bw_);
                 bool? by_ = context.Operators.And(bs_, bx_);
                 return by_;
             }
@@ -933,12 +933,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 "active",
                 "completed",
             ];
-            bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
+            bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string?>?)cd_);
             return ce_;
         }
 
         IEnumerable<ServiceRequest?>? l_ = context.Operators.Where<ServiceRequest>(j_, k_);
-        IEnumerable<object?>? m_ = context.Operators.Union<object>(h_ as IEnumerable<object>, l_ as IEnumerable<object>);
+        IEnumerable<object?>? m_ = context.Operators.Union<object>(h_ as IEnumerable<object?>?, l_ as IEnumerable<object?>?);
         CqlValueSet? n_ = this.Follow_Up_for_Adult_Depression(context);
         IEnumerable<Procedure?>? o_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -951,18 +951,18 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<Procedure?>? q_ = context.Operators.Where<Procedure>(o_, p_);
-        IEnumerable<object?>? r_ = context.Operators.Union<object>(m_ as IEnumerable<object>, q_ as IEnumerable<object>);
+        IEnumerable<object?>? r_ = context.Operators.Union<object>(m_ as IEnumerable<object?>?, q_ as IEnumerable<object?>?);
         return r_;
     }
 
 
     [CqlExpressionDefinition("Most Recent Adult Depression Screening Positive and Follow Up Provided")]
-    public IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>? Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)?>? Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided, Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute);
 
     private const long _cacheIndex_Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided = -4270614387795433444L;
 
-    private IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>? Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)?>? Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided_Compute(CqlContext context)
     {
         Observation? a_ = this.Most_Recent_Adult_Depression_Screening(context);
         Observation?[]? b_ = [
@@ -970,15 +970,15 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         ];
         IEnumerable<object?>? c_ = this.Follow_Up_Intervention_for_Positive_Adult_Depression_Screening(context);
         IEnumerable<Encounter?>? d_ = this.Qualifying_Encounter_During_Measurement_Period(context);
-        IEnumerable<ValueTuple<Observation?, object?, Encounter?>>? e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation>)b_, c_, d_);
+        IEnumerable<ValueTuple<Observation?, object?, Encounter?>>? e_ = context.Operators.CrossJoin<Observation, object, Encounter>((IEnumerable<Observation?>?)b_, c_, d_);
 
-        (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? f_(ValueTuple<Observation?, object?, Encounter?> _valueTuple) {
-            (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? k_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+        (CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? f_(ValueTuple<Observation?, object?, Encounter?> _valueTuple) {
+            (CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? k_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
             return k_;
         }
 
 
-        bool? g_((CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? tuple_cgtoaqsajoehgwcararimqzsa) {
+        bool? g_((CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? tuple_cgtoaqsajoehgwcararimqzsa) {
             DataType? l_ = tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen?.Effective;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             CqlInterval<CqlDateTime?>? n_ = QICoreCommon_4_0_000.Instance.toInterval(context, m_);
@@ -996,7 +996,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
             CqlCode? aa_ = this.Depression_screening_positive__finding_(context);
             CqlConcept? ab_ = context.Operators.ConvertCodeToConcept(aa_);
-            bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept, ab_);
+            bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept?, ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object? ae_;
             object? az_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
@@ -1006,7 +1006,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             {
                 object? bc_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                ae_ = bd_ as CqlDateTime;
+                ae_ = bd_ as CqlDateTime?;
             }
             else
             {
@@ -1017,7 +1017,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 {
                     object? bh_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-                    ae_ = bi_ as CqlQuantity;
+                    ae_ = bi_ as CqlQuantity?;
                 }
                 else
                 {
@@ -1028,7 +1028,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     {
                         object? bm_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
-                        ae_ = bn_ as CqlInterval<CqlDateTime>;
+                        ae_ = bn_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -1039,7 +1039,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         {
                             object? br_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                             object? bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                            ae_ = bs_ as CqlInterval<CqlQuantity>;
+                            ae_ = bs_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -1070,7 +1070,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             {
                 object? bw_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
-                at_ = bx_ as CqlDateTime;
+                at_ = bx_ as CqlDateTime?;
             }
             else
             {
@@ -1081,7 +1081,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 {
                     object? cb_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                    at_ = cc_ as CqlQuantity;
+                    at_ = cc_ as CqlQuantity?;
                 }
                 else
                 {
@@ -1092,7 +1092,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     {
                         object? cg_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                        at_ = ch_ as CqlInterval<CqlDateTime>;
+                        at_ = ch_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -1103,7 +1103,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                         {
                             object? cl_ = context.Operators.LateBoundProperty<object>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                             object? cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                            at_ = cm_ as CqlInterval<CqlQuantity>;
+                            at_ = cm_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -1120,14 +1120,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             return ay_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>? h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)?>? h_ = context.Operators.SelectWhere<ValueTuple<Observation, object, Encounter>, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(e_, f_, g_);
 
-        (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? i_((CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? tuple_cgtoaqsajoehgwcararimqzsa) {
-            (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)? cn_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter);
+        (CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? i_((CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? tuple_cgtoaqsajoehgwcararimqzsa) {
+            (CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)? cn_ = (CqlTupleMetadata_ICeCVaggPeLLMJUWQdWMZROe, tuple_cgtoaqsajoehgwcararimqzsa?.LastAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, tuple_cgtoaqsajoehgwcararimqzsa?.QualifyingEncounter);
             return cn_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>? j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(h_, i_);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)?>? j_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?, (CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(h_, i_);
         return j_;
     }
 
@@ -1163,14 +1163,14 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
     {
         bool? a_ = this.Patient_Age_12_to_16_Years_at_Start_of_Measurement_Period(context);
         bool? b_ = this.Has_Most_Recent_Adolescent_Screening_Negative(context);
-        IEnumerable<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>? c_ = this.Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(context);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdolescentScreen, object? FollowUpPositiveAdolescentScreen, Encounter? QualifyingEncounter)?>? c_ = this.Most_Recent_Adolescent_Depression_Screening_Positive_and_Follow_Up_Provided(context);
         bool? d_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdolescentScreen, object FollowUpPositiveAdolescentScreen, Encounter QualifyingEncounter)?>(c_);
         bool? e_ = context.Operators.Or(b_, d_);
         bool? f_ = context.Operators.And(a_, e_);
         bool? g_ = this.Patient_Age_17_Years_at_Start_of_Measurement_Period(context);
         bool? h_ = this.Has_Most_Recent_Adult_Screening_Negative(context);
         bool? i_ = context.Operators.Or(e_, h_);
-        IEnumerable<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>? j_ = this.Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(context);
+        IEnumerable<(CqlTupleMetadata, Observation? LastAdultScreen, object? FollowUpPositiveAdultScreen, Encounter? QualifyingEncounter)?>? j_ = this.Most_Recent_Adult_Depression_Screening_Positive_and_Follow_Up_Provided(context);
         bool? k_ = context.Operators.Exists<(CqlTupleMetadata, Observation LastAdultScreen, object FollowUpPositiveAdultScreen, Encounter QualifyingEncounter)?>(j_);
         bool? l_ = context.Operators.Or(i_, k_);
         bool? m_ = context.Operators.And(g_, l_);
@@ -1229,11 +1229,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return aj_;
             }
 
-            IEnumerable<object?>? s_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
-                ? (NoAdolescentScreen as DomainResource).Extension
+            IEnumerable<object?>? s_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(NoAdolescentScreen is DomainResource
+                ? (NoAdolescentScreen as DomainResource?).Extension
                 : default), q_, r_);
             object? t_ = context.Operators.SingletonFrom<object>(s_);
-            CqlConcept? u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
+            CqlConcept? u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept?);
             CqlCode? v_ = this.Depression_screening_declined__situation_(context);
             CqlConcept? w_ = context.Operators.ConvertCodeToConcept(v_);
             bool? x_ = context.Operators.Equivalent(u_, w_);
@@ -1251,11 +1251,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return an_;
             }
 
-            IEnumerable<object?>? aa_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoAdolescentScreen is DomainResource
-                ? (NoAdolescentScreen as DomainResource).Extension
+            IEnumerable<object?>? aa_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(NoAdolescentScreen is DomainResource
+                ? (NoAdolescentScreen as DomainResource?).Extension
                 : default), y_, z_);
             object? ab_ = context.Operators.SingletonFrom<object>(aa_);
-            CqlConcept? ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_ as CodeableConcept);
+            CqlConcept? ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_ as CodeableConcept?);
             CqlValueSet? ad_ = this.Medical_Reason(context);
             bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
             bool? af_ = context.Operators.Or(x_, ae_);
@@ -1308,7 +1308,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string?>?)ac_);
                 bool? ae_ = context.Operators.And(y_, ad_);
                 return ae_;
             }
@@ -1368,11 +1368,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return aj_;
             }
 
-            IEnumerable<object?>? s_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
-                ? (NoAdultScreen as DomainResource).Extension
+            IEnumerable<object?>? s_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(NoAdultScreen is DomainResource
+                ? (NoAdultScreen as DomainResource?).Extension
                 : default), q_, r_);
             object? t_ = context.Operators.SingletonFrom<object>(s_);
-            CqlConcept? u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept);
+            CqlConcept? u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_ as CodeableConcept?);
             CqlCode? v_ = this.Depression_screening_declined__situation_(context);
             CqlConcept? w_ = context.Operators.ConvertCodeToConcept(v_);
             bool? x_ = context.Operators.Equivalent(u_, w_);
@@ -1390,11 +1390,11 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 return an_;
             }
 
-            IEnumerable<object?>? aa_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoAdultScreen is DomainResource
-                ? (NoAdultScreen as DomainResource).Extension
+            IEnumerable<object?>? aa_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(NoAdultScreen is DomainResource
+                ? (NoAdultScreen as DomainResource?).Extension
                 : default), y_, z_);
             object? ab_ = context.Operators.SingletonFrom<object>(aa_);
-            CqlConcept? ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_ as CodeableConcept);
+            CqlConcept? ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_ as CodeableConcept?);
             CqlValueSet? ad_ = this.Medical_Reason(context);
             bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
             bool? af_ = context.Operators.Or(x_, ae_);
@@ -1447,7 +1447,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                     "amended",
                     "corrected",
                 ];
-                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string>)ac_);
+                bool? ad_ = context.Operators.In<string>(ab_, (IEnumerable<string?>?)ac_);
                 bool? ae_ = context.Operators.And(y_, ad_);
                 return ae_;
             }
@@ -1485,40 +1485,40 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -4996802696824837470L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 8307048373131935046L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -7267954952347399329L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

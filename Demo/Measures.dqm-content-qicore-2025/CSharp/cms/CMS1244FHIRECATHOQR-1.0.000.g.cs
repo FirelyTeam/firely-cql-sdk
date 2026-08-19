@@ -21,79 +21,79 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
     #region ValueSets (10)
 
     [CqlValueSetDefinition("Admit Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.164", valueSetVersion: null)]
-    public CqlValueSet? Admit_Inpatient(CqlContext _) => _Admit_Inpatient;
-    private static readonly CqlValueSet? _Admit_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.164", null);
+    public CqlValueSet Admit_Inpatient(CqlContext _) => _Admit_Inpatient;
+    private static readonly CqlValueSet _Admit_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.164", null);
 
     [CqlValueSetDefinition("Mental Health Diagnosis without Substance Use Disorders", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.285", valueSetVersion: null)]
-    public CqlValueSet? Mental_Health_Diagnosis_without_Substance_Use_Disorders(CqlContext _) => _Mental_Health_Diagnosis_without_Substance_Use_Disorders;
-    private static readonly CqlValueSet? _Mental_Health_Diagnosis_without_Substance_Use_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.285", null);
+    public CqlValueSet Mental_Health_Diagnosis_without_Substance_Use_Disorders(CqlContext _) => _Mental_Health_Diagnosis_without_Substance_Use_Disorders;
+    private static readonly CqlValueSet _Mental_Health_Diagnosis_without_Substance_Use_Disorders = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.285", null);
 
     [CqlValueSetDefinition("Decision to Admit to Hospital Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.294", valueSetVersion: null)]
-    public CqlValueSet? Decision_to_Admit_to_Hospital_Inpatient(CqlContext _) => _Decision_to_Admit_to_Hospital_Inpatient;
-    private static readonly CqlValueSet? _Decision_to_Admit_to_Hospital_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.294", null);
+    public CqlValueSet Decision_to_Admit_to_Hospital_Inpatient(CqlContext _) => _Decision_to_Admit_to_Hospital_Inpatient;
+    private static readonly CqlValueSet _Decision_to_Admit_to_Hospital_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.294", null);
 
     [CqlValueSetDefinition("Emergency Department Evaluation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.163", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Evaluation(CqlContext _) => _Emergency_Department_Evaluation;
-    private static readonly CqlValueSet? _Emergency_Department_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.163", null);
+    public CqlValueSet Emergency_Department_Evaluation(CqlContext _) => _Emergency_Department_Evaluation;
+    private static readonly CqlValueSet _Emergency_Department_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.163", null);
 
     [CqlValueSetDefinition("Emergency Department Evaluation and Management Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Evaluation_and_Management_Visit(CqlContext _) => _Emergency_Department_Evaluation_and_Management_Visit;
-    private static readonly CqlValueSet? _Emergency_Department_Evaluation_and_Management_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
+    public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext _) => _Emergency_Department_Evaluation_and_Management_Visit;
+    private static readonly CqlValueSet _Emergency_Department_Evaluation_and_Management_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
 
     [CqlValueSetDefinition("Emergency Department Location", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.284", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Location(CqlContext _) => _Emergency_Department_Location;
-    private static readonly CqlValueSet? _Emergency_Department_Location = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.284", null);
+    public CqlValueSet Emergency_Department_Location(CqlContext _) => _Emergency_Department_Location;
+    private static readonly CqlValueSet _Emergency_Department_Location = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.284", null);
 
     [CqlValueSetDefinition("Emergency Department Treatment Location", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.278", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Treatment_Location(CqlContext _) => _Emergency_Department_Treatment_Location;
-    private static readonly CqlValueSet? _Emergency_Department_Treatment_Location = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.278", null);
+    public CqlValueSet Emergency_Department_Treatment_Location(CqlContext _) => _Emergency_Department_Treatment_Location;
+    private static readonly CqlValueSet _Emergency_Department_Treatment_Location = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.278", null);
 
     [CqlValueSetDefinition("Observation Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", valueSetVersion: null)]
-    public CqlValueSet? Observation_Services(CqlContext _) => _Observation_Services;
-    private static readonly CqlValueSet? _Observation_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+    public CqlValueSet Observation_Services(CqlContext _) => _Observation_Services;
+    private static readonly CqlValueSet _Observation_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Triage", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.279", valueSetVersion: null)]
-    public CqlValueSet? Triage(CqlContext _) => _Triage;
-    private static readonly CqlValueSet? _Triage = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.279", null);
+    public CqlValueSet Triage(CqlContext _) => _Triage;
+    private static readonly CqlValueSet _Triage = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.279", null);
 
     #endregion ValueSets
 
     #region Codes (4)
 
     [CqlCodeDefinition("Patient bed assigned (finding)", codeId: "5751000175101", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Patient_bed_assigned__finding_(CqlContext _) => _Patient_bed_assigned__finding_;
-    private static readonly CqlCode? _Patient_bed_assigned__finding_ = new CqlCode("5751000175101", "http://snomed.info/sct");
+    public CqlCode Patient_bed_assigned__finding_(CqlContext _) => _Patient_bed_assigned__finding_;
+    private static readonly CqlCode _Patient_bed_assigned__finding_ = new CqlCode("5751000175101", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Patient left without being seen (finding)", codeId: "21541000119102", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Patient_left_without_being_seen__finding_(CqlContext _) => _Patient_left_without_being_seen__finding_;
-    private static readonly CqlCode? _Patient_left_without_being_seen__finding_ = new CqlCode("21541000119102", "http://snomed.info/sct");
+    public CqlCode Patient_left_without_being_seen__finding_(CqlContext _) => _Patient_left_without_being_seen__finding_;
+    private static readonly CqlCode _Patient_left_without_being_seen__finding_ = new CqlCode("21541000119102", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Emergency room", codeId: "ER", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode? Emergency_room(CqlContext _) => _Emergency_room;
-    private static readonly CqlCode? _Emergency_room = new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
+    public CqlCode Emergency_room(CqlContext _) => _Emergency_room;
+    private static readonly CqlCode _Emergency_room = new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
 
     [CqlCodeDefinition("Emergency trauma unit", codeId: "ETU", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode? Emergency_trauma_unit(CqlContext _) => _Emergency_trauma_unit;
-    private static readonly CqlCode? _Emergency_trauma_unit = new CqlCode("ETU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
+    public CqlCode Emergency_trauma_unit(CqlContext _) => _Emergency_trauma_unit;
+    private static readonly CqlCode _Emergency_trauma_unit = new CqlCode("ETU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Patient_bed_assigned__finding_,
           _Patient_left_without_being_seen__finding_]);
 
     [CqlCodeSystemDefinition("RoleCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-RoleCode", codeSystemVersion: null)]
-    public CqlCodeSystem? RoleCode(CqlContext _) => _RoleCode;
-    private static readonly CqlCodeSystem? _RoleCode =
+    public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
+    private static readonly CqlCodeSystem _RoleCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, [
           _Emergency_room,
           _Emergency_trauma_unit]);
@@ -114,7 +114,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS1244FHIRECATHOQR-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -191,7 +191,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 "finished",
                 "triaged",
             ];
-            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string>)n_);
+            bool? o_ = context.Operators.In<string>(m_, (IEnumerable<string?>?)n_);
             bool? p_ = context.Operators.And(i_, o_);
             return p_;
         }
@@ -292,7 +292,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
         }
 
         IEnumerable<List<Encounter.LocationComponent?>?>? d_ = context.Operators.WhereSelect<Encounter, List<Encounter.LocationComponent>>(a_, b_, c_);
-        IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)d_);
+        IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent?>?>?)d_);
 
         bool? f_(Encounter.LocationComponent? Location) {
             ResourceReference? o_ = Location?.Location;
@@ -319,7 +319,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return bb_;
             }
 
-            IEnumerable<CqlConcept?>? t_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)q_, r_, s_);
+            IEnumerable<CqlConcept?>? t_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)q_, r_, s_);
             bool? u_ = context.Operators.Exists<CqlConcept>(t_);
             Period? v_ = Location?.Period;
             CqlInterval<CqlDateTime?>? w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
@@ -436,7 +436,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return t_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_);
             CqlValueSet? m_ = this.Emergency_Department_Treatment_Location(context);
             bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
             Period? o_ = Location?.Period;
@@ -455,7 +455,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             return w_;
         }
 
-        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent>)a_, b_, c_);
+        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent?>?)a_, b_, c_);
         IEnumerable<CqlDateTime?>? e_ = context.Operators.Distinct<CqlDateTime>(d_);
         IEnumerable<CqlDateTime?>? f_ = context.Operators.ListSort<CqlDateTime>(e_, System.ComponentModel.ListSortDirection.Ascending);
         CqlDateTime? g_ = context.Operators.First<CqlDateTime>(f_);
@@ -567,7 +567,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 "active",
                 "completed",
             ];
-            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string>)i_);
+            bool? j_ = context.Operators.In<string>(h_, (IEnumerable<string?>?)i_);
             return j_;
         }
 
@@ -640,7 +640,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
         }
 
         IEnumerable<List<Encounter.LocationComponent?>?>? d_ = context.Operators.WhereSelect<Encounter, List<Encounter.LocationComponent>>(a_, b_, c_);
-        IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)d_);
+        IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent?>?>?)d_);
 
         bool? f_(Encounter.LocationComponent? Location) {
             ResourceReference? o_ = Location?.Location;
@@ -667,7 +667,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return bb_;
             }
 
-            IEnumerable<CqlConcept?>? t_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)q_, r_, s_);
+            IEnumerable<CqlConcept?>? t_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)q_, r_, s_);
             bool? u_ = context.Operators.Exists<CqlConcept>(t_);
             Period? v_ = Location?.Period;
             CqlInterval<CqlDateTime?>? w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
@@ -763,7 +763,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 "amended",
                 "corrected",
             ];
-            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string?>?)s_);
             bool? u_ = context.Operators.And(o_, t_);
             return u_;
         }
@@ -801,12 +801,12 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
             DataType? g_ = ObsInED?.Value;
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet? i_ = this.Admit_Inpatient(context);
-            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept?, i_);
             return j_;
         }
 
         IEnumerable<Observation?>? e_ = context.Operators.Where<Observation>(c_, d_);
-        IEnumerable<Observation?>? f_ = context.Operators.Union<Observation>(b_ as IEnumerable<Observation>, e_ as IEnumerable<Observation>);
+        IEnumerable<Observation?>? f_ = context.Operators.Union<Observation>(b_ as IEnumerable<Observation?>?, e_ as IEnumerable<Observation?>?);
         return f_;
     }
 
@@ -896,7 +896,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 "active",
                 "completed",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             return n_;
         }
 
@@ -1357,40 +1357,40 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -2764988004099448273L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 3188438233448661594L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -1014595823694878083L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

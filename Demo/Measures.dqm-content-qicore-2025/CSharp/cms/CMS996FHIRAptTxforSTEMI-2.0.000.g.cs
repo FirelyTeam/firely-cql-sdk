@@ -21,219 +21,219 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
     #region ValueSets (34)
 
     [CqlValueSetDefinition("Active Bleeding or Bleeding Diathesis, Excluding Menses", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", valueSetVersion: null)]
-    public CqlValueSet? Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses(CqlContext _) => _Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses;
-    private static readonly CqlValueSet? _Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", null);
+    public CqlValueSet Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses(CqlContext _) => _Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses;
+    private static readonly CqlValueSet _Active_Bleeding_or_Bleeding_Diathesis__Excluding_Menses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", null);
 
     [CqlValueSetDefinition("Active Peptic Ulcer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", valueSetVersion: null)]
-    public CqlValueSet? Active_Peptic_Ulcer(CqlContext _) => _Active_Peptic_Ulcer;
-    private static readonly CqlValueSet? _Active_Peptic_Ulcer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", null);
+    public CqlValueSet Active_Peptic_Ulcer(CqlContext _) => _Active_Peptic_Ulcer;
+    private static readonly CqlValueSet _Active_Peptic_Ulcer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", null);
 
     [CqlValueSetDefinition("Thrombolytics Adverse Event", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", valueSetVersion: null)]
-    public CqlValueSet? Thrombolytics_Adverse_Event(CqlContext _) => _Thrombolytics_Adverse_Event;
-    private static readonly CqlValueSet? _Thrombolytics_Adverse_Event = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", null);
+    public CqlValueSet Thrombolytics_Adverse_Event(CqlContext _) => _Thrombolytics_Adverse_Event;
+    private static readonly CqlValueSet _Thrombolytics_Adverse_Event = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", null);
 
     [CqlValueSetDefinition("Allergy to thrombolytics", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", valueSetVersion: null)]
-    public CqlValueSet? Allergy_to_thrombolytics(CqlContext _) => _Allergy_to_thrombolytics;
-    private static readonly CqlValueSet? _Allergy_to_thrombolytics = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", null);
+    public CqlValueSet Allergy_to_thrombolytics(CqlContext _) => _Allergy_to_thrombolytics;
+    private static readonly CqlValueSet _Allergy_to_thrombolytics = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", null);
 
     [CqlValueSetDefinition("Oral Anticoagulant Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", valueSetVersion: null)]
-    public CqlValueSet? Oral_Anticoagulant_Medications(CqlContext _) => _Oral_Anticoagulant_Medications;
-    private static readonly CqlValueSet? _Oral_Anticoagulant_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", null);
+    public CqlValueSet Oral_Anticoagulant_Medications(CqlContext _) => _Oral_Anticoagulant_Medications;
+    private static readonly CqlValueSet _Oral_Anticoagulant_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", null);
 
     [CqlValueSetDefinition("Aortic Dissection or Ruptured Aortic Aneurysm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", valueSetVersion: null)]
-    public CqlValueSet? Aortic_Dissection_or_Ruptured_Aortic_Aneurysm(CqlContext _) => _Aortic_Dissection_or_Ruptured_Aortic_Aneurysm;
-    private static readonly CqlValueSet? _Aortic_Dissection_or_Ruptured_Aortic_Aneurysm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", null);
+    public CqlValueSet Aortic_Dissection_or_Ruptured_Aortic_Aneurysm(CqlContext _) => _Aortic_Dissection_or_Ruptured_Aortic_Aneurysm;
+    private static readonly CqlValueSet _Aortic_Dissection_or_Ruptured_Aortic_Aneurysm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", null);
 
     [CqlValueSetDefinition("Cardiopulmonary Emergency", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", valueSetVersion: null)]
-    public CqlValueSet? Cardiopulmonary_Emergency(CqlContext _) => _Cardiopulmonary_Emergency;
-    private static readonly CqlValueSet? _Cardiopulmonary_Emergency = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", null);
+    public CqlValueSet Cardiopulmonary_Emergency(CqlContext _) => _Cardiopulmonary_Emergency;
+    private static readonly CqlValueSet _Cardiopulmonary_Emergency = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", null);
 
     [CqlValueSetDefinition("Cerebral Vascular Lesion", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", valueSetVersion: null)]
-    public CqlValueSet? Cerebral_Vascular_Lesion(CqlContext _) => _Cerebral_Vascular_Lesion;
-    private static readonly CqlValueSet? _Cerebral_Vascular_Lesion = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", null);
+    public CqlValueSet Cerebral_Vascular_Lesion(CqlContext _) => _Cerebral_Vascular_Lesion;
+    private static readonly CqlValueSet _Cerebral_Vascular_Lesion = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", null);
 
     [CqlValueSetDefinition("Closed Head and Facial Trauma", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", valueSetVersion: null)]
-    public CqlValueSet? Closed_Head_and_Facial_Trauma(CqlContext _) => _Closed_Head_and_Facial_Trauma;
-    private static readonly CqlValueSet? _Closed_Head_and_Facial_Trauma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", null);
+    public CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext _) => _Closed_Head_and_Facial_Trauma;
+    private static readonly CqlValueSet _Closed_Head_and_Facial_Trauma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", null);
 
     [CqlValueSetDefinition("Dementia and Related Intracranial Pathologies", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", valueSetVersion: null)]
-    public CqlValueSet? Dementia_and_Related_Intracranial_Pathologies(CqlContext _) => _Dementia_and_Related_Intracranial_Pathologies;
-    private static readonly CqlValueSet? _Dementia_and_Related_Intracranial_Pathologies = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", null);
+    public CqlValueSet Dementia_and_Related_Intracranial_Pathologies(CqlContext _) => _Dementia_and_Related_Intracranial_Pathologies;
+    private static readonly CqlValueSet _Dementia_and_Related_Intracranial_Pathologies = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", null);
 
     [CqlValueSetDefinition("Discharge To Acute Care Facility", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", valueSetVersion: null)]
-    public CqlValueSet? Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
-    private static readonly CqlValueSet? _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+    public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
+    private static readonly CqlValueSet _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
 
     [CqlValueSetDefinition("Emergency Department Evaluation and Management Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Evaluation_and_Management_Visit(CqlContext _) => _Emergency_Department_Evaluation_and_Management_Visit;
-    private static readonly CqlValueSet? _Emergency_Department_Evaluation_and_Management_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
+    public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext _) => _Emergency_Department_Evaluation_and_Management_Visit;
+    private static readonly CqlValueSet _Emergency_Department_Evaluation_and_Management_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
-    private static readonly CqlValueSet? _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+    public CqlValueSet Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
+    private static readonly CqlValueSet _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
 
     [CqlValueSetDefinition("Endotracheal Intubation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", valueSetVersion: null)]
-    public CqlValueSet? Endotracheal_Intubation(CqlContext _) => _Endotracheal_Intubation;
-    private static readonly CqlValueSet? _Endotracheal_Intubation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", null);
+    public CqlValueSet Endotracheal_Intubation(CqlContext _) => _Endotracheal_Intubation;
+    private static readonly CqlValueSet _Endotracheal_Intubation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", null);
 
     [CqlValueSetDefinition("Fibrinolytic Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4019", valueSetVersion: null)]
-    public CqlValueSet? Fibrinolytic_Therapy(CqlContext _) => _Fibrinolytic_Therapy;
-    private static readonly CqlValueSet? _Fibrinolytic_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4019", null);
+    public CqlValueSet Fibrinolytic_Therapy(CqlContext _) => _Fibrinolytic_Therapy;
+    private static readonly CqlValueSet _Fibrinolytic_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4019", null);
 
     [CqlValueSetDefinition("Intracranial or Intraspinal surgery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", valueSetVersion: null)]
-    public CqlValueSet? Intracranial_or_Intraspinal_surgery(CqlContext _) => _Intracranial_or_Intraspinal_surgery;
-    private static readonly CqlValueSet? _Intracranial_or_Intraspinal_surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", null);
+    public CqlValueSet Intracranial_or_Intraspinal_surgery(CqlContext _) => _Intracranial_or_Intraspinal_surgery;
+    private static readonly CqlValueSet _Intracranial_or_Intraspinal_surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", null);
 
     [CqlValueSetDefinition("Ischemic Stroke", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", valueSetVersion: null)]
-    public CqlValueSet? Ischemic_Stroke(CqlContext _) => _Ischemic_Stroke;
-    private static readonly CqlValueSet? _Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
+    public CqlValueSet Ischemic_Stroke(CqlContext _) => _Ischemic_Stroke;
+    private static readonly CqlValueSet _Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
 
     [CqlValueSetDefinition("Major Surgical Procedure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", valueSetVersion: null)]
-    public CqlValueSet? Major_Surgical_Procedure(CqlContext _) => _Major_Surgical_Procedure;
-    private static readonly CqlValueSet? _Major_Surgical_Procedure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", null);
+    public CqlValueSet Major_Surgical_Procedure(CqlContext _) => _Major_Surgical_Procedure;
+    private static readonly CqlValueSet _Major_Surgical_Procedure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", null);
 
     [CqlValueSetDefinition("Malignant Intracranial Neoplasm Group", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", valueSetVersion: null)]
-    public CqlValueSet? Malignant_Intracranial_Neoplasm_Group(CqlContext _) => _Malignant_Intracranial_Neoplasm_Group;
-    private static readonly CqlValueSet? _Malignant_Intracranial_Neoplasm_Group = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", null);
+    public CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext _) => _Malignant_Intracranial_Neoplasm_Group;
+    private static readonly CqlValueSet _Malignant_Intracranial_Neoplasm_Group = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", null);
 
     [CqlValueSetDefinition("Mechanical Circulatory Assist Device", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", valueSetVersion: null)]
-    public CqlValueSet? Mechanical_Circulatory_Assist_Device(CqlContext _) => _Mechanical_Circulatory_Assist_Device;
-    private static readonly CqlValueSet? _Mechanical_Circulatory_Assist_Device = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", null);
+    public CqlValueSet Mechanical_Circulatory_Assist_Device(CqlContext _) => _Mechanical_Circulatory_Assist_Device;
+    private static readonly CqlValueSet _Mechanical_Circulatory_Assist_Device = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", null);
 
     [CqlValueSetDefinition("Neurologic impairment", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", valueSetVersion: null)]
-    public CqlValueSet? Neurologic_impairment(CqlContext _) => _Neurologic_impairment;
-    private static readonly CqlValueSet? _Neurologic_impairment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", null);
+    public CqlValueSet Neurologic_impairment(CqlContext _) => _Neurologic_impairment;
+    private static readonly CqlValueSet _Neurologic_impairment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", null);
 
     [CqlValueSetDefinition("Patient Expired", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", valueSetVersion: null)]
-    public CqlValueSet? Patient_Expired(CqlContext _) => _Patient_Expired;
-    private static readonly CqlValueSet? _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+    public CqlValueSet Patient_Expired(CqlContext _) => _Patient_Expired;
+    private static readonly CqlValueSet _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     [CqlValueSetDefinition("Percutaneous Coronary Intervention", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", valueSetVersion: null)]
-    public CqlValueSet? Percutaneous_Coronary_Intervention(CqlContext _) => _Percutaneous_Coronary_Intervention;
-    private static readonly CqlValueSet? _Percutaneous_Coronary_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", null);
+    public CqlValueSet Percutaneous_Coronary_Intervention(CqlContext _) => _Percutaneous_Coronary_Intervention;
+    private static readonly CqlValueSet _Percutaneous_Coronary_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", null);
 
     [CqlValueSetDefinition("Pregnant State", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", valueSetVersion: null)]
-    public CqlValueSet? Pregnant_State(CqlContext _) => _Pregnant_State;
-    private static readonly CqlValueSet? _Pregnant_State = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", null);
+    public CqlValueSet Pregnant_State(CqlContext _) => _Pregnant_State;
+    private static readonly CqlValueSet _Pregnant_State = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", null);
 
     [CqlValueSetDefinition("STEMI", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", valueSetVersion: null)]
-    public CqlValueSet? STEMI(CqlContext _) => _STEMI;
-    private static readonly CqlValueSet? _STEMI = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", null);
+    public CqlValueSet STEMI(CqlContext _) => _STEMI;
+    private static readonly CqlValueSet _STEMI = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", null);
 
     [CqlValueSetDefinition("Thrombolytic medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", valueSetVersion: null)]
-    public CqlValueSet? Thrombolytic_medications(CqlContext _) => _Thrombolytic_medications;
-    private static readonly CqlValueSet? _Thrombolytic_medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", null);
+    public CqlValueSet Thrombolytic_medications(CqlContext _) => _Thrombolytic_medications;
+    private static readonly CqlValueSet _Thrombolytic_medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Hospice Care Ambulatory", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
-    private static readonly CqlValueSet? _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
+    public CqlValueSet Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
+    private static readonly CqlValueSet _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
 
     [CqlValueSetDefinition("Hospice Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
-    private static readonly CqlValueSet? _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
+    public CqlValueSet Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
+    private static readonly CqlValueSet _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
 
     [CqlValueSetDefinition("Hospice Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
-    private static readonly CqlValueSet? _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
+    public CqlValueSet Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
+    private static readonly CqlValueSet _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
 
     [CqlValueSetDefinition("Patient Refusal", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", valueSetVersion: null)]
-    public CqlValueSet? Patient_Refusal(CqlContext _) => _Patient_Refusal;
-    private static readonly CqlValueSet? _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+    public CqlValueSet Patient_Refusal(CqlContext _) => _Patient_Refusal;
+    private static readonly CqlValueSet _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
 
     [CqlValueSetDefinition("Left Against Medical Advice", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", valueSetVersion: null)]
-    public CqlValueSet? Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
-    private static readonly CqlValueSet? _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+    public CqlValueSet Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
+    private static readonly CqlValueSet _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
 
     [CqlValueSetDefinition("Drug Intervention Not Indicated/Contraindicated", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.1", valueSetVersion: null)]
-    public CqlValueSet? Drug_Intervention_Not_Indicated_Contraindicated(CqlContext _) => _Drug_Intervention_Not_Indicated_Contraindicated;
-    private static readonly CqlValueSet? _Drug_Intervention_Not_Indicated_Contraindicated = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.1", null);
+    public CqlValueSet Drug_Intervention_Not_Indicated_Contraindicated(CqlContext _) => _Drug_Intervention_Not_Indicated_Contraindicated;
+    private static readonly CqlValueSet _Drug_Intervention_Not_Indicated_Contraindicated = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.1", null);
 
     [CqlValueSetDefinition("Procedure Not Indicated/Contraindicated", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.2", valueSetVersion: null)]
-    public CqlValueSet? Procedure_Not_Indicated_Contraindicated(CqlContext _) => _Procedure_Not_Indicated_Contraindicated;
-    private static readonly CqlValueSet? _Procedure_Not_Indicated_Contraindicated = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.2", null);
+    public CqlValueSet Procedure_Not_Indicated_Contraindicated(CqlContext _) => _Procedure_Not_Indicated_Contraindicated;
+    private static readonly CqlValueSet _Procedure_Not_Indicated_Contraindicated = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1282.2", null);
 
     #endregion ValueSets
 
     #region Codes (14)
 
     [CqlCodeDefinition("EMER", codeId: "EMER", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-ActCode")]
-    public CqlCode? EMER(CqlContext _) => _EMER;
-    private static readonly CqlCode? _EMER = new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
+    public CqlCode EMER(CqlContext _) => _EMER;
+    private static readonly CqlCode _EMER = new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode");
 
     [CqlCodeDefinition("Status post administration of tPA (rtPA) in a different facility within the last 24 hours prior to admission to current facility", codeId: "Z92.82", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode? Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility(CqlContext _) => _Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility;
-    private static readonly CqlCode? _Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility = new CqlCode("Z92.82", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility(CqlContext _) => _Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility;
+    private static readonly CqlCode _Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility = new CqlCode("Z92.82", "http://hl7.org/fhir/sid/icd-10-cm");
 
     [CqlCodeDefinition("Angina pectoris with documented spasm", codeId: "I20.1", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode? Angina_pectoris_with_documented_spasm(CqlContext _) => _Angina_pectoris_with_documented_spasm;
-    private static readonly CqlCode? _Angina_pectoris_with_documented_spasm = new CqlCode("I20.1", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Angina_pectoris_with_documented_spasm(CqlContext _) => _Angina_pectoris_with_documented_spasm;
+    private static readonly CqlCode _Angina_pectoris_with_documented_spasm = new CqlCode("I20.1", "http://hl7.org/fhir/sid/icd-10-cm");
 
     [CqlCodeDefinition("Long term (current) use of anticoagulants", codeId: "Z79.01", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode? Long_term__current__use_of_anticoagulants(CqlContext _) => _Long_term__current__use_of_anticoagulants;
-    private static readonly CqlCode? _Long_term__current__use_of_anticoagulants = new CqlCode("Z79.01", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Long_term__current__use_of_anticoagulants(CqlContext _) => _Long_term__current__use_of_anticoagulants;
+    private static readonly CqlCode _Long_term__current__use_of_anticoagulants = new CqlCode("Z79.01", "http://hl7.org/fhir/sid/icd-10-cm");
 
     [CqlCodeDefinition("Takotsubo cardiomyopathy (disorder)", codeId: "441541008", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Takotsubo_cardiomyopathy__disorder_(CqlContext _) => _Takotsubo_cardiomyopathy__disorder_;
-    private static readonly CqlCode? _Takotsubo_cardiomyopathy__disorder_ = new CqlCode("441541008", "http://snomed.info/sct");
+    public CqlCode Takotsubo_cardiomyopathy__disorder_(CqlContext _) => _Takotsubo_cardiomyopathy__disorder_;
+    private static readonly CqlCode _Takotsubo_cardiomyopathy__disorder_ = new CqlCode("441541008", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Takotsubo syndrome", codeId: "I51.81", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode? Takotsubo_syndrome(CqlContext _) => _Takotsubo_syndrome;
-    private static readonly CqlCode? _Takotsubo_syndrome = new CqlCode("I51.81", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Takotsubo_syndrome(CqlContext _) => _Takotsubo_syndrome;
+    private static readonly CqlCode _Takotsubo_syndrome = new CqlCode("I51.81", "http://hl7.org/fhir/sid/icd-10-cm");
 
     [CqlCodeDefinition("Ventricular aneurysm due to and following acute myocardial infarction (disorder)", codeId: "723858002", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_(CqlContext _) => _Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_;
-    private static readonly CqlCode? _Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_ = new CqlCode("723858002", "http://snomed.info/sct");
+    public CqlCode Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_(CqlContext _) => _Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_;
+    private static readonly CqlCode _Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_ = new CqlCode("723858002", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Aneurysm of heart", codeId: "I25.3", codeSystem: "http://hl7.org/fhir/sid/icd-10-cm")]
-    public CqlCode? Aneurysm_of_heart(CqlContext _) => _Aneurysm_of_heart;
-    private static readonly CqlCode? _Aneurysm_of_heart = new CqlCode("I25.3", "http://hl7.org/fhir/sid/icd-10-cm");
+    public CqlCode Aneurysm_of_heart(CqlContext _) => _Aneurysm_of_heart;
+    private static readonly CqlCode _Aneurysm_of_heart = new CqlCode("I25.3", "http://hl7.org/fhir/sid/icd-10-cm");
 
     [CqlCodeDefinition("Discharge to healthcare facility for hospice care (procedure)", codeId: "428371000124100", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
+    public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Discharge to home for hospice care (procedure)", codeId: "428361000124107", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
+    public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Hospice care [Minimum Data Set]", codeId: "45755-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
-    private static readonly CqlCode? _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
+    public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
+    private static readonly CqlCode _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
 
     [CqlCodeDefinition("Yes (qualifier value)", codeId: "373066001", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
-    private static readonly CqlCode? _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
+    public CqlCode Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
+    private static readonly CqlCode _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Emergency room", codeId: "ER", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode? Emergency_room(CqlContext _) => _Emergency_room;
-    private static readonly CqlCode? _Emergency_room = new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
+    public CqlCode Emergency_room(CqlContext _) => _Emergency_room;
+    private static readonly CqlCode _Emergency_room = new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
 
     [CqlCodeDefinition("Emergency trauma unit", codeId: "ETU", codeSystem: "http://terminology.hl7.org/CodeSystem/v3-RoleCode")]
-    public CqlCode? Emergency_trauma_unit(CqlContext _) => _Emergency_trauma_unit;
-    private static readonly CqlCode? _Emergency_trauma_unit = new CqlCode("ETU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
+    public CqlCode Emergency_trauma_unit(CqlContext _) => _Emergency_trauma_unit;
+    private static readonly CqlCode _Emergency_trauma_unit = new CqlCode("ETU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode");
 
     #endregion Codes
 
     #region CodeSystems (6)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Hospice_care__Minimum_Data_Set_]);
 
     [CqlCodeSystemDefinition("HSLOC", codeSystemId: "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", codeSystemVersion: null)]
-    public CqlCodeSystem? HSLOC(CqlContext _) => _HSLOC;
-    private static readonly CqlCodeSystem? _HSLOC =
+    public CqlCodeSystem HSLOC(CqlContext _) => _HSLOC;
+    private static readonly CqlCodeSystem _HSLOC =
       new CqlCodeSystem("https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", null, []);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Takotsubo_cardiomyopathy__disorder_,
           _Ventricular_aneurysm_due_to_and_following_acute_myocardial_infarction__disorder_,
@@ -242,14 +242,14 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
           _Yes__qualifier_value_]);
 
     [CqlCodeSystemDefinition("ActCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-ActCode", codeSystemVersion: null)]
-    public CqlCodeSystem? ActCode(CqlContext _) => _ActCode;
-    private static readonly CqlCodeSystem? _ActCode =
+    public CqlCodeSystem ActCode(CqlContext _) => _ActCode;
+    private static readonly CqlCodeSystem _ActCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-ActCode", null, [
           _EMER]);
 
     [CqlCodeSystemDefinition("ICD10CM", codeSystemId: "http://hl7.org/fhir/sid/icd-10-cm", codeSystemVersion: null)]
-    public CqlCodeSystem? ICD10CM(CqlContext _) => _ICD10CM;
-    private static readonly CqlCodeSystem? _ICD10CM =
+    public CqlCodeSystem ICD10CM(CqlContext _) => _ICD10CM;
+    private static readonly CqlCodeSystem _ICD10CM =
       new CqlCodeSystem("http://hl7.org/fhir/sid/icd-10-cm", null, [
           _Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility,
           _Angina_pectoris_with_documented_spasm,
@@ -258,8 +258,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
           _Aneurysm_of_heart]);
 
     [CqlCodeSystemDefinition("RoleCode", codeSystemId: "http://terminology.hl7.org/CodeSystem/v3-RoleCode", codeSystemVersion: null)]
-    public CqlCodeSystem? RoleCode(CqlContext _) => _RoleCode;
-    private static readonly CqlCodeSystem? _RoleCode =
+    public CqlCodeSystem RoleCode(CqlContext _) => _RoleCode;
+    private static readonly CqlCodeSystem _RoleCode =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/v3-RoleCode", null, [
           _Emergency_room,
           _Emergency_trauma_unit]);
@@ -280,7 +280,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS996FHIRAptTxforSTEMI-2.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -323,7 +323,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return af_;
             }
 
-            IEnumerable<CqlConcept?>? i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
+            IEnumerable<CqlConcept?>? i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)g_, h_);
             CqlValueSet? j_ = this.Emergency_Department_Evaluation_and_Management_Visit(context);
             bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
             Period? l_ = EDEncounter?.Period;
@@ -372,12 +372,12 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return p_;
             }
 
-            IEnumerable<CqlConcept?>? f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)d_, e_);
+            IEnumerable<CqlConcept?>? f_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)d_, e_);
             CqlValueSet? g_ = this.STEMI(context);
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
             IEnumerable<Condition?>? i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition?>? k_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? k_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition?>?, j_ as IEnumerable<Condition?>?);
             IEnumerable<Condition?>? l_ = Status_1_15_000.Instance.verified(context, k_);
 
             bool? m_(Condition? DxSTEMI) {
@@ -484,7 +484,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 CqlInterval<CqlDateTime?>? ac_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ab_);
                 bool? ad_ = context.Operators.Overlaps(aa_, ac_, (string)default);
                 CqlDateTime? ae_ = context.Operators.End(ac_);
-                bool? af_ = context.Operators.Before(z_ as CqlDateTime, ae_, (string)default);
+                bool? af_ = context.Operators.Before(z_ as CqlDateTime?, ae_, (string)default);
                 bool? ag_ = context.Operators.Or(ad_, af_);
                 bool? ah_ = context.Operators.And(x_, ag_);
                 return ah_;
@@ -569,7 +569,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition?>? r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? s_ = context.Operators.Union<Condition>(p_, r_);
             IEnumerable<Condition?>? t_ = context.Operators.Union<Condition>(n_, s_);
-            Condition? u_(Condition? X) => X as Condition;
+            Condition? u_(Condition? X) => X as Condition?;
             IEnumerable<Condition?>? v_ = context.Operators.Select<Condition, Condition>(t_, u_);
             IEnumerable<Condition?>? w_ = Status_1_15_000.Instance.verified(context, v_);
 
@@ -609,7 +609,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -637,7 +637,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = OralAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -682,7 +682,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition?>?, g_ as IEnumerable<Condition?>?);
             IEnumerable<Condition?>? i_ = Status_1_15_000.Instance.verified(context, h_);
 
             bool? j_(Condition? LongTermAnticoagulant) {
@@ -761,7 +761,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition?>? ac_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? ad_ = context.Operators.Union<Condition>(aa_, ac_);
             IEnumerable<Condition?>? ae_ = context.Operators.Union<Condition>(x_, ad_);
-            Condition? af_(Condition? X) => X as Condition;
+            Condition? af_(Condition? X) => X as Condition?;
             IEnumerable<Condition?>? ag_ = context.Operators.Select<Condition, Condition>(ae_, af_);
             IEnumerable<Condition?>? ah_ = Status_1_15_000.Instance.verified(context, ag_);
 
@@ -814,7 +814,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? ag_ = MajorSurgery?.Performed;
                     object? ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                    h_ = ah_ as CqlDateTime;
+                    h_ = ah_ as CqlDateTime?;
                 }
                 else
                 {
@@ -825,7 +825,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? al_ = MajorSurgery?.Performed;
                         object? am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                        h_ = am_ as CqlQuantity;
+                        h_ = am_ as CqlQuantity?;
                     }
                     else
                     {
@@ -836,7 +836,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? aq_ = MajorSurgery?.Performed;
                             object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                            h_ = ar_ as CqlInterval<CqlDateTime>;
+                            h_ = ar_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -847,7 +847,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? av_ = MajorSurgery?.Performed;
                                 object? aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-                                h_ = aw_ as CqlInterval<CqlQuantity>;
+                                h_ = aw_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -875,7 +875,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? ba_ = MajorSurgery?.Performed;
                     object? bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-                    t_ = bb_ as CqlDateTime;
+                    t_ = bb_ as CqlDateTime?;
                 }
                 else
                 {
@@ -886,7 +886,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? bf_ = MajorSurgery?.Performed;
                         object? bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
-                        t_ = bg_ as CqlQuantity;
+                        t_ = bg_ as CqlQuantity?;
                     }
                     else
                     {
@@ -897,7 +897,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? bk_ = MajorSurgery?.Performed;
                             object? bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
-                            t_ = bl_ as CqlInterval<CqlDateTime>;
+                            t_ = bl_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -908,7 +908,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? bp_ = MajorSurgery?.Performed;
                                 object? bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                                t_ = bq_ as CqlInterval<CqlQuantity>;
+                                t_ = bq_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -964,7 +964,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? aj_ = AirwayProcedure?.Performed;
                     object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                    k_ = ak_ as CqlDateTime;
+                    k_ = ak_ as CqlDateTime?;
                 }
                 else
                 {
@@ -975,7 +975,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? ao_ = AirwayProcedure?.Performed;
                         object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                        k_ = ap_ as CqlQuantity;
+                        k_ = ap_ as CqlQuantity?;
                     }
                     else
                     {
@@ -986,7 +986,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? at_ = AirwayProcedure?.Performed;
                             object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                            k_ = au_ as CqlInterval<CqlDateTime>;
+                            k_ = au_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -997,7 +997,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? ay_ = AirwayProcedure?.Performed;
                                 object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                                k_ = az_ as CqlInterval<CqlQuantity>;
+                                k_ = az_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1019,7 +1019,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? bd_ = AirwayProcedure?.Performed;
                     object? be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                    q_ = be_ as CqlDateTime;
+                    q_ = be_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1030,7 +1030,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? bi_ = AirwayProcedure?.Performed;
                         object? bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
-                        q_ = bj_ as CqlQuantity;
+                        q_ = bj_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1041,7 +1041,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? bn_ = AirwayProcedure?.Performed;
                             object? bo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bn_);
-                            q_ = bo_ as CqlInterval<CqlDateTime>;
+                            q_ = bo_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1052,7 +1052,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? bs_ = AirwayProcedure?.Performed;
                                 object? bt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bs_);
-                                q_ = bt_ as CqlInterval<CqlQuantity>;
+                                q_ = bt_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1107,7 +1107,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             CqlValueSet? i_ = this.Active_Peptic_Ulcer(context);
             IEnumerable<Condition?>? j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? k_ = context.Operators.Union<Condition>(h_, j_);
-            Condition? l_(Condition? X) => X as Condition;
+            Condition? l_(Condition? X) => X as Condition?;
             IEnumerable<Condition?>? m_ = context.Operators.Select<Condition, Condition>(k_, l_);
             IEnumerable<Condition?>? n_ = Status_1_15_000.Instance.verified(context, m_);
 
@@ -1156,7 +1156,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? ab_ = CranialorSpinalSurgery?.Performed;
                     object? ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-                    h_ = ac_ as CqlDateTime;
+                    h_ = ac_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1167,7 +1167,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? ag_ = CranialorSpinalSurgery?.Performed;
                         object? ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-                        h_ = ah_ as CqlQuantity;
+                        h_ = ah_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1178,7 +1178,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? al_ = CranialorSpinalSurgery?.Performed;
                             object? am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-                            h_ = am_ as CqlInterval<CqlDateTime>;
+                            h_ = am_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1189,7 +1189,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? aq_ = CranialorSpinalSurgery?.Performed;
                                 object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                                h_ = ar_ as CqlInterval<CqlQuantity>;
+                                h_ = ar_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1347,11 +1347,11 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Observation?>? r_ = Status_1_15_000.Instance.isAssessmentPerformed(context, q_);
 
             bool? s_(Observation? HospiceAssessment) {
-                DataType? bz_ = (HospiceAssessment as Observation)?.Value;
+                DataType? bz_ = (HospiceAssessment as Observation?)?.Value;
                 object? ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
                 CqlCode? cb_ = this.Yes__qualifier_value_(context);
                 CqlConcept? cc_ = context.Operators.ConvertCodeToConcept(cb_);
-                bool? cd_ = context.Operators.Equivalent(ca_ as CqlConcept, cc_);
+                bool? cd_ = context.Operators.Equivalent(ca_ as CqlConcept?, cc_);
                 DataType? ce_ = HospiceAssessment?.Effective;
                 object? cf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ce_);
                 CqlInterval<CqlDateTime?>? cg_ = QICoreCommon_4_0_000.Instance.toInterval(context, cf_);
@@ -1405,7 +1405,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? dw_ = HospicePerformed?.Performed;
                     object? dx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dw_);
-                    de_ = dx_ as CqlDateTime;
+                    de_ = dx_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1416,7 +1416,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? eb_ = HospicePerformed?.Performed;
                         object? ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                        de_ = ec_ as CqlQuantity;
+                        de_ = ec_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1427,7 +1427,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? eg_ = HospicePerformed?.Performed;
                             object? eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                            de_ = eh_ as CqlInterval<CqlDateTime>;
+                            de_ = eh_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1438,7 +1438,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? el_ = HospicePerformed?.Performed;
                                 object? em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                                de_ = em_ as CqlInterval<CqlQuantity>;
+                                de_ = em_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1461,7 +1461,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? eq_ = HospicePerformed?.Performed;
                     object? er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                    dl_ = er_ as CqlDateTime;
+                    dl_ = er_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1472,7 +1472,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? ev_ = HospicePerformed?.Performed;
                         object? ew_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ev_);
-                        dl_ = ew_ as CqlQuantity;
+                        dl_ = ew_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1483,7 +1483,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? fa_ = HospicePerformed?.Performed;
                             object? fb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fa_);
-                            dl_ = fb_ as CqlInterval<CqlDateTime>;
+                            dl_ = fb_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1494,7 +1494,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? ff_ = HospicePerformed?.Performed;
                                 object? fg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ff_);
-                                dl_ = fg_ as CqlInterval<CqlQuantity>;
+                                dl_ = fg_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1517,7 +1517,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? af_ = context.Operators.Or(aa_, ae_);
             CqlValueSet? ag_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition?>? ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            Condition? ai_(Condition? X) => X as Condition;
+            Condition? ai_(Condition? X) => X as Condition?;
             IEnumerable<Condition?>? aj_ = context.Operators.Select<Condition, Condition>(ah_, ai_);
             IEnumerable<Condition?>? ak_ = Status_1_15_000.Instance.verified(context, aj_);
 
@@ -1560,7 +1560,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 Code<ObservationStatus>? i_ = context.Operators.Convert<Code<ObservationStatus>>(h_);
                 bool? j_ = context.Operators.Equal(i_, "final");
                 DataType? k_ = PregStatus?.Value;
-                CqlConcept? l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_ as CodeableConcept);
+                CqlConcept? l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_ as CodeableConcept?);
                 CqlValueSet? m_ = this.Pregnant_State(context);
                 bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
                 bool? o_ = context.Operators.And(j_, n_);
@@ -1634,7 +1634,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition?>?, g_ as IEnumerable<Condition?>?);
             IEnumerable<Condition?>? i_ = Status_1_15_000.Instance.verified(context, h_);
 
             bool? j_(Condition? TPA) {
@@ -1692,8 +1692,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ac_;
                 }
 
-                IEnumerable<DataType?>? r_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(PCINotDone is DomainResource
-                    ? (PCINotDone as DomainResource).Extension
+                IEnumerable<DataType?>? r_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension?>?)(PCINotDone is DomainResource
+                    ? (PCINotDone as DomainResource?).Extension
                     : default), p_, q_);
                 DataType? s_ = context.Operators.SingletonFrom<DataType>(r_);
                 FhirDateTime? t_ = context.Operators.Convert<FhirDateTime>(s_);
@@ -1737,7 +1737,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ac_;
                 }
 
-                IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
+                IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_);
                 CqlValueSet? l_ = this.Patient_Refusal(context);
                 bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
@@ -1746,7 +1746,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ad_;
                 }
 
-                IEnumerable<CqlConcept?>? o_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, n_);
+                IEnumerable<CqlConcept?>? o_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, n_);
                 CqlValueSet? p_ = this.Drug_Intervention_Not_Indicated_Contraindicated(context);
                 bool? q_ = context.Operators.ConceptsInValueSet(o_, p_);
                 bool? r_ = context.Operators.Or(m_, q_);
@@ -1764,8 +1764,8 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ah_;
                 }
 
-                IEnumerable<DataType?>? u_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(FibrinolyticNoMed is DomainResource
-                    ? (FibrinolyticNoMed as DomainResource).Extension
+                IEnumerable<DataType?>? u_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension?>?)(FibrinolyticNoMed is DomainResource
+                    ? (FibrinolyticNoMed as DomainResource?).Extension
                     : default), s_, t_);
                 DataType? v_ = context.Operators.SingletonFrom<DataType>(u_);
                 FhirDateTime? w_ = context.Operators.Convert<FhirDateTime>(v_);
@@ -1838,7 +1838,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ad_;
             }
 
-            IEnumerable<CqlConcept?>? m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
+            IEnumerable<CqlConcept?>? m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             return n_;
         }
@@ -1851,7 +1851,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             return ag_;
         }
 
-        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent>)a_, b_, c_);
+        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent?>?)a_, b_, c_);
         IEnumerable<CqlDateTime?>? e_ = context.Operators.Distinct<CqlDateTime>(d_);
         IEnumerable<CqlDateTime?>? f_ = context.Operators.ListSort<CqlDateTime>(e_, System.ComponentModel.ListSortDirection.Ascending);
         CqlDateTime? g_ = context.Operators.First<CqlDateTime>(f_);
@@ -1878,7 +1878,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1950,7 +1950,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 {
                     DataType? z_ = PCI?.Performed;
                     object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    h_ = aa_ as CqlDateTime;
+                    h_ = aa_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1961,7 +1961,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     {
                         DataType? ae_ = PCI?.Performed;
                         object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        h_ = af_ as CqlQuantity;
+                        h_ = af_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1972,7 +1972,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                         {
                             DataType? aj_ = PCI?.Performed;
                             object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            h_ = ak_ as CqlInterval<CqlDateTime>;
+                            h_ = ak_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1983,7 +1983,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                             {
                                 DataType? ao_ = PCI?.Performed;
                                 object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                                h_ = ap_ as CqlInterval<CqlQuantity>;
+                                h_ = ap_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -2053,7 +2053,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ad_;
             }
 
-            IEnumerable<CqlConcept?>? m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_, l_);
+            IEnumerable<CqlConcept?>? m_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_, l_);
             bool? n_ = context.Operators.Exists<CqlConcept>(m_);
             return n_;
         }
@@ -2066,7 +2066,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             return ag_;
         }
 
-        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent>)a_, b_, c_);
+        IEnumerable<CqlDateTime?>? d_ = context.Operators.WhereSelect<Encounter.LocationComponent, CqlDateTime>((IEnumerable<Encounter.LocationComponent?>?)a_, b_, c_);
         IEnumerable<CqlDateTime?>? e_ = context.Operators.Distinct<CqlDateTime>(d_);
         IEnumerable<CqlDateTime?>? f_ = context.Operators.ListSort<CqlDateTime>(e_, System.ComponentModel.ListSortDirection.Ascending);
         CqlDateTime? g_ = context.Operators.Last<CqlDateTime>(f_);
@@ -2125,40 +2125,40 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 965101041482449971L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -3876543663401552806L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -5966982971653611671L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

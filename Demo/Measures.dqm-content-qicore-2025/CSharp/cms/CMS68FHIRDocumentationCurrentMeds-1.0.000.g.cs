@@ -21,28 +21,28 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
     #region ValueSets (1)
 
     [CqlValueSetDefinition("Encounter to Document Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", valueSetVersion: null)]
-    public CqlValueSet? Encounter_to_Document_Medications(CqlContext _) => _Encounter_to_Document_Medications;
-    private static readonly CqlValueSet? _Encounter_to_Document_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", null);
+    public CqlValueSet Encounter_to_Document_Medications(CqlContext _) => _Encounter_to_Document_Medications;
+    private static readonly CqlValueSet _Encounter_to_Document_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", null);
 
     #endregion ValueSets
 
     #region Codes (2)
 
     [CqlCodeDefinition("Acute health crisis (finding)", codeId: "705016005", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Acute_health_crisis__finding_(CqlContext _) => _Acute_health_crisis__finding_;
-    private static readonly CqlCode? _Acute_health_crisis__finding_ = new CqlCode("705016005", "http://snomed.info/sct");
+    public CqlCode Acute_health_crisis__finding_(CqlContext _) => _Acute_health_crisis__finding_;
+    private static readonly CqlCode _Acute_health_crisis__finding_ = new CqlCode("705016005", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Documentation of current medications (procedure)", codeId: "428191000124101", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Documentation_of_current_medications__procedure_(CqlContext _) => _Documentation_of_current_medications__procedure_;
-    private static readonly CqlCode? _Documentation_of_current_medications__procedure_ = new CqlCode("428191000124101", "http://snomed.info/sct");
+    public CqlCode Documentation_of_current_medications__procedure_(CqlContext _) => _Documentation_of_current_medications__procedure_;
+    private static readonly CqlCode _Documentation_of_current_medications__procedure_ = new CqlCode("428191000124101", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Acute_health_crisis__finding_,
           _Documentation_of_current_medications__procedure_]);
@@ -63,7 +63,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS68FHIRDocumentationCurrentMeds-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -86,40 +86,40 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 7344199930023601664L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 6516132503073014460L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -9160309994966787356L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
@@ -216,7 +216,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                 {
                     DataType? aa_ = MedicationsDocumented?.Performed;
                     object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    i_ = ab_ as CqlDateTime;
+                    i_ = ab_ as CqlDateTime?;
                 }
                 else
                 {
@@ -227,7 +227,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     {
                         DataType? af_ = MedicationsDocumented?.Performed;
                         object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        i_ = ag_ as CqlQuantity;
+                        i_ = ag_ as CqlQuantity?;
                     }
                     else
                     {
@@ -238,7 +238,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                         {
                             DataType? ak_ = MedicationsDocumented?.Performed;
                             object? al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                            i_ = al_ as CqlInterval<CqlDateTime>;
+                            i_ = al_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -249,7 +249,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                             {
                                 DataType? ap_ = MedicationsDocumented?.Performed;
                                 object? aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                                i_ = aq_ as CqlInterval<CqlQuantity>;
+                                i_ = aq_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -271,7 +271,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                 {
                     DataType? au_ = MedicationsDocumented?.Performed;
                     object? av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                    o_ = av_ as CqlDateTime;
+                    o_ = av_ as CqlDateTime?;
                 }
                 else
                 {
@@ -282,7 +282,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     {
                         DataType? az_ = MedicationsDocumented?.Performed;
                         object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
-                        o_ = ba_ as CqlQuantity;
+                        o_ = ba_ as CqlQuantity?;
                     }
                     else
                     {
@@ -293,7 +293,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                         {
                             DataType? be_ = MedicationsDocumented?.Performed;
                             object? bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-                            o_ = bf_ as CqlInterval<CqlDateTime>;
+                            o_ = bf_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -304,7 +304,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                             {
                                 DataType? bj_ = MedicationsDocumented?.Performed;
                                 object? bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                                o_ = bk_ as CqlInterval<CqlQuantity>;
+                                o_ = bk_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -363,8 +363,8 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     return af_;
                 }
 
-                IEnumerable<DataType?>? k_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
-                    ? (MedicationsNotDocumented as DomainResource).Extension
+                IEnumerable<DataType?>? k_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension?>?)(MedicationsNotDocumented is DomainResource
+                    ? (MedicationsNotDocumented as DomainResource?).Extension
                     : default), i_, j_);
                 DataType? l_ = context.Operators.SingletonFrom<DataType>(k_);
                 FhirDateTime? m_ = context.Operators.Convert<FhirDateTime>(l_);
@@ -392,7 +392,7 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     return aj_;
                 }
 
-                IEnumerable<CqlConcept?>? z_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)w_, x_, y_);
+                IEnumerable<CqlConcept?>? z_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)w_, x_, y_);
                 bool? aa_ = context.Operators.Exists<CqlConcept>(z_);
                 bool? ab_ = context.Operators.And(v_, aa_);
                 return ab_;

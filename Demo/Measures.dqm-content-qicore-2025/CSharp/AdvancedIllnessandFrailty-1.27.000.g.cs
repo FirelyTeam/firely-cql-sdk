@@ -21,59 +21,59 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
     #region ValueSets (6)
 
     [CqlValueSetDefinition("Advanced Illness", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", valueSetVersion: null)]
-    public CqlValueSet? Advanced_Illness(CqlContext _) => _Advanced_Illness;
-    private static readonly CqlValueSet? _Advanced_Illness = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
+    public CqlValueSet Advanced_Illness(CqlContext _) => _Advanced_Illness;
+    private static readonly CqlValueSet _Advanced_Illness = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
 
     [CqlValueSetDefinition("Dementia Medications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", valueSetVersion: null)]
-    public CqlValueSet? Dementia_Medications(CqlContext _) => _Dementia_Medications;
-    private static readonly CqlValueSet? _Dementia_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
+    public CqlValueSet Dementia_Medications(CqlContext _) => _Dementia_Medications;
+    private static readonly CqlValueSet _Dementia_Medications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
 
     [CqlValueSetDefinition("Frailty Device", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", valueSetVersion: null)]
-    public CqlValueSet? Frailty_Device(CqlContext _) => _Frailty_Device;
-    private static readonly CqlValueSet? _Frailty_Device = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
+    public CqlValueSet Frailty_Device(CqlContext _) => _Frailty_Device;
+    private static readonly CqlValueSet _Frailty_Device = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
 
     [CqlValueSetDefinition("Frailty Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", valueSetVersion: null)]
-    public CqlValueSet? Frailty_Diagnosis(CqlContext _) => _Frailty_Diagnosis;
-    private static readonly CqlValueSet? _Frailty_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
+    public CqlValueSet Frailty_Diagnosis(CqlContext _) => _Frailty_Diagnosis;
+    private static readonly CqlValueSet _Frailty_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
 
     [CqlValueSetDefinition("Frailty Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", valueSetVersion: null)]
-    public CqlValueSet? Frailty_Encounter(CqlContext _) => _Frailty_Encounter;
-    private static readonly CqlValueSet? _Frailty_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
+    public CqlValueSet Frailty_Encounter(CqlContext _) => _Frailty_Encounter;
+    private static readonly CqlValueSet _Frailty_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
 
     [CqlValueSetDefinition("Frailty Symptom", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", valueSetVersion: null)]
-    public CqlValueSet? Frailty_Symptom(CqlContext _) => _Frailty_Symptom;
-    private static readonly CqlValueSet? _Frailty_Symptom = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
+    public CqlValueSet Frailty_Symptom(CqlContext _) => _Frailty_Symptom;
+    private static readonly CqlValueSet _Frailty_Symptom = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
 
     #endregion ValueSets
 
     #region Codes (3)
 
     [CqlCodeDefinition("Housing status", codeId: "71802-3", codeSystem: "http://loinc.org")]
-    public CqlCode? Housing_status(CqlContext _) => _Housing_status;
-    private static readonly CqlCode? _Housing_status = new CqlCode("71802-3", "http://loinc.org");
+    public CqlCode Housing_status(CqlContext _) => _Housing_status;
+    private static readonly CqlCode _Housing_status = new CqlCode("71802-3", "http://loinc.org");
 
     [CqlCodeDefinition("Lives in nursing home (finding)", codeId: "160734000", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Lives_in_nursing_home__finding_(CqlContext _) => _Lives_in_nursing_home__finding_;
-    private static readonly CqlCode? _Lives_in_nursing_home__finding_ = new CqlCode("160734000", "http://snomed.info/sct");
+    public CqlCode Lives_in_nursing_home__finding_(CqlContext _) => _Lives_in_nursing_home__finding_;
+    private static readonly CqlCode _Lives_in_nursing_home__finding_ = new CqlCode("160734000", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Medical equipment used", codeId: "98181-1", codeSystem: "http://loinc.org")]
-    public CqlCode? Medical_equipment_used(CqlContext _) => _Medical_equipment_used;
-    private static readonly CqlCode? _Medical_equipment_used = new CqlCode("98181-1", "http://loinc.org");
+    public CqlCode Medical_equipment_used(CqlContext _) => _Medical_equipment_used;
+    private static readonly CqlCode _Medical_equipment_used = new CqlCode("98181-1", "http://loinc.org");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Housing_status,
           _Medical_equipment_used]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Lives_in_nursing_home__finding_]);
 
@@ -90,7 +90,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -144,7 +144,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             DataType? am_ = EquipmentUsed?.Value;
             object? an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             CqlValueSet? ao_ = this.Frailty_Device(context);
-            bool? ap_ = context.Operators.ConceptInValueSet(an_ as CqlConcept, ao_);
+            bool? ap_ = context.Operators.ConceptInValueSet(an_ as CqlConcept?, ao_);
             DataType? aq_ = EquipmentUsed?.Effective;
             object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
             CqlInterval<CqlDateTime?>? as_ = QICoreCommon_4_0_000.Instance.toInterval(context, ar_);
@@ -160,7 +160,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlValueSet? n_ = this.Frailty_Diagnosis(context);
         IEnumerable<Condition?>? o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? q_ = context.Operators.Union<Condition>(o_ as IEnumerable<Condition>, p_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? q_ = context.Operators.Union<Condition>(o_ as IEnumerable<Condition?>?, p_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? r_ = Status_1_15_000.Instance.verified(context, q_);
 
         bool? s_(Condition? FrailtyDiagnosis) {
@@ -216,7 +216,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlValueSet? a_ = this.Advanced_Illness(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition? AdvancedIllnessDiagnosis) {
@@ -253,7 +253,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             bool? k_(Medication? M) {
                 object? m_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? o_ = context.Operators.Split((string)n_, "/");
+                IEnumerable<string?>? o_ = context.Operators.Split((string?)n_, "/");
                 string? p_ = context.Operators.Last<string>(o_);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;
@@ -410,11 +410,11 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
             CqlCode? al_ = this.Lives_in_nursing_home__finding_(context);
             CqlConcept? am_ = context.Operators.ConvertCodeToConcept(al_);
-            bool? an_ = context.Operators.Equivalent(ak_ as CqlConcept, am_);
+            bool? an_ = context.Operators.Equivalent(ak_ as CqlConcept?, am_);
             return an_;
         }
 
-        IEnumerable<Observation?>? u_ = context.Operators.Where<Observation>((IEnumerable<Observation>)s_, t_);
+        IEnumerable<Observation?>? u_ = context.Operators.Where<Observation>((IEnumerable<Observation?>?)s_, t_);
         Observation? v_ = context.Operators.SingletonFrom<Observation>(u_);
         bool? w_ = context.Operators.Not((bool?)(v_ is null));
         bool? x_ = context.Operators.And(i_, w_);

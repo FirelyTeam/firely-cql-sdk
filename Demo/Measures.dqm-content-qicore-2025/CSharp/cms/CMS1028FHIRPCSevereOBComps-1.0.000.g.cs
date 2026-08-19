@@ -21,290 +21,290 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
     #region ValueSets (61)
 
     [CqlValueSetDefinition("20 to 42 Plus Weeks Gestation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", valueSetVersion: null)]
-    public CqlValueSet? _20_to_42_Plus_Weeks_Gestation(CqlContext _) => __20_to_42_Plus_Weeks_Gestation;
-    private static readonly CqlValueSet? __20_to_42_Plus_Weeks_Gestation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", null);
+    public CqlValueSet _20_to_42_Plus_Weeks_Gestation(CqlContext _) => __20_to_42_Plus_Weeks_Gestation;
+    private static readonly CqlValueSet __20_to_42_Plus_Weeks_Gestation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67", null);
 
     [CqlValueSetDefinition("Acute Heart Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", valueSetVersion: null)]
-    public CqlValueSet? Acute_Heart_Failure(CqlContext _) => _Acute_Heart_Failure;
-    private static readonly CqlValueSet? _Acute_Heart_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", null);
+    public CqlValueSet Acute_Heart_Failure(CqlContext _) => _Acute_Heart_Failure;
+    private static readonly CqlValueSet _Acute_Heart_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.233", null);
 
     [CqlValueSetDefinition("Acute Myocardial Infarction", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", valueSetVersion: null)]
-    public CqlValueSet? Acute_Myocardial_Infarction(CqlContext _) => _Acute_Myocardial_Infarction;
-    private static readonly CqlValueSet? _Acute_Myocardial_Infarction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", null);
+    public CqlValueSet Acute_Myocardial_Infarction(CqlContext _) => _Acute_Myocardial_Infarction;
+    private static readonly CqlValueSet _Acute_Myocardial_Infarction = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.623", null);
 
     [CqlValueSetDefinition("Acute or Persistent Asthma", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", valueSetVersion: null)]
-    public CqlValueSet? Acute_or_Persistent_Asthma(CqlContext _) => _Acute_or_Persistent_Asthma;
-    private static readonly CqlValueSet? _Acute_or_Persistent_Asthma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", null);
+    public CqlValueSet Acute_or_Persistent_Asthma(CqlContext _) => _Acute_or_Persistent_Asthma;
+    private static readonly CqlValueSet _Acute_or_Persistent_Asthma = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.271", null);
 
     [CqlValueSetDefinition("Acute Renal Failure", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", valueSetVersion: null)]
-    public CqlValueSet? Acute_Renal_Failure(CqlContext _) => _Acute_Renal_Failure;
-    private static readonly CqlValueSet? _Acute_Renal_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", null);
+    public CqlValueSet Acute_Renal_Failure(CqlContext _) => _Acute_Renal_Failure;
+    private static readonly CqlValueSet _Acute_Renal_Failure = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.53", null);
 
     [CqlValueSetDefinition("Acute Respiratory Distress Syndrome", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", valueSetVersion: null)]
-    public CqlValueSet? Acute_Respiratory_Distress_Syndrome(CqlContext _) => _Acute_Respiratory_Distress_Syndrome;
-    private static readonly CqlValueSet? _Acute_Respiratory_Distress_Syndrome = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", null);
+    public CqlValueSet Acute_Respiratory_Distress_Syndrome(CqlContext _) => _Acute_Respiratory_Distress_Syndrome;
+    private static readonly CqlValueSet _Acute_Respiratory_Distress_Syndrome = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.214", null);
 
     [CqlValueSetDefinition("Air and Thrombotic Embolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", valueSetVersion: null)]
-    public CqlValueSet? Air_and_Thrombotic_Embolism(CqlContext _) => _Air_and_Thrombotic_Embolism;
-    private static readonly CqlValueSet? _Air_and_Thrombotic_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", null);
+    public CqlValueSet Air_and_Thrombotic_Embolism(CqlContext _) => _Air_and_Thrombotic_Embolism;
+    private static readonly CqlValueSet _Air_and_Thrombotic_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.243", null);
 
     [CqlValueSetDefinition("Amniotic Fluid Embolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", valueSetVersion: null)]
-    public CqlValueSet? Amniotic_Fluid_Embolism(CqlContext _) => _Amniotic_Fluid_Embolism;
-    private static readonly CqlValueSet? _Amniotic_Fluid_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", null);
+    public CqlValueSet Amniotic_Fluid_Embolism(CqlContext _) => _Amniotic_Fluid_Embolism;
+    private static readonly CqlValueSet _Amniotic_Fluid_Embolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.217", null);
 
     [CqlValueSetDefinition("Anemia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", valueSetVersion: null)]
-    public CqlValueSet? Anemia(CqlContext _) => _Anemia;
-    private static readonly CqlValueSet? _Anemia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", null);
+    public CqlValueSet Anemia(CqlContext _) => _Anemia;
+    private static readonly CqlValueSet _Anemia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.323", null);
 
     [CqlValueSetDefinition("Aortic Aneurysm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", valueSetVersion: null)]
-    public CqlValueSet? Aortic_Aneurysm(CqlContext _) => _Aortic_Aneurysm;
-    private static readonly CqlValueSet? _Aortic_Aneurysm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", null);
+    public CqlValueSet Aortic_Aneurysm(CqlContext _) => _Aortic_Aneurysm;
+    private static readonly CqlValueSet _Aortic_Aneurysm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.219", null);
 
     [CqlValueSetDefinition("Autoimmune Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", valueSetVersion: null)]
-    public CqlValueSet? Autoimmune_Disease(CqlContext _) => _Autoimmune_Disease;
-    private static readonly CqlValueSet? _Autoimmune_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", null);
+    public CqlValueSet Autoimmune_Disease(CqlContext _) => _Autoimmune_Disease;
+    private static readonly CqlValueSet _Autoimmune_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.311", null);
 
     [CqlValueSetDefinition("Bariatric Surgery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", valueSetVersion: null)]
-    public CqlValueSet? Bariatric_Surgery(CqlContext _) => _Bariatric_Surgery;
-    private static readonly CqlValueSet? _Bariatric_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", null);
+    public CqlValueSet Bariatric_Surgery(CqlContext _) => _Bariatric_Surgery;
+    private static readonly CqlValueSet _Bariatric_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.317", null);
 
     [CqlValueSetDefinition("Bleeding Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", valueSetVersion: null)]
-    public CqlValueSet? Bleeding_Disorder(CqlContext _) => _Bleeding_Disorder;
-    private static readonly CqlValueSet? _Bleeding_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", null);
+    public CqlValueSet Bleeding_Disorder(CqlContext _) => _Bleeding_Disorder;
+    private static readonly CqlValueSet _Bleeding_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.287", null);
 
     [CqlValueSetDefinition("Blood Transfusion", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", valueSetVersion: null)]
-    public CqlValueSet? Blood_Transfusion(CqlContext _) => _Blood_Transfusion;
-    private static readonly CqlValueSet? _Blood_Transfusion = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", null);
+    public CqlValueSet Blood_Transfusion(CqlContext _) => _Blood_Transfusion;
+    private static readonly CqlValueSet _Blood_Transfusion = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.213", null);
 
     [CqlValueSetDefinition("Cardiac Arrest Ventricular Fibrillation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", valueSetVersion: null)]
-    public CqlValueSet? Cardiac_Arrest_Ventricular_Fibrillation(CqlContext _) => _Cardiac_Arrest_Ventricular_Fibrillation;
-    private static readonly CqlValueSet? _Cardiac_Arrest_Ventricular_Fibrillation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", null);
+    public CqlValueSet Cardiac_Arrest_Ventricular_Fibrillation(CqlContext _) => _Cardiac_Arrest_Ventricular_Fibrillation;
+    private static readonly CqlValueSet _Cardiac_Arrest_Ventricular_Fibrillation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.221", null);
 
     [CqlValueSetDefinition("Cardiac Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", valueSetVersion: null)]
-    public CqlValueSet? Cardiac_Disease(CqlContext _) => _Cardiac_Disease;
-    private static readonly CqlValueSet? _Cardiac_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", null);
+    public CqlValueSet Cardiac_Disease(CqlContext _) => _Cardiac_Disease;
+    private static readonly CqlValueSet _Cardiac_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.341", null);
 
     [CqlValueSetDefinition("Conversion of Cardiac Rhythm", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", valueSetVersion: null)]
-    public CqlValueSet? Conversion_of_Cardiac_Rhythm(CqlContext _) => _Conversion_of_Cardiac_Rhythm;
-    private static readonly CqlValueSet? _Conversion_of_Cardiac_Rhythm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", null);
+    public CqlValueSet Conversion_of_Cardiac_Rhythm(CqlContext _) => _Conversion_of_Cardiac_Rhythm;
+    private static readonly CqlValueSet _Conversion_of_Cardiac_Rhythm = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.357", null);
 
     [CqlValueSetDefinition("Disseminated Intravascular Coagulation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", valueSetVersion: null)]
-    public CqlValueSet? Disseminated_Intravascular_Coagulation(CqlContext _) => _Disseminated_Intravascular_Coagulation;
-    private static readonly CqlValueSet? _Disseminated_Intravascular_Coagulation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", null);
+    public CqlValueSet Disseminated_Intravascular_Coagulation(CqlContext _) => _Disseminated_Intravascular_Coagulation;
+    private static readonly CqlValueSet _Disseminated_Intravascular_Coagulation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.223", null);
 
     [CqlValueSetDefinition("Eclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", valueSetVersion: null)]
-    public CqlValueSet? Eclampsia(CqlContext _) => _Eclampsia;
-    private static readonly CqlValueSet? _Eclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", null);
+    public CqlValueSet Eclampsia(CqlContext _) => _Eclampsia;
+    private static readonly CqlValueSet _Eclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.225", null);
 
     [CqlValueSetDefinition("Economic Housing Instability", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", valueSetVersion: null)]
-    public CqlValueSet? Economic_Housing_Instability(CqlContext _) => _Economic_Housing_Instability;
-    private static readonly CqlValueSet? _Economic_Housing_Instability = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", null);
+    public CqlValueSet Economic_Housing_Instability(CqlContext _) => _Economic_Housing_Instability;
+    private static readonly CqlValueSet _Economic_Housing_Instability = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.292", null);
 
     [CqlValueSetDefinition("Federal Administrative Sex", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.121", valueSetVersion: null)]
-    public CqlValueSet? Federal_Administrative_Sex(CqlContext _) => _Federal_Administrative_Sex;
-    private static readonly CqlValueSet? _Federal_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.121", null);
+    public CqlValueSet Federal_Administrative_Sex(CqlContext _) => _Federal_Administrative_Sex;
+    private static readonly CqlValueSet _Federal_Administrative_Sex = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1021.121", null);
 
     [CqlValueSetDefinition("Gastrointestinal Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", valueSetVersion: null)]
-    public CqlValueSet? Gastrointestinal_Disease(CqlContext _) => _Gastrointestinal_Disease;
-    private static readonly CqlValueSet? _Gastrointestinal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", null);
+    public CqlValueSet Gastrointestinal_Disease(CqlContext _) => _Gastrointestinal_Disease;
+    private static readonly CqlValueSet _Gastrointestinal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.338", null);
 
     [CqlValueSetDefinition("Gestational Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", valueSetVersion: null)]
-    public CqlValueSet? Gestational_Diabetes(CqlContext _) => _Gestational_Diabetes;
-    private static readonly CqlValueSet? _Gestational_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", null);
+    public CqlValueSet Gestational_Diabetes(CqlContext _) => _Gestational_Diabetes;
+    private static readonly CqlValueSet _Gestational_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.269", null);
 
     [CqlValueSetDefinition("Heart Failure Cardiac Arrest Related to Procedure or Surgery", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", valueSetVersion: null)]
-    public CqlValueSet? Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(CqlContext _) => _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery;
-    private static readonly CqlValueSet? _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", null);
+    public CqlValueSet Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery(CqlContext _) => _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery;
+    private static readonly CqlValueSet _Heart_Failure_Cardiac_Arrest_Related_to_Procedure_or_Surgery = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.227", null);
 
     [CqlValueSetDefinition("Hematocrit Lab Test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", valueSetVersion: null)]
-    public CqlValueSet? Hematocrit_Lab_Test(CqlContext _) => _Hematocrit_Lab_Test;
-    private static readonly CqlValueSet? _Hematocrit_Lab_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
+    public CqlValueSet Hematocrit_Lab_Test(CqlContext _) => _Hematocrit_Lab_Test;
+    private static readonly CqlValueSet _Hematocrit_Lab_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
 
     [CqlValueSetDefinition("HIV in Pregnancy Childbirth and Puerperium", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", valueSetVersion: null)]
-    public CqlValueSet? HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext _) => _HIV_in_Pregnancy_Childbirth_and_Puerperium;
-    private static readonly CqlValueSet? _HIV_in_Pregnancy_Childbirth_and_Puerperium = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", null);
+    public CqlValueSet HIV_in_Pregnancy_Childbirth_and_Puerperium(CqlContext _) => _HIV_in_Pregnancy_Childbirth_and_Puerperium;
+    private static readonly CqlValueSet _HIV_in_Pregnancy_Childbirth_and_Puerperium = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.272", null);
 
     [CqlValueSetDefinition("Hypertension", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", valueSetVersion: null)]
-    public CqlValueSet? Hypertension(CqlContext _) => _Hypertension;
-    private static readonly CqlValueSet? _Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", null);
+    public CqlValueSet Hypertension(CqlContext _) => _Hypertension;
+    private static readonly CqlValueSet _Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.332", null);
 
     [CqlValueSetDefinition("Hysterectomy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", valueSetVersion: null)]
-    public CqlValueSet? Hysterectomy(CqlContext _) => _Hysterectomy;
-    private static readonly CqlValueSet? _Hysterectomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", null);
+    public CqlValueSet Hysterectomy(CqlContext _) => _Hysterectomy;
+    private static readonly CqlValueSet _Hysterectomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.358", null);
 
     [CqlValueSetDefinition("Long Term Anticoagulant Use", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", valueSetVersion: null)]
-    public CqlValueSet? Long_Term_Anticoagulant_Use(CqlContext _) => _Long_Term_Anticoagulant_Use;
-    private static readonly CqlValueSet? _Long_Term_Anticoagulant_Use = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", null);
+    public CqlValueSet Long_Term_Anticoagulant_Use(CqlContext _) => _Long_Term_Anticoagulant_Use;
+    private static readonly CqlValueSet _Long_Term_Anticoagulant_Use = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.366", null);
 
     [CqlValueSetDefinition("Mental Health Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", valueSetVersion: null)]
-    public CqlValueSet? Mental_Health_Disorder(CqlContext _) => _Mental_Health_Disorder;
-    private static readonly CqlValueSet? _Mental_Health_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", null);
+    public CqlValueSet Mental_Health_Disorder(CqlContext _) => _Mental_Health_Disorder;
+    private static readonly CqlValueSet _Mental_Health_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.314", null);
 
     [CqlValueSetDefinition("Mild or Moderate Preeclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", valueSetVersion: null)]
-    public CqlValueSet? Mild_or_Moderate_Preeclampsia(CqlContext _) => _Mild_or_Moderate_Preeclampsia;
-    private static readonly CqlValueSet? _Mild_or_Moderate_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", null);
+    public CqlValueSet Mild_or_Moderate_Preeclampsia(CqlContext _) => _Mild_or_Moderate_Preeclampsia;
+    private static readonly CqlValueSet _Mild_or_Moderate_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.329", null);
 
     [CqlValueSetDefinition("Morbid or Severe Obesity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", valueSetVersion: null)]
-    public CqlValueSet? Morbid_or_Severe_Obesity(CqlContext _) => _Morbid_or_Severe_Obesity;
-    private static readonly CqlValueSet? _Morbid_or_Severe_Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", null);
+    public CqlValueSet Morbid_or_Severe_Obesity(CqlContext _) => _Morbid_or_Severe_Obesity;
+    private static readonly CqlValueSet _Morbid_or_Severe_Obesity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.290", null);
 
     [CqlValueSetDefinition("Multiple Pregnancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", valueSetVersion: null)]
-    public CqlValueSet? Multiple_Pregnancy(CqlContext _) => _Multiple_Pregnancy;
-    private static readonly CqlValueSet? _Multiple_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", null);
+    public CqlValueSet Multiple_Pregnancy(CqlContext _) => _Multiple_Pregnancy;
+    private static readonly CqlValueSet _Multiple_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.284", null);
 
     [CqlValueSetDefinition("Neuromuscular Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", valueSetVersion: null)]
-    public CqlValueSet? Neuromuscular_Disease(CqlContext _) => _Neuromuscular_Disease;
-    private static readonly CqlValueSet? _Neuromuscular_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", null);
+    public CqlValueSet Neuromuscular_Disease(CqlContext _) => _Neuromuscular_Disease;
+    private static readonly CqlValueSet _Neuromuscular_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.308", null);
 
     [CqlValueSetDefinition("Patient Expired", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", valueSetVersion: null)]
-    public CqlValueSet? Patient_Expired(CqlContext _) => _Patient_Expired;
-    private static readonly CqlValueSet? _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+    public CqlValueSet Patient_Expired(CqlContext _) => _Patient_Expired;
+    private static readonly CqlValueSet _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     [CqlValueSetDefinition("Placenta Accreta", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", valueSetVersion: null)]
-    public CqlValueSet? Placenta_Accreta(CqlContext _) => _Placenta_Accreta;
-    private static readonly CqlValueSet? _Placenta_Accreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", null);
+    public CqlValueSet Placenta_Accreta(CqlContext _) => _Placenta_Accreta;
+    private static readonly CqlValueSet _Placenta_Accreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.302", null);
 
     [CqlValueSetDefinition("Placenta Increta or Percreta", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", valueSetVersion: null)]
-    public CqlValueSet? Placenta_Increta_or_Percreta(CqlContext _) => _Placenta_Increta_or_Percreta;
-    private static readonly CqlValueSet? _Placenta_Increta_or_Percreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", null);
+    public CqlValueSet Placenta_Increta_or_Percreta(CqlContext _) => _Placenta_Increta_or_Percreta;
+    private static readonly CqlValueSet _Placenta_Increta_or_Percreta = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.388", null);
 
     [CqlValueSetDefinition("Placenta Previa", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", valueSetVersion: null)]
-    public CqlValueSet? Placenta_Previa(CqlContext _) => _Placenta_Previa;
-    private static readonly CqlValueSet? _Placenta_Previa = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", null);
+    public CqlValueSet Placenta_Previa(CqlContext _) => _Placenta_Previa;
+    private static readonly CqlValueSet _Placenta_Previa = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.78", null);
 
     [CqlValueSetDefinition("Placental Abruption", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", valueSetVersion: null)]
-    public CqlValueSet? Placental_Abruption(CqlContext _) => _Placental_Abruption;
-    private static readonly CqlValueSet? _Placental_Abruption = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", null);
+    public CqlValueSet Placental_Abruption(CqlContext _) => _Placental_Abruption;
+    private static readonly CqlValueSet _Placental_Abruption = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.305", null);
 
     [CqlValueSetDefinition("Preexisting Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", valueSetVersion: null)]
-    public CqlValueSet? Preexisting_Diabetes(CqlContext _) => _Preexisting_Diabetes;
-    private static readonly CqlValueSet? _Preexisting_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", null);
+    public CqlValueSet Preexisting_Diabetes(CqlContext _) => _Preexisting_Diabetes;
+    private static readonly CqlValueSet _Preexisting_Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.275", null);
 
     [CqlValueSetDefinition("Present on Admission is No or Unable To Determine", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", valueSetVersion: null)]
-    public CqlValueSet? Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext _) => _Present_on_Admission_is_No_or_Unable_To_Determine;
-    private static readonly CqlValueSet? _Present_on_Admission_is_No_or_Unable_To_Determine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", null);
+    public CqlValueSet Present_on_Admission_is_No_or_Unable_To_Determine(CqlContext _) => _Present_on_Admission_is_No_or_Unable_To_Determine;
+    private static readonly CqlValueSet _Present_on_Admission_is_No_or_Unable_To_Determine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.370", null);
 
     [CqlValueSetDefinition("Present On Admission is Yes or Exempt", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", valueSetVersion: null)]
-    public CqlValueSet? Present_On_Admission_is_Yes_or_Exempt(CqlContext _) => _Present_On_Admission_is_Yes_or_Exempt;
-    private static readonly CqlValueSet? _Present_On_Admission_is_Yes_or_Exempt = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", null);
+    public CqlValueSet Present_On_Admission_is_Yes_or_Exempt(CqlContext _) => _Present_On_Admission_is_Yes_or_Exempt;
+    private static readonly CqlValueSet _Present_On_Admission_is_Yes_or_Exempt = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.63", null);
 
     [CqlValueSetDefinition("Preterm Birth", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", valueSetVersion: null)]
-    public CqlValueSet? Preterm_Birth(CqlContext _) => _Preterm_Birth;
-    private static readonly CqlValueSet? _Preterm_Birth = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", null);
+    public CqlValueSet Preterm_Birth(CqlContext _) => _Preterm_Birth;
+    private static readonly CqlValueSet _Preterm_Birth = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.299", null);
 
     [CqlValueSetDefinition("Previous Cesarean", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", valueSetVersion: null)]
-    public CqlValueSet? Previous_Cesarean(CqlContext _) => _Previous_Cesarean;
-    private static readonly CqlValueSet? _Previous_Cesarean = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", null);
+    public CqlValueSet Previous_Cesarean(CqlContext _) => _Previous_Cesarean;
+    private static readonly CqlValueSet _Previous_Cesarean = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.278", null);
 
     [CqlValueSetDefinition("Puerperal Cerebrovascular Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", valueSetVersion: null)]
-    public CqlValueSet? Puerperal_Cerebrovascular_Disorder(CqlContext _) => _Puerperal_Cerebrovascular_Disorder;
-    private static readonly CqlValueSet? _Puerperal_Cerebrovascular_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", null);
+    public CqlValueSet Puerperal_Cerebrovascular_Disorder(CqlContext _) => _Puerperal_Cerebrovascular_Disorder;
+    private static readonly CqlValueSet _Puerperal_Cerebrovascular_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.229", null);
 
     [CqlValueSetDefinition("Pulmonary Edema", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", valueSetVersion: null)]
-    public CqlValueSet? Pulmonary_Edema(CqlContext _) => _Pulmonary_Edema;
-    private static readonly CqlValueSet? _Pulmonary_Edema = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", null);
+    public CqlValueSet Pulmonary_Edema(CqlContext _) => _Pulmonary_Edema;
+    private static readonly CqlValueSet _Pulmonary_Edema = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.231", null);
 
     [CqlValueSetDefinition("Pulmonary Hypertension", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", valueSetVersion: null)]
-    public CqlValueSet? Pulmonary_Hypertension(CqlContext _) => _Pulmonary_Hypertension;
-    private static readonly CqlValueSet? _Pulmonary_Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", null);
+    public CqlValueSet Pulmonary_Hypertension(CqlContext _) => _Pulmonary_Hypertension;
+    private static readonly CqlValueSet _Pulmonary_Hypertension = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.281", null);
 
     [CqlValueSetDefinition("Renal Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", valueSetVersion: null)]
-    public CqlValueSet? Renal_Disease(CqlContext _) => _Renal_Disease;
-    private static readonly CqlValueSet? _Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", null);
+    public CqlValueSet Renal_Disease(CqlContext _) => _Renal_Disease;
+    private static readonly CqlValueSet _Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.335", null);
 
     [CqlValueSetDefinition("Sepsis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", valueSetVersion: null)]
-    public CqlValueSet? Sepsis(CqlContext _) => _Sepsis;
-    private static readonly CqlValueSet? _Sepsis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", null);
+    public CqlValueSet Sepsis(CqlContext _) => _Sepsis;
+    private static readonly CqlValueSet _Sepsis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.237", null);
 
     [CqlValueSetDefinition("Severe Anesthesia Complications", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", valueSetVersion: null)]
-    public CqlValueSet? Severe_Anesthesia_Complications(CqlContext _) => _Severe_Anesthesia_Complications;
-    private static readonly CqlValueSet? _Severe_Anesthesia_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", null);
+    public CqlValueSet Severe_Anesthesia_Complications(CqlContext _) => _Severe_Anesthesia_Complications;
+    private static readonly CqlValueSet _Severe_Anesthesia_Complications = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.235", null);
 
     [CqlValueSetDefinition("Severe Maternal Morbidity Diagnoses", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", valueSetVersion: null)]
-    public CqlValueSet? Severe_Maternal_Morbidity_Diagnoses(CqlContext _) => _Severe_Maternal_Morbidity_Diagnoses;
-    private static readonly CqlValueSet? _Severe_Maternal_Morbidity_Diagnoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", null);
+    public CqlValueSet Severe_Maternal_Morbidity_Diagnoses(CqlContext _) => _Severe_Maternal_Morbidity_Diagnoses;
+    private static readonly CqlValueSet _Severe_Maternal_Morbidity_Diagnoses = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.255", null);
 
     [CqlValueSetDefinition("Severe Maternal Morbidity Procedures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", valueSetVersion: null)]
-    public CqlValueSet? Severe_Maternal_Morbidity_Procedures(CqlContext _) => _Severe_Maternal_Morbidity_Procedures;
-    private static readonly CqlValueSet? _Severe_Maternal_Morbidity_Procedures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", null);
+    public CqlValueSet Severe_Maternal_Morbidity_Procedures(CqlContext _) => _Severe_Maternal_Morbidity_Procedures;
+    private static readonly CqlValueSet _Severe_Maternal_Morbidity_Procedures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.256", null);
 
     [CqlValueSetDefinition("Severe Preeclampsia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", valueSetVersion: null)]
-    public CqlValueSet? Severe_Preeclampsia(CqlContext _) => _Severe_Preeclampsia;
-    private static readonly CqlValueSet? _Severe_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", null);
+    public CqlValueSet Severe_Preeclampsia(CqlContext _) => _Severe_Preeclampsia;
+    private static readonly CqlValueSet _Severe_Preeclampsia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.327", null);
 
     [CqlValueSetDefinition("Shock", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", valueSetVersion: null)]
-    public CqlValueSet? Shock(CqlContext _) => _Shock;
-    private static readonly CqlValueSet? _Shock = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", null);
+    public CqlValueSet Shock(CqlContext _) => _Shock;
+    private static readonly CqlValueSet _Shock = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.239", null);
 
     [CqlValueSetDefinition("Sickle Cell Disease with Crisis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", valueSetVersion: null)]
-    public CqlValueSet? Sickle_Cell_Disease_with_Crisis(CqlContext _) => _Sickle_Cell_Disease_with_Crisis;
-    private static readonly CqlValueSet? _Sickle_Cell_Disease_with_Crisis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", null);
+    public CqlValueSet Sickle_Cell_Disease_with_Crisis(CqlContext _) => _Sickle_Cell_Disease_with_Crisis;
+    private static readonly CqlValueSet _Sickle_Cell_Disease_with_Crisis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.241", null);
 
     [CqlValueSetDefinition("Substance Abuse", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", valueSetVersion: null)]
-    public CqlValueSet? Substance_Abuse(CqlContext _) => _Substance_Abuse;
-    private static readonly CqlValueSet? _Substance_Abuse = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", null);
+    public CqlValueSet Substance_Abuse(CqlContext _) => _Substance_Abuse;
+    private static readonly CqlValueSet _Substance_Abuse = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.320", null);
 
     [CqlValueSetDefinition("Thyrotoxicosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", valueSetVersion: null)]
-    public CqlValueSet? Thyrotoxicosis(CqlContext _) => _Thyrotoxicosis;
-    private static readonly CqlValueSet? _Thyrotoxicosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", null);
+    public CqlValueSet Thyrotoxicosis(CqlContext _) => _Thyrotoxicosis;
+    private static readonly CqlValueSet _Thyrotoxicosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.296", null);
 
     [CqlValueSetDefinition("Tracheostomy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", valueSetVersion: null)]
-    public CqlValueSet? Tracheostomy(CqlContext _) => _Tracheostomy;
-    private static readonly CqlValueSet? _Tracheostomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", null);
+    public CqlValueSet Tracheostomy(CqlContext _) => _Tracheostomy;
+    private static readonly CqlValueSet _Tracheostomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.359", null);
 
     [CqlValueSetDefinition("Venous Thromboembolism in Pregnancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", valueSetVersion: null)]
-    public CqlValueSet? Venous_Thromboembolism_in_Pregnancy(CqlContext _) => _Venous_Thromboembolism_in_Pregnancy;
-    private static readonly CqlValueSet? _Venous_Thromboembolism_in_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", null);
+    public CqlValueSet Venous_Thromboembolism_in_Pregnancy(CqlContext _) => _Venous_Thromboembolism_in_Pregnancy;
+    private static readonly CqlValueSet _Venous_Thromboembolism_in_Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.363", null);
 
     [CqlValueSetDefinition("Ventilation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", valueSetVersion: null)]
-    public CqlValueSet? Ventilation(CqlContext _) => _Ventilation;
-    private static readonly CqlValueSet? _Ventilation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", null);
+    public CqlValueSet Ventilation(CqlContext _) => _Ventilation;
+    private static readonly CqlValueSet _Ventilation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.360", null);
 
     [CqlValueSetDefinition("White Blood Cells Count Lab Test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", valueSetVersion: null)]
-    public CqlValueSet? White_Blood_Cells_Count_Lab_Test(CqlContext _) => _White_Blood_Cells_Count_Lab_Test;
-    private static readonly CqlValueSet? _White_Blood_Cells_Count_Lab_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
+    public CqlValueSet White_Blood_Cells_Count_Lab_Test(CqlContext _) => _White_Blood_Cells_Count_Lab_Test;
+    private static readonly CqlValueSet _White_Blood_Cells_Count_Lab_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
 
     #endregion ValueSets
 
     #region Codes (4)
 
     [CqlCodeDefinition("Heart rate", codeId: "8867-4", codeSystem: "http://loinc.org")]
-    public CqlCode? Heart_rate(CqlContext _) => _Heart_rate;
-    private static readonly CqlCode? _Heart_rate = new CqlCode("8867-4", "http://loinc.org");
+    public CqlCode Heart_rate(CqlContext _) => _Heart_rate;
+    private static readonly CqlCode _Heart_rate = new CqlCode("8867-4", "http://loinc.org");
 
     [CqlCodeDefinition("Systolic blood pressure", codeId: "8480-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Systolic_blood_pressure(CqlContext _) => _Systolic_blood_pressure;
-    private static readonly CqlCode? _Systolic_blood_pressure = new CqlCode("8480-6", "http://loinc.org");
+    public CqlCode Systolic_blood_pressure(CqlContext _) => _Systolic_blood_pressure;
+    private static readonly CqlCode _Systolic_blood_pressure = new CqlCode("8480-6", "http://loinc.org");
 
     [CqlCodeDefinition("POA-Y", codeId: "Y", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_Y(CqlContext _) => _POA_Y;
-    private static readonly CqlCode? _POA_Y = new CqlCode("Y", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_Y(CqlContext _) => _POA_Y;
+    private static readonly CqlCode _POA_Y = new CqlCode("Y", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     [CqlCodeDefinition("POA-1", codeId: "1", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_1(CqlContext _) => _POA_1;
-    private static readonly CqlCode? _POA_1 = new CqlCode("1", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_1(CqlContext _) => _POA_1;
+    private static readonly CqlCode _POA_1 = new CqlCode("1", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     #endregion Codes
 
     #region CodeSystems (3)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Heart_rate,
           _Systolic_blood_pressure]);
 
     [CqlCodeSystemDefinition("Present On Admission Indicators", codeSystemId: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", codeSystemVersion: null)]
-    public CqlCodeSystem? Present_On_Admission_Indicators(CqlContext _) => _Present_On_Admission_Indicators;
-    private static readonly CqlCodeSystem? _Present_On_Admission_Indicators =
+    public CqlCodeSystem Present_On_Admission_Indicators(CqlContext _) => _Present_On_Admission_Indicators;
+    private static readonly CqlCodeSystem _Present_On_Admission_Indicators =
       new CqlCodeSystem("https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", null, [
           _POA_Y,
           _POA_1]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, []);
 
     #endregion CodeSystems
@@ -323,7 +323,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS1028FHIRPCSevereOBComps-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -359,40 +359,40 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -7145789266820812834L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -7165095462465786372L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 3939123815481697149L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
@@ -476,7 +476,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return s_;
             }
 
-            IEnumerable<CqlConcept?>? i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)g_, h_);
+            IEnumerable<CqlConcept?>? i_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)g_, h_);
             CqlValueSet? j_ = this._20_to_42_Plus_Weeks_Gestation(context);
             bool? k_ = context.Operators.ConceptsInValueSet(i_, j_);
             IEnumerable<Condition?>? l_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, DeliveryEncounter);
@@ -554,7 +554,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? y_ = SMMProcedures?.Performed;
                     object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                    p_ = z_ as CqlDateTime;
+                    p_ = z_ as CqlDateTime?;
                 }
                 else
                 {
@@ -565,7 +565,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? ad_ = SMMProcedures?.Performed;
                         object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                        p_ = ae_ as CqlQuantity;
+                        p_ = ae_ as CqlQuantity?;
                     }
                     else
                     {
@@ -576,7 +576,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? ai_ = SMMProcedures?.Performed;
                             object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                            p_ = aj_ as CqlInterval<CqlDateTime>;
+                            p_ = aj_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -587,7 +587,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType? an_ = SMMProcedures?.Performed;
                                 object? ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                                p_ = ao_ as CqlInterval<CqlQuantity>;
+                                p_ = ao_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -665,7 +665,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? u_ = BloodTransfusion?.Performed;
                     object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    l_ = v_ as CqlDateTime;
+                    l_ = v_ as CqlDateTime?;
                 }
                 else
                 {
@@ -676,7 +676,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? z_ = BloodTransfusion?.Performed;
                         object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        l_ = aa_ as CqlQuantity;
+                        l_ = aa_ as CqlQuantity?;
                     }
                     else
                     {
@@ -687,7 +687,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? ae_ = BloodTransfusion?.Performed;
                             object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                            l_ = af_ as CqlInterval<CqlDateTime>;
+                            l_ = af_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -698,7 +698,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType? aj_ = BloodTransfusion?.Performed;
                                 object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                                l_ = ak_ as CqlInterval<CqlQuantity>;
+                                l_ = ak_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -768,7 +768,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? u_ = Hysterectomy?.Performed;
                     object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                    l_ = v_ as CqlDateTime;
+                    l_ = v_ as CqlDateTime?;
                 }
                 else
                 {
@@ -779,7 +779,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? z_ = Hysterectomy?.Performed;
                         object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                        l_ = aa_ as CqlQuantity;
+                        l_ = aa_ as CqlQuantity?;
                     }
                     else
                     {
@@ -790,7 +790,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? ae_ = Hysterectomy?.Performed;
                             object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                            l_ = af_ as CqlInterval<CqlDateTime>;
+                            l_ = af_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -801,7 +801,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType? aj_ = Hysterectomy?.Performed;
                                 object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                                l_ = ak_ as CqlInterval<CqlQuantity>;
+                                l_ = ak_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -873,7 +873,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? t_ = ConvTrachVentProcedures?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    k_ = u_ as CqlDateTime;
+                    k_ = u_ as CqlDateTime?;
                 }
                 else
                 {
@@ -884,7 +884,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? y_ = ConvTrachVentProcedures?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        k_ = z_ as CqlQuantity;
+                        k_ = z_ as CqlQuantity?;
                     }
                     else
                     {
@@ -895,7 +895,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? ad_ = ConvTrachVentProcedures?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            k_ = ae_ as CqlInterval<CqlDateTime>;
+                            k_ = ae_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -906,7 +906,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType? ai_ = ConvTrachVentProcedures?.Performed;
                                 object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                k_ = aj_ as CqlInterval<CqlQuantity>;
+                                k_ = aj_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -950,7 +950,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return ab_;
             }
 
-            IEnumerable<CqlConcept?>? m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
+            IEnumerable<CqlConcept?>? m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)k_, l_);
             CqlValueSet? n_ = this.Placenta_Increta_or_Percreta(context);
             bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
             IEnumerable<Condition?>? p_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCEncounter);
@@ -1056,7 +1056,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? z_ = SMMProcedures?.Performed;
                     object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    q_ = aa_ as CqlDateTime;
+                    q_ = aa_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1067,7 +1067,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? ae_ = SMMProcedures?.Performed;
                         object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        q_ = af_ as CqlQuantity;
+                        q_ = af_ as CqlQuantity?;
                     }
                     else
                     {
@@ -1078,7 +1078,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? aj_ = SMMProcedures?.Performed;
                             object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            q_ = ak_ as CqlInterval<CqlDateTime>;
+                            q_ = ak_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1089,7 +1089,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                             {
                                 DataType? ao_ = SMMProcedures?.Performed;
                                 object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                                q_ = ap_ as CqlInterval<CqlQuantity>;
+                                q_ = ap_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -1302,16 +1302,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("SDE SOC Diagnoses Detail")]
-    public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>? SDE_SOC_Diagnoses_Detail(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? complications)?>? SDE_SOC_Diagnoses_Detail(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_SOC_Diagnoses_Detail, SDE_SOC_Diagnoses_Detail_Compute);
 
     private const long _cacheIndex_SDE_SOC_Diagnoses_Detail = 4046600195098257904L;
 
-    private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>? SDE_SOC_Diagnoses_Detail_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? complications)?>? SDE_SOC_Diagnoses_Detail_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Diagnosis(context);
 
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)? b_(Encounter? Encounter) {
+        (CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? complications)? b_(Encounter? Encounter) {
             Id? d_ = Encounter?.IdElement;
             string? e_ = d_?.Value;
             List<CodeableConcept?>? f_ = Encounter?.Type;
@@ -1321,13 +1321,13 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return o_;
             }
 
-            IEnumerable<CqlConcept?>? h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_, g_);
+            IEnumerable<CqlConcept?>? h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)f_, g_);
             IEnumerable<object?>? i_ = this.pOAIsNoOrUTD(context, Encounter);
 
             bool? j_(object? Complication) {
                 CqlValueSet? p_ = this.Severe_Maternal_Morbidity_Diagnoses(context);
-                bool? q_ = context.Operators.ConceptInValueSet(Complication as CqlConcept, p_);
-                Condition? r_ = CQMCommon_4_1_000.Instance.getCondition(context, Complication as ResourceReference);
+                bool? q_ = context.Operators.ConceptInValueSet(Complication as CqlConcept?, p_);
+                Condition? r_ = CQMCommon_4_1_000.Instance.getCondition(context, Complication as ResourceReference?);
                 CodeableConcept? s_ = r_?.Code;
                 CqlConcept? t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 bool? u_ = context.Operators.ConceptInValueSet(t_, p_);
@@ -1336,19 +1336,19 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             }
 
 
-            (CqlTupleMetadata, object code, string SOCDxCategory)? k_(object? Complication) {
-                string? w_ = this.sOCDxCategory(context, Complication as CqlConcept);
-                (CqlTupleMetadata, object code, string SOCDxCategory)? x_ = (CqlTupleMetadata_FiRiQVZbDYjPPThNBPPBDcKQI, Complication, w_);
+            (CqlTupleMetadata, object? code, string? SOCDxCategory)? k_(object? Complication) {
+                string? w_ = this.sOCDxCategory(context, Complication as CqlConcept?);
+                (CqlTupleMetadata, object? code, string? SOCDxCategory)? x_ = (CqlTupleMetadata_FiRiQVZbDYjPPThNBPPBDcKQI, Complication, w_);
                 return x_;
             }
 
-            IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?>? l_ = context.Operators.WhereSelect<object, (CqlTupleMetadata, object code, string SOCDxCategory)?>(i_, j_, k_);
-            IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?>? m_ = context.Operators.Distinct<(CqlTupleMetadata, object code, string SOCDxCategory)?>(l_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)? n_ = (CqlTupleMetadata_eabGHhAeORbEDBIGhPYhcaaC, e_, h_, m_);
+            IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? l_ = context.Operators.WhereSelect<object, (CqlTupleMetadata, object code, string SOCDxCategory)?>(i_, j_, k_);
+            IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? m_ = context.Operators.Distinct<(CqlTupleMetadata, object code, string SOCDxCategory)?>(l_);
+            (CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? complications)? n_ = (CqlTupleMetadata_eabGHhAeORbEDBIGhPYhcaaC, e_, h_, m_);
             return n_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, object? code, string? SOCDxCategory)?>? complications)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, object code, string SOCDxCategory)?> complications)?>(a_, b_);
         return c_;
     }
 
@@ -1375,7 +1375,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             {
                 DataType? u_ = SMMProcedures?.Performed;
                 object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                l_ = v_ as CqlDateTime;
+                l_ = v_ as CqlDateTime?;
             }
             else
             {
@@ -1386,7 +1386,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 {
                     DataType? z_ = SMMProcedures?.Performed;
                     object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    l_ = aa_ as CqlQuantity;
+                    l_ = aa_ as CqlQuantity?;
                 }
                 else
                 {
@@ -1397,7 +1397,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     {
                         DataType? ae_ = SMMProcedures?.Performed;
                         object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        l_ = af_ as CqlInterval<CqlDateTime>;
+                        l_ = af_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -1408,7 +1408,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                         {
                             DataType? aj_ = SMMProcedures?.Performed;
                             object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-                            l_ = ak_ as CqlInterval<CqlQuantity>;
+                            l_ = ak_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -1493,16 +1493,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("SDE SOC Procedure Detail")]
-    public IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>? SDE_SOC_Procedure_Detail(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? procedures)?>? SDE_SOC_Procedure_Detail(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_SOC_Procedure_Detail, SDE_SOC_Procedure_Detail_Compute);
 
     private const long _cacheIndex_SDE_SOC_Procedure_Detail = 8235823818015250910L;
 
-    private IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>? SDE_SOC_Procedure_Detail_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? procedures)?>? SDE_SOC_Procedure_Detail_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.SDE_Delivery_Encounters_With_Severe_Obstetric_Complication_Procedures(context);
 
-        (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)? b_(Encounter? Encounter) {
+        (CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? procedures)? b_(Encounter? Encounter) {
             Id? d_ = Encounter?.IdElement;
             string? e_ = d_?.Value;
             List<CodeableConcept?>? f_ = Encounter?.Type;
@@ -1512,21 +1512,21 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return m_;
             }
 
-            IEnumerable<CqlConcept?>? h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)f_, g_);
+            IEnumerable<CqlConcept?>? h_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)f_, g_);
             IEnumerable<Procedure?>? i_ = this.sOCProcedures(context, Encounter);
 
-            (CqlTupleMetadata, Procedure code, string SOCProcedureCategory)? j_(Procedure? P) {
+            (CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)? j_(Procedure? P) {
                 string? n_ = this.sOCProcedureCategory(context, P);
-                (CqlTupleMetadata, Procedure code, string SOCProcedureCategory)? o_ = (CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR, P, n_);
+                (CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)? o_ = (CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR, P, n_);
                 return o_;
             }
 
-            IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>? k_ = context.Operators.SelectDistinct<Procedure, (CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>(i_, j_);
-            (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)? l_ = (CqlTupleMetadata_DSCMXeIPAPIAQMOTjIfgGISOj, e_, h_, k_);
+            IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? k_ = context.Operators.SelectDistinct<Procedure, (CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>(i_, j_);
+            (CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? procedures)? l_ = (CqlTupleMetadata_DSCMXeIPAPIAQMOTjIfgGISOj, e_, h_, k_);
             return l_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? id, IEnumerable<CqlConcept?>? code, IEnumerable<(CqlTupleMetadata, Procedure? code, string? SOCProcedureCategory)?>? procedures)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string id, IEnumerable<CqlConcept> code, IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?> procedures)?>(a_, b_);
         return c_;
     }
 
@@ -1573,14 +1573,14 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("SDE Variable Calculated Gestational Age")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>? SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterID, int? CalculatedCGA)?>? SDE_Variable_Calculated_Gestational_Age(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Variable_Calculated_Gestational_Age, SDE_Variable_Calculated_Gestational_Age_Compute);
 
     private const long _cacheIndex_SDE_Variable_Calculated_Gestational_Age = 5206916030657376427L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>? SDE_Variable_Calculated_Gestational_Age_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterID, int? CalculatedCGA)?>? SDE_Variable_Calculated_Gestational_Age_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>? a_ = PCMaternal_5_25_000.Instance.Variable_Calculated_Gestational_Age(context);
+        IEnumerable<(CqlTupleMetadata, string? EncounterID, int? CalculatedCGA)?>? a_ = PCMaternal_5_25_000.Instance.Variable_Calculated_Gestational_Age(context);
         return a_;
     }
 
@@ -1644,7 +1644,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return ab_;
             }
 
-            IEnumerable<CqlConcept?>? m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)k_, l_);
+            IEnumerable<CqlConcept?>? m_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)k_, l_);
             CqlValueSet? n_ = this.Placenta_Increta_or_Percreta(context);
             bool? o_ = context.Operators.ConceptsInValueSet(m_, n_);
             IEnumerable<Condition?>? p_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, SOCExcludingTransfusion);
@@ -1995,7 +1995,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 TwentyWeeksPlusEncounter,
                 l_ ?? default(int),
             ];
-            return (IEnumerable<object>)m_;
+            return (IEnumerable<object?>?)m_;
         }
 
         IEnumerable<IEnumerable<object?>?>? c_ = context.Operators.SelectDistinct<Encounter, IEnumerable<object>>(a_, b_);
@@ -2412,16 +2412,16 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("Risk Variable First Hematocrit Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>? Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHematocritResult, CqlDateTime? Timing)?>? Risk_Variable_First_Hematocrit_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test, Risk_Variable_First_Hematocrit_Lab_Test_Compute);
 
     private const long _cacheIndex_Risk_Variable_First_Hematocrit_Lab_Test = -6532381667130087125L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>? Risk_Variable_First_Hematocrit_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHematocritResult, CqlDateTime? Timing)?>? Risk_Variable_First_Hematocrit_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHematocritResult, CqlDateTime? Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
             Id? d_ = TwentyWeeksPlusEncounter?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Hematocrit_Lab_Test(context);
@@ -2446,7 +2446,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string?>?)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
                 DataType? an_ = Hematocrit?.Value;
                 object? ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
@@ -2489,7 +2489,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bj_ = context.Operators.In<string>(bh_, (IEnumerable<string>)bi_);
+                bool? bj_ = context.Operators.In<string>(bh_, (IEnumerable<string?>?)bi_);
                 bool? bk_ = context.Operators.And(be_, bj_);
                 DataType? bl_ = Hematocrit?.Value;
                 object? bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
@@ -2513,26 +2513,26 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHematocritResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHematocritResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable First White Blood Cell Count Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>? Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstWBCResult, CqlDateTime? Timing)?>? Risk_Variable_First_White_Blood_Cell_Count_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test, Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute);
 
     private const long _cacheIndex_Risk_Variable_First_White_Blood_Cell_Count_Lab_Test = 3288506537083407272L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>? Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstWBCResult, CqlDateTime? Timing)?>? Risk_Variable_First_White_Blood_Cell_Count_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstWBCResult, CqlDateTime? Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
             Id? d_ = TwentyWeeksPlusEncounter?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.White_Blood_Cells_Count_Lab_Test(context);
@@ -2557,7 +2557,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string?>?)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
                 DataType? an_ = WBC?.Value;
                 object? ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
@@ -2600,7 +2600,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bj_ = context.Operators.In<string>(bh_, (IEnumerable<string>)bi_);
+                bool? bj_ = context.Operators.In<string>(bh_, (IEnumerable<string?>?)bi_);
                 bool? bk_ = context.Operators.And(be_, bj_);
                 DataType? bl_ = WBC?.Value;
                 object? bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
@@ -2624,26 +2624,26 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstWBCResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstWBCResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Heart Rate")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>? Risk_Variable_Heart_Rate(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHRResult, CqlDateTime? Timing)?>? Risk_Variable_Heart_Rate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Heart_Rate, Risk_Variable_Heart_Rate_Compute);
 
     private const long _cacheIndex_Risk_Variable_Heart_Rate = -7231162851022711395L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>? Risk_Variable_Heart_Rate_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHRResult, CqlDateTime? Timing)?>? Risk_Variable_Heart_Rate_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHRResult, CqlDateTime? Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
             Id? d_ = TwentyWeeksPlusEncounter?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
@@ -2667,7 +2667,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
+                bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string?>?)aj_);
                 bool? al_ = context.Operators.And(af_, ak_);
                 return al_;
             }
@@ -2684,7 +2684,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<Observation?>? j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? k_ = context.Operators.First<Observation>(j_);
             DataType? l_ = k_?.Value;
-            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
+            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity?);
 
             bool? n_(Observation? HeartRate) {
                 DataType? ap_ = HeartRate?.Effective;
@@ -2705,7 +2705,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bd_ = context.Operators.In<string>(bb_, (IEnumerable<string>)bc_);
+                bool? bd_ = context.Operators.In<string>(bb_, (IEnumerable<string?>?)bc_);
                 bool? be_ = context.Operators.And(ay_, bd_);
                 return be_;
             }
@@ -2724,26 +2724,26 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             DataType? s_ = r_?.Effective;
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime? u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHRResult, CqlDateTime? Timing)? v_ = (CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV, e_, m_ as CqlQuantity?, u_);
             return v_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHRResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Risk Variable Systolic Blood Pressure")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>? Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstSBPResult, CqlDateTime? Timing)?>? Risk_Variable_Systolic_Blood_Pressure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Risk_Variable_Systolic_Blood_Pressure, Risk_Variable_Systolic_Blood_Pressure_Compute);
 
     private const long _cacheIndex_Risk_Variable_Systolic_Blood_Pressure = 4446916058428857482L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>? Risk_Variable_Systolic_Blood_Pressure_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstSBPResult, CqlDateTime? Timing)?>? Risk_Variable_Systolic_Blood_Pressure_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Delivery_Encounters_At_Greater_Than_Or_Equal_To_20_Weeks_Gestation(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstSBPResult, CqlDateTime? Timing)? b_(Encounter? TwentyWeeksPlusEncounter) {
             Id? d_ = TwentyWeeksPlusEncounter?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
@@ -2767,7 +2767,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
+                bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string?>?)an_);
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 List<Observation.ComponentComponent?>? aq_ = BP?.Component;
 
@@ -2785,7 +2785,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return ba_;
                 }
 
-                IEnumerable<object?>? at_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)aq_, ar_, as_);
+                IEnumerable<object?>? at_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent?>?)aq_, ar_, as_);
                 bool? au_ = context.Operators.Not((bool?)(at_ is null));
                 bool? av_ = context.Operators.And(ap_, au_);
                 return av_;
@@ -2817,10 +2817,10 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             CqlQuantity? n_(Observation.ComponentComponent? C) {
                 DataType? bj_ = C?.Value;
                 object? bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
-                return bk_ as CqlQuantity;
+                return bk_ as CqlQuantity?;
             }
 
-            IEnumerable<CqlQuantity?>? o_ = context.Operators.WhereSelect<Observation.ComponentComponent, CqlQuantity>((IEnumerable<Observation.ComponentComponent>)l_, m_, n_);
+            IEnumerable<CqlQuantity?>? o_ = context.Operators.WhereSelect<Observation.ComponentComponent, CqlQuantity>((IEnumerable<Observation.ComponentComponent?>?)l_, m_, n_);
             IEnumerable<CqlQuantity?>? p_ = context.Operators.Distinct<CqlQuantity>(o_);
             CqlQuantity? q_ = context.Operators.SingletonFrom<CqlQuantity>(p_);
 
@@ -2843,7 +2843,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     "amended",
                     "corrected",
                 ];
-                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string>)by_);
+                bool? bz_ = context.Operators.In<string>(bx_, (IEnumerable<string?>?)by_);
                 bool? ca_ = context.Operators.And(bu_, bz_);
                 List<Observation.ComponentComponent?>? cb_ = BP?.Component;
 
@@ -2861,7 +2861,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                     return cl_;
                 }
 
-                IEnumerable<object?>? ce_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)cb_, cc_, cd_);
+                IEnumerable<object?>? ce_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent?>?)cb_, cc_, cd_);
                 bool? cf_ = context.Operators.Not((bool?)(ce_ is null));
                 bool? cg_ = context.Operators.And(ca_, cf_);
                 return cg_;
@@ -2881,11 +2881,11 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             DataType? w_ = v_?.Effective;
             object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
             CqlDateTime? y_ = QICoreCommon_4_0_000.Instance.earliest(context, x_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)? z_ = (CqlTupleMetadata_FJEchIHcbcHRUXZAJNSdfScQb, e_, q_, y_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstSBPResult, CqlDateTime? Timing)? z_ = (CqlTupleMetadata_FJEchIHcbcHRUXZAJNSdfScQb, e_, q_, y_);
             return z_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstSBPResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstSBPResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 

@@ -21,48 +21,48 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
     #region ValueSets (11)
 
     [CqlValueSetDefinition("Anticoagulant Therapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", valueSetVersion: null)]
-    public CqlValueSet? Anticoagulant_Therapy(CqlContext _) => _Anticoagulant_Therapy;
-    private static readonly CqlValueSet? _Anticoagulant_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", null);
+    public CqlValueSet Anticoagulant_Therapy(CqlContext _) => _Anticoagulant_Therapy;
+    private static readonly CqlValueSet _Anticoagulant_Therapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", null);
 
     [CqlValueSetDefinition("Atrial Ablation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", valueSetVersion: null)]
-    public CqlValueSet? Atrial_Ablation(CqlContext _) => _Atrial_Ablation;
-    private static readonly CqlValueSet? _Atrial_Ablation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", null);
+    public CqlValueSet Atrial_Ablation(CqlContext _) => _Atrial_Ablation;
+    private static readonly CqlValueSet _Atrial_Ablation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", null);
 
     [CqlValueSetDefinition("Atrial Fibrillation or Flutter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", valueSetVersion: null)]
-    public CqlValueSet? Atrial_Fibrillation_or_Flutter(CqlContext _) => _Atrial_Fibrillation_or_Flutter;
-    private static readonly CqlValueSet? _Atrial_Fibrillation_or_Flutter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", null);
+    public CqlValueSet Atrial_Fibrillation_or_Flutter(CqlContext _) => _Atrial_Fibrillation_or_Flutter;
+    private static readonly CqlValueSet _Atrial_Fibrillation_or_Flutter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", null);
 
     [CqlValueSetDefinition("Discharge To Acute Care Facility", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", valueSetVersion: null)]
-    public CqlValueSet? Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
-    private static readonly CqlValueSet? _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+    public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
+    private static readonly CqlValueSet _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
 
     [CqlValueSetDefinition("Discharged to Health Care Facility for Hospice Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", valueSetVersion: null)]
-    public CqlValueSet? Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext _) => _Discharged_to_Health_Care_Facility_for_Hospice_Care;
-    private static readonly CqlValueSet? _Discharged_to_Health_Care_Facility_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+    public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext _) => _Discharged_to_Health_Care_Facility_for_Hospice_Care;
+    private static readonly CqlValueSet _Discharged_to_Health_Care_Facility_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
 
     [CqlValueSetDefinition("Discharged to Home for Hospice Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", valueSetVersion: null)]
-    public CqlValueSet? Discharged_to_Home_for_Hospice_Care(CqlContext _) => _Discharged_to_Home_for_Hospice_Care;
-    private static readonly CqlValueSet? _Discharged_to_Home_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+    public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext _) => _Discharged_to_Home_for_Hospice_Care;
+    private static readonly CqlValueSet _Discharged_to_Home_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
 
     [CqlValueSetDefinition("History of Atrial Ablation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", valueSetVersion: null)]
-    public CqlValueSet? History_of_Atrial_Ablation(CqlContext _) => _History_of_Atrial_Ablation;
-    private static readonly CqlValueSet? _History_of_Atrial_Ablation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", null);
+    public CqlValueSet History_of_Atrial_Ablation(CqlContext _) => _History_of_Atrial_Ablation;
+    private static readonly CqlValueSet _History_of_Atrial_Ablation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", null);
 
     [CqlValueSetDefinition("Left Against Medical Advice", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", valueSetVersion: null)]
-    public CqlValueSet? Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
-    private static readonly CqlValueSet? _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+    public CqlValueSet Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
+    private static readonly CqlValueSet _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
 
     [CqlValueSetDefinition("Medical Reason For Not Providing Treatment", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", valueSetVersion: null)]
-    public CqlValueSet? Medical_Reason_For_Not_Providing_Treatment(CqlContext _) => _Medical_Reason_For_Not_Providing_Treatment;
-    private static readonly CqlValueSet? _Medical_Reason_For_Not_Providing_Treatment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext _) => _Medical_Reason_For_Not_Providing_Treatment;
+    private static readonly CqlValueSet _Medical_Reason_For_Not_Providing_Treatment = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
 
     [CqlValueSetDefinition("Patient Expired", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", valueSetVersion: null)]
-    public CqlValueSet? Patient_Expired(CqlContext _) => _Patient_Expired;
-    private static readonly CqlValueSet? _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+    public CqlValueSet Patient_Expired(CqlContext _) => _Patient_Expired;
+    private static readonly CqlValueSet _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     [CqlValueSetDefinition("Patient Refusal", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", valueSetVersion: null)]
-    public CqlValueSet? Patient_Refusal(CqlContext _) => _Patient_Refusal;
-    private static readonly CqlValueSet? _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+    public CqlValueSet Patient_Refusal(CqlContext _) => _Patient_Refusal;
+    private static readonly CqlValueSet _Patient_Refusal = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
 
     #endregion ValueSets
 
@@ -80,7 +80,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS71FHIRSTKAnticoagAFFlutter-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -142,7 +142,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 {
                     DataType? af_ = AtrialAblationProcedure?.Performed;
                     object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                    u_ = ag_ as CqlDateTime;
+                    u_ = ag_ as CqlDateTime?;
                 }
                 else
                 {
@@ -153,7 +153,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     {
                         DataType? ak_ = AtrialAblationProcedure?.Performed;
                         object? al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-                        u_ = al_ as CqlQuantity;
+                        u_ = al_ as CqlQuantity?;
                     }
                     else
                     {
@@ -164,7 +164,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         {
                             DataType? ap_ = AtrialAblationProcedure?.Performed;
                             object? aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-                            u_ = aq_ as CqlInterval<CqlDateTime>;
+                            u_ = aq_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -175,7 +175,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                             {
                                 DataType? au_ = AtrialAblationProcedure?.Performed;
                                 object? av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
-                                u_ = av_ as CqlInterval<CqlQuantity>;
+                                u_ = av_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -250,7 +250,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     "amended",
                     "corrected",
                 ];
-                bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
+                bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string?>?)cd_);
                 object? cf_;
                 DataType? cm_ = AtrialAblationObservation?.Effective;
                 object? cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
@@ -259,7 +259,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 {
                     DataType? cp_ = AtrialAblationObservation?.Effective;
                     object? cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
-                    cf_ = cq_ as CqlDateTime;
+                    cf_ = cq_ as CqlDateTime?;
                 }
                 else
                 {
@@ -270,7 +270,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     {
                         DataType? cu_ = AtrialAblationObservation?.Effective;
                         object? cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
-                        cf_ = cv_ as CqlDateTime;
+                        cf_ = cv_ as CqlDateTime?;
                     }
                     else
                     {
@@ -281,7 +281,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         {
                             DataType? cz_ = AtrialAblationObservation?.Effective;
                             object? da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
-                            cf_ = da_ as CqlInterval<CqlDateTime>;
+                            cf_ = da_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -449,7 +449,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 {
                     object? q_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                     object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                    g_ = r_ as CqlDateTime;
+                    g_ = r_ as CqlDateTime?;
                 }
                 else
                 {
@@ -460,7 +460,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     {
                         object? v_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        g_ = w_ as CqlQuantity;
+                        g_ = w_ as CqlQuantity?;
                     }
                     else
                     {
@@ -471,7 +471,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                         {
                             object? aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                             object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                            g_ = ab_ as CqlInterval<CqlDateTime>;
+                            g_ = ab_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -482,7 +482,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                             {
                                 object? af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                                 object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                                g_ = ag_ as CqlInterval<CqlQuantity>;
+                                g_ = ag_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -571,7 +571,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 bool? m_(Medication? M) {
                     object? o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                     object? p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string?>? q_ = context.Operators.Split((string)p_, "/");
+                    IEnumerable<string?>? q_ = context.Operators.Split((string?)p_, "/");
                     string? r_ = context.Operators.Last<string>(q_);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -599,7 +599,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
+                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string?>?)ab_);
                 Code<MedicationRequest.MedicationRequestIntent>? ad_ = DischargeAnticoagulant?.IntentElement;
                 MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
                 string? af_ = context.Operators.Convert<string>(ae_);
@@ -610,10 +610,10 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     "filler-order",
                     "instance-order",
                 ];
-                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string>)ag_);
+                bool? ah_ = context.Operators.In<string>(af_, (IEnumerable<string?>?)ag_);
                 bool? ai_ = context.Operators.And(ac_, ah_);
-                bool? aj_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
-                bool? ak_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest);
+                bool? aj_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest?);
+                bool? ak_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest?);
                 bool? al_ = context.Operators.Or(aj_, ak_);
                 bool? am_ = context.Operators.And(ai_, al_);
                 FhirDateTime? an_ = DischargeAnticoagulant?.AuthoredOnElement;
@@ -671,7 +671,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return an_;
             }
 
-            IEnumerable<CqlConcept?>? p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, o_);
+            IEnumerable<CqlConcept?>? p_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)n_, o_);
             CqlValueSet? q_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
             bool? r_ = context.Operators.ConceptsInValueSet(p_, q_);
 
@@ -680,12 +680,12 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return ao_;
             }
 
-            IEnumerable<CqlConcept?>? t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)n_, s_);
+            IEnumerable<CqlConcept?>? t_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)n_, s_);
             CqlValueSet? u_ = this.Patient_Refusal(context);
             bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
             bool? w_ = context.Operators.Or(r_, v_);
-            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant as MedicationRequest);
-            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest);
+            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant as MedicationRequest?);
+            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest?);
             bool? z_ = context.Operators.Or(x_, y_);
             bool? aa_ = context.Operators.And(w_, z_);
             Code<MedicationRequest.MedicationrequestStatus>? ab_ = NoAnticoagulant?.StatusElement;
@@ -695,7 +695,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 "active",
                 "completed",
             ];
-            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+            bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
             bool? ag_ = context.Operators.And(aa_, af_);
             Code<MedicationRequest.MedicationRequestIntent>? ah_ = NoAnticoagulant?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
@@ -707,7 +707,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 "filler-order",
                 "instance-order",
             ];
-            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string?>?)ak_);
             bool? am_ = context.Operators.And(ag_, al_);
             return am_;
         }
@@ -721,7 +721,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             bool? aq_(Medication? M) {
                 object? as_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? at_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? au_ = context.Operators.Split((string)at_, "/");
+                IEnumerable<string?>? au_ = context.Operators.Split((string?)at_, "/");
                 string? av_ = context.Operators.Last<string>(au_);
                 bool? aw_ = context.Operators.Equal(as_, av_);
                 CodeableConcept? ax_ = M?.Code;
@@ -761,7 +761,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     "active",
                     "completed",
                 ];
-                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
+                bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string?>?)bs_);
                 bool? bu_ = context.Operators.And(bo_, bt_);
                 CodeableConcept? bv_ = TaskReject?.Code;
                 CqlConcept? bw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bv_);
@@ -777,7 +777,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
         }
 
         IEnumerable<MedicationRequest?>? l_ = context.Operators.Where<MedicationRequest>(j_, k_);
-        IEnumerable<MedicationRequest?>? m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest>, l_ as IEnumerable<MedicationRequest>);
+        IEnumerable<MedicationRequest?>? m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest?>?, l_ as IEnumerable<MedicationRequest?>?);
         return m_;
     }
 
@@ -814,40 +814,40 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -6898841098894055389L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 6210684600773180603L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 6030951289382128940L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

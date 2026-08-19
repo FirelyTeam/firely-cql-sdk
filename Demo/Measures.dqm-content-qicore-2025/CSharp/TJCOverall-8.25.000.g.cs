@@ -21,36 +21,36 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     #region ValueSets (8)
 
     [CqlValueSetDefinition("Comfort Measures", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", valueSetVersion: null)]
-    public CqlValueSet? Comfort_Measures(CqlContext _) => _Comfort_Measures;
-    private static readonly CqlValueSet? _Comfort_Measures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
+    public CqlValueSet Comfort_Measures(CqlContext _) => _Comfort_Measures;
+    private static readonly CqlValueSet _Comfort_Measures = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
 
     [CqlValueSetDefinition("Discharge To Acute Care Facility", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", valueSetVersion: null)]
-    public CqlValueSet? Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
-    private static readonly CqlValueSet? _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+    public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext _) => _Discharge_To_Acute_Care_Facility;
+    private static readonly CqlValueSet _Discharge_To_Acute_Care_Facility = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
 
     [CqlValueSetDefinition("Discharged to Health Care Facility for Hospice Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", valueSetVersion: null)]
-    public CqlValueSet? Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext _) => _Discharged_to_Health_Care_Facility_for_Hospice_Care;
-    private static readonly CqlValueSet? _Discharged_to_Health_Care_Facility_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+    public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext _) => _Discharged_to_Health_Care_Facility_for_Hospice_Care;
+    private static readonly CqlValueSet _Discharged_to_Health_Care_Facility_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
 
     [CqlValueSetDefinition("Discharged to Home for Hospice Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", valueSetVersion: null)]
-    public CqlValueSet? Discharged_to_Home_for_Hospice_Care(CqlContext _) => _Discharged_to_Home_for_Hospice_Care;
-    private static readonly CqlValueSet? _Discharged_to_Home_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+    public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext _) => _Discharged_to_Home_for_Hospice_Care;
+    private static readonly CqlValueSet _Discharged_to_Home_for_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
 
     [CqlValueSetDefinition("Ischemic Stroke", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", valueSetVersion: null)]
-    public CqlValueSet? Ischemic_Stroke(CqlContext _) => _Ischemic_Stroke;
-    private static readonly CqlValueSet? _Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
+    public CqlValueSet Ischemic_Stroke(CqlContext _) => _Ischemic_Stroke;
+    private static readonly CqlValueSet _Ischemic_Stroke = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
 
     [CqlValueSetDefinition("Left Against Medical Advice", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", valueSetVersion: null)]
-    public CqlValueSet? Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
-    private static readonly CqlValueSet? _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+    public CqlValueSet Left_Against_Medical_Advice(CqlContext _) => _Left_Against_Medical_Advice;
+    private static readonly CqlValueSet _Left_Against_Medical_Advice = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
 
     [CqlValueSetDefinition("Nonelective Inpatient Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", valueSetVersion: null)]
-    public CqlValueSet? Nonelective_Inpatient_Encounter(CqlContext _) => _Nonelective_Inpatient_Encounter;
-    private static readonly CqlValueSet? _Nonelective_Inpatient_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
+    public CqlValueSet Nonelective_Inpatient_Encounter(CqlContext _) => _Nonelective_Inpatient_Encounter;
+    private static readonly CqlValueSet _Nonelective_Inpatient_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
 
     [CqlValueSetDefinition("Patient Expired", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", valueSetVersion: null)]
-    public CqlValueSet? Patient_Expired(CqlContext _) => _Patient_Expired;
-    private static readonly CqlValueSet? _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+    public CqlValueSet Patient_Expired(CqlContext _) => _Patient_Expired;
+    private static readonly CqlValueSet _Patient_Expired = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
 
     #endregion ValueSets
 
@@ -65,7 +65,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("TJCOverall-8.25.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -199,7 +199,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "completed",
                 "on-hold",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             Code<RequestIntent>? o_ = ComfortCare?.IntentElement;
             RequestIntent? p_ = o_?.Value;
             Code<RequestIntent>? q_ = context.Operators.Convert<Code<RequestIntent>>(p_);
@@ -211,7 +211,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "filler-order",
                 "instance-order",
             ];
-            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string>)s_);
+            bool? t_ = context.Operators.In<string>(r_, (IEnumerable<string?>?)s_);
             bool? u_ = context.Operators.And(n_, t_);
             return u_;
         }
@@ -227,12 +227,12 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 "completed",
                 "in-progress",
             ];
-            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string?>?)y_);
             return z_;
         }
 
         IEnumerable<Procedure?>? g_ = context.Operators.Where<Procedure>(e_, f_);
-        IEnumerable<object?>? h_ = context.Operators.Union<object>(d_ as IEnumerable<object>, g_ as IEnumerable<object>);
+        IEnumerable<object?>? h_ = context.Operators.Union<object>(d_ as IEnumerable<object?>?, g_ as IEnumerable<object?>?);
         return h_;
     }
 
@@ -259,7 +259,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                 {
                     object? q_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                     object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                    g_ = r_ as CqlDateTime;
+                    g_ = r_ as CqlDateTime?;
                 }
                 else
                 {
@@ -270,7 +270,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                     {
                         object? v_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                         object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        g_ = w_ as CqlQuantity;
+                        g_ = w_ as CqlQuantity?;
                     }
                     else
                     {
@@ -281,7 +281,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                         {
                             object? aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                             object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                            g_ = ab_ as CqlInterval<CqlDateTime>;
+                            g_ = ab_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -292,7 +292,7 @@ public partial class TJCOverall_8_25_000 : ILibrary, ISingleton<TJCOverall_8_25_
                             {
                                 object? af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
                                 object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                                g_ = ag_ as CqlInterval<CqlQuantity>;
+                                g_ = ag_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {

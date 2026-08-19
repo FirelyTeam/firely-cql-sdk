@@ -21,92 +21,92 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
     #region Codes (20)
 
     [CqlCodeDefinition("Abdomen and Pelvis High Dose", codeId: "LA31754-7", codeSystem: "http://loinc.org")]
-    public CqlCode? Abdomen_and_Pelvis_High_Dose(CqlContext _) => _Abdomen_and_Pelvis_High_Dose;
-    private static readonly CqlCode? _Abdomen_and_Pelvis_High_Dose = new CqlCode("LA31754-7", "http://loinc.org");
+    public CqlCode Abdomen_and_Pelvis_High_Dose(CqlContext _) => _Abdomen_and_Pelvis_High_Dose;
+    private static readonly CqlCode _Abdomen_and_Pelvis_High_Dose = new CqlCode("LA31754-7", "http://loinc.org");
 
     [CqlCodeDefinition("Abdomen and Pelvis Low Dose", codeId: "LA31752-1", codeSystem: "http://loinc.org")]
-    public CqlCode? Abdomen_and_Pelvis_Low_Dose(CqlContext _) => _Abdomen_and_Pelvis_Low_Dose;
-    private static readonly CqlCode? _Abdomen_and_Pelvis_Low_Dose = new CqlCode("LA31752-1", "http://loinc.org");
+    public CqlCode Abdomen_and_Pelvis_Low_Dose(CqlContext _) => _Abdomen_and_Pelvis_Low_Dose;
+    private static readonly CqlCode _Abdomen_and_Pelvis_Low_Dose = new CqlCode("LA31752-1", "http://loinc.org");
 
     [CqlCodeDefinition("Abdomen and Pelvis Routine Dose", codeId: "LA31753-9", codeSystem: "http://loinc.org")]
-    public CqlCode? Abdomen_and_Pelvis_Routine_Dose(CqlContext _) => _Abdomen_and_Pelvis_Routine_Dose;
-    private static readonly CqlCode? _Abdomen_and_Pelvis_Routine_Dose = new CqlCode("LA31753-9", "http://loinc.org");
+    public CqlCode Abdomen_and_Pelvis_Routine_Dose(CqlContext _) => _Abdomen_and_Pelvis_Routine_Dose;
+    private static readonly CqlCode _Abdomen_and_Pelvis_Routine_Dose = new CqlCode("LA31753-9", "http://loinc.org");
 
     [CqlCodeDefinition("Calculated CT global noise", codeId: "96912-1", codeSystem: "http://loinc.org")]
-    public CqlCode? Calculated_CT_global_noise(CqlContext _) => _Calculated_CT_global_noise;
-    private static readonly CqlCode? _Calculated_CT_global_noise = new CqlCode("96912-1", "http://loinc.org");
+    public CqlCode Calculated_CT_global_noise(CqlContext _) => _Calculated_CT_global_noise;
+    private static readonly CqlCode _Calculated_CT_global_noise = new CqlCode("96912-1", "http://loinc.org");
 
     [CqlCodeDefinition("Calculated CT size-adjusted dose", codeId: "96913-9", codeSystem: "http://loinc.org")]
-    public CqlCode? Calculated_CT_size_adjusted_dose(CqlContext _) => _Calculated_CT_size_adjusted_dose;
-    private static readonly CqlCode? _Calculated_CT_size_adjusted_dose = new CqlCode("96913-9", "http://loinc.org");
+    public CqlCode Calculated_CT_size_adjusted_dose(CqlContext _) => _Calculated_CT_size_adjusted_dose;
+    private static readonly CqlCode _Calculated_CT_size_adjusted_dose = new CqlCode("96913-9", "http://loinc.org");
 
     [CqlCodeDefinition("Cardiac High Dose or Chest High Dose", codeId: "LA31761-2", codeSystem: "http://loinc.org")]
-    public CqlCode? Cardiac_High_Dose_or_Chest_High_Dose(CqlContext _) => _Cardiac_High_Dose_or_Chest_High_Dose;
-    private static readonly CqlCode? _Cardiac_High_Dose_or_Chest_High_Dose = new CqlCode("LA31761-2", "http://loinc.org");
+    public CqlCode Cardiac_High_Dose_or_Chest_High_Dose(CqlContext _) => _Cardiac_High_Dose_or_Chest_High_Dose;
+    private static readonly CqlCode _Cardiac_High_Dose_or_Chest_High_Dose = new CqlCode("LA31761-2", "http://loinc.org");
 
     [CqlCodeDefinition("Cardiac Low Dose", codeId: "LA31755-4", codeSystem: "http://loinc.org")]
-    public CqlCode? Cardiac_Low_Dose(CqlContext _) => _Cardiac_Low_Dose;
-    private static readonly CqlCode? _Cardiac_Low_Dose = new CqlCode("LA31755-4", "http://loinc.org");
+    public CqlCode Cardiac_Low_Dose(CqlContext _) => _Cardiac_Low_Dose;
+    private static readonly CqlCode _Cardiac_Low_Dose = new CqlCode("LA31755-4", "http://loinc.org");
 
     [CqlCodeDefinition("Cardiac Routine Dose", codeId: "LA31756-2", codeSystem: "http://loinc.org")]
-    public CqlCode? Cardiac_Routine_Dose(CqlContext _) => _Cardiac_Routine_Dose;
-    private static readonly CqlCode? _Cardiac_Routine_Dose = new CqlCode("LA31756-2", "http://loinc.org");
+    public CqlCode Cardiac_Routine_Dose(CqlContext _) => _Cardiac_Routine_Dose;
+    private static readonly CqlCode _Cardiac_Routine_Dose = new CqlCode("LA31756-2", "http://loinc.org");
 
     [CqlCodeDefinition("Chest Low Dose", codeId: "LA31758-8", codeSystem: "http://loinc.org")]
-    public CqlCode? Chest_Low_Dose(CqlContext _) => _Chest_Low_Dose;
-    private static readonly CqlCode? _Chest_Low_Dose = new CqlCode("LA31758-8", "http://loinc.org");
+    public CqlCode Chest_Low_Dose(CqlContext _) => _Chest_Low_Dose;
+    private static readonly CqlCode _Chest_Low_Dose = new CqlCode("LA31758-8", "http://loinc.org");
 
     [CqlCodeDefinition("Chest Routine Dose", codeId: "LA31759-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Chest_Routine_Dose(CqlContext _) => _Chest_Routine_Dose;
-    private static readonly CqlCode? _Chest_Routine_Dose = new CqlCode("LA31759-6", "http://loinc.org");
+    public CqlCode Chest_Routine_Dose(CqlContext _) => _Chest_Routine_Dose;
+    private static readonly CqlCode _Chest_Routine_Dose = new CqlCode("LA31759-6", "http://loinc.org");
 
     [CqlCodeDefinition("Extremity", codeId: "LA31765-3", codeSystem: "http://loinc.org")]
-    public CqlCode? Extremity(CqlContext _) => _Extremity;
-    private static readonly CqlCode? _Extremity = new CqlCode("LA31765-3", "http://loinc.org");
+    public CqlCode Extremity(CqlContext _) => _Extremity;
+    private static readonly CqlCode _Extremity = new CqlCode("LA31765-3", "http://loinc.org");
 
     [CqlCodeDefinition("Head High Dose", codeId: "LA31764-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Head_High_Dose(CqlContext _) => _Head_High_Dose;
-    private static readonly CqlCode? _Head_High_Dose = new CqlCode("LA31764-6", "http://loinc.org");
+    public CqlCode Head_High_Dose(CqlContext _) => _Head_High_Dose;
+    private static readonly CqlCode _Head_High_Dose = new CqlCode("LA31764-6", "http://loinc.org");
 
     [CqlCodeDefinition("Head Low Dose", codeId: "LA31762-0", codeSystem: "http://loinc.org")]
-    public CqlCode? Head_Low_Dose(CqlContext _) => _Head_Low_Dose;
-    private static readonly CqlCode? _Head_Low_Dose = new CqlCode("LA31762-0", "http://loinc.org");
+    public CqlCode Head_Low_Dose(CqlContext _) => _Head_Low_Dose;
+    private static readonly CqlCode _Head_Low_Dose = new CqlCode("LA31762-0", "http://loinc.org");
 
     [CqlCodeDefinition("Head Routine Dose", codeId: "LA31763-8", codeSystem: "http://loinc.org")]
-    public CqlCode? Head_Routine_Dose(CqlContext _) => _Head_Routine_Dose;
-    private static readonly CqlCode? _Head_Routine_Dose = new CqlCode("LA31763-8", "http://loinc.org");
+    public CqlCode Head_Routine_Dose(CqlContext _) => _Head_Routine_Dose;
+    private static readonly CqlCode _Head_Routine_Dose = new CqlCode("LA31763-8", "http://loinc.org");
 
     [CqlCodeDefinition("Neck or Cervical Spine", codeId: "LA31766-1", codeSystem: "http://loinc.org")]
-    public CqlCode? Neck_or_Cervical_Spine(CqlContext _) => _Neck_or_Cervical_Spine;
-    private static readonly CqlCode? _Neck_or_Cervical_Spine = new CqlCode("LA31766-1", "http://loinc.org");
+    public CqlCode Neck_or_Cervical_Spine(CqlContext _) => _Neck_or_Cervical_Spine;
+    private static readonly CqlCode _Neck_or_Cervical_Spine = new CqlCode("LA31766-1", "http://loinc.org");
 
     [CqlCodeDefinition("Simultaneous Chest and Abdomen and Pelvis", codeId: "LA31768-7", codeSystem: "http://loinc.org")]
-    public CqlCode? Simultaneous_Chest_and_Abdomen_and_Pelvis(CqlContext _) => _Simultaneous_Chest_and_Abdomen_and_Pelvis;
-    private static readonly CqlCode? _Simultaneous_Chest_and_Abdomen_and_Pelvis = new CqlCode("LA31768-7", "http://loinc.org");
+    public CqlCode Simultaneous_Chest_and_Abdomen_and_Pelvis(CqlContext _) => _Simultaneous_Chest_and_Abdomen_and_Pelvis;
+    private static readonly CqlCode _Simultaneous_Chest_and_Abdomen_and_Pelvis = new CqlCode("LA31768-7", "http://loinc.org");
 
     [CqlCodeDefinition("Simultaneous Head and Neck High Dose", codeId: "LA31770-3", codeSystem: "http://loinc.org")]
-    public CqlCode? Simultaneous_Head_and_Neck_High_Dose(CqlContext _) => _Simultaneous_Head_and_Neck_High_Dose;
-    private static readonly CqlCode? _Simultaneous_Head_and_Neck_High_Dose = new CqlCode("LA31770-3", "http://loinc.org");
+    public CqlCode Simultaneous_Head_and_Neck_High_Dose(CqlContext _) => _Simultaneous_Head_and_Neck_High_Dose;
+    private static readonly CqlCode _Simultaneous_Head_and_Neck_High_Dose = new CqlCode("LA31770-3", "http://loinc.org");
 
     [CqlCodeDefinition("Simultaneous Head and Neck Routine Dose", codeId: "LA31769-5", codeSystem: "http://loinc.org")]
-    public CqlCode? Simultaneous_Head_and_Neck_Routine_Dose(CqlContext _) => _Simultaneous_Head_and_Neck_Routine_Dose;
-    private static readonly CqlCode? _Simultaneous_Head_and_Neck_Routine_Dose = new CqlCode("LA31769-5", "http://loinc.org");
+    public CqlCode Simultaneous_Head_and_Neck_Routine_Dose(CqlContext _) => _Simultaneous_Head_and_Neck_Routine_Dose;
+    private static readonly CqlCode _Simultaneous_Head_and_Neck_Routine_Dose = new CqlCode("LA31769-5", "http://loinc.org");
 
     [CqlCodeDefinition("Simultaneous Thoracic and Lumbar Spine", codeId: "LA31851-1", codeSystem: "http://loinc.org")]
-    public CqlCode? Simultaneous_Thoracic_and_Lumbar_Spine(CqlContext _) => _Simultaneous_Thoracic_and_Lumbar_Spine;
-    private static readonly CqlCode? _Simultaneous_Thoracic_and_Lumbar_Spine = new CqlCode("LA31851-1", "http://loinc.org");
+    public CqlCode Simultaneous_Thoracic_and_Lumbar_Spine(CqlContext _) => _Simultaneous_Thoracic_and_Lumbar_Spine;
+    private static readonly CqlCode _Simultaneous_Thoracic_and_Lumbar_Spine = new CqlCode("LA31851-1", "http://loinc.org");
 
     [CqlCodeDefinition("Thoracic or Lumbar Spine", codeId: "LA31767-9", codeSystem: "http://loinc.org")]
-    public CqlCode? Thoracic_or_Lumbar_Spine(CqlContext _) => _Thoracic_or_Lumbar_Spine;
-    private static readonly CqlCode? _Thoracic_or_Lumbar_Spine = new CqlCode("LA31767-9", "http://loinc.org");
+    public CqlCode Thoracic_or_Lumbar_Spine(CqlContext _) => _Thoracic_or_Lumbar_Spine;
+    private static readonly CqlCode _Thoracic_or_Lumbar_Spine = new CqlCode("LA31767-9", "http://loinc.org");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Abdomen_and_Pelvis_High_Dose,
           _Abdomen_and_Pelvis_Low_Dose,
@@ -236,7 +236,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         DataType? a_ = Result?.Value;
         object? b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept? c_ = context.Operators.ConvertCodeToConcept(code);
-        bool? d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
+        bool? d_ = context.Operators.Equivalent(b_ as CqlConcept?, c_);
         decimal? e_ = this.globalNoiseValue(context, Result);
         bool? f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
         decimal? g_ = this.sizeAdjustedValue(context, Result);
@@ -261,7 +261,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             CodeableConcept? l_ = C?.Code;
             CqlConcept? m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode? n_ = this.Calculated_CT_global_noise(context);
@@ -270,7 +270,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? q_ = context.Operators.And(k_, p_);
             DataType? r_ = C?.Value;
             object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            string? t_ = (s_ as CqlQuantity)?.unit;
+            string? t_ = (s_ as CqlQuantity?)?.unit;
             bool? u_ = context.Operators.Equal(t_, "[hnsf'U]");
             bool? v_ = context.Operators.And(q_, u_);
             return v_;
@@ -280,11 +280,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? c_(Observation.ComponentComponent? C) {
             DataType? w_ = C?.Value;
             object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-            decimal? y_ = (x_ as CqlQuantity)?.value;
+            decimal? y_ = (x_ as CqlQuantity?)?.value;
             return y_;
         }
 
-        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
+        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent?>?)a_, b_, c_);
         IEnumerable<decimal?>? e_ = context.Operators.Distinct<decimal?>(d_);
         decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
         return f_;
@@ -305,7 +305,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             CodeableConcept? l_ = C?.Code;
             CqlConcept? m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode? n_ = this.Calculated_CT_size_adjusted_dose(context);
@@ -314,7 +314,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? q_ = context.Operators.And(k_, p_);
             DataType? r_ = C?.Value;
             object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            string? t_ = (s_ as CqlQuantity)?.unit;
+            string? t_ = (s_ as CqlQuantity?)?.unit;
             bool? u_ = context.Operators.Equal(t_, "mGy.cm");
             bool? v_ = context.Operators.And(q_, u_);
             return v_;
@@ -324,11 +324,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? c_(Observation.ComponentComponent? C) {
             DataType? w_ = C?.Value;
             object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-            decimal? y_ = (x_ as CqlQuantity)?.value;
+            decimal? y_ = (x_ as CqlQuantity?)?.value;
             return y_;
         }
 
-        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
+        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent?>?)a_, b_, c_);
         IEnumerable<decimal?>? e_ = context.Operators.Distinct<decimal?>(d_);
         decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
         return f_;
@@ -424,7 +424,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         DataType? a_ = Result?.Value;
         object? b_ = FHIRHelpers_4_4_000.Instance.ToValue(context, a_);
         CqlConcept? c_ = context.Operators.ConvertCodeToConcept(code);
-        bool? d_ = context.Operators.Equivalent(b_ as CqlConcept, c_);
+        bool? d_ = context.Operators.Equivalent(b_ as CqlConcept?, c_);
         decimal? e_ = this.Global_Noise_Value(context, Result);
         bool? f_ = context.Operators.GreaterOrEqual(e_, noiseThreshold);
         decimal? g_ = this.Size_Adjusted_Value(context, Result);
@@ -449,7 +449,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             CodeableConcept? l_ = C?.Code;
             CqlConcept? m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode? n_ = this.Calculated_CT_global_noise(context);
@@ -458,7 +458,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? q_ = context.Operators.And(k_, p_);
             DataType? r_ = C?.Value;
             object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            string? t_ = (s_ as CqlQuantity)?.unit;
+            string? t_ = (s_ as CqlQuantity?)?.unit;
             bool? u_ = context.Operators.Equal(t_, "[hnsf'U]");
             bool? v_ = context.Operators.And(q_, u_);
             return v_;
@@ -468,11 +468,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? c_(Observation.ComponentComponent? C) {
             DataType? w_ = C?.Value;
             object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-            decimal? y_ = (x_ as CqlQuantity)?.value;
+            decimal? y_ = (x_ as CqlQuantity?)?.value;
             return y_;
         }
 
-        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
+        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent?>?)a_, b_, c_);
         IEnumerable<decimal?>? e_ = context.Operators.Distinct<decimal?>(d_);
         decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
         return f_;
@@ -493,7 +493,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             CodeableConcept? l_ = C?.Code;
             CqlConcept? m_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, l_);
             CqlCode? n_ = this.Calculated_CT_size_adjusted_dose(context);
@@ -502,7 +502,7 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
             bool? q_ = context.Operators.And(k_, p_);
             DataType? r_ = C?.Value;
             object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
-            string? t_ = (s_ as CqlQuantity)?.unit;
+            string? t_ = (s_ as CqlQuantity?)?.unit;
             bool? u_ = context.Operators.Equal(t_, "mGy.cm");
             bool? v_ = context.Operators.And(q_, u_);
             return v_;
@@ -512,11 +512,11 @@ public partial class AlaraCommonFunctions_1_10_000 : ILibrary, ISingleton<AlaraC
         decimal? c_(Observation.ComponentComponent? C) {
             DataType? w_ = C?.Value;
             object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
-            decimal? y_ = (x_ as CqlQuantity)?.value;
+            decimal? y_ = (x_ as CqlQuantity?)?.value;
             return y_;
         }
 
-        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent>)a_, b_, c_);
+        IEnumerable<decimal?>? d_ = context.Operators.WhereSelect<Observation.ComponentComponent, decimal?>((IEnumerable<Observation.ComponentComponent?>?)a_, b_, c_);
         IEnumerable<decimal?>? e_ = context.Operators.Distinct<decimal?>(d_);
         decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
         return f_;

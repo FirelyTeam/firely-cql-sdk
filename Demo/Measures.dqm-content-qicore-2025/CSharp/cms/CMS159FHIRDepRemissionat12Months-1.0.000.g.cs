@@ -21,115 +21,115 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
     #region ValueSets (16)
 
     [CqlValueSetDefinition("Bipolar Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", valueSetVersion: null)]
-    public CqlValueSet? Bipolar_Disorder(CqlContext _) => _Bipolar_Disorder;
-    private static readonly CqlValueSet? _Bipolar_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", null);
+    public CqlValueSet Bipolar_Disorder(CqlContext _) => _Bipolar_Disorder;
+    private static readonly CqlValueSet _Bipolar_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", null);
 
     [CqlValueSetDefinition("Contact or Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1080.5", valueSetVersion: null)]
-    public CqlValueSet? Contact_or_Office_Visit(CqlContext _) => _Contact_or_Office_Visit;
-    private static readonly CqlValueSet? _Contact_or_Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1080.5", null);
+    public CqlValueSet Contact_or_Office_Visit(CqlContext _) => _Contact_or_Office_Visit;
+    private static readonly CqlValueSet _Contact_or_Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1080.5", null);
 
     [CqlValueSetDefinition("Dysthymia", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.254", valueSetVersion: null)]
-    public CqlValueSet? Dysthymia(CqlContext _) => _Dysthymia;
-    private static readonly CqlValueSet? _Dysthymia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.254", null);
+    public CqlValueSet Dysthymia(CqlContext _) => _Dysthymia;
+    private static readonly CqlValueSet _Dysthymia = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.254", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Hospice Care Ambulatory", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
-    private static readonly CqlValueSet? _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
+    public CqlValueSet Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
+    private static readonly CqlValueSet _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
 
     [CqlValueSetDefinition("Hospice Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
-    private static readonly CqlValueSet? _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
+    public CqlValueSet Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
+    private static readonly CqlValueSet _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
 
     [CqlValueSetDefinition("Hospice Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
-    private static readonly CqlValueSet? _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
+    public CqlValueSet Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
+    private static readonly CqlValueSet _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
 
     [CqlValueSetDefinition("Major Depression Including Remission", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.113883.3.67.1.101.3.2444", valueSetVersion: null)]
-    public CqlValueSet? Major_Depression_Including_Remission(CqlContext _) => _Major_Depression_Including_Remission;
-    private static readonly CqlValueSet? _Major_Depression_Including_Remission = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.113883.3.67.1.101.3.2444", null);
+    public CqlValueSet Major_Depression_Including_Remission(CqlContext _) => _Major_Depression_Including_Remission;
+    private static readonly CqlValueSet _Major_Depression_Including_Remission = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.113883.3.67.1.101.3.2444", null);
 
     [CqlValueSetDefinition("Palliative Care Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Diagnosis(CqlContext _) => _Palliative_Care_Diagnosis;
-    private static readonly CqlValueSet? _Palliative_Care_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", null);
+    public CqlValueSet Palliative_Care_Diagnosis(CqlContext _) => _Palliative_Care_Diagnosis;
+    private static readonly CqlValueSet _Palliative_Care_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", null);
 
     [CqlValueSetDefinition("Palliative Care Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Encounter(CqlContext _) => _Palliative_Care_Encounter;
-    private static readonly CqlValueSet? _Palliative_Care_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", null);
+    public CqlValueSet Palliative_Care_Encounter(CqlContext _) => _Palliative_Care_Encounter;
+    private static readonly CqlValueSet _Palliative_Care_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", null);
 
     [CqlValueSetDefinition("Palliative Care Intervention", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", valueSetVersion: null)]
-    public CqlValueSet? Palliative_Care_Intervention(CqlContext _) => _Palliative_Care_Intervention;
-    private static readonly CqlValueSet? _Palliative_Care_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", null);
+    public CqlValueSet Palliative_Care_Intervention(CqlContext _) => _Palliative_Care_Intervention;
+    private static readonly CqlValueSet _Palliative_Care_Intervention = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", null);
 
     [CqlValueSetDefinition("Palliative or Hospice Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", valueSetVersion: null)]
-    public CqlValueSet? Palliative_or_Hospice_Care(CqlContext _) => _Palliative_or_Hospice_Care;
-    private static readonly CqlValueSet? _Palliative_or_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", null);
+    public CqlValueSet Palliative_or_Hospice_Care(CqlContext _) => _Palliative_or_Hospice_Care;
+    private static readonly CqlValueSet _Palliative_or_Hospice_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", null);
 
     [CqlValueSetDefinition("Personality Disorder Emotionally Labile", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.246", valueSetVersion: null)]
-    public CqlValueSet? Personality_Disorder_Emotionally_Labile(CqlContext _) => _Personality_Disorder_Emotionally_Labile;
-    private static readonly CqlValueSet? _Personality_Disorder_Emotionally_Labile = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.246", null);
+    public CqlValueSet Personality_Disorder_Emotionally_Labile(CqlContext _) => _Personality_Disorder_Emotionally_Labile;
+    private static readonly CqlValueSet _Personality_Disorder_Emotionally_Labile = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.246", null);
 
     [CqlValueSetDefinition("Pervasive Developmental Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1152", valueSetVersion: null)]
-    public CqlValueSet? Pervasive_Developmental_Disorder(CqlContext _) => _Pervasive_Developmental_Disorder;
-    private static readonly CqlValueSet? _Pervasive_Developmental_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1152", null);
+    public CqlValueSet Pervasive_Developmental_Disorder(CqlContext _) => _Pervasive_Developmental_Disorder;
+    private static readonly CqlValueSet _Pervasive_Developmental_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1152", null);
 
     [CqlValueSetDefinition("PHQ 9 and PHQ 9M Tools", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.263", valueSetVersion: null)]
-    public CqlValueSet? PHQ_9_and_PHQ_9M_Tools(CqlContext _) => _PHQ_9_and_PHQ_9M_Tools;
-    private static readonly CqlValueSet? _PHQ_9_and_PHQ_9M_Tools = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.263", null);
+    public CqlValueSet PHQ_9_and_PHQ_9M_Tools(CqlContext _) => _PHQ_9_and_PHQ_9M_Tools;
+    private static readonly CqlValueSet _PHQ_9_and_PHQ_9M_Tools = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.263", null);
 
     [CqlValueSetDefinition("Schizophrenia or Psychotic Disorder", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1104", valueSetVersion: null)]
-    public CqlValueSet? Schizophrenia_or_Psychotic_Disorder(CqlContext _) => _Schizophrenia_or_Psychotic_Disorder;
-    private static readonly CqlValueSet? _Schizophrenia_or_Psychotic_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1104", null);
+    public CqlValueSet Schizophrenia_or_Psychotic_Disorder(CqlContext _) => _Schizophrenia_or_Psychotic_Disorder;
+    private static readonly CqlValueSet _Schizophrenia_or_Psychotic_Disorder = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1104", null);
 
     #endregion ValueSets
 
     #region Codes (5)
 
     [CqlCodeDefinition("Discharge to healthcare facility for hospice care (procedure)", codeId: "428371000124100", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
+    public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Discharge to home for hospice care (procedure)", codeId: "428361000124107", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
+    public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)", codeId: "71007-9", codeSystem: "http://loinc.org")]
-    public CqlCode? Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
-    private static readonly CqlCode? _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
+    public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext _) => _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_;
+    private static readonly CqlCode _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_ = new CqlCode("71007-9", "http://loinc.org");
 
     [CqlCodeDefinition("Hospice care [Minimum Data Set]", codeId: "45755-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
-    private static readonly CqlCode? _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
+    public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
+    private static readonly CqlCode _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
 
     [CqlCodeDefinition("Yes (qualifier value)", codeId: "373066001", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
-    private static readonly CqlCode? _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
+    public CqlCode Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
+    private static readonly CqlCode _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (3)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_,
           _Hospice_care__Minimum_Data_Set_]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Discharge_to_healthcare_facility_for_hospice_care__procedure_,
           _Discharge_to_home_for_hospice_care__procedure_,
           _Yes__qualifier_value_]);
 
     [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
-    public CqlCodeSystem? ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
-    private static readonly CqlCodeSystem? _ConditionVerificationStatusCodes =
+    public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
+    private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, []);
 
     #endregion CodeSystems
@@ -148,7 +148,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS159FHIRDepRemissionat12Months-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -193,7 +193,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string>)k_);
+            bool? l_ = context.Operators.In<string>(j_, (IEnumerable<string?>?)k_);
             bool? m_ = context.Operators.And(g_, l_);
             return m_;
         }
@@ -240,12 +240,12 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet? a_ = this.Major_Depression_Including_Remission(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         CqlValueSet? e_ = this.Dysthymia(context);
         IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, f_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition?>?, h_ as IEnumerable<Condition?>?);
 
         bool? j_(Condition? Depression) {
             bool? l_ = this.isVerified(context, Depression);
@@ -428,7 +428,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return p_;
         }
 
-        IEnumerable<CqlInterval<CqlDate?>?>? d_ = context.Operators.SelectDistinct<Observation, CqlInterval<CqlDate>>((IEnumerable<Observation>)b_, c_);
+        IEnumerable<CqlInterval<CqlDate?>?>? d_ = context.Operators.SelectDistinct<Observation, CqlInterval<CqlDate>>((IEnumerable<Observation?>?)b_, c_);
         CqlInterval<CqlDate?>? e_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(d_);
         return e_;
     }
@@ -498,7 +498,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "entered-in-error",
                 "unknown",
             ];
-            bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string>)bs_);
+            bool? bt_ = context.Operators.In<string>(br_, (IEnumerable<string?>?)bs_);
             bool? bu_ = context.Operators.Not(bt_);
             bool? bv_ = context.Operators.And(bn_, bu_);
             return bv_;
@@ -515,7 +515,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             object? bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
             CqlCode? by_ = this.Yes__qualifier_value_(context);
             CqlConcept? bz_ = context.Operators.ConvertCodeToConcept(by_);
-            bool? ca_ = context.Operators.Equivalent(bx_ as CqlConcept, bz_);
+            bool? ca_ = context.Operators.Equivalent(bx_ as CqlConcept?, bz_);
             DataType? cb_ = HospiceAssessment?.Effective;
             object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
             CqlInterval<CqlDateTime?>? cd_ = QICoreCommon_4_0_000.Instance.toInterval(context, cc_);
@@ -535,7 +535,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? cq_ = context.Operators.In<string>(co_, (IEnumerable<string>)cp_);
+            bool? cq_ = context.Operators.In<string>(co_, (IEnumerable<string?>?)cp_);
             bool? cr_ = context.Operators.And(cl_, cq_);
             return cr_;
         }
@@ -563,7 +563,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "active",
                 "completed",
             ];
-            bool? dg_ = context.Operators.In<string>(de_, (IEnumerable<string>)df_);
+            bool? dg_ = context.Operators.In<string>(de_, (IEnumerable<string?>?)df_);
             bool? dh_ = context.Operators.And(da_, dg_);
             Code<RequestIntent>? di_ = HospiceOrder?.IntentElement;
             RequestIntent? dj_ = di_?.Value;
@@ -576,7 +576,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "filler-order",
                 "instance-order",
             ];
-            bool? dn_ = context.Operators.In<string>(dl_, (IEnumerable<string>)dm_);
+            bool? dn_ = context.Operators.In<string>(dl_, (IEnumerable<string?>?)dm_);
             bool? do_ = context.Operators.And(dh_, dn_);
             return do_;
         }
@@ -594,7 +594,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             {
                 DataType? ei_ = HospicePerformed?.Performed;
                 object? ej_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ei_);
-                dp_ = ej_ as CqlDateTime;
+                dp_ = ej_ as CqlDateTime?;
             }
             else
             {
@@ -605,7 +605,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 {
                     DataType? en_ = HospicePerformed?.Performed;
                     object? eo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, en_);
-                    dp_ = eo_ as CqlQuantity;
+                    dp_ = eo_ as CqlQuantity?;
                 }
                 else
                 {
@@ -616,7 +616,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     {
                         DataType? es_ = HospicePerformed?.Performed;
                         object? et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                        dp_ = et_ as CqlInterval<CqlDateTime>;
+                        dp_ = et_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -627,7 +627,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         {
                             DataType? ex_ = HospicePerformed?.Performed;
                             object? ey_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ex_);
-                            dp_ = ey_ as CqlInterval<CqlQuantity>;
+                            dp_ = ey_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -652,7 +652,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "entered-in-error",
                 "unknown",
             ];
-            bool? ec_ = context.Operators.In<string>(ea_, (IEnumerable<string>)eb_);
+            bool? ec_ = context.Operators.In<string>(ea_, (IEnumerable<string?>?)eb_);
             bool? ed_ = context.Operators.Not(ec_);
             bool? ee_ = context.Operators.And(dx_, ed_);
             return ee_;
@@ -663,7 +663,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet? y_ = this.Hospice_Diagnosis(context);
         IEnumerable<Condition?>? z_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? aa_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? ab_ = context.Operators.Union<Condition>(z_ as IEnumerable<Condition>, aa_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? ab_ = context.Operators.Union<Condition>(z_ as IEnumerable<Condition?>?, aa_ as IEnumerable<Condition?>?);
 
         bool? ac_(Condition? HospiceCareDiagnosis) {
             CqlInterval<CqlDateTime?>? ez_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
@@ -716,7 +716,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
+            bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string?>?)aj_);
             bool? al_ = context.Operators.And(af_, ak_);
             return al_;
         }
@@ -725,7 +725,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet? f_ = this.Palliative_Care_Diagnosis(context);
         IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition?>?, h_ as IEnumerable<Condition?>?);
 
         bool? j_(Condition? PalliativeDiagnosis) {
             CqlInterval<CqlDateTime?>? am_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeDiagnosis);
@@ -778,7 +778,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             {
                 DataType? cd_ = PalliativeIntervention?.Performed;
                 object? ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                bk_ = ce_ as CqlDateTime;
+                bk_ = ce_ as CqlDateTime?;
             }
             else
             {
@@ -789,7 +789,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 {
                     DataType? ci_ = PalliativeIntervention?.Performed;
                     object? cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
-                    bk_ = cj_ as CqlQuantity;
+                    bk_ = cj_ as CqlQuantity?;
                 }
                 else
                 {
@@ -800,7 +800,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                     {
                         DataType? cn_ = PalliativeIntervention?.Performed;
                         object? co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-                        bk_ = co_ as CqlInterval<CqlDateTime>;
+                        bk_ = co_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -811,7 +811,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                         {
                             DataType? cs_ = PalliativeIntervention?.Performed;
                             object? ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
-                            bk_ = ct_ as CqlInterval<CqlQuantity>;
+                            bk_ = ct_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -836,7 +836,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "entered-in-error",
                 "unknown",
             ];
-            bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
+            bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string?>?)bw_);
             bool? by_ = context.Operators.Not(bx_);
             bool? bz_ = context.Operators.And(bs_, by_);
             return bz_;
@@ -862,7 +862,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlInterval<CqlDate?>? d_ = this.Measure_Assessment_Period(context);
         CqlDate? e_ = context.Operators.End(d_);
         CqlDateTime? f_ = context.Operators.ConvertDateToDateTime(e_);
-        bool? g_ = context.Operators.SameOrBefore(c_ as CqlDateTime, f_, "day");
+        bool? g_ = context.Operators.SameOrBefore(c_ as CqlDateTime?, f_, "day");
         return g_;
     }
 
@@ -878,22 +878,22 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         CqlValueSet? a_ = this.Bipolar_Disorder(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         CqlValueSet? e_ = this.Personality_Disorder_Emotionally_Labile(context);
         IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, f_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition?>?, h_ as IEnumerable<Condition?>?);
         CqlValueSet? j_ = this.Schizophrenia_or_Psychotic_Disorder(context);
         IEnumerable<Condition?>? k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? l_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, k_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? l_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition?>?, k_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? n_ = context.Operators.Union<Condition>(l_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? n_ = context.Operators.Union<Condition>(l_ as IEnumerable<Condition?>?, m_ as IEnumerable<Condition?>?);
         CqlValueSet? o_ = this.Pervasive_Developmental_Disorder(context);
         IEnumerable<Condition?>? p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? q_ = context.Operators.Union<Condition>(n_ as IEnumerable<Condition>, p_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? q_ = context.Operators.Union<Condition>(n_ as IEnumerable<Condition?>?, p_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? s_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition>, r_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? s_ = context.Operators.Union<Condition>(q_ as IEnumerable<Condition?>?, r_ as IEnumerable<Condition?>?);
 
         bool? t_(Condition? MentalHealthDisorderDiagnoses) {
             CqlInterval<CqlDateTime?>? v_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MentalHealthDisorderDiagnoses);
@@ -964,7 +964,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string?>?)aa_);
             bool? ac_ = context.Operators.And(w_, ab_);
             return ac_;
         }
@@ -989,40 +989,40 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -4985592431128511125L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 4176559840175856802L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -7339446756539217987L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
@@ -1069,7 +1069,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return q_;
         }
 
-        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation>)b_, c_);
+        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation?>?)b_, c_);
         bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
         return e_;
     }
@@ -1103,7 +1103,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
             return p_;
         }
 
-        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation>)b_, c_);
+        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Observation, bool?>((IEnumerable<Observation?>?)b_, c_);
         bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
         return e_;
     }

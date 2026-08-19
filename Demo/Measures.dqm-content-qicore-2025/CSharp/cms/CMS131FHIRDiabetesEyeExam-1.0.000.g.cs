@@ -21,84 +21,84 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
     #region ValueSets (12)
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
-    public CqlValueSet? Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
-    private static readonly CqlValueSet? _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
+    public CqlValueSet Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
+    private static readonly CqlValueSet _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
 
     [CqlValueSetDefinition("Autonomous Eye Exam Result or Finding", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1004.2616", valueSetVersion: null)]
-    public CqlValueSet? Autonomous_Eye_Exam_Result_or_Finding(CqlContext _) => _Autonomous_Eye_Exam_Result_or_Finding;
-    private static readonly CqlValueSet? _Autonomous_Eye_Exam_Result_or_Finding = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1004.2616", null);
+    public CqlValueSet Autonomous_Eye_Exam_Result_or_Finding(CqlContext _) => _Autonomous_Eye_Exam_Result_or_Finding;
+    private static readonly CqlValueSet _Autonomous_Eye_Exam_Result_or_Finding = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1004.2616", null);
 
     [CqlValueSetDefinition("Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Diabetes(CqlContext _) => _Diabetes;
-    private static readonly CqlValueSet? _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
+    public CqlValueSet Diabetes(CqlContext _) => _Diabetes;
+    private static readonly CqlValueSet _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
 
     [CqlValueSetDefinition("Diabetic Retinopathy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", valueSetVersion: null)]
-    public CqlValueSet? Diabetic_Retinopathy(CqlContext _) => _Diabetic_Retinopathy;
-    private static readonly CqlValueSet? _Diabetic_Retinopathy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", null);
+    public CqlValueSet Diabetic_Retinopathy(CqlContext _) => _Diabetic_Retinopathy;
+    private static readonly CqlValueSet _Diabetic_Retinopathy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", null);
 
     [CqlValueSetDefinition("Diabetic Retinopathy Severity Level", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1266", valueSetVersion: null)]
-    public CqlValueSet? Diabetic_Retinopathy_Severity_Level(CqlContext _) => _Diabetic_Retinopathy_Severity_Level;
-    private static readonly CqlValueSet? _Diabetic_Retinopathy_Severity_Level = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1266", null);
+    public CqlValueSet Diabetic_Retinopathy_Severity_Level(CqlContext _) => _Diabetic_Retinopathy_Severity_Level;
+    private static readonly CqlValueSet _Diabetic_Retinopathy_Severity_Level = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1266", null);
 
     [CqlValueSetDefinition("Home Healthcare Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", valueSetVersion: null)]
-    public CqlValueSet? Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
-    private static readonly CqlValueSet? _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+    public CqlValueSet Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
+    private static readonly CqlValueSet _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
 
     [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Office_Visit(CqlContext _) => _Office_Visit;
-    private static readonly CqlValueSet? _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Ophthalmological Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", valueSetVersion: null)]
-    public CqlValueSet? Ophthalmological_Services(CqlContext _) => _Ophthalmological_Services;
-    private static readonly CqlValueSet? _Ophthalmological_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
+    public CqlValueSet Ophthalmological_Services(CqlContext _) => _Ophthalmological_Services;
+    private static readonly CqlValueSet _Ophthalmological_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", null);
 
     [CqlValueSetDefinition("Preventive Care Services Established Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", valueSetVersion: null)]
-    public CqlValueSet? Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Established_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet? _Preventive_Care_Services_Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Established_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlValueSetDefinition("Preventive Care Services Initial Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", valueSetVersion: null)]
-    public CqlValueSet? Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet? _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlValueSetDefinition("Retinal or Dilated Eye Exam", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088", valueSetVersion: null)]
-    public CqlValueSet? Retinal_or_Dilated_Eye_Exam(CqlContext _) => _Retinal_or_Dilated_Eye_Exam;
-    private static readonly CqlValueSet? _Retinal_or_Dilated_Eye_Exam = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088", null);
+    public CqlValueSet Retinal_or_Dilated_Eye_Exam(CqlContext _) => _Retinal_or_Dilated_Eye_Exam;
+    private static readonly CqlValueSet _Retinal_or_Dilated_Eye_Exam = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
-    public CqlValueSet? Telephone_Visits(CqlContext _) => _Telephone_Visits;
-    private static readonly CqlValueSet? _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+    public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
+    private static readonly CqlValueSet _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     #endregion ValueSets
 
     #region Codes (5)
 
     [CqlCodeDefinition("Anophthalmos of bilateral eyes (disorder)", codeId: "15665641000119103", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Anophthalmos_of_bilateral_eyes__disorder_(CqlContext _) => _Anophthalmos_of_bilateral_eyes__disorder_;
-    private static readonly CqlCode? _Anophthalmos_of_bilateral_eyes__disorder_ = new CqlCode("15665641000119103", "http://snomed.info/sct");
+    public CqlCode Anophthalmos_of_bilateral_eyes__disorder_(CqlContext _) => _Anophthalmos_of_bilateral_eyes__disorder_;
+    private static readonly CqlCode _Anophthalmos_of_bilateral_eyes__disorder_ = new CqlCode("15665641000119103", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Eye Diabetic retinopathy screening Autonomous artificial intelligence", codeId: "105914-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence(CqlContext _) => _Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence;
-    private static readonly CqlCode? _Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence = new CqlCode("105914-6", "http://loinc.org");
+    public CqlCode Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence(CqlContext _) => _Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence;
+    private static readonly CqlCode _Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence = new CqlCode("105914-6", "http://loinc.org");
 
     [CqlCodeDefinition("Left eye Diabetic retinopathy severity level by Ophthalmoscopy", codeId: "71490-7", codeSystem: "http://loinc.org")]
-    public CqlCode? Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(CqlContext _) => _Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy;
-    private static readonly CqlCode? _Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy = new CqlCode("71490-7", "http://loinc.org");
+    public CqlCode Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(CqlContext _) => _Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy;
+    private static readonly CqlCode _Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy = new CqlCode("71490-7", "http://loinc.org");
 
     [CqlCodeDefinition("No apparent retinopathy", codeId: "LA18643-9", codeSystem: "http://loinc.org")]
-    public CqlCode? No_apparent_retinopathy(CqlContext _) => _No_apparent_retinopathy;
-    private static readonly CqlCode? _No_apparent_retinopathy = new CqlCode("LA18643-9", "http://loinc.org");
+    public CqlCode No_apparent_retinopathy(CqlContext _) => _No_apparent_retinopathy;
+    private static readonly CqlCode _No_apparent_retinopathy = new CqlCode("LA18643-9", "http://loinc.org");
 
     [CqlCodeDefinition("Right eye Diabetic retinopathy severity level by Ophthalmoscopy", codeId: "71491-5", codeSystem: "http://loinc.org")]
-    public CqlCode? Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(CqlContext _) => _Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy;
-    private static readonly CqlCode? _Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy = new CqlCode("71491-5", "http://loinc.org");
+    public CqlCode Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy(CqlContext _) => _Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy;
+    private static readonly CqlCode _Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy = new CqlCode("71491-5", "http://loinc.org");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Eye_Diabetic_retinopathy_screening_Autonomous_artificial_intelligence,
           _Left_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy,
@@ -106,8 +106,8 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
           _Right_eye_Diabetic_retinopathy_severity_level_by_Ophthalmoscopy]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Anophthalmos_of_bilateral_eyes__disorder_]);
 
@@ -127,7 +127,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS131FHIRDiabetesEyeExam-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -215,7 +215,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         bool? m_ = context.Operators.And(j_, l_);
         CqlValueSet? n_ = this.Diabetes(context);
         IEnumerable<Condition?>? o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition? p_(Condition? X) => X as Condition;
+        Condition? p_(Condition? X) => X as Condition?;
         IEnumerable<Condition?>? q_ = context.Operators.Select<Condition, Condition>(o_, p_);
         IEnumerable<Condition?>? r_ = Status_1_15_000.Instance.verified(context, q_);
 
@@ -257,7 +257,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         IEnumerable<CqlCode?>? b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? e_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? e_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition?>?, d_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? f_ = Status_1_15_000.Instance.verified(context, e_);
 
         bool? g_(Condition? BilateralAbsenceEyes) {
@@ -306,7 +306,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
         CqlValueSet? a_ = this.Diabetic_Retinopathy(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition? Retinopathy) {
@@ -395,7 +395,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             DataType? g_ = AutonomousEyeExam?.Value;
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet? i_ = this.Autonomous_Eye_Exam_Result_or_Finding(context);
-            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept?, i_);
             CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
             DataType? l_ = AutonomousEyeExam?.Effective;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
@@ -427,7 +427,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             DataType? g_ = LeftEyeRetinopathy?.Value;
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet? i_ = this.Diabetic_Retinopathy_Severity_Level(context);
-            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept?, i_);
             CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
             DataType? l_ = LeftEyeRetinopathy?.Effective;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
@@ -459,7 +459,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             DataType? g_ = RightEyeRetinopathy?.Value;
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlValueSet? i_ = this.Diabetic_Retinopathy_Severity_Level(context);
-            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, i_);
+            bool? j_ = context.Operators.ConceptInValueSet(h_ as CqlConcept?, i_);
             CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
             DataType? l_ = RightEyeRetinopathy?.Effective;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
@@ -492,7 +492,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlCode? i_ = this.No_apparent_retinopathy(context);
             CqlConcept? j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept?, j_);
             CqlInterval<CqlDateTime?>? l_ = this.Measurement_Period(context);
             CqlDateTime? m_ = context.Operators.Start(l_);
             CqlQuantity? n_ = context.Operators.Quantity(1m, "year");
@@ -531,7 +531,7 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
             CqlCode? i_ = this.No_apparent_retinopathy(context);
             CqlConcept? j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
+            bool? k_ = context.Operators.Equivalent(h_ as CqlConcept?, j_);
             CqlInterval<CqlDateTime?>? l_ = this.Measurement_Period(context);
             CqlDateTime? m_ = context.Operators.Start(l_);
             CqlQuantity? n_ = context.Operators.Quantity(1m, "year");
@@ -614,40 +614,40 @@ public partial class CMS131FHIRDiabetesEyeExam_1_0_000 : ILibrary, ISingleton<CM
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -2126485817556375875L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -8062047007454936636L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 8758770137911828662L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

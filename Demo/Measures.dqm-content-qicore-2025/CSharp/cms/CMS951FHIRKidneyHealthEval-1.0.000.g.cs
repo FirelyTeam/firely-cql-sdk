@@ -21,64 +21,64 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
     #region ValueSets (15)
 
     [CqlValueSetDefinition("Annual Wellness Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", valueSetVersion: null)]
-    public CqlValueSet? Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
-    private static readonly CqlValueSet? _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
+    public CqlValueSet Annual_Wellness_Visit(CqlContext _) => _Annual_Wellness_Visit;
+    private static readonly CqlValueSet _Annual_Wellness_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", null);
 
     [CqlValueSetDefinition("Chronic Kidney Disease, Stage 5", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", valueSetVersion: null)]
-    public CqlValueSet? Chronic_Kidney_Disease__Stage_5(CqlContext _) => _Chronic_Kidney_Disease__Stage_5;
-    private static readonly CqlValueSet? _Chronic_Kidney_Disease__Stage_5 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", null);
+    public CqlValueSet Chronic_Kidney_Disease__Stage_5(CqlContext _) => _Chronic_Kidney_Disease__Stage_5;
+    private static readonly CqlValueSet _Chronic_Kidney_Disease__Stage_5 = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", null);
 
     [CqlValueSetDefinition("Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Diabetes(CqlContext _) => _Diabetes;
-    private static readonly CqlValueSet? _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
+    public CqlValueSet Diabetes(CqlContext _) => _Diabetes;
+    private static readonly CqlValueSet _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
 
     [CqlValueSetDefinition("End Stage Renal Disease", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", valueSetVersion: null)]
-    public CqlValueSet? End_Stage_Renal_Disease(CqlContext _) => _End_Stage_Renal_Disease;
-    private static readonly CqlValueSet? _End_Stage_Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", null);
+    public CqlValueSet End_Stage_Renal_Disease(CqlContext _) => _End_Stage_Renal_Disease;
+    private static readonly CqlValueSet _End_Stage_Renal_Disease = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", null);
 
     [CqlValueSetDefinition("Estimated Glomerular Filtration Rate", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000", valueSetVersion: null)]
-    public CqlValueSet? Estimated_Glomerular_Filtration_Rate(CqlContext _) => _Estimated_Glomerular_Filtration_Rate;
-    private static readonly CqlValueSet? _Estimated_Glomerular_Filtration_Rate = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000", null);
+    public CqlValueSet Estimated_Glomerular_Filtration_Rate(CqlContext _) => _Estimated_Glomerular_Filtration_Rate;
+    private static readonly CqlValueSet _Estimated_Glomerular_Filtration_Rate = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1000", null);
 
     [CqlValueSetDefinition("Home Healthcare Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", valueSetVersion: null)]
-    public CqlValueSet? Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
-    private static readonly CqlValueSet? _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
+    public CqlValueSet Home_Healthcare_Services(CqlContext _) => _Home_Healthcare_Services;
+    private static readonly CqlValueSet _Home_Healthcare_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", null);
 
     [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Office_Visit(CqlContext _) => _Office_Visit;
-    private static readonly CqlValueSet? _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Outpatient Consultation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", valueSetVersion: null)]
-    public CqlValueSet? Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
-    private static readonly CqlValueSet? _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+    public CqlValueSet Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
+    private static readonly CqlValueSet _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
 
     [CqlValueSetDefinition("Preventive Care Services Established Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", valueSetVersion: null)]
-    public CqlValueSet? Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Established_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet? _Preventive_Care_Services_Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Established_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Established_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlValueSetDefinition("Preventive Care Services Initial Office Visit, 18 and Up", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", valueSetVersion: null)]
-    public CqlValueSet? Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
-    private static readonly CqlValueSet? _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext _) => _Preventive_Care_Services_Initial_Office_Visit__18_and_Up;
+    private static readonly CqlValueSet _Preventive_Care_Services_Initial_Office_Visit__18_and_Up = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
-    public CqlValueSet? Telephone_Visits(CqlContext _) => _Telephone_Visits;
-    private static readonly CqlValueSet? _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+    public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
+    private static readonly CqlValueSet _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     [CqlValueSetDefinition("Undetectable Lab Result Value", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.272", valueSetVersion: null)]
-    public CqlValueSet? Undetectable_Lab_Result_Value(CqlContext _) => _Undetectable_Lab_Result_Value;
-    private static readonly CqlValueSet? _Undetectable_Lab_Result_Value = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.272", null);
+    public CqlValueSet Undetectable_Lab_Result_Value(CqlContext _) => _Undetectable_Lab_Result_Value;
+    private static readonly CqlValueSet _Undetectable_Lab_Result_Value = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.272", null);
 
     [CqlValueSetDefinition("Urine Albumin", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.88", valueSetVersion: null)]
-    public CqlValueSet? Urine_Albumin(CqlContext _) => _Urine_Albumin;
-    private static readonly CqlValueSet? _Urine_Albumin = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.88", null);
+    public CqlValueSet Urine_Albumin(CqlContext _) => _Urine_Albumin;
+    private static readonly CqlValueSet _Urine_Albumin = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.88", null);
 
     [CqlValueSetDefinition("Urine Albumin Creatinine Ratio", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007", valueSetVersion: null)]
-    public CqlValueSet? Urine_Albumin_Creatinine_Ratio(CqlContext _) => _Urine_Albumin_Creatinine_Ratio;
-    private static readonly CqlValueSet? _Urine_Albumin_Creatinine_Ratio = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007", null);
+    public CqlValueSet Urine_Albumin_Creatinine_Ratio(CqlContext _) => _Urine_Albumin_Creatinine_Ratio;
+    private static readonly CqlValueSet _Urine_Albumin_Creatinine_Ratio = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.6929.3.1007", null);
 
     [CqlValueSetDefinition("Urine Creatinine", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.87", valueSetVersion: null)]
-    public CqlValueSet? Urine_Creatinine(CqlContext _) => _Urine_Creatinine;
-    private static readonly CqlValueSet? _Urine_Creatinine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.87", null);
+    public CqlValueSet Urine_Creatinine(CqlContext _) => _Urine_Creatinine;
+    private static readonly CqlValueSet _Urine_Creatinine = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.87", null);
 
     #endregion ValueSets
 
@@ -96,7 +96,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS951FHIRKidneyHealthEval-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -119,40 +119,40 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 7472409706051213406L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 3148642837823731225L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 2411070522859842048L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
@@ -181,7 +181,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet? a_ = this.Diabetes(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
 
         bool? e_(Condition? DiabetesDiagnosis) {
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
@@ -306,11 +306,11 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         CqlValueSet? a_ = this.Chronic_Kidney_Disease__Stage_5(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         CqlValueSet? e_ = this.End_Stage_Renal_Disease(context);
         IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition?>?, g_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(d_, h_);
 
         bool? j_(Condition? CKDOrESRD) {
@@ -385,7 +385,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string?>?)q_);
             bool? s_ = context.Operators.And(m_, r_);
             return s_;
         }
@@ -420,13 +420,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(i_, n_);
             DataType? p_ = uACRTest?.Value;
             object? q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             bool r_ = q_ is CqlQuantity;
             CqlValueSet? s_ = this.Undetectable_Lab_Result_Value(context);
-            bool? t_ = context.Operators.ConceptInValueSet(q_ as CqlConcept, s_);
+            bool? t_ = context.Operators.ConceptInValueSet(q_ as CqlConcept?, s_);
             bool? u_ = context.Operators.Or(r_ as bool?, t_);
             bool? v_ = context.Operators.And(o_, u_);
             return v_;
@@ -466,7 +466,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string?>?)q_);
             bool? s_ = context.Operators.And(m_, r_);
             return s_;
         }
@@ -505,7 +505,7 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
                 "amended",
                 "corrected",
             ];
-            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string>)q_);
+            bool? r_ = context.Operators.In<string>(p_, (IEnumerable<string?>?)q_);
             bool? s_ = context.Operators.And(m_, r_);
             return s_;
         }
@@ -527,13 +527,13 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation?>? b_ = this.Urine_Creatinine_Test_Performed_During_The_Measurement_Period(context);
         IEnumerable<ValueTuple<Observation?, Observation?>>? c_ = context.Operators.CrossJoin<Observation, Observation>(a_, b_);
 
-        (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? d_(ValueTuple<Observation?, Observation?> _valueTuple) {
-            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? j_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, _valueTuple.Item1, _valueTuple.Item2);
+        (CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? d_(ValueTuple<Observation?, Observation?> _valueTuple) {
+            (CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? j_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, _valueTuple.Item1, _valueTuple.Item2);
             return j_;
         }
 
 
-        bool? e_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
+        bool? e_((CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
             DataType? k_ = tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest?.Effective;
             object? l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
             CqlInterval<CqlDateTime?>? m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
@@ -550,14 +550,14 @@ public partial class CMS951FHIRKidneyHealthEval_1_0_000 : ILibrary, ISingleton<C
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>? f_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(c_, d_, e_);
+        IEnumerable<(CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)?>? f_ = context.Operators.SelectWhere<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(c_, d_, e_);
 
-        (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? g_((CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
-            (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)? x_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest, tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest);
+        (CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? g_((CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? tuple_celfnsuejxkbgcpwlebsiij) {
+            (CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)? x_ = (CqlTupleMetadata_CELfNSUeJXKBGCPWLEBSIIJ, tuple_celfnsuejxkbgcpwlebsiij?.UrineAlbuminTest, tuple_celfnsuejxkbgcpwlebsiij?.UrineCreatinineTest);
             return x_;
         }
 
-        IEnumerable<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>? h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(f_, g_);
+        IEnumerable<(CqlTupleMetadata, Observation? UrineAlbuminTest, Observation? UrineCreatinineTest)?>? h_ = context.Operators.SelectDistinct<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?, (CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(f_, g_);
         bool? i_ = context.Operators.Exists<(CqlTupleMetadata, Observation UrineAlbuminTest, Observation UrineCreatinineTest)?>(h_);
         return i_;
     }

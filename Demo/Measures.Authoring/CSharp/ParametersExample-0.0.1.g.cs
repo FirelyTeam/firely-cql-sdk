@@ -21,8 +21,8 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     #region ValueSets (1)
 
     [CqlValueSetDefinition("Marital Status", valueSetId: "http://hl7.org/fhir/ValueSet/marital-status", valueSetVersion: null)]
-    public CqlValueSet? Marital_Status(CqlContext _) => _Marital_Status;
-    private static readonly CqlValueSet? _Marital_Status = new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", null);
+    public CqlValueSet Marital_Status(CqlContext _) => _Marital_Status;
+    private static readonly CqlValueSet _Marital_Status = new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", null);
 
     #endregion ValueSets
 
@@ -94,7 +94,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             bool? k_ = context.Operators.IsTrue(j_);
             bool? l_ = context.Operators.And(h_, k_);
             DataType? m_ = P?.Deceased;
-            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean);
+            bool? n_ = FHIRHelpers_4_3_000.Instance.ToBoolean(context, m_ as FhirBoolean?);
             bool? o_ = context.Operators.Not(n_);
             bool? p_ = context.Operators.And(l_, o_);
             CodeableConcept? q_ = P?.MaritalStatus;
@@ -105,7 +105,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
             return u_;
         }
 
-        IEnumerable<Patient?>? d_ = context.Operators.Where<Patient>((IEnumerable<Patient>)b_, c_);
+        IEnumerable<Patient?>? d_ = context.Operators.Where<Patient>((IEnumerable<Patient?>?)b_, c_);
         Patient? e_ = context.Operators.SingletonFrom<Patient>(d_);
         return e_;
     }

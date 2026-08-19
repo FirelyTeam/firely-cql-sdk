@@ -21,100 +21,100 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     #region ValueSets (10)
 
     [CqlValueSetDefinition("Advanced Illness", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", valueSetVersion: null)]
-    public CqlValueSet? Advanced_Illness(CqlContext _) => _Advanced_Illness;
-    private static readonly CqlValueSet? _Advanced_Illness = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
+    public CqlValueSet Advanced_Illness(CqlContext _) => _Advanced_Illness;
+    private static readonly CqlValueSet _Advanced_Illness = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
 
     [CqlValueSetDefinition("Diabetes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Diabetes(CqlContext _) => _Diabetes;
-    private static readonly CqlValueSet? _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
+    public CqlValueSet Diabetes(CqlContext _) => _Diabetes;
+    private static readonly CqlValueSet _Diabetes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", null);
 
     [CqlValueSetDefinition("Ethnicity", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", valueSetVersion: null)]
-    public CqlValueSet? Ethnicity(CqlContext _) => _Ethnicity;
-    private static readonly CqlValueSet? _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+    public CqlValueSet Ethnicity(CqlContext _) => _Ethnicity;
+    private static readonly CqlValueSet _Ethnicity = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
 
     [CqlValueSetDefinition("Glycemic Screening Tests", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.5", valueSetVersion: null)]
-    public CqlValueSet? Glycemic_Screening_Tests(CqlContext _) => _Glycemic_Screening_Tests;
-    private static readonly CqlValueSet? _Glycemic_Screening_Tests = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.5", null);
+    public CqlValueSet Glycemic_Screening_Tests(CqlContext _) => _Glycemic_Screening_Tests;
+    private static readonly CqlValueSet _Glycemic_Screening_Tests = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.5", null);
 
     [CqlValueSetDefinition("Limited Life Expectancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", valueSetVersion: null)]
-    public CqlValueSet? Limited_Life_Expectancy(CqlContext _) => _Limited_Life_Expectancy;
-    private static readonly CqlValueSet? _Limited_Life_Expectancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", null);
+    public CqlValueSet Limited_Life_Expectancy(CqlContext _) => _Limited_Life_Expectancy;
+    private static readonly CqlValueSet _Limited_Life_Expectancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", null);
 
     [CqlValueSetDefinition("Outpatient Clinical Encounters", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.24", valueSetVersion: null)]
-    public CqlValueSet? Outpatient_Clinical_Encounters(CqlContext _) => _Outpatient_Clinical_Encounters;
-    private static readonly CqlValueSet? _Outpatient_Clinical_Encounters = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.24", null);
+    public CqlValueSet Outpatient_Clinical_Encounters(CqlContext _) => _Outpatient_Clinical_Encounters;
+    private static readonly CqlValueSet _Outpatient_Clinical_Encounters = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.24", null);
 
     [CqlValueSetDefinition("Payer Type", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", valueSetVersion: null)]
-    public CqlValueSet? Payer_Type(CqlContext _) => _Payer_Type;
-    private static readonly CqlValueSet? _Payer_Type = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+    public CqlValueSet Payer_Type(CqlContext _) => _Payer_Type;
+    private static readonly CqlValueSet _Payer_Type = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
 
     [CqlValueSetDefinition("Prediabetes (Borderline Diabetes)", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1222.419", valueSetVersion: null)]
-    public CqlValueSet? Prediabetes__Borderline_Diabetes_(CqlContext _) => _Prediabetes__Borderline_Diabetes_;
-    private static readonly CqlValueSet? _Prediabetes__Borderline_Diabetes_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1222.419", null);
+    public CqlValueSet Prediabetes__Borderline_Diabetes_(CqlContext _) => _Prediabetes__Borderline_Diabetes_;
+    private static readonly CqlValueSet _Prediabetes__Borderline_Diabetes_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1222.419", null);
 
     [CqlValueSetDefinition("Pregnancy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", valueSetVersion: null)]
-    public CqlValueSet? Pregnancy(CqlContext _) => _Pregnancy;
-    private static readonly CqlValueSet? _Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", null);
+    public CqlValueSet Pregnancy(CqlContext _) => _Pregnancy;
+    private static readonly CqlValueSet _Pregnancy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", null);
 
     [CqlValueSetDefinition("Preventative Clinical Encounters", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.13", valueSetVersion: null)]
-    public CqlValueSet? Preventative_Clinical_Encounters(CqlContext _) => _Preventative_Clinical_Encounters;
-    private static readonly CqlValueSet? _Preventative_Clinical_Encounters = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.13", null);
+    public CqlValueSet Preventative_Clinical_Encounters(CqlContext _) => _Preventative_Clinical_Encounters;
+    private static readonly CqlValueSet _Preventative_Clinical_Encounters = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1160.13", null);
 
     #endregion ValueSets
 
     #region Codes (8)
 
     [CqlCodeDefinition("Body mass index (BMI) [Ratio]", codeId: "39156-5", codeSystem: "http://loinc.org")]
-    public CqlCode? Body_mass_index__BMI___Ratio_(CqlContext _) => _Body_mass_index__BMI___Ratio_;
-    private static readonly CqlCode? _Body_mass_index__BMI___Ratio_ = new CqlCode("39156-5", "http://loinc.org");
+    public CqlCode Body_mass_index__BMI___Ratio_(CqlContext _) => _Body_mass_index__BMI___Ratio_;
+    private static readonly CqlCode _Body_mass_index__BMI___Ratio_ = new CqlCode("39156-5", "http://loinc.org");
 
     [CqlCodeDefinition("Asian", codeId: "2028-9", codeSystem: "urn:oid:2.16.840.1.113883.6.238")]
-    public CqlCode? Asian(CqlContext _) => _Asian;
-    private static readonly CqlCode? _Asian = new CqlCode("2028-9", "urn:oid:2.16.840.1.113883.6.238");
+    public CqlCode Asian(CqlContext _) => _Asian;
+    private static readonly CqlCode _Asian = new CqlCode("2028-9", "urn:oid:2.16.840.1.113883.6.238");
 
     [CqlCodeDefinition("unconfirmed", codeId: "unconfirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? unconfirmed(CqlContext _) => _unconfirmed;
-    private static readonly CqlCode? _unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode unconfirmed(CqlContext _) => _unconfirmed;
+    private static readonly CqlCode _unconfirmed = new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("provisional", codeId: "provisional", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? provisional(CqlContext _) => _provisional;
-    private static readonly CqlCode? _provisional = new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode provisional(CqlContext _) => _provisional;
+    private static readonly CqlCode _provisional = new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("differential", codeId: "differential", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? differential(CqlContext _) => _differential;
-    private static readonly CqlCode? _differential = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode differential(CqlContext _) => _differential;
+    private static readonly CqlCode _differential = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("confirmed", codeId: "confirmed", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? confirmed(CqlContext _) => _confirmed;
-    private static readonly CqlCode? _confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode confirmed(CqlContext _) => _confirmed;
+    private static readonly CqlCode _confirmed = new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("refuted", codeId: "refuted", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? refuted(CqlContext _) => _refuted;
-    private static readonly CqlCode? _refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode refuted(CqlContext _) => _refuted;
+    private static readonly CqlCode _refuted = new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     [CqlCodeDefinition("entered-in-error", codeId: "entered-in-error", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-ver-status")]
-    public CqlCode? entered_in_error(CqlContext _) => _entered_in_error;
-    private static readonly CqlCode? _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
+    public CqlCode entered_in_error(CqlContext _) => _entered_in_error;
+    private static readonly CqlCode _entered_in_error = new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status");
 
     #endregion Codes
 
     #region CodeSystems (3)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Body_mass_index__BMI___Ratio_]);
 
     [CqlCodeSystemDefinition("CDCREC", codeSystemId: "urn:oid:2.16.840.1.113883.6.238", codeSystemVersion: null)]
-    public CqlCodeSystem? CDCREC(CqlContext _) => _CDCREC;
-    private static readonly CqlCodeSystem? _CDCREC =
+    public CqlCodeSystem CDCREC(CqlContext _) => _CDCREC;
+    private static readonly CqlCodeSystem _CDCREC =
       new CqlCodeSystem("urn:oid:2.16.840.1.113883.6.238", null, [
           _Asian]);
 
     [CqlCodeSystemDefinition("ConditionVerificationStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-ver-status", codeSystemVersion: null)]
-    public CqlCodeSystem? ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
-    private static readonly CqlCodeSystem? _ConditionVerificationStatusCodes =
+    public CqlCodeSystem ConditionVerificationStatusCodes(CqlContext _) => _ConditionVerificationStatusCodes;
+    private static readonly CqlCodeSystem _ConditionVerificationStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-ver-status", null, [
           _unconfirmed,
           _provisional,
@@ -139,7 +139,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS1154ScreeningPrediabetesFHIR-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -204,12 +204,12 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlValueSet? a_ = this.Advanced_Illness(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         CqlValueSet? e_ = this.Limited_Life_Expectancy(context);
         IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, f_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition?>?, h_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? j_ = this.verified(context, i_);
 
         bool? k_(Condition? AdvancedIllness) {
@@ -217,7 +217,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             object? n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
             CqlInterval<CqlDateTime?>? o_ = this.Measurement_Period(context);
             CqlDateTime? p_ = context.Operators.End(o_);
-            bool? q_ = context.Operators.Before(n_ as CqlDateTime, p_, "day");
+            bool? q_ = context.Operators.Before(n_ as CqlDateTime?, p_, "day");
             return q_;
         }
 
@@ -348,7 +348,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
+            bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string?>?)j_);
             return k_;
         }
 
@@ -376,7 +376,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
     private bool? Patient_is_Asian_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         IEnumerable<CqlCode?>? b_ = a_?.codes;
 
         bool? c_(CqlCode? C) {
@@ -414,7 +414,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         Observation? a_ = this.Most_Recent_BMI(context);
         DataType? b_ = a_?.Value;
-        CqlQuantity? c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
+        CqlQuantity? c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity?);
         CqlQuantity? d_ = context.Operators.Quantity(25m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
         bool? f_ = this.Patient_is_not_Asian(context);
@@ -433,7 +433,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
     {
         Observation? a_ = this.Most_Recent_BMI(context);
         DataType? b_ = a_?.Value;
-        CqlQuantity? c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity);
+        CqlQuantity? c_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, b_ as Quantity?);
         CqlQuantity? d_ = context.Operators.Quantity(23m, "kg/m2");
         bool? e_ = context.Operators.GreaterOrEqual(c_, d_);
         bool? f_ = this.Patient_is_Asian(context);
@@ -497,7 +497,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(i_, n_);
             return o_;
         }
@@ -533,7 +533,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
         bool? b_(Observation? PregnantObservation) {
             DataType? d_ = PregnantObservation?.Value;
-            CqlConcept? e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_ as CodeableConcept);
+            CqlConcept? e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_ as CodeableConcept?);
             CqlValueSet? f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
             DataType? h_ = PregnantObservation?.Effective;
@@ -561,7 +561,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlValueSet? a_ = this.Pregnancy(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = this.verified(context, d_);
 
         bool? f_(Condition? PregnancyDx) {
@@ -604,7 +604,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlValueSet? a_ = this.Prediabetes__Borderline_Diabetes_(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = this.verified(context, d_);
 
         bool? f_(Condition? PriorPrediabetes) {
@@ -630,7 +630,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlValueSet? a_ = this.Diabetes(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = this.verified(context, d_);
 
         bool? f_(Condition? PriorDiabetes) {
@@ -670,7 +670,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
                 "amended",
                 "corrected",
             ];
-            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string>)m_);
+            bool? n_ = context.Operators.In<string>(l_, (IEnumerable<string?>?)m_);
             bool? o_ = context.Operators.And(i_, n_);
             return o_;
         }
@@ -708,40 +708,40 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 8978605305610805484L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -6630685495481277238L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 7698772050861812561L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

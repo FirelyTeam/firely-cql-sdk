@@ -21,16 +21,16 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     #region ValueSets (3)
 
     [CqlValueSetDefinition("Obstetrical or Pregnancy Related Conditions", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", valueSetVersion: null)]
-    public CqlValueSet? Obstetrical_or_Pregnancy_Related_Conditions(CqlContext _) => _Obstetrical_or_Pregnancy_Related_Conditions;
-    private static readonly CqlValueSet? _Obstetrical_or_Pregnancy_Related_Conditions = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", null);
+    public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions(CqlContext _) => _Obstetrical_or_Pregnancy_Related_Conditions;
+    private static readonly CqlValueSet _Obstetrical_or_Pregnancy_Related_Conditions = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", null);
 
     [CqlValueSetDefinition("Obstetrics VTE", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", valueSetVersion: null)]
-    public CqlValueSet? Obstetrics_VTE(CqlContext _) => _Obstetrics_VTE;
-    private static readonly CqlValueSet? _Obstetrics_VTE = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", null);
+    public CqlValueSet Obstetrics_VTE(CqlContext _) => _Obstetrics_VTE;
+    private static readonly CqlValueSet _Obstetrics_VTE = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", null);
 
     [CqlValueSetDefinition("Venous Thromboembolism", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", valueSetVersion: null)]
-    public CqlValueSet? Venous_Thromboembolism(CqlContext _) => _Venous_Thromboembolism;
-    private static readonly CqlValueSet? _Venous_Thromboembolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", null);
+    public CqlValueSet Venous_Thromboembolism(CqlContext _) => _Venous_Thromboembolism;
+    private static readonly CqlValueSet _Venous_Thromboembolism = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", null);
 
     #endregion ValueSets
 
@@ -45,7 +45,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -100,13 +100,13 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 return t_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_);
             bool? m_ = context.Operators.ConceptsInValueSet(l_, DiagnosisValueSet);
             bool? n_ = context.Operators.Or(i_, m_);
             return n_;
         }
 
-        IEnumerable<bool?>? c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<bool?>? c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter?>?)a_, b_);
         bool? d_ = context.Operators.SingletonFrom<bool?>(c_);
         return d_;
     }
@@ -210,7 +210,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             Claim.ProcedureComponent? e_ = CQMCommon_4_1_000.Instance.principalProcedure(context, E);
             DataType? f_ = e_?.Procedure;
             object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept, DiagnosisValueSet);
+            bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept?, DiagnosisValueSet);
             IEnumerable<Procedure?>? i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
             bool? j_(Procedure? P) {
@@ -219,7 +219,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
                 object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                 Id? t_ = P?.IdElement;
                 string? u_ = t_?.Value;
-                bool? v_ = QICoreCommon_4_0_000.Instance.references(context, s_ as ResourceReference, u_);
+                bool? v_ = QICoreCommon_4_0_000.Instance.references(context, s_ as ResourceReference?, u_);
                 return v_;
             }
 
@@ -232,7 +232,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
             return p_;
         }
 
-        IEnumerable<bool?>? c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<bool?>? c_ = context.Operators.SelectDistinct<Encounter, bool?>((IEnumerable<Encounter?>?)a_, b_);
         bool? d_ = context.Operators.SingletonFrom<bool?>(c_);
         return d_;
     }

@@ -21,122 +21,122 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     #region ValueSets (6)
 
     [CqlValueSetDefinition("Emergency Department Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", valueSetVersion: null)]
-    public CqlValueSet? Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
-    private static readonly CqlValueSet? _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+    public CqlValueSet Emergency_Department_Visit(CqlContext _) => _Emergency_Department_Visit;
+    private static readonly CqlValueSet _Emergency_Department_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Intensive Care Unit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", valueSetVersion: null)]
-    public CqlValueSet? Intensive_Care_Unit(CqlContext _) => _Intensive_Care_Unit;
-    private static readonly CqlValueSet? _Intensive_Care_Unit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
+    public CqlValueSet Intensive_Care_Unit(CqlContext _) => _Intensive_Care_Unit;
+    private static readonly CqlValueSet _Intensive_Care_Unit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
 
     [CqlValueSetDefinition("Observation Services", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", valueSetVersion: null)]
-    public CqlValueSet? Observation_Services(CqlContext _) => _Observation_Services;
-    private static readonly CqlValueSet? _Observation_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
+    public CqlValueSet Observation_Services(CqlContext _) => _Observation_Services;
+    private static readonly CqlValueSet _Observation_Services = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", null);
 
     [CqlValueSetDefinition("Outpatient Surgery Service", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", valueSetVersion: null)]
-    public CqlValueSet? Outpatient_Surgery_Service(CqlContext _) => _Outpatient_Surgery_Service;
-    private static readonly CqlValueSet? _Outpatient_Surgery_Service = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", null);
+    public CqlValueSet Outpatient_Surgery_Service(CqlContext _) => _Outpatient_Surgery_Service;
+    private static readonly CqlValueSet _Outpatient_Surgery_Service = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", null);
 
     [CqlValueSetDefinition("Present on Admission or Clinically Undetermined", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", valueSetVersion: null)]
-    public CqlValueSet? Present_on_Admission_or_Clinically_Undetermined(CqlContext _) => _Present_on_Admission_or_Clinically_Undetermined;
-    private static readonly CqlValueSet? _Present_on_Admission_or_Clinically_Undetermined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
+    public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext _) => _Present_on_Admission_or_Clinically_Undetermined;
+    private static readonly CqlValueSet _Present_on_Admission_or_Clinically_Undetermined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", null);
 
     #endregion ValueSets
 
     #region Codes (19)
 
     [CqlCodeDefinition("Billing", codeId: "billing", codeSystem: "http://terminology.hl7.org/CodeSystem/diagnosis-role")]
-    public CqlCode? Billing(CqlContext _) => _Billing;
-    private static readonly CqlCode? _Billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
+    public CqlCode Billing(CqlContext _) => _Billing;
+    private static readonly CqlCode _Billing = new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role");
 
     [CqlCodeDefinition("Admitting Diagnosis", codeId: "admitting", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Admitting_Diagnosis(CqlContext _) => _Admitting_Diagnosis;
-    private static readonly CqlCode? _Admitting_Diagnosis = new CqlCode("admitting", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Admitting_Diagnosis(CqlContext _) => _Admitting_Diagnosis;
+    private static readonly CqlCode _Admitting_Diagnosis = new CqlCode("admitting", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Clinical Diagnosis", codeId: "clinical", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Clinical_Diagnosis(CqlContext _) => _Clinical_Diagnosis;
-    private static readonly CqlCode? _Clinical_Diagnosis = new CqlCode("clinical", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Clinical_Diagnosis(CqlContext _) => _Clinical_Diagnosis;
+    private static readonly CqlCode _Clinical_Diagnosis = new CqlCode("clinical", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Differential Diagnosis", codeId: "differential", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Differential_Diagnosis(CqlContext _) => _Differential_Diagnosis;
-    private static readonly CqlCode? _Differential_Diagnosis = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Differential_Diagnosis(CqlContext _) => _Differential_Diagnosis;
+    private static readonly CqlCode _Differential_Diagnosis = new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Discharge Diagnosis", codeId: "discharge", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Discharge_Diagnosis(CqlContext _) => _Discharge_Diagnosis;
-    private static readonly CqlCode? _Discharge_Diagnosis = new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Discharge_Diagnosis(CqlContext _) => _Discharge_Diagnosis;
+    private static readonly CqlCode _Discharge_Diagnosis = new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Laboratory Diagnosis", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Laboratory_Diagnosis(CqlContext _) => _Laboratory_Diagnosis;
-    private static readonly CqlCode? _Laboratory_Diagnosis = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Laboratory_Diagnosis(CqlContext _) => _Laboratory_Diagnosis;
+    private static readonly CqlCode _Laboratory_Diagnosis = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Nursing Diagnosis", codeId: "nursing", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Nursing_Diagnosis(CqlContext _) => _Nursing_Diagnosis;
-    private static readonly CqlCode? _Nursing_Diagnosis = new CqlCode("nursing", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Nursing_Diagnosis(CqlContext _) => _Nursing_Diagnosis;
+    private static readonly CqlCode _Nursing_Diagnosis = new CqlCode("nursing", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Prenatal Diagnosis", codeId: "prenatal", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Prenatal_Diagnosis(CqlContext _) => _Prenatal_Diagnosis;
-    private static readonly CqlCode? _Prenatal_Diagnosis = new CqlCode("prenatal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Prenatal_Diagnosis(CqlContext _) => _Prenatal_Diagnosis;
+    private static readonly CqlCode _Prenatal_Diagnosis = new CqlCode("prenatal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Principal Diagnosis", codeId: "principal", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Principal_Diagnosis(CqlContext _) => _Principal_Diagnosis;
-    private static readonly CqlCode? _Principal_Diagnosis = new CqlCode("principal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Principal_Diagnosis(CqlContext _) => _Principal_Diagnosis;
+    private static readonly CqlCode _Principal_Diagnosis = new CqlCode("principal", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Radiology Diagnosis", codeId: "radiology", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Radiology_Diagnosis(CqlContext _) => _Radiology_Diagnosis;
-    private static readonly CqlCode? _Radiology_Diagnosis = new CqlCode("radiology", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Radiology_Diagnosis(CqlContext _) => _Radiology_Diagnosis;
+    private static readonly CqlCode _Radiology_Diagnosis = new CqlCode("radiology", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Remote Diagnosis", codeId: "remote", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Remote_Diagnosis(CqlContext _) => _Remote_Diagnosis;
-    private static readonly CqlCode? _Remote_Diagnosis = new CqlCode("remote", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Remote_Diagnosis(CqlContext _) => _Remote_Diagnosis;
+    private static readonly CqlCode _Remote_Diagnosis = new CqlCode("remote", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Retrospective Diagnosis", codeId: "retrospective", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Retrospective_Diagnosis(CqlContext _) => _Retrospective_Diagnosis;
-    private static readonly CqlCode? _Retrospective_Diagnosis = new CqlCode("retrospective", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Retrospective_Diagnosis(CqlContext _) => _Retrospective_Diagnosis;
+    private static readonly CqlCode _Retrospective_Diagnosis = new CqlCode("retrospective", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Self Diagnosis", codeId: "self", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype")]
-    public CqlCode? Self_Diagnosis(CqlContext _) => _Self_Diagnosis;
-    private static readonly CqlCode? _Self_Diagnosis = new CqlCode("self", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
+    public CqlCode Self_Diagnosis(CqlContext _) => _Self_Diagnosis;
+    private static readonly CqlCode _Self_Diagnosis = new CqlCode("self", "http://terminology.hl7.org/CodeSystem/ex-diagnosistype");
 
     [CqlCodeDefinition("Primary procedure", codeId: "primary", codeSystem: "http://terminology.hl7.org/CodeSystem/ex-procedure-type")]
-    public CqlCode? Primary_procedure(CqlContext _) => _Primary_procedure;
-    private static readonly CqlCode? _Primary_procedure = new CqlCode("primary", "http://terminology.hl7.org/CodeSystem/ex-procedure-type");
+    public CqlCode Primary_procedure(CqlContext _) => _Primary_procedure;
+    private static readonly CqlCode _Primary_procedure = new CqlCode("primary", "http://terminology.hl7.org/CodeSystem/ex-procedure-type");
 
     [CqlCodeDefinition("POA-Y", codeId: "Y", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_Y(CqlContext _) => _POA_Y;
-    private static readonly CqlCode? _POA_Y = new CqlCode("Y", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_Y(CqlContext _) => _POA_Y;
+    private static readonly CqlCode _POA_Y = new CqlCode("Y", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     [CqlCodeDefinition("POA-N", codeId: "N", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_N(CqlContext _) => _POA_N;
-    private static readonly CqlCode? _POA_N = new CqlCode("N", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_N(CqlContext _) => _POA_N;
+    private static readonly CqlCode _POA_N = new CqlCode("N", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     [CqlCodeDefinition("POA-W", codeId: "W", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_W(CqlContext _) => _POA_W;
-    private static readonly CqlCode? _POA_W = new CqlCode("W", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_W(CqlContext _) => _POA_W;
+    private static readonly CqlCode _POA_W = new CqlCode("W", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     [CqlCodeDefinition("POA-1", codeId: "1", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_1(CqlContext _) => _POA_1;
-    private static readonly CqlCode? _POA_1 = new CqlCode("1", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_1(CqlContext _) => _POA_1;
+    private static readonly CqlCode _POA_1 = new CqlCode("1", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     [CqlCodeDefinition("POA-U", codeId: "U", codeSystem: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding")]
-    public CqlCode? POA_U(CqlContext _) => _POA_U;
-    private static readonly CqlCode? _POA_U = new CqlCode("U", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
+    public CqlCode POA_U(CqlContext _) => _POA_U;
+    private static readonly CqlCode _POA_U = new CqlCode("U", "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding");
 
     #endregion Codes
 
     #region CodeSystems (4)
 
     [CqlCodeSystemDefinition("DiagnosisRole", codeSystemId: "http://terminology.hl7.org/CodeSystem/diagnosis-role", codeSystemVersion: null)]
-    public CqlCodeSystem? DiagnosisRole(CqlContext _) => _DiagnosisRole;
-    private static readonly CqlCodeSystem? _DiagnosisRole =
+    public CqlCodeSystem DiagnosisRole(CqlContext _) => _DiagnosisRole;
+    private static readonly CqlCodeSystem _DiagnosisRole =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/diagnosis-role", null, [
           _Billing]);
 
     [CqlCodeSystemDefinition("Diagnosis Type", codeSystemId: "http://terminology.hl7.org/CodeSystem/ex-diagnosistype", codeSystemVersion: null)]
-    public CqlCodeSystem? Diagnosis_Type(CqlContext _) => _Diagnosis_Type;
-    private static readonly CqlCodeSystem? _Diagnosis_Type =
+    public CqlCodeSystem Diagnosis_Type(CqlContext _) => _Diagnosis_Type;
+    private static readonly CqlCodeSystem _Diagnosis_Type =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/ex-diagnosistype", null, [
           _Admitting_Diagnosis,
           _Clinical_Diagnosis,
@@ -152,14 +152,14 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
           _Self_Diagnosis]);
 
     [CqlCodeSystemDefinition("Procedure Type", codeSystemId: "http://terminology.hl7.org/CodeSystem/ex-procedure-type", codeSystemVersion: null)]
-    public CqlCodeSystem? Procedure_Type(CqlContext _) => _Procedure_Type;
-    private static readonly CqlCodeSystem? _Procedure_Type =
+    public CqlCodeSystem Procedure_Type(CqlContext _) => _Procedure_Type;
+    private static readonly CqlCodeSystem _Procedure_Type =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/ex-procedure-type", null, [
           _Primary_procedure]);
 
     [CqlCodeSystemDefinition("Present On Admission Indicators", codeSystemId: "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", codeSystemVersion: null)]
-    public CqlCodeSystem? Present_On_Admission_Indicators(CqlContext _) => _Present_On_Admission_Indicators;
-    private static readonly CqlCodeSystem? _Present_On_Admission_Indicators =
+    public CqlCodeSystem Present_On_Admission_Indicators(CqlContext _) => _Present_On_Admission_Indicators;
+    private static readonly CqlCodeSystem _Present_On_Admission_Indicators =
       new CqlCodeSystem("https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/HospitalAcqCond/Coding", null, [
           _POA_Y,
           _POA_N,
@@ -180,7 +180,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -386,7 +386,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             }
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? d_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? d_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)b_, c_);
         CqlInterval<CqlDateTime?>? e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
         return e_;
     }
@@ -421,7 +421,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             }
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? d_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)b_, c_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? d_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)b_, c_);
         CqlInterval<CqlDateTime?>? e_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(d_);
         return e_;
     }
@@ -441,22 +441,22 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             if (EDEncounter is null)
             {
                 List<Encounter.LocationComponent?>? f_ = TheEncounter?.Location;
-                return (IEnumerable<Encounter.LocationComponent>)f_;
+                return (IEnumerable<Encounter.LocationComponent?>?)f_;
             }
             else
             {
                 List<Encounter.LocationComponent?>? g_ = EDEncounter?.Location;
                 List<Encounter.LocationComponent?>? h_ = TheEncounter?.Location;
                 IEnumerable<Encounter.LocationComponent?>?[]? i_ = [
-                    (IEnumerable<Encounter.LocationComponent>)g_,
-                    (IEnumerable<Encounter.LocationComponent>)h_,
+                    (IEnumerable<Encounter.LocationComponent?>?)g_,
+                    (IEnumerable<Encounter.LocationComponent?>?)h_,
                 ];
-                IEnumerable<Encounter.LocationComponent?>? j_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)i_);
+                IEnumerable<Encounter.LocationComponent?>? j_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent?>?>?)i_);
                 return j_;
             }
         }
 
-        IEnumerable<IEnumerable<Encounter.LocationComponent?>?>? d_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
+        IEnumerable<IEnumerable<Encounter.LocationComponent?>?>? d_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter?>?)b_, c_);
         IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
         return e_;
     }
@@ -475,22 +475,22 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             if (EDEncounter is null)
             {
                 List<Encounter.LocationComponent?>? f_ = TheEncounter?.Location;
-                return (IEnumerable<Encounter.LocationComponent>)f_;
+                return (IEnumerable<Encounter.LocationComponent?>?)f_;
             }
             else
             {
                 List<Encounter.LocationComponent?>? g_ = EDEncounter?.Location;
                 List<Encounter.LocationComponent?>? h_ = TheEncounter?.Location;
                 IEnumerable<Encounter.LocationComponent?>?[]? i_ = [
-                    (IEnumerable<Encounter.LocationComponent>)g_,
-                    (IEnumerable<Encounter.LocationComponent>)h_,
+                    (IEnumerable<Encounter.LocationComponent?>?)g_,
+                    (IEnumerable<Encounter.LocationComponent?>?)h_,
                 ];
-                IEnumerable<Encounter.LocationComponent?>? j_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent>>)i_);
+                IEnumerable<Encounter.LocationComponent?>? j_ = context.Operators.Flatten<Encounter.LocationComponent>((IEnumerable<IEnumerable<Encounter.LocationComponent?>?>?)i_);
                 return j_;
             }
         }
 
-        IEnumerable<IEnumerable<Encounter.LocationComponent?>?>? d_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter>)b_, c_);
+        IEnumerable<IEnumerable<Encounter.LocationComponent?>?>? d_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Encounter.LocationComponent>>((IEnumerable<Encounter?>?)b_, c_);
         IEnumerable<Encounter.LocationComponent?>? e_ = context.Operators.SingletonFrom<IEnumerable<Encounter.LocationComponent>>(d_);
         return e_;
     }
@@ -667,7 +667,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return o_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_);
             CqlValueSet? m_ = this.Emergency_Department_Visit(context);
             bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
             return n_;
@@ -716,7 +716,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return o_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)j_, k_);
             CqlValueSet? m_ = this.Emergency_Department_Visit(context);
             bool? n_ = context.Operators.ConceptsInValueSet(l_, m_);
             return n_;
@@ -1518,7 +1518,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return am_;
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)a_, b_);
         CqlInterval<CqlDateTime?>? d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
         return d_;
     }
@@ -2310,7 +2310,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return am_;
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)a_, b_);
         CqlInterval<CqlDateTime?>? d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
         return d_;
     }
@@ -2520,7 +2520,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return ac_;
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)a_, b_);
         CqlInterval<CqlDateTime?>? d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
         return d_;
     }
@@ -2729,7 +2729,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return ac_;
         }
 
-        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<CqlInterval<CqlDateTime?>?>? c_ = context.Operators.SelectDistinct<Encounter, CqlInterval<CqlDateTime>>((IEnumerable<Encounter?>?)a_, b_);
         CqlInterval<CqlDateTime?>? d_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(c_);
         return d_;
     }
@@ -2773,7 +2773,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return t_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_);
             CqlValueSet? l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
             Period? n_ = Encounter?.Period;
@@ -2785,7 +2785,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return s_;
         }
 
-        IEnumerable<Encounter.LocationComponent?>? c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
+        IEnumerable<Encounter.LocationComponent?>? c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent?>?)a_, b_);
 
         object? d_(Encounter.LocationComponent? @this) {
             Period? u_ = @this?.Period;
@@ -2816,7 +2816,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return t_;
             }
 
-            IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            IEnumerable<CqlConcept?>? k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_);
             CqlValueSet? l_ = this.Intensive_Care_Unit(context);
             bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
             Period? n_ = Encounter?.Period;
@@ -2828,7 +2828,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return s_;
         }
 
-        IEnumerable<Encounter.LocationComponent?>? c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
+        IEnumerable<Encounter.LocationComponent?>? c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent?>?)a_, b_);
 
         object? d_(Encounter.LocationComponent? @this) {
             Period? u_ = @this?.Period;
@@ -2853,7 +2853,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Condition? b_(Encounter.DiagnosisComponent? D) {
             IEnumerable<Condition?>? d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition?>? e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, e_ as IEnumerable<Condition?>?);
 
             bool? g_(Condition? C) {
                 ResourceReference? j_ = D?.Condition;
@@ -2868,7 +2868,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return i_;
         }
 
-        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
+        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent?>?)a_, b_);
         return c_;
     }
 
@@ -2882,7 +2882,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Condition? b_(ResourceReference? D) {
             IEnumerable<Condition?>? d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition?>? e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition?>?, e_ as IEnumerable<Condition?>?);
 
             bool? g_(Condition? C) {
                 Id? j_ = C?.IdElement;
@@ -2896,7 +2896,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return i_;
         }
 
-        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<ResourceReference, Condition>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<ResourceReference, Condition>((IEnumerable<ResourceReference?>?)a_, b_);
         return c_;
     }
 
@@ -2908,7 +2908,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         IEnumerable<Condition?>? a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition>, b_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition?>?, b_ as IEnumerable<Condition?>?);
 
         bool? d_(Condition? C) {
             Id? g_ = C?.IdElement;
@@ -2929,7 +2929,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
     {
         IEnumerable<Condition?>? a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition>, b_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? c_ = context.Operators.Union<Condition>(a_ as IEnumerable<Condition?>?, b_ as IEnumerable<Condition?>?);
 
         bool? d_(Condition? C) {
             Id? g_ = C?.IdElement;
@@ -2968,7 +2968,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         Condition? c_(Encounter.DiagnosisComponent? PD) {
             IEnumerable<Condition?>? p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition?>? q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition?>? r_ = context.Operators.Union<Condition>(p_ as IEnumerable<Condition>, q_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? r_ = context.Operators.Union<Condition>(p_ as IEnumerable<Condition?>?, q_ as IEnumerable<Condition?>?);
 
             bool? s_(Condition? C) {
                 ResourceReference? v_ = PD?.Condition;
@@ -2983,7 +2983,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return u_;
         }
 
-        IEnumerable<Condition?>? d_ = context.Operators.WhereSelect<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_, c_);
+        IEnumerable<Condition?>? d_ = context.Operators.WhereSelect<Encounter.DiagnosisComponent, Condition>((IEnumerable<Encounter.DiagnosisComponent?>?)a_, b_, c_);
         IEnumerable<Condition?>? e_ = context.Operators.Distinct<Condition>(d_);
         Condition? f_ = context.Operators.SingletonFrom<Condition>(e_);
         return f_;
@@ -3005,7 +3005,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 return j_;
             }
 
-            IEnumerable<CqlConcept?>? g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)e_, f_);
+            IEnumerable<CqlConcept?>? g_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)e_, f_);
             CqlCode? h_ = this.Principal_Diagnosis(context);
             bool? i_ = QICoreCommon_4_0_000.Instance.includesCode(context, g_, h_);
             return i_;
@@ -3043,11 +3043,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                 bool? x_(Claim.ItemComponent? I) {
                     List<ResourceReference?>? aa_ = I?.Encounter;
-                    bool? ab_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)aa_, E);
+                    bool? ab_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)aa_, E);
                     return ab_;
                 }
 
-                bool? y_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)w_, x_);
+                bool? y_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)w_, x_);
                 bool? z_ = context.Operators.And(v_, y_);
                 return z_;
             }
@@ -3067,7 +3067,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             }
 
             IEnumerable<List<Claim.DiagnosisComponent?>?>? j_ = context.Operators.WhereSelect<Claim, List<Claim.DiagnosisComponent>>(g_, h_, i_);
-            IEnumerable<Claim.DiagnosisComponent?>? k_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent>>)j_);
+            IEnumerable<Claim.DiagnosisComponent?>? k_ = context.Operators.Flatten<Claim.DiagnosisComponent>((IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>?)j_);
 
             bool? l_(Claim.DiagnosisComponent? D) {
                 PositiveInt? af_ = D?.SequenceElement;
@@ -3088,11 +3088,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                     bool? bf_(Claim.ItemComponent? I) {
                         List<ResourceReference?>? bi_ = I?.Encounter;
-                        bool? bj_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bi_, E);
+                        bool? bj_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)bi_, E);
                         return bj_;
                     }
 
-                    bool? bg_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)be_, bf_);
+                    bool? bg_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)be_, bf_);
                     bool? bh_ = context.Operators.And(bd_, bg_);
                     return bh_;
                 }
@@ -3112,11 +3112,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 }
 
                 IEnumerable<List<Claim.ItemComponent?>?>? am_ = context.Operators.WhereSelect<Claim, List<Claim.ItemComponent>>(aj_, ak_, al_);
-                IEnumerable<Claim.ItemComponent?>? an_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)am_);
+                IEnumerable<Claim.ItemComponent?>? an_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent?>?>?)am_);
 
                 bool? ao_(Claim.ItemComponent? I) {
                     List<ResourceReference?>? bn_ = I?.Encounter;
-                    bool? bo_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bn_, E);
+                    bool? bo_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)bn_, E);
                     return bo_;
                 }
 
@@ -3130,7 +3130,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return bt_;
                     }
 
-                    IEnumerable<int?>? br_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bp_, bq_);
+                    IEnumerable<int?>? br_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt?>?)bp_, bq_);
                     bool? bs_ = context.Operators.Not((bool?)(br_ is null));
                     return bs_;
                 }
@@ -3144,7 +3144,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return bx_;
                     }
 
-                    IEnumerable<int?>? bw_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bu_, bv_);
+                    IEnumerable<int?>? bw_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt?>?)bu_, bv_);
                     return bw_;
                 }
 
@@ -3158,7 +3158,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return m_;
         }
 
-        IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>? c_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<IEnumerable<Claim.DiagnosisComponent?>?>? c_ = context.Operators.SelectDistinct<Encounter, IEnumerable<Claim.DiagnosisComponent>>((IEnumerable<Encounter?>?)a_, b_);
         IEnumerable<Claim.DiagnosisComponent?>? d_ = context.Operators.SingletonFrom<IEnumerable<Claim.DiagnosisComponent>>(c_);
         return d_;
     }
@@ -3177,8 +3177,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         bool? c_(Claim.DiagnosisComponent? PD) {
             DataType? f_ = PD?.Diagnosis;
             object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept, valueSet);
-            Condition? i_ = this.getCondition(context, g_ as ResourceReference);
+            bool? h_ = context.Operators.ConceptInValueSet(g_ as CqlConcept?, valueSet);
+            Condition? i_ = this.getCondition(context, g_ as ResourceReference?);
             CodeableConcept? j_ = i_?.Code;
             CqlConcept? k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
             bool? l_ = context.Operators.ConceptInValueSet(k_, valueSet);
@@ -3186,7 +3186,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return m_;
         }
 
-        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Claim.DiagnosisComponent, bool?>((IEnumerable<Claim.DiagnosisComponent>)b_, c_);
+        IEnumerable<bool?>? d_ = context.Operators.SelectDistinct<Claim.DiagnosisComponent, bool?>((IEnumerable<Claim.DiagnosisComponent?>?)b_, c_);
         bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
         return e_;
     }
@@ -3205,8 +3205,8 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? f_ = context.Operators.ConceptInValueSet(e_, poaValueSet);
             DataType? g_ = CD?.Diagnosis;
             object? h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
-            bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept, diagnosisValueSet);
-            Condition? j_ = this.getCondition(context, h_ as ResourceReference);
+            bool? i_ = context.Operators.ConceptInValueSet(h_ as CqlConcept?, diagnosisValueSet);
+            Condition? j_ = this.getCondition(context, h_ as ResourceReference?);
             CodeableConcept? k_ = j_?.Code;
             CqlConcept? l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
             bool? m_ = context.Operators.ConceptInValueSet(l_, diagnosisValueSet);
@@ -3249,7 +3249,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         {
             DataType? d_ = request?.Medication;
             object? e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return e_ as CqlConcept;
+            return e_ as CqlConcept?;
         }
         else
         {
@@ -3258,7 +3258,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? g_(Medication? M) {
                 DataType? l_ = request?.Medication;
                 object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference, M);
+                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference?, M);
                 return n_;
             }
 
@@ -3282,7 +3282,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         {
             DataType? d_ = request?.Medication;
             object? e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-            return e_ as CqlConcept;
+            return e_ as CqlConcept?;
         }
         else
         {
@@ -3291,7 +3291,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             bool? g_(Medication? M) {
                 DataType? l_ = request?.Medication;
                 object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference, M);
+                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference?, M);
                 return n_;
             }
 
@@ -3329,11 +3329,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                 bool? y_(Claim.ItemComponent? I) {
                     List<ResourceReference?>? ab_ = I?.Encounter;
-                    bool? ac_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)ab_, E);
+                    bool? ac_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)ab_, E);
                     return ac_;
                 }
 
-                bool? z_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)x_, y_);
+                bool? z_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)x_, y_);
                 bool? aa_ = context.Operators.And(w_, z_);
                 return aa_;
             }
@@ -3353,7 +3353,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             }
 
             IEnumerable<List<Claim.ProcedureComponent?>?>? j_ = context.Operators.WhereSelect<Claim, List<Claim.ProcedureComponent>>(g_, h_, i_);
-            IEnumerable<Claim.ProcedureComponent?>? k_ = context.Operators.Flatten<Claim.ProcedureComponent>((IEnumerable<IEnumerable<Claim.ProcedureComponent>>)j_);
+            IEnumerable<Claim.ProcedureComponent?>? k_ = context.Operators.Flatten<Claim.ProcedureComponent>((IEnumerable<IEnumerable<Claim.ProcedureComponent?>?>?)j_);
 
             bool? l_(Claim.ProcedureComponent? P) {
                 PositiveInt? ag_ = P?.SequenceElement;
@@ -3374,11 +3374,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
                     bool? bm_(Claim.ItemComponent? I) {
                         List<ResourceReference?>? bp_ = I?.Encounter;
-                        bool? bq_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bp_, E);
+                        bool? bq_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)bp_, E);
                         return bq_;
                     }
 
-                    bool? bn_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)bl_, bm_);
+                    bool? bn_ = context.Operators.WhereAny<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent?>?)bl_, bm_);
                     bool? bo_ = context.Operators.And(bk_, bn_);
                     return bo_;
                 }
@@ -3398,11 +3398,11 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                 }
 
                 IEnumerable<List<Claim.ItemComponent?>?>? an_ = context.Operators.WhereSelect<Claim, List<Claim.ItemComponent>>(ak_, al_, am_);
-                IEnumerable<Claim.ItemComponent?>? ao_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent>>)an_);
+                IEnumerable<Claim.ItemComponent?>? ao_ = context.Operators.Flatten<Claim.ItemComponent>((IEnumerable<IEnumerable<Claim.ItemComponent?>?>?)an_);
 
                 bool? ap_(Claim.ItemComponent? I) {
                     List<ResourceReference?>? bu_ = I?.Encounter;
-                    bool? bv_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)bu_, E);
+                    bool? bv_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference?>?)bu_, E);
                     return bv_;
                 }
 
@@ -3416,7 +3416,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return ca_;
                     }
 
-                    IEnumerable<int?>? by_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)bw_, bx_);
+                    IEnumerable<int?>? by_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt?>?)bw_, bx_);
                     bool? bz_ = context.Operators.Not((bool?)(by_ is null));
                     return bz_;
                 }
@@ -3430,7 +3430,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                         return ce_;
                     }
 
-                    IEnumerable<int?>? cd_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt>)cb_, cc_);
+                    IEnumerable<int?>? cd_ = context.Operators.Select<PositiveInt, int?>((IEnumerable<PositiveInt?>?)cb_, cc_);
                     return cd_;
                 }
 
@@ -3444,7 +3444,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
                     return cf_;
                 }
 
-                IEnumerable<CqlConcept?>? ay_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)aw_, ax_);
+                IEnumerable<CqlConcept?>? ay_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)aw_, ax_);
                 CqlCode? az_ = this.Primary_procedure(context);
                 bool? ba_ = QICoreCommon_4_0_000.Instance.includesCode(context, ay_, az_);
                 bool? bb_ = context.Operators.And(av_, ba_);
@@ -3456,7 +3456,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
             return n_;
         }
 
-        IEnumerable<Claim.ProcedureComponent?>? c_ = context.Operators.SelectDistinct<Encounter, Claim.ProcedureComponent>((IEnumerable<Encounter>)a_, b_);
+        IEnumerable<Claim.ProcedureComponent?>? c_ = context.Operators.SelectDistinct<Encounter, Claim.ProcedureComponent>((IEnumerable<Encounter?>?)a_, b_);
         Claim.ProcedureComponent? d_ = context.Operators.SingletonFrom<Claim.ProcedureComponent>(c_);
         return d_;
     }

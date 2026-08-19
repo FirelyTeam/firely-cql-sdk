@@ -10,6 +10,7 @@
 
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 
 namespace CoreTests;
@@ -78,10 +79,17 @@ public class CSharpGenerationGoldenTests
     [TestMethod]
     public void CheckedInGeneratedCSharp_DoesNotContainNullableCqlBoolean()
     {
-        var solutionRoot = LibrarySetsDirs.RR23.CSharpDir.Parent?.Parent?.Parent
-                           ?? throw new InvalidOperationException("Could not resolve solution root from library-set directories.");
+        var typeToCSharpConverter = new TypeToCSharpConverter();
+        Assert.AreEqual("bool", typeToCSharpConverter.ToCSharpDeclaration(typeof(bool)));
 
-        var generatedFiles = solutionRoot.GetFiles("*.g.cs", SearchOption.AllDirectories);
+        DirectoryInfo[] checkedInCorpusDirs =
+        [
+            LibrarySetsDirs.CoreTests.CSharpDir,
+            LibrarySetsDirs.RR23.CSharpDir,
+            LibrarySetsDirs.DqmQiCore2025.ExtractedCSharpDir,
+        ];
+
+        var generatedFiles = checkedInCorpusDirs.SelectMany(dir => dir.GetFiles("*.g.cs")).ToArray();
         Assert.AreNotEqual(0, generatedFiles.Length, "No generated C# files were found.");
 
         foreach (var generatedFile in generatedFiles)
@@ -184,8 +192,8 @@ public class CSharpGenerationGoldenTests
     {
         var normalized = generated.Replace("\r\n", "\n");
         Assert.IsTrue(
-            normalized.StartsWith("#nullable enable", StringComparison.Ordinal),
-            "Generated C# must opt into nullable analysis with '#nullable enable' at the file top.");
+            normalized.StartsWith("#nullable enable annotations", StringComparison.Ordinal),
+            "Generated C# must opt into nullable annotations with '#nullable enable annotations' at the file top.");
 
         var hasBlanketNullablePragmaDisable =
             System.Text.RegularExpressions.Regex.IsMatch(

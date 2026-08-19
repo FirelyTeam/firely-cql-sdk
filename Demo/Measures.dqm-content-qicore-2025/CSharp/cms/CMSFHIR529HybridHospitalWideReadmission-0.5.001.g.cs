@@ -21,72 +21,72 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
     #region ValueSets (13)
 
     [CqlValueSetDefinition("Bicarbonate lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", valueSetVersion: null)]
-    public CqlValueSet? Bicarbonate_lab_test(CqlContext _) => _Bicarbonate_lab_test;
-    private static readonly CqlValueSet? _Bicarbonate_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
+    public CqlValueSet Bicarbonate_lab_test(CqlContext _) => _Bicarbonate_lab_test;
+    private static readonly CqlValueSet _Bicarbonate_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", null);
 
     [CqlValueSetDefinition("Creatinine lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", valueSetVersion: null)]
-    public CqlValueSet? Creatinine_lab_test(CqlContext _) => _Creatinine_lab_test;
-    private static readonly CqlValueSet? _Creatinine_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", null);
+    public CqlValueSet Creatinine_lab_test(CqlContext _) => _Creatinine_lab_test;
+    private static readonly CqlValueSet _Creatinine_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", null);
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Glucose lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", valueSetVersion: null)]
-    public CqlValueSet? Glucose_lab_test(CqlContext _) => _Glucose_lab_test;
-    private static readonly CqlValueSet? _Glucose_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", null);
+    public CqlValueSet Glucose_lab_test(CqlContext _) => _Glucose_lab_test;
+    private static readonly CqlValueSet _Glucose_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.134", null);
 
     [CqlValueSetDefinition("Hematocrit lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", valueSetVersion: null)]
-    public CqlValueSet? Hematocrit_lab_test(CqlContext _) => _Hematocrit_lab_test;
-    private static readonly CqlValueSet? _Hematocrit_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
+    public CqlValueSet Hematocrit_lab_test(CqlContext _) => _Hematocrit_lab_test;
+    private static readonly CqlValueSet _Hematocrit_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", null);
 
     [CqlValueSetDefinition("Non Invasive Oxygen Therapy by Nasal Cannula or Mask", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.209", valueSetVersion: null)]
-    public CqlValueSet? Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask(CqlContext _) => _Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask;
-    private static readonly CqlValueSet? _Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.209", null);
+    public CqlValueSet Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask(CqlContext _) => _Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask;
+    private static readonly CqlValueSet _Non_Invasive_Oxygen_Therapy_by_Nasal_Cannula_or_Mask = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.209", null);
 
     [CqlValueSetDefinition("Non Invasive Oxygen Therapy Device Codes", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.57", valueSetVersion: null)]
-    public CqlValueSet? Non_Invasive_Oxygen_Therapy_Device_Codes(CqlContext _) => _Non_Invasive_Oxygen_Therapy_Device_Codes;
-    private static readonly CqlValueSet? _Non_Invasive_Oxygen_Therapy_Device_Codes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.57", null);
+    public CqlValueSet Non_Invasive_Oxygen_Therapy_Device_Codes(CqlContext _) => _Non_Invasive_Oxygen_Therapy_Device_Codes;
+    private static readonly CqlValueSet _Non_Invasive_Oxygen_Therapy_Device_Codes = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.57", null);
 
     [CqlValueSetDefinition("Medicare Advantage payer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", valueSetVersion: null)]
-    public CqlValueSet? Medicare_Advantage_payer(CqlContext _) => _Medicare_Advantage_payer;
-    private static readonly CqlValueSet? _Medicare_Advantage_payer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", null);
+    public CqlValueSet Medicare_Advantage_payer(CqlContext _) => _Medicare_Advantage_payer;
+    private static readonly CqlValueSet _Medicare_Advantage_payer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", null);
 
     [CqlValueSetDefinition("Medicare FFS payer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", valueSetVersion: null)]
-    public CqlValueSet? Medicare_FFS_payer(CqlContext _) => _Medicare_FFS_payer;
-    private static readonly CqlValueSet? _Medicare_FFS_payer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", null);
+    public CqlValueSet Medicare_FFS_payer(CqlContext _) => _Medicare_FFS_payer;
+    private static readonly CqlValueSet _Medicare_FFS_payer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", null);
 
     [CqlValueSetDefinition("Oxygen Saturation by Pulse Oximetry", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", valueSetVersion: null)]
-    public CqlValueSet? Oxygen_Saturation_by_Pulse_Oximetry(CqlContext _) => _Oxygen_Saturation_by_Pulse_Oximetry;
-    private static readonly CqlValueSet? _Oxygen_Saturation_by_Pulse_Oximetry = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", null);
+    public CqlValueSet Oxygen_Saturation_by_Pulse_Oximetry(CqlContext _) => _Oxygen_Saturation_by_Pulse_Oximetry;
+    private static readonly CqlValueSet _Oxygen_Saturation_by_Pulse_Oximetry = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", null);
 
     [CqlValueSetDefinition("Potassium lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", valueSetVersion: null)]
-    public CqlValueSet? Potassium_lab_test(CqlContext _) => _Potassium_lab_test;
-    private static readonly CqlValueSet? _Potassium_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", null);
+    public CqlValueSet Potassium_lab_test(CqlContext _) => _Potassium_lab_test;
+    private static readonly CqlValueSet _Potassium_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.117", null);
 
     [CqlValueSetDefinition("Sodium lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", valueSetVersion: null)]
-    public CqlValueSet? Sodium_lab_test(CqlContext _) => _Sodium_lab_test;
-    private static readonly CqlValueSet? _Sodium_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", null);
+    public CqlValueSet Sodium_lab_test(CqlContext _) => _Sodium_lab_test;
+    private static readonly CqlValueSet _Sodium_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", null);
 
     [CqlValueSetDefinition("White blood cells count lab test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", valueSetVersion: null)]
-    public CqlValueSet? White_blood_cells_count_lab_test(CqlContext _) => _White_blood_cells_count_lab_test;
-    private static readonly CqlValueSet? _White_blood_cells_count_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
+    public CqlValueSet White_blood_cells_count_lab_test(CqlContext _) => _White_blood_cells_count_lab_test;
+    private static readonly CqlValueSet _White_blood_cells_count_lab_test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", null);
 
     #endregion ValueSets
 
     #region Codes (1)
 
     [CqlCodeDefinition("Systolic blood pressure", codeId: "8480-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Systolic_blood_pressure(CqlContext _) => _Systolic_blood_pressure;
-    private static readonly CqlCode? _Systolic_blood_pressure = new CqlCode("8480-6", "http://loinc.org");
+    public CqlCode Systolic_blood_pressure(CqlContext _) => _Systolic_blood_pressure;
+    private static readonly CqlCode _Systolic_blood_pressure = new CqlCode("8480-6", "http://loinc.org");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Systolic_blood_pressure]);
 
@@ -106,7 +106,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMSFHIR529HybridHospitalWideReadmission-0.5.001", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -196,16 +196,16 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
 
     [CqlExpressionDefinition("SDE Encounter With First Body Temperature")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Body_Temperature(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstTemperatureResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Body_Temperature(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Body_Temperature, SDE_Encounter_With_First_Body_Temperature_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Body_Temperature = -8666970491551489594L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Body_Temperature_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstTemperatureResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Body_Temperature_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstTemperatureResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-temperature"));
@@ -224,10 +224,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = Temperature?.Value;
-                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity);
+                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity?);
                 bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
                 bool? ak_ = context.Operators.And(ag_, aj_);
                 return ak_;
@@ -245,7 +245,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             IEnumerable<Observation?>? j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? k_ = context.Operators.First<Observation>(j_);
             DataType? l_ = k_?.Value;
-            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
+            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity?);
 
             bool? n_(Observation? Temperature) {
                 DataType? ao_ = Temperature?.Effective;
@@ -261,10 +261,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
+                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string?>?)aw_);
                 bool? ay_ = context.Operators.And(as_, ax_);
                 DataType? az_ = Temperature?.Value;
-                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
+                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity?);
                 bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
                 bool? bc_ = context.Operators.And(ay_, bb_);
                 return bc_;
@@ -284,26 +284,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? s_ = r_?.Effective;
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime? u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstTemperatureResult, CqlDateTime? Timing)? v_ = (CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK, e_, m_ as CqlQuantity?, u_);
             return v_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstTemperatureResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Heart Rate")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Heart_Rate(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHeartRateResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Heart_Rate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Heart_Rate, SDE_Encounter_With_First_Heart_Rate_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Heart_Rate = 1290876252074881306L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Heart_Rate_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHeartRateResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Heart_Rate_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHeartRateResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate"));
@@ -322,10 +322,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = HeartRate?.Value;
-                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity);
+                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity?);
                 bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
                 bool? ak_ = context.Operators.And(ag_, aj_);
                 return ak_;
@@ -343,7 +343,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             IEnumerable<Observation?>? j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? k_ = context.Operators.First<Observation>(j_);
             DataType? l_ = k_?.Value;
-            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
+            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity?);
 
             bool? n_(Observation? HeartRate) {
                 DataType? ao_ = HeartRate?.Effective;
@@ -359,10 +359,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
+                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string?>?)aw_);
                 bool? ay_ = context.Operators.And(as_, ax_);
                 DataType? az_ = HeartRate?.Value;
-                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
+                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity?);
                 bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
                 bool? bc_ = context.Operators.And(ay_, bb_);
                 return bc_;
@@ -382,26 +382,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? s_ = r_?.Effective;
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime? u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHeartRateResult, CqlDateTime? Timing)? v_ = (CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ, e_, m_ as CqlQuantity?, u_);
             return v_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstHeartRateResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Oxygen Saturation")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Oxygen_Saturation(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstOxygenSatResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Oxygen_Saturation(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Oxygen_Saturation, SDE_Encounter_With_First_Oxygen_Saturation_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Oxygen_Saturation = -7704303822154817864L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Oxygen_Saturation_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstOxygenSatResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Oxygen_Saturation_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstOxygenSatResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
@@ -421,10 +421,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
                 bool? ah_ = context.Operators.And(ab_, ag_);
                 DataType? ai_ = O2Saturation?.Value;
-                CqlQuantity? aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity);
+                CqlQuantity? aj_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ai_ as Quantity?);
                 bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
                 bool? al_ = context.Operators.And(ah_, ak_);
                 return al_;
@@ -442,7 +442,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             IEnumerable<Observation?>? k_ = context.Operators.SortBy<Observation>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? l_ = context.Operators.First<Observation>(k_);
             DataType? m_ = l_?.Value;
-            CqlQuantity? n_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, m_ as Quantity);
+            CqlQuantity? n_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, m_ as Quantity?);
 
             bool? o_(Observation? O2Saturation) {
                 DataType? ap_ = O2Saturation?.Effective;
@@ -458,10 +458,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string>)ax_);
+                bool? ay_ = context.Operators.In<string>(aw_, (IEnumerable<string?>?)ax_);
                 bool? az_ = context.Operators.And(at_, ay_);
                 DataType? ba_ = O2Saturation?.Value;
-                CqlQuantity? bb_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ba_ as Quantity);
+                CqlQuantity? bb_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ba_ as Quantity?);
                 bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
                 bool? bd_ = context.Operators.And(az_, bc_);
                 return bd_;
@@ -481,26 +481,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? t_ = s_?.Effective;
             object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
             CqlDateTime? v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstOxygenSatResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstOxygenSatResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Respiratory Rate")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Respiratory_Rate(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstRespRateResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Respiratory_Rate(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Respiratory_Rate, SDE_Encounter_With_First_Respiratory_Rate_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Respiratory_Rate = -1971867522856708175L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Respiratory_Rate_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstRespRateResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Respiratory_Rate_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstRespRateResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-respiratory-rate"));
@@ -519,10 +519,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = Respirations?.Value;
-                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity);
+                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity?);
                 bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
                 bool? ak_ = context.Operators.And(ag_, aj_);
                 return ak_;
@@ -540,7 +540,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             IEnumerable<Observation?>? j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? k_ = context.Operators.First<Observation>(j_);
             DataType? l_ = k_?.Value;
-            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
+            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity?);
 
             bool? n_(Observation? Respirations) {
                 DataType? ao_ = Respirations?.Effective;
@@ -556,10 +556,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
+                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string?>?)aw_);
                 bool? ay_ = context.Operators.And(as_, ax_);
                 DataType? az_ = Respirations?.Value;
-                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
+                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity?);
                 bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
                 bool? bc_ = context.Operators.And(ay_, bb_);
                 return bc_;
@@ -579,26 +579,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? s_ = r_?.Effective;
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime? u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstRespRateResult, CqlDateTime? Timing)? v_ = (CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM, e_, m_ as CqlQuantity?, u_);
             return v_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstRespRateResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Systolic Blood Pressure")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Systolic_Blood_Pressure(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, IEnumerable<CqlQuantity?>? FirstSBPResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Systolic_Blood_Pressure(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Systolic_Blood_Pressure, SDE_Encounter_With_First_Systolic_Blood_Pressure_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Systolic_Blood_Pressure = 3660447906796988770L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Systolic_Blood_Pressure_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, IEnumerable<CqlQuantity?>? FirstSBPResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Systolic_Blood_Pressure_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, IEnumerable<CqlQuantity?>? FirstSBPResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-blood-pressure"));
@@ -617,7 +617,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
+                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string?>?)ah_);
                 bool? aj_ = context.Operators.And(ad_, ai_);
                 List<Observation.ComponentComponent?>? ak_ = BP?.Component;
 
@@ -635,7 +635,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return au_;
                 }
 
-                IEnumerable<object?>? an_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)ak_, al_, am_);
+                IEnumerable<object?>? an_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent?>?)ak_, al_, am_);
                 bool? ao_ = context.Operators.Not((bool?)(an_ is null));
                 bool? ap_ = context.Operators.And(aj_, ao_);
                 return ap_;
@@ -667,10 +667,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             CqlQuantity? n_(Observation.ComponentComponent? C) {
                 DataType? bd_ = C?.Value;
                 object? be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
-                return be_ as CqlQuantity;
+                return be_ as CqlQuantity?;
             }
 
-            IEnumerable<CqlQuantity?>? o_ = context.Operators.WhereSelect<Observation.ComponentComponent, CqlQuantity>((IEnumerable<Observation.ComponentComponent>)l_, m_, n_);
+            IEnumerable<CqlQuantity?>? o_ = context.Operators.WhereSelect<Observation.ComponentComponent, CqlQuantity>((IEnumerable<Observation.ComponentComponent?>?)l_, m_, n_);
             IEnumerable<CqlQuantity?>? p_ = context.Operators.Distinct<CqlQuantity>(o_);
 
             bool? q_(Observation? BP) {
@@ -687,7 +687,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bo_ = context.Operators.In<string>(bm_, (IEnumerable<string>)bn_);
+                bool? bo_ = context.Operators.In<string>(bm_, (IEnumerable<string?>?)bn_);
                 bool? bp_ = context.Operators.And(bj_, bo_);
                 List<Observation.ComponentComponent?>? bq_ = BP?.Component;
 
@@ -705,7 +705,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     return ca_;
                 }
 
-                IEnumerable<object?>? bt_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent>)bq_, br_, bs_);
+                IEnumerable<object?>? bt_ = context.Operators.WhereSelect<Observation.ComponentComponent, object>((IEnumerable<Observation.ComponentComponent?>?)bq_, br_, bs_);
                 bool? bu_ = context.Operators.Not((bool?)(bt_ is null));
                 bool? bv_ = context.Operators.And(bp_, bu_);
                 return bv_;
@@ -725,26 +725,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? v_ = u_?.Effective;
             object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
             CqlDateTime? x_ = QICoreCommon_4_0_000.Instance.earliest(context, w_);
-            (CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK, e_, p_, x_);
+            (CqlTupleMetadata, string? EncounterId, IEnumerable<CqlQuantity?>? FirstSBPResult, CqlDateTime? Timing)? y_ = (CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK, e_, p_, x_);
             return y_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, IEnumerable<CqlQuantity?>? FirstSBPResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Bicarbonate Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Bicarbonate_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Bicarbonate_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Bicarbonate_Lab_Test, SDE_Encounter_With_First_Bicarbonate_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Bicarbonate_Lab_Test = -4393915463316232653L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Bicarbonate_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Bicarbonate_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Bicarbonate_lab_test(context);
@@ -759,7 +759,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = bicarbonatelab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -770,7 +770,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = bicarbonatelab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -781,7 +781,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = bicarbonatelab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -800,7 +800,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = bicarbonatelab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -833,7 +833,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = bicarbonatelab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -844,7 +844,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = bicarbonatelab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -855,7 +855,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = bicarbonatelab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -874,7 +874,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = bicarbonatelab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -898,26 +898,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Creatinine Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Creatinine_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Creatinine_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Creatinine_Lab_Test, SDE_Encounter_With_First_Creatinine_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Creatinine_Lab_Test = 5999590137683422991L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Creatinine_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Creatinine_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Creatinine_lab_test(context);
@@ -932,7 +932,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = CreatinineLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -943,7 +943,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = CreatinineLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -954,7 +954,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = CreatinineLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -973,7 +973,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = CreatinineLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1006,7 +1006,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = CreatinineLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1017,7 +1017,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = CreatinineLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1028,7 +1028,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = CreatinineLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1047,7 +1047,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = CreatinineLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1071,26 +1071,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Glucose Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Glucose_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Glucose_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Glucose_Lab_Test, SDE_Encounter_With_First_Glucose_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Glucose_Lab_Test = 1194493558829699982L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Glucose_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Glucose_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Glucose_lab_test(context);
@@ -1105,7 +1105,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = GlucoseLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1116,7 +1116,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = GlucoseLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1127,7 +1127,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = GlucoseLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1146,7 +1146,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = GlucoseLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1179,7 +1179,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = GlucoseLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1190,7 +1190,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = GlucoseLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1201,7 +1201,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = GlucoseLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1220,7 +1220,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = GlucoseLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1244,26 +1244,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Hematocrit Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Hematocrit_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Hematocrit_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Hematocrit_Lab_Test, SDE_Encounter_With_First_Hematocrit_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Hematocrit_Lab_Test = 6689886378393453582L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Hematocrit_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Hematocrit_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Hematocrit_lab_test(context);
@@ -1278,7 +1278,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = HematocritLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1289,7 +1289,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = HematocritLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1300,7 +1300,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = HematocritLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1319,7 +1319,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = HematocritLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1352,7 +1352,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = HematocritLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1363,7 +1363,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = HematocritLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1374,7 +1374,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = HematocritLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1393,7 +1393,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = HematocritLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1417,26 +1417,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Potassium Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Potassium_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Potassium_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Potassium_Lab_Test, SDE_Encounter_With_First_Potassium_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Potassium_Lab_Test = 345924722915584638L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Potassium_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Potassium_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Potassium_lab_test(context);
@@ -1451,7 +1451,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = PotassiumLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1462,7 +1462,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = PotassiumLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1473,7 +1473,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = PotassiumLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1492,7 +1492,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = PotassiumLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1525,7 +1525,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = PotassiumLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1536,7 +1536,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = PotassiumLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1547,7 +1547,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = PotassiumLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1566,7 +1566,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = PotassiumLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1590,26 +1590,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Sodium Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Sodium_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Sodium_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Sodium_Lab_Test, SDE_Encounter_With_First_Sodium_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Sodium_Lab_Test = 306946264291175126L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Sodium_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Sodium_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.Sodium_lab_test(context);
@@ -1624,7 +1624,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = SodiumLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1635,7 +1635,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = SodiumLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1646,7 +1646,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = SodiumLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1665,7 +1665,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = SodiumLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1698,7 +1698,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = SodiumLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1709,7 +1709,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = SodiumLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1720,7 +1720,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = SodiumLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1739,7 +1739,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = SodiumLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1763,26 +1763,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First White Blood Cells Lab Test")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_White_Blood_Cells_Lab_Test(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_White_Blood_Cells_Lab_Test(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_White_Blood_Cells_Lab_Test, SDE_Encounter_With_First_White_Blood_Cells_Lab_Test_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_White_Blood_Cells_Lab_Test = -7218658410531705995L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_White_Blood_Cells_Lab_Test_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_White_Blood_Cells_Lab_Test_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             CqlValueSet? f_ = this.White_blood_cells_count_lab_test(context);
@@ -1797,7 +1797,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? ao_ = WhiteBloodCellLab?.Effective;
                     object? ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
-                    x_ = ap_ as CqlDateTime;
+                    x_ = ap_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1808,7 +1808,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? at_ = WhiteBloodCellLab?.Effective;
                         object? au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                        x_ = au_ as CqlDateTime;
+                        x_ = au_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1819,7 +1819,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? ay_ = WhiteBloodCellLab?.Effective;
                             object? az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
-                            x_ = az_ as CqlInterval<CqlDateTime>;
+                            x_ = az_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1838,7 +1838,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = WhiteBloodCellLab?.Value;
                 object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
@@ -1871,7 +1871,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? bv_ = WhiteBloodCellLab?.Effective;
                     object? bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
-                    be_ = bw_ as CqlDateTime;
+                    be_ = bw_ as CqlDateTime?;
                 }
                 else
                 {
@@ -1882,7 +1882,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ca_ = WhiteBloodCellLab?.Effective;
                         object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
-                        be_ = cb_ as CqlDateTime;
+                        be_ = cb_ as CqlDateTime?;
                     }
                     else
                     {
@@ -1893,7 +1893,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cf_ = WhiteBloodCellLab?.Effective;
                             object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
-                            be_ = cg_ as CqlInterval<CqlDateTime>;
+                            be_ = cg_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -1912,7 +1912,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
+                bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string?>?)bl_);
                 bool? bn_ = context.Operators.And(bh_, bm_);
                 DataType? bo_ = WhiteBloodCellLab?.Value;
                 object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
@@ -1936,26 +1936,26 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             Instant? t_ = s_?.IssuedElement;
             DateTimeOffset? u_ = t_?.Value;
             CqlDateTime? v_ = context.Operators.Convert<CqlDateTime>(u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity?, v_);
             return w_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("SDE Encounter With First Weight Recorded")]
-    public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Weight_Recorded(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Weight_Recorded(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Encounter_With_First_Weight_Recorded, SDE_Encounter_With_First_Weight_Recorded_Compute);
 
     private const long _cacheIndex_SDE_Encounter_With_First_Weight_Recorded = -7805011766788080740L;
 
-    private IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? SDE_Encounter_With_First_Weight_Recorded_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? SDE_Encounter_With_First_Weight_Recorded_Compute(CqlContext context)
     {
         IEnumerable<Encounter?>? a_ = this.Inpatient_Encounters(context);
 
-        (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? b_(Encounter? EncounterInpatient) {
+        (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? b_(Encounter? EncounterInpatient) {
             Id? d_ = EncounterInpatient?.IdElement;
             string? e_ = d_?.Value;
             IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-weight"));
@@ -1974,10 +1974,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string>)ae_);
+                bool? af_ = context.Operators.In<string>(ad_, (IEnumerable<string?>?)ae_);
                 bool? ag_ = context.Operators.And(aa_, af_);
                 DataType? ah_ = WeightExam?.Value;
-                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity);
+                CqlQuantity? ai_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, ah_ as Quantity?);
                 bool? aj_ = context.Operators.Not((bool?)(ai_ is null));
                 bool? ak_ = context.Operators.And(ag_, aj_);
                 return ak_;
@@ -1995,7 +1995,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             IEnumerable<Observation?>? j_ = context.Operators.SortBy<Observation>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
             Observation? k_ = context.Operators.First<Observation>(j_);
             DataType? l_ = k_?.Value;
-            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity);
+            CqlQuantity? m_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, l_ as Quantity?);
 
             bool? n_(Observation? WeightExam) {
                 DataType? ao_ = WeightExam?.Effective;
@@ -2011,10 +2011,10 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "amended",
                     "corrected",
                 ];
-                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string>)aw_);
+                bool? ax_ = context.Operators.In<string>(av_, (IEnumerable<string?>?)aw_);
                 bool? ay_ = context.Operators.And(as_, ax_);
                 DataType? az_ = WeightExam?.Value;
-                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity);
+                CqlQuantity? ba_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, az_ as Quantity?);
                 bool? bb_ = context.Operators.Not((bool?)(ba_ is null));
                 bool? bc_ = context.Operators.And(ay_, bb_);
                 return bc_;
@@ -2034,11 +2034,11 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType? s_ = r_?.Effective;
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime? u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)? v_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, m_ as CqlQuantity?, u_);
             return v_;
         }
 
-        IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlQuantity? FirstResult, CqlDateTime? Timing)?>? c_ = context.Operators.SelectDistinct<Encounter, (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)?>(a_, b_);
         return c_;
     }
 
@@ -2083,7 +2083,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     "active",
                     "completed",
                 ];
-                bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string>)am_);
+                bool? an_ = context.Operators.In<string>(al_, (IEnumerable<string?>?)am_);
                 bool? ao_ = context.Operators.And(ah_, an_);
                 Code<RequestIntent>? ap_ = OxygenTherapyOrder?.IntentElement;
                 RequestIntent? aq_ = ap_?.Value;
@@ -2094,7 +2094,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             }
 
 
-            (CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)? j_(ServiceRequest? OxygenTherapyOrder) {
+            (CqlTupleMetadata, string? EncounterId, Code<RequestStatus>? OrderStatus, CqlDateTime? OrderTiming)? j_(ServiceRequest? OxygenTherapyOrder) {
                 Id? au_ = EncounterInpatient?.IdElement;
                 string? av_ = au_?.Value;
                 Code<RequestStatus>? aw_ = OxygenTherapyOrder?.StatusElement;
@@ -2102,12 +2102,12 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 Code<RequestStatus>? ay_ = context.Operators.Convert<Code<RequestStatus>>(ax_);
                 FhirDateTime? az_ = OxygenTherapyOrder?.AuthoredOnElement;
                 CqlDateTime? ba_ = context.Operators.Convert<CqlDateTime>(az_);
-                (CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)? bb_ = (CqlTupleMetadata_BTRiFTXPQGKeiLWUSieghMWCU, av_, ay_, ba_);
+                (CqlTupleMetadata, string? EncounterId, Code<RequestStatus>? OrderStatus, CqlDateTime? OrderTiming)? bb_ = (CqlTupleMetadata_BTRiFTXPQGKeiLWUSieghMWCU, av_, ay_, ba_);
                 return bb_;
             }
 
-            IEnumerable<(CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>? k_ = context.Operators.WhereSelect<ServiceRequest, (CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>(h_, i_, j_);
-            IEnumerable<(CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>? l_ = context.Operators.Distinct<(CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>(k_);
+            IEnumerable<(CqlTupleMetadata, string? EncounterId, Code<RequestStatus>? OrderStatus, CqlDateTime? OrderTiming)?>? k_ = context.Operators.WhereSelect<ServiceRequest, (CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>(h_, i_, j_);
+            IEnumerable<(CqlTupleMetadata, string? EncounterId, Code<RequestStatus>? OrderStatus, CqlDateTime? OrderTiming)?>? l_ = context.Operators.Distinct<(CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>(k_);
             bool? m_ = context.Operators.Exists<(CqlTupleMetadata, string EncounterId, Code<RequestStatus> OrderStatus, CqlDateTime OrderTiming)?>(l_);
             IEnumerable<Procedure?>? n_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
@@ -2120,7 +2120,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? cc_ = OxygenAdminInterv?.Performed;
                     object? cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
-                    bc_ = cd_ as CqlDateTime;
+                    bc_ = cd_ as CqlDateTime?;
                 }
                 else
                 {
@@ -2131,7 +2131,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? ch_ = OxygenAdminInterv?.Performed;
                         object? ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
-                        bc_ = ci_ as CqlQuantity;
+                        bc_ = ci_ as CqlQuantity?;
                     }
                     else
                     {
@@ -2142,7 +2142,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? cm_ = OxygenAdminInterv?.Performed;
                             object? cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
-                            bc_ = cn_ as CqlInterval<CqlDateTime>;
+                            bc_ = cn_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -2153,7 +2153,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                             {
                                 DataType? cr_ = OxygenAdminInterv?.Performed;
                                 object? cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-                                bc_ = cs_ as CqlInterval<CqlQuantity>;
+                                bc_ = cs_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -2176,7 +2176,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? cw_ = OxygenAdminInterv?.Performed;
                     object? cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    bj_ = cx_ as CqlDateTime;
+                    bj_ = cx_ as CqlDateTime?;
                 }
                 else
                 {
@@ -2187,7 +2187,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? db_ = OxygenAdminInterv?.Performed;
                         object? dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
-                        bj_ = dc_ as CqlQuantity;
+                        bj_ = dc_ as CqlQuantity?;
                     }
                     else
                     {
@@ -2198,7 +2198,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? dg_ = OxygenAdminInterv?.Performed;
                             object? dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
-                            bj_ = dh_ as CqlInterval<CqlDateTime>;
+                            bj_ = dh_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -2209,7 +2209,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                             {
                                 DataType? dl_ = OxygenAdminInterv?.Performed;
                                 object? dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-                                bj_ = dm_ as CqlInterval<CqlQuantity>;
+                                bj_ = dm_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -2237,7 +2237,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             }
 
 
-            (CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)? p_(Procedure? OxygenAdminInterv) {
+            (CqlTupleMetadata, string? EncounterId, CqlInterval<CqlDateTime?>? EDEncounterTiming, string? PerformedStatus, CqlInterval<CqlDateTime?>? PerformedTiming)? p_(Procedure? OxygenAdminInterv) {
                 Id? dn_ = EncounterInpatient?.IdElement;
                 string? do_ = dn_?.Value;
                 Encounter? dp_ = CQMCommon_4_1_000.Instance.edVisit(context, EncounterInpatient);
@@ -2254,7 +2254,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                 {
                     DataType? eb_ = OxygenAdminInterv?.Performed;
                     object? ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-                    dv_ = ec_ as CqlDateTime;
+                    dv_ = ec_ as CqlDateTime?;
                 }
                 else
                 {
@@ -2265,7 +2265,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     {
                         DataType? eg_ = OxygenAdminInterv?.Performed;
                         object? eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                        dv_ = eh_ as CqlQuantity;
+                        dv_ = eh_ as CqlQuantity?;
                     }
                     else
                     {
@@ -2276,7 +2276,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                         {
                             DataType? el_ = OxygenAdminInterv?.Performed;
                             object? em_ = FHIRHelpers_4_4_000.Instance.ToValue(context, el_);
-                            dv_ = em_ as CqlInterval<CqlDateTime>;
+                            dv_ = em_ as CqlInterval<CqlDateTime?>?;
                         }
                         else
                         {
@@ -2287,7 +2287,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                             {
                                 DataType? eq_ = OxygenAdminInterv?.Performed;
                                 object? er_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eq_);
-                                dv_ = er_ as CqlInterval<CqlQuantity>;
+                                dv_ = er_ as CqlInterval<CqlQuantity?>?;
                             }
                             else
                             {
@@ -2297,12 +2297,12 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
                     }
                 }
                 CqlInterval<CqlDateTime?>? dw_ = QICoreCommon_4_0_000.Instance.toInterval(context, dv_);
-                (CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)? dx_ = (CqlTupleMetadata_HBSiHLDibCXHQcPZYMVBgXBIH, do_, dr_, du_, dw_);
+                (CqlTupleMetadata, string? EncounterId, CqlInterval<CqlDateTime?>? EDEncounterTiming, string? PerformedStatus, CqlInterval<CqlDateTime?>? PerformedTiming)? dx_ = (CqlTupleMetadata_HBSiHLDibCXHQcPZYMVBgXBIH, do_, dr_, du_, dw_);
                 return dx_;
             }
 
-            IEnumerable<(CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>? q_ = context.Operators.WhereSelect<Procedure, (CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>(n_, o_, p_);
-            IEnumerable<(CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>? r_ = context.Operators.Distinct<(CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>(q_);
+            IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlInterval<CqlDateTime?>? EDEncounterTiming, string? PerformedStatus, CqlInterval<CqlDateTime?>? PerformedTiming)?>? q_ = context.Operators.WhereSelect<Procedure, (CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>(n_, o_, p_);
+            IEnumerable<(CqlTupleMetadata, string? EncounterId, CqlInterval<CqlDateTime?>? EDEncounterTiming, string? PerformedStatus, CqlInterval<CqlDateTime?>? PerformedTiming)?>? r_ = context.Operators.Distinct<(CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>(q_);
             bool? s_ = context.Operators.Exists<(CqlTupleMetadata, string EncounterId, CqlInterval<CqlDateTime> EDEncounterTiming, string PerformedStatus, CqlInterval<CqlDateTime> PerformedTiming)?>(r_);
             bool? t_ = context.Operators.Or(m_, s_);
             return t_;
@@ -2314,40 +2314,40 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -2927595819383839539L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 5718293540977132843L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -6422847655377928380L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

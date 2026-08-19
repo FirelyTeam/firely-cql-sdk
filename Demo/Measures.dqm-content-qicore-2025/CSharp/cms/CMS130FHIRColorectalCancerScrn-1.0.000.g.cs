@@ -21,32 +21,32 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     #region ValueSets (7)
 
     [CqlValueSetDefinition("Colonoscopy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", valueSetVersion: null)]
-    public CqlValueSet? Colonoscopy(CqlContext _) => _Colonoscopy;
-    private static readonly CqlValueSet? _Colonoscopy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", null);
+    public CqlValueSet Colonoscopy(CqlContext _) => _Colonoscopy;
+    private static readonly CqlValueSet _Colonoscopy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", null);
 
     [CqlValueSetDefinition("CT Colonography", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", valueSetVersion: null)]
-    public CqlValueSet? CT_Colonography(CqlContext _) => _CT_Colonography;
-    private static readonly CqlValueSet? _CT_Colonography = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", null);
+    public CqlValueSet CT_Colonography(CqlContext _) => _CT_Colonography;
+    private static readonly CqlValueSet _CT_Colonography = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", null);
 
     [CqlValueSetDefinition("Fecal Occult Blood Test (FOBT)", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", valueSetVersion: null)]
-    public CqlValueSet? Fecal_Occult_Blood_Test__FOBT_(CqlContext _) => _Fecal_Occult_Blood_Test__FOBT_;
-    private static readonly CqlValueSet? _Fecal_Occult_Blood_Test__FOBT_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", null);
+    public CqlValueSet Fecal_Occult_Blood_Test__FOBT_(CqlContext _) => _Fecal_Occult_Blood_Test__FOBT_;
+    private static readonly CqlValueSet _Fecal_Occult_Blood_Test__FOBT_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", null);
 
     [CqlValueSetDefinition("sDNA FIT Test", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", valueSetVersion: null)]
-    public CqlValueSet? sDNA_FIT_Test(CqlContext _) => _sDNA_FIT_Test;
-    private static readonly CqlValueSet? _sDNA_FIT_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", null);
+    public CqlValueSet sDNA_FIT_Test(CqlContext _) => _sDNA_FIT_Test;
+    private static readonly CqlValueSet _sDNA_FIT_Test = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", null);
 
     [CqlValueSetDefinition("Flexible Sigmoidoscopy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", valueSetVersion: null)]
-    public CqlValueSet? Flexible_Sigmoidoscopy(CqlContext _) => _Flexible_Sigmoidoscopy;
-    private static readonly CqlValueSet? _Flexible_Sigmoidoscopy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", null);
+    public CqlValueSet Flexible_Sigmoidoscopy(CqlContext _) => _Flexible_Sigmoidoscopy;
+    private static readonly CqlValueSet _Flexible_Sigmoidoscopy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", null);
 
     [CqlValueSetDefinition("Malignant Neoplasm of Colon", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Malignant_Neoplasm_of_Colon(CqlContext _) => _Malignant_Neoplasm_of_Colon;
-    private static readonly CqlValueSet? _Malignant_Neoplasm_of_Colon = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", null);
+    public CqlValueSet Malignant_Neoplasm_of_Colon(CqlContext _) => _Malignant_Neoplasm_of_Colon;
+    private static readonly CqlValueSet _Malignant_Neoplasm_of_Colon = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", null);
 
     [CqlValueSetDefinition("Total Colectomy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", valueSetVersion: null)]
-    public CqlValueSet? Total_Colectomy(CqlContext _) => _Total_Colectomy;
-    private static readonly CqlValueSet? _Total_Colectomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", null);
+    public CqlValueSet Total_Colectomy(CqlContext _) => _Total_Colectomy;
+    private static readonly CqlValueSet _Total_Colectomy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", null);
 
     #endregion ValueSets
 
@@ -64,7 +64,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS130FHIRColorectalCancerScrn-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -87,40 +87,40 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 1618786243604187050L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 1608958109846461859L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 1178978355528948591L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
@@ -187,7 +187,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlValueSet? a_ = this.Malignant_Neoplasm_of_Colon(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition? ColorectalCancer) {
@@ -225,7 +225,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             {
                 DataType? o_ = Colectomy?.Performed;
                 object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = p_ as CqlDateTime?;
             }
             else
             {
@@ -236,7 +236,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 {
                     DataType? t_ = Colectomy?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = u_ as CqlQuantity?;
                 }
                 else
                 {
@@ -247,7 +247,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     {
                         DataType? y_ = Colectomy?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = z_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -258,7 +258,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         {
                             DataType? ad_ = Colectomy?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = ae_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -329,7 +329,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             {
                 DataType? q_ = FecalOccultResult?.Effective;
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                i_ = r_ as CqlDateTime;
+                i_ = r_ as CqlDateTime?;
             }
             else
             {
@@ -340,7 +340,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 {
                     DataType? v_ = FecalOccultResult?.Effective;
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    i_ = w_ as CqlDateTime;
+                    i_ = w_ as CqlDateTime?;
                 }
                 else
                 {
@@ -351,7 +351,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     {
                         DataType? aa_ = FecalOccultResult?.Effective;
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        i_ = ab_ as CqlInterval<CqlDateTime>;
+                        i_ = ab_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -395,7 +395,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             {
                 DataType? v_ = sDNATest?.Effective;
                 object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                i_ = w_ as CqlDateTime;
+                i_ = w_ as CqlDateTime?;
             }
             else
             {
@@ -406,7 +406,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 {
                     DataType? aa_ = sDNATest?.Effective;
                     object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    i_ = ab_ as CqlDateTime;
+                    i_ = ab_ as CqlDateTime?;
                 }
                 else
                 {
@@ -417,7 +417,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     {
                         DataType? af_ = sDNATest?.Effective;
                         object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        i_ = ag_ as CqlInterval<CqlDateTime>;
+                        i_ = ag_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -463,7 +463,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             {
                 DataType? s_ = FlexibleSigmoidoscopy?.Performed;
                 object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                f_ = t_ as CqlDateTime;
+                f_ = t_ as CqlDateTime?;
             }
             else
             {
@@ -474,7 +474,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 {
                     DataType? x_ = FlexibleSigmoidoscopy?.Performed;
                     object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    f_ = y_ as CqlQuantity;
+                    f_ = y_ as CqlQuantity?;
                 }
                 else
                 {
@@ -485,7 +485,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     {
                         DataType? ac_ = FlexibleSigmoidoscopy?.Performed;
                         object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        f_ = ad_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -496,7 +496,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         {
                             DataType? ah_ = FlexibleSigmoidoscopy?.Performed;
                             object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            f_ = ai_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -575,7 +575,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             {
                 DataType? s_ = ColonoscopyProcedure?.Performed;
                 object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                f_ = t_ as CqlDateTime;
+                f_ = t_ as CqlDateTime?;
             }
             else
             {
@@ -586,7 +586,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                 {
                     DataType? x_ = ColonoscopyProcedure?.Performed;
                     object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    f_ = y_ as CqlQuantity;
+                    f_ = y_ as CqlQuantity?;
                 }
                 else
                 {
@@ -597,7 +597,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     {
                         DataType? ac_ = ColonoscopyProcedure?.Performed;
                         object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        f_ = ad_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -608,7 +608,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                         {
                             DataType? ah_ = ColonoscopyProcedure?.Performed;
                             object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            f_ = ai_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {

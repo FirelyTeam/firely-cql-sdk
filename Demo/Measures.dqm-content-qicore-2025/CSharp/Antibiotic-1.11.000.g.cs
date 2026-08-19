@@ -29,7 +29,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("Antibiotic-1.11.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -58,7 +58,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
         bool? a_(Encounter? episode) {
 
             bool? e_(Condition? comcondition) {
-                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition as Condition);
+                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition as Condition?);
                 CqlDateTime? h_ = context.Operators.Start(g_);
                 CqlDate? i_ = context.Operators.DateFrom(h_);
                 Period? j_ = episode?.Period;
@@ -90,7 +90,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
         bool? a_(Encounter? episode) {
 
             bool? e_(Condition? competcondition) {
-                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition as Condition);
+                CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition as Condition?);
                 CqlDateTime? h_ = context.Operators.Start(g_);
                 Period? i_ = episode?.Period;
                 CqlInterval<CqlDateTime?>? j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);

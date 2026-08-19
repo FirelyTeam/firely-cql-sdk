@@ -21,40 +21,40 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
     #region ValueSets (5)
 
     [CqlValueSetDefinition("Androgen Deprivation Therapy for Urology Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.352", valueSetVersion: null)]
-    public CqlValueSet? Androgen_Deprivation_Therapy_for_Urology_Care(CqlContext _) => _Androgen_Deprivation_Therapy_for_Urology_Care;
-    private static readonly CqlValueSet? _Androgen_Deprivation_Therapy_for_Urology_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.352", null);
+    public CqlValueSet Androgen_Deprivation_Therapy_for_Urology_Care(CqlContext _) => _Androgen_Deprivation_Therapy_for_Urology_Care;
+    private static readonly CqlValueSet _Androgen_Deprivation_Therapy_for_Urology_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.352", null);
 
     [CqlValueSetDefinition("DEXA Bone Density for Urology Care", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.359", valueSetVersion: null)]
-    public CqlValueSet? DEXA_Bone_Density_for_Urology_Care(CqlContext _) => _DEXA_Bone_Density_for_Urology_Care;
-    private static readonly CqlValueSet? _DEXA_Bone_Density_for_Urology_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.359", null);
+    public CqlValueSet DEXA_Bone_Density_for_Urology_Care(CqlContext _) => _DEXA_Bone_Density_for_Urology_Care;
+    private static readonly CqlValueSet _DEXA_Bone_Density_for_Urology_Care = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.359", null);
 
     [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
-    public CqlValueSet? Office_Visit(CqlContext _) => _Office_Visit;
-    private static readonly CqlValueSet? _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Patient Declined", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", valueSetVersion: null)]
-    public CqlValueSet? Patient_Declined(CqlContext _) => _Patient_Declined;
-    private static readonly CqlValueSet? _Patient_Declined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", null);
+    public CqlValueSet Patient_Declined(CqlContext _) => _Patient_Declined;
+    private static readonly CqlValueSet _Patient_Declined = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", null);
 
     [CqlValueSetDefinition("Prostate Cancer", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", valueSetVersion: null)]
-    public CqlValueSet? Prostate_Cancer(CqlContext _) => _Prostate_Cancer;
-    private static readonly CqlValueSet? _Prostate_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", null);
+    public CqlValueSet Prostate_Cancer(CqlContext _) => _Prostate_Cancer;
+    private static readonly CqlValueSet _Prostate_Cancer = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", null);
 
     #endregion ValueSets
 
     #region Codes (1)
 
     [CqlCodeDefinition("Injection of leuprolide acetate for twelve month period (regime/therapy)", codeId: "456381000124102", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(CqlContext _) => _Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_;
-    private static readonly CqlCode? _Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_ = new CqlCode("456381000124102", "http://snomed.info/sct");
+    public CqlCode Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(CqlContext _) => _Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_;
+    private static readonly CqlCode _Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_ = new CqlCode("456381000124102", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_]);
 
@@ -74,7 +74,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS645FHIRBoneDensityPCADTherapy-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -141,7 +141,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? l_(Medication? M) {
                 object? n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? p_ = context.Operators.Split((string)o_, "/");
+                IEnumerable<string?>? p_ = context.Operators.Split((string?)o_, "/");
                 string? q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(n_, q_);
                 CodeableConcept? s_ = M?.Code;
@@ -169,7 +169,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "active",
                 "completed",
             ];
-            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string?>?)aa_);
             Code<MedicationRequest.MedicationRequestIntent>? ac_ = ADTActive?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
             string? ae_ = context.Operators.Convert<string>(ad_);
@@ -180,7 +180,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "filler-order",
                 "instance-order",
             ];
-            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
             bool? ah_ = context.Operators.And(ab_, ag_);
             return ah_;
         }
@@ -201,7 +201,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ca_;
             }
 
-            IEnumerable<Timing?>? al_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)ai_, aj_, ak_);
+            IEnumerable<Timing?>? al_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)ai_, aj_, ak_);
 
             CqlDateTime? am_(Timing? dosageTiming) {
                 List<FhirDateTime?>? cb_ = dosageTiming?.EventElement;
@@ -211,7 +211,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return ci_;
                 }
 
-                IEnumerable<string?>? cd_ = context.Operators.Select<FhirDateTime, string>((IEnumerable<FhirDateTime>)cb_, cc_);
+                IEnumerable<string?>? cd_ = context.Operators.Select<FhirDateTime, string>((IEnumerable<FhirDateTime?>?)cb_, cc_);
 
                 CqlDateTime? ce_(string? @string) {
                     CqlDateTime? cj_ = context.Operators.ConvertStringToDateTime(@string);
@@ -240,7 +240,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return cm_;
             }
 
-            IEnumerable<Timing?>? as_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)ai_, aq_, ar_);
+            IEnumerable<Timing?>? as_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)ai_, aq_, ar_);
 
             bool? at_(Timing? @this) {
                 Timing.RepeatComponent? cn_ = @this?.Repeat;
@@ -301,7 +301,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return cz_;
             }
 
-            IEnumerable<Timing?>? bi_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)ai_, bg_, bh_);
+            IEnumerable<Timing?>? bi_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)ai_, bg_, bh_);
 
             bool? bj_(Timing? @this) {
                 Timing.RepeatComponent? da_ = @this?.Repeat;
@@ -354,7 +354,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 bf_,
                 bv_,
             ];
-            CqlDateTime? bx_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)bw_);
+            CqlDateTime? bx_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime?>?)bw_);
             return bx_;
         }
 
@@ -380,7 +380,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
             bool? l_(Medication? M) {
                 object? n_ = context.Operators.LateBoundProperty<object>(M, "id.value");
                 object? o_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string?>? p_ = context.Operators.Split((string)o_, "/");
+                IEnumerable<string?>? p_ = context.Operators.Split((string?)o_, "/");
                 string? q_ = context.Operators.Last<string>(p_);
                 bool? r_ = context.Operators.Equal(n_, q_);
                 CodeableConcept? s_ = M?.Code;
@@ -408,7 +408,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "active",
                 "completed",
             ];
-            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string?>?)aa_);
             Code<MedicationRequest.MedicationRequestIntent>? ac_ = ADTOrder?.IntentElement;
             MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
             string? ae_ = context.Operators.Convert<string>(ad_);
@@ -419,7 +419,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "filler-order",
                 "instance-order",
             ];
-            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+            bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string?>?)af_);
             bool? ah_ = context.Operators.And(ab_, ag_);
             return ah_;
         }
@@ -442,7 +442,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return bv_;
             }
 
-            IEnumerable<Timing?>? an_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)ak_, al_, am_);
+            IEnumerable<Timing?>? an_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)ak_, al_, am_);
 
             bool? ao_(Timing? @this) {
                 Timing.RepeatComponent? bw_ = @this?.Repeat;
@@ -503,7 +503,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ci_;
             }
 
-            IEnumerable<Timing?>? bd_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage>)ak_, bb_, bc_);
+            IEnumerable<Timing?>? bd_ = context.Operators.WhereSelect<Dosage, Timing>((IEnumerable<Dosage?>?)ak_, bb_, bc_);
 
             bool? be_(Timing? @this) {
                 Timing.RepeatComponent? cj_ = @this?.Repeat;
@@ -556,7 +556,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 ba_,
                 bq_,
             ];
-            CqlDateTime? bs_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime>)br_);
+            CqlDateTime? bs_ = context.Operators.Min<CqlDateTime>((IEnumerable<CqlDateTime?>?)br_);
             return bs_;
         }
 
@@ -604,7 +604,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
         CqlValueSet? a_ = this.Prostate_Cancer(context);
         IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition?>?, c_ as IEnumerable<Condition?>?);
 
         bool? e_(Condition? ProstateCancer) {
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer);
@@ -700,7 +700,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     "active",
                     "completed",
                 ];
-                bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
+                bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string?>?)z_);
                 bool? ab_ = context.Operators.And(u_, aa_);
                 Code<RequestIntent>? ac_ = OrderTwelveMonthADT?.IntentElement;
                 RequestIntent? ad_ = ac_?.Value;
@@ -710,7 +710,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return ag_;
             }
 
-            bool? i_ = context.Operators.WhereAny<CqlDateTime>((IEnumerable<CqlDateTime>)g_, h_);
+            bool? i_ = context.Operators.WhereAny<CqlDateTime>((IEnumerable<CqlDateTime?>?)g_, h_);
             return i_;
         }
 
@@ -797,7 +797,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "active",
                 "completed",
             ];
-            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+            bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string?>?)ak_);
             Code<RequestIntent>? am_ = DEXAOrdered?.IntentElement;
             RequestIntent? an_ = am_?.Value;
             Code<RequestIntent>? ao_ = context.Operators.Convert<Code<RequestIntent>>(an_);
@@ -850,12 +850,12 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 "amended",
                 "corrected",
             ];
-            bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string>)bq_);
+            bool? br_ = context.Operators.In<string>(bp_, (IEnumerable<string?>?)bq_);
             return br_;
         }
 
         IEnumerable<Observation?>? k_ = context.Operators.Where<Observation>(i_, j_);
-        IEnumerable<object?>? l_ = context.Operators.Union<object>(f_ as IEnumerable<object>, k_ as IEnumerable<object>);
+        IEnumerable<object?>? l_ = context.Operators.Union<object>(f_ as IEnumerable<object?>?, k_ as IEnumerable<object?>?);
         bool? m_ = context.Operators.Exists<object>(l_);
         return m_;
     }
@@ -914,11 +914,11 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return ad_;
                 }
 
-                IEnumerable<object?>? u_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(DEXANotOrdered is DomainResource
-                    ? (DEXANotOrdered as DomainResource).Extension
+                IEnumerable<object?>? u_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(DEXANotOrdered is DomainResource
+                    ? (DEXANotOrdered as DomainResource?).Extension
                     : default), s_, t_);
                 object? v_ = context.Operators.SingletonFrom<object>(u_);
-                CqlConcept? w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
+                CqlConcept? w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept?);
                 CqlValueSet? x_ = this.Patient_Declined(context);
                 bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
                 bool? z_ = context.Operators.And(r_, y_);
@@ -975,11 +975,11 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                     return ae_;
                 }
 
-                IEnumerable<object?>? v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(DEXANotPerformed is DomainResource
-                    ? (DEXANotPerformed as DomainResource).Extension
+                IEnumerable<object?>? v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension?>?)(DEXANotPerformed is DomainResource
+                    ? (DEXANotPerformed as DomainResource?).Extension
                     : default), t_, u_);
                 object? w_ = context.Operators.SingletonFrom<object>(v_);
-                CqlConcept? x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
+                CqlConcept? x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept?);
                 CqlValueSet? y_ = this.Patient_Declined(context);
                 bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
                 bool? aa_ = context.Operators.And(s_, z_);
@@ -1013,40 +1013,40 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = -897900695652524114L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -7384445363689136194L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = -136145099253049696L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 

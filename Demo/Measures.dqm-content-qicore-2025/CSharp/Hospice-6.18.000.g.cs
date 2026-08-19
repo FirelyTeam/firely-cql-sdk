@@ -21,54 +21,54 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
     #region ValueSets (4)
 
     [CqlValueSetDefinition("Encounter Inpatient", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", valueSetVersion: null)]
-    public CqlValueSet? Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
-    private static readonly CqlValueSet? _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
+    public CqlValueSet Encounter_Inpatient(CqlContext _) => _Encounter_Inpatient;
+    private static readonly CqlValueSet _Encounter_Inpatient = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlValueSetDefinition("Hospice Care Ambulatory", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
-    private static readonly CqlValueSet? _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
+    public CqlValueSet Hospice_Care_Ambulatory(CqlContext _) => _Hospice_Care_Ambulatory;
+    private static readonly CqlValueSet _Hospice_Care_Ambulatory = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", null);
 
     [CqlValueSetDefinition("Hospice Encounter", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
-    private static readonly CqlValueSet? _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
+    public CqlValueSet Hospice_Encounter(CqlContext _) => _Hospice_Encounter;
+    private static readonly CqlValueSet _Hospice_Encounter = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", null);
 
     [CqlValueSetDefinition("Hospice Diagnosis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", valueSetVersion: null)]
-    public CqlValueSet? Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
-    private static readonly CqlValueSet? _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
+    public CqlValueSet Hospice_Diagnosis(CqlContext _) => _Hospice_Diagnosis;
+    private static readonly CqlValueSet _Hospice_Diagnosis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", null);
 
     #endregion ValueSets
 
     #region Codes (4)
 
     [CqlCodeDefinition("Discharge to healthcare facility for hospice care (procedure)", codeId: "428371000124100", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
+    public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_healthcare_facility_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_healthcare_facility_for_hospice_care__procedure_ = new CqlCode("428371000124100", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Discharge to home for hospice care (procedure)", codeId: "428361000124107", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
-    private static readonly CqlCode? _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
+    public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext _) => _Discharge_to_home_for_hospice_care__procedure_;
+    private static readonly CqlCode _Discharge_to_home_for_hospice_care__procedure_ = new CqlCode("428361000124107", "http://snomed.info/sct");
 
     [CqlCodeDefinition("Hospice care [Minimum Data Set]", codeId: "45755-6", codeSystem: "http://loinc.org")]
-    public CqlCode? Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
-    private static readonly CqlCode? _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
+    public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext _) => _Hospice_care__Minimum_Data_Set_;
+    private static readonly CqlCode _Hospice_care__Minimum_Data_Set_ = new CqlCode("45755-6", "http://loinc.org");
 
     [CqlCodeDefinition("Yes (qualifier value)", codeId: "373066001", codeSystem: "http://snomed.info/sct")]
-    public CqlCode? Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
-    private static readonly CqlCode? _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
+    public CqlCode Yes__qualifier_value_(CqlContext _) => _Yes__qualifier_value_;
+    private static readonly CqlCode _Yes__qualifier_value_ = new CqlCode("373066001", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("LOINC", codeSystemId: "http://loinc.org", codeSystemVersion: null)]
-    public CqlCodeSystem? LOINC(CqlContext _) => _LOINC;
-    private static readonly CqlCodeSystem? _LOINC =
+    public CqlCodeSystem LOINC(CqlContext _) => _LOINC;
+    private static readonly CqlCodeSystem _LOINC =
       new CqlCodeSystem("http://loinc.org", null, [
           _Hospice_care__Minimum_Data_Set_]);
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem? _SNOMEDCT =
+    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Discharge_to_healthcare_facility_for_hospice_care__procedure_,
           _Discharge_to_home_for_hospice_care__procedure_,
@@ -87,7 +87,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
         object? a_ = context.ResolveParameter("Hospice-6.18.000", "Measurement Period", (object)null);
-        return (CqlInterval<CqlDateTime>)a_;
+        return (CqlInterval<CqlDateTime?>?)a_;
     }
 
 
@@ -166,7 +166,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             object? bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
             CqlCode? bh_ = this.Yes__qualifier_value_(context);
             CqlConcept? bi_ = context.Operators.ConvertCodeToConcept(bh_);
-            bool? bj_ = context.Operators.Equivalent(bg_ as CqlConcept, bi_);
+            bool? bj_ = context.Operators.Equivalent(bg_ as CqlConcept?, bi_);
             DataType? bk_ = HospiceAssessment?.Effective;
             object? bl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bk_);
             CqlInterval<CqlDateTime?>? bm_ = QICoreCommon_4_0_000.Instance.toInterval(context, bl_);
@@ -204,7 +204,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
             {
                 DataType? cb_ = HospicePerformed?.Performed;
                 object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-                bu_ = cc_ as CqlDateTime;
+                bu_ = cc_ as CqlDateTime?;
             }
             else
             {
@@ -215,7 +215,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                 {
                     DataType? cg_ = HospicePerformed?.Performed;
                     object? ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-                    bu_ = ch_ as CqlQuantity;
+                    bu_ = ch_ as CqlQuantity?;
                 }
                 else
                 {
@@ -226,7 +226,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                     {
                         DataType? cl_ = HospicePerformed?.Performed;
                         object? cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
-                        bu_ = cm_ as CqlInterval<CqlDateTime>;
+                        bu_ = cm_ as CqlInterval<CqlDateTime?>?;
                     }
                     else
                     {
@@ -237,7 +237,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
                         {
                             DataType? cq_ = HospicePerformed?.Performed;
                             object? cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                            bu_ = cr_ as CqlInterval<CqlQuantity>;
+                            bu_ = cr_ as CqlInterval<CqlQuantity?>?;
                         }
                         else
                         {
@@ -257,7 +257,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
         CqlValueSet? ad_ = this.Hospice_Diagnosis(context);
         IEnumerable<Condition?>? ae_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition?>? af_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? ag_ = context.Operators.Union<Condition>(ae_ as IEnumerable<Condition>, af_ as IEnumerable<Condition>);
+        IEnumerable<Condition?>? ag_ = context.Operators.Union<Condition>(ae_ as IEnumerable<Condition?>?, af_ as IEnumerable<Condition?>?);
         IEnumerable<Condition?>? ah_ = Status_1_15_000.Instance.verified(context, ag_);
 
         bool? ai_(Condition? HospiceCareDiagnosis) {

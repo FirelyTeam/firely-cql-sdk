@@ -26,6 +26,11 @@ internal static class LibrarySetsDirs
         public static DirectoryInfo ExtractedCSharpDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Extracted", "CSharp");
     }
 
+    public static class CoreTests
+    {
+        public static DirectoryInfo CSharpDir { get; } = GetDir("Cql", "CoreTests", "CSharp");
+    }
+
     public static class RR23
     {
         public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "RR23", "Elm");

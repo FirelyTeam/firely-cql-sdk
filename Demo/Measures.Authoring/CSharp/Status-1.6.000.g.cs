@@ -21,32 +21,32 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     #region Codes (5)
 
     [CqlCodeDefinition("laboratory", codeId: "laboratory", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? laboratory(CqlContext _) => _laboratory;
-    private static readonly CqlCode? _laboratory = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode laboratory(CqlContext _) => _laboratory;
+    private static readonly CqlCode _laboratory = new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("exam", codeId: "exam", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? exam(CqlContext _) => _exam;
-    private static readonly CqlCode? _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode exam(CqlContext _) => _exam;
+    private static readonly CqlCode _exam = new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("survey", codeId: "survey", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? survey(CqlContext _) => _survey;
-    private static readonly CqlCode? _survey = new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode survey(CqlContext _) => _survey;
+    private static readonly CqlCode _survey = new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("vital-signs", codeId: "vital-signs", codeSystem: "http://terminology.hl7.org/CodeSystem/observation-category")]
-    public CqlCode? vital_signs(CqlContext _) => _vital_signs;
-    private static readonly CqlCode? _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
+    public CqlCode vital_signs(CqlContext _) => _vital_signs;
+    private static readonly CqlCode _vital_signs = new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category");
 
     [CqlCodeDefinition("active", codeId: "active", codeSystem: "http://terminology.hl7.org/CodeSystem/condition-clinical")]
-    public CqlCode? active(CqlContext _) => _active;
-    private static readonly CqlCode? _active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical");
+    public CqlCode active(CqlContext _) => _active;
+    private static readonly CqlCode _active = new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical");
 
     #endregion Codes
 
     #region CodeSystems (2)
 
     [CqlCodeSystemDefinition("ObservationCategoryCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/observation-category", codeSystemVersion: null)]
-    public CqlCodeSystem? ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
-    private static readonly CqlCodeSystem? _ObservationCategoryCodes =
+    public CqlCodeSystem ObservationCategoryCodes(CqlContext _) => _ObservationCategoryCodes;
+    private static readonly CqlCodeSystem _ObservationCategoryCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/observation-category", null, [
           _laboratory,
           _exam,
@@ -54,8 +54,8 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
           _vital_signs]);
 
     [CqlCodeSystemDefinition("ConditionClinicalStatusCodes", codeSystemId: "http://terminology.hl7.org/CodeSystem/condition-clinical", codeSystemVersion: null)]
-    public CqlCodeSystem? ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
-    private static readonly CqlCodeSystem? _ConditionClinicalStatusCodes =
+    public CqlCodeSystem ConditionClinicalStatusCodes(CqlContext _) => _ConditionClinicalStatusCodes;
+    private static readonly CqlCodeSystem _ConditionClinicalStatusCodes =
       new CqlCodeSystem("http://terminology.hl7.org/CodeSystem/condition-clinical", null, [
           _active]);
 
@@ -91,7 +91,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -107,7 +107,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -132,7 +132,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -148,7 +148,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -208,7 +208,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -235,7 +235,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = D?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -262,7 +262,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -289,7 +289,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -316,7 +316,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -343,7 +343,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             Code<RequestIntent>? i_ = S?.IntentElement;
             RequestIntent? j_ = i_?.Value;
             Code<RequestIntent>? k_ = context.Operators.Convert<Code<RequestIntent>>(j_);
@@ -371,7 +371,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -394,7 +394,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -419,7 +419,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "in-progress",
                 "onleave",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -444,7 +444,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "in-progress",
                 "onleave",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -552,7 +552,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -568,7 +568,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -593,7 +593,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -609,7 +609,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -678,7 +678,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "in-progress",
                 "on-hold",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -701,7 +701,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "in-progress",
                 "on-hold",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -722,7 +722,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             Code<MedicationRequest.MedicationRequestIntent>? h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
             string? j_ = context.Operators.Convert<string>(i_);
@@ -748,7 +748,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "active",
                 "completed",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             Code<MedicationRequest.MedicationRequestIntent>? h_ = M?.IntentElement;
             MedicationRequest.MedicationRequestIntent? i_ = h_?.Value;
             string? j_ = context.Operators.Convert<string>(i_);
@@ -776,7 +776,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -792,7 +792,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -817,7 +817,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             List<CodeableConcept?>? i_ = O?.Category;
 
             CqlConcept? j_(CodeableConcept? @this) {
@@ -833,7 +833,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 return r_;
             }
 
-            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_, k_);
+            IEnumerable<CqlConcept?>? l_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept?>?)i_, j_, k_);
             bool? m_ = context.Operators.Exists<CqlConcept>(l_);
             bool? n_ = context.Operators.And(h_, m_);
             return n_;
@@ -857,7 +857,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -879,7 +879,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -901,7 +901,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -923,7 +923,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -945,7 +945,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -967,7 +967,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -989,7 +989,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -1011,7 +1011,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string>)f_);
+            bool? g_ = context.Operators.In<string>(e_, (IEnumerable<string?>?)f_);
             return g_;
         }
 
@@ -1035,7 +1035,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
@@ -1059,7 +1059,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
                 "amended",
                 "corrected",
             ];
-            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string>)g_);
+            bool? h_ = context.Operators.In<string>(f_, (IEnumerable<string?>?)g_);
             return h_;
         }
 
