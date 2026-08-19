@@ -190,6 +190,17 @@ def fetch_complete_expansion(entry, key, page_size, log):
         page_contains = expansion.get("contains") or []
         if not page_contains:
             break
+
+        # `offset` counts concepts as the server does, and a hierarchical expansion would make
+        # the top-level entry count disagree with the concept count - paging by the wrong number
+        # would then skip or repeat whole stretches. VSAC returns these flat, so rather than
+        # guessing at the arithmetic for a shape that does not occur, stop and say so.
+        if count_concepts(page_contains) != len(page_contains):
+            raise RuntimeError(
+                f"{oid}: VSAC returned a hierarchical expansion "
+                f"({len(page_contains)} entries, {count_concepts(page_contains)} concepts); "
+                "paging one is not implemented")
+
         contains.extend(page_contains)
         log(f"    {oid}: {count_concepts(contains)}/{total}")
         if count_concepts(contains) >= total:
