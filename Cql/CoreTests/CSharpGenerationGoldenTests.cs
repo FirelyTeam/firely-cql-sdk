@@ -75,6 +75,22 @@ public class CSharpGenerationGoldenTests
             // resource); its dependencies are generated but have no golden counterpart.
             goldenCorpusIsComplete: false);
 
+    [TestMethod]
+    public void CheckedInGeneratedCSharp_DoesNotContainNullableCqlBoolean()
+    {
+        var solutionRoot = LibrarySetsDirs.RR23.CSharpDir.Parent?.Parent?.Parent
+                           ?? throw new InvalidOperationException("Could not resolve solution root from library-set directories.");
+
+        var generatedFiles = solutionRoot.GetFiles("*.g.cs", SearchOption.AllDirectories);
+        Assert.AreNotEqual(0, generatedFiles.Length, "No generated C# files were found.");
+
+        foreach (var generatedFile in generatedFiles)
+        {
+            var text = File.ReadAllText(generatedFile.FullName);
+            Assert.IsFalse(text.Contains("CqlBoolean?"), $"Found forbidden CqlBoolean? annotation in {generatedFile.FullName}.");
+        }
+    }
+
     private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet)
     {
         var elmToolkit =
@@ -110,6 +126,7 @@ public class CSharpGenerationGoldenTests
                 generatedByIdentifier.TryGetValue(libraryIdentifier, out var generated),
                 $"No C# was generated for golden file {goldenFile.Name}. Generated libraries: {string.Join(", ", generatedByIdentifier.Keys)}.");
 
+            AssertNullableConventions(generated!);
             var golden = File.ReadAllText(goldenFile.FullName);
             AssertEqualCSharp(golden, generated!, libraryIdentifier, goldenFile.FullName);
         }
@@ -162,4 +179,21 @@ public class CSharpGenerationGoldenTests
             text,
             "\\[System\\.CodeDom\\.Compiler\\.GeneratedCode\\(\"\\.NET Code Generation\", \"[^\"]+\"\\)\\]",
             "[System.CodeDom.Compiler.GeneratedCode(\".NET Code Generation\", \"<normalized>\")]");
+
+    private static void AssertNullableConventions(string generated)
+    {
+        var normalized = generated.Replace("\r\n", "\n");
+        Assert.IsTrue(
+            normalized.StartsWith("#nullable enable", StringComparison.Ordinal),
+            "Generated C# must opt into nullable analysis with '#nullable enable' at the file top.");
+
+        var hasBlanketNullablePragmaDisable =
+            System.Text.RegularExpressions.Regex.IsMatch(
+                normalized,
+                @"#pragma\s+warning\s+disable\s+CS86\d{2}",
+                System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+        Assert.IsFalse(
+            hasBlanketNullablePragmaDisable,
+            "Generated C# must not suppress nullable warnings via blanket CS86xx pragma disables.");
+    }
 }

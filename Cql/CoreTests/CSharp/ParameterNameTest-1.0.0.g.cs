@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,14 +14,14 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("ParameterNameTest", "1.0.0")]
 public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNameTest_1_0_0>
 {
     #region Functions and Expressions (3)
 
     [CqlFunctionDefinition("Test Function")]
-    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string normalParam)
+    public int? Test_Function(CqlContext context, [CqlFunctionParameter("param with spaces")] int? param_with_spaces, string? normalParam)
     {
         int? a_ = context.Operators.Add(param_with_spaces, 10);
         return a_;
@@ -35,7 +37,7 @@ public partial class ParameterNameTest_1_0_0 : ILibrary, ISingleton<ParameterNam
 
 
     [CqlFunctionDefinition("Keyword Test")]
-    public int? Keyword_Test(CqlContext context, int? @int, string @ref, bool? @class)
+    public int? Keyword_Test(CqlContext context, int? @int, string? @ref, bool? @class)
     {
         int? a_ = context.Operators.Add(@int, 5);
         return a_;

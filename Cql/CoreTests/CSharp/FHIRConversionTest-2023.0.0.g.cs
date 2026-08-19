@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,32 +14,32 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
     #region Functions and Expressions (131)
 
     [CqlFunctionDefinition("AccountResource")]
-    public Account AccountResource(CqlContext context, Account arg)
+    public Account? AccountResource(CqlContext context, Account? arg)
     {
-        Account[] a_ = [
+        Account?[]? a_ = [
             arg,
         ];
 
-        Account b_(Account a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Account.AccountStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            FhirString h_ = a?.NameElement;
-            List<ResourceReference> i_ = a?.Subject;
-            Period j_ = a?.ServicePeriod;
-            List<Account.CoverageComponent> k_ = a?.Coverage;
-            ResourceReference l_ = a?.Owner;
-            FhirString m_ = a?.DescriptionElement;
-            List<Account.GuarantorComponent> n_ = a?.Guarantor;
-            ResourceReference o_ = a?.PartOf;
-            Account p_ = new Account
+        Account? b_(Account? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Account.AccountStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            FhirString? h_ = a?.NameElement;
+            List<ResourceReference?>? i_ = a?.Subject;
+            Period? j_ = a?.ServicePeriod;
+            List<Account.CoverageComponent?>? k_ = a?.Coverage;
+            ResourceReference? l_ = a?.Owner;
+            FhirString? m_ = a?.DescriptionElement;
+            List<Account.GuarantorComponent?>? n_ = a?.Guarantor;
+            ResourceReference? o_ = a?.PartOf;
+            Account? p_ = new Account
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -54,67 +56,67 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<Account> c_ = context.Operators.SelectDistinct<Account, Account>((IEnumerable<Account>)a_, b_);
-        Account d_ = context.Operators.SingletonFrom<Account>(c_);
+        IEnumerable<Account?>? c_ = context.Operators.SelectDistinct<Account, Account>((IEnumerable<Account>)a_, b_);
+        Account? d_ = context.Operators.SingletonFrom<Account>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ActivityDefinitionResource")]
-    public ActivityDefinition ActivityDefinitionResource(CqlContext context, ActivityDefinition arg)
+    public ActivityDefinition? ActivityDefinitionResource(CqlContext context, ActivityDefinition? arg)
     {
-        ActivityDefinition[] a_ = [
+        ActivityDefinition?[]? a_ = [
             arg,
         ];
 
-        ActivityDefinition b_(ActivityDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.SubtitleElement;
-            Code<PublicationStatus> k_ = a?.StatusElement;
-            FhirBoolean l_ = a?.ExperimentalElement;
-            DataType m_ = a?.Subject;
-            FhirDateTime n_ = a?.DateElement;
-            FhirString o_ = a?.PublisherElement;
-            List<ContactDetail> p_ = a?.Contact;
-            Markdown q_ = a?.DescriptionElement;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.PurposeElement;
-            FhirString u_ = a?.UsageElement;
-            Markdown v_ = a?.CopyrightElement;
-            Date w_ = a?.ApprovalDateElement;
-            Date x_ = a?.LastReviewDateElement;
-            Period y_ = a?.EffectivePeriod;
-            List<CodeableConcept> z_ = a?.Topic;
-            List<ContactDetail> aa_ = a?.Author;
-            List<ContactDetail> ab_ = a?.Editor;
-            List<ContactDetail> ac_ = a?.Reviewer;
-            List<ContactDetail> ad_ = a?.Endorser;
-            List<RelatedArtifact> ae_ = a?.RelatedArtifact;
-            List<Canonical> af_ = a?.LibraryElement;
-            Code<ActivityDefinition.RequestResourceType> ag_ = a?.KindElement;
-            Canonical ah_ = a?.ProfileElement;
-            CodeableConcept ai_ = a?.Code;
-            Code<RequestIntent> aj_ = a?.IntentElement;
-            Code<RequestPriority> ak_ = a?.PriorityElement;
-            FhirBoolean al_ = a?.DoNotPerformElement;
-            DataType am_ = a?.Timing;
-            ResourceReference an_ = a?.Location;
-            List<ActivityDefinition.ParticipantComponent> ao_ = a?.Participant;
-            DataType ap_ = a?.Product;
-            Quantity aq_ = a?.Quantity;
-            List<Dosage> ar_ = a?.Dosage;
-            List<CodeableConcept> as_ = a?.BodySite;
-            List<ResourceReference> at_ = a?.SpecimenRequirement;
-            List<ResourceReference> au_ = a?.ObservationRequirement;
-            List<ResourceReference> av_ = a?.ObservationResultRequirement;
-            Canonical aw_ = a?.TransformElement;
-            List<ActivityDefinition.DynamicValueComponent> ax_ = a?.DynamicValue;
-            ActivityDefinition ay_ = new ActivityDefinition
+        ActivityDefinition? b_(ActivityDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.SubtitleElement;
+            Code<PublicationStatus>? k_ = a?.StatusElement;
+            FhirBoolean? l_ = a?.ExperimentalElement;
+            DataType? m_ = a?.Subject;
+            FhirDateTime? n_ = a?.DateElement;
+            FhirString? o_ = a?.PublisherElement;
+            List<ContactDetail?>? p_ = a?.Contact;
+            Markdown? q_ = a?.DescriptionElement;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.PurposeElement;
+            FhirString? u_ = a?.UsageElement;
+            Markdown? v_ = a?.CopyrightElement;
+            Date? w_ = a?.ApprovalDateElement;
+            Date? x_ = a?.LastReviewDateElement;
+            Period? y_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? z_ = a?.Topic;
+            List<ContactDetail?>? aa_ = a?.Author;
+            List<ContactDetail?>? ab_ = a?.Editor;
+            List<ContactDetail?>? ac_ = a?.Reviewer;
+            List<ContactDetail?>? ad_ = a?.Endorser;
+            List<RelatedArtifact?>? ae_ = a?.RelatedArtifact;
+            List<Canonical?>? af_ = a?.LibraryElement;
+            Code<ActivityDefinition.RequestResourceType>? ag_ = a?.KindElement;
+            Canonical? ah_ = a?.ProfileElement;
+            CodeableConcept? ai_ = a?.Code;
+            Code<RequestIntent>? aj_ = a?.IntentElement;
+            Code<RequestPriority>? ak_ = a?.PriorityElement;
+            FhirBoolean? al_ = a?.DoNotPerformElement;
+            DataType? am_ = a?.Timing;
+            ResourceReference? an_ = a?.Location;
+            List<ActivityDefinition.ParticipantComponent?>? ao_ = a?.Participant;
+            DataType? ap_ = a?.Product;
+            Quantity? aq_ = a?.Quantity;
+            List<Dosage?>? ar_ = a?.Dosage;
+            List<CodeableConcept?>? as_ = a?.BodySite;
+            List<ResourceReference?>? at_ = a?.SpecimenRequirement;
+            List<ResourceReference?>? au_ = a?.ObservationRequirement;
+            List<ResourceReference?>? av_ = a?.ObservationResultRequirement;
+            Canonical? aw_ = a?.TransformElement;
+            List<ActivityDefinition.DynamicValueComponent?>? ax_ = a?.DynamicValue;
+            ActivityDefinition? ay_ = new ActivityDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -166,41 +168,41 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ay_;
         }
 
-        IEnumerable<ActivityDefinition> c_ = context.Operators.SelectDistinct<ActivityDefinition, ActivityDefinition>((IEnumerable<ActivityDefinition>)a_, b_);
-        ActivityDefinition d_ = context.Operators.SingletonFrom<ActivityDefinition>(c_);
+        IEnumerable<ActivityDefinition?>? c_ = context.Operators.SelectDistinct<ActivityDefinition, ActivityDefinition>((IEnumerable<ActivityDefinition>)a_, b_);
+        ActivityDefinition? d_ = context.Operators.SingletonFrom<ActivityDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("AdverseEventResource")]
-    public AdverseEvent AdverseEventResource(CqlContext context, AdverseEvent arg)
+    public AdverseEvent? AdverseEventResource(CqlContext context, AdverseEvent? arg)
     {
-        AdverseEvent[] a_ = [
+        AdverseEvent?[]? a_ = [
             arg,
         ];
 
-        AdverseEvent b_(AdverseEvent a) {
-            Identifier e_ = a?.Identifier;
-            Code<AdverseEvent.AdverseEventActuality> f_ = a?.ActualityElement;
-            List<CodeableConcept> g_ = a?.Category;
-            CodeableConcept h_ = a?.Event;
-            ResourceReference i_ = a?.Subject;
-            ResourceReference j_ = a?.Encounter;
-            FhirDateTime k_ = a?.DateElement;
-            FhirDateTime l_ = a?.DetectedElement;
-            FhirDateTime m_ = a?.RecordedDateElement;
-            List<ResourceReference> n_ = a?.ResultingCondition;
-            ResourceReference o_ = a?.Location;
-            CodeableConcept p_ = a?.Seriousness;
-            CodeableConcept q_ = a?.Severity;
-            CodeableConcept r_ = a?.Outcome;
-            ResourceReference s_ = a?.Recorder;
-            List<ResourceReference> t_ = a?.Contributor;
-            List<AdverseEvent.SuspectEntityComponent> u_ = a?.SuspectEntity;
-            List<ResourceReference> v_ = a?.SubjectMedicalHistory;
-            List<ResourceReference> w_ = a?.ReferenceDocument;
-            List<ResourceReference> x_ = a?.Study;
-            AdverseEvent y_ = new AdverseEvent
+        AdverseEvent? b_(AdverseEvent? a) {
+            Identifier? e_ = a?.Identifier;
+            Code<AdverseEvent.AdverseEventActuality>? f_ = a?.ActualityElement;
+            List<CodeableConcept?>? g_ = a?.Category;
+            CodeableConcept? h_ = a?.Event;
+            ResourceReference? i_ = a?.Subject;
+            ResourceReference? j_ = a?.Encounter;
+            FhirDateTime? k_ = a?.DateElement;
+            FhirDateTime? l_ = a?.DetectedElement;
+            FhirDateTime? m_ = a?.RecordedDateElement;
+            List<ResourceReference?>? n_ = a?.ResultingCondition;
+            ResourceReference? o_ = a?.Location;
+            CodeableConcept? p_ = a?.Seriousness;
+            CodeableConcept? q_ = a?.Severity;
+            CodeableConcept? r_ = a?.Outcome;
+            ResourceReference? s_ = a?.Recorder;
+            List<ResourceReference?>? t_ = a?.Contributor;
+            List<AdverseEvent.SuspectEntityComponent?>? u_ = a?.SuspectEntity;
+            List<ResourceReference?>? v_ = a?.SubjectMedicalHistory;
+            List<ResourceReference?>? w_ = a?.ReferenceDocument;
+            List<ResourceReference?>? x_ = a?.Study;
+            AdverseEvent? y_ = new AdverseEvent
             {
                 Identifier = e_,
                 ActualityElement = f_,
@@ -226,37 +228,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return y_;
         }
 
-        IEnumerable<AdverseEvent> c_ = context.Operators.SelectDistinct<AdverseEvent, AdverseEvent>((IEnumerable<AdverseEvent>)a_, b_);
-        AdverseEvent d_ = context.Operators.SingletonFrom<AdverseEvent>(c_);
+        IEnumerable<AdverseEvent?>? c_ = context.Operators.SelectDistinct<AdverseEvent, AdverseEvent>((IEnumerable<AdverseEvent>)a_, b_);
+        AdverseEvent? d_ = context.Operators.SingletonFrom<AdverseEvent>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("AllergyIntoleranceResource")]
-    public AllergyIntolerance AllergyIntoleranceResource(CqlContext context, AllergyIntolerance arg)
+    public AllergyIntolerance? AllergyIntoleranceResource(CqlContext context, AllergyIntolerance? arg)
     {
-        AllergyIntolerance[] a_ = [
+        AllergyIntolerance?[]? a_ = [
             arg,
         ];
 
-        AllergyIntolerance b_(AllergyIntolerance a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.ClinicalStatus;
-            CodeableConcept g_ = a?.VerificationStatus;
-            Code<AllergyIntolerance.AllergyIntoleranceType> h_ = a?.TypeElement;
-            List<Code<AllergyIntolerance.AllergyIntoleranceCategory>> i_ = a?.CategoryElement;
-            Code<AllergyIntolerance.AllergyIntoleranceCriticality> j_ = a?.CriticalityElement;
-            CodeableConcept k_ = a?.Code;
-            ResourceReference l_ = a?.Patient;
-            ResourceReference m_ = a?.Encounter;
-            DataType n_ = a?.Onset;
-            FhirDateTime o_ = a?.RecordedDateElement;
-            ResourceReference p_ = a?.Recorder;
-            ResourceReference q_ = a?.Asserter;
-            FhirDateTime r_ = a?.LastOccurrenceElement;
-            List<Annotation> s_ = a?.Note;
-            List<AllergyIntolerance.ReactionComponent> t_ = a?.Reaction;
-            AllergyIntolerance u_ = new AllergyIntolerance
+        AllergyIntolerance? b_(AllergyIntolerance? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.ClinicalStatus;
+            CodeableConcept? g_ = a?.VerificationStatus;
+            Code<AllergyIntolerance.AllergyIntoleranceType>? h_ = a?.TypeElement;
+            List<Code<AllergyIntolerance.AllergyIntoleranceCategory>?>? i_ = a?.CategoryElement;
+            Code<AllergyIntolerance.AllergyIntoleranceCriticality>? j_ = a?.CriticalityElement;
+            CodeableConcept? k_ = a?.Code;
+            ResourceReference? l_ = a?.Patient;
+            ResourceReference? m_ = a?.Encounter;
+            DataType? n_ = a?.Onset;
+            FhirDateTime? o_ = a?.RecordedDateElement;
+            ResourceReference? p_ = a?.Recorder;
+            ResourceReference? q_ = a?.Asserter;
+            FhirDateTime? r_ = a?.LastOccurrenceElement;
+            List<Annotation?>? s_ = a?.Note;
+            List<AllergyIntolerance.ReactionComponent?>? t_ = a?.Reaction;
+            AllergyIntolerance? u_ = new AllergyIntolerance
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ClinicalStatus = f_,
@@ -278,47 +280,47 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<AllergyIntolerance> c_ = context.Operators.SelectDistinct<AllergyIntolerance, AllergyIntolerance>((IEnumerable<AllergyIntolerance>)a_, b_);
-        AllergyIntolerance d_ = context.Operators.SingletonFrom<AllergyIntolerance>(c_);
+        IEnumerable<AllergyIntolerance?>? c_ = context.Operators.SelectDistinct<AllergyIntolerance, AllergyIntolerance>((IEnumerable<AllergyIntolerance>)a_, b_);
+        AllergyIntolerance? d_ = context.Operators.SingletonFrom<AllergyIntolerance>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("AppointmentResource")]
-    public Appointment AppointmentResource(CqlContext context, Appointment arg)
+    public Appointment? AppointmentResource(CqlContext context, Appointment? arg)
     {
-        Appointment[] a_ = [
+        Appointment?[]? a_ = [
             arg,
         ];
 
-        Appointment b_(Appointment a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Appointment.AppointmentStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.CancelationReason;
-            List<CodeableConcept> h_ = a?.ServiceCategory;
-            List<CodeableConcept> i_ = a?.ServiceType;
-            List<CodeableConcept> j_ = a?.Specialty;
-            CodeableConcept k_ = a?.AppointmentType;
-            List<CodeableConcept> l_ = a?.ReasonCode;
-            List<ResourceReference> m_ = a?.ReasonReference;
-            UnsignedInt n_ = a?.PriorityElement;
-            Integer o_ = context.Operators.Convert<Integer>(n_);
-            UnsignedInt p_ = context.Operators.Convert<UnsignedInt>(o_);
-            FhirString q_ = a?.DescriptionElement;
-            List<ResourceReference> r_ = a?.SupportingInformation;
-            Instant s_ = a?.StartElement;
-            Instant t_ = a?.EndElement;
-            PositiveInt u_ = a?.MinutesDurationElement;
-            Integer v_ = context.Operators.Convert<Integer>(u_);
-            PositiveInt w_ = context.Operators.Convert<PositiveInt>(v_);
-            List<ResourceReference> x_ = a?.Slot;
-            FhirDateTime y_ = a?.CreatedElement;
-            FhirString z_ = a?.CommentElement;
-            FhirString aa_ = a?.PatientInstructionElement;
-            List<ResourceReference> ab_ = a?.BasedOn;
-            List<Appointment.ParticipantComponent> ac_ = a?.Participant;
-            List<Period> ad_ = a?.RequestedPeriod;
-            Appointment ae_ = new Appointment
+        Appointment? b_(Appointment? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Appointment.AppointmentStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.CancelationReason;
+            List<CodeableConcept?>? h_ = a?.ServiceCategory;
+            List<CodeableConcept?>? i_ = a?.ServiceType;
+            List<CodeableConcept?>? j_ = a?.Specialty;
+            CodeableConcept? k_ = a?.AppointmentType;
+            List<CodeableConcept?>? l_ = a?.ReasonCode;
+            List<ResourceReference?>? m_ = a?.ReasonReference;
+            UnsignedInt? n_ = a?.PriorityElement;
+            Integer? o_ = context.Operators.Convert<Integer>(n_);
+            UnsignedInt? p_ = context.Operators.Convert<UnsignedInt>(o_);
+            FhirString? q_ = a?.DescriptionElement;
+            List<ResourceReference?>? r_ = a?.SupportingInformation;
+            Instant? s_ = a?.StartElement;
+            Instant? t_ = a?.EndElement;
+            PositiveInt? u_ = a?.MinutesDurationElement;
+            Integer? v_ = context.Operators.Convert<Integer>(u_);
+            PositiveInt? w_ = context.Operators.Convert<PositiveInt>(v_);
+            List<ResourceReference?>? x_ = a?.Slot;
+            FhirDateTime? y_ = a?.CreatedElement;
+            FhirString? z_ = a?.CommentElement;
+            FhirString? aa_ = a?.PatientInstructionElement;
+            List<ResourceReference?>? ab_ = a?.BasedOn;
+            List<Appointment.ParticipantComponent?>? ac_ = a?.Participant;
+            List<Period?>? ad_ = a?.RequestedPeriod;
+            Appointment? ae_ = new Appointment
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -346,29 +348,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ae_;
         }
 
-        IEnumerable<Appointment> c_ = context.Operators.SelectDistinct<Appointment, Appointment>((IEnumerable<Appointment>)a_, b_);
-        Appointment d_ = context.Operators.SingletonFrom<Appointment>(c_);
+        IEnumerable<Appointment?>? c_ = context.Operators.SelectDistinct<Appointment, Appointment>((IEnumerable<Appointment>)a_, b_);
+        Appointment? d_ = context.Operators.SingletonFrom<Appointment>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("AppointmentResponseResource")]
-    public AppointmentResponse AppointmentResponseResource(CqlContext context, AppointmentResponse arg)
+    public AppointmentResponse? AppointmentResponseResource(CqlContext context, AppointmentResponse? arg)
     {
-        AppointmentResponse[] a_ = [
+        AppointmentResponse?[]? a_ = [
             arg,
         ];
 
-        AppointmentResponse b_(AppointmentResponse a) {
-            List<Identifier> e_ = a?.Identifier;
-            ResourceReference f_ = a?.Appointment;
-            Instant g_ = a?.StartElement;
-            Instant h_ = a?.EndElement;
-            List<CodeableConcept> i_ = a?.ParticipantType;
-            ResourceReference j_ = a?.Actor;
-            Code<ParticipationStatus> k_ = a?.ParticipantStatusElement;
-            FhirString l_ = a?.CommentElement;
-            AppointmentResponse m_ = new AppointmentResponse
+        AppointmentResponse? b_(AppointmentResponse? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            ResourceReference? f_ = a?.Appointment;
+            Instant? g_ = a?.StartElement;
+            Instant? h_ = a?.EndElement;
+            List<CodeableConcept?>? i_ = a?.ParticipantType;
+            ResourceReference? j_ = a?.Actor;
+            Code<ParticipationStatus>? k_ = a?.ParticipantStatusElement;
+            FhirString? l_ = a?.CommentElement;
+            AppointmentResponse? m_ = new AppointmentResponse
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Appointment = f_,
@@ -382,32 +384,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<AppointmentResponse> c_ = context.Operators.SelectDistinct<AppointmentResponse, AppointmentResponse>((IEnumerable<AppointmentResponse>)a_, b_);
-        AppointmentResponse d_ = context.Operators.SingletonFrom<AppointmentResponse>(c_);
+        IEnumerable<AppointmentResponse?>? c_ = context.Operators.SelectDistinct<AppointmentResponse, AppointmentResponse>((IEnumerable<AppointmentResponse>)a_, b_);
+        AppointmentResponse? d_ = context.Operators.SingletonFrom<AppointmentResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("AuditEventResource")]
-    public AuditEvent AuditEventResource(CqlContext context, AuditEvent arg)
+    public AuditEvent? AuditEventResource(CqlContext context, AuditEvent? arg)
     {
-        AuditEvent[] a_ = [
+        AuditEvent?[]? a_ = [
             arg,
         ];
 
-        AuditEvent b_(AuditEvent a) {
-            Coding e_ = a?.Type;
-            List<Coding> f_ = a?.Subtype;
-            Code<AuditEvent.AuditEventAction> g_ = a?.ActionElement;
-            Period h_ = a?.Period;
-            Instant i_ = a?.RecordedElement;
-            Code<AuditEvent.AuditEventOutcome> j_ = a?.OutcomeElement;
-            FhirString k_ = a?.OutcomeDescElement;
-            List<CodeableConcept> l_ = a?.PurposeOfEvent;
-            List<AuditEvent.AgentComponent> m_ = a?.Agent;
-            AuditEvent.SourceComponent n_ = a?.Source;
-            List<AuditEvent.EntityComponent> o_ = a?.Entity;
-            AuditEvent p_ = new AuditEvent
+        AuditEvent? b_(AuditEvent? a) {
+            Coding? e_ = a?.Type;
+            List<Coding?>? f_ = a?.Subtype;
+            Code<AuditEvent.AuditEventAction>? g_ = a?.ActionElement;
+            Period? h_ = a?.Period;
+            Instant? i_ = a?.RecordedElement;
+            Code<AuditEvent.AuditEventOutcome>? j_ = a?.OutcomeElement;
+            FhirString? k_ = a?.OutcomeDescElement;
+            List<CodeableConcept?>? l_ = a?.PurposeOfEvent;
+            List<AuditEvent.AgentComponent?>? m_ = a?.Agent;
+            AuditEvent.SourceComponent? n_ = a?.Source;
+            List<AuditEvent.EntityComponent?>? o_ = a?.Entity;
+            AuditEvent? p_ = new AuditEvent
             {
                 Type = e_,
                 Subtype = new List<Coding>((IEnumerable<Coding>)f_),
@@ -424,26 +426,26 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<AuditEvent> c_ = context.Operators.SelectDistinct<AuditEvent, AuditEvent>((IEnumerable<AuditEvent>)a_, b_);
-        AuditEvent d_ = context.Operators.SingletonFrom<AuditEvent>(c_);
+        IEnumerable<AuditEvent?>? c_ = context.Operators.SelectDistinct<AuditEvent, AuditEvent>((IEnumerable<AuditEvent>)a_, b_);
+        AuditEvent? d_ = context.Operators.SingletonFrom<AuditEvent>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("BasicResource")]
-    public Basic BasicResource(CqlContext context, Basic arg)
+    public Basic? BasicResource(CqlContext context, Basic? arg)
     {
-        Basic[] a_ = [
+        Basic?[]? a_ = [
             arg,
         ];
 
-        Basic b_(Basic a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Code;
-            ResourceReference g_ = a?.Subject;
-            Date h_ = a?.CreatedElement;
-            ResourceReference i_ = a?.Author;
-            Basic j_ = new Basic
+        Basic? b_(Basic? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Code;
+            ResourceReference? g_ = a?.Subject;
+            Date? h_ = a?.CreatedElement;
+            ResourceReference? i_ = a?.Author;
+            Basic? j_ = new Basic
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Code = f_,
@@ -454,32 +456,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return j_;
         }
 
-        IEnumerable<Basic> c_ = context.Operators.SelectDistinct<Basic, Basic>((IEnumerable<Basic>)a_, b_);
-        Basic d_ = context.Operators.SingletonFrom<Basic>(c_);
+        IEnumerable<Basic?>? c_ = context.Operators.SelectDistinct<Basic, Basic>((IEnumerable<Basic>)a_, b_);
+        Basic? d_ = context.Operators.SingletonFrom<Basic>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("BiologicallyDerivedProductResource")]
-    public BiologicallyDerivedProduct BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct arg)
+    public BiologicallyDerivedProduct? BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct? arg)
     {
-        BiologicallyDerivedProduct[] a_ = [
+        BiologicallyDerivedProduct?[]? a_ = [
             arg,
         ];
 
-        BiologicallyDerivedProduct b_(BiologicallyDerivedProduct a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> f_ = a?.ProductCategoryElement;
-            CodeableConcept g_ = a?.ProductCode;
-            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> h_ = a?.StatusElement;
-            List<ResourceReference> i_ = a?.Request;
-            Integer j_ = a?.QuantityElement;
-            List<ResourceReference> k_ = a?.Parent;
-            BiologicallyDerivedProduct.CollectionComponent l_ = a?.Collection;
-            List<BiologicallyDerivedProduct.ProcessingComponent> m_ = a?.Processing;
-            BiologicallyDerivedProduct.ManipulationComponent n_ = a?.Manipulation;
-            List<BiologicallyDerivedProduct.StorageComponent> o_ = a?.Storage;
-            BiologicallyDerivedProduct p_ = new BiologicallyDerivedProduct
+        BiologicallyDerivedProduct? b_(BiologicallyDerivedProduct? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory>? f_ = a?.ProductCategoryElement;
+            CodeableConcept? g_ = a?.ProductCode;
+            Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus>? h_ = a?.StatusElement;
+            List<ResourceReference?>? i_ = a?.Request;
+            Integer? j_ = a?.QuantityElement;
+            List<ResourceReference?>? k_ = a?.Parent;
+            BiologicallyDerivedProduct.CollectionComponent? l_ = a?.Collection;
+            List<BiologicallyDerivedProduct.ProcessingComponent?>? m_ = a?.Processing;
+            BiologicallyDerivedProduct.ManipulationComponent? n_ = a?.Manipulation;
+            List<BiologicallyDerivedProduct.StorageComponent?>? o_ = a?.Storage;
+            BiologicallyDerivedProduct? p_ = new BiologicallyDerivedProduct
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ProductCategoryElement = f_,
@@ -496,29 +498,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<BiologicallyDerivedProduct> c_ = context.Operators.SelectDistinct<BiologicallyDerivedProduct, BiologicallyDerivedProduct>((IEnumerable<BiologicallyDerivedProduct>)a_, b_);
-        BiologicallyDerivedProduct d_ = context.Operators.SingletonFrom<BiologicallyDerivedProduct>(c_);
+        IEnumerable<BiologicallyDerivedProduct?>? c_ = context.Operators.SelectDistinct<BiologicallyDerivedProduct, BiologicallyDerivedProduct>((IEnumerable<BiologicallyDerivedProduct>)a_, b_);
+        BiologicallyDerivedProduct? d_ = context.Operators.SingletonFrom<BiologicallyDerivedProduct>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("BodyStructureResource")]
-    public BodyStructure BodyStructureResource(CqlContext context, BodyStructure arg)
+    public BodyStructure? BodyStructureResource(CqlContext context, BodyStructure? arg)
     {
-        BodyStructure[] a_ = [
+        BodyStructure?[]? a_ = [
             arg,
         ];
 
-        BodyStructure b_(BodyStructure a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            CodeableConcept g_ = a?.Morphology;
-            CodeableConcept h_ = a?.Location;
-            List<CodeableConcept> i_ = a?.LocationQualifier;
-            FhirString j_ = a?.DescriptionElement;
-            List<Attachment> k_ = a?.Image;
-            ResourceReference l_ = a?.Patient;
-            BodyStructure m_ = new BodyStructure
+        BodyStructure? b_(BodyStructure? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            CodeableConcept? g_ = a?.Morphology;
+            CodeableConcept? h_ = a?.Location;
+            List<CodeableConcept?>? i_ = a?.LocationQualifier;
+            FhirString? j_ = a?.DescriptionElement;
+            List<Attachment?>? k_ = a?.Image;
+            ResourceReference? l_ = a?.Patient;
+            BodyStructure? m_ = new BodyStructure
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -532,44 +534,44 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<BodyStructure> c_ = context.Operators.SelectDistinct<BodyStructure, BodyStructure>((IEnumerable<BodyStructure>)a_, b_);
-        BodyStructure d_ = context.Operators.SingletonFrom<BodyStructure>(c_);
+        IEnumerable<BodyStructure?>? c_ = context.Operators.SelectDistinct<BodyStructure, BodyStructure>((IEnumerable<BodyStructure>)a_, b_);
+        BodyStructure? d_ = context.Operators.SingletonFrom<BodyStructure>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CarePlanResource")]
-    public CarePlan CarePlanResource(CqlContext context, CarePlan arg)
+    public CarePlan? CarePlanResource(CqlContext context, CarePlan? arg)
     {
-        CarePlan[] a_ = [
+        CarePlan?[]? a_ = [
             arg,
         ];
 
-        CarePlan b_(CarePlan a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.Replaces;
-            List<ResourceReference> j_ = a?.PartOf;
-            Code<RequestStatus> k_ = a?.StatusElement;
-            Code<CarePlan.CarePlanIntent> l_ = a?.IntentElement;
-            List<CodeableConcept> m_ = a?.Category;
-            FhirString n_ = a?.TitleElement;
-            FhirString o_ = a?.DescriptionElement;
-            ResourceReference p_ = a?.Subject;
-            ResourceReference q_ = a?.Encounter;
-            Period r_ = a?.Period;
-            FhirDateTime s_ = a?.CreatedElement;
-            ResourceReference t_ = a?.Author;
-            List<ResourceReference> u_ = a?.Contributor;
-            List<ResourceReference> v_ = a?.CareTeam;
-            List<ResourceReference> w_ = a?.Addresses;
-            List<ResourceReference> x_ = a?.SupportingInfo;
-            List<ResourceReference> y_ = a?.Goal;
-            List<CarePlan.ActivityComponent> z_ = a?.Activity;
-            List<Annotation> aa_ = a?.Note;
-            CarePlan ab_ = new CarePlan
+        CarePlan? b_(CarePlan? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.Replaces;
+            List<ResourceReference?>? j_ = a?.PartOf;
+            Code<RequestStatus>? k_ = a?.StatusElement;
+            Code<CarePlan.CarePlanIntent>? l_ = a?.IntentElement;
+            List<CodeableConcept?>? m_ = a?.Category;
+            FhirString? n_ = a?.TitleElement;
+            FhirString? o_ = a?.DescriptionElement;
+            ResourceReference? p_ = a?.Subject;
+            ResourceReference? q_ = a?.Encounter;
+            Period? r_ = a?.Period;
+            FhirDateTime? s_ = a?.CreatedElement;
+            ResourceReference? t_ = a?.Author;
+            List<ResourceReference?>? u_ = a?.Contributor;
+            List<ResourceReference?>? v_ = a?.CareTeam;
+            List<ResourceReference?>? w_ = a?.Addresses;
+            List<ResourceReference?>? x_ = a?.SupportingInfo;
+            List<ResourceReference?>? y_ = a?.Goal;
+            List<CarePlan.ActivityComponent?>? z_ = a?.Activity;
+            List<Annotation?>? aa_ = a?.Note;
+            CarePlan? ab_ = new CarePlan
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -598,34 +600,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ab_;
         }
 
-        IEnumerable<CarePlan> c_ = context.Operators.SelectDistinct<CarePlan, CarePlan>((IEnumerable<CarePlan>)a_, b_);
-        CarePlan d_ = context.Operators.SingletonFrom<CarePlan>(c_);
+        IEnumerable<CarePlan?>? c_ = context.Operators.SelectDistinct<CarePlan, CarePlan>((IEnumerable<CarePlan>)a_, b_);
+        CarePlan? d_ = context.Operators.SingletonFrom<CarePlan>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CareTeamResource")]
-    public CareTeam CareTeamResource(CqlContext context, CareTeam arg)
+    public CareTeam? CareTeamResource(CqlContext context, CareTeam? arg)
     {
-        CareTeam[] a_ = [
+        CareTeam?[]? a_ = [
             arg,
         ];
 
-        CareTeam b_(CareTeam a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<CareTeam.CareTeamStatus> f_ = a?.StatusElement;
-            List<CodeableConcept> g_ = a?.Category;
-            FhirString h_ = a?.NameElement;
-            ResourceReference i_ = a?.Subject;
-            ResourceReference j_ = a?.Encounter;
-            Period k_ = a?.Period;
-            List<CareTeam.ParticipantComponent> l_ = a?.Participant;
-            List<CodeableConcept> m_ = a?.ReasonCode;
-            List<ResourceReference> n_ = a?.ReasonReference;
-            List<ResourceReference> o_ = a?.ManagingOrganization;
-            List<ContactPoint> p_ = a?.Telecom;
-            List<Annotation> q_ = a?.Note;
-            CareTeam r_ = new CareTeam
+        CareTeam? b_(CareTeam? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<CareTeam.CareTeamStatus>? f_ = a?.StatusElement;
+            List<CodeableConcept?>? g_ = a?.Category;
+            FhirString? h_ = a?.NameElement;
+            ResourceReference? i_ = a?.Subject;
+            ResourceReference? j_ = a?.Encounter;
+            Period? k_ = a?.Period;
+            List<CareTeam.ParticipantComponent?>? l_ = a?.Participant;
+            List<CodeableConcept?>? m_ = a?.ReasonCode;
+            List<ResourceReference?>? n_ = a?.ReasonReference;
+            List<ResourceReference?>? o_ = a?.ManagingOrganization;
+            List<ContactPoint?>? p_ = a?.Telecom;
+            List<Annotation?>? q_ = a?.Note;
+            CareTeam? r_ = new CareTeam
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -644,34 +646,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<CareTeam> c_ = context.Operators.SelectDistinct<CareTeam, CareTeam>((IEnumerable<CareTeam>)a_, b_);
-        CareTeam d_ = context.Operators.SingletonFrom<CareTeam>(c_);
+        IEnumerable<CareTeam?>? c_ = context.Operators.SelectDistinct<CareTeam, CareTeam>((IEnumerable<CareTeam>)a_, b_);
+        CareTeam? d_ = context.Operators.SingletonFrom<CareTeam>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CatalogEntryResource")]
-    public CatalogEntry CatalogEntryResource(CqlContext context, CatalogEntry arg)
+    public CatalogEntry? CatalogEntryResource(CqlContext context, CatalogEntry? arg)
     {
-        CatalogEntry[] a_ = [
+        CatalogEntry?[]? a_ = [
             arg,
         ];
 
-        CatalogEntry b_(CatalogEntry a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Type;
-            FhirBoolean g_ = a?.OrderableElement;
-            ResourceReference h_ = a?.ReferencedItem;
-            List<Identifier> i_ = a?.AdditionalIdentifier;
-            List<CodeableConcept> j_ = a?.Classification;
-            Code<PublicationStatus> k_ = a?.StatusElement;
-            Period l_ = a?.ValidityPeriod;
-            FhirDateTime m_ = a?.ValidToElement;
-            FhirDateTime n_ = a?.LastUpdatedElement;
-            List<CodeableConcept> o_ = a?.AdditionalCharacteristic;
-            List<CodeableConcept> p_ = a?.AdditionalClassification;
-            List<CatalogEntry.RelatedEntryComponent> q_ = a?.RelatedEntry;
-            CatalogEntry r_ = new CatalogEntry
+        CatalogEntry? b_(CatalogEntry? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Type;
+            FhirBoolean? g_ = a?.OrderableElement;
+            ResourceReference? h_ = a?.ReferencedItem;
+            List<Identifier?>? i_ = a?.AdditionalIdentifier;
+            List<CodeableConcept?>? j_ = a?.Classification;
+            Code<PublicationStatus>? k_ = a?.StatusElement;
+            Period? l_ = a?.ValidityPeriod;
+            FhirDateTime? m_ = a?.ValidToElement;
+            FhirDateTime? n_ = a?.LastUpdatedElement;
+            List<CodeableConcept?>? o_ = a?.AdditionalCharacteristic;
+            List<CodeableConcept?>? p_ = a?.AdditionalClassification;
+            List<CatalogEntry.RelatedEntryComponent?>? q_ = a?.RelatedEntry;
+            CatalogEntry? r_ = new CatalogEntry
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Type = f_,
@@ -690,47 +692,47 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<CatalogEntry> c_ = context.Operators.SelectDistinct<CatalogEntry, CatalogEntry>((IEnumerable<CatalogEntry>)a_, b_);
-        CatalogEntry d_ = context.Operators.SingletonFrom<CatalogEntry>(c_);
+        IEnumerable<CatalogEntry?>? c_ = context.Operators.SelectDistinct<CatalogEntry, CatalogEntry>((IEnumerable<CatalogEntry>)a_, b_);
+        CatalogEntry? d_ = context.Operators.SingletonFrom<CatalogEntry>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ChargeItemResource")]
-    public ChargeItem ChargeItemResource(CqlContext context, ChargeItem arg)
+    public ChargeItem? ChargeItemResource(CqlContext context, ChargeItem? arg)
     {
-        ChargeItem[] a_ = [
+        ChargeItem?[]? a_ = [
             arg,
         ];
 
-        ChargeItem b_(ChargeItem a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<FhirUri> f_ = a?.DefinitionUriElement;
-            List<Canonical> g_ = a?.DefinitionCanonicalElement;
-            Code<ChargeItem.ChargeItemStatus> h_ = a?.StatusElement;
-            List<ResourceReference> i_ = a?.PartOf;
-            CodeableConcept j_ = a?.Code;
-            ResourceReference k_ = a?.Subject;
-            ResourceReference l_ = a?.Context;
-            DataType m_ = a?.Occurrence;
-            List<ChargeItem.PerformerComponent> n_ = a?.Performer;
-            ResourceReference o_ = a?.PerformingOrganization;
-            ResourceReference p_ = a?.RequestingOrganization;
-            ResourceReference q_ = a?.CostCenter;
-            Quantity r_ = a?.Quantity;
-            List<CodeableConcept> s_ = a?.Bodysite;
-            FhirDecimal t_ = a?.FactorOverrideElement;
-            Money u_ = a?.PriceOverride;
-            FhirString v_ = a?.OverrideReasonElement;
-            ResourceReference w_ = a?.Enterer;
-            FhirDateTime x_ = a?.EnteredDateElement;
-            List<CodeableConcept> y_ = a?.Reason;
-            List<ResourceReference> z_ = a?.Service;
-            DataType aa_ = a?.Product;
-            List<ResourceReference> ab_ = a?.Account;
-            List<Annotation> ac_ = a?.Note;
-            List<ResourceReference> ad_ = a?.SupportingInformation;
-            ChargeItem ae_ = new ChargeItem
+        ChargeItem? b_(ChargeItem? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<FhirUri?>? f_ = a?.DefinitionUriElement;
+            List<Canonical?>? g_ = a?.DefinitionCanonicalElement;
+            Code<ChargeItem.ChargeItemStatus>? h_ = a?.StatusElement;
+            List<ResourceReference?>? i_ = a?.PartOf;
+            CodeableConcept? j_ = a?.Code;
+            ResourceReference? k_ = a?.Subject;
+            ResourceReference? l_ = a?.Context;
+            DataType? m_ = a?.Occurrence;
+            List<ChargeItem.PerformerComponent?>? n_ = a?.Performer;
+            ResourceReference? o_ = a?.PerformingOrganization;
+            ResourceReference? p_ = a?.RequestingOrganization;
+            ResourceReference? q_ = a?.CostCenter;
+            Quantity? r_ = a?.Quantity;
+            List<CodeableConcept?>? s_ = a?.Bodysite;
+            FhirDecimal? t_ = a?.FactorOverrideElement;
+            Money? u_ = a?.PriceOverride;
+            FhirString? v_ = a?.OverrideReasonElement;
+            ResourceReference? w_ = a?.Enterer;
+            FhirDateTime? x_ = a?.EnteredDateElement;
+            List<CodeableConcept?>? y_ = a?.Reason;
+            List<ResourceReference?>? z_ = a?.Service;
+            DataType? aa_ = a?.Product;
+            List<ResourceReference?>? ab_ = a?.Account;
+            List<Annotation?>? ac_ = a?.Note;
+            List<ResourceReference?>? ad_ = a?.SupportingInformation;
+            ChargeItem? ae_ = new ChargeItem
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 DefinitionUriElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
@@ -762,44 +764,44 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ae_;
         }
 
-        IEnumerable<ChargeItem> c_ = context.Operators.SelectDistinct<ChargeItem, ChargeItem>((IEnumerable<ChargeItem>)a_, b_);
-        ChargeItem d_ = context.Operators.SingletonFrom<ChargeItem>(c_);
+        IEnumerable<ChargeItem?>? c_ = context.Operators.SelectDistinct<ChargeItem, ChargeItem>((IEnumerable<ChargeItem>)a_, b_);
+        ChargeItem? d_ = context.Operators.SingletonFrom<ChargeItem>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ChargeItemDefinitionResource")]
-    public ChargeItemDefinition ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition arg)
+    public ChargeItemDefinition? ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition? arg)
     {
-        ChargeItemDefinition[] a_ = [
+        ChargeItemDefinition?[]? a_ = [
             arg,
         ];
 
-        ChargeItemDefinition b_(ChargeItemDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.TitleElement;
-            List<FhirUri> i_ = a?.DerivedFromUriElement;
-            List<Canonical> j_ = a?.PartOfElement;
-            List<Canonical> k_ = a?.ReplacesElement;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirBoolean m_ = a?.ExperimentalElement;
-            FhirDateTime n_ = a?.DateElement;
-            FhirString o_ = a?.PublisherElement;
-            List<ContactDetail> p_ = a?.Contact;
-            Markdown q_ = a?.DescriptionElement;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.CopyrightElement;
-            Date u_ = a?.ApprovalDateElement;
-            Date v_ = a?.LastReviewDateElement;
-            Period w_ = a?.EffectivePeriod;
-            CodeableConcept x_ = a?.Code;
-            List<ResourceReference> y_ = a?.Instance;
-            List<ChargeItemDefinition.ApplicabilityComponent> z_ = a?.Applicability;
-            List<ChargeItemDefinition.PropertyGroupComponent> aa_ = a?.PropertyGroup;
-            ChargeItemDefinition ab_ = new ChargeItemDefinition
+        ChargeItemDefinition? b_(ChargeItemDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.TitleElement;
+            List<FhirUri?>? i_ = a?.DerivedFromUriElement;
+            List<Canonical?>? j_ = a?.PartOfElement;
+            List<Canonical?>? k_ = a?.ReplacesElement;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirBoolean? m_ = a?.ExperimentalElement;
+            FhirDateTime? n_ = a?.DateElement;
+            FhirString? o_ = a?.PublisherElement;
+            List<ContactDetail?>? p_ = a?.Contact;
+            Markdown? q_ = a?.DescriptionElement;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.CopyrightElement;
+            Date? u_ = a?.ApprovalDateElement;
+            Date? v_ = a?.LastReviewDateElement;
+            Period? w_ = a?.EffectivePeriod;
+            CodeableConcept? x_ = a?.Code;
+            List<ResourceReference?>? y_ = a?.Instance;
+            List<ChargeItemDefinition.ApplicabilityComponent?>? z_ = a?.Applicability;
+            List<ChargeItemDefinition.PropertyGroupComponent?>? aa_ = a?.PropertyGroup;
+            ChargeItemDefinition? ab_ = new ChargeItemDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -828,48 +830,48 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ab_;
         }
 
-        IEnumerable<ChargeItemDefinition> c_ = context.Operators.SelectDistinct<ChargeItemDefinition, ChargeItemDefinition>((IEnumerable<ChargeItemDefinition>)a_, b_);
-        ChargeItemDefinition d_ = context.Operators.SingletonFrom<ChargeItemDefinition>(c_);
+        IEnumerable<ChargeItemDefinition?>? c_ = context.Operators.SelectDistinct<ChargeItemDefinition, ChargeItemDefinition>((IEnumerable<ChargeItemDefinition>)a_, b_);
+        ChargeItemDefinition? d_ = context.Operators.SingletonFrom<ChargeItemDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ClaimResource")]
-    public Claim ClaimResource(CqlContext context, Claim arg)
+    public Claim? ClaimResource(CqlContext context, Claim? arg)
     {
-        Claim[] a_ = [
+        Claim?[]? a_ = [
             arg,
         ];
 
-        Claim b_(Claim a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            CodeableConcept h_ = a?.SubType;
-            Code<ClaimUseCode> i_ = a?.UseElement;
-            ResourceReference j_ = a?.Patient;
-            Period k_ = a?.BillablePeriod;
-            FhirDateTime l_ = a?.CreatedElement;
-            ResourceReference m_ = a?.Enterer;
-            ResourceReference n_ = a?.Insurer;
-            ResourceReference o_ = a?.Provider;
-            CodeableConcept p_ = a?.Priority;
-            CodeableConcept q_ = a?.FundsReserve;
-            List<Claim.RelatedClaimComponent> r_ = a?.Related;
-            ResourceReference s_ = a?.Prescription;
-            ResourceReference t_ = a?.OriginalPrescription;
-            Claim.PayeeComponent u_ = a?.Payee;
-            ResourceReference v_ = a?.Referral;
-            ResourceReference w_ = a?.Facility;
-            List<Claim.CareTeamComponent> x_ = a?.CareTeam;
-            List<Claim.SupportingInformationComponent> y_ = a?.SupportingInfo;
-            List<Claim.DiagnosisComponent> z_ = a?.Diagnosis;
-            List<Claim.ProcedureComponent> aa_ = a?.Procedure;
-            List<Claim.InsuranceComponent> ab_ = a?.Insurance;
-            Claim.AccidentComponent ac_ = a?.Accident;
-            List<Claim.ItemComponent> ad_ = a?.Item;
-            Money ae_ = a?.Total;
-            Claim af_ = new Claim
+        Claim? b_(Claim? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            CodeableConcept? h_ = a?.SubType;
+            Code<ClaimUseCode>? i_ = a?.UseElement;
+            ResourceReference? j_ = a?.Patient;
+            Period? k_ = a?.BillablePeriod;
+            FhirDateTime? l_ = a?.CreatedElement;
+            ResourceReference? m_ = a?.Enterer;
+            ResourceReference? n_ = a?.Insurer;
+            ResourceReference? o_ = a?.Provider;
+            CodeableConcept? p_ = a?.Priority;
+            CodeableConcept? q_ = a?.FundsReserve;
+            List<Claim.RelatedClaimComponent?>? r_ = a?.Related;
+            ResourceReference? s_ = a?.Prescription;
+            ResourceReference? t_ = a?.OriginalPrescription;
+            Claim.PayeeComponent? u_ = a?.Payee;
+            ResourceReference? v_ = a?.Referral;
+            ResourceReference? w_ = a?.Facility;
+            List<Claim.CareTeamComponent?>? x_ = a?.CareTeam;
+            List<Claim.SupportingInformationComponent?>? y_ = a?.SupportingInfo;
+            List<Claim.DiagnosisComponent?>? z_ = a?.Diagnosis;
+            List<Claim.ProcedureComponent?>? aa_ = a?.Procedure;
+            List<Claim.InsuranceComponent?>? ab_ = a?.Insurance;
+            Claim.AccidentComponent? ac_ = a?.Accident;
+            List<Claim.ItemComponent?>? ad_ = a?.Item;
+            Money? ae_ = a?.Total;
+            Claim? af_ = new Claim
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -902,48 +904,48 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return af_;
         }
 
-        IEnumerable<Claim> c_ = context.Operators.SelectDistinct<Claim, Claim>((IEnumerable<Claim>)a_, b_);
-        Claim d_ = context.Operators.SingletonFrom<Claim>(c_);
+        IEnumerable<Claim?>? c_ = context.Operators.SelectDistinct<Claim, Claim>((IEnumerable<Claim>)a_, b_);
+        Claim? d_ = context.Operators.SingletonFrom<Claim>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ClaimResponseResource")]
-    public ClaimResponse ClaimResponseResource(CqlContext context, ClaimResponse arg)
+    public ClaimResponse? ClaimResponseResource(CqlContext context, ClaimResponse? arg)
     {
-        ClaimResponse[] a_ = [
+        ClaimResponse?[]? a_ = [
             arg,
         ];
 
-        ClaimResponse b_(ClaimResponse a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            CodeableConcept h_ = a?.SubType;
-            Code<ClaimUseCode> i_ = a?.UseElement;
-            ResourceReference j_ = a?.Patient;
-            FhirDateTime k_ = a?.CreatedElement;
-            ResourceReference l_ = a?.Insurer;
-            ResourceReference m_ = a?.Requestor;
-            ResourceReference n_ = a?.Request;
-            Code<ClaimProcessingCodes> o_ = a?.OutcomeElement;
-            FhirString p_ = a?.DispositionElement;
-            FhirString q_ = a?.PreAuthRefElement;
-            Period r_ = a?.PreAuthPeriod;
-            CodeableConcept s_ = a?.PayeeType;
-            List<ClaimResponse.ItemComponent> t_ = a?.Item;
-            List<ClaimResponse.AddedItemComponent> u_ = a?.AddItem;
-            List<ClaimResponse.AdjudicationComponent> v_ = a?.Adjudication;
-            List<ClaimResponse.TotalComponent> w_ = a?.Total;
-            ClaimResponse.PaymentComponent x_ = a?.Payment;
-            CodeableConcept y_ = a?.FundsReserve;
-            CodeableConcept z_ = a?.FormCode;
-            Attachment aa_ = a?.Form;
-            List<ClaimResponse.NoteComponent> ab_ = a?.ProcessNote;
-            List<ResourceReference> ac_ = a?.CommunicationRequest;
-            List<ClaimResponse.InsuranceComponent> ad_ = a?.Insurance;
-            List<ClaimResponse.ErrorComponent> ae_ = a?.Error;
-            ClaimResponse af_ = new ClaimResponse
+        ClaimResponse? b_(ClaimResponse? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            CodeableConcept? h_ = a?.SubType;
+            Code<ClaimUseCode>? i_ = a?.UseElement;
+            ResourceReference? j_ = a?.Patient;
+            FhirDateTime? k_ = a?.CreatedElement;
+            ResourceReference? l_ = a?.Insurer;
+            ResourceReference? m_ = a?.Requestor;
+            ResourceReference? n_ = a?.Request;
+            Code<ClaimProcessingCodes>? o_ = a?.OutcomeElement;
+            FhirString? p_ = a?.DispositionElement;
+            FhirString? q_ = a?.PreAuthRefElement;
+            Period? r_ = a?.PreAuthPeriod;
+            CodeableConcept? s_ = a?.PayeeType;
+            List<ClaimResponse.ItemComponent?>? t_ = a?.Item;
+            List<ClaimResponse.AddedItemComponent?>? u_ = a?.AddItem;
+            List<ClaimResponse.AdjudicationComponent?>? v_ = a?.Adjudication;
+            List<ClaimResponse.TotalComponent?>? w_ = a?.Total;
+            ClaimResponse.PaymentComponent? x_ = a?.Payment;
+            CodeableConcept? y_ = a?.FundsReserve;
+            CodeableConcept? z_ = a?.FormCode;
+            Attachment? aa_ = a?.Form;
+            List<ClaimResponse.NoteComponent?>? ab_ = a?.ProcessNote;
+            List<ResourceReference?>? ac_ = a?.CommunicationRequest;
+            List<ClaimResponse.InsuranceComponent?>? ad_ = a?.Insurance;
+            List<ClaimResponse.ErrorComponent?>? ae_ = a?.Error;
+            ClaimResponse? af_ = new ClaimResponse
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -976,41 +978,41 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return af_;
         }
 
-        IEnumerable<ClaimResponse> c_ = context.Operators.SelectDistinct<ClaimResponse, ClaimResponse>((IEnumerable<ClaimResponse>)a_, b_);
-        ClaimResponse d_ = context.Operators.SingletonFrom<ClaimResponse>(c_);
+        IEnumerable<ClaimResponse?>? c_ = context.Operators.SelectDistinct<ClaimResponse, ClaimResponse>((IEnumerable<ClaimResponse>)a_, b_);
+        ClaimResponse? d_ = context.Operators.SingletonFrom<ClaimResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ClinicalImpressionResource")]
-    public ClinicalImpression ClinicalImpressionResource(CqlContext context, ClinicalImpression arg)
+    public ClinicalImpression? ClinicalImpressionResource(CqlContext context, ClinicalImpression? arg)
     {
-        ClinicalImpression[] a_ = [
+        ClinicalImpression?[]? a_ = [
             arg,
         ];
 
-        ClinicalImpression b_(ClinicalImpression a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ClinicalImpression.ClinicalImpressionStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.StatusReason;
-            CodeableConcept h_ = a?.Code;
-            FhirString i_ = a?.DescriptionElement;
-            ResourceReference j_ = a?.Subject;
-            ResourceReference k_ = a?.Encounter;
-            DataType l_ = a?.Effective;
-            FhirDateTime m_ = a?.DateElement;
-            ResourceReference n_ = a?.Assessor;
-            ResourceReference o_ = a?.Previous;
-            List<ResourceReference> p_ = a?.Problem;
-            List<ClinicalImpression.InvestigationComponent> q_ = a?.Investigation;
-            List<FhirUri> r_ = a?.ProtocolElement;
-            FhirString s_ = a?.SummaryElement;
-            List<ClinicalImpression.FindingComponent> t_ = a?.Finding;
-            List<CodeableConcept> u_ = a?.PrognosisCodeableConcept;
-            List<ResourceReference> v_ = a?.PrognosisReference;
-            List<ResourceReference> w_ = a?.SupportingInfo;
-            List<Annotation> x_ = a?.Note;
-            ClinicalImpression y_ = new ClinicalImpression
+        ClinicalImpression? b_(ClinicalImpression? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ClinicalImpression.ClinicalImpressionStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.StatusReason;
+            CodeableConcept? h_ = a?.Code;
+            FhirString? i_ = a?.DescriptionElement;
+            ResourceReference? j_ = a?.Subject;
+            ResourceReference? k_ = a?.Encounter;
+            DataType? l_ = a?.Effective;
+            FhirDateTime? m_ = a?.DateElement;
+            ResourceReference? n_ = a?.Assessor;
+            ResourceReference? o_ = a?.Previous;
+            List<ResourceReference?>? p_ = a?.Problem;
+            List<ClinicalImpression.InvestigationComponent?>? q_ = a?.Investigation;
+            List<FhirUri?>? r_ = a?.ProtocolElement;
+            FhirString? s_ = a?.SummaryElement;
+            List<ClinicalImpression.FindingComponent?>? t_ = a?.Finding;
+            List<CodeableConcept?>? u_ = a?.PrognosisCodeableConcept;
+            List<ResourceReference?>? v_ = a?.PrognosisReference;
+            List<ResourceReference?>? w_ = a?.SupportingInfo;
+            List<Annotation?>? x_ = a?.Note;
+            ClinicalImpression? y_ = new ClinicalImpression
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1036,49 +1038,49 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return y_;
         }
 
-        IEnumerable<ClinicalImpression> c_ = context.Operators.SelectDistinct<ClinicalImpression, ClinicalImpression>((IEnumerable<ClinicalImpression>)a_, b_);
-        ClinicalImpression d_ = context.Operators.SingletonFrom<ClinicalImpression>(c_);
+        IEnumerable<ClinicalImpression?>? c_ = context.Operators.SelectDistinct<ClinicalImpression, ClinicalImpression>((IEnumerable<ClinicalImpression>)a_, b_);
+        ClinicalImpression? d_ = context.Operators.SingletonFrom<ClinicalImpression>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CodeSystemResource")]
-    public CodeSystem CodeSystemResource(CqlContext context, CodeSystem arg)
+    public CodeSystem? CodeSystemResource(CqlContext context, CodeSystem? arg)
     {
-        CodeSystem[] a_ = [
+        CodeSystem?[]? a_ = [
             arg,
         ];
 
-        CodeSystem b_(CodeSystem a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.PurposeElement;
-            Markdown s_ = a?.CopyrightElement;
-            FhirBoolean t_ = a?.CaseSensitiveElement;
-            Canonical u_ = a?.ValueSetElement;
-            Code<CodeSystem.CodeSystemHierarchyMeaning> v_ = a?.HierarchyMeaningElement;
-            FhirBoolean w_ = a?.CompositionalElement;
-            FhirBoolean x_ = a?.VersionNeededElement;
-            Code<CodeSystemContentMode> y_ = a?.ContentElement;
-            Canonical z_ = a?.SupplementsElement;
-            UnsignedInt aa_ = a?.CountElement;
-            Integer ab_ = context.Operators.Convert<Integer>(aa_);
-            UnsignedInt ac_ = context.Operators.Convert<UnsignedInt>(ab_);
-            List<CodeSystem.FilterComponent> ad_ = a?.Filter;
-            List<CodeSystem.PropertyComponent> ae_ = a?.Property;
-            List<CodeSystem.ConceptDefinitionComponent> af_ = a?.Concept;
-            CodeSystem ag_ = new CodeSystem
+        CodeSystem? b_(CodeSystem? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.PurposeElement;
+            Markdown? s_ = a?.CopyrightElement;
+            FhirBoolean? t_ = a?.CaseSensitiveElement;
+            Canonical? u_ = a?.ValueSetElement;
+            Code<CodeSystem.CodeSystemHierarchyMeaning>? v_ = a?.HierarchyMeaningElement;
+            FhirBoolean? w_ = a?.CompositionalElement;
+            FhirBoolean? x_ = a?.VersionNeededElement;
+            Code<CodeSystemContentMode>? y_ = a?.ContentElement;
+            Canonical? z_ = a?.SupplementsElement;
+            UnsignedInt? aa_ = a?.CountElement;
+            Integer? ab_ = context.Operators.Convert<Integer>(aa_);
+            UnsignedInt? ac_ = context.Operators.Convert<UnsignedInt>(ab_);
+            List<CodeSystem.FilterComponent?>? ad_ = a?.Filter;
+            List<CodeSystem.PropertyComponent?>? ae_ = a?.Property;
+            List<CodeSystem.ConceptDefinitionComponent?>? af_ = a?.Concept;
+            CodeSystem? ag_ = new CodeSystem
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -1110,44 +1112,44 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ag_;
         }
 
-        IEnumerable<CodeSystem> c_ = context.Operators.SelectDistinct<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)a_, b_);
-        CodeSystem d_ = context.Operators.SingletonFrom<CodeSystem>(c_);
+        IEnumerable<CodeSystem?>? c_ = context.Operators.SelectDistinct<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)a_, b_);
+        CodeSystem? d_ = context.Operators.SingletonFrom<CodeSystem>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CommunicationResource")]
-    public Communication CommunicationResource(CqlContext context, Communication arg)
+    public Communication? CommunicationResource(CqlContext context, Communication? arg)
     {
-        Communication[] a_ = [
+        Communication?[]? a_ = [
             arg,
         ];
 
-        Communication b_(Communication a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.PartOf;
-            List<ResourceReference> j_ = a?.InResponseTo;
-            Code<EventStatus> k_ = a?.StatusElement;
-            CodeableConcept l_ = a?.StatusReason;
-            List<CodeableConcept> m_ = a?.Category;
-            Code<RequestPriority> n_ = a?.PriorityElement;
-            List<CodeableConcept> o_ = a?.Medium;
-            ResourceReference p_ = a?.Subject;
-            CodeableConcept q_ = a?.Topic;
-            List<ResourceReference> r_ = a?.About;
-            ResourceReference s_ = a?.Encounter;
-            FhirDateTime t_ = a?.SentElement;
-            FhirDateTime u_ = a?.ReceivedElement;
-            List<ResourceReference> v_ = a?.Recipient;
-            ResourceReference w_ = a?.Sender;
-            List<CodeableConcept> x_ = a?.ReasonCode;
-            List<ResourceReference> y_ = a?.ReasonReference;
-            List<Communication.PayloadComponent> z_ = a?.Payload;
-            List<Annotation> aa_ = a?.Note;
-            Communication ab_ = new Communication
+        Communication? b_(Communication? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.PartOf;
+            List<ResourceReference?>? j_ = a?.InResponseTo;
+            Code<EventStatus>? k_ = a?.StatusElement;
+            CodeableConcept? l_ = a?.StatusReason;
+            List<CodeableConcept?>? m_ = a?.Category;
+            Code<RequestPriority>? n_ = a?.PriorityElement;
+            List<CodeableConcept?>? o_ = a?.Medium;
+            ResourceReference? p_ = a?.Subject;
+            CodeableConcept? q_ = a?.Topic;
+            List<ResourceReference?>? r_ = a?.About;
+            ResourceReference? s_ = a?.Encounter;
+            FhirDateTime? t_ = a?.SentElement;
+            FhirDateTime? u_ = a?.ReceivedElement;
+            List<ResourceReference?>? v_ = a?.Recipient;
+            ResourceReference? w_ = a?.Sender;
+            List<CodeableConcept?>? x_ = a?.ReasonCode;
+            List<ResourceReference?>? y_ = a?.ReasonReference;
+            List<Communication.PayloadComponent?>? z_ = a?.Payload;
+            List<Annotation?>? aa_ = a?.Note;
+            Communication? ab_ = new Communication
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -1176,43 +1178,43 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ab_;
         }
 
-        IEnumerable<Communication> c_ = context.Operators.SelectDistinct<Communication, Communication>((IEnumerable<Communication>)a_, b_);
-        Communication d_ = context.Operators.SingletonFrom<Communication>(c_);
+        IEnumerable<Communication?>? c_ = context.Operators.SelectDistinct<Communication, Communication>((IEnumerable<Communication>)a_, b_);
+        Communication? d_ = context.Operators.SingletonFrom<Communication>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CommunicationRequestResource")]
-    public CommunicationRequest CommunicationRequestResource(CqlContext context, CommunicationRequest arg)
+    public CommunicationRequest? CommunicationRequestResource(CqlContext context, CommunicationRequest? arg)
     {
-        CommunicationRequest[] a_ = [
+        CommunicationRequest?[]? a_ = [
             arg,
         ];
 
-        CommunicationRequest b_(CommunicationRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            List<ResourceReference> g_ = a?.Replaces;
-            Identifier h_ = a?.GroupIdentifier;
-            Code<RequestStatus> i_ = a?.StatusElement;
-            CodeableConcept j_ = a?.StatusReason;
-            List<CodeableConcept> k_ = a?.Category;
-            Code<RequestPriority> l_ = a?.PriorityElement;
-            FhirBoolean m_ = a?.DoNotPerformElement;
-            List<CodeableConcept> n_ = a?.Medium;
-            ResourceReference o_ = a?.Subject;
-            List<ResourceReference> p_ = a?.About;
-            ResourceReference q_ = a?.Encounter;
-            List<CommunicationRequest.PayloadComponent> r_ = a?.Payload;
-            DataType s_ = a?.Occurrence;
-            FhirDateTime t_ = a?.AuthoredOnElement;
-            ResourceReference u_ = a?.Requester;
-            List<ResourceReference> v_ = a?.Recipient;
-            ResourceReference w_ = a?.Sender;
-            List<CodeableConcept> x_ = a?.ReasonCode;
-            List<ResourceReference> y_ = a?.ReasonReference;
-            List<Annotation> z_ = a?.Note;
-            CommunicationRequest aa_ = new CommunicationRequest
+        CommunicationRequest? b_(CommunicationRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            List<ResourceReference?>? g_ = a?.Replaces;
+            Identifier? h_ = a?.GroupIdentifier;
+            Code<RequestStatus>? i_ = a?.StatusElement;
+            CodeableConcept? j_ = a?.StatusReason;
+            List<CodeableConcept?>? k_ = a?.Category;
+            Code<RequestPriority>? l_ = a?.PriorityElement;
+            FhirBoolean? m_ = a?.DoNotPerformElement;
+            List<CodeableConcept?>? n_ = a?.Medium;
+            ResourceReference? o_ = a?.Subject;
+            List<ResourceReference?>? p_ = a?.About;
+            ResourceReference? q_ = a?.Encounter;
+            List<CommunicationRequest.PayloadComponent?>? r_ = a?.Payload;
+            DataType? s_ = a?.Occurrence;
+            FhirDateTime? t_ = a?.AuthoredOnElement;
+            ResourceReference? u_ = a?.Requester;
+            List<ResourceReference?>? v_ = a?.Recipient;
+            ResourceReference? w_ = a?.Sender;
+            List<CodeableConcept?>? x_ = a?.ReasonCode;
+            List<ResourceReference?>? y_ = a?.ReasonReference;
+            List<Annotation?>? z_ = a?.Note;
+            CommunicationRequest? aa_ = new CommunicationRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -1240,36 +1242,36 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aa_;
         }
 
-        IEnumerable<CommunicationRequest> c_ = context.Operators.SelectDistinct<CommunicationRequest, CommunicationRequest>((IEnumerable<CommunicationRequest>)a_, b_);
-        CommunicationRequest d_ = context.Operators.SingletonFrom<CommunicationRequest>(c_);
+        IEnumerable<CommunicationRequest?>? c_ = context.Operators.SelectDistinct<CommunicationRequest, CommunicationRequest>((IEnumerable<CommunicationRequest>)a_, b_);
+        CommunicationRequest? d_ = context.Operators.SingletonFrom<CommunicationRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CompositionResource")]
-    public Composition CompositionResource(CqlContext context, Composition arg)
+    public Composition? CompositionResource(CqlContext context, Composition? arg)
     {
-        Composition[] a_ = [
+        Composition?[]? a_ = [
             arg,
         ];
 
-        Composition b_(Composition a) {
-            Identifier e_ = a?.Identifier;
-            Code<CompositionStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            List<CodeableConcept> h_ = a?.Category;
-            ResourceReference i_ = a?.Subject;
-            ResourceReference j_ = a?.Encounter;
-            FhirDateTime k_ = a?.DateElement;
-            List<ResourceReference> l_ = a?.Author;
-            FhirString m_ = a?.TitleElement;
-            Code<Composition.V3ConfidentialityClassification> n_ = a?.ConfidentialityElement;
-            List<Composition.AttesterComponent> o_ = a?.Attester;
-            ResourceReference p_ = a?.Custodian;
-            List<Composition.RelatesToComponent> q_ = a?.RelatesTo;
-            List<Composition.EventComponent> r_ = a?.Event;
-            List<Composition.SectionComponent> s_ = a?.Section;
-            Composition t_ = new Composition
+        Composition? b_(Composition? a) {
+            Identifier? e_ = a?.Identifier;
+            Code<CompositionStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            List<CodeableConcept?>? h_ = a?.Category;
+            ResourceReference? i_ = a?.Subject;
+            ResourceReference? j_ = a?.Encounter;
+            FhirDateTime? k_ = a?.DateElement;
+            List<ResourceReference?>? l_ = a?.Author;
+            FhirString? m_ = a?.TitleElement;
+            Code<Composition.V3ConfidentialityClassification>? n_ = a?.ConfidentialityElement;
+            List<Composition.AttesterComponent?>? o_ = a?.Attester;
+            ResourceReference? p_ = a?.Custodian;
+            List<Composition.RelatesToComponent?>? q_ = a?.RelatesTo;
+            List<Composition.EventComponent?>? r_ = a?.Event;
+            List<Composition.SectionComponent?>? s_ = a?.Section;
+            Composition? t_ = new Composition
             {
                 Identifier = e_,
                 StatusElement = f_,
@@ -1290,39 +1292,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return t_;
         }
 
-        IEnumerable<Composition> c_ = context.Operators.SelectDistinct<Composition, Composition>((IEnumerable<Composition>)a_, b_);
-        Composition d_ = context.Operators.SingletonFrom<Composition>(c_);
+        IEnumerable<Composition?>? c_ = context.Operators.SelectDistinct<Composition, Composition>((IEnumerable<Composition>)a_, b_);
+        Composition? d_ = context.Operators.SingletonFrom<Composition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ConceptMapResource")]
-    public ConceptMap ConceptMapResource(CqlContext context, ConceptMap arg)
+    public ConceptMap? ConceptMapResource(CqlContext context, ConceptMap? arg)
     {
-        ConceptMap[] a_ = [
+        ConceptMap?[]? a_ = [
             arg,
         ];
 
-        ConceptMap b_(ConceptMap a) {
-            FhirUri e_ = a?.UrlElement;
-            Identifier f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.PurposeElement;
-            Markdown s_ = a?.CopyrightElement;
-            DataType t_ = a?.Source;
-            DataType u_ = a?.Target;
-            List<ConceptMap.GroupComponent> v_ = a?.Group;
-            ConceptMap w_ = new ConceptMap
+        ConceptMap? b_(ConceptMap? a) {
+            FhirUri? e_ = a?.UrlElement;
+            Identifier? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.PurposeElement;
+            Markdown? s_ = a?.CopyrightElement;
+            DataType? t_ = a?.Source;
+            DataType? u_ = a?.Target;
+            List<ConceptMap.GroupComponent?>? v_ = a?.Group;
+            ConceptMap? w_ = new ConceptMap
             {
                 UrlElement = e_,
                 Identifier = f_,
@@ -1346,38 +1348,38 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<ConceptMap> c_ = context.Operators.SelectDistinct<ConceptMap, ConceptMap>((IEnumerable<ConceptMap>)a_, b_);
-        ConceptMap d_ = context.Operators.SingletonFrom<ConceptMap>(c_);
+        IEnumerable<ConceptMap?>? c_ = context.Operators.SelectDistinct<ConceptMap, ConceptMap>((IEnumerable<ConceptMap>)a_, b_);
+        ConceptMap? d_ = context.Operators.SingletonFrom<ConceptMap>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ConditionResource")]
-    public Condition ConditionResource(CqlContext context, Condition arg)
+    public Condition? ConditionResource(CqlContext context, Condition? arg)
     {
-        Condition[] a_ = [
+        Condition?[]? a_ = [
             arg,
         ];
 
-        Condition b_(Condition a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.ClinicalStatus;
-            CodeableConcept g_ = a?.VerificationStatus;
-            List<CodeableConcept> h_ = a?.Category;
-            CodeableConcept i_ = a?.Severity;
-            CodeableConcept j_ = a?.Code;
-            List<CodeableConcept> k_ = a?.BodySite;
-            ResourceReference l_ = a?.Subject;
-            ResourceReference m_ = a?.Encounter;
-            DataType n_ = a?.Onset;
-            DataType o_ = a?.Abatement;
-            FhirDateTime p_ = a?.RecordedDateElement;
-            ResourceReference q_ = a?.Recorder;
-            ResourceReference r_ = a?.Asserter;
-            List<Condition.StageComponent> s_ = a?.Stage;
-            List<Condition.EvidenceComponent> t_ = a?.Evidence;
-            List<Annotation> u_ = a?.Note;
-            Condition v_ = new Condition
+        Condition? b_(Condition? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.ClinicalStatus;
+            CodeableConcept? g_ = a?.VerificationStatus;
+            List<CodeableConcept?>? h_ = a?.Category;
+            CodeableConcept? i_ = a?.Severity;
+            CodeableConcept? j_ = a?.Code;
+            List<CodeableConcept?>? k_ = a?.BodySite;
+            ResourceReference? l_ = a?.Subject;
+            ResourceReference? m_ = a?.Encounter;
+            DataType? n_ = a?.Onset;
+            DataType? o_ = a?.Abatement;
+            FhirDateTime? p_ = a?.RecordedDateElement;
+            ResourceReference? q_ = a?.Recorder;
+            ResourceReference? r_ = a?.Asserter;
+            List<Condition.StageComponent?>? s_ = a?.Stage;
+            List<Condition.EvidenceComponent?>? t_ = a?.Evidence;
+            List<Annotation?>? u_ = a?.Note;
+            Condition? v_ = new Condition
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ClinicalStatus = f_,
@@ -1400,34 +1402,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return v_;
         }
 
-        IEnumerable<Condition> c_ = context.Operators.SelectDistinct<Condition, Condition>((IEnumerable<Condition>)a_, b_);
-        Condition d_ = context.Operators.SingletonFrom<Condition>(c_);
+        IEnumerable<Condition?>? c_ = context.Operators.SelectDistinct<Condition, Condition>((IEnumerable<Condition>)a_, b_);
+        Condition? d_ = context.Operators.SingletonFrom<Condition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ConsentResource")]
-    public Consent ConsentResource(CqlContext context, Consent arg)
+    public Consent? ConsentResource(CqlContext context, Consent? arg)
     {
-        Consent[] a_ = [
+        Consent?[]? a_ = [
             arg,
         ];
 
-        Consent b_(Consent a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Consent.ConsentState> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Scope;
-            List<CodeableConcept> h_ = a?.Category;
-            ResourceReference i_ = a?.Patient;
-            FhirDateTime j_ = a?.DateTimeElement;
-            List<ResourceReference> k_ = a?.Performer;
-            List<ResourceReference> l_ = a?.Organization;
-            DataType m_ = a?.Source;
-            List<Consent.PolicyComponent> n_ = a?.Policy;
-            CodeableConcept o_ = a?.PolicyRule;
-            List<Consent.VerificationComponent> p_ = a?.Verification;
-            Consent.provisionComponent q_ = a?.Provision;
-            Consent r_ = new Consent
+        Consent? b_(Consent? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Consent.ConsentState>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Scope;
+            List<CodeableConcept?>? h_ = a?.Category;
+            ResourceReference? i_ = a?.Patient;
+            FhirDateTime? j_ = a?.DateTimeElement;
+            List<ResourceReference?>? k_ = a?.Performer;
+            List<ResourceReference?>? l_ = a?.Organization;
+            DataType? m_ = a?.Source;
+            List<Consent.PolicyComponent?>? n_ = a?.Policy;
+            CodeableConcept? o_ = a?.PolicyRule;
+            List<Consent.VerificationComponent?>? p_ = a?.Verification;
+            Consent.provisionComponent? q_ = a?.Provision;
+            Consent? r_ = new Consent
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1446,54 +1448,54 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<Consent> c_ = context.Operators.SelectDistinct<Consent, Consent>((IEnumerable<Consent>)a_, b_);
-        Consent d_ = context.Operators.SingletonFrom<Consent>(c_);
+        IEnumerable<Consent?>? c_ = context.Operators.SelectDistinct<Consent, Consent>((IEnumerable<Consent>)a_, b_);
+        Consent? d_ = context.Operators.SingletonFrom<Consent>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ContractResource")]
-    public Contract ContractResource(CqlContext context, Contract arg)
+    public Contract? ContractResource(CqlContext context, Contract? arg)
     {
-        Contract[] a_ = [
+        Contract?[]? a_ = [
             arg,
         ];
 
-        Contract b_(Contract a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirUri f_ = a?.UrlElement;
-            FhirString g_ = a?.VersionElement;
-            Code<Contract.ContractResourceStatusCodes> h_ = a?.StatusElement;
-            CodeableConcept i_ = a?.LegalState;
-            ResourceReference j_ = a?.InstantiatesCanonical;
-            FhirUri k_ = a?.InstantiatesUriElement;
-            CodeableConcept l_ = a?.ContentDerivative;
-            FhirDateTime m_ = a?.IssuedElement;
-            Period n_ = a?.Applies;
-            CodeableConcept o_ = a?.ExpirationType;
-            List<ResourceReference> p_ = a?.Subject;
-            List<ResourceReference> q_ = a?.Authority;
-            List<ResourceReference> r_ = a?.Domain;
-            List<ResourceReference> s_ = a?.Site;
-            FhirString t_ = a?.NameElement;
-            FhirString u_ = a?.TitleElement;
-            FhirString v_ = a?.SubtitleElement;
-            List<FhirString> w_ = a?.AliasElement;
-            ResourceReference x_ = a?.Author;
-            CodeableConcept y_ = a?.Scope;
-            DataType z_ = a?.Topic;
-            CodeableConcept aa_ = a?.Type;
-            List<CodeableConcept> ab_ = a?.SubType;
-            Contract.ContentDefinitionComponent ac_ = a?.ContentDefinition;
-            List<Contract.TermComponent> ad_ = a?.Term;
-            List<ResourceReference> ae_ = a?.SupportingInfo;
-            List<ResourceReference> af_ = a?.RelevantHistory;
-            List<Contract.SignatoryComponent> ag_ = a?.Signer;
-            List<Contract.FriendlyLanguageComponent> ah_ = a?.Friendly;
-            List<Contract.LegalLanguageComponent> ai_ = a?.Legal;
-            List<Contract.ComputableLanguageComponent> aj_ = a?.Rule;
-            DataType ak_ = a?.LegallyBinding;
-            Contract al_ = new Contract
+        Contract? b_(Contract? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirUri? f_ = a?.UrlElement;
+            FhirString? g_ = a?.VersionElement;
+            Code<Contract.ContractResourceStatusCodes>? h_ = a?.StatusElement;
+            CodeableConcept? i_ = a?.LegalState;
+            ResourceReference? j_ = a?.InstantiatesCanonical;
+            FhirUri? k_ = a?.InstantiatesUriElement;
+            CodeableConcept? l_ = a?.ContentDerivative;
+            FhirDateTime? m_ = a?.IssuedElement;
+            Period? n_ = a?.Applies;
+            CodeableConcept? o_ = a?.ExpirationType;
+            List<ResourceReference?>? p_ = a?.Subject;
+            List<ResourceReference?>? q_ = a?.Authority;
+            List<ResourceReference?>? r_ = a?.Domain;
+            List<ResourceReference?>? s_ = a?.Site;
+            FhirString? t_ = a?.NameElement;
+            FhirString? u_ = a?.TitleElement;
+            FhirString? v_ = a?.SubtitleElement;
+            List<FhirString?>? w_ = a?.AliasElement;
+            ResourceReference? x_ = a?.Author;
+            CodeableConcept? y_ = a?.Scope;
+            DataType? z_ = a?.Topic;
+            CodeableConcept? aa_ = a?.Type;
+            List<CodeableConcept?>? ab_ = a?.SubType;
+            Contract.ContentDefinitionComponent? ac_ = a?.ContentDefinition;
+            List<Contract.TermComponent?>? ad_ = a?.Term;
+            List<ResourceReference?>? ae_ = a?.SupportingInfo;
+            List<ResourceReference?>? af_ = a?.RelevantHistory;
+            List<Contract.SignatoryComponent?>? ag_ = a?.Signer;
+            List<Contract.FriendlyLanguageComponent?>? ah_ = a?.Friendly;
+            List<Contract.LegalLanguageComponent?>? ai_ = a?.Legal;
+            List<Contract.ComputableLanguageComponent?>? aj_ = a?.Rule;
+            DataType? ak_ = a?.LegallyBinding;
+            Contract? al_ = new Contract
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 UrlElement = f_,
@@ -1532,40 +1534,40 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return al_;
         }
 
-        IEnumerable<Contract> c_ = context.Operators.SelectDistinct<Contract, Contract>((IEnumerable<Contract>)a_, b_);
-        Contract d_ = context.Operators.SingletonFrom<Contract>(c_);
+        IEnumerable<Contract?>? c_ = context.Operators.SelectDistinct<Contract, Contract>((IEnumerable<Contract>)a_, b_);
+        Contract? d_ = context.Operators.SingletonFrom<Contract>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CoverageResource")]
-    public Coverage CoverageResource(CqlContext context, Coverage arg)
+    public Coverage? CoverageResource(CqlContext context, Coverage? arg)
     {
-        Coverage[] a_ = [
+        Coverage?[]? a_ = [
             arg,
         ];
 
-        Coverage b_(Coverage a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            ResourceReference h_ = a?.PolicyHolder;
-            ResourceReference i_ = a?.Subscriber;
-            FhirString j_ = a?.SubscriberIdElement;
-            ResourceReference k_ = a?.Beneficiary;
-            FhirString l_ = a?.DependentElement;
-            CodeableConcept m_ = a?.Relationship;
-            Period n_ = a?.Period;
-            List<ResourceReference> o_ = a?.Payor;
-            List<Coverage.ClassComponent> p_ = a?.Class;
-            PositiveInt q_ = a?.OrderElement;
-            Integer r_ = context.Operators.Convert<Integer>(q_);
-            PositiveInt s_ = context.Operators.Convert<PositiveInt>(r_);
-            FhirString t_ = a?.NetworkElement;
-            List<Coverage.CostToBeneficiaryComponent> u_ = a?.CostToBeneficiary;
-            FhirBoolean v_ = a?.SubrogationElement;
-            List<ResourceReference> w_ = a?.Contract;
-            Coverage x_ = new Coverage
+        Coverage? b_(Coverage? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            ResourceReference? h_ = a?.PolicyHolder;
+            ResourceReference? i_ = a?.Subscriber;
+            FhirString? j_ = a?.SubscriberIdElement;
+            ResourceReference? k_ = a?.Beneficiary;
+            FhirString? l_ = a?.DependentElement;
+            CodeableConcept? m_ = a?.Relationship;
+            Period? n_ = a?.Period;
+            List<ResourceReference?>? o_ = a?.Payor;
+            List<Coverage.ClassComponent?>? p_ = a?.Class;
+            PositiveInt? q_ = a?.OrderElement;
+            Integer? r_ = context.Operators.Convert<Integer>(q_);
+            PositiveInt? s_ = context.Operators.Convert<PositiveInt>(r_);
+            FhirString? t_ = a?.NetworkElement;
+            List<Coverage.CostToBeneficiaryComponent?>? u_ = a?.CostToBeneficiary;
+            FhirBoolean? v_ = a?.SubrogationElement;
+            List<ResourceReference?>? w_ = a?.Contract;
+            Coverage? x_ = new Coverage
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1588,35 +1590,35 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return x_;
         }
 
-        IEnumerable<Coverage> c_ = context.Operators.SelectDistinct<Coverage, Coverage>((IEnumerable<Coverage>)a_, b_);
-        Coverage d_ = context.Operators.SingletonFrom<Coverage>(c_);
+        IEnumerable<Coverage?>? c_ = context.Operators.SelectDistinct<Coverage, Coverage>((IEnumerable<Coverage>)a_, b_);
+        Coverage? d_ = context.Operators.SingletonFrom<Coverage>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CoverageEligibilityRequestResource")]
-    public CoverageEligibilityRequest CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest arg)
+    public CoverageEligibilityRequest? CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest? arg)
     {
-        CoverageEligibilityRequest[] a_ = [
+        CoverageEligibilityRequest?[]? a_ = [
             arg,
         ];
 
-        CoverageEligibilityRequest b_(CoverageEligibilityRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Priority;
-            List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>> h_ = a?.PurposeElement;
-            ResourceReference i_ = a?.Patient;
-            DataType j_ = a?.Serviced;
-            FhirDateTime k_ = a?.CreatedElement;
-            ResourceReference l_ = a?.Enterer;
-            ResourceReference m_ = a?.Provider;
-            ResourceReference n_ = a?.Insurer;
-            ResourceReference o_ = a?.Facility;
-            List<CoverageEligibilityRequest.SupportingInformationComponent> p_ = a?.SupportingInfo;
-            List<CoverageEligibilityRequest.InsuranceComponent> q_ = a?.Insurance;
-            List<CoverageEligibilityRequest.DetailsComponent> r_ = a?.Item;
-            CoverageEligibilityRequest s_ = new CoverageEligibilityRequest
+        CoverageEligibilityRequest? b_(CoverageEligibilityRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Priority;
+            List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>?>? h_ = a?.PurposeElement;
+            ResourceReference? i_ = a?.Patient;
+            DataType? j_ = a?.Serviced;
+            FhirDateTime? k_ = a?.CreatedElement;
+            ResourceReference? l_ = a?.Enterer;
+            ResourceReference? m_ = a?.Provider;
+            ResourceReference? n_ = a?.Insurer;
+            ResourceReference? o_ = a?.Facility;
+            List<CoverageEligibilityRequest.SupportingInformationComponent?>? p_ = a?.SupportingInfo;
+            List<CoverageEligibilityRequest.InsuranceComponent?>? q_ = a?.Insurance;
+            List<CoverageEligibilityRequest.DetailsComponent?>? r_ = a?.Item;
+            CoverageEligibilityRequest? s_ = new CoverageEligibilityRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1636,36 +1638,36 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return s_;
         }
 
-        IEnumerable<CoverageEligibilityRequest> c_ = context.Operators.SelectDistinct<CoverageEligibilityRequest, CoverageEligibilityRequest>((IEnumerable<CoverageEligibilityRequest>)a_, b_);
-        CoverageEligibilityRequest d_ = context.Operators.SingletonFrom<CoverageEligibilityRequest>(c_);
+        IEnumerable<CoverageEligibilityRequest?>? c_ = context.Operators.SelectDistinct<CoverageEligibilityRequest, CoverageEligibilityRequest>((IEnumerable<CoverageEligibilityRequest>)a_, b_);
+        CoverageEligibilityRequest? d_ = context.Operators.SingletonFrom<CoverageEligibilityRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("CoverageEligibilityResponseResource")]
-    public CoverageEligibilityResponse CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse arg)
+    public CoverageEligibilityResponse? CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse? arg)
     {
-        CoverageEligibilityResponse[] a_ = [
+        CoverageEligibilityResponse?[]? a_ = [
             arg,
         ];
 
-        CoverageEligibilityResponse b_(CoverageEligibilityResponse a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>> g_ = a?.PurposeElement;
-            ResourceReference h_ = a?.Patient;
-            DataType i_ = a?.Serviced;
-            FhirDateTime j_ = a?.CreatedElement;
-            ResourceReference k_ = a?.Requestor;
-            ResourceReference l_ = a?.Request;
-            Code<ClaimProcessingCodes> m_ = a?.OutcomeElement;
-            FhirString n_ = a?.DispositionElement;
-            ResourceReference o_ = a?.Insurer;
-            List<CoverageEligibilityResponse.InsuranceComponent> p_ = a?.Insurance;
-            FhirString q_ = a?.PreAuthRefElement;
-            CodeableConcept r_ = a?.Form;
-            List<CoverageEligibilityResponse.ErrorsComponent> s_ = a?.Error;
-            CoverageEligibilityResponse t_ = new CoverageEligibilityResponse
+        CoverageEligibilityResponse? b_(CoverageEligibilityResponse? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>?>? g_ = a?.PurposeElement;
+            ResourceReference? h_ = a?.Patient;
+            DataType? i_ = a?.Serviced;
+            FhirDateTime? j_ = a?.CreatedElement;
+            ResourceReference? k_ = a?.Requestor;
+            ResourceReference? l_ = a?.Request;
+            Code<ClaimProcessingCodes>? m_ = a?.OutcomeElement;
+            FhirString? n_ = a?.DispositionElement;
+            ResourceReference? o_ = a?.Insurer;
+            List<CoverageEligibilityResponse.InsuranceComponent?>? p_ = a?.Insurance;
+            FhirString? q_ = a?.PreAuthRefElement;
+            CodeableConcept? r_ = a?.Form;
+            List<CoverageEligibilityResponse.ErrorsComponent?>? s_ = a?.Error;
+            CoverageEligibilityResponse? t_ = new CoverageEligibilityResponse
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1686,33 +1688,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return t_;
         }
 
-        IEnumerable<CoverageEligibilityResponse> c_ = context.Operators.SelectDistinct<CoverageEligibilityResponse, CoverageEligibilityResponse>((IEnumerable<CoverageEligibilityResponse>)a_, b_);
-        CoverageEligibilityResponse d_ = context.Operators.SingletonFrom<CoverageEligibilityResponse>(c_);
+        IEnumerable<CoverageEligibilityResponse?>? c_ = context.Operators.SelectDistinct<CoverageEligibilityResponse, CoverageEligibilityResponse>((IEnumerable<CoverageEligibilityResponse>)a_, b_);
+        CoverageEligibilityResponse? d_ = context.Operators.SingletonFrom<CoverageEligibilityResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DetectedIssueResource")]
-    public DetectedIssue DetectedIssueResource(CqlContext context, DetectedIssue arg)
+    public DetectedIssue? DetectedIssueResource(CqlContext context, DetectedIssue? arg)
     {
-        DetectedIssue[] a_ = [
+        DetectedIssue?[]? a_ = [
             arg,
         ];
 
-        DetectedIssue b_(DetectedIssue a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ObservationStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Code;
-            Code<DetectedIssue.DetectedIssueSeverity> h_ = a?.SeverityElement;
-            ResourceReference i_ = a?.Patient;
-            DataType j_ = a?.Identified;
-            ResourceReference k_ = a?.Author;
-            List<ResourceReference> l_ = a?.Implicated;
-            List<DetectedIssue.EvidenceComponent> m_ = a?.Evidence;
-            FhirString n_ = a?.DetailElement;
-            FhirUri o_ = a?.ReferenceElement;
-            List<DetectedIssue.MitigationComponent> p_ = a?.Mitigation;
-            DetectedIssue q_ = new DetectedIssue
+        DetectedIssue? b_(DetectedIssue? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ObservationStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Code;
+            Code<DetectedIssue.DetectedIssueSeverity>? h_ = a?.SeverityElement;
+            ResourceReference? i_ = a?.Patient;
+            DataType? j_ = a?.Identified;
+            ResourceReference? k_ = a?.Author;
+            List<ResourceReference?>? l_ = a?.Implicated;
+            List<DetectedIssue.EvidenceComponent?>? m_ = a?.Evidence;
+            FhirString? n_ = a?.DetailElement;
+            FhirUri? o_ = a?.ReferenceElement;
+            List<DetectedIssue.MitigationComponent?>? p_ = a?.Mitigation;
+            DetectedIssue? q_ = new DetectedIssue
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1730,47 +1732,47 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<DetectedIssue> c_ = context.Operators.SelectDistinct<DetectedIssue, DetectedIssue>((IEnumerable<DetectedIssue>)a_, b_);
-        DetectedIssue d_ = context.Operators.SingletonFrom<DetectedIssue>(c_);
+        IEnumerable<DetectedIssue?>? c_ = context.Operators.SelectDistinct<DetectedIssue, DetectedIssue>((IEnumerable<DetectedIssue>)a_, b_);
+        DetectedIssue? d_ = context.Operators.SingletonFrom<DetectedIssue>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DeviceResource")]
-    public Device DeviceResource(CqlContext context, Device arg)
+    public Device? DeviceResource(CqlContext context, Device? arg)
     {
-        Device[] a_ = [
+        Device?[]? a_ = [
             arg,
         ];
 
-        Device b_(Device a) {
-            List<Identifier> e_ = a?.Identifier;
-            ResourceReference f_ = a?.Definition;
-            List<Device.UdiCarrierComponent> g_ = a?.UdiCarrier;
-            Code<Device.FHIRDeviceStatus> h_ = a?.StatusElement;
-            List<CodeableConcept> i_ = a?.StatusReason;
-            FhirString j_ = a?.DistinctIdentifierElement;
-            FhirString k_ = a?.ManufacturerElement;
-            FhirDateTime l_ = a?.ManufactureDateElement;
-            FhirDateTime m_ = a?.ExpirationDateElement;
-            FhirString n_ = a?.LotNumberElement;
-            FhirString o_ = a?.SerialNumberElement;
-            List<Device.DeviceNameComponent> p_ = a?.DeviceName;
-            FhirString q_ = a?.ModelNumberElement;
-            FhirString r_ = a?.PartNumberElement;
-            CodeableConcept s_ = a?.Type;
-            List<Device.SpecializationComponent> t_ = a?.Specialization;
-            List<Device.VersionComponent> u_ = a?.Version;
-            List<Device.PropertyComponent> v_ = a?.Property;
-            ResourceReference w_ = a?.Patient;
-            ResourceReference x_ = a?.Owner;
-            List<ContactPoint> y_ = a?.Contact;
-            ResourceReference z_ = a?.Location;
-            FhirUri aa_ = a?.UrlElement;
-            List<Annotation> ab_ = a?.Note;
-            List<CodeableConcept> ac_ = a?.Safety;
-            ResourceReference ad_ = a?.Parent;
-            Device ae_ = new Device
+        Device? b_(Device? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            ResourceReference? f_ = a?.Definition;
+            List<Device.UdiCarrierComponent?>? g_ = a?.UdiCarrier;
+            Code<Device.FHIRDeviceStatus>? h_ = a?.StatusElement;
+            List<CodeableConcept?>? i_ = a?.StatusReason;
+            FhirString? j_ = a?.DistinctIdentifierElement;
+            FhirString? k_ = a?.ManufacturerElement;
+            FhirDateTime? l_ = a?.ManufactureDateElement;
+            FhirDateTime? m_ = a?.ExpirationDateElement;
+            FhirString? n_ = a?.LotNumberElement;
+            FhirString? o_ = a?.SerialNumberElement;
+            List<Device.DeviceNameComponent?>? p_ = a?.DeviceName;
+            FhirString? q_ = a?.ModelNumberElement;
+            FhirString? r_ = a?.PartNumberElement;
+            CodeableConcept? s_ = a?.Type;
+            List<Device.SpecializationComponent?>? t_ = a?.Specialization;
+            List<Device.VersionComponent?>? u_ = a?.Version;
+            List<Device.PropertyComponent?>? v_ = a?.Property;
+            ResourceReference? w_ = a?.Patient;
+            ResourceReference? x_ = a?.Owner;
+            List<ContactPoint?>? y_ = a?.Contact;
+            ResourceReference? z_ = a?.Location;
+            FhirUri? aa_ = a?.UrlElement;
+            List<Annotation?>? ab_ = a?.Note;
+            List<CodeableConcept?>? ac_ = a?.Safety;
+            ResourceReference? ad_ = a?.Parent;
+            Device? ae_ = new Device
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Definition = f_,
@@ -1802,43 +1804,43 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ae_;
         }
 
-        IEnumerable<Device> c_ = context.Operators.SelectDistinct<Device, Device>((IEnumerable<Device>)a_, b_);
-        Device d_ = context.Operators.SingletonFrom<Device>(c_);
+        IEnumerable<Device?>? c_ = context.Operators.SelectDistinct<Device, Device>((IEnumerable<Device>)a_, b_);
+        Device? d_ = context.Operators.SingletonFrom<Device>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DeviceDefinitionResource")]
-    public DeviceDefinition DeviceDefinitionResource(CqlContext context, DeviceDefinition arg)
+    public DeviceDefinition? DeviceDefinitionResource(CqlContext context, DeviceDefinition? arg)
     {
-        DeviceDefinition[] a_ = [
+        DeviceDefinition?[]? a_ = [
             arg,
         ];
 
-        DeviceDefinition b_(DeviceDefinition a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<DeviceDefinition.UdiDeviceIdentifierComponent> f_ = a?.UdiDeviceIdentifier;
-            DataType g_ = a?.Manufacturer;
-            List<DeviceDefinition.DeviceNameComponent> h_ = a?.DeviceName;
-            FhirString i_ = a?.ModelNumberElement;
-            CodeableConcept j_ = a?.Type;
-            List<DeviceDefinition.SpecializationComponent> k_ = a?.Specialization;
-            List<FhirString> l_ = a?.VersionElement;
-            List<CodeableConcept> m_ = a?.Safety;
-            List<ProductShelfLife> n_ = a?.ShelfLifeStorage;
-            ProdCharacteristic o_ = a?.PhysicalCharacteristics;
-            List<CodeableConcept> p_ = a?.LanguageCode;
-            List<DeviceDefinition.CapabilityComponent> q_ = a?.Capability;
-            List<DeviceDefinition.PropertyComponent> r_ = a?.Property;
-            ResourceReference s_ = a?.Owner;
-            List<ContactPoint> t_ = a?.Contact;
-            FhirUri u_ = a?.UrlElement;
-            FhirUri v_ = a?.OnlineInformationElement;
-            List<Annotation> w_ = a?.Note;
-            Quantity x_ = a?.Quantity;
-            ResourceReference y_ = a?.ParentDevice;
-            List<DeviceDefinition.MaterialComponent> z_ = a?.Material;
-            DeviceDefinition aa_ = new DeviceDefinition
+        DeviceDefinition? b_(DeviceDefinition? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<DeviceDefinition.UdiDeviceIdentifierComponent?>? f_ = a?.UdiDeviceIdentifier;
+            DataType? g_ = a?.Manufacturer;
+            List<DeviceDefinition.DeviceNameComponent?>? h_ = a?.DeviceName;
+            FhirString? i_ = a?.ModelNumberElement;
+            CodeableConcept? j_ = a?.Type;
+            List<DeviceDefinition.SpecializationComponent?>? k_ = a?.Specialization;
+            List<FhirString?>? l_ = a?.VersionElement;
+            List<CodeableConcept?>? m_ = a?.Safety;
+            List<ProductShelfLife?>? n_ = a?.ShelfLifeStorage;
+            ProdCharacteristic? o_ = a?.PhysicalCharacteristics;
+            List<CodeableConcept?>? p_ = a?.LanguageCode;
+            List<DeviceDefinition.CapabilityComponent?>? q_ = a?.Capability;
+            List<DeviceDefinition.PropertyComponent?>? r_ = a?.Property;
+            ResourceReference? s_ = a?.Owner;
+            List<ContactPoint?>? t_ = a?.Contact;
+            FhirUri? u_ = a?.UrlElement;
+            FhirUri? v_ = a?.OnlineInformationElement;
+            List<Annotation?>? w_ = a?.Note;
+            Quantity? x_ = a?.Quantity;
+            ResourceReference? y_ = a?.ParentDevice;
+            List<DeviceDefinition.MaterialComponent?>? z_ = a?.Material;
+            DeviceDefinition? aa_ = new DeviceDefinition
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 UdiDeviceIdentifier = new List<DeviceDefinition.UdiDeviceIdentifierComponent>((IEnumerable<DeviceDefinition.UdiDeviceIdentifierComponent>)f_),
@@ -1866,31 +1868,31 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aa_;
         }
 
-        IEnumerable<DeviceDefinition> c_ = context.Operators.SelectDistinct<DeviceDefinition, DeviceDefinition>((IEnumerable<DeviceDefinition>)a_, b_);
-        DeviceDefinition d_ = context.Operators.SingletonFrom<DeviceDefinition>(c_);
+        IEnumerable<DeviceDefinition?>? c_ = context.Operators.SelectDistinct<DeviceDefinition, DeviceDefinition>((IEnumerable<DeviceDefinition>)a_, b_);
+        DeviceDefinition? d_ = context.Operators.SingletonFrom<DeviceDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DeviceMetricResource")]
-    public DeviceMetric DeviceMetricResource(CqlContext context, DeviceMetric arg)
+    public DeviceMetric? DeviceMetricResource(CqlContext context, DeviceMetric? arg)
     {
-        DeviceMetric[] a_ = [
+        DeviceMetric?[]? a_ = [
             arg,
         ];
 
-        DeviceMetric b_(DeviceMetric a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Type;
-            CodeableConcept g_ = a?.Unit;
-            ResourceReference h_ = a?.Source;
-            ResourceReference i_ = a?.Parent;
-            Code<DeviceMetric.DeviceMetricOperationalStatus> j_ = a?.OperationalStatusElement;
-            Code<DeviceMetric.DeviceMetricColor> k_ = a?.ColorElement;
-            Code<DeviceMetric.DeviceMetricCategory> l_ = a?.CategoryElement;
-            Timing m_ = a?.MeasurementPeriod;
-            List<DeviceMetric.CalibrationComponent> n_ = a?.Calibration;
-            DeviceMetric o_ = new DeviceMetric
+        DeviceMetric? b_(DeviceMetric? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Type;
+            CodeableConcept? g_ = a?.Unit;
+            ResourceReference? h_ = a?.Source;
+            ResourceReference? i_ = a?.Parent;
+            Code<DeviceMetric.DeviceMetricOperationalStatus>? j_ = a?.OperationalStatusElement;
+            Code<DeviceMetric.DeviceMetricColor>? k_ = a?.ColorElement;
+            Code<DeviceMetric.DeviceMetricCategory>? l_ = a?.CategoryElement;
+            Timing? m_ = a?.MeasurementPeriod;
+            List<DeviceMetric.CalibrationComponent?>? n_ = a?.Calibration;
+            DeviceMetric? o_ = new DeviceMetric
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Type = f_,
@@ -1906,45 +1908,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return o_;
         }
 
-        IEnumerable<DeviceMetric> c_ = context.Operators.SelectDistinct<DeviceMetric, DeviceMetric>((IEnumerable<DeviceMetric>)a_, b_);
-        DeviceMetric d_ = context.Operators.SingletonFrom<DeviceMetric>(c_);
+        IEnumerable<DeviceMetric?>? c_ = context.Operators.SelectDistinct<DeviceMetric, DeviceMetric>((IEnumerable<DeviceMetric>)a_, b_);
+        DeviceMetric? d_ = context.Operators.SingletonFrom<DeviceMetric>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DeviceRequestResource")]
-    public DeviceRequest DeviceRequestResource(CqlContext context, DeviceRequest arg)
+    public DeviceRequest? DeviceRequestResource(CqlContext context, DeviceRequest? arg)
     {
-        DeviceRequest[] a_ = [
+        DeviceRequest?[]? a_ = [
             arg,
         ];
 
-        DeviceRequest b_(DeviceRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.PriorRequest;
-            Identifier j_ = a?.GroupIdentifier;
-            Code<RequestStatus> k_ = a?.StatusElement;
-            Code<RequestIntent> l_ = a?.IntentElement;
-            Code<RequestPriority> m_ = a?.PriorityElement;
-            DataType n_ = a?.Code;
-            List<DeviceRequest.ParameterComponent> o_ = a?.Parameter;
-            ResourceReference p_ = a?.Subject;
-            ResourceReference q_ = a?.Encounter;
-            DataType r_ = a?.Occurrence;
-            FhirDateTime s_ = a?.AuthoredOnElement;
-            ResourceReference t_ = a?.Requester;
-            CodeableConcept u_ = a?.PerformerType;
-            ResourceReference v_ = a?.Performer;
-            List<CodeableConcept> w_ = a?.ReasonCode;
-            List<ResourceReference> x_ = a?.ReasonReference;
-            List<ResourceReference> y_ = a?.Insurance;
-            List<ResourceReference> z_ = a?.SupportingInfo;
-            List<Annotation> aa_ = a?.Note;
-            List<ResourceReference> ab_ = a?.RelevantHistory;
-            DeviceRequest ac_ = new DeviceRequest
+        DeviceRequest? b_(DeviceRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.PriorRequest;
+            Identifier? j_ = a?.GroupIdentifier;
+            Code<RequestStatus>? k_ = a?.StatusElement;
+            Code<RequestIntent>? l_ = a?.IntentElement;
+            Code<RequestPriority>? m_ = a?.PriorityElement;
+            DataType? n_ = a?.Code;
+            List<DeviceRequest.ParameterComponent?>? o_ = a?.Parameter;
+            ResourceReference? p_ = a?.Subject;
+            ResourceReference? q_ = a?.Encounter;
+            DataType? r_ = a?.Occurrence;
+            FhirDateTime? s_ = a?.AuthoredOnElement;
+            ResourceReference? t_ = a?.Requester;
+            CodeableConcept? u_ = a?.PerformerType;
+            ResourceReference? v_ = a?.Performer;
+            List<CodeableConcept?>? w_ = a?.ReasonCode;
+            List<ResourceReference?>? x_ = a?.ReasonReference;
+            List<ResourceReference?>? y_ = a?.Insurance;
+            List<ResourceReference?>? z_ = a?.SupportingInfo;
+            List<Annotation?>? aa_ = a?.Note;
+            List<ResourceReference?>? ab_ = a?.RelevantHistory;
+            DeviceRequest? ac_ = new DeviceRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -1974,34 +1976,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<DeviceRequest> c_ = context.Operators.SelectDistinct<DeviceRequest, DeviceRequest>((IEnumerable<DeviceRequest>)a_, b_);
-        DeviceRequest d_ = context.Operators.SingletonFrom<DeviceRequest>(c_);
+        IEnumerable<DeviceRequest?>? c_ = context.Operators.SelectDistinct<DeviceRequest, DeviceRequest>((IEnumerable<DeviceRequest>)a_, b_);
+        DeviceRequest? d_ = context.Operators.SingletonFrom<DeviceRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DeviceUseStatementResource")]
-    public DeviceUseStatement DeviceUseStatementResource(CqlContext context, DeviceUseStatement arg)
+    public DeviceUseStatement? DeviceUseStatementResource(CqlContext context, DeviceUseStatement? arg)
     {
-        DeviceUseStatement[] a_ = [
+        DeviceUseStatement?[]? a_ = [
             arg,
         ];
 
-        DeviceUseStatement b_(DeviceUseStatement a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            Code<DeviceUseStatement.DeviceUseStatementStatus> g_ = a?.StatusElement;
-            ResourceReference h_ = a?.Subject;
-            List<ResourceReference> i_ = a?.DerivedFrom;
-            DataType j_ = a?.Timing;
-            FhirDateTime k_ = a?.RecordedOnElement;
-            ResourceReference l_ = a?.Source;
-            ResourceReference m_ = a?.Device;
-            List<CodeableConcept> n_ = a?.ReasonCode;
-            List<ResourceReference> o_ = a?.ReasonReference;
-            CodeableConcept p_ = a?.BodySite;
-            List<Annotation> q_ = a?.Note;
-            DeviceUseStatement r_ = new DeviceUseStatement
+        DeviceUseStatement? b_(DeviceUseStatement? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            Code<DeviceUseStatement.DeviceUseStatementStatus>? g_ = a?.StatusElement;
+            ResourceReference? h_ = a?.Subject;
+            List<ResourceReference?>? i_ = a?.DerivedFrom;
+            DataType? j_ = a?.Timing;
+            FhirDateTime? k_ = a?.RecordedOnElement;
+            ResourceReference? l_ = a?.Source;
+            ResourceReference? m_ = a?.Device;
+            List<CodeableConcept?>? n_ = a?.ReasonCode;
+            List<ResourceReference?>? o_ = a?.ReasonReference;
+            CodeableConcept? p_ = a?.BodySite;
+            List<Annotation?>? q_ = a?.Note;
+            DeviceUseStatement? r_ = new DeviceUseStatement
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -2020,39 +2022,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<DeviceUseStatement> c_ = context.Operators.SelectDistinct<DeviceUseStatement, DeviceUseStatement>((IEnumerable<DeviceUseStatement>)a_, b_);
-        DeviceUseStatement d_ = context.Operators.SingletonFrom<DeviceUseStatement>(c_);
+        IEnumerable<DeviceUseStatement?>? c_ = context.Operators.SelectDistinct<DeviceUseStatement, DeviceUseStatement>((IEnumerable<DeviceUseStatement>)a_, b_);
+        DeviceUseStatement? d_ = context.Operators.SingletonFrom<DeviceUseStatement>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DiagnosticReportResource")]
-    public DiagnosticReport DiagnosticReportResource(CqlContext context, DiagnosticReport arg)
+    public DiagnosticReport? DiagnosticReportResource(CqlContext context, DiagnosticReport? arg)
     {
-        DiagnosticReport[] a_ = [
+        DiagnosticReport?[]? a_ = [
             arg,
         ];
 
-        DiagnosticReport b_(DiagnosticReport a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            Code<DiagnosticReport.DiagnosticReportStatus> g_ = a?.StatusElement;
-            List<CodeableConcept> h_ = a?.Category;
-            CodeableConcept i_ = a?.Code;
-            ResourceReference j_ = a?.Subject;
-            ResourceReference k_ = a?.Encounter;
-            DataType l_ = a?.Effective;
-            Instant m_ = a?.IssuedElement;
-            List<ResourceReference> n_ = a?.Performer;
-            List<ResourceReference> o_ = a?.ResultsInterpreter;
-            List<ResourceReference> p_ = a?.Specimen;
-            List<ResourceReference> q_ = a?.Result;
-            List<ResourceReference> r_ = a?.ImagingStudy;
-            List<DiagnosticReport.MediaComponent> s_ = a?.Media;
-            FhirString t_ = a?.ConclusionElement;
-            List<CodeableConcept> u_ = a?.ConclusionCode;
-            List<Attachment> v_ = a?.PresentedForm;
-            DiagnosticReport w_ = new DiagnosticReport
+        DiagnosticReport? b_(DiagnosticReport? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            Code<DiagnosticReport.DiagnosticReportStatus>? g_ = a?.StatusElement;
+            List<CodeableConcept?>? h_ = a?.Category;
+            CodeableConcept? i_ = a?.Code;
+            ResourceReference? j_ = a?.Subject;
+            ResourceReference? k_ = a?.Encounter;
+            DataType? l_ = a?.Effective;
+            Instant? m_ = a?.IssuedElement;
+            List<ResourceReference?>? n_ = a?.Performer;
+            List<ResourceReference?>? o_ = a?.ResultsInterpreter;
+            List<ResourceReference?>? p_ = a?.Specimen;
+            List<ResourceReference?>? q_ = a?.Result;
+            List<ResourceReference?>? r_ = a?.ImagingStudy;
+            List<DiagnosticReport.MediaComponent?>? s_ = a?.Media;
+            FhirString? t_ = a?.ConclusionElement;
+            List<CodeableConcept?>? u_ = a?.ConclusionCode;
+            List<Attachment?>? v_ = a?.PresentedForm;
+            DiagnosticReport? w_ = new DiagnosticReport
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -2076,33 +2078,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<DiagnosticReport> c_ = context.Operators.SelectDistinct<DiagnosticReport, DiagnosticReport>((IEnumerable<DiagnosticReport>)a_, b_);
-        DiagnosticReport d_ = context.Operators.SingletonFrom<DiagnosticReport>(c_);
+        IEnumerable<DiagnosticReport?>? c_ = context.Operators.SelectDistinct<DiagnosticReport, DiagnosticReport>((IEnumerable<DiagnosticReport>)a_, b_);
+        DiagnosticReport? d_ = context.Operators.SingletonFrom<DiagnosticReport>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DocumentManifestResource")]
-    public DocumentManifest DocumentManifestResource(CqlContext context, DocumentManifest arg)
+    public DocumentManifest? DocumentManifestResource(CqlContext context, DocumentManifest? arg)
     {
-        DocumentManifest[] a_ = [
+        DocumentManifest?[]? a_ = [
             arg,
         ];
 
-        DocumentManifest b_(DocumentManifest a) {
-            Identifier e_ = a?.MasterIdentifier;
-            List<Identifier> f_ = a?.Identifier;
-            Code<DocumentReferenceStatus> g_ = a?.StatusElement;
-            CodeableConcept h_ = a?.Type;
-            ResourceReference i_ = a?.Subject;
-            FhirDateTime j_ = a?.CreatedElement;
-            List<ResourceReference> k_ = a?.Author;
-            List<ResourceReference> l_ = a?.Recipient;
-            FhirUri m_ = a?.SourceElement;
-            FhirString n_ = a?.DescriptionElement;
-            List<ResourceReference> o_ = a?.Content;
-            List<DocumentManifest.RelatedComponent> p_ = a?.Related;
-            DocumentManifest q_ = new DocumentManifest
+        DocumentManifest? b_(DocumentManifest? a) {
+            Identifier? e_ = a?.MasterIdentifier;
+            List<Identifier?>? f_ = a?.Identifier;
+            Code<DocumentReferenceStatus>? g_ = a?.StatusElement;
+            CodeableConcept? h_ = a?.Type;
+            ResourceReference? i_ = a?.Subject;
+            FhirDateTime? j_ = a?.CreatedElement;
+            List<ResourceReference?>? k_ = a?.Author;
+            List<ResourceReference?>? l_ = a?.Recipient;
+            FhirUri? m_ = a?.SourceElement;
+            FhirString? n_ = a?.DescriptionElement;
+            List<ResourceReference?>? o_ = a?.Content;
+            List<DocumentManifest.RelatedComponent?>? p_ = a?.Related;
+            DocumentManifest? q_ = new DocumentManifest
             {
                 MasterIdentifier = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2120,37 +2122,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<DocumentManifest> c_ = context.Operators.SelectDistinct<DocumentManifest, DocumentManifest>((IEnumerable<DocumentManifest>)a_, b_);
-        DocumentManifest d_ = context.Operators.SingletonFrom<DocumentManifest>(c_);
+        IEnumerable<DocumentManifest?>? c_ = context.Operators.SelectDistinct<DocumentManifest, DocumentManifest>((IEnumerable<DocumentManifest>)a_, b_);
+        DocumentManifest? d_ = context.Operators.SingletonFrom<DocumentManifest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("DocumentReferenceResource")]
-    public DocumentReference DocumentReferenceResource(CqlContext context, DocumentReference arg)
+    public DocumentReference? DocumentReferenceResource(CqlContext context, DocumentReference? arg)
     {
-        DocumentReference[] a_ = [
+        DocumentReference?[]? a_ = [
             arg,
         ];
 
-        DocumentReference b_(DocumentReference a) {
-            Identifier e_ = a?.MasterIdentifier;
-            List<Identifier> f_ = a?.Identifier;
-            Code<DocumentReferenceStatus> g_ = a?.StatusElement;
-            Code<CompositionStatus> h_ = a?.DocStatusElement;
-            CodeableConcept i_ = a?.Type;
-            List<CodeableConcept> j_ = a?.Category;
-            ResourceReference k_ = a?.Subject;
-            Instant l_ = a?.DateElement;
-            List<ResourceReference> m_ = a?.Author;
-            ResourceReference n_ = a?.Authenticator;
-            ResourceReference o_ = a?.Custodian;
-            List<DocumentReference.RelatesToComponent> p_ = a?.RelatesTo;
-            FhirString q_ = a?.DescriptionElement;
-            List<CodeableConcept> r_ = a?.SecurityLabel;
-            List<DocumentReference.ContentComponent> s_ = a?.Content;
-            DocumentReference.ContextComponent t_ = a?.Context;
-            DocumentReference u_ = new DocumentReference
+        DocumentReference? b_(DocumentReference? a) {
+            Identifier? e_ = a?.MasterIdentifier;
+            List<Identifier?>? f_ = a?.Identifier;
+            Code<DocumentReferenceStatus>? g_ = a?.StatusElement;
+            Code<CompositionStatus>? h_ = a?.DocStatusElement;
+            CodeableConcept? i_ = a?.Type;
+            List<CodeableConcept?>? j_ = a?.Category;
+            ResourceReference? k_ = a?.Subject;
+            Instant? l_ = a?.DateElement;
+            List<ResourceReference?>? m_ = a?.Author;
+            ResourceReference? n_ = a?.Authenticator;
+            ResourceReference? o_ = a?.Custodian;
+            List<DocumentReference.RelatesToComponent?>? p_ = a?.RelatesTo;
+            FhirString? q_ = a?.DescriptionElement;
+            List<CodeableConcept?>? r_ = a?.SecurityLabel;
+            List<DocumentReference.ContentComponent?>? s_ = a?.Content;
+            DocumentReference.ContextComponent? t_ = a?.Context;
+            DocumentReference? u_ = new DocumentReference
             {
                 MasterIdentifier = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2172,54 +2174,54 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<DocumentReference> c_ = context.Operators.SelectDistinct<DocumentReference, DocumentReference>((IEnumerable<DocumentReference>)a_, b_);
-        DocumentReference d_ = context.Operators.SingletonFrom<DocumentReference>(c_);
+        IEnumerable<DocumentReference?>? c_ = context.Operators.SelectDistinct<DocumentReference, DocumentReference>((IEnumerable<DocumentReference>)a_, b_);
+        DocumentReference? d_ = context.Operators.SingletonFrom<DocumentReference>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EffectEvidenceSynthesisResource")]
-    public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis arg)
+    public EffectEvidenceSynthesis? EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis? arg)
     {
-        EffectEvidenceSynthesis[] a_ = [
+        EffectEvidenceSynthesis?[]? a_ = [
             arg,
         ];
 
-        EffectEvidenceSynthesis b_(EffectEvidenceSynthesis a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirDateTime k_ = a?.DateElement;
-            FhirString l_ = a?.PublisherElement;
-            List<ContactDetail> m_ = a?.Contact;
-            Markdown n_ = a?.DescriptionElement;
-            List<Annotation> o_ = a?.Note;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.CopyrightElement;
-            Date s_ = a?.ApprovalDateElement;
-            Date t_ = a?.LastReviewDateElement;
-            Period u_ = a?.EffectivePeriod;
-            List<CodeableConcept> v_ = a?.Topic;
-            List<ContactDetail> w_ = a?.Author;
-            List<ContactDetail> x_ = a?.Editor;
-            List<ContactDetail> y_ = a?.Reviewer;
-            List<ContactDetail> z_ = a?.Endorser;
-            List<RelatedArtifact> aa_ = a?.RelatedArtifact;
-            CodeableConcept ab_ = a?.SynthesisType;
-            CodeableConcept ac_ = a?.StudyType;
-            ResourceReference ad_ = a?.Population;
-            ResourceReference ae_ = a?.Exposure;
-            ResourceReference af_ = a?.ExposureAlternative;
-            ResourceReference ag_ = a?.Outcome;
-            EffectEvidenceSynthesis.SampleSizeComponent ah_ = a?.SampleSize;
-            List<EffectEvidenceSynthesis.ResultsByExposureComponent> ai_ = a?.ResultsByExposure;
-            List<EffectEvidenceSynthesis.EffectEstimateComponent> aj_ = a?.EffectEstimate;
-            List<EffectEvidenceSynthesis.CertaintyComponent> ak_ = a?.Certainty;
-            EffectEvidenceSynthesis al_ = new EffectEvidenceSynthesis
+        EffectEvidenceSynthesis? b_(EffectEvidenceSynthesis? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirDateTime? k_ = a?.DateElement;
+            FhirString? l_ = a?.PublisherElement;
+            List<ContactDetail?>? m_ = a?.Contact;
+            Markdown? n_ = a?.DescriptionElement;
+            List<Annotation?>? o_ = a?.Note;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.CopyrightElement;
+            Date? s_ = a?.ApprovalDateElement;
+            Date? t_ = a?.LastReviewDateElement;
+            Period? u_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? v_ = a?.Topic;
+            List<ContactDetail?>? w_ = a?.Author;
+            List<ContactDetail?>? x_ = a?.Editor;
+            List<ContactDetail?>? y_ = a?.Reviewer;
+            List<ContactDetail?>? z_ = a?.Endorser;
+            List<RelatedArtifact?>? aa_ = a?.RelatedArtifact;
+            CodeableConcept? ab_ = a?.SynthesisType;
+            CodeableConcept? ac_ = a?.StudyType;
+            ResourceReference? ad_ = a?.Population;
+            ResourceReference? ae_ = a?.Exposure;
+            ResourceReference? af_ = a?.ExposureAlternative;
+            ResourceReference? ag_ = a?.Outcome;
+            EffectEvidenceSynthesis.SampleSizeComponent? ah_ = a?.SampleSize;
+            List<EffectEvidenceSynthesis.ResultsByExposureComponent?>? ai_ = a?.ResultsByExposure;
+            List<EffectEvidenceSynthesis.EffectEstimateComponent?>? aj_ = a?.EffectEstimate;
+            List<EffectEvidenceSynthesis.CertaintyComponent?>? ak_ = a?.Certainty;
+            EffectEvidenceSynthesis? al_ = new EffectEvidenceSynthesis
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2258,44 +2260,44 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return al_;
         }
 
-        IEnumerable<EffectEvidenceSynthesis> c_ = context.Operators.SelectDistinct<EffectEvidenceSynthesis, EffectEvidenceSynthesis>((IEnumerable<EffectEvidenceSynthesis>)a_, b_);
-        EffectEvidenceSynthesis d_ = context.Operators.SingletonFrom<EffectEvidenceSynthesis>(c_);
+        IEnumerable<EffectEvidenceSynthesis?>? c_ = context.Operators.SelectDistinct<EffectEvidenceSynthesis, EffectEvidenceSynthesis>((IEnumerable<EffectEvidenceSynthesis>)a_, b_);
+        EffectEvidenceSynthesis? d_ = context.Operators.SingletonFrom<EffectEvidenceSynthesis>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EncounterResource")]
-    public Encounter EncounterResource(CqlContext context, Encounter arg)
+    public Encounter? EncounterResource(CqlContext context, Encounter? arg)
     {
-        Encounter[] a_ = [
+        Encounter?[]? a_ = [
             arg,
         ];
 
-        Encounter b_(Encounter a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Encounter.EncounterStatus> f_ = a?.StatusElement;
-            List<Encounter.StatusHistoryComponent> g_ = a?.StatusHistory;
-            Coding h_ = a?.Class;
-            List<Encounter.ClassHistoryComponent> i_ = a?.ClassHistory;
-            List<CodeableConcept> j_ = a?.Type;
-            CodeableConcept k_ = a?.ServiceType;
-            CodeableConcept l_ = a?.Priority;
-            ResourceReference m_ = a?.Subject;
-            List<ResourceReference> n_ = a?.EpisodeOfCare;
-            List<ResourceReference> o_ = a?.BasedOn;
-            List<Encounter.ParticipantComponent> p_ = a?.Participant;
-            List<ResourceReference> q_ = a?.Appointment;
-            Period r_ = a?.Period;
-            Duration s_ = a?.Length;
-            List<CodeableConcept> t_ = a?.ReasonCode;
-            List<ResourceReference> u_ = a?.ReasonReference;
-            List<Encounter.DiagnosisComponent> v_ = a?.Diagnosis;
-            List<ResourceReference> w_ = a?.Account;
-            Encounter.HospitalizationComponent x_ = a?.Hospitalization;
-            List<Encounter.LocationComponent> y_ = a?.Location;
-            ResourceReference z_ = a?.ServiceProvider;
-            ResourceReference aa_ = a?.PartOf;
-            Encounter ab_ = new Encounter
+        Encounter? b_(Encounter? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Encounter.EncounterStatus>? f_ = a?.StatusElement;
+            List<Encounter.StatusHistoryComponent?>? g_ = a?.StatusHistory;
+            Coding? h_ = a?.Class;
+            List<Encounter.ClassHistoryComponent?>? i_ = a?.ClassHistory;
+            List<CodeableConcept?>? j_ = a?.Type;
+            CodeableConcept? k_ = a?.ServiceType;
+            CodeableConcept? l_ = a?.Priority;
+            ResourceReference? m_ = a?.Subject;
+            List<ResourceReference?>? n_ = a?.EpisodeOfCare;
+            List<ResourceReference?>? o_ = a?.BasedOn;
+            List<Encounter.ParticipantComponent?>? p_ = a?.Participant;
+            List<ResourceReference?>? q_ = a?.Appointment;
+            Period? r_ = a?.Period;
+            Duration? s_ = a?.Length;
+            List<CodeableConcept?>? t_ = a?.ReasonCode;
+            List<ResourceReference?>? u_ = a?.ReasonReference;
+            List<Encounter.DiagnosisComponent?>? v_ = a?.Diagnosis;
+            List<ResourceReference?>? w_ = a?.Account;
+            Encounter.HospitalizationComponent? x_ = a?.Hospitalization;
+            List<Encounter.LocationComponent?>? y_ = a?.Location;
+            ResourceReference? z_ = a?.ServiceProvider;
+            ResourceReference? aa_ = a?.PartOf;
+            Encounter? ab_ = new Encounter
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2324,32 +2326,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ab_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.SelectDistinct<Encounter, Encounter>((IEnumerable<Encounter>)a_, b_);
-        Encounter d_ = context.Operators.SingletonFrom<Encounter>(c_);
+        IEnumerable<Encounter?>? c_ = context.Operators.SelectDistinct<Encounter, Encounter>((IEnumerable<Encounter>)a_, b_);
+        Encounter? d_ = context.Operators.SingletonFrom<Encounter>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EndpointResource")]
-    public Endpoint EndpointResource(CqlContext context, Endpoint arg)
+    public Endpoint? EndpointResource(CqlContext context, Endpoint? arg)
     {
-        Endpoint[] a_ = [
+        Endpoint?[]? a_ = [
             arg,
         ];
 
-        Endpoint b_(Endpoint a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Endpoint.EndpointStatus> f_ = a?.StatusElement;
-            Coding g_ = a?.ConnectionType;
-            FhirString h_ = a?.NameElement;
-            ResourceReference i_ = a?.ManagingOrganization;
-            List<ContactPoint> j_ = a?.Contact;
-            Period k_ = a?.Period;
-            List<CodeableConcept> l_ = a?.PayloadType;
-            List<Code> m_ = a?.PayloadMimeTypeElement;
-            FhirUrl n_ = a?.AddressElement;
-            List<FhirString> o_ = a?.HeaderElement;
-            Endpoint p_ = new Endpoint
+        Endpoint? b_(Endpoint? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Endpoint.EndpointStatus>? f_ = a?.StatusElement;
+            Coding? g_ = a?.ConnectionType;
+            FhirString? h_ = a?.NameElement;
+            ResourceReference? i_ = a?.ManagingOrganization;
+            List<ContactPoint?>? j_ = a?.Contact;
+            Period? k_ = a?.Period;
+            List<CodeableConcept?>? l_ = a?.PayloadType;
+            List<Code?>? m_ = a?.PayloadMimeTypeElement;
+            FhirUrl? n_ = a?.AddressElement;
+            List<FhirString?>? o_ = a?.HeaderElement;
+            Endpoint? p_ = new Endpoint
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2366,28 +2368,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<Endpoint> c_ = context.Operators.SelectDistinct<Endpoint, Endpoint>((IEnumerable<Endpoint>)a_, b_);
-        Endpoint d_ = context.Operators.SingletonFrom<Endpoint>(c_);
+        IEnumerable<Endpoint?>? c_ = context.Operators.SelectDistinct<Endpoint, Endpoint>((IEnumerable<Endpoint>)a_, b_);
+        Endpoint? d_ = context.Operators.SingletonFrom<Endpoint>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EnrollmentRequestResource")]
-    public EnrollmentRequest EnrollmentRequestResource(CqlContext context, EnrollmentRequest arg)
+    public EnrollmentRequest? EnrollmentRequestResource(CqlContext context, EnrollmentRequest? arg)
     {
-        EnrollmentRequest[] a_ = [
+        EnrollmentRequest?[]? a_ = [
             arg,
         ];
 
-        EnrollmentRequest b_(EnrollmentRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            FhirDateTime g_ = a?.CreatedElement;
-            ResourceReference h_ = a?.Insurer;
-            ResourceReference i_ = a?.Provider;
-            ResourceReference j_ = a?.Candidate;
-            ResourceReference k_ = a?.Coverage;
-            EnrollmentRequest l_ = new EnrollmentRequest
+        EnrollmentRequest? b_(EnrollmentRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            FhirDateTime? g_ = a?.CreatedElement;
+            ResourceReference? h_ = a?.Insurer;
+            ResourceReference? i_ = a?.Provider;
+            ResourceReference? j_ = a?.Candidate;
+            ResourceReference? k_ = a?.Coverage;
+            EnrollmentRequest? l_ = new EnrollmentRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2400,29 +2402,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<EnrollmentRequest> c_ = context.Operators.SelectDistinct<EnrollmentRequest, EnrollmentRequest>((IEnumerable<EnrollmentRequest>)a_, b_);
-        EnrollmentRequest d_ = context.Operators.SingletonFrom<EnrollmentRequest>(c_);
+        IEnumerable<EnrollmentRequest?>? c_ = context.Operators.SelectDistinct<EnrollmentRequest, EnrollmentRequest>((IEnumerable<EnrollmentRequest>)a_, b_);
+        EnrollmentRequest? d_ = context.Operators.SingletonFrom<EnrollmentRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EnrollmentResponseResource")]
-    public EnrollmentResponse EnrollmentResponseResource(CqlContext context, EnrollmentResponse arg)
+    public EnrollmentResponse? EnrollmentResponseResource(CqlContext context, EnrollmentResponse? arg)
     {
-        EnrollmentResponse[] a_ = [
+        EnrollmentResponse?[]? a_ = [
             arg,
         ];
 
-        EnrollmentResponse b_(EnrollmentResponse a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            ResourceReference g_ = a?.Request;
-            Code<ClaimProcessingCodes> h_ = a?.OutcomeElement;
-            FhirString i_ = a?.DispositionElement;
-            FhirDateTime j_ = a?.CreatedElement;
-            ResourceReference k_ = a?.Organization;
-            ResourceReference l_ = a?.RequestProvider;
-            EnrollmentResponse m_ = new EnrollmentResponse
+        EnrollmentResponse? b_(EnrollmentResponse? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            ResourceReference? g_ = a?.Request;
+            Code<ClaimProcessingCodes>? h_ = a?.OutcomeElement;
+            FhirString? i_ = a?.DispositionElement;
+            FhirDateTime? j_ = a?.CreatedElement;
+            ResourceReference? k_ = a?.Organization;
+            ResourceReference? l_ = a?.RequestProvider;
+            EnrollmentResponse? m_ = new EnrollmentResponse
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2436,33 +2438,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<EnrollmentResponse> c_ = context.Operators.SelectDistinct<EnrollmentResponse, EnrollmentResponse>((IEnumerable<EnrollmentResponse>)a_, b_);
-        EnrollmentResponse d_ = context.Operators.SingletonFrom<EnrollmentResponse>(c_);
+        IEnumerable<EnrollmentResponse?>? c_ = context.Operators.SelectDistinct<EnrollmentResponse, EnrollmentResponse>((IEnumerable<EnrollmentResponse>)a_, b_);
+        EnrollmentResponse? d_ = context.Operators.SingletonFrom<EnrollmentResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EpisodeOfCareResource")]
-    public EpisodeOfCare EpisodeOfCareResource(CqlContext context, EpisodeOfCare arg)
+    public EpisodeOfCare? EpisodeOfCareResource(CqlContext context, EpisodeOfCare? arg)
     {
-        EpisodeOfCare[] a_ = [
+        EpisodeOfCare?[]? a_ = [
             arg,
         ];
 
-        EpisodeOfCare b_(EpisodeOfCare a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<EpisodeOfCare.EpisodeOfCareStatus> f_ = a?.StatusElement;
-            List<EpisodeOfCare.StatusHistoryComponent> g_ = a?.StatusHistory;
-            List<CodeableConcept> h_ = a?.Type;
-            List<EpisodeOfCare.DiagnosisComponent> i_ = a?.Diagnosis;
-            ResourceReference j_ = a?.Patient;
-            ResourceReference k_ = a?.ManagingOrganization;
-            Period l_ = a?.Period;
-            List<ResourceReference> m_ = a?.ReferralRequest;
-            ResourceReference n_ = a?.CareManager;
-            List<ResourceReference> o_ = a?.Team;
-            List<ResourceReference> p_ = a?.Account;
-            EpisodeOfCare q_ = new EpisodeOfCare
+        EpisodeOfCare? b_(EpisodeOfCare? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<EpisodeOfCare.EpisodeOfCareStatus>? f_ = a?.StatusElement;
+            List<EpisodeOfCare.StatusHistoryComponent?>? g_ = a?.StatusHistory;
+            List<CodeableConcept?>? h_ = a?.Type;
+            List<EpisodeOfCare.DiagnosisComponent?>? i_ = a?.Diagnosis;
+            ResourceReference? j_ = a?.Patient;
+            ResourceReference? k_ = a?.ManagingOrganization;
+            Period? l_ = a?.Period;
+            List<ResourceReference?>? m_ = a?.ReferralRequest;
+            ResourceReference? n_ = a?.CareManager;
+            List<ResourceReference?>? o_ = a?.Team;
+            List<ResourceReference?>? p_ = a?.Account;
+            EpisodeOfCare? q_ = new EpisodeOfCare
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2480,49 +2482,49 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<EpisodeOfCare> c_ = context.Operators.SelectDistinct<EpisodeOfCare, EpisodeOfCare>((IEnumerable<EpisodeOfCare>)a_, b_);
-        EpisodeOfCare d_ = context.Operators.SingletonFrom<EpisodeOfCare>(c_);
+        IEnumerable<EpisodeOfCare?>? c_ = context.Operators.SelectDistinct<EpisodeOfCare, EpisodeOfCare>((IEnumerable<EpisodeOfCare>)a_, b_);
+        EpisodeOfCare? d_ = context.Operators.SingletonFrom<EpisodeOfCare>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EventDefinitionResource")]
-    public EventDefinition EventDefinitionResource(CqlContext context, EventDefinition arg)
+    public EventDefinition? EventDefinitionResource(CqlContext context, EventDefinition? arg)
     {
-        EventDefinition[] a_ = [
+        EventDefinition?[]? a_ = [
             arg,
         ];
 
-        EventDefinition b_(EventDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.SubtitleElement;
-            Code<PublicationStatus> k_ = a?.StatusElement;
-            FhirBoolean l_ = a?.ExperimentalElement;
-            DataType m_ = a?.Subject;
-            FhirDateTime n_ = a?.DateElement;
-            FhirString o_ = a?.PublisherElement;
-            List<ContactDetail> p_ = a?.Contact;
-            Markdown q_ = a?.DescriptionElement;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.PurposeElement;
-            FhirString u_ = a?.UsageElement;
-            Markdown v_ = a?.CopyrightElement;
-            Date w_ = a?.ApprovalDateElement;
-            Date x_ = a?.LastReviewDateElement;
-            Period y_ = a?.EffectivePeriod;
-            List<CodeableConcept> z_ = a?.Topic;
-            List<ContactDetail> aa_ = a?.Author;
-            List<ContactDetail> ab_ = a?.Editor;
-            List<ContactDetail> ac_ = a?.Reviewer;
-            List<ContactDetail> ad_ = a?.Endorser;
-            List<RelatedArtifact> ae_ = a?.RelatedArtifact;
-            List<TriggerDefinition> af_ = a?.Trigger;
-            EventDefinition ag_ = new EventDefinition
+        EventDefinition? b_(EventDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.SubtitleElement;
+            Code<PublicationStatus>? k_ = a?.StatusElement;
+            FhirBoolean? l_ = a?.ExperimentalElement;
+            DataType? m_ = a?.Subject;
+            FhirDateTime? n_ = a?.DateElement;
+            FhirString? o_ = a?.PublisherElement;
+            List<ContactDetail?>? p_ = a?.Contact;
+            Markdown? q_ = a?.DescriptionElement;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.PurposeElement;
+            FhirString? u_ = a?.UsageElement;
+            Markdown? v_ = a?.CopyrightElement;
+            Date? w_ = a?.ApprovalDateElement;
+            Date? x_ = a?.LastReviewDateElement;
+            Period? y_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? z_ = a?.Topic;
+            List<ContactDetail?>? aa_ = a?.Author;
+            List<ContactDetail?>? ab_ = a?.Editor;
+            List<ContactDetail?>? ac_ = a?.Reviewer;
+            List<ContactDetail?>? ad_ = a?.Endorser;
+            List<RelatedArtifact?>? ae_ = a?.RelatedArtifact;
+            List<TriggerDefinition?>? af_ = a?.Trigger;
+            EventDefinition? ag_ = new EventDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2556,49 +2558,49 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ag_;
         }
 
-        IEnumerable<EventDefinition> c_ = context.Operators.SelectDistinct<EventDefinition, EventDefinition>((IEnumerable<EventDefinition>)a_, b_);
-        EventDefinition d_ = context.Operators.SingletonFrom<EventDefinition>(c_);
+        IEnumerable<EventDefinition?>? c_ = context.Operators.SelectDistinct<EventDefinition, EventDefinition>((IEnumerable<EventDefinition>)a_, b_);
+        EventDefinition? d_ = context.Operators.SingletonFrom<EventDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EvidenceResource")]
-    public Evidence EvidenceResource(CqlContext context, Evidence arg)
+    public Evidence? EvidenceResource(CqlContext context, Evidence? arg)
     {
-        Evidence[] a_ = [
+        Evidence?[]? a_ = [
             arg,
         ];
 
-        Evidence b_(Evidence a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.ShortTitleElement;
-            FhirString k_ = a?.SubtitleElement;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirDateTime m_ = a?.DateElement;
-            FhirString n_ = a?.PublisherElement;
-            List<ContactDetail> o_ = a?.Contact;
-            Markdown p_ = a?.DescriptionElement;
-            List<Annotation> q_ = a?.Note;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.CopyrightElement;
-            Date u_ = a?.ApprovalDateElement;
-            Date v_ = a?.LastReviewDateElement;
-            Period w_ = a?.EffectivePeriod;
-            List<CodeableConcept> x_ = a?.Topic;
-            List<ContactDetail> y_ = a?.Author;
-            List<ContactDetail> z_ = a?.Editor;
-            List<ContactDetail> aa_ = a?.Reviewer;
-            List<ContactDetail> ab_ = a?.Endorser;
-            List<RelatedArtifact> ac_ = a?.RelatedArtifact;
-            ResourceReference ad_ = a?.ExposureBackground;
-            List<ResourceReference> ae_ = a?.ExposureVariant;
-            List<ResourceReference> af_ = a?.Outcome;
-            Evidence ag_ = new Evidence
+        Evidence? b_(Evidence? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.ShortTitleElement;
+            FhirString? k_ = a?.SubtitleElement;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirDateTime? m_ = a?.DateElement;
+            FhirString? n_ = a?.PublisherElement;
+            List<ContactDetail?>? o_ = a?.Contact;
+            Markdown? p_ = a?.DescriptionElement;
+            List<Annotation?>? q_ = a?.Note;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.CopyrightElement;
+            Date? u_ = a?.ApprovalDateElement;
+            Date? v_ = a?.LastReviewDateElement;
+            Period? w_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? x_ = a?.Topic;
+            List<ContactDetail?>? y_ = a?.Author;
+            List<ContactDetail?>? z_ = a?.Editor;
+            List<ContactDetail?>? aa_ = a?.Reviewer;
+            List<ContactDetail?>? ab_ = a?.Endorser;
+            List<RelatedArtifact?>? ac_ = a?.RelatedArtifact;
+            ResourceReference? ad_ = a?.ExposureBackground;
+            List<ResourceReference?>? ae_ = a?.ExposureVariant;
+            List<ResourceReference?>? af_ = a?.Outcome;
+            Evidence? ag_ = new Evidence
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2632,48 +2634,48 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ag_;
         }
 
-        IEnumerable<Evidence> c_ = context.Operators.SelectDistinct<Evidence, Evidence>((IEnumerable<Evidence>)a_, b_);
-        Evidence d_ = context.Operators.SingletonFrom<Evidence>(c_);
+        IEnumerable<Evidence?>? c_ = context.Operators.SelectDistinct<Evidence, Evidence>((IEnumerable<Evidence>)a_, b_);
+        Evidence? d_ = context.Operators.SingletonFrom<Evidence>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("EvidenceVariableResource")]
-    public EvidenceVariable EvidenceVariableResource(CqlContext context, EvidenceVariable arg)
+    public EvidenceVariable? EvidenceVariableResource(CqlContext context, EvidenceVariable? arg)
     {
-        EvidenceVariable[] a_ = [
+        EvidenceVariable?[]? a_ = [
             arg,
         ];
 
-        EvidenceVariable b_(EvidenceVariable a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.ShortTitleElement;
-            FhirString k_ = a?.SubtitleElement;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirDateTime m_ = a?.DateElement;
-            FhirString n_ = a?.PublisherElement;
-            List<ContactDetail> o_ = a?.Contact;
-            Markdown p_ = a?.DescriptionElement;
-            List<Annotation> q_ = a?.Note;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.CopyrightElement;
-            Date u_ = a?.ApprovalDateElement;
-            Date v_ = a?.LastReviewDateElement;
-            Period w_ = a?.EffectivePeriod;
-            List<CodeableConcept> x_ = a?.Topic;
-            List<ContactDetail> y_ = a?.Author;
-            List<ContactDetail> z_ = a?.Editor;
-            List<ContactDetail> aa_ = a?.Reviewer;
-            List<ContactDetail> ab_ = a?.Endorser;
-            List<RelatedArtifact> ac_ = a?.RelatedArtifact;
-            Code<VariableTypeCode> ad_ = a?.TypeElement;
-            List<EvidenceVariable.CharacteristicComponent> ae_ = a?.Characteristic;
-            EvidenceVariable af_ = new EvidenceVariable
+        EvidenceVariable? b_(EvidenceVariable? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.ShortTitleElement;
+            FhirString? k_ = a?.SubtitleElement;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirDateTime? m_ = a?.DateElement;
+            FhirString? n_ = a?.PublisherElement;
+            List<ContactDetail?>? o_ = a?.Contact;
+            Markdown? p_ = a?.DescriptionElement;
+            List<Annotation?>? q_ = a?.Note;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.CopyrightElement;
+            Date? u_ = a?.ApprovalDateElement;
+            Date? v_ = a?.LastReviewDateElement;
+            Period? w_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? x_ = a?.Topic;
+            List<ContactDetail?>? y_ = a?.Author;
+            List<ContactDetail?>? z_ = a?.Editor;
+            List<ContactDetail?>? aa_ = a?.Reviewer;
+            List<ContactDetail?>? ab_ = a?.Endorser;
+            List<RelatedArtifact?>? ac_ = a?.RelatedArtifact;
+            Code<VariableTypeCode>? ad_ = a?.TypeElement;
+            List<EvidenceVariable.CharacteristicComponent?>? ae_ = a?.Characteristic;
+            EvidenceVariable? af_ = new EvidenceVariable
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -2706,66 +2708,66 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return af_;
         }
 
-        IEnumerable<EvidenceVariable> c_ = context.Operators.SelectDistinct<EvidenceVariable, EvidenceVariable>((IEnumerable<EvidenceVariable>)a_, b_);
-        EvidenceVariable d_ = context.Operators.SingletonFrom<EvidenceVariable>(c_);
+        IEnumerable<EvidenceVariable?>? c_ = context.Operators.SelectDistinct<EvidenceVariable, EvidenceVariable>((IEnumerable<EvidenceVariable>)a_, b_);
+        EvidenceVariable? d_ = context.Operators.SingletonFrom<EvidenceVariable>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ExplanationOfBenefitResource")]
-    public ExplanationOfBenefit ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit arg)
+    public ExplanationOfBenefit? ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit? arg)
     {
-        ExplanationOfBenefit[] a_ = [
+        ExplanationOfBenefit?[]? a_ = [
             arg,
         ];
 
-        ExplanationOfBenefit b_(ExplanationOfBenefit a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Type;
-            CodeableConcept h_ = a?.SubType;
-            Code<ClaimUseCode> i_ = a?.UseElement;
-            ResourceReference j_ = a?.Patient;
-            Period k_ = a?.BillablePeriod;
-            FhirDateTime l_ = a?.CreatedElement;
-            ResourceReference m_ = a?.Enterer;
-            ResourceReference n_ = a?.Insurer;
-            ResourceReference o_ = a?.Provider;
-            CodeableConcept p_ = a?.Priority;
-            CodeableConcept q_ = a?.FundsReserveRequested;
-            CodeableConcept r_ = a?.FundsReserve;
-            List<ExplanationOfBenefit.RelatedClaimComponent> s_ = a?.Related;
-            ResourceReference t_ = a?.Prescription;
-            ResourceReference u_ = a?.OriginalPrescription;
-            ExplanationOfBenefit.PayeeComponent v_ = a?.Payee;
-            ResourceReference w_ = a?.Referral;
-            ResourceReference x_ = a?.Facility;
-            ResourceReference y_ = a?.Claim;
-            ResourceReference z_ = a?.ClaimResponse;
-            Code<ClaimProcessingCodes> aa_ = a?.OutcomeElement;
-            FhirString ab_ = a?.DispositionElement;
-            List<FhirString> ac_ = a?.PreAuthRefElement;
-            List<Period> ad_ = a?.PreAuthRefPeriod;
-            List<ExplanationOfBenefit.CareTeamComponent> ae_ = a?.CareTeam;
-            List<ExplanationOfBenefit.SupportingInformationComponent> af_ = a?.SupportingInfo;
-            List<ExplanationOfBenefit.DiagnosisComponent> ag_ = a?.Diagnosis;
-            List<ExplanationOfBenefit.ProcedureComponent> ah_ = a?.Procedure;
-            PositiveInt ai_ = a?.PrecedenceElement;
-            Integer aj_ = context.Operators.Convert<Integer>(ai_);
-            PositiveInt ak_ = context.Operators.Convert<PositiveInt>(aj_);
-            List<ExplanationOfBenefit.InsuranceComponent> al_ = a?.Insurance;
-            ExplanationOfBenefit.AccidentComponent am_ = a?.Accident;
-            List<ExplanationOfBenefit.ItemComponent> an_ = a?.Item;
-            List<ExplanationOfBenefit.AddedItemComponent> ao_ = a?.AddItem;
-            List<ExplanationOfBenefit.AdjudicationComponent> ap_ = a?.Adjudication;
-            List<ExplanationOfBenefit.TotalComponent> aq_ = a?.Total;
-            ExplanationOfBenefit.PaymentComponent ar_ = a?.Payment;
-            CodeableConcept as_ = a?.FormCode;
-            Attachment at_ = a?.Form;
-            List<ExplanationOfBenefit.NoteComponent> au_ = a?.ProcessNote;
-            Period av_ = a?.BenefitPeriod;
-            List<ExplanationOfBenefit.BenefitBalanceComponent> aw_ = a?.BenefitBalance;
-            ExplanationOfBenefit ax_ = new ExplanationOfBenefit
+        ExplanationOfBenefit? b_(ExplanationOfBenefit? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ExplanationOfBenefit.ExplanationOfBenefitStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Type;
+            CodeableConcept? h_ = a?.SubType;
+            Code<ClaimUseCode>? i_ = a?.UseElement;
+            ResourceReference? j_ = a?.Patient;
+            Period? k_ = a?.BillablePeriod;
+            FhirDateTime? l_ = a?.CreatedElement;
+            ResourceReference? m_ = a?.Enterer;
+            ResourceReference? n_ = a?.Insurer;
+            ResourceReference? o_ = a?.Provider;
+            CodeableConcept? p_ = a?.Priority;
+            CodeableConcept? q_ = a?.FundsReserveRequested;
+            CodeableConcept? r_ = a?.FundsReserve;
+            List<ExplanationOfBenefit.RelatedClaimComponent?>? s_ = a?.Related;
+            ResourceReference? t_ = a?.Prescription;
+            ResourceReference? u_ = a?.OriginalPrescription;
+            ExplanationOfBenefit.PayeeComponent? v_ = a?.Payee;
+            ResourceReference? w_ = a?.Referral;
+            ResourceReference? x_ = a?.Facility;
+            ResourceReference? y_ = a?.Claim;
+            ResourceReference? z_ = a?.ClaimResponse;
+            Code<ClaimProcessingCodes>? aa_ = a?.OutcomeElement;
+            FhirString? ab_ = a?.DispositionElement;
+            List<FhirString?>? ac_ = a?.PreAuthRefElement;
+            List<Period?>? ad_ = a?.PreAuthRefPeriod;
+            List<ExplanationOfBenefit.CareTeamComponent?>? ae_ = a?.CareTeam;
+            List<ExplanationOfBenefit.SupportingInformationComponent?>? af_ = a?.SupportingInfo;
+            List<ExplanationOfBenefit.DiagnosisComponent?>? ag_ = a?.Diagnosis;
+            List<ExplanationOfBenefit.ProcedureComponent?>? ah_ = a?.Procedure;
+            PositiveInt? ai_ = a?.PrecedenceElement;
+            Integer? aj_ = context.Operators.Convert<Integer>(ai_);
+            PositiveInt? ak_ = context.Operators.Convert<PositiveInt>(aj_);
+            List<ExplanationOfBenefit.InsuranceComponent?>? al_ = a?.Insurance;
+            ExplanationOfBenefit.AccidentComponent? am_ = a?.Accident;
+            List<ExplanationOfBenefit.ItemComponent?>? an_ = a?.Item;
+            List<ExplanationOfBenefit.AddedItemComponent?>? ao_ = a?.AddItem;
+            List<ExplanationOfBenefit.AdjudicationComponent?>? ap_ = a?.Adjudication;
+            List<ExplanationOfBenefit.TotalComponent?>? aq_ = a?.Total;
+            ExplanationOfBenefit.PaymentComponent? ar_ = a?.Payment;
+            CodeableConcept? as_ = a?.FormCode;
+            Attachment? at_ = a?.Form;
+            List<ExplanationOfBenefit.NoteComponent?>? au_ = a?.ProcessNote;
+            Period? av_ = a?.BenefitPeriod;
+            List<ExplanationOfBenefit.BenefitBalanceComponent?>? aw_ = a?.BenefitBalance;
+            ExplanationOfBenefit? ax_ = new ExplanationOfBenefit
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2814,39 +2816,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ax_;
         }
 
-        IEnumerable<ExplanationOfBenefit> c_ = context.Operators.SelectDistinct<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)a_, b_);
-        ExplanationOfBenefit d_ = context.Operators.SingletonFrom<ExplanationOfBenefit>(c_);
+        IEnumerable<ExplanationOfBenefit?>? c_ = context.Operators.SelectDistinct<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)a_, b_);
+        ExplanationOfBenefit? d_ = context.Operators.SingletonFrom<ExplanationOfBenefit>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("FamilyMemberHistoryResource")]
-    public FamilyMemberHistory FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory arg)
+    public FamilyMemberHistory? FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory? arg)
     {
-        FamilyMemberHistory[] a_ = [
+        FamilyMemberHistory?[]? a_ = [
             arg,
         ];
 
-        FamilyMemberHistory b_(FamilyMemberHistory a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            Code<FamilyMemberHistory.FamilyHistoryStatus> h_ = a?.StatusElement;
-            CodeableConcept i_ = a?.DataAbsentReason;
-            ResourceReference j_ = a?.Patient;
-            FhirDateTime k_ = a?.DateElement;
-            FhirString l_ = a?.NameElement;
-            CodeableConcept m_ = a?.Relationship;
-            CodeableConcept n_ = a?.Sex;
-            DataType o_ = a?.Born;
-            DataType p_ = a?.Age;
-            FhirBoolean q_ = a?.EstimatedAgeElement;
-            DataType r_ = a?.Deceased;
-            List<CodeableConcept> s_ = a?.ReasonCode;
-            List<ResourceReference> t_ = a?.ReasonReference;
-            List<Annotation> u_ = a?.Note;
-            List<FamilyMemberHistory.ConditionComponent> v_ = a?.Condition;
-            FamilyMemberHistory w_ = new FamilyMemberHistory
+        FamilyMemberHistory? b_(FamilyMemberHistory? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            Code<FamilyMemberHistory.FamilyHistoryStatus>? h_ = a?.StatusElement;
+            CodeableConcept? i_ = a?.DataAbsentReason;
+            ResourceReference? j_ = a?.Patient;
+            FhirDateTime? k_ = a?.DateElement;
+            FhirString? l_ = a?.NameElement;
+            CodeableConcept? m_ = a?.Relationship;
+            CodeableConcept? n_ = a?.Sex;
+            DataType? o_ = a?.Born;
+            DataType? p_ = a?.Age;
+            FhirBoolean? q_ = a?.EstimatedAgeElement;
+            DataType? r_ = a?.Deceased;
+            List<CodeableConcept?>? s_ = a?.ReasonCode;
+            List<ResourceReference?>? t_ = a?.ReasonReference;
+            List<Annotation?>? u_ = a?.Note;
+            List<FamilyMemberHistory.ConditionComponent?>? v_ = a?.Condition;
+            FamilyMemberHistory? w_ = new FamilyMemberHistory
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -2870,29 +2872,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<FamilyMemberHistory> c_ = context.Operators.SelectDistinct<FamilyMemberHistory, FamilyMemberHistory>((IEnumerable<FamilyMemberHistory>)a_, b_);
-        FamilyMemberHistory d_ = context.Operators.SingletonFrom<FamilyMemberHistory>(c_);
+        IEnumerable<FamilyMemberHistory?>? c_ = context.Operators.SelectDistinct<FamilyMemberHistory, FamilyMemberHistory>((IEnumerable<FamilyMemberHistory>)a_, b_);
+        FamilyMemberHistory? d_ = context.Operators.SingletonFrom<FamilyMemberHistory>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("FlagResource")]
-    public Flag FlagResource(CqlContext context, Flag arg)
+    public Flag? FlagResource(CqlContext context, Flag? arg)
     {
-        Flag[] a_ = [
+        Flag?[]? a_ = [
             arg,
         ];
 
-        Flag b_(Flag a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Flag.FlagStatus> f_ = a?.StatusElement;
-            List<CodeableConcept> g_ = a?.Category;
-            CodeableConcept h_ = a?.Code;
-            ResourceReference i_ = a?.Subject;
-            Period j_ = a?.Period;
-            ResourceReference k_ = a?.Encounter;
-            ResourceReference l_ = a?.Author;
-            Flag m_ = new Flag
+        Flag? b_(Flag? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Flag.FlagStatus>? f_ = a?.StatusElement;
+            List<CodeableConcept?>? g_ = a?.Category;
+            CodeableConcept? h_ = a?.Code;
+            ResourceReference? i_ = a?.Subject;
+            Period? j_ = a?.Period;
+            ResourceReference? k_ = a?.Encounter;
+            ResourceReference? l_ = a?.Author;
+            Flag? m_ = new Flag
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2906,37 +2908,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<Flag> c_ = context.Operators.SelectDistinct<Flag, Flag>((IEnumerable<Flag>)a_, b_);
-        Flag d_ = context.Operators.SingletonFrom<Flag>(c_);
+        IEnumerable<Flag?>? c_ = context.Operators.SelectDistinct<Flag, Flag>((IEnumerable<Flag>)a_, b_);
+        Flag? d_ = context.Operators.SingletonFrom<Flag>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("GoalResource")]
-    public Goal GoalResource(CqlContext context, Goal arg)
+    public Goal? GoalResource(CqlContext context, Goal? arg)
     {
-        Goal[] a_ = [
+        Goal?[]? a_ = [
             arg,
         ];
 
-        Goal b_(Goal a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Goal.GoalLifecycleStatus> f_ = a?.LifecycleStatusElement;
-            CodeableConcept g_ = a?.AchievementStatus;
-            List<CodeableConcept> h_ = a?.Category;
-            CodeableConcept i_ = a?.Priority;
-            CodeableConcept j_ = a?.Description;
-            ResourceReference k_ = a?.Subject;
-            DataType l_ = a?.Start;
-            List<Goal.TargetComponent> m_ = a?.Target;
-            Date n_ = a?.StatusDateElement;
-            FhirString o_ = a?.StatusReasonElement;
-            ResourceReference p_ = a?.ExpressedBy;
-            List<ResourceReference> q_ = a?.Addresses;
-            List<Annotation> r_ = a?.Note;
-            List<CodeableConcept> s_ = a?.OutcomeCode;
-            List<ResourceReference> t_ = a?.OutcomeReference;
-            Goal u_ = new Goal
+        Goal? b_(Goal? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Goal.GoalLifecycleStatus>? f_ = a?.LifecycleStatusElement;
+            CodeableConcept? g_ = a?.AchievementStatus;
+            List<CodeableConcept?>? h_ = a?.Category;
+            CodeableConcept? i_ = a?.Priority;
+            CodeableConcept? j_ = a?.Description;
+            ResourceReference? k_ = a?.Subject;
+            DataType? l_ = a?.Start;
+            List<Goal.TargetComponent?>? m_ = a?.Target;
+            Date? n_ = a?.StatusDateElement;
+            FhirString? o_ = a?.StatusReasonElement;
+            ResourceReference? p_ = a?.ExpressedBy;
+            List<ResourceReference?>? q_ = a?.Addresses;
+            List<Annotation?>? r_ = a?.Note;
+            List<CodeableConcept?>? s_ = a?.OutcomeCode;
+            List<ResourceReference?>? t_ = a?.OutcomeReference;
+            Goal? u_ = new Goal
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 LifecycleStatusElement = f_,
@@ -2958,33 +2960,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<Goal> c_ = context.Operators.SelectDistinct<Goal, Goal>((IEnumerable<Goal>)a_, b_);
-        Goal d_ = context.Operators.SingletonFrom<Goal>(c_);
+        IEnumerable<Goal?>? c_ = context.Operators.SelectDistinct<Goal, Goal>((IEnumerable<Goal>)a_, b_);
+        Goal? d_ = context.Operators.SingletonFrom<Goal>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("GroupResource")]
-    public Group GroupResource(CqlContext context, Group arg)
+    public Group? GroupResource(CqlContext context, Group? arg)
     {
-        Group[] a_ = [
+        Group?[]? a_ = [
             arg,
         ];
 
-        Group b_(Group a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            Code<Group.GroupType> g_ = a?.TypeElement;
-            FhirBoolean h_ = a?.ActualElement;
-            CodeableConcept i_ = a?.Code;
-            FhirString j_ = a?.NameElement;
-            UnsignedInt k_ = a?.QuantityElement;
-            Integer l_ = context.Operators.Convert<Integer>(k_);
-            UnsignedInt m_ = context.Operators.Convert<UnsignedInt>(l_);
-            ResourceReference n_ = a?.ManagingEntity;
-            List<Group.CharacteristicComponent> o_ = a?.Characteristic;
-            List<Group.MemberComponent> p_ = a?.Member;
-            Group q_ = new Group
+        Group? b_(Group? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            Code<Group.GroupType>? g_ = a?.TypeElement;
+            FhirBoolean? h_ = a?.ActualElement;
+            CodeableConcept? i_ = a?.Code;
+            FhirString? j_ = a?.NameElement;
+            UnsignedInt? k_ = a?.QuantityElement;
+            Integer? l_ = context.Operators.Convert<Integer>(k_);
+            UnsignedInt? m_ = context.Operators.Convert<UnsignedInt>(l_);
+            ResourceReference? n_ = a?.ManagingEntity;
+            List<Group.CharacteristicComponent?>? o_ = a?.Characteristic;
+            List<Group.MemberComponent?>? p_ = a?.Member;
+            Group? q_ = new Group
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -3000,36 +3002,36 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<Group> c_ = context.Operators.SelectDistinct<Group, Group>((IEnumerable<Group>)a_, b_);
-        Group d_ = context.Operators.SingletonFrom<Group>(c_);
+        IEnumerable<Group?>? c_ = context.Operators.SelectDistinct<Group, Group>((IEnumerable<Group>)a_, b_);
+        Group? d_ = context.Operators.SingletonFrom<Group>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("GuidanceResponseResource")]
-    public GuidanceResponse GuidanceResponseResource(CqlContext context, GuidanceResponse arg)
+    public GuidanceResponse? GuidanceResponseResource(CqlContext context, GuidanceResponse? arg)
     {
-        GuidanceResponse[] a_ = [
+        GuidanceResponse?[]? a_ = [
             arg,
         ];
 
-        GuidanceResponse b_(GuidanceResponse a) {
-            Identifier e_ = a?.RequestIdentifier;
-            List<Identifier> f_ = a?.Identifier;
-            DataType g_ = a?.Module;
-            Code<GuidanceResponse.GuidanceResponseStatus> h_ = a?.StatusElement;
-            ResourceReference i_ = a?.Subject;
-            ResourceReference j_ = a?.Encounter;
-            FhirDateTime k_ = a?.OccurrenceDateTimeElement;
-            ResourceReference l_ = a?.Performer;
-            List<CodeableConcept> m_ = a?.ReasonCode;
-            List<ResourceReference> n_ = a?.ReasonReference;
-            List<Annotation> o_ = a?.Note;
-            List<ResourceReference> p_ = a?.EvaluationMessage;
-            ResourceReference q_ = a?.OutputParameters;
-            ResourceReference r_ = a?.Result;
-            List<DataRequirement> s_ = a?.DataRequirement;
-            GuidanceResponse t_ = new GuidanceResponse
+        GuidanceResponse? b_(GuidanceResponse? a) {
+            Identifier? e_ = a?.RequestIdentifier;
+            List<Identifier?>? f_ = a?.Identifier;
+            DataType? g_ = a?.Module;
+            Code<GuidanceResponse.GuidanceResponseStatus>? h_ = a?.StatusElement;
+            ResourceReference? i_ = a?.Subject;
+            ResourceReference? j_ = a?.Encounter;
+            FhirDateTime? k_ = a?.OccurrenceDateTimeElement;
+            ResourceReference? l_ = a?.Performer;
+            List<CodeableConcept?>? m_ = a?.ReasonCode;
+            List<ResourceReference?>? n_ = a?.ReasonReference;
+            List<Annotation?>? o_ = a?.Note;
+            List<ResourceReference?>? p_ = a?.EvaluationMessage;
+            ResourceReference? q_ = a?.OutputParameters;
+            ResourceReference? r_ = a?.Result;
+            List<DataRequirement?>? s_ = a?.DataRequirement;
+            GuidanceResponse? t_ = new GuidanceResponse
             {
                 RequestIdentifier = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -3050,45 +3052,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return t_;
         }
 
-        IEnumerable<GuidanceResponse> c_ = context.Operators.SelectDistinct<GuidanceResponse, GuidanceResponse>((IEnumerable<GuidanceResponse>)a_, b_);
-        GuidanceResponse d_ = context.Operators.SingletonFrom<GuidanceResponse>(c_);
+        IEnumerable<GuidanceResponse?>? c_ = context.Operators.SelectDistinct<GuidanceResponse, GuidanceResponse>((IEnumerable<GuidanceResponse>)a_, b_);
+        GuidanceResponse? d_ = context.Operators.SingletonFrom<GuidanceResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("HealthcareServiceResource")]
-    public HealthcareService HealthcareServiceResource(CqlContext context, HealthcareService arg)
+    public HealthcareService? HealthcareServiceResource(CqlContext context, HealthcareService? arg)
     {
-        HealthcareService[] a_ = [
+        HealthcareService?[]? a_ = [
             arg,
         ];
 
-        HealthcareService b_(HealthcareService a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            ResourceReference g_ = a?.ProvidedBy;
-            List<CodeableConcept> h_ = a?.Category;
-            List<CodeableConcept> i_ = a?.Type;
-            List<CodeableConcept> j_ = a?.Specialty;
-            List<ResourceReference> k_ = a?.Location;
-            FhirString l_ = a?.NameElement;
-            FhirString m_ = a?.CommentElement;
-            Markdown n_ = a?.ExtraDetailsElement;
-            Attachment o_ = a?.Photo;
-            List<ContactPoint> p_ = a?.Telecom;
-            List<ResourceReference> q_ = a?.CoverageArea;
-            List<CodeableConcept> r_ = a?.ServiceProvisionCode;
-            List<HealthcareService.EligibilityComponent> s_ = a?.Eligibility;
-            List<CodeableConcept> t_ = a?.Program;
-            List<CodeableConcept> u_ = a?.Characteristic;
-            List<CodeableConcept> v_ = a?.Communication;
-            List<CodeableConcept> w_ = a?.ReferralMethod;
-            FhirBoolean x_ = a?.AppointmentRequiredElement;
-            List<HealthcareService.AvailableTimeComponent> y_ = a?.AvailableTime;
-            List<HealthcareService.NotAvailableComponent> z_ = a?.NotAvailable;
-            FhirString aa_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> ab_ = a?.Endpoint;
-            HealthcareService ac_ = new HealthcareService
+        HealthcareService? b_(HealthcareService? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            ResourceReference? g_ = a?.ProvidedBy;
+            List<CodeableConcept?>? h_ = a?.Category;
+            List<CodeableConcept?>? i_ = a?.Type;
+            List<CodeableConcept?>? j_ = a?.Specialty;
+            List<ResourceReference?>? k_ = a?.Location;
+            FhirString? l_ = a?.NameElement;
+            FhirString? m_ = a?.CommentElement;
+            Markdown? n_ = a?.ExtraDetailsElement;
+            Attachment? o_ = a?.Photo;
+            List<ContactPoint?>? p_ = a?.Telecom;
+            List<ResourceReference?>? q_ = a?.CoverageArea;
+            List<CodeableConcept?>? r_ = a?.ServiceProvisionCode;
+            List<HealthcareService.EligibilityComponent?>? s_ = a?.Eligibility;
+            List<CodeableConcept?>? t_ = a?.Program;
+            List<CodeableConcept?>? u_ = a?.Characteristic;
+            List<CodeableConcept?>? v_ = a?.Communication;
+            List<CodeableConcept?>? w_ = a?.ReferralMethod;
+            FhirBoolean? x_ = a?.AppointmentRequiredElement;
+            List<HealthcareService.AvailableTimeComponent?>? y_ = a?.AvailableTime;
+            List<HealthcareService.NotAvailableComponent?>? z_ = a?.NotAvailable;
+            FhirString? aa_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference?>? ab_ = a?.Endpoint;
+            HealthcareService? ac_ = new HealthcareService
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -3118,45 +3120,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<HealthcareService> c_ = context.Operators.SelectDistinct<HealthcareService, HealthcareService>((IEnumerable<HealthcareService>)a_, b_);
-        HealthcareService d_ = context.Operators.SingletonFrom<HealthcareService>(c_);
+        IEnumerable<HealthcareService?>? c_ = context.Operators.SelectDistinct<HealthcareService, HealthcareService>((IEnumerable<HealthcareService>)a_, b_);
+        HealthcareService? d_ = context.Operators.SingletonFrom<HealthcareService>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ImagingStudyResource")]
-    public ImagingStudy ImagingStudyResource(CqlContext context, ImagingStudy arg)
+    public ImagingStudy? ImagingStudyResource(CqlContext context, ImagingStudy? arg)
     {
-        ImagingStudy[] a_ = [
+        ImagingStudy?[]? a_ = [
             arg,
         ];
 
-        ImagingStudy b_(ImagingStudy a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ImagingStudy.ImagingStudyStatus> f_ = a?.StatusElement;
-            List<Coding> g_ = a?.Modality;
-            ResourceReference h_ = a?.Subject;
-            ResourceReference i_ = a?.Encounter;
-            FhirDateTime j_ = a?.StartedElement;
-            List<ResourceReference> k_ = a?.BasedOn;
-            ResourceReference l_ = a?.Referrer;
-            List<ResourceReference> m_ = a?.Interpreter;
-            List<ResourceReference> n_ = a?.Endpoint;
-            UnsignedInt o_ = a?.NumberOfSeriesElement;
-            Integer p_ = context.Operators.Convert<Integer>(o_);
-            UnsignedInt q_ = context.Operators.Convert<UnsignedInt>(p_);
-            UnsignedInt r_ = a?.NumberOfInstancesElement;
-            Integer s_ = context.Operators.Convert<Integer>(r_);
-            UnsignedInt t_ = context.Operators.Convert<UnsignedInt>(s_);
-            ResourceReference u_ = a?.ProcedureReference;
-            List<CodeableConcept> v_ = a?.ProcedureCode;
-            ResourceReference w_ = a?.Location;
-            List<CodeableConcept> x_ = a?.ReasonCode;
-            List<ResourceReference> y_ = a?.ReasonReference;
-            List<Annotation> z_ = a?.Note;
-            FhirString aa_ = a?.DescriptionElement;
-            List<ImagingStudy.SeriesComponent> ab_ = a?.Series;
-            ImagingStudy ac_ = new ImagingStudy
+        ImagingStudy? b_(ImagingStudy? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ImagingStudy.ImagingStudyStatus>? f_ = a?.StatusElement;
+            List<Coding?>? g_ = a?.Modality;
+            ResourceReference? h_ = a?.Subject;
+            ResourceReference? i_ = a?.Encounter;
+            FhirDateTime? j_ = a?.StartedElement;
+            List<ResourceReference?>? k_ = a?.BasedOn;
+            ResourceReference? l_ = a?.Referrer;
+            List<ResourceReference?>? m_ = a?.Interpreter;
+            List<ResourceReference?>? n_ = a?.Endpoint;
+            UnsignedInt? o_ = a?.NumberOfSeriesElement;
+            Integer? p_ = context.Operators.Convert<Integer>(o_);
+            UnsignedInt? q_ = context.Operators.Convert<UnsignedInt>(p_);
+            UnsignedInt? r_ = a?.NumberOfInstancesElement;
+            Integer? s_ = context.Operators.Convert<Integer>(r_);
+            UnsignedInt? t_ = context.Operators.Convert<UnsignedInt>(s_);
+            ResourceReference? u_ = a?.ProcedureReference;
+            List<CodeableConcept?>? v_ = a?.ProcedureCode;
+            ResourceReference? w_ = a?.Location;
+            List<CodeableConcept?>? x_ = a?.ReasonCode;
+            List<ResourceReference?>? y_ = a?.ReasonReference;
+            List<Annotation?>? z_ = a?.Note;
+            FhirString? aa_ = a?.DescriptionElement;
+            List<ImagingStudy.SeriesComponent?>? ab_ = a?.Series;
+            ImagingStudy? ac_ = new ImagingStudy
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3182,49 +3184,49 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<ImagingStudy> c_ = context.Operators.SelectDistinct<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)a_, b_);
-        ImagingStudy d_ = context.Operators.SingletonFrom<ImagingStudy>(c_);
+        IEnumerable<ImagingStudy?>? c_ = context.Operators.SelectDistinct<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)a_, b_);
+        ImagingStudy? d_ = context.Operators.SingletonFrom<ImagingStudy>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ImmunizationResource")]
-    public Immunization ImmunizationResource(CqlContext context, Immunization arg)
+    public Immunization? ImmunizationResource(CqlContext context, Immunization? arg)
     {
-        Immunization[] a_ = [
+        Immunization?[]? a_ = [
             arg,
         ];
 
-        Immunization b_(Immunization a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Immunization.ImmunizationStatusCodes> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.StatusReason;
-            CodeableConcept h_ = a?.VaccineCode;
-            ResourceReference i_ = a?.Patient;
-            ResourceReference j_ = a?.Encounter;
-            DataType k_ = a?.Occurrence;
-            FhirDateTime l_ = a?.RecordedElement;
-            FhirBoolean m_ = a?.PrimarySourceElement;
-            CodeableConcept n_ = a?.ReportOrigin;
-            ResourceReference o_ = a?.Location;
-            ResourceReference p_ = a?.Manufacturer;
-            FhirString q_ = a?.LotNumberElement;
-            Date r_ = a?.ExpirationDateElement;
-            CodeableConcept s_ = a?.Site;
-            CodeableConcept t_ = a?.Route;
-            Quantity u_ = a?.DoseQuantity;
-            List<Immunization.PerformerComponent> v_ = a?.Performer;
-            List<Annotation> w_ = a?.Note;
-            List<CodeableConcept> x_ = a?.ReasonCode;
-            List<ResourceReference> y_ = a?.ReasonReference;
-            FhirBoolean z_ = a?.IsSubpotentElement;
-            List<CodeableConcept> aa_ = a?.SubpotentReason;
-            List<Immunization.EducationComponent> ab_ = a?.Education;
-            List<CodeableConcept> ac_ = a?.ProgramEligibility;
-            CodeableConcept ad_ = a?.FundingSource;
-            List<Immunization.ReactionComponent> ae_ = a?.Reaction;
-            List<Immunization.ProtocolAppliedComponent> af_ = a?.ProtocolApplied;
-            Immunization ag_ = new Immunization
+        Immunization? b_(Immunization? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Immunization.ImmunizationStatusCodes>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.StatusReason;
+            CodeableConcept? h_ = a?.VaccineCode;
+            ResourceReference? i_ = a?.Patient;
+            ResourceReference? j_ = a?.Encounter;
+            DataType? k_ = a?.Occurrence;
+            FhirDateTime? l_ = a?.RecordedElement;
+            FhirBoolean? m_ = a?.PrimarySourceElement;
+            CodeableConcept? n_ = a?.ReportOrigin;
+            ResourceReference? o_ = a?.Location;
+            ResourceReference? p_ = a?.Manufacturer;
+            FhirString? q_ = a?.LotNumberElement;
+            Date? r_ = a?.ExpirationDateElement;
+            CodeableConcept? s_ = a?.Site;
+            CodeableConcept? t_ = a?.Route;
+            Quantity? u_ = a?.DoseQuantity;
+            List<Immunization.PerformerComponent?>? v_ = a?.Performer;
+            List<Annotation?>? w_ = a?.Note;
+            List<CodeableConcept?>? x_ = a?.ReasonCode;
+            List<ResourceReference?>? y_ = a?.ReasonReference;
+            FhirBoolean? z_ = a?.IsSubpotentElement;
+            List<CodeableConcept?>? aa_ = a?.SubpotentReason;
+            List<Immunization.EducationComponent?>? ab_ = a?.Education;
+            List<CodeableConcept?>? ac_ = a?.ProgramEligibility;
+            CodeableConcept? ad_ = a?.FundingSource;
+            List<Immunization.ReactionComponent?>? ae_ = a?.Reaction;
+            List<Immunization.ProtocolAppliedComponent?>? af_ = a?.ProtocolApplied;
+            Immunization? ag_ = new Immunization
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3258,34 +3260,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ag_;
         }
 
-        IEnumerable<Immunization> c_ = context.Operators.SelectDistinct<Immunization, Immunization>((IEnumerable<Immunization>)a_, b_);
-        Immunization d_ = context.Operators.SingletonFrom<Immunization>(c_);
+        IEnumerable<Immunization?>? c_ = context.Operators.SelectDistinct<Immunization, Immunization>((IEnumerable<Immunization>)a_, b_);
+        Immunization? d_ = context.Operators.SingletonFrom<Immunization>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ImmunizationEvaluationResource")]
-    public ImmunizationEvaluation ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation arg)
+    public ImmunizationEvaluation? ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation? arg)
     {
-        ImmunizationEvaluation[] a_ = [
+        ImmunizationEvaluation?[]? a_ = [
             arg,
         ];
 
-        ImmunizationEvaluation b_(ImmunizationEvaluation a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> f_ = a?.StatusElement;
-            ResourceReference g_ = a?.Patient;
-            FhirDateTime h_ = a?.DateElement;
-            ResourceReference i_ = a?.Authority;
-            CodeableConcept j_ = a?.TargetDisease;
-            ResourceReference k_ = a?.ImmunizationEvent;
-            CodeableConcept l_ = a?.DoseStatus;
-            List<CodeableConcept> m_ = a?.DoseStatusReason;
-            FhirString n_ = a?.DescriptionElement;
-            FhirString o_ = a?.SeriesElement;
-            DataType p_ = a?.DoseNumber;
-            DataType q_ = a?.SeriesDoses;
-            ImmunizationEvaluation r_ = new ImmunizationEvaluation
+        ImmunizationEvaluation? b_(ImmunizationEvaluation? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes>? f_ = a?.StatusElement;
+            ResourceReference? g_ = a?.Patient;
+            FhirDateTime? h_ = a?.DateElement;
+            ResourceReference? i_ = a?.Authority;
+            CodeableConcept? j_ = a?.TargetDisease;
+            ResourceReference? k_ = a?.ImmunizationEvent;
+            CodeableConcept? l_ = a?.DoseStatus;
+            List<CodeableConcept?>? m_ = a?.DoseStatusReason;
+            FhirString? n_ = a?.DescriptionElement;
+            FhirString? o_ = a?.SeriesElement;
+            DataType? p_ = a?.DoseNumber;
+            DataType? q_ = a?.SeriesDoses;
+            ImmunizationEvaluation? r_ = new ImmunizationEvaluation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3304,26 +3306,26 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<ImmunizationEvaluation> c_ = context.Operators.SelectDistinct<ImmunizationEvaluation, ImmunizationEvaluation>((IEnumerable<ImmunizationEvaluation>)a_, b_);
-        ImmunizationEvaluation d_ = context.Operators.SingletonFrom<ImmunizationEvaluation>(c_);
+        IEnumerable<ImmunizationEvaluation?>? c_ = context.Operators.SelectDistinct<ImmunizationEvaluation, ImmunizationEvaluation>((IEnumerable<ImmunizationEvaluation>)a_, b_);
+        ImmunizationEvaluation? d_ = context.Operators.SingletonFrom<ImmunizationEvaluation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ImmunizationRecommendationResource")]
-    public ImmunizationRecommendation ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation arg)
+    public ImmunizationRecommendation? ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation? arg)
     {
-        ImmunizationRecommendation[] a_ = [
+        ImmunizationRecommendation?[]? a_ = [
             arg,
         ];
 
-        ImmunizationRecommendation b_(ImmunizationRecommendation a) {
-            List<Identifier> e_ = a?.Identifier;
-            ResourceReference f_ = a?.Patient;
-            FhirDateTime g_ = a?.DateElement;
-            ResourceReference h_ = a?.Authority;
-            List<ImmunizationRecommendation.RecommendationComponent> i_ = a?.Recommendation;
-            ImmunizationRecommendation j_ = new ImmunizationRecommendation
+        ImmunizationRecommendation? b_(ImmunizationRecommendation? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            ResourceReference? f_ = a?.Patient;
+            FhirDateTime? g_ = a?.DateElement;
+            ResourceReference? h_ = a?.Authority;
+            List<ImmunizationRecommendation.RecommendationComponent?>? i_ = a?.Recommendation;
+            ImmunizationRecommendation? j_ = new ImmunizationRecommendation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Patient = f_,
@@ -3334,35 +3336,35 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return j_;
         }
 
-        IEnumerable<ImmunizationRecommendation> c_ = context.Operators.SelectDistinct<ImmunizationRecommendation, ImmunizationRecommendation>((IEnumerable<ImmunizationRecommendation>)a_, b_);
-        ImmunizationRecommendation d_ = context.Operators.SingletonFrom<ImmunizationRecommendation>(c_);
+        IEnumerable<ImmunizationRecommendation?>? c_ = context.Operators.SelectDistinct<ImmunizationRecommendation, ImmunizationRecommendation>((IEnumerable<ImmunizationRecommendation>)a_, b_);
+        ImmunizationRecommendation? d_ = context.Operators.SingletonFrom<ImmunizationRecommendation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("InsurancePlanResource")]
-    public InsurancePlan InsurancePlanResource(CqlContext context, InsurancePlan arg)
+    public InsurancePlan? InsurancePlanResource(CqlContext context, InsurancePlan? arg)
     {
-        InsurancePlan[] a_ = [
+        InsurancePlan?[]? a_ = [
             arg,
         ];
 
-        InsurancePlan b_(InsurancePlan a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<PublicationStatus> f_ = a?.StatusElement;
-            List<CodeableConcept> g_ = a?.Type;
-            FhirString h_ = a?.NameElement;
-            List<FhirString> i_ = a?.AliasElement;
-            Period j_ = a?.Period;
-            ResourceReference k_ = a?.OwnedBy;
-            ResourceReference l_ = a?.AdministeredBy;
-            List<ResourceReference> m_ = a?.CoverageArea;
-            List<InsurancePlan.ContactComponent> n_ = a?.Contact;
-            List<ResourceReference> o_ = a?.Endpoint;
-            List<ResourceReference> p_ = a?.Network;
-            List<InsurancePlan.CoverageComponent> q_ = a?.Coverage;
-            List<InsurancePlan.PlanComponent> r_ = a?.Plan;
-            InsurancePlan s_ = new InsurancePlan
+        InsurancePlan? b_(InsurancePlan? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<PublicationStatus>? f_ = a?.StatusElement;
+            List<CodeableConcept?>? g_ = a?.Type;
+            FhirString? h_ = a?.NameElement;
+            List<FhirString?>? i_ = a?.AliasElement;
+            Period? j_ = a?.Period;
+            ResourceReference? k_ = a?.OwnedBy;
+            ResourceReference? l_ = a?.AdministeredBy;
+            List<ResourceReference?>? m_ = a?.CoverageArea;
+            List<InsurancePlan.ContactComponent?>? n_ = a?.Contact;
+            List<ResourceReference?>? o_ = a?.Endpoint;
+            List<ResourceReference?>? p_ = a?.Network;
+            List<InsurancePlan.CoverageComponent?>? q_ = a?.Coverage;
+            List<InsurancePlan.PlanComponent?>? r_ = a?.Plan;
+            InsurancePlan? s_ = new InsurancePlan
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3382,37 +3384,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return s_;
         }
 
-        IEnumerable<InsurancePlan> c_ = context.Operators.SelectDistinct<InsurancePlan, InsurancePlan>((IEnumerable<InsurancePlan>)a_, b_);
-        InsurancePlan d_ = context.Operators.SingletonFrom<InsurancePlan>(c_);
+        IEnumerable<InsurancePlan?>? c_ = context.Operators.SelectDistinct<InsurancePlan, InsurancePlan>((IEnumerable<InsurancePlan>)a_, b_);
+        InsurancePlan? d_ = context.Operators.SingletonFrom<InsurancePlan>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("InvoiceResource")]
-    public Invoice InvoiceResource(CqlContext context, Invoice arg)
+    public Invoice? InvoiceResource(CqlContext context, Invoice? arg)
     {
-        Invoice[] a_ = [
+        Invoice?[]? a_ = [
             arg,
         ];
 
-        Invoice b_(Invoice a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Invoice.InvoiceStatus> f_ = a?.StatusElement;
-            FhirString g_ = a?.CancelledReasonElement;
-            CodeableConcept h_ = a?.Type;
-            ResourceReference i_ = a?.Subject;
-            ResourceReference j_ = a?.Recipient;
-            FhirDateTime k_ = a?.DateElement;
-            List<Invoice.ParticipantComponent> l_ = a?.Participant;
-            ResourceReference m_ = a?.Issuer;
-            ResourceReference n_ = a?.Account;
-            List<Invoice.LineItemComponent> o_ = a?.LineItem;
-            List<Invoice.PriceComponentComponent> p_ = a?.TotalPriceComponent;
-            Money q_ = a?.TotalNet;
-            Money r_ = a?.TotalGross;
-            Markdown s_ = a?.PaymentTermsElement;
-            List<Annotation> t_ = a?.Note;
-            Invoice u_ = new Invoice
+        Invoice? b_(Invoice? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Invoice.InvoiceStatus>? f_ = a?.StatusElement;
+            FhirString? g_ = a?.CancelledReasonElement;
+            CodeableConcept? h_ = a?.Type;
+            ResourceReference? i_ = a?.Subject;
+            ResourceReference? j_ = a?.Recipient;
+            FhirDateTime? k_ = a?.DateElement;
+            List<Invoice.ParticipantComponent?>? l_ = a?.Participant;
+            ResourceReference? m_ = a?.Issuer;
+            ResourceReference? n_ = a?.Account;
+            List<Invoice.LineItemComponent?>? o_ = a?.LineItem;
+            List<Invoice.PriceComponentComponent?>? p_ = a?.TotalPriceComponent;
+            Money? q_ = a?.TotalNet;
+            Money? r_ = a?.TotalGross;
+            Markdown? s_ = a?.PaymentTermsElement;
+            List<Annotation?>? t_ = a?.Note;
+            Invoice? u_ = new Invoice
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3434,52 +3436,52 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<Invoice> c_ = context.Operators.SelectDistinct<Invoice, Invoice>((IEnumerable<Invoice>)a_, b_);
-        Invoice d_ = context.Operators.SingletonFrom<Invoice>(c_);
+        IEnumerable<Invoice?>? c_ = context.Operators.SelectDistinct<Invoice, Invoice>((IEnumerable<Invoice>)a_, b_);
+        Invoice? d_ = context.Operators.SingletonFrom<Invoice>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("LibraryResource")]
-    public Library LibraryResource(CqlContext context, Library arg)
+    public Library? LibraryResource(CqlContext context, Library? arg)
     {
-        Library[] a_ = [
+        Library?[]? a_ = [
             arg,
         ];
 
-        Library b_(Library a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.SubtitleElement;
-            Code<PublicationStatus> k_ = a?.StatusElement;
-            FhirBoolean l_ = a?.ExperimentalElement;
-            CodeableConcept m_ = a?.Type;
-            DataType n_ = a?.Subject;
-            FhirDateTime o_ = a?.DateElement;
-            FhirString p_ = a?.PublisherElement;
-            List<ContactDetail> q_ = a?.Contact;
-            Markdown r_ = a?.DescriptionElement;
-            List<UsageContext> s_ = a?.UseContext;
-            List<CodeableConcept> t_ = a?.Jurisdiction;
-            Markdown u_ = a?.PurposeElement;
-            FhirString v_ = a?.UsageElement;
-            Markdown w_ = a?.CopyrightElement;
-            Date x_ = a?.ApprovalDateElement;
-            Date y_ = a?.LastReviewDateElement;
-            Period z_ = a?.EffectivePeriod;
-            List<CodeableConcept> aa_ = a?.Topic;
-            List<ContactDetail> ab_ = a?.Author;
-            List<ContactDetail> ac_ = a?.Editor;
-            List<ContactDetail> ad_ = a?.Reviewer;
-            List<ContactDetail> ae_ = a?.Endorser;
-            List<RelatedArtifact> af_ = a?.RelatedArtifact;
-            List<ParameterDefinition> ag_ = a?.Parameter;
-            List<DataRequirement> ah_ = a?.DataRequirement;
-            List<Attachment> ai_ = a?.Content;
-            Library aj_ = new Library
+        Library? b_(Library? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.SubtitleElement;
+            Code<PublicationStatus>? k_ = a?.StatusElement;
+            FhirBoolean? l_ = a?.ExperimentalElement;
+            CodeableConcept? m_ = a?.Type;
+            DataType? n_ = a?.Subject;
+            FhirDateTime? o_ = a?.DateElement;
+            FhirString? p_ = a?.PublisherElement;
+            List<ContactDetail?>? q_ = a?.Contact;
+            Markdown? r_ = a?.DescriptionElement;
+            List<UsageContext?>? s_ = a?.UseContext;
+            List<CodeableConcept?>? t_ = a?.Jurisdiction;
+            Markdown? u_ = a?.PurposeElement;
+            FhirString? v_ = a?.UsageElement;
+            Markdown? w_ = a?.CopyrightElement;
+            Date? x_ = a?.ApprovalDateElement;
+            Date? y_ = a?.LastReviewDateElement;
+            Period? z_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? aa_ = a?.Topic;
+            List<ContactDetail?>? ab_ = a?.Author;
+            List<ContactDetail?>? ac_ = a?.Editor;
+            List<ContactDetail?>? ad_ = a?.Reviewer;
+            List<ContactDetail?>? ae_ = a?.Endorser;
+            List<RelatedArtifact?>? af_ = a?.RelatedArtifact;
+            List<ParameterDefinition?>? ag_ = a?.Parameter;
+            List<DataRequirement?>? ah_ = a?.DataRequirement;
+            List<Attachment?>? ai_ = a?.Content;
+            Library? aj_ = new Library
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -3516,24 +3518,24 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aj_;
         }
 
-        IEnumerable<Library> c_ = context.Operators.SelectDistinct<Library, Library>((IEnumerable<Library>)a_, b_);
-        Library d_ = context.Operators.SingletonFrom<Library>(c_);
+        IEnumerable<Library?>? c_ = context.Operators.SelectDistinct<Library, Library>((IEnumerable<Library>)a_, b_);
+        Library? d_ = context.Operators.SingletonFrom<Library>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("LinkageResource")]
-    public Linkage LinkageResource(CqlContext context, Linkage arg)
+    public Linkage? LinkageResource(CqlContext context, Linkage? arg)
     {
-        Linkage[] a_ = [
+        Linkage?[]? a_ = [
             arg,
         ];
 
-        Linkage b_(Linkage a) {
-            FhirBoolean e_ = a?.ActiveElement;
-            ResourceReference f_ = a?.Author;
-            List<Linkage.ItemComponent> g_ = a?.Item;
-            Linkage h_ = new Linkage
+        Linkage? b_(Linkage? a) {
+            FhirBoolean? e_ = a?.ActiveElement;
+            ResourceReference? f_ = a?.Author;
+            List<Linkage.ItemComponent?>? g_ = a?.Item;
+            Linkage? h_ = new Linkage
             {
                 ActiveElement = e_,
                 Author = f_,
@@ -3542,38 +3544,38 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return h_;
         }
 
-        IEnumerable<Linkage> c_ = context.Operators.SelectDistinct<Linkage, Linkage>((IEnumerable<Linkage>)a_, b_);
-        Linkage d_ = context.Operators.SingletonFrom<Linkage>(c_);
+        IEnumerable<Linkage?>? c_ = context.Operators.SelectDistinct<Linkage, Linkage>((IEnumerable<Linkage>)a_, b_);
+        Linkage? d_ = context.Operators.SingletonFrom<Linkage>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("LocationResource")]
-    public Location LocationResource(CqlContext context, Location arg)
+    public Location? LocationResource(CqlContext context, Location? arg)
     {
-        Location[] a_ = [
+        Location?[]? a_ = [
             arg,
         ];
 
-        Location b_(Location a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Location.LocationStatus> f_ = a?.StatusElement;
-            Coding g_ = a?.OperationalStatus;
-            FhirString h_ = a?.NameElement;
-            List<FhirString> i_ = a?.AliasElement;
-            FhirString j_ = a?.DescriptionElement;
-            Code<Location.LocationMode> k_ = a?.ModeElement;
-            List<CodeableConcept> l_ = a?.Type;
-            List<ContactPoint> m_ = a?.Telecom;
-            Address n_ = a?.Address;
-            CodeableConcept o_ = a?.PhysicalType;
-            Location.PositionComponent p_ = a?.Position;
-            ResourceReference q_ = a?.ManagingOrganization;
-            ResourceReference r_ = a?.PartOf;
-            List<Location.HoursOfOperationComponent> s_ = a?.HoursOfOperation;
-            FhirString t_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> u_ = a?.Endpoint;
-            Location v_ = new Location
+        Location? b_(Location? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Location.LocationStatus>? f_ = a?.StatusElement;
+            Coding? g_ = a?.OperationalStatus;
+            FhirString? h_ = a?.NameElement;
+            List<FhirString?>? i_ = a?.AliasElement;
+            FhirString? j_ = a?.DescriptionElement;
+            Code<Location.LocationMode>? k_ = a?.ModeElement;
+            List<CodeableConcept?>? l_ = a?.Type;
+            List<ContactPoint?>? m_ = a?.Telecom;
+            Address? n_ = a?.Address;
+            CodeableConcept? o_ = a?.PhysicalType;
+            Location.PositionComponent? p_ = a?.Position;
+            ResourceReference? q_ = a?.ManagingOrganization;
+            ResourceReference? r_ = a?.PartOf;
+            List<Location.HoursOfOperationComponent?>? s_ = a?.HoursOfOperation;
+            FhirString? t_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference?>? u_ = a?.Endpoint;
+            Location? v_ = new Location
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3596,62 +3598,62 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return v_;
         }
 
-        IEnumerable<Location> c_ = context.Operators.SelectDistinct<Location, Location>((IEnumerable<Location>)a_, b_);
-        Location d_ = context.Operators.SingletonFrom<Location>(c_);
+        IEnumerable<Location?>? c_ = context.Operators.SelectDistinct<Location, Location>((IEnumerable<Location>)a_, b_);
+        Location? d_ = context.Operators.SingletonFrom<Location>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MeasureResource")]
-    public Measure MeasureResource(CqlContext context, Measure arg)
+    public Measure? MeasureResource(CqlContext context, Measure? arg)
     {
-        Measure[] a_ = [
+        Measure?[]? a_ = [
             arg,
         ];
 
-        Measure b_(Measure a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.SubtitleElement;
-            Code<PublicationStatus> k_ = a?.StatusElement;
-            FhirBoolean l_ = a?.ExperimentalElement;
-            DataType m_ = a?.Subject;
-            FhirDateTime n_ = a?.DateElement;
-            FhirString o_ = a?.PublisherElement;
-            List<ContactDetail> p_ = a?.Contact;
-            Markdown q_ = a?.DescriptionElement;
-            List<UsageContext> r_ = a?.UseContext;
-            List<CodeableConcept> s_ = a?.Jurisdiction;
-            Markdown t_ = a?.PurposeElement;
-            FhirString u_ = a?.UsageElement;
-            Markdown v_ = a?.CopyrightElement;
-            Date w_ = a?.ApprovalDateElement;
-            Date x_ = a?.LastReviewDateElement;
-            Period y_ = a?.EffectivePeriod;
-            List<CodeableConcept> z_ = a?.Topic;
-            List<ContactDetail> aa_ = a?.Author;
-            List<ContactDetail> ab_ = a?.Editor;
-            List<ContactDetail> ac_ = a?.Reviewer;
-            List<ContactDetail> ad_ = a?.Endorser;
-            List<RelatedArtifact> ae_ = a?.RelatedArtifact;
-            List<Canonical> af_ = a?.LibraryElement;
-            Markdown ag_ = a?.DisclaimerElement;
-            CodeableConcept ah_ = a?.Scoring;
-            CodeableConcept ai_ = a?.CompositeScoring;
-            List<CodeableConcept> aj_ = a?.Type;
-            FhirString ak_ = a?.RiskAdjustmentElement;
-            FhirString al_ = a?.RateAggregationElement;
-            Markdown am_ = a?.RationaleElement;
-            Markdown an_ = a?.ClinicalRecommendationStatementElement;
-            CodeableConcept ao_ = a?.ImprovementNotation;
-            List<Markdown> ap_ = a?.DefinitionElement;
-            Markdown aq_ = a?.GuidanceElement;
-            List<Measure.GroupComponent> ar_ = a?.Group;
-            List<Measure.SupplementalDataComponent> as_ = a?.SupplementalData;
-            Measure at_ = new Measure
+        Measure? b_(Measure? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.SubtitleElement;
+            Code<PublicationStatus>? k_ = a?.StatusElement;
+            FhirBoolean? l_ = a?.ExperimentalElement;
+            DataType? m_ = a?.Subject;
+            FhirDateTime? n_ = a?.DateElement;
+            FhirString? o_ = a?.PublisherElement;
+            List<ContactDetail?>? p_ = a?.Contact;
+            Markdown? q_ = a?.DescriptionElement;
+            List<UsageContext?>? r_ = a?.UseContext;
+            List<CodeableConcept?>? s_ = a?.Jurisdiction;
+            Markdown? t_ = a?.PurposeElement;
+            FhirString? u_ = a?.UsageElement;
+            Markdown? v_ = a?.CopyrightElement;
+            Date? w_ = a?.ApprovalDateElement;
+            Date? x_ = a?.LastReviewDateElement;
+            Period? y_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? z_ = a?.Topic;
+            List<ContactDetail?>? aa_ = a?.Author;
+            List<ContactDetail?>? ab_ = a?.Editor;
+            List<ContactDetail?>? ac_ = a?.Reviewer;
+            List<ContactDetail?>? ad_ = a?.Endorser;
+            List<RelatedArtifact?>? ae_ = a?.RelatedArtifact;
+            List<Canonical?>? af_ = a?.LibraryElement;
+            Markdown? ag_ = a?.DisclaimerElement;
+            CodeableConcept? ah_ = a?.Scoring;
+            CodeableConcept? ai_ = a?.CompositeScoring;
+            List<CodeableConcept?>? aj_ = a?.Type;
+            FhirString? ak_ = a?.RiskAdjustmentElement;
+            FhirString? al_ = a?.RateAggregationElement;
+            Markdown? am_ = a?.RationaleElement;
+            Markdown? an_ = a?.ClinicalRecommendationStatementElement;
+            CodeableConcept? ao_ = a?.ImprovementNotation;
+            List<Markdown?>? ap_ = a?.DefinitionElement;
+            Markdown? aq_ = a?.GuidanceElement;
+            List<Measure.GroupComponent?>? ar_ = a?.Group;
+            List<Measure.SupplementalDataComponent?>? as_ = a?.SupplementalData;
+            Measure? at_ = new Measure
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -3698,32 +3700,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return at_;
         }
 
-        IEnumerable<Measure> c_ = context.Operators.SelectDistinct<Measure, Measure>((IEnumerable<Measure>)a_, b_);
-        Measure d_ = context.Operators.SingletonFrom<Measure>(c_);
+        IEnumerable<Measure?>? c_ = context.Operators.SelectDistinct<Measure, Measure>((IEnumerable<Measure>)a_, b_);
+        Measure? d_ = context.Operators.SingletonFrom<Measure>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MeasureReportResource")]
-    public MeasureReport MeasureReportResource(CqlContext context, MeasureReport arg)
+    public MeasureReport? MeasureReportResource(CqlContext context, MeasureReport? arg)
     {
-        MeasureReport[] a_ = [
+        MeasureReport?[]? a_ = [
             arg,
         ];
 
-        MeasureReport b_(MeasureReport a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<MeasureReport.MeasureReportStatus> f_ = a?.StatusElement;
-            Code<MeasureReport.MeasureReportType> g_ = a?.TypeElement;
-            Canonical h_ = a?.MeasureElement;
-            ResourceReference i_ = a?.Subject;
-            FhirDateTime j_ = a?.DateElement;
-            ResourceReference k_ = a?.Reporter;
-            Period l_ = a?.Period;
-            CodeableConcept m_ = a?.ImprovementNotation;
-            List<MeasureReport.GroupComponent> n_ = a?.Group;
-            List<ResourceReference> o_ = a?.EvaluatedResource;
-            MeasureReport p_ = new MeasureReport
+        MeasureReport? b_(MeasureReport? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<MeasureReport.MeasureReportStatus>? f_ = a?.StatusElement;
+            Code<MeasureReport.MeasureReportType>? g_ = a?.TypeElement;
+            Canonical? h_ = a?.MeasureElement;
+            ResourceReference? i_ = a?.Subject;
+            FhirDateTime? j_ = a?.DateElement;
+            ResourceReference? k_ = a?.Reporter;
+            Period? l_ = a?.Period;
+            CodeableConcept? m_ = a?.ImprovementNotation;
+            List<MeasureReport.GroupComponent?>? n_ = a?.Group;
+            List<ResourceReference?>? o_ = a?.EvaluatedResource;
+            MeasureReport? p_ = new MeasureReport
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3740,29 +3742,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<MeasureReport> c_ = context.Operators.SelectDistinct<MeasureReport, MeasureReport>((IEnumerable<MeasureReport>)a_, b_);
-        MeasureReport d_ = context.Operators.SingletonFrom<MeasureReport>(c_);
+        IEnumerable<MeasureReport?>? c_ = context.Operators.SelectDistinct<MeasureReport, MeasureReport>((IEnumerable<MeasureReport>)a_, b_);
+        MeasureReport? d_ = context.Operators.SingletonFrom<MeasureReport>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationResource")]
-    public Medication MedicationResource(CqlContext context, Medication arg)
+    public Medication? MedicationResource(CqlContext context, Medication? arg)
     {
-        Medication[] a_ = [
+        Medication?[]? a_ = [
             arg,
         ];
 
-        Medication b_(Medication a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Code;
-            Code<Medication.MedicationStatusCodes> g_ = a?.StatusElement;
-            ResourceReference h_ = a?.Manufacturer;
-            CodeableConcept i_ = a?.Form;
-            Ratio j_ = a?.Amount;
-            List<Medication.IngredientComponent> k_ = a?.Ingredient;
-            Medication.BatchComponent l_ = a?.Batch;
-            Medication m_ = new Medication
+        Medication? b_(Medication? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Code;
+            Code<Medication.MedicationStatusCodes>? g_ = a?.StatusElement;
+            ResourceReference? h_ = a?.Manufacturer;
+            CodeableConcept? i_ = a?.Form;
+            Ratio? j_ = a?.Amount;
+            List<Medication.IngredientComponent?>? k_ = a?.Ingredient;
+            Medication.BatchComponent? l_ = a?.Batch;
+            Medication? m_ = new Medication
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Code = f_,
@@ -3776,40 +3778,40 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<Medication> c_ = context.Operators.SelectDistinct<Medication, Medication>((IEnumerable<Medication>)a_, b_);
-        Medication d_ = context.Operators.SingletonFrom<Medication>(c_);
+        IEnumerable<Medication?>? c_ = context.Operators.SelectDistinct<Medication, Medication>((IEnumerable<Medication>)a_, b_);
+        Medication? d_ = context.Operators.SingletonFrom<Medication>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationAdministrationResource")]
-    public MedicationAdministration MedicationAdministrationResource(CqlContext context, MedicationAdministration arg)
+    public MedicationAdministration? MedicationAdministrationResource(CqlContext context, MedicationAdministration? arg)
     {
-        MedicationAdministration[] a_ = [
+        MedicationAdministration?[]? a_ = [
             arg,
         ];
 
-        MedicationAdministration b_(MedicationAdministration a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<FhirUri> f_ = a?.InstantiatesElement;
-            List<ResourceReference> g_ = a?.PartOf;
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = a?.StatusElement;
-            List<CodeableConcept> i_ = a?.StatusReason;
-            CodeableConcept j_ = a?.Category;
-            DataType k_ = a?.Medication;
-            ResourceReference l_ = a?.Subject;
-            ResourceReference m_ = a?.Context;
-            List<ResourceReference> n_ = a?.SupportingInformation;
-            DataType o_ = a?.Effective;
-            List<MedicationAdministration.PerformerComponent> p_ = a?.Performer;
-            List<CodeableConcept> q_ = a?.ReasonCode;
-            List<ResourceReference> r_ = a?.ReasonReference;
-            ResourceReference s_ = a?.Request;
-            List<ResourceReference> t_ = a?.Device;
-            List<Annotation> u_ = a?.Note;
-            MedicationAdministration.DosageComponent v_ = a?.Dosage;
-            List<ResourceReference> w_ = a?.EventHistory;
-            MedicationAdministration x_ = new MedicationAdministration
+        MedicationAdministration? b_(MedicationAdministration? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<FhirUri?>? f_ = a?.InstantiatesElement;
+            List<ResourceReference?>? g_ = a?.PartOf;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes>? h_ = a?.StatusElement;
+            List<CodeableConcept?>? i_ = a?.StatusReason;
+            CodeableConcept? j_ = a?.Category;
+            DataType? k_ = a?.Medication;
+            ResourceReference? l_ = a?.Subject;
+            ResourceReference? m_ = a?.Context;
+            List<ResourceReference?>? n_ = a?.SupportingInformation;
+            DataType? o_ = a?.Effective;
+            List<MedicationAdministration.PerformerComponent?>? p_ = a?.Performer;
+            List<CodeableConcept?>? q_ = a?.ReasonCode;
+            List<ResourceReference?>? r_ = a?.ReasonReference;
+            ResourceReference? s_ = a?.Request;
+            List<ResourceReference?>? t_ = a?.Device;
+            List<Annotation?>? u_ = a?.Note;
+            MedicationAdministration.DosageComponent? v_ = a?.Dosage;
+            List<ResourceReference?>? w_ = a?.EventHistory;
+            MedicationAdministration? x_ = new MedicationAdministration
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
@@ -3834,45 +3836,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return x_;
         }
 
-        IEnumerable<MedicationAdministration> c_ = context.Operators.SelectDistinct<MedicationAdministration, MedicationAdministration>((IEnumerable<MedicationAdministration>)a_, b_);
-        MedicationAdministration d_ = context.Operators.SingletonFrom<MedicationAdministration>(c_);
+        IEnumerable<MedicationAdministration?>? c_ = context.Operators.SelectDistinct<MedicationAdministration, MedicationAdministration>((IEnumerable<MedicationAdministration>)a_, b_);
+        MedicationAdministration? d_ = context.Operators.SingletonFrom<MedicationAdministration>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationDispenseResource")]
-    public MedicationDispense MedicationDispenseResource(CqlContext context, MedicationDispense arg)
+    public MedicationDispense? MedicationDispenseResource(CqlContext context, MedicationDispense? arg)
     {
-        MedicationDispense[] a_ = [
+        MedicationDispense?[]? a_ = [
             arg,
         ];
 
-        MedicationDispense b_(MedicationDispense a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.PartOf;
-            Code<MedicationDispense.MedicationDispenseStatusCodes> g_ = a?.StatusElement;
-            DataType h_ = a?.StatusReason;
-            CodeableConcept i_ = a?.Category;
-            DataType j_ = a?.Medication;
-            ResourceReference k_ = a?.Subject;
-            ResourceReference l_ = a?.Context;
-            List<ResourceReference> m_ = a?.SupportingInformation;
-            List<MedicationDispense.PerformerComponent> n_ = a?.Performer;
-            ResourceReference o_ = a?.Location;
-            List<ResourceReference> p_ = a?.AuthorizingPrescription;
-            CodeableConcept q_ = a?.Type;
-            Quantity r_ = a?.Quantity;
-            Quantity s_ = a?.DaysSupply;
-            FhirDateTime t_ = a?.WhenPreparedElement;
-            FhirDateTime u_ = a?.WhenHandedOverElement;
-            ResourceReference v_ = a?.Destination;
-            List<ResourceReference> w_ = a?.Receiver;
-            List<Annotation> x_ = a?.Note;
-            List<Dosage> y_ = a?.DosageInstruction;
-            MedicationDispense.SubstitutionComponent z_ = a?.Substitution;
-            List<ResourceReference> aa_ = a?.DetectedIssue;
-            List<ResourceReference> ab_ = a?.EventHistory;
-            MedicationDispense ac_ = new MedicationDispense
+        MedicationDispense? b_(MedicationDispense? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.PartOf;
+            Code<MedicationDispense.MedicationDispenseStatusCodes>? g_ = a?.StatusElement;
+            DataType? h_ = a?.StatusReason;
+            CodeableConcept? i_ = a?.Category;
+            DataType? j_ = a?.Medication;
+            ResourceReference? k_ = a?.Subject;
+            ResourceReference? l_ = a?.Context;
+            List<ResourceReference?>? m_ = a?.SupportingInformation;
+            List<MedicationDispense.PerformerComponent?>? n_ = a?.Performer;
+            ResourceReference? o_ = a?.Location;
+            List<ResourceReference?>? p_ = a?.AuthorizingPrescription;
+            CodeableConcept? q_ = a?.Type;
+            Quantity? r_ = a?.Quantity;
+            Quantity? s_ = a?.DaysSupply;
+            FhirDateTime? t_ = a?.WhenPreparedElement;
+            FhirDateTime? u_ = a?.WhenHandedOverElement;
+            ResourceReference? v_ = a?.Destination;
+            List<ResourceReference?>? w_ = a?.Receiver;
+            List<Annotation?>? x_ = a?.Note;
+            List<Dosage?>? y_ = a?.DosageInstruction;
+            MedicationDispense.SubstitutionComponent? z_ = a?.Substitution;
+            List<ResourceReference?>? aa_ = a?.DetectedIssue;
+            List<ResourceReference?>? ab_ = a?.EventHistory;
+            MedicationDispense? ac_ = new MedicationDispense
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -3902,43 +3904,43 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<MedicationDispense> c_ = context.Operators.SelectDistinct<MedicationDispense, MedicationDispense>((IEnumerable<MedicationDispense>)a_, b_);
-        MedicationDispense d_ = context.Operators.SingletonFrom<MedicationDispense>(c_);
+        IEnumerable<MedicationDispense?>? c_ = context.Operators.SelectDistinct<MedicationDispense, MedicationDispense>((IEnumerable<MedicationDispense>)a_, b_);
+        MedicationDispense? d_ = context.Operators.SingletonFrom<MedicationDispense>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationKnowledgeResource")]
-    public MedicationKnowledge MedicationKnowledgeResource(CqlContext context, MedicationKnowledge arg)
+    public MedicationKnowledge? MedicationKnowledgeResource(CqlContext context, MedicationKnowledge? arg)
     {
-        MedicationKnowledge[] a_ = [
+        MedicationKnowledge?[]? a_ = [
             arg,
         ];
 
-        MedicationKnowledge b_(MedicationKnowledge a) {
-            CodeableConcept e_ = a?.Code;
-            Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> f_ = a?.StatusElement;
-            ResourceReference g_ = a?.Manufacturer;
-            CodeableConcept h_ = a?.DoseForm;
-            Quantity i_ = a?.Amount;
-            List<FhirString> j_ = a?.SynonymElement;
-            List<MedicationKnowledge.RelatedMedicationKnowledgeComponent> k_ = a?.RelatedMedicationKnowledge;
-            List<ResourceReference> l_ = a?.AssociatedMedication;
-            List<CodeableConcept> m_ = a?.ProductType;
-            List<MedicationKnowledge.MonographComponent> n_ = a?.Monograph;
-            List<MedicationKnowledge.IngredientComponent> o_ = a?.Ingredient;
-            Markdown p_ = a?.PreparationInstructionElement;
-            List<CodeableConcept> q_ = a?.IntendedRoute;
-            List<MedicationKnowledge.CostComponent> r_ = a?.Cost;
-            List<MedicationKnowledge.MonitoringProgramComponent> s_ = a?.MonitoringProgram;
-            List<MedicationKnowledge.AdministrationGuidelinesComponent> t_ = a?.AdministrationGuidelines;
-            List<MedicationKnowledge.MedicineClassificationComponent> u_ = a?.MedicineClassification;
-            MedicationKnowledge.PackagingComponent v_ = a?.Packaging;
-            List<MedicationKnowledge.DrugCharacteristicComponent> w_ = a?.DrugCharacteristic;
-            List<ResourceReference> x_ = a?.Contraindication;
-            List<MedicationKnowledge.RegulatoryComponent> y_ = a?.Regulatory;
-            List<MedicationKnowledge.KineticsComponent> z_ = a?.Kinetics;
-            MedicationKnowledge aa_ = new MedicationKnowledge
+        MedicationKnowledge? b_(MedicationKnowledge? a) {
+            CodeableConcept? e_ = a?.Code;
+            Code<MedicationKnowledge.MedicationKnowledgeStatusCodes>? f_ = a?.StatusElement;
+            ResourceReference? g_ = a?.Manufacturer;
+            CodeableConcept? h_ = a?.DoseForm;
+            Quantity? i_ = a?.Amount;
+            List<FhirString?>? j_ = a?.SynonymElement;
+            List<MedicationKnowledge.RelatedMedicationKnowledgeComponent?>? k_ = a?.RelatedMedicationKnowledge;
+            List<ResourceReference?>? l_ = a?.AssociatedMedication;
+            List<CodeableConcept?>? m_ = a?.ProductType;
+            List<MedicationKnowledge.MonographComponent?>? n_ = a?.Monograph;
+            List<MedicationKnowledge.IngredientComponent?>? o_ = a?.Ingredient;
+            Markdown? p_ = a?.PreparationInstructionElement;
+            List<CodeableConcept?>? q_ = a?.IntendedRoute;
+            List<MedicationKnowledge.CostComponent?>? r_ = a?.Cost;
+            List<MedicationKnowledge.MonitoringProgramComponent?>? s_ = a?.MonitoringProgram;
+            List<MedicationKnowledge.AdministrationGuidelinesComponent?>? t_ = a?.AdministrationGuidelines;
+            List<MedicationKnowledge.MedicineClassificationComponent?>? u_ = a?.MedicineClassification;
+            MedicationKnowledge.PackagingComponent? v_ = a?.Packaging;
+            List<MedicationKnowledge.DrugCharacteristicComponent?>? w_ = a?.DrugCharacteristic;
+            List<ResourceReference?>? x_ = a?.Contraindication;
+            List<MedicationKnowledge.RegulatoryComponent?>? y_ = a?.Regulatory;
+            List<MedicationKnowledge.KineticsComponent?>? z_ = a?.Kinetics;
+            MedicationKnowledge? aa_ = new MedicationKnowledge
             {
                 Code = e_,
                 StatusElement = f_,
@@ -3966,53 +3968,53 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aa_;
         }
 
-        IEnumerable<MedicationKnowledge> c_ = context.Operators.SelectDistinct<MedicationKnowledge, MedicationKnowledge>((IEnumerable<MedicationKnowledge>)a_, b_);
-        MedicationKnowledge d_ = context.Operators.SingletonFrom<MedicationKnowledge>(c_);
+        IEnumerable<MedicationKnowledge?>? c_ = context.Operators.SelectDistinct<MedicationKnowledge, MedicationKnowledge>((IEnumerable<MedicationKnowledge>)a_, b_);
+        MedicationKnowledge? d_ = context.Operators.SingletonFrom<MedicationKnowledge>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationRequestResource")]
-    public MedicationRequest MedicationRequestResource(CqlContext context, MedicationRequest arg)
+    public MedicationRequest? MedicationRequestResource(CqlContext context, MedicationRequest? arg)
     {
-        MedicationRequest[] a_ = [
+        MedicationRequest?[]? a_ = [
             arg,
         ];
 
-        MedicationRequest b_(MedicationRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<MedicationRequest.MedicationrequestStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.StatusReason;
-            Code<MedicationRequest.MedicationRequestIntent> h_ = a?.IntentElement;
-            List<CodeableConcept> i_ = a?.Category;
-            Code<RequestPriority> j_ = a?.PriorityElement;
-            FhirBoolean k_ = a?.DoNotPerformElement;
-            DataType l_ = a?.Reported;
-            DataType m_ = a?.Medication;
-            ResourceReference n_ = a?.Subject;
-            ResourceReference o_ = a?.Encounter;
-            List<ResourceReference> p_ = a?.SupportingInformation;
-            FhirDateTime q_ = a?.AuthoredOnElement;
-            ResourceReference r_ = a?.Requester;
-            ResourceReference s_ = a?.Performer;
-            CodeableConcept t_ = a?.PerformerType;
-            ResourceReference u_ = a?.Recorder;
-            List<CodeableConcept> v_ = a?.ReasonCode;
-            List<ResourceReference> w_ = a?.ReasonReference;
-            List<Canonical> x_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> y_ = a?.InstantiatesUriElement;
-            List<ResourceReference> z_ = a?.BasedOn;
-            Identifier aa_ = a?.GroupIdentifier;
-            CodeableConcept ab_ = a?.CourseOfTherapyType;
-            List<ResourceReference> ac_ = a?.Insurance;
-            List<Annotation> ad_ = a?.Note;
-            List<Dosage> ae_ = a?.DosageInstruction;
-            MedicationRequest.DispenseRequestComponent af_ = a?.DispenseRequest;
-            MedicationRequest.SubstitutionComponent ag_ = a?.Substitution;
-            ResourceReference ah_ = a?.PriorPrescription;
-            List<ResourceReference> ai_ = a?.DetectedIssue;
-            List<ResourceReference> aj_ = a?.EventHistory;
-            MedicationRequest ak_ = new MedicationRequest
+        MedicationRequest? b_(MedicationRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<MedicationRequest.MedicationrequestStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.StatusReason;
+            Code<MedicationRequest.MedicationRequestIntent>? h_ = a?.IntentElement;
+            List<CodeableConcept?>? i_ = a?.Category;
+            Code<RequestPriority>? j_ = a?.PriorityElement;
+            FhirBoolean? k_ = a?.DoNotPerformElement;
+            DataType? l_ = a?.Reported;
+            DataType? m_ = a?.Medication;
+            ResourceReference? n_ = a?.Subject;
+            ResourceReference? o_ = a?.Encounter;
+            List<ResourceReference?>? p_ = a?.SupportingInformation;
+            FhirDateTime? q_ = a?.AuthoredOnElement;
+            ResourceReference? r_ = a?.Requester;
+            ResourceReference? s_ = a?.Performer;
+            CodeableConcept? t_ = a?.PerformerType;
+            ResourceReference? u_ = a?.Recorder;
+            List<CodeableConcept?>? v_ = a?.ReasonCode;
+            List<ResourceReference?>? w_ = a?.ReasonReference;
+            List<Canonical?>? x_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? y_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? z_ = a?.BasedOn;
+            Identifier? aa_ = a?.GroupIdentifier;
+            CodeableConcept? ab_ = a?.CourseOfTherapyType;
+            List<ResourceReference?>? ac_ = a?.Insurance;
+            List<Annotation?>? ad_ = a?.Note;
+            List<Dosage?>? ae_ = a?.DosageInstruction;
+            MedicationRequest.DispenseRequestComponent? af_ = a?.DispenseRequest;
+            MedicationRequest.SubstitutionComponent? ag_ = a?.Substitution;
+            ResourceReference? ah_ = a?.PriorPrescription;
+            List<ResourceReference?>? ai_ = a?.DetectedIssue;
+            List<ResourceReference?>? aj_ = a?.EventHistory;
+            MedicationRequest? ak_ = new MedicationRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -4050,38 +4052,38 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ak_;
         }
 
-        IEnumerable<MedicationRequest> c_ = context.Operators.SelectDistinct<MedicationRequest, MedicationRequest>((IEnumerable<MedicationRequest>)a_, b_);
-        MedicationRequest d_ = context.Operators.SingletonFrom<MedicationRequest>(c_);
+        IEnumerable<MedicationRequest?>? c_ = context.Operators.SelectDistinct<MedicationRequest, MedicationRequest>((IEnumerable<MedicationRequest>)a_, b_);
+        MedicationRequest? d_ = context.Operators.SingletonFrom<MedicationRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicationStatementResource")]
-    public MedicationStatement MedicationStatementResource(CqlContext context, MedicationStatement arg)
+    public MedicationStatement? MedicationStatementResource(CqlContext context, MedicationStatement? arg)
     {
-        MedicationStatement[] a_ = [
+        MedicationStatement?[]? a_ = [
             arg,
         ];
 
-        MedicationStatement b_(MedicationStatement a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            List<ResourceReference> g_ = a?.PartOf;
-            Code<MedicationStatement.MedicationStatusCodes> h_ = a?.StatusElement;
-            List<CodeableConcept> i_ = a?.StatusReason;
-            CodeableConcept j_ = a?.Category;
-            DataType k_ = a?.Medication;
-            ResourceReference l_ = a?.Subject;
-            ResourceReference m_ = a?.Context;
-            DataType n_ = a?.Effective;
-            FhirDateTime o_ = a?.DateAssertedElement;
-            ResourceReference p_ = a?.InformationSource;
-            List<ResourceReference> q_ = a?.DerivedFrom;
-            List<CodeableConcept> r_ = a?.ReasonCode;
-            List<ResourceReference> s_ = a?.ReasonReference;
-            List<Annotation> t_ = a?.Note;
-            List<Dosage> u_ = a?.Dosage;
-            MedicationStatement v_ = new MedicationStatement
+        MedicationStatement? b_(MedicationStatement? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            List<ResourceReference?>? g_ = a?.PartOf;
+            Code<MedicationStatement.MedicationStatusCodes>? h_ = a?.StatusElement;
+            List<CodeableConcept?>? i_ = a?.StatusReason;
+            CodeableConcept? j_ = a?.Category;
+            DataType? k_ = a?.Medication;
+            ResourceReference? l_ = a?.Subject;
+            ResourceReference? m_ = a?.Context;
+            DataType? n_ = a?.Effective;
+            FhirDateTime? o_ = a?.DateAssertedElement;
+            ResourceReference? p_ = a?.InformationSource;
+            List<ResourceReference?>? q_ = a?.DerivedFrom;
+            List<CodeableConcept?>? r_ = a?.ReasonCode;
+            List<ResourceReference?>? s_ = a?.ReasonReference;
+            List<Annotation?>? t_ = a?.Note;
+            List<Dosage?>? u_ = a?.Dosage;
+            MedicationStatement? v_ = new MedicationStatement
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -4104,41 +4106,41 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return v_;
         }
 
-        IEnumerable<MedicationStatement> c_ = context.Operators.SelectDistinct<MedicationStatement, MedicationStatement>((IEnumerable<MedicationStatement>)a_, b_);
-        MedicationStatement d_ = context.Operators.SingletonFrom<MedicationStatement>(c_);
+        IEnumerable<MedicationStatement?>? c_ = context.Operators.SelectDistinct<MedicationStatement, MedicationStatement>((IEnumerable<MedicationStatement>)a_, b_);
+        MedicationStatement? d_ = context.Operators.SingletonFrom<MedicationStatement>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductResource")]
-    public MedicinalProduct MedicinalProductResource(CqlContext context, MedicinalProduct arg)
+    public MedicinalProduct? MedicinalProductResource(CqlContext context, MedicinalProduct? arg)
     {
-        MedicinalProduct[] a_ = [
+        MedicinalProduct?[]? a_ = [
             arg,
         ];
 
-        MedicinalProduct b_(MedicinalProduct a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Type;
-            Coding g_ = a?.Domain;
-            CodeableConcept h_ = a?.CombinedPharmaceuticalDoseForm;
-            CodeableConcept i_ = a?.LegalStatusOfSupply;
-            CodeableConcept j_ = a?.AdditionalMonitoringIndicator;
-            List<FhirString> k_ = a?.SpecialMeasuresElement;
-            CodeableConcept l_ = a?.PaediatricUseIndicator;
-            List<CodeableConcept> m_ = a?.ProductClassification;
-            List<MarketingStatus> n_ = a?.MarketingStatus;
-            List<ResourceReference> o_ = a?.PharmaceuticalProduct;
-            List<ResourceReference> p_ = a?.PackagedMedicinalProduct;
-            List<ResourceReference> q_ = a?.AttachedDocument;
-            List<ResourceReference> r_ = a?.MasterFile;
-            List<ResourceReference> s_ = a?.Contact;
-            List<ResourceReference> t_ = a?.ClinicalTrial;
-            List<MedicinalProduct.NameComponent> u_ = a?.Name;
-            List<Identifier> v_ = a?.CrossReference;
-            List<MedicinalProduct.ManufacturingBusinessOperationComponent> w_ = a?.ManufacturingBusinessOperation;
-            List<MedicinalProduct.SpecialDesignationComponent> x_ = a?.SpecialDesignation;
-            MedicinalProduct y_ = new MedicinalProduct
+        MedicinalProduct? b_(MedicinalProduct? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Type;
+            Coding? g_ = a?.Domain;
+            CodeableConcept? h_ = a?.CombinedPharmaceuticalDoseForm;
+            CodeableConcept? i_ = a?.LegalStatusOfSupply;
+            CodeableConcept? j_ = a?.AdditionalMonitoringIndicator;
+            List<FhirString?>? k_ = a?.SpecialMeasuresElement;
+            CodeableConcept? l_ = a?.PaediatricUseIndicator;
+            List<CodeableConcept?>? m_ = a?.ProductClassification;
+            List<MarketingStatus?>? n_ = a?.MarketingStatus;
+            List<ResourceReference?>? o_ = a?.PharmaceuticalProduct;
+            List<ResourceReference?>? p_ = a?.PackagedMedicinalProduct;
+            List<ResourceReference?>? q_ = a?.AttachedDocument;
+            List<ResourceReference?>? r_ = a?.MasterFile;
+            List<ResourceReference?>? s_ = a?.Contact;
+            List<ResourceReference?>? t_ = a?.ClinicalTrial;
+            List<MedicinalProduct.NameComponent?>? u_ = a?.Name;
+            List<Identifier?>? v_ = a?.CrossReference;
+            List<MedicinalProduct.ManufacturingBusinessOperationComponent?>? w_ = a?.ManufacturingBusinessOperation;
+            List<MedicinalProduct.SpecialDesignationComponent?>? x_ = a?.SpecialDesignation;
+            MedicinalProduct? y_ = new MedicinalProduct
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Type = f_,
@@ -4164,37 +4166,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return y_;
         }
 
-        IEnumerable<MedicinalProduct> c_ = context.Operators.SelectDistinct<MedicinalProduct, MedicinalProduct>((IEnumerable<MedicinalProduct>)a_, b_);
-        MedicinalProduct d_ = context.Operators.SingletonFrom<MedicinalProduct>(c_);
+        IEnumerable<MedicinalProduct?>? c_ = context.Operators.SelectDistinct<MedicinalProduct, MedicinalProduct>((IEnumerable<MedicinalProduct>)a_, b_);
+        MedicinalProduct? d_ = context.Operators.SingletonFrom<MedicinalProduct>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductAuthorizationResource")]
-    public MedicinalProductAuthorization MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization arg)
+    public MedicinalProductAuthorization? MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization? arg)
     {
-        MedicinalProductAuthorization[] a_ = [
+        MedicinalProductAuthorization?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductAuthorization b_(MedicinalProductAuthorization a) {
-            List<Identifier> e_ = a?.Identifier;
-            ResourceReference f_ = a?.Subject;
-            List<CodeableConcept> g_ = a?.Country;
-            List<CodeableConcept> h_ = a?.Jurisdiction;
-            CodeableConcept i_ = a?.Status;
-            FhirDateTime j_ = a?.StatusDateElement;
-            FhirDateTime k_ = a?.RestoreDateElement;
-            Period l_ = a?.ValidityPeriod;
-            Period m_ = a?.DataExclusivityPeriod;
-            FhirDateTime n_ = a?.DateOfFirstAuthorizationElement;
-            FhirDateTime o_ = a?.InternationalBirthDateElement;
-            CodeableConcept p_ = a?.LegalBasis;
-            List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent> q_ = a?.JurisdictionalAuthorization;
-            ResourceReference r_ = a?.Holder;
-            ResourceReference s_ = a?.Regulator;
-            MedicinalProductAuthorization.ProcedureComponent t_ = a?.Procedure;
-            MedicinalProductAuthorization u_ = new MedicinalProductAuthorization
+        MedicinalProductAuthorization? b_(MedicinalProductAuthorization? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            ResourceReference? f_ = a?.Subject;
+            List<CodeableConcept?>? g_ = a?.Country;
+            List<CodeableConcept?>? h_ = a?.Jurisdiction;
+            CodeableConcept? i_ = a?.Status;
+            FhirDateTime? j_ = a?.StatusDateElement;
+            FhirDateTime? k_ = a?.RestoreDateElement;
+            Period? l_ = a?.ValidityPeriod;
+            Period? m_ = a?.DataExclusivityPeriod;
+            FhirDateTime? n_ = a?.DateOfFirstAuthorizationElement;
+            FhirDateTime? o_ = a?.InternationalBirthDateElement;
+            CodeableConcept? p_ = a?.LegalBasis;
+            List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent?>? q_ = a?.JurisdictionalAuthorization;
+            ResourceReference? r_ = a?.Holder;
+            ResourceReference? s_ = a?.Regulator;
+            MedicinalProductAuthorization.ProcedureComponent? t_ = a?.Procedure;
+            MedicinalProductAuthorization? u_ = new MedicinalProductAuthorization
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Subject = f_,
@@ -4216,28 +4218,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<MedicinalProductAuthorization> c_ = context.Operators.SelectDistinct<MedicinalProductAuthorization, MedicinalProductAuthorization>((IEnumerable<MedicinalProductAuthorization>)a_, b_);
-        MedicinalProductAuthorization d_ = context.Operators.SingletonFrom<MedicinalProductAuthorization>(c_);
+        IEnumerable<MedicinalProductAuthorization?>? c_ = context.Operators.SelectDistinct<MedicinalProductAuthorization, MedicinalProductAuthorization>((IEnumerable<MedicinalProductAuthorization>)a_, b_);
+        MedicinalProductAuthorization? d_ = context.Operators.SingletonFrom<MedicinalProductAuthorization>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductContraindicationResource")]
-    public MedicinalProductContraindication MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication arg)
+    public MedicinalProductContraindication? MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication? arg)
     {
-        MedicinalProductContraindication[] a_ = [
+        MedicinalProductContraindication?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductContraindication b_(MedicinalProductContraindication a) {
-            List<ResourceReference> e_ = a?.Subject;
-            CodeableConcept f_ = a?.Disease;
-            CodeableConcept g_ = a?.DiseaseStatus;
-            List<CodeableConcept> h_ = a?.Comorbidity;
-            List<ResourceReference> i_ = a?.TherapeuticIndication;
-            List<MedicinalProductContraindication.OtherTherapyComponent> j_ = a?.OtherTherapy;
-            List<Population> k_ = a?.Population;
-            MedicinalProductContraindication l_ = new MedicinalProductContraindication
+        MedicinalProductContraindication? b_(MedicinalProductContraindication? a) {
+            List<ResourceReference?>? e_ = a?.Subject;
+            CodeableConcept? f_ = a?.Disease;
+            CodeableConcept? g_ = a?.DiseaseStatus;
+            List<CodeableConcept?>? h_ = a?.Comorbidity;
+            List<ResourceReference?>? i_ = a?.TherapeuticIndication;
+            List<MedicinalProductContraindication.OtherTherapyComponent?>? j_ = a?.OtherTherapy;
+            List<Population?>? k_ = a?.Population;
+            MedicinalProductContraindication? l_ = new MedicinalProductContraindication
             {
                 Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
                 Disease = f_,
@@ -4250,27 +4252,27 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<MedicinalProductContraindication> c_ = context.Operators.SelectDistinct<MedicinalProductContraindication, MedicinalProductContraindication>((IEnumerable<MedicinalProductContraindication>)a_, b_);
-        MedicinalProductContraindication d_ = context.Operators.SingletonFrom<MedicinalProductContraindication>(c_);
+        IEnumerable<MedicinalProductContraindication?>? c_ = context.Operators.SelectDistinct<MedicinalProductContraindication, MedicinalProductContraindication>((IEnumerable<MedicinalProductContraindication>)a_, b_);
+        MedicinalProductContraindication? d_ = context.Operators.SingletonFrom<MedicinalProductContraindication>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductIngredientResource")]
-    public MedicinalProductIngredient MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient arg)
+    public MedicinalProductIngredient? MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient? arg)
     {
-        MedicinalProductIngredient[] a_ = [
+        MedicinalProductIngredient?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductIngredient b_(MedicinalProductIngredient a) {
-            Identifier e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Role;
-            FhirBoolean g_ = a?.AllergenicIndicatorElement;
-            List<ResourceReference> h_ = a?.Manufacturer;
-            List<MedicinalProductIngredient.SpecifiedSubstanceComponent> i_ = a?.SpecifiedSubstance;
-            MedicinalProductIngredient.SubstanceComponent j_ = a?.Substance;
-            MedicinalProductIngredient k_ = new MedicinalProductIngredient
+        MedicinalProductIngredient? b_(MedicinalProductIngredient? a) {
+            Identifier? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Role;
+            FhirBoolean? g_ = a?.AllergenicIndicatorElement;
+            List<ResourceReference?>? h_ = a?.Manufacturer;
+            List<MedicinalProductIngredient.SpecifiedSubstanceComponent?>? i_ = a?.SpecifiedSubstance;
+            MedicinalProductIngredient.SubstanceComponent? j_ = a?.Substance;
+            MedicinalProductIngredient? k_ = new MedicinalProductIngredient
             {
                 Identifier = e_,
                 Role = f_,
@@ -4282,28 +4284,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return k_;
         }
 
-        IEnumerable<MedicinalProductIngredient> c_ = context.Operators.SelectDistinct<MedicinalProductIngredient, MedicinalProductIngredient>((IEnumerable<MedicinalProductIngredient>)a_, b_);
-        MedicinalProductIngredient d_ = context.Operators.SingletonFrom<MedicinalProductIngredient>(c_);
+        IEnumerable<MedicinalProductIngredient?>? c_ = context.Operators.SelectDistinct<MedicinalProductIngredient, MedicinalProductIngredient>((IEnumerable<MedicinalProductIngredient>)a_, b_);
+        MedicinalProductIngredient? d_ = context.Operators.SingletonFrom<MedicinalProductIngredient>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductInteractionResource")]
-    public MedicinalProductInteraction MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction arg)
+    public MedicinalProductInteraction? MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction? arg)
     {
-        MedicinalProductInteraction[] a_ = [
+        MedicinalProductInteraction?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductInteraction b_(MedicinalProductInteraction a) {
-            List<ResourceReference> e_ = a?.Subject;
-            FhirString f_ = a?.DescriptionElement;
-            List<MedicinalProductInteraction.InteractantComponent> g_ = a?.Interactant;
-            CodeableConcept h_ = a?.Type;
-            CodeableConcept i_ = a?.Effect;
-            CodeableConcept j_ = a?.Incidence;
-            CodeableConcept k_ = a?.Management;
-            MedicinalProductInteraction l_ = new MedicinalProductInteraction
+        MedicinalProductInteraction? b_(MedicinalProductInteraction? a) {
+            List<ResourceReference?>? e_ = a?.Subject;
+            FhirString? f_ = a?.DescriptionElement;
+            List<MedicinalProductInteraction.InteractantComponent?>? g_ = a?.Interactant;
+            CodeableConcept? h_ = a?.Type;
+            CodeableConcept? i_ = a?.Effect;
+            CodeableConcept? j_ = a?.Incidence;
+            CodeableConcept? k_ = a?.Management;
+            MedicinalProductInteraction? l_ = new MedicinalProductInteraction
             {
                 Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
                 DescriptionElement = f_,
@@ -4316,28 +4318,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<MedicinalProductInteraction> c_ = context.Operators.SelectDistinct<MedicinalProductInteraction, MedicinalProductInteraction>((IEnumerable<MedicinalProductInteraction>)a_, b_);
-        MedicinalProductInteraction d_ = context.Operators.SingletonFrom<MedicinalProductInteraction>(c_);
+        IEnumerable<MedicinalProductInteraction?>? c_ = context.Operators.SelectDistinct<MedicinalProductInteraction, MedicinalProductInteraction>((IEnumerable<MedicinalProductInteraction>)a_, b_);
+        MedicinalProductInteraction? d_ = context.Operators.SingletonFrom<MedicinalProductInteraction>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductManufacturedResource")]
-    public MedicinalProductManufactured MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured arg)
+    public MedicinalProductManufactured? MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured? arg)
     {
-        MedicinalProductManufactured[] a_ = [
+        MedicinalProductManufactured?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductManufactured b_(MedicinalProductManufactured a) {
-            CodeableConcept e_ = a?.ManufacturedDoseForm;
-            CodeableConcept f_ = a?.UnitOfPresentation;
-            Quantity g_ = a?.Quantity;
-            List<ResourceReference> h_ = a?.Manufacturer;
-            List<ResourceReference> i_ = a?.Ingredient;
-            ProdCharacteristic j_ = a?.PhysicalCharacteristics;
-            List<CodeableConcept> k_ = a?.OtherCharacteristics;
-            MedicinalProductManufactured l_ = new MedicinalProductManufactured
+        MedicinalProductManufactured? b_(MedicinalProductManufactured? a) {
+            CodeableConcept? e_ = a?.ManufacturedDoseForm;
+            CodeableConcept? f_ = a?.UnitOfPresentation;
+            Quantity? g_ = a?.Quantity;
+            List<ResourceReference?>? h_ = a?.Manufacturer;
+            List<ResourceReference?>? i_ = a?.Ingredient;
+            ProdCharacteristic? j_ = a?.PhysicalCharacteristics;
+            List<CodeableConcept?>? k_ = a?.OtherCharacteristics;
+            MedicinalProductManufactured? l_ = new MedicinalProductManufactured
             {
                 ManufacturedDoseForm = e_,
                 UnitOfPresentation = f_,
@@ -4350,30 +4352,30 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<MedicinalProductManufactured> c_ = context.Operators.SelectDistinct<MedicinalProductManufactured, MedicinalProductManufactured>((IEnumerable<MedicinalProductManufactured>)a_, b_);
-        MedicinalProductManufactured d_ = context.Operators.SingletonFrom<MedicinalProductManufactured>(c_);
+        IEnumerable<MedicinalProductManufactured?>? c_ = context.Operators.SelectDistinct<MedicinalProductManufactured, MedicinalProductManufactured>((IEnumerable<MedicinalProductManufactured>)a_, b_);
+        MedicinalProductManufactured? d_ = context.Operators.SingletonFrom<MedicinalProductManufactured>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductPackagedResource")]
-    public MedicinalProductPackaged MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged arg)
+    public MedicinalProductPackaged? MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged? arg)
     {
-        MedicinalProductPackaged[] a_ = [
+        MedicinalProductPackaged?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductPackaged b_(MedicinalProductPackaged a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.Subject;
-            FhirString g_ = a?.DescriptionElement;
-            CodeableConcept h_ = a?.LegalStatusOfSupply;
-            List<MarketingStatus> i_ = a?.MarketingStatus;
-            ResourceReference j_ = a?.MarketingAuthorization;
-            List<ResourceReference> k_ = a?.Manufacturer;
-            List<MedicinalProductPackaged.BatchIdentifierComponent> l_ = a?.BatchIdentifier;
-            List<MedicinalProductPackaged.PackageItemComponent> m_ = a?.PackageItem;
-            MedicinalProductPackaged n_ = new MedicinalProductPackaged
+        MedicinalProductPackaged? b_(MedicinalProductPackaged? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.Subject;
+            FhirString? g_ = a?.DescriptionElement;
+            CodeableConcept? h_ = a?.LegalStatusOfSupply;
+            List<MarketingStatus?>? i_ = a?.MarketingStatus;
+            ResourceReference? j_ = a?.MarketingAuthorization;
+            List<ResourceReference?>? k_ = a?.Manufacturer;
+            List<MedicinalProductPackaged.BatchIdentifierComponent?>? l_ = a?.BatchIdentifier;
+            List<MedicinalProductPackaged.PackageItemComponent?>? m_ = a?.PackageItem;
+            MedicinalProductPackaged? n_ = new MedicinalProductPackaged
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -4388,28 +4390,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return n_;
         }
 
-        IEnumerable<MedicinalProductPackaged> c_ = context.Operators.SelectDistinct<MedicinalProductPackaged, MedicinalProductPackaged>((IEnumerable<MedicinalProductPackaged>)a_, b_);
-        MedicinalProductPackaged d_ = context.Operators.SingletonFrom<MedicinalProductPackaged>(c_);
+        IEnumerable<MedicinalProductPackaged?>? c_ = context.Operators.SelectDistinct<MedicinalProductPackaged, MedicinalProductPackaged>((IEnumerable<MedicinalProductPackaged>)a_, b_);
+        MedicinalProductPackaged? d_ = context.Operators.SingletonFrom<MedicinalProductPackaged>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductPharmaceuticalResource")]
-    public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical arg)
+    public MedicinalProductPharmaceutical? MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical? arg)
     {
-        MedicinalProductPharmaceutical[] a_ = [
+        MedicinalProductPharmaceutical?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductPharmaceutical b_(MedicinalProductPharmaceutical a) {
-            List<Identifier> e_ = a?.Identifier;
-            CodeableConcept f_ = a?.AdministrableDoseForm;
-            CodeableConcept g_ = a?.UnitOfPresentation;
-            List<ResourceReference> h_ = a?.Ingredient;
-            List<ResourceReference> i_ = a?.Device;
-            List<MedicinalProductPharmaceutical.CharacteristicsComponent> j_ = a?.Characteristics;
-            List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent> k_ = a?.RouteOfAdministration;
-            MedicinalProductPharmaceutical l_ = new MedicinalProductPharmaceutical
+        MedicinalProductPharmaceutical? b_(MedicinalProductPharmaceutical? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.AdministrableDoseForm;
+            CodeableConcept? g_ = a?.UnitOfPresentation;
+            List<ResourceReference?>? h_ = a?.Ingredient;
+            List<ResourceReference?>? i_ = a?.Device;
+            List<MedicinalProductPharmaceutical.CharacteristicsComponent?>? j_ = a?.Characteristics;
+            List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent?>? k_ = a?.RouteOfAdministration;
+            MedicinalProductPharmaceutical? l_ = new MedicinalProductPharmaceutical
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 AdministrableDoseForm = f_,
@@ -4422,26 +4424,26 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<MedicinalProductPharmaceutical> c_ = context.Operators.SelectDistinct<MedicinalProductPharmaceutical, MedicinalProductPharmaceutical>((IEnumerable<MedicinalProductPharmaceutical>)a_, b_);
-        MedicinalProductPharmaceutical d_ = context.Operators.SingletonFrom<MedicinalProductPharmaceutical>(c_);
+        IEnumerable<MedicinalProductPharmaceutical?>? c_ = context.Operators.SelectDistinct<MedicinalProductPharmaceutical, MedicinalProductPharmaceutical>((IEnumerable<MedicinalProductPharmaceutical>)a_, b_);
+        MedicinalProductPharmaceutical? d_ = context.Operators.SingletonFrom<MedicinalProductPharmaceutical>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MedicinalProductUndesirableEffectResource")]
-    public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect arg)
+    public MedicinalProductUndesirableEffect? MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect? arg)
     {
-        MedicinalProductUndesirableEffect[] a_ = [
+        MedicinalProductUndesirableEffect?[]? a_ = [
             arg,
         ];
 
-        MedicinalProductUndesirableEffect b_(MedicinalProductUndesirableEffect a) {
-            List<ResourceReference> e_ = a?.Subject;
-            CodeableConcept f_ = a?.SymptomConditionEffect;
-            CodeableConcept g_ = a?.Classification;
-            CodeableConcept h_ = a?.FrequencyOfOccurrence;
-            List<Population> i_ = a?.Population;
-            MedicinalProductUndesirableEffect j_ = new MedicinalProductUndesirableEffect
+        MedicinalProductUndesirableEffect? b_(MedicinalProductUndesirableEffect? a) {
+            List<ResourceReference?>? e_ = a?.Subject;
+            CodeableConcept? f_ = a?.SymptomConditionEffect;
+            CodeableConcept? g_ = a?.Classification;
+            CodeableConcept? h_ = a?.FrequencyOfOccurrence;
+            List<Population?>? i_ = a?.Population;
+            MedicinalProductUndesirableEffect? j_ = new MedicinalProductUndesirableEffect
             {
                 Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
                 SymptomConditionEffect = f_,
@@ -4452,32 +4454,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return j_;
         }
 
-        IEnumerable<MedicinalProductUndesirableEffect> c_ = context.Operators.SelectDistinct<MedicinalProductUndesirableEffect, MedicinalProductUndesirableEffect>((IEnumerable<MedicinalProductUndesirableEffect>)a_, b_);
-        MedicinalProductUndesirableEffect d_ = context.Operators.SingletonFrom<MedicinalProductUndesirableEffect>(c_);
+        IEnumerable<MedicinalProductUndesirableEffect?>? c_ = context.Operators.SelectDistinct<MedicinalProductUndesirableEffect, MedicinalProductUndesirableEffect>((IEnumerable<MedicinalProductUndesirableEffect>)a_, b_);
+        MedicinalProductUndesirableEffect? d_ = context.Operators.SingletonFrom<MedicinalProductUndesirableEffect>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MessageHeaderResource")]
-    public MessageHeader MessageHeaderResource(CqlContext context, MessageHeader arg)
+    public MessageHeader? MessageHeaderResource(CqlContext context, MessageHeader? arg)
     {
-        MessageHeader[] a_ = [
+        MessageHeader?[]? a_ = [
             arg,
         ];
 
-        MessageHeader b_(MessageHeader a) {
-            DataType e_ = a?.Event;
-            List<MessageHeader.MessageDestinationComponent> f_ = a?.Destination;
-            ResourceReference g_ = a?.Sender;
-            ResourceReference h_ = a?.Enterer;
-            ResourceReference i_ = a?.Author;
-            MessageHeader.MessageSourceComponent j_ = a?.Source;
-            ResourceReference k_ = a?.Responsible;
-            CodeableConcept l_ = a?.Reason;
-            MessageHeader.ResponseComponent m_ = a?.Response;
-            List<ResourceReference> n_ = a?.Focus;
-            Canonical o_ = a?.DefinitionElement;
-            MessageHeader p_ = new MessageHeader
+        MessageHeader? b_(MessageHeader? a) {
+            DataType? e_ = a?.Event;
+            List<MessageHeader.MessageDestinationComponent?>? f_ = a?.Destination;
+            ResourceReference? g_ = a?.Sender;
+            ResourceReference? h_ = a?.Enterer;
+            ResourceReference? i_ = a?.Author;
+            MessageHeader.MessageSourceComponent? j_ = a?.Source;
+            ResourceReference? k_ = a?.Responsible;
+            CodeableConcept? l_ = a?.Reason;
+            MessageHeader.ResponseComponent? m_ = a?.Response;
+            List<ResourceReference?>? n_ = a?.Focus;
+            Canonical? o_ = a?.DefinitionElement;
+            MessageHeader? p_ = new MessageHeader
             {
                 Event = (DataType)e_,
                 Destination = new List<MessageHeader.MessageDestinationComponent>((IEnumerable<MessageHeader.MessageDestinationComponent>)f_),
@@ -4494,37 +4496,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<MessageHeader> c_ = context.Operators.SelectDistinct<MessageHeader, MessageHeader>((IEnumerable<MessageHeader>)a_, b_);
-        MessageHeader d_ = context.Operators.SingletonFrom<MessageHeader>(c_);
+        IEnumerable<MessageHeader?>? c_ = context.Operators.SelectDistinct<MessageHeader, MessageHeader>((IEnumerable<MessageHeader>)a_, b_);
+        MessageHeader? d_ = context.Operators.SingletonFrom<MessageHeader>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("MolecularSequenceResource")]
-    public MolecularSequence MolecularSequenceResource(CqlContext context, MolecularSequence arg)
+    public MolecularSequence? MolecularSequenceResource(CqlContext context, MolecularSequence? arg)
     {
-        MolecularSequence[] a_ = [
+        MolecularSequence?[]? a_ = [
             arg,
         ];
 
-        MolecularSequence b_(MolecularSequence a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<MolecularSequence.SequenceType> f_ = a?.TypeElement;
-            Integer g_ = a?.CoordinateSystemElement;
-            ResourceReference h_ = a?.Patient;
-            ResourceReference i_ = a?.Specimen;
-            ResourceReference j_ = a?.Device;
-            ResourceReference k_ = a?.Performer;
-            Quantity l_ = a?.Quantity;
-            MolecularSequence.ReferenceSeqComponent m_ = a?.ReferenceSeq;
-            List<MolecularSequence.VariantComponent> n_ = a?.Variant;
-            FhirString o_ = a?.ObservedSeqElement;
-            List<MolecularSequence.QualityComponent> p_ = a?.Quality;
-            Integer q_ = a?.ReadCoverageElement;
-            List<MolecularSequence.RepositoryComponent> r_ = a?.Repository;
-            List<ResourceReference> s_ = a?.Pointer;
-            List<MolecularSequence.StructureVariantComponent> t_ = a?.StructureVariant;
-            MolecularSequence u_ = new MolecularSequence
+        MolecularSequence? b_(MolecularSequence? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<MolecularSequence.SequenceType>? f_ = a?.TypeElement;
+            Integer? g_ = a?.CoordinateSystemElement;
+            ResourceReference? h_ = a?.Patient;
+            ResourceReference? i_ = a?.Specimen;
+            ResourceReference? j_ = a?.Device;
+            ResourceReference? k_ = a?.Performer;
+            Quantity? l_ = a?.Quantity;
+            MolecularSequence.ReferenceSeqComponent? m_ = a?.ReferenceSeq;
+            List<MolecularSequence.VariantComponent?>? n_ = a?.Variant;
+            FhirString? o_ = a?.ObservedSeqElement;
+            List<MolecularSequence.QualityComponent?>? p_ = a?.Quality;
+            Integer? q_ = a?.ReadCoverageElement;
+            List<MolecularSequence.RepositoryComponent?>? r_ = a?.Repository;
+            List<ResourceReference?>? s_ = a?.Pointer;
+            List<MolecularSequence.StructureVariantComponent?>? t_ = a?.StructureVariant;
+            MolecularSequence? u_ = new MolecularSequence
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 TypeElement = f_,
@@ -4546,34 +4548,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<MolecularSequence> c_ = context.Operators.SelectDistinct<MolecularSequence, MolecularSequence>((IEnumerable<MolecularSequence>)a_, b_);
-        MolecularSequence d_ = context.Operators.SingletonFrom<MolecularSequence>(c_);
+        IEnumerable<MolecularSequence?>? c_ = context.Operators.SelectDistinct<MolecularSequence, MolecularSequence>((IEnumerable<MolecularSequence>)a_, b_);
+        MolecularSequence? d_ = context.Operators.SingletonFrom<MolecularSequence>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("NamingSystemResource")]
-    public NamingSystem NamingSystemResource(CqlContext context, NamingSystem arg)
+    public NamingSystem? NamingSystemResource(CqlContext context, NamingSystem? arg)
     {
-        NamingSystem[] a_ = [
+        NamingSystem?[]? a_ = [
             arg,
         ];
 
-        NamingSystem b_(NamingSystem a) {
-            FhirString e_ = a?.NameElement;
-            Code<PublicationStatus> f_ = a?.StatusElement;
-            Code<NamingSystem.NamingSystemType> g_ = a?.KindElement;
-            FhirDateTime h_ = a?.DateElement;
-            FhirString i_ = a?.PublisherElement;
-            List<ContactDetail> j_ = a?.Contact;
-            FhirString k_ = a?.ResponsibleElement;
-            CodeableConcept l_ = a?.Type;
-            Markdown m_ = a?.DescriptionElement;
-            List<UsageContext> n_ = a?.UseContext;
-            List<CodeableConcept> o_ = a?.Jurisdiction;
-            FhirString p_ = a?.UsageElement;
-            List<NamingSystem.UniqueIdComponent> q_ = a?.UniqueId;
-            NamingSystem r_ = new NamingSystem
+        NamingSystem? b_(NamingSystem? a) {
+            FhirString? e_ = a?.NameElement;
+            Code<PublicationStatus>? f_ = a?.StatusElement;
+            Code<NamingSystem.NamingSystemType>? g_ = a?.KindElement;
+            FhirDateTime? h_ = a?.DateElement;
+            FhirString? i_ = a?.PublisherElement;
+            List<ContactDetail?>? j_ = a?.Contact;
+            FhirString? k_ = a?.ResponsibleElement;
+            CodeableConcept? l_ = a?.Type;
+            Markdown? m_ = a?.DescriptionElement;
+            List<UsageContext?>? n_ = a?.UseContext;
+            List<CodeableConcept?>? o_ = a?.Jurisdiction;
+            FhirString? p_ = a?.UsageElement;
+            List<NamingSystem.UniqueIdComponent?>? q_ = a?.UniqueId;
+            NamingSystem? r_ = new NamingSystem
             {
                 NameElement = e_,
                 StatusElement = f_,
@@ -4592,38 +4594,38 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<NamingSystem> c_ = context.Operators.SelectDistinct<NamingSystem, NamingSystem>((IEnumerable<NamingSystem>)a_, b_);
-        NamingSystem d_ = context.Operators.SingletonFrom<NamingSystem>(c_);
+        IEnumerable<NamingSystem?>? c_ = context.Operators.SelectDistinct<NamingSystem, NamingSystem>((IEnumerable<NamingSystem>)a_, b_);
+        NamingSystem? d_ = context.Operators.SingletonFrom<NamingSystem>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("NutritionOrderResource")]
-    public NutritionOrder NutritionOrderResource(CqlContext context, NutritionOrder arg)
+    public NutritionOrder? NutritionOrderResource(CqlContext context, NutritionOrder? arg)
     {
-        NutritionOrder[] a_ = [
+        NutritionOrder?[]? a_ = [
             arg,
         ];
 
-        NutritionOrder b_(NutritionOrder a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<FhirUri> h_ = a?.InstantiatesElement;
-            Code<RequestStatus> i_ = a?.StatusElement;
-            Code<RequestIntent> j_ = a?.IntentElement;
-            ResourceReference k_ = a?.Patient;
-            ResourceReference l_ = a?.Encounter;
-            FhirDateTime m_ = a?.DateTimeElement;
-            ResourceReference n_ = a?.Orderer;
-            List<ResourceReference> o_ = a?.AllergyIntolerance;
-            List<CodeableConcept> p_ = a?.FoodPreferenceModifier;
-            List<CodeableConcept> q_ = a?.ExcludeFoodModifier;
-            NutritionOrder.OralDietComponent r_ = a?.OralDiet;
-            List<NutritionOrder.SupplementComponent> s_ = a?.Supplement;
-            NutritionOrder.EnteralFormulaComponent t_ = a?.EnteralFormula;
-            List<Annotation> u_ = a?.Note;
-            NutritionOrder v_ = new NutritionOrder
+        NutritionOrder? b_(NutritionOrder? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<FhirUri?>? h_ = a?.InstantiatesElement;
+            Code<RequestStatus>? i_ = a?.StatusElement;
+            Code<RequestIntent>? j_ = a?.IntentElement;
+            ResourceReference? k_ = a?.Patient;
+            ResourceReference? l_ = a?.Encounter;
+            FhirDateTime? m_ = a?.DateTimeElement;
+            ResourceReference? n_ = a?.Orderer;
+            List<ResourceReference?>? o_ = a?.AllergyIntolerance;
+            List<CodeableConcept?>? p_ = a?.FoodPreferenceModifier;
+            List<CodeableConcept?>? q_ = a?.ExcludeFoodModifier;
+            NutritionOrder.OralDietComponent? r_ = a?.OralDiet;
+            List<NutritionOrder.SupplementComponent?>? s_ = a?.Supplement;
+            NutritionOrder.EnteralFormulaComponent? t_ = a?.EnteralFormula;
+            List<Annotation?>? u_ = a?.Note;
+            NutritionOrder? v_ = new NutritionOrder
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -4646,45 +4648,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return v_;
         }
 
-        IEnumerable<NutritionOrder> c_ = context.Operators.SelectDistinct<NutritionOrder, NutritionOrder>((IEnumerable<NutritionOrder>)a_, b_);
-        NutritionOrder d_ = context.Operators.SingletonFrom<NutritionOrder>(c_);
+        IEnumerable<NutritionOrder?>? c_ = context.Operators.SelectDistinct<NutritionOrder, NutritionOrder>((IEnumerable<NutritionOrder>)a_, b_);
+        NutritionOrder? d_ = context.Operators.SingletonFrom<NutritionOrder>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ObservationResource")]
-    public Observation ObservationResource(CqlContext context, Observation arg)
+    public Observation? ObservationResource(CqlContext context, Observation? arg)
     {
-        Observation[] a_ = [
+        Observation?[]? a_ = [
             arg,
         ];
 
-        Observation b_(Observation a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            List<ResourceReference> g_ = a?.PartOf;
-            Code<ObservationStatus> h_ = a?.StatusElement;
-            List<CodeableConcept> i_ = a?.Category;
-            CodeableConcept j_ = a?.Code;
-            ResourceReference k_ = a?.Subject;
-            List<ResourceReference> l_ = a?.Focus;
-            ResourceReference m_ = a?.Encounter;
-            DataType n_ = a?.Effective;
-            Instant o_ = a?.IssuedElement;
-            List<ResourceReference> p_ = a?.Performer;
-            DataType q_ = a?.Value;
-            CodeableConcept r_ = a?.DataAbsentReason;
-            List<CodeableConcept> s_ = a?.Interpretation;
-            List<Annotation> t_ = a?.Note;
-            CodeableConcept u_ = a?.BodySite;
-            CodeableConcept v_ = a?.Method;
-            ResourceReference w_ = a?.Specimen;
-            ResourceReference x_ = a?.Device;
-            List<Observation.ReferenceRangeComponent> y_ = a?.ReferenceRange;
-            List<ResourceReference> z_ = a?.HasMember;
-            List<ResourceReference> aa_ = a?.DerivedFrom;
-            List<Observation.ComponentComponent> ab_ = a?.Component;
-            Observation ac_ = new Observation
+        Observation? b_(Observation? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            List<ResourceReference?>? g_ = a?.PartOf;
+            Code<ObservationStatus>? h_ = a?.StatusElement;
+            List<CodeableConcept?>? i_ = a?.Category;
+            CodeableConcept? j_ = a?.Code;
+            ResourceReference? k_ = a?.Subject;
+            List<ResourceReference?>? l_ = a?.Focus;
+            ResourceReference? m_ = a?.Encounter;
+            DataType? n_ = a?.Effective;
+            Instant? o_ = a?.IssuedElement;
+            List<ResourceReference?>? p_ = a?.Performer;
+            DataType? q_ = a?.Value;
+            CodeableConcept? r_ = a?.DataAbsentReason;
+            List<CodeableConcept?>? s_ = a?.Interpretation;
+            List<Annotation?>? t_ = a?.Note;
+            CodeableConcept? u_ = a?.BodySite;
+            CodeableConcept? v_ = a?.Method;
+            ResourceReference? w_ = a?.Specimen;
+            ResourceReference? x_ = a?.Device;
+            List<Observation.ReferenceRangeComponent?>? y_ = a?.ReferenceRange;
+            List<ResourceReference?>? z_ = a?.HasMember;
+            List<ResourceReference?>? aa_ = a?.DerivedFrom;
+            List<Observation.ComponentComponent?>? ab_ = a?.Component;
+            Observation? ac_ = new Observation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -4714,34 +4716,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<Observation> c_ = context.Operators.SelectDistinct<Observation, Observation>((IEnumerable<Observation>)a_, b_);
-        Observation d_ = context.Operators.SingletonFrom<Observation>(c_);
+        IEnumerable<Observation?>? c_ = context.Operators.SelectDistinct<Observation, Observation>((IEnumerable<Observation>)a_, b_);
+        Observation? d_ = context.Operators.SingletonFrom<Observation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ObservationDefinitionResource")]
-    public ObservationDefinition ObservationDefinitionResource(CqlContext context, ObservationDefinition arg)
+    public ObservationDefinition? ObservationDefinitionResource(CqlContext context, ObservationDefinition? arg)
     {
-        ObservationDefinition[] a_ = [
+        ObservationDefinition?[]? a_ = [
             arg,
         ];
 
-        ObservationDefinition b_(ObservationDefinition a) {
-            List<CodeableConcept> e_ = a?.Category;
-            CodeableConcept f_ = a?.Code;
-            List<Identifier> g_ = a?.Identifier;
-            List<Code<ObservationDefinition.ObservationDataType>> h_ = a?.PermittedDataTypeElement;
-            FhirBoolean i_ = a?.MultipleResultsAllowedElement;
-            CodeableConcept j_ = a?.Method;
-            FhirString k_ = a?.PreferredReportNameElement;
-            ObservationDefinition.QuantitativeDetailsComponent l_ = a?.QuantitativeDetails;
-            List<ObservationDefinition.QualifiedIntervalComponent> m_ = a?.QualifiedInterval;
-            ResourceReference n_ = a?.ValidCodedValueSet;
-            ResourceReference o_ = a?.NormalCodedValueSet;
-            ResourceReference p_ = a?.AbnormalCodedValueSet;
-            ResourceReference q_ = a?.CriticalCodedValueSet;
-            ObservationDefinition r_ = new ObservationDefinition
+        ObservationDefinition? b_(ObservationDefinition? a) {
+            List<CodeableConcept?>? e_ = a?.Category;
+            CodeableConcept? f_ = a?.Code;
+            List<Identifier?>? g_ = a?.Identifier;
+            List<Code<ObservationDefinition.ObservationDataType>?>? h_ = a?.PermittedDataTypeElement;
+            FhirBoolean? i_ = a?.MultipleResultsAllowedElement;
+            CodeableConcept? j_ = a?.Method;
+            FhirString? k_ = a?.PreferredReportNameElement;
+            ObservationDefinition.QuantitativeDetailsComponent? l_ = a?.QuantitativeDetails;
+            List<ObservationDefinition.QualifiedIntervalComponent?>? m_ = a?.QualifiedInterval;
+            ResourceReference? n_ = a?.ValidCodedValueSet;
+            ResourceReference? o_ = a?.NormalCodedValueSet;
+            ResourceReference? p_ = a?.AbnormalCodedValueSet;
+            ResourceReference? q_ = a?.CriticalCodedValueSet;
+            ObservationDefinition? r_ = new ObservationDefinition
             {
                 Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)e_),
                 Code = f_,
@@ -4760,53 +4762,53 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<ObservationDefinition> c_ = context.Operators.SelectDistinct<ObservationDefinition, ObservationDefinition>((IEnumerable<ObservationDefinition>)a_, b_);
-        ObservationDefinition d_ = context.Operators.SingletonFrom<ObservationDefinition>(c_);
+        IEnumerable<ObservationDefinition?>? c_ = context.Operators.SelectDistinct<ObservationDefinition, ObservationDefinition>((IEnumerable<ObservationDefinition>)a_, b_);
+        ObservationDefinition? d_ = context.Operators.SingletonFrom<ObservationDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("OperationOutcomeResource")]
-    public OperationOutcome OperationOutcomeResource(CqlContext context, OperationOutcome arg)
+    public OperationOutcome? OperationOutcomeResource(CqlContext context, OperationOutcome? arg)
     {
-        OperationOutcome[] a_ = [
+        OperationOutcome?[]? a_ = [
             arg,
         ];
 
-        OperationOutcome b_(OperationOutcome a) {
-            List<OperationOutcome.IssueComponent> e_ = a?.Issue;
-            OperationOutcome f_ = new OperationOutcome
+        OperationOutcome? b_(OperationOutcome? a) {
+            List<OperationOutcome.IssueComponent?>? e_ = a?.Issue;
+            OperationOutcome? f_ = new OperationOutcome
             {
                 Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)e_),
             };
             return f_;
         }
 
-        IEnumerable<OperationOutcome> c_ = context.Operators.SelectDistinct<OperationOutcome, OperationOutcome>((IEnumerable<OperationOutcome>)a_, b_);
-        OperationOutcome d_ = context.Operators.SingletonFrom<OperationOutcome>(c_);
+        IEnumerable<OperationOutcome?>? c_ = context.Operators.SelectDistinct<OperationOutcome, OperationOutcome>((IEnumerable<OperationOutcome>)a_, b_);
+        OperationOutcome? d_ = context.Operators.SingletonFrom<OperationOutcome>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("OrganizationResource")]
-    public Organization OrganizationResource(CqlContext context, Organization arg)
+    public Organization? OrganizationResource(CqlContext context, Organization? arg)
     {
-        Organization[] a_ = [
+        Organization?[]? a_ = [
             arg,
         ];
 
-        Organization b_(Organization a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            List<CodeableConcept> g_ = a?.Type;
-            FhirString h_ = a?.NameElement;
-            List<FhirString> i_ = a?.AliasElement;
-            List<ContactPoint> j_ = a?.Telecom;
-            List<Address> k_ = a?.Address;
-            ResourceReference l_ = a?.PartOf;
-            List<Organization.ContactComponent> m_ = a?.Contact;
-            List<ResourceReference> n_ = a?.Endpoint;
-            Organization o_ = new Organization
+        Organization? b_(Organization? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            List<CodeableConcept?>? g_ = a?.Type;
+            FhirString? h_ = a?.NameElement;
+            List<FhirString?>? i_ = a?.AliasElement;
+            List<ContactPoint?>? j_ = a?.Telecom;
+            List<Address?>? k_ = a?.Address;
+            ResourceReference? l_ = a?.PartOf;
+            List<Organization.ContactComponent?>? m_ = a?.Contact;
+            List<ResourceReference?>? n_ = a?.Endpoint;
+            Organization? o_ = new Organization
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -4822,33 +4824,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return o_;
         }
 
-        IEnumerable<Organization> c_ = context.Operators.SelectDistinct<Organization, Organization>((IEnumerable<Organization>)a_, b_);
-        Organization d_ = context.Operators.SingletonFrom<Organization>(c_);
+        IEnumerable<Organization?>? c_ = context.Operators.SelectDistinct<Organization, Organization>((IEnumerable<Organization>)a_, b_);
+        Organization? d_ = context.Operators.SingletonFrom<Organization>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("OrganizationAffiliationResource")]
-    public OrganizationAffiliation OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation arg)
+    public OrganizationAffiliation? OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation? arg)
     {
-        OrganizationAffiliation[] a_ = [
+        OrganizationAffiliation?[]? a_ = [
             arg,
         ];
 
-        OrganizationAffiliation b_(OrganizationAffiliation a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            Period g_ = a?.Period;
-            ResourceReference h_ = a?.Organization;
-            ResourceReference i_ = a?.ParticipatingOrganization;
-            List<ResourceReference> j_ = a?.Network;
-            List<CodeableConcept> k_ = a?.Code;
-            List<CodeableConcept> l_ = a?.Specialty;
-            List<ResourceReference> m_ = a?.Location;
-            List<ResourceReference> n_ = a?.HealthcareService;
-            List<ContactPoint> o_ = a?.Telecom;
-            List<ResourceReference> p_ = a?.Endpoint;
-            OrganizationAffiliation q_ = new OrganizationAffiliation
+        OrganizationAffiliation? b_(OrganizationAffiliation? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            Period? g_ = a?.Period;
+            ResourceReference? h_ = a?.Organization;
+            ResourceReference? i_ = a?.ParticipatingOrganization;
+            List<ResourceReference?>? j_ = a?.Network;
+            List<CodeableConcept?>? k_ = a?.Code;
+            List<CodeableConcept?>? l_ = a?.Specialty;
+            List<ResourceReference?>? m_ = a?.Location;
+            List<ResourceReference?>? n_ = a?.HealthcareService;
+            List<ContactPoint?>? o_ = a?.Telecom;
+            List<ResourceReference?>? p_ = a?.Endpoint;
+            OrganizationAffiliation? q_ = new OrganizationAffiliation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -4866,37 +4868,37 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<OrganizationAffiliation> c_ = context.Operators.SelectDistinct<OrganizationAffiliation, OrganizationAffiliation>((IEnumerable<OrganizationAffiliation>)a_, b_);
-        OrganizationAffiliation d_ = context.Operators.SingletonFrom<OrganizationAffiliation>(c_);
+        IEnumerable<OrganizationAffiliation?>? c_ = context.Operators.SelectDistinct<OrganizationAffiliation, OrganizationAffiliation>((IEnumerable<OrganizationAffiliation>)a_, b_);
+        OrganizationAffiliation? d_ = context.Operators.SingletonFrom<OrganizationAffiliation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PatientResource")]
-    public Patient PatientResource(CqlContext context, Patient arg)
+    public Patient? PatientResource(CqlContext context, Patient? arg)
     {
-        Patient[] a_ = [
+        Patient?[]? a_ = [
             arg,
         ];
 
-        Patient b_(Patient a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            List<HumanName> g_ = a?.Name;
-            List<ContactPoint> h_ = a?.Telecom;
-            Code<AdministrativeGender> i_ = a?.GenderElement;
-            Date j_ = a?.BirthDateElement;
-            DataType k_ = a?.Deceased;
-            List<Address> l_ = a?.Address;
-            CodeableConcept m_ = a?.MaritalStatus;
-            DataType n_ = a?.MultipleBirth;
-            List<Attachment> o_ = a?.Photo;
-            List<Patient.ContactComponent> p_ = a?.Contact;
-            List<Patient.CommunicationComponent> q_ = a?.Communication;
-            List<ResourceReference> r_ = a?.GeneralPractitioner;
-            ResourceReference s_ = a?.ManagingOrganization;
-            List<Patient.LinkComponent> t_ = a?.Link;
-            Patient u_ = new Patient
+        Patient? b_(Patient? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            List<HumanName?>? g_ = a?.Name;
+            List<ContactPoint?>? h_ = a?.Telecom;
+            Code<AdministrativeGender>? i_ = a?.GenderElement;
+            Date? j_ = a?.BirthDateElement;
+            DataType? k_ = a?.Deceased;
+            List<Address?>? l_ = a?.Address;
+            CodeableConcept? m_ = a?.MaritalStatus;
+            DataType? n_ = a?.MultipleBirth;
+            List<Attachment?>? o_ = a?.Photo;
+            List<Patient.ContactComponent?>? p_ = a?.Contact;
+            List<Patient.CommunicationComponent?>? q_ = a?.Communication;
+            List<ResourceReference?>? r_ = a?.GeneralPractitioner;
+            ResourceReference? s_ = a?.ManagingOrganization;
+            List<Patient.LinkComponent?>? t_ = a?.Link;
+            Patient? u_ = new Patient
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -4918,33 +4920,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return u_;
         }
 
-        IEnumerable<Patient> c_ = context.Operators.SelectDistinct<Patient, Patient>((IEnumerable<Patient>)a_, b_);
-        Patient d_ = context.Operators.SingletonFrom<Patient>(c_);
+        IEnumerable<Patient?>? c_ = context.Operators.SelectDistinct<Patient, Patient>((IEnumerable<Patient>)a_, b_);
+        Patient? d_ = context.Operators.SingletonFrom<Patient>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PaymentNoticeResource")]
-    public PaymentNotice PaymentNoticeResource(CqlContext context, PaymentNotice arg)
+    public PaymentNotice? PaymentNoticeResource(CqlContext context, PaymentNotice? arg)
     {
-        PaymentNotice[] a_ = [
+        PaymentNotice?[]? a_ = [
             arg,
         ];
 
-        PaymentNotice b_(PaymentNotice a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            ResourceReference g_ = a?.Request;
-            ResourceReference h_ = a?.Response;
-            FhirDateTime i_ = a?.CreatedElement;
-            ResourceReference j_ = a?.Provider;
-            ResourceReference k_ = a?.Payment;
-            Date l_ = a?.PaymentDateElement;
-            ResourceReference m_ = a?.Payee;
-            ResourceReference n_ = a?.Recipient;
-            Money o_ = a?.Amount;
-            CodeableConcept p_ = a?.PaymentStatus;
-            PaymentNotice q_ = new PaymentNotice
+        PaymentNotice? b_(PaymentNotice? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            ResourceReference? g_ = a?.Request;
+            ResourceReference? h_ = a?.Response;
+            FhirDateTime? i_ = a?.CreatedElement;
+            ResourceReference? j_ = a?.Provider;
+            ResourceReference? k_ = a?.Payment;
+            Date? l_ = a?.PaymentDateElement;
+            ResourceReference? m_ = a?.Payee;
+            ResourceReference? n_ = a?.Recipient;
+            Money? o_ = a?.Amount;
+            CodeableConcept? p_ = a?.PaymentStatus;
+            PaymentNotice? q_ = new PaymentNotice
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -4962,36 +4964,36 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<PaymentNotice> c_ = context.Operators.SelectDistinct<PaymentNotice, PaymentNotice>((IEnumerable<PaymentNotice>)a_, b_);
-        PaymentNotice d_ = context.Operators.SingletonFrom<PaymentNotice>(c_);
+        IEnumerable<PaymentNotice?>? c_ = context.Operators.SelectDistinct<PaymentNotice, PaymentNotice>((IEnumerable<PaymentNotice>)a_, b_);
+        PaymentNotice? d_ = context.Operators.SingletonFrom<PaymentNotice>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PaymentReconciliationResource")]
-    public PaymentReconciliation PaymentReconciliationResource(CqlContext context, PaymentReconciliation arg)
+    public PaymentReconciliation? PaymentReconciliationResource(CqlContext context, PaymentReconciliation? arg)
     {
-        PaymentReconciliation[] a_ = [
+        PaymentReconciliation?[]? a_ = [
             arg,
         ];
 
-        PaymentReconciliation b_(PaymentReconciliation a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            Period g_ = a?.Period;
-            FhirDateTime h_ = a?.CreatedElement;
-            ResourceReference i_ = a?.PaymentIssuer;
-            ResourceReference j_ = a?.Request;
-            ResourceReference k_ = a?.Requestor;
-            Code<ClaimProcessingCodes> l_ = a?.OutcomeElement;
-            FhirString m_ = a?.DispositionElement;
-            Date n_ = a?.PaymentDateElement;
-            Money o_ = a?.PaymentAmount;
-            Identifier p_ = a?.PaymentIdentifier;
-            List<PaymentReconciliation.DetailsComponent> q_ = a?.Detail;
-            CodeableConcept r_ = a?.FormCode;
-            List<PaymentReconciliation.NotesComponent> s_ = a?.ProcessNote;
-            PaymentReconciliation t_ = new PaymentReconciliation
+        PaymentReconciliation? b_(PaymentReconciliation? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            Period? g_ = a?.Period;
+            FhirDateTime? h_ = a?.CreatedElement;
+            ResourceReference? i_ = a?.PaymentIssuer;
+            ResourceReference? j_ = a?.Request;
+            ResourceReference? k_ = a?.Requestor;
+            Code<ClaimProcessingCodes>? l_ = a?.OutcomeElement;
+            FhirString? m_ = a?.DispositionElement;
+            Date? n_ = a?.PaymentDateElement;
+            Money? o_ = a?.PaymentAmount;
+            Identifier? p_ = a?.PaymentIdentifier;
+            List<PaymentReconciliation.DetailsComponent?>? q_ = a?.Detail;
+            CodeableConcept? r_ = a?.FormCode;
+            List<PaymentReconciliation.NotesComponent?>? s_ = a?.ProcessNote;
+            PaymentReconciliation? t_ = new PaymentReconciliation
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -5012,31 +5014,31 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return t_;
         }
 
-        IEnumerable<PaymentReconciliation> c_ = context.Operators.SelectDistinct<PaymentReconciliation, PaymentReconciliation>((IEnumerable<PaymentReconciliation>)a_, b_);
-        PaymentReconciliation d_ = context.Operators.SingletonFrom<PaymentReconciliation>(c_);
+        IEnumerable<PaymentReconciliation?>? c_ = context.Operators.SelectDistinct<PaymentReconciliation, PaymentReconciliation>((IEnumerable<PaymentReconciliation>)a_, b_);
+        PaymentReconciliation? d_ = context.Operators.SingletonFrom<PaymentReconciliation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PersonResource")]
-    public Person PersonResource(CqlContext context, Person arg)
+    public Person? PersonResource(CqlContext context, Person? arg)
     {
-        Person[] a_ = [
+        Person?[]? a_ = [
             arg,
         ];
 
-        Person b_(Person a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<HumanName> f_ = a?.Name;
-            List<ContactPoint> g_ = a?.Telecom;
-            Code<AdministrativeGender> h_ = a?.GenderElement;
-            Date i_ = a?.BirthDateElement;
-            List<Address> j_ = a?.Address;
-            Attachment k_ = a?.Photo;
-            ResourceReference l_ = a?.ManagingOrganization;
-            FhirBoolean m_ = a?.ActiveElement;
-            List<Person.LinkComponent> n_ = a?.Link;
-            Person o_ = new Person
+        Person? b_(Person? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<HumanName?>? f_ = a?.Name;
+            List<ContactPoint?>? g_ = a?.Telecom;
+            Code<AdministrativeGender>? h_ = a?.GenderElement;
+            Date? i_ = a?.BirthDateElement;
+            List<Address?>? j_ = a?.Address;
+            Attachment? k_ = a?.Photo;
+            ResourceReference? l_ = a?.ManagingOrganization;
+            FhirBoolean? m_ = a?.ActiveElement;
+            List<Person.LinkComponent?>? n_ = a?.Link;
+            Person? o_ = new Person
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 Name = new List<HumanName>((IEnumerable<HumanName>)f_),
@@ -5052,52 +5054,52 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return o_;
         }
 
-        IEnumerable<Person> c_ = context.Operators.SelectDistinct<Person, Person>((IEnumerable<Person>)a_, b_);
-        Person d_ = context.Operators.SingletonFrom<Person>(c_);
+        IEnumerable<Person?>? c_ = context.Operators.SelectDistinct<Person, Person>((IEnumerable<Person>)a_, b_);
+        Person? d_ = context.Operators.SingletonFrom<Person>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PlanDefinitionResource")]
-    public PlanDefinition PlanDefinitionResource(CqlContext context, PlanDefinition arg)
+    public PlanDefinition? PlanDefinitionResource(CqlContext context, PlanDefinition? arg)
     {
-        PlanDefinition[] a_ = [
+        PlanDefinition?[]? a_ = [
             arg,
         ];
 
-        PlanDefinition b_(PlanDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.SubtitleElement;
-            CodeableConcept k_ = a?.Type;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirBoolean m_ = a?.ExperimentalElement;
-            DataType n_ = a?.Subject;
-            FhirDateTime o_ = a?.DateElement;
-            FhirString p_ = a?.PublisherElement;
-            List<ContactDetail> q_ = a?.Contact;
-            Markdown r_ = a?.DescriptionElement;
-            List<UsageContext> s_ = a?.UseContext;
-            List<CodeableConcept> t_ = a?.Jurisdiction;
-            Markdown u_ = a?.PurposeElement;
-            FhirString v_ = a?.UsageElement;
-            Markdown w_ = a?.CopyrightElement;
-            Date x_ = a?.ApprovalDateElement;
-            Date y_ = a?.LastReviewDateElement;
-            Period z_ = a?.EffectivePeriod;
-            List<CodeableConcept> aa_ = a?.Topic;
-            List<ContactDetail> ab_ = a?.Author;
-            List<ContactDetail> ac_ = a?.Editor;
-            List<ContactDetail> ad_ = a?.Reviewer;
-            List<ContactDetail> ae_ = a?.Endorser;
-            List<RelatedArtifact> af_ = a?.RelatedArtifact;
-            List<Canonical> ag_ = a?.LibraryElement;
-            List<PlanDefinition.GoalComponent> ah_ = a?.Goal;
-            List<PlanDefinition.ActionComponent> ai_ = a?.Action;
-            PlanDefinition aj_ = new PlanDefinition
+        PlanDefinition? b_(PlanDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.SubtitleElement;
+            CodeableConcept? k_ = a?.Type;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirBoolean? m_ = a?.ExperimentalElement;
+            DataType? n_ = a?.Subject;
+            FhirDateTime? o_ = a?.DateElement;
+            FhirString? p_ = a?.PublisherElement;
+            List<ContactDetail?>? q_ = a?.Contact;
+            Markdown? r_ = a?.DescriptionElement;
+            List<UsageContext?>? s_ = a?.UseContext;
+            List<CodeableConcept?>? t_ = a?.Jurisdiction;
+            Markdown? u_ = a?.PurposeElement;
+            FhirString? v_ = a?.UsageElement;
+            Markdown? w_ = a?.CopyrightElement;
+            Date? x_ = a?.ApprovalDateElement;
+            Date? y_ = a?.LastReviewDateElement;
+            Period? z_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? aa_ = a?.Topic;
+            List<ContactDetail?>? ab_ = a?.Author;
+            List<ContactDetail?>? ac_ = a?.Editor;
+            List<ContactDetail?>? ad_ = a?.Reviewer;
+            List<ContactDetail?>? ae_ = a?.Endorser;
+            List<RelatedArtifact?>? af_ = a?.RelatedArtifact;
+            List<Canonical?>? ag_ = a?.LibraryElement;
+            List<PlanDefinition.GoalComponent?>? ah_ = a?.Goal;
+            List<PlanDefinition.ActionComponent?>? ai_ = a?.Action;
+            PlanDefinition? aj_ = new PlanDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -5134,31 +5136,31 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aj_;
         }
 
-        IEnumerable<PlanDefinition> c_ = context.Operators.SelectDistinct<PlanDefinition, PlanDefinition>((IEnumerable<PlanDefinition>)a_, b_);
-        PlanDefinition d_ = context.Operators.SingletonFrom<PlanDefinition>(c_);
+        IEnumerable<PlanDefinition?>? c_ = context.Operators.SelectDistinct<PlanDefinition, PlanDefinition>((IEnumerable<PlanDefinition>)a_, b_);
+        PlanDefinition? d_ = context.Operators.SingletonFrom<PlanDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PractitionerResource")]
-    public Practitioner PractitionerResource(CqlContext context, Practitioner arg)
+    public Practitioner? PractitionerResource(CqlContext context, Practitioner? arg)
     {
-        Practitioner[] a_ = [
+        Practitioner?[]? a_ = [
             arg,
         ];
 
-        Practitioner b_(Practitioner a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            List<HumanName> g_ = a?.Name;
-            List<ContactPoint> h_ = a?.Telecom;
-            List<Address> i_ = a?.Address;
-            Code<AdministrativeGender> j_ = a?.GenderElement;
-            Date k_ = a?.BirthDateElement;
-            List<Attachment> l_ = a?.Photo;
-            List<Practitioner.QualificationComponent> m_ = a?.Qualification;
-            List<CodeableConcept> n_ = a?.Communication;
-            Practitioner o_ = new Practitioner
+        Practitioner? b_(Practitioner? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            List<HumanName?>? g_ = a?.Name;
+            List<ContactPoint?>? h_ = a?.Telecom;
+            List<Address?>? i_ = a?.Address;
+            Code<AdministrativeGender>? j_ = a?.GenderElement;
+            Date? k_ = a?.BirthDateElement;
+            List<Attachment?>? l_ = a?.Photo;
+            List<Practitioner.QualificationComponent?>? m_ = a?.Qualification;
+            List<CodeableConcept?>? n_ = a?.Communication;
+            Practitioner? o_ = new Practitioner
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -5174,35 +5176,35 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return o_;
         }
 
-        IEnumerable<Practitioner> c_ = context.Operators.SelectDistinct<Practitioner, Practitioner>((IEnumerable<Practitioner>)a_, b_);
-        Practitioner d_ = context.Operators.SingletonFrom<Practitioner>(c_);
+        IEnumerable<Practitioner?>? c_ = context.Operators.SelectDistinct<Practitioner, Practitioner>((IEnumerable<Practitioner>)a_, b_);
+        Practitioner? d_ = context.Operators.SingletonFrom<Practitioner>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("PractitionerRoleResource")]
-    public PractitionerRole PractitionerRoleResource(CqlContext context, PractitionerRole arg)
+    public PractitionerRole? PractitionerRoleResource(CqlContext context, PractitionerRole? arg)
     {
-        PractitionerRole[] a_ = [
+        PractitionerRole?[]? a_ = [
             arg,
         ];
 
-        PractitionerRole b_(PractitionerRole a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            Period g_ = a?.Period;
-            ResourceReference h_ = a?.Practitioner;
-            ResourceReference i_ = a?.Organization;
-            List<CodeableConcept> j_ = a?.Code;
-            List<CodeableConcept> k_ = a?.Specialty;
-            List<ResourceReference> l_ = a?.Location;
-            List<ResourceReference> m_ = a?.HealthcareService;
-            List<ContactPoint> n_ = a?.Telecom;
-            List<PractitionerRole.AvailableTimeComponent> o_ = a?.AvailableTime;
-            List<PractitionerRole.NotAvailableComponent> p_ = a?.NotAvailable;
-            FhirString q_ = a?.AvailabilityExceptionsElement;
-            List<ResourceReference> r_ = a?.Endpoint;
-            PractitionerRole s_ = new PractitionerRole
+        PractitionerRole? b_(PractitionerRole? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            Period? g_ = a?.Period;
+            ResourceReference? h_ = a?.Practitioner;
+            ResourceReference? i_ = a?.Organization;
+            List<CodeableConcept?>? j_ = a?.Code;
+            List<CodeableConcept?>? k_ = a?.Specialty;
+            List<ResourceReference?>? l_ = a?.Location;
+            List<ResourceReference?>? m_ = a?.HealthcareService;
+            List<ContactPoint?>? n_ = a?.Telecom;
+            List<PractitionerRole.AvailableTimeComponent?>? o_ = a?.AvailableTime;
+            List<PractitionerRole.NotAvailableComponent?>? p_ = a?.NotAvailable;
+            FhirString? q_ = a?.AvailabilityExceptionsElement;
+            List<ResourceReference?>? r_ = a?.Endpoint;
+            PractitionerRole? s_ = new PractitionerRole
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -5222,49 +5224,49 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return s_;
         }
 
-        IEnumerable<PractitionerRole> c_ = context.Operators.SelectDistinct<PractitionerRole, PractitionerRole>((IEnumerable<PractitionerRole>)a_, b_);
-        PractitionerRole d_ = context.Operators.SingletonFrom<PractitionerRole>(c_);
+        IEnumerable<PractitionerRole?>? c_ = context.Operators.SelectDistinct<PractitionerRole, PractitionerRole>((IEnumerable<PractitionerRole>)a_, b_);
+        PractitionerRole? d_ = context.Operators.SingletonFrom<PractitionerRole>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ProcedureResource")]
-    public Procedure ProcedureResource(CqlContext context, Procedure arg)
+    public Procedure? ProcedureResource(CqlContext context, Procedure? arg)
     {
-        Procedure[] a_ = [
+        Procedure?[]? a_ = [
             arg,
         ];
 
-        Procedure b_(Procedure a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.PartOf;
-            Code<EventStatus> j_ = a?.StatusElement;
-            CodeableConcept k_ = a?.StatusReason;
-            CodeableConcept l_ = a?.Category;
-            CodeableConcept m_ = a?.Code;
-            ResourceReference n_ = a?.Subject;
-            ResourceReference o_ = a?.Encounter;
-            DataType p_ = a?.Performed;
-            ResourceReference q_ = a?.Recorder;
-            ResourceReference r_ = a?.Asserter;
-            List<Procedure.PerformerComponent> s_ = a?.Performer;
-            ResourceReference t_ = a?.Location;
-            List<CodeableConcept> u_ = a?.ReasonCode;
-            List<ResourceReference> v_ = a?.ReasonReference;
-            List<CodeableConcept> w_ = a?.BodySite;
-            CodeableConcept x_ = a?.Outcome;
-            List<ResourceReference> y_ = a?.Report;
-            List<CodeableConcept> z_ = a?.Complication;
-            List<ResourceReference> aa_ = a?.ComplicationDetail;
-            List<CodeableConcept> ab_ = a?.FollowUp;
-            List<Annotation> ac_ = a?.Note;
-            List<Procedure.FocalDeviceComponent> ad_ = a?.FocalDevice;
-            List<ResourceReference> ae_ = a?.UsedReference;
-            List<CodeableConcept> af_ = a?.UsedCode;
-            Procedure ag_ = new Procedure
+        Procedure? b_(Procedure? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.PartOf;
+            Code<EventStatus>? j_ = a?.StatusElement;
+            CodeableConcept? k_ = a?.StatusReason;
+            CodeableConcept? l_ = a?.Category;
+            CodeableConcept? m_ = a?.Code;
+            ResourceReference? n_ = a?.Subject;
+            ResourceReference? o_ = a?.Encounter;
+            DataType? p_ = a?.Performed;
+            ResourceReference? q_ = a?.Recorder;
+            ResourceReference? r_ = a?.Asserter;
+            List<Procedure.PerformerComponent?>? s_ = a?.Performer;
+            ResourceReference? t_ = a?.Location;
+            List<CodeableConcept?>? u_ = a?.ReasonCode;
+            List<ResourceReference?>? v_ = a?.ReasonReference;
+            List<CodeableConcept?>? w_ = a?.BodySite;
+            CodeableConcept? x_ = a?.Outcome;
+            List<ResourceReference?>? y_ = a?.Report;
+            List<CodeableConcept?>? z_ = a?.Complication;
+            List<ResourceReference?>? aa_ = a?.ComplicationDetail;
+            List<CodeableConcept?>? ab_ = a?.FollowUp;
+            List<Annotation?>? ac_ = a?.Note;
+            List<Procedure.FocalDeviceComponent?>? ad_ = a?.FocalDevice;
+            List<ResourceReference?>? ae_ = a?.UsedReference;
+            List<CodeableConcept?>? af_ = a?.UsedCode;
+            Procedure? ag_ = new Procedure
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -5298,31 +5300,31 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ag_;
         }
 
-        IEnumerable<Procedure> c_ = context.Operators.SelectDistinct<Procedure, Procedure>((IEnumerable<Procedure>)a_, b_);
-        Procedure d_ = context.Operators.SingletonFrom<Procedure>(c_);
+        IEnumerable<Procedure?>? c_ = context.Operators.SelectDistinct<Procedure, Procedure>((IEnumerable<Procedure>)a_, b_);
+        Procedure? d_ = context.Operators.SingletonFrom<Procedure>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ProvenanceResource")]
-    public Provenance ProvenanceResource(CqlContext context, Provenance arg)
+    public Provenance? ProvenanceResource(CqlContext context, Provenance? arg)
     {
-        Provenance[] a_ = [
+        Provenance?[]? a_ = [
             arg,
         ];
 
-        Provenance b_(Provenance a) {
-            List<ResourceReference> e_ = a?.Target;
-            DataType f_ = a?.Occurred;
-            Instant g_ = a?.RecordedElement;
-            List<FhirUri> h_ = a?.PolicyElement;
-            ResourceReference i_ = a?.Location;
-            List<CodeableConcept> j_ = a?.Reason;
-            CodeableConcept k_ = a?.Activity;
-            List<Provenance.AgentComponent> l_ = a?.Agent;
-            List<Provenance.EntityComponent> m_ = a?.Entity;
-            List<Signature> n_ = a?.Signature;
-            Provenance o_ = new Provenance
+        Provenance? b_(Provenance? a) {
+            List<ResourceReference?>? e_ = a?.Target;
+            DataType? f_ = a?.Occurred;
+            Instant? g_ = a?.RecordedElement;
+            List<FhirUri?>? h_ = a?.PolicyElement;
+            ResourceReference? i_ = a?.Location;
+            List<CodeableConcept?>? j_ = a?.Reason;
+            CodeableConcept? k_ = a?.Activity;
+            List<Provenance.AgentComponent?>? l_ = a?.Agent;
+            List<Provenance.EntityComponent?>? m_ = a?.Entity;
+            List<Signature?>? n_ = a?.Signature;
+            Provenance? o_ = new Provenance
             {
                 Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
                 Occurred = (DataType)f_,
@@ -5338,32 +5340,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return o_;
         }
 
-        IEnumerable<Provenance> c_ = context.Operators.SelectDistinct<Provenance, Provenance>((IEnumerable<Provenance>)a_, b_);
-        Provenance d_ = context.Operators.SingletonFrom<Provenance>(c_);
+        IEnumerable<Provenance?>? c_ = context.Operators.SelectDistinct<Provenance, Provenance>((IEnumerable<Provenance>)a_, b_);
+        Provenance? d_ = context.Operators.SingletonFrom<Provenance>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("QuestionnaireResponseResource")]
-    public QuestionnaireResponse QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse arg)
+    public QuestionnaireResponse? QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse? arg)
     {
-        QuestionnaireResponse[] a_ = [
+        QuestionnaireResponse?[]? a_ = [
             arg,
         ];
 
-        QuestionnaireResponse b_(QuestionnaireResponse a) {
-            Identifier e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            List<ResourceReference> g_ = a?.PartOf;
-            Canonical h_ = a?.QuestionnaireElement;
-            Code<QuestionnaireResponse.QuestionnaireResponseStatus> i_ = a?.StatusElement;
-            ResourceReference j_ = a?.Subject;
-            ResourceReference k_ = a?.Encounter;
-            FhirDateTime l_ = a?.AuthoredElement;
-            ResourceReference m_ = a?.Author;
-            ResourceReference n_ = a?.Source;
-            List<QuestionnaireResponse.ItemComponent> o_ = a?.Item;
-            QuestionnaireResponse p_ = new QuestionnaireResponse
+        QuestionnaireResponse? b_(QuestionnaireResponse? a) {
+            Identifier? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            List<ResourceReference?>? g_ = a?.PartOf;
+            Canonical? h_ = a?.QuestionnaireElement;
+            Code<QuestionnaireResponse.QuestionnaireResponseStatus>? i_ = a?.StatusElement;
+            ResourceReference? j_ = a?.Subject;
+            ResourceReference? k_ = a?.Encounter;
+            FhirDateTime? l_ = a?.AuthoredElement;
+            ResourceReference? m_ = a?.Author;
+            ResourceReference? n_ = a?.Source;
+            List<QuestionnaireResponse.ItemComponent?>? o_ = a?.Item;
+            QuestionnaireResponse? p_ = new QuestionnaireResponse
             {
                 Identifier = e_,
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -5380,33 +5382,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<QuestionnaireResponse> c_ = context.Operators.SelectDistinct<QuestionnaireResponse, QuestionnaireResponse>((IEnumerable<QuestionnaireResponse>)a_, b_);
-        QuestionnaireResponse d_ = context.Operators.SingletonFrom<QuestionnaireResponse>(c_);
+        IEnumerable<QuestionnaireResponse?>? c_ = context.Operators.SelectDistinct<QuestionnaireResponse, QuestionnaireResponse>((IEnumerable<QuestionnaireResponse>)a_, b_);
+        QuestionnaireResponse? d_ = context.Operators.SingletonFrom<QuestionnaireResponse>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("RelatedPersonResource")]
-    public RelatedPerson RelatedPersonResource(CqlContext context, RelatedPerson arg)
+    public RelatedPerson? RelatedPersonResource(CqlContext context, RelatedPerson? arg)
     {
-        RelatedPerson[] a_ = [
+        RelatedPerson?[]? a_ = [
             arg,
         ];
 
-        RelatedPerson b_(RelatedPerson a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            ResourceReference g_ = a?.Patient;
-            List<CodeableConcept> h_ = a?.Relationship;
-            List<HumanName> i_ = a?.Name;
-            List<ContactPoint> j_ = a?.Telecom;
-            Code<AdministrativeGender> k_ = a?.GenderElement;
-            Date l_ = a?.BirthDateElement;
-            List<Address> m_ = a?.Address;
-            List<Attachment> n_ = a?.Photo;
-            Period o_ = a?.Period;
-            List<RelatedPerson.CommunicationComponent> p_ = a?.Communication;
-            RelatedPerson q_ = new RelatedPerson
+        RelatedPerson? b_(RelatedPerson? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            ResourceReference? g_ = a?.Patient;
+            List<CodeableConcept?>? h_ = a?.Relationship;
+            List<HumanName?>? i_ = a?.Name;
+            List<ContactPoint?>? j_ = a?.Telecom;
+            Code<AdministrativeGender>? k_ = a?.GenderElement;
+            Date? l_ = a?.BirthDateElement;
+            List<Address?>? m_ = a?.Address;
+            List<Attachment?>? n_ = a?.Photo;
+            Period? o_ = a?.Period;
+            List<RelatedPerson.CommunicationComponent?>? p_ = a?.Communication;
+            RelatedPerson? q_ = new RelatedPerson
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -5424,39 +5426,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<RelatedPerson> c_ = context.Operators.SelectDistinct<RelatedPerson, RelatedPerson>((IEnumerable<RelatedPerson>)a_, b_);
-        RelatedPerson d_ = context.Operators.SingletonFrom<RelatedPerson>(c_);
+        IEnumerable<RelatedPerson?>? c_ = context.Operators.SelectDistinct<RelatedPerson, RelatedPerson>((IEnumerable<RelatedPerson>)a_, b_);
+        RelatedPerson? d_ = context.Operators.SingletonFrom<RelatedPerson>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("RequestGroupResource")]
-    public RequestGroup RequestGroupResource(CqlContext context, RequestGroup arg)
+    public RequestGroup? RequestGroupResource(CqlContext context, RequestGroup? arg)
     {
-        RequestGroup[] a_ = [
+        RequestGroup?[]? a_ = [
             arg,
         ];
 
-        RequestGroup b_(RequestGroup a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.Replaces;
-            Identifier j_ = a?.GroupIdentifier;
-            Code<RequestStatus> k_ = a?.StatusElement;
-            Code<RequestIntent> l_ = a?.IntentElement;
-            Code<RequestPriority> m_ = a?.PriorityElement;
-            CodeableConcept n_ = a?.Code;
-            ResourceReference o_ = a?.Subject;
-            ResourceReference p_ = a?.Encounter;
-            FhirDateTime q_ = a?.AuthoredOnElement;
-            ResourceReference r_ = a?.Author;
-            List<CodeableConcept> s_ = a?.ReasonCode;
-            List<ResourceReference> t_ = a?.ReasonReference;
-            List<Annotation> u_ = a?.Note;
-            List<RequestGroup.ActionComponent> v_ = a?.Action;
-            RequestGroup w_ = new RequestGroup
+        RequestGroup? b_(RequestGroup? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.Replaces;
+            Identifier? j_ = a?.GroupIdentifier;
+            Code<RequestStatus>? k_ = a?.StatusElement;
+            Code<RequestIntent>? l_ = a?.IntentElement;
+            Code<RequestPriority>? m_ = a?.PriorityElement;
+            CodeableConcept? n_ = a?.Code;
+            ResourceReference? o_ = a?.Subject;
+            ResourceReference? p_ = a?.Encounter;
+            FhirDateTime? q_ = a?.AuthoredOnElement;
+            ResourceReference? r_ = a?.Author;
+            List<CodeableConcept?>? s_ = a?.ReasonCode;
+            List<ResourceReference?>? t_ = a?.ReasonReference;
+            List<Annotation?>? u_ = a?.Note;
+            List<RequestGroup.ActionComponent?>? v_ = a?.Action;
+            RequestGroup? w_ = new RequestGroup
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -5480,55 +5482,55 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<RequestGroup> c_ = context.Operators.SelectDistinct<RequestGroup, RequestGroup>((IEnumerable<RequestGroup>)a_, b_);
-        RequestGroup d_ = context.Operators.SingletonFrom<RequestGroup>(c_);
+        IEnumerable<RequestGroup?>? c_ = context.Operators.SelectDistinct<RequestGroup, RequestGroup>((IEnumerable<RequestGroup>)a_, b_);
+        RequestGroup? d_ = context.Operators.SingletonFrom<RequestGroup>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ResearchDefinitionResource")]
-    public ResearchDefinition ResearchDefinitionResource(CqlContext context, ResearchDefinition arg)
+    public ResearchDefinition? ResearchDefinitionResource(CqlContext context, ResearchDefinition? arg)
     {
-        ResearchDefinition[] a_ = [
+        ResearchDefinition?[]? a_ = [
             arg,
         ];
 
-        ResearchDefinition b_(ResearchDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.ShortTitleElement;
-            FhirString k_ = a?.SubtitleElement;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirBoolean m_ = a?.ExperimentalElement;
-            DataType n_ = a?.Subject;
-            FhirDateTime o_ = a?.DateElement;
-            FhirString p_ = a?.PublisherElement;
-            List<ContactDetail> q_ = a?.Contact;
-            Markdown r_ = a?.DescriptionElement;
-            List<FhirString> s_ = a?.CommentElement;
-            List<UsageContext> t_ = a?.UseContext;
-            List<CodeableConcept> u_ = a?.Jurisdiction;
-            Markdown v_ = a?.PurposeElement;
-            FhirString w_ = a?.UsageElement;
-            Markdown x_ = a?.CopyrightElement;
-            Date y_ = a?.ApprovalDateElement;
-            Date z_ = a?.LastReviewDateElement;
-            Period aa_ = a?.EffectivePeriod;
-            List<CodeableConcept> ab_ = a?.Topic;
-            List<ContactDetail> ac_ = a?.Author;
-            List<ContactDetail> ad_ = a?.Editor;
-            List<ContactDetail> ae_ = a?.Reviewer;
-            List<ContactDetail> af_ = a?.Endorser;
-            List<RelatedArtifact> ag_ = a?.RelatedArtifact;
-            List<Canonical> ah_ = a?.LibraryElement;
-            ResourceReference ai_ = a?.Population;
-            ResourceReference aj_ = a?.Exposure;
-            ResourceReference ak_ = a?.ExposureAlternative;
-            ResourceReference al_ = a?.Outcome;
-            ResearchDefinition am_ = new ResearchDefinition
+        ResearchDefinition? b_(ResearchDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.ShortTitleElement;
+            FhirString? k_ = a?.SubtitleElement;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirBoolean? m_ = a?.ExperimentalElement;
+            DataType? n_ = a?.Subject;
+            FhirDateTime? o_ = a?.DateElement;
+            FhirString? p_ = a?.PublisherElement;
+            List<ContactDetail?>? q_ = a?.Contact;
+            Markdown? r_ = a?.DescriptionElement;
+            List<FhirString?>? s_ = a?.CommentElement;
+            List<UsageContext?>? t_ = a?.UseContext;
+            List<CodeableConcept?>? u_ = a?.Jurisdiction;
+            Markdown? v_ = a?.PurposeElement;
+            FhirString? w_ = a?.UsageElement;
+            Markdown? x_ = a?.CopyrightElement;
+            Date? y_ = a?.ApprovalDateElement;
+            Date? z_ = a?.LastReviewDateElement;
+            Period? aa_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? ab_ = a?.Topic;
+            List<ContactDetail?>? ac_ = a?.Author;
+            List<ContactDetail?>? ad_ = a?.Editor;
+            List<ContactDetail?>? ae_ = a?.Reviewer;
+            List<ContactDetail?>? af_ = a?.Endorser;
+            List<RelatedArtifact?>? ag_ = a?.RelatedArtifact;
+            List<Canonical?>? ah_ = a?.LibraryElement;
+            ResourceReference? ai_ = a?.Population;
+            ResourceReference? aj_ = a?.Exposure;
+            ResourceReference? ak_ = a?.ExposureAlternative;
+            ResourceReference? al_ = a?.Outcome;
+            ResearchDefinition? am_ = new ResearchDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -5568,54 +5570,54 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return am_;
         }
 
-        IEnumerable<ResearchDefinition> c_ = context.Operators.SelectDistinct<ResearchDefinition, ResearchDefinition>((IEnumerable<ResearchDefinition>)a_, b_);
-        ResearchDefinition d_ = context.Operators.SingletonFrom<ResearchDefinition>(c_);
+        IEnumerable<ResearchDefinition?>? c_ = context.Operators.SelectDistinct<ResearchDefinition, ResearchDefinition>((IEnumerable<ResearchDefinition>)a_, b_);
+        ResearchDefinition? d_ = context.Operators.SingletonFrom<ResearchDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ResearchElementDefinitionResource")]
-    public ResearchElementDefinition ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition arg)
+    public ResearchElementDefinition? ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition? arg)
     {
-        ResearchElementDefinition[] a_ = [
+        ResearchElementDefinition?[]? a_ = [
             arg,
         ];
 
-        ResearchElementDefinition b_(ResearchElementDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            FhirString j_ = a?.ShortTitleElement;
-            FhirString k_ = a?.SubtitleElement;
-            Code<PublicationStatus> l_ = a?.StatusElement;
-            FhirBoolean m_ = a?.ExperimentalElement;
-            DataType n_ = a?.Subject;
-            FhirDateTime o_ = a?.DateElement;
-            FhirString p_ = a?.PublisherElement;
-            List<ContactDetail> q_ = a?.Contact;
-            Markdown r_ = a?.DescriptionElement;
-            List<FhirString> s_ = a?.CommentElement;
-            List<UsageContext> t_ = a?.UseContext;
-            List<CodeableConcept> u_ = a?.Jurisdiction;
-            Markdown v_ = a?.PurposeElement;
-            FhirString w_ = a?.UsageElement;
-            Markdown x_ = a?.CopyrightElement;
-            Date y_ = a?.ApprovalDateElement;
-            Date z_ = a?.LastReviewDateElement;
-            Period aa_ = a?.EffectivePeriod;
-            List<CodeableConcept> ab_ = a?.Topic;
-            List<ContactDetail> ac_ = a?.Author;
-            List<ContactDetail> ad_ = a?.Editor;
-            List<ContactDetail> ae_ = a?.Reviewer;
-            List<ContactDetail> af_ = a?.Endorser;
-            List<RelatedArtifact> ag_ = a?.RelatedArtifact;
-            List<Canonical> ah_ = a?.LibraryElement;
-            Code<ResearchElementDefinition.ResearchElementType> ai_ = a?.TypeElement;
-            Code<VariableTypeCode> aj_ = a?.VariableTypeElement;
-            List<ResearchElementDefinition.CharacteristicComponent> ak_ = a?.Characteristic;
-            ResearchElementDefinition al_ = new ResearchElementDefinition
+        ResearchElementDefinition? b_(ResearchElementDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            FhirString? j_ = a?.ShortTitleElement;
+            FhirString? k_ = a?.SubtitleElement;
+            Code<PublicationStatus>? l_ = a?.StatusElement;
+            FhirBoolean? m_ = a?.ExperimentalElement;
+            DataType? n_ = a?.Subject;
+            FhirDateTime? o_ = a?.DateElement;
+            FhirString? p_ = a?.PublisherElement;
+            List<ContactDetail?>? q_ = a?.Contact;
+            Markdown? r_ = a?.DescriptionElement;
+            List<FhirString?>? s_ = a?.CommentElement;
+            List<UsageContext?>? t_ = a?.UseContext;
+            List<CodeableConcept?>? u_ = a?.Jurisdiction;
+            Markdown? v_ = a?.PurposeElement;
+            FhirString? w_ = a?.UsageElement;
+            Markdown? x_ = a?.CopyrightElement;
+            Date? y_ = a?.ApprovalDateElement;
+            Date? z_ = a?.LastReviewDateElement;
+            Period? aa_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? ab_ = a?.Topic;
+            List<ContactDetail?>? ac_ = a?.Author;
+            List<ContactDetail?>? ad_ = a?.Editor;
+            List<ContactDetail?>? ae_ = a?.Reviewer;
+            List<ContactDetail?>? af_ = a?.Endorser;
+            List<RelatedArtifact?>? ag_ = a?.RelatedArtifact;
+            List<Canonical?>? ah_ = a?.LibraryElement;
+            Code<ResearchElementDefinition.ResearchElementType>? ai_ = a?.TypeElement;
+            Code<VariableTypeCode>? aj_ = a?.VariableTypeElement;
+            List<ResearchElementDefinition.CharacteristicComponent?>? ak_ = a?.Characteristic;
+            ResearchElementDefinition? al_ = new ResearchElementDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -5654,45 +5656,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return al_;
         }
 
-        IEnumerable<ResearchElementDefinition> c_ = context.Operators.SelectDistinct<ResearchElementDefinition, ResearchElementDefinition>((IEnumerable<ResearchElementDefinition>)a_, b_);
-        ResearchElementDefinition d_ = context.Operators.SingletonFrom<ResearchElementDefinition>(c_);
+        IEnumerable<ResearchElementDefinition?>? c_ = context.Operators.SelectDistinct<ResearchElementDefinition, ResearchElementDefinition>((IEnumerable<ResearchElementDefinition>)a_, b_);
+        ResearchElementDefinition? d_ = context.Operators.SingletonFrom<ResearchElementDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ResearchStudyResource")]
-    public ResearchStudy ResearchStudyResource(CqlContext context, ResearchStudy arg)
+    public ResearchStudy? ResearchStudyResource(CqlContext context, ResearchStudy? arg)
     {
-        ResearchStudy[] a_ = [
+        ResearchStudy?[]? a_ = [
             arg,
         ];
 
-        ResearchStudy b_(ResearchStudy a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirString f_ = a?.TitleElement;
-            List<ResourceReference> g_ = a?.Protocol;
-            List<ResourceReference> h_ = a?.PartOf;
-            Code<ResearchStudy.ResearchStudyStatus> i_ = a?.StatusElement;
-            CodeableConcept j_ = a?.PrimaryPurposeType;
-            CodeableConcept k_ = a?.Phase;
-            List<CodeableConcept> l_ = a?.Category;
-            List<CodeableConcept> m_ = a?.Focus;
-            List<CodeableConcept> n_ = a?.Condition;
-            List<ContactDetail> o_ = a?.Contact;
-            List<RelatedArtifact> p_ = a?.RelatedArtifact;
-            List<CodeableConcept> q_ = a?.Keyword;
-            List<CodeableConcept> r_ = a?.Location;
-            Markdown s_ = a?.DescriptionElement;
-            List<ResourceReference> t_ = a?.Enrollment;
-            Period u_ = a?.Period;
-            ResourceReference v_ = a?.Sponsor;
-            ResourceReference w_ = a?.PrincipalInvestigator;
-            List<ResourceReference> x_ = a?.Site;
-            CodeableConcept y_ = a?.ReasonStopped;
-            List<Annotation> z_ = a?.Note;
-            List<ResearchStudy.ArmComponent> aa_ = a?.Arm;
-            List<ResearchStudy.ObjectiveComponent> ab_ = a?.Objective;
-            ResearchStudy ac_ = new ResearchStudy
+        ResearchStudy? b_(ResearchStudy? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirString? f_ = a?.TitleElement;
+            List<ResourceReference?>? g_ = a?.Protocol;
+            List<ResourceReference?>? h_ = a?.PartOf;
+            Code<ResearchStudy.ResearchStudyStatus>? i_ = a?.StatusElement;
+            CodeableConcept? j_ = a?.PrimaryPurposeType;
+            CodeableConcept? k_ = a?.Phase;
+            List<CodeableConcept?>? l_ = a?.Category;
+            List<CodeableConcept?>? m_ = a?.Focus;
+            List<CodeableConcept?>? n_ = a?.Condition;
+            List<ContactDetail?>? o_ = a?.Contact;
+            List<RelatedArtifact?>? p_ = a?.RelatedArtifact;
+            List<CodeableConcept?>? q_ = a?.Keyword;
+            List<CodeableConcept?>? r_ = a?.Location;
+            Markdown? s_ = a?.DescriptionElement;
+            List<ResourceReference?>? t_ = a?.Enrollment;
+            Period? u_ = a?.Period;
+            ResourceReference? v_ = a?.Sponsor;
+            ResourceReference? w_ = a?.PrincipalInvestigator;
+            List<ResourceReference?>? x_ = a?.Site;
+            CodeableConcept? y_ = a?.ReasonStopped;
+            List<Annotation?>? z_ = a?.Note;
+            List<ResearchStudy.ArmComponent?>? aa_ = a?.Arm;
+            List<ResearchStudy.ObjectiveComponent?>? ab_ = a?.Objective;
+            ResearchStudy? ac_ = new ResearchStudy
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 TitleElement = f_,
@@ -5722,29 +5724,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<ResearchStudy> c_ = context.Operators.SelectDistinct<ResearchStudy, ResearchStudy>((IEnumerable<ResearchStudy>)a_, b_);
-        ResearchStudy d_ = context.Operators.SingletonFrom<ResearchStudy>(c_);
+        IEnumerable<ResearchStudy?>? c_ = context.Operators.SelectDistinct<ResearchStudy, ResearchStudy>((IEnumerable<ResearchStudy>)a_, b_);
+        ResearchStudy? d_ = context.Operators.SingletonFrom<ResearchStudy>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ResearchSubjectResource")]
-    public ResearchSubject ResearchSubjectResource(CqlContext context, ResearchSubject arg)
+    public ResearchSubject? ResearchSubjectResource(CqlContext context, ResearchSubject? arg)
     {
-        ResearchSubject[] a_ = [
+        ResearchSubject?[]? a_ = [
             arg,
         ];
 
-        ResearchSubject b_(ResearchSubject a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<ResearchSubject.ResearchSubjectStatus> f_ = a?.StatusElement;
-            Period g_ = a?.Period;
-            ResourceReference h_ = a?.Study;
-            ResourceReference i_ = a?.Individual;
-            FhirString j_ = a?.AssignedArmElement;
-            FhirString k_ = a?.ActualArmElement;
-            ResourceReference l_ = a?.Consent;
-            ResearchSubject m_ = new ResearchSubject
+        ResearchSubject? b_(ResearchSubject? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<ResearchSubject.ResearchSubjectStatus>? f_ = a?.StatusElement;
+            Period? g_ = a?.Period;
+            ResourceReference? h_ = a?.Study;
+            ResourceReference? i_ = a?.Individual;
+            FhirString? j_ = a?.AssignedArmElement;
+            FhirString? k_ = a?.ActualArmElement;
+            ResourceReference? l_ = a?.Consent;
+            ResearchSubject? m_ = new ResearchSubject
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -5758,38 +5760,38 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<ResearchSubject> c_ = context.Operators.SelectDistinct<ResearchSubject, ResearchSubject>((IEnumerable<ResearchSubject>)a_, b_);
-        ResearchSubject d_ = context.Operators.SingletonFrom<ResearchSubject>(c_);
+        IEnumerable<ResearchSubject?>? c_ = context.Operators.SelectDistinct<ResearchSubject, ResearchSubject>((IEnumerable<ResearchSubject>)a_, b_);
+        ResearchSubject? d_ = context.Operators.SingletonFrom<ResearchSubject>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("RiskAssessmentResource")]
-    public RiskAssessment RiskAssessmentResource(CqlContext context, RiskAssessment arg)
+    public RiskAssessment? RiskAssessmentResource(CqlContext context, RiskAssessment? arg)
     {
-        RiskAssessment[] a_ = [
+        RiskAssessment?[]? a_ = [
             arg,
         ];
 
-        RiskAssessment b_(RiskAssessment a) {
-            List<Identifier> e_ = a?.Identifier;
-            ResourceReference f_ = a?.BasedOn;
-            ResourceReference g_ = a?.Parent;
-            Code<ObservationStatus> h_ = a?.StatusElement;
-            CodeableConcept i_ = a?.Method;
-            CodeableConcept j_ = a?.Code;
-            ResourceReference k_ = a?.Subject;
-            ResourceReference l_ = a?.Encounter;
-            DataType m_ = a?.Occurrence;
-            ResourceReference n_ = a?.Condition;
-            ResourceReference o_ = a?.Performer;
-            List<CodeableConcept> p_ = a?.ReasonCode;
-            List<ResourceReference> q_ = a?.ReasonReference;
-            List<ResourceReference> r_ = a?.Basis;
-            List<RiskAssessment.PredictionComponent> s_ = a?.Prediction;
-            FhirString t_ = a?.MitigationElement;
-            List<Annotation> u_ = a?.Note;
-            RiskAssessment v_ = new RiskAssessment
+        RiskAssessment? b_(RiskAssessment? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            ResourceReference? f_ = a?.BasedOn;
+            ResourceReference? g_ = a?.Parent;
+            Code<ObservationStatus>? h_ = a?.StatusElement;
+            CodeableConcept? i_ = a?.Method;
+            CodeableConcept? j_ = a?.Code;
+            ResourceReference? k_ = a?.Subject;
+            ResourceReference? l_ = a?.Encounter;
+            DataType? m_ = a?.Occurrence;
+            ResourceReference? n_ = a?.Condition;
+            ResourceReference? o_ = a?.Performer;
+            List<CodeableConcept?>? p_ = a?.ReasonCode;
+            List<ResourceReference?>? q_ = a?.ReasonReference;
+            List<ResourceReference?>? r_ = a?.Basis;
+            List<RiskAssessment.PredictionComponent?>? s_ = a?.Prediction;
+            FhirString? t_ = a?.MitigationElement;
+            List<Annotation?>? u_ = a?.Note;
+            RiskAssessment? v_ = new RiskAssessment
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = f_,
@@ -5812,52 +5814,52 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return v_;
         }
 
-        IEnumerable<RiskAssessment> c_ = context.Operators.SelectDistinct<RiskAssessment, RiskAssessment>((IEnumerable<RiskAssessment>)a_, b_);
-        RiskAssessment d_ = context.Operators.SingletonFrom<RiskAssessment>(c_);
+        IEnumerable<RiskAssessment?>? c_ = context.Operators.SelectDistinct<RiskAssessment, RiskAssessment>((IEnumerable<RiskAssessment>)a_, b_);
+        RiskAssessment? d_ = context.Operators.SingletonFrom<RiskAssessment>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("RiskEvidenceSynthesisResource")]
-    public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis arg)
+    public RiskEvidenceSynthesis? RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis? arg)
     {
-        RiskEvidenceSynthesis[] a_ = [
+        RiskEvidenceSynthesis?[]? a_ = [
             arg,
         ];
 
-        RiskEvidenceSynthesis b_(RiskEvidenceSynthesis a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirDateTime k_ = a?.DateElement;
-            FhirString l_ = a?.PublisherElement;
-            List<ContactDetail> m_ = a?.Contact;
-            Markdown n_ = a?.DescriptionElement;
-            List<Annotation> o_ = a?.Note;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.CopyrightElement;
-            Date s_ = a?.ApprovalDateElement;
-            Date t_ = a?.LastReviewDateElement;
-            Period u_ = a?.EffectivePeriod;
-            List<CodeableConcept> v_ = a?.Topic;
-            List<ContactDetail> w_ = a?.Author;
-            List<ContactDetail> x_ = a?.Editor;
-            List<ContactDetail> y_ = a?.Reviewer;
-            List<ContactDetail> z_ = a?.Endorser;
-            List<RelatedArtifact> aa_ = a?.RelatedArtifact;
-            CodeableConcept ab_ = a?.SynthesisType;
-            CodeableConcept ac_ = a?.StudyType;
-            ResourceReference ad_ = a?.Population;
-            ResourceReference ae_ = a?.Exposure;
-            ResourceReference af_ = a?.Outcome;
-            RiskEvidenceSynthesis.SampleSizeComponent ag_ = a?.SampleSize;
-            RiskEvidenceSynthesis.RiskEstimateComponent ah_ = a?.RiskEstimate;
-            List<RiskEvidenceSynthesis.CertaintyComponent> ai_ = a?.Certainty;
-            RiskEvidenceSynthesis aj_ = new RiskEvidenceSynthesis
+        RiskEvidenceSynthesis? b_(RiskEvidenceSynthesis? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirDateTime? k_ = a?.DateElement;
+            FhirString? l_ = a?.PublisherElement;
+            List<ContactDetail?>? m_ = a?.Contact;
+            Markdown? n_ = a?.DescriptionElement;
+            List<Annotation?>? o_ = a?.Note;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.CopyrightElement;
+            Date? s_ = a?.ApprovalDateElement;
+            Date? t_ = a?.LastReviewDateElement;
+            Period? u_ = a?.EffectivePeriod;
+            List<CodeableConcept?>? v_ = a?.Topic;
+            List<ContactDetail?>? w_ = a?.Author;
+            List<ContactDetail?>? x_ = a?.Editor;
+            List<ContactDetail?>? y_ = a?.Reviewer;
+            List<ContactDetail?>? z_ = a?.Endorser;
+            List<RelatedArtifact?>? aa_ = a?.RelatedArtifact;
+            CodeableConcept? ab_ = a?.SynthesisType;
+            CodeableConcept? ac_ = a?.StudyType;
+            ResourceReference? ad_ = a?.Population;
+            ResourceReference? ae_ = a?.Exposure;
+            ResourceReference? af_ = a?.Outcome;
+            RiskEvidenceSynthesis.SampleSizeComponent? ag_ = a?.SampleSize;
+            RiskEvidenceSynthesis.RiskEstimateComponent? ah_ = a?.RiskEstimate;
+            List<RiskEvidenceSynthesis.CertaintyComponent?>? ai_ = a?.Certainty;
+            RiskEvidenceSynthesis? aj_ = new RiskEvidenceSynthesis
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -5894,29 +5896,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aj_;
         }
 
-        IEnumerable<RiskEvidenceSynthesis> c_ = context.Operators.SelectDistinct<RiskEvidenceSynthesis, RiskEvidenceSynthesis>((IEnumerable<RiskEvidenceSynthesis>)a_, b_);
-        RiskEvidenceSynthesis d_ = context.Operators.SingletonFrom<RiskEvidenceSynthesis>(c_);
+        IEnumerable<RiskEvidenceSynthesis?>? c_ = context.Operators.SelectDistinct<RiskEvidenceSynthesis, RiskEvidenceSynthesis>((IEnumerable<RiskEvidenceSynthesis>)a_, b_);
+        RiskEvidenceSynthesis? d_ = context.Operators.SingletonFrom<RiskEvidenceSynthesis>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ScheduleResource")]
-    public Schedule ScheduleResource(CqlContext context, Schedule arg)
+    public Schedule? ScheduleResource(CqlContext context, Schedule? arg)
     {
-        Schedule[] a_ = [
+        Schedule?[]? a_ = [
             arg,
         ];
 
-        Schedule b_(Schedule a) {
-            List<Identifier> e_ = a?.Identifier;
-            FhirBoolean f_ = a?.ActiveElement;
-            List<CodeableConcept> g_ = a?.ServiceCategory;
-            List<CodeableConcept> h_ = a?.ServiceType;
-            List<CodeableConcept> i_ = a?.Specialty;
-            List<ResourceReference> j_ = a?.Actor;
-            Period k_ = a?.PlanningHorizon;
-            FhirString l_ = a?.CommentElement;
-            Schedule m_ = new Schedule
+        Schedule? b_(Schedule? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            FhirBoolean? f_ = a?.ActiveElement;
+            List<CodeableConcept?>? g_ = a?.ServiceCategory;
+            List<CodeableConcept?>? h_ = a?.ServiceType;
+            List<CodeableConcept?>? i_ = a?.Specialty;
+            List<ResourceReference?>? j_ = a?.Actor;
+            Period? k_ = a?.PlanningHorizon;
+            FhirString? l_ = a?.CommentElement;
+            Schedule? m_ = new Schedule
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -5930,54 +5932,54 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<Schedule> c_ = context.Operators.SelectDistinct<Schedule, Schedule>((IEnumerable<Schedule>)a_, b_);
-        Schedule d_ = context.Operators.SingletonFrom<Schedule>(c_);
+        IEnumerable<Schedule?>? c_ = context.Operators.SelectDistinct<Schedule, Schedule>((IEnumerable<Schedule>)a_, b_);
+        Schedule? d_ = context.Operators.SingletonFrom<Schedule>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ServiceRequestResource")]
-    public ServiceRequest ServiceRequestResource(CqlContext context, ServiceRequest arg)
+    public ServiceRequest? ServiceRequestResource(CqlContext context, ServiceRequest? arg)
     {
-        ServiceRequest[] a_ = [
+        ServiceRequest?[]? a_ = [
             arg,
         ];
 
-        ServiceRequest b_(ServiceRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<Canonical> f_ = a?.InstantiatesCanonicalElement;
-            List<FhirUri> g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            List<ResourceReference> i_ = a?.Replaces;
-            Identifier j_ = a?.Requisition;
-            Code<RequestStatus> k_ = a?.StatusElement;
-            Code<RequestIntent> l_ = a?.IntentElement;
-            List<CodeableConcept> m_ = a?.Category;
-            Code<RequestPriority> n_ = a?.PriorityElement;
-            FhirBoolean o_ = a?.DoNotPerformElement;
-            CodeableConcept p_ = a?.Code;
-            List<CodeableConcept> q_ = a?.OrderDetail;
-            DataType r_ = a?.Quantity;
-            ResourceReference s_ = a?.Subject;
-            ResourceReference t_ = a?.Encounter;
-            DataType u_ = a?.Occurrence;
-            DataType v_ = a?.AsNeeded;
-            FhirDateTime w_ = a?.AuthoredOnElement;
-            ResourceReference x_ = a?.Requester;
-            CodeableConcept y_ = a?.PerformerType;
-            List<ResourceReference> z_ = a?.Performer;
-            List<CodeableConcept> aa_ = a?.LocationCode;
-            List<ResourceReference> ab_ = a?.LocationReference;
-            List<CodeableConcept> ac_ = a?.ReasonCode;
-            List<ResourceReference> ad_ = a?.ReasonReference;
-            List<ResourceReference> ae_ = a?.Insurance;
-            List<ResourceReference> af_ = a?.SupportingInfo;
-            List<ResourceReference> ag_ = a?.Specimen;
-            List<CodeableConcept> ah_ = a?.BodySite;
-            List<Annotation> ai_ = a?.Note;
-            FhirString aj_ = a?.PatientInstructionElement;
-            List<ResourceReference> ak_ = a?.RelevantHistory;
-            ServiceRequest al_ = new ServiceRequest
+        ServiceRequest? b_(ServiceRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<Canonical?>? f_ = a?.InstantiatesCanonicalElement;
+            List<FhirUri?>? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            List<ResourceReference?>? i_ = a?.Replaces;
+            Identifier? j_ = a?.Requisition;
+            Code<RequestStatus>? k_ = a?.StatusElement;
+            Code<RequestIntent>? l_ = a?.IntentElement;
+            List<CodeableConcept?>? m_ = a?.Category;
+            Code<RequestPriority>? n_ = a?.PriorityElement;
+            FhirBoolean? o_ = a?.DoNotPerformElement;
+            CodeableConcept? p_ = a?.Code;
+            List<CodeableConcept?>? q_ = a?.OrderDetail;
+            DataType? r_ = a?.Quantity;
+            ResourceReference? s_ = a?.Subject;
+            ResourceReference? t_ = a?.Encounter;
+            DataType? u_ = a?.Occurrence;
+            DataType? v_ = a?.AsNeeded;
+            FhirDateTime? w_ = a?.AuthoredOnElement;
+            ResourceReference? x_ = a?.Requester;
+            CodeableConcept? y_ = a?.PerformerType;
+            List<ResourceReference?>? z_ = a?.Performer;
+            List<CodeableConcept?>? aa_ = a?.LocationCode;
+            List<ResourceReference?>? ab_ = a?.LocationReference;
+            List<CodeableConcept?>? ac_ = a?.ReasonCode;
+            List<ResourceReference?>? ad_ = a?.ReasonReference;
+            List<ResourceReference?>? ae_ = a?.Insurance;
+            List<ResourceReference?>? af_ = a?.SupportingInfo;
+            List<ResourceReference?>? ag_ = a?.Specimen;
+            List<CodeableConcept?>? ah_ = a?.BodySite;
+            List<Annotation?>? ai_ = a?.Note;
+            FhirString? aj_ = a?.PatientInstructionElement;
+            List<ResourceReference?>? ak_ = a?.RelevantHistory;
+            ServiceRequest? al_ = new ServiceRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
@@ -6016,32 +6018,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return al_;
         }
 
-        IEnumerable<ServiceRequest> c_ = context.Operators.SelectDistinct<ServiceRequest, ServiceRequest>((IEnumerable<ServiceRequest>)a_, b_);
-        ServiceRequest d_ = context.Operators.SingletonFrom<ServiceRequest>(c_);
+        IEnumerable<ServiceRequest?>? c_ = context.Operators.SelectDistinct<ServiceRequest, ServiceRequest>((IEnumerable<ServiceRequest>)a_, b_);
+        ServiceRequest? d_ = context.Operators.SingletonFrom<ServiceRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SlotResource")]
-    public Slot SlotResource(CqlContext context, Slot arg)
+    public Slot? SlotResource(CqlContext context, Slot? arg)
     {
-        Slot[] a_ = [
+        Slot?[]? a_ = [
             arg,
         ];
 
-        Slot b_(Slot a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<CodeableConcept> f_ = a?.ServiceCategory;
-            List<CodeableConcept> g_ = a?.ServiceType;
-            List<CodeableConcept> h_ = a?.Specialty;
-            CodeableConcept i_ = a?.AppointmentType;
-            ResourceReference j_ = a?.Schedule;
-            Code<Slot.SlotStatus> k_ = a?.StatusElement;
-            Instant l_ = a?.StartElement;
-            Instant m_ = a?.EndElement;
-            FhirBoolean n_ = a?.OverbookedElement;
-            FhirString o_ = a?.CommentElement;
-            Slot p_ = new Slot
+        Slot? b_(Slot? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<CodeableConcept?>? f_ = a?.ServiceCategory;
+            List<CodeableConcept?>? g_ = a?.ServiceType;
+            List<CodeableConcept?>? h_ = a?.Specialty;
+            CodeableConcept? i_ = a?.AppointmentType;
+            ResourceReference? j_ = a?.Schedule;
+            Code<Slot.SlotStatus>? k_ = a?.StatusElement;
+            Instant? l_ = a?.StartElement;
+            Instant? m_ = a?.EndElement;
+            FhirBoolean? n_ = a?.OverbookedElement;
+            FhirString? o_ = a?.CommentElement;
+            Slot? p_ = new Slot
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)f_),
@@ -6058,34 +6060,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<Slot> c_ = context.Operators.SelectDistinct<Slot, Slot>((IEnumerable<Slot>)a_, b_);
-        Slot d_ = context.Operators.SingletonFrom<Slot>(c_);
+        IEnumerable<Slot?>? c_ = context.Operators.SelectDistinct<Slot, Slot>((IEnumerable<Slot>)a_, b_);
+        Slot? d_ = context.Operators.SingletonFrom<Slot>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SpecimenResource")]
-    public Specimen SpecimenResource(CqlContext context, Specimen arg)
+    public Specimen? SpecimenResource(CqlContext context, Specimen? arg)
     {
-        Specimen[] a_ = [
+        Specimen?[]? a_ = [
             arg,
         ];
 
-        Specimen b_(Specimen a) {
-            List<Identifier> e_ = a?.Identifier;
-            Identifier f_ = a?.AccessionIdentifier;
-            Code<Specimen.SpecimenStatus> g_ = a?.StatusElement;
-            CodeableConcept h_ = a?.Type;
-            ResourceReference i_ = a?.Subject;
-            FhirDateTime j_ = a?.ReceivedTimeElement;
-            List<ResourceReference> k_ = a?.Parent;
-            List<ResourceReference> l_ = a?.Request;
-            Specimen.CollectionComponent m_ = a?.Collection;
-            List<Specimen.ProcessingComponent> n_ = a?.Processing;
-            List<Specimen.ContainerComponent> o_ = a?.Container;
-            List<CodeableConcept> p_ = a?.Condition;
-            List<Annotation> q_ = a?.Note;
-            Specimen r_ = new Specimen
+        Specimen? b_(Specimen? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Identifier? f_ = a?.AccessionIdentifier;
+            Code<Specimen.SpecimenStatus>? g_ = a?.StatusElement;
+            CodeableConcept? h_ = a?.Type;
+            ResourceReference? i_ = a?.Subject;
+            FhirDateTime? j_ = a?.ReceivedTimeElement;
+            List<ResourceReference?>? k_ = a?.Parent;
+            List<ResourceReference?>? l_ = a?.Request;
+            Specimen.CollectionComponent? m_ = a?.Collection;
+            List<Specimen.ProcessingComponent?>? n_ = a?.Processing;
+            List<Specimen.ContainerComponent?>? o_ = a?.Container;
+            List<CodeableConcept?>? p_ = a?.Condition;
+            List<Annotation?>? q_ = a?.Note;
+            Specimen? r_ = new Specimen
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 AccessionIdentifier = f_,
@@ -6104,27 +6106,27 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<Specimen> c_ = context.Operators.SelectDistinct<Specimen, Specimen>((IEnumerable<Specimen>)a_, b_);
-        Specimen d_ = context.Operators.SingletonFrom<Specimen>(c_);
+        IEnumerable<Specimen?>? c_ = context.Operators.SelectDistinct<Specimen, Specimen>((IEnumerable<Specimen>)a_, b_);
+        Specimen? d_ = context.Operators.SingletonFrom<Specimen>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SpecimenDefinitionResource")]
-    public SpecimenDefinition SpecimenDefinitionResource(CqlContext context, SpecimenDefinition arg)
+    public SpecimenDefinition? SpecimenDefinitionResource(CqlContext context, SpecimenDefinition? arg)
     {
-        SpecimenDefinition[] a_ = [
+        SpecimenDefinition?[]? a_ = [
             arg,
         ];
 
-        SpecimenDefinition b_(SpecimenDefinition a) {
-            Identifier e_ = a?.Identifier;
-            CodeableConcept f_ = a?.TypeCollected;
-            List<CodeableConcept> g_ = a?.PatientPreparation;
-            FhirString h_ = a?.TimeAspectElement;
-            List<CodeableConcept> i_ = a?.Collection;
-            List<SpecimenDefinition.TypeTestedComponent> j_ = a?.TypeTested;
-            SpecimenDefinition k_ = new SpecimenDefinition
+        SpecimenDefinition? b_(SpecimenDefinition? a) {
+            Identifier? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.TypeCollected;
+            List<CodeableConcept?>? g_ = a?.PatientPreparation;
+            FhirString? h_ = a?.TimeAspectElement;
+            List<CodeableConcept?>? i_ = a?.Collection;
+            List<SpecimenDefinition.TypeTestedComponent?>? j_ = a?.TypeTested;
+            SpecimenDefinition? k_ = new SpecimenDefinition
             {
                 Identifier = e_,
                 TypeCollected = f_,
@@ -6136,48 +6138,48 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return k_;
         }
 
-        IEnumerable<SpecimenDefinition> c_ = context.Operators.SelectDistinct<SpecimenDefinition, SpecimenDefinition>((IEnumerable<SpecimenDefinition>)a_, b_);
-        SpecimenDefinition d_ = context.Operators.SingletonFrom<SpecimenDefinition>(c_);
+        IEnumerable<SpecimenDefinition?>? c_ = context.Operators.SelectDistinct<SpecimenDefinition, SpecimenDefinition>((IEnumerable<SpecimenDefinition>)a_, b_);
+        SpecimenDefinition? d_ = context.Operators.SingletonFrom<SpecimenDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("StructureDefinitionResource")]
-    public StructureDefinition StructureDefinitionResource(CqlContext context, StructureDefinition arg)
+    public StructureDefinition? StructureDefinitionResource(CqlContext context, StructureDefinition? arg)
     {
-        StructureDefinition[] a_ = [
+        StructureDefinition?[]? a_ = [
             arg,
         ];
 
-        StructureDefinition b_(StructureDefinition a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.PurposeElement;
-            Markdown s_ = a?.CopyrightElement;
-            List<Coding> t_ = a?.Keyword;
-            Code<FHIRVersion> u_ = a?.FhirVersionElement;
-            List<StructureDefinition.MappingComponent> v_ = a?.Mapping;
-            Code<StructureDefinition.StructureDefinitionKind> w_ = a?.KindElement;
-            FhirBoolean x_ = a?.AbstractElement;
-            List<StructureDefinition.ContextComponent> y_ = a?.Context;
-            List<FhirString> z_ = a?.ContextInvariantElement;
-            FhirUri aa_ = a?.TypeElement;
-            Canonical ab_ = a?.BaseDefinitionElement;
-            Code<StructureDefinition.TypeDerivationRule> ac_ = a?.DerivationElement;
-            StructureDefinition.SnapshotComponent ad_ = a?.Snapshot;
-            StructureDefinition.DifferentialComponent ae_ = a?.Differential;
-            StructureDefinition af_ = new StructureDefinition
+        StructureDefinition? b_(StructureDefinition? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.PurposeElement;
+            Markdown? s_ = a?.CopyrightElement;
+            List<Coding?>? t_ = a?.Keyword;
+            Code<FHIRVersion>? u_ = a?.FhirVersionElement;
+            List<StructureDefinition.MappingComponent?>? v_ = a?.Mapping;
+            Code<StructureDefinition.StructureDefinitionKind>? w_ = a?.KindElement;
+            FhirBoolean? x_ = a?.AbstractElement;
+            List<StructureDefinition.ContextComponent?>? y_ = a?.Context;
+            List<FhirString?>? z_ = a?.ContextInvariantElement;
+            FhirUri? aa_ = a?.TypeElement;
+            Canonical? ab_ = a?.BaseDefinitionElement;
+            Code<StructureDefinition.TypeDerivationRule>? ac_ = a?.DerivationElement;
+            StructureDefinition.SnapshotComponent? ad_ = a?.Snapshot;
+            StructureDefinition.DifferentialComponent? ae_ = a?.Differential;
+            StructureDefinition? af_ = new StructureDefinition
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -6210,39 +6212,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return af_;
         }
 
-        IEnumerable<StructureDefinition> c_ = context.Operators.SelectDistinct<StructureDefinition, StructureDefinition>((IEnumerable<StructureDefinition>)a_, b_);
-        StructureDefinition d_ = context.Operators.SingletonFrom<StructureDefinition>(c_);
+        IEnumerable<StructureDefinition?>? c_ = context.Operators.SelectDistinct<StructureDefinition, StructureDefinition>((IEnumerable<StructureDefinition>)a_, b_);
+        StructureDefinition? d_ = context.Operators.SingletonFrom<StructureDefinition>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("StructureMapResource")]
-    public StructureMap StructureMapResource(CqlContext context, StructureMap arg)
+    public StructureMap? StructureMapResource(CqlContext context, StructureMap? arg)
     {
-        StructureMap[] a_ = [
+        StructureMap?[]? a_ = [
             arg,
         ];
 
-        StructureMap b_(StructureMap a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.PurposeElement;
-            Markdown s_ = a?.CopyrightElement;
-            List<StructureMap.StructureComponent> t_ = a?.Structure;
-            List<Canonical> u_ = a?.ImportElement;
-            List<StructureMap.GroupComponent> v_ = a?.Group;
-            StructureMap w_ = new StructureMap
+        StructureMap? b_(StructureMap? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.PurposeElement;
+            Markdown? s_ = a?.CopyrightElement;
+            List<StructureMap.StructureComponent?>? t_ = a?.Structure;
+            List<Canonical?>? u_ = a?.ImportElement;
+            List<StructureMap.GroupComponent?>? v_ = a?.Group;
+            StructureMap? w_ = new StructureMap
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -6266,28 +6268,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<StructureMap> c_ = context.Operators.SelectDistinct<StructureMap, StructureMap>((IEnumerable<StructureMap>)a_, b_);
-        StructureMap d_ = context.Operators.SingletonFrom<StructureMap>(c_);
+        IEnumerable<StructureMap?>? c_ = context.Operators.SelectDistinct<StructureMap, StructureMap>((IEnumerable<StructureMap>)a_, b_);
+        StructureMap? d_ = context.Operators.SingletonFrom<StructureMap>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubscriptionResource")]
-    public Subscription SubscriptionResource(CqlContext context, Subscription arg)
+    public Subscription? SubscriptionResource(CqlContext context, Subscription? arg)
     {
-        Subscription[] a_ = [
+        Subscription?[]? a_ = [
             arg,
         ];
 
-        Subscription b_(Subscription a) {
-            Code<Subscription.SubscriptionStatus> e_ = a?.StatusElement;
-            List<ContactPoint> f_ = a?.Contact;
-            Instant g_ = a?.EndElement;
-            FhirString h_ = a?.ReasonElement;
-            FhirString i_ = a?.CriteriaElement;
-            FhirString j_ = a?.ErrorElement;
-            Subscription.ChannelComponent k_ = a?.Channel;
-            Subscription l_ = new Subscription
+        Subscription? b_(Subscription? a) {
+            Code<Subscription.SubscriptionStatus>? e_ = a?.StatusElement;
+            List<ContactPoint?>? f_ = a?.Contact;
+            Instant? g_ = a?.EndElement;
+            FhirString? h_ = a?.ReasonElement;
+            FhirString? i_ = a?.CriteriaElement;
+            FhirString? j_ = a?.ErrorElement;
+            Subscription.ChannelComponent? k_ = a?.Channel;
+            Subscription? l_ = new Subscription
             {
                 StatusElement = e_,
                 Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)f_),
@@ -6300,28 +6302,28 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<Subscription> c_ = context.Operators.SelectDistinct<Subscription, Subscription>((IEnumerable<Subscription>)a_, b_);
-        Subscription d_ = context.Operators.SingletonFrom<Subscription>(c_);
+        IEnumerable<Subscription?>? c_ = context.Operators.SelectDistinct<Subscription, Subscription>((IEnumerable<Subscription>)a_, b_);
+        Subscription? d_ = context.Operators.SingletonFrom<Subscription>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceResource")]
-    public Substance SubstanceResource(CqlContext context, Substance arg)
+    public Substance? SubstanceResource(CqlContext context, Substance? arg)
     {
-        Substance[] a_ = [
+        Substance?[]? a_ = [
             arg,
         ];
 
-        Substance b_(Substance a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<Substance.FHIRSubstanceStatus> f_ = a?.StatusElement;
-            List<CodeableConcept> g_ = a?.Category;
-            CodeableConcept h_ = a?.Code;
-            FhirString i_ = a?.DescriptionElement;
-            List<Substance.InstanceComponent> j_ = a?.Instance;
-            List<Substance.IngredientComponent> k_ = a?.Ingredient;
-            Substance l_ = new Substance
+        Substance? b_(Substance? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<Substance.FHIRSubstanceStatus>? f_ = a?.StatusElement;
+            List<CodeableConcept?>? g_ = a?.Category;
+            CodeableConcept? h_ = a?.Code;
+            FhirString? i_ = a?.DescriptionElement;
+            List<Substance.InstanceComponent?>? j_ = a?.Instance;
+            List<Substance.IngredientComponent?>? k_ = a?.Ingredient;
+            Substance? l_ = new Substance
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -6334,26 +6336,26 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return l_;
         }
 
-        IEnumerable<Substance> c_ = context.Operators.SelectDistinct<Substance, Substance>((IEnumerable<Substance>)a_, b_);
-        Substance d_ = context.Operators.SingletonFrom<Substance>(c_);
+        IEnumerable<Substance?>? c_ = context.Operators.SelectDistinct<Substance, Substance>((IEnumerable<Substance>)a_, b_);
+        Substance? d_ = context.Operators.SingletonFrom<Substance>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceNucleicAcidResource")]
-    public SubstanceNucleicAcid SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid arg)
+    public SubstanceNucleicAcid? SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid? arg)
     {
-        SubstanceNucleicAcid[] a_ = [
+        SubstanceNucleicAcid?[]? a_ = [
             arg,
         ];
 
-        SubstanceNucleicAcid b_(SubstanceNucleicAcid a) {
-            CodeableConcept e_ = a?.SequenceType;
-            Integer f_ = a?.NumberOfSubunitsElement;
-            FhirString g_ = a?.AreaOfHybridisationElement;
-            CodeableConcept h_ = a?.OligoNucleotideType;
-            List<SubstanceNucleicAcid.SubunitComponent> i_ = a?.Subunit;
-            SubstanceNucleicAcid j_ = new SubstanceNucleicAcid
+        SubstanceNucleicAcid? b_(SubstanceNucleicAcid? a) {
+            CodeableConcept? e_ = a?.SequenceType;
+            Integer? f_ = a?.NumberOfSubunitsElement;
+            FhirString? g_ = a?.AreaOfHybridisationElement;
+            CodeableConcept? h_ = a?.OligoNucleotideType;
+            List<SubstanceNucleicAcid.SubunitComponent?>? i_ = a?.Subunit;
+            SubstanceNucleicAcid? j_ = new SubstanceNucleicAcid
             {
                 SequenceType = e_,
                 NumberOfSubunitsElement = f_,
@@ -6364,27 +6366,27 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return j_;
         }
 
-        IEnumerable<SubstanceNucleicAcid> c_ = context.Operators.SelectDistinct<SubstanceNucleicAcid, SubstanceNucleicAcid>((IEnumerable<SubstanceNucleicAcid>)a_, b_);
-        SubstanceNucleicAcid d_ = context.Operators.SingletonFrom<SubstanceNucleicAcid>(c_);
+        IEnumerable<SubstanceNucleicAcid?>? c_ = context.Operators.SelectDistinct<SubstanceNucleicAcid, SubstanceNucleicAcid>((IEnumerable<SubstanceNucleicAcid>)a_, b_);
+        SubstanceNucleicAcid? d_ = context.Operators.SingletonFrom<SubstanceNucleicAcid>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstancePolymerResource")]
-    public SubstancePolymer SubstancePolymerResource(CqlContext context, SubstancePolymer arg)
+    public SubstancePolymer? SubstancePolymerResource(CqlContext context, SubstancePolymer? arg)
     {
-        SubstancePolymer[] a_ = [
+        SubstancePolymer?[]? a_ = [
             arg,
         ];
 
-        SubstancePolymer b_(SubstancePolymer a) {
-            CodeableConcept e_ = a?.Class;
-            CodeableConcept f_ = a?.Geometry;
-            List<CodeableConcept> g_ = a?.CopolymerConnectivity;
-            List<FhirString> h_ = a?.ModificationElement;
-            List<SubstancePolymer.MonomerSetComponent> i_ = a?.MonomerSet;
-            List<SubstancePolymer.RepeatComponent> j_ = a?.Repeat;
-            SubstancePolymer k_ = new SubstancePolymer
+        SubstancePolymer? b_(SubstancePolymer? a) {
+            CodeableConcept? e_ = a?.Class;
+            CodeableConcept? f_ = a?.Geometry;
+            List<CodeableConcept?>? g_ = a?.CopolymerConnectivity;
+            List<FhirString?>? h_ = a?.ModificationElement;
+            List<SubstancePolymer.MonomerSetComponent?>? i_ = a?.MonomerSet;
+            List<SubstancePolymer.RepeatComponent?>? j_ = a?.Repeat;
+            SubstancePolymer? k_ = new SubstancePolymer
             {
                 Class = e_,
                 Geometry = f_,
@@ -6396,25 +6398,25 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return k_;
         }
 
-        IEnumerable<SubstancePolymer> c_ = context.Operators.SelectDistinct<SubstancePolymer, SubstancePolymer>((IEnumerable<SubstancePolymer>)a_, b_);
-        SubstancePolymer d_ = context.Operators.SingletonFrom<SubstancePolymer>(c_);
+        IEnumerable<SubstancePolymer?>? c_ = context.Operators.SelectDistinct<SubstancePolymer, SubstancePolymer>((IEnumerable<SubstancePolymer>)a_, b_);
+        SubstancePolymer? d_ = context.Operators.SingletonFrom<SubstancePolymer>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceProteinResource")]
-    public SubstanceProtein SubstanceProteinResource(CqlContext context, SubstanceProtein arg)
+    public SubstanceProtein? SubstanceProteinResource(CqlContext context, SubstanceProtein? arg)
     {
-        SubstanceProtein[] a_ = [
+        SubstanceProtein?[]? a_ = [
             arg,
         ];
 
-        SubstanceProtein b_(SubstanceProtein a) {
-            CodeableConcept e_ = a?.SequenceType;
-            Integer f_ = a?.NumberOfSubunitsElement;
-            List<FhirString> g_ = a?.DisulfideLinkageElement;
-            List<SubstanceProtein.SubunitComponent> h_ = a?.Subunit;
-            SubstanceProtein i_ = new SubstanceProtein
+        SubstanceProtein? b_(SubstanceProtein? a) {
+            CodeableConcept? e_ = a?.SequenceType;
+            Integer? f_ = a?.NumberOfSubunitsElement;
+            List<FhirString?>? g_ = a?.DisulfideLinkageElement;
+            List<SubstanceProtein.SubunitComponent?>? h_ = a?.Subunit;
+            SubstanceProtein? i_ = new SubstanceProtein
             {
                 SequenceType = e_,
                 NumberOfSubunitsElement = f_,
@@ -6424,26 +6426,26 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return i_;
         }
 
-        IEnumerable<SubstanceProtein> c_ = context.Operators.SelectDistinct<SubstanceProtein, SubstanceProtein>((IEnumerable<SubstanceProtein>)a_, b_);
-        SubstanceProtein d_ = context.Operators.SingletonFrom<SubstanceProtein>(c_);
+        IEnumerable<SubstanceProtein?>? c_ = context.Operators.SelectDistinct<SubstanceProtein, SubstanceProtein>((IEnumerable<SubstanceProtein>)a_, b_);
+        SubstanceProtein? d_ = context.Operators.SingletonFrom<SubstanceProtein>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceReferenceInformationResource")]
-    public SubstanceReferenceInformation SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation arg)
+    public SubstanceReferenceInformation? SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation? arg)
     {
-        SubstanceReferenceInformation[] a_ = [
+        SubstanceReferenceInformation?[]? a_ = [
             arg,
         ];
 
-        SubstanceReferenceInformation b_(SubstanceReferenceInformation a) {
-            FhirString e_ = a?.CommentElement;
-            List<SubstanceReferenceInformation.GeneComponent> f_ = a?.Gene;
-            List<SubstanceReferenceInformation.GeneElementComponent> g_ = a?.GeneElement;
-            List<SubstanceReferenceInformation.ClassificationComponent> h_ = a?.Classification;
-            List<SubstanceReferenceInformation.TargetComponent> i_ = a?.Target;
-            SubstanceReferenceInformation j_ = new SubstanceReferenceInformation
+        SubstanceReferenceInformation? b_(SubstanceReferenceInformation? a) {
+            FhirString? e_ = a?.CommentElement;
+            List<SubstanceReferenceInformation.GeneComponent?>? f_ = a?.Gene;
+            List<SubstanceReferenceInformation.GeneElementComponent?>? g_ = a?.GeneElement;
+            List<SubstanceReferenceInformation.ClassificationComponent?>? h_ = a?.Classification;
+            List<SubstanceReferenceInformation.TargetComponent?>? i_ = a?.Target;
+            SubstanceReferenceInformation? j_ = new SubstanceReferenceInformation
             {
                 CommentElement = e_,
                 Gene = new List<SubstanceReferenceInformation.GeneComponent>((IEnumerable<SubstanceReferenceInformation.GeneComponent>)f_),
@@ -6454,34 +6456,34 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return j_;
         }
 
-        IEnumerable<SubstanceReferenceInformation> c_ = context.Operators.SelectDistinct<SubstanceReferenceInformation, SubstanceReferenceInformation>((IEnumerable<SubstanceReferenceInformation>)a_, b_);
-        SubstanceReferenceInformation d_ = context.Operators.SingletonFrom<SubstanceReferenceInformation>(c_);
+        IEnumerable<SubstanceReferenceInformation?>? c_ = context.Operators.SelectDistinct<SubstanceReferenceInformation, SubstanceReferenceInformation>((IEnumerable<SubstanceReferenceInformation>)a_, b_);
+        SubstanceReferenceInformation? d_ = context.Operators.SingletonFrom<SubstanceReferenceInformation>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceSourceMaterialResource")]
-    public SubstanceSourceMaterial SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial arg)
+    public SubstanceSourceMaterial? SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial? arg)
     {
-        SubstanceSourceMaterial[] a_ = [
+        SubstanceSourceMaterial?[]? a_ = [
             arg,
         ];
 
-        SubstanceSourceMaterial b_(SubstanceSourceMaterial a) {
-            CodeableConcept e_ = a?.SourceMaterialClass;
-            CodeableConcept f_ = a?.SourceMaterialType;
-            CodeableConcept g_ = a?.SourceMaterialState;
-            Identifier h_ = a?.OrganismId;
-            FhirString i_ = a?.OrganismNameElement;
-            List<Identifier> j_ = a?.ParentSubstanceId;
-            List<FhirString> k_ = a?.ParentSubstanceNameElement;
-            List<CodeableConcept> l_ = a?.CountryOfOrigin;
-            List<FhirString> m_ = a?.GeographicalLocationElement;
-            CodeableConcept n_ = a?.DevelopmentStage;
-            List<SubstanceSourceMaterial.FractionDescriptionComponent> o_ = a?.FractionDescription;
-            SubstanceSourceMaterial.OrganismComponent p_ = a?.Organism;
-            List<SubstanceSourceMaterial.PartDescriptionComponent> q_ = a?.PartDescription;
-            SubstanceSourceMaterial r_ = new SubstanceSourceMaterial
+        SubstanceSourceMaterial? b_(SubstanceSourceMaterial? a) {
+            CodeableConcept? e_ = a?.SourceMaterialClass;
+            CodeableConcept? f_ = a?.SourceMaterialType;
+            CodeableConcept? g_ = a?.SourceMaterialState;
+            Identifier? h_ = a?.OrganismId;
+            FhirString? i_ = a?.OrganismNameElement;
+            List<Identifier?>? j_ = a?.ParentSubstanceId;
+            List<FhirString?>? k_ = a?.ParentSubstanceNameElement;
+            List<CodeableConcept?>? l_ = a?.CountryOfOrigin;
+            List<FhirString?>? m_ = a?.GeographicalLocationElement;
+            CodeableConcept? n_ = a?.DevelopmentStage;
+            List<SubstanceSourceMaterial.FractionDescriptionComponent?>? o_ = a?.FractionDescription;
+            SubstanceSourceMaterial.OrganismComponent? p_ = a?.Organism;
+            List<SubstanceSourceMaterial.PartDescriptionComponent?>? q_ = a?.PartDescription;
+            SubstanceSourceMaterial? r_ = new SubstanceSourceMaterial
             {
                 SourceMaterialClass = e_,
                 SourceMaterialType = f_,
@@ -6500,40 +6502,40 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return r_;
         }
 
-        IEnumerable<SubstanceSourceMaterial> c_ = context.Operators.SelectDistinct<SubstanceSourceMaterial, SubstanceSourceMaterial>((IEnumerable<SubstanceSourceMaterial>)a_, b_);
-        SubstanceSourceMaterial d_ = context.Operators.SingletonFrom<SubstanceSourceMaterial>(c_);
+        IEnumerable<SubstanceSourceMaterial?>? c_ = context.Operators.SelectDistinct<SubstanceSourceMaterial, SubstanceSourceMaterial>((IEnumerable<SubstanceSourceMaterial>)a_, b_);
+        SubstanceSourceMaterial? d_ = context.Operators.SingletonFrom<SubstanceSourceMaterial>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SubstanceSpecificationResource")]
-    public SubstanceSpecification SubstanceSpecificationResource(CqlContext context, SubstanceSpecification arg)
+    public SubstanceSpecification? SubstanceSpecificationResource(CqlContext context, SubstanceSpecification? arg)
     {
-        SubstanceSpecification[] a_ = [
+        SubstanceSpecification?[]? a_ = [
             arg,
         ];
 
-        SubstanceSpecification b_(SubstanceSpecification a) {
-            Identifier e_ = a?.Identifier;
-            CodeableConcept f_ = a?.Type;
-            CodeableConcept g_ = a?.Status;
-            CodeableConcept h_ = a?.Domain;
-            FhirString i_ = a?.DescriptionElement;
-            List<ResourceReference> j_ = a?.Source;
-            FhirString k_ = a?.CommentElement;
-            List<SubstanceSpecification.MoietyComponent> l_ = a?.Moiety;
-            List<SubstanceSpecification.PropertyComponent> m_ = a?.Property;
-            ResourceReference n_ = a?.ReferenceInformation;
-            SubstanceSpecification.StructureComponent o_ = a?.Structure;
-            List<SubstanceSpecification.CodeComponent> p_ = a?.Code;
-            List<SubstanceSpecification.NameComponent> q_ = a?.Name;
-            List<SubstanceSpecification.MolecularWeightComponent> r_ = a?.MolecularWeight;
-            List<SubstanceSpecification.RelationshipComponent> s_ = a?.Relationship;
-            ResourceReference t_ = a?.NucleicAcid;
-            ResourceReference u_ = a?.Polymer;
-            ResourceReference v_ = a?.Protein;
-            ResourceReference w_ = a?.SourceMaterial;
-            SubstanceSpecification x_ = new SubstanceSpecification
+        SubstanceSpecification? b_(SubstanceSpecification? a) {
+            Identifier? e_ = a?.Identifier;
+            CodeableConcept? f_ = a?.Type;
+            CodeableConcept? g_ = a?.Status;
+            CodeableConcept? h_ = a?.Domain;
+            FhirString? i_ = a?.DescriptionElement;
+            List<ResourceReference?>? j_ = a?.Source;
+            FhirString? k_ = a?.CommentElement;
+            List<SubstanceSpecification.MoietyComponent?>? l_ = a?.Moiety;
+            List<SubstanceSpecification.PropertyComponent?>? m_ = a?.Property;
+            ResourceReference? n_ = a?.ReferenceInformation;
+            SubstanceSpecification.StructureComponent? o_ = a?.Structure;
+            List<SubstanceSpecification.CodeComponent?>? p_ = a?.Code;
+            List<SubstanceSpecification.NameComponent?>? q_ = a?.Name;
+            List<SubstanceSpecification.MolecularWeightComponent?>? r_ = a?.MolecularWeight;
+            List<SubstanceSpecification.RelationshipComponent?>? s_ = a?.Relationship;
+            ResourceReference? t_ = a?.NucleicAcid;
+            ResourceReference? u_ = a?.Polymer;
+            ResourceReference? v_ = a?.Protein;
+            ResourceReference? w_ = a?.SourceMaterial;
+            SubstanceSpecification? x_ = new SubstanceSpecification
             {
                 Identifier = e_,
                 Type = f_,
@@ -6558,32 +6560,32 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return x_;
         }
 
-        IEnumerable<SubstanceSpecification> c_ = context.Operators.SelectDistinct<SubstanceSpecification, SubstanceSpecification>((IEnumerable<SubstanceSpecification>)a_, b_);
-        SubstanceSpecification d_ = context.Operators.SingletonFrom<SubstanceSpecification>(c_);
+        IEnumerable<SubstanceSpecification?>? c_ = context.Operators.SelectDistinct<SubstanceSpecification, SubstanceSpecification>((IEnumerable<SubstanceSpecification>)a_, b_);
+        SubstanceSpecification? d_ = context.Operators.SingletonFrom<SubstanceSpecification>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SupplyDeliveryResource")]
-    public SupplyDelivery SupplyDeliveryResource(CqlContext context, SupplyDelivery arg)
+    public SupplyDelivery? SupplyDeliveryResource(CqlContext context, SupplyDelivery? arg)
     {
-        SupplyDelivery[] a_ = [
+        SupplyDelivery?[]? a_ = [
             arg,
         ];
 
-        SupplyDelivery b_(SupplyDelivery a) {
-            List<Identifier> e_ = a?.Identifier;
-            List<ResourceReference> f_ = a?.BasedOn;
-            List<ResourceReference> g_ = a?.PartOf;
-            Code<SupplyDelivery.SupplyDeliveryStatus> h_ = a?.StatusElement;
-            ResourceReference i_ = a?.Patient;
-            CodeableConcept j_ = a?.Type;
-            SupplyDelivery.SuppliedItemComponent k_ = a?.SuppliedItem;
-            DataType l_ = a?.Occurrence;
-            ResourceReference m_ = a?.Supplier;
-            ResourceReference n_ = a?.Destination;
-            List<ResourceReference> o_ = a?.Receiver;
-            SupplyDelivery p_ = new SupplyDelivery
+        SupplyDelivery? b_(SupplyDelivery? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            List<ResourceReference?>? f_ = a?.BasedOn;
+            List<ResourceReference?>? g_ = a?.PartOf;
+            Code<SupplyDelivery.SupplyDeliveryStatus>? h_ = a?.StatusElement;
+            ResourceReference? i_ = a?.Patient;
+            CodeableConcept? j_ = a?.Type;
+            SupplyDelivery.SuppliedItemComponent? k_ = a?.SuppliedItem;
+            DataType? l_ = a?.Occurrence;
+            ResourceReference? m_ = a?.Supplier;
+            ResourceReference? n_ = a?.Destination;
+            List<ResourceReference?>? o_ = a?.Receiver;
+            SupplyDelivery? p_ = new SupplyDelivery
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
@@ -6600,36 +6602,36 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return p_;
         }
 
-        IEnumerable<SupplyDelivery> c_ = context.Operators.SelectDistinct<SupplyDelivery, SupplyDelivery>((IEnumerable<SupplyDelivery>)a_, b_);
-        SupplyDelivery d_ = context.Operators.SingletonFrom<SupplyDelivery>(c_);
+        IEnumerable<SupplyDelivery?>? c_ = context.Operators.SelectDistinct<SupplyDelivery, SupplyDelivery>((IEnumerable<SupplyDelivery>)a_, b_);
+        SupplyDelivery? d_ = context.Operators.SingletonFrom<SupplyDelivery>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("SupplyRequestResource")]
-    public SupplyRequest SupplyRequestResource(CqlContext context, SupplyRequest arg)
+    public SupplyRequest? SupplyRequestResource(CqlContext context, SupplyRequest? arg)
     {
-        SupplyRequest[] a_ = [
+        SupplyRequest?[]? a_ = [
             arg,
         ];
 
-        SupplyRequest b_(SupplyRequest a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<SupplyRequest.SupplyRequestStatus> f_ = a?.StatusElement;
-            CodeableConcept g_ = a?.Category;
-            Code<RequestPriority> h_ = a?.PriorityElement;
-            DataType i_ = a?.Item;
-            Quantity j_ = a?.Quantity;
-            List<SupplyRequest.ParameterComponent> k_ = a?.Parameter;
-            DataType l_ = a?.Occurrence;
-            FhirDateTime m_ = a?.AuthoredOnElement;
-            ResourceReference n_ = a?.Requester;
-            List<ResourceReference> o_ = a?.Supplier;
-            List<CodeableConcept> p_ = a?.ReasonCode;
-            List<ResourceReference> q_ = a?.ReasonReference;
-            ResourceReference r_ = a?.DeliverFrom;
-            ResourceReference s_ = a?.DeliverTo;
-            SupplyRequest t_ = new SupplyRequest
+        SupplyRequest? b_(SupplyRequest? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<SupplyRequest.SupplyRequestStatus>? f_ = a?.StatusElement;
+            CodeableConcept? g_ = a?.Category;
+            Code<RequestPriority>? h_ = a?.PriorityElement;
+            DataType? i_ = a?.Item;
+            Quantity? j_ = a?.Quantity;
+            List<SupplyRequest.ParameterComponent?>? k_ = a?.Parameter;
+            DataType? l_ = a?.Occurrence;
+            FhirDateTime? m_ = a?.AuthoredOnElement;
+            ResourceReference? n_ = a?.Requester;
+            List<ResourceReference?>? o_ = a?.Supplier;
+            List<CodeableConcept?>? p_ = a?.ReasonCode;
+            List<ResourceReference?>? q_ = a?.ReasonReference;
+            ResourceReference? r_ = a?.DeliverFrom;
+            ResourceReference? s_ = a?.DeliverTo;
+            SupplyRequest? t_ = new SupplyRequest
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -6650,52 +6652,52 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return t_;
         }
 
-        IEnumerable<SupplyRequest> c_ = context.Operators.SelectDistinct<SupplyRequest, SupplyRequest>((IEnumerable<SupplyRequest>)a_, b_);
-        SupplyRequest d_ = context.Operators.SingletonFrom<SupplyRequest>(c_);
+        IEnumerable<SupplyRequest?>? c_ = context.Operators.SelectDistinct<SupplyRequest, SupplyRequest>((IEnumerable<SupplyRequest>)a_, b_);
+        SupplyRequest? d_ = context.Operators.SingletonFrom<SupplyRequest>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("TaskResource")]
-    public Task TaskResource(CqlContext context, Task arg)
+    public Task? TaskResource(CqlContext context, Task? arg)
     {
-        Task[] a_ = [
+        Task?[]? a_ = [
             arg,
         ];
 
-        Task b_(Task a) {
-            List<Identifier> e_ = a?.Identifier;
-            Canonical f_ = a?.InstantiatesCanonicalElement;
-            FhirUri g_ = a?.InstantiatesUriElement;
-            List<ResourceReference> h_ = a?.BasedOn;
-            Identifier i_ = a?.GroupIdentifier;
-            List<ResourceReference> j_ = a?.PartOf;
-            Code<Task.TaskStatus> k_ = a?.StatusElement;
-            CodeableConcept l_ = a?.StatusReason;
-            CodeableConcept m_ = a?.BusinessStatus;
-            Code<Task.TaskIntent> n_ = a?.IntentElement;
-            Code<RequestPriority> o_ = a?.PriorityElement;
-            CodeableConcept p_ = a?.Code;
-            FhirString q_ = a?.DescriptionElement;
-            ResourceReference r_ = a?.Focus;
-            ResourceReference s_ = a?.For;
-            ResourceReference t_ = a?.Encounter;
-            Period u_ = a?.ExecutionPeriod;
-            FhirDateTime v_ = a?.AuthoredOnElement;
-            FhirDateTime w_ = a?.LastModifiedElement;
-            ResourceReference x_ = a?.Requester;
-            List<CodeableConcept> y_ = a?.PerformerType;
-            ResourceReference z_ = a?.Owner;
-            ResourceReference aa_ = a?.Location;
-            CodeableConcept ab_ = a?.ReasonCode;
-            ResourceReference ac_ = a?.ReasonReference;
-            List<ResourceReference> ad_ = a?.Insurance;
-            List<Annotation> ae_ = a?.Note;
-            List<ResourceReference> af_ = a?.RelevantHistory;
-            Task.RestrictionComponent ag_ = a?.Restriction;
-            List<Task.ParameterComponent> ah_ = a?.Input;
-            List<Task.OutputComponent> ai_ = a?.Output;
-            Task aj_ = new Task
+        Task? b_(Task? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Canonical? f_ = a?.InstantiatesCanonicalElement;
+            FhirUri? g_ = a?.InstantiatesUriElement;
+            List<ResourceReference?>? h_ = a?.BasedOn;
+            Identifier? i_ = a?.GroupIdentifier;
+            List<ResourceReference?>? j_ = a?.PartOf;
+            Code<Task.TaskStatus>? k_ = a?.StatusElement;
+            CodeableConcept? l_ = a?.StatusReason;
+            CodeableConcept? m_ = a?.BusinessStatus;
+            Code<Task.TaskIntent>? n_ = a?.IntentElement;
+            Code<RequestPriority>? o_ = a?.PriorityElement;
+            CodeableConcept? p_ = a?.Code;
+            FhirString? q_ = a?.DescriptionElement;
+            ResourceReference? r_ = a?.Focus;
+            ResourceReference? s_ = a?.For;
+            ResourceReference? t_ = a?.Encounter;
+            Period? u_ = a?.ExecutionPeriod;
+            FhirDateTime? v_ = a?.AuthoredOnElement;
+            FhirDateTime? w_ = a?.LastModifiedElement;
+            ResourceReference? x_ = a?.Requester;
+            List<CodeableConcept?>? y_ = a?.PerformerType;
+            ResourceReference? z_ = a?.Owner;
+            ResourceReference? aa_ = a?.Location;
+            CodeableConcept? ab_ = a?.ReasonCode;
+            ResourceReference? ac_ = a?.ReasonReference;
+            List<ResourceReference?>? ad_ = a?.Insurance;
+            List<Annotation?>? ae_ = a?.Note;
+            List<ResourceReference?>? af_ = a?.RelevantHistory;
+            Task.RestrictionComponent? ag_ = a?.Restriction;
+            List<Task.ParameterComponent?>? ah_ = a?.Input;
+            List<Task.OutputComponent?>? ai_ = a?.Output;
+            Task? aj_ = new Task
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 InstantiatesCanonicalElement = f_,
@@ -6732,45 +6734,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return aj_;
         }
 
-        IEnumerable<Task> c_ = context.Operators.SelectDistinct<Task, Task>((IEnumerable<Task>)a_, b_);
-        Task d_ = context.Operators.SingletonFrom<Task>(c_);
+        IEnumerable<Task?>? c_ = context.Operators.SelectDistinct<Task, Task>((IEnumerable<Task>)a_, b_);
+        Task? d_ = context.Operators.SingletonFrom<Task>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("TerminologyCapabilitiesResource")]
-    public TerminologyCapabilities TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities arg)
+    public TerminologyCapabilities? TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities? arg)
     {
-        TerminologyCapabilities[] a_ = [
+        TerminologyCapabilities?[]? a_ = [
             arg,
         ];
 
-        TerminologyCapabilities b_(TerminologyCapabilities a) {
-            FhirUri e_ = a?.UrlElement;
-            FhirString f_ = a?.VersionElement;
-            FhirString g_ = a?.NameElement;
-            FhirString h_ = a?.TitleElement;
-            Code<PublicationStatus> i_ = a?.StatusElement;
-            FhirBoolean j_ = a?.ExperimentalElement;
-            FhirDateTime k_ = a?.DateElement;
-            FhirString l_ = a?.PublisherElement;
-            List<ContactDetail> m_ = a?.Contact;
-            Markdown n_ = a?.DescriptionElement;
-            List<UsageContext> o_ = a?.UseContext;
-            List<CodeableConcept> p_ = a?.Jurisdiction;
-            Markdown q_ = a?.PurposeElement;
-            Markdown r_ = a?.CopyrightElement;
-            Code<CapabilityStatementKind> s_ = a?.KindElement;
-            TerminologyCapabilities.SoftwareComponent t_ = a?.Software;
-            TerminologyCapabilities.ImplementationComponent u_ = a?.Implementation;
-            FhirBoolean v_ = a?.LockedDateElement;
-            List<TerminologyCapabilities.CodeSystemComponent> w_ = a?.CodeSystem;
-            TerminologyCapabilities.ExpansionComponent x_ = a?.Expansion;
-            Code<TerminologyCapabilities.CodeSearchSupport> y_ = a?.CodeSearchElement;
-            TerminologyCapabilities.ValidateCodeComponent z_ = a?.ValidateCode;
-            TerminologyCapabilities.TranslationComponent aa_ = a?.Translation;
-            TerminologyCapabilities.ClosureComponent ab_ = a?.Closure;
-            TerminologyCapabilities ac_ = new TerminologyCapabilities
+        TerminologyCapabilities? b_(TerminologyCapabilities? a) {
+            FhirUri? e_ = a?.UrlElement;
+            FhirString? f_ = a?.VersionElement;
+            FhirString? g_ = a?.NameElement;
+            FhirString? h_ = a?.TitleElement;
+            Code<PublicationStatus>? i_ = a?.StatusElement;
+            FhirBoolean? j_ = a?.ExperimentalElement;
+            FhirDateTime? k_ = a?.DateElement;
+            FhirString? l_ = a?.PublisherElement;
+            List<ContactDetail?>? m_ = a?.Contact;
+            Markdown? n_ = a?.DescriptionElement;
+            List<UsageContext?>? o_ = a?.UseContext;
+            List<CodeableConcept?>? p_ = a?.Jurisdiction;
+            Markdown? q_ = a?.PurposeElement;
+            Markdown? r_ = a?.CopyrightElement;
+            Code<CapabilityStatementKind>? s_ = a?.KindElement;
+            TerminologyCapabilities.SoftwareComponent? t_ = a?.Software;
+            TerminologyCapabilities.ImplementationComponent? u_ = a?.Implementation;
+            FhirBoolean? v_ = a?.LockedDateElement;
+            List<TerminologyCapabilities.CodeSystemComponent?>? w_ = a?.CodeSystem;
+            TerminologyCapabilities.ExpansionComponent? x_ = a?.Expansion;
+            Code<TerminologyCapabilities.CodeSearchSupport>? y_ = a?.CodeSearchElement;
+            TerminologyCapabilities.ValidateCodeComponent? z_ = a?.ValidateCode;
+            TerminologyCapabilities.TranslationComponent? aa_ = a?.Translation;
+            TerminologyCapabilities.ClosureComponent? ab_ = a?.Closure;
+            TerminologyCapabilities? ac_ = new TerminologyCapabilities
             {
                 UrlElement = e_,
                 VersionElement = f_,
@@ -6800,33 +6802,33 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<TerminologyCapabilities> c_ = context.Operators.SelectDistinct<TerminologyCapabilities, TerminologyCapabilities>((IEnumerable<TerminologyCapabilities>)a_, b_);
-        TerminologyCapabilities d_ = context.Operators.SingletonFrom<TerminologyCapabilities>(c_);
+        IEnumerable<TerminologyCapabilities?>? c_ = context.Operators.SelectDistinct<TerminologyCapabilities, TerminologyCapabilities>((IEnumerable<TerminologyCapabilities>)a_, b_);
+        TerminologyCapabilities? d_ = context.Operators.SingletonFrom<TerminologyCapabilities>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("TestReportResource")]
-    public TestReport TestReportResource(CqlContext context, TestReport arg)
+    public TestReport? TestReportResource(CqlContext context, TestReport? arg)
     {
-        TestReport[] a_ = [
+        TestReport?[]? a_ = [
             arg,
         ];
 
-        TestReport b_(TestReport a) {
-            Identifier e_ = a?.Identifier;
-            FhirString f_ = a?.NameElement;
-            Code<TestReport.TestReportStatus> g_ = a?.StatusElement;
-            ResourceReference h_ = a?.TestScript;
-            Code<TestReport.TestReportResult> i_ = a?.ResultElement;
-            FhirDecimal j_ = a?.ScoreElement;
-            FhirString k_ = a?.TesterElement;
-            FhirDateTime l_ = a?.IssuedElement;
-            List<TestReport.ParticipantComponent> m_ = a?.Participant;
-            TestReport.SetupComponent n_ = a?.Setup;
-            List<TestReport.TestComponent> o_ = a?.Test;
-            TestReport.TeardownComponent p_ = a?.Teardown;
-            TestReport q_ = new TestReport
+        TestReport? b_(TestReport? a) {
+            Identifier? e_ = a?.Identifier;
+            FhirString? f_ = a?.NameElement;
+            Code<TestReport.TestReportStatus>? g_ = a?.StatusElement;
+            ResourceReference? h_ = a?.TestScript;
+            Code<TestReport.TestReportResult>? i_ = a?.ResultElement;
+            FhirDecimal? j_ = a?.ScoreElement;
+            FhirString? k_ = a?.TesterElement;
+            FhirDateTime? l_ = a?.IssuedElement;
+            List<TestReport.ParticipantComponent?>? m_ = a?.Participant;
+            TestReport.SetupComponent? n_ = a?.Setup;
+            List<TestReport.TestComponent?>? o_ = a?.Test;
+            TestReport.TeardownComponent? p_ = a?.Teardown;
+            TestReport? q_ = new TestReport
             {
                 Identifier = e_,
                 NameElement = f_,
@@ -6844,45 +6846,45 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return q_;
         }
 
-        IEnumerable<TestReport> c_ = context.Operators.SelectDistinct<TestReport, TestReport>((IEnumerable<TestReport>)a_, b_);
-        TestReport d_ = context.Operators.SingletonFrom<TestReport>(c_);
+        IEnumerable<TestReport?>? c_ = context.Operators.SelectDistinct<TestReport, TestReport>((IEnumerable<TestReport>)a_, b_);
+        TestReport? d_ = context.Operators.SingletonFrom<TestReport>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("TestScriptResource")]
-    public TestScript TestScriptResource(CqlContext context, TestScript arg)
+    public TestScript? TestScriptResource(CqlContext context, TestScript? arg)
     {
-        TestScript[] a_ = [
+        TestScript?[]? a_ = [
             arg,
         ];
 
-        TestScript b_(TestScript a) {
-            FhirUri e_ = a?.UrlElement;
-            Identifier f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            Markdown r_ = a?.PurposeElement;
-            Markdown s_ = a?.CopyrightElement;
-            List<TestScript.OriginComponent> t_ = a?.Origin;
-            List<TestScript.DestinationComponent> u_ = a?.Destination;
-            TestScript.MetadataComponent v_ = a?.Metadata;
-            List<TestScript.FixtureComponent> w_ = a?.Fixture;
-            List<ResourceReference> x_ = a?.Profile;
-            List<TestScript.VariableComponent> y_ = a?.Variable;
-            TestScript.SetupComponent z_ = a?.Setup;
-            List<TestScript.TestComponent> aa_ = a?.Test;
-            TestScript.TeardownComponent ab_ = a?.Teardown;
-            TestScript ac_ = new TestScript
+        TestScript? b_(TestScript? a) {
+            FhirUri? e_ = a?.UrlElement;
+            Identifier? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            Markdown? r_ = a?.PurposeElement;
+            Markdown? s_ = a?.CopyrightElement;
+            List<TestScript.OriginComponent?>? t_ = a?.Origin;
+            List<TestScript.DestinationComponent?>? u_ = a?.Destination;
+            TestScript.MetadataComponent? v_ = a?.Metadata;
+            List<TestScript.FixtureComponent?>? w_ = a?.Fixture;
+            List<ResourceReference?>? x_ = a?.Profile;
+            List<TestScript.VariableComponent?>? y_ = a?.Variable;
+            TestScript.SetupComponent? z_ = a?.Setup;
+            List<TestScript.TestComponent?>? aa_ = a?.Test;
+            TestScript.TeardownComponent? ab_ = a?.Teardown;
+            TestScript? ac_ = new TestScript
             {
                 UrlElement = e_,
                 Identifier = f_,
@@ -6912,39 +6914,39 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return ac_;
         }
 
-        IEnumerable<TestScript> c_ = context.Operators.SelectDistinct<TestScript, TestScript>((IEnumerable<TestScript>)a_, b_);
-        TestScript d_ = context.Operators.SingletonFrom<TestScript>(c_);
+        IEnumerable<TestScript?>? c_ = context.Operators.SelectDistinct<TestScript, TestScript>((IEnumerable<TestScript>)a_, b_);
+        TestScript? d_ = context.Operators.SingletonFrom<TestScript>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("ValueSetResource")]
-    public ValueSet ValueSetResource(CqlContext context, ValueSet arg)
+    public ValueSet? ValueSetResource(CqlContext context, ValueSet? arg)
     {
-        ValueSet[] a_ = [
+        ValueSet?[]? a_ = [
             arg,
         ];
 
-        ValueSet b_(ValueSet a) {
-            FhirUri e_ = a?.UrlElement;
-            List<Identifier> f_ = a?.Identifier;
-            FhirString g_ = a?.VersionElement;
-            FhirString h_ = a?.NameElement;
-            FhirString i_ = a?.TitleElement;
-            Code<PublicationStatus> j_ = a?.StatusElement;
-            FhirBoolean k_ = a?.ExperimentalElement;
-            FhirDateTime l_ = a?.DateElement;
-            FhirString m_ = a?.PublisherElement;
-            List<ContactDetail> n_ = a?.Contact;
-            Markdown o_ = a?.DescriptionElement;
-            List<UsageContext> p_ = a?.UseContext;
-            List<CodeableConcept> q_ = a?.Jurisdiction;
-            FhirBoolean r_ = a?.ImmutableElement;
-            Markdown s_ = a?.PurposeElement;
-            Markdown t_ = a?.CopyrightElement;
-            ValueSet.ComposeComponent u_ = a?.Compose;
-            ValueSet.ExpansionComponent v_ = a?.Expansion;
-            ValueSet w_ = new ValueSet
+        ValueSet? b_(ValueSet? a) {
+            FhirUri? e_ = a?.UrlElement;
+            List<Identifier?>? f_ = a?.Identifier;
+            FhirString? g_ = a?.VersionElement;
+            FhirString? h_ = a?.NameElement;
+            FhirString? i_ = a?.TitleElement;
+            Code<PublicationStatus>? j_ = a?.StatusElement;
+            FhirBoolean? k_ = a?.ExperimentalElement;
+            FhirDateTime? l_ = a?.DateElement;
+            FhirString? m_ = a?.PublisherElement;
+            List<ContactDetail?>? n_ = a?.Contact;
+            Markdown? o_ = a?.DescriptionElement;
+            List<UsageContext?>? p_ = a?.UseContext;
+            List<CodeableConcept?>? q_ = a?.Jurisdiction;
+            FhirBoolean? r_ = a?.ImmutableElement;
+            Markdown? s_ = a?.PurposeElement;
+            Markdown? t_ = a?.CopyrightElement;
+            ValueSet.ComposeComponent? u_ = a?.Compose;
+            ValueSet.ExpansionComponent? v_ = a?.Expansion;
+            ValueSet? w_ = new ValueSet
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -6968,35 +6970,35 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return w_;
         }
 
-        IEnumerable<ValueSet> c_ = context.Operators.SelectDistinct<ValueSet, ValueSet>((IEnumerable<ValueSet>)a_, b_);
-        ValueSet d_ = context.Operators.SingletonFrom<ValueSet>(c_);
+        IEnumerable<ValueSet?>? c_ = context.Operators.SelectDistinct<ValueSet, ValueSet>((IEnumerable<ValueSet>)a_, b_);
+        ValueSet? d_ = context.Operators.SingletonFrom<ValueSet>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("VerificationResultResource")]
-    public VerificationResult VerificationResultResource(CqlContext context, VerificationResult arg)
+    public VerificationResult? VerificationResultResource(CqlContext context, VerificationResult? arg)
     {
-        VerificationResult[] a_ = [
+        VerificationResult?[]? a_ = [
             arg,
         ];
 
-        VerificationResult b_(VerificationResult a) {
-            List<ResourceReference> e_ = a?.Target;
-            List<FhirString> f_ = a?.TargetLocationElement;
-            CodeableConcept g_ = a?.Need;
-            Code<VerificationResult.StatusCode> h_ = a?.StatusElement;
-            FhirDateTime i_ = a?.StatusDateElement;
-            CodeableConcept j_ = a?.ValidationType;
-            List<CodeableConcept> k_ = a?.ValidationProcess;
-            Timing l_ = a?.Frequency;
-            FhirDateTime m_ = a?.LastPerformedElement;
-            Date n_ = a?.NextScheduledElement;
-            CodeableConcept o_ = a?.FailureAction;
-            List<VerificationResult.PrimarySourceComponent> p_ = a?.PrimarySource;
-            VerificationResult.AttestationComponent q_ = a?.Attestation;
-            List<VerificationResult.ValidatorComponent> r_ = a?.Validator;
-            VerificationResult s_ = new VerificationResult
+        VerificationResult? b_(VerificationResult? a) {
+            List<ResourceReference?>? e_ = a?.Target;
+            List<FhirString?>? f_ = a?.TargetLocationElement;
+            CodeableConcept? g_ = a?.Need;
+            Code<VerificationResult.StatusCode>? h_ = a?.StatusElement;
+            FhirDateTime? i_ = a?.StatusDateElement;
+            CodeableConcept? j_ = a?.ValidationType;
+            List<CodeableConcept?>? k_ = a?.ValidationProcess;
+            Timing? l_ = a?.Frequency;
+            FhirDateTime? m_ = a?.LastPerformedElement;
+            Date? n_ = a?.NextScheduledElement;
+            CodeableConcept? o_ = a?.FailureAction;
+            List<VerificationResult.PrimarySourceComponent?>? p_ = a?.PrimarySource;
+            VerificationResult.AttestationComponent? q_ = a?.Attestation;
+            List<VerificationResult.ValidatorComponent?>? r_ = a?.Validator;
+            VerificationResult? s_ = new VerificationResult
             {
                 Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
                 TargetLocationElement = new List<FhirString>((IEnumerable<FhirString>)f_),
@@ -7016,29 +7018,29 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return s_;
         }
 
-        IEnumerable<VerificationResult> c_ = context.Operators.SelectDistinct<VerificationResult, VerificationResult>((IEnumerable<VerificationResult>)a_, b_);
-        VerificationResult d_ = context.Operators.SingletonFrom<VerificationResult>(c_);
+        IEnumerable<VerificationResult?>? c_ = context.Operators.SelectDistinct<VerificationResult, VerificationResult>((IEnumerable<VerificationResult>)a_, b_);
+        VerificationResult? d_ = context.Operators.SingletonFrom<VerificationResult>(c_);
         return d_;
     }
 
 
     [CqlFunctionDefinition("VisionPrescriptionResource")]
-    public VisionPrescription VisionPrescriptionResource(CqlContext context, VisionPrescription arg)
+    public VisionPrescription? VisionPrescriptionResource(CqlContext context, VisionPrescription? arg)
     {
-        VisionPrescription[] a_ = [
+        VisionPrescription?[]? a_ = [
             arg,
         ];
 
-        VisionPrescription b_(VisionPrescription a) {
-            List<Identifier> e_ = a?.Identifier;
-            Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
-            FhirDateTime g_ = a?.CreatedElement;
-            ResourceReference h_ = a?.Patient;
-            ResourceReference i_ = a?.Encounter;
-            FhirDateTime j_ = a?.DateWrittenElement;
-            ResourceReference k_ = a?.Prescriber;
-            List<VisionPrescription.LensSpecificationComponent> l_ = a?.LensSpecification;
-            VisionPrescription m_ = new VisionPrescription
+        VisionPrescription? b_(VisionPrescription? a) {
+            List<Identifier?>? e_ = a?.Identifier;
+            Code<FinancialResourceStatusCodes>? f_ = a?.StatusElement;
+            FhirDateTime? g_ = a?.CreatedElement;
+            ResourceReference? h_ = a?.Patient;
+            ResourceReference? i_ = a?.Encounter;
+            FhirDateTime? j_ = a?.DateWrittenElement;
+            ResourceReference? k_ = a?.Prescriber;
+            List<VisionPrescription.LensSpecificationComponent?>? l_ = a?.LensSpecification;
+            VisionPrescription? m_ = new VisionPrescription
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -7052,8 +7054,8 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             return m_;
         }
 
-        IEnumerable<VisionPrescription> c_ = context.Operators.SelectDistinct<VisionPrescription, VisionPrescription>((IEnumerable<VisionPrescription>)a_, b_);
-        VisionPrescription d_ = context.Operators.SingletonFrom<VisionPrescription>(c_);
+        IEnumerable<VisionPrescription?>? c_ = context.Operators.SelectDistinct<VisionPrescription, VisionPrescription>((IEnumerable<VisionPrescription>)a_, b_);
+        VisionPrescription? d_ = context.Operators.SingletonFrom<VisionPrescription>(c_);
         return d_;
     }
 

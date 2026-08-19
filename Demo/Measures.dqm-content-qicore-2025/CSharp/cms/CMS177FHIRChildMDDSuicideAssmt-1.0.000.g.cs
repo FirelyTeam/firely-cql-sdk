@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,63 +14,63 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
     #region ValueSets (9)
 
     [CqlValueSetDefinition("Group Psychotherapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187", valueSetVersion: null)]
-    public CqlValueSet Group_Psychotherapy(CqlContext _) => _Group_Psychotherapy;
-    private static readonly CqlValueSet _Group_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187", null);
+    public CqlValueSet? Group_Psychotherapy(CqlContext _) => _Group_Psychotherapy;
+    private static readonly CqlValueSet? _Group_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187", null);
 
     [CqlValueSetDefinition("Major Depressive Disorder Active", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491", valueSetVersion: null)]
-    public CqlValueSet Major_Depressive_Disorder_Active(CqlContext _) => _Major_Depressive_Disorder_Active;
-    private static readonly CqlValueSet _Major_Depressive_Disorder_Active = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491", null);
+    public CqlValueSet? Major_Depressive_Disorder_Active(CqlContext _) => _Major_Depressive_Disorder_Active;
+    private static readonly CqlValueSet? _Major_Depressive_Disorder_Active = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491", null);
 
     [CqlValueSetDefinition("Office Visit", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", valueSetVersion: null)]
-    public CqlValueSet Office_Visit(CqlContext _) => _Office_Visit;
-    private static readonly CqlValueSet _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
+    public CqlValueSet? Office_Visit(CqlContext _) => _Office_Visit;
+    private static readonly CqlValueSet? _Office_Visit = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlValueSetDefinition("Outpatient Consultation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", valueSetVersion: null)]
-    public CqlValueSet Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
-    private static readonly CqlValueSet _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
+    public CqlValueSet? Outpatient_Consultation(CqlContext _) => _Outpatient_Consultation;
+    private static readonly CqlValueSet? _Outpatient_Consultation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", null);
 
     [CqlValueSetDefinition("Psych Visit Diagnostic Evaluation", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", valueSetVersion: null)]
-    public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext _) => _Psych_Visit_Diagnostic_Evaluation;
-    private static readonly CqlValueSet _Psych_Visit_Diagnostic_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", null);
+    public CqlValueSet? Psych_Visit_Diagnostic_Evaluation(CqlContext _) => _Psych_Visit_Diagnostic_Evaluation;
+    private static readonly CqlValueSet? _Psych_Visit_Diagnostic_Evaluation = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", null);
 
     [CqlValueSetDefinition("Psych Visit for Family Psychotherapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018", valueSetVersion: null)]
-    public CqlValueSet Psych_Visit_for_Family_Psychotherapy(CqlContext _) => _Psych_Visit_for_Family_Psychotherapy;
-    private static readonly CqlValueSet _Psych_Visit_for_Family_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018", null);
+    public CqlValueSet? Psych_Visit_for_Family_Psychotherapy(CqlContext _) => _Psych_Visit_for_Family_Psychotherapy;
+    private static readonly CqlValueSet? _Psych_Visit_for_Family_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018", null);
 
     [CqlValueSetDefinition("Psych Visit Psychotherapy", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", valueSetVersion: null)]
-    public CqlValueSet Psych_Visit_Psychotherapy(CqlContext _) => _Psych_Visit_Psychotherapy;
-    private static readonly CqlValueSet _Psych_Visit_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", null);
+    public CqlValueSet? Psych_Visit_Psychotherapy(CqlContext _) => _Psych_Visit_Psychotherapy;
+    private static readonly CqlValueSet? _Psych_Visit_Psychotherapy = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", null);
 
     [CqlValueSetDefinition("Psychoanalysis", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", valueSetVersion: null)]
-    public CqlValueSet Psychoanalysis(CqlContext _) => _Psychoanalysis;
-    private static readonly CqlValueSet _Psychoanalysis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", null);
+    public CqlValueSet? Psychoanalysis(CqlContext _) => _Psychoanalysis;
+    private static readonly CqlValueSet? _Psychoanalysis = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", null);
 
     [CqlValueSetDefinition("Telephone Visits", valueSetId: "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", valueSetVersion: null)]
-    public CqlValueSet Telephone_Visits(CqlContext _) => _Telephone_Visits;
-    private static readonly CqlValueSet _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
+    public CqlValueSet? Telephone_Visits(CqlContext _) => _Telephone_Visits;
+    private static readonly CqlValueSet? _Telephone_Visits = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     #endregion ValueSets
 
     #region Codes (1)
 
     [CqlCodeDefinition("Suicide risk assessment (procedure)", codeId: "225337009", codeSystem: "http://snomed.info/sct")]
-    public CqlCode Suicide_risk_assessment__procedure_(CqlContext _) => _Suicide_risk_assessment__procedure_;
-    private static readonly CqlCode _Suicide_risk_assessment__procedure_ = new CqlCode("225337009", "http://snomed.info/sct");
+    public CqlCode? Suicide_risk_assessment__procedure_(CqlContext _) => _Suicide_risk_assessment__procedure_;
+    private static readonly CqlCode? _Suicide_risk_assessment__procedure_ = new CqlCode("225337009", "http://snomed.info/sct");
 
     #endregion Codes
 
     #region CodeSystems (1)
 
     [CqlCodeSystemDefinition("SNOMEDCT", codeSystemId: "http://snomed.info/sct", codeSystemVersion: null)]
-    public CqlCodeSystem SNOMEDCT(CqlContext _) => _SNOMEDCT;
-    private static readonly CqlCodeSystem _SNOMEDCT =
+    public CqlCodeSystem? SNOMEDCT(CqlContext _) => _SNOMEDCT;
+    private static readonly CqlCodeSystem? _SNOMEDCT =
       new CqlCodeSystem("http://snomed.info/sct", null, [
           _Suicide_risk_assessment__procedure_]);
 
@@ -77,17 +79,17 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+    public CqlInterval<CqlDateTime?>? Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private const long _cacheIndex_Measurement_Period = 8755168546983360421L;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-        object d_ = context.ResolveParameter("CMS177FHIRChildMDDSuicideAssmt-1.0.000", "Measurement Period", c_);
+        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
+        object? d_ = context.ResolveParameter("CMS177FHIRChildMDDSuicideAssmt-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime>)d_;
     }
 
@@ -97,15 +99,15 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
     #region Functions and Expressions (13)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context) =>
+    public Patient? Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = 5323727449356102700L;
 
-    private Patient Patient_Compute(CqlContext context)
+    private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient>(a_);
         return b_;
     }
 
@@ -124,14 +126,14 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = -7256827302783747340L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
@@ -150,184 +152,184 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("SDE Sex")]
-    public CqlCode SDE_Sex(CqlContext context) =>
+    public CqlCode? SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private const long _cacheIndex_SDE_Sex = 8732306134938989179L;
 
-    private CqlCode SDE_Sex_Compute(CqlContext context)
+    private CqlCode? SDE_Sex_Compute(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+        CqlCode? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("Encounter With Condition Major Depressive Disorder")]
-    public IEnumerable<Encounter> Encounter_With_Condition_Major_Depressive_Disorder(CqlContext context) =>
+    public IEnumerable<Encounter?>? Encounter_With_Condition_Major_Depressive_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Condition_Major_Depressive_Disorder, Encounter_With_Condition_Major_Depressive_Disorder_Compute);
 
     private const long _cacheIndex_Encounter_With_Condition_Major_Depressive_Disorder = 8107967900919985246L;
 
-    private IEnumerable<Encounter> Encounter_With_Condition_Major_Depressive_Disorder_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Encounter_With_Condition_Major_Depressive_Disorder_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Office_Visit(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet c_ = this.Outpatient_Consultation(context);
-        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-        CqlValueSet f_ = this.Psych_Visit_Diagnostic_Evaluation(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet h_ = this.Psych_Visit_for_Family_Psychotherapy(context);
-        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Psych_Visit_Psychotherapy(context);
-        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet n_ = this.Psychoanalysis(context);
-        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-        CqlValueSet r_ = this.Group_Psychotherapy(context);
-        IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet t_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
-        IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+        CqlValueSet? a_ = this.Office_Visit(context);
+        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? c_ = this.Outpatient_Consultation(context);
+        IEnumerable<Encounter?>? d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? e_ = context.Operators.Union<Encounter>(b_, d_);
+        CqlValueSet? f_ = this.Psych_Visit_Diagnostic_Evaluation(context);
+        IEnumerable<Encounter?>? g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? h_ = this.Psych_Visit_for_Family_Psychotherapy(context);
+        IEnumerable<Encounter?>? i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? j_ = context.Operators.Union<Encounter>(g_, i_);
+        IEnumerable<Encounter?>? k_ = context.Operators.Union<Encounter>(e_, j_);
+        CqlValueSet? l_ = this.Psych_Visit_Psychotherapy(context);
+        IEnumerable<Encounter?>? m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? n_ = this.Psychoanalysis(context);
+        IEnumerable<Encounter?>? o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? p_ = context.Operators.Union<Encounter>(m_, o_);
+        IEnumerable<Encounter?>? q_ = context.Operators.Union<Encounter>(k_, p_);
+        CqlValueSet? r_ = this.Group_Psychotherapy(context);
+        IEnumerable<Encounter?>? s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? t_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter?>? u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? v_ = context.Operators.Union<Encounter>(s_, u_);
+        IEnumerable<Encounter?>? w_ = context.Operators.Union<Encounter>(q_, v_);
 
-        bool? x_(Encounter ValidEncounter) {
-            Code<Encounter.EncounterStatus> z_ = ValidEncounter?.StatusElement;
+        bool? x_(Encounter? ValidEncounter) {
+            Code<Encounter.EncounterStatus>? z_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? aa_ = z_?.Value;
-            Code<Encounter.EncounterStatus> ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
+            Code<Encounter.EncounterStatus>? ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
             bool? ac_ = context.Operators.Equal(ab_, "finished");
-            CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-            Period ae_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
+            CqlInterval<CqlDateTime?>? ad_ = this.Measurement_Period(context);
+            Period? ae_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime?>? af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
             bool? ag_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ad_, af_, "day");
             bool? ah_ = context.Operators.And(ac_, ag_);
-            CqlValueSet ai_ = this.Major_Depressive_Disorder_Active(context);
-            IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            CqlValueSet? ai_ = this.Major_Depressive_Disorder_Active(context);
+            IEnumerable<Condition?>? aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
-            bool? ak_(Condition MDDConditionProb) {
-                List<ResourceReference> as_ = ValidEncounter?.ReasonReference;
+            bool? ak_(Condition? MDDConditionProb) {
+                List<ResourceReference?>? as_ = ValidEncounter?.ReasonReference;
                 bool? at_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)as_, MDDConditionProb);
                 return at_;
             }
 
-            IEnumerable<Condition> al_ = context.Operators.Where<Condition>(aj_, ak_);
-            IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition?>? al_ = context.Operators.Where<Condition>(aj_, ak_);
+            IEnumerable<Condition?>? am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
 
-            bool? an_(Condition MDDEncDx) {
-                List<ResourceReference> au_ = ValidEncounter?.ReasonReference;
+            bool? an_(Condition? MDDEncDx) {
+                List<ResourceReference?>? au_ = ValidEncounter?.ReasonReference;
                 bool? av_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)au_, MDDEncDx);
                 return av_;
             }
 
-            IEnumerable<Condition> ao_ = context.Operators.Where<Condition>(am_, an_);
-            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(al_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
+            IEnumerable<Condition?>? ao_ = context.Operators.Where<Condition>(am_, an_);
+            IEnumerable<Condition?>? ap_ = context.Operators.Union<Condition>(al_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
             bool? aq_ = context.Operators.Exists<Condition>(ap_);
             bool? ar_ = context.Operators.And(ah_, aq_);
             return ar_;
         }
 
-        IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
+        IEnumerable<Encounter?>? y_ = context.Operators.Where<Encounter>(w_, x_);
         return y_;
     }
 
 
     [CqlExpressionDefinition("Encounter With Reason Major Depressive Disorder")]
-    public IEnumerable<Encounter> Encounter_With_Reason_Major_Depressive_Disorder(CqlContext context) =>
+    public IEnumerable<Encounter?>? Encounter_With_Reason_Major_Depressive_Disorder(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Reason_Major_Depressive_Disorder, Encounter_With_Reason_Major_Depressive_Disorder_Compute);
 
     private const long _cacheIndex_Encounter_With_Reason_Major_Depressive_Disorder = 720527832511942766L;
 
-    private IEnumerable<Encounter> Encounter_With_Reason_Major_Depressive_Disorder_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Encounter_With_Reason_Major_Depressive_Disorder_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Office_Visit(context);
-        IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet c_ = this.Outpatient_Consultation(context);
-        IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-        CqlValueSet f_ = this.Psych_Visit_Diagnostic_Evaluation(context);
-        IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet h_ = this.Psych_Visit_for_Family_Psychotherapy(context);
-        IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
-        IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-        CqlValueSet l_ = this.Psych_Visit_Psychotherapy(context);
-        IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet n_ = this.Psychoanalysis(context);
-        IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
-        IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
-        CqlValueSet r_ = this.Group_Psychotherapy(context);
-        IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        CqlValueSet t_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
-        IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
+        CqlValueSet? a_ = this.Office_Visit(context);
+        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? c_ = this.Outpatient_Consultation(context);
+        IEnumerable<Encounter?>? d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? e_ = context.Operators.Union<Encounter>(b_, d_);
+        CqlValueSet? f_ = this.Psych_Visit_Diagnostic_Evaluation(context);
+        IEnumerable<Encounter?>? g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? h_ = this.Psych_Visit_for_Family_Psychotherapy(context);
+        IEnumerable<Encounter?>? i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? j_ = context.Operators.Union<Encounter>(g_, i_);
+        IEnumerable<Encounter?>? k_ = context.Operators.Union<Encounter>(e_, j_);
+        CqlValueSet? l_ = this.Psych_Visit_Psychotherapy(context);
+        IEnumerable<Encounter?>? m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? n_ = this.Psychoanalysis(context);
+        IEnumerable<Encounter?>? o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? p_ = context.Operators.Union<Encounter>(m_, o_);
+        IEnumerable<Encounter?>? q_ = context.Operators.Union<Encounter>(k_, p_);
+        CqlValueSet? r_ = this.Group_Psychotherapy(context);
+        IEnumerable<Encounter?>? s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        CqlValueSet? t_ = this.Telephone_Visits(context);
+        IEnumerable<Encounter?>? u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? v_ = context.Operators.Union<Encounter>(s_, u_);
+        IEnumerable<Encounter?>? w_ = context.Operators.Union<Encounter>(q_, v_);
 
-        bool? x_(Encounter ValidEncounter) {
-            Code<Encounter.EncounterStatus> z_ = ValidEncounter?.StatusElement;
+        bool? x_(Encounter? ValidEncounter) {
+            Code<Encounter.EncounterStatus>? z_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? aa_ = z_?.Value;
-            Code<Encounter.EncounterStatus> ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
+            Code<Encounter.EncounterStatus>? ab_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(aa_);
             bool? ac_ = context.Operators.Equal(ab_, "finished");
-            CqlInterval<CqlDateTime> ad_ = this.Measurement_Period(context);
-            Period ae_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
+            CqlInterval<CqlDateTime?>? ad_ = this.Measurement_Period(context);
+            Period? ae_ = ValidEncounter?.Period;
+            CqlInterval<CqlDateTime?>? af_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ae_);
             bool? ag_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ad_, af_, "day");
             bool? ah_ = context.Operators.And(ac_, ag_);
-            List<CodeableConcept> ai_ = ValidEncounter?.ReasonCode;
+            List<CodeableConcept?>? ai_ = ValidEncounter?.ReasonCode;
 
-            CqlConcept aj_(CodeableConcept @this) {
-                CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+            CqlConcept? aj_(CodeableConcept? @this) {
+                CqlConcept? ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
                 return ao_;
             }
 
-            IEnumerable<CqlConcept> ak_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ai_, aj_);
-            CqlValueSet al_ = this.Major_Depressive_Disorder_Active(context);
+            IEnumerable<CqlConcept?>? ak_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)ai_, aj_);
+            CqlValueSet? al_ = this.Major_Depressive_Disorder_Active(context);
             bool? am_ = context.Operators.ConceptsInValueSet(ak_, al_);
             bool? an_ = context.Operators.And(ah_, am_);
             return an_;
         }
 
-        IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
+        IEnumerable<Encounter?>? y_ = context.Operators.Where<Encounter>(w_, x_);
         return y_;
     }
 
 
     [CqlExpressionDefinition("Major Depressive Disorder Encounter")]
-    public IEnumerable<Encounter> Major_Depressive_Disorder_Encounter(CqlContext context) =>
+    public IEnumerable<Encounter?>? Major_Depressive_Disorder_Encounter(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Major_Depressive_Disorder_Encounter, Major_Depressive_Disorder_Encounter_Compute);
 
     private const long _cacheIndex_Major_Depressive_Disorder_Encounter = 3689749010899809839L;
 
-    private IEnumerable<Encounter> Major_Depressive_Disorder_Encounter_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Major_Depressive_Disorder_Encounter_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Condition_Major_Depressive_Disorder(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Reason_Major_Depressive_Disorder(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+        IEnumerable<Encounter?>? a_ = this.Encounter_With_Condition_Major_Depressive_Disorder(context);
+        IEnumerable<Encounter?>? b_ = this.Encounter_With_Reason_Major_Depressive_Disorder(context);
+        IEnumerable<Encounter?>? c_ = context.Operators.Union<Encounter>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Initial Population")]
-    public IEnumerable<Encounter> Initial_Population(CqlContext context) =>
+    public IEnumerable<Encounter?>? Initial_Population(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Initial_Population, Initial_Population_Compute);
 
     private const long _cacheIndex_Initial_Population = 7797060179689319226L;
 
-    private IEnumerable<Encounter> Initial_Population_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Initial_Population_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
+        IEnumerable<Encounter?>? a_ = this.Major_Depressive_Disorder_Encounter(context);
 
-        bool? b_(Encounter MDDEncounter) {
-            Patient d_ = this.Patient(context);
-            Date e_ = d_?.BirthDateElement;
-            string f_ = e_?.Value;
-            CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-            CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            CqlDate j_ = context.Operators.DateFrom(i_);
+        bool? b_(Encounter? MDDEncounter) {
+            Patient? d_ = this.Patient(context);
+            Date? e_ = d_?.BirthDateElement;
+            string? f_ = e_?.Value;
+            CqlDate? g_ = context.Operators.ConvertStringToDate(f_);
+            CqlInterval<CqlDateTime?>? h_ = this.Measurement_Period(context);
+            CqlDateTime? i_ = context.Operators.Start(h_);
+            CqlDate? j_ = context.Operators.DateFrom(i_);
             int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
             bool? l_ = context.Operators.GreaterOrEqual(k_, 6);
             bool? m_ = context.Operators.LessOrEqual(k_, 16);
@@ -335,87 +337,87 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             return n_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        IEnumerable<Encounter?>? c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Denominator")]
-    public IEnumerable<Encounter> Denominator(CqlContext context) =>
+    public IEnumerable<Encounter?>? Denominator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Denominator, Denominator_Compute);
 
     private const long _cacheIndex_Denominator = 572249356221058848L;
 
-    private IEnumerable<Encounter> Denominator_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Denominator_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Initial_Population(context);
+        IEnumerable<Encounter?>? a_ = this.Initial_Population(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("Encounter With Procedure For Suicide Risk Assessment")]
-    public IEnumerable<Encounter> Encounter_With_Procedure_For_Suicide_Risk_Assessment(CqlContext context) =>
+    public IEnumerable<Encounter?>? Encounter_With_Procedure_For_Suicide_Risk_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Procedure_For_Suicide_Risk_Assessment, Encounter_With_Procedure_For_Suicide_Risk_Assessment_Compute);
 
     private const long _cacheIndex_Encounter_With_Procedure_For_Suicide_Risk_Assessment = 4638551457840909626L;
 
-    private IEnumerable<Encounter> Encounter_With_Procedure_For_Suicide_Risk_Assessment_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Encounter_With_Procedure_For_Suicide_Risk_Assessment_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
+        IEnumerable<Encounter?>? a_ = this.Major_Depressive_Disorder_Encounter(context);
 
-        bool? b_(Encounter MDDEncounter) {
-            CqlCode d_ = this.Suicide_risk_assessment__procedure_(context);
-            IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-            IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        bool? b_(Encounter? MDDEncounter) {
+            CqlCode? d_ = this.Suicide_risk_assessment__procedure_(context);
+            IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode>(d_);
+            IEnumerable<Procedure?>? f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
-            bool? g_(Procedure SuicideRiskAssessmentProcedure) {
-                Code<EventStatus> i_ = SuicideRiskAssessmentProcedure?.StatusElement;
+            bool? g_(Procedure? SuicideRiskAssessmentProcedure) {
+                Code<EventStatus>? i_ = SuicideRiskAssessmentProcedure?.StatusElement;
                 EventStatus? j_ = i_?.Value;
-                string k_ = context.Operators.Convert<string>(j_);
+                string? k_ = context.Operators.Convert<string>(j_);
                 bool? l_ = context.Operators.Equal(k_, "completed");
-                Period m_ = MDDEncounter?.Period;
-                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-                object o_;
-                DataType s_ = SuicideRiskAssessmentProcedure?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                Period? m_ = MDDEncounter?.Period;
+                CqlInterval<CqlDateTime?>? n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                object? o_;
+                DataType? s_ = SuicideRiskAssessmentProcedure?.Performed;
+                object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                 bool u_ = t_ is CqlDateTime;
                 if (u_)
                 {
-                    DataType v_ = SuicideRiskAssessmentProcedure?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    DataType? v_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     o_ = w_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType x_ = SuicideRiskAssessmentProcedure?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    DataType? x_ = SuicideRiskAssessmentProcedure?.Performed;
+                    object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                     bool z_ = y_ is CqlQuantity;
                     if (z_)
                     {
-                        DataType aa_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        DataType? aa_ = SuicideRiskAssessmentProcedure?.Performed;
+                        object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         o_ = ab_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType ac_ = SuicideRiskAssessmentProcedure?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        DataType? ac_ = SuicideRiskAssessmentProcedure?.Performed;
+                        object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                         bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                         if (ae_)
                         {
-                            DataType af_ = SuicideRiskAssessmentProcedure?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                            DataType? af_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
                             o_ = ag_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType ah_ = SuicideRiskAssessmentProcedure?.Performed;
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            DataType? ah_ = SuicideRiskAssessmentProcedure?.Performed;
+                            object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
                             bool aj_ = ai_ is CqlInterval<CqlQuantity>;
                             if (aj_)
                             {
-                                DataType ak_ = SuicideRiskAssessmentProcedure?.Performed;
-                                object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                                DataType? ak_ = SuicideRiskAssessmentProcedure?.Performed;
+                                object? al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                                 o_ = al_ as CqlInterval<CqlQuantity>;
                             }
                             else
@@ -425,7 +427,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
                         }
                     }
                 }
-                CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
+                CqlInterval<CqlDateTime?>? p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
                 bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, p_, (string)default);
                 bool? r_ = context.Operators.And(l_, q_);
                 return r_;
@@ -435,39 +437,39 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             return h_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        IEnumerable<Encounter?>? c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Encounter With Observation For Suicide Risk Assessment")]
-    public IEnumerable<Encounter> Encounter_With_Observation_For_Suicide_Risk_Assessment(CqlContext context) =>
+    public IEnumerable<Encounter?>? Encounter_With_Observation_For_Suicide_Risk_Assessment(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Encounter_With_Observation_For_Suicide_Risk_Assessment, Encounter_With_Observation_For_Suicide_Risk_Assessment_Compute);
 
     private const long _cacheIndex_Encounter_With_Observation_For_Suicide_Risk_Assessment = -6020880057812522378L;
 
-    private IEnumerable<Encounter> Encounter_With_Observation_For_Suicide_Risk_Assessment_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Encounter_With_Observation_For_Suicide_Risk_Assessment_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Major_Depressive_Disorder_Encounter(context);
+        IEnumerable<Encounter?>? a_ = this.Major_Depressive_Disorder_Encounter(context);
 
-        bool? b_(Encounter MDDEncounter) {
-            CqlCode d_ = this.Suicide_risk_assessment__procedure_(context);
-            IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-            IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
-            IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> h_ = context.Operators.Union<Observation>(f_ as IEnumerable<Observation>, g_ as IEnumerable<Observation>);
+        bool? b_(Encounter? MDDEncounter) {
+            CqlCode? d_ = this.Suicide_risk_assessment__procedure_(context);
+            IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode>(d_);
+            IEnumerable<Observation?>? f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
+            IEnumerable<Observation?>? g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+            IEnumerable<Observation?>? h_ = context.Operators.Union<Observation>(f_ as IEnumerable<Observation>, g_ as IEnumerable<Observation>);
 
-            bool? i_(Observation ObservationSuicideRiskAssmt) {
-                Period k_ = MDDEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                DataType m_ = ObservationSuicideRiskAssmt?.Effective;
-                object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
+            bool? i_(Observation? ObservationSuicideRiskAssmt) {
+                Period? k_ = MDDEncounter?.Period;
+                CqlInterval<CqlDateTime?>? l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
+                DataType? m_ = ObservationSuicideRiskAssmt?.Effective;
+                object? n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+                CqlInterval<CqlDateTime?>? o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
                 bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, (string)default);
-                Code<ObservationStatus> q_ = ObservationSuicideRiskAssmt?.StatusElement;
+                Code<ObservationStatus>? q_ = ObservationSuicideRiskAssmt?.StatusElement;
                 ObservationStatus? r_ = q_?.Value;
-                string s_ = context.Operators.Convert<string>(r_);
-                string[] t_ = [
+                string? s_ = context.Operators.Convert<string>(r_);
+                string?[]? t_ = [
                     "final",
                     "corrected",
                     "amended",
@@ -481,22 +483,22 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             return j_;
         }
 
-        IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
+        IEnumerable<Encounter?>? c_ = context.Operators.Where<Encounter>(a_, b_);
         return c_;
     }
 
 
     [CqlExpressionDefinition("Numerator")]
-    public IEnumerable<Encounter> Numerator(CqlContext context) =>
+    public IEnumerable<Encounter?>? Numerator(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numerator, Numerator_Compute);
 
     private const long _cacheIndex_Numerator = 3556269054093713636L;
 
-    private IEnumerable<Encounter> Numerator_Compute(CqlContext context)
+    private IEnumerable<Encounter?>? Numerator_Compute(CqlContext context)
     {
-        IEnumerable<Encounter> a_ = this.Encounter_With_Procedure_For_Suicide_Risk_Assessment(context);
-        IEnumerable<Encounter> b_ = this.Encounter_With_Observation_For_Suicide_Risk_Assessment(context);
-        IEnumerable<Encounter> c_ = context.Operators.Union<Encounter>(a_, b_);
+        IEnumerable<Encounter?>? a_ = this.Encounter_With_Procedure_For_Suicide_Risk_Assessment(context);
+        IEnumerable<Encounter?>? b_ = this.Encounter_With_Observation_For_Suicide_Risk_Assessment(context);
+        IEnumerable<Encounter?>? c_ = context.Operators.Union<Encounter>(a_, b_);
         return c_;
     }
 

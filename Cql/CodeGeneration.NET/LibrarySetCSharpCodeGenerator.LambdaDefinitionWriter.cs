@@ -28,7 +28,7 @@ partial class LibrarySetCSharpCodeGenerator
             // implicit CqlContext parameter (see CqlLambdaDefinition remarks) — these are only
             // the CQL operands; the printed signature prepends "CqlContext context" explicitly.
             var parameters = ld.Lambda.Parameters;
-            var returnType = TypeToCSharpConverter.ToCSharp(ld.Lambda.Body.Type);
+            var returnType = TypeToCSharpConverter.ToCSharpDeclaration(ld.Lambda.Body.Type);
 
             var useCache = parameters is not { Count: > 0 };
 
@@ -126,7 +126,7 @@ partial class LibrarySetCSharpCodeGenerator
         {
             var parameters = lambda.Parameters.Select((p, i) =>
             {
-                var typeDeclaration = TypeToCSharpConverter.ToCSharp(p.Type);
+                var typeDeclaration = TypeToCSharpConverter.ToCSharpDeclaration(p.Type);
                 var parameterName = parameterNames[i].EscapeKeywords();
 
                 // Add attribute if original name differs from normalized name. The dictionary

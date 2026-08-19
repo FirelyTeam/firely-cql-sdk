@@ -48,6 +48,45 @@ internal class TypeToCSharpConverter
         return result;
     }
 
+    /// <summary>
+    /// Formats a type for declarations (locals, parameters, and return types).
+    /// The code model carries <see cref="Type"/>, which does not encode reference-type
+    /// nullability, so generated declarations apply a blanket nullable annotation to
+    /// reference types only.
+    /// </summary>
+    public string ToCSharpDeclaration(Type type)
+    {
+        if (ShouldUseTupleType(type))
+            return ToCSharp(type);
+
+        if (type.IsNullableValueType(out var underlying))
+            return $"{ToCSharpDeclaration(underlying)}?";
+
+        if (type.IsArray)
+        {
+            var elementType = type.GetElementType() ?? throw new InvalidOperationException($"Array type '{type}' has no element type.");
+            return $"{ToCSharpDeclaration(elementType)}[]?";
+        }
+
+        if (type.IsGenericType)
+        {
+            var genericTypeName = ToCSharp(type);
+            var tick = genericTypeName.IndexOf('<');
+            if (tick >= 0)
+                genericTypeName = genericTypeName[..tick];
+            genericTypeName = genericTypeName.TrimEnd('?');
+
+            var genericArguments = string.Join(", ", type.GetGenericArguments().Select(ToCSharpDeclaration));
+            var result = $"{genericTypeName}<{genericArguments}>";
+            return type.IsValueType ? result : $"{result}?";
+        }
+
+        if (type.IsValueType)
+            return ToCSharp(type);
+
+        return $"{ToCSharp(type).TrimEnd('?')}?";
+    }
+
     public string GetMemberAccessNullabilityOperator(Type? type)
     {
         if (type is null) return "";

@@ -158,6 +158,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
                 optimizationLevel: debugSymbolsFormat == DebugSymbolsFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
+                nullableContextOptions: NullableContextOptions.Annotations,
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 

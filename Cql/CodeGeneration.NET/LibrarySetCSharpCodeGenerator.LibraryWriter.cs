@@ -62,6 +62,8 @@ partial class LibrarySetCSharpCodeGenerator
                     LibrarySetWriter.TupleMetadataBuilder,
                     LibraryName));
 
+            ISB.AppendLine("#nullable enable annotations");
+            ISB.AppendLine();
             AppendUsings();
             AppendNamespaceFileScope();
             AppendClass();

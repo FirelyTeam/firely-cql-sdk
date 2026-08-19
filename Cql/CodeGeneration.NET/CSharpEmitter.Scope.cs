@@ -189,7 +189,7 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
+            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharpDeclaration(node.Type);
             var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
@@ -224,8 +224,8 @@ internal partial class CSharpEmitter
                 var result = nested.Linearize(lambda.Body, tailPosition: true);
 
                 var parameterList = string.Join(", ",
-                    lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
-                var returnType = _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type);
+                    lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharpDeclaration(p.Type)} {_emitter._assignedNames[p]}"));
+                var returnType = _emitter._typeToCSharpConverter.ToCSharpDeclaration(lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-
                 // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
@@ -342,7 +342,7 @@ internal partial class CSharpEmitter
 
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
-            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
+            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharpDeclaration(resultType)} {resultName};");
             _statements.Add(() => RenderChain(resultName, cases, @else));
             return new Atom(resultName, resultLocal);
         }

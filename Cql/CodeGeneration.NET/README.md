@@ -9,6 +9,7 @@ This package provides functionality to generate readable C# source code from the
 ## Key Features
 
 - **IR to C# Printing**: Transforms the typed IR (carrying `System.Type` on each node) into readable C# source code by direct string emission — no Roslyn syntax-tree construction
+- **Nullable-aware generated declarations**: Generated `*.g.cs` files emit `#nullable enable`; because the IR stores `System.Type` (which cannot express reference-type nullability), declaration signatures use blanket `T?` annotations for reference types while preserving value-type behavior
 - **Code Formatting**: Generates well-formatted, readable C# code
 - **Roslyn Integration**: Uses Microsoft.CodeAnalysis.CSharp to compile already-generated C# source text into .NET assemblies
 - **Debugging Support**: Generated code includes debugging information, and debugging information is included in the .NET assemblies based on the DebugSymbolsFormat setting

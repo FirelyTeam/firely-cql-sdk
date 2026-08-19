@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,54 +14,54 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
     #region ValueSets (4)
 
     [CqlValueSetDefinition("ValueSet-A-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-1", valueSetVersion: null)]
-    public CqlValueSet ValueSet_A_1(CqlContext _) => _ValueSet_A_1;
-    private static readonly CqlValueSet _ValueSet_A_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", null);
+    public CqlValueSet? ValueSet_A_1(CqlContext _) => _ValueSet_A_1;
+    private static readonly CqlValueSet? _ValueSet_A_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", null);
 
     [CqlValueSetDefinition("ValueSet-A-2", valueSetId: "http://fire.ly/ValueSet/ValueSet-A-2", valueSetVersion: null)]
-    public CqlValueSet ValueSet_A_2(CqlContext _) => _ValueSet_A_2;
-    private static readonly CqlValueSet _ValueSet_A_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", null);
+    public CqlValueSet? ValueSet_A_2(CqlContext _) => _ValueSet_A_2;
+    private static readonly CqlValueSet? _ValueSet_A_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", null);
 
     [CqlValueSetDefinition("ValueSet-B-1", valueSetId: "http://fire.ly/ValueSet/ValueSet-B-1", valueSetVersion: null)]
-    public CqlValueSet ValueSet_B_1(CqlContext _) => _ValueSet_B_1;
-    private static readonly CqlValueSet _ValueSet_B_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", null);
+    public CqlValueSet? ValueSet_B_1(CqlContext _) => _ValueSet_B_1;
+    private static readonly CqlValueSet? _ValueSet_B_1 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", null);
 
     [CqlValueSetDefinition("ValueSet-B-2", valueSetId: "http://fire.ly/ValueSet/ValueSet-B-2", valueSetVersion: null)]
-    public CqlValueSet ValueSet_B_2(CqlContext _) => _ValueSet_B_2;
-    private static readonly CqlValueSet _ValueSet_B_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", null);
+    public CqlValueSet? ValueSet_B_2(CqlContext _) => _ValueSet_B_2;
+    private static readonly CqlValueSet? _ValueSet_B_2 = new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", null);
 
     #endregion ValueSets
 
     #region Parameters (2)
 
     [CqlParameterDefinition("ChosenSubCategory")]
-    public string ChosenSubCategory(CqlContext context) =>
+    public string? ChosenSubCategory(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ChosenSubCategory, ChosenSubCategory_Compute);
 
     private const long _cacheIndex_ChosenSubCategory = -6797237956357043470L;
 
-    private string ChosenSubCategory_Compute(CqlContext context)
+    private string? ChosenSubCategory_Compute(CqlContext context)
     {
-        object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
         return (string)a_;
     }
 
 
     [CqlParameterDefinition("ChosenCode")]
-    public CqlCode ChosenCode(CqlContext context) =>
+    public CqlCode? ChosenCode(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ChosenCode, ChosenCode_Compute);
 
     private const long _cacheIndex_ChosenCode = 4576364196465695553L;
 
-    private CqlCode ChosenCode_Compute(CqlContext context)
+    private CqlCode? ChosenCode_Compute(CqlContext context)
     {
-        object a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
         return (CqlCode)a_;
     }
 
@@ -69,27 +71,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     #region Functions and Expressions (3)
 
     [CqlExpressionDefinition("ValueSetA")]
-    public CqlValueSet ValueSetA(CqlContext context) =>
+    public CqlValueSet? ValueSetA(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ValueSetA, ValueSetA_Compute);
 
     private const long _cacheIndex_ValueSetA = 3635379538251128517L;
 
-    private CqlValueSet ValueSetA_Compute(CqlContext context)
+    private CqlValueSet? ValueSetA_Compute(CqlContext context)
     {
-        string a_ = this.ChosenSubCategory(context);
+        string? a_ = this.ChosenSubCategory(context);
         bool? b_ = context.Operators.Equal(a_, "1");
         if (b_ ?? false)
         {
-            CqlValueSet c_ = this.ValueSet_A_1(context);
+            CqlValueSet? c_ = this.ValueSet_A_1(context);
             return c_;
         }
         else
         {
-            string d_ = this.ChosenSubCategory(context);
+            string? d_ = this.ChosenSubCategory(context);
             bool? e_ = context.Operators.Equal(d_, "2");
             if (e_ ?? false)
             {
-                CqlValueSet f_ = this.ValueSet_A_2(context);
+                CqlValueSet? f_ = this.ValueSet_A_2(context);
                 return f_;
             }
             else
@@ -101,27 +103,27 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
 
     [CqlExpressionDefinition("ValueSetB")]
-    public CqlValueSet ValueSetB(CqlContext context) =>
+    public CqlValueSet? ValueSetB(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_ValueSetB, ValueSetB_Compute);
 
     private const long _cacheIndex_ValueSetB = 1902915641396550611L;
 
-    private CqlValueSet ValueSetB_Compute(CqlContext context)
+    private CqlValueSet? ValueSetB_Compute(CqlContext context)
     {
-        string a_ = this.ChosenSubCategory(context);
+        string? a_ = this.ChosenSubCategory(context);
         bool? b_ = context.Operators.Equal(a_, "1");
         if (b_ ?? false)
         {
-            CqlValueSet c_ = this.ValueSet_B_1(context);
+            CqlValueSet? c_ = this.ValueSet_B_1(context);
             return c_;
         }
         else
         {
-            string d_ = this.ChosenSubCategory(context);
+            string? d_ = this.ChosenSubCategory(context);
             bool? e_ = context.Operators.Equal(d_, "2");
             if (e_ ?? false)
             {
-                CqlValueSet f_ = this.ValueSet_B_2(context);
+                CqlValueSet? f_ = this.ValueSet_B_2(context);
                 return f_;
             }
             else
@@ -133,15 +135,15 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
 
     [CqlExpressionDefinition("Result")]
-    public string Result(CqlContext context) =>
+    public string? Result(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Result, Result_Compute);
 
     private const long _cacheIndex_Result = 2591165112630919659L;
 
-    private string Result_Compute(CqlContext context)
+    private string? Result_Compute(CqlContext context)
     {
-        CqlCode a_ = this.ChosenCode(context);
-        CqlValueSet b_ = this.ValueSetA(context);
+        CqlCode? a_ = this.ChosenCode(context);
+        CqlValueSet? b_ = this.ValueSetA(context);
         bool? c_ = context.Operators.CodeInValueSet(a_, b_);
         if (c_ ?? false)
         {
@@ -149,8 +151,8 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            CqlCode d_ = this.ChosenCode(context);
-            CqlValueSet e_ = this.ValueSetB(context);
+            CqlCode? d_ = this.ChosenCode(context);
+            CqlValueSet? e_ = this.ValueSetB(context);
             bool? f_ = context.Operators.CodeInValueSet(d_, e_);
             if (f_ ?? false)
             {
