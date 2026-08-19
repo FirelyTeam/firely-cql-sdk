@@ -29,7 +29,6 @@ import argparse
 import base64
 import json
 import os
-import re
 import sys
 import time
 import urllib.error
@@ -279,35 +278,105 @@ def format_value(value, indent):
     return json.dumps(value, ensure_ascii=False)
 
 
-def span_of_expansion(text):
-    """The half-open span of the top-level `expansion` object's value."""
-    match = re.search(r'^(\s*)"expansion"\s*:\s*', text, re.MULTILINE)
-    if not match:
-        raise RuntimeError("no top-level expansion element found")
-    start = match.end()
-    if text[start] != "{":
-        raise RuntimeError("expansion element is not an object")
-
-    depth, i, in_string, escaped = 0, start, False, False
-    while i < len(text):
-        ch = text[i]
-        if in_string:
-            if escaped:
-                escaped = False
-            elif ch == "\\":
-                escaped = True
-            elif ch == '"':
-                in_string = False
-        elif ch == '"':
-            in_string = True
-        elif ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                return start, i + 1, len(match.group(1))
+def _skip_whitespace(text, i):
+    while i < len(text) and text[i] in " \t\r\n":
         i += 1
-    raise RuntimeError("unterminated expansion element")
+    return i
+
+
+def _skip_string(text, i):
+    """Index just past the string starting at `i`, which must be its opening quote."""
+    i += 1
+    while i < len(text):
+        if text[i] == "\\":
+            i += 2
+            continue
+        if text[i] == '"':
+            return i + 1
+        i += 1
+    raise RuntimeError("unterminated string")
+
+
+def _skip_value(text, i):
+    """Index just past the JSON value starting at `i`."""
+    i = _skip_whitespace(text, i)
+    if i >= len(text):
+        raise RuntimeError("value expected")
+    ch = text[i]
+    if ch == '"':
+        return _skip_string(text, i)
+    if ch in "{[":
+        closing = "}" if ch == "{" else "]"
+        depth = 0
+        while i < len(text):
+            ch = text[i]
+            if ch == '"':
+                i = _skip_string(text, i)
+                continue
+            if ch in "{[":
+                depth += 1
+            elif ch in "}]":
+                depth -= 1
+                if depth == 0:
+                    if ch != closing:
+                        raise RuntimeError("mismatched brackets")
+                    return i + 1
+            i += 1
+        raise RuntimeError("unterminated object or array")
+    # A literal: number, true, false or null.
+    while i < len(text) and text[i] not in ",}] \t\r\n":
+        i += 1
+    return i
+
+
+def _root_members(text):
+    """Every (key, key_start, value_start, value_end) of the root object, in order."""
+    i = _skip_whitespace(text, 0)
+    if i >= len(text) or text[i] != "{":
+        raise RuntimeError("this is not a JSON object")
+    i += 1
+    while True:
+        i = _skip_whitespace(text, i)
+        if i >= len(text):
+            raise RuntimeError("unterminated root object")
+        if text[i] == "}":
+            return
+        if text[i] == ",":
+            i += 1
+            continue
+        if text[i] != '"':
+            raise RuntimeError(f"member name expected at offset {i}")
+        key_start = i
+        after_key = _skip_string(text, i)
+        key = json.loads(text[key_start:after_key])
+        i = _skip_whitespace(text, after_key)
+        if i >= len(text) or text[i] != ":":
+            raise RuntimeError(f"colon expected after '{key}'")
+        value_start = _skip_whitespace(text, i + 1)
+        value_end = _skip_value(text, value_start)
+        yield key, key_start, value_start, value_end
+        i = value_end
+
+
+def span_of_expansion(text):
+    """The half-open span of the root resource's `expansion` value, and its indent.
+
+    Found by walking the document rather than by matching a line. A line-anchored search
+    would also match an `expansion` inside a `contained` resource - and would match it
+    *first*, since FHIR serializes `contained` before `expansion` - which would leave the
+    real partial expansion in place while reporting success. Walking also means a document
+    that is not pretty-printed is handled the same way as one that is.
+    """
+    for key, key_start, value_start, value_end in _root_members(text):
+        if key != "expansion":
+            continue
+        if text[value_start] != "{":
+            raise RuntimeError("expansion element is not an object")
+        line_start = text.rfind("\n", 0, key_start) + 1
+        prefix = text[line_start:key_start]
+        indent = len(prefix) if prefix.strip() == "" else 0
+        return value_start, value_end, indent
+    raise RuntimeError("no expansion element at the root of this resource")
 
 
 def splice(path, text, expansion):
@@ -317,10 +386,23 @@ def splice(path, text, expansion):
     # The corpus is checked out with CRLF endings and no BOM; keep it that way rather than
     # leaving one file in the folder different from the other six hundred.
     newline = "\r\n" if "\r\n" in text else "\n"
-    body = rewritten.replace("\r\n", "\n").replace("\n", newline)
-    with open(path, "wb") as fh:
-        fh.write(body.encode("utf-8"))
-    return len(body.encode("utf-8"))
+    body = rewritten.replace("\r\n", "\n").replace("\n", newline).encode("utf-8")
+
+    # Written beside the target and moved into place, so an interrupted or failing write
+    # cannot leave a vendored value set truncated: os.replace is atomic within a directory,
+    # and until it runs the original is still the original.
+    temporary = path + ".partial"
+    try:
+        with open(temporary, "wb") as fh:
+            fh.write(body)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(temporary, path)
+    except BaseException:
+        if os.path.exists(temporary):
+            os.remove(temporary)
+        raise
+    return len(body)
 
 
 # ---------------------------------------------------------------------------------------
@@ -389,7 +471,9 @@ def main(argv=None):
     for oid, why in failures:
         print(f"  {oid}: {why}")
     if drifted:
-        print(f"\n{len(drifted)} value set(s) refreshed rather than completed:")
+        # Counted by value set, not by note: one value set can drift in more than one way, and
+        # a summary that says "33 value sets" when twenty were fetched is worse than no summary.
+        print(f"\n{len({oid for oid, _ in drifted})} value set(s) refreshed rather than completed:")
         for oid, note in drifted:
             print(f"  {oid}: {note}")
     return 1 if failures else 0
