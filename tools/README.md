@@ -7,7 +7,6 @@ Utility scripts for the Firely CQL SDK.
 - **condense_spec/** - CQL Specification HTML to Markdown converter
 - **mermaid/** - Mermaid diagram-to-SVG export scripts
 - **dqic_sync/** - Compares the vendored CQL conformance test suite against the official upstream suite
-- **vsac/** - Completes partial (paged) ValueSet expansions in a vendored corpus from VSAC
 - **XsdToCSharpConverter/** - XSD to C# code generation tool
 - **XsdToCSharpConverterTests/** - Tests for XSD converter
 
@@ -80,26 +79,15 @@ python3 tools/dqic_sync/compare_dqic_tests.py --report-path /tmp/dqic-report.md
 
 **Created in:** [#1389](https://github.com/FirelyTeam/firely-cql-sdk/issues/1389)
 
-### vsac
+---
 
-Replaces partial (paged) `ValueSet` expansions in a vendored corpus — `expansion.total` of 3608 with
-1000 concepts actually present — with complete ones fetched from VSAC's FHIR `$expand`, pinned to the
-version each local file declares. A page cannot answer membership, so the SDK rejects one; the
-upstream eCQM content repositories ship 20 such files, which silently disabled 1200
-integration-runner cases.
+## Tooling that lives elsewhere
 
-**Location:** `tools/vsac/`
-
-**Usage:**
-```bash
-python3 tools/vsac/complete_expansions.py --dry-run
-python3 tools/vsac/complete_expansions.py --api-key-file <path-to-umls-key>
-```
-
-**Documentation:** See [tools/vsac/README.md](vsac/README.md) for complete details, including what
-the tool refuses to write and why a content re-sync reinstates the truncation.
-
-**Created in:** [#1562](https://github.com/FirelyTeam/firely-cql-sdk/issues/1562)
+**VSAC expansion completer** — replaces partial (paged) `ValueSet` expansions with complete ones
+fetched from VSAC's FHIR `$expand`. It lives in the integration runner repository, at
+`tools/vsac/complete_expansions.py` in `Firely.Cql.Sdk.Integration.Runner`, because the corpus it
+maintains lives there and the refresh runs as part of that repository's sync procedure. Created in
+[#1562](https://github.com/FirelyTeam/firely-cql-sdk/issues/1562).
 
 ---
 
