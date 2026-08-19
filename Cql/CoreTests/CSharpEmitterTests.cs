@@ -898,4 +898,25 @@ public class CSharpEmitterTests
         Assert.ThrowsException<ArgumentException>(() =>
             new CodeConstant(null, typeof(int)));
     }
+
+    /// <summary>
+    /// Nullability metadata may only be read from assemblies whose annotations do not vary by
+    /// runtime. .NET 8 and .NET 10 disagree about <c>List&lt;T&gt;</c>'s
+    /// <c>IEnumerable&lt;T&gt;</c> constructor parameter — NotNull on one, Nullable on the other —
+    /// so reading framework metadata made the generated C# depend on which runtime the packager
+    /// happened to execute on.
+    /// </summary>
+    [TestMethod]
+    public void HasStableNullabilityMetadata_ExcludesFrameworkAssembliesOnly()
+    {
+        // Framework: annotations differ between target runtimes, so they are off limits.
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(List<int>)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(IEnumerable<int>)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(object)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(string)));
+
+        // Shipped with the SDK, or referenced at a pinned version: compiled once, so stable.
+        Assert.IsTrue(CSharpEmitter.HasStableNullabilityMetadata(typeof(CqlConcept)));
+        Assert.IsTrue(CSharpEmitter.HasStableNullabilityMetadata(typeof(Hl7.Fhir.Model.Account)));
+    }
 }
