@@ -38,10 +38,51 @@ internal static class StringExtensions
         if (term.StartsWith('(') ^ term.EndsWith(')'))
             return $"({term})";
 
-        if (term.Any(char.IsWhiteSpace))
+        if (ContainsWhitespaceOutsideQuotedSpan(term))
             return $"({term})";
 
         return term;
+    }
+
+    private static bool ContainsWhitespaceOutsideQuotedSpan(string term)
+    {
+        var inQuotedSpan = false;
+        var isEscaped = false;
+
+        foreach (var ch in term)
+        {
+            if (inQuotedSpan)
+            {
+                if (isEscaped)
+                {
+                    isEscaped = false;
+                    continue;
+                }
+
+                switch (ch)
+                {
+                    case '\\':
+                        isEscaped = true;
+                        break;
+                    case '"':
+                        inQuotedSpan = false;
+                        break;
+                }
+
+                continue;
+            }
+
+            if (ch == '"')
+            {
+                inQuotedSpan = true;
+                continue;
+            }
+
+            if (char.IsWhiteSpace(ch))
+                return true;
+        }
+
+        return false;
     }
 
     // Check whether the term has matching opening and closing parentheses.

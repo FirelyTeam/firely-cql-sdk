@@ -194,7 +194,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
             bool? b_ = context.Operators.Not((bool?)(a_ is null));
             if (b_ ?? false)
             {
-                object? c_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported"!, "Error"!, ("FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.")!);
+                object? c_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.ComparatorQuantityNotSupported", "Error", "FHIR Quantity value has a comparator and cannot be converted to a System.Quantity value.");
                 return c_ as CqlQuantity;
             }
             else
@@ -230,7 +230,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                     string? z_ = y_?.Value;
                     string? aa_ = context.Operators.Concatenate(x_ ?? "", z_ ?? "");
                     string? ab_ = context.Operators.Concatenate(aa_ ?? "", ")");
-                    object? ac_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity"!, "Error"!, ab_!);
+                    object? ac_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ab_!);
                     return ac_ as CqlQuantity;
                 }
             }
@@ -282,7 +282,7 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
                 string? w_ = v_?.Value;
                 string? x_ = context.Operators.Concatenate(u_ ?? "", w_ ?? "");
                 string? y_ = context.Operators.Concatenate(x_ ?? "", ")");
-                object? z_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity"!, "Error"!, y_!);
+                object? z_ = context.Operators.Message<object?>((object?)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", y_!);
                 return z_ as CqlQuantity;
             }
         }

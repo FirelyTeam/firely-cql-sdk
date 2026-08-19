@@ -12,6 +12,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
@@ -748,6 +749,31 @@ public class CSharpEmitterTests
         Assert.AreEqual(
             "{\n    int a_ = Math.Abs(-3);\n    string? b_ = FHIRHelpers_4_0_1.Instance.ToCode(context, a_);\n    return b_;\n}",
             EmitBody(new CodeLambda([], foreignCall)));
+    }
+
+    [TestMethod]
+    public void Invoke_ConstantsAndContext_DoNotEmitNullForgivingOperator()
+    {
+        var resolveParameter = ReflectionUtility.MethodOf(
+            () => default(CqlContext)!.ResolveParameter(default!, default!, default));
+
+        var call = new CodeInvoke(
+            CodeContextParameter.Instance,
+            resolveParameter,
+            new CodeConstant("DevDays-2025.0.0", typeof(string)),
+            new CodeConstant("Measurement Period", typeof(string)),
+            new CodeConstant(null, typeof(object)));
+
+        Assert.AreEqual(
+            "{\n    object? a_ = context.ResolveParameter(\"DevDays-2025.0.0\", \"Measurement Period\", (object?)null);\n    return a_;\n}",
+            EmitBody(new CodeLambda([], call)));
+    }
+
+    [TestMethod]
+    public void ParenthesizeIfNeeded_DoesNotWrapStandaloneStringLiteralContainingWhitespace()
+    {
+        Assert.AreEqual("\"a b\"", "\"a b\"".ParenthesizeIfNeeded());
+        Assert.AreEqual("(a + b)", "a + b".ParenthesizeIfNeeded());
     }
 
     [TestMethod]

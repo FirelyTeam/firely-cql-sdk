@@ -121,13 +121,14 @@ internal partial class CSharpEmitter
                 code = $"({ToCSharpParameterType(parameter, parameterNullability)}){code.ParenthesizeIfNeeded()}";
             }
 
-            if (ShouldApplyNullForgivingOperator(parameter, a))
-                code = $"{code.ParenthesizeIfNeeded()}!";
-
             // Null/default arguments carry a cast to the parameter type so overload intent
             // stays visible — the old writer's BuildArguments rule.
             if (a is CodeConstant { Value: null } or CodeDefault && code is "null" or "default")
                 return $"({_typeToCSharpConverter.ToCSharpDeclaration(parameter.ParameterType)}){code}";
+
+            if (ShouldApplyNullForgivingOperator(parameter, a))
+                code = $"{code.ParenthesizeIfNeeded()}!";
+
             return code;
         }));
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
@@ -135,7 +136,7 @@ internal partial class CSharpEmitter
 
     private static bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
     {
-        if (argument is CodeLambda)
+        if (argument is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
             return false;
 
         if (parameter.ParameterType.IsByRef || parameter.ParameterType.IsPointer)

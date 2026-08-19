@@ -71,7 +71,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         CqlDateTime? a_ = context.Operators.DateTime(2023, 1, 1, (int?)default, (int?)default, (int?)default, (int?)default, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2023, 12, 31, (int?)default, (int?)default, (int?)default, (int?)default, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, true);
-        object? d_ = context.ResolveParameter("RR23-1.0.0"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 

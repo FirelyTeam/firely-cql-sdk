@@ -71,7 +71,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         CqlDate? a_ = context.Operators.Date(2023, 1, 1);
         CqlDate? b_ = context.Operators.Date(2023, 12, 31);
         CqlInterval<CqlDate?>? c_ = context.Operators.Interval(a_, b_, true, true);
-        object? d_ = context.ResolveParameter("RR23-1.0.0"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("RR23-1.0.0", "Measurement Period", c_);
         return d_;
     }
 
@@ -111,7 +111,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         bool? c_(Condition? C) {
             DataType? e_ = C?.Onset;
-            object? f_ = context.Operators.LateBoundProperty<object?>(e_, "value"!);
+            object? f_ = context.Operators.LateBoundProperty<object?>(e_, "value");
             object? g_ = this.Measurement_Period(context);
             CqlDate? h_ = ((CqlInterval<CqlDate?>?)g_)?.low;
             CqlDateTime? i_ = context.Operators.ConvertDateToDateTime(h_);
@@ -141,7 +141,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         object b_(Condition? @this) {
             DataType? e_ = @this?.Onset;
-            object? f_ = context.Operators.LateBoundProperty<object?>(e_, "value"!);
+            object? f_ = context.Operators.LateBoundProperty<object?>(e_, "value");
             return (f_ as CqlDateTime)!;
         }
 
@@ -179,9 +179,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
             bool? l_(Condition? C) {
                 DataType? q_ = C?.Onset;
-                object? r_ = context.Operators.LateBoundProperty<object?>(q_, "value"!);
+                object? r_ = context.Operators.LateBoundProperty<object?>(q_, "value");
                 DataType? s_ = SD?.Occurrence;
-                CqlDateTime? t_ = context.Operators.LateBoundProperty<CqlDateTime?>(s_, "value"!);
+                CqlDateTime? t_ = context.Operators.LateBoundProperty<CqlDateTime?>(s_, "value");
                 CqlQuantity? u_ = context.Operators.Quantity(7m, "days");
                 CqlDateTime? v_ = context.Operators.Subtract(t_, u_);
                 CqlInterval<CqlDateTime?>? w_ = context.Operators.Interval(v_, t_, true, false);

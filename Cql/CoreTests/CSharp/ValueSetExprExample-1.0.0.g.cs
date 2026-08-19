@@ -48,7 +48,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private string? ChosenSubCategory_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0"!, "ChosenSubCategory"!, "1");
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenSubCategory", "1");
         return (string?)a_;
     }
 
@@ -61,7 +61,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     private CqlCode? ChosenCode_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0"!, "ChosenCode"!, new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
+        object? a_ = context.ResolveParameter("ValueSetExprExample-1.0.0", "ChosenCode", new CqlCode("A-1-A", "http://fire.ly/CodeSystem/Test", default, default));
         return (CqlCode?)a_;
     }
 
