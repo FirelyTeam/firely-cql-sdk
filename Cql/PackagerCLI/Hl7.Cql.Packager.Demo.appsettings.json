@@ -3,9 +3,11 @@
     "SkipFiles": [
     ],
     "CSharp": {
-      // See the dqm-content-qicore-2025 profile: this corpus is not yet warning-clean under
-      // nullable reference types (#1564), so generate it null-oblivious for now.
-      "NullabilityEnabled": false
+      // Annotations rather than Enabled: consumers still get the honest nullability of the
+      // generated API, but the compiler does not verify it, so none of the null-forgiving
+      // operators or bridging casts that full checks need are emitted. Full checks need
+      // ICqlOperators' own signatures to use one nullability convention first (#1564).
+      "Nullability": "Annotations"
     }
   }
 }

@@ -108,19 +108,19 @@ public class CSharpGenerationGoldenTests
 
         var nullOblivious = GenerateWithToolkit(
                 librarySet,
-                new ElmToolkitConfig(CSharp: new CSharpConfig(NullabilityEnabled: false)))
+                new ElmToolkitConfig(CSharp: new CSharpConfig(Nullability: CSharpNullability.Disabled)))
             .Values
             .First();
 
         Assert.IsFalse(
             nullOblivious.Contains("#nullable"),
-            "With NullabilityEnabled off, no '#nullable' directive should be emitted.");
+            "With nullability Disabled, no '#nullable' directive should be emitted.");
         Assert.IsFalse(
             nullOblivious.Contains("CqlInterval<CqlDateTime>?"),
-            "With NullabilityEnabled off, reference-typed declarations should carry no annotation.");
+            "With nullability Disabled, reference-typed declarations should carry no annotation.");
         Assert.IsFalse(
             nullOblivious.Contains("context!"),
-            "With NullabilityEnabled off, no null-forgiving operator should be emitted.");
+            "With nullability Disabled, no null-forgiving operator should be emitted.");
 
         // The assertions above only catch the shapes we thought to name. Compiling the result
         // outside a nullable context is the real invariant: any stray annotation is CS8669, which
@@ -137,6 +137,44 @@ public class CSharpGenerationGoldenTests
         var annotated = GenerateWithToolkit(librarySet).Values.First();
         StringAssert.Contains(annotated, "#nullable enable");
         StringAssert.Contains(annotated, "CqlInterval<CqlDateTime?>?");
+    }
+
+    /// <summary>
+    /// Annotations mode is the point of the tri-state: consumers get the honest nullability of the
+    /// generated API, and nothing is emitted purely to satisfy flow analysis. The null-forgiving
+    /// operators and bridging casts that <see cref="CSharpNullability.Enabled"/> needs are the
+    /// readability cost of having the compiler verify the annotations, so they must be absent here.
+    /// </summary>
+    [TestMethod]
+    public void NullabilityAnnotations_AnnotatesWithoutFlowAnalysisScaffolding()
+    {
+        LibrarySet librarySet = new();
+        librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.CoreTests.Hl7ElmDir, "FHIRHelpers", "4.0.1");
+
+        var annotationsOnly = GenerateWithToolkit(
+                librarySet,
+                new ElmToolkitConfig(CSharp: new CSharpConfig(Nullability: CSharpNullability.Annotations)))
+            .Values
+            .First();
+
+        StringAssert.StartsWith(annotationsOnly.TrimStart('﻿'), "#nullable enable annotations");
+        StringAssert.Contains(
+            annotationsOnly,
+            "CqlInterval<CqlDateTime?>?",
+            "Annotations mode must still annotate declarations — that is its entire purpose.");
+
+        Assert.IsFalse(
+            annotationsOnly.Contains('!') && System.Text.RegularExpressions.Regex.IsMatch(
+                annotationsOnly, @"[A-Za-z0-9_\)\]]!(?![=])"),
+            "Annotations mode must not emit null-forgiving operators; there are no warnings to silence.");
+
+        // Compiled in its own context, annotation-only output must be diagnostic-free — CS8669 would
+        // mean an annotation leaked somewhere the directive does not cover.
+        AssertNoNullableDiagnostics(
+            "AnnotationsOnlyFhirHelpers",
+            [CSharpSyntaxTree.ParseText(annotationsOnly)],
+            NullableContextOptions.Annotations,
+            "annotation-only generated C#");
     }
 
     // Kept as a single-argument method so it still converts to the Func<LibrarySet, …> the

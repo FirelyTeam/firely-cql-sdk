@@ -130,7 +130,7 @@ internal partial class CSharpEmitter
 
     private bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
     {
-        if (!_typeToCSharpConverter.NullabilityEnabled)
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
             return false;
 
         if (argument is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
@@ -148,7 +148,7 @@ internal partial class CSharpEmitter
 
     private bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
     {
-        if (!_typeToCSharpConverter.NullabilityEnabled)
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
             return false;
 
         if (value is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
@@ -182,7 +182,7 @@ internal partial class CSharpEmitter
     /// </summary>
     private bool NeedsNullabilityBridgingCast(ParameterInfo parameter, CodeExpression argument)
     {
-        if (!_typeToCSharpConverter.NullabilityEnabled)
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
             return false;
 
         var parameterType = parameter.ParameterType;
@@ -259,7 +259,7 @@ internal partial class CSharpEmitter
     {
         // This method appends its own nullable annotation below, so it has to honour the switch
         // itself — ToCSharpDeclaration(Type) is not in the path that produces it.
-        if (!_typeToCSharpConverter.NullabilityEnabled)
+        if (!_typeToCSharpConverter.AnnotationsEnabled)
             return _typeToCSharpConverter.ToCSharp(node.Type);
 
         if (node is not CodeProperty property)
@@ -470,7 +470,7 @@ internal partial class CSharpEmitter
             ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
             : child(receiver).Code.ParenthesizeIfNeeded();
 
-        if (_typeToCSharpConverter.NullabilityEnabled
+        if (_typeToCSharpConverter.NullableWarningsEnabled
             && !property.NullConditional && receiver is CodeCast { Kind: CodeCastKind.As })
             target = $"{target}!";
 

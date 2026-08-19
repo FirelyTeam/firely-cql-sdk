@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -13,11 +13,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <summary>
 /// Settings that control the C# source the generator emits, as opposed to how ELM is translated.
 /// </summary>
-/// <param name="NullabilityEnabled">
-/// When <see langword="true"/> (the default), generated files opt into nullable reference types
-/// with <c>#nullable enable</c> and declarations carry nullable annotations. When
-/// <see langword="false"/>, no <c>#nullable</c> directive is emitted and declarations are
-/// null-oblivious, which is how the generator behaved before nullable emission was added.
+/// <param name="Nullability">
+/// How much of C#'s nullable reference types the generated code opts into. See
+/// <see cref="CSharpNullability"/>. Defaults to <see cref="CSharpNullability.Enabled"/>.
 /// </param>
 /// <param name="Namespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
 /// <param name="AllowInvalidCSharp">
@@ -27,7 +25,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// but may be useful for debugging or testing purposes.
 /// </param>
 public record CSharpConfig(
-    bool NullabilityEnabled = true,
+    CSharpNullability Nullability = CSharpNullability.Enabled,
     string? Namespace = null,
     bool AllowInvalidCSharp = false)
 {

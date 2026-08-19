@@ -20,15 +20,25 @@ internal class TypeToCSharpConverter
     private readonly bool _useCSharpValueTuples = true;
 
     /// <summary>
-    /// When <see langword="false"/>, declarations render null-oblivious and the emitter suppresses
-    /// every nullable-specific construct (the <c>#nullable</c> directive, annotations and
-    /// null-forgiving operators).
+    /// How much of nullable reference types the generated code opts into.
     /// </summary>
-    public bool NullabilityEnabled { get; }
+    public CSharpNullability Nullability { get; }
+
+    /// <summary>
+    /// Whether declarations carry nullable annotations at all.
+    /// </summary>
+    public bool AnnotationsEnabled => Nullability is not CSharpNullability.Disabled;
+
+    /// <summary>
+    /// Whether the compiler will verify the annotations. Only then does the emitter add constructs
+    /// whose sole purpose is to satisfy flow analysis — null-forgiving operators and bridging casts.
+    /// Without checks those constructs are pure noise in the generated source.
+    /// </summary>
+    public bool NullableWarningsEnabled => Nullability is CSharpNullability.Enabled;
 
     public TypeToCSharpConverter(CSharpConfig? cSharpGeneratingConfig = null)
     {
-        NullabilityEnabled = (cSharpGeneratingConfig ?? CSharpConfig.Default).NullabilityEnabled;
+        Nullability = (cSharpGeneratingConfig ?? CSharpConfig.Default).Nullability;
         _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, FormatName: FormatTypeNameAsTuple);
         _declarationCSharpFormat = _typeCSharpFormat with
         {
@@ -86,7 +96,7 @@ internal class TypeToCSharpConverter
     /// reference types only.
     /// </summary>
     public string ToCSharpDeclaration(Type type) =>
-        NullabilityEnabled ? type.ToCSharpString(_declarationCSharpFormat) : ToCSharp(type);
+        AnnotationsEnabled ? type.ToCSharpString(_declarationCSharpFormat) : ToCSharp(type);
 
     /// <summary>
     /// Formats a type for an <c>as</c>-cast target: declaration-style generic/array element
@@ -94,7 +104,7 @@ internal class TypeToCSharpConverter
     /// targets, CS8651).
     /// </summary>
     public string ToCSharpAsTarget(Type type) =>
-        NullabilityEnabled ? type.ToCSharpString(_asTargetCSharpFormat) : ToCSharp(type);
+        AnnotationsEnabled ? type.ToCSharpString(_asTargetCSharpFormat) : ToCSharp(type);
 
     public string GetMemberAccessNullabilityOperator(Type? type)
     {

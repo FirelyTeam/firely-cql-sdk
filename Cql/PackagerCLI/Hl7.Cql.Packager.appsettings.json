@@ -22,7 +22,7 @@
     "JsonPretty": false, // --json-pretty
     "DebugSymbolsFormat": "None", // --debug-symbols : "None", "PortablePdb", "Embedded"
     "CSharp": {
-      "NullabilityEnabled": true, // Emit "#nullable enable" and nullable annotations in generated C#
+      "Nullability": "Enabled", // "Disabled" | "Annotations" (annotate only) | "Enabled" (annotate + check)
       "Namespace": null, // --cs-namespace : The C# namespace to use for generated code (e.g., "MyCompany.MyCqlLibraries")
       "AllowInvalidCSharp": true
     },

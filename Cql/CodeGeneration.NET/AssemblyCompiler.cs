@@ -63,11 +63,11 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private readonly Lazy<Assembly[]> _referencesLazy;
 
-        private readonly bool _nullabilityEnabled;
+        private readonly CSharpNullability _nullability;
 
         public AssemblyCompiler(TypeResolver typeResolver, CSharpConfig? cSharpGeneratingConfig = null)
         {
-            _nullabilityEnabled = (cSharpGeneratingConfig ?? CSharpConfig.Default).NullabilityEnabled;
+            _nullability = (cSharpGeneratingConfig ?? CSharpConfig.Default).Nullability;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
@@ -158,12 +158,17 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
             DebugSymbolsFormat debugSymbolsFormat,
-            bool nullabilityEnabled) =>
+            CSharpNullability nullability) =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
                 optimizationLevel: debugSymbolsFormat == DebugSymbolsFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
-                nullableContextOptions: nullabilityEnabled ? NullableContextOptions.Enable : NullableContextOptions.Disable,
+                nullableContextOptions: nullability switch
+                {
+                    CSharpNullability.Enabled     => NullableContextOptions.Enable,
+                    CSharpNullability.Annotations => NullableContextOptions.Annotations,
+                    _                             => NullableContextOptions.Disable,
+                },
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
@@ -217,7 +222,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
 
             var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
-                                               .WithOptions(CreateCSharpCompilationOptions(debugSymbolsFormat, _nullabilityEnabled))
+                                               .WithOptions(CreateCSharpCompilationOptions(debugSymbolsFormat, _nullability))
                                                .WithReferences(metadataReferences)
                                                .AddSyntaxTrees(
                                                    librarySyntaxTree,

@@ -356,7 +356,7 @@ internal partial class CSharpEmitter
             _statements.Add(() =>
             {
                 var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(resultType);
-                if (_emitter._typeToCSharpConverter.NullabilityEnabled
+                if (_emitter._typeToCSharpConverter.AnnotationsEnabled
                     && !resultType.IsValueType
                     && !resultType.IsPointer
                     && !resultType.IsByRef
