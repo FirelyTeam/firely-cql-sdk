@@ -87,9 +87,9 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context!.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context!.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context!.Operators.Interval(a_, b_, true, false);
+        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS125FHIRBreastCancerScreen-1.0.000"!, ("Measurement Period")!, c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
@@ -107,8 +107,8 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -122,22 +122,22 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Initial_Population_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement!;
-        string? c_ = b_?.Value!;
-        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context!.Operators.End(e_);
-        CqlDate? g_ = context!.Operators.DateFrom(f_);
-        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context!.Operators.Interval(42, 74, true, true);
-        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
-        List<Extension?>? k_;
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context.Operators.Interval(42, 74, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
+        List<Extension>? k_;
         Patient? u_ = this.Patient(context);
         bool v_ = u_ is DomainResource;
         if (v_)
         {
             Patient? w_ = this.Patient(context);
-            k_ = ((w_ as DomainResource)!.Extension)!;
+            k_ = (w_ as DomainResource)!.Extension;
         }
         else
         {
@@ -145,25 +145,25 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         }
 
         bool? l_(Extension? @this) {
-            FhirUri? x_ = @this?.UrlElement!;
+            FhirUri? x_ = @this?.UrlElement;
             string? y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-            bool? z_ = context!.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
             return z_;
         }
 
 
         DataType? m_(Extension? @this) {
-            DataType? aa_ = @this?.Value!;
+            DataType? aa_ = @this?.Value;
             return aa_;
         }
 
-        IEnumerable<DataType?>? n_ = context!.Operators.WhereSelect<Extension?, DataType?>((IEnumerable<Extension?>?)k_, l_, m_);
-        DataType? o_ = context!.Operators.SingletonFrom<DataType?>(n_);
-        bool? p_ = context!.Operators.Equal(o_, "248152002");
-        bool? q_ = context!.Operators.And(j_, p_);
+        IEnumerable<DataType?>? n_ = context.Operators.WhereSelect<Extension?, DataType?>((IEnumerable<Extension?>?)k_, l_, m_);
+        DataType? o_ = context.Operators.SingletonFrom<DataType?>(n_);
+        bool? p_ = context.Operators.Equal(o_, "248152002");
+        bool? q_ = context.Operators.And(j_, p_);
         IEnumerable<Encounter?>? r_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-        bool? s_ = context!.Operators.Exists<Encounter?>(r_!);
-        bool? t_ = context!.Operators.And(q_, s_);
+        bool? s_ = context.Operators.Exists<Encounter?>(r_!);
+        bool? t_ = context.Operators.And(q_, s_);
         return t_;
     }
 
@@ -190,16 +190,16 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Condition?>? Right_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Status_Post_Right_Mastectomy(context);
-        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? c_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? d_ = context!.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
         CqlValueSet? e_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
-        IEnumerable<Condition?>? f_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? g_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? h_ = context!.Operators.Union<Condition?>(f_ as IEnumerable<Condition?>, g_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition?>(f_ as IEnumerable<Condition?>, g_ as IEnumerable<Condition?>);
 
         bool? i_(Condition? UnilateralMastectomyDiagnosis) {
-            List<CodeableConcept?>? o_ = UnilateralMastectomyDiagnosis?.BodySite!;
+            List<CodeableConcept>? o_ = UnilateralMastectomyDiagnosis?.BodySite;
 
             CqlConcept? p_(CodeableConcept? @this) {
                 CqlConcept? t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
@@ -209,30 +209,30 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
             bool? q_(CqlConcept? S) {
                 CqlCode? u_ = this.Right__qualifier_value_(context);
-                CqlConcept? v_ = context!.Operators.ConvertCodeToConcept(u_);
-                bool? w_ = context!.Operators.Equivalent(S, v_);
+                CqlConcept? v_ = context.Operators.ConvertCodeToConcept(u_);
+                bool? w_ = context.Operators.Equivalent(S, v_);
                 return w_;
             }
 
-            IEnumerable<CqlConcept?>? r_ = context!.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)o_, p_, q_);
-            bool? s_ = context!.Operators.Exists<CqlConcept?>(r_!);
+            IEnumerable<CqlConcept?>? r_ = context.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)o_, p_, q_);
+            bool? s_ = context.Operators.Exists<CqlConcept?>(r_!);
             return s_;
         }
 
-        IEnumerable<Condition?>? j_ = context!.Operators.Where<Condition?>(h_, i_);
-        IEnumerable<Condition?>? k_ = context!.Operators.Union<Condition?>(d_, j_);
+        IEnumerable<Condition?>? j_ = context.Operators.Where<Condition?>(h_, i_);
+        IEnumerable<Condition?>? k_ = context.Operators.Union<Condition?>(d_, j_);
         IEnumerable<Condition?>? l_ = Status_1_15_000.Instance.verified(context, k_);
 
         bool? m_(Condition? RightMastectomy) {
             CqlInterval<CqlDateTime?>? x_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, RightMastectomy);
-            CqlDateTime? y_ = context!.Operators.Start(x_);
+            CqlDateTime? y_ = context.Operators.Start(x_);
             CqlInterval<CqlDateTime?>? z_ = this.Measurement_Period(context);
-            CqlDateTime? aa_ = context!.Operators.End(z_);
-            bool? ab_ = context!.Operators.SameOrBefore(y_, aa_, (string?)default);
+            CqlDateTime? aa_ = context.Operators.End(z_);
+            bool? ab_ = context.Operators.SameOrBefore(y_, aa_, (string?)default);
             return ab_;
         }
 
-        IEnumerable<Condition?>? n_ = context!.Operators.Where<Condition?>(l_, m_);
+        IEnumerable<Condition?>? n_ = context.Operators.Where<Condition?>(l_, m_);
         return n_;
     }
 
@@ -246,50 +246,50 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Procedure?>? Right_Mastectomy_Procedure_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Unilateral_Mastectomy_Right(context);
-        IEnumerable<Procedure?>? b_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
         bool? d_(Procedure? UnilateralMastectomyRightPerformed) {
             object? f_;
-            DataType? l_ = UnilateralMastectomyRightPerformed?.Performed!;
+            DataType? l_ = UnilateralMastectomyRightPerformed?.Performed;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType? o_ = UnilateralMastectomyRightPerformed?.Performed!;
+                DataType? o_ = UnilateralMastectomyRightPerformed?.Performed;
                 object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 f_ = p_ as CqlDateTime;
             }
             else
             {
-                DataType? q_ = UnilateralMastectomyRightPerformed?.Performed!;
+                DataType? q_ = UnilateralMastectomyRightPerformed?.Performed;
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
-                    DataType? t_ = UnilateralMastectomyRightPerformed?.Performed!;
+                    DataType? t_ = UnilateralMastectomyRightPerformed?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     f_ = u_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? v_ = UnilateralMastectomyRightPerformed?.Performed!;
+                    DataType? v_ = UnilateralMastectomyRightPerformed?.Performed;
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
-                        DataType? y_ = UnilateralMastectomyRightPerformed?.Performed!;
+                        DataType? y_ = UnilateralMastectomyRightPerformed?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         f_ = z_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType? aa_ = UnilateralMastectomyRightPerformed?.Performed!;
+                        DataType? aa_ = UnilateralMastectomyRightPerformed?.Performed;
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlQuantity>;
                         if (ac_)
                         {
-                            DataType? ad_ = UnilateralMastectomyRightPerformed?.Performed!;
+                            DataType? ad_ = UnilateralMastectomyRightPerformed?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             f_ = ae_ as CqlInterval<CqlQuantity?>;
                         }
@@ -301,14 +301,14 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
                 }
             }
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime? h_ = context!.Operators.End(g_);
+            CqlDateTime? h_ = context.Operators.End(g_);
             CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
-            CqlDateTime? j_ = context!.Operators.End(i_);
-            bool? k_ = context!.Operators.SameOrBefore(h_, j_, (string?)default);
+            CqlDateTime? j_ = context.Operators.End(i_);
+            bool? k_ = context.Operators.SameOrBefore(h_, j_, (string?)default);
             return k_;
         }
 
-        IEnumerable<Procedure?>? e_ = context!.Operators.Where<Procedure?>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
@@ -322,16 +322,16 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Condition?>? Left_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Status_Post_Left_Mastectomy(context);
-        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? c_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? d_ = context!.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
         CqlValueSet? e_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
-        IEnumerable<Condition?>? f_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? g_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? h_ = context!.Operators.Union<Condition?>(f_ as IEnumerable<Condition?>, g_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? h_ = context.Operators.Union<Condition?>(f_ as IEnumerable<Condition?>, g_ as IEnumerable<Condition?>);
 
         bool? i_(Condition? UnilateralMastectomyDiagnosis) {
-            List<CodeableConcept?>? o_ = UnilateralMastectomyDiagnosis?.BodySite!;
+            List<CodeableConcept>? o_ = UnilateralMastectomyDiagnosis?.BodySite;
 
             CqlConcept? p_(CodeableConcept? @this) {
                 CqlConcept? t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
@@ -341,30 +341,30 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
 
             bool? q_(CqlConcept? S) {
                 CqlCode? u_ = this.Left__qualifier_value_(context);
-                CqlConcept? v_ = context!.Operators.ConvertCodeToConcept(u_);
-                bool? w_ = context!.Operators.Equivalent(S, v_);
+                CqlConcept? v_ = context.Operators.ConvertCodeToConcept(u_);
+                bool? w_ = context.Operators.Equivalent(S, v_);
                 return w_;
             }
 
-            IEnumerable<CqlConcept?>? r_ = context!.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)o_, p_, q_);
-            bool? s_ = context!.Operators.Exists<CqlConcept?>(r_!);
+            IEnumerable<CqlConcept?>? r_ = context.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)o_, p_, q_);
+            bool? s_ = context.Operators.Exists<CqlConcept?>(r_!);
             return s_;
         }
 
-        IEnumerable<Condition?>? j_ = context!.Operators.Where<Condition?>(h_, i_);
-        IEnumerable<Condition?>? k_ = context!.Operators.Union<Condition?>(d_, j_);
+        IEnumerable<Condition?>? j_ = context.Operators.Where<Condition?>(h_, i_);
+        IEnumerable<Condition?>? k_ = context.Operators.Union<Condition?>(d_, j_);
         IEnumerable<Condition?>? l_ = Status_1_15_000.Instance.verified(context, k_);
 
         bool? m_(Condition? LeftMastectomy) {
             CqlInterval<CqlDateTime?>? x_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LeftMastectomy);
-            CqlDateTime? y_ = context!.Operators.Start(x_);
+            CqlDateTime? y_ = context.Operators.Start(x_);
             CqlInterval<CqlDateTime?>? z_ = this.Measurement_Period(context);
-            CqlDateTime? aa_ = context!.Operators.End(z_);
-            bool? ab_ = context!.Operators.SameOrBefore(y_, aa_, (string?)default);
+            CqlDateTime? aa_ = context.Operators.End(z_);
+            bool? ab_ = context.Operators.SameOrBefore(y_, aa_, (string?)default);
             return ab_;
         }
 
-        IEnumerable<Condition?>? n_ = context!.Operators.Where<Condition?>(l_, m_);
+        IEnumerable<Condition?>? n_ = context.Operators.Where<Condition?>(l_, m_);
         return n_;
     }
 
@@ -378,50 +378,50 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Procedure?>? Left_Mastectomy_Procedure_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Unilateral_Mastectomy_Left(context);
-        IEnumerable<Procedure?>? b_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
         bool? d_(Procedure? UnilateralMastectomyLeftPerformed) {
             object? f_;
-            DataType? l_ = UnilateralMastectomyLeftPerformed?.Performed!;
+            DataType? l_ = UnilateralMastectomyLeftPerformed?.Performed;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType? o_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                DataType? o_ = UnilateralMastectomyLeftPerformed?.Performed;
                 object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 f_ = p_ as CqlDateTime;
             }
             else
             {
-                DataType? q_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                DataType? q_ = UnilateralMastectomyLeftPerformed?.Performed;
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
-                    DataType? t_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                    DataType? t_ = UnilateralMastectomyLeftPerformed?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     f_ = u_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? v_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                    DataType? v_ = UnilateralMastectomyLeftPerformed?.Performed;
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
-                        DataType? y_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                        DataType? y_ = UnilateralMastectomyLeftPerformed?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         f_ = z_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType? aa_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                        DataType? aa_ = UnilateralMastectomyLeftPerformed?.Performed;
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlQuantity>;
                         if (ac_)
                         {
-                            DataType? ad_ = UnilateralMastectomyLeftPerformed?.Performed!;
+                            DataType? ad_ = UnilateralMastectomyLeftPerformed?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             f_ = ae_ as CqlInterval<CqlQuantity?>;
                         }
@@ -433,14 +433,14 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
                 }
             }
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime? h_ = context!.Operators.End(g_);
+            CqlDateTime? h_ = context.Operators.End(g_);
             CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
-            CqlDateTime? j_ = context!.Operators.End(i_);
-            bool? k_ = context!.Operators.SameOrBefore(h_, j_, (string?)default);
+            CqlDateTime? j_ = context.Operators.End(i_);
+            bool? k_ = context.Operators.SameOrBefore(h_, j_, (string?)default);
             return k_;
         }
 
-        IEnumerable<Procedure?>? e_ = context!.Operators.Where<Procedure?>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
@@ -454,21 +454,21 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Condition?>? Bilateral_Mastectomy_Diagnosis_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.History_of_bilateral_mastectomy(context);
-        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? c_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? d_ = context!.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
         IEnumerable<Condition?>? e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition? BilateralMastectomyHistory) {
             CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BilateralMastectomyHistory);
-            CqlDateTime? i_ = context!.Operators.Start(h_);
+            CqlDateTime? i_ = context.Operators.Start(h_);
             CqlInterval<CqlDateTime?>? j_ = this.Measurement_Period(context);
-            CqlDateTime? k_ = context!.Operators.End(j_);
-            bool? l_ = context!.Operators.SameOrBefore(i_, k_, (string?)default);
+            CqlDateTime? k_ = context.Operators.End(j_);
+            bool? l_ = context.Operators.SameOrBefore(i_, k_, (string?)default);
             return l_;
         }
 
-        IEnumerable<Condition?>? g_ = context!.Operators.Where<Condition?>(e_, f_);
+        IEnumerable<Condition?>? g_ = context.Operators.Where<Condition?>(e_, f_);
         return g_;
     }
 
@@ -482,50 +482,50 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private IEnumerable<Procedure?>? Bilateral_Mastectomy_Procedure_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Bilateral_Mastectomy(context);
-        IEnumerable<Procedure?>? b_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
         bool? d_(Procedure? BilateralMastectomyPerformed) {
             object? f_;
-            DataType? l_ = BilateralMastectomyPerformed?.Performed!;
+            DataType? l_ = BilateralMastectomyPerformed?.Performed;
             object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType? o_ = BilateralMastectomyPerformed?.Performed!;
+                DataType? o_ = BilateralMastectomyPerformed?.Performed;
                 object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 f_ = p_ as CqlDateTime;
             }
             else
             {
-                DataType? q_ = BilateralMastectomyPerformed?.Performed!;
+                DataType? q_ = BilateralMastectomyPerformed?.Performed;
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
-                    DataType? t_ = BilateralMastectomyPerformed?.Performed!;
+                    DataType? t_ = BilateralMastectomyPerformed?.Performed;
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     f_ = u_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType? v_ = BilateralMastectomyPerformed?.Performed!;
+                    DataType? v_ = BilateralMastectomyPerformed?.Performed;
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
-                        DataType? y_ = BilateralMastectomyPerformed?.Performed!;
+                        DataType? y_ = BilateralMastectomyPerformed?.Performed;
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         f_ = z_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType? aa_ = BilateralMastectomyPerformed?.Performed!;
+                        DataType? aa_ = BilateralMastectomyPerformed?.Performed;
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlQuantity>;
                         if (ac_)
                         {
-                            DataType? ad_ = BilateralMastectomyPerformed?.Performed!;
+                            DataType? ad_ = BilateralMastectomyPerformed?.Performed;
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             f_ = ae_ as CqlInterval<CqlQuantity?>;
                         }
@@ -537,14 +537,14 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
                 }
             }
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime? h_ = context!.Operators.End(g_);
+            CqlDateTime? h_ = context.Operators.End(g_);
             CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
-            CqlDateTime? j_ = context!.Operators.End(i_);
-            bool? k_ = context!.Operators.SameOrBefore(h_, j_, (string?)default);
+            CqlDateTime? j_ = context.Operators.End(i_);
+            bool? k_ = context.Operators.SameOrBefore(h_, j_, (string?)default);
             return k_;
         }
 
-        IEnumerable<Procedure?>? e_ = context!.Operators.Where<Procedure?>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
@@ -559,29 +559,29 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
         IEnumerable<Condition?>? b_ = this.Right_Mastectomy_Diagnosis(context);
-        bool? c_ = context!.Operators.Exists<Condition?>(b_!);
+        bool? c_ = context.Operators.Exists<Condition?>(b_!);
         IEnumerable<Procedure?>? d_ = this.Right_Mastectomy_Procedure(context);
-        bool? e_ = context!.Operators.Exists<Procedure?>(d_!);
-        bool? f_ = context!.Operators.Or(c_, e_);
+        bool? e_ = context.Operators.Exists<Procedure?>(d_!);
+        bool? f_ = context.Operators.Or(c_, e_);
         IEnumerable<Condition?>? g_ = this.Left_Mastectomy_Diagnosis(context);
-        bool? h_ = context!.Operators.Exists<Condition?>(g_!);
+        bool? h_ = context.Operators.Exists<Condition?>(g_!);
         IEnumerable<Procedure?>? i_ = this.Left_Mastectomy_Procedure(context);
-        bool? j_ = context!.Operators.Exists<Procedure?>(i_!);
-        bool? k_ = context!.Operators.Or(h_, j_);
-        bool? l_ = context!.Operators.And(f_, k_);
-        bool? m_ = context!.Operators.Or(a_, l_);
+        bool? j_ = context.Operators.Exists<Procedure?>(i_!);
+        bool? k_ = context.Operators.Or(h_, j_);
+        bool? l_ = context.Operators.And(f_, k_);
+        bool? m_ = context.Operators.Or(a_, l_);
         IEnumerable<Condition?>? n_ = this.Bilateral_Mastectomy_Diagnosis(context);
-        bool? o_ = context!.Operators.Exists<Condition?>(n_!);
-        bool? p_ = context!.Operators.Or(m_, o_);
+        bool? o_ = context.Operators.Exists<Condition?>(n_!);
+        bool? p_ = context.Operators.Or(m_, o_);
         IEnumerable<Procedure?>? q_ = this.Bilateral_Mastectomy_Procedure(context);
-        bool? r_ = context!.Operators.Exists<Procedure?>(q_!);
-        bool? s_ = context!.Operators.Or(p_, r_);
+        bool? r_ = context.Operators.Exists<Procedure?>(q_!);
+        bool? s_ = context.Operators.Or(p_, r_);
         bool? t_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
-        bool? u_ = context!.Operators.Or(s_, t_);
+        bool? u_ = context.Operators.Or(s_, t_);
         bool? v_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_Living_Long_Term_in_a_Nursing_Home(context);
-        bool? w_ = context!.Operators.Or(u_, v_);
+        bool? w_ = context.Operators.Or(u_, v_);
         bool? x_ = PalliativeCare_1_18_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
-        bool? y_ = context!.Operators.Or(w_, x_);
+        bool? y_ = context.Operators.Or(w_, x_);
         return y_;
     }
 
@@ -595,11 +595,11 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private CqlDateTime? October_1_Two_Years_Prior_to_the_Measurement_Period_Compute(CqlContext context)
     {
         CqlInterval<CqlDateTime?>? a_ = this.Measurement_Period(context);
-        CqlDateTime? b_ = context!.Operators.Start(a_);
-        int? c_ = context!.Operators.DateTimeComponentFrom(b_, "year");
-        int? d_ = context!.Operators.Subtract(c_, 2);
-        decimal? e_ = context!.Operators.ConvertIntegerToDecimal(0);
-        CqlDateTime? f_ = context!.Operators.DateTime(d_, 10, 1, 0, 0, 0, 0, e_);
+        CqlDateTime? b_ = context.Operators.Start(a_);
+        int? c_ = context.Operators.DateTimeComponentFrom(b_, "year");
+        int? d_ = context.Operators.Subtract(c_, 2);
+        decimal? e_ = context.Operators.ConvertIntegerToDecimal(0);
+        CqlDateTime? f_ = context.Operators.DateTime(d_, 10, 1, 0, 0, 0, 0, e_);
         return f_;
     }
 
@@ -613,23 +613,23 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Numerator_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Mammography(context);
-        IEnumerable<Observation?>? b_ = context!.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
         IEnumerable<Observation?>? c_ = Status_1_15_000.Instance.isDiagnosticStudyPerformed(context, b_);
 
         bool? d_(Observation? Mammogram) {
-            DataType? f_ = Mammogram?.Effective!;
+            DataType? f_ = Mammogram?.Effective;
             object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            CqlDateTime? i_ = context!.Operators.End(h_);
+            CqlDateTime? i_ = context.Operators.End(h_);
             CqlDateTime? j_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period(context);
             CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
-            CqlDateTime? l_ = context!.Operators.End(k_);
-            CqlInterval<CqlDateTime?>? m_ = context!.Operators.Interval(j_, l_, true, true);
-            bool? n_ = context!.Operators.In<CqlDateTime?>(i_, m_, "day");
+            CqlDateTime? l_ = context.Operators.End(k_);
+            CqlInterval<CqlDateTime?>? m_ = context.Operators.Interval(j_, l_, true, true);
+            bool? n_ = context.Operators.In<CqlDateTime?>(i_, m_, "day");
             return n_;
         }
 
-        bool? e_ = context!.Operators.WhereAny<Observation?>(c_, d_);
+        bool? e_ = context.Operators.WhereAny<Observation?>(c_, d_);
         return e_;
     }
 
@@ -695,15 +695,15 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Stratification_1_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement!;
-        string? c_ = b_?.Value!;
-        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context!.Operators.End(e_);
-        CqlDate? g_ = context!.Operators.DateFrom(f_);
-        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context!.Operators.Interval(42, 51, true, true);
-        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context.Operators.Interval(42, 51, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 
@@ -717,15 +717,15 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
     private bool? Stratification_2_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement!;
-        string? c_ = b_?.Value!;
-        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context!.Operators.End(e_);
-        CqlDate? g_ = context!.Operators.DateFrom(f_);
-        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context!.Operators.Interval(52, 74, true, true);
-        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context.Operators.Interval(52, 74, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 

@@ -113,6 +113,14 @@ internal partial class CSharpEmitter
         {
             var parameter = parameters[i];
             var code = child(a).Code;
+            var parameterNullability = NullabilityInfoContext.Create(parameter);
+            if (!typeof(Delegate).IsAssignableFrom(parameter.ParameterType)
+                && RequiresNestedNotNull(parameterNullability)
+                && (a.Type.IsNullableValueType(out _) || !a.Type.IsValueType))
+            {
+                code = $"({ToCSharpParameterType(parameter, parameterNullability)}){code.ParenthesizeIfNeeded()}";
+            }
+
             if (ShouldApplyNullForgivingOperator(parameter, a))
                 code = $"{code.ParenthesizeIfNeeded()}!";
 
@@ -140,21 +148,55 @@ internal partial class CSharpEmitter
         return argument.Type.IsNullableValueType(out _) || !argument.Type.IsValueType;
     }
 
-    private static bool RequiresNotNull(System.Reflection.NullabilityInfo info)
+    private static bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
     {
-        if (info.ReadState == NullabilityState.NotNull)
+        if (value is CodeLambda)
+            return false;
+
+        var readState = GetReadStateOrUnknown(member);
+        if (readState == NullabilityState.Nullable)
+            return false;
+
+        return value.Type.IsNullableValueType(out _) || !value.Type.IsValueType;
+    }
+
+    private static bool RequiresNotNull(System.Reflection.NullabilityInfo info)
+        => info.ReadState == NullabilityState.NotNull;
+
+    private static bool RequiresNestedNotNull(System.Reflection.NullabilityInfo info)
+    {
+        if (info.ElementType is { ReadState: NullabilityState.NotNull })
             return true;
 
-        if (info.ElementType is not null && RequiresNotNull(info.ElementType))
+        if (info.ElementType is not null && RequiresNestedNotNull(info.ElementType))
             return true;
 
         foreach (var genericTypeArgument in info.GenericTypeArguments)
         {
-            if (RequiresNotNull(genericTypeArgument))
+            if (genericTypeArgument.ReadState == NullabilityState.NotNull
+                || RequiresNestedNotNull(genericTypeArgument))
+            {
                 return true;
+            }
         }
 
         return false;
+    }
+
+    private string ToCSharpParameterType(ParameterInfo parameter, System.Reflection.NullabilityInfo? info = null)
+    {
+        var parameterType = parameter.ParameterType;
+        var typeSyntax = _typeToCSharpConverter.ToCSharp(parameterType);
+        if (parameterType.IsValueType
+            || parameterType.IsPointer
+            || parameterType.IsByRef
+            || parameterType.IsGenericParameter)
+        {
+            return typeSyntax;
+        }
+
+        info ??= NullabilityInfoContext.Create(parameter);
+        return info.ReadState == NullabilityState.NotNull ? typeSyntax : $"{typeSyntax}?";
     }
 
     private string RenderGenericMethodTypeArgument(MethodInfo method, int index, Type typeArgument)
@@ -170,6 +212,52 @@ internal partial class CSharpEmitter
         return hasReferenceTypeConstraint
             ? _typeToCSharpConverter.ToCSharp(typeArgument)
             : _typeToCSharpConverter.ToCSharpDeclaration(typeArgument);
+    }
+
+    internal string ToCSharpDeclaration(CodeExpression node)
+    {
+        if (node is not CodeProperty property)
+            return _typeToCSharpConverter.ToCSharpDeclaration(node.Type);
+
+        if (_typeToCSharpConverter.ShouldUseTupleType(property.Type))
+            return _typeToCSharpConverter.ToCSharpDeclaration(property.Type);
+
+        var type = property.Type;
+        if (type.IsValueType || type.IsPointer || type.IsByRef || type.IsGenericParameter)
+            return _typeToCSharpConverter.ToCSharp(type);
+
+        var readState = GetReadStateOrUnknown(property.Member);
+
+        var nullConditional = property.NullConditional
+            || property.Receiver is { } receiver
+            && (receiver.Type.IsNullableValueType(out _)
+                || _typeToCSharpConverter.ShouldUseTupleType(receiver.Type));
+
+        var topLevelNullable = nullConditional || readState is not NullabilityState.NotNull;
+        var typeSyntax = _typeToCSharpConverter.ToCSharp(type);
+        return topLevelNullable ? $"{typeSyntax}?" : typeSyntax;
+
+    }
+
+    private static NullabilityState GetReadStateOrUnknown(MemberInfo member)
+    {
+        try
+        {
+            return member switch
+            {
+                PropertyInfo p => NullabilityInfoContext.Create(p).ReadState,
+                FieldInfo f => NullabilityInfoContext.Create(f).ReadState,
+                _ => NullabilityState.Unknown,
+            };
+        }
+        catch (NotSupportedException)
+        {
+            return NullabilityState.Unknown;
+        }
+        catch (NotImplementedException)
+        {
+            return NullabilityState.Unknown;
+        }
     }
 
     /// <summary>
@@ -336,9 +424,7 @@ internal partial class CSharpEmitter
             ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
             : child(receiver).Code.ParenthesizeIfNeeded();
 
-        if (!property.NullConditional
-            && !receiver.Type.IsValueType
-            && !_typeToCSharpConverter.ShouldUseTupleType(receiver.Type))
+        if (!property.NullConditional && receiver is CodeCast { Kind: CodeCastKind.As })
             target = $"{target}!";
 
         // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
@@ -579,6 +665,14 @@ internal partial class CSharpEmitter
         var arguments = string.Join(", ", @new.Arguments.Select((a, i) =>
         {
             var code = child(a).Code;
+            var parameterNullability = NullabilityInfoContext.Create(parameters[i]);
+            if (!typeof(Delegate).IsAssignableFrom(parameters[i].ParameterType)
+                && RequiresNestedNotNull(parameterNullability)
+                && (a.Type.IsNullableValueType(out _) || !a.Type.IsValueType))
+            {
+                code = $"({ToCSharpParameterType(parameters[i], parameterNullability)}){code.ParenthesizeIfNeeded()}";
+            }
+
             if (ShouldApplyNullForgivingOperator(parameters[i], a))
                 code = $"{code.ParenthesizeIfNeeded()}!";
             return code;
@@ -631,7 +725,11 @@ internal partial class CSharpEmitter
         {
             foreach (var binding in memberInit.Bindings)
             {
-                isb.Append($"{binding.Member.Name} = {child(binding.Value).Code}");
+                var valueCode = child(binding.Value).Code;
+                if (ShouldApplyNullForgivingOperator(binding.Member, binding.Value))
+                    valueCode = $"{valueCode.ParenthesizeIfNeeded()}!";
+
+                isb.Append($"{binding.Member.Name} = {valueCode}");
                 isb.AppendLine(",");
             }
         }

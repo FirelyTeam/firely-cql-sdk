@@ -17,17 +17,21 @@ internal static class LibrarySetsDirs
     public static class Demo
     {
         public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "Demo", "Elm");
+        public static DirectoryInfo AuthoringCSharpDir { get; } = GetDir("Demo", "Measures.Authoring", "CSharp");
+        public static DirectoryInfo DemoCSharpDir { get; } = GetDir("Demo", "Measures.Demo", "CSharp");
         public static DirectoryInfo ResourcesDir { get; } = GetDir("LibrarySets", "Demo", "Resources");
     }
 
     public static class DqmQiCore2025
     {
         public static DirectoryInfo ElmDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Elm");
+        public static DirectoryInfo CSharpDir { get; } = GetDir("Demo", "Measures.dqm-content-qicore-2025", "CSharp");
         public static DirectoryInfo ExtractedCSharpDir { get; } = GetDir("LibrarySets", "dqm-content-qicore-2025", "Extracted", "CSharp");
     }
 
     public static class CoreTests
     {
+        public static DirectoryInfo Hl7ElmDir { get; } = GetDir("Cql", "CoreTests", "Input", "ELM", "HL7");
         public static DirectoryInfo CSharpDir { get; } = GetDir("Cql", "CoreTests", "CSharp");
     }
 

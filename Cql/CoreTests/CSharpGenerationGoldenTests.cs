@@ -8,10 +8,16 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Iso8601;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Model;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CoreTests;
 
@@ -76,6 +82,24 @@ public class CSharpGenerationGoldenTests
             // resource); its dependencies are generated but have no golden counterpart.
             goldenCorpusIsComplete: false);
 
+    [TestMethod]
+    public void FHIRConversionTest_CSharp_Matches_CheckedInFile() =>
+        AssertGeneratedCSharpMatchesGoldenFile(
+            LibrarySetsDirs.CoreTests.Hl7ElmDir,
+            "FHIRConversionTest",
+            LibrarySetsDirs.CoreTests.CSharpDir,
+            "FHIRConversionTest-2023.0.0",
+            GenerateWithToolkit,
+            "2023.0.0");
+
+    [TestMethod]
+    public void CheckedInGeneratedCorpora_AreNullableWarningClean()
+    {
+        AssertNoCs86xxWarnings("CoreTestsCSharp", LibrarySetsDirs.CoreTests.CSharpDir);
+        AssertNoCs86xxWarnings("DemoMeasuresAuthoring", LibrarySetsDirs.Demo.AuthoringCSharpDir);
+        AssertNoCs86xxWarnings("RR23", LibrarySetsDirs.RR23.CSharpDir);
+    }
+
     private static Dictionary<string, string> GenerateWithToolkit(LibrarySet librarySet)
     {
         var elmToolkit =
@@ -127,6 +151,30 @@ public class CSharpGenerationGoldenTests
                 extraGenerated.Count,
                 $"C# was generated for libraries without a checked-in golden file: {string.Join(", ", extraGenerated)}.");
         }
+    }
+
+    private static void AssertGeneratedCSharpMatchesGoldenFile(
+        DirectoryInfo elmDir,
+        string topLibraryName,
+        DirectoryInfo goldenCSharpDir,
+        string libraryIdentifier,
+        Func<LibrarySet, Dictionary<string, string>> generate,
+        string version = "")
+    {
+        LibrarySet librarySet = new();
+        librarySet.LoadLibraryAndDependencies(elmDir, topLibraryName, version);
+
+        var generatedByIdentifier = generate(librarySet);
+        Assert.IsTrue(
+            generatedByIdentifier.TryGetValue(libraryIdentifier, out var generated),
+            $"No C# was generated for golden file {libraryIdentifier}.g.cs. Generated libraries: {string.Join(", ", generatedByIdentifier.Keys)}.");
+
+        var goldenPath = Path.Combine(goldenCSharpDir.FullName, $"{libraryIdentifier}.g.cs");
+        Assert.IsTrue(File.Exists(goldenPath), $"Missing golden file: {goldenPath}");
+
+        AssertNullableConventions(generated!);
+        var golden = File.ReadAllText(goldenPath);
+        AssertEqualCSharp(golden, generated!, libraryIdentifier, goldenPath);
     }
 
     /// <summary>Asserts equality (line endings normalized), failing with the first differing
@@ -185,5 +233,52 @@ public class CSharpGenerationGoldenTests
         Assert.IsFalse(
             hasBlanketNullablePragmaDisable,
             "Generated C# must not suppress nullable warnings via blanket CS86xx pragma disables.");
+    }
+
+    private static void AssertNoCs86xxWarnings(string assemblyName, DirectoryInfo csharpDir)
+    {
+        var gcsFiles = csharpDir.GetFiles("*.g.cs");
+        Assert.AreNotEqual(0, gcsFiles.Length, $"No generated files found in {csharpDir.FullName}.");
+
+        var syntaxTrees = gcsFiles
+            .Select(f => CSharpSyntaxTree.ParseText(File.ReadAllText(f.FullName), path: f.FullName))
+            .ToArray();
+
+        var compilation = CSharpCompilation.Create(
+            assemblyName,
+            syntaxTrees: syntaxTrees,
+            references: GetCompilationReferences(),
+            options: new CSharpCompilationOptions(
+                outputKind: OutputKind.DynamicallyLinkedLibrary,
+                nullableContextOptions: NullableContextOptions.Enable));
+
+        var nullableWarnings = compilation.GetDiagnostics()
+            .Where(d => d.Severity == DiagnosticSeverity.Warning && d.Id.StartsWith("CS86", StringComparison.Ordinal))
+            .ToList();
+
+        Assert.AreEqual(
+            0,
+            nullableWarnings.Count,
+            $"Expected no CS86xx warnings in {csharpDir.FullName}. Found:{Environment.NewLine}{string.Join(Environment.NewLine, nullableWarnings.Take(200))}");
+    }
+
+    private static IEnumerable<MetadataReference> GetCompilationReferences()
+    {
+        var tpa = AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES") as string
+            ?? throw new InvalidOperationException("Trusted platform assemblies were not available.");
+
+        var references = tpa
+            .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
+            .Select(path => MetadataReference.CreateFromFile(path))
+            .ToList();
+
+        references.Add(MetadataReference.CreateFromFile(typeof(CqlDefinitionAttribute).Assembly.Location));
+        references.Add(MetadataReference.CreateFromFile(typeof(CqlContext).Assembly.Location));
+        references.Add(MetadataReference.CreateFromFile(typeof(DateIso8601).Assembly.Location));
+        references.Add(MetadataReference.CreateFromFile(typeof(Resource).Assembly.Location));
+
+        return references
+            .GroupBy(r => r.Display, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.First());
     }
 }

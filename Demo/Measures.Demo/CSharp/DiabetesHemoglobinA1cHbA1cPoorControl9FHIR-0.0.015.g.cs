@@ -115,8 +115,8 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -182,21 +182,21 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private IEnumerable<Encounter?>? Telehealth_Services_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter?>? b_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
+        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 
         bool? c_(Encounter? TelehealthEncounter) {
-            Code<Encounter.EncounterStatus>? e_ = TelehealthEncounter?.StatusElement!;
+            Code<Encounter.EncounterStatus>? e_ = TelehealthEncounter?.StatusElement;
             string? f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
-            bool? g_ = context!.Operators.Equal(f_, "finished");
+            bool? g_ = context.Operators.Equal(f_, "finished");
             CqlInterval<CqlDateTime?>? h_ = this.Measurement_Period(context);
-            Period? i_ = TelehealthEncounter?.Period!;
+            Period? i_ = TelehealthEncounter?.Period;
             CqlInterval<CqlDateTime?>? j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, i_);
-            bool? k_ = context!.Operators.IntervalIncludesInterval<CqlDateTime?>(h_, j_, (string?)default);
-            bool? l_ = context!.Operators.And(g_, k_);
+            bool? k_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(h_, j_, (string?)default);
+            bool? l_ = context.Operators.And(g_, k_);
             return l_;
         }
 
-        IEnumerable<Encounter?>? d_ = context!.Operators.Where<Encounter?>(b_, c_);
+        IEnumerable<Encounter?>? d_ = context.Operators.Where<Encounter?>(b_, c_);
         return d_;
     }
 
@@ -210,32 +210,32 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Initial_Population_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Date? b_ = a_?.BirthDateElement!;
-        string? c_ = b_?.Value!;
-        CqlDate? d_ = context!.Operators.ConvertStringToDate(c_);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
         CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
-        CqlDateTime? f_ = context!.Operators.Start(e_);
-        CqlDate? g_ = context!.Operators.DateFrom(f_);
-        int? h_ = context!.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?>? i_ = context!.Operators.Interval(18, 75, true, false);
-        bool? j_ = context!.Operators.In<int?>(h_, i_, (string?)default);
+        CqlDateTime? f_ = context.Operators.Start(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
+        int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+        CqlInterval<int?>? i_ = context.Operators.Interval(18, 75, true, false);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
         IEnumerable<Encounter?>? k_ = AdultOutpatientEncountersFHIR4_2_2_000.Instance.Qualifying_Encounters(context);
         IEnumerable<Encounter?>? l_ = this.Telehealth_Services(context);
-        IEnumerable<Encounter?>? m_ = context!.Operators.Union<Encounter?>(k_, l_);
-        bool? n_ = context!.Operators.Exists<Encounter?>(m_!);
-        bool? o_ = context!.Operators.And(j_, n_);
+        IEnumerable<Encounter?>? m_ = context.Operators.Union<Encounter?>(k_, l_);
+        bool? n_ = context.Operators.Exists<Encounter?>(m_!);
+        bool? o_ = context.Operators.And(j_, n_);
         CqlValueSet? p_ = this.Diabetes(context);
-        IEnumerable<Condition?>? q_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        IEnumerable<Condition?>? q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
         bool? r_(Condition? Diabetes) {
             CqlInterval<CqlDateTime?>? u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
             CqlInterval<CqlDateTime?>? v_ = this.Measurement_Period(context);
-            bool? w_ = context!.Operators.Overlaps(u_!, v_!, (string?)default);
+            bool? w_ = context.Operators.Overlaps(u_!, v_!, (string?)default);
             return w_;
         }
 
-        bool? s_ = context!.Operators.WhereAny<Condition?>(q_, r_);
-        bool? t_ = context!.Operators.And(o_, s_);
+        bool? s_ = context.Operators.WhereAny<Condition?>(q_, r_);
+        bool? t_ = context.Operators.And(o_, s_);
         return t_;
     }
 
@@ -262,36 +262,36 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private Observation? Most_Recent_HbA1c_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.HbA1c_Laboratory_Test(context);
-        IEnumerable<Observation?>? b_ = context!.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? c_(Observation? RecentHbA1c) {
-            Code<ObservationStatus>? h_ = RecentHbA1c?.StatusElement!;
+            Code<ObservationStatus>? h_ = RecentHbA1c?.StatusElement;
             string? i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
             string?[]? j_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? k_ = context!.Operators.In<string?>(i_, (IEnumerable<string?>?)j_);
-            DataType? l_ = RecentHbA1c?.Effective!;
+            bool? k_ = context.Operators.In<string?>(i_, (IEnumerable<string?>?)j_);
+            DataType? l_ = RecentHbA1c?.Effective;
             CqlDateTime? m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, l_);
             CqlInterval<CqlDateTime?>? n_ = this.Measurement_Period(context);
-            bool? o_ = context!.Operators.In<CqlDateTime?>(m_, n_, (string?)default);
-            bool? p_ = context!.Operators.And(k_, o_);
+            bool? o_ = context.Operators.In<CqlDateTime?>(m_, n_, (string?)default);
+            bool? p_ = context.Operators.And(k_, o_);
             return p_;
         }
 
-        IEnumerable<Observation?>? d_ = context!.Operators.Where<Observation?>(b_, c_);
+        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation?>(b_, c_);
 
         object e_(Observation? @this) {
-            DataType? q_ = @this?.Effective!;
+            DataType? q_ = @this?.Effective;
             CqlInterval<CqlDateTime?>? r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, q_);
-            CqlDateTime? s_ = context!.Operators.Start(r_);
+            CqlDateTime? s_ = context.Operators.Start(r_);
             return s_!;
         }
 
-        IEnumerable<Observation?>? f_ = context!.Operators.SortBy<Observation?>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation? g_ = context!.Operators.Last<Observation?>(f_!);
+        IEnumerable<Observation?>? f_ = context.Operators.SortBy<Observation?>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation? g_ = context.Operators.Last<Observation?>(f_!);
         return g_;
     }
 
@@ -305,9 +305,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Has_Most_Recent_HbA1c_Without_Result_Compute(CqlContext context)
     {
         Observation? a_ = this.Most_Recent_HbA1c(context);
-        bool? b_ = context!.Operators.Not((bool?)(a_ is null));
-        DataType? c_ = a_?.Value!;
-        bool? d_ = context!.Operators.And(b_, (bool?)(c_ is null));
+        bool? b_ = context.Operators.Not((bool?)(a_ is null));
+        DataType? c_ = a_?.Value;
+        bool? d_ = context.Operators.And(b_, (bool?)(c_ is null));
         return d_;
     }
 
@@ -321,10 +321,10 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Has_Most_Recent_Elevated_HbA1c_Compute(CqlContext context)
     {
         Observation? a_ = this.Most_Recent_HbA1c(context);
-        DataType? b_ = a_?.Value!;
+        DataType? b_ = a_?.Value;
         CqlQuantity? c_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, b_ as Quantity);
-        CqlQuantity? d_ = context!.Operators.Quantity(9m, "%");
-        bool? e_ = context!.Operators.Greater(c_, d_);
+        CqlQuantity? d_ = context.Operators.Quantity(9m, "%");
+        bool? e_ = context.Operators.Greater(c_, d_);
         return e_;
     }
 
@@ -338,27 +338,27 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     private bool? Has_No_Record_Of_HbA1c_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.HbA1c_Laboratory_Test(context);
-        IEnumerable<Observation?>? b_ = context!.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
         bool? c_(Observation? NoHbA1c) {
-            Code<ObservationStatus>? f_ = NoHbA1c?.StatusElement!;
+            Code<ObservationStatus>? f_ = NoHbA1c?.StatusElement;
             string? g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
             string?[]? h_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? i_ = context!.Operators.In<string?>(g_, (IEnumerable<string?>?)h_);
-            DataType? j_ = NoHbA1c?.Effective!;
+            bool? i_ = context.Operators.In<string?>(g_, (IEnumerable<string?>?)h_);
+            DataType? j_ = NoHbA1c?.Effective;
             CqlDateTime? k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, j_);
             CqlInterval<CqlDateTime?>? l_ = this.Measurement_Period(context);
-            bool? m_ = context!.Operators.In<CqlDateTime?>(k_, l_, (string?)default);
-            bool? n_ = context!.Operators.And(i_, m_);
+            bool? m_ = context.Operators.In<CqlDateTime?>(k_, l_, (string?)default);
+            bool? n_ = context.Operators.And(i_, m_);
             return n_;
         }
 
-        bool? d_ = context!.Operators.WhereAny<Observation?>(b_, c_);
-        bool? e_ = context!.Operators.Not(d_);
+        bool? d_ = context.Operators.WhereAny<Observation?>(b_, c_);
+        bool? e_ = context.Operators.Not(d_);
         return e_;
     }
 
@@ -373,9 +373,9 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     {
         bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
         bool? b_ = this.Has_Most_Recent_Elevated_HbA1c(context);
-        bool? c_ = context!.Operators.Or(a_, b_);
+        bool? c_ = context.Operators.Or(a_, b_);
         bool? d_ = this.Has_No_Record_Of_HbA1c(context);
-        bool? e_ = context!.Operators.Or(c_, d_);
+        bool? e_ = context.Operators.Or(c_, d_);
         return e_;
     }
 
@@ -390,21 +390,21 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     {
         bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
         bool? b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(context);
-        bool? c_ = context!.Operators.Or(a_, b_);
+        bool? c_ = context.Operators.Or(a_, b_);
         Patient? d_ = this.Patient(context);
-        Date? e_ = d_?.BirthDateElement!;
-        string? f_ = e_?.Value!;
-        CqlDate? g_ = context!.Operators.ConvertStringToDate(f_);
+        Date? e_ = d_?.BirthDateElement;
+        string? f_ = e_?.Value;
+        CqlDate? g_ = context.Operators.ConvertStringToDate(f_);
         CqlInterval<CqlDateTime?>? h_ = this.Measurement_Period(context);
-        CqlDateTime? i_ = context!.Operators.Start(h_);
-        CqlDate? j_ = context!.Operators.DateFrom(i_);
-        int? k_ = context!.Operators.CalculateAgeAt(g_, j_, "year");
-        bool? l_ = context!.Operators.GreaterOrEqual(k_, 65);
+        CqlDateTime? i_ = context.Operators.Start(h_);
+        CqlDate? j_ = context.Operators.DateFrom(i_);
+        int? k_ = context.Operators.CalculateAgeAt(g_, j_, "year");
+        bool? l_ = context.Operators.GreaterOrEqual(k_, 65);
         bool? m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Instance.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(context);
-        bool? n_ = context!.Operators.And(l_, m_);
-        bool? o_ = context!.Operators.Or(c_, n_);
+        bool? n_ = context.Operators.And(l_, m_);
+        bool? o_ = context.Operators.Or(c_, n_);
         bool? p_ = PalliativeCareFHIR_0_6_000.Instance.Palliative_Care_in_the_Measurement_Period(context);
-        bool? q_ = context!.Operators.Or(o_, p_);
+        bool? q_ = context.Operators.Or(o_, p_);
         return q_;
     }
 

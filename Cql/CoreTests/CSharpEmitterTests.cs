@@ -396,14 +396,14 @@ public class CSharpEmitterTests
 
         var instance = new CodeProperty(x, stringLength, nullConditional: false);
         Assert.AreEqual(
-            "{\n    return x!.Length;\n}",
+            "{\n    return x.Length;\n}",
             EmitBody(new CodeLambda([x], instance)));
         Assert.AreEqual(typeof(int), instance.Type);
 
         var nullConditional = new CodeProperty(x, stringLength, nullConditional: true);
         Assert.AreEqual(typeof(int?), nullConditional.Type);
         Assert.AreEqual(
-            "{\n    int? a_ = x?.Length!;\n    return a_;\n}",
+            "{\n    int? a_ = x?.Length;\n    return a_;\n}",
             EmitBody(new CodeLambda([x], nullConditional)));
 
         var newLine = ReflectionUtility.PropertyOf(() => Environment.NewLine);

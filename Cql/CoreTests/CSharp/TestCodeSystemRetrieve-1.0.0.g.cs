@@ -28,8 +28,8 @@ public partial class TestCodeSystemRetrieve_1_0_0 : ILibrary, ISingleton<TestCod
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -43,8 +43,8 @@ public partial class TestCodeSystemRetrieve_1_0_0 : ILibrary, ISingleton<TestCod
     private IEnumerable<Task?>? FulfillTasks_Compute(CqlContext context)
     {
         CqlCode? a_ = TestCodeSystemInclude_1_0_0.Instance.Fulfill_Task(context);
-        IEnumerable<CqlCode?>? b_ = context!.Operators.ToList<CqlCode?>(a_);
-        IEnumerable<Task?>? c_ = context!.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Task"));
+        IEnumerable<CqlCode?>? b_ = context.Operators.ToList<CqlCode?>(a_);
+        IEnumerable<Task?>? c_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Task"));
         return c_;
     }
 

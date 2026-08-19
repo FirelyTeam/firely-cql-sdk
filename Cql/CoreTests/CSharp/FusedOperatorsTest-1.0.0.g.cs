@@ -52,11 +52,11 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
         IEnumerable<int?>? a_ = this.Numbers(context);
 
         bool? b_(int? N) {
-            bool? d_ = context!.Operators.Greater(N, 4);
+            bool? d_ = context.Operators.Greater(N, 4);
             return d_;
         }
 
-        bool? c_ = context!.Operators.WhereAny<int?>(a_, b_);
+        bool? c_ = context.Operators.WhereAny<int?>(a_, b_);
         return c_;
     }
 
@@ -72,18 +72,18 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
         IEnumerable<int?>? a_ = this.Numbers(context);
 
         bool? b_(int? N) {
-            int? e_ = context!.Operators.Modulo(N, 2);
-            bool? f_ = context!.Operators.Equal(e_, 0);
+            int? e_ = context.Operators.Modulo(N, 2);
+            bool? f_ = context.Operators.Equal(e_, 0);
             return f_;
         }
 
 
         int? c_(int? N) {
-            int? g_ = context!.Operators.Multiply(N, 10);
+            int? g_ = context.Operators.Multiply(N, 10);
             return g_;
         }
 
-        IEnumerable<int?>? d_ = context!.Operators.WhereSelect<int?, int?>(a_, b_, c_);
+        IEnumerable<int?>? d_ = context.Operators.WhereSelect<int?, int?>(a_, b_, c_);
         return d_;
     }
 
@@ -99,17 +99,17 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
         IEnumerable<int?>? a_ = this.Numbers(context);
 
         int? b_(int? N) {
-            int? e_ = context!.Operators.Multiply(N, 2);
+            int? e_ = context.Operators.Multiply(N, 2);
             return e_;
         }
 
 
         bool? c_(int? D) {
-            bool? f_ = context!.Operators.Greater(D, 6);
+            bool? f_ = context.Operators.Greater(D, 6);
             return f_;
         }
 
-        IEnumerable<int?>? d_ = context!.Operators.SelectWhere<int?, int?>(a_, b_, c_);
+        IEnumerable<int?>? d_ = context.Operators.SelectWhere<int?, int?>(a_, b_, c_);
         return d_;
     }
 
@@ -125,11 +125,11 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
         IEnumerable<int?>? a_ = this.Numbers(context);
 
         int? b_(int? N) {
-            int? d_ = context!.Operators.Multiply(N, N);
+            int? d_ = context.Operators.Multiply(N, N);
             return d_;
         }
 
-        IEnumerable<int?>? c_ = context!.Operators.SelectDistinct<int?, int?>(a_, b_);
+        IEnumerable<int?>? c_ = context.Operators.SelectDistinct<int?, int?>(a_, b_);
         return c_;
     }
 

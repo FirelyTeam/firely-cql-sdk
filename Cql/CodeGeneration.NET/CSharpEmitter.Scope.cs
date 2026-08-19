@@ -189,7 +189,7 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharpDeclaration(node.Type);
+            var typeSyntax = _emitter.ToCSharpDeclaration(node);
             var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
@@ -202,10 +202,7 @@ internal partial class CSharpEmitter
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
-            var initializer = node is CodeProperty && code is not ("null" or "default")
-                ? $"{code.ParenthesizeIfNeeded()}!"
-                : code;
-            var statement = $"{typeSyntax} {name} = {initializer};";
+            var statement = $"{typeSyntax} {name} = {code};";
             _statements.Add(() => statement);
 
             var atom = new Atom(name, name, local);
@@ -356,7 +353,20 @@ internal partial class CSharpEmitter
 
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
-            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharpDeclaration(resultType)} {resultName};");
+            _statements.Add(() =>
+            {
+                var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(resultType);
+                if (!resultType.IsValueType
+                    && !resultType.IsPointer
+                    && !resultType.IsByRef
+                    && !resultType.IsGenericParameter
+                    && !_emitter._typeToCSharpConverter.ShouldUseTupleType(resultType))
+                {
+                    typeSyntax += "?";
+                }
+
+                return $"{typeSyntax} {resultName};";
+            });
             _statements.Add(() => RenderChain(resultName, cases, @else));
             return new Atom(resultName, resultLocal);
         }
@@ -499,12 +509,7 @@ internal partial class CSharpEmitter
                     if (resultName is null || atom.Node is CodeThrow)
                         isb.AppendLine(TailStatement(atom));
                     else
-                    {
-                        var assignmentCode = atom.Node is CodeProperty && atom.Code is not ("null" or "default")
-                            ? $"{atom.Code.ParenthesizeIfNeeded()}!"
-                            : atom.Code;
-                        isb.AppendLine($"{resultName} = {assignmentCode};");
-                    }
+                        isb.AppendLine($"{resultName} = {atom.Code};");
                 }
             }
             isb.AppendLine("}");

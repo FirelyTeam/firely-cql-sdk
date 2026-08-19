@@ -28,8 +28,8 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -39,15 +39,15 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(AllergyIntolerance? A) {
-            CodeableConcept? c_ = A?.ClinicalStatus!;
+            CodeableConcept? c_ = A?.ClinicalStatus;
             CqlConcept? d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
             CqlCode? e_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
-            CqlConcept? f_ = context!.Operators.ConvertCodeToConcept(e_);
-            bool? g_ = context!.Operators.Equal(d_, f_);
+            CqlConcept? f_ = context.Operators.ConvertCodeToConcept(e_);
+            bool? g_ = context.Operators.Equal(d_, f_);
             return g_;
         }
 
-        IEnumerable<AllergyIntolerance?>? b_ = context!.Operators.Where<AllergyIntolerance?>(Allergy, a_);
+        IEnumerable<AllergyIntolerance?>? b_ = context.Operators.Where<AllergyIntolerance?>(Allergy, a_);
         return b_;
     }
 
@@ -57,15 +57,15 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(Condition? C) {
-            CodeableConcept? c_ = C?.ClinicalStatus!;
+            CodeableConcept? c_ = C?.ClinicalStatus;
             CqlConcept? d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
             CqlCode? e_ = NCQATerminology_1_0_0.Instance.active(context);
-            CqlConcept? f_ = context!.Operators.ConvertCodeToConcept(e_);
-            bool? g_ = context!.Operators.Equal(d_, f_);
+            CqlConcept? f_ = context.Operators.ConvertCodeToConcept(e_);
+            bool? g_ = context.Operators.Equal(d_, f_);
             return g_;
         }
 
-        IEnumerable<Condition?>? b_ = context!.Operators.Where<Condition?>(Condition, a_);
+        IEnumerable<Condition?>? b_ = context.Operators.Where<Condition?>(Condition, a_);
         return b_;
     }
 
@@ -75,13 +75,13 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(Encounter? E) {
-            Code<Encounter.EncounterStatus>? c_ = E?.StatusElement!;
+            Code<Encounter.EncounterStatus>? c_ = E?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
-            bool? e_ = context!.Operators.Equal(d_, "finished");
+            bool? e_ = context.Operators.Equal(d_, "finished");
             return e_;
         }
 
-        IEnumerable<Encounter?>? b_ = context!.Operators.Where<Encounter?>(Enc, a_);
+        IEnumerable<Encounter?>? b_ = context.Operators.Where<Encounter?>(Enc, a_);
         return b_;
     }
 
@@ -91,13 +91,13 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(Immunization? I) {
-            Code<Immunization.ImmunizationStatusCodes>? c_ = I?.StatusElement!;
+            Code<Immunization.ImmunizationStatusCodes>? c_ = I?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
-            bool? e_ = context!.Operators.Equal(d_, "completed");
+            bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
         }
 
-        IEnumerable<Immunization?>? b_ = context!.Operators.Where<Immunization?>(Immunization, a_);
+        IEnumerable<Immunization?>? b_ = context.Operators.Where<Immunization?>(Immunization, a_);
         return b_;
     }
 
@@ -107,13 +107,13 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(MedicationDispense? M) {
-            Code<MedicationDispense.MedicationDispenseStatusCodes>? c_ = M?.StatusElement!;
+            Code<MedicationDispense.MedicationDispenseStatusCodes>? c_ = M?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
-            bool? e_ = context!.Operators.Equal(d_, "completed");
+            bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
         }
 
-        IEnumerable<MedicationDispense?>? b_ = context!.Operators.Where<MedicationDispense?>(Med, a_);
+        IEnumerable<MedicationDispense?>? b_ = context.Operators.Where<MedicationDispense?>(Med, a_);
         return b_;
     }
 
@@ -123,16 +123,16 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(MedicationRequest? M) {
-            Code<MedicationRequest.MedicationrequestStatus>? c_ = M?.StatusElement!;
+            Code<MedicationRequest.MedicationrequestStatus>? c_ = M?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             string?[]? e_ = [
                 "completed",
             ];
-            bool? f_ = context!.Operators.In<string?>(d_, (IEnumerable<string?>?)e_);
+            bool? f_ = context.Operators.In<string?>(d_, (IEnumerable<string?>?)e_);
             return f_;
         }
 
-        IEnumerable<MedicationRequest?>? b_ = context!.Operators.Where<MedicationRequest?>(Med, a_);
+        IEnumerable<MedicationRequest?>? b_ = context.Operators.Where<MedicationRequest?>(Med, a_);
         return b_;
     }
 
@@ -142,13 +142,13 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(Procedure? P) {
-            Code<EventStatus>? c_ = P?.StatusElement!;
+            Code<EventStatus>? c_ = P?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
-            bool? e_ = context!.Operators.Equal(d_, "completed");
+            bool? e_ = context.Operators.Equal(d_, "completed");
             return e_;
         }
 
-        IEnumerable<Procedure?>? b_ = context!.Operators.Where<Procedure?>(Proc, a_);
+        IEnumerable<Procedure?>? b_ = context.Operators.Where<Procedure?>(Proc, a_);
         return b_;
     }
 
@@ -158,17 +158,17 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     {
 
         bool? a_(Procedure? P) {
-            Code<EventStatus>? c_ = P?.StatusElement!;
+            Code<EventStatus>? c_ = P?.StatusElement;
             string? d_ = FHIRHelpers_4_0_001.Instance.ToString(context, c_);
             string?[]? e_ = [
                 "completed",
                 "in-progress",
             ];
-            bool? f_ = context!.Operators.In<string?>(d_, (IEnumerable<string?>?)e_);
+            bool? f_ = context.Operators.In<string?>(d_, (IEnumerable<string?>?)e_);
             return f_;
         }
 
-        IEnumerable<Procedure?>? b_ = context!.Operators.Where<Procedure?>(Proc, a_);
+        IEnumerable<Procedure?>? b_ = context.Operators.Where<Procedure?>(Proc, a_);
         return b_;
     }
 

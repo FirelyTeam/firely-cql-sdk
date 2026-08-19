@@ -59,9 +59,9 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context!.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context!.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context!.Operators.Interval(a_, b_, true, false);
+        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS68FHIRDocumentationCurrentMeds-1.0.000"!, ("Measurement Period")!, c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
@@ -79,8 +79,8 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -146,22 +146,22 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
     private IEnumerable<Encounter?>? Qualifying_Encounter_During_Day_of_Measurement_Period_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Encounter_to_Document_Medications(context);
-        IEnumerable<Encounter?>? b_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
         bool? c_(Encounter? ValidEncounter) {
-            Code<Encounter.EncounterStatus>? e_ = ValidEncounter?.StatusElement!;
-            Encounter.EncounterStatus? f_ = e_?.Value!;
-            Code<Encounter.EncounterStatus>? g_ = context!.Operators.Convert<Code<Encounter.EncounterStatus>?>(f_);
-            bool? h_ = context!.Operators.Equal(g_, "finished");
+            Code<Encounter.EncounterStatus>? e_ = ValidEncounter?.StatusElement;
+            Encounter.EncounterStatus? f_ = e_?.Value;
+            Code<Encounter.EncounterStatus>? g_ = context.Operators.Convert<Code<Encounter.EncounterStatus>?>(f_);
+            bool? h_ = context.Operators.Equal(g_, "finished");
             CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
-            Period? j_ = ValidEncounter?.Period!;
+            Period? j_ = ValidEncounter?.Period;
             CqlInterval<CqlDateTime?>? k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
-            bool? l_ = context!.Operators.IntervalIncludesInterval<CqlDateTime?>(i_, k_, "day");
-            bool? m_ = context!.Operators.And(h_, l_);
+            bool? l_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(i_, k_, "day");
+            bool? m_ = context.Operators.And(h_, l_);
             return m_;
         }
 
-        IEnumerable<Encounter?>? d_ = context!.Operators.Where<Encounter?>(b_, c_);
+        IEnumerable<Encounter?>? d_ = context.Operators.Where<Encounter?>(b_, c_);
         return d_;
     }
 
@@ -204,50 +204,50 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
         bool? b_(Encounter? QualifyingEncounter) {
             CqlCode? d_ = this.Documentation_of_current_medications__procedure_(context);
-            IEnumerable<CqlCode?>? e_ = context!.Operators.ToList<CqlCode?>(d_);
-            IEnumerable<Procedure?>? f_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+            IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode?>(d_);
+            IEnumerable<Procedure?>? f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 
             bool? g_(Procedure? MedicationsDocumented) {
                 object? i_;
-                DataType? x_ = MedicationsDocumented?.Performed!;
+                DataType? x_ = MedicationsDocumented?.Performed;
                 object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                 bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
-                    DataType? aa_ = MedicationsDocumented?.Performed!;
+                    DataType? aa_ = MedicationsDocumented?.Performed;
                     object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                     i_ = ab_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType? ac_ = MedicationsDocumented?.Performed!;
+                    DataType? ac_ = MedicationsDocumented?.Performed;
                     object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                     bool ae_ = ad_ is CqlQuantity;
                     if (ae_)
                     {
-                        DataType? af_ = MedicationsDocumented?.Performed!;
+                        DataType? af_ = MedicationsDocumented?.Performed;
                         object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
                         i_ = ag_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType? ah_ = MedicationsDocumented?.Performed!;
+                        DataType? ah_ = MedicationsDocumented?.Performed;
                         object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
                         bool aj_ = ai_ is CqlInterval<CqlDateTime>;
                         if (aj_)
                         {
-                            DataType? ak_ = MedicationsDocumented?.Performed!;
+                            DataType? ak_ = MedicationsDocumented?.Performed;
                             object? al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                             i_ = al_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            DataType? am_ = MedicationsDocumented?.Performed!;
+                            DataType? am_ = MedicationsDocumented?.Performed;
                             object? an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
                             bool ao_ = an_ is CqlInterval<CqlQuantity>;
                             if (ao_)
                             {
-                                DataType? ap_ = MedicationsDocumented?.Performed!;
+                                DataType? ap_ = MedicationsDocumented?.Performed;
                                 object? aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
                                 i_ = aq_ as CqlInterval<CqlQuantity?>;
                             }
@@ -259,50 +259,50 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     }
                 }
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                CqlDateTime? k_ = context!.Operators.Start(j_);
-                Period? l_ = QualifyingEncounter?.Period!;
+                CqlDateTime? k_ = context.Operators.Start(j_);
+                Period? l_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime?>? m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                bool? n_ = context!.Operators.In<CqlDateTime?>(k_, m_, "day");
+                bool? n_ = context.Operators.In<CqlDateTime?>(k_, m_, "day");
                 object? o_;
-                DataType? ar_ = MedicationsDocumented?.Performed!;
+                DataType? ar_ = MedicationsDocumented?.Performed;
                 object? as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                 bool at_ = as_ is CqlDateTime;
                 if (at_)
                 {
-                    DataType? au_ = MedicationsDocumented?.Performed!;
+                    DataType? au_ = MedicationsDocumented?.Performed;
                     object? av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                     o_ = av_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType? aw_ = MedicationsDocumented?.Performed!;
+                    DataType? aw_ = MedicationsDocumented?.Performed;
                     object? ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
                     bool ay_ = ax_ is CqlQuantity;
                     if (ay_)
                     {
-                        DataType? az_ = MedicationsDocumented?.Performed!;
+                        DataType? az_ = MedicationsDocumented?.Performed;
                         object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
                         o_ = ba_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType? bb_ = MedicationsDocumented?.Performed!;
+                        DataType? bb_ = MedicationsDocumented?.Performed;
                         object? bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
                         bool bd_ = bc_ is CqlInterval<CqlDateTime>;
                         if (bd_)
                         {
-                            DataType? be_ = MedicationsDocumented?.Performed!;
+                            DataType? be_ = MedicationsDocumented?.Performed;
                             object? bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
                             o_ = bf_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            DataType? bg_ = MedicationsDocumented?.Performed!;
+                            DataType? bg_ = MedicationsDocumented?.Performed;
                             object? bh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bg_);
                             bool bi_ = bh_ is CqlInterval<CqlQuantity>;
                             if (bi_)
                             {
-                                DataType? bj_ = MedicationsDocumented?.Performed!;
+                                DataType? bj_ = MedicationsDocumented?.Performed;
                                 object? bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
                                 o_ = bk_ as CqlInterval<CqlQuantity?>;
                             }
@@ -315,20 +315,20 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                 }
                 CqlInterval<CqlDateTime?>? p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
                 bool? q_ = QICoreCommon_4_0_000.Instance.hasEnd(context, p_);
-                bool? r_ = context!.Operators.And(n_, q_);
-                Code<EventStatus>? s_ = MedicationsDocumented?.StatusElement!;
-                EventStatus? t_ = s_?.Value!;
-                string? u_ = context!.Operators.Convert<string?>(t_);
-                bool? v_ = context!.Operators.Equal(u_, "completed");
-                bool? w_ = context!.Operators.And(r_, v_);
+                bool? r_ = context.Operators.And(n_, q_);
+                Code<EventStatus>? s_ = MedicationsDocumented?.StatusElement;
+                EventStatus? t_ = s_?.Value;
+                string? u_ = context.Operators.Convert<string?>(t_);
+                bool? v_ = context.Operators.Equal(u_, "completed");
+                bool? w_ = context.Operators.And(r_, v_);
                 return w_;
             }
 
-            bool? h_ = context!.Operators.WhereAny<Procedure?>(f_, g_);
+            bool? h_ = context.Operators.WhereAny<Procedure?>(f_, g_);
             return h_;
         }
 
-        IEnumerable<Encounter?>? c_ = context!.Operators.Where<Encounter?>(a_, b_);
+        IEnumerable<Encounter?>? c_ = context.Operators.Where<Encounter?>(a_, b_);
         return c_;
     }
 
@@ -345,39 +345,39 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
         bool? b_(Encounter? QualifyingEncounter) {
             CqlCode? d_ = this.Documentation_of_current_medications__procedure_(context);
-            IEnumerable<CqlCode?>? e_ = context!.Operators.ToList<CqlCode?>(d_);
-            IEnumerable<Procedure?>? f_ = context!.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
+            IEnumerable<CqlCode?>? e_ = context.Operators.ToList<CqlCode?>(d_);
+            IEnumerable<Procedure?>? f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
 
             bool? g_(Procedure? MedicationsNotDocumented) {
 
                 bool? i_(Extension? @this) {
-                    FhirUri? ac_ = @this?.UrlElement!;
+                    FhirUri? ac_ = @this?.UrlElement;
                     string? ad_ = FHIRHelpers_4_4_000.Instance.ToString(context, ac_);
-                    bool? ae_ = context!.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
                     return ae_;
                 }
 
 
                 DataType? j_(Extension? @this) {
-                    DataType? af_ = @this?.Value!;
+                    DataType? af_ = @this?.Value;
                     return af_;
                 }
 
-                IEnumerable<DataType?>? k_ = context!.Operators.WhereSelect<Extension?, DataType?>((IEnumerable<Extension?>?)(MedicationsNotDocumented is DomainResource
+                IEnumerable<DataType?>? k_ = context.Operators.WhereSelect<Extension?, DataType?>((IEnumerable<Extension?>?)(MedicationsNotDocumented is DomainResource
                     ? (MedicationsNotDocumented as DomainResource)!.Extension
                     : default), i_, j_);
-                DataType? l_ = context!.Operators.SingletonFrom<DataType?>(k_);
-                FhirDateTime? m_ = context!.Operators.Convert<FhirDateTime?>(l_);
-                CqlDateTime? n_ = context!.Operators.Convert<CqlDateTime?>(m_);
-                Period? o_ = QualifyingEncounter?.Period!;
+                DataType? l_ = context.Operators.SingletonFrom<DataType?>(k_);
+                FhirDateTime? m_ = context.Operators.Convert<FhirDateTime?>(l_);
+                CqlDateTime? n_ = context.Operators.Convert<CqlDateTime?>(m_);
+                Period? o_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime?>? p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-                bool? q_ = context!.Operators.In<CqlDateTime?>(n_, p_, "day");
-                Code<EventStatus>? r_ = MedicationsNotDocumented?.StatusElement!;
-                EventStatus? s_ = r_?.Value!;
-                string? t_ = context!.Operators.Convert<string?>(s_);
-                bool? u_ = context!.Operators.Equal(t_, "not-done");
-                bool? v_ = context!.Operators.And(q_, u_);
-                List<CodeableConcept?>? w_ = MedicationsNotDocumented?.ReasonCode!;
+                bool? q_ = context.Operators.In<CqlDateTime?>(n_, p_, "day");
+                Code<EventStatus>? r_ = MedicationsNotDocumented?.StatusElement;
+                EventStatus? s_ = r_?.Value;
+                string? t_ = context.Operators.Convert<string?>(s_);
+                bool? u_ = context.Operators.Equal(t_, "not-done");
+                bool? v_ = context.Operators.And(q_, u_);
+                List<CodeableConcept>? w_ = MedicationsNotDocumented?.ReasonCode;
 
                 CqlConcept? x_(CodeableConcept? @this) {
                     CqlConcept? ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
@@ -387,22 +387,22 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
 
                 bool? y_(CqlConcept? reasonItem) {
                     CqlCode? ah_ = this.Acute_health_crisis__finding_(context);
-                    CqlConcept? ai_ = context!.Operators.ConvertCodeToConcept(ah_);
-                    bool? aj_ = context!.Operators.Equivalent(reasonItem, ai_);
+                    CqlConcept? ai_ = context.Operators.ConvertCodeToConcept(ah_);
+                    bool? aj_ = context.Operators.Equivalent(reasonItem, ai_);
                     return aj_;
                 }
 
-                IEnumerable<CqlConcept?>? z_ = context!.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)w_, x_, y_);
-                bool? aa_ = context!.Operators.Exists<CqlConcept?>(z_!);
-                bool? ab_ = context!.Operators.And(v_, aa_);
+                IEnumerable<CqlConcept?>? z_ = context.Operators.SelectWhere<CodeableConcept?, CqlConcept?>((IEnumerable<CodeableConcept?>?)w_, x_, y_);
+                bool? aa_ = context.Operators.Exists<CqlConcept?>(z_!);
+                bool? ab_ = context.Operators.And(v_, aa_);
                 return ab_;
             }
 
-            bool? h_ = context!.Operators.WhereAny<Procedure?>(f_, g_);
+            bool? h_ = context.Operators.WhereAny<Procedure?>(f_, g_);
             return h_;
         }
 
-        IEnumerable<Encounter?>? c_ = context!.Operators.Where<Encounter?>(a_, b_);
+        IEnumerable<Encounter?>? c_ = context.Operators.Where<Encounter?>(a_, b_);
         return c_;
     }
 

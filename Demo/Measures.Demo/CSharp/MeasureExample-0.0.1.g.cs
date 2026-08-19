@@ -28,8 +28,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -77,8 +77,8 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     {
         bool? a_ = this.Initial_population(context);
         bool? b_ = this.Exclusion(context);
-        bool? c_ = context!.Operators.Not(b_);
-        bool? d_ = context!.Operators.And(a_, c_);
+        bool? c_ = context.Operators.Not(b_);
+        bool? d_ = context.Operators.And(a_, c_);
         return d_;
     }
 
@@ -119,9 +119,9 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     private string? Gender_Stratifier_Compute(CqlContext context)
     {
         Patient? a_ = this.Patient(context);
-        Code<AdministrativeGender>? b_ = a_?.GenderElement!;
-        AdministrativeGender? c_ = b_?.Value!;
-        string? d_ = context!.Operators.Convert<string?>(c_);
+        Code<AdministrativeGender>? b_ = a_?.GenderElement;
+        AdministrativeGender? c_ = b_?.Value;
+        string? d_ = context.Operators.Convert<string?>(c_);
         return d_;
     }
 

@@ -107,9 +107,9 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime? a_ = context!.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime? b_ = context!.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime?>? c_ = context!.Operators.Interval(a_, b_, true, false);
+        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
         object? d_ = context.ResolveParameter("CMS314FHIRHIVViralSuppression-1.0.000"!, ("Measurement Period")!, c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
@@ -127,8 +127,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
 
     private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient?>? a_ = context!.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient? b_ = context!.Operators.SingletonFrom<Patient?>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -136,25 +136,25 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     [CqlFunctionDefinition("isVerified")]
     public bool? isVerified(CqlContext context, Condition? condition)
     {
-        CodeableConcept? a_ = condition?.VerificationStatus!;
+        CodeableConcept? a_ = condition?.VerificationStatus;
         CqlConcept? b_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, a_);
-        bool? c_ = context!.Operators.Not((bool?)(b_ is null));
+        bool? c_ = context.Operators.Not((bool?)(b_ is null));
         CqlCode? d_ = QICoreCommon_4_0_000.Instance.confirmed(context);
-        CqlConcept? e_ = context!.Operators.ConvertCodeToConcept(d_);
-        bool? f_ = context!.Operators.Equivalent(b_, e_);
+        CqlConcept? e_ = context.Operators.ConvertCodeToConcept(d_);
+        bool? f_ = context.Operators.Equivalent(b_, e_);
         CqlCode? g_ = QICoreCommon_4_0_000.Instance.unconfirmed(context);
-        CqlConcept? h_ = context!.Operators.ConvertCodeToConcept(g_);
-        bool? i_ = context!.Operators.Equivalent(b_, h_);
-        bool? j_ = context!.Operators.Or(f_, i_);
+        CqlConcept? h_ = context.Operators.ConvertCodeToConcept(g_);
+        bool? i_ = context.Operators.Equivalent(b_, h_);
+        bool? j_ = context.Operators.Or(f_, i_);
         CqlCode? k_ = QICoreCommon_4_0_000.Instance.provisional(context);
-        CqlConcept? l_ = context!.Operators.ConvertCodeToConcept(k_);
-        bool? m_ = context!.Operators.Equivalent(b_, l_);
-        bool? n_ = context!.Operators.Or(j_, m_);
+        CqlConcept? l_ = context.Operators.ConvertCodeToConcept(k_);
+        bool? m_ = context.Operators.Equivalent(b_, l_);
+        bool? n_ = context.Operators.Or(j_, m_);
         CqlCode? o_ = QICoreCommon_4_0_000.Instance.differential(context);
-        CqlConcept? p_ = context!.Operators.ConvertCodeToConcept(o_);
-        bool? q_ = context!.Operators.Equivalent(b_, p_);
-        bool? r_ = context!.Operators.Or(n_, q_);
-        bool? s_ = context!.Operators.Implies(c_, r_);
+        CqlConcept? p_ = context.Operators.ConvertCodeToConcept(o_);
+        bool? q_ = context.Operators.Equivalent(b_, p_);
+        bool? r_ = context.Operators.Or(n_, q_);
+        bool? s_ = context.Operators.Implies(c_, r_);
         return s_;
     }
 
@@ -168,24 +168,24 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     private bool? Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.HIV(context);
-        IEnumerable<Condition?>? b_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition?>? c_ = context!.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition?>? d_ = context!.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
 
         bool? e_(Condition? HIVDx) {
             CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HIVDx);
-            CqlDateTime? h_ = context!.Operators.Start(g_);
+            CqlDateTime? h_ = context.Operators.Start(g_);
             CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
-            CqlDateTime? j_ = context!.Operators.Start(i_);
-            CqlQuantity? k_ = context!.Operators.Quantity(90m, "days");
-            CqlDateTime? l_ = context!.Operators.Add(j_, k_);
-            bool? m_ = context!.Operators.Before(h_, l_, "day");
+            CqlDateTime? j_ = context.Operators.Start(i_);
+            CqlQuantity? k_ = context.Operators.Quantity(90m, "days");
+            CqlDateTime? l_ = context.Operators.Add(j_, k_);
+            bool? m_ = context.Operators.Before(h_, l_, "day");
             bool? n_ = this.isVerified(context, HIVDx);
-            bool? o_ = context!.Operators.And(m_, n_);
+            bool? o_ = context.Operators.And(m_, n_);
             return o_;
         }
 
-        bool? f_ = context!.Operators.WhereAny<Condition?>(d_, e_);
+        bool? f_ = context.Operators.WhereAny<Condition?>(d_, e_);
         return f_;
     }
 
@@ -199,56 +199,56 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     private bool? Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.Office_Visit(context);
-        IEnumerable<Encounter?>? b_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         CqlValueSet? c_ = this.Outpatient_Consultation(context);
-        IEnumerable<Encounter?>? d_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? e_ = context!.Operators.Union<Encounter?>(b_, d_);
+        IEnumerable<Encounter?>? d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? e_ = context.Operators.Union<Encounter?>(b_, d_);
         CqlValueSet? f_ = this.Annual_Wellness_Visit(context);
-        IEnumerable<Encounter?>? g_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         CqlValueSet? h_ = this.Face_to_Face_Interaction(context);
-        IEnumerable<Encounter?>? i_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? j_ = context!.Operators.Union<Encounter?>(g_, i_);
-        IEnumerable<Encounter?>? k_ = context!.Operators.Union<Encounter?>(e_, j_);
+        IEnumerable<Encounter?>? i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? j_ = context.Operators.Union<Encounter?>(g_, i_);
+        IEnumerable<Encounter?>? k_ = context.Operators.Union<Encounter?>(e_, j_);
         CqlValueSet? l_ = this.Home_Healthcare_Services(context);
-        IEnumerable<Encounter?>? m_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         CqlValueSet? n_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter?>? o_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? p_ = context!.Operators.Union<Encounter?>(m_, o_);
-        IEnumerable<Encounter?>? q_ = context!.Operators.Union<Encounter?>(k_, p_);
+        IEnumerable<Encounter?>? o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? p_ = context.Operators.Union<Encounter?>(m_, o_);
+        IEnumerable<Encounter?>? q_ = context.Operators.Union<Encounter?>(k_, p_);
         CqlValueSet? r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-        IEnumerable<Encounter?>? s_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         CqlValueSet? t_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter?>? u_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? v_ = context!.Operators.Union<Encounter?>(s_, u_);
-        IEnumerable<Encounter?>? w_ = context!.Operators.Union<Encounter?>(q_, v_);
+        IEnumerable<Encounter?>? u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? v_ = context.Operators.Union<Encounter?>(s_, u_);
+        IEnumerable<Encounter?>? w_ = context.Operators.Union<Encounter?>(q_, v_);
         CqlValueSet? x_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-        IEnumerable<Encounter?>? y_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
         CqlValueSet? z_ = this.Telephone_Visits(context);
-        IEnumerable<Encounter?>? aa_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? ab_ = context!.Operators.Union<Encounter?>(y_, aa_);
-        IEnumerable<Encounter?>? ac_ = context!.Operators.Union<Encounter?>(w_, ab_);
+        IEnumerable<Encounter?>? aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? ab_ = context.Operators.Union<Encounter?>(y_, aa_);
+        IEnumerable<Encounter?>? ac_ = context.Operators.Union<Encounter?>(w_, ab_);
         CqlValueSet? ad_ = this.Preventive_Care_Services_Other(context);
-        IEnumerable<Encounter?>? ae_ = context!.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-        IEnumerable<Encounter?>? af_ = context!.Operators.Union<Encounter?>(ac_, ae_);
+        IEnumerable<Encounter?>? ae_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+        IEnumerable<Encounter?>? af_ = context.Operators.Union<Encounter?>(ac_, ae_);
 
         bool? ag_(Encounter? QualifyingEncounter) {
             CqlInterval<CqlDateTime?>? ai_ = this.Measurement_Period(context);
-            CqlDateTime? aj_ = context!.Operators.Start(ai_);
-            CqlQuantity? ak_ = context!.Operators.Quantity(240m, "days");
-            CqlDateTime? al_ = context!.Operators.Add(aj_, ak_);
-            CqlInterval<CqlDateTime?>? am_ = context!.Operators.Interval(aj_, al_, true, true);
-            Period? an_ = QualifyingEncounter?.Period!;
+            CqlDateTime? aj_ = context.Operators.Start(ai_);
+            CqlQuantity? ak_ = context.Operators.Quantity(240m, "days");
+            CqlDateTime? al_ = context.Operators.Add(aj_, ak_);
+            CqlInterval<CqlDateTime?>? am_ = context.Operators.Interval(aj_, al_, true, true);
+            Period? an_ = QualifyingEncounter?.Period;
             CqlInterval<CqlDateTime?>? ao_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, an_);
-            bool? ap_ = context!.Operators.IntervalIncludesInterval<CqlDateTime?>(am_, ao_, "day");
-            Code<Encounter.EncounterStatus>? aq_ = QualifyingEncounter?.StatusElement!;
-            Encounter.EncounterStatus? ar_ = aq_?.Value!;
-            Code<Encounter.EncounterStatus>? as_ = context!.Operators.Convert<Code<Encounter.EncounterStatus>?>(ar_);
-            bool? at_ = context!.Operators.Equal(as_, "finished");
-            bool? au_ = context!.Operators.And(ap_, at_);
+            bool? ap_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(am_, ao_, "day");
+            Code<Encounter.EncounterStatus>? aq_ = QualifyingEncounter?.StatusElement;
+            Encounter.EncounterStatus? ar_ = aq_?.Value;
+            Code<Encounter.EncounterStatus>? as_ = context.Operators.Convert<Code<Encounter.EncounterStatus>?>(ar_);
+            bool? at_ = context.Operators.Equal(as_, "finished");
+            bool? au_ = context.Operators.And(ap_, at_);
             return au_;
         }
 
-        bool? ah_ = context!.Operators.WhereAny<Encounter?>(af_, ag_);
+        bool? ah_ = context.Operators.WhereAny<Encounter?>(af_, ag_);
         return ah_;
     }
 
@@ -263,7 +263,7 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     {
         bool? a_ = this.Has_Active_HIV_Diagnosis_Before_or_in_First_90_Days_of_Measurement_Period(context);
         bool? b_ = this.Has_Qualifying_Encounter_During_First_240_Days_of_Measurement_Period(context);
-        bool? c_ = context!.Operators.And(a_, b_);
+        bool? c_ = context.Operators.And(a_, b_);
         return c_;
     }
 
@@ -290,47 +290,47 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     private Observation? Most_Recent_Viral_Load_Test_During_Measurement_Period_Compute(CqlContext context)
     {
         CqlValueSet? a_ = this.HIV_Viral_Load_Tests(context);
-        IEnumerable<Observation?>? b_ = context!.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
 
         bool? c_(Observation? ViralLoad) {
-            Code<ObservationStatus>? h_ = ViralLoad?.StatusElement!;
-            ObservationStatus? i_ = h_?.Value!;
-            string? j_ = context!.Operators.Convert<string?>(i_);
+            Code<ObservationStatus>? h_ = ViralLoad?.StatusElement;
+            ObservationStatus? i_ = h_?.Value;
+            string? j_ = context.Operators.Convert<string?>(i_);
             string?[]? k_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? l_ = context!.Operators.In<string?>(j_, (IEnumerable<string?>?)k_);
+            bool? l_ = context.Operators.In<string?>(j_, (IEnumerable<string?>?)k_);
             object? m_;
-            DataType? r_ = ViralLoad?.Effective!;
+            DataType? r_ = ViralLoad?.Effective;
             object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
             bool t_ = s_ is CqlDateTime;
             if (t_)
             {
-                DataType? u_ = ViralLoad?.Effective!;
+                DataType? u_ = ViralLoad?.Effective;
                 object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                 m_ = v_ as CqlDateTime;
             }
             else
             {
-                DataType? w_ = ViralLoad?.Effective!;
+                DataType? w_ = ViralLoad?.Effective;
                 object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
                 bool y_ = x_ is CqlDateTime;
                 if (y_)
                 {
-                    DataType? z_ = ViralLoad?.Effective!;
+                    DataType? z_ = ViralLoad?.Effective;
                     object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                     m_ = aa_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType? ab_ = ViralLoad?.Effective!;
+                    DataType? ab_ = ViralLoad?.Effective;
                     object? ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
                     bool ad_ = ac_ is CqlInterval<CqlDateTime>;
                     if (ad_)
                     {
-                        DataType? ae_ = ViralLoad?.Effective!;
+                        DataType? ae_ = ViralLoad?.Effective;
                         object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                         m_ = af_ as CqlInterval<CqlDateTime?>;
                     }
@@ -342,43 +342,43 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             }
             CqlDateTime? n_ = QICoreCommon_4_0_000.Instance.latest(context, m_);
             CqlInterval<CqlDateTime?>? o_ = this.Measurement_Period(context);
-            bool? p_ = context!.Operators.In<CqlDateTime?>(n_, o_, "day");
-            bool? q_ = context!.Operators.And(l_, p_);
+            bool? p_ = context.Operators.In<CqlDateTime?>(n_, o_, "day");
+            bool? q_ = context.Operators.And(l_, p_);
             return q_;
         }
 
-        IEnumerable<Observation?>? d_ = context!.Operators.Where<Observation?>(b_, c_);
+        IEnumerable<Observation?>? d_ = context.Operators.Where<Observation?>(b_, c_);
 
         object e_(Observation? @this) {
             object? ag_;
-            DataType? ai_ = @this?.Effective!;
+            DataType? ai_ = @this?.Effective;
             object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
             bool ak_ = aj_ is CqlDateTime;
             if (ak_)
             {
-                DataType? al_ = @this?.Effective!;
+                DataType? al_ = @this?.Effective;
                 object? am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
                 ag_ = am_ as CqlDateTime;
             }
             else
             {
-                DataType? an_ = @this?.Effective!;
+                DataType? an_ = @this?.Effective;
                 object? ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
                 bool ap_ = ao_ is CqlDateTime;
                 if (ap_)
                 {
-                    DataType? aq_ = @this?.Effective!;
+                    DataType? aq_ = @this?.Effective;
                     object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
                     ag_ = ar_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType? as_ = @this?.Effective!;
+                    DataType? as_ = @this?.Effective;
                     object? at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
                     bool au_ = at_ is CqlInterval<CqlDateTime>;
                     if (au_)
                     {
-                        DataType? av_ = @this?.Effective!;
+                        DataType? av_ = @this?.Effective;
                         object? aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
                         ag_ = aw_ as CqlInterval<CqlDateTime?>;
                     }
@@ -392,8 +392,8 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
             return ah_!;
         }
 
-        IEnumerable<Observation?>? f_ = context!.Operators.SortBy<Observation?>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
-        Observation? g_ = context!.Operators.Last<Observation?>(f_!);
+        IEnumerable<Observation?>? f_ = context.Operators.SortBy<Observation?>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+        Observation? g_ = context.Operators.Last<Observation?>(f_!);
         return g_;
     }
 
@@ -407,18 +407,18 @@ public partial class CMS314FHIRHIVViralSuppression_1_0_000 : ILibrary, ISingleto
     private bool? Numerator_Compute(CqlContext context)
     {
         Observation? a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
-        DataType? b_ = a_?.Value!;
+        DataType? b_ = a_?.Value;
         object? c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
-        CqlQuantity? d_ = context!.Operators.Quantity(200m, "{copies}/mL");
-        bool? e_ = context!.Operators.Less(c_ as CqlQuantity, d_);
+        CqlQuantity? d_ = context.Operators.Quantity(200m, "{copies}/mL");
+        bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
         CqlCode? f_ = this.Below_threshold_level__qualifier_value_(context);
-        CqlConcept? g_ = context!.Operators.ConvertCodeToConcept(f_);
-        bool? h_ = context!.Operators.Equivalent(c_ as CqlConcept, g_);
-        bool? i_ = context!.Operators.Or(e_, h_);
+        CqlConcept? g_ = context.Operators.ConvertCodeToConcept(f_);
+        bool? h_ = context.Operators.Equivalent(c_ as CqlConcept, g_);
+        bool? i_ = context.Operators.Or(e_, h_);
         CqlCode? j_ = this.Not_detected__qualifier_value_(context);
-        CqlConcept? k_ = context!.Operators.ConvertCodeToConcept(j_);
-        bool? l_ = context!.Operators.Equivalent(c_ as CqlConcept, k_);
-        bool? m_ = context!.Operators.Or(i_, l_);
+        CqlConcept? k_ = context.Operators.ConvertCodeToConcept(j_);
+        bool? l_ = context.Operators.Equivalent(c_ as CqlConcept, k_);
+        bool? m_ = context.Operators.Or(i_, l_);
         return m_;
     }
 

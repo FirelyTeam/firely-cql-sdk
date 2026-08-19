@@ -28,8 +28,8 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     private bool? SomethingTrueEqualsTrue_Compute(CqlContext context)
     {
-        bool? a_ = context!.Operators.Equal(1, 1);
-        bool? b_ = context!.Operators.Equal(a_, true);
+        bool? a_ = context.Operators.Equal(1, 1);
+        bool? b_ = context.Operators.Equal(a_, true);
         return b_;
     }
 
