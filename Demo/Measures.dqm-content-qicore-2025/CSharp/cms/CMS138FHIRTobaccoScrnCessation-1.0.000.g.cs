@@ -184,7 +184,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS138FHIRTobaccoScrnCessation-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS138FHIRTobaccoScrnCessation-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -461,7 +461,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         bool? c_(Observation? TobaccoUseScreening) {
             CqlInterval<CqlDateTime?>? l_ = this.Measurement_Period(context);
             DataType? m_ = TobaccoUseScreening?.Effective;
-            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value"!);
+            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value");
             CqlInterval<CqlDateTime?>? o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
             bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(l_, o_, "day");
             return p_;
@@ -471,7 +471,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
         object e_(Observation? @this) {
             DataType? q_ = @this?.Effective;
-            CqlDateTime? r_ = context.Operators.LateBoundProperty<CqlDateTime?>(q_, "value"!);
+            CqlDateTime? r_ = context.Operators.LateBoundProperty<CqlDateTime?>(q_, "value");
             CqlInterval<CqlDateTime?>? s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
             CqlDateTime? t_ = context.Operators.Start(s_);
             return t_!;
@@ -540,7 +540,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         bool? c_(Observation? TobaccoUseScreening) {
             CqlInterval<CqlDateTime?>? l_ = this.Measurement_Period(context);
             DataType? m_ = TobaccoUseScreening?.Effective;
-            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value"!);
+            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value");
             CqlInterval<CqlDateTime?>? o_ = QICoreCommon_4_0_000.Instance.toInterval(context, n_);
             bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(l_, o_, "day");
             return p_;
@@ -550,7 +550,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
 
         object e_(Observation? @this) {
             DataType? q_ = @this?.Effective;
-            CqlDateTime? r_ = context.Operators.LateBoundProperty<CqlDateTime?>(q_, "value"!);
+            CqlDateTime? r_ = context.Operators.LateBoundProperty<CqlDateTime?>(q_, "value");
             CqlInterval<CqlDateTime?>? s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
             CqlDateTime? t_ = context.Operators.Start(s_);
             return t_!;
@@ -708,9 +708,9 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication?>? j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication? M) {
-                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/"!);
+                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/");
                 string? p_ = context.Operators.Last<string?>(o_!);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;
@@ -780,9 +780,9 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication?>? j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication? M) {
-                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/"!);
+                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/");
                 string? p_ = context.Operators.Last<string?>(o_!);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;

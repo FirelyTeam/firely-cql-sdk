@@ -84,7 +84,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -125,9 +125,9 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? j_(Medication? M) {
                 Id? l_ = M?.IdElement;
                 string? m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_ as FhirString);
-                IEnumerable<string?>? p_ = context.Operators.Split(o_!, "/"!);
+                IEnumerable<string?>? p_ = context.Operators.Split(o_!, "/");
                 string? q_ = context.Operators.Last<string?>(p_!);
                 bool? r_ = context.Operators.Equal(m_, q_);
                 CodeableConcept? s_ = M?.Code;

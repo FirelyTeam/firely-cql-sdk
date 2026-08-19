@@ -141,7 +141,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
         CqlDateTime? a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("HybridHWRFHIR-1.3.005", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 

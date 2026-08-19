@@ -234,7 +234,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS1218FHIRHHRF-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS1218FHIRHHRF-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -7219,7 +7219,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             bool? k_ = context.Operators.In<string?>(i_, (IEnumerable<string?>?)j_);
             CqlInterval<CqlDateTime?>? l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, QualifyingEncounter);
             DataType? m_ = SMStatus?.Effective;
-            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value"!);
+            CqlDateTime? n_ = context.Operators.LateBoundProperty<CqlDateTime?>(m_, "value");
             CqlDateTime? o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
             CqlInterval<CqlDateTime?>? p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
             bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime?>(l_, p_, (string?)default);

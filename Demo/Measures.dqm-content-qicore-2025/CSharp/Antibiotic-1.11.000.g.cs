@@ -28,7 +28,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("Antibiotic-1.11.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("Antibiotic-1.11.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

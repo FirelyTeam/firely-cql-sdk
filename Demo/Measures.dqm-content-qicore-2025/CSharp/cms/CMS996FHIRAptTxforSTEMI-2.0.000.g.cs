@@ -279,7 +279,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS996FHIRAptTxforSTEMI-2.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS996FHIRAptTxforSTEMI-2.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -310,7 +310,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
 
     private IEnumerable<Encounter?>? ED_Encounter_During_MP_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Encounter)).GetProperty("Class"!);
+        PropertyInfo? a_ = (typeof(Encounter)).GetProperty("Class");
         CqlCode? b_ = this.EMER(context);
         IEnumerable<CqlCode?>? c_ = context.Operators.ToList<CqlCode?>(b_);
         IEnumerable<Encounter?>? d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(a_, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -607,9 +607,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 IEnumerable<Medication?>? l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication? M) {
-                    object? o_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                    object? p_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                    IEnumerable<string?>? q_ = context.Operators.Split(((string?)p_)!, "/"!);
+                    object? o_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                    object? p_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                    IEnumerable<string?>? q_ = context.Operators.Split(((string?)p_)!, "/");
                     string? r_ = context.Operators.Last<string?>(q_!);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;
@@ -1565,7 +1565,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
                 bool? o_ = context.Operators.And(j_, n_);
                 DataType? p_ = PregStatus?.Effective;
-                CqlDateTime? q_ = context.Operators.LateBoundProperty<CqlDateTime?>(p_, "value"!);
+                CqlDateTime? q_ = context.Operators.LateBoundProperty<CqlDateTime?>(p_, "value");
                 Period? r_ = EDwSTEMI?.Period;
                 CqlInterval<CqlDateTime?>? s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
                 bool? t_ = context.Operators.In<CqlDateTime?>(q_, s_, (string?)default);
@@ -1876,9 +1876,9 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 IEnumerable<Medication?>? l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication? M) {
-                    object? o_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                    object? p_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                    IEnumerable<string?>? q_ = context.Operators.Split(((string?)p_)!, "/"!);
+                    object? o_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                    object? p_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                    IEnumerable<string?>? q_ = context.Operators.Split(((string?)p_)!, "/");
                     string? r_ = context.Operators.Last<string?>(q_!);
                     bool? s_ = context.Operators.Equal(o_, r_);
                     CodeableConcept? t_ = M?.Code;

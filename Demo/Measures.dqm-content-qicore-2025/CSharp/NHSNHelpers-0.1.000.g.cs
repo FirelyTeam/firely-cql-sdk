@@ -88,12 +88,12 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
         }
         else if (choice is Timing)
         {
-            CqlInterval<CqlDateTime?>? ad_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute a single interval from a Timing type")!);
+            CqlInterval<CqlDateTime?>? ad_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute a single interval from a Timing type");
             return ad_;
         }
         else if (choice is FhirString)
         {
-            CqlInterval<CqlDateTime?>? ae_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+            CqlInterval<CqlDateTime?>? ae_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
             return ae_;
         }
         else
@@ -142,7 +142,7 @@ public partial class NHSNHelpers_0_1_000 : ILibrary, ISingleton<NHSNHelpers_0_1_
     [CqlFunctionDefinition("GetId")]
     public string? GetId(CqlContext context, string? uri)
     {
-        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/"!);
+        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/");
         string? b_ = context.Operators.Last<string?>(a_!);
         return b_;
     }

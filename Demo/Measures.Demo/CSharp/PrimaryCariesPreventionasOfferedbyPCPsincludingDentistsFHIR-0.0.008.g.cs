@@ -86,7 +86,7 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

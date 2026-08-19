@@ -81,7 +81,7 @@ public partial class CMS349FHIRHIVScreening_1_1_000 : ILibrary, ISingleton<CMS34
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS349FHIRHIVScreening-1.1.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS349FHIRHIVScreening-1.1.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 

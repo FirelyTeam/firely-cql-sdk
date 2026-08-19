@@ -146,19 +146,19 @@ internal partial class CSharpEmitter
         if (!RequiresNotNull(parameterNullability))
             return false;
 
-        return argument.Type.IsNullableValueType(out _) || !argument.Type.IsValueType;
+        return !argument.Type.IsValueType;
     }
 
     private static bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
     {
-        if (value is CodeLambda)
+        if (value is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
             return false;
 
         var readState = GetReadStateOrUnknown(member);
         if (readState == NullabilityState.Nullable)
             return false;
 
-        return value.Type.IsNullableValueType(out _) || !value.Type.IsValueType;
+        return !value.Type.IsValueType;
     }
 
     private static bool RequiresNotNull(System.Reflection.NullabilityInfo info)

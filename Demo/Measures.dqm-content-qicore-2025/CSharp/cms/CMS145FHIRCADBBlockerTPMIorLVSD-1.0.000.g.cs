@@ -165,7 +165,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS145FHIRCADBBlockerTPMIorLVSD-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS145FHIRCADBBlockerTPMIorLVSD-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -823,7 +823,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
             bool? e_(object? LVSDFindings) {
                 CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
-                object? h_ = context.Operators.LateBoundProperty<object?>(LVSDFindings, "effective"!);
+                object? h_ = context.Operators.LateBoundProperty<object?>(LVSDFindings, "effective");
                 object? i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                 CqlDateTime? k_ = context.Operators.Start(g_ ?? j_);
@@ -1546,24 +1546,24 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         bool? a_(Encounter? Visit) {
             if (Event is AllergyIntolerance)
             {
-                object? d_ = context.Operators.LateBoundProperty<object?>(Event, "onset"!);
+                object? d_ = context.Operators.LateBoundProperty<object?>(Event, "onset");
                 object? e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
                 CqlInterval<CqlDateTime?>? f_ = QICoreCommon_4_0_000.Instance.toInterval(context, e_);
                 CqlDateTime? g_ = context.Operators.Start(f_);
-                object? h_ = context.Operators.LateBoundProperty<object?>(Event, "lastOccurrence"!);
-                CqlDateTime? i_ = context.Operators.LateBoundProperty<CqlDateTime?>(h_, "value"!);
+                object? h_ = context.Operators.LateBoundProperty<object?>(Event, "lastOccurrence");
+                CqlDateTime? i_ = context.Operators.LateBoundProperty<CqlDateTime?>(h_, "value");
                 CqlInterval<CqlDateTime?>? j_ = context.Operators.Interval(g_, i_, true, true);
                 Period? k_ = Visit?.Period;
                 CqlInterval<CqlDateTime?>? l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
                 bool? m_ = context.Operators.OverlapsAfter(j_, l_, "day");
-                object? n_ = context.Operators.LateBoundProperty<object?>(Event, "clinicalStatus"!);
+                object? n_ = context.Operators.LateBoundProperty<object?>(Event, "clinicalStatus");
                 CqlConcept? o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_ as CodeableConcept);
                 CqlCode? p_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
                 CqlConcept? q_ = context.Operators.ConvertCodeToConcept(p_);
                 bool? r_ = context.Operators.Equivalent(o_, q_);
                 bool? s_ = context.Operators.Or((bool?)(o_ is null), r_);
                 bool? t_ = context.Operators.And(m_, s_);
-                object? u_ = context.Operators.LateBoundProperty<object?>(Event, "verificationStatus"!);
+                object? u_ = context.Operators.LateBoundProperty<object?>(Event, "verificationStatus");
                 CqlConcept? v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_ as CodeableConcept);
                 CqlCode? w_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
                 CqlConcept? x_ = context.Operators.ConvertCodeToConcept(w_);

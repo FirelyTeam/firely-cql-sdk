@@ -152,7 +152,7 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS153FHIRChlamydiaScreening-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS153FHIRChlamydiaScreening-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -369,9 +369,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             IEnumerable<Medication?>? j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication? M) {
-                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/"!);
+                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/");
                 string? p_ = context.Operators.Last<string?>(o_!);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;
@@ -425,9 +425,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             IEnumerable<Medication?>? j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication? M) {
-                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/"!);
+                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/");
                 string? p_ = context.Operators.Last<string?>(o_!);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;
@@ -763,9 +763,9 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
                 IEnumerable<Medication?>? au_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? av_(Medication? M) {
-                    object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                    object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                    IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/"!);
+                    object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                    object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                    IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/");
                     string? ba_ = context.Operators.Last<string?>(az_!);
                     bool? bb_ = context.Operators.Equal(ax_, ba_);
                     CodeableConcept? bc_ = M?.Code;

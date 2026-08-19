@@ -122,7 +122,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS2FHIRPCSDepScreenAndFollowUp-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS2FHIRPCSDepScreenAndFollowUp-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -408,9 +408,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? s_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? t_(Medication? M) {
-                object? v_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? w_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? x_ = context.Operators.Split(((string?)w_)!, "/"!);
+                object? v_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? w_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? x_ = context.Operators.Split(((string?)w_)!, "/");
                 string? y_ = context.Operators.Last<string?>(x_!);
                 bool? z_ = context.Operators.Equal(v_, y_);
                 CodeableConcept? aa_ = M?.Code;
@@ -572,45 +572,45 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept, ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object? ae_;
-            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
             object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
             bool bb_ = ba_ is CqlDateTime;
             if (bb_)
             {
-                object? bc_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                object? bc_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
                 ae_ = bd_ as CqlDateTime;
             }
             else
             {
-                object? be_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                object? be_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
                 bool bg_ = bf_ is CqlQuantity;
                 if (bg_)
                 {
-                    object? bh_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                    object? bh_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
                     ae_ = bi_ as CqlQuantity;
                 }
                 else
                 {
-                    object? bj_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                    object? bj_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
                     bool bl_ = bk_ is CqlInterval<CqlDateTime>;
                     if (bl_)
                     {
-                        object? bm_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                        object? bm_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
                         ae_ = bn_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? bo_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                        object? bo_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
                         bool bq_ = bp_ is CqlInterval<CqlQuantity>;
                         if (bq_)
                         {
-                            object? br_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                            object? br_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                             object? bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
                             ae_ = bs_ as CqlInterval<CqlQuantity?>;
                         }
@@ -624,8 +624,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime?>? af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
             CqlDateTime? ag_ = context.Operators.Start(af_);
             bool? ah_ = context.Operators.In<CqlDateTime?>(ag_, q_, (string?)default);
-            object? ai_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "authoredOn"!);
-            CqlDateTime? aj_ = context.Operators.LateBoundProperty<CqlDateTime?>(ai_, "value"!);
+            object? ai_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "authoredOn");
+            CqlDateTime? aj_ = context.Operators.LateBoundProperty<CqlDateTime?>(ai_, "value");
             CqlDateTime? ak_ = context.Operators.End(q_);
             CqlQuantity? al_ = context.Operators.Quantity(2m, "days");
             CqlDateTime? am_ = context.Operators.Add(ak_, al_);
@@ -636,45 +636,45 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? ar_ = context.Operators.Or(ah_, aq_);
             bool? as_ = context.Operators.And(ad_, ar_);
             object? at_;
-            object? bt_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+            object? bt_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
             object? bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
             bool bv_ = bu_ is CqlDateTime;
             if (bv_)
             {
-                object? bw_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                object? bw_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
                 at_ = bx_ as CqlDateTime;
             }
             else
             {
-                object? by_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                object? by_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                 object? bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
                 bool ca_ = bz_ is CqlQuantity;
                 if (ca_)
                 {
-                    object? cb_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                    object? cb_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
                     at_ = cc_ as CqlQuantity;
                 }
                 else
                 {
-                    object? cd_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                    object? cd_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                     object? ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
                     bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                     if (cf_)
                     {
-                        object? cg_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                        object? cg_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
                         at_ = ch_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? ci_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                        object? ci_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                         object? cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
                         bool ck_ = cj_ is CqlInterval<CqlQuantity>;
                         if (ck_)
                         {
-                            object? cl_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed"!);
+                            object? cl_ = context.Operators.LateBoundProperty<object?>(tuple_ewmohjtdtinujhphqjvbwmmhh?.FollowUpPositiveAdolescentScreen, "performed");
                             object? cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
                             at_ = cm_ as CqlInterval<CqlQuantity?>;
                         }
@@ -835,9 +835,9 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? s_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? t_(Medication? M) {
-                object? v_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? w_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? x_ = context.Operators.Split(((string?)w_)!, "/"!);
+                object? v_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? w_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? x_ = context.Operators.Split(((string?)w_)!, "/");
                 string? y_ = context.Operators.Last<string?>(x_!);
                 bool? z_ = context.Operators.Equal(v_, y_);
                 CodeableConcept? aa_ = M?.Code;
@@ -999,45 +999,45 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? ac_ = context.Operators.Equivalent(z_ as CqlConcept, ab_);
             bool? ad_ = context.Operators.And(x_, ac_);
             object? ae_;
-            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
             object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
             bool bb_ = ba_ is CqlDateTime;
             if (bb_)
             {
-                object? bc_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                object? bc_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
                 ae_ = bd_ as CqlDateTime;
             }
             else
             {
-                object? be_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                object? be_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
                 bool bg_ = bf_ is CqlQuantity;
                 if (bg_)
                 {
-                    object? bh_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                    object? bh_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
                     ae_ = bi_ as CqlQuantity;
                 }
                 else
                 {
-                    object? bj_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                    object? bj_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
                     bool bl_ = bk_ is CqlInterval<CqlDateTime>;
                     if (bl_)
                     {
-                        object? bm_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                        object? bm_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
                         ae_ = bn_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? bo_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                        object? bo_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
                         bool bq_ = bp_ is CqlInterval<CqlQuantity>;
                         if (bq_)
                         {
-                            object? br_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                            object? br_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                             object? bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
                             ae_ = bs_ as CqlInterval<CqlQuantity?>;
                         }
@@ -1051,8 +1051,8 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             CqlInterval<CqlDateTime?>? af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
             CqlDateTime? ag_ = context.Operators.Start(af_);
             bool? ah_ = context.Operators.In<CqlDateTime?>(ag_, q_, (string?)default);
-            object? ai_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "authoredOn"!);
-            CqlDateTime? aj_ = context.Operators.LateBoundProperty<CqlDateTime?>(ai_, "value"!);
+            object? ai_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "authoredOn");
+            CqlDateTime? aj_ = context.Operators.LateBoundProperty<CqlDateTime?>(ai_, "value");
             CqlDateTime? ak_ = context.Operators.End(q_);
             CqlQuantity? al_ = context.Operators.Quantity(2m, "days");
             CqlDateTime? am_ = context.Operators.Add(ak_, al_);
@@ -1063,45 +1063,45 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             bool? ar_ = context.Operators.Or(ah_, aq_);
             bool? as_ = context.Operators.And(ad_, ar_);
             object? at_;
-            object? bt_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+            object? bt_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
             object? bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
             bool bv_ = bu_ is CqlDateTime;
             if (bv_)
             {
-                object? bw_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                object? bw_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bw_);
                 at_ = bx_ as CqlDateTime;
             }
             else
             {
-                object? by_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                object? by_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                 object? bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
                 bool ca_ = bz_ is CqlQuantity;
                 if (ca_)
                 {
-                    object? cb_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                    object? cb_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
                     at_ = cc_ as CqlQuantity;
                 }
                 else
                 {
-                    object? cd_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                    object? cd_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                     object? ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
                     bool cf_ = ce_ is CqlInterval<CqlDateTime>;
                     if (cf_)
                     {
-                        object? cg_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                        object? cg_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
                         at_ = ch_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? ci_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                        object? ci_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                         object? cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
                         bool ck_ = cj_ is CqlInterval<CqlQuantity>;
                         if (ck_)
                         {
-                            object? cl_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed"!);
+                            object? cl_ = context.Operators.LateBoundProperty<object?>(tuple_cgtoaqsajoehgwcararimqzsa?.FollowUpPositiveAdultScreen, "performed");
                             object? cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
                             at_ = cm_ as CqlInterval<CqlQuantity?>;
                         }

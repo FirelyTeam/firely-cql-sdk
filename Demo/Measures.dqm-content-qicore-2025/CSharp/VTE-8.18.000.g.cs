@@ -44,7 +44,7 @@ public partial class VTE_8_18_000 : ILibrary, ISingleton<VTE_8_18_000>
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("VTE-8.18.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("VTE-8.18.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

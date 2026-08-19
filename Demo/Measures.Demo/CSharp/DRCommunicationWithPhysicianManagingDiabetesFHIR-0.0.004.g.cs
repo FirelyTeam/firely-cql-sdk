@@ -129,7 +129,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -318,7 +318,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlValueSet? b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
         IEnumerable<Communication?>? c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
 
@@ -399,7 +399,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlCode? b_ = this.Macular_edema_absent__situation_(context);
         IEnumerable<CqlCode?>? c_ = context.Operators.ToList<CqlCode?>(b_);
         IEnumerable<Communication?>? d_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, default, c_, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -481,7 +481,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlValueSet? b_ = this.Macular_Edema_Findings_Present(context);
         IEnumerable<Communication?>? c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
 
@@ -670,7 +670,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Level_of_Severity_of_Retinopathy_Findings_Communicated_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlValueSet? b_ = this.Level_of_Severity_of_Retinopathy_Findings(context);
         IEnumerable<Communication?>? c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
 
@@ -713,7 +713,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Macular_Edema_Absence_Communicated_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlCode? b_ = this.Macular_edema_absent__situation_(context);
         IEnumerable<CqlCode?>? c_ = context.Operators.ToList<CqlCode?>(b_);
         IEnumerable<Communication?>? d_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, default, c_, "http://hl7.org/fhir/StructureDefinition/Communication"));
@@ -757,7 +757,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     private IEnumerable<Communication?>? Macular_Edema_Presence_Communicated_Compute(CqlContext context)
     {
-        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode"!);
+        PropertyInfo? a_ = (typeof(Communication)).GetProperty("ReasonCode");
         CqlValueSet? b_ = this.Macular_Edema_Findings_Present(context);
         IEnumerable<Communication?>? c_ = context.Operators.Retrieve<Communication>(new RetrieveParameters(a_, b_, default, "http://hl7.org/fhir/StructureDefinition/Communication"));
 

@@ -70,7 +70,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -271,9 +271,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             bool? o_(Medication? M) {
                 Id? q_ = M?.IdElement;
                 string? r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
-                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? t_ = FHIRHelpers_4_0_001.Instance.ToString(context, s_ as FhirString);
-                IEnumerable<string?>? u_ = context.Operators.Split(t_!, "/"!);
+                IEnumerable<string?>? u_ = context.Operators.Split(t_!, "/");
                 string? v_ = context.Operators.Last<string?>(u_!);
                 bool? w_ = context.Operators.Equal(r_, v_);
                 CodeableConcept? x_ = M?.Code;

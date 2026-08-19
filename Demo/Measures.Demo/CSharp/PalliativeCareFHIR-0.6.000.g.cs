@@ -68,7 +68,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

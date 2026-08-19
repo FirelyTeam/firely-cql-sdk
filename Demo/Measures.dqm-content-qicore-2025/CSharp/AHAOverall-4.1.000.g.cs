@@ -106,7 +106,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("AHAOverall-4.1.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("AHAOverall-4.1.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -340,7 +340,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             bool? e_(object? LVSDFindings) {
                 CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
-                object? h_ = context.Operators.LateBoundProperty<object?>(LVSDFindings, "effective"!);
+                object? h_ = context.Operators.LateBoundProperty<object?>(LVSDFindings, "effective");
                 object? i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                 CqlDateTime? k_ = context.Operators.Start(g_ ?? j_);
@@ -1153,9 +1153,9 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         }
         else if (choice is CqlInterval<CqlQuantity>)
         {
-            object? a_ = context.Operators.LateBoundProperty<object?>(choice, "low"!);
+            object? a_ = context.Operators.LateBoundProperty<object?>(choice, "low");
             CqlDateTime? b_ = context.Operators.Add(startDate, a_ as CqlQuantity);
-            object? c_ = context.Operators.LateBoundProperty<object?>(choice, "high"!);
+            object? c_ = context.Operators.LateBoundProperty<object?>(choice, "high");
             CqlDateTime? d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
             CqlInterval<CqlDateTime?>? e_ = context.Operators.Interval(b_, d_, true, true);
             return e_;

@@ -137,7 +137,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS646FHIRIntravesicalBCGTherapy-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS646FHIRIntravesicalBCGTherapy-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -861,9 +861,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication?>? k_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? l_(Medication? M) {
-                object? n_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? o_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? p_ = context.Operators.Split(((string?)o_)!, "/"!);
+                object? n_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? o_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? p_ = context.Operators.Split(((string?)o_)!, "/");
                 string? q_ = context.Operators.Last<string?>(p_!);
                 bool? r_ = context.Operators.Equal(n_, q_);
                 CodeableConcept? s_ = M?.Code;
@@ -1506,9 +1506,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication?>? t_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? u_(Medication? M) {
-                object? w_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? x_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? y_ = context.Operators.Split(((string?)x_)!, "/"!);
+                object? w_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? x_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? y_ = context.Operators.Split(((string?)x_)!, "/");
                 string? z_ = context.Operators.Last<string?>(y_!);
                 bool? aa_ = context.Operators.Equal(w_, z_);
                 CodeableConcept? ab_ = M?.Code;
@@ -2320,9 +2320,9 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication?>? n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? o_(Medication? M) {
-                object? q_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? r_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? s_ = context.Operators.Split(((string?)r_)!, "/"!);
+                object? q_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? r_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? s_ = context.Operators.Split(((string?)r_)!, "/");
                 string? t_ = context.Operators.Last<string?>(s_!);
                 bool? u_ = context.Operators.Equal(q_, t_);
                 CodeableConcept? v_ = M?.Code;

@@ -148,7 +148,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS22FHIRPCSBPScreeningFollowUp-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS22FHIRPCSBPScreeningFollowUp-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -1990,9 +1990,9 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 IEnumerable<Medication?>? av_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? aw_(Medication? M) {
-                    object? ay_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                    object? az_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                    IEnumerable<string?>? ba_ = context.Operators.Split(((string?)az_)!, "/"!);
+                    object? ay_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                    object? az_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                    IEnumerable<string?>? ba_ = context.Operators.Split(((string?)az_)!, "/");
                     string? bb_ = context.Operators.Last<string?>(ba_!);
                     bool? bc_ = context.Operators.Equal(ay_, bb_);
                     CodeableConcept? bd_ = M?.Code;
@@ -2653,8 +2653,8 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<object?>? dh_ = this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(context);
 
             bool? di_(object? SecondHTN140Over90DeclinedInterventions) {
-                object? dk_ = context.Operators.LateBoundProperty<object?>(SecondHTN140Over90DeclinedInterventions, "authoredOn"!);
-                CqlDateTime? dl_ = context.Operators.LateBoundProperty<CqlDateTime?>(dk_, "value"!);
+                object? dk_ = context.Operators.LateBoundProperty<object?>(SecondHTN140Over90DeclinedInterventions, "authoredOn");
+                CqlDateTime? dl_ = context.Operators.LateBoundProperty<CqlDateTime?>(dk_, "value");
                 Period? dm_ = SecondHTN140Over90Encounter?.Period;
                 CqlInterval<CqlDateTime?>? dn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dm_);
                 bool? do_ = context.Operators.In<CqlDateTime?>(dl_, dn_, "day");

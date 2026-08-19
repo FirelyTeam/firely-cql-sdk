@@ -264,7 +264,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
     private string? ErrorLevel_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("CumulativeMedicationDuration-6.0.000"!, "ErrorLevel"!, "Warning");
+        object? a_ = context.ResolveParameter("CumulativeMedicationDuration-6.0.000", "ErrorLevel", "Warning");
         return (string?)a_;
     }
 
@@ -593,7 +593,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                             string? fs_ = this.ErrorLevel(context);
                                                                                             string? ft_ = period?.unit;
                                                                                             string? fu_ = context.Operators.Concatenate("Unknown unit ", ft_ ?? "");
-                                                                                            object? fv_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownUnit"!, fs_!, fu_!);
+                                                                                            object? fv_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownUnit", fs_!, fu_!);
                                                                                             return fv_ as decimal?;
                                                                                         }
                                                                                     }
@@ -1027,7 +1027,7 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
                                                                                                                                                                                                     string? dq_ = this.ErrorLevel(context);
                                                                                                                                                                                                     string? dr_ = frequency?.code;
                                                                                                                                                                                                     string? ds_ = context.Operators.Concatenate("Unknown frequency code ", dr_ ?? "");
-                                                                                                                                                                                                    object? dt_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownFrequencyCode"!, dq_!, ds_!);
+                                                                                                                                                                                                    object? dt_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownFrequencyCode", dq_!, ds_!);
                                                                                                                                                                                                     return dt_ as decimal?;
                                                                                                                                                                                                 }
                                                                                                                                                                                             }

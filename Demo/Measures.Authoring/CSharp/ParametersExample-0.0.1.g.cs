@@ -36,7 +36,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     private int? AgeThreshold_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("ParametersExample-0.0.1"!, "AgeThreshold"!, 30);
+        object? a_ = context.ResolveParameter("ParametersExample-0.0.1", "AgeThreshold", 30);
         return (int?)a_;
     }
 

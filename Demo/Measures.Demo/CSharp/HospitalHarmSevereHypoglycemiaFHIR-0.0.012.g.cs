@@ -81,7 +81,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
         CqlDateTime? a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("HospitalHarmSevereHypoglycemiaFHIR-0.0.012", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -217,9 +217,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             bool? j_(Medication? M) {
                 Id? l_ = M?.IdElement;
                 string? m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_ as FhirString);
-                IEnumerable<string?>? p_ = context.Operators.Split(o_!, "/"!);
+                IEnumerable<string?>? p_ = context.Operators.Split(o_!, "/");
                 string? q_ = context.Operators.Last<string?>(p_!);
                 bool? r_ = context.Operators.Equal(m_, q_);
                 CodeableConcept? s_ = M?.Code;

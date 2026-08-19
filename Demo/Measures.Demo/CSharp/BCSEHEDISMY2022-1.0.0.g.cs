@@ -92,7 +92,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

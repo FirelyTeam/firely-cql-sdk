@@ -82,7 +82,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -159,9 +159,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 bool? u_(Medication? M) {
                     Id? w_ = M?.IdElement;
                     string? x_ = FHIRHelpers_4_0_001.Instance.ToString(context, w_);
-                    object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                    object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                     string? z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_ as FhirString);
-                    IEnumerable<string?>? aa_ = context.Operators.Split(z_!, "/"!);
+                    IEnumerable<string?>? aa_ = context.Operators.Split(z_!, "/");
                     string? ab_ = context.Operators.Last<string?>(aa_!);
                     bool? ac_ = context.Operators.Equal(x_, ab_);
                     CodeableConcept? ad_ = M?.Code;
@@ -187,9 +187,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 bool? aj_(Medication? M) {
                     Id? al_ = M?.IdElement;
                     string? am_ = FHIRHelpers_4_0_001.Instance.ToString(context, al_);
-                    object? an_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                    object? an_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                     string? ao_ = FHIRHelpers_4_0_001.Instance.ToString(context, an_ as FhirString);
-                    IEnumerable<string?>? ap_ = context.Operators.Split(ao_!, "/"!);
+                    IEnumerable<string?>? ap_ = context.Operators.Split(ao_!, "/");
                     string? aq_ = context.Operators.Last<string?>(ap_!);
                     bool? ar_ = context.Operators.Equal(am_, aq_);
                     CodeableConcept? as_ = M?.Code;

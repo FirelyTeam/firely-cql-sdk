@@ -893,10 +893,10 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date? m_ = l_?.BirthDateElement;
             string? n_ = m_?.Value;
             CqlDate? o_ = context.Operators.ConvertStringToDate(n_);
-            object? p_ = context.Operators.LateBoundProperty<object?>(choice, "low"!);
+            object? p_ = context.Operators.LateBoundProperty<object?>(choice, "low");
             CqlDate? q_ = context.Operators.Add(o_, p_ as CqlQuantity);
             CqlDateTime? r_ = context.Operators.ConvertDateToDateTime(q_);
-            object? s_ = context.Operators.LateBoundProperty<object?>(choice, "high"!);
+            object? s_ = context.Operators.LateBoundProperty<object?>(choice, "high");
             CqlDate? t_ = context.Operators.Add(o_, s_ as CqlQuantity);
             CqlQuantity? u_ = context.Operators.Quantity(1m, "year");
             CqlDate? v_ = context.Operators.Add(t_, u_);
@@ -906,7 +906,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         }
         else if (choice is Timing)
         {
-            object? y_ = context.Operators.Message<object?>((object?)null, "NOT_IMPLEMENTED"!, "Error"!, ("Calculation of an interval from a Timing value is not supported")!);
+            object? y_ = context.Operators.Message<object?>((object?)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
             return y_ as CqlInterval<CqlDateTime?>;
         }
         else
@@ -950,10 +950,10 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date? m_ = l_?.BirthDateElement;
             string? n_ = m_?.Value;
             CqlDate? o_ = context.Operators.ConvertStringToDate(n_);
-            object? p_ = context.Operators.LateBoundProperty<object?>(choice, "low"!);
+            object? p_ = context.Operators.LateBoundProperty<object?>(choice, "low");
             CqlDate? q_ = context.Operators.Add(o_, p_ as CqlQuantity);
             CqlDateTime? r_ = context.Operators.ConvertDateToDateTime(q_);
-            object? s_ = context.Operators.LateBoundProperty<object?>(choice, "high"!);
+            object? s_ = context.Operators.LateBoundProperty<object?>(choice, "high");
             CqlDate? t_ = context.Operators.Add(o_, s_ as CqlQuantity);
             CqlQuantity? u_ = context.Operators.Quantity(1m, "year");
             CqlDate? v_ = context.Operators.Add(t_, u_);
@@ -963,7 +963,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         }
         else if (choice is Timing)
         {
-            object? y_ = context.Operators.Message<object?>((object?)null, "NOT_IMPLEMENTED"!, "Error"!, ("Calculation of an interval from a Timing value is not supported")!);
+            object? y_ = context.Operators.Message<object?>((object?)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
             return y_ as CqlInterval<CqlDateTime?>;
         }
         else
@@ -1023,10 +1023,10 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlDate? ab_ = context.Operators.ConvertStringToDate(aa_);
                     DataType? ac_ = condition?.Abatement;
                     object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    object? ae_ = context.Operators.LateBoundProperty<object?>(ad_, "low"!);
+                    object? ae_ = context.Operators.LateBoundProperty<object?>(ad_, "low");
                     CqlDate? af_ = context.Operators.Add(ab_, ae_ as CqlQuantity);
                     CqlDateTime? ag_ = context.Operators.ConvertDateToDateTime(af_);
-                    object? ah_ = context.Operators.LateBoundProperty<object?>(ad_, "high"!);
+                    object? ah_ = context.Operators.LateBoundProperty<object?>(ad_, "high");
                     CqlDate? ai_ = context.Operators.Add(ab_, ah_ as CqlQuantity);
                     CqlQuantity? aj_ = context.Operators.Quantity(1m, "year");
                     CqlDate? ak_ = context.Operators.Add(ai_, aj_);
@@ -1043,8 +1043,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     {
                         DataType? aq_ = condition?.Abatement;
                         object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        object? as_ = context.Operators.LateBoundProperty<object?>(ar_, "low"!);
-                        object? at_ = context.Operators.LateBoundProperty<object?>(ar_, "high"!);
+                        object? as_ = context.Operators.LateBoundProperty<object?>(ar_, "low");
+                        object? at_ = context.Operators.LateBoundProperty<object?>(ar_, "high");
                         CqlInterval<CqlDateTime?>? au_ = context.Operators.Interval(as_ as CqlDateTime, at_ as CqlDateTime, true, false);
                         return au_;
                     }
@@ -1107,10 +1107,10 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlDate? ab_ = context.Operators.ConvertStringToDate(aa_);
                     DataType? ac_ = condition?.Abatement;
                     object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    object? ae_ = context.Operators.LateBoundProperty<object?>(ad_, "low"!);
+                    object? ae_ = context.Operators.LateBoundProperty<object?>(ad_, "low");
                     CqlDate? af_ = context.Operators.Add(ab_, ae_ as CqlQuantity);
                     CqlDateTime? ag_ = context.Operators.ConvertDateToDateTime(af_);
-                    object? ah_ = context.Operators.LateBoundProperty<object?>(ad_, "high"!);
+                    object? ah_ = context.Operators.LateBoundProperty<object?>(ad_, "high");
                     CqlDate? ai_ = context.Operators.Add(ab_, ah_ as CqlQuantity);
                     CqlQuantity? aj_ = context.Operators.Quantity(1m, "year");
                     CqlDate? ak_ = context.Operators.Add(ai_, aj_);
@@ -1127,8 +1127,8 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     {
                         DataType? aq_ = condition?.Abatement;
                         object? ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        object? as_ = context.Operators.LateBoundProperty<object?>(ar_, "low"!);
-                        object? at_ = context.Operators.LateBoundProperty<object?>(ar_, "high"!);
+                        object? as_ = context.Operators.LateBoundProperty<object?>(ar_, "low");
+                        object? at_ = context.Operators.LateBoundProperty<object?>(ar_, "high");
                         CqlInterval<CqlDateTime?>? au_ = context.Operators.Interval(as_ as CqlDateTime, at_ as CqlDateTime, true, false);
                         return au_;
                     }
@@ -1279,7 +1279,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `getId()` instead")]
     public string? GetId(CqlContext context, string? uri)
     {
-        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/"!);
+        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/");
         string? b_ = context.Operators.Last<string?>(a_!);
         return b_;
     }
@@ -1290,7 +1290,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("comment", "This function can be used to determine the logical id of a given resource. It can be used in\na single-server environment to trace references. However, this function does not attempt to resolve\nor distinguish the base of the given url, and so cannot be used safely in multi-server environments.")]
     public string? getId(CqlContext context, string? uri)
     {
-        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/"!);
+        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/");
         string? b_ = context.Operators.Last<string?>(a_!);
         return b_;
     }
@@ -1305,7 +1305,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
         string? b_ = a_?.Value;
         FhirString? c_ = reference?.ReferenceElement;
         string? d_ = c_?.Value;
-        IEnumerable<string?>? e_ = context.Operators.Split(d_!, "/"!);
+        IEnumerable<string?>? e_ = context.Operators.Split(d_!, "/");
         string? f_ = context.Operators.Last<string?>(e_!);
         bool? g_ = context.Operators.Equal(b_, f_);
         return g_;
@@ -1319,7 +1319,7 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     {
         FhirString? a_ = reference?.ReferenceElement;
         string? b_ = a_?.Value;
-        IEnumerable<string?>? c_ = context.Operators.Split(b_!, "/"!);
+        IEnumerable<string?>? c_ = context.Operators.Split(b_!, "/");
         string? d_ = context.Operators.Last<string?>(c_!);
         bool? e_ = context.Operators.Equal(resourceId, d_);
         return e_;

@@ -88,7 +88,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

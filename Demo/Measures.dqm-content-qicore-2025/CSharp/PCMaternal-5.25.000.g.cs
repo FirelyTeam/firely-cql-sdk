@@ -75,7 +75,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("PCMaternal-5.25.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("PCMaternal-5.25.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

@@ -52,7 +52,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

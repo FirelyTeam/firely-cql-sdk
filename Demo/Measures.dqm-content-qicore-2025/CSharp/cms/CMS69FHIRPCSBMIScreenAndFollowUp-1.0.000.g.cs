@@ -117,7 +117,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS69FHIRPCSBMIScreenAndFollowUp-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS69FHIRPCSBMIScreenAndFollowUp-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -242,7 +242,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
         bool? h_(Observation? PregnantObservation) {
             DataType? n_ = PregnantObservation?.Effective;
-            CqlDateTime? o_ = context.Operators.LateBoundProperty<CqlDateTime?>(n_, "value"!);
+            CqlDateTime? o_ = context.Operators.LateBoundProperty<CqlDateTime?>(n_, "value");
             CqlInterval<CqlDateTime?>? p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
             CqlInterval<CqlDateTime?>? q_ = this.Measurement_Period(context);
             bool? r_ = context.Operators.Overlaps(p_!, q_!, "day");
@@ -360,9 +360,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication?>? o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication? M) {
-                object? r_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? t_ = context.Operators.Split(((string?)s_)!, "/"!);
+                object? r_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? t_ = context.Operators.Split(((string?)s_)!, "/");
                 string? u_ = context.Operators.Last<string?>(t_!);
                 bool? v_ = context.Operators.Equal(r_, u_);
                 CodeableConcept? w_ = M?.Code;
@@ -384,7 +384,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<object?>? l_ = context.Operators.Union<object?>(e_ as IEnumerable<object?>, k_ as IEnumerable<object?>);
 
         bool? m_(object? HighInterventionsOrdered) {
-            object? ab_ = context.Operators.LateBoundProperty<object?>(HighInterventionsOrdered, "reasonCode"!);
+            object? ab_ = context.Operators.LateBoundProperty<object?>(HighInterventionsOrdered, "reasonCode");
             object?[]? ac_ = [
                 ab_,
             ];
@@ -408,8 +408,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? am_(Condition? OverweightObese) {
                 CqlInterval<CqlDateTime?>? aq_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
                 CqlDateTime? ar_ = context.Operators.Start(aq_);
-                object? as_ = context.Operators.LateBoundProperty<object?>(HighInterventionsOrdered, "authoredOn"!);
-                CqlDateTime? at_ = context.Operators.LateBoundProperty<CqlDateTime?>(as_, "value"!);
+                object? as_ = context.Operators.LateBoundProperty<object?>(HighInterventionsOrdered, "authoredOn");
+                CqlDateTime? at_ = context.Operators.LateBoundProperty<CqlDateTime?>(as_, "value");
                 bool? au_ = context.Operators.SameOrBefore(ar_, at_, "day");
                 return au_;
             }
@@ -590,45 +590,45 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
             bool? g_(object? HighBMIInterventions) {
                 object? i_;
-                object? q_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                object? q_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    object? t_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                    object? t_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     i_ = u_ as CqlDateTime;
                 }
                 else
                 {
-                    object? v_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                    object? v_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlQuantity;
                     if (x_)
                     {
-                        object? y_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                        object? y_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         i_ = z_ as CqlQuantity;
                     }
                     else
                     {
-                        object? aa_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                        object? aa_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlDateTime>;
                         if (ac_)
                         {
-                            object? ad_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                            object? ad_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             i_ = ae_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            object? af_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                            object? af_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                             object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
                             bool ah_ = ag_ is CqlInterval<CqlQuantity>;
                             if (ah_)
                             {
-                                object? ai_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed"!);
+                                object? ai_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "performed");
                                 object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                                 i_ = aj_ as CqlInterval<CqlQuantity?>;
                             }
@@ -640,8 +640,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     }
                 }
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                object? k_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "authoredOn"!);
-                CqlDateTime? l_ = context.Operators.LateBoundProperty<CqlDateTime?>(k_, "value"!);
+                object? k_ = context.Operators.LateBoundProperty<object?>(HighBMIInterventions, "authoredOn");
+                CqlDateTime? l_ = context.Operators.LateBoundProperty<CqlDateTime?>(k_, "value");
                 CqlInterval<CqlDateTime?>? m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
                 CqlDateTime? n_ = context.Operators.Start(j_ ?? m_);
                 CqlInterval<CqlDateTime?>? o_ = this.Measurement_Period(context);
@@ -700,9 +700,9 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication?>? o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication? M) {
-                object? r_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? t_ = context.Operators.Split(((string?)s_)!, "/"!);
+                object? r_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? s_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? t_ = context.Operators.Split(((string?)s_)!, "/");
                 string? u_ = context.Operators.Last<string?>(t_!);
                 bool? v_ = context.Operators.Equal(r_, u_);
                 CodeableConcept? w_ = M?.Code;
@@ -724,7 +724,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<object?>? l_ = context.Operators.Union<object?>(e_ as IEnumerable<object?>, k_ as IEnumerable<object?>);
 
         bool? m_(object? LowInterventionsOrdered) {
-            object? ab_ = context.Operators.LateBoundProperty<object?>(LowInterventionsOrdered, "reasonCode"!);
+            object? ab_ = context.Operators.LateBoundProperty<object?>(LowInterventionsOrdered, "reasonCode");
             object?[]? ac_ = [
                 ab_,
             ];
@@ -748,8 +748,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? am_(Condition? UnderweightDiagnosis) {
                 CqlInterval<CqlDateTime?>? aq_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
                 CqlDateTime? ar_ = context.Operators.Start(aq_);
-                object? as_ = context.Operators.LateBoundProperty<object?>(LowInterventionsOrdered, "authoredOn"!);
-                CqlDateTime? at_ = context.Operators.LateBoundProperty<CqlDateTime?>(as_, "value"!);
+                object? as_ = context.Operators.LateBoundProperty<object?>(LowInterventionsOrdered, "authoredOn");
+                CqlDateTime? at_ = context.Operators.LateBoundProperty<CqlDateTime?>(as_, "value");
                 bool? au_ = context.Operators.SameOrBefore(ar_, at_, "day");
                 CqlInterval<CqlDateTime?>? av_ = this.Measurement_Period(context);
                 bool? aw_ = context.Operators.In<CqlDateTime?>(at_, av_, "day");
@@ -994,45 +994,45 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
             bool? g_(object? LowBMIInterventions) {
                 object? i_;
-                object? q_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                object? q_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                 object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    object? t_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                    object? t_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     i_ = u_ as CqlDateTime;
                 }
                 else
                 {
-                    object? v_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                    object? v_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                     object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlQuantity;
                     if (x_)
                     {
-                        object? y_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                        object? y_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         i_ = z_ as CqlQuantity;
                     }
                     else
                     {
-                        object? aa_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                        object? aa_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                         object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlDateTime>;
                         if (ac_)
                         {
-                            object? ad_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                            object? ad_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             i_ = ae_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            object? af_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                            object? af_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                             object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
                             bool ah_ = ag_ is CqlInterval<CqlQuantity>;
                             if (ah_)
                             {
-                                object? ai_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed"!);
+                                object? ai_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "performed");
                                 object? aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
                                 i_ = aj_ as CqlInterval<CqlQuantity?>;
                             }
@@ -1044,8 +1044,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                     }
                 }
                 CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                object? k_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "authoredOn"!);
-                CqlDateTime? l_ = context.Operators.LateBoundProperty<CqlDateTime?>(k_, "value"!);
+                object? k_ = context.Operators.LateBoundProperty<object?>(LowBMIInterventions, "authoredOn");
+                CqlDateTime? l_ = context.Operators.LateBoundProperty<CqlDateTime?>(k_, "value");
                 CqlInterval<CqlDateTime?>? m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
                 CqlDateTime? n_ = context.Operators.Start(j_ ?? m_);
                 CqlInterval<CqlDateTime?>? o_ = this.Measurement_Period(context);

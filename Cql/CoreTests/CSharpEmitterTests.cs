@@ -26,6 +26,8 @@ internal sealed class CSharpEmitterTestWidget
     public CSharpEmitterTestWidget() { }
 
     public int Count { get; set; }
+
+    public string Label { get; set; } = "";
 }
 
 /// <summary>
@@ -50,6 +52,8 @@ internal static class CSharpEmitterTestHelpers
     public static int? ApplyFunc(Func<int, int?> f, int x) => f(x);
 
     public static bool? IdentityBool(bool? value) => value;
+
+    public static object AcceptObject(object value) => value;
 }
 
 /// <summary>
@@ -626,6 +630,12 @@ public class CSharpEmitterTests
         Assert.AreEqual(
             "{\n    CSharpEmitterTestWidget? a_ = new CSharpEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
             EmitBody(new CodeLambda([], memberInit)));
+
+        var labelProperty = ReflectionUtility.PropertyOf(() => default(CSharpEmitterTestWidget)!.Label);
+        var memberInitWithStringConstant = new CodeMemberInit(widgetNew, [(labelProperty, new CodeConstant("A B", typeof(string)))]);
+        Assert.AreEqual(
+            "{\n    CSharpEmitterTestWidget? a_ = new CSharpEmitterTestWidget\n    {\n        Label = \"A B\",\n    };\n    return a_;\n}",
+            EmitBody(new CodeLambda([], memberInitWithStringConstant)));
     }
 
     [TestMethod]
@@ -767,6 +777,18 @@ public class CSharpEmitterTests
         Assert.AreEqual(
             "{\n    object? a_ = context.ResolveParameter(\"DevDays-2025.0.0\", \"Measurement Period\", (object?)null);\n    return a_;\n}",
             EmitBody(new CodeLambda([], call)));
+    }
+
+    [TestMethod]
+    public void Invoke_NullableValueArgument_ToNonNullableParameter_DoesNotEmitNullForgivingOperator()
+    {
+        var acceptObject = ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.AcceptObject(default!));
+        var value = new CodeLocal(typeof(int?), "value");
+        var call = new CodeInvoke(null, acceptObject, value);
+
+        Assert.AreEqual(
+            "{\n    object? a_ = CSharpEmitterTestHelpers.AcceptObject(value);\n    return a_;\n}",
+            EmitBody(new CodeLambda([value], call)));
     }
 
     [TestMethod]

@@ -197,7 +197,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS108FHIRVTEProphylaxis-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS108FHIRVTEProphylaxis-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -530,45 +530,45 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
             bool? e_(object? ComfortMeasure) {
                 object? g_;
-                object? u_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                object? u_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                 object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                 bool w_ = v_ is CqlDateTime;
                 if (w_)
                 {
-                    object? x_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                    object? x_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                     object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                     g_ = y_ as CqlDateTime;
                 }
                 else
                 {
-                    object? z_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                    object? z_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                     object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                     bool ab_ = aa_ is CqlQuantity;
                     if (ab_)
                     {
-                        object? ac_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                        object? ac_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                         object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                         g_ = ad_ as CqlQuantity;
                     }
                     else
                     {
-                        object? ae_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                        object? ae_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                         object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                         bool ag_ = af_ is CqlInterval<CqlDateTime>;
                         if (ag_)
                         {
-                            object? ah_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                            object? ah_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                             object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
                             g_ = ai_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            object? aj_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                            object? aj_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                             object? ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
                             bool al_ = ak_ is CqlInterval<CqlQuantity>;
                             if (al_)
                             {
-                                object? am_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed"!);
+                                object? am_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "performed");
                                 object? an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
                                 g_ = an_ as CqlInterval<CqlQuantity?>;
                             }
@@ -581,8 +581,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 }
                 CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
                 CqlDateTime? i_ = context.Operators.Start(h_);
-                object? j_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "authoredOn"!);
-                CqlDateTime? k_ = context.Operators.LateBoundProperty<CqlDateTime?>(j_, "value"!);
+                object? j_ = context.Operators.LateBoundProperty<object?>(ComfortMeasure, "authoredOn");
+                CqlDateTime? k_ = context.Operators.LateBoundProperty<CqlDateTime?>(j_, "value");
                 CqlInterval<CqlDate?>? l_ = this.fromDayOfStartOfHospitalizationToDayAfterAdmission(context, QualifyingEncounter);
                 CqlDate? m_ = l_?.low;
                 CqlDateTime? n_ = context.Operators.ConvertDateToDateTime(m_);
@@ -689,45 +689,45 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             bool? x_ = context.Operators.SameAs(r_, w_, "day");
             bool? y_ = context.Operators.And(o_, x_);
             object? z_;
-            object? bx_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+            object? bx_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
             object? by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
             bool bz_ = by_ is CqlDateTime;
             if (bz_)
             {
-                object? ca_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                object? ca_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                 object? cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
                 z_ = cb_ as CqlDateTime;
             }
             else
             {
-                object? cc_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                object? cc_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                 object? cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
                 bool ce_ = cd_ is CqlQuantity;
                 if (ce_)
                 {
-                    object? cf_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                    object? cf_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                     object? cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cf_);
                     z_ = cg_ as CqlQuantity;
                 }
                 else
                 {
-                    object? ch_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                    object? ch_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                     object? ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
                     bool cj_ = ci_ is CqlInterval<CqlDateTime>;
                     if (cj_)
                     {
-                        object? ck_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                        object? ck_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                         object? cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
                         z_ = cl_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? cm_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                        object? cm_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                         object? cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
                         bool co_ = cn_ is CqlInterval<CqlQuantity>;
                         if (co_)
                         {
-                            object? cp_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed"!);
+                            object? cp_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "performed");
                             object? cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
                             z_ = cq_ as CqlInterval<CqlQuantity?>;
                         }
@@ -740,8 +740,8 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             }
             CqlInterval<CqlDateTime?>? aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
             CqlDateTime? ab_ = context.Operators.Start(aa_);
-            object? ac_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "authoredOn"!);
-            CqlDateTime? ad_ = context.Operators.LateBoundProperty<CqlDateTime?>(ac_, "value"!);
+            object? ac_ = context.Operators.LateBoundProperty<object?>(tuple_hbjscqgbuhismoaytymvucjfi?.ComfortMeasure, "authoredOn");
+            CqlDateTime? ad_ = context.Operators.LateBoundProperty<CqlDateTime?>(ac_, "value");
             object? ae_;
             DataType? cr_ = tuple_hbjscqgbuhismoaytymvucjfi?.AnesthesiaProcedure?.Performed;
             object? cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
@@ -1010,9 +1010,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? az_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ba_(Medication? M) {
-                object? bc_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? be_ = context.Operators.Split(((string?)bd_)!, "/"!);
+                object? bc_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? be_ = context.Operators.Split(((string?)bd_)!, "/");
                 string? bf_ = context.Operators.Last<string?>(be_!);
                 bool? bg_ = context.Operators.Equal(bc_, bf_);
                 CodeableConcept? bh_ = M?.Code;
@@ -1052,9 +1052,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? bw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? bx_(Medication? M) {
-                object? bz_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? ca_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? cb_ = context.Operators.Split(((string?)ca_)!, "/"!);
+                object? bz_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? ca_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? cb_ = context.Operators.Split(((string?)ca_)!, "/");
                 string? cc_ = context.Operators.Last<string?>(cb_!);
                 bool? cd_ = context.Operators.Equal(bz_, cc_);
                 CodeableConcept? ce_ = M?.Code;
@@ -1089,9 +1089,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? cn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? co_(Medication? M) {
-                object? cq_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? cr_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? cs_ = context.Operators.Split(((string?)cr_)!, "/"!);
+                object? cq_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? cr_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? cs_ = context.Operators.Split(((string?)cr_)!, "/");
                 string? ct_ = context.Operators.Last<string?>(cs_!);
                 bool? cu_ = context.Operators.Equal(cq_, ct_);
                 CodeableConcept? cv_ = M?.Code;
@@ -1125,9 +1125,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? de_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? df_(Medication? M) {
-                object? dh_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? di_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? dj_ = context.Operators.Split(((string?)di_)!, "/"!);
+                object? dh_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? di_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? dj_ = context.Operators.Split(((string?)di_)!, "/");
                 string? dk_ = context.Operators.Last<string?>(dj_!);
                 bool? dl_ = context.Operators.Equal(dh_, dk_);
                 CodeableConcept? dm_ = M?.Code;
@@ -1163,9 +1163,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? dv_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dw_(Medication? M) {
-                object? dy_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? dz_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? ea_ = context.Operators.Split(((string?)dz_)!, "/"!);
+                object? dy_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? dz_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? ea_ = context.Operators.Split(((string?)dz_)!, "/");
                 string? eb_ = context.Operators.Last<string?>(ea_!);
                 bool? ec_ = context.Operators.Equal(dy_, eb_);
                 CodeableConcept? ed_ = M?.Code;
@@ -1237,49 +1237,49 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
 
 
         bool? e_((CqlTupleMetadata, Encounter? QualifyingEncounter, object? VTEProphylaxis)? tuple_dqdjdfndavflfyejysbyihgsj) {
-            object? s_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "effective"!);
+            object? s_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "effective");
             object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlInterval<CqlDateTime?>? u_ = QICoreCommon_4_0_000.Instance.toInterval(context, t_);
             object? v_;
-            object? ah_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+            object? ah_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
             object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
             bool aj_ = ai_ is CqlDateTime;
             if (aj_)
             {
-                object? ak_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                object? ak_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                 object? al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
                 v_ = al_ as CqlDateTime;
             }
             else
             {
-                object? am_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                object? am_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                 object? an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
                 bool ao_ = an_ is CqlQuantity;
                 if (ao_)
                 {
-                    object? ap_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                    object? ap_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                     object? aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
                     v_ = aq_ as CqlQuantity;
                 }
                 else
                 {
-                    object? ar_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                    object? ar_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                     object? as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
                     bool at_ = as_ is CqlInterval<CqlDateTime>;
                     if (at_)
                     {
-                        object? au_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                        object? au_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                         object? av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
                         v_ = av_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? aw_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                        object? aw_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                         object? ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
                         bool ay_ = ax_ is CqlInterval<CqlQuantity>;
                         if (ay_)
                         {
-                            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed"!);
+                            object? az_ = context.Operators.LateBoundProperty<object?>(tuple_dqdjdfndavflfyejysbyihgsj?.VTEProphylaxis, "performed");
                             object? ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
                             v_ = ba_ as CqlInterval<CqlQuantity?>;
                         }
@@ -1381,49 +1381,49 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             CqlDateTime? bn_ = context.Operators.Add(bl_, bm_);
             bool? bo_ = context.Operators.SameAs(bi_, bn_, "day");
             bool? bp_ = context.Operators.And(bf_, bo_);
-            object? bq_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "effective"!);
+            object? bq_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "effective");
             object? br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
             CqlInterval<CqlDateTime?>? bs_ = QICoreCommon_4_0_000.Instance.toInterval(context, br_);
             object? bt_;
-            object? dp_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+            object? dp_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
             object? dq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dp_);
             bool dr_ = dq_ is CqlDateTime;
             if (dr_)
             {
-                object? ds_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                object? ds_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                 object? dt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ds_);
                 bt_ = dt_ as CqlDateTime;
             }
             else
             {
-                object? du_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                object? du_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                 object? dv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, du_);
                 bool dw_ = dv_ is CqlQuantity;
                 if (dw_)
                 {
-                    object? dx_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                    object? dx_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                     object? dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
                     bt_ = dy_ as CqlQuantity;
                 }
                 else
                 {
-                    object? dz_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                    object? dz_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                     object? ea_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dz_);
                     bool eb_ = ea_ is CqlInterval<CqlDateTime>;
                     if (eb_)
                     {
-                        object? ec_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                        object? ec_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                         object? ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
                         bt_ = ed_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        object? ee_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                        object? ee_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                         object? ef_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ee_);
                         bool eg_ = ef_ is CqlInterval<CqlQuantity>;
                         if (eg_)
                         {
-                            object? eh_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed"!);
+                            object? eh_ = context.Operators.LateBoundProperty<object?>(tuple_bnvctjfzpousixdcefwhciwq?.VTEProphylaxis, "performed");
                             object? ei_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eh_);
                             bt_ = ei_ as CqlInterval<CqlQuantity?>;
                         }
@@ -1683,9 +1683,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? z_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? aa_(Medication? M) {
-                object? ac_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? ad_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? ae_ = context.Operators.Split(((string?)ad_)!, "/"!);
+                object? ac_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? ad_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? ae_ = context.Operators.Split(((string?)ad_)!, "/");
                 string? af_ = context.Operators.Last<string?>(ae_!);
                 bool? ag_ = context.Operators.Equal(ac_, af_);
                 CodeableConcept? ah_ = M?.Code;
@@ -1747,9 +1747,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? bi_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? bj_(Medication? M) {
-                object? bl_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? bm_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? bn_ = context.Operators.Split(((string?)bm_)!, "/"!);
+                object? bl_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? bm_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? bn_ = context.Operators.Split(((string?)bm_)!, "/");
                 string? bo_ = context.Operators.Last<string?>(bn_!);
                 bool? bp_ = context.Operators.Equal(bl_, bo_);
                 CodeableConcept? bq_ = M?.Code;
@@ -2411,9 +2411,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? ch_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ci_(Medication? M) {
-                object? ck_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? cl_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? cm_ = context.Operators.Split(((string?)cl_)!, "/"!);
+                object? ck_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? cl_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? cm_ = context.Operators.Split(((string?)cl_)!, "/");
                 string? cn_ = context.Operators.Last<string?>(cm_!);
                 bool? co_ = context.Operators.Equal(ck_, cn_);
                 CodeableConcept? cp_ = M?.Code;
@@ -2448,9 +2448,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? cz_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? da_(Medication? M) {
-                object? dc_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? dd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? de_ = context.Operators.Split(((string?)dd_)!, "/"!);
+                object? dc_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? dd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? de_ = context.Operators.Split(((string?)dd_)!, "/");
                 string? df_ = context.Operators.Last<string?>(de_!);
                 bool? dg_ = context.Operators.Equal(dc_, df_);
                 CodeableConcept? dh_ = M?.Code;
@@ -2475,9 +2475,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? dm_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dn_(Medication? M) {
-                object? dp_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? dq_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? dr_ = context.Operators.Split(((string?)dq_)!, "/"!);
+                object? dp_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? dq_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? dr_ = context.Operators.Split(((string?)dq_)!, "/");
                 string? ds_ = context.Operators.Last<string?>(dr_!);
                 bool? dt_ = context.Operators.Equal(dp_, ds_);
                 CodeableConcept? du_ = M?.Code;
@@ -3036,9 +3036,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? dj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dk_(Medication? M) {
-                object? dm_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? dn_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? do_ = context.Operators.Split(((string?)dn_)!, "/"!);
+                object? dm_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? dn_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? do_ = context.Operators.Split(((string?)dn_)!, "/");
                 string? dp_ = context.Operators.Last<string?>(do_!);
                 bool? dq_ = context.Operators.Equal(dm_, dp_);
                 CodeableConcept? dr_ = M?.Code;
@@ -3061,9 +3061,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? dw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dx_(Medication? M) {
-                object? dz_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? ea_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? eb_ = context.Operators.Split(((string?)ea_)!, "/"!);
+                object? dz_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? ea_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? eb_ = context.Operators.Split(((string?)ea_)!, "/");
                 string? ec_ = context.Operators.Last<string?>(eb_!);
                 bool? ed_ = context.Operators.Equal(dz_, ec_);
                 CodeableConcept? ee_ = M?.Code;
@@ -3087,9 +3087,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? ej_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ek_(Medication? M) {
-                object? em_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? en_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? eo_ = context.Operators.Split(((string?)en_)!, "/"!);
+                object? em_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? en_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? eo_ = context.Operators.Split(((string?)en_)!, "/");
                 string? ep_ = context.Operators.Last<string?>(eo_!);
                 bool? eq_ = context.Operators.Equal(em_, ep_);
                 CodeableConcept? er_ = M?.Code;
@@ -3113,9 +3113,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? ew_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ex_(Medication? M) {
-                object? ez_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? fa_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? fb_ = context.Operators.Split(((string?)fa_)!, "/"!);
+                object? ez_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? fa_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? fb_ = context.Operators.Split(((string?)fa_)!, "/");
                 string? fc_ = context.Operators.Last<string?>(fb_!);
                 bool? fd_ = context.Operators.Equal(ez_, fc_);
                 CodeableConcept? fe_ = M?.Code;
@@ -3139,9 +3139,9 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<Medication?>? fj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? fk_(Medication? M) {
-                object? fm_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? fn_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? fo_ = context.Operators.Split(((string?)fn_)!, "/"!);
+                object? fm_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? fn_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? fo_ = context.Operators.Split(((string?)fn_)!, "/");
                 string? fp_ = context.Operators.Last<string?>(fo_!);
                 bool? fq_ = context.Operators.Equal(fm_, fp_);
                 CodeableConcept? fr_ = M?.Code;
@@ -4205,7 +4205,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             IEnumerable<object?>? d_ = this.No_Mechanical_Or_Pharmacological_VTE_Prophylaxis_Due_To_Patient_Refusal(context);
 
             bool? e_(object? PatientRefusal) {
-                CqlDateTime? g_ = context.Operators.LateBoundProperty<CqlDateTime?>(PatientRefusal, "authoredOn"!);
+                CqlDateTime? g_ = context.Operators.LateBoundProperty<CqlDateTime?>(PatientRefusal, "authoredOn");
                 CqlInterval<CqlDate?>? h_ = this.fromDayOfStartOfHospitalizationToDayAfterAdmission(context, QualifyingEncounter);
                 CqlDate? i_ = h_?.low;
                 CqlDateTime? j_ = context.Operators.ConvertDateToDateTime(i_);
@@ -4311,7 +4311,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
             CqlDateTime? w_ = context.Operators.Add(u_, v_);
             bool? x_ = context.Operators.SameAs(r_, w_, "day");
             bool? y_ = context.Operators.And(o_, x_);
-            CqlDateTime? z_ = context.Operators.LateBoundProperty<CqlDateTime?>(tuple_fpeghttqsjgusnbabduddbjbh?.PatientRefusal, "authoredOn"!);
+            CqlDateTime? z_ = context.Operators.LateBoundProperty<CqlDateTime?>(tuple_fpeghttqsjgusnbabduddbjbh?.PatientRefusal, "authoredOn");
             object? aa_;
             DataType? bt_ = tuple_fpeghttqsjgusnbabduddbjbh?.AnesthesiaProcedure?.Performed;
             object? bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);

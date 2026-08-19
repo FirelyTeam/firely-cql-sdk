@@ -98,7 +98,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

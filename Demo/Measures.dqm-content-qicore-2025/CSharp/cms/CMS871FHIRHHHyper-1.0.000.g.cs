@@ -63,7 +63,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS871FHIRHHHyper-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS871FHIRHHHyper-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -303,9 +303,9 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             IEnumerable<Medication?>? n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? o_(Medication? M) {
-                object? q_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? r_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? s_ = context.Operators.Split(((string?)r_)!, "/"!);
+                object? q_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? r_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? s_ = context.Operators.Split(((string?)r_)!, "/");
                 string? t_ = context.Operators.Last<string?>(s_!);
                 bool? u_ = context.Operators.Equal(q_, t_);
                 CodeableConcept? v_ = M?.Code;
@@ -1209,45 +1209,45 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
 
             bool? e_(object? ComfortCare) {
                 object? g_;
-                object? o_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                object? o_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                 object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 bool q_ = p_ is CqlDateTime;
                 if (q_)
                 {
-                    object? r_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                    object? r_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                     object? s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     g_ = s_ as CqlDateTime;
                 }
                 else
                 {
-                    object? t_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                    object? t_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                     object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     bool v_ = u_ is CqlQuantity;
                     if (v_)
                     {
-                        object? w_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                        object? w_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                         object? x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
                         g_ = x_ as CqlQuantity;
                     }
                     else
                     {
-                        object? y_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                        object? y_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                         object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
                         bool aa_ = z_ is CqlInterval<CqlDateTime>;
                         if (aa_)
                         {
-                            object? ab_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                            object? ab_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                             object? ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
                             g_ = ac_ as CqlInterval<CqlDateTime?>;
                         }
                         else
                         {
-                            object? ad_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                            object? ad_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                             object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
                             bool af_ = ae_ is CqlInterval<CqlQuantity>;
                             if (af_)
                             {
-                                object? ag_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed"!);
+                                object? ag_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "performed");
                                 object? ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
                                 g_ = ah_ as CqlInterval<CqlQuantity?>;
                             }
@@ -1259,8 +1259,8 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                     }
                 }
                 CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-                object? i_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "authoredOn"!);
-                CqlDateTime? j_ = context.Operators.LateBoundProperty<CqlDateTime?>(i_, "value"!);
+                object? i_ = context.Operators.LateBoundProperty<object?>(ComfortCare, "authoredOn");
+                CqlDateTime? j_ = context.Operators.LateBoundProperty<CqlDateTime?>(i_, "value");
                 CqlInterval<CqlDateTime?>? k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
                 CqlDateTime? l_ = context.Operators.Start(h_ ?? k_);
                 CqlInterval<CqlDateTime?>? m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientHospitalization);

@@ -83,7 +83,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
         CqlDateTime? a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("Exam125FHIR-0.0.009"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("Exam125FHIR-0.0.009", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 

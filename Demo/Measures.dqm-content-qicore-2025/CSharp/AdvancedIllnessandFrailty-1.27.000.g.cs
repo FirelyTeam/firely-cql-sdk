@@ -89,7 +89,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("AdvancedIllnessandFrailty-1.27.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -251,9 +251,9 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             IEnumerable<Medication?>? j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication? M) {
-                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/"!);
+                object? m_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? n_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? o_ = context.Operators.Split(((string?)n_)!, "/");
                 string? p_ = context.Operators.Last<string?>(o_!);
                 bool? q_ = context.Operators.Equal(m_, p_);
                 CodeableConcept? r_ = M?.Code;

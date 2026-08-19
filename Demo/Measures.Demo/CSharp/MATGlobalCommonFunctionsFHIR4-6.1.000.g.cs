@@ -229,7 +229,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         CqlDateTime? a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -688,12 +688,12 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         }
         else if (choice is Timing)
         {
-            CqlInterval<CqlDateTime?>? ad_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute a single interval from a Timing type")!);
+            CqlInterval<CqlDateTime?>? ad_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute a single interval from a Timing type");
             return ad_;
         }
         else if (choice is FhirString)
         {
-            CqlInterval<CqlDateTime?>? ae_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+            CqlInterval<CqlDateTime?>? ae_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
             return ae_;
         }
         else
@@ -731,7 +731,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
                 bool k_ = j_ is FhirString;
                 if (k_)
                 {
-                    CqlInterval<CqlDateTime?>? l_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+                    CqlInterval<CqlDateTime?>? l_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
                     return l_;
                 }
                 else
@@ -844,7 +844,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     [CqlFunctionDefinition("GetId")]
     public string? GetId(CqlContext context, string? uri)
     {
-        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/"!);
+        IEnumerable<string?>? a_ = context.Operators.Split(uri!, "/");
         string? b_ = context.Operators.Last<string?>(a_!);
         return b_;
     }

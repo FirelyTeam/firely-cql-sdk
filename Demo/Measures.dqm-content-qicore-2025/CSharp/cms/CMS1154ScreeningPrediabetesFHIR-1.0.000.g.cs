@@ -138,7 +138,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS1154ScreeningPrediabetesFHIR-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS1154ScreeningPrediabetesFHIR-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -537,7 +537,7 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CqlValueSet? f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
             DataType? h_ = PregnantObservation?.Effective;
-            CqlDateTime? i_ = context.Operators.LateBoundProperty<CqlDateTime?>(h_, "value"!);
+            CqlDateTime? i_ = context.Operators.LateBoundProperty<CqlDateTime?>(h_, "value");
             CqlInterval<CqlDateTime?>? j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
             CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
             bool? l_ = context.Operators.Overlaps(j_!, k_!, "day");

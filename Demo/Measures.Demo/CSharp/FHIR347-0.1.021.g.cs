@@ -190,7 +190,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("FHIR347-0.1.021"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("FHIR347-0.1.021", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -911,9 +911,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? v_(Medication? M) {
                 Id? x_ = M?.IdElement;
                 string? y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
-                object? z_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? z_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_ as FhirString);
-                IEnumerable<string?>? ab_ = context.Operators.Split(aa_!, "/"!);
+                IEnumerable<string?>? ab_ = context.Operators.Split(aa_!, "/");
                 string? ac_ = context.Operators.Last<string?>(ab_!);
                 bool? ad_ = context.Operators.Equal(y_, ac_);
                 CodeableConcept? ae_ = M?.Code;
@@ -939,9 +939,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? ak_(Medication? M) {
                 Id? am_ = M?.IdElement;
                 string? an_ = FHIRHelpers_4_0_001.Instance.ToString(context, am_);
-                object? ao_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? ao_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? ap_ = FHIRHelpers_4_0_001.Instance.ToString(context, ao_ as FhirString);
-                IEnumerable<string?>? aq_ = context.Operators.Split(ap_!, "/"!);
+                IEnumerable<string?>? aq_ = context.Operators.Split(ap_!, "/");
                 string? ar_ = context.Operators.Last<string?>(aq_!);
                 bool? as_ = context.Operators.Equal(an_, ar_);
                 CodeableConcept? at_ = M?.Code;
@@ -968,9 +968,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? az_(Medication? M) {
                 Id? bb_ = M?.IdElement;
                 string? bc_ = FHIRHelpers_4_0_001.Instance.ToString(context, bb_);
-                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? be_ = FHIRHelpers_4_0_001.Instance.ToString(context, bd_ as FhirString);
-                IEnumerable<string?>? bf_ = context.Operators.Split(be_!, "/"!);
+                IEnumerable<string?>? bf_ = context.Operators.Split(be_!, "/");
                 string? bg_ = context.Operators.Last<string?>(bf_!);
                 bool? bh_ = context.Operators.Equal(bc_, bg_);
                 CodeableConcept? bi_ = M?.Code;
@@ -1032,9 +1032,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? v_(Medication? M) {
                 Id? x_ = M?.IdElement;
                 string? y_ = FHIRHelpers_4_0_001.Instance.ToString(context, x_);
-                object? z_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? z_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_ as FhirString);
-                IEnumerable<string?>? ab_ = context.Operators.Split(aa_!, "/"!);
+                IEnumerable<string?>? ab_ = context.Operators.Split(aa_!, "/");
                 string? ac_ = context.Operators.Last<string?>(ab_!);
                 bool? ad_ = context.Operators.Equal(y_, ac_);
                 CodeableConcept? ae_ = M?.Code;
@@ -1060,9 +1060,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? ak_(Medication? M) {
                 Id? am_ = M?.IdElement;
                 string? an_ = FHIRHelpers_4_0_001.Instance.ToString(context, am_);
-                object? ao_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? ao_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? ap_ = FHIRHelpers_4_0_001.Instance.ToString(context, ao_ as FhirString);
-                IEnumerable<string?>? aq_ = context.Operators.Split(ap_!, "/"!);
+                IEnumerable<string?>? aq_ = context.Operators.Split(ap_!, "/");
                 string? ar_ = context.Operators.Last<string?>(aq_!);
                 bool? as_ = context.Operators.Equal(an_, ar_);
                 CodeableConcept? at_ = M?.Code;
@@ -1089,9 +1089,9 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
             bool? az_(Medication? M) {
                 Id? bb_ = M?.IdElement;
                 string? bc_ = FHIRHelpers_4_0_001.Instance.ToString(context, bb_);
-                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? bd_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? be_ = FHIRHelpers_4_0_001.Instance.ToString(context, bd_ as FhirString);
-                IEnumerable<string?>? bf_ = context.Operators.Split(be_!, "/"!);
+                IEnumerable<string?>? bf_ = context.Operators.Split(be_!, "/");
                 string? bg_ = context.Operators.Last<string?>(bf_!);
                 bool? bh_ = context.Operators.Equal(bc_, bg_);
                 CodeableConcept? bi_ = M?.Code;

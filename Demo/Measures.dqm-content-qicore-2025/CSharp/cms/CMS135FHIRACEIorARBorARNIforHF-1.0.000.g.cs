@@ -100,7 +100,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS135FHIRACEIorARBorARNIforHF-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS135FHIRACEIorARBorARNIforHF-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -386,7 +386,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
             bool? ab_(Encounter? ModerateOrSevereLVSDHFOutpatientEncounter) {
                 DataType? ad_ = PregnantObservation?.Effective;
-                CqlDateTime? ae_ = context.Operators.LateBoundProperty<CqlDateTime?>(ad_, "value"!);
+                CqlDateTime? ae_ = context.Operators.LateBoundProperty<CqlDateTime?>(ad_, "value");
                 CqlInterval<CqlDateTime?>? af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
                 CqlDateTime? ag_ = context.Operators.Start(af_);
                 Period? ah_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;

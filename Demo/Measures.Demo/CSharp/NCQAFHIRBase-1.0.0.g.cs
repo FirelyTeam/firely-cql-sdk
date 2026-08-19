@@ -45,16 +45,16 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (onset is Period)
         {
-            FhirDateTime? c_ = context.Operators.LateBoundProperty<FhirDateTime?>(onset, "start"!);
+            FhirDateTime? c_ = context.Operators.LateBoundProperty<FhirDateTime?>(onset, "start");
             CqlDateTime? d_ = context.Operators.Convert<CqlDateTime?>(c_);
-            FhirDateTime? e_ = context.Operators.LateBoundProperty<FhirDateTime?>(onset, "end"!);
+            FhirDateTime? e_ = context.Operators.LateBoundProperty<FhirDateTime?>(onset, "end");
             CqlDateTime? f_ = context.Operators.Convert<CqlDateTime?>(e_);
             CqlInterval<CqlDateTime?>? g_ = context.Operators.Interval(d_, f_, true, true);
             return g_;
         }
         else if (onset is FhirString)
         {
-            CqlInterval<CqlDateTime?>? h_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+            CqlInterval<CqlDateTime?>? h_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
             return h_;
         }
         else
@@ -214,16 +214,16 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (abatement is Period)
         {
-            FhirDateTime? c_ = context.Operators.LateBoundProperty<FhirDateTime?>(abatement, "start"!);
+            FhirDateTime? c_ = context.Operators.LateBoundProperty<FhirDateTime?>(abatement, "start");
             CqlDateTime? d_ = context.Operators.Convert<CqlDateTime?>(c_);
-            FhirDateTime? e_ = context.Operators.LateBoundProperty<FhirDateTime?>(abatement, "end"!);
+            FhirDateTime? e_ = context.Operators.LateBoundProperty<FhirDateTime?>(abatement, "end");
             CqlDateTime? f_ = context.Operators.Convert<CqlDateTime?>(e_);
             CqlInterval<CqlDateTime?>? g_ = context.Operators.Interval(d_, f_, true, true);
             return g_;
         }
         else if (abatement is FhirString)
         {
-            CqlInterval<CqlDateTime?>? h_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+            CqlInterval<CqlDateTime?>? h_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
             return h_;
         }
         else
@@ -404,9 +404,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (choice is Period)
         {
-            FhirDateTime? f_ = context.Operators.LateBoundProperty<FhirDateTime?>(choice, "start"!);
+            FhirDateTime? f_ = context.Operators.LateBoundProperty<FhirDateTime?>(choice, "start");
             CqlDateTime? g_ = context.Operators.Convert<CqlDateTime?>(f_);
-            FhirDateTime? h_ = context.Operators.LateBoundProperty<FhirDateTime?>(choice, "end"!);
+            FhirDateTime? h_ = context.Operators.LateBoundProperty<FhirDateTime?>(choice, "end");
             CqlDateTime? i_ = context.Operators.Convert<CqlDateTime?>(h_);
             CqlInterval<CqlDateTime?>? j_ = context.Operators.Interval(g_, i_, true, true);
             return j_;
@@ -451,12 +451,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (choice is Timing)
         {
-            CqlInterval<CqlDateTime?>? ak_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute a single interval from a Timing type")!);
+            CqlInterval<CqlDateTime?>? ak_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute a single interval from a Timing type");
             return ak_;
         }
         else if (choice is FhirString)
         {
-            CqlInterval<CqlDateTime?>? al_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1"!, "Error"!, ("Cannot compute an interval from a String value")!);
+            CqlInterval<CqlDateTime?>? al_ = context.Operators.Message<CqlInterval<CqlDateTime?>?>((CqlInterval<CqlDateTime>?)(null as CqlInterval<CqlDateTime?>), "1", "Error", "Cannot compute an interval from a String value");
             return al_;
         }
         else
@@ -469,11 +469,11 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     [CqlFunctionDefinition("GetId")]
     public string? GetId(CqlContext context, string? uri)
     {
-        int? a_ = context.Operators.PositionOf("/"!, uri!);
+        int? a_ = context.Operators.PositionOf("/", uri!);
         bool? b_ = context.Operators.Greater(a_, 0);
         if (b_ ?? false)
         {
-            IEnumerable<string?>? c_ = context.Operators.Split(uri!, "/"!);
+            IEnumerable<string?>? c_ = context.Operators.Split(uri!, "/");
             string? d_ = context.Operators.Last<string?>(c_!);
             return d_;
         }

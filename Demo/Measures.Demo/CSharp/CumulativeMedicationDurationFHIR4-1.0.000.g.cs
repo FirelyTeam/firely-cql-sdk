@@ -176,7 +176,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     private string? ErrorLevel_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("CumulativeMedicationDurationFHIR4-1.0.000"!, "ErrorLevel"!, "Warning");
+        object? a_ = context.ResolveParameter("CumulativeMedicationDurationFHIR4-1.0.000", "ErrorLevel", "Warning");
         return (string?)a_;
     }
 
@@ -505,7 +505,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
                                                                                             string? fs_ = this.ErrorLevel(context);
                                                                                             string? ft_ = period?.unit;
                                                                                             string? fu_ = context.Operators.Concatenate("Unknown unit ", ft_ ?? "");
-                                                                                            object? fv_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownUnit"!, fs_!, fu_!);
+                                                                                            object? fv_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownUnit", fs_!, fu_!);
                                                                                             return fv_ as decimal?;
                                                                                         }
                                                                                     }
@@ -545,7 +545,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
             string? c_ = this.ErrorLevel(context);
             string? d_ = frequency?.code;
             string? e_ = context.Operators.Concatenate("Unknown frequency code ", d_ ?? "");
-            object? f_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownFrequencyCode"!, c_!, e_!);
+            object? f_ = context.Operators.Message<object?>((object?)null, "CMDLogic.ToDaily.UnknownFrequencyCode", c_!, e_!);
             return f_ as decimal?;
         }
     }

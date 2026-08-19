@@ -177,7 +177,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
         CqlDateTime? a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlDateTime? b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, (decimal?)default);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("Exam130FHIR-0.0.003"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("Exam130FHIR-0.0.003", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -490,7 +490,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             DataType? p_ = FecalOccult?.Effective;
             CqlDateTime? q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
             DataType? r_ = FecalOccult?.Value;
-            IEnumerable<Coding?>? s_ = context.Operators.LateBoundProperty<IEnumerable<Coding?>?>(r_, "coding"!);
+            IEnumerable<Coding?>? s_ = context.Operators.LateBoundProperty<IEnumerable<Coding?>?>(r_, "coding");
 
             bool? t_(Coding? @this) {
                 FhirString? aj_ = @this?.DisplayElement;
@@ -850,7 +850,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             DataType? q_ = FitDNA?.Effective;
             CqlDateTime? r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
             DataType? s_ = FitDNA?.Value;
-            IEnumerable<Coding?>? t_ = context.Operators.LateBoundProperty<IEnumerable<Coding?>?>(s_, "coding"!);
+            IEnumerable<Coding?>? t_ = context.Operators.LateBoundProperty<IEnumerable<Coding?>?>(s_, "coding");
 
             bool? u_(Coding? @this) {
                 FhirString? ak_ = @this?.DisplayElement;

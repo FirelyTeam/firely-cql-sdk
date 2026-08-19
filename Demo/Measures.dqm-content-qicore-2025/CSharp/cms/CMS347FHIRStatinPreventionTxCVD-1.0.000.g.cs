@@ -200,7 +200,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
         CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
-        object? d_ = context.ResolveParameter("CMS347FHIRStatinPreventionTxCVD-1.0.000"!, ("Measurement Period")!, c_);
+        object? d_ = context.ResolveParameter("CMS347FHIRStatinPreventionTxCVD-1.0.000", "Measurement Period", c_);
         return (CqlInterval<CqlDateTime?>?)d_;
     }
 
@@ -1068,9 +1068,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? u_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? v_(Medication? M) {
-                object? x_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? z_ = context.Operators.Split(((string?)y_)!, "/"!);
+                object? x_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? z_ = context.Operators.Split(((string?)y_)!, "/");
                 string? aa_ = context.Operators.Last<string?>(z_!);
                 bool? ab_ = context.Operators.Equal(x_, aa_);
                 CodeableConcept? ac_ = M?.Code;
@@ -1094,9 +1094,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? ah_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ai_(Medication? M) {
-                object? ak_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? al_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? am_ = context.Operators.Split(((string?)al_)!, "/"!);
+                object? ak_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? al_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? am_ = context.Operators.Split(((string?)al_)!, "/");
                 string? an_ = context.Operators.Last<string?>(am_!);
                 bool? ao_ = context.Operators.Equal(ak_, an_);
                 CodeableConcept? ap_ = M?.Code;
@@ -1121,9 +1121,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? au_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? av_(Medication? M) {
-                object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/"!);
+                object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/");
                 string? ba_ = context.Operators.Last<string?>(az_!);
                 bool? bb_ = context.Operators.Equal(ax_, ba_);
                 CodeableConcept? bc_ = M?.Code;
@@ -1192,9 +1192,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? u_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? v_(Medication? M) {
-                object? x_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? z_ = context.Operators.Split(((string?)y_)!, "/"!);
+                object? x_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? y_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? z_ = context.Operators.Split(((string?)y_)!, "/");
                 string? aa_ = context.Operators.Last<string?>(z_!);
                 bool? ab_ = context.Operators.Equal(x_, aa_);
                 CodeableConcept? ac_ = M?.Code;
@@ -1218,9 +1218,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? ah_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ai_(Medication? M) {
-                object? ak_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? al_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? am_ = context.Operators.Split(((string?)al_)!, "/"!);
+                object? ak_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? al_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? am_ = context.Operators.Split(((string?)al_)!, "/");
                 string? an_ = context.Operators.Last<string?>(am_!);
                 bool? ao_ = context.Operators.Equal(ak_, an_);
                 CodeableConcept? ap_ = M?.Code;
@@ -1245,9 +1245,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
             IEnumerable<Medication?>? au_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? av_(Medication? M) {
-                object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value"!);
-                object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value"!);
-                IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/"!);
+                object? ax_ = context.Operators.LateBoundProperty<object?>(M, "id.value");
+                object? ay_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference.value");
+                IEnumerable<string?>? az_ = context.Operators.Split(((string?)ay_)!, "/");
                 string? ba_ = context.Operators.Last<string?>(az_!);
                 bool? bb_ = context.Operators.Equal(ax_, ba_);
                 CodeableConcept? bc_ = M?.Code;

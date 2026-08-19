@@ -40,7 +40,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("NCQAHospice-1.0.0"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 

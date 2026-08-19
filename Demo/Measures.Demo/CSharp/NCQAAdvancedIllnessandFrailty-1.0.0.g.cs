@@ -84,7 +84,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
@@ -438,9 +438,9 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             bool? k_(Medication? M) {
                 Id? m_ = M?.IdElement;
                 string? n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-                object? o_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference"!);
+                object? o_ = context.Operators.LateBoundProperty<object?>(MR, "medication.reference");
                 string? p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_ as FhirString);
-                IEnumerable<string?>? q_ = context.Operators.Split(p_!, "/"!);
+                IEnumerable<string?>? q_ = context.Operators.Split(p_!, "/");
                 string? r_ = context.Operators.Last<string?>(q_!);
                 bool? s_ = context.Operators.Equal(n_, r_);
                 CodeableConcept? t_ = M?.Code;

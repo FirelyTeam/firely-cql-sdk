@@ -179,7 +179,7 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
 
     private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        object? a_ = context.ResolveParameter("CQMCommon-4.1.000"!, ("Measurement Period")!, (object?)null);
+        object? a_ = context.ResolveParameter("CQMCommon-4.1.000", "Measurement Period", (object?)null);
         return (CqlInterval<CqlDateTime?>?)a_;
     }
 
