@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -16,6 +16,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 // fixed in #1311 (is-patterns, casts through object) are preserved here as well.
 internal partial class CSharpEmitter
 {
+    private static readonly NullabilityInfoContext NullabilityInfoContext = new();
+
     /// <summary>
     /// Prints a node that is a single token or literal and never needs hoisting.
     /// </summary>
@@ -103,20 +105,205 @@ internal partial class CSharpEmitter
             : _typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!);
 
         var methodName = call.Method.IsGenericMethod
-            ? $"{call.Method.Name}<{string.Join(", ", call.Method.GetGenericArguments().Select(_typeToCSharpConverter.ToCSharp))}>"
+            ? $"{call.Method.Name}<{string.Join(", ", call.Method.GetGenericArguments().Select((t, i) => RenderGenericMethodTypeArgument(call.Method, i, t)))}>"
             : call.Method.Name;
 
         var parameters = call.Method.GetParameters();
         var arguments = string.Join(", ", call.Arguments.Select((a, i) =>
         {
+            var parameter = parameters[i];
             var code = child(a).Code;
+            if (NeedsNullabilityBridgingCast(parameter, a))
+                code = $"({ToCSharpParameterType(parameter)}){code.ParenthesizeIfNeeded()}";
             // Null/default arguments carry a cast to the parameter type so overload intent
             // stays visible — the old writer's BuildArguments rule.
             if (a is CodeConstant { Value: null } or CodeDefault && code is "null" or "default")
-                return $"({_typeToCSharpConverter.ToCSharp(parameters[i].ParameterType)}){code}";
+                return $"({_typeToCSharpConverter.ToCSharpDeclaration(parameter.ParameterType)}){code}";
+
+            if (ShouldApplyNullForgivingOperator(parameter, a))
+                code = $"{code.ParenthesizeIfNeeded()}!";
+
             return code;
         }));
         return $"{target}{(call.NullConditional ? "?." : ".")}{methodName}({arguments})";
+    }
+
+    private bool ShouldApplyNullForgivingOperator(ParameterInfo parameter, CodeExpression argument)
+    {
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
+            return false;
+
+        if (argument is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
+            return false;
+
+        if (parameter.ParameterType.IsByRef || parameter.ParameterType.IsPointer)
+            return false;
+
+        var parameterNullability = NullabilityInfoContext.Create(parameter);
+        if (!RequiresNotNull(parameterNullability))
+            return false;
+
+        return !argument.Type.IsValueType;
+    }
+
+    private bool ShouldApplyNullForgivingOperator(MemberInfo member, CodeExpression value)
+    {
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
+            return false;
+
+        if (value is CodeLambda or CodeConstant or CodeDefault or CodeContextParameter)
+            return false;
+
+        var readState = GetReadStateOrUnknown(member);
+        if (readState == NullabilityState.Nullable)
+            return false;
+
+        return !value.Type.IsValueType;
+    }
+
+    /// <summary>
+    /// Framework annotations are not a stable input to code generation: .NET 8 and .NET 10 report
+    /// different nullability for the same declaration (List&lt;T&gt;'s IEnumerable&lt;T&gt;
+    /// constructor parameter is NotNull on one and Nullable on the other), which made the emitted
+    /// C# depend on the runtime the packager happened to run on. Assemblies we ship or reference
+    /// are compiled once, so only framework metadata is excluded.
+    /// </summary>
+    internal static bool HasStableNullabilityMetadata(Type type)
+    {
+        var name = type.Assembly.GetName().Name;
+        return name is not null
+               && !name.StartsWith("System.", StringComparison.Ordinal)
+               && name is not ("mscorlib" or "netstandard" or "System");
+    }
+
+    /// <summary>
+    /// Bridges a nullability difference between the argument and the parameter with an explicit
+    /// cast, so the difference is visible in the generated source rather than suppressed.
+    /// </summary>
+    private bool NeedsNullabilityBridgingCast(ParameterInfo parameter, CodeExpression argument)
+    {
+        if (!_typeToCSharpConverter.NullableWarningsEnabled)
+            return false;
+
+        var parameterType = parameter.ParameterType;
+        if (typeof(Delegate).IsAssignableFrom(parameterType)
+            || parameterType.IsByRef
+            || parameterType.IsPointer
+            || parameterType.IsGenericParameter
+            || parameterType.IsValueType)
+        {
+            return false;
+        }
+
+        if (parameter.Member.DeclaringType is not { } declaringType || !HasStableNullabilityMetadata(declaringType))
+            return false;
+
+        if (!(argument.Type.IsNullableValueType(out _) || !argument.Type.IsValueType))
+            return false;
+
+        return RequiresNestedNotNull(NullabilityInfoContext.Create(parameter));
+    }
+
+    private static bool RequiresNestedNotNull(System.Reflection.NullabilityInfo info)
+    {
+        if (info.ElementType is { ReadState: NullabilityState.NotNull })
+            return true;
+
+        if (info.ElementType is not null && RequiresNestedNotNull(info.ElementType))
+            return true;
+
+        foreach (var genericTypeArgument in info.GenericTypeArguments)
+        {
+            if (genericTypeArgument.ReadState == NullabilityState.NotNull
+                || RequiresNestedNotNull(genericTypeArgument))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// The parameter type as the callee declares it. Only the outermost annotation is decided here;
+    /// nested positions come out unannotated, which is correct for the callees this is used on
+    /// (see <see cref="HasStableNullabilityMetadata"/>).
+    /// </summary>
+    private string ToCSharpParameterType(ParameterInfo parameter)
+    {
+        var typeSyntax = _typeToCSharpConverter.ToCSharp(parameter.ParameterType);
+        return NullabilityInfoContext.Create(parameter).ReadState == NullabilityState.NotNull
+            ? typeSyntax
+            : $"{typeSyntax}?";
+    }
+
+    private static bool RequiresNotNull(System.Reflection.NullabilityInfo info)
+        => info.ReadState == NullabilityState.NotNull;
+
+    private string RenderGenericMethodTypeArgument(MethodInfo method, int index, Type typeArgument)
+    {
+        if (!method.IsGenericMethod)
+            return _typeToCSharpConverter.ToCSharp(typeArgument);
+
+        var definition = method.IsGenericMethodDefinition ? method : method.GetGenericMethodDefinition();
+        var genericParameter = definition.GetGenericArguments()[index];
+        var hasReferenceTypeConstraint =
+            (genericParameter.GenericParameterAttributes & GenericParameterAttributes.ReferenceTypeConstraint) != 0;
+
+        return hasReferenceTypeConstraint
+            ? _typeToCSharpConverter.ToCSharp(typeArgument)
+            : _typeToCSharpConverter.ToCSharpDeclaration(typeArgument);
+    }
+
+    internal string ToCSharpDeclaration(CodeExpression node)
+    {
+        // This method appends its own nullable annotation below, so it has to honour the switch
+        // itself — ToCSharpDeclaration(Type) is not in the path that produces it.
+        if (!_typeToCSharpConverter.AnnotationsEnabled)
+            return _typeToCSharpConverter.ToCSharp(node.Type);
+
+        if (node is not CodeProperty property)
+            return _typeToCSharpConverter.ToCSharpDeclaration(node.Type);
+
+        if (_typeToCSharpConverter.ShouldUseTupleType(property.Type))
+            return _typeToCSharpConverter.ToCSharpDeclaration(property.Type);
+
+        var type = property.Type;
+        if (type.IsValueType || type.IsPointer || type.IsByRef || type.IsGenericParameter)
+            return _typeToCSharpConverter.ToCSharp(type);
+
+        var readState = GetReadStateOrUnknown(property.Member);
+
+        var nullConditional = property.NullConditional
+            || property.Receiver is { } receiver
+            && (receiver.Type.IsNullableValueType(out _)
+                || _typeToCSharpConverter.ShouldUseTupleType(receiver.Type));
+
+        var topLevelNullable = nullConditional || readState is not NullabilityState.NotNull;
+        var typeSyntax = _typeToCSharpConverter.ToCSharp(type);
+        return topLevelNullable ? $"{typeSyntax}?" : typeSyntax;
+
+    }
+
+    private static NullabilityState GetReadStateOrUnknown(MemberInfo member)
+    {
+        try
+        {
+            return member switch
+            {
+                PropertyInfo p => NullabilityInfoContext.Create(p).ReadState,
+                FieldInfo f => NullabilityInfoContext.Create(f).ReadState,
+                _ => NullabilityState.Unknown,
+            };
+        }
+        catch (NotSupportedException)
+        {
+            return NullabilityState.Unknown;
+        }
+        catch (NotImplementedException)
+        {
+            return NullabilityState.Unknown;
+        }
     }
 
     /// <summary>
@@ -283,6 +470,10 @@ internal partial class CSharpEmitter
             ? $"default({_typeToCSharpConverter.ToCSharp(receiver.Type)})"
             : child(receiver).Code.ParenthesizeIfNeeded();
 
+        if (_typeToCSharpConverter.NullableWarningsEnabled
+            && !property.NullConditional && receiver is CodeCast { Kind: CodeCastKind.As })
+            target = $"{target}!";
+
         // The old writer's GetMemberAccessNullabilityOperator: a plain (non-null-conditional)
         // property access still prints "?." when the receiver's static type is a nullable
         // value type, OR a CQL tuple type — CQL tuples are represented as ordinary reference
@@ -326,10 +517,11 @@ internal partial class CSharpEmitter
 
         var atom = child(cast.Operand);
         var operand = atom.Code.ParenthesizeIfNeeded();
-        var typeName = _typeToCSharpConverter.ToCSharp(cast.Type);
 
         if (cast.Kind == CodeCastKind.As)
-            return $"{operand} as {typeName}";
+            return $"{operand} as {_typeToCSharpConverter.ToCSharpAsTarget(cast.Type)}";
+
+        var typeName = _typeToCSharpConverter.ToCSharpDeclaration(cast.Type);
 
         // When no direct C# conversion exists from the printed operand's type to the target
         // type (e.g. a bool constant typed as object printing as its literal), route the cast
@@ -516,7 +708,17 @@ internal partial class CSharpEmitter
 
     private string PrintNew(CodeNew @new, Func<CodeExpression, Atom> child)
     {
-        var arguments = string.Join(", ", @new.Arguments.Select(a => child(a).Code));
+        var parameters = @new.Constructor.GetParameters();
+        var arguments = string.Join(", ", @new.Arguments.Select((a, i) =>
+        {
+            var code = child(a).Code;
+            if (NeedsNullabilityBridgingCast(parameters[i], a))
+                code = $"({ToCSharpParameterType(parameters[i])}){code.ParenthesizeIfNeeded()}";
+
+            if (ShouldApplyNullForgivingOperator(parameters[i], a))
+                code = $"{code.ParenthesizeIfNeeded()}!";
+            return code;
+        }));
         return $"new {_typeToCSharpConverter.ToCSharp(@new.Type)}({arguments})";
     }
 
@@ -565,7 +767,11 @@ internal partial class CSharpEmitter
         {
             foreach (var binding in memberInit.Bindings)
             {
-                isb.Append($"{binding.Member.Name} = {child(binding.Value).Code}");
+                var valueCode = child(binding.Value).Code;
+                if (ShouldApplyNullForgivingOperator(binding.Member, binding.Value))
+                    valueCode = $"{valueCode.ParenthesizeIfNeeded()}!";
+
+                isb.Append($"{binding.Member.Name} = {valueCode}");
                 isb.AppendLine(",");
             }
         }

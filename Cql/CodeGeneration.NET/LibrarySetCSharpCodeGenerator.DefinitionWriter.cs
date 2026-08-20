@@ -1,5 +1,6 @@
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.CodeModel;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -59,11 +60,12 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             var quotedCodeId = cd.Code.code!.QuoteString();
             var quotedCodeSystem = cd.Code.system.QuoteOrNullString();
+            var cqlCodeType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlCode));
             ISB.AppendLine(
                 $$"""
                   [CqlCodeDefinition({{quotedName}}, codeId: {{quotedCodeId}}, codeSystem: {{quotedCodeSystem}})]
-                  public CqlCode {{methodName}}(CqlContext _) => {{fieldName}};
-                  private static readonly CqlCode {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}});
+                  public {{cqlCodeType}} {{methodName}}(CqlContext _) => {{fieldName}};
+                  private static readonly {{cqlCodeType}} {{fieldName}} = new CqlCode({{quotedCodeId}}, {{quotedCodeSystem}});
                   """);
         }
 
@@ -73,6 +75,7 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedCodeSystemId = csd.CodeSystem.id!.QuoteString();
             string quotedCodeSystemVersion = csd.CodeSystem.version.QuoteOrNullString();
+            var cqlCodeSystemType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlCodeSystem));
             string arrayOfCodes = string.Join(
                 ",",
                 csd.CodeSystem.codes.Select(code =>
@@ -89,8 +92,8 @@ partial class LibrarySetCSharpCodeGenerator
             ISB.AppendLine(
                 $$"""
                   [CqlCodeSystemDefinition({{quotedName}}, codeSystemId: {{quotedCodeSystemId}}, codeSystemVersion: {{quotedCodeSystemVersion}})]
-                  public CqlCodeSystem {{methodName}}(CqlContext _) => {{fieldName}};
-                  private static readonly CqlCodeSystem {{fieldName}} =
+                  public {{cqlCodeSystemType}} {{methodName}}(CqlContext _) => {{fieldName}};
+                  private static readonly {{cqlCodeSystemType}} {{fieldName}} =
                     new CqlCodeSystem({{quotedCodeSystemId}}, {{quotedCodeSystemVersion}}, [{{arrayOfCodes}}]);
                   """);
         }
@@ -100,6 +103,7 @@ partial class LibrarySetCSharpCodeGenerator
         {
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedConceptDisplay = ccd.Display.QuoteOrNullString();
+            var cqlConceptType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlConcept));
             string arrayOfCodes = string.Join(
                 ",",
                 ccd.Codes.Select(code =>
@@ -116,8 +120,8 @@ partial class LibrarySetCSharpCodeGenerator
             ISB.AppendLine(
                 $$"""
                   [CqlConceptDefinition({{quotedName}})]
-                  public CqlConcept {{methodName}}(CqlContext _) => {{fieldName}};
-                  private static readonly CqlConcept {{fieldName}} =
+                  public {{cqlConceptType}} {{methodName}}(CqlContext _) => {{fieldName}};
+                  private static readonly {{cqlConceptType}} {{fieldName}} =
                     new CqlConcept([{{arrayOfCodes}}],
                         {{quotedConceptDisplay}});
                   """);
@@ -129,11 +133,12 @@ partial class LibrarySetCSharpCodeGenerator
             var (quotedName, methodName, fieldName) = GetMemberNames(CqlDefinition);
             string quotedValueSetId = vsd.ValueSetId.QuoteString();
             string quotedValueSetVersion = vsd.ValueSetVersion.QuoteOrNullString();
+            var cqlValueSetType = LibraryWriter.LibrarySetWriter.TypeToCSharpConverter.ToCSharp(typeof(CqlValueSet));
             ISB.AppendLine(
                 $$"""
                   [CqlValueSetDefinition({{quotedName}}, valueSetId: {{quotedValueSetId}}, valueSetVersion: {{quotedValueSetVersion}})]
-                  public CqlValueSet {{methodName}}(CqlContext _) => {{fieldName}};
-                  private static readonly CqlValueSet {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
+                  public {{cqlValueSetType}} {{methodName}}(CqlContext _) => {{fieldName}};
+                  private static readonly {{cqlValueSetType}} {{fieldName}} = new CqlValueSet({{quotedValueSetId}}, {{quotedValueSetVersion}});
                   """);
         }
     }

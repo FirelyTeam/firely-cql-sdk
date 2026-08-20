@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -21,20 +21,21 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <see cref="InvalidOperationException"/> will be thrown during compilation if they are not found in customImplementations.
 /// The default value is <see langword="true"/>.
 /// </param>
-/// <param name="AllowInvalidCSharp">
-/// Gets a value indicating whether invalid C# code is allowed.
-/// Invalid C# code is code that does not compile.
-/// When <see langword="true"/>, the generated C# code may contain syntax errors or other issues that prevent it from compiling,
-/// but may be useful for debugging or testing purposes.
+/// <param name="CSharp">
+/// Settings that control the C# source the generator emits — nullability, namespace, and whether
+/// invalid C# is tolerated. See <see cref="CSharpConfig"/>.
 /// </param>
-/// <param name="CSharpNamespace">The C# namespace to use for generated code. If <see langword="null"/> or empty, no namespace is generated.</param>
 public record ElmToolkitConfig(
     DebugSymbolsFormat DebugSymbolsFormat = DebugSymbolsFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
-    bool AllowInvalidCSharp = false,
-    string? CSharpNamespace = null)
+    CSharpConfig? CSharp = null)
 {
+    /// <summary>
+    /// Settings that control the C# source the generator emits.
+    /// </summary>
+    public CSharpConfig CSharp { get; init; } = CSharp ?? CSharpConfig.Default;
+
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>

@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,21 +14,21 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("FusedOperatorsTest", "1.0.0")]
 public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperatorsTest_1_0_0>
 {
     #region Functions and Expressions (5)
 
     [CqlExpressionDefinition("Numbers")]
-    public IEnumerable<int?> Numbers(CqlContext context) =>
+    public IEnumerable<int?>? Numbers(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Numbers, Numbers_Compute);
 
     private const long _cacheIndex_Numbers = 5710833029308663172L;
 
-    private IEnumerable<int?> Numbers_Compute(CqlContext context)
+    private IEnumerable<int?>? Numbers_Compute(CqlContext context)
     {
-        int?[] a_ = [
+        int?[]? a_ = [
             1,
             2,
             3,
@@ -35,7 +37,7 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
             2,
             3,
         ];
-        return (IEnumerable<int?>)a_;
+        return (IEnumerable<int?>?)a_;
     }
 
 
@@ -47,7 +49,7 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
 
     private bool? AnyGreaterThanFour_Compute(CqlContext context)
     {
-        IEnumerable<int?> a_ = this.Numbers(context);
+        IEnumerable<int?>? a_ = this.Numbers(context);
 
         bool? b_(int? N) {
             bool? d_ = context.Operators.Greater(N, 4);
@@ -60,14 +62,14 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
 
 
     [CqlExpressionDefinition("TenTimesEvens")]
-    public IEnumerable<int?> TenTimesEvens(CqlContext context) =>
+    public IEnumerable<int?>? TenTimesEvens(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_TenTimesEvens, TenTimesEvens_Compute);
 
     private const long _cacheIndex_TenTimesEvens = -8432815467079268054L;
 
-    private IEnumerable<int?> TenTimesEvens_Compute(CqlContext context)
+    private IEnumerable<int?>? TenTimesEvens_Compute(CqlContext context)
     {
-        IEnumerable<int?> a_ = this.Numbers(context);
+        IEnumerable<int?>? a_ = this.Numbers(context);
 
         bool? b_(int? N) {
             int? e_ = context.Operators.Modulo(N, 2);
@@ -81,20 +83,20 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
             return g_;
         }
 
-        IEnumerable<int?> d_ = context.Operators.WhereSelect<int?, int?>(a_, b_, c_);
+        IEnumerable<int?>? d_ = context.Operators.WhereSelect<int?, int?>(a_, b_, c_);
         return d_;
     }
 
 
     [CqlExpressionDefinition("DoublesOverSix")]
-    public IEnumerable<int?> DoublesOverSix(CqlContext context) =>
+    public IEnumerable<int?>? DoublesOverSix(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_DoublesOverSix, DoublesOverSix_Compute);
 
     private const long _cacheIndex_DoublesOverSix = -73810178161427429L;
 
-    private IEnumerable<int?> DoublesOverSix_Compute(CqlContext context)
+    private IEnumerable<int?>? DoublesOverSix_Compute(CqlContext context)
     {
-        IEnumerable<int?> a_ = this.Numbers(context);
+        IEnumerable<int?>? a_ = this.Numbers(context);
 
         int? b_(int? N) {
             int? e_ = context.Operators.Multiply(N, 2);
@@ -107,27 +109,27 @@ public partial class FusedOperatorsTest_1_0_0 : ILibrary, ISingleton<FusedOperat
             return f_;
         }
 
-        IEnumerable<int?> d_ = context.Operators.SelectWhere<int?, int?>(a_, b_, c_);
+        IEnumerable<int?>? d_ = context.Operators.SelectWhere<int?, int?>(a_, b_, c_);
         return d_;
     }
 
 
     [CqlExpressionDefinition("DistinctSquares")]
-    public IEnumerable<int?> DistinctSquares(CqlContext context) =>
+    public IEnumerable<int?>? DistinctSquares(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_DistinctSquares, DistinctSquares_Compute);
 
     private const long _cacheIndex_DistinctSquares = 9095248241989806364L;
 
-    private IEnumerable<int?> DistinctSquares_Compute(CqlContext context)
+    private IEnumerable<int?>? DistinctSquares_Compute(CqlContext context)
     {
-        IEnumerable<int?> a_ = this.Numbers(context);
+        IEnumerable<int?>? a_ = this.Numbers(context);
 
         int? b_(int? N) {
             int? d_ = context.Operators.Multiply(N, N);
             return d_;
         }
 
-        IEnumerable<int?> c_ = context.Operators.SelectDistinct<int?, int?>(a_, b_);
+        IEnumerable<int?>? c_ = context.Operators.SelectDistinct<int?, int?>(a_, b_);
         return c_;
     }
 

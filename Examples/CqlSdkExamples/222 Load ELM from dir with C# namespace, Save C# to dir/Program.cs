@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -20,7 +20,7 @@ partial class Program
         SetCurrentDirectory(Path.Combine(InitialCurrentDirectory, "222 Load ELM from dir with C# namespace, Save C# to dir"));
 
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
-        var elmToolkitConfig = new ElmToolkitConfig(CSharpNamespace: "MyCompany.MyCqlLibraries");
+        var elmToolkitConfig = new ElmToolkitConfig(CSharp: new(Namespace: "MyCompany.MyCqlLibraries"));
         var elmToolkit = new ElmToolkit(loggerFactory, elmToolkitConfig);
 
         // Add ELM libraries from a directory

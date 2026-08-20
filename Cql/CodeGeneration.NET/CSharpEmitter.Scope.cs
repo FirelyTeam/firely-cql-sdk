@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -189,7 +189,7 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
+            var typeSyntax = _emitter.ToCSharpDeclaration(node);
             var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
@@ -224,8 +224,11 @@ internal partial class CSharpEmitter
                 var result = nested.Linearize(lambda.Body, tailPosition: true);
 
                 var parameterList = string.Join(", ",
-                    lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharp(p.Type)} {_emitter._assignedNames[p]}"));
-                var returnType = _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type);
+                    lambda.Parameters.Select(p => $"{_emitter._typeToCSharpConverter.ToCSharpDeclaration(p.Type)} {_emitter._assignedNames[p]}"));
+                var objectReturn = lambda.Body.Type == typeof(object);
+                var returnType = objectReturn
+                    ? _emitter._typeToCSharpConverter.ToCSharp(lambda.Body.Type)
+                    : _emitter._typeToCSharpConverter.ToCSharpDeclaration(lambda.Body.Type);
 
                 // A body that linearizes without hoisting any statement prints expression-
                 // bodied ("=> expr;"), matching the old writer's BuildLambdaOperator, which
@@ -235,7 +238,10 @@ internal partial class CSharpEmitter
                 // keyed on the body being a BlockExpression, so the expression-bodied form gets
                 // none of the surrounding blank lines either.
                 if (!nested.HasStatements && result is not null)
-                    return $"{returnType} {functionName}({parameterList}) => {result.Code};";
+                {
+                    var expressionBody = objectReturn ? $"{result.Code.ParenthesizeIfNeeded()}!" : result.Code;
+                    return $"{returnType} {functionName}({parameterList}) => {expressionBody};";
+                }
 
                 // Old format: blank line before the definition, opening brace on the
                 // signature line, blank line after (via the trailing newline).
@@ -246,7 +252,12 @@ internal partial class CSharpEmitter
                 {
                     nested.WriteStatements(isb);
                     if (result is not null)
-                        isb.AppendLine(TailStatement(result));
+                    {
+                        if (objectReturn && result.Node is not CodeThrow)
+                            isb.AppendLine($"return {result.Code.ParenthesizeIfNeeded()}!;");
+                        else
+                            isb.AppendLine(TailStatement(result));
+                    }
                 }
                 isb.AppendLine("}");
                 return isb;
@@ -342,7 +353,21 @@ internal partial class CSharpEmitter
 
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
-            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
+            _statements.Add(() =>
+            {
+                var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(resultType);
+                if (_emitter._typeToCSharpConverter.AnnotationsEnabled
+                    && !resultType.IsValueType
+                    && !resultType.IsPointer
+                    && !resultType.IsByRef
+                    && !resultType.IsGenericParameter
+                    && !_emitter._typeToCSharpConverter.ShouldUseTupleType(resultType))
+                {
+                    typeSyntax += "?";
+                }
+
+                return $"{typeSyntax} {resultName};";
+            });
             _statements.Add(() => RenderChain(resultName, cases, @else));
             return new Atom(resultName, resultLocal);
         }
@@ -481,9 +506,12 @@ internal partial class CSharpEmitter
                 var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)
-                    isb.AppendLine(resultName is null || atom.Node is CodeThrow
-                        ? TailStatement(atom)
-                        : $"{resultName} = {atom.Code};");
+                {
+                    if (resultName is null || atom.Node is CodeThrow)
+                        isb.AppendLine(TailStatement(atom));
+                    else
+                        isb.AppendLine($"{resultName} = {atom.Code};");
+                }
             }
             isb.AppendLine("}");
         }

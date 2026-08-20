@@ -39,6 +39,7 @@
 	<PropertyGroup>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<LibrarySet>Demo</LibrarySet>
+		<Profile>Demo</Profile>
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>

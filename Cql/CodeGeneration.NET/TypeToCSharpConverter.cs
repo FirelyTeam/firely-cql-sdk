@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
@@ -14,21 +15,61 @@ namespace Hl7.Cql.CodeGeneration.NET;
 internal class TypeToCSharpConverter
 {
     private readonly TypeCSharpFormat _typeCSharpFormat;
+    private readonly TypeCSharpFormat _declarationCSharpFormat;
+    private readonly TypeCSharpFormat _asTargetCSharpFormat;
     private readonly bool _useCSharpValueTuples = true;
 
-    public TypeToCSharpConverter()
+    /// <summary>
+    /// How much of nullable reference types the generated code opts into.
+    /// </summary>
+    public CSharpNullability Nullability { get; }
+
+    /// <summary>
+    /// Whether declarations carry nullable annotations at all.
+    /// </summary>
+    public bool AnnotationsEnabled => Nullability is not CSharpNullability.Disabled;
+
+    /// <summary>
+    /// Whether the compiler will verify the annotations. Only then does the emitter add constructs
+    /// whose sole purpose is to satisfy flow analysis — null-forgiving operators and bridging casts.
+    /// Without checks those constructs are pure noise in the generated source.
+    /// </summary>
+    public bool NullableWarningsEnabled => Nullability is CSharpNullability.Enabled;
+
+    public TypeToCSharpConverter(CSharpConfig? cSharpGeneratingConfig = null)
     {
+        Nullability = (cSharpGeneratingConfig ?? CSharpConfig.Default).Nullability;
         _typeCSharpFormat = new TypeCSharpFormat(UseKeywords: true, NoNamespaces: true, FormatName: FormatTypeNameAsTuple);
+        _declarationCSharpFormat = _typeCSharpFormat with
+        {
+            NullableReferenceTypes = true,
+            // CQL tuples render as nullable C# value tuples, so FormatTypeNameAsTuple already
+            // appends the '?' itself.
+            RendersItsOwnNullOperator = ShouldUseTupleType,
+            FormatName = FormatTypeNameAsDeclarationTuple,
+        };
+        _asTargetCSharpFormat = _declarationCSharpFormat with
+        {
+            NoTopLevelNullableReferenceOperator = true,
+        };
     }
 
     private TextWriterFormattableString FormatTypeNameAsTuple(ITypeNameCSharpFormatContext ctx)
+        => FormatTypeNameAsTuple(_typeCSharpFormat, ctx);
+
+    private TextWriterFormattableString FormatTypeNameAsDeclarationTuple(ITypeNameCSharpFormatContext ctx)
+        => FormatTypeNameAsTuple(_declarationCSharpFormat, ctx);
+
+    private TextWriterFormattableString FormatTypeNameAsTuple(
+        TypeCSharpFormat typeFormat,
+        ITypeNameCSharpFormatContext ctx)
     {
         if (!ShouldUseTupleType(ctx.TypeInfo))
             return ctx.Name;
 
         var rest = string.Join(
             ", ",
-            GetTupleProperties(ctx.TypeInfo).Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"));
+            GetTupleProperties(ctx.TypeInfo).Select(p => $"{p.Type.ToCSharpString(typeFormat)} {p.Name}"));
         TextWriterFormattableString formatTypeNameAsTuple = $"(CqlTupleMetadata, {rest})?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
         return formatTypeNameAsTuple;
     }
@@ -47,6 +88,23 @@ internal class TypeToCSharpConverter
         string result = type.ToCSharpString(_typeCSharpFormat);
         return result;
     }
+
+    /// <summary>
+    /// Formats a type for declarations (locals, parameters, and return types).
+    /// The code model carries <see cref="Type"/>, which does not encode reference-type
+    /// nullability, so generated declarations apply a blanket nullable annotation to
+    /// reference types only.
+    /// </summary>
+    public string ToCSharpDeclaration(Type type) =>
+        AnnotationsEnabled ? type.ToCSharpString(_declarationCSharpFormat) : ToCSharp(type);
+
+    /// <summary>
+    /// Formats a type for an <c>as</c>-cast target: declaration-style generic/array element
+    /// nullability, but without a top-level nullable-reference <c>?</c> (illegal in <c>as</c>
+    /// targets, CS8651).
+    /// </summary>
+    public string ToCSharpAsTarget(Type type) =>
+        AnnotationsEnabled ? type.ToCSharpString(_asTargetCSharpFormat) : ToCSharp(type);
 
     public string GetMemberAccessNullabilityOperator(Type? type)
     {

@@ -228,6 +228,38 @@ public class CSharpFormatterTests
             string.Join('|', tw.Tokens));
     }
 
+    [TestMethod]
+    public void TypeToCSharpString_NullableReferenceDeclarations_ShouldReturnCorrectResults()
+    {
+        var declarationTypeToCSharpStringOptions = new TypeCSharpFormat(
+            NoNamespaces: true,
+            UseKeywords: true,
+            NullableReferenceTypes: true);
+
+        (Type type, string expected)[] testCases =
+        [
+            (typeof(string), "string?"),
+            (typeof(bool), "bool"),
+            (typeof(bool?), "bool?"),
+            (typeof(decimal), "decimal"),
+            (typeof(int), "int"),
+            (typeof(int?), "int?"),
+            (typeof(object), "object?"),
+            (typeof(int[]), "int[]?"),
+            (typeof(string[]), "string?[]?"),
+            (typeof(string[][]), "string?[]?[]?"),
+            (typeof(IEnumerable<string>), "IEnumerable<string?>?"),
+            (typeof(Dictionary<string, List<int?>>), "Dictionary<string?, List<int?>?>?"),
+            (typeof(Hl7.Fhir.Model.Account.AccountStatus), "Account.AccountStatus"),
+        ];
+
+        foreach (var (type, expected) in testCases)
+        {
+            var actual = type.ToCSharpString(typeFormatterOptions: declarationTypeToCSharpStringOptions);
+            Assert.AreEqual(expected: expected, actual: actual);
+        }
+    }
+
     private class TestTextWriter(TextWriter Inner) : TextWriter
     {
         public List<string> Tokens { get; } = new();

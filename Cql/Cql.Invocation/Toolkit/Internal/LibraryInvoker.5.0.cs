@@ -38,13 +38,16 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// </summary>
     /// <remarks>
     /// Widened from 5.2.0.0 to 5.3.0.0 for generator version 5.2.0.0 (operator fusion, #1484).
-    /// That was a minor bump because the generated C# began calling four new
+    /// Widened again from 5.3.0.0 to 5.4.0.0 for generator version 5.3.0.0 (nullable annotations).
+    /// Both were minor bumps because the generated C# call shape this invoker binds to did not
+    /// change.
+    /// In 5.2.0.0 the generated C# began calling four new
     /// <c>ICqlOperators</c> members, but nothing this invoker binds to changed - the library
     /// shape (the <c>Instance</c> property, <c>ILibrary</c>, <c>CqlDefinitionAttribute</c>, the
     /// definition method signatures) is exactly as before - so the existing invoker keeps
     /// working and no new one is needed.
     /// </remarks>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,3,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,4,0,0);
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 

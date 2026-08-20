@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -51,18 +53,18 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     #region Parameters (1)
 
     [CqlParameterDefinition("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context) =>
+    public CqlInterval<CqlDateTime?>? Measurement_Period(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Measurement_Period, Measurement_Period_Compute);
 
     private const long _cacheIndex_Measurement_Period = 8727962915329166310L;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Compute(CqlContext context)
+    private CqlInterval<CqlDateTime?>? Measurement_Period_Compute(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlDateTime b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-        object d_ = context.ResolveParameter("CMS130FHIRColorectalCancerScrn-1.0.000", "Measurement Period", c_);
-        return (CqlInterval<CqlDateTime>)d_;
+        CqlDateTime? a_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime? b_ = context.Operators.DateTime(2027, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlInterval<CqlDateTime?>? c_ = context.Operators.Interval(a_, b_, true, false);
+        object? d_ = context.ResolveParameter("CMS130FHIRColorectalCancerScrn-1.0.000", "Measurement Period", c_);
+        return (CqlInterval<CqlDateTime?>?)d_;
     }
 
 
@@ -71,67 +73,67 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     #region Functions and Expressions (18)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context) =>
+    public Patient? Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = -5698627232654440380L;
 
-    private Patient Patient_Compute(CqlContext context)
+    private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
 
     [CqlExpressionDefinition("SDE Ethnicity")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Ethnicity, SDE_Ethnicity_Compute);
 
     private const long _cacheIndex_SDE_Ethnicity = 1618786243604187050L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Ethnicity_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Ethnicity(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Payer")]
-    public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context) =>
+    public IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Payer, SDE_Payer_Compute);
 
     private const long _cacheIndex_SDE_Payer = 1608958109846461859L;
 
-    private IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Compute(CqlContext context)
+    private IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? SDE_Payer_Compute(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept? code, CqlInterval<CqlDateTime?>? period)?>? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Payer(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Race")]
-    public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context) =>
+    public (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Race, SDE_Race_Compute);
 
     private const long _cacheIndex_SDE_Race = 1178978355528948591L;
 
-    private (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race_Compute(CqlContext context)
+    private (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? SDE_Race_Compute(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode?>? codes, string? display)? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Race(context);
         return a_;
     }
 
 
     [CqlExpressionDefinition("SDE Sex")]
-    public CqlCode SDE_Sex(CqlContext context) =>
+    public CqlCode? SDE_Sex(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_SDE_Sex, SDE_Sex_Compute);
 
     private const long _cacheIndex_SDE_Sex = -9223078807715422392L;
 
-    private CqlCode SDE_Sex_Compute(CqlContext context)
+    private CqlCode? SDE_Sex_Compute(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
+        CqlCode? a_ = SupplementalDataElements_5_1_000.Instance.SDE_Sex(context);
         return a_;
     }
 
@@ -144,18 +146,18 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Initial_Population_Compute(CqlContext context)
     {
-        Patient a_ = this.Patient(context);
-        Date b_ = a_?.BirthDateElement;
-        string c_ = b_?.Value;
-        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-        CqlDateTime f_ = context.Operators.End(e_);
-        CqlDate g_ = context.Operators.DateFrom(f_);
+        Patient? a_ = this.Patient(context);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?> i_ = context.Operators.Interval(46, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        IEnumerable<Encounter> k_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
-        bool? l_ = context.Operators.Exists<Encounter>(k_);
+        CqlInterval<int?>? i_ = context.Operators.Interval(46, 75, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
+        IEnumerable<Encounter?>? k_ = AdultOutpatientEncounters_4_19_000.Instance.Qualifying_Encounters(context);
+        bool? l_ = context.Operators.Exists<Encounter?>(k_);
         bool? m_ = context.Operators.And(j_, l_);
         return m_;
     }
@@ -175,88 +177,88 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("Malignant Neoplasm")]
-    public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context) =>
+    public IEnumerable<Condition?>? Malignant_Neoplasm(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Malignant_Neoplasm, Malignant_Neoplasm_Compute);
 
     private const long _cacheIndex_Malignant_Neoplasm = 584573600949950176L;
 
-    private IEnumerable<Condition> Malignant_Neoplasm_Compute(CqlContext context)
+    private IEnumerable<Condition?>? Malignant_Neoplasm_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
-        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
-        IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
+        CqlValueSet? a_ = this.Malignant_Neoplasm_of_Colon(context);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+        IEnumerable<Condition?>? c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+        IEnumerable<Condition?>? d_ = context.Operators.Union<Condition?>(b_ as IEnumerable<Condition?>, c_ as IEnumerable<Condition?>);
+        IEnumerable<Condition?>? e_ = Status_1_15_000.Instance.verified(context, d_);
 
-        bool? f_(Condition ColorectalCancer) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ColorectalCancer);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.End(j_);
+        bool? f_(Condition? ColorectalCancer) {
+            CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ColorectalCancer);
+            CqlDateTime? i_ = context.Operators.Start(h_);
+            CqlInterval<CqlDateTime?>? j_ = this.Measurement_Period(context);
+            CqlDateTime? k_ = context.Operators.End(j_);
             bool? l_ = context.Operators.SameOrBefore(i_, k_, "day");
             return l_;
         }
 
-        IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
+        IEnumerable<Condition?>? g_ = context.Operators.Where<Condition?>(e_, f_);
         return g_;
     }
 
 
     [CqlExpressionDefinition("Total Colectomy Performed")]
-    public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context) =>
+    public IEnumerable<Procedure?>? Total_Colectomy_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Total_Colectomy_Performed, Total_Colectomy_Performed_Compute);
 
     private const long _cacheIndex_Total_Colectomy_Performed = 8942615805545728627L;
 
-    private IEnumerable<Procedure> Total_Colectomy_Performed_Compute(CqlContext context)
+    private IEnumerable<Procedure?>? Total_Colectomy_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Total_Colectomy(context);
-        IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
+        CqlValueSet? a_ = this.Total_Colectomy(context);
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
-        bool? d_(Procedure Colectomy) {
-            object f_;
-            DataType l_ = Colectomy?.Performed;
-            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+        bool? d_(Procedure? Colectomy) {
+            object? f_;
+            DataType? l_ = Colectomy?.Performed;
+            object? m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = Colectomy?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
+                DataType? o_ = Colectomy?.Performed;
+                object? p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                 f_ = p_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = Colectomy?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                DataType? q_ = Colectomy?.Performed;
+                object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 bool s_ = r_ is CqlQuantity;
                 if (s_)
                 {
-                    DataType t_ = Colectomy?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    DataType? t_ = Colectomy?.Performed;
+                    object? u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
                     f_ = u_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = Colectomy?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    DataType? v_ = Colectomy?.Performed;
+                    object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     bool x_ = w_ is CqlInterval<CqlDateTime>;
                     if (x_)
                     {
-                        DataType y_ = Colectomy?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        DataType? y_ = Colectomy?.Performed;
+                        object? z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                        f_ = z_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType aa_ = Colectomy?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        DataType? aa_ = Colectomy?.Performed;
+                        object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                         bool ac_ = ab_ is CqlInterval<CqlQuantity>;
                         if (ac_)
                         {
-                            DataType ad_ = Colectomy?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            DataType? ad_ = Colectomy?.Performed;
+                            object? ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                            f_ = ae_ as CqlInterval<CqlQuantity?>;
                         }
                         else
                         {
@@ -265,15 +267,15 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     }
                 }
             }
-            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime h_ = context.Operators.End(g_);
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            CqlDateTime j_ = context.Operators.End(i_);
+            CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
+            CqlDateTime? h_ = context.Operators.End(g_);
+            CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
+            CqlDateTime? j_ = context.Operators.End(i_);
             bool? k_ = context.Operators.SameOrBefore(h_, j_, "day");
             return k_;
         }
 
-        IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
@@ -287,11 +289,11 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
     private bool? Denominator_Exclusions_Compute(CqlContext context)
     {
         bool? a_ = Hospice_6_18_000.Instance.Has_Hospice_Services(context);
-        IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
-        bool? c_ = context.Operators.Exists<Condition>(b_);
+        IEnumerable<Condition?>? b_ = this.Malignant_Neoplasm(context);
+        bool? c_ = context.Operators.Exists<Condition?>(b_);
         bool? d_ = context.Operators.Or(a_, c_);
-        IEnumerable<Procedure> e_ = this.Total_Colectomy_Performed(context);
-        bool? f_ = context.Operators.Exists<Procedure>(e_);
+        IEnumerable<Procedure?>? e_ = this.Total_Colectomy_Performed(context);
+        bool? f_ = context.Operators.Exists<Procedure?>(e_);
         bool? g_ = context.Operators.Or(d_, f_);
         bool? h_ = AdvancedIllnessandFrailty_1_27_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
         bool? i_ = context.Operators.Or(g_, h_);
@@ -304,52 +306,52 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
 
     [CqlExpressionDefinition("Fecal Occult Blood Test Performed")]
-    public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context) =>
+    public IEnumerable<Observation?>? Fecal_Occult_Blood_Test_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Fecal_Occult_Blood_Test_Performed, Fecal_Occult_Blood_Test_Performed_Compute);
 
     private const long _cacheIndex_Fecal_Occult_Blood_Test_Performed = -8973331652132369237L;
 
-    private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Compute(CqlContext context)
+    private IEnumerable<Observation?>? Fecal_Occult_Blood_Test_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
+        CqlValueSet? a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        IEnumerable<Observation?>? c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
 
-        bool? d_(Observation FecalOccultResult) {
-            DataType f_ = FecalOccultResult?.Value;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+        bool? d_(Observation? FecalOccultResult) {
+            DataType? f_ = FecalOccultResult?.Value;
+            object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             bool? h_ = context.Operators.Not((bool?)(g_ is null));
-            object i_;
-            DataType n_ = FecalOccultResult?.Effective;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+            object? i_;
+            DataType? n_ = FecalOccultResult?.Effective;
+            object? o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
             bool p_ = o_ is CqlDateTime;
             if (p_)
             {
-                DataType q_ = FecalOccultResult?.Effective;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+                DataType? q_ = FecalOccultResult?.Effective;
+                object? r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
                 i_ = r_ as CqlDateTime;
             }
             else
             {
-                DataType s_ = FecalOccultResult?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                DataType? s_ = FecalOccultResult?.Effective;
+                object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                 bool u_ = t_ is CqlDateTime;
                 if (u_)
                 {
-                    DataType v_ = FecalOccultResult?.Effective;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    DataType? v_ = FecalOccultResult?.Effective;
+                    object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                     i_ = w_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType x_ = FecalOccultResult?.Effective;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    DataType? x_ = FecalOccultResult?.Effective;
+                    object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                     bool z_ = y_ is CqlInterval<CqlDateTime>;
                     if (z_)
                     {
-                        DataType aa_ = FecalOccultResult?.Effective;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        i_ = ab_ as CqlInterval<CqlDateTime>;
+                        DataType? aa_ = FecalOccultResult?.Effective;
+                        object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        i_ = ab_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
@@ -357,65 +359,65 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     }
                 }
             }
-            CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            bool? l_ = context.Operators.In<CqlDateTime>(j_, k_, "day");
+            CqlDateTime? j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
+            CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
+            bool? l_ = context.Operators.In<CqlDateTime?>(j_, k_, "day");
             bool? m_ = context.Operators.And(h_, l_);
             return m_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation?>? e_ = context.Operators.Where<Observation?>(c_, d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("Stool DNA with FIT Test Performed")]
-    public IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed(CqlContext context) =>
+    public IEnumerable<Observation?>? Stool_DNA_with_FIT_Test_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Stool_DNA_with_FIT_Test_Performed, Stool_DNA_with_FIT_Test_Performed_Compute);
 
     private const long _cacheIndex_Stool_DNA_with_FIT_Test_Performed = 7135797916654997859L;
 
-    private IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed_Compute(CqlContext context)
+    private IEnumerable<Observation?>? Stool_DNA_with_FIT_Test_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.sDNA_FIT_Test(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
-        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
+        CqlValueSet? a_ = this.sDNA_FIT_Test(context);
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-lab"));
+        IEnumerable<Observation?>? c_ = Status_1_15_000.Instance.isLaboratoryTestPerformed(context, b_);
 
-        bool? d_(Observation sDNATest) {
-            DataType f_ = sDNATest?.Value;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+        bool? d_(Observation? sDNATest) {
+            DataType? f_ = sDNATest?.Value;
+            object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
             bool? h_ = context.Operators.Not((bool?)(g_ is null));
-            object i_;
-            DataType s_ = sDNATest?.Effective;
-            object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+            object? i_;
+            DataType? s_ = sDNATest?.Effective;
+            object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             bool u_ = t_ is CqlDateTime;
             if (u_)
             {
-                DataType v_ = sDNATest?.Effective;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                DataType? v_ = sDNATest?.Effective;
+                object? w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
                 i_ = w_ as CqlDateTime;
             }
             else
             {
-                DataType x_ = sDNATest?.Effective;
-                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                DataType? x_ = sDNATest?.Effective;
+                object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                 bool z_ = y_ is CqlDateTime;
                 if (z_)
                 {
-                    DataType aa_ = sDNATest?.Effective;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                    DataType? aa_ = sDNATest?.Effective;
+                    object? ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
                     i_ = ab_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ac_ = sDNATest?.Effective;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                    DataType? ac_ = sDNATest?.Effective;
+                    object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
                     bool ae_ = ad_ is CqlInterval<CqlDateTime>;
                     if (ae_)
                     {
-                        DataType af_ = sDNATest?.Effective;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        i_ = ag_ as CqlInterval<CqlDateTime>;
+                        DataType? af_ = sDNATest?.Effective;
+                        object? ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                        i_ = ag_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
@@ -423,78 +425,78 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     }
                 }
             }
-            CqlDateTime j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            CqlDateTime l_ = context.Operators.Start(k_);
-            CqlQuantity m_ = context.Operators.Quantity(2m, "years");
-            CqlDateTime n_ = context.Operators.Subtract(l_, m_);
-            CqlDateTime o_ = context.Operators.End(k_);
-            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(n_, o_, true, true);
-            bool? q_ = context.Operators.In<CqlDateTime>(j_, p_, "day");
+            CqlDateTime? j_ = QICoreCommon_4_0_000.Instance.latest(context, i_);
+            CqlInterval<CqlDateTime?>? k_ = this.Measurement_Period(context);
+            CqlDateTime? l_ = context.Operators.Start(k_);
+            CqlQuantity? m_ = context.Operators.Quantity(2m, "years");
+            CqlDateTime? n_ = context.Operators.Subtract(l_, m_);
+            CqlDateTime? o_ = context.Operators.End(k_);
+            CqlInterval<CqlDateTime?>? p_ = context.Operators.Interval(n_, o_, true, true);
+            bool? q_ = context.Operators.In<CqlDateTime?>(j_, p_, "day");
             bool? r_ = context.Operators.And(h_, q_);
             return r_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation?>? e_ = context.Operators.Where<Observation?>(c_, d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("Flexible Sigmoidoscopy Performed")]
-    public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context) =>
+    public IEnumerable<Procedure?>? Flexible_Sigmoidoscopy_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Flexible_Sigmoidoscopy_Performed, Flexible_Sigmoidoscopy_Performed_Compute);
 
     private const long _cacheIndex_Flexible_Sigmoidoscopy_Performed = -3126305953337278587L;
 
-    private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Compute(CqlContext context)
+    private IEnumerable<Procedure?>? Flexible_Sigmoidoscopy_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
-        IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
+        CqlValueSet? a_ = this.Flexible_Sigmoidoscopy(context);
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
-        bool? d_(Procedure FlexibleSigmoidoscopy) {
-            object f_;
-            DataType p_ = FlexibleSigmoidoscopy?.Performed;
-            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+        bool? d_(Procedure? FlexibleSigmoidoscopy) {
+            object? f_;
+            DataType? p_ = FlexibleSigmoidoscopy?.Performed;
+            object? q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             bool r_ = q_ is CqlDateTime;
             if (r_)
             {
-                DataType s_ = FlexibleSigmoidoscopy?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                DataType? s_ = FlexibleSigmoidoscopy?.Performed;
+                object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                 f_ = t_ as CqlDateTime;
             }
             else
             {
-                DataType u_ = FlexibleSigmoidoscopy?.Performed;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                DataType? u_ = FlexibleSigmoidoscopy?.Performed;
+                object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                 bool w_ = v_ is CqlQuantity;
                 if (w_)
                 {
-                    DataType x_ = FlexibleSigmoidoscopy?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    DataType? x_ = FlexibleSigmoidoscopy?.Performed;
+                    object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                     f_ = y_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType z_ = FlexibleSigmoidoscopy?.Performed;
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    DataType? z_ = FlexibleSigmoidoscopy?.Performed;
+                    object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                     bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                     if (ab_)
                     {
-                        DataType ac_ = FlexibleSigmoidoscopy?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        DataType? ac_ = FlexibleSigmoidoscopy?.Performed;
+                        object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        f_ = ad_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType ae_ = FlexibleSigmoidoscopy?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        DataType? ae_ = FlexibleSigmoidoscopy?.Performed;
+                        object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                         bool ag_ = af_ is CqlInterval<CqlQuantity>;
                         if (ag_)
                         {
-                            DataType ah_ = FlexibleSigmoidoscopy?.Performed;
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            DataType? ah_ = FlexibleSigmoidoscopy?.Performed;
+                            object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            f_ = ai_ as CqlInterval<CqlQuantity?>;
                         }
                         else
                         {
@@ -503,110 +505,110 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     }
                 }
             }
-            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime h_ = context.Operators.End(g_);
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            CqlDateTime j_ = context.Operators.Start(i_);
-            CqlQuantity k_ = context.Operators.Quantity(4m, "years");
-            CqlDateTime l_ = context.Operators.Subtract(j_, k_);
-            CqlDateTime m_ = context.Operators.End(i_);
-            CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
-            bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+            CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
+            CqlDateTime? h_ = context.Operators.End(g_);
+            CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
+            CqlDateTime? j_ = context.Operators.Start(i_);
+            CqlQuantity? k_ = context.Operators.Quantity(4m, "years");
+            CqlDateTime? l_ = context.Operators.Subtract(j_, k_);
+            CqlDateTime? m_ = context.Operators.End(i_);
+            CqlInterval<CqlDateTime?>? n_ = context.Operators.Interval(l_, m_, true, true);
+            bool? o_ = context.Operators.In<CqlDateTime?>(h_, n_, "day");
             return o_;
         }
 
-        IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("CT Colonography Performed")]
-    public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context) =>
+    public IEnumerable<Observation?>? CT_Colonography_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_CT_Colonography_Performed, CT_Colonography_Performed_Compute);
 
     private const long _cacheIndex_CT_Colonography_Performed = 6875238329079171871L;
 
-    private IEnumerable<Observation> CT_Colonography_Performed_Compute(CqlContext context)
+    private IEnumerable<Observation?>? CT_Colonography_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.CT_Colonography(context);
-        IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-        IEnumerable<Observation> c_ = Status_1_15_000.Instance.isDiagnosticStudyPerformed(context, b_);
+        CqlValueSet? a_ = this.CT_Colonography(context);
+        IEnumerable<Observation?>? b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
+        IEnumerable<Observation?>? c_ = Status_1_15_000.Instance.isDiagnosticStudyPerformed(context, b_);
 
-        bool? d_(Observation Colonography) {
-            DataType f_ = Colonography?.Effective;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-            CqlDateTime i_ = context.Operators.End(h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            CqlDateTime k_ = context.Operators.Start(j_);
-            CqlQuantity l_ = context.Operators.Quantity(4m, "years");
-            CqlDateTime m_ = context.Operators.Subtract(k_, l_);
-            CqlDateTime n_ = context.Operators.End(j_);
-            CqlInterval<CqlDateTime> o_ = context.Operators.Interval(m_, n_, true, true);
-            bool? p_ = context.Operators.In<CqlDateTime>(i_, o_, "day");
+        bool? d_(Observation? Colonography) {
+            DataType? f_ = Colonography?.Effective;
+            object? g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+            CqlInterval<CqlDateTime?>? h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+            CqlDateTime? i_ = context.Operators.End(h_);
+            CqlInterval<CqlDateTime?>? j_ = this.Measurement_Period(context);
+            CqlDateTime? k_ = context.Operators.Start(j_);
+            CqlQuantity? l_ = context.Operators.Quantity(4m, "years");
+            CqlDateTime? m_ = context.Operators.Subtract(k_, l_);
+            CqlDateTime? n_ = context.Operators.End(j_);
+            CqlInterval<CqlDateTime?>? o_ = context.Operators.Interval(m_, n_, true, true);
+            bool? p_ = context.Operators.In<CqlDateTime?>(i_, o_, "day");
             return p_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation?>? e_ = context.Operators.Where<Observation?>(c_, d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("Colonoscopy Performed")]
-    public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context) =>
+    public IEnumerable<Procedure?>? Colonoscopy_Performed(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Colonoscopy_Performed, Colonoscopy_Performed_Compute);
 
     private const long _cacheIndex_Colonoscopy_Performed = -2586072086965485321L;
 
-    private IEnumerable<Procedure> Colonoscopy_Performed_Compute(CqlContext context)
+    private IEnumerable<Procedure?>? Colonoscopy_Performed_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Colonoscopy(context);
-        IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-        IEnumerable<Procedure> c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
+        CqlValueSet? a_ = this.Colonoscopy(context);
+        IEnumerable<Procedure?>? b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
+        IEnumerable<Procedure?>? c_ = Status_1_15_000.Instance.isProcedurePerformed(context, b_);
 
-        bool? d_(Procedure ColonoscopyProcedure) {
-            object f_;
-            DataType p_ = ColonoscopyProcedure?.Performed;
-            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+        bool? d_(Procedure? ColonoscopyProcedure) {
+            object? f_;
+            DataType? p_ = ColonoscopyProcedure?.Performed;
+            object? q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
             bool r_ = q_ is CqlDateTime;
             if (r_)
             {
-                DataType s_ = ColonoscopyProcedure?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
+                DataType? s_ = ColonoscopyProcedure?.Performed;
+                object? t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
                 f_ = t_ as CqlDateTime;
             }
             else
             {
-                DataType u_ = ColonoscopyProcedure?.Performed;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                DataType? u_ = ColonoscopyProcedure?.Performed;
+                object? v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                 bool w_ = v_ is CqlQuantity;
                 if (w_)
                 {
-                    DataType x_ = ColonoscopyProcedure?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
+                    DataType? x_ = ColonoscopyProcedure?.Performed;
+                    object? y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
                     f_ = y_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType z_ = ColonoscopyProcedure?.Performed;
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
+                    DataType? z_ = ColonoscopyProcedure?.Performed;
+                    object? aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
                     bool ab_ = aa_ is CqlInterval<CqlDateTime>;
                     if (ab_)
                     {
-                        DataType ac_ = ColonoscopyProcedure?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        DataType? ac_ = ColonoscopyProcedure?.Performed;
+                        object? ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+                        f_ = ad_ as CqlInterval<CqlDateTime?>;
                     }
                     else
                     {
-                        DataType ae_ = ColonoscopyProcedure?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
+                        DataType? ae_ = ColonoscopyProcedure?.Performed;
+                        object? af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
                         bool ag_ = af_ is CqlInterval<CqlQuantity>;
                         if (ag_)
                         {
-                            DataType ah_ = ColonoscopyProcedure?.Performed;
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            DataType? ah_ = ColonoscopyProcedure?.Performed;
+                            object? ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            f_ = ai_ as CqlInterval<CqlQuantity?>;
                         }
                         else
                         {
@@ -615,19 +617,19 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
                     }
                 }
             }
-            CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
-            CqlDateTime h_ = context.Operators.End(g_);
-            CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            CqlDateTime j_ = context.Operators.Start(i_);
-            CqlQuantity k_ = context.Operators.Quantity(9m, "years");
-            CqlDateTime l_ = context.Operators.Subtract(j_, k_);
-            CqlDateTime m_ = context.Operators.End(i_);
-            CqlInterval<CqlDateTime> n_ = context.Operators.Interval(l_, m_, true, true);
-            bool? o_ = context.Operators.In<CqlDateTime>(h_, n_, "day");
+            CqlInterval<CqlDateTime?>? g_ = QICoreCommon_4_0_000.Instance.toInterval(context, f_);
+            CqlDateTime? h_ = context.Operators.End(g_);
+            CqlInterval<CqlDateTime?>? i_ = this.Measurement_Period(context);
+            CqlDateTime? j_ = context.Operators.Start(i_);
+            CqlQuantity? k_ = context.Operators.Quantity(9m, "years");
+            CqlDateTime? l_ = context.Operators.Subtract(j_, k_);
+            CqlDateTime? m_ = context.Operators.End(i_);
+            CqlInterval<CqlDateTime?>? n_ = context.Operators.Interval(l_, m_, true, true);
+            bool? o_ = context.Operators.In<CqlDateTime?>(h_, n_, "day");
             return o_;
         }
 
-        IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
+        IEnumerable<Procedure?>? e_ = context.Operators.Where<Procedure?>(c_, d_);
         return e_;
     }
 
@@ -640,19 +642,19 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Numerator_Compute(CqlContext context)
     {
-        IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
-        bool? b_ = context.Operators.Exists<Observation>(a_);
-        IEnumerable<Observation> c_ = this.Stool_DNA_with_FIT_Test_Performed(context);
-        bool? d_ = context.Operators.Exists<Observation>(c_);
+        IEnumerable<Observation?>? a_ = this.Fecal_Occult_Blood_Test_Performed(context);
+        bool? b_ = context.Operators.Exists<Observation?>(a_);
+        IEnumerable<Observation?>? c_ = this.Stool_DNA_with_FIT_Test_Performed(context);
+        bool? d_ = context.Operators.Exists<Observation?>(c_);
         bool? e_ = context.Operators.Or(b_, d_);
-        IEnumerable<Procedure> f_ = this.Flexible_Sigmoidoscopy_Performed(context);
-        bool? g_ = context.Operators.Exists<Procedure>(f_);
+        IEnumerable<Procedure?>? f_ = this.Flexible_Sigmoidoscopy_Performed(context);
+        bool? g_ = context.Operators.Exists<Procedure?>(f_);
         bool? h_ = context.Operators.Or(e_, g_);
-        IEnumerable<Observation> i_ = this.CT_Colonography_Performed(context);
-        bool? j_ = context.Operators.Exists<Observation>(i_);
+        IEnumerable<Observation?>? i_ = this.CT_Colonography_Performed(context);
+        bool? j_ = context.Operators.Exists<Observation?>(i_);
         bool? k_ = context.Operators.Or(h_, j_);
-        IEnumerable<Procedure> l_ = this.Colonoscopy_Performed(context);
-        bool? m_ = context.Operators.Exists<Procedure>(l_);
+        IEnumerable<Procedure?>? l_ = this.Colonoscopy_Performed(context);
+        bool? m_ = context.Operators.Exists<Procedure?>(l_);
         bool? n_ = context.Operators.Or(k_, m_);
         return n_;
     }
@@ -666,16 +668,16 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Stratification_1_Compute(CqlContext context)
     {
-        Patient a_ = this.Patient(context);
-        Date b_ = a_?.BirthDateElement;
-        string c_ = b_?.Value;
-        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-        CqlDateTime f_ = context.Operators.End(e_);
-        CqlDate g_ = context.Operators.DateFrom(f_);
+        Patient? a_ = this.Patient(context);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?> i_ = context.Operators.Interval(46, 49, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlInterval<int?>? i_ = context.Operators.Interval(46, 49, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 
@@ -688,16 +690,16 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
 
     private bool? Stratification_2_Compute(CqlContext context)
     {
-        Patient a_ = this.Patient(context);
-        Date b_ = a_?.BirthDateElement;
-        string c_ = b_?.Value;
-        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
-        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-        CqlDateTime f_ = context.Operators.End(e_);
-        CqlDate g_ = context.Operators.DateFrom(f_);
+        Patient? a_ = this.Patient(context);
+        Date? b_ = a_?.BirthDateElement;
+        string? c_ = b_?.Value;
+        CqlDate? d_ = context.Operators.ConvertStringToDate(c_);
+        CqlInterval<CqlDateTime?>? e_ = this.Measurement_Period(context);
+        CqlDateTime? f_ = context.Operators.End(e_);
+        CqlDate? g_ = context.Operators.DateFrom(f_);
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-        CqlInterval<int?> i_ = context.Operators.Interval(50, 75, true, true);
-        bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
+        CqlInterval<int?>? i_ = context.Operators.Interval(50, 75, true, true);
+        bool? j_ = context.Operators.In<int?>(h_, i_, (string?)default);
         return j_;
     }
 

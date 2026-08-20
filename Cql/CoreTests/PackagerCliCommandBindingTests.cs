@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
@@ -55,7 +56,7 @@ public class PackagerCliCommandBindingTests
             var csNamespaceConfig =
                 capturedCqlCommand!
                     .GetConfigMapping()
-                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]));
+                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]));
 
             csNamespaceConfig.value.Should().Be(namespaceValue);
         }
@@ -87,7 +88,7 @@ public class PackagerCliCommandBindingTests
             var csNamespaceConfig =
                 capturedElmCommand!
                     .GetConfigMapping()
-                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]));
+                    .Single(x => x.sectionPath.SequenceEqual([ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]));
 
             csNamespaceConfig.value.Should().Be(namespaceValue);
         }

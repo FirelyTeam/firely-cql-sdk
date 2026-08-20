@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager.Options;
 
@@ -183,7 +184,7 @@ internal record ElmToFhirCommand
         (Measures, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.MeasuresOutDir)]),
         (FlattenDirHierarchy, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FlattenDirHierarchy)]),
         (DebugSymbols, [ElmOptions.ConfigSection, nameof(ElmOptions.DebugSymbolsFormat)]),
-        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharpNamespace)]),
+        (CsNamespace, [ElmOptions.ConfigSection, nameof(ElmOptions.CSharp), nameof(CSharpConfig.Namespace)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (MeasureGroupCodeSystem, [PackagingOptions.ConfigSection, nameof(PackagingOptions.MeasureGroupCodeSystem)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),

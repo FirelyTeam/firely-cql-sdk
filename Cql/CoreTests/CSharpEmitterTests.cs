@@ -12,6 +12,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests;
 
@@ -25,6 +26,8 @@ internal sealed class CSharpEmitterTestWidget
     public CSharpEmitterTestWidget() { }
 
     public int Count { get; set; }
+
+    public string Label { get; set; } = "";
 }
 
 /// <summary>
@@ -49,6 +52,8 @@ internal static class CSharpEmitterTestHelpers
     public static int? ApplyFunc(Func<int, int?> f, int x) => f(x);
 
     public static bool? IdentityBool(bool? value) => value;
+
+    public static object AcceptObject(object value) => value;
 }
 
 /// <summary>
@@ -136,7 +141,7 @@ public class CSharpEmitterTests
         var lambda = new CodeLambda([], array);
 
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-5);\n    int[] b_ = [\n        a_,\n        a_,\n    ];\n    return b_;\n}",
+            "{\n    int a_ = Math.Abs(-5);\n    int[]? b_ = [\n        a_,\n        a_,\n    ];\n    return b_;\n}",
             EmitBody(lambda));
     }
 
@@ -373,7 +378,7 @@ public class CSharpEmitterTests
             "    }\n" +
             "    else\n" +
             "    {\n" +
-            "        string a_ = string.Concat(s, s);\n" +
+            "        string? a_ = string.Concat(s, s);\n" +
             "        bool b_ = string.IsNullOrEmpty(a_);\n" +
             "        if (b_)\n" +
             "        {\n" +
@@ -623,8 +628,14 @@ public class CSharpEmitterTests
         // rendering that never matched the old pipeline (found via the HEDIS 2025 corpus —
         // ResultParameters/HFS_Elements construct a FHIR Parameters resource this way).
         Assert.AreEqual(
-            "{\n    CSharpEmitterTestWidget a_ = new CSharpEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
+            "{\n    CSharpEmitterTestWidget? a_ = new CSharpEmitterTestWidget\n    {\n        Count = 7,\n    };\n    return a_;\n}",
             EmitBody(new CodeLambda([], memberInit)));
+
+        var labelProperty = ReflectionUtility.PropertyOf(() => default(CSharpEmitterTestWidget)!.Label);
+        var memberInitWithStringConstant = new CodeMemberInit(widgetNew, [(labelProperty, new CodeConstant("A B", typeof(string)))]);
+        Assert.AreEqual(
+            "{\n    CSharpEmitterTestWidget? a_ = new CSharpEmitterTestWidget\n    {\n        Label = \"A B\",\n    };\n    return a_;\n}",
+            EmitBody(new CodeLambda([], memberInitWithStringConstant)));
     }
 
     [TestMethod]
@@ -634,7 +645,7 @@ public class CSharpEmitterTests
         // the old writer's array format (see CSharpEmitter.Print.cs PrintNewArray).
         var newArray = new CodeNewArray(typeof(int), new CodeConstant(1, typeof(int)), new CodeConstant(2, typeof(int)));
         Assert.AreEqual(
-            "{\n    int[] a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
+            "{\n    int[]? a_ = [\n        1,\n        2,\n    ];\n    return a_;\n}",
             EmitBody(new CodeLambda([], newArray)));
 
         // LambdaDefinitionWriter.BuildNewArrayExpression: "case ExpressionType.NewArrayBounds:
@@ -644,7 +655,7 @@ public class CSharpEmitterTests
         // build an empty typed array this way, e.g. "Immunization[] k_ = [];").
         var newArrayBounds = new CodeNewArrayBounds(typeof(string), new CodeConstant(0, typeof(int)));
         Assert.AreEqual(
-            "{\n    string[] a_ = [];\n    return a_;\n}",
+            "{\n    string?[]? a_ = [];\n    return a_;\n}",
             EmitBody(new CodeLambda([], newArrayBounds)));
 
         // A non-zero length has no print form (no builder path produces one); the emitter
@@ -662,7 +673,7 @@ public class CSharpEmitterTests
         var lambda = new CodeLambda([], tupleInit);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
             EmitBody(lambda));
     }
 
@@ -678,7 +689,7 @@ public class CSharpEmitterTests
             [("B", new CodeConstant("x", typeof(string))), ("A", new CodeConstant(1, typeof(int?)))]);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, 1, \"x\");\n    return a_;\n}",
             EmitBody(new CodeLambda([], tupleInit)));
     }
 
@@ -691,7 +702,7 @@ public class CSharpEmitterTests
         var tupleInit = new CodeTupleInit(tupleType, [("B", new CodeConstant("x", typeof(string)))]);
 
         Assert.AreEqual(
-            "{\n    (CqlTupleMetadata, int? A, string B)? a_ = (CqlTupleMetadata_TEST, default, \"x\");\n    return a_;\n}",
+            "{\n    (CqlTupleMetadata, int? A, string? B)? a_ = (CqlTupleMetadata_TEST, default, \"x\");\n    return a_;\n}",
             EmitBody(new CodeLambda([], tupleInit)));
     }
 
@@ -746,8 +757,45 @@ public class CSharpEmitterTests
             "FHIRHelpers", "4.0.1", "ToCode", isLocalLibrary: false,
             [CodeContextParameter.Instance, innerArgument], typeof(string));
         Assert.AreEqual(
-            "{\n    int a_ = Math.Abs(-3);\n    string b_ = FHIRHelpers_4_0_1.Instance.ToCode(context, a_);\n    return b_;\n}",
+            "{\n    int a_ = Math.Abs(-3);\n    string? b_ = FHIRHelpers_4_0_1.Instance.ToCode(context, a_);\n    return b_;\n}",
             EmitBody(new CodeLambda([], foreignCall)));
+    }
+
+    [TestMethod]
+    public void Invoke_ConstantsAndContext_DoNotEmitNullForgivingOperator()
+    {
+        var resolveParameter = ReflectionUtility.MethodOf(
+            () => default(CqlContext)!.ResolveParameter(default!, default!, default));
+
+        var call = new CodeInvoke(
+            CodeContextParameter.Instance,
+            resolveParameter,
+            new CodeConstant("DevDays-2025.0.0", typeof(string)),
+            new CodeConstant("Measurement Period", typeof(string)),
+            new CodeConstant(null, typeof(object)));
+
+        Assert.AreEqual(
+            "{\n    object? a_ = context.ResolveParameter(\"DevDays-2025.0.0\", \"Measurement Period\", (object?)null);\n    return a_;\n}",
+            EmitBody(new CodeLambda([], call)));
+    }
+
+    [TestMethod]
+    public void Invoke_NullableValueArgument_ToNonNullableParameter_DoesNotEmitNullForgivingOperator()
+    {
+        var acceptObject = ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.AcceptObject(default!));
+        var value = new CodeLocal(typeof(int?), "value");
+        var call = new CodeInvoke(null, acceptObject, value);
+
+        Assert.AreEqual(
+            "{\n    object? a_ = CSharpEmitterTestHelpers.AcceptObject(value);\n    return a_;\n}",
+            EmitBody(new CodeLambda([value], call)));
+    }
+
+    [TestMethod]
+    public void ParenthesizeIfNeeded_DoesNotWrapStandaloneStringLiteralContainingWhitespace()
+    {
+        Assert.AreEqual("\"a b\"", "\"a b\"".ParenthesizeIfNeeded());
+        Assert.AreEqual("(a + b)", "a + b".ParenthesizeIfNeeded());
     }
 
     [TestMethod]
@@ -849,5 +897,26 @@ public class CSharpEmitterTests
         // CodeConstant: a null value requires a type that can hold null.
         Assert.ThrowsException<ArgumentException>(() =>
             new CodeConstant(null, typeof(int)));
+    }
+
+    /// <summary>
+    /// Nullability metadata may only be read from assemblies whose annotations do not vary by
+    /// runtime. .NET 8 and .NET 10 disagree about <c>List&lt;T&gt;</c>'s
+    /// <c>IEnumerable&lt;T&gt;</c> constructor parameter — NotNull on one, Nullable on the other —
+    /// so reading framework metadata made the generated C# depend on which runtime the packager
+    /// happened to execute on.
+    /// </summary>
+    [TestMethod]
+    public void HasStableNullabilityMetadata_ExcludesFrameworkAssembliesOnly()
+    {
+        // Framework: annotations differ between target runtimes, so they are off limits.
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(List<int>)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(IEnumerable<int>)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(object)));
+        Assert.IsFalse(CSharpEmitter.HasStableNullabilityMetadata(typeof(string)));
+
+        // Shipped with the SDK, or referenced at a pinned version: compiled once, so stable.
+        Assert.IsTrue(CSharpEmitter.HasStableNullabilityMetadata(typeof(CqlConcept)));
+        Assert.IsTrue(CSharpEmitter.HasStableNullabilityMetadata(typeof(Hl7.Fhir.Model.Account)));
     }
 }

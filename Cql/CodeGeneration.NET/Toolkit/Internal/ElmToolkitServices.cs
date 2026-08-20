@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -43,6 +43,7 @@ internal readonly record struct ElmToolkitServices(
     {
         var codeBuilderSettings = config.ToCodeBuilderSettings();
         AddCqlCompilerServices(services, codeBuilderSettings);
+        services.TryAddSingleton(config.CSharp);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();

@@ -25,6 +25,10 @@
       // "CMS50FHIRReceiptofSpecialistReport.json"
 
     ],
+    "CSharp": {
+      // See the Demo profile: annotate, but do not ask the compiler to verify yet (#1564).
+      "Nullability": "Annotations"
+    },
     // "DebugSymbolsFormat": "Embedded"
   },
   "Packaging": {

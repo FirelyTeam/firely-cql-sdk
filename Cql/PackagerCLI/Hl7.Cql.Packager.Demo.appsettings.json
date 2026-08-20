@@ -1,6 +1,13 @@
 ﻿{
   "Elm": {
     "SkipFiles": [
-    ]
+    ],
+    "CSharp": {
+      // Annotations rather than Enabled: consumers still get the honest nullability of the
+      // generated API, but the compiler does not verify it, so none of the null-forgiving
+      // operators or bridging casts that full checks need are emitted. Full checks need
+      // ICqlOperators' own signatures to use one nullability convention first (#1564).
+      "Nullability": "Annotations"
+    }
   }
 }

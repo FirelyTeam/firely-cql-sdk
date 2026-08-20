@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
@@ -49,67 +51,67 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     #region Functions and Expressions (3)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context) =>
+    public Patient? Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = 8337256495588297023L;
 
-    private Patient Patient_Compute(CqlContext context)
+    private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
 
     [CqlExpressionDefinition("Smoking status observation")]
-    public IEnumerable<Observation> Smoking_status_observation(CqlContext context) =>
+    public IEnumerable<Observation?>? Smoking_status_observation(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Smoking_status_observation, Smoking_status_observation_Compute);
 
     private const long _cacheIndex_Smoking_status_observation = -4432068073053488285L;
 
-    private IEnumerable<Observation> Smoking_status_observation_Compute(CqlContext context)
+    private IEnumerable<Observation?>? Smoking_status_observation_Compute(CqlContext context)
     {
-        CqlCode a_ = this.Tobacco_Smoking_Status(context);
-        IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-        IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        CqlCode? a_ = this.Tobacco_Smoking_Status(context);
+        IEnumerable<CqlCode?>? b_ = context.Operators.ToList<CqlCode?>(a_);
+        IEnumerable<Observation?>? c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 
-        bool? d_(Observation O) {
-            Code<ObservationStatus> f_ = O?.StatusElement;
-            string g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
-            string[] h_ = [
+        bool? d_(Observation? O) {
+            Code<ObservationStatus>? f_ = O?.StatusElement;
+            string? g_ = FHIRHelpers_4_3_000.Instance.ToString(context, f_);
+            string?[]? h_ = [
                 "final",
                 "amended",
             ];
-            bool? i_ = context.Operators.In<string>(g_, (IEnumerable<string>)h_);
+            bool? i_ = context.Operators.In<string?>(g_, (IEnumerable<string?>?)h_);
             return i_;
         }
 
-        IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
+        IEnumerable<Observation?>? e_ = context.Operators.Where<Observation?>(c_, d_);
         return e_;
     }
 
 
     [CqlExpressionDefinition("Lung cancer diagnosis")]
-    public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context) =>
+    public IEnumerable<Condition?>? Lung_cancer_diagnosis(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Lung_cancer_diagnosis, Lung_cancer_diagnosis_Compute);
 
     private const long _cacheIndex_Lung_cancer_diagnosis = 8408096397658502118L;
 
-    private IEnumerable<Condition> Lung_cancer_diagnosis_Compute(CqlContext context)
+    private IEnumerable<Condition?>? Lung_cancer_diagnosis_Compute(CqlContext context)
     {
-        CqlValueSet a_ = this.Lung_Cancer(context);
-        IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        CqlValueSet? a_ = this.Lung_Cancer(context);
+        IEnumerable<Condition?>? b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
-        bool? c_(Condition C) {
-            CodeableConcept e_ = C?.ClinicalStatus;
-            CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
-            CqlValueSet g_ = this.Condition_Clinical_Status(context);
+        bool? c_(Condition? C) {
+            CodeableConcept? e_ = C?.ClinicalStatus;
+            CqlConcept? f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
+            CqlValueSet? g_ = this.Condition_Clinical_Status(context);
             bool? h_ = context.Operators.ConceptInValueSet(f_, g_);
             return h_;
         }
 
-        IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
+        IEnumerable<Condition?>? d_ = context.Operators.Where<Condition?>(b_, c_);
         return d_;
     }
 

@@ -1,3 +1,5 @@
+#nullable enable
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
@@ -47,14 +49,14 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     #region Functions and Expressions (1)
 
     [CqlExpressionDefinition("InDemographic")]
-    public IEnumerable<Observation> InDemographic(CqlContext context) =>
+    public IEnumerable<Observation?>? InDemographic(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_InDemographic, InDemographic_Compute);
 
     private const long _cacheIndex_InDemographic = 1057832894862877646L;
 
-    private IEnumerable<Observation> InDemographic_Compute(CqlContext context)
+    private IEnumerable<Observation?>? InDemographic_Compute(CqlContext context)
     {
-        IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+        IEnumerable<Observation?>? a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
         return a_;
     }
 

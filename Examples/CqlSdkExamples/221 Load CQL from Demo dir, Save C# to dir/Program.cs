@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -40,7 +40,7 @@ partial class Program
 
         // Generate binaries from the ELM libraries
         var allowInvalidCSharp = true;
-        var elmToolkitConfig = new ElmToolkitConfig(AllowInvalidCSharp: allowInvalidCSharp);
+        var elmToolkitConfig = new ElmToolkitConfig(CSharp: new(AllowInvalidCSharp: allowInvalidCSharp));
         var elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfig);
         // elmToolkit.SetThrowEnumerationExceptions();
         elmToolkit.CompileToAssemblies();

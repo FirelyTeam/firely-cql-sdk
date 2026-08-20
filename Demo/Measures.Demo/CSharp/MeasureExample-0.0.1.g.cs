@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,22 +14,22 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
 {
     #region Functions and Expressions (7)
 
     [CqlExpressionDefinition("Patient")]
-    public Patient Patient(CqlContext context) =>
+    public Patient? Patient(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Patient, Patient_Compute);
 
     private const long _cacheIndex_Patient = 573802528633067256L;
 
-    private Patient Patient_Compute(CqlContext context)
+    private Patient? Patient_Compute(CqlContext context)
     {
-        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+        IEnumerable<Patient?>? a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient? b_ = context.Operators.SingletonFrom<Patient?>(a_);
         return b_;
     }
 
@@ -109,17 +111,17 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("group", "1")]
     [CqlTag("stratifier", "Gender")]
     [CqlTag("description", "Stratifies by the patient's administrative gender")]
-    public string Gender_Stratifier(CqlContext context) =>
+    public string? Gender_Stratifier(CqlContext context) =>
         context.GetOrCompute(_cacheIndex_Gender_Stratifier, Gender_Stratifier_Compute);
 
     private const long _cacheIndex_Gender_Stratifier = -8144273202348602151L;
 
-    private string Gender_Stratifier_Compute(CqlContext context)
+    private string? Gender_Stratifier_Compute(CqlContext context)
     {
-        Patient a_ = this.Patient(context);
-        Code<AdministrativeGender> b_ = a_?.GenderElement;
+        Patient? a_ = this.Patient(context);
+        Code<AdministrativeGender>? b_ = a_?.GenderElement;
         AdministrativeGender? c_ = b_?.Value;
-        string d_ = context.Operators.Convert<string>(c_);
+        string? d_ = context.Operators.Convert<string?>(c_);
         return d_;
     }
 

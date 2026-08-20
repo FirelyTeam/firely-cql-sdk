@@ -1,1 +1,35 @@
 #nullable enable
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.AllowInvalidCSharp.get -> bool
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.AllowInvalidCSharp.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.CSharpConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig! original) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.CSharpConfig(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability Nullability = Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability.Enabled, string? Namespace = null, bool AllowInvalidCSharp = false) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability Nullability, out string? Namespace, out bool AllowInvalidCSharp) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Namespace.get -> string?
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Namespace.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Nullability.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Nullability.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability.Annotations = 1 -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability.Disabled = 0 -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability
+Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability.Enabled = 2 -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpNullability
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharp.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharp.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? CSharp) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? CSharp = null) -> void
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.ToString() -> string!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Default.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig!
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.operator !=(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? left, Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.operator ==(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? left, Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? right) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.Toolkit.CSharpConfig.PrintMembers(System.Text.StringBuilder! builder) -> bool
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowInvalidCSharp.get -> bool
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowInvalidCSharp.init -> void
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpNamespace.get -> string?
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.CSharpNamespace.init -> void
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out bool AllowInvalidCSharp, out string? CSharpNamespace) -> void
+*REMOVED*Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat DebugSymbolsFormat = Hl7.Cql.CodeGeneration.NET.DebugSymbolsFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, bool AllowInvalidCSharp = false, string? CSharpNamespace = null) -> void

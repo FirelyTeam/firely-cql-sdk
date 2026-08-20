@@ -54,7 +54,7 @@ public class FusedOperatorsCqlTest
     {
         CollectionAssert.AreEqual(
             new int?[] { 20, 40, 20 },
-            Library.TenTimesEvens(Context()).ToArray());
+            Library.TenTimesEvens(Context())!.ToArray());
     }
 
     /// <summary><c>(Numbers N return all N * 2) D where D &gt; 6</c>, emitted as <c>SelectWhere</c>.</summary>
@@ -63,7 +63,7 @@ public class FusedOperatorsCqlTest
     {
         CollectionAssert.AreEqual(
             new int?[] { 8, 10 },
-            Library.DoublesOverSix(Context()).ToArray());
+            Library.DoublesOverSix(Context())!.ToArray());
     }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class FusedOperatorsCqlTest
     {
         CollectionAssert.AreEqual(
             new int?[] { 1, 4, 9, 16, 25 },
-            Library.DistinctSquares(Context()).ToArray());
+            Library.DistinctSquares(Context())!.ToArray());
     }
 
     /// <summary>
