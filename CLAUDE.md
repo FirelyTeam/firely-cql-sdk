@@ -90,6 +90,12 @@ The `*.g.cs` files are not the only generated artifact carrying that version. `D
 
 Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). When cutting a release, fragment files under `docs/releases/vnext/` are the sole source — fold them into the versioned release notes, then delete them. See the `cut-release-notes` skill for the full procedure.
 
+## Versioning
+
+The SDK package version uses **EffVer** (Intended Effort Versioning), not SemVer. [docs/versioning.md](docs/versioning.md) is canonical and is deliberately not restated here — read it before deciding a level, and cite its rules rather than precedent (the history is inconsistent: `2.9.1` shipped a breaking change as a patch).
+
+Two rules catch people out, so they are worth carrying here: **a bug fix can force a MESO bump** when it changes CQL evaluation results or `GeneratorToolVersion`, and **public API additions on their own never raise the digit**. `GeneratorToolVersion` is a separate scale that does follow SemVer (see the section above).
+
 ## Skills
 
 Task-specific workflows live under `.claude/skills/` and load on demand — invoke them (or let them trigger) rather than expecting this always-loaded file to cover the steps:

@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.16.1
+**Version:** 3.17.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -59,6 +59,10 @@ This file is the decision-tree entry point. Route tasks here first, then open th
   - ICqlError and CqlException<TError> pattern, error placement, usage boundaries
   - Read [10-cql-evaluation-exceptions.md](copilot-instructions/10-cql-evaluation-exceptions.md)
 
+- Versioning or release-level task?
+  - Choosing MACRO/MESO/MICRO, what forces a bump, EffVer vs the separate SemVer generator scale
+  - Read [docs/versioning.md](../docs/versioning.md) — canonical, no sub-document restates it
+
 ## 3.0. Quick Navigation Index
 
 - [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md)
@@ -98,6 +102,14 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.17.0
+  - Documented the SDK's versioning scheme at [docs/versioning.md](../docs/versioning.md), which is **canonical and deliberately not restated anywhere**: the package version uses **EffVer** (Intended Effort Versioning), not SemVer. Deliberately no `11-versioning.md` sub-document — per the DRY rule in [CLAUDE.md](../CLAUDE.md), a task-specific procedure gets one copy plus links, and a second full copy of the trigger list had already drifted from the first while this change was in review.
+  - Added a decision-tree entry (2.0) routing versioning tasks straight to that document.
+  - Added a short `## Versioning` section to [CLAUDE.md](../CLAUDE.md) and 4.6.3 to [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) carrying only the two rules most often got wrong — a result-changing bug fix forces MESO, and public API additions alone do not raise the digit — plus the pointer. These are the universal gotchas the sync rule requires in both instruction sets; the full trigger list stays in one place.
+  - Added a required `### Version Level` section to [release-notes-template.md](../docs/releases/release-notes-template.md), a `## Versioning` section to the root [README.md](../README.md), and a one-line fragment-heading-to-digit rule to [docs/releases/vnext/README.md](../docs/releases/vnext/README.md).
+  - Scoped the "follow semantic versioning" line in [docs/technical-readme.md](../docs/technical-readme.md) and the "SemVer Compliance" line in [build/README.md](../build/README.md) so neither reads as an SDK-wide claim.
+  - Corrected the Vonk sync comment in both `cql-base.props` and `Demo/cql-demo.props`: `FhirNetApiVersion` in `Directory.Packages.props`, not `FirelyNetVersion` in `src/Vonk.props`.
 
 - 3.16.1
   - Updated the integration-runner resource regeneration rule in [05-build-and-test.md](copilot-instructions/05-build-and-test.md): refreshing `passed.jsonl` is now gated on a complete, trustworthy run with no unexplained regressions; when blocked, preserve the existing baseline and track the blocker in an issue instead of replacing it with incomplete coverage.

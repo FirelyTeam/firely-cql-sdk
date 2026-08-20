@@ -119,11 +119,14 @@ This prevents generating the same artifacts multiple times and ensures tools use
 
 ### Code Generation Version Management
 
+`GeneratorToolVersion` is a separate scale from the SDK package version, which uses EffVer — see [versioning.md](versioning.md). The generator version *does* follow SemVer.
+
 When modifying C# code generation logic in `CodeGeneration.NET`, always update `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`:
 - The version is in `CodeGeneration.NET/_CODE GENERATOR VERSION_.cs`
-- Follow semantic versioning (major.minor.patch.build)
+- Follow semantic versioning (major.minor.patch.build) — this applies to the **generator** version only, not to the SDK package version
 - Ensure `LibraryInstanceInvoker` supports the new version range
 - Regenerate libraries after version changes
+- Any change here makes the next SDK release at least MESO, because consumers regenerate
 
 ## Build and Test
 

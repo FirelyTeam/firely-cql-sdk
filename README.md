@@ -19,6 +19,22 @@ This is release version 2.14.0 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 
+## Versioning
+
+This SDK uses **[EffVer](https://jacobtomlinson.dev/effver/)** (Intended Effort Versioning), not Semantic Versioning. Version numbers tell you how much work an upgrade will cost, not what kind of change it contains:
+
+| `MACRO.MESO.MICRO` | What it means for you |
+| --- | --- |
+| **MACRO** | A new engine generation, or an upgrade needing significant time — the release notes say which. |
+| **MESO** | Some small effort may be required — check the release notes' migration steps. |
+| **MICRO** | Nothing to do; upgrade the package reference. |
+
+Notably, a **MESO** bump can carry a change that SemVer would call a patch — a corrected calculation whose results move, or a code-generator change requiring you to regenerate `*.g.cs`. Conversely, **API additions on their own never raise the digit**, since they cost existing consumers nothing; a release that adds API may still be MESO for some other reason.
+
+Pre-release packages keep standard SemVer 2.0 suffixes — `2.15.0-alpha.1`, `-beta.1`, `-rc.1` — so NuGet orders them below the final release and will not install them unless you ask for them explicitly (`--prerelease`).
+
+Full rules, including where this deviates from EffVer as published: [docs/versioning.md](docs/versioning.md).
+
 1.x releases are maintained with hotfixes only and do not receive new features.
 
 ## Getting Started
