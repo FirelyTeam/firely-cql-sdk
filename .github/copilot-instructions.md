@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.16.0
+**Version:** 3.16.1
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -98,6 +98,10 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.16.1
+  - Updated the integration-runner resource regeneration rule in [05-build-and-test.md](copilot-instructions/05-build-and-test.md): refreshing `passed.jsonl` is now gated on a complete, trustworthy run with no unexplained regressions; when blocked, preserve the existing baseline and track the blocker in an issue instead of replacing it with incomplete coverage.
+  - Mirrored the same guardrail into [CLAUDE.md](../CLAUDE.md).
 
 - 3.16.0
   - Added 1.10.8 to [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md): when picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count ahead, second behind), report `mergeable` and `mergeStateStatus` when available, and ask whether to merge the base before reviewing rather than deciding unilaterally. This reflects the richer intent from [#1516](https://github.com/FirelyTeam/firely-cql-sdk/issues/1516), where an earlier quoted draft used behind-only wording. The rationale records both costs: reviewing stale code against a moved base, and re-triggered CI/conflict risk from an ill-timed base merge.

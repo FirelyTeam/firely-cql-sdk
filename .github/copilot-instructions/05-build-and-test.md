@@ -83,14 +83,16 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 5.3.2.5 **Regenerate checked-in generated code, but commit only real changes**: The version is embedded in every checked-in `*.g.cs` file via `GeneratedCodeAttribute` (e.g., `CoreTests/CSharp`, Demo library sets). Regenerate these libraries as part of the same pull request, then revert (`git checkout`) every file whose sole difference is that version header, committing only the files whose content actually changed. Checked-in generated files therefore carry a mix of versions, which is intentional: the version is an internal marker, the invoker toolkit accepts any version within its supported range (see 5.3.2.3), and the golden tests normalize it away before comparing. This keeps the pull request diff reviewable instead of burying one real change in dozens of one-line header updates
 
-5.3.2.6 **Examples**:
-5.3.2.6.1 Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
+5.3.2.6 **Regenerate the integration runner's vendored resources too**: `Demo/Measures.dqm-content-qicore-2025` writes library resources into the `Firely.Cql.Sdk.Integration.Runner` submodule (`IntegrationRunner/Resources/libraries/*.json`). Those JSON files embed the **compiled assembly the integration runner actually executes**, so a version bump that skips them leaves the MADiE run exercising the old generator and the submodule's `passed.jsonl` describing behavior that is no longer in `develop`. Regenerate them in the same pull request with `dotnet build Demo/Measures.dqm-content-qicore-2025/Measures.dqm-content-qicore-2025.csproj -c Release /p:ElmToolingEnabled=true` — build `Cql/PackagerCLI` in the same configuration first, because the `GenerateCSharp` target silently skips when the packager executable is missing — then re-run the integration suite, refresh `passed.jsonl` only when the run is complete and has no unexplained regressions, and bump the submodule pointer in `firely-cql-sdk`. If a complete trustworthy run is blocked, preserve the existing `passed.jsonl` baseline and track the blocker in an issue instead of normalizing coverage loss by replacing the baseline. Unlike the `*.g.cs` header churn described in 5.3.2.5, these resources are committed wholesale, since the embedded assembly changes in every one of them. Letting this drift is what [issue #1407](https://github.com/FirelyTeam/firely-cql-sdk/issues/1407) had to clean up
 
-      5.3.2.6.2 Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
+5.3.2.7 **Examples**:
+5.3.2.7.1 Adding `CqlFunctionParameterAttribute` → Minor version increment (3.0.0.0 → 3.1.0.0)
 
-      5.3.2.6.3 Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+      5.3.2.7.2 Changing method signatures → Major version increment (3.0.0.0 → 4.0.0.0)
 
-      5.3.2.6.4 Binder emits a different `ICqlOperators` method for the same CQL (e.g., `CoalesceValueTypes<T>` → `Coalesce<T>`) → Patch version increment (5.1.0.0 → 5.1.1.0)
+      5.3.2.7.3 Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
+
+      5.3.2.7.4 Binder emits a different `ICqlOperators` method for the same CQL (e.g., `CoalesceValueTypes<T>` → `Coalesce<T>`) → Patch version increment (5.1.0.0 → 5.1.1.0)
 
 ## 5.4. Generating ELM Files from CQL
 
