@@ -33,7 +33,7 @@ public class CqlToFhirProgram
     IOptions<CqlToFhirOptions> cqlToElmOptions,
     PdbOptionsValidator pdbOptionsValidator) : IProgram
 {
-    public static int CommandHandler(
+    internal static int CommandHandler(
         IConsole console,
         LoggingCommand loggingCommand,
         GlobalCommand globalCommand,

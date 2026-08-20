@@ -1,9 +1,1 @@
 #nullable enable
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.get -> System.TimeSpan?
-Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideConverterTimezoneOffset.init -> void
-static Hl7.Cql.Fhir.FhirCqlContext.DataSourceForBundle(Hl7.Fhir.Model.Bundle! bundle, Hl7.Cql.Fhir.FhirCqlContextOptions? options = null) -> Hl7.Cql.Operators.IDataSource!
-static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model) -> Hl7.Cql.Conversion.TypeConverter!
-static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, System.TimeSpan? defaultTimezoneOffset) -> Hl7.Cql.Conversion.TypeConverter!
-*REMOVED*Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize.get -> int?
-*REMOVED*Hl7.Cql.Fhir.FhirCqlContextOptions.OverrideFhirTypeConverterCacheSize.init -> void
-*REMOVED*static Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Introspection.ModelInspector! model, int? cacheSize = null) -> Hl7.Cql.Conversion.TypeConverter!
