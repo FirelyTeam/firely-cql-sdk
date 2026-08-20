@@ -52,6 +52,7 @@ $testDataFolder  = Join-Path $repoRoot (Join-Path "submodules" (Join-Path "Firel
 $valueSetsFolder = Join-Path $testDataFolder "Value Sets"
 $measuresFolder  = Join-Path $testDataFolder "Measures"
 $vsacFhirBase    = "https://cts.nlm.nih.gov/fhir"
+$vsacReleaseManifest = "ecqm-update-2025-05-08"
 
 # -----------------------------
 # VALUE SET SYNC (VSAC FHIR TERMINOLOGY SERVICE)
@@ -88,13 +89,17 @@ function Get-CorpusRepairList {
         $vs  = Get-Content -Raw -Path $entry.Value.FullName | ConvertFrom-Json
         $exp = $vs.expansion
         if ($null -eq $exp) { continue }
+        $valueSetVersion = $null
+        if ($vs.PSObject.Properties['version'] -and $vs.version) {
+            $valueSetVersion = [string]$vs.version
+        }
         $concepts = Get-ConceptCount $exp.contains
         $offset   = 0
         if ($exp.PSObject.Properties['offset'] -and $null -ne $exp.offset) { $offset = [int]$exp.offset }
         $total = $null
         if ($exp.PSObject.Properties['total'] -and $null -ne $exp.total) { $total = [int]$exp.total }
         if ($offset -gt 0 -or ($null -ne $total -and $total -gt $concepts)) {
-            $truncated += [pscustomobject]@{ Oid = $entry.Key; Present = $concepts; Total = $total }
+            $truncated += [pscustomobject]@{ Oid = $entry.Key; Present = $concepts; Total = $total; ValueSetVersion = $valueSetVersion }
         }
     }
 
@@ -121,7 +126,7 @@ function Get-CorpusRepairList {
 
 # Fetches one value set's complete expansion, following VSAC's offset/count
 # paging, and merges the pages into a single ValueSet resource.
-function Get-VsacValueSet([string]$Oid) {
+function Get-VsacValueSet([string]$Oid, [string]$ValueSetVersion) {
     $headers = @{
         Authorization = 'Basic ' + [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("apikey:$VsacApiKey"))
         Accept        = 'application/fhir+json'
@@ -133,7 +138,11 @@ function Get-VsacValueSet([string]$Oid) {
     $allContains = [System.Collections.Generic.List[object]]::new()
 
     while ($true) {
-        $uri  = "$vsacFhirBase/ValueSet/$Oid/" + '$expand' + "?offset=$offset&count=$pageSize"
+        $query = "offset=$offset&count=$pageSize&release=$vsacReleaseManifest"
+        if ($ValueSetVersion) {
+            $query += "&valueSetVersion=$ValueSetVersion"
+        }
+        $uri  = "$vsacFhirBase/ValueSet/$Oid/" + '$expand' + "?$query"
         $page = $null
         for ($attempt = 1; ; $attempt++) {
             try {
@@ -192,6 +201,7 @@ function Invoke-ValueSetSync {
     Write-Host "Value Set Sync (VSAC FHIR)" -ForegroundColor Cyan
     Write-Host "========================================" -ForegroundColor Cyan
     Write-Host "  FHIR base: $vsacFhirBase"
+    Write-Host "  Release:   $vsacReleaseManifest"
     Write-Host "  Corpus:    $valueSetsFolder"
     Write-Host "  API key:   $(if ($VsacApiKey) { 'provided' } else { 'NOT SET (-VsacApiKey / UMLS_API_KEY)' })"
 
@@ -199,10 +209,20 @@ function Invoke-ValueSetSync {
         throw "Value set corpus not found at '$valueSetsFolder'. Initialize the Firely.Cql.Sdk.Integration.Runner submodule first (git submodule update --init)."
     }
 
-    $oidsToFetch = @()
+    $requests = @()
     if ($ValueSetOids) {
-        $oidsToFetch = $ValueSetOids
-        Write-Host "`nFetching $($oidsToFetch.Count) explicitly requested value set(s)."
+        foreach ($oid in $ValueSetOids) {
+            $version = $null
+            $existingPath = Join-Path $valueSetsFolder "ValueSet-$oid.json"
+            if (Test-Path $existingPath) {
+                $existingValueSet = Get-Content -Raw -Path $existingPath | ConvertFrom-Json
+                if ($existingValueSet.PSObject.Properties['version'] -and $existingValueSet.version) {
+                    $version = [string]$existingValueSet.version
+                }
+            }
+            $requests += [pscustomobject]@{ Oid = $oid; ValueSetVersion = $version }
+        }
+        Write-Host "`nFetching $($requests.Count) explicitly requested value set(s)."
     } else {
         Write-Host "`nScanning corpus for truncated and missing value sets (parses every file; takes a moment)..."
         $repair = Get-CorpusRepairList
@@ -213,16 +233,17 @@ function Invoke-ValueSetSync {
         foreach ($m in $repair.Missing) {
             Write-Host ("  missing:   {0} (referenced by {1})" -f $m.Oid, ($m.ReferencedBy -join ', '))
         }
-        $oidsToFetch = @($repair.Truncated | ForEach-Object Oid) + @($repair.Missing | ForEach-Object Oid)
+        $requests += @($repair.Truncated | ForEach-Object { [pscustomobject]@{ Oid = $_.Oid; ValueSetVersion = $_.ValueSetVersion } })
+        $requests += @($repair.Missing | ForEach-Object { [pscustomobject]@{ Oid = $_.Oid; ValueSetVersion = $null } })
     }
 
-    if ($oidsToFetch.Count -eq 0) {
+    if ($requests.Count -eq 0) {
         Write-Host "Corpus is complete - nothing to fetch." -ForegroundColor Green
         return
     }
 
     if (-not $VsacApiKey) {
-        Write-Warning "$($oidsToFetch.Count) value set(s) need fetching, but no VSAC API key is available."
+        Write-Warning "$($requests.Count) value set(s) need fetching, but no VSAC API key is available."
         Write-Warning "Pass -VsacApiKey or set UMLS_API_KEY (create a key at https://uts.nlm.nih.gov > My Profile)."
         if ($ValueSetsOnly) { exit 1 }
         return
@@ -230,10 +251,12 @@ function Invoke-ValueSetSync {
 
     $fetched = @()
     $failed  = @()
-    foreach ($oid in $oidsToFetch) {
-        Write-Host "`nFetching ValueSet $oid ..."
+    foreach ($request in $requests) {
+        $oid = $request.Oid
+        $valueSetVersion = $request.ValueSetVersion
+        Write-Host "`nFetching ValueSet $oid (release=$vsacReleaseManifest$(if ($valueSetVersion) { ", valueSetVersion=$valueSetVersion" })) ..."
         try {
-            $vs      = Get-VsacValueSet -Oid $oid
+            $vs      = Get-VsacValueSet -Oid $oid -ValueSetVersion $valueSetVersion
             $outFile = Join-Path $valueSetsFolder "ValueSet-$oid.json"
             [System.IO.File]::WriteAllText($outFile, ($vs | ConvertTo-Json -Depth 60))
 

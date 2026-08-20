@@ -39,6 +39,9 @@ value sets (truncated at VSAC's 1000-concept page size), and a handful of refere
 value sets are absent from it entirely. The script scans the corpus for both cases and
 fetches complete expansions, following VSAC's `offset`/`count` paging until
 `expansion.total` concepts are present.
+To keep the corpus reproducible, requests are pinned to VSAC release
+`ecqm-update-2025-05-08`; when an existing value set file already declares a
+`version`, that value is also sent as VSAC's `valueSetVersion` query parameter.
 
 Fetching requires a personal UMLS API key: sign in at [uts.nlm.nih.gov](https://uts.nlm.nih.gov)
 and choose "Generate new API Key" under My Profile (a free UMLS Metathesaurus license is
