@@ -25,13 +25,15 @@ This SDK uses **[EffVer](https://jacobtomlinson.dev/effver/)** (Intended Effort 
 
 | `MACRO.MESO.MICRO` | What it means for you |
 | --- | --- |
-| **MACRO** | Set aside significant time to upgrade. |
+| **MACRO** | A new engine generation, or an upgrade needing significant time — the release notes say which. |
 | **MESO** | Some small effort may be required — check the release notes' migration steps. |
 | **MICRO** | Nothing to do; upgrade the package reference. |
 
-Notably, a **MESO** bump can carry a change that SemVer would call a patch — a corrected calculation whose results move, or a code-generator change requiring you to regenerate `*.g.cs`. Conversely, **new API is added in MICRO releases**, since additions cost existing consumers nothing. Full rules: [docs/versioning.md](docs/versioning.md).
+Notably, a **MESO** bump can carry a change that SemVer would call a patch — a corrected calculation whose results move, or a code-generator change requiring you to regenerate `*.g.cs`. Conversely, **API additions on their own never raise the digit**, since they cost existing consumers nothing; a release that adds API may still be MESO for some other reason.
 
-Pre-release packages keep standard SemVer 2.0 suffixes — `2.15.0-alpha.1`, `-beta.1`, `-rc.1` — so NuGet orders them below the final release and will not install them unless you ask for them explicitly (`--prerelease`). The digits still describe what adopting the *final* release will cost.
+Pre-release packages keep standard SemVer 2.0 suffixes — `2.15.0-alpha.1`, `-beta.1`, `-rc.1` — so NuGet orders them below the final release and will not install them unless you ask for them explicitly (`--prerelease`).
+
+Full rules, including where this deviates from EffVer as published: [docs/versioning.md](docs/versioning.md).
 
 1.x releases are maintained with hotfixes only and do not receive new features.
 

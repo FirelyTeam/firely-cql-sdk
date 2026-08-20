@@ -40,12 +40,22 @@ consumer nothing, so additions alone do not raise the digit.
 
 ## MACRO — the first digit
 
-Reserved for a release whose migration is substantial for a typical consumer: a re-architecture,
-removal of a whole surface area, or several MESO-level migrations landing together. This is a
-deliberate, recorded decision, not an automatic consequence of any single change.
+Either of two triggers raises it, and the release notes must say **which**:
 
-The `1.x` to `2.x` transition was a MACRO bump under these rules. `1.x` releases are maintained
-with hotfixes only and do not receive new features.
+- **Measured.** The migration is substantial for a typical consumer: a re-architecture, removal of
+  a whole surface area, or several MESO-level migrations landing together.
+- **Declared.** A deliberate decision that this is a new engine generation — that the release is to
+  be considered a separate project from what came before. This is a product judgement, taken and
+  recorded, not a consequence of any single change. It may be taken *before* the adoption cost is
+  known, and it holds even if that cost later turns out to be modest.
+
+The declared trigger is a deviation from EffVer; see [Deviations from EffVer](#deviations-from-effver).
+
+The `2.x` line is itself a declared MACRO. `v2.0.0-alpha` was tagged 2024-06-13, fourteen months
+before the first 2.x final release (`v2.1.0`, 2025-08-19) and while the `1.x` line was still being
+tagged — there was no released 2.x version from which any adoption cost could have been measured.
+There has never been a `v2.0.0` final, and `1.x` never had a final release either, only three
+release candidates.
 
 ## What never affects the version
 
@@ -97,8 +107,15 @@ SemVer classifies changes by compatibility. Two categories break that model here
 - **Compatible but costly.** A `GeneratorToolVersion` bump, or a bug fix that changes a measure's
   computed result, is backward-compatible by SemVer's definition and would land in `PATCH`.
   Consumers have real work to do in both cases.
-- **Breaking but cheap.** Fixing an option that never worked is technically breaking, yet nobody
-  could have depended on the broken behavior.
+- **Breaking but cheap.** Removing public API that nothing could reach — an `internal` type's
+  accidentally-public member, or a surface added and withdrawn inside one release window so no
+  released version ever exposed it — is source-breaking by SemVer's definition while costing every
+  actual consumer nothing.
+
+  Note that "the option never worked, so nobody can have depended on it" is *not* an instance of
+  this. Fixing Packager CLI `--cs-namespace` in #1570 changed generated type identities for
+  everyone already passing the option, who must now regenerate — which is why `2.14.0` is MESO. The
+  cause of a change being a defect says nothing about the cost of adopting the fix.
 
 SemVer also forces `MAJOR` on every breaking change, which for this SDK would have meant roughly
 one major per release. EffVer keeps the leading digit meaningful.
@@ -128,16 +145,46 @@ giving `2.15.0-rc.1`. `VersionSuffix` stays commented out except while a pre-rel
 
 Two rules keep the suffix from muddying the effort signal:
 
-- **Decide the EffVer level first, then append the suffix.** `VersionPrefix` is always the version
-  you intend to ship, chosen by the rules above. `2.15.0-rc.1` means "the next release is a MESO
-  bump, and this is a candidate for it". Never use a pre-release to defer the level decision, and
-  never ship a pre-release whose prefix you expect to change — if the level turns out to be wrong,
-  correct the prefix and restart the suffix at `.1`.
+- **Decide the level first, then append the suffix.** `VersionPrefix` is always the version you
+  intend to ship, chosen by the rules above. `2.15.0-rc.1` means "the next release is a MESO bump,
+  and this is a candidate for it". Never use a pre-release to defer the level decision.
+
+  A **declared MACRO** is the one exception where the prefix is fixed before the adoption cost is
+  known: `3.0.0-alpha.1` is legitimate the moment a new engine generation is declared, and the `3`
+  stays put even if the finished release turns out to cost a typical consumer little. Outside that
+  case, do not ship a pre-release whose prefix you expect to change — if a measured level proves
+  wrong, correct the prefix and restart the suffix at `.1`.
 - **The digits describe adopting the final release, not the pre-release.** "Expect instability" is
   what `alpha`/`beta` conveys, and it is orthogonal to MACRO/MESO/MICRO. A `2.15.0-alpha.1` still
   carries the MESO promise about what upgrading from `2.14.0` to the eventual `2.15.0` will cost.
 
-Historical note: the `v2.0.x-alpha` and `v2.1.0-alpha.18` tags predate this convention and are not
-consistent with it. See the
+Historical note: the `v2.0.0-alpha` … `v2.0.17-alpha` tags incremented the third digit once per
+alpha instead of using an `-alpha.N` suffix, which is not consistent with this convention. The
+*decision* to call that line `2.x` while still in alpha is a declared MACRO and is consistent; only
+the suffix mechanics were wrong. See the
 [Creating Tags and Releases](https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases)
 wiki page for the tagging mechanics.
+
+## Deviations from EffVer
+
+[EffVer](https://jacobtomlinson.dev/effver/) as published defines the three digits purely by
+adoption effort. We follow it with **one** documented deviation, listed here so that citing EffVer
+stays honest — the failure this policy exists to fix was a document claiming a scheme the project
+did not follow.
+
+**1. MACRO may be *declared* as well as measured.** EffVer's macro means "you will need to dedicate
+significant time to upgrading" — a statement about cost. We also allow MACRO to be raised by
+declaring a new engine generation, a product judgement that can be taken before any cost is known
+and that stands even if the cost proves small. This borrows the PROJECT digit from
+[Romantic Versioning](https://romversioning.github.io/romver/): *"if the release is to be considered
+as a separate project from older releases … the PROJECT identifier must be incremented."*
+
+Its consequence for pre-releases is covered under [Pre-release versions](#pre-release-versions): a
+declared MACRO fixes `VersionPrefix` up front, which no measured level may do.
+
+Everything else is EffVer as written. In particular the MESO trigger list above is a *refinement* —
+it enumerates, for this codebase, what "some small effort may be required" concretely means — and
+not a departure. Two entries are worth naming as interpretations rather than deviations, since
+EffVer does not mention either: marking public API `[Obsolete]` counts as effort because a consumer
+building with warnings-as-errors has work to do, and a dependency bump crossing that dependency's
+own major counts because the consumer's own graph moves with it.

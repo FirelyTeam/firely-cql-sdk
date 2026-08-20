@@ -38,20 +38,14 @@ frontmatter or other metadata — the category comes from the `##` heading, same
 
 ## Which heading drives the version
 
-The `##` heading you choose is the primary input to the next release's version level
-(see [versioning.md](../../versioning.md)):
+The `##` heading you choose is the primary input to the next release's version level —
+[versioning.md](../../versioning.md) has the rules, which are not repeated here.
 
-| Fragment heading | Version effect |
-| --- | --- |
-| `## Breaking`, `## Potentially Breaking` | MESO — forces the second digit |
-| `## Features`, `## Fixes`, `## Performance` | MICRO by default |
-
-A `## Fixes` or `## Performance` fragment still forces MESO if the change moves CQL evaluation
-results or `GeneratorToolVersion`. Say so in the fragment text when it does —
-[#1568](https://github.com/FirelyTeam/firely-cql-sdk/pull/1568) was filed as `## Performance` with
-"no public API change" and both statements were true, yet it changed whether in-place expansion
-edits are observed, which is a MESO-level behavior change. If in doubt about your own change, write
-the caveat down and let the release cut decide.
+The one thing to watch: a `## Fixes` or `## Performance` fragment is not automatically a
+no-migration change. [#1568](https://github.com/FirelyTeam/firely-cql-sdk/pull/1568) was filed as
+`## Performance` with "no public API change" — both true — yet it changed whether in-place expansion
+edits are observed, which forces a MESO bump. If your change moves CQL evaluation results or
+`GeneratorToolVersion`, write that in the fragment text and let the release cut decide the level.
 
 ## Consolidation
 

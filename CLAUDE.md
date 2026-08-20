@@ -92,14 +92,9 @@ Any breaking change (public API, generated C# output, Packager CLI behavior, bui
 
 ## Versioning
 
-The SDK package version uses **EffVer** (Intended Effort Versioning), not SemVer: `MACRO.MESO.MICRO`, where each digit says how much work the upgrade costs a consumer. [docs/versioning.md](docs/versioning.md) is canonical — read it before deciding a level.
+The SDK package version uses **EffVer** (Intended Effort Versioning), not SemVer. [docs/versioning.md](docs/versioning.md) is canonical and is deliberately not restated here — read it before deciding a level, and cite its rules rather than precedent (the history is inconsistent: `2.9.1` shipped a breaking change as a patch).
 
-The two things most often got wrong:
-
-- **A bug fix can force MESO.** If it changes CQL evaluation results or `GeneratorToolVersion`, consumers have work to do, and the digit has to say so.
-- **New public API is MICRO.** Additions cost existing consumers nothing.
-
-`GeneratorToolVersion` is a separate scale and does follow SemVer (see the section above). The `breaking change` label is a hint, never the trigger — the `docs/releases/vnext/` fragment decides. Never justify a level by precedent; the history is inconsistent (`2.9.1` shipped a breaking change as a patch). Cite the rule instead. Record the level and its trigger in the release notes' `### Version Level` section and in the version-bump PR description.
+Two rules catch people out, so they are worth carrying here: **a bug fix can force a MESO bump** when it changes CQL evaluation results or `GeneratorToolVersion`, and **public API additions on their own never raise the digit**. `GeneratorToolVersion` is a separate scale that does follow SemVer (see the section above).
 
 ## Skills
 
