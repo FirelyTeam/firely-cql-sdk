@@ -4,15 +4,15 @@
 
 > **Upgrading?** Here is the short version:
 >
-> - **Breaking changes:** Packager CLI `--cs-namespace` now correctly populates `Elm:CSharpNamespace` for both `cql` and `elm`, so generated `*.g.cs` types move from the global namespace into the requested namespace when that option is used.
-> - **Required migrations:** If you already pass `--cs-namespace`, regenerate artifacts and update any code/tests that referenced the previous global-namespace type identities.
-> - **Highlights:** `ValueSetSource` now memoizes facade materialization for repeated `ValueSet.expansion` instances, reducing repeated work in instance-stable resolver scenarios.
+> - **Breaking changes:** Packager CLI `--cs-namespace` now correctly populates `Elm:CSharpNamespace` for both `cql` and `elm`, so generated `*.g.cs` types move from the global namespace into the requested namespace when that option is used. Separately, `ValueSetSource` no longer observes in-place edits to a `ValueSet.Expansion` it has already built a facade from.
+> - **Required migrations:** If you already pass `--cs-namespace`, regenerate artifacts and update any code/tests that referenced the previous global-namespace type identities. If your host edits a `ValueSet.Expansion` in place after handing the value set to a `ValueSetSource`, assign a new expansion instance instead of mutating the existing one.
+> - **Highlights:** `ValueSetSource` now memoizes facade materialization for repeated `ValueSet.Expansion` instances, reducing repeated work in instance-stable resolver scenarios.
 
 ---
 
 ### Versioning Decision
 
-- This release is cut as **2.14.0 (minor)**, not `2.13.1`, because release content includes a consumer-visible breaking behavior change (`--cs-namespace` now taking effect in Packager output type identities). This follows the repository's existing convention of shipping breaking behavior under minor releases, while patch releases remain non-breaking bugfix updates.
+- This release is cut as **2.14.0 (minor)**, not `2.13.1`. The deciding factor is scope of impact rather than the shape of the change: `--cs-namespace` now taking effect moves generated type identities for every consumer already passing that option, so their checked-in `*.g.cs` and anything compiled against it must be regenerated. That is a migration step, not a drop-in upgrade, and a patch number would not signal it. Note that this repository has previously shipped a Packager-default breaking change as a patch (`2.9.1`, the `FHIRHelpers` canonical default, #1312), so the level remains a per-cycle judgement about consumer impact rather than a written rule.
 
 ---
 
@@ -24,9 +24,7 @@
 
 #### Improvements
 
-- `ValueSetSource` now memoizes expansion-facade materialization process-wide by `ValueSet.expansion` instance under weak keys. The memo only hits when a resolver returns the same `ExpansionComponent` instance again; there is no manual tuning or invalidation surface.
-- Facade materialization is now eager on `Add` instead of deferred to first query. This reduces repeated expansion walks for queried value sets, but callers that bulk-load value sets they never query now pay that materialization up front.
-- In-place mutation of an already-materialized expansion instance is not observed by the memoized facade (replacement with a new expansion instance is observed).
+- `ValueSetSource` now memoizes expansion-facade materialization process-wide by `ValueSet.Expansion` instance under weak keys. The memo only hits when a resolver returns the same `ExpansionComponent` instance again; there is no manual tuning or invalidation surface. (#1568)
 
 #### Dependency Updates
 
@@ -34,7 +32,8 @@
 
 #### Potentially Breaking
 
-- None.
+- `ValueSetSource` no longer observes in-place edits to a `ValueSet.Expansion` it has already built a facade from. Previously the facade was built from a deferred walk of `expansion.contains` that ran on first query, and each `ValueSetSource` rebuilt it from the live expansion; the codes are now materialized at `Add` and the result is shared process-wide against that `ExpansionComponent` instance. A host that appends to `contains` or adjusts `total` after a successful build will not see the change. Replacing `ValueSet.Expansion` with a new instance is still observed, as is editing an expansion after a build *failed* on it. (#1568)
+- Facade materialization moved from first query to `Add`. A caller that bulk-loads value sets it never queries (`Add(IEnumerable<ValueSet>)`, `ToValueSetDictionary`) now pays the expansion walk and code interning up front rather than never. (#1568)
 
 ---
 
@@ -58,9 +57,7 @@
 
 #### Improvements
 
-- No consumer-facing release-note entry is required for #1563 or #1583:
-  - #1563 updates private integration-runner submodule resources/pointer and maintenance docs/scripts; it does not change shipped SDK/package behavior (`Cql/`, `*.props`, public API, or `GeneratorToolVersion`).
-  - #1583 is contributor-facing documentation only (`docs/getting-started.md`, `tools/README.md`), with no shipped runtime/tooling behavior change.
+- None.
 
 ---
 
@@ -79,6 +76,7 @@
 - Invocation toolkit generator support range still covers the current generator version (`LibraryInstanceInvoker_5_0`: `[5.1.0.0, 5.3.0.0)`).
 - `FirelyNetVersion` updates: none (`6.3.0` unchanged).
 - Packager CLI argument changes: `--cs-namespace` binding fix for `cql` and `elm`.
+- MSBuild property, target, or script-flag changes: `LibrarySets/sync-dqm-2025.ps1` gained `-ValueSetsOnly`, `-SkipValueSets`, `-VsacApiKey` and `-ValueSetOids` (#1563). It is a repository-maintenance script, not shipped tooling, so no consumer-facing entry is warranted.
 - Content previously drafted in `docs/releases/vnext-release-notes.md`: none (file remains a static pointer doc).
 - All merged PRs since `v2.13.0`: included below.
 
