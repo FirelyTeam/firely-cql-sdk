@@ -100,6 +100,25 @@ public class CSharpGenerationGoldenTests
         AssertNoCs86xxWarnings("RR23", LibrarySetsDirs.RR23.CSharpDir);
     }
 
+    /// <summary>
+    /// The corpora generated with <see cref="CSharpNullability.Annotations"/> are compiled only by
+    /// the <c>Demo/*</c> projects, which are outside <c>Cql-Sdk.slnf</c> — the solution filter
+    /// contributors build. Without this they are unverified by anything a contributor runs, which is
+    /// how a stray annotation outside a <c>#nullable</c> context (CS8669) reached CI once already.
+    /// </summary>
+    [TestMethod]
+    public void CheckedInAnnotationOnlyCorpora_CompileUnderTheirOwnNullableContext()
+    {
+        AssertCorpusHasNoNullableDiagnostics(
+            "DemoMeasures",
+            LibrarySetsDirs.Demo.DemoCSharpDir,
+            NullableContextOptions.Annotations);
+        AssertCorpusHasNoNullableDiagnostics(
+            "DemoMeasuresDqmQiCore2025",
+            LibrarySetsDirs.DqmQiCore2025.CSharpDir,
+            NullableContextOptions.Annotations);
+    }
+
     [TestMethod]
     public void NullabilityDisabled_EmitsNullObliviousCSharp()
     {
@@ -301,13 +320,15 @@ public class CSharpGenerationGoldenTests
     {
         var normalized = generated.Replace("\r\n", "\n");
         var firstLine = normalized.Split('\n')[0];
+        // These corpora are generated with the default CSharpNullability.Enabled, so the directive
+        // must be the full one. Annotations-only is a supported mode — it is simply not the mode
+        // these corpora are generated in, and the exact directive is part of what they pin.
         Assert.AreEqual(
             "#nullable enable",
             firstLine,
-            "Generated C# must opt into nullable checks and annotations with '#nullable enable' at the file top.");
-        Assert.IsFalse(
-            normalized.StartsWith("#nullable enable annotations", StringComparison.Ordinal),
-            "Generated C# must not use annotations-only nullable mode.");
+            "Golden corpora are generated with CSharpNullability.Enabled, so the first line must be "
+            + "exactly '#nullable enable'. '#nullable enable annotations' here means the corpus was "
+            + "generated in the wrong mode.");
 
         var hasBlanketNullablePragmaDisable =
             System.Text.RegularExpressions.Regex.IsMatch(
@@ -319,15 +340,22 @@ public class CSharpGenerationGoldenTests
             "Generated C# must not suppress nullable warnings via blanket CS86xx pragma disables.");
     }
 
-    private static void AssertNoCs86xxWarnings(string assemblyName, DirectoryInfo csharpDir)
+    private static void AssertNoCs86xxWarnings(string assemblyName, DirectoryInfo csharpDir) =>
+        AssertCorpusHasNoNullableDiagnostics(assemblyName, csharpDir, NullableContextOptions.Enable);
+
+    private static void AssertCorpusHasNoNullableDiagnostics(
+        string assemblyName,
+        DirectoryInfo csharpDir,
+        NullableContextOptions nullableContextOptions)
     {
-        var gcsFiles = csharpDir.GetFiles("*.g.cs");
+        // Recursive: the dqm corpus keeps its libraries in cms/ and lib/ subdirectories.
+        var gcsFiles = csharpDir.GetFiles("*.g.cs", SearchOption.AllDirectories);
         Assert.AreNotEqual(0, gcsFiles.Length, $"No generated files found in {csharpDir.FullName}.");
 
         AssertNoNullableDiagnostics(
             assemblyName,
             gcsFiles.Select(f => CSharpSyntaxTree.ParseText(File.ReadAllText(f.FullName), path: f.FullName)).ToArray(),
-            NullableContextOptions.Enable,
+            nullableContextOptions,
             csharpDir.FullName);
     }
 
