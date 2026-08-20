@@ -36,6 +36,23 @@ needs:
 A PR with both a breaking change and a fix writes both `##` sections in its one fragment file. No
 frontmatter or other metadata — the category comes from the `##` heading, same as today.
 
+## Which heading drives the version
+
+The `##` heading you choose is the primary input to the next release's version level
+(see [versioning.md](../../versioning.md)):
+
+| Fragment heading | Version effect |
+| --- | --- |
+| `## Breaking`, `## Potentially Breaking` | MESO — forces the second digit |
+| `## Features`, `## Fixes`, `## Performance` | MICRO by default |
+
+A `## Fixes` or `## Performance` fragment still forces MESO if the change moves CQL evaluation
+results or `GeneratorToolVersion`. Say so in the fragment text when it does —
+[#1568](https://github.com/FirelyTeam/firely-cql-sdk/pull/1568) was filed as `## Performance` with
+"no public API change" and both statements were true, yet it changed whether in-place expansion
+edits are observed, which is a MESO-level behavior change. If in doubt about your own change, write
+the caveat down and let the release cut decide.
+
 ## Consolidation
 
 Handled by the [`cut-release-notes`](../../../.claude/skills/cut-release-notes/SKILL.md) skill when a

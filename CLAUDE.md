@@ -90,6 +90,17 @@ The `*.g.cs` files are not the only generated artifact carrying that version. `D
 
 Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). When cutting a release, fragment files under `docs/releases/vnext/` are the sole source — fold them into the versioned release notes, then delete them. See the `cut-release-notes` skill for the full procedure.
 
+## Versioning
+
+The SDK package version uses **EffVer** (Intended Effort Versioning), not SemVer: `MACRO.MESO.MICRO`, where each digit says how much work the upgrade costs a consumer. [docs/versioning.md](docs/versioning.md) is canonical — read it before deciding a level.
+
+The two things most often got wrong:
+
+- **A bug fix can force MESO.** If it changes CQL evaluation results or `GeneratorToolVersion`, consumers have work to do, and the digit has to say so.
+- **New public API is MICRO.** Additions cost existing consumers nothing.
+
+`GeneratorToolVersion` is a separate scale and does follow SemVer (see the section above). The `breaking change` label is a hint, never the trigger — the `docs/releases/vnext/` fragment decides. Never justify a level by precedent; the history is inconsistent (`2.9.1` shipped a breaking change as a patch). Cite the rule instead. Record the level and its trigger in the release notes' `### Version Level` section and in the version-bump PR description.
+
 ## Skills
 
 Task-specific workflows live under `.claude/skills/` and load on demand — invoke them (or let them trigger) rather than expecting this always-loaded file to cover the steps:

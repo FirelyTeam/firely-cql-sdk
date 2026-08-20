@@ -59,6 +59,10 @@ This file is the decision-tree entry point. Route tasks here first, then open th
   - ICqlError and CqlException<TError> pattern, error placement, usage boundaries
   - Read [10-cql-evaluation-exceptions.md](copilot-instructions/10-cql-evaluation-exceptions.md)
 
+- Versioning or release-level task?
+  - Choosing MACRO/MESO/MICRO, what forces a bump, EffVer vs the separate SemVer generator scale
+  - Read [11-versioning.md](copilot-instructions/11-versioning.md)
+
 ## 3.0. Quick Navigation Index
 
 - [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md)
@@ -71,6 +75,7 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 - [08-cql-specification-conformance.md](copilot-instructions/08-cql-specification-conformance.md)
 - [09-nullological-operators-design-pattern.md](copilot-instructions/09-nullological-operators-design-pattern.md)
 - [10-cql-evaluation-exceptions.md](copilot-instructions/10-cql-evaluation-exceptions.md)
+- [11-versioning.md](copilot-instructions/11-versioning.md)
 
 ## 4.0. Project Context (Brief)
 
@@ -98,6 +103,14 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.17.0
+  - Added [11-versioning.md](copilot-instructions/11-versioning.md): the SDK package version uses **EffVer** (Intended Effort Versioning), not SemVer, with the MESO trigger list, the `breaking change` label demoted to a hint, and the `GeneratorToolVersion` SemVer scale kept explicitly separate. Documents the two rules most often got wrong — a result-changing bug fix forces MESO, and new public API is MICRO — and forbids justifying a level by precedent, since `2.9.1` shipped a `#### Breaking` entry as a patch.
+  - Added a `## Versioning` section to [CLAUDE.md](../CLAUDE.md) mirroring the same rules, and added the new sub-document to the decision tree (2.0) and quick navigation index (3.0).
+  - Added the canonical policy at [docs/versioning.md](../docs/versioning.md), a `## Versioning` section to the root [README.md](../README.md), a required `### Version Level` section to [release-notes-template.md](../docs/releases/release-notes-template.md), and a fragment-heading-to-digit table to [docs/releases/vnext/README.md](../docs/releases/vnext/README.md).
+  - Scoped the "follow semantic versioning" line in [docs/technical-readme.md](../docs/technical-readme.md) and the "SemVer Compliance" line in [build/README.md](../build/README.md) so neither reads as an SDK-wide claim.
+  - Added 4.6.3 to [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) cross-referencing the fragment heading to the version level.
+  - Documented pre-release handling (11.4): EffVer covers the three digits only, so `alpha.N`/`beta.N`/`rc.N` keep SemVer 2.0 suffix syntax because NuGet's ordering and opt-in resolution depend on it. The EffVer level is decided first and `VersionPrefix` always names the version intended to ship — a pre-release never defers that decision.
 
 - 3.16.1
   - Updated the integration-runner resource regeneration rule in [05-build-and-test.md](copilot-instructions/05-build-and-test.md): refreshing `passed.jsonl` is now gated on a complete, trustworthy run with no unexplained regressions; when blocked, preserve the existing baseline and track the blocker in an issue instead of replacing it with incomplete coverage.

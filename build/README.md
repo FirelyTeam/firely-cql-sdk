@@ -388,7 +388,7 @@ This implementation follows Microsoft's recommendations for multi-targeting and 
 3. **Parallel Execution**: Leverages Azure Pipelines jobs to test frameworks simultaneously
 4. **Separate Results**: Framework-specific test results aid in debugging framework issues
 5. **SDK Management**: Installs all required SDK versions before building/testing
-6. **SemVer Compliance**: Uses VersionSuffix for preview builds (e.g., `1.0.0-build-20260118-1`)
+6. **SemVer-valid pre-release suffixes**: Uses VersionSuffix for preview builds (e.g., `1.0.0-build-20260118-1`). This concerns NuGet's suffix grammar only — the SDK version itself uses EffVer, see [docs/versioning.md](../docs/versioning.md)
 7. **Code Signing**: Uses Azure Trusted Signing for secure assembly signing
 
 ## Additional Resources
