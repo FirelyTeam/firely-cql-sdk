@@ -5,7 +5,7 @@
 > **Upgrading?** Here is the short version:
 >
 > - **Breaking changes:** Packager CLI `--cs-namespace` now correctly populates `Elm:CSharpNamespace` for both `cql` and `elm`, so generated `*.g.cs` types move from the global namespace into the requested namespace when that option is used. Separately, `ValueSetSource` no longer observes in-place edits to a `ValueSet.Expansion` it has already built a facade from.
-> - **Required migrations:** If you already pass `--cs-namespace`, regenerate artifacts and update any code/tests that referenced the previous global-namespace type identities. If your host edits a `ValueSet.Expansion` in place after handing the value set to a `ValueSetSource`, assign a new expansion instance instead of mutating the existing one.
+> - **Required migrations:** If you already pass `--cs-namespace`, regenerate artifacts and update any code/tests that referenced the previous global-namespace type identities. If your host edits a `ValueSet.Expansion` in place after handing the value set to a `ValueSetSource`, assign a new expansion instance and pass that replacement to a subsequent/new `ValueSetSource` instead of mutating the existing one.
 > - **Highlights:** `ValueSetSource` now memoizes facade materialization for repeated `ValueSet.Expansion` instances, reducing repeated work in instance-stable resolver scenarios.
 
 ---
@@ -32,7 +32,7 @@
 
 #### Potentially Breaking
 
-- `ValueSetSource` no longer observes in-place edits to a `ValueSet.Expansion` it has already built a facade from. Previously the facade was built from a deferred walk of `expansion.contains` that ran on first query, and each `ValueSetSource` rebuilt it from the live expansion; the codes are now materialized at `Add` and the result is shared process-wide against that `ExpansionComponent` instance. A host that appends to `contains` or adjusts `total` after a successful build will not see the change. Replacing `ValueSet.Expansion` with a new instance is still observed, as is editing an expansion after a build *failed* on it. (#1568)
+- `ValueSetSource` no longer observes in-place edits to a `ValueSet.Expansion` it has already built a facade from. Previously the facade was built from a deferred walk of `expansion.contains` that ran on first query, and each `ValueSetSource` rebuilt it from the live expansion; the codes are now materialized at `Add` and the result is shared process-wide against that `ExpansionComponent` instance. A host that appends to `contains` or adjusts `total` after a successful build will not see the change. Replacing `ValueSet.Expansion` with a new instance is observed only when that replacement is supplied to a subsequent/new `ValueSetSource`; existing sources keep the earlier facade, as does editing an expansion after a build *failed* on it. (#1568)
 - Facade materialization moved from first query to `Add`. A caller that bulk-loads value sets it never queries (`Add(IEnumerable<ValueSet>)`, `ToValueSetDictionary`) now pays the expansion walk and code interning up front rather than never. (#1568)
 
 ---
@@ -64,6 +64,7 @@
 ### Upgrade Checklist
 
 1. If you pass Packager CLI `--cs-namespace`, regenerate generated `*.g.cs` artifacts and update references/assertions that depended on prior global-namespace output.
+2. If you replace a `ValueSet.Expansion` after a `ValueSetSource` has already built a facade from the prior instance, supply the replacement to a subsequent/new `ValueSetSource` to observe the new membership.
 
 ---
 
