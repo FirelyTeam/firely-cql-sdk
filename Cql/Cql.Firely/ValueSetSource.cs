@@ -81,12 +81,16 @@ namespace Hl7.Cql.Fhir;
 /// <para>
 /// A valueset that arrives without an expansion is expanded here instead, and that expansion depends
 /// on the CodeSystems and valuesets this source's resolver can reach - things the valueset alone does
-/// not determine - so its facade stays in the per-source layer only. The expander writes what it
-/// computed into the caller's instance, which is the one edit to a resolved valueset the SDK performs
-/// on its own; a later <see cref="Add(ValueSet)"/> of that same instance therefore does see an
-/// expansion and does take the memo path, keyed on the component just written. That adds no staleness
-/// beyond the in-place mutation itself, which already leaves every source handed that instance looking
-/// at the same frozen expansion.
+/// not determine - so its facade stays in the per-source layer only. The expansion is computed on a
+/// private copy of the valueset: the instance handed in is on loan - on the <see cref="Load"/> path it
+/// belongs to the resolver, which may be serving the same object to every consumer in the process -
+/// and the underlying expander writes into its argument (and clears the expansion on failure), so
+/// running it on the original would edit, or on failure damage, an object this class does not own.
+/// The SDK therefore never modifies a resolved valueset. The price is that another source handed the
+/// same expansion-less instance expands its own copy rather than finding an expansion already written;
+/// each source still expands a given canonical at most once, through its per-canonical facade layer,
+/// and a host that wants cross-source reuse can serve valuesets with static expansions or seed sources
+/// via <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
@@ -208,10 +212,17 @@ public class ValueSetSource : IValueSetDictionary
             // Without an expansion we have to compute one, and what that yields depends on the
             // CodeSystems and valuesets this source's resolver can reach. The memo key cannot see any
             // of that, so this facade stays private to this source.
+            //
+            // The expander writes the expansion it computes into its argument (and nulls it on
+            // failure), while the instance we hold is on loan: on the Load path it belongs to the
+            // resolver, which may be handing the very same object to every consumer in the process.
+            // The expansion is only needed to build the facade, so it is computed on a private copy
+            // and the caller's instance stays untouched, success or failure.
+            var copy = (ValueSet)vs.DeepCopy();
             var expander = BuildExpander();
-            await expander.ExpandAsync(vs).ConfigureAwait(false);
+            await expander.ExpandAsync(copy).ConfigureAwait(false);
 
-            return BuildFromExpansion(vs);
+            return BuildFromExpansion(copy);
         }
     }
 

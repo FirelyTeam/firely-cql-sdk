@@ -12,6 +12,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Specification.Source;
+using Hl7.Fhir.Specification.Terminology;
 using Task = System.Threading.Tasks.Task;
 
 namespace CoreTests;
@@ -162,26 +163,38 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
-    public async Task ComputedExpansion_IsWrittenIntoTheInstance_SoLaterSourcesShareIt()
+    public async Task ComputedExpansion_LeavesTheResolvedInstanceUntouched()
     {
-        const string includedUrl = "http://example.org/ValueSet/mutation-included";
-        const string composedUrl = "http://example.org/ValueSet/mutation-composed";
+        const string includedUrl = "http://example.org/ValueSet/no-mutation-included";
+        const string composedUrl = "http://example.org/ValueSet/no-mutation-composed";
 
         var included = ExpandedValueSet(includedUrl, "111", "222");
         var composed = ComposedValueSet(composedUrl, includedUrl);
         var resolver = new InMemoryResourceResolver(included, composed);
 
-        _ = await new ValueSetSource(resolver).Add(composed);
+        var facade = await new ValueSetSource(resolver).Add(composed);
 
-        // Expansion happens in place, so from here on the instance carries one and every further
-        // source takes the memo path. This is the pre-existing mutation showing through, not extra
-        // staleness: those sources were already looking at the expansion frozen into the instance.
-        Assert.IsTrue(composed.HasExpansion);
+        // The expansion is computed on a private copy: the instance handed in may be a resolver's
+        // shared object, so the source must answer from its facade without writing anything back.
+        Assert.IsFalse(composed.HasExpansion, "adding a valueset must not write the computed expansion into the caller's instance.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsTrue(facade.IsCodeInValueSet("222", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
 
-        var facadeB = await new ValueSetSource(resolver).Add(composed);
-        var facadeC = await new ValueSetSource(resolver).Add(composed);
+    [TestMethod]
+    public async Task FailedExpansion_LeavesTheResolvedInstanceUntouched()
+    {
+        // The expander clears the expansion of the instance it failed on. Failing on a private copy
+        // is what keeps that damage away from the caller's instance.
+        const string composedUrl = "http://example.org/ValueSet/failing-composed";
 
-        Assert.AreSame(facadeB, facadeC);
+        var composed = ComposedValueSet(composedUrl, "http://example.org/ValueSet/does-not-exist");
+        var resolver = new InMemoryResourceResolver(composed);
+
+        await Assert.ThrowsExceptionAsync<ValueSetUnknownException>(() => new ValueSetSource(resolver).Add(composed));
+
+        Assert.IsFalse(composed.HasExpansion, "a failed expansion must not alter the caller's instance either.");
     }
 
     [TestMethod]
