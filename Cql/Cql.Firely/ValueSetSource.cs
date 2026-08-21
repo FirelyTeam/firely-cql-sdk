@@ -86,7 +86,12 @@ namespace Hl7.Cql.Fhir;
 /// belongs to the resolver, which may be serving the same object to every consumer in the process -
 /// and the underlying expander writes into its argument (and clears the expansion on failure), so
 /// running it on the original would edit, or on failure damage, an object this class does not own.
-/// The SDK therefore never modifies a resolved valueset. The price is that another source handed the
+/// This class therefore never modifies the valueset handed to <see cref="Add(ValueSet)"/> or resolved
+/// by <see cref="Load"/>. The copy does not reach further: the expander pulls <c>compose.include</c>
+/// dependencies from the resolver on its own and still expands an expansion-less <em>included</em>
+/// valueset in place - that is the expander's own behavior, tracked at
+/// <see href="https://github.com/FirelyTeam/firely-net-sdk/issues/3582"/>. The price of the copy is
+/// that another source handed the
 /// same expansion-less instance expands its own copy rather than finding an expansion already written;
 /// each source still expands a given canonical at most once, through its per-canonical facade layer,
 /// and a host that wants cross-source reuse can serve valuesets with static expansions or seed sources

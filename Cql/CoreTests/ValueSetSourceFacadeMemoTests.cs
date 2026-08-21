@@ -185,16 +185,21 @@ public class ValueSetSourceFacadeMemoTests
     [TestMethod]
     public async Task FailedExpansion_LeavesTheResolvedInstanceUntouched()
     {
-        // The expander clears the expansion of the instance it failed on. Failing on a private copy
-        // is what keeps that damage away from the caller's instance.
+        // A failed in-place expansion is invisible in the end state - the expander writes an
+        // expansion into the instance and clears it again before rethrowing - so the test listens
+        // for the writes themselves: the instance's PropertyChanged must never fire.
         const string composedUrl = "http://example.org/ValueSet/failing-composed";
 
         var composed = ComposedValueSet(composedUrl, "http://example.org/ValueSet/does-not-exist");
         var resolver = new InMemoryResourceResolver(composed);
+        var changedProperties = new List<string>();
+        composed.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
 
         await Assert.ThrowsExceptionAsync<ValueSetUnknownException>(() => new ValueSetSource(resolver).Add(composed));
 
-        Assert.IsFalse(composed.HasExpansion, "a failed expansion must not alter the caller's instance either.");
+        Assert.IsFalse(composed.HasExpansion, "a failed expansion must not alter the caller's instance.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a failed expansion must not write to the caller's instance at all, but these properties changed: {string.Join(", ", changedProperties)}");
     }
 
     [TestMethod]
