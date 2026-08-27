@@ -12,6 +12,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Specification.Source;
+using Hl7.Fhir.Specification.Terminology;
 using Task = System.Threading.Tasks.Task;
 
 namespace CoreTests;
@@ -162,26 +163,63 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
-    public async Task ComputedExpansion_IsWrittenIntoTheInstance_SoLaterSourcesShareIt()
+    public async Task ComputedExpansion_LeavesTheResolvedInstanceUntouched()
     {
-        const string includedUrl = "http://example.org/ValueSet/mutation-included";
-        const string composedUrl = "http://example.org/ValueSet/mutation-composed";
+        const string includedUrl = "http://example.org/ValueSet/no-mutation-included";
+        const string composedUrl = "http://example.org/ValueSet/no-mutation-composed";
 
         var included = ExpandedValueSet(includedUrl, "111", "222");
         var composed = ComposedValueSet(composedUrl, includedUrl);
         var resolver = new InMemoryResourceResolver(included, composed);
 
-        _ = await new ValueSetSource(resolver).Add(composed);
+        var facade = await new ValueSetSource(resolver).Add(composed);
 
-        // Expansion happens in place, so from here on the instance carries one and every further
-        // source takes the memo path. This is the pre-existing mutation showing through, not extra
-        // staleness: those sources were already looking at the expansion frozen into the instance.
-        Assert.IsTrue(composed.HasExpansion);
+        // The expansion is computed on a private copy: the instance handed in may be a resolver's
+        // shared object, so the source must answer from its facade without writing anything back.
+        Assert.IsFalse(composed.HasExpansion, "adding a valueset must not write the computed expansion into the caller's instance.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsTrue(facade.IsCodeInValueSet("222", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
 
-        var facadeB = await new ValueSetSource(resolver).Add(composed);
-        var facadeC = await new ValueSetSource(resolver).Add(composed);
+    [TestMethod]
+    public async Task FailedExpansion_LeavesTheResolvedInstanceUntouched()
+    {
+        // A failed in-place expansion is invisible in the end state - the expander writes an
+        // expansion into the instance and clears it again before rethrowing - so the test listens
+        // for the writes themselves: the instance's PropertyChanged must never fire.
+        const string composedUrl = "http://example.org/ValueSet/failing-composed";
 
-        Assert.AreSame(facadeB, facadeC);
+        var composed = ComposedValueSet(composedUrl, "http://example.org/ValueSet/does-not-exist");
+        var resolver = new InMemoryResourceResolver(composed);
+        var changedProperties = new List<string>();
+        composed.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
+
+        await Assert.ThrowsExceptionAsync<ValueSetUnknownException>(() => new ValueSetSource(resolver).Add(composed));
+
+        Assert.IsFalse(composed.HasExpansion, "a failed expansion must not alter the caller's instance.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a failed expansion must not write to the caller's instance at all, but these properties changed: {string.Join(", ", changedProperties)}");
+    }
+
+    [TestMethod]
+    public async Task IncludedExpansionlessValueSet_IsStillExpandedInPlace_ByTheExpander()
+    {
+        // Quarantine, not an invariant we want: the copy protects the instance handed to Add, but the
+        // expander resolves compose.include dependencies itself and expands an expansion-less one in
+        // place. Tracked upstream as adjacent defect B of FirelyTeam/firely-net-sdk#3582. When that is
+        // fixed - or FirelyNetVersion moves - this test fails, which is the prompt to update the class
+        // remarks and the release note that both currently document this residual.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/residual-leaf", "111");
+        var inner = ComposedValueSet("http://example.org/ValueSet/residual-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/residual-outer", inner.Url!);
+        var resolver = new InMemoryResourceResolver(leaf, inner, outer);
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.IsFalse(outer.HasExpansion, "the instance handed to Add is protected by the copy.");
+        Assert.IsTrue(inner.HasExpansion, "known residual: the expander expands an included valueset in place.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
     }
 
     [TestMethod]
