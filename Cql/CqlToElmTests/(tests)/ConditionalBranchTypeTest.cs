@@ -127,6 +127,24 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void ChoiceBranchesOverlappingByConversion_StillUnionTheAlternatives()
+        {
+            // Integer converts implicitly to Decimal, so the two branch types look coercible - but
+            // the coercion being weighed is a Cast, answered with a single As over the whole choice.
+            // That As is a type test: it does not convert the Integer to a Decimal, it discards it.
+            // An implicit conversion is therefore not evidence that an alternative survives, and
+            // this chain must widen to all three rather than casting one choice to the other.
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(
+                "if true then (if true then 1 else 'a') else (if true then 2.0 else 'a')");
+            var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
+
+            var choice = @if.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
+            choice.choice.Should().BeEquivalentTo(
+                new TypeSpecifier[] { SystemTypes.IntegerType, SystemTypes.StringType, SystemTypes.DecimalType },
+                "Integer is not covered by Choice<Decimal|String> under a cast, so it has to stay in the union.");
+        }
+
+        [TestMethod]
         public void DivergentTupleLists_InACase_AlreadyWidensToTheChoice()
         {
             // `case` is the reference behavior the `if` chain above was brought in line with: its

@@ -246,17 +246,32 @@ namespace Hl7.Cql.CqlToElm
         };
 
         /// <summary>
-        /// True when every alternative of <paramref name="from"/> can reach <paramref name="to"/> -
-        /// for a choice target, some alternative of it; for anything else, the target itself.
+        /// True when every alternative of <paramref name="from"/> survives the cast to
+        /// <paramref name="to"/> - for a choice target, into some alternative of it; for anything
+        /// else, into the target itself.
         /// </summary>
         private bool CoversEveryAlternative(ChoiceTypeSpecifier from, TypeSpecifier to) =>
             (from.choice ?? []).All(
                 alternative => to is ChoiceTypeSpecifier target
-                    ? (target.choice ?? []).Any(t => Reaches(alternative, t))
-                    : Reaches(alternative, to));
+                    ? (target.choice ?? []).Any(t => SurvivesCast(alternative, t))
+                    : SurvivesCast(alternative, to));
 
-        private bool Reaches(TypeSpecifier from, TypeSpecifier to) =>
-            CoercionProvider.GetCoercionCost(from, to) != CoercionCost.Incompatible;
+        /// <summary>
+        /// True when a value of <paramref name="from"/> is still there after a cast to
+        /// <paramref name="to"/>: only an exact match or a widening to a supertype.
+        /// </summary>
+        /// <remarks>
+        /// An implicit conversion does not count, even though it makes the two types coercible. The
+        /// coercion being judged here has been costed <see cref="CoercionCost.Cast"/>, and
+        /// <see cref="CoercionProvider.Coerce"/> answers that with a single <c>As</c> over the whole
+        /// choice - a type test. It never performs a per-alternative conversion, so counting
+        /// <c>Integer</c> as covered by <c>Choice&lt;Decimal|String&gt;</c> because
+        /// <c>Integer</c> converts to <c>Decimal</c> would be wrong twice over: the conversion does
+        /// not happen, and the type test fails, so the alternative is dropped exactly as it would
+        /// have been without the guard.
+        /// </remarks>
+        private bool SurvivesCast(TypeSpecifier from, TypeSpecifier to) =>
+            CoercionProvider.GetCoercionCost(from, to) is CoercionCost.ExactMatch or CoercionCost.Subtype;
 
         /// <summary>
         /// The choice of two types, flattened so that a choice built from a branch that is itself a
