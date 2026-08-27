@@ -205,15 +205,23 @@ namespace Hl7.Cql.CqlToElm
 
         /// <summary>
         /// True when coercing <paramref name="from"/> to <paramref name="to"/> would cast a choice
-        /// type down to something narrower than itself: a run-time type test that yields null for
-        /// every alternative it does not match.
+        /// type to a target that cannot hold all of its alternatives: a run-time type test that
+        /// yields null for every alternative the target does not cover.
         /// </summary>
         /// <remarks>
         /// <para>
         /// Only a <see cref="CoercionCost.Cast"/> qualifies. A genuine conversion - through a
         /// model's helper functions, say - produces a value for the alternatives it accepts and is
-        /// not the failure this guards against, and widening a choice into a larger choice, or into
-        /// <c>Any</c>, keeps every alternative reachable.
+        /// not the failure this guards against.
+        /// </para>
+        /// <para>
+        /// Coverage, rather than "is the target a choice too", is what decides it.
+        /// <see cref="CoercionProvider.CanBeCast"/> is satisfied by a <em>single</em> alternative
+        /// matching, so <c>Choice&lt;Integer|String&gt;</c> to <c>Choice&lt;Integer|Decimal&gt;</c>
+        /// is also a cast that drops an alternative, and treating every choice-to-choice cast as
+        /// harmless would let that one through. The same test subsumes the two cases that would
+        /// otherwise be special: a non-choice target covers a choice only when every alternative
+        /// converts to it, and <c>Any</c> covers everything because every type exactly matches it.
         /// </para>
         /// <para>
         /// The walk into list and interval element types mirrors
@@ -225,17 +233,30 @@ namespace Hl7.Cql.CqlToElm
         /// the cost it is judging.
         /// </para>
         /// </remarks>
-        private static bool NarrowsChoice(TypeSpecifier from, TypeSpecifier to, CoercionCost cost) =>
+        private bool NarrowsChoice(TypeSpecifier from, TypeSpecifier to, CoercionCost cost) =>
             cost == CoercionCost.Cast && Narrows(from, to);
 
-        private static bool Narrows(TypeSpecifier? from, TypeSpecifier? to) => (from, to) switch
+        private bool Narrows(TypeSpecifier? from, TypeSpecifier? to) => (from, to) switch
         {
             (null, _) or (_, null) => false,
             (ListTypeSpecifier f, ListTypeSpecifier t) => Narrows(f.elementType, t.elementType),
             (IntervalTypeSpecifier f, IntervalTypeSpecifier t) => Narrows(f.pointType, t.pointType),
-            (ChoiceTypeSpecifier, not ChoiceTypeSpecifier) => to != SystemTypes.AnyType,
+            (ChoiceTypeSpecifier f, _) => !CoversEveryAlternative(f, to),
             _ => false,
         };
+
+        /// <summary>
+        /// True when every alternative of <paramref name="from"/> can reach <paramref name="to"/> -
+        /// for a choice target, some alternative of it; for anything else, the target itself.
+        /// </summary>
+        private bool CoversEveryAlternative(ChoiceTypeSpecifier from, TypeSpecifier to) =>
+            (from.choice ?? []).All(
+                alternative => to is ChoiceTypeSpecifier target
+                    ? (target.choice ?? []).Any(t => Reaches(alternative, t))
+                    : Reaches(alternative, to));
+
+        private bool Reaches(TypeSpecifier from, TypeSpecifier to) =>
+            CoercionProvider.GetCoercionCost(from, to) != CoercionCost.Incompatible;
 
         /// <summary>
         /// The choice of two types, flattened so that a choice built from a branch that is itself a

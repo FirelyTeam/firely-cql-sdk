@@ -109,6 +109,24 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void PartiallyOverlappingChoiceBranches_UnionTheAlternatives()
+        {
+            // Both branches are already choices, overlapping only in String. CanBeCast is satisfied
+            // by a *single* alternative matching, so casting either branch to the other's type is a
+            // Cast that drops an alternative - Integer one way, Boolean the other. Neither pair
+            // collapses on its own (Integer/String and String/Boolean have no common type), which is
+            // what keeps the two choices intact for the outer chain to reconcile.
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(
+                "if true then (if true then 1 else 'a') else (if true then 'a' else true)");
+            var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
+
+            var choice = @if.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
+            choice.choice.Should().BeEquivalentTo(
+                new TypeSpecifier[] { SystemTypes.IntegerType, SystemTypes.StringType, SystemTypes.BooleanType },
+                "no alternative reachable from either branch may be dropped, and String - common to both - is listed once.");
+        }
+
+        [TestMethod]
         public void DivergentTupleLists_InACase_AlreadyWidensToTheChoice()
         {
             // `case` is the reference behavior the `if` chain above was brought in line with: its
