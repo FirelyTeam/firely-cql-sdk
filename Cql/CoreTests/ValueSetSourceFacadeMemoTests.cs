@@ -203,6 +203,26 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
+    public async Task IncludedExpansionlessValueSet_IsStillExpandedInPlace_ByTheExpander()
+    {
+        // Quarantine, not an invariant we want: the copy protects the instance handed to Add, but the
+        // expander resolves compose.include dependencies itself and expands an expansion-less one in
+        // place. Tracked upstream as adjacent defect B of FirelyTeam/firely-net-sdk#3582. When that is
+        // fixed - or FirelyNetVersion moves - this test fails, which is the prompt to update the class
+        // remarks and the release note that both currently document this residual.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/residual-leaf", "111");
+        var inner = ComposedValueSet("http://example.org/ValueSet/residual-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/residual-outer", inner.Url!);
+        var resolver = new InMemoryResourceResolver(leaf, inner, outer);
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.IsFalse(outer.HasExpansion, "the instance handed to Add is protected by the copy.");
+        Assert.IsTrue(inner.HasExpansion, "known residual: the expander expands an included valueset in place.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+    }
+
+    [TestMethod]
     public async Task PartialExpansion_IsNeverMemoized_AndKeepsThrowing()
     {
         var partial = ExpandedValueSet("http://example.org/ValueSet/partial", "111", "222");

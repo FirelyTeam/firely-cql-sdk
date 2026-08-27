@@ -89,13 +89,13 @@ namespace Hl7.Cql.Fhir;
 /// This class therefore never modifies the valueset handed to <see cref="Add(ValueSet)"/> or resolved
 /// by <see cref="Load"/>. The copy does not reach further: the expander pulls <c>compose.include</c>
 /// dependencies from the resolver on its own and still expands an expansion-less <em>included</em>
-/// valueset in place - that is the expander's own behavior, tracked at
+/// valueset in place - that is the expander's own behavior, tracked upstream as adjacent defect B of
 /// <see href="https://github.com/FirelyTeam/firely-net-sdk/issues/3582"/>. The price of the copy is
-/// that another source handed the
-/// same expansion-less instance expands its own copy rather than finding an expansion already written;
-/// each source still expands a given canonical at most once, through its per-canonical facade layer,
-/// and a host that wants cross-source reuse can serve valuesets with static expansions or seed sources
-/// via <see cref="Add(string, IEnumerable{CqlCode})"/>.
+/// that another source handed the same expansion-less instance expands its own copy rather than
+/// finding an expansion already written; each source still expands a given canonical at most once,
+/// through its per-canonical facade layer, and a host that wants cross-source reuse can serve
+/// valuesets with static expansions or seed sources via
+/// <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
@@ -193,6 +193,8 @@ public class ValueSetSource : IValueSetDictionary
 
     /// <summary>
     /// Adds a <see cref="ValueSet"/> to the cache, so it will not be retrieved using the resolver.
+    /// The instance is not modified: an expansion this source has to compute is computed on a private
+    /// copy. See the remarks on this class.
     /// </summary>
     public async Task<IValueSetFacade> Add(ValueSet vs)
     {
@@ -307,7 +309,8 @@ public class ValueSetSource : IValueSetDictionary
 
     /// <summary>
     /// Given a canonical, returns the <see cref="IValueSetFacade"/> for that canonical from the
-    /// cache, or uses the resolver to load it.
+    /// cache, or uses the resolver to load it. The resolved instance is not modified; see the remarks
+    /// on this class.
     /// </summary>
     public async Task<IValueSetFacade?> Load(string canonical)
     {
