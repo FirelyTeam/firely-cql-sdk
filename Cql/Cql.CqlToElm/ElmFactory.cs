@@ -161,32 +161,32 @@ namespace Hl7.Cql.CqlToElm
                 var thenToElseNarrows = NarrowsChoice(then.resultTypeSpecifier, @else.resultTypeSpecifier, convertThenToElse.Cost);
                 var elseToThenNarrows = NarrowsChoice(@else.resultTypeSpecifier, then.resultTypeSpecifier, convertElseToThen.Cost);
 
-                // With both directions equally cheap and neither narrowing, prefer widening into a
-                // branch that is already a choice over adding another; failing that, keep coercing
-                // the else branch, which is what this reconciliation has always done on a tie.
-                var preferThenToElse =
-                    convertThenToElse.Cost < convertElseToThen.Cost
-                    || (convertThenToElse.Cost == convertElseToThen.Cost
-                        && @else.resultTypeSpecifier is ChoiceTypeSpecifier
-                        && then.resultTypeSpecifier is not ChoiceTypeSpecifier);
-
                 if (thenToElseNarrows && elseToThenNarrows)
                 {
+                    // Neither direction reconciles without loss; the choice built below covers both.
                     compatible = false;
-                }
-                else if (!thenToElseNarrows && (preferThenToElse || elseToThenNarrows))
-                {
-                    if (convertThenToElse.Cost == CoercionCost.Incompatible)
-                        compatible = false;
-                    else
-                        then = convertThenToElse.Result;
                 }
                 else
                 {
-                    if (convertElseToThen.Cost == CoercionCost.Incompatible)
+                    // Excluding one direction forces the other. With both available, take the
+                    // cheaper one - and on a tie prefer widening into a branch that is already a
+                    // choice over adding another, falling back to coercing the else branch, which
+                    // is what this reconciliation has always done when the costs are equal.
+                    var coerceThen =
+                        elseToThenNarrows
+                        || (!thenToElseNarrows
+                            && (convertThenToElse.Cost < convertElseToThen.Cost
+                                || (convertThenToElse.Cost == convertElseToThen.Cost
+                                    && @else.resultTypeSpecifier is ChoiceTypeSpecifier
+                                    && then.resultTypeSpecifier is not ChoiceTypeSpecifier)));
+
+                    var chosen = coerceThen ? convertThenToElse : convertElseToThen;
+                    if (chosen.Cost == CoercionCost.Incompatible)
                         compatible = false;
+                    else if (coerceThen)
+                        then = chosen.Result;
                     else
-                        @else = convertElseToThen.Result;
+                        @else = chosen.Result;
                 }
             }
             if (!compatible)
@@ -209,16 +209,33 @@ namespace Hl7.Cql.CqlToElm
         /// every alternative it does not match.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Only a <see cref="CoercionCost.Cast"/> qualifies. A genuine conversion - through a
         /// model's helper functions, say - produces a value for the alternatives it accepts and is
         /// not the failure this guards against, and widening a choice into a larger choice, or into
         /// <c>Any</c>, keeps every alternative reachable.
+        /// </para>
+        /// <para>
+        /// The walk into list and interval element types mirrors
+        /// <see cref="CoercionProvider.GetCoercionCost"/>, which recurses the same way: a
+        /// <c>List&lt;Choice&lt;X|Y&gt;&gt;</c> to <c>List&lt;X&gt;</c> coercion is costed from its
+        /// element types, so inspecting only the outer types would report no narrowing for a cast
+        /// that does narrow. No CQL is known to reach that shape today - a mixed list literal widens
+        /// to <c>List&lt;Any&gt;</c> rather than forming a choice - but the guard has to agree with
+        /// the cost it is judging.
+        /// </para>
         /// </remarks>
         private static bool NarrowsChoice(TypeSpecifier from, TypeSpecifier to, CoercionCost cost) =>
-            cost == CoercionCost.Cast
-            && from is ChoiceTypeSpecifier
-            && to is not ChoiceTypeSpecifier
-            && to != SystemTypes.AnyType;
+            cost == CoercionCost.Cast && Narrows(from, to);
+
+        private static bool Narrows(TypeSpecifier? from, TypeSpecifier? to) => (from, to) switch
+        {
+            (null, _) or (_, null) => false,
+            (ListTypeSpecifier f, ListTypeSpecifier t) => Narrows(f.elementType, t.elementType),
+            (IntervalTypeSpecifier f, IntervalTypeSpecifier t) => Narrows(f.pointType, t.pointType),
+            (ChoiceTypeSpecifier, not ChoiceTypeSpecifier) => to != SystemTypes.AnyType,
+            _ => false,
+        };
 
         /// <summary>
         /// The choice of two types, flattened so that a choice built from a branch that is itself a

@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [DataRow(3, "three", DisplayName = "later branch of the first type")]
         public void DivergentTupleLists_EveryBranchReturnsItsList(int selector, string expectedValue)
         {
-            var (result, _) = Evaluate(DivergentTupleListsCql.Replace("{0}", selector.ToString()), "Result");
+            var result = Evaluate(DivergentTupleListsCql.Replace("{0}", selector.ToString()), "Result");
 
             Assert.IsNotNull(result, $"branch {selector} must return its list, not null.");
             var items = ((System.Collections.IEnumerable)result).Cast<object?>().ToList();
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
                   else null
                 """;
 
-            var (result, _) = Evaluate(reordered, "Result");
+            var result = Evaluate(reordered, "Result");
 
             Assert.IsNotNull(result, "a MakeA branch must survive a chain whose first branch is MakeB.");
             var items = ((System.Collections.IEnumerable)result).Cast<object?>().ToList();
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var caseExpression = library.statements!.Single(s => s.name == "Result").expression!;
             caseExpression.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>();
 
-            var (result, _) = Evaluate(caseCql, "Result");
+            var result = Evaluate(caseCql, "Result");
 
             Assert.IsNotNull(result, "the divergent case branch must return its list.");
             var items = ((System.Collections.IEnumerable)result).Cast<object?>().ToList();
@@ -145,9 +145,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         /// <summary>
         /// Compiles <paramref name="cql"/> the whole way to an assembly and invokes
-        /// <paramref name="definition"/>, returning its value and the generated C#.
+        /// <paramref name="definition"/>, returning its value. Evaluating rather than inspecting the
+        /// ELM is deliberate: the ELM can carry the right result type while the emitted cast still
+        /// discards the value.
         /// </summary>
-        private static (object? result, string cSharp) Evaluate(string cql, string definition)
+        private static object? Evaluate(string cql, string definition)
         {
             var library = CreateCqlToolkit().MakeLibrary(cql);
             var elmToolkit = CreateElmToolkit();
@@ -168,8 +170,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = compiled.Single().assemblyBinaryWithSourceCode.AssemblyBytes })
                 .CreateLibrarySetInvoker();
 
-            var result = invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), library.VersionedLibraryIdentifier, definition);
-            return (result, generated.Single().cSharp);
+            return invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), library.VersionedLibraryIdentifier, definition);
         }
     }
 }
