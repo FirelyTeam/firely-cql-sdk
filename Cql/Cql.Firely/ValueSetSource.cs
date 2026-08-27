@@ -90,12 +90,13 @@ namespace Hl7.Cql.Fhir;
 /// by <see cref="Load"/>. The copy does not reach further: the expander pulls <c>compose.include</c>
 /// dependencies from the resolver on its own and still expands an expansion-less <em>included</em>
 /// valueset in place - that is the expander's own behavior, tracked upstream as adjacent defect B of
-/// <see href="https://github.com/FirelyTeam/firely-net-sdk/issues/3582"/>. The price of the copy is
-/// that another source handed the same expansion-less instance expands its own copy rather than
-/// finding an expansion already written; each source still expands a given canonical at most once,
-/// through its per-canonical facade layer, and a host that wants cross-source reuse can serve
-/// valuesets with static expansions or seed sources via
-/// <see cref="Add(string, IEnumerable{CqlCode})"/>.
+/// <see href="https://github.com/FirelyTeam/firely-net-sdk/issues/3582"/>. A cache serving an
+/// expansion-less valueset that another valueset includes is therefore still written to through that
+/// path, and still loses its expansion if that expansion fails. The price of the copy is that
+/// another source handed the same expansion-less instance expands its own copy rather than finding an
+/// expansion already written; each source still expands a given canonical at most once, through its
+/// per-canonical facade layer, and a host that wants cross-source reuse can serve valuesets with
+/// static expansions or seed sources via <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
