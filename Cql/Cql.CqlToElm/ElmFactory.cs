@@ -151,7 +151,30 @@ namespace Hl7.Cql.CqlToElm
             {
                 var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
                 var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-                if (convertThenToElse.Cost < convertElseToThen.Cost)
+
+                // Reconciling the branches must not *narrow* one of them. Casting a branch typed
+                // Choice<X|Y> down to X is a run-time type test that fails for every value the
+                // other branch produced - silently, with no diagnostic - so a conditional typed
+                // that way returns null for all but one branch (see #1594). Both directions are
+                // merely a Cast here, so cost alone cannot choose between them; the narrowing one
+                // is excluded outright and the choice-widening path below takes over.
+                var thenToElseNarrows = NarrowsChoice(then.resultTypeSpecifier, @else.resultTypeSpecifier, convertThenToElse.Cost);
+                var elseToThenNarrows = NarrowsChoice(@else.resultTypeSpecifier, then.resultTypeSpecifier, convertElseToThen.Cost);
+
+                // With both directions equally cheap and neither narrowing, prefer widening into a
+                // branch that is already a choice over adding another; failing that, keep coercing
+                // the else branch, which is what this reconciliation has always done on a tie.
+                var preferThenToElse =
+                    convertThenToElse.Cost < convertElseToThen.Cost
+                    || (convertThenToElse.Cost == convertElseToThen.Cost
+                        && @else.resultTypeSpecifier is ChoiceTypeSpecifier
+                        && then.resultTypeSpecifier is not ChoiceTypeSpecifier);
+
+                if (thenToElseNarrows && elseToThenNarrows)
+                {
+                    compatible = false;
+                }
+                else if (!thenToElseNarrows && (preferThenToElse || elseToThenNarrows))
                 {
                     if (convertThenToElse.Cost == CoercionCost.Incompatible)
                         compatible = false;
@@ -168,7 +191,7 @@ namespace Hl7.Cql.CqlToElm
             }
             if (!compatible)
             {
-                var choiceType = new ChoiceTypeSpecifier(then.resultTypeSpecifier, @else.resultTypeSpecifier);
+                var choiceType = ChoiceOf(then.resultTypeSpecifier, @else.resultTypeSpecifier);
                 then = CoercionProvider.Coerce(then, choiceType).Result; // it will succeed
                 @else = CoercionProvider.Coerce(@else, choiceType).Result; // it will succeed
             }
@@ -179,6 +202,35 @@ namespace Hl7.Cql.CqlToElm
             return @if
                 .WithResultType(then.resultTypeSpecifier);
         }
+
+        /// <summary>
+        /// True when coercing <paramref name="from"/> to <paramref name="to"/> would cast a choice
+        /// type down to something narrower than itself: a run-time type test that yields null for
+        /// every alternative it does not match.
+        /// </summary>
+        /// <remarks>
+        /// Only a <see cref="CoercionCost.Cast"/> qualifies. A genuine conversion - through a
+        /// model's helper functions, say - produces a value for the alternatives it accepts and is
+        /// not the failure this guards against, and widening a choice into a larger choice, or into
+        /// <c>Any</c>, keeps every alternative reachable.
+        /// </remarks>
+        private static bool NarrowsChoice(TypeSpecifier from, TypeSpecifier to, CoercionCost cost) =>
+            cost == CoercionCost.Cast
+            && from is ChoiceTypeSpecifier
+            && to is not ChoiceTypeSpecifier
+            && to != SystemTypes.AnyType;
+
+        /// <summary>
+        /// The choice of two types, flattened so that a choice built from a branch that is itself a
+        /// choice stays one level deep and lists each alternative once.
+        /// </summary>
+        private static ChoiceTypeSpecifier ChoiceOf(TypeSpecifier a, TypeSpecifier b) =>
+            new(FlattenChoice(a).Concat(FlattenChoice(b)).Distinct());
+
+        private static IEnumerable<TypeSpecifier> FlattenChoice(TypeSpecifier type) =>
+            type is ChoiceTypeSpecifier choice
+                ? (choice.choice ?? []).SelectMany(FlattenChoice)
+                : [type];
 
         internal Expression Case(Expression? comparand, CaseItem[] caseItems, Expression @else)
         {
