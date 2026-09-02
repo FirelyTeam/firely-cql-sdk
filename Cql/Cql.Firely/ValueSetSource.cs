@@ -98,10 +98,10 @@ namespace Hl7.Cql.Fhir;
 /// expansion succeeds or fails. The price of the copy is the same one paid at the top level, extended
 /// to every include: another source, or another valueset that includes the same canonical, expands its
 /// own copy rather than finding an expansion already written. The per-canonical facade layer memoizes
-/// only the valuesets added or loaded directly, so a canonical reached solely as another valueset's
-/// include is expanded once per outer valueset that pulls it in; a host that wants reuse across
-/// sources or across includes can serve valuesets with static expansions or seed sources via
-/// <see cref="Add(string, IEnumerable{CqlCode})"/>.
+/// only the valuesets added or loaded directly, and the copying resolver keeps no memo of its own, so
+/// a canonical reached solely as another valueset's include is expanded anew for every resolver lookup
+/// that pulls it in; a host that wants reuse across sources or across includes can serve valuesets
+/// with static expansions or seed sources via <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary

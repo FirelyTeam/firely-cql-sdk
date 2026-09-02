@@ -15,6 +15,6 @@
   clear it. Valuesets resolved transitively through `compose.include` are protected the same way —
   see the accompanying fix note on included valuesets. A valueset added or loaded directly is
   expanded at most once per source through the per-canonical facade layer; a canonical reached only
-  as another valueset's include is expanded once per outer valueset that pulls it in. Hosts that
+  as another valueset's include is expanded anew for every resolver lookup that pulls it in. Hosts that
   want reuse across sources or across includes can serve valuesets with static expansions or seed
   sources via `Add(string, IEnumerable<CqlCode>)`. (#1591)
