@@ -1,3 +1,11 @@
+## Potentially Breaking
+
+- After an expansion, a valueset that was pulled in through another valueset's `compose.include`
+  no longer carries the computed expansion on the resolver-owned instance: a host that read
+  `ValueSet.Expansion` back from such an included instance after expanding the outer valueset no
+  longer finds one there and must expand for itself. This mirrors the entry #1592 records for the
+  instance handed to `Add` or resolved by `Load`, extended to transitively included instances.
+
 ## Fixes
 
 - Expanding a valueset no longer writes a computed expansion into — or clears one from — the

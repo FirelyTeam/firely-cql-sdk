@@ -97,9 +97,10 @@ namespace Hl7.Cql.Fhir;
 /// shared instance, and keeps its expansion, or lack of one, regardless of whether the inclusion
 /// expansion succeeds or fails. The price of the copy is the same one paid at the top level, extended
 /// to every include: another source, or another valueset that includes the same canonical, expands its
-/// own copy rather than finding an expansion already written; each source still expands a given
-/// canonical at most once, through its per-canonical facade layer, and a host that wants cross-source
-/// reuse can serve valuesets with static expansions or seed sources via
+/// own copy rather than finding an expansion already written. The per-canonical facade layer memoizes
+/// only the valuesets added or loaded directly, so a canonical reached solely as another valueset's
+/// include is expanded once per outer valueset that pulls it in; a host that wants reuse across
+/// sources or across includes can serve valuesets with static expansions or seed sources via
 /// <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
@@ -203,16 +204,34 @@ public class ValueSetSource : IValueSetDictionary
     /// and skipping the copy for anything else keeps a large <see cref="CodeSystem"/> resolved along the
     /// way (the expander pulling every concept out of it) from being copied for nothing.
     /// </remarks>
-#pragma warning disable CS0618  // the two IAsyncResourceResolver members are obsolete
     private sealed class CopyOnResolve(IAsyncResourceResolver inner) : IAsyncResourceResolver
     {
+        // Both dispatch paths of the interface are forwarded to the wrapped resolver's own
+        // implementation of that same path: the TryResolve* default implementations fall back to the
+        // obsolete members of the instance they run on, so leaving them unimplemented here would
+        // reroute a caller of TryResolve* to the wrapped resolver's obsolete members - breaking a
+        // resolver that supports only the modern members.
+        public async Task<ResolverResult> TryResolveByUriAsync(string uri) => Copy(await inner.TryResolveByUriAsync(uri).ConfigureAwait(false));
+
+        public async Task<ResolverResult> TryResolveByCanonicalUriAsync(string uri) => Copy(await inner.TryResolveByCanonicalUriAsync(uri).ConfigureAwait(false));
+
+#pragma warning disable CS0618  // these two IAsyncResourceResolver members are obsolete
         public async Task<Resource?> ResolveByUriAsync(string uri) => Copy(await inner.ResolveByUriAsync(uri).ConfigureAwait(false));
 
         public async Task<Resource?> ResolveByCanonicalUriAsync(string uri) => Copy(await inner.ResolveByCanonicalUriAsync(uri).ConfigureAwait(false));
+#pragma warning restore CS0618
 
         private static Resource? Copy(Resource? resource) => resource is ValueSet valueSet ? (ValueSet)valueSet.DeepCopy() : resource;
+
+        // Only a carried ValueSet is replaced; a result without one - a failure, or another resource
+        // type - passes through untouched, error and all.
+        private static ResolverResult Copy(ResolverResult result) =>
+            result.Value is not ValueSet valueSet
+                ? result
+                : result.Error is { } error
+                    ? new ResolverResult((ValueSet)valueSet.DeepCopy(), error)
+                    : new ResolverResult((ValueSet)valueSet.DeepCopy());
     }
-#pragma warning restore CS0618
 
     /// <summary>
     /// Adds a list of <see cref="ValueSet"/>s to the cache, so they will not be retrieved using the resolver.

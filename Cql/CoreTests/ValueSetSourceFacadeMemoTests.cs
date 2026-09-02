@@ -229,6 +229,40 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
+    public async Task TransitiveResolution_ReachesTheResolverThroughItsModernMembers()
+    {
+        // The TryResolve* members of IAsyncResourceResolver are default implementations that fall back
+        // to the obsolete members of the instance they run on. The copying resolver ValueSetSource
+        // hands the expander must therefore forward each dispatch path to the wrapped resolver's own
+        // implementation of that same path: a resolver that supports only the modern members - the
+        // obsolete ones throw - must still serve every include of the chain.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/modern-leaf", "111");
+        var inner = ComposedValueSet("http://example.org/ValueSet/modern-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/modern-outer", inner.Url!);
+        var resolver = new ModernOnlyResolver(new InMemoryResourceResolver(leaf, inner, outer));
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.IsFalse(inner.HasExpansion, "an included instance must stay untouched on the modern dispatch path too.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+    }
+
+    /// <summary>
+    /// A resolver that supports only the modern <c>TryResolve*</c> members: the obsolete members throw,
+    /// as they may in a resolver written against the current interface surface.
+    /// </summary>
+    private sealed class ModernOnlyResolver(IAsyncResourceResolver inner) : IAsyncResourceResolver
+    {
+        public Task<Resource?> ResolveByUriAsync(string uri) => throw new NotSupportedException("Use TryResolveByUriAsync.");
+
+        public Task<Resource?> ResolveByCanonicalUriAsync(string uri) => throw new NotSupportedException("Use TryResolveByCanonicalUriAsync.");
+
+        public Task<ResolverResult> TryResolveByUriAsync(string uri) => inner.TryResolveByUriAsync(uri);
+
+        public Task<ResolverResult> TryResolveByCanonicalUriAsync(string uri) => inner.TryResolveByCanonicalUriAsync(uri);
+    }
+
+    [TestMethod]
     public async Task FailedTransitiveExpansion_LeavesTheIncludedInstanceUntouched()
     {
         // outer includes inner (no expansion of its own), and inner's own compose.include names a

@@ -13,7 +13,8 @@
   serving that instance to every consumer in the process is no longer corrupted by the SDK: the
   computed expansion used to be written into the caller's instance, and a failed expansion used to
   clear it. Valuesets resolved transitively through `compose.include` are protected the same way —
-  see the accompanying fix note on included valuesets. A source still expands a given canonical at
-  most once through its per-canonical facade layer; hosts that want cross-source reuse of computed
-  expansions can serve valuesets with static expansions or seed sources via
-  `Add(string, IEnumerable<CqlCode>)`. (#1591)
+  see the accompanying fix note on included valuesets. A valueset added or loaded directly is
+  expanded at most once per source through the per-canonical facade layer; a canonical reached only
+  as another valueset's include is expanded once per outer valueset that pulls it in. Hosts that
+  want reuse across sources or across includes can serve valuesets with static expansions or seed
+  sources via `Add(string, IEnumerable<CqlCode>)`. (#1591)
