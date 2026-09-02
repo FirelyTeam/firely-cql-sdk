@@ -203,23 +203,50 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
-    public async Task IncludedExpansionlessValueSet_IsStillExpandedInPlace_ByTheExpander()
+    public async Task TransitivelyIncludedValueSet_LeavesTheResolvedInstanceUntouched()
     {
-        // Quarantine, not an invariant we want: the copy protects the instance handed to Add, but the
-        // expander resolves compose.include dependencies itself and expands an expansion-less one in
-        // place. Tracked upstream as adjacent defect B of FirelyTeam/firely-net-sdk#3582. When that is
-        // fixed - or FirelyNetVersion moves - this test fails, which is the prompt to update the class
-        // remarks and the release note that both currently document this residual.
-        var leaf = ExpandedValueSet("http://example.org/ValueSet/residual-leaf", "111");
-        var inner = ComposedValueSet("http://example.org/ValueSet/residual-inner", leaf.Url!);
-        var outer = ComposedValueSet("http://example.org/ValueSet/residual-outer", inner.Url!);
+        // outer includes inner (no expansion of its own), and inner in turn includes leaf (which
+        // already carries a static expansion). Expanding outer therefore has the expander resolve
+        // inner transitively through the resolver - inner is never the instance Add was called on -
+        // so this pins that the no-mutation contract reaches that far too, not only the instance
+        // handed to Add directly.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/transitive-leaf", "111", "222");
+        var inner = ComposedValueSet("http://example.org/ValueSet/transitive-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/transitive-outer", inner.Url!);
         var resolver = new InMemoryResourceResolver(leaf, inner, outer);
+
+        var changedProperties = new List<string>();
+        inner.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
 
         var facade = await new ValueSetSource(resolver).Add(outer);
 
-        Assert.IsFalse(outer.HasExpansion, "the instance handed to Add is protected by the copy.");
-        Assert.IsTrue(inner.HasExpansion, "known residual: the expander expands an included valueset in place.");
+        Assert.IsFalse(inner.HasExpansion,
+            "the expander resolves compose.include transitively through the resolver, so an included instance reached that way must stay untouched, exactly like the instance handed to Add.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a transitively resolved included instance must not be written to at all, but these properties changed: {string.Join(", ", changedProperties)}");
         Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
+
+    [TestMethod]
+    public async Task FailedTransitiveExpansion_LeavesTheIncludedInstanceUntouched()
+    {
+        // outer includes inner (no expansion of its own), and inner's own compose.include names a
+        // canonical the resolver cannot serve, so expanding inner - reached transitively while
+        // expanding outer - fails. The failure must be as invisible on inner as a failure on the
+        // instance handed to Add directly is: no expansion left behind, no PropertyChanged at all.
+        var inner = ComposedValueSet("http://example.org/ValueSet/failing-transitive-inner", "http://example.org/ValueSet/does-not-exist");
+        var outer = ComposedValueSet("http://example.org/ValueSet/failing-transitive-outer", inner.Url!);
+        var resolver = new InMemoryResourceResolver(inner, outer);
+
+        var changedProperties = new List<string>();
+        inner.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
+
+        await Assert.ThrowsExceptionAsync<ValueSetUnknownException>(() => new ValueSetSource(resolver).Add(outer));
+
+        Assert.IsFalse(inner.HasExpansion, "a failed transitive expansion must not alter the resolved included instance.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a failed transitive expansion must not write to the resolved included instance at all, but these properties changed: {string.Join(", ", changedProperties)}");
     }
 
     [TestMethod]
