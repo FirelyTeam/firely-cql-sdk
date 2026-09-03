@@ -203,23 +203,131 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
-    public async Task IncludedExpansionlessValueSet_IsStillExpandedInPlace_ByTheExpander()
+    public async Task TransitivelyIncludedValueSet_LeavesTheResolvedInstanceUntouched()
     {
-        // Quarantine, not an invariant we want: the copy protects the instance handed to Add, but the
-        // expander resolves compose.include dependencies itself and expands an expansion-less one in
-        // place. Tracked upstream as adjacent defect B of FirelyTeam/firely-net-sdk#3582. When that is
-        // fixed - or FirelyNetVersion moves - this test fails, which is the prompt to update the class
-        // remarks and the release note that both currently document this residual.
-        var leaf = ExpandedValueSet("http://example.org/ValueSet/residual-leaf", "111");
-        var inner = ComposedValueSet("http://example.org/ValueSet/residual-inner", leaf.Url!);
-        var outer = ComposedValueSet("http://example.org/ValueSet/residual-outer", inner.Url!);
+        // outer includes inner (no expansion of its own), and inner in turn includes leaf (which
+        // already carries a static expansion). Expanding outer therefore has the expander resolve
+        // inner transitively through the resolver - inner is never the instance Add was called on -
+        // so this pins that the no-mutation contract reaches that far too, not only the instance
+        // handed to Add directly.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/transitive-leaf", "111", "222");
+        var inner = ComposedValueSet("http://example.org/ValueSet/transitive-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/transitive-outer", inner.Url!);
+        var resolver = new InMemoryResourceResolver(leaf, inner, outer);
+
+        var changedProperties = new List<string>();
+        inner.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.IsFalse(inner.HasExpansion,
+            "the expander resolves compose.include transitively through the resolver, so an included instance reached that way must stay untouched, exactly like the instance handed to Add.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a transitively resolved included instance must not be written to at all, but these properties changed: {string.Join(", ", changedProperties)}");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
+
+    [TestMethod]
+    public async Task TransitiveResolution_ReachesTheResolverThroughItsModernMembers()
+    {
+        // The TryResolve* members of IAsyncResourceResolver are default implementations that fall back
+        // to the obsolete members of the instance they run on. The copying resolver ValueSetSource
+        // hands the expander must therefore forward each dispatch path to the wrapped resolver's own
+        // implementation of that same path: a resolver that supports only the modern members - the
+        // obsolete ones throw - must still serve every include of the chain.
+        var leaf = ExpandedValueSet("http://example.org/ValueSet/modern-leaf", "111");
+        var inner = ComposedValueSet("http://example.org/ValueSet/modern-inner", leaf.Url!);
+        var outer = ComposedValueSet("http://example.org/ValueSet/modern-outer", inner.Url!);
+        var resolver = new ModernOnlyResolver(new InMemoryResourceResolver(leaf, inner, outer));
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.IsFalse(inner.HasExpansion, "an included instance must stay untouched on the modern dispatch path too.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+    }
+
+    /// <summary>
+    /// A resolver that supports only the modern <c>TryResolve*</c> members: the obsolete members throw,
+    /// as they may in a resolver written against the current interface surface.
+    /// </summary>
+    private sealed class ModernOnlyResolver(IAsyncResourceResolver inner) : IAsyncResourceResolver
+    {
+        public Task<Resource?> ResolveByUriAsync(string uri) => throw new NotSupportedException("Use TryResolveByUriAsync.");
+
+        public Task<Resource?> ResolveByCanonicalUriAsync(string uri) => throw new NotSupportedException("Use TryResolveByCanonicalUriAsync.");
+
+        public Task<ResolverResult> TryResolveByUriAsync(string uri) => inner.TryResolveByUriAsync(uri);
+
+        public Task<ResolverResult> TryResolveByCanonicalUriAsync(string uri) => inner.TryResolveByCanonicalUriAsync(uri);
+    }
+
+    [TestMethod]
+    public async Task ResolvedValueSets_AreCopiedOnlyWhenTheyLackAnExpansion()
+    {
+        // The expander writes only to an included valueset that has no expansion yet; one that already
+        // carries an expansion is merely read. The copying resolver mirrors that split: the compose-only
+        // include about to be written to is copied, while the expanded one - the bulk of which is the
+        // very expansion a copy would duplicate - reaches the expander as the resolver's own instance.
+        var leaf = new CopyCountingValueSet
+        {
+            Url = "http://example.org/ValueSet/copy-once-leaf",
+            Status = PublicationStatus.Active,
+            Expansion = ExpansionOf("111", "222")
+        };
+        var inner = new CopyCountingValueSet
+        {
+            Url = "http://example.org/ValueSet/copy-once-inner",
+            Status = PublicationStatus.Active,
+            Compose = new ValueSet.ComposeComponent { Include = [new ValueSet.ConceptSetComponent { ValueSet = [leaf.Url] }] }
+        };
+        var outer = ComposedValueSet("http://example.org/ValueSet/copy-once-outer", inner.Url);
         var resolver = new InMemoryResourceResolver(leaf, inner, outer);
 
         var facade = await new ValueSetSource(resolver).Add(outer);
 
-        Assert.IsFalse(outer.HasExpansion, "the instance handed to Add is protected by the copy.");
-        Assert.IsTrue(inner.HasExpansion, "known residual: the expander expands an included valueset in place.");
+        Assert.AreEqual(1, inner.DeepCopyCount, "an expansion-less include is expanded on a private copy, so it is copied exactly once.");
+        Assert.AreEqual(0, leaf.DeepCopyCount, "an include that already carries an expansion is only read by the expander, so it is not copied at all.");
+        Assert.IsFalse(inner.HasExpansion, "the copy, not the resolver's instance, received the expansion.");
         Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
+
+    /// <summary>
+    /// A <see cref="ValueSet"/> that counts how often it is deep-copied, which is the only way to observe
+    /// from the outside whether the resolver handed to the expander copied it or passed it through.
+    /// <c>DeepCopy()</c> is an extension method that dispatches to this override.
+    /// </summary>
+    private sealed class CopyCountingValueSet : ValueSet
+    {
+        public int DeepCopyCount { get; private set; }
+
+        protected override Base DeepCopyInternal()
+        {
+            DeepCopyCount++;
+            return base.DeepCopyInternal();
+        }
+    }
+
+    [TestMethod]
+    public async Task FailedTransitiveExpansion_LeavesTheIncludedInstanceUntouched()
+    {
+        // outer includes inner (no expansion of its own), and inner's own compose.include names a
+        // canonical the resolver cannot serve, so expanding inner - reached transitively while
+        // expanding outer - fails. The failure must be as invisible on inner as a failure on the
+        // instance handed to Add directly is: no expansion left behind, no PropertyChanged at all.
+        var inner = ComposedValueSet("http://example.org/ValueSet/failing-transitive-inner", "http://example.org/ValueSet/does-not-exist");
+        var outer = ComposedValueSet("http://example.org/ValueSet/failing-transitive-outer", inner.Url!);
+        var resolver = new InMemoryResourceResolver(inner, outer);
+
+        var changedProperties = new List<string>();
+        inner.PropertyChanged += (_, e) => changedProperties.Add(e.PropertyName ?? "?");
+
+        await Assert.ThrowsExceptionAsync<ValueSetUnknownException>(() => new ValueSetSource(resolver).Add(outer));
+
+        Assert.IsFalse(inner.HasExpansion, "a failed transitive expansion must not alter the resolved included instance.");
+        Assert.AreEqual(0, changedProperties.Count,
+            $"a failed transitive expansion must not write to the resolved included instance at all, but these properties changed: {string.Join(", ", changedProperties)}");
     }
 
     [TestMethod]
