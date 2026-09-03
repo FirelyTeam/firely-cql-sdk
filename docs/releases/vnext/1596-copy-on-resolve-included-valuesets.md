@@ -9,12 +9,14 @@
 ## Fixes
 
 - Expanding a valueset no longer writes a computed expansion into — or clears one from — the
-  valuesets its `compose.include` pulls in through the resolver. Those included valuesets are now
-  expanded on private copies as well, closing the gap left by #1591/#1592: a host cache serving an
-  expansion-less included valueset to every consumer in the process is no longer corrupted by the
-  underlying `ValueSetExpander`'s in-place writes (adjacent defect B of
-  [firely-net-sdk#3582](https://github.com/FirelyTeam/firely-net-sdk/issues/3582)). As with the
-  top-level copy, another source (or another valueset that includes the same canonical) now expands
-  its own copy rather than finding an expansion already written; hosts that want cross-source reuse
-  of computed expansions can serve valuesets with static expansions or seed sources via
-  `Add(string, IEnumerable<CqlCode>)`.
+  valuesets its `compose.include` pulls in through the resolver. An expansion-less included valueset
+  is now expanded on a private copy as well, closing the gap left by #1591/#1592: a host cache
+  serving such a valueset to every consumer in the process is no longer corrupted by the underlying
+  `ValueSetExpander`'s in-place writes (adjacent defect B of
+  [firely-net-sdk#3582](https://github.com/FirelyTeam/firely-net-sdk/issues/3582)). Only
+  expansion-less valuesets are copied — an included valueset that already carries an expansion is
+  only read by the expander and passes through as-is — and only on the cold path, where a valueset
+  missing the per-source cache has to be expanded at all. As with the top-level copy, another source
+  (or another valueset that includes the same canonical) now expands its own copy rather than
+  finding an expansion already written; hosts that want cross-source reuse of computed expansions
+  can serve valuesets with static expansions or seed sources via `Add(string, IEnumerable<CqlCode>)`.

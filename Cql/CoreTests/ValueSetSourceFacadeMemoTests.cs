@@ -263,6 +263,53 @@ public class ValueSetSourceFacadeMemoTests
     }
 
     [TestMethod]
+    public async Task ResolvedValueSets_AreCopiedOnlyWhenTheyLackAnExpansion()
+    {
+        // The expander writes only to an included valueset that has no expansion yet; one that already
+        // carries an expansion is merely read. The copying resolver mirrors that split: the compose-only
+        // include about to be written to is copied, while the expanded one - the bulk of which is the
+        // very expansion a copy would duplicate - reaches the expander as the resolver's own instance.
+        var leaf = new CopyCountingValueSet
+        {
+            Url = "http://example.org/ValueSet/copy-once-leaf",
+            Status = PublicationStatus.Active,
+            Expansion = ExpansionOf("111", "222")
+        };
+        var inner = new CopyCountingValueSet
+        {
+            Url = "http://example.org/ValueSet/copy-once-inner",
+            Status = PublicationStatus.Active,
+            Compose = new ValueSet.ComposeComponent { Include = [new ValueSet.ConceptSetComponent { ValueSet = [leaf.Url] }] }
+        };
+        var outer = ComposedValueSet("http://example.org/ValueSet/copy-once-outer", inner.Url);
+        var resolver = new InMemoryResourceResolver(leaf, inner, outer);
+
+        var facade = await new ValueSetSource(resolver).Add(outer);
+
+        Assert.AreEqual(1, inner.DeepCopyCount, "an expansion-less include is expanded on a private copy, so it is copied exactly once.");
+        Assert.AreEqual(0, leaf.DeepCopyCount, "an include that already carries an expansion is only read by the expander, so it is not copied at all.");
+        Assert.IsFalse(inner.HasExpansion, "the copy, not the resolver's instance, received the expansion.");
+        Assert.IsTrue(facade.IsCodeInValueSet("111", CodeSystem));
+        Assert.IsFalse(facade.IsCodeInValueSet("999", CodeSystem));
+    }
+
+    /// <summary>
+    /// A <see cref="ValueSet"/> that counts how often it is deep-copied, which is the only way to observe
+    /// from the outside whether the resolver handed to the expander copied it or passed it through.
+    /// <c>DeepCopy()</c> is an extension method that dispatches to this override.
+    /// </summary>
+    private sealed class CopyCountingValueSet : ValueSet
+    {
+        public int DeepCopyCount { get; private set; }
+
+        protected override Base DeepCopyInternal()
+        {
+            DeepCopyCount++;
+            return base.DeepCopyInternal();
+        }
+    }
+
+    [TestMethod]
     public async Task FailedTransitiveExpansion_LeavesTheIncludedInstanceUntouched()
     {
         // outer includes inner (no expansion of its own), and inner's own compose.include names a

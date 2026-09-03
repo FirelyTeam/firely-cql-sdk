@@ -91,17 +91,23 @@ namespace Hl7.Cql.Fhir;
 /// dependencies from the resolver on its own, and an expansion-less <em>included</em> valueset it
 /// resolves that way is expanded in place too - that is the expander's own behavior, tracked upstream
 /// as adjacent defect B of <see href="https://github.com/FirelyTeam/firely-net-sdk/issues/3582"/>. The
-/// resolver this class hands to the expander (see <see cref="BuildExpander"/>) wraps every resolved
-/// valueset in a private copy for the same reason as the top-level one, so a cache serving an
-/// expansion-less valueset that another valueset includes is expanded on that copy rather than on the
-/// shared instance, and keeps its expansion, or lack of one, regardless of whether the inclusion
-/// expansion succeeds or fails. The price of the copy is the same one paid at the top level, extended
-/// to every include: another source, or another valueset that includes the same canonical, expands its
-/// own copy rather than finding an expansion already written. The per-canonical facade layer memoizes
-/// only the valuesets added or loaded directly, and the copying resolver keeps no memo of its own, so
-/// a canonical reached solely as another valueset's include is expanded anew for every resolver lookup
-/// that pulls it in; a host that wants reuse across sources or across includes can serve valuesets
-/// with static expansions or seed sources via <see cref="Add(string, IEnumerable{CqlCode})"/>.
+/// resolver this class hands to the expander (see <see cref="BuildExpander"/>) hands out a private
+/// copy of every <em>expansion-less</em> valueset it resolves, for the same reason as the top-level
+/// one, so a cache serving an expansion-less valueset that another valueset includes is expanded on
+/// that copy rather than on the shared instance, and stays expansion-less regardless of whether the
+/// inclusion expansion succeeds or fails. A resolved valueset that already carries an expansion is not
+/// copied: the expander only reads such an instance, and the expansion is the bulk of a valueset, so
+/// the copy would cost far more than the write it has nothing to prevent. The copies are confined to
+/// the cold path - the expander runs only for a valueset that misses the per-canonical facade layer
+/// and arrives without an expansion, and content that ships static expansions never reaches it - and
+/// each one is a copy of a compose-only valueset. The price of the copy is the same one paid at the
+/// top level, extended to every include: another source, or another valueset that includes the same
+/// canonical, expands its own copy rather than finding an expansion already written. The per-canonical
+/// facade layer memoizes only the valuesets added or loaded directly, and the copying resolver
+/// deliberately keeps no memo of its own, so a canonical reached solely as another valueset's include
+/// is expanded anew for every resolver lookup that pulls it in; a host that wants reuse across sources
+/// or across includes can serve valuesets with static expansions or seed sources via
+/// <see cref="Add(string, IEnumerable{CqlCode})"/>.
 /// </para>
 /// </remarks>
 public class ValueSetSource : IValueSetDictionary
@@ -187,8 +193,8 @@ public class ValueSetSource : IValueSetDictionary
     }
 
     /// <summary>
-    /// Wraps an <see cref="IAsyncResourceResolver"/> so that every <see cref="ValueSet"/> it resolves is
-    /// handed out as a private copy.
+    /// Wraps an <see cref="IAsyncResourceResolver"/> so that every expansion-less
+    /// <see cref="ValueSet"/> it resolves is handed out as a private copy.
     /// </summary>
     /// <remarks>
     /// The expander (see <see cref="BuildExpander"/>) does not stop at the top-level valueset it was
@@ -199,10 +205,13 @@ public class ValueSetSource : IValueSetDictionary
     /// the top-level one (see the remarks on <see cref="ValueSetSource"/>): a host with an
     /// instance-stable resolver, such as a conformance cache, may be handing that same object to every
     /// other consumer in the process, so writing into it - or, on failure, nulling what was already
-    /// there - reaches consumers this class has no relationship with. Copying only <see cref="ValueSet"/>
-    /// results is deliberate, not incidental: that is the only resource type the expander writes to,
-    /// and skipping the copy for anything else keeps a large <see cref="CodeSystem"/> resolved along the
-    /// way (the expander pulling every concept out of it) from being copied for nothing.
+    /// there - reaches consumers this class has no relationship with. What is copied is exactly what
+    /// the expander writes to, and nothing else: an expansion-less <see cref="ValueSet"/>. A resolved
+    /// valueset that already carries an expansion is only read by the expander, and since that
+    /// expansion is the bulk of the valueset, copying it to read it once would cost far more than the
+    /// compose-only copies this class does make; it passes through as-is. So does every other resource
+    /// type, which keeps a large <see cref="CodeSystem"/> resolved along the way (the expander pulling
+    /// every concept out of it) from being copied for nothing.
     /// </remarks>
     private sealed class CopyOnResolve(IAsyncResourceResolver inner) : IAsyncResourceResolver
     {
@@ -221,12 +230,14 @@ public class ValueSetSource : IValueSetDictionary
         public async Task<Resource?> ResolveByCanonicalUriAsync(string uri) => Copy(await inner.ResolveByCanonicalUriAsync(uri).ConfigureAwait(false));
 #pragma warning restore CS0618
 
-        private static Resource? Copy(Resource? resource) => resource is ValueSet valueSet ? (ValueSet)valueSet.DeepCopy() : resource;
+        private static Resource? Copy(Resource? resource) =>
+            resource is ValueSet { HasExpansion: false } valueSet ? (ValueSet)valueSet.DeepCopy() : resource;
 
-        // Only a carried ValueSet is replaced; a result without one - a failure, or another resource
-        // type - passes through untouched, error and all.
+        // Only a carried expansion-less ValueSet is replaced; a result without one - a failure, another
+        // resource type, or a valueset that already carries an expansion - passes through untouched,
+        // error and all.
         private static ResolverResult Copy(ResolverResult result) =>
-            result.Value is not ValueSet valueSet
+            result.Value is not ValueSet { HasExpansion: false } valueSet
                 ? result
                 : result.Error is { } error
                     ? new ResolverResult((ValueSet)valueSet.DeepCopy(), error)
