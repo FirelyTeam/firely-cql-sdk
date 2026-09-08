@@ -11,4 +11,4 @@
   boundary into the FHIR conversion, the conversion to a `Period` steps an exclusive date/time boundary
   inward by one unit of its precision, as the `Range` conversion already did, so emitted Periods are
   unchanged. **CQL evaluation results change** for same-day boundary cases; the three CMS646
-  intravesical BCG therapy test cases of the MADiE corpus that exercise this pattern pass.
+  intravesical BCG therapy test cases of the MADiE corpus that exercise this pattern pass. (#1602)
