@@ -43,8 +43,16 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// shape (the <c>Instance</c> property, <c>ILibrary</c>, <c>CqlDefinitionAttribute</c>, the
     /// definition method signatures) is exactly as before - so the existing invoker keeps
     /// working and no new one is needed.
+    /// <para>
+    /// Widened again from 5.3.0.0 to 5.4.0.0 for generator version 5.3.0.0 (late-bound list-valued
+    /// query sources, #1600), for the same reason: the generated C# began calling the new
+    /// <c>ICqlOperators.PromoteLateBoundToList</c> member, so an older runtime must reject such a
+    /// library at this version gate instead of loading it and failing with
+    /// <c>MissingMethodException</c> inside a definition body, while nothing this invoker binds to
+    /// changed.
+    /// </para>
     /// </remarks>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,3,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,4,0,0);
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 
