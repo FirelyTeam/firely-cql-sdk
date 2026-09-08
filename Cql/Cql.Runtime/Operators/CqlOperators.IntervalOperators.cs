@@ -66,9 +66,9 @@ namespace Hl7.Cql.Operators
                 return null;
             else
             {
-                var interval = new CqlInterval<CqlDate?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
+                // Boundary exclusivity is preserved, not normalized with ToClosed() - see the
+                // CqlDateTime overload for why.
+                return new CqlInterval<CqlDate?>(low, high, lowClosed, highClosed);
             }
         }
 
@@ -78,9 +78,16 @@ namespace Hl7.Cql.Operators
                 return null;
             else
             {
-                var interval = new CqlInterval<CqlDateTime?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
+                // Boundary exclusivity is deliberately preserved rather than normalized away with
+                // ToClosed(): closing an exclusive date/time boundary shifts it by one unit of the
+                // boundary value's own precision, which is lossy for any operator that compares at a
+                // coarser precision. In: "For open interval boundaries, exclusive comparison operators
+                // are used. [...] If precision is specified and the point type is a date/time type,
+                // comparisons used in the operation are performed at the specified precision."
+                // (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, 5.3 in). Pre-closing an exclusive
+                // high of @2026-06-30T08:00 to @2026-06-30T07:59:59.999 turns 'in ... day' from an
+                // exclusive same-day comparison into an inclusive one.
+                return new CqlInterval<CqlDateTime?>(low, high, lowClosed, highClosed);
             }
         }
         public CqlInterval<CqlTime?>? Interval(CqlTime? low, CqlTime? high, bool? lowClosed, bool? highClosed)
@@ -89,9 +96,9 @@ namespace Hl7.Cql.Operators
                 return null;
             else
             {
-                var interval = new CqlInterval<CqlTime?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
+                // Boundary exclusivity is preserved, not normalized with ToClosed() - see the
+                // DateTime overload above for why.
+                return new CqlInterval<CqlTime?>(low, high, lowClosed, highClosed);
             }
         }
         #endregion
