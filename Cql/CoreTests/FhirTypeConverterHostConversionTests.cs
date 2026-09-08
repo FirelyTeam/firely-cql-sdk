@@ -39,6 +39,7 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             Assert.AreEqual("2026-01-01T00:00:00.001Z", converted.Start);
             Assert.AreEqual("2026-06-30T23:59:59.999Z", converted.End);
+            AssertValidFhirDateTimeBoundaries(converted);
         }
 
         [TestMethod]
@@ -53,6 +54,7 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             Assert.AreEqual("2026-01-01T00:00:00.000Z", converted.Start);
             Assert.AreEqual("2026-07-01T00:00:00.000Z", converted.End);
+            AssertValidFhirDateTimeBoundaries(converted);
         }
 
         [TestMethod]
@@ -67,6 +69,131 @@ namespace CoreTests
             Assert.IsNotNull(converted);
             Assert.AreEqual("2026-01-01", converted.Start);
             Assert.AreEqual("2026-12-31", converted.End);
+            AssertValidFhirDateBoundaries(converted);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfDateTime_Period_ExclusiveBoundaryAtTypeExtremum_IsEmittedUnstepped()
+        {
+            // The successor of the maximum DateTime and the predecessor of the minimum are not
+            // representable, so there is no inclusive equivalent to emit: the boundary is emitted as it
+            // stands rather than dereferencing a null step or dropping the boundary altogether (which
+            // would read as an unbounded Period).
+            var interval = new CqlInterval<CqlDateTime>(CqlDateTime.MaxValue, CqlDateTime.MaxValue, lowClosed: false, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("9999-12-31T23:59:59.999Z", converted.Start);
+            AssertValidFhirDateTimeBoundaries(converted);
+
+            var atMinimum = new CqlInterval<CqlDateTime>(CqlDateTime.MinValue, CqlDateTime.MinValue, lowClosed: true, highClosed: false);
+
+            var convertedAtMinimum = FhirTypeConverter.Convert<Period>(atMinimum);
+
+            Assert.IsNotNull(convertedAtMinimum);
+            Assert.AreEqual("0001-01-01T00:00:00.000Z", convertedAtMinimum.End);
+            AssertValidFhirDateTimeBoundaries(convertedAtMinimum);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfDate_Period_ExclusiveBoundaryAtTypeExtremum_IsEmittedUnstepped()
+        {
+            var interval = new CqlInterval<CqlDate>(CqlDate.MaxValue, CqlDate.MaxValue, lowClosed: false, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("9999-12-31", converted.Start);
+            AssertValidFhirDateBoundaries(converted);
+
+            var atMinimum = new CqlInterval<CqlDate>(CqlDate.MinValue, CqlDate.MinValue, lowClosed: true, highClosed: false);
+
+            var convertedAtMinimum = FhirTypeConverter.Convert<Period>(atMinimum);
+
+            Assert.IsNotNull(convertedAtMinimum);
+            Assert.AreEqual("0001-01-01", convertedAtMinimum.End);
+            AssertValidFhirDateBoundaries(convertedAtMinimum);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfDate_Period_ExclusiveYearPrecisionBoundaryAtTypeExtremum_IsEmittedUnstepped()
+        {
+            // The step is one unit of the boundary's own precision, so a year-precision @9999 overflows
+            // just as a fully specified @9999-12-31 does.
+            var interval = new CqlInterval<CqlDate>(new CqlDate(9999, null, null), new CqlDate(9999, null, null), lowClosed: false, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("9999", converted.Start);
+            AssertValidFhirDateBoundaries(converted);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_ExclusiveBoundaryAtTypeExtremum_IsEmittedUnstepped()
+        {
+            // A CqlTime step neither overflows nor returns null: the successor of @T23:59:59.999 wraps to
+            // the start of the day and the predecessor of @T00:00:00.000 yields negative components, so
+            // both are rejected and the boundary is emitted as it stands.
+            var interval = new CqlInterval<CqlTime>(CqlTime.MaxValue, CqlTime.MaxValue, lowClosed: false, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T23:59:59.999Z", converted.Start);
+            AssertValidFhirDateTimeBoundaries(converted);
+
+            var atMinimum = new CqlInterval<CqlTime>(CqlTime.MinValue, CqlTime.MinValue, lowClosed: true, highClosed: false);
+
+            var convertedAtMinimum = FhirTypeConverter.Convert<Period>(atMinimum);
+
+            Assert.IsNotNull(convertedAtMinimum);
+            Assert.AreEqual("0001-01-01T00:00:00.000Z", convertedAtMinimum.End);
+            AssertValidFhirDateTimeBoundaries(convertedAtMinimum);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_ExclusiveHourPrecisionBoundaryAtTypeExtremum_IsEmittedUnstepped()
+        {
+            // @T23 steps by an hour and @T00 by an hour, so both wrap at hour precision too.
+            var interval = new CqlInterval<CqlTime>(new CqlTime(23, null, null, null, null, null), new CqlTime(0, null, null, null, null, null), lowClosed: false, highClosed: false);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T23:00:00Z", converted.Start);
+            Assert.AreEqual("0001-01-01T00:00:00Z", converted.End);
+            AssertValidFhirDateTimeBoundaries(converted);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfTime_Period_StepsExclusiveBoundariesInward()
+        {
+            var interval = new CqlInterval<CqlTime>(new CqlTime(10, 30, 0, 0, 0, 0), new CqlTime(16, 45, 15, 123, 0, 0), lowClosed: false, highClosed: false);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("0001-01-01T10:30:00.001Z", converted.Start);
+            Assert.AreEqual("0001-01-01T16:45:15.122Z", converted.End);
+            AssertValidFhirDateTimeBoundaries(converted);
+        }
+
+        private static void AssertValidFhirDateTimeBoundaries(Period period)
+        {
+            if (period.Start is { } start)
+                Assert.IsTrue(M.FhirDateTime.IsValidValue(start), $"Start is not a valid FHIR dateTime: {start}");
+            if (period.End is { } end)
+                Assert.IsTrue(M.FhirDateTime.IsValidValue(end), $"End is not a valid FHIR dateTime: {end}");
+        }
+
+        private static void AssertValidFhirDateBoundaries(Period period)
+        {
+            if (period.Start is { } start)
+                Assert.IsTrue(M.Date.IsValidValue(start), $"Start is not a valid FHIR date: {start}");
+            if (period.End is { } end)
+                Assert.IsTrue(M.Date.IsValidValue(end), $"End is not a valid FHIR date: {end}");
         }
 
         [TestMethod]
