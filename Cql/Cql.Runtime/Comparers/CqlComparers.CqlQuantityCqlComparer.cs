@@ -42,15 +42,15 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            // redo the comparison. TryCanonicalize succeeds for any valid UCUM unit, so the
-            // canonical units have to agree before the values may be compared: quantities of
-            // different base metrics are incommensurable, and comparing their canonical values
-            // would answer as if both were dimensionless (1 'cm' = 0.01 'g').
-            if (x.TryCanonicalize(MetricService, out var left1)
-                && y.TryCanonicalize(MetricService, out var right1)
-                && left1!.unit == right1!.unit)
+            // Redo the comparison with both quantities brought into one common unit. That unit is the
+            // finer of the two operand units rather than the canonical base unit: canonicalizing
+            // rescales the values, and for a clinical unit far from its base it pushes them below the
+            // step size of a CQL Decimal (0.25 'mg/d' canonicalizes to 0.0000000028935185 'g.s-1'),
+            // where the Decimal comparer's 8-digit quantization answers 0 for every pair. See
+            // UcumConversionExtensions.TryAlignUnits, which also establishes commensurability.
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1))
             {
-                var valueComparison = ValueComparer.Compare(left1.value!, right1.value!, precision);
+                var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
             }
 
@@ -77,17 +77,18 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            // Spec §9.B: quantity equivalence considers unit conversion, so normalize the units
-            // using UCUM and redo the comparison. The canonical units must agree for the same
-            // reason they must in CompareValues, but where that method answers null, equivalence
-            // never may -- it "will always return true or false": units that cannot be
-            // canonicalized, or that canonicalize to different base metrics (incommensurable), are
-            // simply not equivalent (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
-            if (x.TryCanonicalize(MetricService, out var left1)
-                && y.TryCanonicalize(MetricService, out var right1)
-                && left1!.unit == right1!.unit)
+            // Spec §9.B: quantity equivalence considers unit conversion, so bring both quantities into
+            // one common unit and redo the comparison. Equivalence rounds to the precision of the
+            // least precise operand, which makes the choice of that unit matter even more than it does
+            // for CompareValues -- rounding two canonical values that both sit below 1e-8 makes every
+            // pair of clinical quantities equivalent. The units must be commensurable for the same
+            // reason they must in CompareValues, but where that method answers null, equivalence never
+            // may -- it "will always return true or false": units that cannot be canonicalized, or that
+            // canonicalize to different base metrics (incommensurable), are simply not equivalent
+            // (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1))
             {
-                var valueComparison = ValueComparer.Equivalent(left1.value, right1.value, precision);
+                var valueComparison = ValueComparer.Equivalent(left1!.value, right1!.value, precision);
                 return valueComparison;
             }
 
