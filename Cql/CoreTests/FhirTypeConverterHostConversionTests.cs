@@ -25,6 +25,51 @@ namespace CoreTests
             Hl7.Cql.Fhir.FhirTypeConverter.Create(ModelInfo.ModelInspector);
 
         [TestMethod]
+        public void ConvertCqlIntervalOfDateTime_Period_StepsExclusiveBoundariesInward()
+        {
+            // A FHIR Period is inclusive on both ends, so Interval(@2026-01-01T00:00:00.000Z, @2026-07-01T00:00:00.000Z)
+            // with both boundaries exclusive covers the first millisecond after the low and the last millisecond
+            // before the high.
+            var low = new CqlDateTime(2026, 1, 1, 0, 0, 0, 0, 0, 0);
+            var high = new CqlDateTime(2026, 7, 1, 0, 0, 0, 0, 0, 0);
+            var interval = new CqlInterval<CqlDateTime>(low, high, lowClosed: false, highClosed: false);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2026-01-01T00:00:00.001Z", converted.Start);
+            Assert.AreEqual("2026-06-30T23:59:59.999Z", converted.End);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfDateTime_Period_KeepsClosedBoundaries()
+        {
+            var low = new CqlDateTime(2026, 1, 1, 0, 0, 0, 0, 0, 0);
+            var high = new CqlDateTime(2026, 7, 1, 0, 0, 0, 0, 0, 0);
+            var interval = new CqlInterval<CqlDateTime>(low, high, lowClosed: true, highClosed: true);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2026-01-01T00:00:00.000Z", converted.Start);
+            Assert.AreEqual("2026-07-01T00:00:00.000Z", converted.End);
+        }
+
+        [TestMethod]
+        public void ConvertCqlIntervalOfDate_Period_StepsExclusiveHighToPreviousDay()
+        {
+            var low = new CqlDate(2026, 1, 1);
+            var high = new CqlDate(2027, 1, 1);
+            var interval = new CqlInterval<CqlDate>(low, high, lowClosed: true, highClosed: false);
+
+            var converted = FhirTypeConverter.Convert<Period>(interval);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual("2026-01-01", converted.Start);
+            Assert.AreEqual("2026-12-31", converted.End);
+        }
+
+        [TestMethod]
         public void ConvertCqlIntervalOfTime_Period_AnchorsTimesOnMinimumFhirDate()
         {
             var low = new CqlTime(10, 30, 0, null, 0, 0);
