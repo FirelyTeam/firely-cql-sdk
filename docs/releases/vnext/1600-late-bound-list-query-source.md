@@ -13,4 +13,4 @@
   `[ServiceRequest] union [MedicationRequest]` is the pattern this affects. **CQL evaluation results
   change:** a define containing this pattern previously scored as if the property were empty and now
   returns its values, so measure output can move; `GeneratorToolVersion` is bumped to `5.2.2.0` and
-  packaged artifacts need regenerating.
+  packaged artifacts need regenerating. (#1600)
