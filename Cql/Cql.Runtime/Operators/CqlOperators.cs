@@ -128,6 +128,37 @@ namespace Hl7.Cql.Operators
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
                 return (T)(object)null!;
 
+            // An ELM Property element's path may be qualified - "medication.reference.value" - and the
+            // code generator passes it through to this operator verbatim, so a late-bound access has to
+            // walk the path segment by segment. Reflection resolves one property name at a time and
+            // answers null for the whole dotted string, which silently turned every qualified late-bound
+            // path into null. CodeBuilderContext already walks the segments the same way when the types
+            // are known at design time ("support paths like birthDate.value on Patient"); this is the
+            // same walk for the case that falls through to late binding, which is where a path reached
+            // through a choice or union type surfaced as 'object' ends up.
+            //
+            // Only the final segment is converted to T. The segments before it are intermediate objects
+            // on the way there, so they resolve as 'object' and a null among them short-circuits.
+            var separatorIndex = propertyName.IndexOf('.');
+            while (separatorIndex >= 0)
+            {
+                source = ResolvePropertySegment<object>(source, propertyName[..separatorIndex]);
+                if (source == null)
+                    return (T)(object)null!;
+
+                propertyName = propertyName[(separatorIndex + 1)..];
+                separatorIndex = propertyName.IndexOf('.');
+            }
+
+            return ResolvePropertySegment<T>(source, propertyName);
+        }
+
+        /// <summary>
+        /// Resolves one segment of a late-bound property path against <paramref name="source"/>, converting
+        /// the result to <typeparamref name="T"/>.
+        /// </summary>
+        private T ResolvePropertySegment<T>(object source, string propertyName)
+        {
             object? propertyValue;
             if (source is System.Runtime.CompilerServices.ITuple valueTuple
                 && valueTuple.Length > 0
