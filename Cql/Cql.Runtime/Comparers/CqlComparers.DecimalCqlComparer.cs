@@ -12,15 +12,12 @@ partial class CqlComparers
 {
     private class DecimalCqlComparer() : CqlComparer<decimal?>(CqlComparerEqualsImplementation.Compare)
     {
-        // CQL only supports 8 digits of scale.
-        private const int MaxDecimalDigits = 8;
-
         protected override int? CompareValues(
             [DisallowNull] decimal? x,
             [DisallowNull] decimal? y,
             string? precision)
         {
-            return Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
+            return Comparer<decimal?>.Default.Compare(TruncateToCqlDecimalScale(x ?? 0), TruncateToCqlDecimalScale(y ?? 0));
         }
 
         protected override bool EquivalentValues(
@@ -43,17 +40,6 @@ partial class CqlComparers
         // EquivalentValues. EquivalentValues rounds to the least precise operand, which is
         // non-transitive and therefore has no consistent hash.
         protected override int GetHashCodeValue([DisallowNull] decimal? value) =>
-            TruncateDigits(value ?? 0, MaxDecimalDigits).GetHashCode();
-
-        private static decimal TruncateDigits(decimal value, int places)
-        {
-            var integral = Math.Truncate(value);
-            var fraction = value - integral;
-
-            var multiplier = (decimal)Math.Pow(10, places);
-            var truncatedFraction = Math.Truncate(fraction * multiplier) / multiplier;
-
-            return integral + truncatedFraction;
-        }
+            TruncateToCqlDecimalScale(value ?? 0).GetHashCode();
     }
 }

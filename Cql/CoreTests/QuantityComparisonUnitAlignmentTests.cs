@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -140,6 +141,51 @@ namespace CoreTests
 
             Assert.IsNotNull(distinct);
             Assert.AreEqual(2, distinct!.Count());
+        }
+
+        /// <summary>
+        /// Equality truncates both values to the CQL Decimal scale, so two quantities that differ only
+        /// below the step size are equal and have to hash alike - in the quantity's own unit, whether that
+        /// unit is finer than its UCUM base ('mg'), coarser than it ('kg', 'd'), or not UCUM at all.
+        /// Hashing the canonical value untruncated put such pairs in different buckets, so Distinct kept
+        /// both.
+        /// </summary>
+        [TestMethod]
+        [DataRow("mg")]
+        [DataRow("kg")]
+        [DataRow("d")]
+        [DataRow("mg/d")]
+        [DataRow("no-such-ucum-unit")]
+        public void GetHashCode_SameUnitDifferingBelowDecimalStepSize_HashesAlike(string unit)
+        {
+            var comparers = new CqlComparers();
+            var x = Q(70.000000001m, unit);
+            var y = Q(70.000000002m, unit);
+
+            Assert.AreEqual(true, comparers.Equals(x, y, null));
+            Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
+
+            var distinct = Context.Operators.Distinct<CqlQuantity>([x, y]);
+            Assert.IsNotNull(distinct);
+            Assert.AreEqual(1, distinct!.Count());
+        }
+
+        /// <summary>
+        /// The truncation must not cost the cross-unit buckets: quantities equal across a unit conversion
+        /// keep hashing alike, and quantities that differ at or above the step size keep hashing apart.
+        /// </summary>
+        [TestMethod]
+        public void GetHashCode_EqualAcrossUnitsAndDistinctAboveStepSize_FollowsEquality()
+        {
+            var comparers = new CqlComparers();
+
+            Assert.AreEqual(comparers.GetHashCode(Q(1m, "mg")), comparers.GetHashCode(Q(0.001m, "g")));
+            Assert.AreEqual(comparers.GetHashCode(Q(1.000000001m, "mg")), comparers.GetHashCode(Q(0.001m, "g")));
+            Assert.AreEqual(comparers.GetHashCode(Q(0.25m, "mg/d")), comparers.GetHashCode(Q(0.25m, "mg.d-1")));
+            Assert.AreEqual(comparers.GetHashCode(Q(1.0m, "cm")), comparers.GetHashCode(Q(1.00m, "cm")));
+
+            Assert.AreEqual(false, comparers.Equals(Q(70.00000001m, "kg"), Q(70.00000002m, "kg"), null));
+            Assert.AreNotEqual(comparers.GetHashCode(Q(70.00000001m, "kg")), comparers.GetHashCode(Q(70.00000002m, "kg")));
         }
     }
 }

@@ -20,3 +20,10 @@
   rounding precision. **CQL evaluation results change** for cross-unit quantity comparisons; the CMS156
   high-risk-medications-in-the-elderly test case of the MADiE corpus that compares an average daily dose
   against a `'mg/d'` threshold passes.
+- **Runtime:** the hash code of a quantity is taken over its value truncated to the CQL `Decimal` scale,
+  in the quantity's own unit, before canonicalization. Equality already compared the truncated values, so
+  two quantities differing only below the step size of 10^-8 were equal but hashed differently, and the
+  set-based operators (`Distinct`, `Union`, `Except`) kept both. The truncation happens in the quantity's
+  own unit because that is where equality truncates; a truncated canonical value would collapse every
+  clinical dose rate to zero and would keep digits equality drops for units coarser than their base
+  (`'kg'`, `'d'`).

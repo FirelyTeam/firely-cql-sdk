@@ -97,29 +97,45 @@ partial class CqlComparers
 
         protected override int GetHashCodeValue(CqlQuantity value)
         {
-            // Both equality (CompareValues) and equivalence (EquivalentValues) canonicalize units,
-            // so the hash has to be taken over the canonical form: 1 'cm' and 0.01 'm' are equal
-            // and must land in the same bucket for the HashSet-based operators (Distinct, Union,
-            // Except) to deduplicate them. Value normalization covers the same-unit case, where
-            // 1.0 'cm' and 1.00 'cm' are equal but have different decimal representations.
+            // Equality (CompareValues) compares the values truncated to the CQL Decimal scale, in one
+            // common unit when the units differ, so the hash is taken over that same truncation and
+            // then over the canonical form: 1.000000001 'mg' and 1.000000002 'mg' are equal and so are
+            // 1 'mg' and 0.001 'g', and both pairs must land in the same bucket for the HashSet-based
+            // operators (Distinct, Union, Except) to deduplicate them. The truncation happens in the
+            // quantity's own unit, before canonicalization, because that is the unit equality truncates
+            // in whenever the units agree; truncating the canonical value instead would collapse every
+            // clinical dose rate to zero (0.25 'mg/d' is 0.0000000028935185 'g.s-1') and would keep
+            // digits that equality drops for a unit coarser than its base (70.000000001 'kg' is
+            // 70000.000001 'g'). Value normalization covers the scale: 1.0 'cm' and 1.00 'cm' are equal
+            // but have different decimal representations.
             //
-            // Known hash-contract gaps (pre-existing, non-fixable without breaking the equality
-            // semantics themselves):
+            // Known hash-contract gaps, inherent to equality semantics that are not transitive and so
+            // admit no consistent hash:
             //   '1' unit wildcard: CompareValues treats unit '1' as matching any other unit, so
-            //     (v, '1') equals (v, 'cm'), but their hashes differ. This is inherently
-            //     non-transitive — (1,'1') equals both (1,'cm') and (1,'g') while those two are
-            //     unequal — so no consistent hash exists for the '1' case.
-            //   Rounding-based equivalence: EquivalentValues rounds to the least-precise operand,
-            //     which is also non-transitive (0.15 ~ 0.2, 0.2 ~ 0.24, 0.15 !~ 0.24).
+            //     (v, '1') equals (v, 'cm'), but their hashes differ. (1,'1') equals both (1,'cm') and
+            //     (1,'g') while those two are unequal.
+            //   Rounding-based equivalence: EquivalentValues rounds to the least-precise operand
+            //     (0.15 ~ 0.2, 0.2 ~ 0.24, 0.15 !~ 0.24).
+            //   Cross-unit pairs whose coarser operand carries digits below the step size of its own
+            //     unit that are above the step size of the finer one: 1.000000004 'g' equals both
+            //     1000.000004 'mg' (compared in 'mg') and 1.000000006 'g' (compared in 'g'), while
+            //     those two are unequal. The hash drops such digits with the coarser operand's own
+            //     truncation, so the first pair hashes differently.
             //
             // Skip canonicalization for null/wildcard units: these can never benefit from unit
             // conversion (null has no UCUM meaning, '1' is already documented as unhashable above).
-            if (value.unit != null && value.unit != "1" && value.TryCanonicalize(MetricService, out var canonical))
+            var truncatedValue = value.value is { } quantityValue ? TruncateToCqlDecimalScale(quantityValue) : (decimal?)null;
+            if (truncatedValue is { } && value.unit is { } unit && unit != "1"
+                && new CqlQuantity(truncatedValue, unit).TryCanonicalize(MetricService, out var canonical))
+            {
                 return combine(canonical!.value, canonical.unit);
+            }
 
             // A unit UCUM cannot canonicalize -- and a quantity whose value or unit is null, which
             // this comparer does not treat as a null quantity -- must still hash without throwing.
-            return combine(value.value, value.unit);
+            // Equality compares such quantities in their own unit, truncated, so the truncated value
+            // is what gets hashed.
+            return combine(truncatedValue, value.unit);
 
             static int combine(decimal? quantityValue, string? unit) =>
                 HashCode.Combine(quantityValue is { } v ? NormalizeDecimalScale(v) : (decimal?)null, unit);
