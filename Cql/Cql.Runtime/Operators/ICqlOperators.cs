@@ -486,6 +486,7 @@ namespace Hl7.Cql.Operators
         decimal?                                 Predecessor(decimal? argument);
         int?                                     Predecessor(int? argument);
         long?                                    Predecessor(long? argument);
+        IEnumerable<object?>?                    PromoteLateBoundToList(object? argument);
         CqlQuantity?                             Product(IEnumerable<CqlQuantity?>? argument);
         decimal?                                 Product(IEnumerable<decimal?>? argument);
         int?                                     Product(IEnumerable<int?>? argument);

@@ -667,6 +667,26 @@ namespace Hl7.Cql.Operators
             }
         }
 
+        /// <summary>
+        /// Presents a late-bound value - one whose static type is not known at code-generation
+        /// time, because it was reached through a choice or union type surfaced as
+        /// <see cref="object"/> - as the list a query source has to be.
+        /// </summary>
+        /// <remarks>
+        /// A query source is either a list or a singleton, and the code generator normally
+        /// decides which from the source expression's static type. A late-bound source has no
+        /// usable static type, so the decision has to be made here, on the value itself:
+        /// a collection is iterated, anything else becomes the single element of a list.
+        /// </remarks>
+        public IEnumerable<object?>? PromoteLateBoundToList(object? argument) =>
+            argument switch
+            {
+                null                              => null,
+                string                            => [argument],
+                System.Collections.IEnumerable seq => seq.Cast<object?>().ToList(),
+                _                                 => [argument],
+            };
+
         public IEnumerable<object>? FlattenLateBoundList(IEnumerable<object> argument)
         {
             if (argument == null) return null;

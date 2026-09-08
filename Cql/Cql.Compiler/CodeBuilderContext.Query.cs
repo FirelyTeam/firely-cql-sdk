@@ -45,7 +45,7 @@ partial class CodeBuilderContext
             if (sources.Length == 0)
                 throw this.NewExpressionBuildingException("Queries must define at least 1 source");
 
-            var (@return, sourcesPreviouslySingletons) = ProcessQuerySources(query);
+            var (@return, sourcePromotions) = ProcessQuerySources(query);
             var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
 
             CodeLocal scopeParameter;
@@ -136,8 +136,12 @@ partial class CodeBuilderContext
             }
 
             // Because we promoted the source to a list, we now have to demote the result again.
-            var wereAllSourcesPreviouslySingletons = sourcesPreviouslySingletons.All(b => b);
-            if (wereAllSourcesPreviouslySingletons)
+            // A late-bound source is the exception: it was promoted from the runtime value, which
+            // can hold any number of elements, so SingletonFrom would drop all but one of them
+            // (and throw on more than one) exactly where the ELM says the result is a list.
+            var wereAllSourcesPromoted = sourcePromotions.All(p => p is not QuerySourcePromotion.None);
+            var wasAnySourceLateBound = sourcePromotions.Any(p => p is QuerySourcePromotion.LateBound);
+            if (wereAllSourcesPromoted && !(wasAnySourceLateBound && query.resultTypeSpecifier is ListTypeSpecifier))
             {
                 @return = DemoteSourceListToSingleton(@return);
             }
@@ -162,13 +166,41 @@ partial class CodeBuilderContext
         return BindCqlOperator(nameof(ICqlOperators.SingletonFrom), [source], [typeArg!]);
     }
 
-    private (CodeExpression source, bool sourceOriginallyASingleton) PromoteSourceSingletonToList(CodeExpression source)
+    /// <summary>
+    /// How a query source reached the list form the query machinery works on.
+    /// </summary>
+    private enum QuerySourcePromotion
+    {
+        /// <summary>The source was already list-typed.</summary>
+        None,
+
+        /// <summary>A singleton wrapped in a one-element list at code-generation time.</summary>
+        Singleton,
+
+        /// <summary>A late-bound value turned into a list at run time, of any length.</summary>
+        LateBound,
+    }
+
+    private (CodeExpression source, QuerySourcePromotion promotion) PromoteSourceSingletonToList(CodeExpression source)
     {
         if (_typeResolver.IsListType(source.Type))
-            return (source, false);
+            return (source, QuerySourcePromotion.None);
+
+        if (source.Type == typeof(object))
+        {
+            // A late-bound source - a property reached through a choice or union type, which the
+            // ELM leaves untyped and the code generator surfaces as 'object' - carries no static
+            // type to decide list-vs-singleton by, and the runtime value can be either. Wrapping
+            // it in a one-element array here would make a list-valued property (e.g.
+            // ServiceRequest.reasonCode on a ServiceRequest|MedicationRequest union) the single
+            // element of that array, so every element access in the query body would see the list
+            // itself instead of its elements. Promote on the value instead.
+            var promoted = BindCqlOperator(nameof(ICqlOperators.PromoteLateBoundToList), source);
+            return (promoted, QuerySourcePromotion.LateBound);
+        }
 
         source = new CodeNewArray(source.Type, source);
-        return (source, true);
+        return (source, QuerySourcePromotion.Singleton);
     }
 
     [Conditional("DEBUG")]
@@ -251,7 +283,7 @@ partial class CodeBuilderContext
             lines is not null ? $"{string.Concat(from l in lines select $"\n\t{l}")}" : "");
     }
 
-    private (CodeExpression sourceExpression, bool[] sourcesPreviouslySingletons) ProcessQuerySources(Query query)
+    private (CodeExpression sourceExpression, QuerySourcePromotion[] sourcePromotions) ProcessQuerySources(Query query)
     {
         AliasedQuerySource[] sources = query.source;
 
@@ -274,11 +306,11 @@ partial class CodeBuilderContext
 
         var temp = sourceExpressions.SelectToArray(expr => PromoteSourceSingletonToList(expr));
         var promotedSourceExpressions = temp.SelectToArray(s => s.source);
-        var sourcesPreviouslySingletons = temp.SelectToArray(s => s.sourceOriginallyASingleton);
+        var sourcePromotions = temp.SelectToArray(s => s.promotion);
 
         // Only one source, so no need for cross-joining. Return as-is.
         if (sources.Length == 1)
-            return (promotedSourceExpressions[0], sourcesPreviouslySingletons);
+            return (promotedSourceExpressions[0], sourcePromotions);
 
         var crossJoinedValueTupleResultsExpression = BindCqlOperator(nameof(ICqlOperators.CrossJoin), promotedSourceExpressions);
 
@@ -335,7 +367,7 @@ partial class CodeBuilderContext
 
         var crossJoinedCqlTupleResultsExpression = BindCqlOperator(nameof(ICqlOperators.Select), crossJoinedValueTupleResultsExpression, selectExpression);
 
-        return (crossJoinedCqlTupleResultsExpression, sourcesPreviouslySingletons)!;
+        return (crossJoinedCqlTupleResultsExpression, sourcePromotions)!;
     }
 
     protected CodeExpression SortClause(
