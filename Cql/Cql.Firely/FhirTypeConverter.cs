@@ -362,10 +362,6 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion((CqlInterval<long?> interval) => interval is null
                 ? null
                 : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
-            // A FHIR Period has inclusive boundaries, so an exclusive CQL boundary is stepped inward by one
-            // unit of its own precision, exactly like NumericIntervalToRange does for a Range. The CQL
-            // interval itself keeps its exclusivity (the Interval selector no longer normalizes it away),
-            // because operators comparing at a coarser precision need the original boundary.
             converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
             {
                 if (interval is null)
@@ -375,12 +371,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.StartElement = CqlDateTimeToFhirDateTime((interval.lowClosed ?? false) ? low : low.Successor(), dateTimeOffsetWhenAbsent);
+                        period.StartElement = CqlDateTimeToFhirDateTime(low, dateTimeOffsetWhenAbsent);
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.EndElement = CqlDateTimeToFhirDateTime((interval.highClosed ?? false) ? high : high.Predecessor(), dateTimeOffsetWhenAbsent);
+                        period.EndElement = CqlDateTimeToFhirDateTime(high, dateTimeOffsetWhenAbsent);
                     }
                     return period;
                 }
@@ -394,12 +390,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.Start = ((interval.lowClosed ?? false) ? low : low.Successor()).ToString();
+                        period.Start = low.ToString();
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.End = ((interval.highClosed ?? false) ? high : high.Predecessor()).ToString();
+                        period.End = high.ToString();
                     }
                     return period;
                 }
@@ -413,12 +409,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.StartElement = CqlTimeToFhirDateTime((interval.lowClosed ?? false) ? low : low.Successor());
+                        period.StartElement = CqlTimeToFhirDateTime(low);
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.EndElement = CqlTimeToFhirDateTime((interval.highClosed ?? false) ? high : high.Predecessor());
+                        period.EndElement = CqlTimeToFhirDateTime(high);
                     }
                     return period;
                 }
