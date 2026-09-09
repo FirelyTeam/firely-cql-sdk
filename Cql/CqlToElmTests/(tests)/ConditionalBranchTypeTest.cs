@@ -121,9 +121,11 @@ namespace Hl7.Cql.CqlToElm.Test
             // see QueryTest.SuchThat_WithAnyTypedElseBranch_TypesAsBoolean), Cql.Compiler's binder
             // then had no Func<T, object> overload to bind to.
             //
-            // An Any-typed branch has no static type of its own to contribute, so - like a literal
-            // null branch, which this same special case already covered - the other, meaningfully
-            // typed branch must govern instead.
+            // An Any-typed else branch here has no static type of its own to contribute - the CQL
+            // specification's If semantics require it to conform to the then branch's type, exactly
+            // as a literal null branch already did. See AnyTypedThenBranch_StillGovernsTheResult
+            // below for why this generalization is one-directional: an Any-typed then branch is not
+            // the same situation, because Any is also a real, valid static type in its own right.
             var library = CreateCqlToolkit().MakeLibrary("""
                 library ReproIf version '1.0.0'
 
@@ -136,6 +138,39 @@ namespace Hl7.Cql.CqlToElm.Test
             ifExpression.resultTypeSpecifier.Should().Be(
                 SystemTypes.BooleanType,
                 "the then branch's static type must govern when the else branch is Any-typed, per the CQL specification's If semantics.");
+        }
+
+        [TestMethod]
+        public void AnyTypedThenBranch_StillGovernsTheResult()
+        {
+            // Any is a real, valid static type - not just an untyped-null marker - as
+            // FunctionDefinitionTest.OptionalReturnTypesMayBeSupertype pins: a function declared
+            // `returns Any` is statically Any at every call site regardless of what its body
+            // actually evaluates to. A then branch built from such a call is exactly the case
+            // AnyTypedElseBranch_DoesNotWidenTheThenBranchToAny must NOT also cover: forcing that
+            // Any-typed then branch down to the else branch's concrete type - here, String - would
+            // silently null out any then value that isn't actually a String (Two() returns the
+            // Integer 2), the same class of defect #1594 fixed for Choice branches. The CQL
+            // specification's If semantics make the then branch's static type govern
+            // unconditionally, and Any is that type here, so the result stays Any and the real
+            // value survives - proven by evaluating, not just inspecting the ELM, since the ELM
+            // could carry the right result type while an emitted cast still discarded the value.
+            const string cql = """
+                library ReproIfAnyThen version '1.0.0'
+
+                define function Two() returns Any: 2
+
+                define "Result": if true then Two() else 'fallback'
+                """;
+
+            var library = CreateCqlToolkit().MakeLibrary(cql);
+            var ifExpression = library.ShouldDefine<ExpressionDef>("Result").expression!;
+            ifExpression.resultTypeSpecifier.Should().Be(
+                SystemTypes.AnyType,
+                "the then branch's static type - Any - must govern per the CQL specification's If semantics, even though the else branch is concretely typed.");
+
+            var result = Evaluate(cql, "Result");
+            Assert.AreEqual(2, result, "Two()'s real value must survive, not be cast away to null because the else branch is a String.");
         }
 
         [TestMethod]

@@ -131,17 +131,23 @@ namespace Hl7.Cql.CqlToElm
             else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
             var compatible = true;
-            // A branch typed Any carries no useful static type to reconcile against - whether it's
-            // an untyped null literal or an expression the translator could not resolve to anything
-            // more specific (e.g. a Message(null, ...) call, or a call to an undefined function
-            // under AllowUnresolvedExternals). The CQL specification (Logical Specification, If)
-            // states the then branch's static type determines the result and the else branch must
-            // be of that same type; an Any-typed branch has nothing to contribute, so the other
-            // (non-Any) branch's type governs instead. This used to special-case only a literal
-            // Null node, so a non-null Any-typed branch fell through to the cost-based
-            // reconciliation below, which could pick coercing the *other*, meaningfully-typed
-            // branch down to Any as the "cheaper" direction - see #1601.
-            if (then.resultTypeSpecifier == SystemTypes.AnyType)
+            // An untyped null literal carries no static type of its own, so it takes on the other
+            // branch's type - this direction is unconditional on node kind because a literal Null
+            // is the only expression with nothing to lose by being retyped.
+            //
+            // Any itself is different: it is a real, valid static type (see
+            // FunctionDefinitionTest's `Two() returns Any: 2`), not just an untyped-null marker, and
+            // the CQL specification (Logical Specification, If) makes the then branch's static type
+            // determine the result unconditionally - "the else argument must be of that same type."
+            // Only an Any-typed else branch has a spec-mandated coercion to perform (into then's
+            // type); an Any-typed then branch is already the answer the spec asks for, and forcing
+            // it down to else's type on the strength of else being concretely typed would silently
+            // null out any then value that doesn't happen to fit, the same class of defect #1594
+            // fixed for Choice branches. So only the else side generalizes past the literal-null
+            // case - see #1601, where the else branch is an unresolved-or-Message(null, ...) call
+            // that previously fell through to the cost-based reconciliation below, which could pick
+            // coercing the meaningfully-typed then branch *up* to Any as the "cheaper" direction.
+            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
             {
                 if (@else.resultTypeSpecifier != SystemTypes.AnyType)
                 {
@@ -149,7 +155,7 @@ namespace Hl7.Cql.CqlToElm
                     then = thenResult.Result;
                 }
             }
-            else if (@else.resultTypeSpecifier == SystemTypes.AnyType)
+            else if (@else.resultTypeSpecifier == SystemTypes.AnyType && then.resultTypeSpecifier != SystemTypes.AnyType)
             {
                 var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
                 @else = elseResult.Result;
