@@ -131,7 +131,17 @@ namespace Hl7.Cql.CqlToElm
             else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
             var compatible = true;
-            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
+            // A branch typed Any carries no useful static type to reconcile against - whether it's
+            // an untyped null literal or an expression the translator could not resolve to anything
+            // more specific (e.g. a Message(null, ...) call, or a call to an undefined function
+            // under AllowUnresolvedExternals). The CQL specification (Logical Specification, If)
+            // states the then branch's static type determines the result and the else branch must
+            // be of that same type; an Any-typed branch has nothing to contribute, so the other
+            // (non-Any) branch's type governs instead. This used to special-case only a literal
+            // Null node, so a non-null Any-typed branch fell through to the cost-based
+            // reconciliation below, which could pick coercing the *other*, meaningfully-typed
+            // branch down to Any as the "cheaper" direction - see #1601.
+            if (then.resultTypeSpecifier == SystemTypes.AnyType)
             {
                 if (@else.resultTypeSpecifier != SystemTypes.AnyType)
                 {
@@ -139,13 +149,10 @@ namespace Hl7.Cql.CqlToElm
                     then = thenResult.Result;
                 }
             }
-            else if (@else is Null && @else.resultTypeSpecifier == SystemTypes.AnyType)
+            else if (@else.resultTypeSpecifier == SystemTypes.AnyType)
             {
-                if (then.resultTypeSpecifier != SystemTypes.AnyType)
-                {
-                    var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-                    @else = elseResult.Result;
-                }
+                var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
+                @else = elseResult.Result;
             }
             else
             {

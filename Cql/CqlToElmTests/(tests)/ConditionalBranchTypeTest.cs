@@ -109,6 +109,36 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void AnyTypedElseBranch_DoesNotWidenTheThenBranchToAny()
+        {
+            // Regression test for #1601. An else branch typed Any - here, a call the translator
+            // could not resolve to anything more specific than Any, the same outcome an
+            // AllowUnresolvedExternals call or a Message(null, ...) source produces - used to
+            // reconcile by the general cost-based path below, which measured coercing the Boolean
+            // then branch *up* to Any as cheaper than coercing the Any else branch down to Boolean,
+            // and picked it. That silently widened an otherwise-Boolean conditional to Any; anywhere
+            // that conditional fed a lambda expecting bool? (a such that clause, for instance -
+            // see QueryTest.SuchThat_WithAnyTypedElseBranch_TypesAsBoolean), Cql.Compiler's binder
+            // then had no Func<T, object> overload to bind to.
+            //
+            // An Any-typed branch has no static type of its own to contribute, so - like a literal
+            // null branch, which this same special case already covered - the other, meaningfully
+            // typed branch must govern instead.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ReproIf version '1.0.0'
+
+                define function "Error"(message String): Message(null, true, 'E1', 'Error', message)
+
+                define "IfElseAny": if true then true else "Error"('not supported')
+                """);
+
+            var ifExpression = library.ShouldDefine<ExpressionDef>("IfElseAny").expression!;
+            ifExpression.resultTypeSpecifier.Should().Be(
+                SystemTypes.BooleanType,
+                "the then branch's static type must govern when the else branch is Any-typed, per the CQL specification's If semantics.");
+        }
+
+        [TestMethod]
         public void PartiallyOverlappingChoiceBranches_UnionTheAlternatives()
         {
             // Both branches are already choices, overlapping only in String. CanBeCast is satisfied
