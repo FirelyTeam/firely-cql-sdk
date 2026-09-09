@@ -131,23 +131,28 @@ namespace Hl7.Cql.CqlToElm
             else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
             var compatible = true;
-            // An untyped null literal carries no static type of its own, so it takes on the other
-            // branch's type - this direction is unconditional on node kind because a literal Null
-            // is the only expression with nothing to lose by being retyped.
+            // An Any-typed branch - a literal null, an unresolved-external call under
+            // AllowUnresolvedExternals, a Message(null, ...) source, or any other expression the
+            // translator could not resolve to a more specific type - has no static type of its own
+            // to reconcile against, so the other branch's type governs instead. This is symmetric on
+            // purpose, matching two things this translator already does elsewhere:
             //
-            // Any itself is different: it is a real, valid static type (see
-            // FunctionDefinitionTest's `Two() returns Any: 2`), not just an untyped-null marker, and
-            // the CQL specification (Logical Specification, If) makes the then branch's static type
-            // determine the result unconditionally - "the else argument must be of that same type."
-            // Only an Any-typed else branch has a spec-mandated coercion to perform (into then's
-            // type); an Any-typed then branch is already the answer the spec asks for, and forcing
-            // it down to else's type on the strength of else being concretely typed would silently
-            // null out any then value that doesn't happen to fit, the same class of defect #1594
-            // fixed for Choice branches. So only the else side generalizes past the literal-null
-            // case - see #1601, where the else branch is an unresolved-or-Message(null, ...) call
-            // that previously fell through to the cost-based reconciliation below, which could pick
-            // coercing the meaningfully-typed then branch *up* to Any as the "cheaper" direction.
-            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
+            //  - The Java reference translator (cql-to-elm-cli) is symmetric here:
+            //    LibraryBuilder.findCompatibleType returns the other side's type whenever either
+            //    side is Any, for both `if true then true else Error(...)` and
+            //    `if true then Error(...) else true`.
+            //  - Case in this translator is already symmetric: VisitCaseExpressionTerm drops Any
+            //    from the set of branch result types regardless of which branch(es) it came from,
+            //    so a case with an Any-typed then item behaves identically to one with an Any-typed
+            //    else. #1595 pinned "if behaves the way case already did" as an explicit invariant;
+            //    special-casing only one side of if would make it disagree with case about Any.
+            //
+            // Before this generalization, only a literal Null node was special-cased, so a non-null
+            // Any-typed branch on either side fell through to the cost-based reconciliation below,
+            // which could pick coercing the *other*, meaningfully-typed branch down to Any as the
+            // "cheaper" direction - see #1601 (else-side) and its exact mirror on the then-side,
+            // verified to still reproduce without this generalization covering both directions.
+            if (then.resultTypeSpecifier == SystemTypes.AnyType)
             {
                 if (@else.resultTypeSpecifier != SystemTypes.AnyType)
                 {
@@ -155,7 +160,7 @@ namespace Hl7.Cql.CqlToElm
                     then = thenResult.Result;
                 }
             }
-            else if (@else.resultTypeSpecifier == SystemTypes.AnyType && then.resultTypeSpecifier != SystemTypes.AnyType)
+            else if (@else.resultTypeSpecifier == SystemTypes.AnyType)
             {
                 var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
                 @else = elseResult.Result;
