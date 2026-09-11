@@ -72,4 +72,31 @@ internal static class CqlComparerSharedMethods
 
         return value;
     }
+
+    /// <summary>
+    /// The scale of the CQL Decimal type: "a <i>scale</i> (meaning number of possible digits to the right
+    /// of the decimal) of 8 [...] with a step size of 10^-8" (CQL 1.5.3 Errata 2, Appendix B - CQL
+    /// Reference, 1.1 Decimal).
+    /// </summary>
+    public const int CqlDecimalScale = 8;
+
+    /// <summary>
+    /// Truncates <paramref name="value"/> to the <see cref="CqlDecimalScale"/>, dropping every digit below
+    /// the step size of a CQL Decimal without rounding.
+    /// </summary>
+    /// <remarks>
+    /// Decimal equality compares the truncated values, so a hash over a decimal that takes part in
+    /// equality has to be taken over the same truncation: two values that differ only below the step size
+    /// are equal and must land in the same bucket.
+    /// </remarks>
+    public static decimal TruncateToCqlDecimalScale(decimal value)
+    {
+        var integral = Math.Truncate(value);
+        var fraction = value - integral;
+
+        var multiplier = (decimal)Math.Pow(10, CqlDecimalScale);
+        var truncatedFraction = Math.Truncate(fraction * multiplier) / multiplier;
+
+        return integral + truncatedFraction;
+    }
 }
