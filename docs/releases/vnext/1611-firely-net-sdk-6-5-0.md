@@ -6,4 +6,4 @@
   Dependencies" table is updated to match. A consumer with its own direct reference to the Firely .NET
   SDK should move it to `6.5.0` as well. This stays within the Firely .NET SDK's own `6.x` major, so it
   is not a MESO trigger on its own (see [versioning.md](../../versioning.md)); no public API, generated
-  C# output, or CQL evaluation result changes with it.
+  C# output, or CQL evaluation result changes with it. (#1611)
