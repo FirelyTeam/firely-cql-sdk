@@ -10,10 +10,9 @@
 		<!-- <VersionSuffix>rc.1</VersionSuffix> -->
 
 		<!--
-			Keep FirelyNetVersion in sync between cql-base.props and cql-demo.props and README.md
-			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
+			FirelyNetVersion moved to Directory.Packages.props at the repository root, which is now the
+			single source of truth for every package version. Its Vonk sync obligation is documented there.
 			-->
-		<FirelyNetVersion>6.5.0</FirelyNetVersion>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>

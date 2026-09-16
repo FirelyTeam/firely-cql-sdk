@@ -12,7 +12,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
+        <PackageReference Include="Antlr4.Runtime.Standard" />
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
             <_Parameter1>true</_Parameter1>
         </AssemblyAttribute>

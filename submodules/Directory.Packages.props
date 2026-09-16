@@ -1,0 +1,21 @@
+<Project>
+
+	<!--
+		Opt the private Firely.Cql.Sdk.Integration.Runner submodule out of this repository's central
+		package management.
+
+		MSBuild finds the nearest Directory.Packages.props by walking up from each project directory.
+		Without this file, projects inside submodules/Firely.Cql.Sdk.Integration.Runner would walk up
+		to the repository root and inherit ManagePackageVersionsCentrally=true, then fail to restore
+		with NU1008 because they declare versions on their own PackageReference items.
+
+		The submodule is a separate repository. Adopting central package management there is its own
+		decision, taken there - this file only stops our root file from reaching across the boundary.
+		Placing it here (in submodules/, which belongs to this repository) rather than inside the
+		submodule keeps the change entirely on our side of that boundary.
+		-->
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+
+</Project>

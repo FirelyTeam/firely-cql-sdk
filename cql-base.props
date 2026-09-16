@@ -10,10 +10,9 @@
 
 	<PropertyGroup>
 		<!--
-			Keep FirelyNetVersion in sync between cql-base.props and cql-demo.props and README.md
-			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
+			FirelyNetVersion moved to Directory.Packages.props at the repository root, which is now the
+			single source of truth for every package version. Its Vonk sync obligation is documented there.
 			-->
-		<FirelyNetVersion>6.5.0</FirelyNetVersion>
 
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>
@@ -49,7 +48,7 @@
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
-		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageReference Include="JetBrains.Annotations" />
 	</ItemGroup>
 
 </Project>

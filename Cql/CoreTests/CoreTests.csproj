@@ -15,19 +15,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
-		<PackageReference Include="Fhir.Metrics" Version="1.4.0" />
-		<PackageReference Include="FluentAssertions" Version="7.2.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.3" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.3" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-		<PackageReference Include="MSTest.TestFramework" Version="3.8.3" />
-		<PackageReference Include="MSTest.TestAdapter" Version="3.8.3" />
-		<PackageReference Include="coverlet.collector" Version="6.0.2">
+		<PackageReference Include="BenchmarkDotNet" />
+		<PackageReference Include="Fhir.Metrics" />
+		<PackageReference Include="FluentAssertions" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" />
+		<PackageReference Include="MSTest.TestFramework" />
+		<PackageReference Include="MSTest.TestAdapter" />
+		<PackageReference Include="coverlet.collector">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
 	</ItemGroup>
 
