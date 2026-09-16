@@ -30,6 +30,7 @@
 
   - `LibrarySetCSharpCodeGenerator.GeneratorToolVersion` is unchanged at `5.2.1.0`. #1595 and #1606 change the C# that comes out of the pipeline, but they do so by changing the **ELM the translator produces**, not the ELM-to-C# generator — the generator emits the same C# it always did for a given input. The version marks the generator, so it does not move here.
   - No public API was removed, changed, or marked `[Obsolete]`; all 13 `PublicAPI.Unshipped.txt` files are header-only.
+  - **No dependency crossed its own major.** `FirelyNetVersion` moved `6.3.0` → `6.5.0` (#1611), which stays inside the Firely .NET SDK's `6.x` and so does not fire the trigger.
   - **The dependency-major trigger is a near miss worth naming.** `Microsoft.SourceLink.GitHub` went `8.0.0` → `10.0.401` (#1609), which crosses two of that package's majors. It does not fire the trigger, because the trigger exists for the case where "the consumer's own graph moves with it" and this reference is `PrivateAssets="All"` — a build-time asset of ours that never reaches a consumer's dependency graph. A future bump of a package **without** `PrivateAssets` across its major does fire it.
 
   **MACRO was considered and rejected.** versioning.md's measured trigger wants a re-architecture, removal of a whole surface area, or several MESO-level migrations landing together. Four `Potentially Breaking` entries sounds like the third, but each is narrow: the two translator entries affect only defines containing one specific branch-type pattern and generate exactly as before otherwise, and the two valueset entries affect only hosts that read a computed `Expansion` back off an instance they handed in. No surface area was removed and nothing was re-architected. There is no **declared** MACRO here either — that is a product judgement about a new engine generation, and none has been taken.
@@ -57,7 +58,7 @@ Note that generated C# **does** change in this release for libraries containing 
 
 #### Dependency Updates
 
-- `FirelyNetVersion` remains `6.3.0` in `cql-base.props` and `Demo/cql-demo.props`, matching Vonk's `FhirNetApiVersion` (`Directory.Packages.props`) at release cut time.
+- `FirelyNetVersion`: `6.3.0` → `6.5.0` in `cql-base.props` and `Demo/cql-demo.props`, bumping `Hl7.Fhir.Base` and `Hl7.Fhir.R4` for every package that consumes Firely .NET SDK types (`Hl7.Cql.Fhir`, `Hl7.Cql.Packaging`, `Hl7.Cql.Packager`) and for the demo projects. The root `README.md` "External Dependencies" table matches. A consumer with its own direct reference to the Firely .NET SDK should move it to `6.5.0` as well. This stays within the Firely .NET SDK's own `6.x` major, so it is not a MESO trigger on its own; no public API, generated C# output, or CQL evaluation result changes with it. (#1611)
 - `Microsoft.SourceLink.GitHub`: `8.0.0` → `10.0.401`, resolving the NU1902 advisory warning. The reference is `PrivateAssets="All"`, so it is a build-time asset of the SDK's own compilation and does not appear in a consumer's dependency graph. (#1609)
 
 #### Potentially Breaking
@@ -119,7 +120,7 @@ Note that generated C# **does** change in this release for libraries containing 
 - New or changed exception types: none in this release window. (#1606 makes the `CannotBindToCqlOperatorError` binding failure stop occurring for the affected pattern; the error type itself is unchanged.)
 - Public runtime/operator API changes: none in this release window.
 - Generator version and invoker range: stated above under `### Generated Code Compatibility`; neither moved, though generated C# does change for affected libraries.
-- `FirelyNetVersion` updates: none (`6.3.0` unchanged, still matching Vonk).
+- `FirelyNetVersion` updates: `6.3.0` → `6.5.0` (#1611), with the root README External Dependencies table updated to match. **Note for maintainers:** `cql-base.props` requires this to equal `FhirNetApiVersion` in [Vonk's `Directory.Packages.props`](https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props), which was still `6.3.0` on Vonk's `develop` when this release was cut. The two are out of step until Vonk moves; nothing in this release depends on Vonk, but the invariant does not currently hold.
 - Packager CLI argument changes: none in this release window.
 - MSBuild property, target, or script-flag changes: none consumer-facing. `.github/dependabot.yml` gained a submodule exclusion (#1610), which is CI configuration and outside the version scales.
 - Content previously drafted in `docs/releases/vnext-release-notes.md`: none (file remains a static pointer doc).
@@ -131,6 +132,7 @@ Note that generated C# **does** change in this release for libraries containing 
 
 | PR | Title |
 | --- | --- |
+| [#1611](https://github.com/FirelyTeam/firely-cql-sdk/pull/1611) | Update Firely .NET SDK to 6.5.0 |
 | [#1610](https://github.com/FirelyTeam/firely-cql-sdk/pull/1610) | Skip private submodules in Dependabot |
 | [#1609](https://github.com/FirelyTeam/firely-cql-sdk/pull/1609) | Fix NU1902: bump Microsoft.SourceLink.GitHub to 10.0.401 |
 | [#1606](https://github.com/FirelyTeam/firely-cql-sdk/pull/1606) | Don't widen a typed `If` branch to `Any` |
