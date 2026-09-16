@@ -7,14 +7,24 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<!--
+		The references below carry no Version because this repository manages package versions centrally,
+		in the root Directory.Packages.props. To enable one, add a PackageVersion for Hl7.Cql.Invocation
+		there naming the version you want.
+
+		In your own project you have the same two choices: manage versions centrally the same way, or
+		don't, and put Version="..." on the PackageReference itself.
+		-->
+
 	<!-- Use NuGet Package from the public Nuget feed -->
 	<!-- <ItemGroup> -->
-	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-alpha.18" /> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" /> -->
 	<!-- </ItemGroup> -->
 
-	<!-- OR, Use NuGet Package from the local build build-local-nuget.ps1, you'll need to update the version accordingly -->
+	<!-- OR, Use NuGet Package from the local build build-local-nuget.ps1. Also uncomment the LocalPackages
+	     source in NuGet.config, and give it a packageSourceMapping entry so Hl7.Cql.* resolves from it -->
 	<!-- <ItemGroup> -->
-	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" Version="2.1.0-build.202506041535" /> -->
+	<!-- 	<PackageReference Include="Hl7.Cql.Invocation" /> -->
 	<!-- </ItemGroup> -->
 
 	<!-- OR, Use a direct project reference to the Cql.Invocation project, this is useful for debugging the library -->
