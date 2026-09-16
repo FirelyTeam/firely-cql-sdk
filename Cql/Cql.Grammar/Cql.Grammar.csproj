@@ -30,8 +30,8 @@
     obj/debug directory and then commit the updated generated files.
 
     <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
-        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
-        <PackageReference Include="Antlr4BuildTasks" Version="12.8" PrivateAssets="All"/>
+        <PackageReference Include="Antlr4.Runtime.Standard" />
+        <PackageReference Include="Antlr4BuildTasks" PrivateAssets="All" />
         <Antlr4 Include="cql.g4">
             <Visitor>true</Visitor>
             <Package>Hl7.Cql.CqlToElm.Grammar</Package>

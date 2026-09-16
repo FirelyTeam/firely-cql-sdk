@@ -35,9 +35,9 @@
 		-->
 	<PropertyGroup>
 		<!--
-			FirelyNetVersion must be at or above FhirNetApiVersion in Vonk's Directory.Packages.props
-			by the time Vonk upgrades the CQL SDK: Hl7.Cql.Fhir declares Hl7.Fhir.Base >= this version,
-			and Vonk pins Hl7.Fhir.Base directly, so a lower value there is a package downgrade.
+			When Vonk upgrades to a CQL SDK release, Vonk's FhirNetApiVersion must be at or above
+			this FirelyNetVersion: Hl7.Cql.Fhir declares Hl7.Fhir.Base >= this version, and Vonk
+			pins Hl7.Fhir.Base directly, so a lower value there is a package downgrade.
 			The CQL SDK legitimately leads for a while - Vonk moves to this version as part of taking
 			the release that carries it - so the two being unequal between releases is expected.
 			Keep in sync with the root README.md "External Dependencies" table.
@@ -55,6 +55,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageVersion Include="Antlr4BuildTasks" Version="12.8" />
 		<PackageVersion Include="Antlr4.Runtime.Standard" Version="4.13.1" />
 		<PackageVersion Include="BenchmarkDotNet" Version="$(BenchmarkDotNetVersion)" />
 		<PackageVersion Include="BenchmarkDotNet.Diagnostics.Windows" Version="$(BenchmarkDotNetVersion)" />
