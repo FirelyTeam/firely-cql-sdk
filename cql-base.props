@@ -9,11 +9,6 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<!--
-			FirelyNetVersion moved to Directory.Packages.props at the repository root, which is now the
-			single source of truth for every package version. Its Vonk sync obligation is documented there.
-			-->
-
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>
 		<DefineConstants Condition="'$(FhirRelease)'!=''">$(DefineConstants);FhirRelease$(FhirRelease)</DefineConstants>

@@ -76,9 +76,13 @@ For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` 
 - Any change to build scripts/project files must keep working on both Windows and Unix (Linux/macOS/WSL): maintain matching `.ps1`/`.sh` script pairs, use `Condition="'$(OS)' == 'Windows_NT'"` (or `!=`) rather than assuming an OS, and match directory-name case exactly — Unix filesystems are case-sensitive even though this repo is usually edited on Windows. Avoid platform-specific tools like `flock` (no default on macOS); prefer a portable mechanism like directory-based locking.
 - CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, any `*.md` file, and `.claude/`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
 
-## Dependency version bumps — update the root README table
+## Dependency version bumps — change `Directory.Packages.props`, then the root README table
 
-When any external package version is bumped in a `.csproj` or `.props` file, also update the version number in the **"External Dependencies" table in the root `README.md`** — not just the sub-project READMEs (which don't state version numbers). The root README's versioned table is the only place the canonical pinned versions are documented for consumers, and it silently drifts after bumps that only touch `csproj` files. Likewise, check `docs/` for any design or assessment doc that mentions a version number for the same package and update it too.
+External package versions are centrally managed. **Every version lives in the root [`Directory.Packages.props`](Directory.Packages.props)** — that file explains the arrangement in full and is the one place to change a version. Projects carry a bare `<PackageReference Include="Foo" />` with no `Version` attribute; adding one is an error (`NU1008`). Don't go looking in `cql-base.props` or a `.csproj` for a package version, and don't reintroduce one there.
+
+Two things are deliberately *not* centrally managed, so don't move them: `VersionPrefix` (the version we ship, in `cql-sdk.props` and `Demo/cql-demo.props`) and the private `Firely.Cql.Sdk.Integration.Runner` submodule, which opts out via `submodules/Directory.Packages.props` because it is a separate repository.
+
+When any external package version is bumped, also update the version number in the **"External Dependencies" table in the root `README.md`** — not just the sub-project READMEs (which don't state version numbers). The root README's versioned table is the only place the canonical pinned versions are documented for consumers, and it silently drifts after bumps. Likewise, check `docs/` for any design or assessment doc that mentions a version number for the same package and update it too.
 
 ## Code generation version (`GeneratorToolVersion`)
 

@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.17.0
+**Version:** 3.18.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -102,6 +102,13 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 ## 6.0. Appendix: Version History
 
 - Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
+
+- 3.18.0
+  - External package versions are now centrally managed in the root `Directory.Packages.props`. Rewrote 4.5.2.1 in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) to point there as the single source of truth, note that a `Version` attribute on a `PackageReference` is now an error (`NU1008`), and name the two deliberate exclusions: `VersionPrefix` (the version we ship) and the private integration-runner submodule, which opts out via `submodules/Directory.Packages.props`.
+  - Mirrored the same rule into [CLAUDE.md](../CLAUDE.md), per the sync requirement.
+  - Updated the `cut-release-notes` skill: `FirelyNetVersion` is read from `Directory.Packages.props`, and the Vonk comparison is now a **record** step rather than a reconcile step — the SDK leads and Vonk catches up when it upgrades, so ours being higher is expected and must not be "fixed" by lowering ours.
+  - Corrected the same instruction on the [Creating Tags and Releases](https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases) wiki page, which told the reader to copy Vonk’s `FhirNetApiVersion` into our value.
+  - The explanation of the arrangement lives in one place, `Directory.Packages.props` itself; the old props files carry no pointer comments back to it.
 
 - 3.17.0
   - Documented the SDK's versioning scheme at [docs/versioning.md](../docs/versioning.md), which is **canonical and deliberately not restated anywhere**: the package version uses **EffVer** (Intended Effort Versioning), not SemVer. Deliberately no `11-versioning.md` sub-document — per the DRY rule in [CLAUDE.md](../CLAUDE.md), a task-specific procedure gets one copy plus links, and a second full copy of the trigger list had already drifted from the first while this change was in review.

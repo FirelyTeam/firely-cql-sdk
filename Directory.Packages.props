@@ -1,15 +1,37 @@
 <Project>
 
+	<!--
+		=====================================================================================
+		This file is the single source of truth for every external package version used by
+		this repository. It is the only place to change one.
+		=====================================================================================
+
+		Projects declare packages without a version - <PackageReference Include="Foo" /> - and
+		NuGet takes the version from the PackageVersion items below. A Version attribute on a
+		PackageReference is an error (NU1008), which is what keeps this file authoritative.
+
+		What does NOT live here:
+		  - The SDK's own product version. VersionPrefix stays in cql-sdk.props and
+		    Demo/cql-demo.props; it is the version we ship, not a version we consume.
+		  - Versions for the private Firely.Cql.Sdk.Integration.Runner submodule, which opts
+		    out via submodules/Directory.Packages.props. It is a separate repository.
+
+		When you change a version here, also update the root README.md "External Dependencies"
+		table, which is the only consumer-visible record of what we pin.
+
+		This mirrors the arrangement in
+		https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
+		-->
+
 	<PropertyGroup>
 		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
 	</PropertyGroup>
 
 	<!--
 		Version variables, used to keep related package versions in sync.
-		Defined here (rather than in cql-base.props) because Directory.Packages.props is imported
-		before the project body, so the PackageVersion items below can reference them, and because
-		cql-base.props is imported explicitly by each project and so is evaluated too late.
-		This mirrors the arrangement in https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
+		Defined here rather than in cql-base.props for two reasons: Directory.Packages.props is
+		imported before the project body, so the PackageVersion items below can reference them,
+		and cql-base.props is imported explicitly by each project and so is evaluated too late.
 		-->
 	<PropertyGroup>
 		<!--

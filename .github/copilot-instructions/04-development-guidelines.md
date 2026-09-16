@@ -104,7 +104,9 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.5.2 **When adding dependencies, also update the README's Dependencies section**
 
-4.5.2.1 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
+4.5.2.1 **External package versions are centrally managed: every version lives in the root `Directory.Packages.props`**, which explains the arrangement in full and is the one place to change a version. Projects carry a bare `<PackageReference Include="Foo" />` with no `Version` attribute; adding one is an error (`NU1008`). Two things are deliberately not centrally managed: `VersionPrefix` (the version we ship, in `cql-sdk.props` and `Demo/cql-demo.props`), and the private `Firely.Cql.Sdk.Integration.Runner` submodule, which opts out via `submodules/Directory.Packages.props` because it is a separate repository.
+
+4.5.2.2 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
 
 4.5.3 Document experimental features clearly in preview projects
 

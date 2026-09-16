@@ -9,10 +9,6 @@
 		<VersionPrefix>2.15.0</VersionPrefix>
 		<!-- <VersionSuffix>rc.1</VersionSuffix> -->
 
-		<!--
-			FirelyNetVersion moved to Directory.Packages.props at the repository root, which is now the
-			single source of truth for every package version. Its Vonk sync obligation is documented there.
-			-->
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>
