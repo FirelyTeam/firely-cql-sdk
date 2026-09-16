@@ -400,7 +400,26 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNull(result);
         }
 
+        [TestMethod]
+        public void Interval_NonLiteral_Closed_Arguments()
+        {
+            // "Interval" quoted: the selector syntax only ever emits Boolean literals here.
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("\"Interval\"(1, 10, 1 > 2, 1 < 2)");
+            var interval = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Interval>();
 
+            Assert.IsInstanceOfType(interval.lowClosedExpression, typeof(Greater));
+            Assert.IsInstanceOfType(interval.highClosedExpression, typeof(Less));
+
+            var result = Run(interval, library, FhirCqlContext.ForBundle());
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(CqlInterval<int?>));
+            var cqlInterval = (CqlInterval<int?>)result;
+            // SDK always closes intervals upon creation
+            Assert.AreEqual(2, cqlInterval.low);
+            Assert.IsTrue(cqlInterval.lowClosed);
+            Assert.AreEqual(10, cqlInterval.high);
+            Assert.IsTrue(cqlInterval.highClosed);
+        }
 
     }
 }
