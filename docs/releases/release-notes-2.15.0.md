@@ -24,7 +24,7 @@
 - **MESO** (`2.15.0`) — the second digit, meaning some small effort may be required. Two triggers from [versioning.md](../versioning.md) fired independently, either of which forces the level on its own:
 
   1. **Fragments declaring `## Potentially Breaking`.** All four release-note fragments in this window carry one: #1592, #1595, #1596 and #1606.
-  2. **CQL evaluation results change.** #1595's fix makes branches of an `if`/`else if` chain return their own values where they previously evaluated to `null`, so a measure containing that pattern scores differently than it did on `2.14.0`. versioning.md counts this even though the old output was a defect: "A measure whose output moves is a migration even when the old output was a defect."
+  2. **CQL evaluation results change.** #1595's fix makes branches of an `if`/`else if` chain return their own values where they previously evaluated to `null`, so a measure containing that pattern scores differently than it did on `2.14.0`. [versioning.md](../versioning.md) counts this even though the old output was a defect: "A measure whose output moves is a migration even when the old output was a defect."
 
   Triggers that did **not** fire, recorded so the next cut does not have to re-derive them:
 
@@ -33,7 +33,7 @@
   - **No dependency crossed its own major.** `FirelyNetVersion` moved `6.3.0` → `6.5.0` (#1611), which stays inside the Firely .NET SDK's `6.x` and so does not fire the trigger.
   - **The dependency-major trigger is a near miss worth naming.** `Microsoft.SourceLink.GitHub` went `8.0.0` → `10.0.401` (#1609), which crosses two of that package's majors. It does not fire the trigger, because the trigger exists for the case where "the consumer's own graph moves with it" and this reference is `PrivateAssets="All"` — a build-time asset of ours that never reaches a consumer's dependency graph. A future bump of a package **without** `PrivateAssets` across its major does fire it.
 
-  **MACRO was considered and rejected.** versioning.md's measured trigger wants a re-architecture, removal of a whole surface area, or several MESO-level migrations landing together. Four `Potentially Breaking` entries sounds like the third, but each is narrow: the two translator entries affect only defines containing one specific branch-type pattern and generate exactly as before otherwise, and the two valueset entries affect only hosts that read a computed `Expansion` back off an instance they handed in. No surface area was removed and nothing was re-architected. There is no **declared** MACRO here either — that is a product judgement about a new engine generation, and none has been taken.
+  **MACRO was considered and rejected.** [versioning.md](../versioning.md)'s measured trigger wants a re-architecture, removal of a whole surface area, or several MESO-level migrations landing together. Four `Potentially Breaking` entries sounds like the third, but each is narrow: the two translator entries affect only defines containing one specific branch-type pattern and generate exactly as before otherwise, and the two valueset entries affect only hosts that read a computed `Expansion` back off an instance they handed in. No surface area was removed and nothing was re-architected. There is no **declared** MACRO here either — that is a product judgement about a new engine generation, and none has been taken.
 
 ---
 
