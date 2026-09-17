@@ -32,6 +32,13 @@ namespace Hl7.Cql.Comparers
             var xHigh = x.highClosed ?? false ? x.high : Predecessor(x.high);
             var yHigh = y.highClosed ?? false ? y.high : Predecessor(y.high);
 
+            // A boundary that is null and not closed is unknown - as is an open boundary whose
+            // closed equivalent cannot be represented - so the intervals cannot be ordered. The
+            // null boundaries left below are closed, and stand for the extremes of the point type.
+            if (IsUnknown(xLow, x.lowClosed) || IsUnknown(xHigh, x.highClosed)
+                || IsUnknown(yLow, y.lowClosed) || IsUnknown(yHigh, y.highClosed))
+                return null;
+
             if (xLow == null)
             {
                 if (yLow == null)
@@ -68,6 +75,9 @@ namespace Hl7.Cql.Comparers
                 else return low;
             }
         }
+
+        private static bool IsUnknown(T? boundary, bool? closed) =>
+            boundary is null && !(closed ?? false);
 
         protected override int GetHashCodeValue(CqlInterval<T> value)
         {
