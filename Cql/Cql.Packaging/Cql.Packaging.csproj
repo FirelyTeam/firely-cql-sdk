@@ -12,7 +12,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" />
 	</ItemGroup>
 
 	<ItemGroup>

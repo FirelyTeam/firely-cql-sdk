@@ -12,9 +12,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Fhir.Metrics" Version="1.4.0" />
-		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelyNetVersion)" />
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelyNetVersion)" />
+		<PackageReference Include="Fhir.Metrics" />
+		<PackageReference Include="Hl7.Fhir.Base" />
+		<PackageReference Include="Hl7.Fhir.R4" />
 	</ItemGroup>
 
 	<ItemGroup>
