@@ -53,8 +53,8 @@ public readonly record struct CqlUcumMonthArithmeticError : ICqlArithmeticError
 /// interval that is not a unit interval.
 /// </summary>
 /// <remarks>
-/// Per the CQL specification (§9.B, Point From), extracting a point from an interval whose size
-/// is greater than one signals an error to the calling environment. A null closed boundary is
+/// Per the CQL specification (§9.B, Point From), extracting a point from an interval that is not
+/// a unit interval signals an error to the calling environment. A null closed boundary is
 /// the minimum or maximum value of the point type, so an interval with two of them spans the
 /// whole domain.
 /// </remarks>

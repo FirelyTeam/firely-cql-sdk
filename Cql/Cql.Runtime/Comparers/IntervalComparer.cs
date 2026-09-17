@@ -14,7 +14,7 @@ namespace Hl7.Cql.Comparers
         ICqlComparer<object> pointComparer,
         Func<T, T> predecessor,
         Func<T, T> successor) :
-        CqlComparer<CqlInterval<T>>(CqlComparerEqualsImplementation.Compare, equivalentImplementation:CqlComparerEquivalentImplementation.Compare)
+        CqlComparer<CqlInterval<T>>(CqlComparerEqualsImplementation.Compare, equivalentImplementation: CqlComparerEquivalentImplementation.Equivalent)
     {
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
 
@@ -22,62 +22,85 @@ namespace Hl7.Cql.Comparers
 
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
+        /// <summary>
+        /// Orders intervals by their Start, then by their End. A null closed boundary is the minimum
+        /// or maximum value of the point type; a null open boundary (or an open boundary whose closed
+        /// equivalent cannot be represented) is unknown, so a comparison against it is indeterminate.
+        /// A boundary that is known to differ decides the comparison even when the other boundary is
+        /// unknown, so that equality derived from this comparison is false rather than unknown.
+        /// </summary>
         protected override int? CompareValues(
             CqlInterval<T> x,
             CqlInterval<T> y,
             string? precision)
         {
-            var xLow = x.lowClosed ?? false ? x.low : Successor(x.low);
-            var yLow = y.lowClosed ?? false ? y.low : Successor(y.low);
-            var xHigh = x.highClosed ?? false ? x.high : Predecessor(x.high);
-            var yHigh = y.highClosed ?? false ? y.high : Predecessor(y.high);
+            var (xLow, xHigh) = Normalise(x);
+            var (yLow, yHigh) = Normalise(y);
 
-            // A boundary that is null and not closed is unknown - as is an open boundary whose
-            // closed equivalent cannot be represented - so the intervals cannot be ordered. The
-            // null boundaries left below are closed, and stand for the extremes of the point type.
-            if (IsUnknown(xLow, x.lowClosed) || IsUnknown(xHigh, x.highClosed)
-                || IsUnknown(yLow, y.lowClosed) || IsUnknown(yHigh, y.highClosed))
-                return null;
+            var low = CompareBoundaries(xLow, yLow, precision, nullIsMinimum: true);
+            var high = CompareBoundaries(xHigh, yHigh, precision, nullIsMinimum: false);
 
-            if (xLow == null)
+            return low switch
             {
-                if (yLow == null)
-                {
-                    if (xHigh == null)
-                    {
-                        if (yHigh == null)
-                            return 0;
-                        else return -1;
-                    }
-                    else if (yHigh == null)
-                        return 1;
-                    else return PointComparer.Compare(xHigh, yHigh, precision);
-                }
-                else return -1;
-            }
-            else if (yLow == null)
-                return 1;
-            else
-            {
-                var low = PointComparer.Compare(xLow, yLow, precision);
-                if (low == 0)
-                {
-                    if (xHigh == null)
-                    {
-                        if (yHigh == null)
-                            return 0;
-                        else return -1;
-                    }
-                    else if (yHigh == null)
-                        return 1;
-                    else return PointComparer.Compare(xHigh, yHigh, precision);
-                }
-                else return low;
-            }
+                null => high is not null and not 0 ? high : null,
+                0    => high,
+                _    => low,
+            };
         }
 
-        private static bool IsUnknown(T? boundary, bool? closed) =>
-            boundary is null && !(closed ?? false);
+        /// <summary>
+        /// Intervals are equivalent when both boundaries are equivalent: unknown to unknown, closed
+        /// null to closed null (the same extreme of the point type), or value to equivalent value.
+        /// </summary>
+        protected override bool EquivalentValues(
+            CqlInterval<T> x,
+            CqlInterval<T> y,
+            string? precision)
+        {
+            var (xLow, xHigh) = Normalise(x);
+            var (yLow, yHigh) = Normalise(y);
+            return EquivalentBoundaries(xLow, yLow, precision) && EquivalentBoundaries(xHigh, yHigh, precision);
+        }
+
+        private (Boundary low, Boundary high) Normalise(CqlInterval<T> interval)
+        {
+            var low = (interval.lowClosed ?? false) ? interval.low : Successor(interval.low);
+            var high = (interval.highClosed ?? false) ? interval.high : Predecessor(interval.high);
+            return (
+                new Boundary(low, Unknown: low is null && !(interval.lowClosed ?? false)),
+                new Boundary(high, Unknown: high is null && !(interval.highClosed ?? false)));
+        }
+
+        private int? CompareBoundaries(Boundary x, Boundary y, string? precision, bool nullIsMinimum)
+        {
+            if (x.Unknown || y.Unknown)
+                return null;
+
+            return (x.Value, y.Value) switch
+            {
+                (null, null) => 0,
+                (null, _)    => nullIsMinimum ? -1 : 1,
+                (_, null)    => nullIsMinimum ? 1 : -1,
+                var (xv, yv) => PointComparer.Compare(xv, yv, precision),
+            };
+        }
+
+        private bool EquivalentBoundaries(Boundary x, Boundary y, string? precision) =>
+            (x.Unknown, y.Unknown, x.Value, y.Value) switch
+            {
+                (true, true, _, _)        => true,
+                (true, _, _, _)           => false,
+                (_, true, _, _)           => false,
+                (_, _, null, null)        => true,
+                (_, _, null, _)           => false,
+                (_, _, _, null)           => false,
+                var (_, _, xv, yv)        => PointComparer.Equivalent(xv, yv, precision),
+            };
+
+        /// <summary>
+        /// A normalised interval boundary: its closed value, or unknown.
+        /// </summary>
+        private readonly record struct Boundary(T? Value, bool Unknown);
 
         protected override int GetHashCodeValue(CqlInterval<T> value)
         {

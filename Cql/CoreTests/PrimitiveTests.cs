@@ -3882,6 +3882,71 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void StartAndEndOfMaxIntervalAreTheTypeExtremes()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(int.MinValue, ops.Start(new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(int.MaxValue, ops.End(new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(long.MinValue, ops.Start(new CqlInterval<long?>(null, null, true, true)));
+            Assert.AreEqual(decimal.MaxValue, ops.End(new CqlInterval<decimal?>(null, null, true, true)));
+            Assert.AreEqual(0, ops.Comparer.Compare(CqlDate.MinValue, ops.Start(new CqlInterval<CqlDate?>(null, null, true, true)), null));
+            Assert.AreEqual(0, ops.Comparer.Compare(CqlTime.MaxValue, ops.End(new CqlInterval<CqlTime?>(null, null, true, true)), null));
+
+            // An unknown boundary has no start or end, and a null interval has neither.
+            Assert.IsNull(ops.Start(new CqlInterval<int?>(null, null, false, false)));
+            Assert.IsNull(ops.End(new CqlInterval<int?>(null, null, false, false)));
+            Assert.IsNull(ops.Start((CqlInterval<int?>?)null));
+        }
+
+        [TestMethod]
+        public void SameOrBeforeComparesTheEndWithTheOtherStart()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var tenToTwenty = new CqlInterval<int?>(10, 20, true, true);
+            var nineToTwenty = new CqlInterval<int?>(9, 20, true, true);
+
+            // An interval does not end on or before its own start.
+            Assert.AreEqual(false, ops.SameOrBefore(oneToTen, oneToTen));
+            Assert.AreEqual(false, ops.SameOrAfter(oneToTen, oneToTen));
+            Assert.AreEqual(true, ops.SameOrBefore(oneToTen, tenToTwenty));
+            Assert.AreEqual(true, ops.SameOrAfter(tenToTwenty, oneToTen));
+            Assert.AreEqual(false, ops.SameOrBefore(oneToTen, nineToTwenty));
+            Assert.AreEqual(false, ops.SameOrAfter(nineToTwenty, oneToTen));
+
+            var max = new CqlInterval<int?>(null, null, true, true);
+            Assert.AreEqual(false, ops.SameOrBefore(max, oneToTen));
+            Assert.AreEqual(false, ops.SameOrAfter(max, oneToTen));
+            Assert.AreEqual(false, ops.SameOrBefore(max, max));
+
+            var unknown = new CqlInterval<int?>(null, null, false, false);
+            Assert.IsNull(ops.SameOrBefore(unknown, unknown));
+            Assert.IsNull(ops.SameOrBefore(oneToTen, unknown));
+            Assert.IsNull(ops.SameOrAfter(unknown, oneToTen));
+        }
+
+        [TestMethod]
+        public void IntervalEqualityIsDecidedByAKnownBoundary()
+        {
+            var ops = GetNewContext().Operators;
+            var toFive = new CqlInterval<int?>(null, 5, false, true);
+            var toSix = new CqlInterval<int?>(null, 6, false, true);
+
+            // The ends differ, so the intervals are not equal even though the starts are unknown.
+            Assert.AreEqual(false, ops.Equal(toFive, toSix));
+            Assert.IsFalse(ops.Comparer.Equivalent(toFive, toSix, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(toFive, new CqlInterval<int?>(null, 5, false, true), null));
+            Assert.IsFalse(ops.Comparer.Equivalent(toFive, new CqlInterval<int?>(null, 5, true, true), null));
+            Assert.IsTrue(ops.Comparer.Equivalent(new CqlInterval<int?>(null, null, false, false), new CqlInterval<int?>(null, null, false, false), null));
+            Assert.IsTrue(ops.Comparer.Equivalent(new CqlInterval<int?>(null, null, true, true), new CqlInterval<int?>(null, null, true, true), null));
+
+            // A closed null boundary is the extreme of the point type, so it orders beyond any finite boundary.
+            Assert.IsTrue(ops.Comparer.Compare(new CqlInterval<int?>(1, null, true, true), new CqlInterval<int?>(1, 10, true, true), null) > 0);
+            Assert.IsTrue(ops.Comparer.Compare(new CqlInterval<int?>(null, 10, true, true), new CqlInterval<int?>(1, 10, true, true), null) < 0);
+            Assert.AreEqual(0, ops.Comparer.Compare(new CqlInterval<int?>(1, null, true, true), new CqlInterval<int?>(1, null, true, true), null));
+        }
+
+        [TestMethod]
         public void LastPositionOf1()
         {
             var ops = GetNewContext().Operators;
