@@ -3811,6 +3811,22 @@ namespace CoreTests
             var days = ops.Expand(new CqlInterval<CqlDate>(new CqlDate(9999, 12, 30), lastDay, true, true), new CqlQuantity(1, "day"))!.ToList();
             Assert.AreEqual(2, days.Count);
             Assert.AreEqual(0, ops.Comparer.Compare(lastDay, days[1], null));
+
+            // A weekly per steps in days, so the last week of the calendar is one partition and a shorter tail is none.
+            var week = new CqlQuantity(1, "week");
+            var lastWeekStart = new CqlDate(9999, 12, 25);
+            var weeks = ops.Expand(new CqlInterval<CqlDate>(lastWeekStart, lastDay, true, true), week)!.ToList();
+            Assert.AreEqual(1, weeks.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastWeekStart, weeks[0], null));
+            Assert.AreEqual(0, ops.Expand(new CqlInterval<CqlDate>(lastWeekStart, lastWeekStart, true, true), week)!.Count());
+            var weekIntervals = ops.Expand(new List<CqlInterval<CqlDate?>?> { new(lastWeekStart, lastDay, true, true) }, week)!.ToList();
+            Assert.AreEqual(1, weekIntervals.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastWeekStart, weekIntervals[0].low, null));
+            Assert.AreEqual(0, ops.Comparer.Compare(lastDay, weekIntervals[0].high, null));
+            var lastWeekOfDateTimes = ops.Expand(
+                new CqlInterval<CqlDateTime>(new CqlDateTime(9999, 12, 25, 0, 0, 0, 0, 0, 0), new CqlDateTime(9999, 12, 31, 0, 0, 0, 0, 0, 0), true, true),
+                week)!.ToList();
+            Assert.AreEqual(1, lastWeekOfDateTimes.Count);
         }
 
         [TestMethod]

@@ -692,8 +692,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // When the next start cannot be represented, the partition still ends per - 1 units after this start.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
@@ -756,8 +757,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // When the next start cannot be represented, the partition still ends per - 1 units after this start.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
@@ -825,8 +827,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // When the next start cannot be represented, the partition still ends per - 1 units after this start.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
