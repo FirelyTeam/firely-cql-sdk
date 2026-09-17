@@ -3674,12 +3674,14 @@ namespace CoreTests
             Assert.IsNull(ops.Successor(int.MaxValue));
             Assert.IsNull(ops.Successor(long.MaxValue));
             Assert.IsNull(ops.Successor(decimal.MaxValue));
+            Assert.IsNull(ops.Successor(new CqlQuantity(decimal.MaxValue, "1")));
             Assert.IsNull(ops.Successor(new CqlDate(9999, 12, 31)));
             Assert.IsNull(ops.Successor(new CqlTime(23, 59, 59, 999, null, null)));
 
             Assert.IsNull(ops.Predecessor(int.MinValue));
             Assert.IsNull(ops.Predecessor(long.MinValue));
             Assert.IsNull(ops.Predecessor(decimal.MinValue));
+            Assert.IsNull(ops.Predecessor(new CqlQuantity(decimal.MinValue, "1")));
             Assert.IsNull(ops.Predecessor(new CqlDate(1, 1, 1)));
             Assert.IsNull(ops.Predecessor(new CqlTime(0, 0, 0, 0, null, null)));
 

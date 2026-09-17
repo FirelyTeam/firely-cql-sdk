@@ -183,8 +183,8 @@ namespace Hl7.Cql.Primitives
         /// <remarks>
         /// For example, if <see cref="Precision"/> is in <see cref="DateTimePrecision.Year"/>, this method will return the preceding year.
         /// </remarks>
-        /// <returns>The immediate predecessor value.</returns>
-        public CqlTime Predecessor() => Subtract(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
+        /// <returns>The immediate predecessor value, or <see langword="null"/> if this value is the minimum time.</returns>
+        public CqlTime? Predecessor() => Subtract(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision]);
 
         /// <summary>
         /// Gets the immediate successor of this value in its precision.
@@ -192,8 +192,8 @@ namespace Hl7.Cql.Primitives
         /// <remarks>
         /// For example, if <see cref="Precision"/> is in <see cref="DateTimePrecision.Year"/>, this method will return the following year.
         /// </remarks>
-        /// <returns>The immediate predecessor value.</returns>
-        public CqlTime Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
+        /// <returns>The immediate successor value, or <see langword="null"/> if this value is the maximum time.</returns>
+        public CqlTime? Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision]);
 
         /// <summary>
         /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.

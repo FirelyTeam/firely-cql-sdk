@@ -695,7 +695,8 @@ namespace Hl7.Cql.Operators
             else if (argument.value == null)
                 return null;
             else
-                return new CqlQuantity(Predecessor(argument.value), argument.unit);
+                // A null value means the predecessor cannot be represented, so the quantity is null too.
+                return Predecessor(argument.value) is { } value ? new CqlQuantity(value, argument.unit) : null;
         }
 
         public CqlDate? Predecessor(CqlDate? argument) => argument == null ? null : argument!.Predecessor();
@@ -953,7 +954,8 @@ namespace Hl7.Cql.Operators
             else if (argument.value == null)
                 return null;
             else
-                return new CqlQuantity(Successor(argument.value), argument.unit);
+                // A null value means the successor cannot be represented, so the quantity is null too.
+                return Successor(argument.value) is { } value ? new CqlQuantity(value, argument.unit) : null;
         }
 
         public CqlDate? Successor(CqlDate? argument) => argument == null ? null : argument.Successor();
