@@ -575,10 +575,6 @@ namespace Hl7.Cql.Operators
         }
 
         /// <summary>
-        /// The precision an expansion of the given per unit aligns to, or <see langword="null" /> when the unit is not
-        /// a temporal one. A per of weeks aligns to days, because there is no week precision.
-        /// </summary>
-        /// <summary>
         /// The per quantity shortened by one step of the boundary unit and expressed in that unit. A weekly per is
         /// the only case where per and the boundary step differ in unit, since weeks align to day precision.
         /// </summary>
@@ -590,6 +586,10 @@ namespace Hl7.Cql.Operators
             return new CqlQuantity(value - 1, stepUnit);
         }
 
+        /// <summary>
+        /// The precision an expansion of the given per unit aligns to, or <see langword="null" /> when the unit is not
+        /// a temporal one. A per of weeks aligns to days, because there is no week precision.
+        /// </summary>
         private static Iso8601.DateTimePrecision? PerUnitPrecision(string? unit) =>
             unit switch
             {
