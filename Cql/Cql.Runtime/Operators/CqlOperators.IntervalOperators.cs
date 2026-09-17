@@ -1404,8 +1404,14 @@ namespace Hl7.Cql.Operators
         {
             if (@this == null || other == null)
                 return null;
-            else
-                return Comparer.Compare(@this, other, precision) == 0;
+
+            // An indeterminate comparison, such as between intervals sharing an unknown boundary, stays unknown.
+            return Comparer.Compare(@this, other, precision) switch
+            {
+                null => null,
+                0    => true,
+                _    => false,
+            };
         }
 
         #endregion

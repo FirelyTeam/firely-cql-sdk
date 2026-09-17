@@ -3978,6 +3978,36 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ClosedNullBoundaryEqualsTheWrittenOutExtreme()
+        {
+            var ops = GetNewContext().Operators;
+            var fromMinimum = new CqlInterval<int?>(null, 5, true, true);
+            var fromWrittenMinimum = new CqlInterval<int?>(int.MinValue, 5, true, true);
+            var toMaximum = new CqlInterval<int?>(1, null, true, true);
+            var toWrittenMaximum = new CqlInterval<int?>(1, int.MaxValue, true, true);
+
+            Assert.AreEqual(true, ops.Equal(fromMinimum, fromWrittenMinimum));
+            Assert.AreEqual(true, ops.Equal(toMaximum, toWrittenMaximum));
+            Assert.AreEqual(0, ops.Comparer.Compare(fromMinimum, fromWrittenMinimum, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(fromMinimum, fromWrittenMinimum, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(toMaximum, toWrittenMaximum, null));
+            Assert.AreEqual(ops.Comparer.GetHashCode(fromMinimum), ops.Comparer.GetHashCode(fromWrittenMinimum));
+            Assert.AreEqual(ops.Comparer.GetHashCode(toMaximum), ops.Comparer.GetHashCode(toWrittenMaximum));
+            Assert.AreEqual(false, ops.Equal(fromMinimum, new CqlInterval<int?>(int.MinValue + 1, 5, true, true)));
+        }
+
+        [TestMethod]
+        public void SameAsPropagatesAnIndeterminateComparison()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            Assert.AreEqual(true, ops.SameAs(oneToTen, new CqlInterval<int?>(1, 10, true, true), null));
+            Assert.AreEqual(false, ops.SameAs(oneToTen, new CqlInterval<int?>(1, 11, true, true), null));
+            Assert.IsNull(ops.SameAs(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 5, false, true), null));
+            Assert.AreEqual(false, ops.SameAs(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 6, false, true), null));
+        }
+
+        [TestMethod]
         public void OperatorsOverTwoIntervalsOfAnyUseTheExtremesOfAny()
         {
             var ops = GetNewContext().Operators;
