@@ -23,6 +23,12 @@ namespace Hl7.Cql.Comparers
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
         /// <summary>
+        /// Two intervals with the same representation are not equal when a boundary is unknown,
+        /// since two unknown starts (or ends) cannot be known to be the same value.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquality => false;
+
+        /// <summary>
         /// Orders intervals by their Start, then by their End. A null closed boundary is the minimum
         /// or maximum value of the point type; a null open boundary (or an open boundary whose closed
         /// equivalent cannot be represented) is unknown, so a comparison against it is indeterminate.

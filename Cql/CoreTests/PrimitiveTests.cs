@@ -3947,6 +3947,36 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void IntervalsWithTheSameUnknownBoundaryAreNotKnownToBeEqual()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Equal(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 5, false, true)));
+            Assert.IsNull(ops.Equal(new CqlInterval<int?>(null, null, false, false), new CqlInterval<int?>(null, null, false, false)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(1, 10, true, true), new CqlInterval<int?>(1, 10, true, true)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(null, null, true, true), new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(null, 5, true, true), new CqlInterval<int?>(null, 5, true, true)));
+        }
+
+        [TestMethod]
+        public void OperatorsOverTwoIntervalsOfAnyUseTheExtremesOfAny()
+        {
+            var ops = GetNewContext().Operators;
+            var max = new CqlInterval<object>(null, null, true, true);
+            var unknown = new CqlInterval<object>(null, null, false, false);
+
+            Assert.AreEqual(true, ops.Starts(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.Ends(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.Equal(max, new CqlInterval<object>(null, null, true, true)));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.IntervalIncludesInterval(max, new CqlInterval<object>(null, null, true, true), null));
+
+            Assert.IsNull(ops.Starts(unknown, max, null));
+            Assert.IsNull(ops.Ends(max, unknown, null));
+            Assert.IsNull(ops.Equal(max, unknown));
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(unknown, max, null));
+        }
+
+        [TestMethod]
         public void LastPositionOf1()
         {
             var ops = GetNewContext().Operators;

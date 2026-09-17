@@ -57,6 +57,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
+            Comparers.TryAdd(typeof(AnyExtreme), new AnyExtremeComparer());
 
             ComparerFactories.TryAdd(typeof(System.Collections.Generic.KeyValuePair<,>), (type, self) =>
             {

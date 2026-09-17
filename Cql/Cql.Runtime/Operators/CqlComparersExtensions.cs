@@ -27,6 +27,8 @@ namespace Hl7.Cql.Operators
                 .Register(typeof(CqlInterval<CqlQuantity>), new IntervalComparer<CqlQuantity?>(Comparers, operators.Predecessor, operators.Successor))
                 .Register(typeof(CqlInterval<CqlDateTime>), new IntervalComparer<CqlDateTime?>(Comparers, operators.Predecessor, operators.Successor))
                 .Register(typeof(CqlInterval<CqlDate>), new IntervalComparer<CqlDate?>(Comparers, operators.Predecessor, operators.Successor))
-                .Register(typeof(CqlInterval<CqlTime>), new IntervalComparer<CqlTime?>(Comparers, operators.Predecessor, operators.Successor));
+                .Register(typeof(CqlInterval<CqlTime>), new IntervalComparer<CqlTime?>(Comparers, operators.Predecessor, operators.Successor))
+                // An interval over Any carries only null boundaries, which have no successor or predecessor.
+                .Register(typeof(CqlInterval<object>), new IntervalComparer<object>(Comparers, static _ => null!, static _ => null!));
     }
 }
