@@ -19,12 +19,6 @@
 
 ---
 
-### Version Level
-
-- **MESO** (`2.15.0`) — the second digit, meaning some small effort may be required. See [versioning.md](../versioning.md) for what the digits mean.
-
----
-
 ### Generated Code Compatibility
 
 - `LibrarySetCSharpCodeGenerator.GeneratorToolVersion`: **5.2.1.0** (unchanged from `2.14.0`).
@@ -103,7 +97,6 @@ Note that generated C# **does** change in this release for libraries containing 
 
 ### Common Items To Check
 
-- Version level: **MESO**, stated under `### Version Level` above.
 - PublicAPI shipped/unshipped promotions: none to promote — all 13 `PublicAPI.Unshipped.txt` files are header-only.
 - New or changed exception types: none in this release window. (#1606 makes the `CannotBindToCqlOperatorError` binding failure stop occurring for the affected pattern; the error type itself is unchanged.)
 - Public runtime/operator API changes: none in this release window.
