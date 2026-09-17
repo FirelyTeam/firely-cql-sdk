@@ -667,12 +667,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -728,12 +732,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -794,12 +802,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the same end is
+                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -916,16 +928,17 @@ namespace Hl7.Cql.Operators
             var listItem = interval.low!.Value;
             while (true)
             {
-                var next = listItem + intQuantity;
-
-                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
-                var high = Predecessor(next);
-                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                if (!endsOnOrBeforeHigh)
+                // The starting point is only returned for a partition of size per that ends on or before the
+                // upper boundary. The end is computed in a wider type so a partition reaching the type's
+                // maximum is still emitted, after which there is no next start.
+                var end = (long)listItem + intQuantity - 1;
+                if (end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
-                listItem = next;
+                if (end == int.MaxValue)
+                    break;
+                listItem = (int)(end + 1);
             }
 
             return expanded;
@@ -974,16 +987,17 @@ namespace Hl7.Cql.Operators
             var listItem = interval.low!.Value;
             while (true)
             {
-                var next = listItem + intQuantity;
-
-                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
-                var high = Predecessor(next);
-                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                if (!endsOnOrBeforeHigh)
+                // The starting point is only returned for a partition of size per that ends on or before the
+                // upper boundary. The end is computed in a wider type so a partition reaching the type's
+                // maximum is still emitted, after which there is no next start.
+                var end = (decimal)listItem + intQuantity - 1;
+                if (end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
-                listItem = next;
+                if (end == long.MaxValue)
+                    break;
+                listItem = (long)(end + 1);
             }
 
             return expanded;
@@ -1954,16 +1968,36 @@ namespace Hl7.Cql.Operators
         /// </summary>
         private bool? SameInterval<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision)
         {
-            if (IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
-                || IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed))
-                return null;
-
-            var sameLow = (left.lowClosed ?? false) == (right.lowClosed ?? false)
-                          && Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) == 0;
-            var sameHigh = (left.highClosed ?? false) == (right.highClosed ?? false)
-                           && Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) == 0;
-            return sameLow && sameHigh;
+            // Each end is compared on its own, so a definite difference on one end decides the answer
+            // even when the other end is unknown.
+            var sameLow = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
+                ? null
+                : (left.lowClosed ?? false) != (right.lowClosed ?? false)
+                    ? false
+                    : SameBoundary(Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision));
+            var sameHigh = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
+                ? null
+                : (left.highClosed ?? false) != (right.highClosed ?? false)
+                    ? false
+                    : SameBoundary(Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision));
+            return AndAllowingUnknown(sameLow, sameHigh);
         }
+
+        private static bool? SameBoundary(int? comparison) =>
+            comparison switch
+            {
+                null => null,
+                0    => true,
+                _    => false,
+            };
+
+        /// <summary>
+        /// Whether both boundaries of the interval are known once it is normalised to closed
+        /// boundaries, so that it covers a representable range rather than an unknown or
+        /// unbounded one.
+        /// </summary>
+        private bool HasKnownBoundaries<T>(CqlInterval<T>? interval) =>
+            ToClosedBoundaries(interval) is { low: not null, high: not null };
 
         /// <summary>
         /// Normalises an interval's open boundaries with a value to their closed equivalent
