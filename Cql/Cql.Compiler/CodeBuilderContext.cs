@@ -149,7 +149,7 @@ internal partial class CodeBuilderContext
                     Negate e           => Negate(e),
                     As e               => As(e),
                     Case e             => Case(e),
-                    Interval { low: Null, high: Null } => new CodeConstant(null, typeof(object)),
+                    Interval { low: Null, high: Null } e when TypeFor(e, throwIfNotFound: false) == typeof(CqlInterval<object>) => AnyPointInterval(e),
                     ToTime e           => ChangeType(e.operand!, _typeResolver.TimeType),
                     ToBoolean e        => ChangeType(e.operand!, typeof(bool?)),
                     ToString e         => ChangeType(e.operand!, typeof(string)),
@@ -420,6 +420,19 @@ internal partial class CodeBuilderContext
             throw this.NewExpressionBuildingException($"Union expects two arguments of the same list or interval type.");
         }
     }
+
+    /// <summary>
+    /// Builds the interval denoted by an interval selector whose boundaries are both untyped
+    /// nulls. Its point type is <c>Any</c>, which none of the <see cref="ICqlOperators"/>
+    /// Interval factory overloads accept, so the interval is constructed directly.
+    /// </summary>
+    private CodeExpression AnyPointInterval(Interval e) =>
+        new CodeNew(
+            ReflectionUtility.ConstructorOf(() => new CqlInterval<object>(null, null, (bool?)null, (bool?)null)),
+            new CodeConstant(null, typeof(object)),
+            new CodeConstant(null, typeof(object)),
+            TranslateArg((object?)e.lowClosedExpression ?? e.lowClosed),
+            TranslateArg((object?)e.highClosedExpression ?? e.highClosed));
 
     /// <summary>
     /// Returns whether the type is one of the point types supported by the
