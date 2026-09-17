@@ -16,8 +16,20 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return null;
-            var result = string.Join(separator ?? string.Empty, source);
-            return result;
+
+            // Spec §9.B, Combine: "If the source argument is null, or the source list is empty, the result is
+            // null." The source is walked with a single enumerator so a lazily produced list is not evaluated twice.
+            using var elements = source.GetEnumerator();
+            if (!elements.MoveNext())
+                return null;
+
+            var result = new StringBuilder(elements.Current);
+            while (elements.MoveNext())
+            {
+                result.Append(separator);
+                result.Append(elements.Current);
+            }
+            return result.ToString();
         }
         #endregion
 
