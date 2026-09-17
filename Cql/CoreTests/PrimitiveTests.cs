@@ -3739,6 +3739,38 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ExpandOfOpenBoundaryAtTypeExtremeIsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            // The open low boundary sits at the type's maximum, so its closed equivalent is unknown and the interval contributes nothing.
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(int.MaxValue, int.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<long?>(long.MaxValue, long.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<decimal?>(decimal.MaxValue, decimal.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(int.MinValue, int.MinValue, true, false), null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            Assert.IsNull(ops.Expand(new CqlInterval<CqlDate>(lastDay, lastDay, false, true), null));
+
+            // A closed null boundary would contribute the whole domain, which is also not expanded.
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(0, null, true, true), null));
+
+            // In a list, such an interval is skipped while the others still expand.
+            var expanded = ops.Expand(
+                new List<CqlInterval<int?>?>
+                {
+                    new(int.MaxValue, int.MaxValue, false, true),
+                    new(1, 2, true, true),
+                },
+                new CqlQuantity(1, null));
+            Assert.IsNotNull(expanded);
+            var list = expanded.ToList();
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(1, list[0].low);
+            Assert.AreEqual(2, list[1].low);
+        }
+
+        [TestMethod]
         public void LastPositionOf1()
         {
             var ops = GetNewContext().Operators;

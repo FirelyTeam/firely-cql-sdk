@@ -152,6 +152,10 @@ namespace Hl7.Cql.Operators
 
                     var interval = ToClosed(item)!;
 
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
+
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
                         per = CoarsestPer(interval.low!.Precision, interval.high!.Precision);
@@ -225,6 +229,10 @@ namespace Hl7.Cql.Operators
 
                     var interval = ToClosed(item)!;
 
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
+
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
                         per = CoarsestPer(interval.low!.Precision, interval.high!.Precision);
@@ -292,6 +300,10 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
+
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
@@ -366,6 +378,10 @@ namespace Hl7.Cql.Operators
 
                     var interval = ToClosed(item)!;
 
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
+
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)
                         per = new CqlQuantity(1, "1");
@@ -439,6 +455,10 @@ namespace Hl7.Cql.Operators
 
                     var interval = ToClosed(item)!;
 
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
+
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)
                         per = new CqlQuantity(1, "1");
@@ -502,6 +522,10 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
+
+                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+                    if (interval.low == null || interval.high == null)
+                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)

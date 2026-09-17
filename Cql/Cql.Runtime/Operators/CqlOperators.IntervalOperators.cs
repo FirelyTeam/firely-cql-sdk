@@ -655,6 +655,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlDate>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -717,6 +721,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlDateTime>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -774,6 +782,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlTime>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -836,6 +848,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<decimal?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -899,6 +915,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<int?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -953,6 +973,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<long?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
