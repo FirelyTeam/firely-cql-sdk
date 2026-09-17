@@ -3641,6 +3641,27 @@ namespace CoreTests
             Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(wholeYear, januaryToMarch, "month"));
         }
 
+        /// <summary>
+        /// Under Start/End semantics an open boundary with a value denotes its successor or
+        /// predecessor, so (0, 11) covers the same range as [1, 10]: neither properly includes
+        /// the other, while a strictly smaller interval is properly included in either form.
+        /// </summary>
+        [TestMethod]
+        public void OpenAndClosedRepresentationsOfTheSameRangeAreTheSameInterval()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTenClosed = new CqlInterval<int?>(1, 10, true, true);
+            var oneToTenOpen = new CqlInterval<int?>(0, 11, false, false);
+            var twoToNine = new CqlInterval<int?>(2, 9, true, true);
+            var zeroToEleven = new CqlInterval<int?>(0, 11, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenClosed, oneToTenOpen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, oneToTenClosed, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTenOpen, oneToTenClosed, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(twoToNine, oneToTenOpen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, zeroToEleven, null));
+        }
+
         [TestMethod]
         public void LastPositionOf1()
         {

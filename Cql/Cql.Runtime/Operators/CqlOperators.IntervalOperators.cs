@@ -1868,6 +1868,12 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
+            // An open boundary with a value is the successor or predecessor of that value under
+            // Start/End semantics, so both operands are normalised to closed boundaries first;
+            // [1, 10] and (0, 11) then compare as the same interval.
+            left = ToClosedBoundaries(left)!;
+            right = ToClosedBoundaries(right)!;
+
             // Start/End semantics: a null closed boundary is the minimum or maximum value of the
             // point type, while a null open boundary is unknown, leaving comparisons against it
             // indeterminate.
@@ -1921,6 +1927,26 @@ namespace Hl7.Cql.Operators
                            && Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) == 0;
             return sameLow && sameHigh;
         }
+
+        /// <summary>
+        /// Normalises an interval's open boundaries with a value to their closed equivalent
+        /// (successor for the low boundary, predecessor for the high boundary) for every point
+        /// type that has a successor and predecessor. A null open boundary stays open, since it is
+        /// unknown; an interval over any other point type is returned as is.
+        /// </summary>
+        private CqlInterval<T>? ToClosedBoundaries<T>(CqlInterval<T>? interval) =>
+            interval switch
+            {
+                null                          => null,
+                CqlInterval<int?> i           => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<long?> i          => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<decimal?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlQuantity?> i   => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlDate?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlDateTime?> i   => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlTime?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                _                             => interval,
+            };
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
