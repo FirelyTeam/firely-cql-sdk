@@ -815,4 +815,99 @@ public class CqlComparersTests
         Assert.AreEqual(false, operators.Equal(1.5m, 1.55m));
         Assert.AreNotEqual(0, comparers.Compare(1.5m, 1.55m, null));
     }
+
+    /// <summary>
+    /// §9.B Equivalent: "For string values, equivalence returns true if the strings are the same value
+    /// while ignoring case and locale, and normalizing whitespace."
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("Abel", "abel")]
+    [DataRow("ABEL", "abel")]
+    [DataRow("abel", "abel")]
+    [DataRow("", "")]
+    public void String_Equivalent_IgnoresCase(string left, string right)
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        // Strings are scalars to the compiler, which binds them to the object overload of Equivalent;
+        // the casts take that same path rather than the IEnumerable<T> overload C# would pick here.
+        Assert.AreEqual(true, operators.Equivalent((object?)left, (object?)right));
+    }
+
+    /// <summary>
+    /// §9.B Equivalent: "Normalizing whitespace means that all whitespace characters are treated as
+    /// equivalent, with whitespace characters as defined in the whitespace lexical category" -- which
+    /// Appendix A, Lexer Rules, defines as <c>WS : [ \r\n\t]+</c>. Whitespace characters are equivalent
+    /// one for one; a run of them is not collapsed into one.
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("a\tb", "a b", true)]
+    [DataRow("a\r\nb", "a  b", true)]
+    [DataRow("a\nb", "a\tb", true)]
+    [DataRow("a  b", "a b", false)]
+    [DataRow("a\r\nb", "a b", false)]
+    public void String_Equivalent_TreatsWhitespaceCharactersAsEquivalentWithoutCollapsingRuns(string left, string right, bool expected)
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(expected, operators.Equivalent((object?)left, (object?)right));
+    }
+
+    /// <summary>
+    /// Ignoring case and whitespace does not make unrelated strings equivalent.
+    /// </summary>
+    [TestMethod]
+    public void String_Equivalent_DifferingCharacters_IsFalse()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent((object?)"abc", (object?)"abd"));
+        Assert.AreEqual(false, operators.Equivalent((object?)"abc", (object?)"ab"));
+    }
+
+    /// <summary>
+    /// §9.B Equivalent: "Note that null is not equivalent to the empty string ('')."
+    /// </summary>
+    [TestMethod]
+    public void String_Equivalent_NullAndEmptyString_IsNotEquivalent()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent((object?)"", (object?)null));
+        Assert.AreEqual(false, operators.Equivalent((object?)null, (object?)""));
+        Assert.AreEqual(true, operators.Equivalent((object?)null, (object?)null));
+    }
+
+    /// <summary>
+    /// Equality (<c>=</c>) is unaffected by the equivalence semantics: it stays case-sensitive and
+    /// treats each whitespace character as the distinct character it is.
+    /// </summary>
+    [TestMethod]
+    public void String_Equal_StaysOrdinal()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equal("Abel", "abel"));
+        Assert.AreEqual(false, operators.Equal("a\tb", "a b"));
+        Assert.AreEqual(true, operators.Equal("abel", "abel"));
+        Assert.AreEqual(true, operators.Equal("a b", "a b"));
+    }
+
+    /// <summary>
+    /// Ordering and the hash-based set operators are driven by <c>CompareValues</c>/<c>GetHashCodeValue</c>,
+    /// which stay ordinal, so strings differing only in case or in which whitespace character they use are
+    /// kept apart by <c>Distinct</c> and sort case-sensitively.
+    /// </summary>
+    [TestMethod]
+    public void String_DistinctAndSort_StayOrdinal()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var deduplicated = operators.Distinct<string>(["Abel", "abel", "a\tb", "a b"])!.ToList();
+        Assert.AreEqual(4, deduplicated.Count);
+
+        var comparers = new CqlComparers();
+        Assert.AreNotEqual(0, comparers.Compare("Abel", "abel", null));
+        Assert.AreEqual(0, comparers.Compare("abel", "abel", null));
+    }
 }
