@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -16,84 +17,21 @@ namespace Hl7.Cql.Operators
     {
         #region Interval
 
-        public CqlInterval<int?>? Interval(int? low, int? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<int?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
-        public CqlInterval<decimal?>? Interval(decimal? low, decimal? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<decimal?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
-        public CqlInterval<long?>? Interval(long? low, long? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<long?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
-        public CqlInterval<CqlQuantity?>? Interval(CqlQuantity? low, CqlQuantity? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<CqlQuantity?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
-        public CqlInterval<CqlDate?>? Interval(CqlDate? low, CqlDate? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<CqlDate?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
+        public CqlInterval<int?>? Interval(int? low, int? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<int?>(low, high, lowClosed, highClosed));
+        public CqlInterval<decimal?>? Interval(decimal? low, decimal? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<decimal?>(low, high, lowClosed, highClosed));
+        public CqlInterval<long?>? Interval(long? low, long? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<long?>(low, high, lowClosed, highClosed));
+        public CqlInterval<CqlQuantity?>? Interval(CqlQuantity? low, CqlQuantity? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<CqlQuantity?>(low, high, lowClosed, highClosed));
+        public CqlInterval<CqlDate?>? Interval(CqlDate? low, CqlDate? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<CqlDate?>(low, high, lowClosed, highClosed));
 
-        public CqlInterval<CqlDateTime?>? Interval(CqlDateTime? low, CqlDateTime? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<CqlDateTime?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
-        public CqlInterval<CqlTime?>? Interval(CqlTime? low, CqlTime? high, bool? lowClosed, bool? highClosed)
-        {
-            if (low is null && high is null)
-                return null;
-            else
-            {
-                var interval = new CqlInterval<CqlTime?>(low, high, lowClosed, highClosed);
-                var closed = ToClosed(interval);
-                return closed;
-            }
-        }
+        public CqlInterval<CqlDateTime?>? Interval(CqlDateTime? low, CqlDateTime? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<CqlDateTime?>(low, high, lowClosed, highClosed));
+        public CqlInterval<CqlTime?>? Interval(CqlTime? low, CqlTime? high, bool? lowClosed, bool? highClosed) =>
+            ToClosed(new CqlInterval<CqlTime?>(low, high, lowClosed, highClosed));
         #endregion
 
         #region After
@@ -120,11 +58,20 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var leftClosed = toClosed(left);
-            var rightClosed = toClosed(right);
+            var leftClosed = toClosed(left)!;
+            var rightClosed = toClosed(right)!;
 
-            var after = Comparer.Compare(leftClosed!.low!, rightClosed!.high!, precision);
-            return after > 0;
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            return IsUnknownBoundary(leftClosed.low, leftClosed.lowClosed) || IsUnknownBoundary(rightClosed.high, rightClosed.highClosed)
+                ? RangeGreaterThan(LowBoundaryRange(leftClosed), HighBoundaryRange(rightClosed), precision)
+                : Comparer.Compare(leftClosed.low ?? MinValue<T>()!, rightClosed.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    > 0  => true,
+                    _    => false,
+                };
         }
 
         public bool? After(CqlInterval<int?>? left, int? right, string? precision) =>
@@ -228,12 +175,20 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var leftClosed = toClosed(left);
-            var rightClosed = toClosed(right);
+            var leftClosed = toClosed(left)!;
+            var rightClosed = toClosed(right)!;
 
-            var before = Comparer.Compare(leftClosed!.high!, rightClosed!.low!, precision);
-
-            return before < 0;
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            return IsUnknownBoundary(leftClosed.high, leftClosed.highClosed) || IsUnknownBoundary(rightClosed.low, rightClosed.lowClosed)
+                ? RangeLessThan(HighBoundaryRange(leftClosed), LowBoundaryRange(rightClosed), precision)
+                : Comparer.Compare(leftClosed.high ?? MaxValue<T>()!, rightClosed.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    < 0  => true,
+                    _    => false,
+                };
         }
 
         public bool? Before(CqlInterval<int?>? left, int? right, string? precision) =>
@@ -583,10 +538,30 @@ namespace Hl7.Cql.Operators
             if (left == null) return null;
             else if (right == null) return null;
 
-            if (Comparer.Compare(left!.low!, right!.low!, precision) >= 0 && Comparer.Compare(left.high!, right.high!, precision) == 0)
-                return true;
-            else
-                return false;
+            left = ToClosedBoundaries(left)!;
+            right = ToClosedBoundaries(right)!;
+
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            var startsNoEarlier = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
+                ? RangeGreaterOrEqual(LowBoundaryRange(left), LowBoundaryRange(right), precision)
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    >= 0 => true,
+                    _    => false,
+                };
+            var sameEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
+                ? RangeEqual(HighBoundaryRange(left), HighBoundaryRange(right), precision)
+                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    0    => true,
+                    _    => false,
+                };
+
+            return AndAllowingUnknown(startsNoEarlier, sameEnd);
         }
         #endregion
 
@@ -1785,6 +1760,9 @@ namespace Hl7.Cql.Operators
             return null;
         }
 
+        private bool? RangeEqual<T>((T min, T max) x, (T min, T max) y, string? precision) =>
+            AndAllowingUnknown(RangeLessOrEqual(x, y, precision), RangeGreaterOrEqual(x, y, precision));
+
         private bool? RangeGreaterThan<T>((T min, T max) x, (T min, T max) y, string? precision)
         {
             if (Comparer.Compare(x.min!, y.max!, precision) > 0) return true;
@@ -1880,8 +1858,31 @@ namespace Hl7.Cql.Operators
 
         #region Point from
 
-        public T? PointFrom<T>(CqlInterval<T?>? argument) =>
-           argument == null ? default : (Comparer.Compare(argument!.low!, argument!.high!, null) == 0 ? argument.low : throw new InvalidOperationException("PointFrom can not be extracted  - interval is too wide"));
+        public T? PointFrom<T>(CqlInterval<T?>? argument)
+        {
+            if (argument == null)
+                return default;
+
+            var closed = ToClosedBoundaries(argument)!;
+
+            // A null open boundary is unknown, so the interval has no known point.
+            if (IsUnknownBoundary(closed.low, closed.lowClosed) || IsUnknownBoundary(closed.high, closed.highClosed))
+                return default;
+
+            // A null closed boundary is the minimum or maximum value of the point type, so an
+            // interval with two of them spans the whole domain and is never a unit interval.
+            if (closed.low is null && closed.high is null)
+                throw new CqlException<CqlPointFromNonUnitIntervalError>(
+                    new(argument.low, argument.high, argument.lowClosed ?? false, argument.highClosed ?? false));
+
+            var start = closed.low ?? MinValue<T?>();
+            var end = closed.high ?? MaxValue<T?>();
+            if (Comparer.Compare(start!, end!, null) == 0)
+                return start;
+
+            throw new CqlException<CqlPointFromNonUnitIntervalError>(
+                new(argument.low, argument.high, argument.lowClosed ?? false, argument.highClosed ?? false));
+        }
 
         #endregion
 
@@ -2250,9 +2251,31 @@ namespace Hl7.Cql.Operators
         {
             if (starts == null || other == null)
                 return null;
-            if (Comparer.Compare(starts.low!, other.low!, precision) == 0 && Comparer.Compare(starts.high!, other.high!, precision) <= 0)
-                return true;
-            return false;
+
+            starts = ToClosedBoundaries(starts)!;
+            other = ToClosedBoundaries(other)!;
+
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            var sameStart = IsUnknownBoundary(starts.low, starts.lowClosed) || IsUnknownBoundary(other.low, other.lowClosed)
+                ? RangeEqual(LowBoundaryRange(starts), LowBoundaryRange(other), precision)
+                : Comparer.Compare(starts.low ?? MinValue<T>()!, other.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    0    => true,
+                    _    => false,
+                };
+            var endsNoLater = IsUnknownBoundary(starts.high, starts.highClosed) || IsUnknownBoundary(other.high, other.highClosed)
+                ? RangeLessOrEqual(HighBoundaryRange(starts), HighBoundaryRange(other), precision)
+                : Comparer.Compare(starts.high ?? MaxValue<T>()!, other.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    <= 0 => true,
+                    _    => false,
+                };
+
+            return AndAllowingUnknown(sameStart, endsNoLater);
         }
 
         #endregion
@@ -2288,6 +2311,11 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             left = toClosed(left)!;
             right = toClosed(right)!;
+
+            // A null open boundary is unknown, so where the union starts or ends has no answer.
+            if (IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(left.high, left.highClosed)
+                || IsUnknownBoundary(right.low, right.lowClosed) || IsUnknownBoundary(right.high, right.highClosed))
+                return null;
 
             // Order the intervals so that 'first' starts on or before 'second';
             // a null low boundary is the minimum value.
