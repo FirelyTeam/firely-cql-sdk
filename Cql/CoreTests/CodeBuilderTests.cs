@@ -479,6 +479,128 @@ namespace CoreTests
             CollectionAssert.AreEqual(new List<string> { "a", "b" }, ids);
         }
 
+        [TestMethod]
+        public void Query_OverLateBoundListValuedProperty_IteratesTheListElements()
+        {
+            // Mirrors CMS69 "High BMI Interventions Ordered" (integration runner cases
+            // 050201c2, 27849d59, c3caf126): the query source is a property reached through an
+            // alias whose type is a choice, so the ELM leaves the Property untyped and the code
+            // generator surfaces it as object. The property is list-valued, and the query has to
+            // iterate its elements - not treat the list itself as the query's single element.
+            var stringType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "String");
+            var stringListType = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = stringType };
+            var anyType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "Any");
+
+            Hl7.Cql.Elm.TupleTypeSpecifier RowTypeWith(string elementName, Hl7.Cql.Elm.TypeSpecifier elementType) => new()
+            {
+                element = [new Hl7.Cql.Elm.TupleElementDefinition { name = elementName, elementType = elementType }],
+            };
+
+            // Two different tuple types, so the choice cannot collapse to one type and the alias
+            // is typed as object - the same shape a [ServiceRequest] union [MedicationRequest]
+            // source has.
+            var rowChoiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                RowTypeWith("codes", stringListType),
+                RowTypeWith("other", stringType));
+
+            Hl7.Cql.Elm.Literal StringLiteral(string value) => new()
+            {
+                value = value,
+                valueType = new System.Xml.XmlQualifiedName("{urn:hl7-org:elm-types:r1}String"),
+                resultTypeSpecifier = stringType,
+            };
+
+            var rowType = RowTypeWith("codes", stringListType);
+            var rows = new Hl7.Cql.Elm.As
+            {
+                asTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = rowChoiceType },
+                operand = new Hl7.Cql.Elm.List
+                {
+                    resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = rowType },
+                    element =
+                    [
+                        new Hl7.Cql.Elm.Tuple
+                        {
+                            resultTypeSpecifier = rowType,
+                            element =
+                            [
+                                new Hl7.Cql.Elm.TupleElement
+                                {
+                                    name = "codes",
+                                    value = new Hl7.Cql.Elm.List
+                                    {
+                                        resultTypeSpecifier = stringListType,
+                                        element = [StringLiteral("first"), StringLiteral("second")],
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+            };
+
+            // Row R return ( ( R.codes ) C return C ) - the inner query's source is the untyped,
+            // list-valued property, and the ELM declares the inner result to be a list.
+            var innerQuery = new Hl7.Cql.Elm.Query
+            {
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = anyType },
+                source =
+                [
+                    new Hl7.Cql.Elm.AliasedQuerySource
+                    {
+                        alias = "C",
+                        expression = new Hl7.Cql.Elm.Property { path = "codes", scope = "R" },
+                    },
+                ],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    expression = new Hl7.Cql.Elm.AliasRef { name = "C" },
+                },
+            };
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "LateBoundQuerySourceTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "CodesPerRow",
+                        context = "Unfiltered",
+                        expression = new Hl7.Cql.Elm.Query
+                        {
+                            resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier
+                            {
+                                elementType = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = anyType },
+                            },
+                            source =
+                            [
+                                new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = rows },
+                            ],
+                            @return = new Hl7.Cql.Elm.ReturnClause { expression = innerQuery },
+                        },
+                    },
+                ],
+            };
+
+            var result = InvokeLibrary(elmLibrary, "CodesPerRow");
+
+            Assert.IsNotNull(result, "The outer query must not evaluate to null.");
+            var rowResults = ((System.Collections.IEnumerable)result).Cast<object>().ToList();
+            Assert.AreEqual(1, rowResults.Count);
+
+            // Before the fix the untyped source was wrapped in a one-element array, so the inner
+            // query saw the List<string> as its single element and yielded that list, demoted
+            // back to one item.
+            var codes = ((System.Collections.IEnumerable)rowResults[0]!).Cast<object>().Select(c => c?.ToString()).ToList();
+            CollectionAssert.AreEqual(new List<string> { "first", "second" }, codes);
+        }
+
         private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
         {
