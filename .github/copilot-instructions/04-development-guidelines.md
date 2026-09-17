@@ -98,6 +98,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.4.4 `ReflectionUtility` is `internal` to `HL7.Cql.Abstractions`, whose `.csproj` grants `InternalsVisibleTo` to every SDK assembly and to `CoreTests`; if a project genuinely cannot see it, add the `InternalsVisibleTo` entry per 4.3 rather than falling back to a string lookup.
 
+4.4.5 **Never put backstory in a code comment.** Why a thing was once done, which PR or issue caused it, what used to be pinned, broken or worked around — none of that belongs in source, project or config files. It goes in the **pull request description**, and in the release notes where consumers need it. A comment may state a constraint that is true *now* ("raise this property rather than pinning one package"), never the history of how it came to be: history rots in place, gets copied forward, and outlives the reason it was written, while git blame, the PR and the issue already hold it.
+
 ## 4.5. Documentation
 
 4.5.1 Update README files when adding new projects or significant features
