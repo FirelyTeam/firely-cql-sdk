@@ -3480,15 +3480,145 @@ namespace CoreTests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// A null closed boundary is the minimum/maximum value of the point type, so an interval with
+        /// two null closed boundaries covers the whole range and properly includes any bounded interval.
+        /// </summary>
         [TestMethod]
         public void NullBoundariesProperlyIncludesIntegerInterval()
         {
             var ops = GetNewContext().Operators;
-            var lhs = new CqlInterval<int?>(null, null, true, true);
-            var rhs = new CqlInterval<int?>(1, 10, true, true);
-            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
-            Assert.IsNull(result);
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
 
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(nullBoundaries, oneToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTen, nullBoundaries, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalDoesNotProperlyIncludeNullBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, nullBoundaries, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(nullBoundaries, oneToTen, null));
+        }
+
+        /// <summary>
+        /// Two intervals covering the whole range are the same interval, and an interval never
+        /// properly includes itself.
+        /// </summary>
+        [TestMethod]
+        public void NullBoundariesProperlyIncludedInNullBoundariesIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(nullBoundaries, nullBoundaries, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(nullBoundaries, nullBoundaries, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInNullLowBoundary()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var upToTen = new CqlInterval<int?>(null, 10, true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTen, upToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(upToTen, oneToTen, null));
+        }
+
+        /// <summary>
+        /// A null open boundary is unknown - neither the minimum/maximum value nor any other -
+        /// so nothing can be concluded about inclusion in such an interval.
+        /// </summary>
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInOpenNullBoundariesIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var openNullBoundaries = new CqlInterval<int?>(null, null, false, false);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, openNullBoundaries, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(openNullBoundaries, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInOpenNullHighBoundaryIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var fromOne = new CqlInterval<int?>(1, null, true, false);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, fromOne, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(fromOne, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, null, null));
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(null, oneToTen, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(oneToTen, null, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(null, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInItselfIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var sameAsOneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTen, sameAsOneToTen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, sameAsOneToTen, null));
+        }
+
+        [TestMethod]
+        public void SmallerIntegerIntervalIsProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var twoToNine = new CqlInterval<int?>(2, 9, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(twoToNine, oneToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(oneToTen, twoToNine, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalStartingBeforeIsNotProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var zeroToTen = new CqlInterval<int?>(0, 10, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(zeroToTen, oneToTen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, zeroToTen, null));
+        }
+
+        /// <summary>
+        /// Comparisons are performed at the requested precision: at month precision January is
+        /// properly included in January through February, while January 15-28 and all of January
+        /// are the same interval and therefore not properly included in one another.
+        /// </summary>
+        [TestMethod]
+        public void DateIntervalProperlyIncludedInAtMonthPrecision()
+        {
+            var ops = GetNewContext().Operators;
+            var midJanuary = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 15), new CqlDate(2012, 1, 28), true, true);
+            var januaryThroughFebruary = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 2, 28), true, true);
+            var january = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 31), true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(midJanuary, januaryThroughFebruary, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(januaryThroughFebruary, midJanuary, "month"));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(midJanuary, january, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(midJanuary, january, "day"));
         }
 
         [TestMethod]

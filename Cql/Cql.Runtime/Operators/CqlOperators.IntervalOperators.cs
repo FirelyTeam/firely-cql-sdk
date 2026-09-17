@@ -1865,32 +1865,62 @@ namespace Hl7.Cql.Operators
 
         public bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision)
         {
-            if (left == null)
-                return null;
-            else if (left.low == null && left.high == null)
-                return null;
-            else if (right == null)
-                return null;
-            else if (right.low == null && right.high == null)
+            if (left == null || right == null)
                 return null;
 
-            var min = MinValue<T>()!;
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            var lowIncluded = IsUnknownBoundary(right.low, right.lowClosed) || IsUnknownBoundary(left.low, left.lowClosed)
+                ? RangeLessOrEqual(LowBoundaryRange(right), LowBoundaryRange(left), precision)
+                : Comparer.Compare(right.low ?? MinValue<T>()!, left.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    <= 0 => true,
+                    _    => false,
+                };
+            var highIncluded = IsUnknownBoundary(right.high, right.highClosed) || IsUnknownBoundary(left.high, left.highClosed)
+                ? RangeGreaterOrEqual(HighBoundaryRange(right), HighBoundaryRange(left), precision)
+                : Comparer.Compare(right.high ?? MaxValue<T>()!, left.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    >= 0 => true,
+                    _    => false,
+                };
 
-            var low = Comparer.Compare(left!.low ?? min!, right.low ?? min, precision);
-            if (low < 0)
-                return false;
-            var max = MaxValue<T>()!;
-            var high = Comparer.Compare(left.high ?? max, right.high ?? max, precision);
-            if (high > 0)
-                return false;
-            // and they are not the same interval.
-            if (low == 0 && high == 0 && left.lowClosed == right.lowClosed && left.highClosed == right.highClosed)
-                return false;
-            return true;
+            // Complete inclusion is only proper inclusion when the two are not the same interval.
+            return AndAllowingUnknown(lowIncluded, highIncluded) switch
+            {
+                true => SameInterval(left, right, precision) switch
+                {
+                    true  => false,
+                    false => true,
+                    null  => null,
+                },
+                var included => included,
+            };
         }
 
         public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision) =>
             IntervalProperlyIncludedInInterval(right, left, precision);
+
+        /// <summary>
+        /// Whether both intervals cover the same range under Start/End semantics: equal boundary
+        /// values - a null closed boundary being the minimum or maximum value of the point type -
+        /// and equal closedness on both ends. An unknown boundary leaves the answer indeterminate.
+        /// </summary>
+        private bool? SameInterval<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision)
+        {
+            if (IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
+                || IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed))
+                return null;
+
+            var sameLow = (left.lowClosed ?? false) == (right.lowClosed ?? false)
+                          && Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) == 0;
+            var sameHigh = (left.highClosed ?? false) == (right.highClosed ?? false)
+                           && Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) == 0;
+            return sameLow && sameHigh;
+        }
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
