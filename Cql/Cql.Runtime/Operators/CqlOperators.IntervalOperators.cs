@@ -1426,14 +1426,9 @@ namespace Hl7.Cql.Operators
             if (@this == null || other == null)
                 return null;
 
-
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
-
+            // Only the compared boundaries take part: the first interval's start and the second one's end.
             if (precision != null
                 && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
@@ -1445,14 +1440,9 @@ namespace Hl7.Cql.Operators
             if (@this == null || other == null)
                 return null;
 
-
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
-
+            // Only the compared boundaries take part: the first interval's start and the second one's end.
             if (precision != null
                 && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
@@ -1464,15 +1454,9 @@ namespace Hl7.Cql.Operators
             if (@this == null || other == null)
                 return null;
 
-
-
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
-
+            // Only the compared boundaries take part: the first interval's start and the second one's end.
             if (precision != null
                 && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
@@ -1520,17 +1504,10 @@ namespace Hl7.Cql.Operators
             if (@this is null || other is null)
                 return null;
 
-            if (SamePrecision(@this!.low, other!.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
-
-            // if one of the dates has a lower precision than what's passed in, return null
-            // ex [2017-09-01T00:00:00, 2017-09-01T00:00:00] same of after [2017-09-01T00:00:00.000, 2017-12-30T23:59:59.999]
-            // left goes to seconds and right goes to ms, precision passed in is ms so the left doesn't match the precision we're checking
+            // Only the compared boundaries take part: the first interval's end and the second one's start.
             if (precision != null
-                && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
-                    || GreaterOrSamePrecision(other.high!, precision) == false))
+                && (GreaterOrSamePrecision(@this.high!, precision) == false
+                    || GreaterOrSamePrecision(other.low!, precision) == false))
                 return null;
 
             return IntervalSameOrBeforeHelper(@this, other, precision, ToClosed);
@@ -1540,17 +1517,11 @@ namespace Hl7.Cql.Operators
         {
             if (@this == null || other == null)
                 return null;
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
 
-            // if one of the dates has a lower precision than what's passed in, return null
-            // ex [2017-09-01T00:00:00, 2017-09-01T00:00:00] same of after [2017-09-01T00:00:00.000, 2017-12-30T23:59:59.999]
-            // left goes to seconds and right goes to ms, precision passed in is ms so the left doesn't match the precision we're checking
+            // Only the compared boundaries take part: the first interval's end and the second one's start.
             if (precision != null
-                && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
-                    || GreaterOrSamePrecision(other.high!, precision) == false))
+                && (GreaterOrSamePrecision(@this.high!, precision) == false
+                    || GreaterOrSamePrecision(other.low!, precision) == false))
                 return null;
 
             return IntervalSameOrBeforeHelper(@this, other, precision, ToClosed);
@@ -1560,17 +1531,11 @@ namespace Hl7.Cql.Operators
         {
             if (@this == null || other == null)
                 return null;
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
-                return null;
 
-            // if one of the dates has a lower precision than what's passed in, return null
-            // ex [2017-09-01T00:00:00, 2017-09-01T00:00:00] same of after [2017-09-01T00:00:00.000, 2017-12-30T23:59:59.999]
-            // left goes to seconds and right goes to ms, precision passed in is ms so the left doesn't match the precision we're checking
+            // Only the compared boundaries take part: the first interval's end and the second one's start.
             if (precision != null
-                && (GreaterOrSamePrecision(@this.low!, precision) == false
-                    || GreaterOrSamePrecision(@this.high!, precision) == false
-                    || GreaterOrSamePrecision(other.low!, precision) == false
-                    || GreaterOrSamePrecision(other.high!, precision) == false))
+                && (GreaterOrSamePrecision(@this.high!, precision) == false
+                    || GreaterOrSamePrecision(other.low!, precision) == false))
                 return null;
 
             return IntervalSameOrBeforeHelper(@this, other, precision, ToClosed);

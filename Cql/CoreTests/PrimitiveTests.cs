@@ -3926,6 +3926,26 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void TemporalSameOrBeforeOnlyConsidersTheComparedBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+            var earlier = new CqlInterval<CqlDate?>(new CqlDate(2019, null, null), new CqlDate(2020, 1, 1), true, true);
+            var later = new CqlInterval<CqlDate?>(new CqlDate(2020, 1, 2), new CqlDate(2021, null, null), true, true);
+
+            // The unrelated boundaries have year precision, but the compared ones have day precision.
+            Assert.AreEqual(true, ops.SameOrBefore(earlier, later, null));
+            Assert.AreEqual(true, ops.SameOrAfter(later, earlier, null));
+            Assert.AreEqual(true, ops.SameOrBefore(earlier, later, "day"));
+            Assert.AreEqual(true, ops.SameOrAfter(later, earlier, "day"));
+            Assert.AreEqual(false, ops.SameOrBefore(later, earlier, null));
+
+            // A compared boundary coarser than the requested precision leaves the answer unknown.
+            var coarseEnd = new CqlInterval<CqlDate?>(new CqlDate(2019, 1, 1), new CqlDate(2020, null, null), true, true);
+            Assert.IsNull(ops.SameOrBefore(coarseEnd, later, "day"));
+            Assert.IsNull(ops.SameOrBefore(coarseEnd, later, null));
+        }
+
+        [TestMethod]
         public void IntervalEqualityIsDecidedByAKnownBoundary()
         {
             var ops = GetNewContext().Operators;
