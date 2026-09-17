@@ -1885,14 +1885,13 @@ namespace Hl7.Cql.Operators
 
             // A null closed boundary is the minimum or maximum value of the point type, so an
             // interval with two of them spans the whole domain and is never a unit interval.
-            if (closed.low is null && closed.high is null)
-                throw new CqlException<CqlPointFromNonUnitIntervalError>(
-                    new(argument.low, argument.high, argument.lowClosed ?? false, argument.highClosed ?? false));
-
-            var start = closed.low ?? MinValue<T?>();
-            var end = closed.high ?? MaxValue<T?>();
-            if (Comparer.Compare(start!, end!, null) == 0)
-                return start;
+            if (closed.low is not null || closed.high is not null)
+            {
+                var start = closed.low ?? MinValue<T?>();
+                var end = closed.high ?? MaxValue<T?>();
+                if (Comparer.Compare(start!, end!, null) == 0)
+                    return start;
+            }
 
             throw new CqlException<CqlPointFromNonUnitIntervalError>(
                 new(argument.low, argument.high, argument.lowClosed ?? false, argument.highClosed ?? false));
