@@ -3621,6 +3621,26 @@ namespace CoreTests
             Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(midJanuary, january, "day"));
         }
 
+        /// <summary>
+        /// A boundary comparison between dates of different precision is indeterminate unless a
+        /// precision is given, so the inclusion result is null rather than a definite answer, the
+        /// same way <c>included in</c> treats an indeterminate boundary comparison.
+        /// </summary>
+        [TestMethod]
+        public void DateIntervalProperlyIncludedInWithMixedPrecisionBoundariesIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var januaryToMarch = new CqlInterval<CqlDate>(new CqlDate(2012, 1, null), new CqlDate(2012, 3, null), true, true);
+            var wholeYear = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 12, 31), true, true);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(januaryToMarch, wholeYear, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(wholeYear, januaryToMarch, null));
+            Assert.IsNull(ops.IntervalIncludedIn(januaryToMarch, wholeYear, null));
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(januaryToMarch, wholeYear, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(wholeYear, januaryToMarch, "month"));
+        }
+
         [TestMethod]
         public void LastPositionOf1()
         {
