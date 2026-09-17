@@ -3690,6 +3690,21 @@ namespace CoreTests
         }
 
         /// <summary>
+        /// Adding a quantity to a time yields null whenever the result cannot be represented as a
+        /// time of day, whether it merely leaves the day or is too large for the arithmetic itself.
+        /// </summary>
+        [TestMethod]
+        public void TimeAddOutsideTheDayIsNull()
+        {
+            var ten = new CqlTime(10, 0, 0, 0, null, null);
+            Assert.IsNull(ten.Add(new CqlQuantity(14m, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(-11m, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(decimal.MaxValue, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(decimal.MinValue, "milliseconds")));
+            Assert.AreEqual(new CqlTime(23, 0, 0, 0, null, null).ToString(), ten.Add(new CqlQuantity(13m, "hours"))!.ToString());
+        }
+
+        /// <summary>
         /// An open boundary at the extreme of its type has no representable closed equivalent, so
         /// closing the interval leaves that boundary open and null (unknown) instead of turning it
         /// into the opposite extreme, and inclusion against it is indeterminate.
