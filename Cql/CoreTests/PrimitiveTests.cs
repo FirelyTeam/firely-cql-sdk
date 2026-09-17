@@ -9,6 +9,7 @@
 #nullable enable
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -4448,6 +4449,218 @@ namespace CoreTests
             Assert.AreEqual(expected, actual);
         }
         #endregion
+
+        #region All-null interval boundaries
+
+        /// <summary>
+        /// A closed null boundary is the minimum or maximum value of the point type, so the
+        /// factory yields the interval covering the whole domain rather than null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalFactory_ClosedNullPoints_ReturnsMaximalInterval()
+        {
+            var ops = GetNewContext().Operators;
+
+            var interval = ops.Interval((int?)null, (int?)null, true, true);
+
+            Assert.IsNotNull(interval);
+            Assert.IsNull(interval.low);
+            Assert.IsNull(interval.high);
+            Assert.AreEqual(true, interval.lowClosed);
+            Assert.AreEqual(true, interval.highClosed);
+        }
+
+        /// <summary>
+        /// An open null boundary is unknown, so the factory yields an interval whose boundaries
+        /// are unknown rather than null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalFactory_OpenNullPoints_ReturnsIntervalWithUnknownBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+
+            var interval = ops.Interval((int?)null, (int?)null, false, false);
+
+            Assert.IsNotNull(interval);
+            Assert.IsNull(interval.low);
+            Assert.IsNull(interval.high);
+            Assert.AreEqual(false, interval.lowClosed);
+            Assert.AreEqual(false, interval.highClosed);
+        }
+
+        [TestMethod]
+        public void IntegerInMaxIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(true, ops.In((int?)5, MaxInterval, null));
+        }
+
+        [TestMethod]
+        public void IntegerInUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.In((int?)5, UnknownInterval, null));
+        }
+
+        [TestMethod]
+        public void MaxIntervalOverlapsBoundedIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.AreEqual(true, ops.Overlaps(MaxInterval, OneToTen));
+            Assert.AreEqual(true, ops.OverlapsBefore(MaxInterval, OneToTen));
+            Assert.AreEqual(true, ops.OverlapsAfter(MaxInterval, OneToTen));
+        }
+
+        [TestMethod]
+        public void UnknownIntervalOverlapsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Overlaps(UnknownInterval, OneToTen));
+            Assert.IsNull(ops.OverlapsBefore(UnknownInterval, OneToTen));
+            Assert.IsNull(ops.OverlapsAfter(UnknownInterval, OneToTen));
+        }
+
+        /// <summary>
+        /// The maximal interval starts at the minimum value of the point type, not at 1, so it
+        /// does not start Interval[1, 10].
+        /// </summary>
+        [TestMethod]
+        public void MaxIntervalStartsBoundedIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Starts(MaxInterval, OneToTen, null));
+        }
+
+        [TestMethod]
+        public void UnknownIntervalStartsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Starts(UnknownInterval, OneToTen, null));
+        }
+
+        [TestMethod]
+        public void NullIntervalStartsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Starts(null, OneToTen, null));
+        }
+
+        /// <summary>
+        /// The maximal interval ends at the maximum value of the point type, not at 10, so
+        /// Interval[1, 10] does not end it.
+        /// </summary>
+        [TestMethod]
+        public void BoundedIntervalEndsMaxIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Ends(OneToTen, MaxInterval, null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEndsUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Ends(OneToTen, UnknownInterval, null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEndsNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Ends(OneToTen, null!, null));
+        }
+
+        [TestMethod]
+        public void MaxIntervalUnionBoundedIntervalIsMaxInterval()
+        {
+            var ops = GetNewContext().Operators;
+
+            var union = ops.Union(MaxInterval, OneToTen);
+
+            Assert.IsNotNull(union);
+            Assert.IsNull(union.low);
+            Assert.IsNull(union.high);
+            Assert.AreEqual(true, union.lowClosed);
+            Assert.AreEqual(true, union.highClosed);
+        }
+
+        [TestMethod]
+        public void UnknownIntervalUnionBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Union(UnknownInterval, OneToTen));
+        }
+
+        /// <summary>
+        /// Removing an interval from itself leaves no interval that can be expressed, so the
+        /// result is null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalExceptItselfIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var one = new CqlInterval<int?>(1, 1, true, true);
+
+            Assert.IsNull(ops.Except(MaxInterval, new CqlInterval<int?>(null, null, true, true)));
+            Assert.IsNull(ops.Except(one, new CqlInterval<int?>(1, 1, true, true)));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalProperlyIncludedInMaxIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(OneToTen, MaxInterval, null));
+        }
+
+        /// <summary>
+        /// The maximal interval spans the whole domain, so it is not the unit interval the
+        /// point from operator requires.
+        /// </summary>
+        [TestMethod]
+        public void PointFromMaxIntervalSignalsAnError()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.ThrowsException<CqlException<CqlPointFromNonUnitIntervalError>>(() => ops.PointFrom(MaxInterval));
+        }
+
+        [TestMethod]
+        public void PointFromUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.PointFrom(UnknownInterval));
+        }
+
+        [TestMethod]
+        public void PointFromNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.PointFrom((CqlInterval<int?>?)null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEqualUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Equal(OneToTen, UnknownInterval));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEqualMaxIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Equal(OneToTen, MaxInterval));
+        }
+
+        private static CqlInterval<int?> MaxInterval => new(null, null, true, true);
+
+        private static CqlInterval<int?> UnknownInterval => new(null, null, false, false);
+
+        private static CqlInterval<int?> OneToTen => new(1, 10, true, true);
+
+        #endregion
+
     
     [TestMethod]
     public void TupleEqual_NullElement_WithDifferentValues_ReturnsFalse()
