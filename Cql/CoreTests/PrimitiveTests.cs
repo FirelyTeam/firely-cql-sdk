@@ -3662,6 +3662,56 @@ namespace CoreTests
             Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, zeroToEleven, null));
         }
 
+        /// <summary>
+        /// The successor of the maximum value and the predecessor of the minimum value of a type
+        /// cannot be represented and are null.
+        /// </summary>
+        [TestMethod]
+        public void SuccessorOfMaximumAndPredecessorOfMinimumAreNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Successor(int.MaxValue));
+            Assert.IsNull(ops.Successor(long.MaxValue));
+            Assert.IsNull(ops.Successor(decimal.MaxValue));
+            Assert.IsNull(ops.Successor(new CqlDate(9999, 12, 31)));
+            Assert.IsNull(ops.Successor(new CqlTime(23, 59, 59, 999, null, null)));
+
+            Assert.IsNull(ops.Predecessor(int.MinValue));
+            Assert.IsNull(ops.Predecessor(long.MinValue));
+            Assert.IsNull(ops.Predecessor(decimal.MinValue));
+            Assert.IsNull(ops.Predecessor(new CqlDate(1, 1, 1)));
+            Assert.IsNull(ops.Predecessor(new CqlTime(0, 0, 0, 0, null, null)));
+
+            Assert.AreEqual(int.MaxValue, ops.Successor(int.MaxValue - 1));
+            Assert.AreEqual(int.MinValue, ops.Predecessor(int.MinValue + 1));
+        }
+
+        /// <summary>
+        /// An open boundary at the extreme of its type has no representable closed equivalent, so
+        /// closing the interval leaves that boundary open and null (unknown) instead of turning it
+        /// into the opposite extreme, and inclusion against it is indeterminate.
+        /// </summary>
+        [TestMethod]
+        public void OpenBoundaryAtTypeExtremeStaysUnknownWhenClosed()
+        {
+            var ops = GetNewContext().Operators;
+            var openAtMax = new CqlInterval<int?>(int.MaxValue, int.MaxValue, false, true);
+            var closed = ops.ToClosed(openAtMax)!;
+            Assert.IsNull(closed.low);
+            Assert.AreEqual(false, closed.lowClosed);
+            Assert.AreEqual(int.MaxValue, closed.high);
+
+            var wholeRange = new CqlInterval<int?>(null, null, true, true);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(openAtMax, wholeRange, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(wholeRange, openAtMax, null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            var openAtLastDay = new CqlInterval<CqlDate>(lastDay, lastDay, false, true);
+            var allDates = new CqlInterval<CqlDate>(new CqlDate(1, 1, 1), lastDay, true, true);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(openAtLastDay, allDates, null));
+        }
+
         [TestMethod]
         public void LastPositionOf1()
         {

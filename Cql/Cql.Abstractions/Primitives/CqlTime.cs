@@ -107,8 +107,8 @@ namespace Hl7.Cql.Primitives
         /// Adds the given quantity to this time.
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
-        /// <returns>A new time with <paramref name="quantity"/> added to it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new time with <paramref name="quantity"/> added to it, or <see langword="null"/> if the result would fall outside the day.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
@@ -125,6 +125,11 @@ namespace Hl7.Cql.Primitives
                 UCUMUnits.Second or "second" or "seconds" => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
                 _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
             };
+
+            // A time-of-day outside 00:00:00.000 to 23:59:59.999 cannot be represented, so the
+            // result is null rather than a wrapped-around time.
+            if (span < TimeSpan.Zero || span >= TimeSpan.FromDays(1))
+                return null;
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
             var result = new CqlTime(newIsoTime);

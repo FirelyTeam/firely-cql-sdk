@@ -2334,11 +2334,18 @@ namespace Hl7.Cql.Operators
 
             if ((interval!.lowClosed ?? false) && (interval.highClosed ?? false)) return interval;
 
+            // An open boundary whose successor or predecessor cannot be represented (the value is
+            // already the maximum or minimum of the type) has no known closed equivalent and stays
+            // open and null, so it is treated as unknown rather than as the opposite extreme.
             T newLow, newHigh;
             if (!(interval.lowClosed ?? false))
             {
                 if (interval.low != null)
+                {
                     newLow = successor(interval.low);
+                    if (newLow is null)
+                        lowClosed = false;
+                }
                 else
                 {
                     lowClosed = false;
@@ -2354,7 +2361,11 @@ namespace Hl7.Cql.Operators
 
             {
                 if (interval.high != null)
+                {
                     newHigh = predecessor(interval.high);
+                    if (newHigh is null)
+                        highClosed = false;
+                }
                 else
                 {
                     highClosed = false;

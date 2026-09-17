@@ -670,20 +670,21 @@ namespace Hl7.Cql.Operators
 
         public int? Predecessor(int? argument)
         {
-            if (argument == null)
+            // The predecessor of the minimum value cannot be represented, so it is null.
+            if (argument == null || argument == int.MinValue)
                 return null;
             else return argument - 1;
         }
 
         public long? Predecessor(long? argument)
         {
-            if (argument == null)
+            if (argument == null || argument == long.MinValue)
                 return null;
             else return argument - 1;
         }
         public decimal? Predecessor(decimal? argument)
         {
-            if (argument == null)
+            if (argument == null || argument == decimal.MinValue)
                 return null;
             else return argument - MinDecimalPrecisionValue;
         }
@@ -927,20 +928,21 @@ namespace Hl7.Cql.Operators
 
         public int? Successor(int? argument)
         {
-            if (argument == null)
+            // The successor of the maximum value cannot be represented, so it is null.
+            if (argument == null || argument == int.MaxValue)
                 return null;
             else return argument + 1;
         }
 
         public long? Successor(long? argument)
         {
-            if (argument == null)
+            if (argument == null || argument == long.MaxValue)
                 return null;
             else return argument + 1;
         }
         public decimal? Successor(decimal? argument)
         {
-            if (argument == null)
+            if (argument == null || argument == decimal.MaxValue)
                 return null;
             else return argument + MinDecimalPrecisionValue;
         }
