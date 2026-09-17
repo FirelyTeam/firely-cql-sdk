@@ -21,19 +21,7 @@
 
 ### Version Level
 
-- **MESO** (`2.15.0`) — the second digit, meaning some small effort may be required. Two triggers from [versioning.md](../versioning.md) fired independently, either of which forces the level on its own:
-
-  1. **Fragments declaring `## Potentially Breaking`.** All four release-note fragments in this window carry one: #1592, #1595, #1596 and #1606.
-  2. **CQL evaluation results change.** #1595's fix makes branches of an `if`/`else if` chain return their own values where they previously evaluated to `null`, so a measure containing that pattern scores differently than it did on `2.14.0`. [versioning.md](../versioning.md) counts this even though the old output was a defect: "A measure whose output moves is a migration even when the old output was a defect."
-
-  Triggers that did **not** fire, recorded so the next cut does not have to re-derive them:
-
-  - `LibrarySetCSharpCodeGenerator.GeneratorToolVersion` is unchanged at `5.2.1.0`. #1595 and #1606 change the C# that comes out of the pipeline, but they do so by changing the **ELM the translator produces**, not the ELM-to-C# generator — the generator emits the same C# it always did for a given input. The version marks the generator, so it does not move here.
-  - No public API was removed, changed, or marked `[Obsolete]`; all 13 `PublicAPI.Unshipped.txt` files are header-only.
-  - **No dependency crossed its own major.** `FirelyNetVersion` moved `6.3.0` → `6.5.0` (#1611), which stays inside the Firely .NET SDK's `6.x` and so does not fire the trigger.
-  - **The dependency-major trigger is a near miss worth naming.** `Microsoft.SourceLink.GitHub` went `8.0.0` → `10.0.401` (#1609), which crosses two of that package's majors. It does not fire the trigger, because the trigger exists for the case where "the consumer's own graph moves with it" and this reference is `PrivateAssets="All"` — a build-time asset of ours that never reaches a consumer's dependency graph. A future bump of a package **without** `PrivateAssets` across its major does fire it.
-
-  **MACRO was considered and rejected.** [versioning.md](../versioning.md)'s measured trigger wants a re-architecture, removal of a whole surface area, or several MESO-level migrations landing together. Four `Potentially Breaking` entries sounds like the third, but each is narrow: the two translator entries affect only defines containing one specific branch-type pattern and generate exactly as before otherwise, and the two valueset entries affect only hosts that read a computed `Expansion` back off an instance they handed in. No surface area was removed and nothing was re-architected. There is no **declared** MACRO here either — that is a product judgement about a new engine generation, and none has been taken.
+- **MESO** (`2.15.0`) — the second digit, meaning some small effort may be required. See [versioning.md](../versioning.md) for what the digits mean.
 
 ---
 
@@ -58,7 +46,7 @@ Note that generated C# **does** change in this release for libraries containing 
 
 #### Dependency Updates
 
-- `FirelyNetVersion`: `6.3.0` → `6.5.0` in `cql-base.props` and `Demo/cql-demo.props`, bumping `Hl7.Fhir.Base` and `Hl7.Fhir.R4` for every package that consumes Firely .NET SDK types (`Hl7.Cql.Fhir`, `Hl7.Cql.Packaging`, `Hl7.Cql.Packager`) and for the demo projects. The root `README.md` "External Dependencies" table matches. A consumer with its own direct reference to the Firely .NET SDK should move it to `6.5.0` as well. This stays within the Firely .NET SDK's own `6.x` major, so it is not a MESO trigger on its own; no public API, generated C# output, or CQL evaluation result changes with it. (#1611)
+- `FirelyNetVersion`: `6.3.0` → `6.5.0` in `cql-base.props` and `Demo/cql-demo.props`, bumping `Hl7.Fhir.Base` and `Hl7.Fhir.R4` for every package that consumes Firely .NET SDK types (`Hl7.Cql.Fhir`, `Hl7.Cql.Packaging`, `Hl7.Cql.Packager`) and for the demo projects. The root `README.md` "External Dependencies" table matches. A consumer with its own direct reference to the Firely .NET SDK should move it to `6.5.0` as well. No public API, generated C# output, or CQL evaluation result changes with it. (#1611)
 - `Microsoft.SourceLink.GitHub`: `8.0.0` → `10.0.401`, resolving the NU1902 advisory warning. The reference is `PrivateAssets="All"`, so it is a build-time asset of the SDK's own compilation and does not appear in a consumer's dependency graph. (#1609)
 
 #### Potentially Breaking
@@ -115,7 +103,7 @@ Note that generated C# **does** change in this release for libraries containing 
 
 ### Common Items To Check
 
-- Version level decided against [versioning.md](../versioning.md): **MESO**, triggered by four `Potentially Breaking` fragments and independently by changed CQL evaluation results. Recorded in full under `### Version Level` above.
+- Version level: **MESO**, stated under `### Version Level` above.
 - PublicAPI shipped/unshipped promotions: none to promote — all 13 `PublicAPI.Unshipped.txt` files are header-only.
 - New or changed exception types: none in this release window. (#1606 makes the `CannotBindToCqlOperatorError` binding failure stop occurring for the affected pattern; the error type itself is unchanged.)
 - Public runtime/operator API changes: none in this release window.
