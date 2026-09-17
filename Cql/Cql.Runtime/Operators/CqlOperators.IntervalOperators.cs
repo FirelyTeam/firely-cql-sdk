@@ -1868,6 +1868,18 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
+            // Only the nullable point forms can carry an unknown boundary, which the normalisation
+            // below may produce, so a non-nullable numeric interval is evaluated in its nullable form.
+            switch (left, right)
+            {
+                case (CqlInterval<int> l, CqlInterval<int> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<long> l, CqlInterval<long> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+            }
+
             // An open boundary with a value is the successor or predecessor of that value under
             // Start/End semantics, so both operands are normalised to closed boundaries first;
             // [1, 10] and (0, 11) then compare as the same interval.
@@ -1947,6 +1959,9 @@ namespace Hl7.Cql.Operators
                 CqlInterval<CqlTime?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
                 _                             => interval,
             };
+
+        private static CqlInterval<T?> ToNullablePoints<T>(CqlInterval<T> interval) where T : struct =>
+            new(interval.low, interval.high, interval.lowClosed, interval.highClosed);
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {

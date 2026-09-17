@@ -148,8 +148,8 @@ namespace Hl7.Cql.Primitives
         /// Subtracts the given quantity from this time.
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
-        /// <returns>A new time with <paramref name="quantity"/> subtracted from it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new time with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the result would fall outside the day.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>

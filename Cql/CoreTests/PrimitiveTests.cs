@@ -3660,6 +3660,15 @@ namespace CoreTests
             Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTenOpen, oneToTenClosed, null));
             Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(twoToNine, oneToTenOpen, null));
             Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, zeroToEleven, null));
+
+            // The non-nullable point form is normalised the same way.
+            var oneToTenClosedInt = new CqlInterval<int>(1, 10, true, true);
+            var oneToTenOpenInt = new CqlInterval<int>(0, 11, false, false);
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenClosedInt, oneToTenOpenInt, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTenOpenInt, oneToTenClosedInt, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(new CqlInterval<int>(2, 9, true, true), oneToTenOpenInt, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(new CqlInterval<long>(1L, 10L, true, true), new CqlInterval<long>(0L, 11L, false, false), null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(new CqlInterval<decimal>(1.0m, 10.0m, true, true), new CqlInterval<decimal>(0.99999999m, 10.00000001m, false, false), null));
         }
 
         /// <summary>
