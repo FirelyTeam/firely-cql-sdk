@@ -18,18 +18,29 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // Spec §9.B, Combine: "If the source argument is null, or the source list is empty, the result is
-            // null." The source is walked with a single enumerator so a lazily produced list is not evaluated twice.
+            // null", and "For consistency with aggregate operator behavior, null elements in the input list are
+            // ignored." A list holding no non-null element therefore yields null as well, the same as the aggregate
+            // operators do for a list they find nothing to aggregate in. Empty strings are elements like any other
+            // and keep their separators. The source is walked with a single enumerator so a lazily produced list is
+            // not evaluated twice.
             using var elements = source.GetEnumerator();
-            if (!elements.MoveNext())
-                return null;
 
-            var result = new StringBuilder(elements.Current);
+            StringBuilder? result = null;
             while (elements.MoveNext())
             {
-                result.Append(separator);
-                result.Append(elements.Current);
+                var element = elements.Current;
+                if (element is null)
+                    continue;
+
+                if (result is null)
+                    result = new StringBuilder(element);
+                else
+                {
+                    result.Append(separator);
+                    result.Append(element);
+                }
             }
-            return result.ToString();
+            return result?.ToString();
         }
         #endregion
 

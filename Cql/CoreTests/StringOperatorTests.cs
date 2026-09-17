@@ -70,6 +70,60 @@ public class StringOperatorTests
     }
 
     /// <summary>
+    /// Spec §9.B, Combine: "For consistency with aggregate operator behavior, null elements in the input list are
+    /// ignored." A null element contributes neither its own text nor a separator, so it leaves no trace in the
+    /// result.
+    /// </summary>
+    [TestMethod]
+    public void Combine_NullElementBetweenElements_IsIgnored()
+    {
+        Assert.AreEqual("a,b", Operators().Combine(["a", null!, "b"], ","));
+    }
+
+    /// <summary>
+    /// Spec §9.B: <c>Combine({ 'A', 'B', 'C', null })</c> is <c>'ABC'</c>.
+    /// </summary>
+    [TestMethod]
+    public void Combine_TrailingNullElementWithoutSeparator_IsIgnored()
+    {
+        Assert.AreEqual("abc", Operators().Combine(["a", "b", "c", null!], null));
+    }
+
+    /// <summary>
+    /// An ignored null at either end leaves no leading or trailing separator behind.
+    /// </summary>
+    [TestMethod]
+    public void Combine_NullElementAtEitherEnd_IsIgnored()
+    {
+        var operators = Operators();
+
+        Assert.AreEqual("a", operators.Combine([null!, "a"], "-"));
+        Assert.AreEqual("a", operators.Combine(["a", null!], "-"));
+    }
+
+    /// <summary>
+    /// With every element ignored there is nothing left to combine, which is null - the same answer the aggregate
+    /// operators give for a list holding no non-null element.
+    /// </summary>
+    [TestMethod]
+    public void Combine_AllElementsNull_IsNull()
+    {
+        var operators = Operators();
+
+        Assert.IsNull(operators.Combine([null!, null!], null));
+        Assert.IsNull(operators.Combine([null!], ","));
+    }
+
+    /// <summary>
+    /// An empty string is an element, not a null, so it is combined like any other and keeps its separators.
+    /// </summary>
+    [TestMethod]
+    public void Combine_EmptyStringElement_KeepsItsSeparators()
+    {
+        Assert.AreEqual("a,,b", Operators().Combine(["a", "", "b"], ","));
+    }
+
+    /// <summary>
     /// A single element has nothing to separate it from, so it comes back unchanged with or without a separator.
     /// </summary>
     [TestMethod]
