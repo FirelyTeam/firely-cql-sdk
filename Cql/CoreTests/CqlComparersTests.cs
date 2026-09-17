@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -758,5 +758,61 @@ public class CqlComparersTests
 
         Assert.AreEqual(false, operators.Equivalent(new CqlDate(2012, 1, null), new CqlDate(2012, 1, 1)));
         Assert.AreEqual(true, operators.Equivalent(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 1)));
+    }
+
+    /// <summary>
+    /// CQL 1.5.3 &#167;9.B (Equivalent): "For decimals, equivalent means the values are the same with
+    /// the comparison done on values rounded to the precision of the least precise operand;
+    /// trailing zeroes after the decimal are ignored in determining precision for equivalent
+    /// comparison." Trailing zeroes therefore do not raise an operand's precision, so 1.000 is as
+    /// precise as 1 and both operands are rounded to whole numbers before 1.001 is compared to it.
+    /// </summary>
+    [DataTestMethod]
+    // Trailing zeroes are ignored: 1.000 has precision 0, so both sides round to 1.
+    [DataRow("1.001", "1.000", true)]
+    [DataRow("1.0", "1.0", true)]
+    [DataRow("1.0", "1", true)]
+    // Rounding is away from zero, so 1.55 becomes 1.6 at precision 1, not 1.5.
+    [DataRow("1.5", "1.55", false)]
+    [DataRow("1.55", "1.5", false)]
+    [DataRow("1.50", "1.55", false)]
+    [DataRow("1.05", "1.1", true)]
+    [DataRow("-1.55", "-1.5", false)]
+    [DataRow("-1.5", "-1.55", false)]
+    [DataRow("0.1", "0.15", false)]
+    [DataRow("2", "2.4", true)]
+    [DataRow("2", "2.5", false)]
+    // Zero carries no precision however it is written.
+    [DataRow("0", "0.00", true)]
+    [DataRow("0.000", "0.4", true)]
+    [DataRow("0.000", "0.5", false)]
+    public void Decimal_Equivalent_RoundsToLeastPreciseOperandIgnoringTrailingZeroes(string leftText, string rightText, bool expected)
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var left = decimal.Parse(leftText, CultureInfo.InvariantCulture);
+        var right = decimal.Parse(rightText, CultureInfo.InvariantCulture);
+
+        Assert.AreEqual(expected, comparers.Equivalent(left, right, null));
+        Assert.AreEqual(expected, operators.Equivalent(left, right));
+    }
+
+    /// <summary>
+    /// Equivalence rounds to the least precise operand; equality does not. Trailing zeroes are not
+    /// part of a decimal's value, so 1.5 equals 1.50, while 1.5 and 1.55 are different values.
+    /// </summary>
+    [TestMethod]
+    public void Decimal_Equality_IsUnaffectedByEquivalenceRounding()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.IsTrue(comparers.Equals(1.5m, 1.50m, null) is true);
+        Assert.AreEqual(true, operators.Equal(1.5m, 1.50m));
+        Assert.AreEqual(0, comparers.Compare(1.5m, 1.50m, null));
+
+        Assert.IsTrue(comparers.Equals(1.5m, 1.55m, null) is false);
+        Assert.AreEqual(false, operators.Equal(1.5m, 1.55m));
+        Assert.AreNotEqual(0, comparers.Compare(1.5m, 1.55m, null));
     }
 }
