@@ -135,7 +135,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument!, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlDate?>>();
             foreach (var item in collapsed)
@@ -151,10 +152,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
@@ -188,7 +185,8 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // When the next start cannot be represented, the partition still ends per - 1 units after this start.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -197,6 +195,8 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlDate?>(listItem, high, true, true);
                         expanded.Add(listInterval);
+                        if (next is null)
+                            break;
                         listItem = next;
                     }
                 }
@@ -212,7 +212,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlDateTime?>>();
             foreach (var item in collapsed)
@@ -228,10 +229,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
@@ -259,7 +256,8 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // When the next start cannot be represented, the partition still ends per - 1 units after this start.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval, null) <= 0;
@@ -268,7 +266,9 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlDateTime?>(listItem, high, true, true);
                         expanded.Add(listInterval);
-                        listItem = next!;
+                        if (next is null)
+                            break;
+                        listItem = next;
                     }
                 }
             }
@@ -284,7 +284,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument!, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlTime?>>();
             foreach (var item in collapsed)
@@ -300,10 +301,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per?.unit == null)
@@ -336,7 +333,8 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // When the next start cannot be represented, the partition still ends per - 1 units after this start.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(new CqlQuantity((per.value ?? 1) - 1, per.unit));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -345,6 +343,8 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlTime?>(listItem, high, true, true);
                         expanded.Add(listInterval);
+                        if (next is null)
+                            break;
                         listItem = next;
                     }
                 }
@@ -361,7 +361,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<decimal?>>();
             foreach (var item in collapsed)
@@ -377,10 +378,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)
@@ -438,7 +435,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<int?>>();
             foreach (var item in collapsed)
@@ -454,10 +452,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)
@@ -479,18 +473,19 @@ namespace Hl7.Cql.Operators
                     var listItem = interval.low!.Value;
                     while (true)
                     {
-                        var next = listItem + intQuantity;
-                        var high = Predecessor(next);
-
-                        // Only intervals of size per that end on or before the upper boundary are contributed.
-                        var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                        if (!endsOnOrBeforeHigh)
+                        // Only a partition of size per that ends on or before the upper boundary is contributed. The end
+                        // is computed in a wider type so a partition reaching the type's maximum is still emitted,
+                        // after which there is no next start.
+                        var end = (long)listItem + intQuantity - 1;
+                        if (end > interval.high!.Value)
                             break;
 
-                        var listInterval = new CqlInterval<int?>(listItem, high, true, true);
+                        var listInterval = new CqlInterval<int?>(listItem, (int)end, true, true);
                         expanded.Add(listInterval);
 
-                        listItem = next;
+                        if (end == int.MaxValue)
+                            break;
+                        listItem = (int)(end + 1);
                     }
                 }
             }
@@ -506,7 +501,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<long?>>();
             foreach (var item in collapsed)
@@ -522,10 +518,6 @@ namespace Hl7.Cql.Operators
                         continue;
 
                     var interval = ToClosed(item)!;
-
-                    // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
-                    if (interval.low == null || interval.high == null)
-                        continue;
 
                     // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
                     if (per == null)
@@ -547,18 +539,19 @@ namespace Hl7.Cql.Operators
                     var listItem = interval.low!.Value;
                     while (true)
                     {
-                        var next = listItem + intQuantity;
-                        var high = Predecessor(next);
-
-                        // Only intervals of size per that end on or before the upper boundary are contributed.
-                        var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                        if (!endsOnOrBeforeHigh)
+                        // Only a partition of size per that ends on or before the upper boundary is contributed. The end
+                        // is computed in a wider type so a partition reaching the type's maximum is still emitted,
+                        // after which there is no next start.
+                        var end = (decimal)listItem + intQuantity - 1;
+                        if (end > interval.high!.Value)
                             break;
 
-                        var listInterval = new CqlInterval<long?>(listItem, high, true, true);
+                        var listInterval = new CqlInterval<long?>(listItem, (long)end, true, true);
                         expanded.Add(listInterval);
 
-                        listItem = next;
+                        if (end == long.MaxValue)
+                            break;
+                        listItem = (long)(end + 1);
                     }
                 }
             }

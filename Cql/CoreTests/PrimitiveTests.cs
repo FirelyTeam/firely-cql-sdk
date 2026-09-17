@@ -3771,6 +3771,86 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ExpandEmitsThePartitionThatEndsAtTheTypeMaximum()
+        {
+            var ops = GetNewContext().Operators;
+            var one = new CqlQuantity(1, null);
+
+            var ints = ops.Expand(new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true), one)!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 1, int.MaxValue }, ints);
+            var longs = ops.Expand(new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true), one)!.ToList();
+            CollectionAssert.AreEqual(new List<long?> { long.MaxValue - 1, long.MaxValue }, longs);
+
+            // A partition of size two that ends exactly at the maximum is emitted, one that would pass it is not.
+            var twos = ops.Expand(new CqlInterval<int?>(int.MaxValue - 3, int.MaxValue, true, true), new CqlQuantity(2, null))!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 3, int.MaxValue - 1 }, twos);
+            var threes = ops.Expand(new CqlInterval<int?>(int.MaxValue - 3, int.MaxValue, true, true), new CqlQuantity(3, null))!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 3 }, threes);
+
+            var intIntervals = ops.Expand(new List<CqlInterval<int?>?> { new(int.MaxValue - 1, int.MaxValue, true, true) }, one)!.ToList();
+            Assert.AreEqual(2, intIntervals.Count);
+            Assert.AreEqual(int.MaxValue, intIntervals[1].low);
+            Assert.AreEqual(int.MaxValue, intIntervals[1].high);
+            var longIntervals = ops.Expand(new List<CqlInterval<long?>?> { new(long.MaxValue, long.MaxValue, true, true) }, one)!.ToList();
+            Assert.AreEqual(1, longIntervals.Count);
+            Assert.AreEqual(long.MaxValue, longIntervals[0].low);
+            Assert.AreEqual(long.MaxValue, longIntervals[0].high);
+
+            var hour = new CqlQuantity(1, "hour");
+            var t22 = new CqlTime(22, null, null, null, null, null);
+            var t23 = new CqlTime(23, null, null, null, null, null);
+            var times = ops.Expand(new CqlInterval<CqlTime>(t23, t23, true, true), hour)!.ToList();
+            Assert.AreEqual(1, times.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, times[0], null));
+            var timeIntervals = ops.Expand(new List<CqlInterval<CqlTime?>?> { new(t22, t23, true, true) }, hour)!.ToList();
+            Assert.AreEqual(2, timeIntervals.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, timeIntervals[1].low, null));
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, timeIntervals[1].high, null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            var days = ops.Expand(new CqlInterval<CqlDate>(new CqlDate(9999, 12, 30), lastDay, true, true), new CqlQuantity(1, "day"))!.ToList();
+            Assert.AreEqual(2, days.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastDay, days[1], null));
+        }
+
+        [TestMethod]
+        public void ExpandOfListLeavesOutUnboundedIntervalsBeforeCollapsing()
+        {
+            var ops = GetNewContext().Operators;
+            var intervals = new List<CqlInterval<int?>?>
+            {
+                new(null, null, true, true),
+                new(1, 2, true, true),
+                new(null, 5, false, true),
+                new(int.MaxValue, int.MaxValue, false, true),
+                null,
+            };
+
+            // Only the bounded interval contributes; the others would cover the whole domain or are unknown.
+            var expanded = ops.Expand(intervals, new CqlQuantity(1, null))!.ToList();
+            Assert.AreEqual(2, expanded.Count);
+            Assert.AreEqual(1, expanded[0].low);
+            Assert.AreEqual(1, expanded[0].high);
+            Assert.AreEqual(2, expanded[1].low);
+            Assert.AreEqual(2, expanded[1].high);
+        }
+
+        [TestMethod]
+        public void UnknownStartWithADifferentEndIsProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var wholeRange = new CqlInterval<int?>(null, null, true, true);
+            var unknownStart = new CqlInterval<int?>(null, 10, false, true);
+
+            // The starts cannot be compared, but the ends differ, so the intervals are not the same.
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(unknownStart, wholeRange, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(wholeRange, unknownStart, null));
+
+            var unknown = new CqlInterval<int?>(null, null, false, false);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(unknown, wholeRange, null));
+        }
+
+        [TestMethod]
         public void LastPositionOf1()
         {
             var ops = GetNewContext().Operators;
