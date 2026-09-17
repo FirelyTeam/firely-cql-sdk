@@ -3192,7 +3192,9 @@ namespace CoreTests
 
         #region Interval_Same_Or_Before
         /// <summary>
-        /// Handles ([null, @2022] same or before [null, @2023]
+        /// Handles ([null, @2022] same or before [null, @2023]. Both intervals start at the minimum
+        /// Date, the value a null closed boundary stands for, so the first does not end on or before
+        /// the second starts.
         /// </summary>
         [TestMethod]
         public void Interval_Same_Or_Before_Overlapping()
@@ -3204,7 +3206,7 @@ namespace CoreTests
 
             var sameOrBefore = fcq.SameOrBefore((CqlInterval<CqlDate?>)(object)thru2022, (CqlInterval<CqlDate?>)(object)thru2023, null);
 
-            Assert.AreEqual(true, sameOrBefore);
+            Assert.AreEqual(false, sameOrBefore);
         }
 
         /// <summary>

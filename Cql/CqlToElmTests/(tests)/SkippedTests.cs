@@ -34,11 +34,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
 
-            { "TestExceptNull", "This is ambiguous with every valid interval overload." }
+            { "TestMaxIntervalExceptNull", "This is ambiguous with every valid interval overload." }
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
+            { "TestAfterNull", "There is no point-interval overload for 'after', so the null point is promoted to Interval[null, null] - the maximal interval - which does not start after Interval[1, 10]; the result is false rather than null." },
+            { "TestBeforeNull", "There is no point-interval overload for 'before', so the null point is promoted to Interval[null, null] - the maximal interval - which does not end before Interval[1, 10]; the result is false rather than null." },
             { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },

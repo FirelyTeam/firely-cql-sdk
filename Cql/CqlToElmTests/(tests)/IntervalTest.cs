@@ -388,7 +388,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii, library);
-            Assert.IsNull(result);
+            Assert.AreEqual(true, result);
         }
 
         [TestMethod]
@@ -397,7 +397,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
             var result = Run(pii, library);
-            Assert.IsNull(result);
+            Assert.AreEqual(false, result);
         }
 
 

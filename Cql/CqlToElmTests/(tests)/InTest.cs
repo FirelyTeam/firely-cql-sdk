@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("5 in Interval[null as Integer, null as Integer]");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
             var result = Run<bool?>(@in, lib);
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
         public void NullContains5()

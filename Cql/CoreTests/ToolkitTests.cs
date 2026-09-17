@@ -603,11 +603,12 @@ public class ToolkitTests
     }
 
     /// <summary>
-    /// Tests that Interval[null, null] returns null.
-    /// See https://github.com/FirelyTeam/firely-cql-sdk/issues/543
+    /// A null closed boundary is the minimum or maximum value of the point type, so an interval
+    /// selector with two null closed boundaries is the maximal interval over the point type,
+    /// not null.
     /// </summary>
     [TestMethod]
-    public void Interval_Untyped_Null_Null_Returns_Null()
+    public void Interval_Untyped_Null_Null_Returns_MaximalInterval()
     {
         // Arrange
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -626,11 +627,15 @@ public class ToolkitTests
             FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullInterval");
 
         // Assert
-        result.Should().BeNull("Interval[null, null] should return null");
+        var interval = result.Should().BeOfType<CqlInterval<object>>().Subject;
+        interval.low.Should().BeNull();
+        interval.high.Should().BeNull();
+        interval.lowClosed.Should().BeTrue();
+        interval.highClosed.Should().BeTrue();
     }
 
     [TestMethod]
-    public void Interval_Date_Null_Null_Returns_Null()
+    public void Interval_Date_Null_Null_Returns_MaximalInterval()
     {
         // Arrange
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -649,11 +654,15 @@ public class ToolkitTests
             FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsDate");
 
         // Assert
-        result.Should().BeNull("Interval[null as Date, null as Date] should return null");
+        var interval = result.Should().BeOfType<CqlInterval<CqlDate>>().Subject;
+        interval.low.Should().BeNull();
+        interval.high.Should().BeNull();
+        interval.lowClosed.Should().BeTrue();
+        interval.highClosed.Should().BeTrue();
     }
 
     [TestMethod]
-    public void Interval_Integer_Null_Null_Returns_Null()
+    public void Interval_Integer_Null_Null_Returns_MaximalInterval()
     {
         // Arrange
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -672,11 +681,15 @@ public class ToolkitTests
             FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsInteger");
 
         // Assert
-        result.Should().BeNull("Interval[null as Integer, null as Integer] should return null");
+        var interval = result.Should().BeOfType<CqlInterval<int?>>().Subject;
+        interval.low.Should().BeNull();
+        interval.high.Should().BeNull();
+        interval.lowClosed.Should().BeTrue();
+        interval.highClosed.Should().BeTrue();
     }
 
     [TestMethod]
-    public void Interval_Decimal_Null_Null_Returns_Null()
+    public void Interval_Decimal_Null_Null_Returns_MaximalInterval()
     {
         // Arrange
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -695,7 +708,11 @@ public class ToolkitTests
             FhirCqlContext.ForBundle(), cqlLibraryString.LibraryIdentifier, "NullIntervalAsDecimal");
 
         // Assert
-        result.Should().BeNull("Interval[null as Decimal, null as Decimal] should return null");
+        var interval = result.Should().BeOfType<CqlInterval<decimal?>>().Subject;
+        interval.low.Should().BeNull();
+        interval.high.Should().BeNull();
+        interval.lowClosed.Should().BeTrue();
+        interval.highClosed.Should().BeTrue();
     }
 
     [TestMethod]
