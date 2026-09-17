@@ -185,9 +185,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                        // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                        var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -257,9 +257,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                        // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                        var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval, null) <= 0;
@@ -335,9 +335,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                        // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                        var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -578,6 +578,18 @@ namespace Hl7.Cql.Operators
         /// The precision an expansion of the given per unit aligns to, or <see langword="null" /> when the unit is not
         /// a temporal one. A per of weeks aligns to days, because there is no week precision.
         /// </summary>
+        /// <summary>
+        /// The per quantity shortened by one step of the boundary unit and expressed in that unit. A weekly per is
+        /// the only case where per and the boundary step differ in unit, since weeks align to day precision.
+        /// </summary>
+        private static CqlQuantity PerLessOneStep(CqlQuantity per, string? stepUnit)
+        {
+            var value = per.value ?? 1;
+            if (per.unit is "week" or "weeks" or UCUMUnits.Week)
+                value *= CqlDateTimeMath.DaysPerWeek;
+            return new CqlQuantity(value - 1, stepUnit);
+        }
+
         private static Iso8601.DateTimePrecision? PerUnitPrecision(string? unit) =>
             unit switch
             {
