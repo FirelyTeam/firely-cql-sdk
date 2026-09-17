@@ -3830,6 +3830,18 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(9999, 12, 25, 0, 0, 0, 0, 0, 0), new CqlDateTime(9999, 12, 31, 0, 0, 0, 0, 0, 0), true, true),
                 week)!.ToList();
             Assert.AreEqual(1, lastWeekOfDateTimes.Count);
+
+            // A partition spanning the whole domain starts at the minimum and ends at the maximum.
+            var wholeDay = ops.Expand(new CqlInterval<CqlTime>(new CqlTime(0, null, null, null, null, null), t23, true, true), new CqlQuantity(24, "hours"))!.ToList();
+            Assert.AreEqual(1, wholeDay.Count);
+            Assert.AreEqual(0, wholeDay[0].Value.Hour);
+            var allYears = ops.Expand(new CqlInterval<CqlDate>(new CqlDate(1, null, null), new CqlDate(9999, null, null), true, true), new CqlQuantity(9999, "years"))!.ToList();
+            Assert.AreEqual(1, allYears.Count);
+            Assert.AreEqual(1, allYears[0].Value.Year);
+            var allYearIntervals = ops.Expand(new List<CqlInterval<CqlDate?>?> { new(new CqlDate(1, null, null), new CqlDate(9999, null, null), true, true) }, new CqlQuantity(9999, "years"))!.ToList();
+            Assert.AreEqual(1, allYearIntervals.Count);
+            Assert.AreEqual(9999, allYearIntervals[0].high!.Value.Year);
+            Assert.AreEqual(0, ops.Expand(new CqlInterval<CqlDate>(new CqlDate(2, null, null), new CqlDate(9999, null, null), true, true), new CqlQuantity(9999, "years"))!.Count());
         }
 
         [TestMethod]

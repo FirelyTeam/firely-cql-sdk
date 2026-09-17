@@ -667,9 +667,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
@@ -732,9 +732,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
@@ -802,9 +802,9 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                // The partition ends one step before the next start. When that start cannot be represented, the same end is
-                // reached by stepping back first and then adding per, which stays representable whenever the partition fits.
-                var high = next is not null ? next.Subtract(onePrior) : listItem.Subtract(onePrior)?.Add(per);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
