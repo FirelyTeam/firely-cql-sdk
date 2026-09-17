@@ -116,7 +116,7 @@ This prevents generating the same artifacts multiple times and ensures tools use
 **Microsoft.CodeAnalysis.CSharp**:
 - Used for runtime C# compilation in CodeGeneration.NET
 - Provides cross-platform Roslyn compiler APIs
-- The pinned version lives in [`Directory.Packages.props`](../Directory.Packages.props) (`MicrosoftCodeAnalysisVersion`), and is restated for consumers in the root [README](../README.md)'s "External Dependencies" table — it is deliberately not repeated here
+- The pinned version lives in [`Directory.Packages.props`](../Directory.Packages.props) (`MicrosoftCodeAnalysisVersion`) and is deliberately not repeated here
 
 ### Code Generation Version Management
 

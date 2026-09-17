@@ -77,13 +77,17 @@ For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` 
 - Any change to build scripts/project files must keep working on both Windows and Unix (Linux/macOS/WSL): maintain matching `.ps1`/`.sh` script pairs, use `Condition="'$(OS)' == 'Windows_NT'"` (or `!=`) rather than assuming an OS, and match directory-name case exactly — Unix filesystems are case-sensitive even though this repo is usually edited on Windows. Avoid platform-specific tools like `flock` (no default on macOS); prefer a portable mechanism like directory-based locking.
 - CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, any `*.md` file, and `.claude/`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
 
-## Dependency version bumps — change `Directory.Packages.props`, then the root README table
+## Dependency version bumps — change `Directory.Packages.props`, and nothing else
 
 External package versions are centrally managed. **Every version lives in the root [`Directory.Packages.props`](Directory.Packages.props)** — that file explains the arrangement in full and is the one place to change a version. Projects carry a bare `<PackageReference Include="Foo" />` with no `Version` attribute; adding one is an error (`NU1008`). Don't go looking in `cql-base.props` or a `.csproj` for a package version, and don't reintroduce one there.
 
 Two things are deliberately *not* centrally managed, so don't move them: `VersionPrefix` (the version we ship, in `cql-sdk.props` and `Demo/cql-demo.props`) and the private `Firely.Cql.Sdk.Integration.Runner` submodule, which opts out via `submodules/Directory.Packages.props` because it is a separate repository.
 
-When any external package version is bumped, also update the version number in the **"External Dependencies" table in the root `README.md`** — not just the sub-project READMEs (which don't state version numbers). The root README's versioned table is the only place the canonical pinned versions are documented for consumers, and it silently drifts after bumps. Likewise, check `docs/` for any design or assessment doc that mentions a version number for the same package and update it too.
+**Documentation never restates a package version.** Bumping a version is a one-file change: edit `Directory.Packages.props` and stop. No README, design doc or assessment doc should carry a copy of a pinned version — they point at that file instead, so there is nothing to keep in sync and nothing that can silently drift. If you find a markdown file stating a package version, remove the number and link to `Directory.Packages.props` rather than correcting it.
+
+The root `README.md` used to carry an "External Dependencies" table restating versions for consumers. It was removed because it drifted repeatedly, undetected, and it is not the only place that happened: `docs/technical-readme.md` sat on a Roslyn version two bumps out of date. Consumers are pointed at `Directory.Packages.props`, which is what the build actually uses and therefore cannot be wrong.
+
+The one exception is **release notes**, which are a historical record: `docs/releases/release-notes-*.md` and the `docs/releases/vnext/` fragments legitimately name the versions a release shipped or moved between. Never "correct" a version in those.
 
 ## Code generation version (`GeneratorToolVersion`)
 

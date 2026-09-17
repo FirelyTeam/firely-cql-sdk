@@ -114,32 +114,13 @@ This SDK consists of the following packages:
 
 ## External Dependencies
 
-The SDK depends on the following key external packages:
+Every external package this SDK depends on, and the exact version it is pinned to, is listed in one
+place: [`Directory.Packages.props`](Directory.Packages.props) in the repository root. Consult that file
+rather than this README — it is what the build actually uses, so it cannot be out of date.
 
-### FHIR Support
-
-- **Hl7.Fhir.Base**: Version 6.5.0 - Base classes and utilities for FHIR support
-- **Hl7.Fhir.R4**: Version 6.5.0 - FHIR R4 POCOs and serialization support
-- **Fhir.Metrics**: Version 1.4.0 - FHIR units and metrics support
-
-### Parsing & Compilation
-
-- **Antlr4.Runtime.Standard**: Version 4.13.1 - ANTLR4 runtime for CQL grammar parsing
-- **Microsoft.CodeAnalysis.CSharp**: Version 5.3.0 - Roslyn C# compiler APIs
-- **Microsoft.SourceLink.GitHub**: Version 10.0.401 - Source Link integration for GitHub repositories
-
-### Configuration & Logging
-
-- **Microsoft.Extensions.Configuration**: Version 10.0.3 - Configuration framework
-- **Microsoft.Extensions.DependencyInjection**: Version 10.0.3 - Dependency injection container
-- **Microsoft.Extensions.Logging**: Version 10.0.3 - Logging abstractions
-- **Microsoft.Extensions.Hosting**: Version 10.0.3 - Generic host for .NET applications
-
-### Command-line Tool Dependencies
-
-- **Serilog.Extensions.Logging**: Version 9.0.1 - Serilog integration with Microsoft.Extensions.Logging
-- **Serilog.Sinks.File**: Version 7.0.0 - Serilog file logging sink
-- **System.CommandLine**: Version 2.0.0-beta4.22272.1 - Command-line argument parsing
+The dependency most likely to matter to you is the Firely .NET SDK (`Hl7.Fhir.Base` and `Hl7.Fhir.R4`),
+since a host that references it directly needs a version at or above the one we pin. It is held in the
+`FirelyNetVersion` property at the top of that file.
 
 ## Pre-release NuGet Packages
 

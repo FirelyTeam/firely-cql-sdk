@@ -16,8 +16,8 @@
 		  - Versions for the private Firely.Cql.Sdk.Integration.Runner submodule, which opts
 		    out via submodules/Directory.Packages.props. It is a separate repository.
 
-		When you change a version here, also update the root README.md "External Dependencies"
-		table, which is the only consumer-visible record of what we pin.
+		This file is also the consumer-facing record of what we pin: documentation does not restate
+		package versions, it points here, so changing a version here is the whole job.
 
 		This mirrors the arrangement in
 		https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
@@ -40,7 +40,6 @@
 			pins Hl7.Fhir.Base directly, so a lower value there is a package downgrade.
 			The CQL SDK legitimately leads for a while - Vonk moves to this version as part of taking
 			the release that carries it - so the two being unequal between releases is expected.
-			Keep in sync with the root README.md "External Dependencies" table.
 			-->
 		<FirelyNetVersion>6.5.0</FirelyNetVersion>
 		<FhirMetricsVersion>1.4.0</FhirMetricsVersion>
