@@ -400,7 +400,23 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNull(result);
         }
 
+        [TestMethod]
+        public void Interval_Untyped_Null_Null_Is_Interval_Of_Any()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[null, null]");
+            var interval = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Interval>();
+            interval.Should().HaveType(SystemTypes.AnyType.ToIntervalType());
+        }
 
+        [TestMethod]
+        public void Interval_Untyped_Null_Null_Errors_When_AllowNullIntervals_Is_False()
+        {
+            CreateCqlToolkit(AllowNullIntervals: false).MakeLibrary("""
+                library IntervalTest version '1.0.0'
+
+                define private Interval_Untyped_Null_Null: Interval[null, null]
+                """, "Could not resolve call to operator Interval*");
+        }
 
     }
 }
