@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
