@@ -106,6 +106,9 @@ namespace Hl7.Cql.CqlToElm
             var expression = ElmFactory.CreateElmNode(function, library, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+            // A system function reached by its quoted name gets the same validators as one reached by its operator.
+            if (function is SystemFunction sysFn)
+                expression = sysFn.Validate(expression);
             var newResultType = ReplaceGenericType(function.ResultTypeSpecifier!, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);

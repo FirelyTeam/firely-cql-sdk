@@ -1,9 +1,10 @@
-## Fixes
+## Potentially Breaking
 
-- The `Interval` system function no longer populates `highClosedExpression` from the low boundary's
-  `closed` argument. When the third and fourth arguments are non-literal expressions, both closed
-  expressions were taken from the third, so the upper bound's closedness was governed by the lower
-  bound's expression, silently and with no error or warning. **CQL evaluation results change**, but
-  only for libraries that call `"Interval"(low, high, lowClosed, highClosed)` with non-literal closed
-  arguments; the `Interval[...]` selector syntax always emits Boolean literals for those positions
-  and was unaffected. (#1616)
+- **CQL-to-ELM translator:** calling `"Interval"(low, high, lowClosed, highClosed)` through the quoted
+  identifier with non-literal closed arguments is now a translation error, as it is in the reference
+  translator. CQL defines no `Interval` function; the `Interval[...]` selector carries closedness in its
+  bracket characters and always emits Boolean literals, so it is unaffected. Libraries using the quoted
+  form with non-literal closed arguments were silently getting the wrong interval: both closed
+  expressions were populated from the third argument, so the upper bound's closedness was governed by
+  the lower bound's expression. That index is corrected as well, but the call no longer translates, so
+  the fix is not observable. (#1616)

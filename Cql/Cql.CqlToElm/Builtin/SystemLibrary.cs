@@ -220,6 +220,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Intersect = binary<Intersect>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
             .Combine(binary<Intersect>(T.ToListType(), T.ToListType(), T.ToListType()));
         public static OverloadedFunctionDef Interval = nary<Interval>(new TypeSpecifier[] { T, T, BooleanType, BooleanType, }, 4, T.ToIntervalType())
+            .ValidateWith(Validators.Validate)
             .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType);
         public static OverloadedFunctionDef InValueSet = binary<InValueSet>(T, ValueSetType, BooleanType).For(T, StringType, CodeType, ConceptType);
         public static SystemFunction<IsFalse> IsFalse = unary<IsFalse>(BooleanType, BooleanType);
@@ -338,6 +339,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         internal static void Validate(DateTimeComponentFrom dtc) =>
             dtc.HasValidPrecision(dtc.operand.resultTypeSpecifier, dtc.precisionSpecified, dtc.precision);
+
+        // CQL has no Interval function: the grammar reserves the word and the selector carries closedness
+        // in its bracket characters, so only a quoted-identifier call can reach this with non-literal
+        // closed arguments. The reference translator rejects that call; so do we.
+        internal static void Validate(Interval i)
+        {
+            if (i.lowClosedExpression is not null || i.highClosedExpression is not null)
+                i.AddError("The closed boundary arguments of Interval must be Boolean literals.");
+        }
 
         public static T HasSameOperandTypes<T>(this T element) where T : Element =>
             element switch
