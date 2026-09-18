@@ -282,9 +282,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef SameOrBefore = binaryWithPrecision<SameOrBefore>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
             .Combine(binaryWithPrecision<SameOrBefore>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef Before = binaryWithPrecision<Before>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
-            .Combine(binaryWithPrecision<Before>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+            .Combine(binaryWithPrecision<Before>(T.ToIntervalType(), T.ToIntervalType(), BooleanType))
+            .Combine(binaryWithPrecision<Before>(T, T.ToIntervalType(), BooleanType).For(T, IntervalPointTypes.ToArray()))
+            .Combine(binaryWithPrecision<Before>(T.ToIntervalType(), T, BooleanType).For(T, IntervalPointTypes.ToArray()));
         public static OverloadedFunctionDef After = binaryWithPrecision<After>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
-            .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+            .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T.ToIntervalType(), BooleanType))
+            .Combine(binaryWithPrecision<After>(T, T.ToIntervalType(), BooleanType).For(T, IntervalPointTypes.ToArray()))
+            .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T, BooleanType).For(T, IntervalPointTypes.ToArray()));
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
