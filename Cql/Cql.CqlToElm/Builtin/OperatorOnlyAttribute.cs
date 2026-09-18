@@ -11,10 +11,9 @@
 namespace Hl7.Cql.CqlToElm.Builtin
 {
     /// <summary>
-    /// Marks a <see cref="SystemLibrary"/> field that the visitors reach directly and that is not a
-    /// CQL function. The field is left out of the symbol table, so function syntax of the same name
-    /// (<c>NotEqual(1, 2)</c>, <c>"Interval"(1, 10, true, true)</c>) does not resolve to it. The
-    /// reference translator rejects those calls, and so does this one.
+    /// Marks a <see cref="SystemLibrary"/> field that is not a CQL function. The field is left out
+    /// of the symbol table, so function syntax of the same name (<c>NotEqual(1, 2)</c>,
+    /// <c>"Interval"(1, 10, true, true)</c>) does not resolve to it; only the operator syntax reaches it.
     /// </summary>
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     internal sealed class OperatorOnlyAttribute : Attribute

@@ -328,7 +328,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void OperatorOnlySymbol_UserFunctionOfSameNameResolves()
         {
-            // On develop this call was ambiguous between the local function and the internal NotEqual.
+            // The internal operator is not in the symbol table, so the local function is the only candidate.
             var library = CreateCqlToolkit().MakeLibrary("""
                 library SymbolTableTest version '1.0.0'
 
