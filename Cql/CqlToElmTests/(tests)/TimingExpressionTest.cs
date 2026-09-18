@@ -412,5 +412,35 @@ namespace Hl7.Cql.CqlToElm.Test
             Run<bool?>(after, library).Should().BeNull();
         }
 
+        [TestMethod]
+        public void TestIntervalOfCoarserPrecisionAfterDateIsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[@2024, @2025] after @2024-01-01");
+            var after = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<After>();
+            after.precisionSpecified.Should().BeFalse();
+            after.operand[1].Should().NotBeOfType<Elm.Interval>();
+            Run<bool?>(after, library).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void TestDateOfCoarserPrecisionBeforeIntervalIsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("@2024 before Interval[@2024-01-01, @2024-12-31]");
+            var before = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Before>();
+            before.precisionSpecified.Should().BeFalse();
+            before.operand[0].Should().NotBeOfType<Elm.Interval>();
+            Run<bool?>(before, library).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void TestIntervalBeforeDateOfCoarserPrecisionIsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[@2023-01-01, @2024-01-01] before @2024");
+            var before = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Before>();
+            before.precisionSpecified.Should().BeFalse();
+            before.operand[1].Should().NotBeOfType<Elm.Interval>();
+            Run<bool?>(before, library).Should().BeNull();
+        }
+
     }
 }
