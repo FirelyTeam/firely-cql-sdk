@@ -64,8 +64,8 @@ public class ChoiceTypeListPropertyTests
     public void ChoiceTypedSource_MatchesOnListValuedProperty()
     {
         var bundle = BundleOf(
-            ServiceRequestWithReasons(InValueSetCode),
-            MedicationRequestWithReasons(InValueSetCode));
+            ServiceRequestWithReasons("sr", InValueSetCode),
+            MedicationRequestWithReasons("mr", InValueSetCode));
 
         var matches = Invoke("Interventions With Reason", bundle);
 
@@ -79,7 +79,7 @@ public class ChoiceTypeListPropertyTests
     [TestMethod]
     public void ChoiceTypedSource_MatchesOnAnyElementOfTheList()
     {
-        var bundle = BundleOf(ServiceRequestWithReasons(OutOfValueSetCode, InValueSetCode));
+        var bundle = BundleOf(ServiceRequestWithReasons("sr", OutOfValueSetCode, InValueSetCode));
 
         Invoke("Interventions With Reason", bundle).Should().HaveCount(1);
     }
@@ -88,8 +88,8 @@ public class ChoiceTypeListPropertyTests
     public void ChoiceTypedSource_DoesNotMatchWhenNoCodeIsInTheValueSet()
     {
         var bundle = BundleOf(
-            ServiceRequestWithReasons(OutOfValueSetCode),
-            MedicationRequestWithReasons(OutOfValueSetCode));
+            ServiceRequestWithReasons("sr", OutOfValueSetCode),
+            MedicationRequestWithReasons("mr", OutOfValueSetCode));
 
         Invoke("Interventions With Reason", bundle).Should().BeEmpty();
     }
@@ -102,8 +102,8 @@ public class ChoiceTypeListPropertyTests
     [TestMethod]
     public void StronglyTypedSource_MatchesOnListValuedProperty()
     {
-        var matching = new Procedure { ReasonCode = [Concept(InValueSetCode)] };
-        var nonMatching = new Procedure { ReasonCode = [Concept(OutOfValueSetCode)] };
+        var matching = new Procedure { Id = "match", ReasonCode = [Concept(InValueSetCode)] };
+        var nonMatching = new Procedure { Id = "no-match", ReasonCode = [Concept(OutOfValueSetCode)] };
 
         Invoke("Procedures With Reason", BundleOf(matching, nonMatching)).Should().HaveCount(1);
     }
@@ -123,18 +123,22 @@ public class ChoiceTypeListPropertyTests
         return bundle;
     }
 
-    private static ServiceRequest ServiceRequestWithReasons(params string[] codes) =>
+    // Every resource carries an id: a union eliminates duplicates, and resources that differ in
+    // nothing else collapse into one, which has nothing to do with what is under test here.
+    private static ServiceRequest ServiceRequestWithReasons(string id, params string[] codes) =>
         new()
         {
+            Id = id,
             Status = RequestStatus.Completed,
             Intent = RequestIntent.Order,
             Subject = new ResourceReference("Patient/1"),
             ReasonCode = [.. codes.Select(Concept)],
         };
 
-    private static MedicationRequest MedicationRequestWithReasons(params string[] codes) =>
+    private static MedicationRequest MedicationRequestWithReasons(string id, params string[] codes) =>
         new()
         {
+            Id = id,
             Status = MedicationRequest.MedicationrequestStatus.Completed,
             Intent = MedicationRequest.MedicationRequestIntent.Order,
             Subject = new ResourceReference("Patient/1"),
