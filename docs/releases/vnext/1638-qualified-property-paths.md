@@ -6,7 +6,9 @@
   `medication.reference.value` was looked up as one literal element name, found nothing, and returned
   `null`. `LateBoundProperty<T>` now splits the path and resolves each segment against the runtime type
   of the value the preceding segment produced, which is what the logical specification requires and what
-  the unscoped form of `Property` already did.
+  the unscoped form of `Property` already did. A literal element name that itself contains a dot (a CQL
+  quoted identifier, e.g. a tuple element name) still resolves by exact match, which takes precedence
+  over path splitting.
 
   Walking the runtime type is what makes these paths resolvable at all: `MedicationRequest.medication`
   is declared as `DataType`, so `reference` exists only on the concrete `ResourceReference` the element

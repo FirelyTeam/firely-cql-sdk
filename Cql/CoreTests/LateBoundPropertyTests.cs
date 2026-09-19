@@ -89,6 +89,21 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void LateBoundProperty_LiteralNameContainingDot_ResolvesExactlyWithoutSplitting()
+        {
+            var operators = FhirCqlContext.ForBundle().Operators;
+
+            // A CQL quoted identifier may contain a dot, and tuple metadata carries element
+            // names verbatim. An exact match must win over splitting the name as a path.
+            var metadata = new CqlTupleMetadata([typeof(string)], ["medication.reference"]);
+            var tuple = (metadata, "Medication/63369663-1234");
+
+            var value = operators.LateBoundProperty<string>(tuple, "medication.reference");
+
+            Assert.AreEqual("Medication/63369663-1234", value);
+        }
+
+        [TestMethod]
         public void LateBoundProperty_MissingProperty_ReturnsNull()
         {
             var operators = FhirCqlContext.ForBundle().Operators;

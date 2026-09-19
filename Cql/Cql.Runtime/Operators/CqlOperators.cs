@@ -128,13 +128,15 @@ namespace Hl7.Cql.Operators
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
                 return (T)(object)null!;
 
-            if (propertyName.IndexOf('.') >= 0)
+            if (propertyName.IndexOf('.') >= 0 && !ResolvesAsLiteralName(source, propertyName))
             {
                 // The path of an ELM Property node may be qualified, e.g. "medication.reference.value".
                 // Resolve each segment against the runtime type of the value the preceding segment
                 // produced. Only the runtime type carries the later segments when an earlier one is a
                 // choice element: MedicationRequest.medication is declared as DataType, so 'reference'
                 // exists on the ResourceReference it actually holds, never on the declared type.
+                // A literal element name may itself contain a dot (CQL quoted identifiers, carried
+                // verbatim in tuple metadata), so an exact match always wins over path splitting.
                 var segments = propertyName.Split('.');
                 object? qualifier = source;
                 for (var i = 0; i < segments.Length - 1; i++)
@@ -204,6 +206,31 @@ namespace Hl7.Cql.Operators
                 return (T)propertyValue;
             }
             else return ConvertOrNull<T>(propertyValue);
+        }
+
+        /// <summary>
+        /// Returns whether <paramref name="propertyName"/>, taken verbatim, resolves on
+        /// <paramref name="source"/> through any of the lookups <see cref="LateBoundProperty{T}"/>
+        /// performs for a single element name.
+        /// </summary>
+        private bool ResolvesAsLiteralName(object source, string propertyName)
+        {
+            if (source is System.Runtime.CompilerServices.ITuple valueTuple
+                && valueTuple.Length > 0
+                && valueTuple[0] is CqlTupleMetadata tupleMetadata)
+            {
+                for (int i = 0; i < tupleMetadata.ItemNames.Count && i + 1 < valueTuple.Length; i++)
+                {
+                    if (string.Equals(tupleMetadata.ItemNames[i], propertyName, StringComparison.Ordinal))
+                        return true;
+                }
+                return false;
+            }
+
+            var type = source.GetType();
+            return TypeResolver.ShouldUseSourceObject(type, propertyName)
+                   || type.GetProperty(propertyName) != null
+                   || TypeResolver.GetProperty(type, propertyName) != null;
         }
 
         private T ConvertOrNull<T>(object? value)
