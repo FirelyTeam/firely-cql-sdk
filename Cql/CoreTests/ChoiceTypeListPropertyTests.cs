@@ -108,6 +108,77 @@ public class ChoiceTypeListPropertyTests
         Invoke("Procedures With Reason", BundleOf(matching, nonMatching)).Should().HaveCount(1);
     }
 
+    /// <summary>
+    /// A choice member whose type cannot be resolved has unknown cardinality, so the list recovery
+    /// must be abandoned rather than inferred from the resolvable subset: were the read typed as a
+    /// list off the members that do resolve, a runtime value of the unresolvable alternative whose
+    /// path is scalar would convert to <see langword="null"/> - the same silent-wrong-answer class
+    /// this fix closes, pointed the other way.
+    /// </summary>
+    /// <remarks>
+    /// These two tests assert the emitted C#, not a runtime result, because declining the recovery
+    /// is an abstention, not a correct outcome: the <see cref="object"/>-typed emission still wraps
+    /// a list-valued <c>reasonCode</c> in a singleton and converts it to <see langword="null"/>, so
+    /// there is no runtime value these fixtures get right, and asserting one would pin a defect as
+    /// correct behaviour. The abstention restores the pre-fix behaviour rather than inventing a new
+    /// wrong answer, but it is a known remaining gap in #1636's coverage, not a complete fix for
+    /// this shape of input.
+    /// </remarks>
+    [TestMethod]
+    public void UnresolvableChoiceMember_DeclinesTheListRecovery()
+    {
+        var allMembersResolve = GenerateCSharp("ChoiceTypeListPropertyTest");
+        var oneMemberUnresolvable = GenerateCSharp("ChoiceTypeUnresolvedMemberTest");
+
+        allMembersResolve.Should()
+                         .Contain(
+                             "LateBoundProperty<IEnumerable<CodeableConcept>>",
+                             "every member of the choice resolves, so reasonCode's list cardinality can be read off them");
+
+        oneMemberUnresolvable.Should()
+                             .NotContain(
+                                 "LateBoundProperty<IEnumerable<",
+                                 "a member that does not resolve cannot be shown to make the path list-valued");
+        oneMemberUnresolvable.Should()
+                             .Contain(
+                                 "LateBoundProperty<object>",
+                                 "the read falls back to the erased type the choice already has");
+    }
+
+    /// <summary>
+    /// The other arm of the same guard: a member that is itself a heterogeneous choice resolves,
+    /// but to <see cref="object"/>, which is just as uninspectable for the path - so the recovery
+    /// must be declined here too. See the remarks on
+    /// <see cref="UnresolvableChoiceMember_DeclinesTheListRecovery"/> for why the emitted C#, not a
+    /// runtime result, is asserted.
+    /// </summary>
+    [TestMethod]
+    public void NestedHeterogeneousChoiceMember_DeclinesTheListRecovery()
+    {
+        var oneMemberIsANestedChoice = GenerateCSharp("ChoiceTypeNestedChoiceMemberTest");
+
+        oneMemberIsANestedChoice.Should()
+                                .NotContain(
+                                    "LateBoundProperty<IEnumerable<",
+                                    "a nested heterogeneous choice collapses to object, which cannot be shown to make the path list-valued");
+        oneMemberIsANestedChoice.Should()
+                                .Contain(
+                                    "LateBoundProperty<object>",
+                                    "the read falls back to the erased type the choice already has");
+    }
+
+    private static string GenerateCSharp(string libraryName) =>
+        new ElmToolkit()
+            .AddElmFiles((FileInfo[])
+            [
+                new(Path.Combine("Input", "ELM", "Test", $"{libraryName}-1.0.0.json")),
+                new(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json")),
+            ])
+            .CompileToAssemblies()
+            .GetElmToCSharpResults()
+            .Single(result => result.libraryIdentifier.ToString() == $"{libraryName}-1.0.0")
+            .cSharp;
+
     private static IEnumerable<object> Invoke(string define, Bundle bundle)
     {
         var context = FhirCqlContext.ForBundle(bundle: bundle, valueSets: _valueSets);
