@@ -247,6 +247,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     expression = expression,
                 };
+                // ReturnClause.distinct defaults to true, so only an explicit 'all' has to be carried over.
+                if (returnClauseCtx.children.Count > 1 && returnClauseCtx.children[1].GetText() == "all")
+                    rc.distinct = false;
                 var resultType = isScalarSource
                     ? expression.resultTypeSpecifier
                     : expression.resultTypeSpecifier.ToListType();
