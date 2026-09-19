@@ -128,6 +128,28 @@ namespace Hl7.Cql.Operators
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
                 return (T)(object)null!;
 
+            if (propertyName.IndexOf('.') >= 0)
+            {
+                // The path of an ELM Property node may be qualified, e.g. "medication.reference.value".
+                // Resolve each segment against the runtime type of the value the preceding segment
+                // produced. Only the runtime type carries the later segments when an earlier one is a
+                // choice element: MedicationRequest.medication is declared as DataType, so 'reference'
+                // exists on the ResourceReference it actually holds, never on the declared type.
+                var segments = propertyName.Split('.');
+                object? qualifier = source;
+                for (var i = 0; i < segments.Length - 1; i++)
+                {
+                    qualifier = LateBoundProperty<object>(qualifier, segments[i]);
+                    if (qualifier == null)
+                        return (T)(object)null!;
+                }
+                source = qualifier;
+                propertyName = segments[segments.Length - 1];
+
+                if (string.IsNullOrWhiteSpace(propertyName))
+                    return (T)(object)null!;
+            }
+
             object? propertyValue;
             if (source is System.Runtime.CompilerServices.ITuple valueTuple
                 && valueTuple.Length > 0

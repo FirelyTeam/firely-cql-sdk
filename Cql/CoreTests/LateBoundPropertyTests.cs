@@ -37,6 +37,57 @@ namespace CoreTests
             Assert.AreEqual(1, value.Value.Day);
         }
 
+        // Regression test for a qualified (dotted) path. The scoped form of an ELM Property
+        // node emits its path verbatim, so the generated code for the translator's standard
+        // medication-by-reference join asks for "medication.reference.value" in one call.
+        // Resolving that as a single element name returns null, which makes the join match
+        // nothing and any medication retrieve reached through medicationReference silently
+        // return no rows.
+        [TestMethod]
+        public void LateBoundProperty_QualifiedPathOverChoiceType_WalksEachSegment()
+        {
+            var operators = FhirCqlContext.ForBundle().Operators;
+
+            // MedicationRequest.Medication is declared as DataType, so 'reference' is reachable
+            // only through the runtime type of the value it holds.
+            var medicationRequest = new MedicationRequest
+            {
+                Medication = new ResourceReference("Medication/63369663-1234")
+            };
+
+            var value = operators.LateBoundProperty<string>(medicationRequest, "medication.reference.value");
+
+            Assert.AreEqual("Medication/63369663-1234", value);
+        }
+
+        [TestMethod]
+        public void LateBoundProperty_QualifiedPathOverPrimitive_WalksEachSegment()
+        {
+            var operators = FhirCqlContext.ForBundle().Operators;
+
+            var medication = new Medication { Id = "63369663-1234" };
+
+            var value = operators.LateBoundProperty<string>(medication, "id.value");
+
+            Assert.AreEqual("63369663-1234", value);
+        }
+
+        [TestMethod]
+        public void LateBoundProperty_QualifiedPathWithUnresolvableSegment_ReturnsNull()
+        {
+            var operators = FhirCqlContext.ForBundle().Operators;
+
+            var medicationRequest = new MedicationRequest
+            {
+                Medication = new ResourceReference("Medication/63369663-1234")
+            };
+
+            // A segment that does not exist must still degrade to null rather than throw or
+            // return the partially walked value.
+            Assert.IsNull(operators.LateBoundProperty<object>(medicationRequest, "medication.nonexistent.value"));
+            Assert.IsNull(operators.LateBoundProperty<object>(medicationRequest, "nonexistent.reference.value"));
+        }
+
         [TestMethod]
         public void LateBoundProperty_MissingProperty_ReturnsNull()
         {
