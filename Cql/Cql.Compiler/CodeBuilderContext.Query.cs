@@ -682,7 +682,9 @@ partial class CodeBuilderContext
     /// <summary>
     /// Resolves <paramref name="path"/> against the member types of <paramref name="sourceElement"/>'s
     /// choice type, returning the list type to read it as, or <see langword="null"/> when the path
-    /// is not list-valued on every member that has it, or when the members disagree.
+    /// is not list-valued on every member that has it, when the members disagree, or when any
+    /// member's type cannot be inspected - an uninspectable member has unknown cardinality, so
+    /// recovery is abandoned rather than inferred from the resolvable subset.
     /// </summary>
     /// <remarks>
     /// A choice type erases to <see cref="object"/>, so a path on it can only be late-bound, and a
@@ -706,8 +708,9 @@ partial class CodeBuilderContext
         Type? elementType = null;
         foreach (var choiceTypeSpecifier in choices)
         {
-            if (TypeFor(choiceTypeSpecifier, throwIfNotFound: false) is not { } memberType)
-                continue;
+            var memberType = TypeFor(choiceTypeSpecifier, throwIfNotFound: false);
+            if (memberType is null || memberType == typeof(object))
+                return null;
 
             if (_typeResolver.GetProperty(memberType, path) is not { } property)
                 continue;
