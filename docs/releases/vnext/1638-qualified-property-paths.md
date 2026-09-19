@@ -19,4 +19,4 @@
   populated list, and measure populations computed from them change accordingly. Per
   [versioning.md](../../versioning.md) this forces a **MESO** bump: consumers should re-check any
   measure results that involve reference-based medication retrieves, even though no public API,
-  generated C# output, or `GeneratorToolVersion` changes. (#1637)
+  generated C# output, or `GeneratorToolVersion` changes. (#1638)
