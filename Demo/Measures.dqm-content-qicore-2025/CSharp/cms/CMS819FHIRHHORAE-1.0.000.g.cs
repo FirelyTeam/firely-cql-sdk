@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS819FHIRHHORAE", "1.0.000")]
 public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRHHORAE_1_0_000>
 {
@@ -138,15 +138,24 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                string l_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType m_ = MR?.Medication;
-                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                Id l_ = M?.IdElement;
+                string m_ = l_?.Value;
+                FhirString n_;
+                DataType x_ = MR?.Medication;
+                bool y_ = x_ is ResourceReference;
+                if (y_)
+                {
+                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
+                    n_ = z_;
+                }
+                else
+                {
+                    n_ = default;
+                }
+                string o_ = n_?.Value;
+                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
                 string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(l_, q_);
+                bool? r_ = context.Operators.Equal(m_, q_);
                 CodeableConcept s_ = M?.Code;
                 CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Opioids__All(context);
@@ -165,11 +174,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration Opioids) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = Opioids?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
-            string z_ = context.Operators.Convert<string>(y_);
-            bool? aa_ = context.Operators.Equal(z_, "completed");
-            return aa_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> aa_ = Opioids?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? ab_ = aa_?.Value;
+            string ac_ = context.Operators.Convert<string>(ab_);
+            bool? ad_ = context.Operators.Equal(ac_, "completed");
+            return ad_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -278,15 +287,24 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                string l_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType m_ = MR?.Medication;
-                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                Id l_ = M?.IdElement;
+                string m_ = l_?.Value;
+                FhirString n_;
+                DataType x_ = MR?.Medication;
+                bool y_ = x_ is ResourceReference;
+                if (y_)
+                {
+                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
+                    n_ = z_;
+                }
+                else
+                {
+                    n_ = default;
+                }
+                string o_ = n_?.Value;
+                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
                 string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(l_, q_);
+                bool? r_ = context.Operators.Equal(m_, q_);
                 CodeableConcept s_ = M?.Code;
                 CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Opioid_Antagonist(context);
@@ -305,11 +323,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration AntagonistGiven) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = AntagonistGiven?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
-            string z_ = context.Operators.Convert<string>(y_);
-            bool? aa_ = context.Operators.Equal(z_, "completed");
-            return aa_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> aa_ = AntagonistGiven?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? ab_ = aa_?.Value;
+            string ac_ = context.Operators.Convert<string>(ab_);
+            bool? ad_ = context.Operators.Equal(ac_, "completed");
+            return ad_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);

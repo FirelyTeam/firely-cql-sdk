@@ -497,22 +497,174 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ScopedProperty_QualifiedPathAcrossChoiceElement_LateBindsRemainderOneSegmentPerCall()
+        public void ScopedProperty_QualifiedPathAcrossChoiceElement_DispatchesOnTheModelsAlternatives()
         {
-            // MR.medication.reference.value: 'medication' is a choice element, statically DataType,
-            // so 'reference' cannot be bound at design time. The bound prefix stays typed and the
-            // remainder is late-bound one segment per call; no emitted call carries a dotted name.
+            // MR.medication.reference.value: 'medication' is a FHIR choice element, statically
+            // DataType. The ELM carries no type for the read, so the alternatives come from the
+            // model (CodeableConcept | Reference); only Reference has 'reference', so the read is
+            // a single typed branch and the result is a plain string. No late binding remains.
             var elmLibrary = QualifiedPathLibrary("QualifiedPathChoiceElement", "MedicationRequest", "medication.reference.value");
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "?.Medication");
-            StringAssert.Contains(cSharp, "\"reference\")");
-            StringAssert.Contains(cSharp, "\"value\")");
-            Assert.IsFalse(cSharp.Contains("\"medication.reference"), "No late-bound call may carry a dotted name:\n" + cSharp);
+            StringAssert.Contains(cSharp, "is ResourceReference");
+            StringAssert.Contains(cSharp, "ReferenceElement");
+            StringAssert.Contains(cSharp, "IEnumerable<string>");
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice is known, so nothing may be late-bound:\n" + cSharp);
 
-            var bundle = BundleOf(new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") });
-            CollectionAssert.AreEqual(new[] { "Medication/med-1" }, ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList());
+            var bundle = BundleOf(
+                new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") },
+                new MedicationRequest { Id = "mr-2", Medication = new CodeableConcept("http://example.org", "coded") });
+            CollectionAssert.AreEqual(
+                new object[] { "Medication/med-1", null },
+                ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList(),
+                "a reference resolves to its string; a coded medication has no reference and yields null");
+        }
+
+        [TestMethod]
+        public void Property_OnUnionAlias_DispatchesOnTheAlternativesThatHaveTheElement()
+        {
+            // [Procedure] union [ServiceRequest] is Choice<Procedure, ServiceRequest>; only
+            // ServiceRequest has authoredOn. The read is a single typed branch, null for a
+            // Procedure, and the ELM's DateTime result type converts the FHIR dateTime per branch.
+            var union = new Hl7.Cql.Elm.Union
+            {
+                operand = [RetrieveOf("Procedure"), RetrieveOf("ServiceRequest")],
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier
+                {
+                    elementType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                        new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Procedure"),
+                        new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "ServiceRequest")),
+                },
+            };
+            var authoredOnValue = new Hl7.Cql.Elm.Property
+            {
+                path = "value",
+                resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "DateTime"),
+                source = new Hl7.Cql.Elm.Property { path = "authoredOn", scope = "R" },
+            };
+            var elmLibrary = QueryLibrary("UnionAliasDispatch", union, authoredOnValue);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "is ServiceRequest");
+            StringAssert.Contains(cSharp, "AuthoredOnElement");
+            StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime>");
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Both alternatives of the union are known, so nothing may be late-bound:\n" + cSharp);
+
+            var bundle = BundleOf(
+                new Procedure { Id = "p-1", Status = EventStatus.Completed, Subject = new ResourceReference("Patient/1") },
+                new ServiceRequest
+                {
+                    Id = "sr-1",
+                    Status = RequestStatus.Completed,
+                    Intent = RequestIntent.Order,
+                    Subject = new ResourceReference("Patient/1"),
+                    AuthoredOnElement = new FhirDateTime("2026-01-15T10:00:00Z"),
+                });
+            var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList();
+            Assert.AreEqual(2, values.Count);
+            Assert.IsTrue(values.Contains(null), "the Procedure has no authoredOn");
+            var authoredOn = values.OfType<Hl7.Cql.Primitives.CqlDateTime>().Single();
+            Assert.AreEqual(2026, authoredOn.Value.Year);
+            Assert.AreEqual(15, authoredOn.Value.Day);
+        }
+
+        [TestMethod]
+        public void Property_OnChoiceWithDifferentElementTypes_DispatchesToObject()
+        {
+            // Condition.onset is Age | Period | Range | dateTime | string per the model. Only Age,
+            // dateTime and string have a value, and their value types differ, so the result is the
+            // choice of those types - object - and alternatives without the element yield null.
+            var onsetValue = new Hl7.Cql.Elm.Property
+            {
+                path = "value",
+                source = new Hl7.Cql.Elm.Property { path = "onset", scope = "R" },
+            };
+            var elmLibrary = QueryLibrary("ChoiceValueDispatch", RetrieveOf("Condition"), onsetValue);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "is Age");
+            StringAssert.Contains(cSharp, "is FhirDateTime");
+            StringAssert.Contains(cSharp, "is FhirString");
+            Assert.IsFalse(cSharp.Contains("is Period"), "Period has no value element, so it gets no branch:\n" + cSharp);
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice element is known, so nothing may be late-bound:\n" + cSharp);
+
+            var bundle = BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new Period { Start = "2026-01-01" } });
+            var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList();
+            Assert.AreEqual(2, values.Count);
+            Assert.AreEqual(1, values.Count(v => v is null), "an onset Period has no value");
+            Assert.AreEqual(1, values.Count(v => v is not null), "an onset dateTime has a value");
+        }
+
+        [TestMethod]
+        public void Property_OnAliasOverAQueryReturningAChoiceElement_DispatchesOnWhatTheQueryReturns()
+        {
+            // from ([Condition] X return X.onset) R return R.value: the outer alias ranges over a
+            // query whose elements are Condition.onset values. Nothing in the ELM types either
+            // read, so the alternatives come from what was learned translating the inner query.
+            var onsets = new Hl7.Cql.Elm.Query
+            {
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "X", expression = RetrieveOf("Condition") }],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    distinct = false,
+                    expression = new Hl7.Cql.Elm.Property { path = "onset", scope = "X" },
+                },
+            };
+            var elmLibrary = QueryLibrary("QueryElementDispatch", onsets, new Hl7.Cql.Elm.Property { path = "value", scope = "R" });
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "is Age");
+            StringAssert.Contains(cSharp, "is FhirDateTime");
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "The inner query's elements are a known choice, so nothing may be late-bound:\n" + cSharp);
+
+            var bundle = BundleOf(new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") });
+            var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList();
+            Assert.AreEqual(1, values.Count);
+            Assert.IsNotNull(values[0], "an onset dateTime has a value");
+        }
+
+        [TestMethod]
+        public void Property_OnChoiceDeclaredInTheElm_DispatchesOnTheDeclaredAlternatives()
+        {
+            // The same read as the test above, but typed the way the CQL translator types it: the
+            // choice element carries Choice<Age, Period, Range, string, dateTime> and the value
+            // read carries the sum of the alternatives' value types. The alternatives are taken
+            // from the ELM, not the model, and the result stays object.
+            const string fhir = "http://hl7.org/fhir";
+            const string system = "urn:hl7-org:elm-types:r1";
+            var onsetValue = new Hl7.Cql.Elm.Property
+            {
+                path = "value",
+                resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                    new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "decimal"),
+                    new Hl7.Cql.Elm.NamedTypeSpecifier(system, "DateTime"),
+                    new Hl7.Cql.Elm.NamedTypeSpecifier(system, "String")),
+                source = new Hl7.Cql.Elm.Property
+                {
+                    path = "onset",
+                    scope = "R",
+                    resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Age"),
+                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Period"),
+                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Range"),
+                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"),
+                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "dateTime")),
+                },
+            };
+            var elmLibrary = QueryLibrary("ElmChoiceValueDispatch", RetrieveOf("Condition"), onsetValue);
+
+            var (cSharp, _) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "is Age");
+            StringAssert.Contains(cSharp, "is FhirDateTime");
+            StringAssert.Contains(cSharp, "is FhirString");
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative the ELM declares is known, so nothing may be late-bound:\n" + cSharp);
         }
 
         [TestMethod]
@@ -564,6 +716,13 @@ namespace CoreTests
         /// type, matching what the MADiE translator emits for a qualified path.
         /// </summary>
         private static Library QualifiedPathLibrary(string libraryName, string resourceType, string path) =>
+            QueryLibrary(libraryName, RetrieveOf(resourceType), new Hl7.Cql.Elm.Property { scope = "R", path = path });
+
+        /// <summary>
+        /// A library with one definition, <c>Values</c>: a query over <paramref name="source"/>
+        /// aliased <c>R</c>, returning <paramref name="returnExpression"/> for each element.
+        /// </summary>
+        private static Library QueryLibrary(string libraryName, Hl7.Cql.Elm.Expression source, Hl7.Cql.Elm.Expression returnExpression) =>
             new()
             {
                 identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = libraryName, version = "1.0.0" },
@@ -582,12 +741,12 @@ namespace CoreTests
                         {
                             source =
                             [
-                                new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf(resourceType) },
+                                new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = source },
                             ],
                             @return = new Hl7.Cql.Elm.ReturnClause
                             {
                                 distinct = false,
-                                expression = new Hl7.Cql.Elm.Property { scope = "R", path = path },
+                                expression = returnExpression,
                             },
                         },
                     },

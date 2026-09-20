@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("Exam130FHIR", "0.0.003")]
 public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_003>
 {
@@ -487,69 +487,79 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? d_(Observation FecalOccult) {
             DataType p_ = FecalOccult?.Effective;
             CqlDateTime q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, p_);
-            DataType r_ = FecalOccult?.Value;
-            IEnumerable<Coding> s_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(r_, "coding");
-
-            bool? t_(Coding @this) {
-                FhirString aj_ = @this?.DisplayElement;
-                bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
-                return ak_;
+            IEnumerable<Coding> r_;
+            DataType ai_ = FecalOccult?.Value;
+            bool aj_ = ai_ is CodeableConcept;
+            if (aj_)
+            {
+                List<Coding> ak_ = (ai_ as CodeableConcept)?.Coding;
+                r_ = (IEnumerable<Coding>)ak_;
+            }
+            else
+            {
+                r_ = default;
             }
 
-
-            FhirString u_(Coding @this) {
+            bool? s_(Coding @this) {
                 FhirString al_ = @this?.DisplayElement;
-                return al_;
+                bool? am_ = context.Operators.Not((bool?)(al_ is null));
+                return am_;
             }
 
-            IEnumerable<FhirString> v_ = context.Operators.WhereSelect<Coding, FhirString>(s_, t_, u_);
-            List<CodeableConcept> w_ = FecalOccult?.Category;
 
-            bool? x_(CodeableConcept @this) {
-                List<Coding> am_ = @this?.Coding;
-                bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            FhirString t_(Coding @this) {
+                FhirString an_ = @this?.DisplayElement;
                 return an_;
             }
 
+            IEnumerable<FhirString> u_ = context.Operators.WhereSelect<Coding, FhirString>(r_, s_, t_);
+            List<CodeableConcept> v_ = FecalOccult?.Category;
 
-            List<Coding> y_(CodeableConcept @this) {
+            bool? w_(CodeableConcept @this) {
                 List<Coding> ao_ = @this?.Coding;
-                return ao_;
+                bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
+                return ap_;
             }
 
-            IEnumerable<List<Coding>> z_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)w_, x_, y_);
-            IEnumerable<Coding> aa_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)z_);
 
-            bool? ab_(Coding @this) {
-                Code ap_ = @this?.CodeElement;
-                bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
+            List<Coding> x_(CodeableConcept @this) {
+                List<Coding> aq_ = @this?.Coding;
                 return aq_;
             }
 
+            IEnumerable<List<Coding>> y_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)v_, w_, x_);
+            IEnumerable<Coding> z_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)y_);
 
-            Code ac_(Coding @this) {
+            bool? aa_(Coding @this) {
                 Code ar_ = @this?.CodeElement;
-                return ar_;
+                bool? as_ = context.Operators.Not((bool?)(ar_ is null));
+                return as_;
             }
 
-            IEnumerable<Code> ad_ = context.Operators.WhereSelect<Coding, Code>(aa_, ab_, ac_);
 
-            bool? ae_(Code @this) {
-                string as_ = @this?.Value;
-                bool? at_ = context.Operators.Not((bool?)(as_ is null));
+            Code ab_(Coding @this) {
+                Code at_ = @this?.CodeElement;
                 return at_;
             }
 
+            IEnumerable<Code> ac_ = context.Operators.WhereSelect<Coding, Code>(z_, aa_, ab_);
 
-            string af_(Code @this) {
+            bool? ad_(Code @this) {
                 string au_ = @this?.Value;
-                return au_;
+                bool? av_ = context.Operators.Not((bool?)(au_ is null));
+                return av_;
             }
 
-            IEnumerable<string> ag_ = context.Operators.WhereSelect<Code, string>(ad_, ae_, af_);
-            Code<ObservationStatus> ah_ = FecalOccult?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ai_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, q_, v_, ag_, ah_);
-            return ai_;
+
+            string ae_(Code @this) {
+                string aw_ = @this?.Value;
+                return aw_;
+            }
+
+            IEnumerable<string> af_ = context.Operators.WhereSelect<Code, string>(ac_, ad_, ae_);
+            Code<ObservationStatus> ag_ = FecalOccult?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ah_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, q_, u_, af_, ag_);
+            return ah_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> e_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(b_, c_, d_);
@@ -847,69 +857,79 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
         (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? d_(Observation FitDNA) {
             DataType q_ = FitDNA?.Effective;
             CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
-            DataType s_ = FitDNA?.Value;
-            IEnumerable<Coding> t_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(s_, "coding");
-
-            bool? u_(Coding @this) {
-                FhirString ak_ = @this?.DisplayElement;
-                bool? al_ = context.Operators.Not((bool?)(ak_ is null));
-                return al_;
+            IEnumerable<Coding> s_;
+            DataType aj_ = FitDNA?.Value;
+            bool ak_ = aj_ is CodeableConcept;
+            if (ak_)
+            {
+                List<Coding> al_ = (aj_ as CodeableConcept)?.Coding;
+                s_ = (IEnumerable<Coding>)al_;
+            }
+            else
+            {
+                s_ = default;
             }
 
-
-            FhirString v_(Coding @this) {
+            bool? t_(Coding @this) {
                 FhirString am_ = @this?.DisplayElement;
-                return am_;
+                bool? an_ = context.Operators.Not((bool?)(am_ is null));
+                return an_;
             }
 
-            IEnumerable<FhirString> w_ = context.Operators.WhereSelect<Coding, FhirString>(t_, u_, v_);
-            List<CodeableConcept> x_ = FitDNA?.Category;
 
-            bool? y_(CodeableConcept @this) {
-                List<Coding> an_ = @this?.Coding;
-                bool? ao_ = context.Operators.Not((bool?)(an_ is null));
+            FhirString u_(Coding @this) {
+                FhirString ao_ = @this?.DisplayElement;
                 return ao_;
             }
 
+            IEnumerable<FhirString> v_ = context.Operators.WhereSelect<Coding, FhirString>(s_, t_, u_);
+            List<CodeableConcept> w_ = FitDNA?.Category;
 
-            List<Coding> z_(CodeableConcept @this) {
+            bool? x_(CodeableConcept @this) {
                 List<Coding> ap_ = @this?.Coding;
-                return ap_;
+                bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
+                return aq_;
             }
 
-            IEnumerable<List<Coding>> aa_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)x_, y_, z_);
-            IEnumerable<Coding> ab_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)aa_);
 
-            bool? ac_(Coding @this) {
-                Code aq_ = @this?.CodeElement;
-                bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
+            List<Coding> y_(CodeableConcept @this) {
+                List<Coding> ar_ = @this?.Coding;
                 return ar_;
             }
 
+            IEnumerable<List<Coding>> z_ = context.Operators.WhereSelect<CodeableConcept, List<Coding>>((IEnumerable<CodeableConcept>)w_, x_, y_);
+            IEnumerable<Coding> aa_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)z_);
 
-            Code ad_(Coding @this) {
+            bool? ab_(Coding @this) {
                 Code as_ = @this?.CodeElement;
-                return as_;
+                bool? at_ = context.Operators.Not((bool?)(as_ is null));
+                return at_;
             }
 
-            IEnumerable<Code> ae_ = context.Operators.WhereSelect<Coding, Code>(ab_, ac_, ad_);
 
-            bool? af_(Code @this) {
-                string at_ = @this?.Value;
-                bool? au_ = context.Operators.Not((bool?)(at_ is null));
+            Code ac_(Coding @this) {
+                Code au_ = @this?.CodeElement;
                 return au_;
             }
 
+            IEnumerable<Code> ad_ = context.Operators.WhereSelect<Coding, Code>(aa_, ab_, ac_);
 
-            string ag_(Code @this) {
+            bool? ae_(Code @this) {
                 string av_ = @this?.Value;
-                return av_;
+                bool? aw_ = context.Operators.Not((bool?)(av_ is null));
+                return aw_;
             }
 
-            IEnumerable<string> ah_ = context.Operators.WhereSelect<Code, string>(ae_, af_, ag_);
-            Code<ObservationStatus> ai_ = FitDNA?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? aj_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, r_, w_, ah_, ai_);
-            return aj_;
+
+            string af_(Code @this) {
+                string ax_ = @this?.Value;
+                return ax_;
+            }
+
+            IEnumerable<string> ag_ = context.Operators.WhereSelect<Code, string>(ad_, ae_, af_);
+            Code<ObservationStatus> ah_ = FitDNA?.StatusElement;
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ai_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, r_, v_, ag_, ah_);
+            return ai_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> e_ = context.Operators.WhereSelect<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(b_, c_, d_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHIR_1_8_000>
 {
@@ -328,8 +328,26 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object g_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                FhirDateTime h_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
+                object g_;
+                if (ComfortMeasure is Procedure)
+                {
+                    DataType l_ = (ComfortMeasure as Procedure)?.Performed;
+                    g_ = l_;
+                }
+                else
+                {
+                    g_ = null;
+                }
+                FhirDateTime h_;
+                if (ComfortMeasure is ServiceRequest)
+                {
+                    FhirDateTime m_ = (ComfortMeasure as ServiceRequest)?.AuthoredOnElement;
+                    h_ = m_;
+                }
+                else
+                {
+                    h_ = default;
+                }
                 CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (g_ as FhirDateTime) ?? h_);
                 CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                 bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, (string)default);
@@ -359,10 +377,28 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object g_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+                object g_;
+                if (ComfortMeasure is Procedure)
+                {
+                    DataType n_ = (ComfortMeasure as Procedure)?.Performed;
+                    g_ = n_;
+                }
+                else
+                {
+                    g_ = null;
+                }
                 CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
                 CqlDateTime i_ = context.Operators.Start(h_);
-                FhirDateTime j_ = context.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
+                FhirDateTime j_;
+                if (ComfortMeasure is ServiceRequest)
+                {
+                    FhirDateTime o_ = (ComfortMeasure as ServiceRequest)?.AuthoredOnElement;
+                    j_ = o_;
+                }
+                else
+                {
+                    j_ = default;
+                }
                 CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, j_);
                 CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
                 bool? m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);

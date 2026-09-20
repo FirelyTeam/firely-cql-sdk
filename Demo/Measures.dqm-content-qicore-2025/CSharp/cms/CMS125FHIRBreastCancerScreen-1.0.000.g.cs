@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -129,31 +129,271 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        List<Extension> k_;
-        Patient u_ = this.Patient(context);
-        bool v_ = u_ is DomainResource;
-        if (v_)
-        {
-            Patient w_ = this.Patient(context);
-            k_ = (w_ as DomainResource).Extension;
-        }
-        else
-        {
-            k_ = default;
-        }
+        List<Extension> k_ = a_?.Extension;
 
         bool? l_(Extension @this) {
-            FhirUri x_ = @this?.UrlElement;
-            string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return z_;
+            FhirUri u_ = @this?.UrlElement;
+            string v_ = FHIRHelpers_4_4_000.Instance.ToString(context, u_);
+            bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return w_;
         }
 
 
         object m_(Extension @this) {
-            DataType aa_ = @this?.Value;
-            object ab_ = context.Operators.LateBoundProperty<object>(aa_, "value");
-            return ab_;
+            DataType x_ = @this?.Value;
+            bool y_ = x_ is Uuid;
+            if (y_)
+            {
+                string z_ = (x_ as Uuid)?.Value;
+                return z_;
+            }
+            else
+            {
+                bool aa_ = x_ is Oid;
+                if (aa_)
+                {
+                    string ab_ = (x_ as Oid)?.Value;
+                    return ab_;
+                }
+                else
+                {
+                    bool ac_ = x_ is Markdown;
+                    if (ac_)
+                    {
+                        string ad_ = (x_ as Markdown)?.Value;
+                        return ad_;
+                    }
+                    else
+                    {
+                        bool ae_ = x_ is Integer;
+                        if (ae_)
+                        {
+                            int? af_ = (x_ as Integer)?.Value;
+                            return af_;
+                        }
+                        else
+                        {
+                            bool ag_ = x_ is Instant;
+                            if (ag_)
+                            {
+                                DateTimeOffset? ah_ = (x_ as Instant)?.Value;
+                                return ah_;
+                            }
+                            else
+                            {
+                                bool ai_ = x_ is Id;
+                                if (ai_)
+                                {
+                                    string aj_ = (x_ as Id)?.Value;
+                                    return aj_;
+                                }
+                                else
+                                {
+                                    bool ak_ = x_ is Duration;
+                                    if (ak_)
+                                    {
+                                        FhirDecimal al_ = (x_ as Duration)?.ValueElement;
+                                        return al_;
+                                    }
+                                    else
+                                    {
+                                        bool am_ = x_ is Distance;
+                                        if (am_)
+                                        {
+                                            FhirDecimal an_ = (x_ as Distance)?.ValueElement;
+                                            return an_;
+                                        }
+                                        else
+                                        {
+                                            bool ao_ = x_ is FhirDecimal;
+                                            if (ao_)
+                                            {
+                                                decimal? ap_ = (x_ as FhirDecimal)?.Value;
+                                                return ap_;
+                                            }
+                                            else
+                                            {
+                                                bool aq_ = x_ is Date;
+                                                if (aq_)
+                                                {
+                                                    string ar_ = (x_ as Date)?.Value;
+                                                    return ar_;
+                                                }
+                                                else
+                                                {
+                                                    bool as_ = x_ is Count;
+                                                    if (as_)
+                                                    {
+                                                        FhirDecimal at_ = (x_ as Count)?.ValueElement;
+                                                        return at_;
+                                                    }
+                                                    else
+                                                    {
+                                                        bool au_ = x_ is FhirDateTime;
+                                                        if (au_)
+                                                        {
+                                                            string av_ = context.Operators.Convert<string>(x_ as FhirDateTime);
+                                                            return av_;
+                                                        }
+                                                        else
+                                                        {
+                                                            bool aw_ = x_ is Time;
+                                                            if (aw_)
+                                                            {
+                                                                string ax_ = (x_ as Time)?.Value;
+                                                                return ax_;
+                                                            }
+                                                            else
+                                                            {
+                                                                bool ay_ = x_ is Age;
+                                                                if (ay_)
+                                                                {
+                                                                    FhirDecimal az_ = (x_ as Age)?.ValueElement;
+                                                                    return az_;
+                                                                }
+                                                                else
+                                                                {
+                                                                    bool ba_ = x_ is FhirUrl;
+                                                                    if (ba_)
+                                                                    {
+                                                                        string bb_ = (x_ as FhirUrl)?.Value;
+                                                                        return bb_;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        bool bc_ = x_ is FhirUri;
+                                                                        if (bc_)
+                                                                        {
+                                                                            string bd_ = (x_ as FhirUri)?.Value;
+                                                                            return bd_;
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            bool be_ = x_ is Base64Binary;
+                                                                            if (be_)
+                                                                            {
+                                                                                byte[] bf_ = (x_ as Base64Binary)?.Value;
+                                                                                return bf_;
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                bool bg_ = x_ is FhirBoolean;
+                                                                                if (bg_)
+                                                                                {
+                                                                                    bool? bh_ = (x_ as FhirBoolean)?.Value;
+                                                                                    return bh_;
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    bool bi_ = x_ is FhirString;
+                                                                                    if (bi_)
+                                                                                    {
+                                                                                        string bj_ = (x_ as FhirString)?.Value;
+                                                                                        return bj_;
+                                                                                    }
+                                                                                    else
+                                                                                    {
+                                                                                        bool bk_ = x_ is PositiveInt;
+                                                                                        if (bk_)
+                                                                                        {
+                                                                                            int? bl_ = (x_ as PositiveInt)?.Value;
+                                                                                            return bl_;
+                                                                                        }
+                                                                                        else
+                                                                                        {
+                                                                                            bool bm_ = x_ is Code;
+                                                                                            if (bm_)
+                                                                                            {
+                                                                                                string bn_ = (x_ as Code)?.Value;
+                                                                                                return bn_;
+                                                                                            }
+                                                                                            else
+                                                                                            {
+                                                                                                bool bo_ = x_ is UnsignedInt;
+                                                                                                if (bo_)
+                                                                                                {
+                                                                                                    int? bp_ = (x_ as UnsignedInt)?.Value;
+                                                                                                    return bp_;
+                                                                                                }
+                                                                                                else
+                                                                                                {
+                                                                                                    bool bq_ = x_ is Canonical;
+                                                                                                    if (bq_)
+                                                                                                    {
+                                                                                                        string br_ = (x_ as Canonical)?.Value;
+                                                                                                        return br_;
+                                                                                                    }
+                                                                                                    else
+                                                                                                    {
+                                                                                                        bool bs_ = x_ is Quantity;
+                                                                                                        if (bs_)
+                                                                                                        {
+                                                                                                            FhirDecimal bt_ = (x_ as Quantity)?.ValueElement;
+                                                                                                            return bt_;
+                                                                                                        }
+                                                                                                        else
+                                                                                                        {
+                                                                                                            bool bu_ = x_ is Identifier;
+                                                                                                            if (bu_)
+                                                                                                            {
+                                                                                                                FhirString bv_ = (x_ as Identifier)?.ValueElement;
+                                                                                                                return bv_;
+                                                                                                            }
+                                                                                                            else
+                                                                                                            {
+                                                                                                                bool bw_ = x_ is Money;
+                                                                                                                if (bw_)
+                                                                                                                {
+                                                                                                                    FhirDecimal bx_ = (x_ as Money)?.ValueElement;
+                                                                                                                    return bx_;
+                                                                                                                }
+                                                                                                                else
+                                                                                                                {
+                                                                                                                    bool by_ = x_ is UsageContext;
+                                                                                                                    if (by_)
+                                                                                                                    {
+                                                                                                                        DataType bz_ = (x_ as UsageContext)?.Value;
+                                                                                                                        return bz_;
+                                                                                                                    }
+                                                                                                                    else
+                                                                                                                    {
+                                                                                                                        bool ca_ = x_ is ContactPoint;
+                                                                                                                        if (ca_)
+                                                                                                                        {
+                                                                                                                            FhirString cb_ = (x_ as ContactPoint)?.ValueElement;
+                                                                                                                            return cb_;
+                                                                                                                        }
+                                                                                                                        else
+                                                                                                                        {
+                                                                                                                            return null;
+                                                                                                                        }
+                                                                                                                    }
+                                                                                                                }
+                                                                                                            }
+                                                                                                        }
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         IEnumerable<object> n_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)k_, l_, m_);
@@ -255,42 +495,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = UnilateralMastectomyRightPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = UnilateralMastectomyRightPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = UnilateralMastectomyRightPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = UnilateralMastectomyRightPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = UnilateralMastectomyRightPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = UnilateralMastectomyRightPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = UnilateralMastectomyRightPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -387,42 +613,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = UnilateralMastectomyLeftPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = UnilateralMastectomyLeftPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = UnilateralMastectomyLeftPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = UnilateralMastectomyLeftPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = UnilateralMastectomyLeftPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = UnilateralMastectomyLeftPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = UnilateralMastectomyLeftPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -491,42 +703,28 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = BilateralMastectomyPerformed?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = BilateralMastectomyPerformed?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = BilateralMastectomyPerformed?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = BilateralMastectomyPerformed?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = BilateralMastectomyPerformed?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = BilateralMastectomyPerformed?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = BilateralMastectomyPerformed?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

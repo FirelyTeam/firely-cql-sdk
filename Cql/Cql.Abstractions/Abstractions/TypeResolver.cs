@@ -158,6 +158,18 @@ namespace Hl7.Cql.Abstractions
         internal abstract PropertyInfo? GetProperty(Type type, string propertyName);
 
         /// <summary>
+        /// Gets the types a choice element can hold, for a property returned by
+        /// <see cref="GetProperty(Type, string)"/> whose declared .NET type erases that choice
+        /// (e.g. a FHIR <c>value[x]</c> element declared as its base data type).
+        /// </summary>
+        /// <param name="property">The property, as returned by <see cref="GetProperty(Type, string)"/>.</param>
+        /// <returns>
+        /// The concrete types the element can hold, or <see langword="null"/> when the property is not a
+        /// choice, or when the model does not enumerate its alternatives.
+        /// </returns>
+        internal virtual IReadOnlyList<Type>? GetChoiceTypes(PropertyInfo property) => null;
+
+        /// <summary>
         /// Gets the type used to model the concept of a Patient.
         /// For FHIR models, this would be the type used to model the <see href="https://www.hl7.org/fhir/patient.html" /> resource.
         /// </summary>

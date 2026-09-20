@@ -55,6 +55,13 @@ internal partial class CodeBuilderContext
     private readonly LibraryCodeBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, CodeLocal>? _operands = operands;
 
+    /// <summary>
+    /// The declared ELM type of each function operand in <see cref="_operands"/>, keyed by operand
+    /// name. An <see cref="OperandRef"/> may carry no result type of its own, so this is where the
+    /// alternatives of a choice-typed operand come from.
+    /// </summary>
+    private readonly Dictionary<string, TypeSpecifier> _operandTypeSpecifiers = new();
+
     // NOTE(phase4): the old builder carried an IExpressionMutator list here, documented as
     // "Not used yet, since it's always empty". That (Expression-based) hook was dropped in the
     // IR port; see Mutate below.

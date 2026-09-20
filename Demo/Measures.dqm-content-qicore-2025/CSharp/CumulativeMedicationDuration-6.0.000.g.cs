@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
 public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
@@ -300,299 +300,278 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
         }
         else
         {
-            string g_ = period?.unit;
-            bool? h_ = context.Operators.Equal(g_, "min");
-            if (h_ ?? false)
+            bool? g_ = context.Operators.Equal(a_, "min");
+            if (g_ ?? false)
             {
-                decimal? i_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                decimal? j_ = period?.value;
-                decimal? k_ = context.Operators.Divide(24.0m, j_);
-                decimal? l_ = context.Operators.Multiply(i_, k_);
-                decimal? m_ = context.Operators.ConvertIntegerToDecimal(60);
-                decimal? n_ = context.Operators.Multiply(l_, m_);
-                return n_;
+                decimal? h_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                decimal? i_ = period?.value;
+                decimal? j_ = context.Operators.Divide(24.0m, i_);
+                decimal? k_ = context.Operators.Multiply(h_, j_);
+                decimal? l_ = context.Operators.ConvertIntegerToDecimal(60);
+                decimal? m_ = context.Operators.Multiply(k_, l_);
+                return m_;
             }
             else
             {
-                string o_ = period?.unit;
-                bool? p_ = context.Operators.Equal(o_, "s");
-                if (p_ ?? false)
+                bool? n_ = context.Operators.Equal(a_, "s");
+                if (n_ ?? false)
                 {
-                    decimal? q_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                    decimal? r_ = period?.value;
-                    decimal? s_ = context.Operators.Divide(24.0m, r_);
-                    decimal? t_ = context.Operators.Multiply(q_, s_);
-                    decimal? u_ = context.Operators.ConvertIntegerToDecimal(60);
-                    decimal? v_ = context.Operators.Multiply(t_, u_);
-                    decimal? w_ = context.Operators.Multiply(v_, u_);
-                    return w_;
+                    decimal? o_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                    decimal? p_ = period?.value;
+                    decimal? q_ = context.Operators.Divide(24.0m, p_);
+                    decimal? r_ = context.Operators.Multiply(o_, q_);
+                    decimal? s_ = context.Operators.ConvertIntegerToDecimal(60);
+                    decimal? t_ = context.Operators.Multiply(r_, s_);
+                    decimal? u_ = context.Operators.Multiply(t_, s_);
+                    return u_;
                 }
                 else
                 {
-                    string x_ = period?.unit;
-                    bool? y_ = context.Operators.Equal(x_, "d");
-                    if (y_ ?? false)
+                    bool? v_ = context.Operators.Equal(a_, "d");
+                    if (v_ ?? false)
                     {
-                        decimal? z_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                        decimal? aa_ = period?.value;
-                        decimal? ab_ = context.Operators.Divide(24.0m, aa_);
-                        decimal? ac_ = context.Operators.Multiply(z_, ab_);
-                        decimal? ad_ = context.Operators.ConvertIntegerToDecimal(24);
-                        decimal? ae_ = context.Operators.Divide(ac_, ad_);
-                        return ae_;
+                        decimal? w_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                        decimal? x_ = period?.value;
+                        decimal? y_ = context.Operators.Divide(24.0m, x_);
+                        decimal? z_ = context.Operators.Multiply(w_, y_);
+                        decimal? aa_ = context.Operators.ConvertIntegerToDecimal(24);
+                        decimal? ab_ = context.Operators.Divide(z_, aa_);
+                        return ab_;
                     }
                     else
                     {
-                        string af_ = period?.unit;
-                        bool? ag_ = context.Operators.Equal(af_, "wk");
-                        if (ag_ ?? false)
+                        bool? ac_ = context.Operators.Equal(a_, "wk");
+                        if (ac_ ?? false)
                         {
-                            decimal? ah_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                            decimal? ai_ = period?.value;
-                            decimal? aj_ = context.Operators.Divide(24.0m, ai_);
-                            decimal? ak_ = context.Operators.Multiply(ah_, aj_);
-                            int? al_ = context.Operators.Multiply(24, 7);
-                            decimal? am_ = context.Operators.ConvertIntegerToDecimal(al_);
-                            decimal? an_ = context.Operators.Divide(ak_, am_);
-                            return an_;
+                            decimal? ad_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                            decimal? ae_ = period?.value;
+                            decimal? af_ = context.Operators.Divide(24.0m, ae_);
+                            decimal? ag_ = context.Operators.Multiply(ad_, af_);
+                            int? ah_ = context.Operators.Multiply(24, 7);
+                            decimal? ai_ = context.Operators.ConvertIntegerToDecimal(ah_);
+                            decimal? aj_ = context.Operators.Divide(ag_, ai_);
+                            return aj_;
                         }
                         else
                         {
-                            string ao_ = period?.unit;
-                            bool? ap_ = context.Operators.Equal(ao_, "mo");
-                            if (ap_ ?? false)
+                            bool? ak_ = context.Operators.Equal(a_, "mo");
+                            if (ak_ ?? false)
                             {
-                                decimal? aq_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                decimal? ar_ = period?.value;
-                                decimal? as_ = context.Operators.Divide(24.0m, ar_);
-                                decimal? at_ = context.Operators.Multiply(aq_, as_);
-                                int? au_ = context.Operators.Multiply(24, 30);
-                                decimal? av_ = context.Operators.ConvertIntegerToDecimal(au_);
-                                decimal? aw_ = context.Operators.Divide(at_, av_);
-                                return aw_;
+                                decimal? al_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                decimal? am_ = period?.value;
+                                decimal? an_ = context.Operators.Divide(24.0m, am_);
+                                decimal? ao_ = context.Operators.Multiply(al_, an_);
+                                int? ap_ = context.Operators.Multiply(24, 30);
+                                decimal? aq_ = context.Operators.ConvertIntegerToDecimal(ap_);
+                                decimal? ar_ = context.Operators.Divide(ao_, aq_);
+                                return ar_;
                             }
                             else
                             {
-                                string ax_ = period?.unit;
-                                bool? ay_ = context.Operators.Equal(ax_, "a");
-                                if (ay_ ?? false)
+                                bool? as_ = context.Operators.Equal(a_, "a");
+                                if (as_ ?? false)
                                 {
-                                    decimal? az_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                    decimal? ba_ = period?.value;
-                                    decimal? bb_ = context.Operators.Divide(24.0m, ba_);
-                                    decimal? bc_ = context.Operators.Multiply(az_, bb_);
-                                    int? bd_ = context.Operators.Multiply(24, 365);
-                                    decimal? be_ = context.Operators.ConvertIntegerToDecimal(bd_);
-                                    decimal? bf_ = context.Operators.Divide(bc_, be_);
-                                    return bf_;
+                                    decimal? at_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                    decimal? au_ = period?.value;
+                                    decimal? av_ = context.Operators.Divide(24.0m, au_);
+                                    decimal? aw_ = context.Operators.Multiply(at_, av_);
+                                    int? ax_ = context.Operators.Multiply(24, 365);
+                                    decimal? ay_ = context.Operators.ConvertIntegerToDecimal(ax_);
+                                    decimal? az_ = context.Operators.Divide(aw_, ay_);
+                                    return az_;
                                 }
                                 else
                                 {
-                                    string bg_ = period?.unit;
-                                    bool? bh_ = context.Operators.Equal(bg_, "hour");
-                                    if (bh_ ?? false)
+                                    bool? ba_ = context.Operators.Equal(a_, "hour");
+                                    if (ba_ ?? false)
                                     {
-                                        decimal? bi_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                        decimal? bj_ = period?.value;
-                                        decimal? bk_ = context.Operators.Divide(24.0m, bj_);
-                                        decimal? bl_ = context.Operators.Multiply(bi_, bk_);
-                                        return bl_;
+                                        decimal? bb_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                        decimal? bc_ = period?.value;
+                                        decimal? bd_ = context.Operators.Divide(24.0m, bc_);
+                                        decimal? be_ = context.Operators.Multiply(bb_, bd_);
+                                        return be_;
                                     }
                                     else
                                     {
-                                        string bm_ = period?.unit;
-                                        bool? bn_ = context.Operators.Equal(bm_, "minute");
-                                        if (bn_ ?? false)
+                                        bool? bf_ = context.Operators.Equal(a_, "minute");
+                                        if (bf_ ?? false)
                                         {
-                                            decimal? bo_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                            decimal? bp_ = period?.value;
-                                            decimal? bq_ = context.Operators.Divide(24.0m, bp_);
-                                            decimal? br_ = context.Operators.Multiply(bo_, bq_);
-                                            decimal? bs_ = context.Operators.ConvertIntegerToDecimal(60);
-                                            decimal? bt_ = context.Operators.Multiply(br_, bs_);
-                                            return bt_;
+                                            decimal? bg_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                            decimal? bh_ = period?.value;
+                                            decimal? bi_ = context.Operators.Divide(24.0m, bh_);
+                                            decimal? bj_ = context.Operators.Multiply(bg_, bi_);
+                                            decimal? bk_ = context.Operators.ConvertIntegerToDecimal(60);
+                                            decimal? bl_ = context.Operators.Multiply(bj_, bk_);
+                                            return bl_;
                                         }
                                         else
                                         {
-                                            string bu_ = period?.unit;
-                                            bool? bv_ = context.Operators.Equal(bu_, "second");
-                                            if (bv_ ?? false)
+                                            bool? bm_ = context.Operators.Equal(a_, "second");
+                                            if (bm_ ?? false)
                                             {
-                                                decimal? bw_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                decimal? bx_ = period?.value;
-                                                decimal? by_ = context.Operators.Divide(24.0m, bx_);
-                                                decimal? bz_ = context.Operators.Multiply(bw_, by_);
-                                                decimal? ca_ = context.Operators.ConvertIntegerToDecimal(60);
-                                                decimal? cb_ = context.Operators.Multiply(bz_, ca_);
-                                                decimal? cc_ = context.Operators.Multiply(cb_, ca_);
-                                                return cc_;
+                                                decimal? bn_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                decimal? bo_ = period?.value;
+                                                decimal? bp_ = context.Operators.Divide(24.0m, bo_);
+                                                decimal? bq_ = context.Operators.Multiply(bn_, bp_);
+                                                decimal? br_ = context.Operators.ConvertIntegerToDecimal(60);
+                                                decimal? bs_ = context.Operators.Multiply(bq_, br_);
+                                                decimal? bt_ = context.Operators.Multiply(bs_, br_);
+                                                return bt_;
                                             }
                                             else
                                             {
-                                                string cd_ = period?.unit;
-                                                bool? ce_ = context.Operators.Equal(cd_, "day");
-                                                if (ce_ ?? false)
+                                                bool? bu_ = context.Operators.Equal(a_, "day");
+                                                if (bu_ ?? false)
                                                 {
-                                                    decimal? cf_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                    decimal? cg_ = period?.value;
-                                                    decimal? ch_ = context.Operators.Divide(24.0m, cg_);
-                                                    decimal? ci_ = context.Operators.Multiply(cf_, ch_);
-                                                    decimal? cj_ = context.Operators.ConvertIntegerToDecimal(24);
-                                                    decimal? ck_ = context.Operators.Divide(ci_, cj_);
-                                                    return ck_;
+                                                    decimal? bv_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                    decimal? bw_ = period?.value;
+                                                    decimal? bx_ = context.Operators.Divide(24.0m, bw_);
+                                                    decimal? by_ = context.Operators.Multiply(bv_, bx_);
+                                                    decimal? bz_ = context.Operators.ConvertIntegerToDecimal(24);
+                                                    decimal? ca_ = context.Operators.Divide(by_, bz_);
+                                                    return ca_;
                                                 }
                                                 else
                                                 {
-                                                    string cl_ = period?.unit;
-                                                    bool? cm_ = context.Operators.Equal(cl_, "week");
-                                                    if (cm_ ?? false)
+                                                    bool? cb_ = context.Operators.Equal(a_, "week");
+                                                    if (cb_ ?? false)
                                                     {
-                                                        decimal? cn_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                        decimal? co_ = period?.value;
-                                                        decimal? cp_ = context.Operators.Divide(24.0m, co_);
-                                                        decimal? cq_ = context.Operators.Multiply(cn_, cp_);
-                                                        int? cr_ = context.Operators.Multiply(24, 7);
-                                                        decimal? cs_ = context.Operators.ConvertIntegerToDecimal(cr_);
-                                                        decimal? ct_ = context.Operators.Divide(cq_, cs_);
-                                                        return ct_;
+                                                        decimal? cc_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                        decimal? cd_ = period?.value;
+                                                        decimal? ce_ = context.Operators.Divide(24.0m, cd_);
+                                                        decimal? cf_ = context.Operators.Multiply(cc_, ce_);
+                                                        int? cg_ = context.Operators.Multiply(24, 7);
+                                                        decimal? ch_ = context.Operators.ConvertIntegerToDecimal(cg_);
+                                                        decimal? ci_ = context.Operators.Divide(cf_, ch_);
+                                                        return ci_;
                                                     }
                                                     else
                                                     {
-                                                        string cu_ = period?.unit;
-                                                        bool? cv_ = context.Operators.Equal(cu_, "month");
-                                                        if (cv_ ?? false)
+                                                        bool? cj_ = context.Operators.Equal(a_, "month");
+                                                        if (cj_ ?? false)
                                                         {
-                                                            decimal? cw_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                            decimal? cx_ = period?.value;
-                                                            decimal? cy_ = context.Operators.Divide(24.0m, cx_);
-                                                            decimal? cz_ = context.Operators.Multiply(cw_, cy_);
-                                                            int? da_ = context.Operators.Multiply(24, 30);
-                                                            decimal? db_ = context.Operators.ConvertIntegerToDecimal(da_);
-                                                            decimal? dc_ = context.Operators.Divide(cz_, db_);
-                                                            return dc_;
+                                                            decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                            decimal? cl_ = period?.value;
+                                                            decimal? cm_ = context.Operators.Divide(24.0m, cl_);
+                                                            decimal? cn_ = context.Operators.Multiply(ck_, cm_);
+                                                            int? co_ = context.Operators.Multiply(24, 30);
+                                                            decimal? cp_ = context.Operators.ConvertIntegerToDecimal(co_);
+                                                            decimal? cq_ = context.Operators.Divide(cn_, cp_);
+                                                            return cq_;
                                                         }
                                                         else
                                                         {
-                                                            string dd_ = period?.unit;
-                                                            bool? de_ = context.Operators.Equal(dd_, "year");
-                                                            if (de_ ?? false)
+                                                            bool? cr_ = context.Operators.Equal(a_, "year");
+                                                            if (cr_ ?? false)
                                                             {
-                                                                decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                decimal? dg_ = period?.value;
-                                                                decimal? dh_ = context.Operators.Divide(24.0m, dg_);
-                                                                decimal? di_ = context.Operators.Multiply(df_, dh_);
-                                                                int? dj_ = context.Operators.Multiply(24, 365);
-                                                                decimal? dk_ = context.Operators.ConvertIntegerToDecimal(dj_);
-                                                                decimal? dl_ = context.Operators.Divide(di_, dk_);
-                                                                return dl_;
+                                                                decimal? cs_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                decimal? ct_ = period?.value;
+                                                                decimal? cu_ = context.Operators.Divide(24.0m, ct_);
+                                                                decimal? cv_ = context.Operators.Multiply(cs_, cu_);
+                                                                int? cw_ = context.Operators.Multiply(24, 365);
+                                                                decimal? cx_ = context.Operators.ConvertIntegerToDecimal(cw_);
+                                                                decimal? cy_ = context.Operators.Divide(cv_, cx_);
+                                                                return cy_;
                                                             }
                                                             else
                                                             {
-                                                                string dm_ = period?.unit;
-                                                                bool? dn_ = context.Operators.Equal(dm_, "hours");
-                                                                if (dn_ ?? false)
+                                                                bool? cz_ = context.Operators.Equal(a_, "hours");
+                                                                if (cz_ ?? false)
                                                                 {
-                                                                    decimal? do_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                    decimal? dp_ = period?.value;
-                                                                    decimal? dq_ = context.Operators.Divide(24.0m, dp_);
-                                                                    decimal? dr_ = context.Operators.Multiply(do_, dq_);
-                                                                    return dr_;
+                                                                    decimal? da_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                    decimal? db_ = period?.value;
+                                                                    decimal? dc_ = context.Operators.Divide(24.0m, db_);
+                                                                    decimal? dd_ = context.Operators.Multiply(da_, dc_);
+                                                                    return dd_;
                                                                 }
                                                                 else
                                                                 {
-                                                                    string ds_ = period?.unit;
-                                                                    bool? dt_ = context.Operators.Equal(ds_, "minutes");
-                                                                    if (dt_ ?? false)
+                                                                    bool? de_ = context.Operators.Equal(a_, "minutes");
+                                                                    if (de_ ?? false)
                                                                     {
-                                                                        decimal? du_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                        decimal? dv_ = period?.value;
-                                                                        decimal? dw_ = context.Operators.Divide(24.0m, dv_);
-                                                                        decimal? dx_ = context.Operators.Multiply(du_, dw_);
-                                                                        decimal? dy_ = context.Operators.ConvertIntegerToDecimal(60);
-                                                                        decimal? dz_ = context.Operators.Multiply(dx_, dy_);
-                                                                        return dz_;
+                                                                        decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                        decimal? dg_ = period?.value;
+                                                                        decimal? dh_ = context.Operators.Divide(24.0m, dg_);
+                                                                        decimal? di_ = context.Operators.Multiply(df_, dh_);
+                                                                        decimal? dj_ = context.Operators.ConvertIntegerToDecimal(60);
+                                                                        decimal? dk_ = context.Operators.Multiply(di_, dj_);
+                                                                        return dk_;
                                                                     }
                                                                     else
                                                                     {
-                                                                        string ea_ = period?.unit;
-                                                                        bool? eb_ = context.Operators.Equal(ea_, "seconds");
-                                                                        if (eb_ ?? false)
+                                                                        bool? dl_ = context.Operators.Equal(a_, "seconds");
+                                                                        if (dl_ ?? false)
                                                                         {
-                                                                            decimal? ec_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                            decimal? ed_ = period?.value;
-                                                                            decimal? ee_ = context.Operators.Divide(24.0m, ed_);
-                                                                            decimal? ef_ = context.Operators.Multiply(ec_, ee_);
-                                                                            decimal? eg_ = context.Operators.ConvertIntegerToDecimal(60);
-                                                                            decimal? eh_ = context.Operators.Multiply(ef_, eg_);
-                                                                            decimal? ei_ = context.Operators.Multiply(eh_, eg_);
-                                                                            return ei_;
+                                                                            decimal? dm_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                            decimal? dn_ = period?.value;
+                                                                            decimal? do_ = context.Operators.Divide(24.0m, dn_);
+                                                                            decimal? dp_ = context.Operators.Multiply(dm_, do_);
+                                                                            decimal? dq_ = context.Operators.ConvertIntegerToDecimal(60);
+                                                                            decimal? dr_ = context.Operators.Multiply(dp_, dq_);
+                                                                            decimal? ds_ = context.Operators.Multiply(dr_, dq_);
+                                                                            return ds_;
                                                                         }
                                                                         else
                                                                         {
-                                                                            string ej_ = period?.unit;
-                                                                            bool? ek_ = context.Operators.Equal(ej_, "days");
-                                                                            if (ek_ ?? false)
+                                                                            bool? dt_ = context.Operators.Equal(a_, "days");
+                                                                            if (dt_ ?? false)
                                                                             {
-                                                                                decimal? el_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                                decimal? em_ = period?.value;
-                                                                                decimal? en_ = context.Operators.Divide(24.0m, em_);
-                                                                                decimal? eo_ = context.Operators.Multiply(el_, en_);
-                                                                                decimal? ep_ = context.Operators.ConvertIntegerToDecimal(24);
-                                                                                decimal? eq_ = context.Operators.Divide(eo_, ep_);
-                                                                                return eq_;
+                                                                                decimal? du_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                                decimal? dv_ = period?.value;
+                                                                                decimal? dw_ = context.Operators.Divide(24.0m, dv_);
+                                                                                decimal? dx_ = context.Operators.Multiply(du_, dw_);
+                                                                                decimal? dy_ = context.Operators.ConvertIntegerToDecimal(24);
+                                                                                decimal? dz_ = context.Operators.Divide(dx_, dy_);
+                                                                                return dz_;
                                                                             }
                                                                             else
                                                                             {
-                                                                                string er_ = period?.unit;
-                                                                                bool? es_ = context.Operators.Equal(er_, "weeks");
-                                                                                if (es_ ?? false)
+                                                                                bool? ea_ = context.Operators.Equal(a_, "weeks");
+                                                                                if (ea_ ?? false)
                                                                                 {
-                                                                                    decimal? et_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                                    decimal? eu_ = period?.value;
-                                                                                    decimal? ev_ = context.Operators.Divide(24.0m, eu_);
-                                                                                    decimal? ew_ = context.Operators.Multiply(et_, ev_);
-                                                                                    int? ex_ = context.Operators.Multiply(24, 7);
-                                                                                    decimal? ey_ = context.Operators.ConvertIntegerToDecimal(ex_);
-                                                                                    decimal? ez_ = context.Operators.Divide(ew_, ey_);
-                                                                                    return ez_;
+                                                                                    decimal? eb_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                                    decimal? ec_ = period?.value;
+                                                                                    decimal? ed_ = context.Operators.Divide(24.0m, ec_);
+                                                                                    decimal? ee_ = context.Operators.Multiply(eb_, ed_);
+                                                                                    int? ef_ = context.Operators.Multiply(24, 7);
+                                                                                    decimal? eg_ = context.Operators.ConvertIntegerToDecimal(ef_);
+                                                                                    decimal? eh_ = context.Operators.Divide(ee_, eg_);
+                                                                                    return eh_;
                                                                                 }
                                                                                 else
                                                                                 {
-                                                                                    string fa_ = period?.unit;
-                                                                                    bool? fb_ = context.Operators.Equal(fa_, "months");
-                                                                                    if (fb_ ?? false)
+                                                                                    bool? ei_ = context.Operators.Equal(a_, "months");
+                                                                                    if (ei_ ?? false)
                                                                                     {
-                                                                                        decimal? fc_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                                        decimal? fd_ = period?.value;
-                                                                                        decimal? fe_ = context.Operators.Divide(24.0m, fd_);
-                                                                                        decimal? ff_ = context.Operators.Multiply(fc_, fe_);
-                                                                                        int? fg_ = context.Operators.Multiply(24, 30);
-                                                                                        decimal? fh_ = context.Operators.ConvertIntegerToDecimal(fg_);
-                                                                                        decimal? fi_ = context.Operators.Divide(ff_, fh_);
-                                                                                        return fi_;
+                                                                                        decimal? ej_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                                        decimal? ek_ = period?.value;
+                                                                                        decimal? el_ = context.Operators.Divide(24.0m, ek_);
+                                                                                        decimal? em_ = context.Operators.Multiply(ej_, el_);
+                                                                                        int? en_ = context.Operators.Multiply(24, 30);
+                                                                                        decimal? eo_ = context.Operators.ConvertIntegerToDecimal(en_);
+                                                                                        decimal? ep_ = context.Operators.Divide(em_, eo_);
+                                                                                        return ep_;
                                                                                     }
                                                                                     else
                                                                                     {
-                                                                                        string fj_ = period?.unit;
-                                                                                        bool? fk_ = context.Operators.Equal(fj_, "years");
-                                                                                        if (fk_ ?? false)
+                                                                                        bool? eq_ = context.Operators.Equal(a_, "years");
+                                                                                        if (eq_ ?? false)
                                                                                         {
-                                                                                            decimal? fl_ = context.Operators.ConvertIntegerToDecimal(frequency);
-                                                                                            decimal? fm_ = period?.value;
-                                                                                            decimal? fn_ = context.Operators.Divide(24.0m, fm_);
-                                                                                            decimal? fo_ = context.Operators.Multiply(fl_, fn_);
-                                                                                            int? fp_ = context.Operators.Multiply(24, 365);
-                                                                                            decimal? fq_ = context.Operators.ConvertIntegerToDecimal(fp_);
-                                                                                            decimal? fr_ = context.Operators.Divide(fo_, fq_);
-                                                                                            return fr_;
+                                                                                            decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
+                                                                                            decimal? es_ = period?.value;
+                                                                                            decimal? et_ = context.Operators.Divide(24.0m, es_);
+                                                                                            decimal? eu_ = context.Operators.Multiply(er_, et_);
+                                                                                            int? ev_ = context.Operators.Multiply(24, 365);
+                                                                                            decimal? ew_ = context.Operators.ConvertIntegerToDecimal(ev_);
+                                                                                            decimal? ex_ = context.Operators.Divide(eu_, ew_);
+                                                                                            return ex_;
                                                                                         }
                                                                                         else
                                                                                         {
-                                                                                            string fs_ = this.ErrorLevel(context);
-                                                                                            string ft_ = period?.unit;
-                                                                                            string fu_ = context.Operators.Concatenate("Unknown unit ", ft_ ?? "");
-                                                                                            object fv_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownUnit", fs_, fu_);
-                                                                                            return fv_ as decimal?;
+                                                                                            string ey_ = this.ErrorLevel(context);
+                                                                                            string ez_ = context.Operators.Concatenate("Unknown unit ", a_ ?? "");
+                                                                                            object fa_ = context.Operators.Message<object>((object)null, "CMDLogic.ToDaily.UnknownUnit", ey_, ez_);
+                                                                                            return fa_ as decimal?;
                                                                                         }
                                                                                     }
                                                                                 }
@@ -1154,121 +1133,43 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? bi_ = context.Operators.And(u_, bh_);
             if (bi_ ?? false)
             {
-                List<Dosage> bl_ = R?.DosageInstruction;
-                Dosage bm_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bl_);
-                Timing bn_ = bm_?.Timing;
-                Timing.RepeatComponent bo_ = bn_?.Repeat;
-                DataType bp_ = bo_?.Bounds;
-                object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                CqlDateTime br_ = context.Operators.Start(bq_ as CqlInterval<CqlDateTime>);
-                CqlDate bs_ = context.Operators.DateFrom(br_);
-                FhirDateTime bt_ = R?.AuthoredOnElement;
-                CqlDateTime bu_ = context.Operators.Convert<CqlDateTime>(bt_);
-                CqlDate bv_ = context.Operators.DateFrom(bu_);
-                MedicationRequest.DispenseRequestComponent bw_ = R?.DispenseRequest;
-                Period bx_ = bw_?.ValidityPeriod;
-                CqlInterval<CqlDateTime> by_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bx_);
-                CqlDateTime bz_ = context.Operators.Start(by_);
-                CqlDate ca_ = context.Operators.DateFrom(bz_);
-                Duration cb_ = bw_?.ExpectedSupplyDuration;
-                CqlQuantity cc_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, cb_);
-                CqlQuantity cd_ = context.Operators.ConvertQuantity(cc_, "d");
-                decimal? ce_ = cd_?.value;
-                Quantity cf_ = bw_?.Quantity;
-                CqlQuantity cg_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, cf_);
-                decimal? ch_ = cg_?.value;
-                List<Dosage.DoseAndRateComponent> ci_ = bm_?.DoseAndRate;
-                Dosage.DoseAndRateComponent cj_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ci_);
-                DataType ck_ = cj_?.Dose;
-                object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                CqlQuantity cm_ = context.Operators.End(cl_ as CqlInterval<CqlQuantity>);
-                decimal? cn_ = (cm_ ?? cl_ as CqlQuantity)?.value;
-                PositiveInt co_ = bo_?.FrequencyMaxElement;
-                int? cp_ = co_?.Value;
-                PositiveInt cq_ = bo_?.FrequencyElement;
-                int? cr_ = cq_?.Value;
-                FhirDecimal cs_ = bo_?.PeriodElement;
-                decimal? ct_ = cs_?.Value;
-                Code<Timing.UnitsOfTime> cu_ = bo_?.PeriodUnitElement;
-                Timing.UnitsOfTime? cv_ = cu_?.Value;
-                string cw_ = context.Operators.Convert<string>(cv_);
-                CqlQuantity cx_ = this.Quantity(context, ct_, cw_);
-                decimal? cy_ = this.ToDaily(context, cp_ ?? cr_, cx_);
-                List<Time> cz_ = bo_?.TimeOfDayElement;
 
-                string da_(Time @this) {
-                    string ds_ = @this?.Value;
-                    return ds_;
+                string bl_(Time @this) {
+                    string bz_ = @this?.Value;
+                    return bz_;
                 }
 
-                IEnumerable<string> db_ = context.Operators.Select<Time, string>((IEnumerable<Time>)cz_, da_);
+                IEnumerable<string> bm_ = context.Operators.Select<Time, string>((IEnumerable<Time>)at_, bl_);
 
-                CqlTime dc_(string @string) {
-                    CqlTime dt_ = context.Operators.ConvertStringToTime(@string);
-                    return dt_;
+                CqlTime bn_(string @string) {
+                    CqlTime ca_ = context.Operators.ConvertStringToTime(@string);
+                    return ca_;
                 }
 
-                IEnumerable<CqlTime> dd_ = context.Operators.Select<string, CqlTime>(db_, dc_);
-                int? de_ = context.Operators.Count<CqlTime>(dd_);
-                decimal? df_ = context.Operators.ConvertIntegerToDecimal(de_);
-                decimal? dg_ = context.Operators.Multiply(cn_, (cy_ ?? df_) ?? 1.0m);
-                decimal? dh_ = context.Operators.Divide(ch_, dg_);
-                UnsignedInt di_ = bw_?.NumberOfRepeatsAllowedElement;
-                int? dj_ = di_?.Value;
-                int? dk_ = context.Operators.Add(1, dj_ ?? 0);
-                decimal? dl_ = context.Operators.ConvertIntegerToDecimal(dk_);
-                decimal? dm_ = context.Operators.Multiply(ce_ ?? dh_, dl_);
-                decimal? dn_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? do_ = context.Operators.Subtract(dm_, dn_);
-                CqlQuantity dp_ = this.Quantity(context, do_, "day");
-                CqlDate dq_ = context.Operators.Add((bs_ ?? bv_) ?? ca_, dp_);
-                CqlInterval<CqlDate> dr_ = context.Operators.Interval((bs_ ?? bv_) ?? ca_, dq_, true, true);
-                return dr_;
+                IEnumerable<CqlTime> bo_ = context.Operators.Select<string, CqlTime>(bm_, bn_);
+                int? bp_ = context.Operators.Count<CqlTime>(bo_);
+                decimal? bq_ = context.Operators.ConvertIntegerToDecimal(bp_);
+                decimal? br_ = context.Operators.Multiply(ah_, (as_ ?? bq_) ?? 1.0m);
+                decimal? bs_ = context.Operators.Divide(ab_, br_);
+                decimal? bt_ = context.Operators.Multiply(y_ ?? bs_, bf_);
+                decimal? bu_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bv_ = context.Operators.Subtract(bt_, bu_);
+                CqlQuantity bw_ = this.Quantity(context, bv_, "day");
+                CqlDate bx_ = context.Operators.Add((l_ ?? o_) ?? t_, bw_);
+                CqlInterval<CqlDate> by_ = context.Operators.Interval((l_ ?? o_) ?? t_, bx_, true, true);
+                return by_;
             }
             else
             {
-                List<Dosage> du_ = R?.DosageInstruction;
-                Dosage dv_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)du_);
-                Timing dw_ = dv_?.Timing;
-                Timing.RepeatComponent dx_ = dw_?.Repeat;
-                DataType dy_ = dx_?.Bounds;
-                object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                CqlDateTime ea_ = context.Operators.Start(dz_ as CqlInterval<CqlDateTime>);
-                CqlDate eb_ = context.Operators.DateFrom(ea_);
-                FhirDateTime ec_ = R?.AuthoredOnElement;
-                CqlDateTime ed_ = context.Operators.Convert<CqlDateTime>(ec_);
-                CqlDate ee_ = context.Operators.DateFrom(ed_);
-                MedicationRequest.DispenseRequestComponent ef_ = R?.DispenseRequest;
-                Period eg_ = ef_?.ValidityPeriod;
-                CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
-                CqlDateTime ei_ = context.Operators.Start(eh_);
-                CqlDate ej_ = context.Operators.DateFrom(ei_);
-                bool? ek_ = context.Operators.Not((bool?)(((eb_ ?? ee_) ?? ej_) is null));
-                CqlDateTime el_ = (dz_ as CqlInterval<CqlDateTime>)?.high;
-                bool? em_ = context.Operators.Not((bool?)(el_ is null));
-                bool? en_ = context.Operators.And(ek_, em_);
-                if (en_ ?? false)
+                CqlDateTime cb_ = (j_ as CqlInterval<CqlDateTime>)?.high;
+                bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+                bool? cd_ = context.Operators.And(u_, cc_);
+                if (cd_ ?? false)
                 {
-                    List<Dosage> eo_ = R?.DosageInstruction;
-                    Dosage ep_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)eo_);
-                    Timing eq_ = ep_?.Timing;
-                    Timing.RepeatComponent er_ = eq_?.Repeat;
-                    DataType es_ = er_?.Bounds;
-                    object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                    CqlDateTime eu_ = context.Operators.Start(et_ as CqlInterval<CqlDateTime>);
-                    CqlDate ev_ = context.Operators.DateFrom(eu_);
-                    FhirDateTime ew_ = R?.AuthoredOnElement;
-                    CqlDateTime ex_ = context.Operators.Convert<CqlDateTime>(ew_);
-                    CqlDate ey_ = context.Operators.DateFrom(ex_);
-                    MedicationRequest.DispenseRequestComponent ez_ = R?.DispenseRequest;
-                    Period fa_ = ez_?.ValidityPeriod;
-                    CqlInterval<CqlDateTime> fb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fa_);
-                    CqlDateTime fc_ = context.Operators.Start(fb_);
-                    CqlDate fd_ = context.Operators.DateFrom(fc_);
-                    CqlDateTime fe_ = context.Operators.End(et_ as CqlInterval<CqlDateTime>);
-                    CqlDate ff_ = context.Operators.DateFrom(fe_);
-                    CqlInterval<CqlDate> fg_ = context.Operators.Interval((ev_ ?? ey_) ?? fd_, ff_, true, true);
-                    return fg_;
+                    CqlDateTime ce_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
+                    CqlDate cf_ = context.Operators.DateFrom(ce_);
+                    CqlInterval<CqlDate> cg_ = context.Operators.Interval((l_ ?? o_) ?? t_, cf_, true, true);
+                    return cg_;
                 }
                 else
                 {
@@ -1367,121 +1268,43 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? bi_ = context.Operators.And(u_, bh_);
             if (bi_ ?? false)
             {
-                List<Dosage> bl_ = R?.DosageInstruction;
-                Dosage bm_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bl_);
-                Timing bn_ = bm_?.Timing;
-                Timing.RepeatComponent bo_ = bn_?.Repeat;
-                DataType bp_ = bo_?.Bounds;
-                object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bp_);
-                CqlDateTime br_ = context.Operators.Start(bq_ as CqlInterval<CqlDateTime>);
-                CqlDate bs_ = context.Operators.DateFrom(br_);
-                FhirDateTime bt_ = R?.AuthoredOnElement;
-                CqlDateTime bu_ = context.Operators.Convert<CqlDateTime>(bt_);
-                CqlDate bv_ = context.Operators.DateFrom(bu_);
-                MedicationRequest.DispenseRequestComponent bw_ = R?.DispenseRequest;
-                Period bx_ = bw_?.ValidityPeriod;
-                CqlInterval<CqlDateTime> by_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bx_);
-                CqlDateTime bz_ = context.Operators.Start(by_);
-                CqlDate ca_ = context.Operators.DateFrom(bz_);
-                Duration cb_ = bw_?.ExpectedSupplyDuration;
-                CqlQuantity cc_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, cb_);
-                CqlQuantity cd_ = context.Operators.ConvertQuantity(cc_, "d");
-                decimal? ce_ = cd_?.value;
-                Quantity cf_ = bw_?.Quantity;
-                CqlQuantity cg_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, cf_);
-                decimal? ch_ = cg_?.value;
-                List<Dosage.DoseAndRateComponent> ci_ = bm_?.DoseAndRate;
-                Dosage.DoseAndRateComponent cj_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ci_);
-                DataType ck_ = cj_?.Dose;
-                object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-                CqlQuantity cm_ = context.Operators.End(cl_ as CqlInterval<CqlQuantity>);
-                decimal? cn_ = (cm_ ?? cl_ as CqlQuantity)?.value;
-                PositiveInt co_ = bo_?.FrequencyMaxElement;
-                int? cp_ = co_?.Value;
-                PositiveInt cq_ = bo_?.FrequencyElement;
-                int? cr_ = cq_?.Value;
-                FhirDecimal cs_ = bo_?.PeriodElement;
-                decimal? ct_ = cs_?.Value;
-                Code<Timing.UnitsOfTime> cu_ = bo_?.PeriodUnitElement;
-                Timing.UnitsOfTime? cv_ = cu_?.Value;
-                string cw_ = context.Operators.Convert<string>(cv_);
-                CqlQuantity cx_ = this.Quantity(context, ct_, cw_);
-                decimal? cy_ = this.ToDaily(context, cp_ ?? cr_, cx_);
-                List<Time> cz_ = bo_?.TimeOfDayElement;
 
-                string da_(Time @this) {
-                    string ds_ = @this?.Value;
-                    return ds_;
+                string bl_(Time @this) {
+                    string bz_ = @this?.Value;
+                    return bz_;
                 }
 
-                IEnumerable<string> db_ = context.Operators.Select<Time, string>((IEnumerable<Time>)cz_, da_);
+                IEnumerable<string> bm_ = context.Operators.Select<Time, string>((IEnumerable<Time>)at_, bl_);
 
-                CqlTime dc_(string @string) {
-                    CqlTime dt_ = context.Operators.ConvertStringToTime(@string);
-                    return dt_;
+                CqlTime bn_(string @string) {
+                    CqlTime ca_ = context.Operators.ConvertStringToTime(@string);
+                    return ca_;
                 }
 
-                IEnumerable<CqlTime> dd_ = context.Operators.Select<string, CqlTime>(db_, dc_);
-                int? de_ = context.Operators.Count<CqlTime>(dd_);
-                decimal? df_ = context.Operators.ConvertIntegerToDecimal(de_);
-                decimal? dg_ = context.Operators.Multiply(cn_, (cy_ ?? df_) ?? 1.0m);
-                decimal? dh_ = context.Operators.Divide(ch_, dg_);
-                UnsignedInt di_ = bw_?.NumberOfRepeatsAllowedElement;
-                int? dj_ = di_?.Value;
-                int? dk_ = context.Operators.Add(1, dj_ ?? 0);
-                decimal? dl_ = context.Operators.ConvertIntegerToDecimal(dk_);
-                decimal? dm_ = context.Operators.Multiply(ce_ ?? dh_, dl_);
-                decimal? dn_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? do_ = context.Operators.Subtract(dm_, dn_);
-                CqlQuantity dp_ = this.Quantity(context, do_, "day");
-                CqlDate dq_ = context.Operators.Add((bs_ ?? bv_) ?? ca_, dp_);
-                CqlInterval<CqlDate> dr_ = context.Operators.Interval((bs_ ?? bv_) ?? ca_, dq_, true, true);
-                return dr_;
+                IEnumerable<CqlTime> bo_ = context.Operators.Select<string, CqlTime>(bm_, bn_);
+                int? bp_ = context.Operators.Count<CqlTime>(bo_);
+                decimal? bq_ = context.Operators.ConvertIntegerToDecimal(bp_);
+                decimal? br_ = context.Operators.Multiply(ah_, (as_ ?? bq_) ?? 1.0m);
+                decimal? bs_ = context.Operators.Divide(ab_, br_);
+                decimal? bt_ = context.Operators.Multiply(y_ ?? bs_, bf_);
+                decimal? bu_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bv_ = context.Operators.Subtract(bt_, bu_);
+                CqlQuantity bw_ = this.Quantity(context, bv_, "day");
+                CqlDate bx_ = context.Operators.Add((l_ ?? o_) ?? t_, bw_);
+                CqlInterval<CqlDate> by_ = context.Operators.Interval((l_ ?? o_) ?? t_, bx_, true, true);
+                return by_;
             }
             else
             {
-                List<Dosage> du_ = R?.DosageInstruction;
-                Dosage dv_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)du_);
-                Timing dw_ = dv_?.Timing;
-                Timing.RepeatComponent dx_ = dw_?.Repeat;
-                DataType dy_ = dx_?.Bounds;
-                object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
-                CqlDateTime ea_ = context.Operators.Start(dz_ as CqlInterval<CqlDateTime>);
-                CqlDate eb_ = context.Operators.DateFrom(ea_);
-                FhirDateTime ec_ = R?.AuthoredOnElement;
-                CqlDateTime ed_ = context.Operators.Convert<CqlDateTime>(ec_);
-                CqlDate ee_ = context.Operators.DateFrom(ed_);
-                MedicationRequest.DispenseRequestComponent ef_ = R?.DispenseRequest;
-                Period eg_ = ef_?.ValidityPeriod;
-                CqlInterval<CqlDateTime> eh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, eg_);
-                CqlDateTime ei_ = context.Operators.Start(eh_);
-                CqlDate ej_ = context.Operators.DateFrom(ei_);
-                bool? ek_ = context.Operators.Not((bool?)(((eb_ ?? ee_) ?? ej_) is null));
-                CqlDateTime el_ = (dz_ as CqlInterval<CqlDateTime>)?.high;
-                bool? em_ = context.Operators.Not((bool?)(el_ is null));
-                bool? en_ = context.Operators.And(ek_, em_);
-                if (en_ ?? false)
+                CqlDateTime cb_ = (j_ as CqlInterval<CqlDateTime>)?.high;
+                bool? cc_ = context.Operators.Not((bool?)(cb_ is null));
+                bool? cd_ = context.Operators.And(u_, cc_);
+                if (cd_ ?? false)
                 {
-                    List<Dosage> eo_ = R?.DosageInstruction;
-                    Dosage ep_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)eo_);
-                    Timing eq_ = ep_?.Timing;
-                    Timing.RepeatComponent er_ = eq_?.Repeat;
-                    DataType es_ = er_?.Bounds;
-                    object et_ = FHIRHelpers_4_4_000.Instance.ToValue(context, es_);
-                    CqlDateTime eu_ = context.Operators.Start(et_ as CqlInterval<CqlDateTime>);
-                    CqlDate ev_ = context.Operators.DateFrom(eu_);
-                    FhirDateTime ew_ = R?.AuthoredOnElement;
-                    CqlDateTime ex_ = context.Operators.Convert<CqlDateTime>(ew_);
-                    CqlDate ey_ = context.Operators.DateFrom(ex_);
-                    MedicationRequest.DispenseRequestComponent ez_ = R?.DispenseRequest;
-                    Period fa_ = ez_?.ValidityPeriod;
-                    CqlInterval<CqlDateTime> fb_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, fa_);
-                    CqlDateTime fc_ = context.Operators.Start(fb_);
-                    CqlDate fd_ = context.Operators.DateFrom(fc_);
-                    CqlDateTime fe_ = context.Operators.End(et_ as CqlInterval<CqlDateTime>);
-                    CqlDate ff_ = context.Operators.DateFrom(fe_);
-                    CqlInterval<CqlDate> fg_ = context.Operators.Interval((ev_ ?? ey_) ?? fd_, ff_, true, true);
-                    return fg_;
+                    CqlDateTime ce_ = context.Operators.End(j_ as CqlInterval<CqlDateTime>);
+                    CqlDate cf_ = context.Operators.DateFrom(ce_);
+                    CqlInterval<CqlDate> cg_ = context.Operators.Interval((l_ ?? o_) ?? t_, cf_, true, true);
+                    return cg_;
                 }
                 else
                 {
@@ -1562,65 +1385,30 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? ax_ = context.Operators.And(k_, aw_);
             if (ax_ ?? false)
             {
-                FhirDateTime ba_ = D?.WhenHandedOverElement;
-                CqlDateTime bb_ = context.Operators.Convert<CqlDateTime>(ba_);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                FhirDateTime bd_ = D?.WhenPreparedElement;
-                CqlDateTime be_ = context.Operators.Convert<CqlDateTime>(bd_);
-                CqlDate bf_ = context.Operators.DateFrom(be_);
-                Quantity bg_ = D?.DaysSupply;
-                CqlQuantity bh_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bg_);
-                CqlQuantity bi_ = context.Operators.ConvertQuantity(bh_, "d");
-                decimal? bj_ = bi_?.value;
-                Quantity bk_ = D?.Quantity;
-                CqlQuantity bl_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bk_);
-                decimal? bm_ = bl_?.value;
-                List<Dosage> bn_ = D?.DosageInstruction;
-                Dosage bo_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bn_);
-                List<Dosage.DoseAndRateComponent> bp_ = bo_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bq_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bp_);
-                DataType br_ = bq_?.Dose;
-                object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                CqlQuantity bt_ = context.Operators.End(bs_ as CqlInterval<CqlQuantity>);
-                decimal? bu_ = (bt_ ?? bs_ as CqlQuantity)?.value;
-                Timing bv_ = bo_?.Timing;
-                Timing.RepeatComponent bw_ = bv_?.Repeat;
-                PositiveInt bx_ = bw_?.FrequencyMaxElement;
-                int? by_ = bx_?.Value;
-                PositiveInt bz_ = bw_?.FrequencyElement;
-                int? ca_ = bz_?.Value;
-                FhirDecimal cb_ = bw_?.PeriodElement;
-                decimal? cc_ = cb_?.Value;
-                Code<Timing.UnitsOfTime> cd_ = bw_?.PeriodUnitElement;
-                Timing.UnitsOfTime? ce_ = cd_?.Value;
-                string cf_ = context.Operators.Convert<string>(ce_);
-                CqlQuantity cg_ = this.Quantity(context, cc_, cf_);
-                decimal? ch_ = this.ToDaily(context, by_ ?? ca_, cg_);
-                List<Time> ci_ = bw_?.TimeOfDayElement;
 
-                string cj_(Time @this) {
-                    string cw_ = @this?.Value;
-                    return cw_;
+                string ba_(Time @this) {
+                    string bn_ = @this?.Value;
+                    return bn_;
                 }
 
-                IEnumerable<string> ck_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ci_, cj_);
+                IEnumerable<string> bb_ = context.Operators.Select<Time, string>((IEnumerable<Time>)an_, ba_);
 
-                CqlTime cl_(string @string) {
-                    CqlTime cx_ = context.Operators.ConvertStringToTime(@string);
-                    return cx_;
+                CqlTime bc_(string @string) {
+                    CqlTime bo_ = context.Operators.ConvertStringToTime(@string);
+                    return bo_;
                 }
 
-                IEnumerable<CqlTime> cm_ = context.Operators.Select<string, CqlTime>(ck_, cl_);
-                int? cn_ = context.Operators.Count<CqlTime>(cm_);
-                decimal? co_ = context.Operators.ConvertIntegerToDecimal(cn_);
-                decimal? cp_ = context.Operators.Multiply(bu_, (ch_ ?? co_) ?? 1.0m);
-                decimal? cq_ = context.Operators.Divide(bm_, cp_);
-                decimal? cr_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? cs_ = context.Operators.Subtract(bj_ ?? cq_, cr_);
-                CqlQuantity ct_ = this.Quantity(context, cs_, "day");
-                CqlDate cu_ = context.Operators.Add(bc_ ?? bf_, ct_);
-                CqlInterval<CqlDate> cv_ = context.Operators.Interval(bc_ ?? bf_, cu_, true, true);
-                return cv_;
+                IEnumerable<CqlTime> bd_ = context.Operators.Select<string, CqlTime>(bb_, bc_);
+                int? be_ = context.Operators.Count<CqlTime>(bd_);
+                decimal? bf_ = context.Operators.ConvertIntegerToDecimal(be_);
+                decimal? bg_ = context.Operators.Multiply(z_, (am_ ?? bf_) ?? 1.0m);
+                decimal? bh_ = context.Operators.Divide(r_, bg_);
+                decimal? bi_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bj_ = context.Operators.Subtract(o_ ?? bh_, bi_);
+                CqlQuantity bk_ = this.Quantity(context, bj_, "day");
+                CqlDate bl_ = context.Operators.Add(g_ ?? j_, bk_);
+                CqlInterval<CqlDate> bm_ = context.Operators.Interval(g_ ?? j_, bl_, true, true);
+                return bm_;
             }
             else
             {
@@ -1700,65 +1488,30 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? ax_ = context.Operators.And(k_, aw_);
             if (ax_ ?? false)
             {
-                FhirDateTime ba_ = D?.WhenHandedOverElement;
-                CqlDateTime bb_ = context.Operators.Convert<CqlDateTime>(ba_);
-                CqlDate bc_ = context.Operators.DateFrom(bb_);
-                FhirDateTime bd_ = D?.WhenPreparedElement;
-                CqlDateTime be_ = context.Operators.Convert<CqlDateTime>(bd_);
-                CqlDate bf_ = context.Operators.DateFrom(be_);
-                Quantity bg_ = D?.DaysSupply;
-                CqlQuantity bh_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bg_);
-                CqlQuantity bi_ = context.Operators.ConvertQuantity(bh_, "d");
-                decimal? bj_ = bi_?.value;
-                Quantity bk_ = D?.Quantity;
-                CqlQuantity bl_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, bk_);
-                decimal? bm_ = bl_?.value;
-                List<Dosage> bn_ = D?.DosageInstruction;
-                Dosage bo_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)bn_);
-                List<Dosage.DoseAndRateComponent> bp_ = bo_?.DoseAndRate;
-                Dosage.DoseAndRateComponent bq_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)bp_);
-                DataType br_ = bq_?.Dose;
-                object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
-                CqlQuantity bt_ = context.Operators.End(bs_ as CqlInterval<CqlQuantity>);
-                decimal? bu_ = (bt_ ?? bs_ as CqlQuantity)?.value;
-                Timing bv_ = bo_?.Timing;
-                Timing.RepeatComponent bw_ = bv_?.Repeat;
-                PositiveInt bx_ = bw_?.FrequencyMaxElement;
-                int? by_ = bx_?.Value;
-                PositiveInt bz_ = bw_?.FrequencyElement;
-                int? ca_ = bz_?.Value;
-                FhirDecimal cb_ = bw_?.PeriodElement;
-                decimal? cc_ = cb_?.Value;
-                Code<Timing.UnitsOfTime> cd_ = bw_?.PeriodUnitElement;
-                Timing.UnitsOfTime? ce_ = cd_?.Value;
-                string cf_ = context.Operators.Convert<string>(ce_);
-                CqlQuantity cg_ = this.Quantity(context, cc_, cf_);
-                decimal? ch_ = this.ToDaily(context, by_ ?? ca_, cg_);
-                List<Time> ci_ = bw_?.TimeOfDayElement;
 
-                string cj_(Time @this) {
-                    string cw_ = @this?.Value;
-                    return cw_;
+                string ba_(Time @this) {
+                    string bn_ = @this?.Value;
+                    return bn_;
                 }
 
-                IEnumerable<string> ck_ = context.Operators.Select<Time, string>((IEnumerable<Time>)ci_, cj_);
+                IEnumerable<string> bb_ = context.Operators.Select<Time, string>((IEnumerable<Time>)an_, ba_);
 
-                CqlTime cl_(string @string) {
-                    CqlTime cx_ = context.Operators.ConvertStringToTime(@string);
-                    return cx_;
+                CqlTime bc_(string @string) {
+                    CqlTime bo_ = context.Operators.ConvertStringToTime(@string);
+                    return bo_;
                 }
 
-                IEnumerable<CqlTime> cm_ = context.Operators.Select<string, CqlTime>(ck_, cl_);
-                int? cn_ = context.Operators.Count<CqlTime>(cm_);
-                decimal? co_ = context.Operators.ConvertIntegerToDecimal(cn_);
-                decimal? cp_ = context.Operators.Multiply(bu_, (ch_ ?? co_) ?? 1.0m);
-                decimal? cq_ = context.Operators.Divide(bm_, cp_);
-                decimal? cr_ = context.Operators.ConvertIntegerToDecimal(1);
-                decimal? cs_ = context.Operators.Subtract(bj_ ?? cq_, cr_);
-                CqlQuantity ct_ = this.Quantity(context, cs_, "day");
-                CqlDate cu_ = context.Operators.Add(bc_ ?? bf_, ct_);
-                CqlInterval<CqlDate> cv_ = context.Operators.Interval(bc_ ?? bf_, cu_, true, true);
-                return cv_;
+                IEnumerable<CqlTime> bd_ = context.Operators.Select<string, CqlTime>(bb_, bc_);
+                int? be_ = context.Operators.Count<CqlTime>(bd_);
+                decimal? bf_ = context.Operators.ConvertIntegerToDecimal(be_);
+                decimal? bg_ = context.Operators.Multiply(z_, (am_ ?? bf_) ?? 1.0m);
+                decimal? bh_ = context.Operators.Divide(r_, bg_);
+                decimal? bi_ = context.Operators.ConvertIntegerToDecimal(1);
+                decimal? bj_ = context.Operators.Subtract(o_ ?? bh_, bi_);
+                CqlQuantity bk_ = this.Quantity(context, bj_, "day");
+                CqlDate bl_ = context.Operators.Add(g_ ?? j_, bk_);
+                CqlInterval<CqlDate> bm_ = context.Operators.Interval(g_ ?? j_, bl_, true, true);
+                return bm_;
             }
             else
             {
@@ -1800,18 +1553,11 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? n_ = context.Operators.And(i_, m_);
             if (n_ ?? false)
             {
-                DataType o_ = Administration?.Effective;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                CqlDateTime q_ = context.Operators.Start(p_ as CqlInterval<CqlDateTime>);
-                CqlDate r_ = context.Operators.DateFrom(q_);
-                DataType s_ = Administration?.Medication;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlQuantity u_ = this.TherapeuticDuration(context, t_ as CqlConcept);
-                CqlDate v_ = context.Operators.Add(r_, u_);
-                CqlQuantity w_ = context.Operators.ConvertIntegerToQuantity(1);
-                CqlDate x_ = context.Operators.Subtract(v_, w_);
-                CqlInterval<CqlDate> y_ = context.Operators.Interval(r_, x_, true, true);
-                return y_;
+                CqlDate o_ = context.Operators.Add(h_, l_);
+                CqlQuantity p_ = context.Operators.ConvertIntegerToQuantity(1);
+                CqlDate q_ = context.Operators.Subtract(o_, p_);
+                CqlInterval<CqlDate> r_ = context.Operators.Interval(h_, q_, true, true);
+                return r_;
             }
             else
             {
@@ -1845,18 +1591,11 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
             bool? n_ = context.Operators.And(i_, m_);
             if (n_ ?? false)
             {
-                DataType o_ = Administration?.Effective;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                CqlDateTime q_ = context.Operators.Start(p_ as CqlInterval<CqlDateTime>);
-                CqlDate r_ = context.Operators.DateFrom(q_);
-                DataType s_ = Administration?.Medication;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                CqlQuantity u_ = this.TherapeuticDuration(context, t_ as CqlConcept);
-                CqlDate v_ = context.Operators.Add(r_, u_);
-                CqlQuantity w_ = context.Operators.ConvertIntegerToQuantity(1);
-                CqlDate x_ = context.Operators.Subtract(v_, w_);
-                CqlInterval<CqlDate> y_ = context.Operators.Interval(r_, x_, true, true);
-                return y_;
+                CqlDate o_ = context.Operators.Add(h_, l_);
+                CqlQuantity p_ = context.Operators.ConvertIntegerToQuantity(1);
+                CqlDate q_ = context.Operators.Subtract(o_, p_);
+                CqlInterval<CqlDate> r_ = context.Operators.Interval(h_, q_, true, true);
+                return r_;
             }
             else
             {

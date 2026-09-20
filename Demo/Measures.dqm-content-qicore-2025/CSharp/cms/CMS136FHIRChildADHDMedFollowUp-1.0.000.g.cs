@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -240,15 +240,24 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication> bl_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? bm_(Medication M) {
-                string bo_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType bp_ = MR?.Medication;
-                object bq_ = context.Operators.LateBoundProperty<object>(bp_, "reference");
-                object br_ = context.Operators.LateBoundProperty<object>(bq_, "value");
-                IEnumerable<string> bs_ = context.Operators.Split((string)br_, "/");
+                Id bo_ = M?.IdElement;
+                string bp_ = bo_?.Value;
+                FhirString bq_;
+                DataType ca_ = MR?.Medication;
+                bool cb_ = ca_ is ResourceReference;
+                if (cb_)
+                {
+                    FhirString cc_ = (ca_ as ResourceReference)?.ReferenceElement;
+                    bq_ = cc_;
+                }
+                else
+                {
+                    bq_ = default;
+                }
+                string br_ = bq_?.Value;
+                IEnumerable<string> bs_ = context.Operators.Split(br_, "/");
                 string bt_ = context.Operators.Last<string>(bs_);
-                bool? bu_ = context.Operators.Equal(bo_, bt_);
+                bool? bu_ = context.Operators.Equal(bp_, bt_);
                 CodeableConcept bv_ = M?.Code;
                 CqlConcept bw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bv_);
                 CqlValueSet bx_ = this.Atomoxetine(context);
@@ -267,28 +276,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest MR) {
-            IEnumerable<Medication> ca_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> cd_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? cb_(Medication M) {
-                string cd_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType ce_ = MR?.Medication;
-                object cf_ = context.Operators.LateBoundProperty<object>(ce_, "reference");
-                object cg_ = context.Operators.LateBoundProperty<object>(cf_, "value");
-                IEnumerable<string> ch_ = context.Operators.Split((string)cg_, "/");
-                string ci_ = context.Operators.Last<string>(ch_);
-                bool? cj_ = context.Operators.Equal(cd_, ci_);
-                CodeableConcept ck_ = M?.Code;
-                CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ck_);
-                CqlValueSet cm_ = this.Clonidine(context);
-                bool? cn_ = context.Operators.ConceptInValueSet(cl_, cm_);
-                bool? co_ = context.Operators.And(cj_, cn_);
-                return co_;
+            bool? ce_(Medication M) {
+                Id cg_ = M?.IdElement;
+                string ch_ = cg_?.Value;
+                FhirString ci_;
+                DataType cs_ = MR?.Medication;
+                bool ct_ = cs_ is ResourceReference;
+                if (ct_)
+                {
+                    FhirString cu_ = (cs_ as ResourceReference)?.ReferenceElement;
+                    ci_ = cu_;
+                }
+                else
+                {
+                    ci_ = default;
+                }
+                string cj_ = ci_?.Value;
+                IEnumerable<string> ck_ = context.Operators.Split(cj_, "/");
+                string cl_ = context.Operators.Last<string>(ck_);
+                bool? cm_ = context.Operators.Equal(ch_, cl_);
+                CodeableConcept cn_ = M?.Code;
+                CqlConcept co_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cn_);
+                CqlValueSet cp_ = this.Clonidine(context);
+                bool? cq_ = context.Operators.ConceptInValueSet(co_, cp_);
+                bool? cr_ = context.Operators.And(cm_, cq_);
+                return cr_;
             }
 
-            bool? cc_ = context.Operators.WhereAny<Medication>(ca_, cb_);
-            return cc_;
+            bool? cf_ = context.Operators.WhereAny<Medication>(cd_, ce_);
+            return cf_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(a_, g_);
@@ -298,28 +316,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(f_, k_);
 
         bool? m_(MedicationRequest MR) {
-            IEnumerable<Medication> cp_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> cv_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? cq_(Medication M) {
-                string cs_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType ct_ = MR?.Medication;
-                object cu_ = context.Operators.LateBoundProperty<object>(ct_, "reference");
-                object cv_ = context.Operators.LateBoundProperty<object>(cu_, "value");
-                IEnumerable<string> cw_ = context.Operators.Split((string)cv_, "/");
-                string cx_ = context.Operators.Last<string>(cw_);
-                bool? cy_ = context.Operators.Equal(cs_, cx_);
-                CodeableConcept cz_ = M?.Code;
-                CqlConcept da_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, cz_);
-                CqlValueSet db_ = this.Dexmethylphenidate(context);
-                bool? dc_ = context.Operators.ConceptInValueSet(da_, db_);
-                bool? dd_ = context.Operators.And(cy_, dc_);
-                return dd_;
+            bool? cw_(Medication M) {
+                Id cy_ = M?.IdElement;
+                string cz_ = cy_?.Value;
+                FhirString da_;
+                DataType dk_ = MR?.Medication;
+                bool dl_ = dk_ is ResourceReference;
+                if (dl_)
+                {
+                    FhirString dm_ = (dk_ as ResourceReference)?.ReferenceElement;
+                    da_ = dm_;
+                }
+                else
+                {
+                    da_ = default;
+                }
+                string db_ = da_?.Value;
+                IEnumerable<string> dc_ = context.Operators.Split(db_, "/");
+                string dd_ = context.Operators.Last<string>(dc_);
+                bool? de_ = context.Operators.Equal(cz_, dd_);
+                CodeableConcept df_ = M?.Code;
+                CqlConcept dg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, df_);
+                CqlValueSet dh_ = this.Dexmethylphenidate(context);
+                bool? di_ = context.Operators.ConceptInValueSet(dg_, dh_);
+                bool? dj_ = context.Operators.And(de_, di_);
+                return dj_;
             }
 
-            bool? cr_ = context.Operators.WhereAny<Medication>(cp_, cq_);
-            return cr_;
+            bool? cx_ = context.Operators.WhereAny<Medication>(cv_, cw_);
+            return cx_;
         }
 
         IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(a_, m_);
@@ -329,28 +356,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(l_, q_);
 
         bool? s_(MedicationRequest MR) {
-            IEnumerable<Medication> de_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> dn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? df_(Medication M) {
-                string dh_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType di_ = MR?.Medication;
-                object dj_ = context.Operators.LateBoundProperty<object>(di_, "reference");
-                object dk_ = context.Operators.LateBoundProperty<object>(dj_, "value");
-                IEnumerable<string> dl_ = context.Operators.Split((string)dk_, "/");
-                string dm_ = context.Operators.Last<string>(dl_);
-                bool? dn_ = context.Operators.Equal(dh_, dm_);
-                CodeableConcept do_ = M?.Code;
-                CqlConcept dp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, do_);
-                CqlValueSet dq_ = this.Dextroamphetamine(context);
-                bool? dr_ = context.Operators.ConceptInValueSet(dp_, dq_);
-                bool? ds_ = context.Operators.And(dn_, dr_);
-                return ds_;
+            bool? do_(Medication M) {
+                Id dq_ = M?.IdElement;
+                string dr_ = dq_?.Value;
+                FhirString ds_;
+                DataType ec_ = MR?.Medication;
+                bool ed_ = ec_ is ResourceReference;
+                if (ed_)
+                {
+                    FhirString ee_ = (ec_ as ResourceReference)?.ReferenceElement;
+                    ds_ = ee_;
+                }
+                else
+                {
+                    ds_ = default;
+                }
+                string dt_ = ds_?.Value;
+                IEnumerable<string> du_ = context.Operators.Split(dt_, "/");
+                string dv_ = context.Operators.Last<string>(du_);
+                bool? dw_ = context.Operators.Equal(dr_, dv_);
+                CodeableConcept dx_ = M?.Code;
+                CqlConcept dy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, dx_);
+                CqlValueSet dz_ = this.Dextroamphetamine(context);
+                bool? ea_ = context.Operators.ConceptInValueSet(dy_, dz_);
+                bool? eb_ = context.Operators.And(dw_, ea_);
+                return eb_;
             }
 
-            bool? dg_ = context.Operators.WhereAny<Medication>(de_, df_);
-            return dg_;
+            bool? dp_ = context.Operators.WhereAny<Medication>(dn_, do_);
+            return dp_;
         }
 
         IEnumerable<MedicationRequest> t_ = context.Operators.Where<MedicationRequest>(a_, s_);
@@ -360,28 +396,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> x_ = context.Operators.Union<MedicationRequest>(r_, w_);
 
         bool? y_(MedicationRequest MR) {
-            IEnumerable<Medication> dt_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ef_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? du_(Medication M) {
-                string dw_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType dx_ = MR?.Medication;
-                object dy_ = context.Operators.LateBoundProperty<object>(dx_, "reference");
-                object dz_ = context.Operators.LateBoundProperty<object>(dy_, "value");
-                IEnumerable<string> ea_ = context.Operators.Split((string)dz_, "/");
-                string eb_ = context.Operators.Last<string>(ea_);
-                bool? ec_ = context.Operators.Equal(dw_, eb_);
-                CodeableConcept ed_ = M?.Code;
-                CqlConcept ee_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ed_);
-                CqlValueSet ef_ = this.Lisdexamfetamine(context);
-                bool? eg_ = context.Operators.ConceptInValueSet(ee_, ef_);
-                bool? eh_ = context.Operators.And(ec_, eg_);
-                return eh_;
+            bool? eg_(Medication M) {
+                Id ei_ = M?.IdElement;
+                string ej_ = ei_?.Value;
+                FhirString ek_;
+                DataType eu_ = MR?.Medication;
+                bool ev_ = eu_ is ResourceReference;
+                if (ev_)
+                {
+                    FhirString ew_ = (eu_ as ResourceReference)?.ReferenceElement;
+                    ek_ = ew_;
+                }
+                else
+                {
+                    ek_ = default;
+                }
+                string el_ = ek_?.Value;
+                IEnumerable<string> em_ = context.Operators.Split(el_, "/");
+                string en_ = context.Operators.Last<string>(em_);
+                bool? eo_ = context.Operators.Equal(ej_, en_);
+                CodeableConcept ep_ = M?.Code;
+                CqlConcept eq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ep_);
+                CqlValueSet er_ = this.Lisdexamfetamine(context);
+                bool? es_ = context.Operators.ConceptInValueSet(eq_, er_);
+                bool? et_ = context.Operators.And(eo_, es_);
+                return et_;
             }
 
-            bool? dv_ = context.Operators.WhereAny<Medication>(dt_, du_);
-            return dv_;
+            bool? eh_ = context.Operators.WhereAny<Medication>(ef_, eg_);
+            return eh_;
         }
 
         IEnumerable<MedicationRequest> z_ = context.Operators.Where<MedicationRequest>(a_, y_);
@@ -391,29 +436,38 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> ad_ = context.Operators.Union<MedicationRequest>(x_, ac_);
 
         bool? ae_(MedicationRequest MR) {
-            IEnumerable<Medication> ei_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ex_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ej_(Medication M) {
-                string el_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType em_ = MR?.Medication;
-                object en_ = context.Operators.LateBoundProperty<object>(em_, "reference");
-                object eo_ = context.Operators.LateBoundProperty<object>(en_, "value");
-                IEnumerable<string> ep_ = context.Operators.Split((string)eo_, "/");
-                string eq_ = context.Operators.Last<string>(ep_);
-                bool? er_ = context.Operators.Equal(el_, eq_);
-                CodeableConcept es_ = M?.Code;
-                CqlConcept et_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, es_);
-                CqlCode eu_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-                CqlConcept ev_ = context.Operators.ConvertCodeToConcept(eu_);
-                bool? ew_ = context.Operators.Equivalent(et_, ev_);
-                bool? ex_ = context.Operators.And(er_, ew_);
-                return ex_;
+            bool? ey_(Medication M) {
+                Id fa_ = M?.IdElement;
+                string fb_ = fa_?.Value;
+                FhirString fc_;
+                DataType fn_ = MR?.Medication;
+                bool fo_ = fn_ is ResourceReference;
+                if (fo_)
+                {
+                    FhirString fp_ = (fn_ as ResourceReference)?.ReferenceElement;
+                    fc_ = fp_;
+                }
+                else
+                {
+                    fc_ = default;
+                }
+                string fd_ = fc_?.Value;
+                IEnumerable<string> fe_ = context.Operators.Split(fd_, "/");
+                string ff_ = context.Operators.Last<string>(fe_);
+                bool? fg_ = context.Operators.Equal(fb_, ff_);
+                CodeableConcept fh_ = M?.Code;
+                CqlConcept fi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fh_);
+                CqlCode fj_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+                CqlConcept fk_ = context.Operators.ConvertCodeToConcept(fj_);
+                bool? fl_ = context.Operators.Equivalent(fi_, fk_);
+                bool? fm_ = context.Operators.And(fg_, fl_);
+                return fm_;
             }
 
-            bool? ek_ = context.Operators.WhereAny<Medication>(ei_, ej_);
-            return ek_;
+            bool? ez_ = context.Operators.WhereAny<Medication>(ex_, ey_);
+            return ez_;
         }
 
         IEnumerable<MedicationRequest> af_ = context.Operators.Where<MedicationRequest>(a_, ae_);
@@ -424,28 +478,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ad_, aj_);
 
         bool? al_(MedicationRequest MR) {
-            IEnumerable<Medication> ey_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> fq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ez_(Medication M) {
-                string fb_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType fc_ = MR?.Medication;
-                object fd_ = context.Operators.LateBoundProperty<object>(fc_, "reference");
-                object fe_ = context.Operators.LateBoundProperty<object>(fd_, "value");
-                IEnumerable<string> ff_ = context.Operators.Split((string)fe_, "/");
-                string fg_ = context.Operators.Last<string>(ff_);
-                bool? fh_ = context.Operators.Equal(fb_, fg_);
-                CodeableConcept fi_ = M?.Code;
-                CqlConcept fj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fi_);
-                CqlValueSet fk_ = this.Methylphenidate(context);
-                bool? fl_ = context.Operators.ConceptInValueSet(fj_, fk_);
-                bool? fm_ = context.Operators.And(fh_, fl_);
-                return fm_;
+            bool? fr_(Medication M) {
+                Id ft_ = M?.IdElement;
+                string fu_ = ft_?.Value;
+                FhirString fv_;
+                DataType gf_ = MR?.Medication;
+                bool gg_ = gf_ is ResourceReference;
+                if (gg_)
+                {
+                    FhirString gh_ = (gf_ as ResourceReference)?.ReferenceElement;
+                    fv_ = gh_;
+                }
+                else
+                {
+                    fv_ = default;
+                }
+                string fw_ = fv_?.Value;
+                IEnumerable<string> fx_ = context.Operators.Split(fw_, "/");
+                string fy_ = context.Operators.Last<string>(fx_);
+                bool? fz_ = context.Operators.Equal(fu_, fy_);
+                CodeableConcept ga_ = M?.Code;
+                CqlConcept gb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ga_);
+                CqlValueSet gc_ = this.Methylphenidate(context);
+                bool? gd_ = context.Operators.ConceptInValueSet(gb_, gc_);
+                bool? ge_ = context.Operators.And(fz_, gd_);
+                return ge_;
             }
 
-            bool? fa_ = context.Operators.WhereAny<Medication>(ey_, ez_);
-            return fa_;
+            bool? fs_ = context.Operators.WhereAny<Medication>(fq_, fr_);
+            return fs_;
         }
 
         IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(a_, al_);
@@ -455,28 +518,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
 
         bool? ar_(MedicationRequest MR) {
-            IEnumerable<Medication> fn_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gi_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fo_(Medication M) {
-                string fq_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType fr_ = MR?.Medication;
-                object fs_ = context.Operators.LateBoundProperty<object>(fr_, "reference");
-                object ft_ = context.Operators.LateBoundProperty<object>(fs_, "value");
-                IEnumerable<string> fu_ = context.Operators.Split((string)ft_, "/");
-                string fv_ = context.Operators.Last<string>(fu_);
-                bool? fw_ = context.Operators.Equal(fq_, fv_);
-                CodeableConcept fx_ = M?.Code;
-                CqlConcept fy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fx_);
-                CqlValueSet fz_ = this.Guanfacine_Medications(context);
-                bool? ga_ = context.Operators.ConceptInValueSet(fy_, fz_);
-                bool? gb_ = context.Operators.And(fw_, ga_);
-                return gb_;
+            bool? gj_(Medication M) {
+                Id gl_ = M?.IdElement;
+                string gm_ = gl_?.Value;
+                FhirString gn_;
+                DataType gx_ = MR?.Medication;
+                bool gy_ = gx_ is ResourceReference;
+                if (gy_)
+                {
+                    FhirString gz_ = (gx_ as ResourceReference)?.ReferenceElement;
+                    gn_ = gz_;
+                }
+                else
+                {
+                    gn_ = default;
+                }
+                string go_ = gn_?.Value;
+                IEnumerable<string> gp_ = context.Operators.Split(go_, "/");
+                string gq_ = context.Operators.Last<string>(gp_);
+                bool? gr_ = context.Operators.Equal(gm_, gq_);
+                CodeableConcept gs_ = M?.Code;
+                CqlConcept gt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gs_);
+                CqlValueSet gu_ = this.Guanfacine_Medications(context);
+                bool? gv_ = context.Operators.ConceptInValueSet(gt_, gu_);
+                bool? gw_ = context.Operators.And(gr_, gv_);
+                return gw_;
             }
 
-            bool? fp_ = context.Operators.WhereAny<Medication>(fn_, fo_);
-            return fp_;
+            bool? gk_ = context.Operators.WhereAny<Medication>(gi_, gj_);
+            return gk_;
         }
 
         IEnumerable<MedicationRequest> as_ = context.Operators.Where<MedicationRequest>(a_, ar_);
@@ -486,28 +558,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
 
         bool? ax_(MedicationRequest MR) {
-            IEnumerable<Medication> gc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ha_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? gd_(Medication M) {
-                string gf_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType gg_ = MR?.Medication;
-                object gh_ = context.Operators.LateBoundProperty<object>(gg_, "reference");
-                object gi_ = context.Operators.LateBoundProperty<object>(gh_, "value");
-                IEnumerable<string> gj_ = context.Operators.Split((string)gi_, "/");
-                string gk_ = context.Operators.Last<string>(gj_);
-                bool? gl_ = context.Operators.Equal(gf_, gk_);
-                CodeableConcept gm_ = M?.Code;
-                CqlConcept gn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gm_);
-                CqlValueSet go_ = this.Viloxazine(context);
-                bool? gp_ = context.Operators.ConceptInValueSet(gn_, go_);
-                bool? gq_ = context.Operators.And(gl_, gp_);
-                return gq_;
+            bool? hb_(Medication M) {
+                Id hd_ = M?.IdElement;
+                string he_ = hd_?.Value;
+                FhirString hf_;
+                DataType hp_ = MR?.Medication;
+                bool hq_ = hp_ is ResourceReference;
+                if (hq_)
+                {
+                    FhirString hr_ = (hp_ as ResourceReference)?.ReferenceElement;
+                    hf_ = hr_;
+                }
+                else
+                {
+                    hf_ = default;
+                }
+                string hg_ = hf_?.Value;
+                IEnumerable<string> hh_ = context.Operators.Split(hg_, "/");
+                string hi_ = context.Operators.Last<string>(hh_);
+                bool? hj_ = context.Operators.Equal(he_, hi_);
+                CodeableConcept hk_ = M?.Code;
+                CqlConcept hl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hk_);
+                CqlValueSet hm_ = this.Viloxazine(context);
+                bool? hn_ = context.Operators.ConceptInValueSet(hl_, hm_);
+                bool? ho_ = context.Operators.And(hj_, hn_);
+                return ho_;
             }
 
-            bool? ge_ = context.Operators.WhereAny<Medication>(gc_, gd_);
-            return ge_;
+            bool? hc_ = context.Operators.WhereAny<Medication>(ha_, hb_);
+            return hc_;
         }
 
         IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(a_, ax_);
@@ -518,127 +599,83 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> bd_ = Status_1_15_000.Instance.isMedicationOrder(context, bc_);
 
         bool? be_(MedicationRequest ADHDMedications) {
-            CqlInterval<CqlDate> gr_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ADHDMedications);
-            CqlDate gs_ = context.Operators.Start(gr_);
-            CqlDateTime gt_ = context.Operators.ConvertDateToDateTime(gs_);
-            CqlInterval<CqlDateTime> gu_ = this.Intake_Period(context);
-            bool? gv_ = context.Operators.In<CqlDateTime>(gt_, gu_, (string)default);
-            return gv_;
+            CqlInterval<CqlDate> hs_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ADHDMedications);
+            CqlDate ht_ = context.Operators.Start(hs_);
+            CqlDateTime hu_ = context.Operators.ConvertDateToDateTime(ht_);
+            CqlInterval<CqlDateTime> hv_ = this.Intake_Period(context);
+            bool? hw_ = context.Operators.In<CqlDateTime>(hu_, hv_, (string)default);
+            return hw_;
         }
 
         IEnumerable<MedicationRequest> bf_ = context.Operators.Where<MedicationRequest>(bd_, be_);
 
         bool? bg_(MedicationRequest ADHDMedicationOrder) {
-            IEnumerable<MedicationRequest> gw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> hx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 
-            bool? gx_(MedicationRequest MR) {
-                IEnumerable<Medication> jd_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? hy_(MedicationRequest MR) {
+                IEnumerable<Medication> ke_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? je_(Medication M) {
-                    string jg_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType jh_ = MR?.Medication;
-                    object ji_ = context.Operators.LateBoundProperty<object>(jh_, "reference");
-                    object jj_ = context.Operators.LateBoundProperty<object>(ji_, "value");
-                    IEnumerable<string> jk_ = context.Operators.Split((string)jj_, "/");
-                    string jl_ = context.Operators.Last<string>(jk_);
-                    bool? jm_ = context.Operators.Equal(jg_, jl_);
-                    CodeableConcept jn_ = M?.Code;
-                    CqlConcept jo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jn_);
-                    CqlValueSet jp_ = this.Atomoxetine(context);
-                    bool? jq_ = context.Operators.ConceptInValueSet(jo_, jp_);
-                    bool? jr_ = context.Operators.And(jm_, jq_);
-                    return jr_;
+                bool? kf_(Medication M) {
+                    Id kh_ = M?.IdElement;
+                    string ki_ = kh_?.Value;
+                    FhirString kj_;
+                    DataType kt_ = MR?.Medication;
+                    bool ku_ = kt_ is ResourceReference;
+                    if (ku_)
+                    {
+                        FhirString kv_ = (kt_ as ResourceReference)?.ReferenceElement;
+                        kj_ = kv_;
+                    }
+                    else
+                    {
+                        kj_ = default;
+                    }
+                    string kk_ = kj_?.Value;
+                    IEnumerable<string> kl_ = context.Operators.Split(kk_, "/");
+                    string km_ = context.Operators.Last<string>(kl_);
+                    bool? kn_ = context.Operators.Equal(ki_, km_);
+                    CodeableConcept ko_ = M?.Code;
+                    CqlConcept kp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ko_);
+                    CqlValueSet kq_ = this.Atomoxetine(context);
+                    bool? kr_ = context.Operators.ConceptInValueSet(kp_, kq_);
+                    bool? ks_ = context.Operators.And(kn_, kr_);
+                    return ks_;
                 }
 
-                bool? jf_ = context.Operators.WhereAny<Medication>(jd_, je_);
-                return jf_;
+                bool? kg_ = context.Operators.WhereAny<Medication>(ke_, kf_);
+                return kg_;
             }
 
-            IEnumerable<MedicationRequest> gy_ = context.Operators.Where<MedicationRequest>(gw_, gx_);
-            CqlValueSet gz_ = this.Atomoxetine(context);
-            IEnumerable<MedicationRequest> ha_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, gz_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> hb_ = context.Operators.Union<MedicationRequest>(gy_, ha_);
+            IEnumerable<MedicationRequest> hz_ = context.Operators.Where<MedicationRequest>(hx_, hy_);
+            CqlValueSet ia_ = this.Atomoxetine(context);
+            IEnumerable<MedicationRequest> ib_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ia_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ic_ = context.Operators.Union<MedicationRequest>(hz_, ib_);
 
-            bool? hc_(MedicationRequest MR) {
-                IEnumerable<Medication> js_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-
-                bool? jt_(Medication M) {
-                    string jv_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType jw_ = MR?.Medication;
-                    object jx_ = context.Operators.LateBoundProperty<object>(jw_, "reference");
-                    object jy_ = context.Operators.LateBoundProperty<object>(jx_, "value");
-                    IEnumerable<string> jz_ = context.Operators.Split((string)jy_, "/");
-                    string ka_ = context.Operators.Last<string>(jz_);
-                    bool? kb_ = context.Operators.Equal(jv_, ka_);
-                    CodeableConcept kc_ = M?.Code;
-                    CqlConcept kd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kc_);
-                    CqlValueSet ke_ = this.Clonidine(context);
-                    bool? kf_ = context.Operators.ConceptInValueSet(kd_, ke_);
-                    bool? kg_ = context.Operators.And(kb_, kf_);
-                    return kg_;
-                }
-
-                bool? ju_ = context.Operators.WhereAny<Medication>(js_, jt_);
-                return ju_;
-            }
-
-            IEnumerable<MedicationRequest> hd_ = context.Operators.Where<MedicationRequest>(gw_, hc_);
-            CqlValueSet he_ = this.Clonidine(context);
-            IEnumerable<MedicationRequest> hf_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, he_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> hg_ = context.Operators.Union<MedicationRequest>(hd_, hf_);
-            IEnumerable<MedicationRequest> hh_ = context.Operators.Union<MedicationRequest>(hb_, hg_);
-
-            bool? hi_(MedicationRequest MR) {
-                IEnumerable<Medication> kh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-
-                bool? ki_(Medication M) {
-                    string kk_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType kl_ = MR?.Medication;
-                    object km_ = context.Operators.LateBoundProperty<object>(kl_, "reference");
-                    object kn_ = context.Operators.LateBoundProperty<object>(km_, "value");
-                    IEnumerable<string> ko_ = context.Operators.Split((string)kn_, "/");
-                    string kp_ = context.Operators.Last<string>(ko_);
-                    bool? kq_ = context.Operators.Equal(kk_, kp_);
-                    CodeableConcept kr_ = M?.Code;
-                    CqlConcept ks_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kr_);
-                    CqlValueSet kt_ = this.Dexmethylphenidate(context);
-                    bool? ku_ = context.Operators.ConceptInValueSet(ks_, kt_);
-                    bool? kv_ = context.Operators.And(kq_, ku_);
-                    return kv_;
-                }
-
-                bool? kj_ = context.Operators.WhereAny<Medication>(kh_, ki_);
-                return kj_;
-            }
-
-            IEnumerable<MedicationRequest> hj_ = context.Operators.Where<MedicationRequest>(gw_, hi_);
-            CqlValueSet hk_ = this.Dexmethylphenidate(context);
-            IEnumerable<MedicationRequest> hl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> hm_ = context.Operators.Union<MedicationRequest>(hj_, hl_);
-            IEnumerable<MedicationRequest> hn_ = context.Operators.Union<MedicationRequest>(hh_, hm_);
-
-            bool? ho_(MedicationRequest MR) {
+            bool? id_(MedicationRequest MR) {
                 IEnumerable<Medication> kw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? kx_(Medication M) {
-                    string kz_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType la_ = MR?.Medication;
-                    object lb_ = context.Operators.LateBoundProperty<object>(la_, "reference");
-                    object lc_ = context.Operators.LateBoundProperty<object>(lb_, "value");
-                    IEnumerable<string> ld_ = context.Operators.Split((string)lc_, "/");
+                    Id kz_ = M?.IdElement;
+                    string la_ = kz_?.Value;
+                    FhirString lb_;
+                    DataType ll_ = MR?.Medication;
+                    bool lm_ = ll_ is ResourceReference;
+                    if (lm_)
+                    {
+                        FhirString ln_ = (ll_ as ResourceReference)?.ReferenceElement;
+                        lb_ = ln_;
+                    }
+                    else
+                    {
+                        lb_ = default;
+                    }
+                    string lc_ = lb_?.Value;
+                    IEnumerable<string> ld_ = context.Operators.Split(lc_, "/");
                     string le_ = context.Operators.Last<string>(ld_);
-                    bool? lf_ = context.Operators.Equal(kz_, le_);
+                    bool? lf_ = context.Operators.Equal(la_, le_);
                     CodeableConcept lg_ = M?.Code;
                     CqlConcept lh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lg_);
-                    CqlValueSet li_ = this.Dextroamphetamine(context);
+                    CqlValueSet li_ = this.Clonidine(context);
                     bool? lj_ = context.Operators.ConceptInValueSet(lh_, li_);
                     bool? lk_ = context.Operators.And(lf_, lj_);
                     return lk_;
@@ -648,201 +685,326 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ky_;
             }
 
-            IEnumerable<MedicationRequest> hp_ = context.Operators.Where<MedicationRequest>(gw_, ho_);
-            CqlValueSet hq_ = this.Dextroamphetamine(context);
-            IEnumerable<MedicationRequest> hr_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> hs_ = context.Operators.Union<MedicationRequest>(hp_, hr_);
-            IEnumerable<MedicationRequest> ht_ = context.Operators.Union<MedicationRequest>(hn_, hs_);
+            IEnumerable<MedicationRequest> ie_ = context.Operators.Where<MedicationRequest>(hx_, id_);
+            CqlValueSet if_ = this.Clonidine(context);
+            IEnumerable<MedicationRequest> ig_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, if_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> ih_ = context.Operators.Union<MedicationRequest>(ie_, ig_);
+            IEnumerable<MedicationRequest> ii_ = context.Operators.Union<MedicationRequest>(ic_, ih_);
 
-            bool? hu_(MedicationRequest MR) {
-                IEnumerable<Medication> ll_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? ij_(MedicationRequest MR) {
+                IEnumerable<Medication> lo_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? lm_(Medication M) {
-                    string lo_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType lp_ = MR?.Medication;
-                    object lq_ = context.Operators.LateBoundProperty<object>(lp_, "reference");
-                    object lr_ = context.Operators.LateBoundProperty<object>(lq_, "value");
-                    IEnumerable<string> ls_ = context.Operators.Split((string)lr_, "/");
-                    string lt_ = context.Operators.Last<string>(ls_);
-                    bool? lu_ = context.Operators.Equal(lo_, lt_);
-                    CodeableConcept lv_ = M?.Code;
-                    CqlConcept lw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lv_);
-                    CqlValueSet lx_ = this.Lisdexamfetamine(context);
-                    bool? ly_ = context.Operators.ConceptInValueSet(lw_, lx_);
-                    bool? lz_ = context.Operators.And(lu_, ly_);
-                    return lz_;
+                bool? lp_(Medication M) {
+                    Id lr_ = M?.IdElement;
+                    string ls_ = lr_?.Value;
+                    FhirString lt_;
+                    DataType md_ = MR?.Medication;
+                    bool me_ = md_ is ResourceReference;
+                    if (me_)
+                    {
+                        FhirString mf_ = (md_ as ResourceReference)?.ReferenceElement;
+                        lt_ = mf_;
+                    }
+                    else
+                    {
+                        lt_ = default;
+                    }
+                    string lu_ = lt_?.Value;
+                    IEnumerable<string> lv_ = context.Operators.Split(lu_, "/");
+                    string lw_ = context.Operators.Last<string>(lv_);
+                    bool? lx_ = context.Operators.Equal(ls_, lw_);
+                    CodeableConcept ly_ = M?.Code;
+                    CqlConcept lz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ly_);
+                    CqlValueSet ma_ = this.Dexmethylphenidate(context);
+                    bool? mb_ = context.Operators.ConceptInValueSet(lz_, ma_);
+                    bool? mc_ = context.Operators.And(lx_, mb_);
+                    return mc_;
                 }
 
-                bool? ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
-                return ln_;
+                bool? lq_ = context.Operators.WhereAny<Medication>(lo_, lp_);
+                return lq_;
             }
 
-            IEnumerable<MedicationRequest> hv_ = context.Operators.Where<MedicationRequest>(gw_, hu_);
-            CqlValueSet hw_ = this.Lisdexamfetamine(context);
-            IEnumerable<MedicationRequest> hx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, hw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> hy_ = context.Operators.Union<MedicationRequest>(hv_, hx_);
-            IEnumerable<MedicationRequest> hz_ = context.Operators.Union<MedicationRequest>(ht_, hy_);
+            IEnumerable<MedicationRequest> ik_ = context.Operators.Where<MedicationRequest>(hx_, ij_);
+            CqlValueSet il_ = this.Dexmethylphenidate(context);
+            IEnumerable<MedicationRequest> im_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, il_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> in_ = context.Operators.Union<MedicationRequest>(ik_, im_);
+            IEnumerable<MedicationRequest> io_ = context.Operators.Union<MedicationRequest>(ii_, in_);
 
-            bool? ia_(MedicationRequest MR) {
-                IEnumerable<Medication> ma_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? ip_(MedicationRequest MR) {
+                IEnumerable<Medication> mg_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? mb_(Medication M) {
-                    string md_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType me_ = MR?.Medication;
-                    object mf_ = context.Operators.LateBoundProperty<object>(me_, "reference");
-                    object mg_ = context.Operators.LateBoundProperty<object>(mf_, "value");
-                    IEnumerable<string> mh_ = context.Operators.Split((string)mg_, "/");
-                    string mi_ = context.Operators.Last<string>(mh_);
-                    bool? mj_ = context.Operators.Equal(md_, mi_);
-                    CodeableConcept mk_ = M?.Code;
-                    CqlConcept ml_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mk_);
-                    CqlCode mm_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-                    CqlConcept mn_ = context.Operators.ConvertCodeToConcept(mm_);
-                    bool? mo_ = context.Operators.Equivalent(ml_, mn_);
-                    bool? mp_ = context.Operators.And(mj_, mo_);
-                    return mp_;
+                bool? mh_(Medication M) {
+                    Id mj_ = M?.IdElement;
+                    string mk_ = mj_?.Value;
+                    FhirString ml_;
+                    DataType mv_ = MR?.Medication;
+                    bool mw_ = mv_ is ResourceReference;
+                    if (mw_)
+                    {
+                        FhirString mx_ = (mv_ as ResourceReference)?.ReferenceElement;
+                        ml_ = mx_;
+                    }
+                    else
+                    {
+                        ml_ = default;
+                    }
+                    string mm_ = ml_?.Value;
+                    IEnumerable<string> mn_ = context.Operators.Split(mm_, "/");
+                    string mo_ = context.Operators.Last<string>(mn_);
+                    bool? mp_ = context.Operators.Equal(mk_, mo_);
+                    CodeableConcept mq_ = M?.Code;
+                    CqlConcept mr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mq_);
+                    CqlValueSet ms_ = this.Dextroamphetamine(context);
+                    bool? mt_ = context.Operators.ConceptInValueSet(mr_, ms_);
+                    bool? mu_ = context.Operators.And(mp_, mt_);
+                    return mu_;
                 }
 
-                bool? mc_ = context.Operators.WhereAny<Medication>(ma_, mb_);
-                return mc_;
+                bool? mi_ = context.Operators.WhereAny<Medication>(mg_, mh_);
+                return mi_;
             }
 
-            IEnumerable<MedicationRequest> ib_ = context.Operators.Where<MedicationRequest>(gw_, ia_);
-            CqlCode ic_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-            IEnumerable<CqlCode> id_ = context.Operators.ToList<CqlCode>(ic_);
-            IEnumerable<MedicationRequest> ie_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, id_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> if_ = context.Operators.Union<MedicationRequest>(ib_, ie_);
-            IEnumerable<MedicationRequest> ig_ = context.Operators.Union<MedicationRequest>(hz_, if_);
+            IEnumerable<MedicationRequest> iq_ = context.Operators.Where<MedicationRequest>(hx_, ip_);
+            CqlValueSet ir_ = this.Dextroamphetamine(context);
+            IEnumerable<MedicationRequest> is_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ir_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> it_ = context.Operators.Union<MedicationRequest>(iq_, is_);
+            IEnumerable<MedicationRequest> iu_ = context.Operators.Union<MedicationRequest>(io_, it_);
 
-            bool? ih_(MedicationRequest MR) {
-                IEnumerable<Medication> mq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? iv_(MedicationRequest MR) {
+                IEnumerable<Medication> my_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? mr_(Medication M) {
-                    string mt_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType mu_ = MR?.Medication;
-                    object mv_ = context.Operators.LateBoundProperty<object>(mu_, "reference");
-                    object mw_ = context.Operators.LateBoundProperty<object>(mv_, "value");
-                    IEnumerable<string> mx_ = context.Operators.Split((string)mw_, "/");
-                    string my_ = context.Operators.Last<string>(mx_);
-                    bool? mz_ = context.Operators.Equal(mt_, my_);
-                    CodeableConcept na_ = M?.Code;
-                    CqlConcept nb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, na_);
-                    CqlValueSet nc_ = this.Methylphenidate(context);
-                    bool? nd_ = context.Operators.ConceptInValueSet(nb_, nc_);
-                    bool? ne_ = context.Operators.And(mz_, nd_);
-                    return ne_;
+                bool? mz_(Medication M) {
+                    Id nb_ = M?.IdElement;
+                    string nc_ = nb_?.Value;
+                    FhirString nd_;
+                    DataType nn_ = MR?.Medication;
+                    bool no_ = nn_ is ResourceReference;
+                    if (no_)
+                    {
+                        FhirString np_ = (nn_ as ResourceReference)?.ReferenceElement;
+                        nd_ = np_;
+                    }
+                    else
+                    {
+                        nd_ = default;
+                    }
+                    string ne_ = nd_?.Value;
+                    IEnumerable<string> nf_ = context.Operators.Split(ne_, "/");
+                    string ng_ = context.Operators.Last<string>(nf_);
+                    bool? nh_ = context.Operators.Equal(nc_, ng_);
+                    CodeableConcept ni_ = M?.Code;
+                    CqlConcept nj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ni_);
+                    CqlValueSet nk_ = this.Lisdexamfetamine(context);
+                    bool? nl_ = context.Operators.ConceptInValueSet(nj_, nk_);
+                    bool? nm_ = context.Operators.And(nh_, nl_);
+                    return nm_;
                 }
 
-                bool? ms_ = context.Operators.WhereAny<Medication>(mq_, mr_);
-                return ms_;
+                bool? na_ = context.Operators.WhereAny<Medication>(my_, mz_);
+                return na_;
             }
 
-            IEnumerable<MedicationRequest> ii_ = context.Operators.Where<MedicationRequest>(gw_, ih_);
-            CqlValueSet ij_ = this.Methylphenidate(context);
-            IEnumerable<MedicationRequest> ik_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ij_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> il_ = context.Operators.Union<MedicationRequest>(ii_, ik_);
-            IEnumerable<MedicationRequest> im_ = context.Operators.Union<MedicationRequest>(ig_, il_);
+            IEnumerable<MedicationRequest> iw_ = context.Operators.Where<MedicationRequest>(hx_, iv_);
+            CqlValueSet ix_ = this.Lisdexamfetamine(context);
+            IEnumerable<MedicationRequest> iy_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ix_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> iz_ = context.Operators.Union<MedicationRequest>(iw_, iy_);
+            IEnumerable<MedicationRequest> ja_ = context.Operators.Union<MedicationRequest>(iu_, iz_);
 
-            bool? in_(MedicationRequest MR) {
-                IEnumerable<Medication> nf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? jb_(MedicationRequest MR) {
+                IEnumerable<Medication> nq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? ng_(Medication M) {
-                    string ni_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType nj_ = MR?.Medication;
-                    object nk_ = context.Operators.LateBoundProperty<object>(nj_, "reference");
-                    object nl_ = context.Operators.LateBoundProperty<object>(nk_, "value");
-                    IEnumerable<string> nm_ = context.Operators.Split((string)nl_, "/");
-                    string nn_ = context.Operators.Last<string>(nm_);
-                    bool? no_ = context.Operators.Equal(ni_, nn_);
-                    CodeableConcept np_ = M?.Code;
-                    CqlConcept nq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, np_);
-                    CqlValueSet nr_ = this.Guanfacine_Medications(context);
-                    bool? ns_ = context.Operators.ConceptInValueSet(nq_, nr_);
-                    bool? nt_ = context.Operators.And(no_, ns_);
-                    return nt_;
+                bool? nr_(Medication M) {
+                    Id nt_ = M?.IdElement;
+                    string nu_ = nt_?.Value;
+                    FhirString nv_;
+                    DataType og_ = MR?.Medication;
+                    bool oh_ = og_ is ResourceReference;
+                    if (oh_)
+                    {
+                        FhirString oi_ = (og_ as ResourceReference)?.ReferenceElement;
+                        nv_ = oi_;
+                    }
+                    else
+                    {
+                        nv_ = default;
+                    }
+                    string nw_ = nv_?.Value;
+                    IEnumerable<string> nx_ = context.Operators.Split(nw_, "/");
+                    string ny_ = context.Operators.Last<string>(nx_);
+                    bool? nz_ = context.Operators.Equal(nu_, ny_);
+                    CodeableConcept oa_ = M?.Code;
+                    CqlConcept ob_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, oa_);
+                    CqlCode oc_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+                    CqlConcept od_ = context.Operators.ConvertCodeToConcept(oc_);
+                    bool? oe_ = context.Operators.Equivalent(ob_, od_);
+                    bool? of_ = context.Operators.And(nz_, oe_);
+                    return of_;
                 }
 
-                bool? nh_ = context.Operators.WhereAny<Medication>(nf_, ng_);
-                return nh_;
+                bool? ns_ = context.Operators.WhereAny<Medication>(nq_, nr_);
+                return ns_;
             }
 
-            IEnumerable<MedicationRequest> io_ = context.Operators.Where<MedicationRequest>(gw_, in_);
-            CqlValueSet ip_ = this.Guanfacine_Medications(context);
-            IEnumerable<MedicationRequest> iq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ip_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ir_ = context.Operators.Union<MedicationRequest>(io_, iq_);
-            IEnumerable<MedicationRequest> is_ = context.Operators.Union<MedicationRequest>(im_, ir_);
+            IEnumerable<MedicationRequest> jc_ = context.Operators.Where<MedicationRequest>(hx_, jb_);
+            CqlCode jd_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+            IEnumerable<CqlCode> je_ = context.Operators.ToList<CqlCode>(jd_);
+            IEnumerable<MedicationRequest> jf_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, je_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> jg_ = context.Operators.Union<MedicationRequest>(jc_, jf_);
+            IEnumerable<MedicationRequest> jh_ = context.Operators.Union<MedicationRequest>(ja_, jg_);
 
-            bool? it_(MedicationRequest MR) {
-                IEnumerable<Medication> nu_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            bool? ji_(MedicationRequest MR) {
+                IEnumerable<Medication> oj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-                bool? nv_(Medication M) {
-                    string nx_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType ny_ = MR?.Medication;
-                    object nz_ = context.Operators.LateBoundProperty<object>(ny_, "reference");
-                    object oa_ = context.Operators.LateBoundProperty<object>(nz_, "value");
-                    IEnumerable<string> ob_ = context.Operators.Split((string)oa_, "/");
-                    string oc_ = context.Operators.Last<string>(ob_);
-                    bool? od_ = context.Operators.Equal(nx_, oc_);
-                    CodeableConcept oe_ = M?.Code;
-                    CqlConcept of_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, oe_);
-                    CqlValueSet og_ = this.Viloxazine(context);
-                    bool? oh_ = context.Operators.ConceptInValueSet(of_, og_);
-                    bool? oi_ = context.Operators.And(od_, oh_);
-                    return oi_;
+                bool? ok_(Medication M) {
+                    Id om_ = M?.IdElement;
+                    string on_ = om_?.Value;
+                    FhirString oo_;
+                    DataType oy_ = MR?.Medication;
+                    bool oz_ = oy_ is ResourceReference;
+                    if (oz_)
+                    {
+                        FhirString pa_ = (oy_ as ResourceReference)?.ReferenceElement;
+                        oo_ = pa_;
+                    }
+                    else
+                    {
+                        oo_ = default;
+                    }
+                    string op_ = oo_?.Value;
+                    IEnumerable<string> oq_ = context.Operators.Split(op_, "/");
+                    string or_ = context.Operators.Last<string>(oq_);
+                    bool? os_ = context.Operators.Equal(on_, or_);
+                    CodeableConcept ot_ = M?.Code;
+                    CqlConcept ou_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ot_);
+                    CqlValueSet ov_ = this.Methylphenidate(context);
+                    bool? ow_ = context.Operators.ConceptInValueSet(ou_, ov_);
+                    bool? ox_ = context.Operators.And(os_, ow_);
+                    return ox_;
                 }
 
-                bool? nw_ = context.Operators.WhereAny<Medication>(nu_, nv_);
-                return nw_;
+                bool? ol_ = context.Operators.WhereAny<Medication>(oj_, ok_);
+                return ol_;
             }
 
-            IEnumerable<MedicationRequest> iu_ = context.Operators.Where<MedicationRequest>(gw_, it_);
-            CqlValueSet iv_ = this.Viloxazine(context);
-            IEnumerable<MedicationRequest> iw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, iv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
-            IEnumerable<MedicationRequest> ix_ = context.Operators.Union<MedicationRequest>(iu_, iw_);
-            IEnumerable<MedicationRequest> iy_ = context.Operators.Union<MedicationRequest>(is_, ix_);
-            IEnumerable<MedicationRequest> iz_ = Status_1_15_000.Instance.isMedicationActive(context, iy_);
+            IEnumerable<MedicationRequest> jj_ = context.Operators.Where<MedicationRequest>(hx_, ji_);
+            CqlValueSet jk_ = this.Methylphenidate(context);
+            IEnumerable<MedicationRequest> jl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, jk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> jm_ = context.Operators.Union<MedicationRequest>(jj_, jl_);
+            IEnumerable<MedicationRequest> jn_ = context.Operators.Union<MedicationRequest>(jh_, jm_);
 
-            bool? ja_(MedicationRequest ActiveADHDMedication) {
-                CqlInterval<CqlDate> oj_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveADHDMedication);
-                CqlInterval<CqlDate> ok_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ADHDMedicationOrder);
-                CqlDate ol_ = context.Operators.Start(ok_);
-                CqlDateTime om_ = context.Operators.ConvertDateToDateTime(ol_);
-                CqlDate on_ = context.Operators.DateFrom(om_);
-                CqlQuantity oo_ = context.Operators.Quantity(120m, "days");
-                CqlDate op_ = context.Operators.Subtract(on_, oo_);
-                CqlInterval<CqlDate> oq_ = context.Operators.Interval(op_, on_, true, false);
-                bool? or_ = context.Operators.Overlaps(oj_, oq_, (string)default);
-                return or_;
+            bool? jo_(MedicationRequest MR) {
+                IEnumerable<Medication> pb_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+
+                bool? pc_(Medication M) {
+                    Id pe_ = M?.IdElement;
+                    string pf_ = pe_?.Value;
+                    FhirString pg_;
+                    DataType pq_ = MR?.Medication;
+                    bool pr_ = pq_ is ResourceReference;
+                    if (pr_)
+                    {
+                        FhirString ps_ = (pq_ as ResourceReference)?.ReferenceElement;
+                        pg_ = ps_;
+                    }
+                    else
+                    {
+                        pg_ = default;
+                    }
+                    string ph_ = pg_?.Value;
+                    IEnumerable<string> pi_ = context.Operators.Split(ph_, "/");
+                    string pj_ = context.Operators.Last<string>(pi_);
+                    bool? pk_ = context.Operators.Equal(pf_, pj_);
+                    CodeableConcept pl_ = M?.Code;
+                    CqlConcept pm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, pl_);
+                    CqlValueSet pn_ = this.Guanfacine_Medications(context);
+                    bool? po_ = context.Operators.ConceptInValueSet(pm_, pn_);
+                    bool? pp_ = context.Operators.And(pk_, po_);
+                    return pp_;
+                }
+
+                bool? pd_ = context.Operators.WhereAny<Medication>(pb_, pc_);
+                return pd_;
             }
 
-            bool? jb_ = context.Operators.WhereAny<MedicationRequest>(iz_, ja_);
-            bool? jc_ = context.Operators.Not(jb_);
-            return jc_;
+            IEnumerable<MedicationRequest> jp_ = context.Operators.Where<MedicationRequest>(hx_, jo_);
+            CqlValueSet jq_ = this.Guanfacine_Medications(context);
+            IEnumerable<MedicationRequest> jr_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, jq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> js_ = context.Operators.Union<MedicationRequest>(jp_, jr_);
+            IEnumerable<MedicationRequest> jt_ = context.Operators.Union<MedicationRequest>(jn_, js_);
+
+            bool? ju_(MedicationRequest MR) {
+                IEnumerable<Medication> pt_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+
+                bool? pu_(Medication M) {
+                    Id pw_ = M?.IdElement;
+                    string px_ = pw_?.Value;
+                    FhirString py_;
+                    DataType qi_ = MR?.Medication;
+                    bool qj_ = qi_ is ResourceReference;
+                    if (qj_)
+                    {
+                        FhirString qk_ = (qi_ as ResourceReference)?.ReferenceElement;
+                        py_ = qk_;
+                    }
+                    else
+                    {
+                        py_ = default;
+                    }
+                    string pz_ = py_?.Value;
+                    IEnumerable<string> qa_ = context.Operators.Split(pz_, "/");
+                    string qb_ = context.Operators.Last<string>(qa_);
+                    bool? qc_ = context.Operators.Equal(px_, qb_);
+                    CodeableConcept qd_ = M?.Code;
+                    CqlConcept qe_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, qd_);
+                    CqlValueSet qf_ = this.Viloxazine(context);
+                    bool? qg_ = context.Operators.ConceptInValueSet(qe_, qf_);
+                    bool? qh_ = context.Operators.And(qc_, qg_);
+                    return qh_;
+                }
+
+                bool? pv_ = context.Operators.WhereAny<Medication>(pt_, pu_);
+                return pv_;
+            }
+
+            IEnumerable<MedicationRequest> jv_ = context.Operators.Where<MedicationRequest>(hx_, ju_);
+            CqlValueSet jw_ = this.Viloxazine(context);
+            IEnumerable<MedicationRequest> jx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, jw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+            IEnumerable<MedicationRequest> jy_ = context.Operators.Union<MedicationRequest>(jv_, jx_);
+            IEnumerable<MedicationRequest> jz_ = context.Operators.Union<MedicationRequest>(jt_, jy_);
+            IEnumerable<MedicationRequest> ka_ = Status_1_15_000.Instance.isMedicationActive(context, jz_);
+
+            bool? kb_(MedicationRequest ActiveADHDMedication) {
+                CqlInterval<CqlDate> ql_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ActiveADHDMedication);
+                CqlInterval<CqlDate> qm_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ADHDMedicationOrder);
+                CqlDate qn_ = context.Operators.Start(qm_);
+                CqlDateTime qo_ = context.Operators.ConvertDateToDateTime(qn_);
+                CqlDate qp_ = context.Operators.DateFrom(qo_);
+                CqlQuantity qq_ = context.Operators.Quantity(120m, "days");
+                CqlDate qr_ = context.Operators.Subtract(qp_, qq_);
+                CqlInterval<CqlDate> qs_ = context.Operators.Interval(qr_, qp_, true, false);
+                bool? qt_ = context.Operators.Overlaps(ql_, qs_, (string)default);
+                return qt_;
+            }
+
+            bool? kc_ = context.Operators.WhereAny<MedicationRequest>(ka_, kb_);
+            bool? kd_ = context.Operators.Not(kc_);
+            return kd_;
         }
 
 
         (CqlTupleMetadata, CqlDate startDate)? bh_(MedicationRequest QualifyingMed) {
-            CqlInterval<CqlDate> os_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, QualifyingMed);
-            CqlDate ot_ = context.Operators.Start(os_);
-            (CqlTupleMetadata, CqlDate startDate)? ou_ = (CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW, ot_);
-            return ou_;
+            CqlInterval<CqlDate> qu_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, QualifyingMed);
+            CqlDate qv_ = context.Operators.Start(qu_);
+            (CqlTupleMetadata, CqlDate startDate)? qw_ = (CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW, qv_);
+            return qw_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> bi_ = context.Operators.WhereSelect<MedicationRequest, (CqlTupleMetadata, CqlDate startDate)?>(bf_, bg_, bh_);
 
         object bj_((CqlTupleMetadata, CqlDate startDate)? @this) {
-            CqlDate ov_ = @this?.startDate;
-            return ov_;
+            CqlDate qx_ = @this?.startDate;
+            return qx_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlDate startDate)?> bk_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate startDate)?>(bi_, bj_, System.ComponentModel.ListSortDirection.Ascending);
@@ -1206,15 +1368,24 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication> ei_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? ej_(Medication M) {
-                string el_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType em_ = MR?.Medication;
-                object en_ = context.Operators.LateBoundProperty<object>(em_, "reference");
-                object eo_ = context.Operators.LateBoundProperty<object>(en_, "value");
-                IEnumerable<string> ep_ = context.Operators.Split((string)eo_, "/");
+                Id el_ = M?.IdElement;
+                string em_ = el_?.Value;
+                FhirString en_;
+                DataType ex_ = MR?.Medication;
+                bool ey_ = ex_ is ResourceReference;
+                if (ey_)
+                {
+                    FhirString ez_ = (ex_ as ResourceReference)?.ReferenceElement;
+                    en_ = ez_;
+                }
+                else
+                {
+                    en_ = default;
+                }
+                string eo_ = en_?.Value;
+                IEnumerable<string> ep_ = context.Operators.Split(eo_, "/");
                 string eq_ = context.Operators.Last<string>(ep_);
-                bool? er_ = context.Operators.Equal(el_, eq_);
+                bool? er_ = context.Operators.Equal(em_, eq_);
                 CodeableConcept es_ = M?.Code;
                 CqlConcept et_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, es_);
                 CqlValueSet eu_ = this.Atomoxetine(context);
@@ -1234,59 +1405,68 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? h_(MedicationRequest AtomoxetineMed) {
-            CqlInterval<CqlDate> ex_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AtomoxetineMed);
-            CqlDate ey_ = context.Operators.Start(ex_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ez_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ex_, ey_);
-            return ez_;
+            CqlInterval<CqlDate> fa_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AtomoxetineMed);
+            CqlDate fb_ = context.Operators.Start(fa_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? fc_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, fa_, fb_);
+            return fc_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> i_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(g_, h_);
 
         object j_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate fa_ = @this?.periodStart;
-            return fa_;
+            CqlDate fd_ = @this?.periodStart;
+            return fd_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> k_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(i_, j_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? l_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> fb_ = @this?.period;
-            bool? fc_ = context.Operators.Not((bool?)(fb_ is null));
-            return fc_;
+            CqlInterval<CqlDate> fe_ = @this?.period;
+            bool? ff_ = context.Operators.Not((bool?)(fe_ is null));
+            return ff_;
         }
 
 
         CqlInterval<CqlDate> m_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> fd_ = @this?.period;
-            return fd_;
+            CqlInterval<CqlDate> fg_ = @this?.period;
+            return fg_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> n_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_, m_);
         IEnumerable<CqlInterval<CqlDate>> o_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, n_);
 
         bool? p_(MedicationRequest MR) {
-            IEnumerable<Medication> fe_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> fh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ff_(Medication M) {
-                string fh_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType fi_ = MR?.Medication;
-                object fj_ = context.Operators.LateBoundProperty<object>(fi_, "reference");
-                object fk_ = context.Operators.LateBoundProperty<object>(fj_, "value");
-                IEnumerable<string> fl_ = context.Operators.Split((string)fk_, "/");
-                string fm_ = context.Operators.Last<string>(fl_);
-                bool? fn_ = context.Operators.Equal(fh_, fm_);
-                CodeableConcept fo_ = M?.Code;
-                CqlConcept fp_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fo_);
-                CqlValueSet fq_ = this.Clonidine(context);
-                bool? fr_ = context.Operators.ConceptInValueSet(fp_, fq_);
-                bool? fs_ = context.Operators.And(fn_, fr_);
-                return fs_;
+            bool? fi_(Medication M) {
+                Id fk_ = M?.IdElement;
+                string fl_ = fk_?.Value;
+                FhirString fm_;
+                DataType fw_ = MR?.Medication;
+                bool fx_ = fw_ is ResourceReference;
+                if (fx_)
+                {
+                    FhirString fy_ = (fw_ as ResourceReference)?.ReferenceElement;
+                    fm_ = fy_;
+                }
+                else
+                {
+                    fm_ = default;
+                }
+                string fn_ = fm_?.Value;
+                IEnumerable<string> fo_ = context.Operators.Split(fn_, "/");
+                string fp_ = context.Operators.Last<string>(fo_);
+                bool? fq_ = context.Operators.Equal(fl_, fp_);
+                CodeableConcept fr_ = M?.Code;
+                CqlConcept fs_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fr_);
+                CqlValueSet ft_ = this.Clonidine(context);
+                bool? fu_ = context.Operators.ConceptInValueSet(fs_, ft_);
+                bool? fv_ = context.Operators.And(fq_, fu_);
+                return fv_;
             }
 
-            bool? fg_ = context.Operators.WhereAny<Medication>(fe_, ff_);
-            return fg_;
+            bool? fj_ = context.Operators.WhereAny<Medication>(fh_, fi_);
+            return fj_;
         }
 
         IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(a_, p_);
@@ -1296,31 +1476,31 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> u_ = Status_1_15_000.Instance.isMedicationOrder(context, t_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? v_(MedicationRequest ClonidineMed) {
-            CqlInterval<CqlDate> ft_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ClonidineMed);
-            CqlDate fu_ = context.Operators.Start(ft_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? fv_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ft_, fu_);
-            return fv_;
+            CqlInterval<CqlDate> fz_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ClonidineMed);
+            CqlDate ga_ = context.Operators.Start(fz_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? gb_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, fz_, ga_);
+            return gb_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> w_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(u_, v_);
 
         object x_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate fw_ = @this?.periodStart;
-            return fw_;
+            CqlDate gc_ = @this?.periodStart;
+            return gc_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> y_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(w_, x_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? z_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> fx_ = @this?.period;
-            bool? fy_ = context.Operators.Not((bool?)(fx_ is null));
-            return fy_;
+            CqlInterval<CqlDate> gd_ = @this?.period;
+            bool? ge_ = context.Operators.Not((bool?)(gd_ is null));
+            return ge_;
         }
 
 
         CqlInterval<CqlDate> aa_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> fz_ = @this?.period;
-            return fz_;
+            CqlInterval<CqlDate> gf_ = @this?.period;
+            return gf_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> ab_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(y_, z_, aa_);
@@ -1328,28 +1508,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> ad_ = context.Operators.Union<CqlInterval<CqlDate>>(o_, ac_);
 
         bool? ae_(MedicationRequest MR) {
-            IEnumerable<Medication> ga_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gg_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? gb_(Medication M) {
-                string gd_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType ge_ = MR?.Medication;
-                object gf_ = context.Operators.LateBoundProperty<object>(ge_, "reference");
-                object gg_ = context.Operators.LateBoundProperty<object>(gf_, "value");
-                IEnumerable<string> gh_ = context.Operators.Split((string)gg_, "/");
-                string gi_ = context.Operators.Last<string>(gh_);
-                bool? gj_ = context.Operators.Equal(gd_, gi_);
-                CodeableConcept gk_ = M?.Code;
-                CqlConcept gl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gk_);
-                CqlValueSet gm_ = this.Dexmethylphenidate(context);
-                bool? gn_ = context.Operators.ConceptInValueSet(gl_, gm_);
-                bool? go_ = context.Operators.And(gj_, gn_);
-                return go_;
+            bool? gh_(Medication M) {
+                Id gj_ = M?.IdElement;
+                string gk_ = gj_?.Value;
+                FhirString gl_;
+                DataType gv_ = MR?.Medication;
+                bool gw_ = gv_ is ResourceReference;
+                if (gw_)
+                {
+                    FhirString gx_ = (gv_ as ResourceReference)?.ReferenceElement;
+                    gl_ = gx_;
+                }
+                else
+                {
+                    gl_ = default;
+                }
+                string gm_ = gl_?.Value;
+                IEnumerable<string> gn_ = context.Operators.Split(gm_, "/");
+                string go_ = context.Operators.Last<string>(gn_);
+                bool? gp_ = context.Operators.Equal(gk_, go_);
+                CodeableConcept gq_ = M?.Code;
+                CqlConcept gr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gq_);
+                CqlValueSet gs_ = this.Dexmethylphenidate(context);
+                bool? gt_ = context.Operators.ConceptInValueSet(gr_, gs_);
+                bool? gu_ = context.Operators.And(gp_, gt_);
+                return gu_;
             }
 
-            bool? gc_ = context.Operators.WhereAny<Medication>(ga_, gb_);
-            return gc_;
+            bool? gi_ = context.Operators.WhereAny<Medication>(gg_, gh_);
+            return gi_;
         }
 
         IEnumerable<MedicationRequest> af_ = context.Operators.Where<MedicationRequest>(a_, ae_);
@@ -1359,59 +1548,68 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> aj_ = Status_1_15_000.Instance.isMedicationOrder(context, ai_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ak_(MedicationRequest DexmethylphenidateMed) {
-            CqlInterval<CqlDate> gp_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DexmethylphenidateMed);
-            CqlDate gq_ = context.Operators.Start(gp_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? gr_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, gp_, gq_);
-            return gr_;
+            CqlInterval<CqlDate> gy_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DexmethylphenidateMed);
+            CqlDate gz_ = context.Operators.Start(gy_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ha_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, gy_, gz_);
+            return ha_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> al_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(aj_, ak_);
 
         object am_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate gs_ = @this?.periodStart;
-            return gs_;
+            CqlDate hb_ = @this?.periodStart;
+            return hb_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> an_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(al_, am_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? ao_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> gt_ = @this?.period;
-            bool? gu_ = context.Operators.Not((bool?)(gt_ is null));
-            return gu_;
+            CqlInterval<CqlDate> hc_ = @this?.period;
+            bool? hd_ = context.Operators.Not((bool?)(hc_ is null));
+            return hd_;
         }
 
 
         CqlInterval<CqlDate> ap_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> gv_ = @this?.period;
-            return gv_;
+            CqlInterval<CqlDate> he_ = @this?.period;
+            return he_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> aq_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_, ap_);
         IEnumerable<CqlInterval<CqlDate>> ar_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, aq_);
 
         bool? as_(MedicationRequest MR) {
-            IEnumerable<Medication> gw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> hf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? gx_(Medication M) {
-                string gz_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType ha_ = MR?.Medication;
-                object hb_ = context.Operators.LateBoundProperty<object>(ha_, "reference");
-                object hc_ = context.Operators.LateBoundProperty<object>(hb_, "value");
-                IEnumerable<string> hd_ = context.Operators.Split((string)hc_, "/");
-                string he_ = context.Operators.Last<string>(hd_);
-                bool? hf_ = context.Operators.Equal(gz_, he_);
-                CodeableConcept hg_ = M?.Code;
-                CqlConcept hh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hg_);
-                CqlValueSet hi_ = this.Dextroamphetamine(context);
-                bool? hj_ = context.Operators.ConceptInValueSet(hh_, hi_);
-                bool? hk_ = context.Operators.And(hf_, hj_);
-                return hk_;
+            bool? hg_(Medication M) {
+                Id hi_ = M?.IdElement;
+                string hj_ = hi_?.Value;
+                FhirString hk_;
+                DataType hu_ = MR?.Medication;
+                bool hv_ = hu_ is ResourceReference;
+                if (hv_)
+                {
+                    FhirString hw_ = (hu_ as ResourceReference)?.ReferenceElement;
+                    hk_ = hw_;
+                }
+                else
+                {
+                    hk_ = default;
+                }
+                string hl_ = hk_?.Value;
+                IEnumerable<string> hm_ = context.Operators.Split(hl_, "/");
+                string hn_ = context.Operators.Last<string>(hm_);
+                bool? ho_ = context.Operators.Equal(hj_, hn_);
+                CodeableConcept hp_ = M?.Code;
+                CqlConcept hq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hp_);
+                CqlValueSet hr_ = this.Dextroamphetamine(context);
+                bool? hs_ = context.Operators.ConceptInValueSet(hq_, hr_);
+                bool? ht_ = context.Operators.And(ho_, hs_);
+                return ht_;
             }
 
-            bool? gy_ = context.Operators.WhereAny<Medication>(gw_, gx_);
-            return gy_;
+            bool? hh_ = context.Operators.WhereAny<Medication>(hf_, hg_);
+            return hh_;
         }
 
         IEnumerable<MedicationRequest> at_ = context.Operators.Where<MedicationRequest>(a_, as_);
@@ -1421,31 +1619,31 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> ax_ = Status_1_15_000.Instance.isMedicationOrder(context, aw_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ay_(MedicationRequest DextroamphetamineMed) {
-            CqlInterval<CqlDate> hl_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DextroamphetamineMed);
-            CqlDate hm_ = context.Operators.Start(hl_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? hn_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, hl_, hm_);
-            return hn_;
+            CqlInterval<CqlDate> hx_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DextroamphetamineMed);
+            CqlDate hy_ = context.Operators.Start(hx_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? hz_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, hx_, hy_);
+            return hz_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> az_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(ax_, ay_);
 
         object ba_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate ho_ = @this?.periodStart;
-            return ho_;
+            CqlDate ia_ = @this?.periodStart;
+            return ia_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> bb_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(az_, ba_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? bc_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> hp_ = @this?.period;
-            bool? hq_ = context.Operators.Not((bool?)(hp_ is null));
-            return hq_;
+            CqlInterval<CqlDate> ib_ = @this?.period;
+            bool? ic_ = context.Operators.Not((bool?)(ib_ is null));
+            return ic_;
         }
 
 
         CqlInterval<CqlDate> bd_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> hr_ = @this?.period;
-            return hr_;
+            CqlInterval<CqlDate> id_ = @this?.period;
+            return id_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> be_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(bb_, bc_, bd_);
@@ -1454,28 +1652,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> bh_ = context.Operators.Union<CqlInterval<CqlDate>>(ad_, bg_);
 
         bool? bi_(MedicationRequest MR) {
-            IEnumerable<Medication> hs_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ie_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ht_(Medication M) {
-                string hv_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType hw_ = MR?.Medication;
-                object hx_ = context.Operators.LateBoundProperty<object>(hw_, "reference");
-                object hy_ = context.Operators.LateBoundProperty<object>(hx_, "value");
-                IEnumerable<string> hz_ = context.Operators.Split((string)hy_, "/");
-                string ia_ = context.Operators.Last<string>(hz_);
-                bool? ib_ = context.Operators.Equal(hv_, ia_);
-                CodeableConcept ic_ = M?.Code;
-                CqlConcept id_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ic_);
-                CqlValueSet ie_ = this.Lisdexamfetamine(context);
-                bool? if_ = context.Operators.ConceptInValueSet(id_, ie_);
-                bool? ig_ = context.Operators.And(ib_, if_);
-                return ig_;
+            bool? if_(Medication M) {
+                Id ih_ = M?.IdElement;
+                string ii_ = ih_?.Value;
+                FhirString ij_;
+                DataType it_ = MR?.Medication;
+                bool iu_ = it_ is ResourceReference;
+                if (iu_)
+                {
+                    FhirString iv_ = (it_ as ResourceReference)?.ReferenceElement;
+                    ij_ = iv_;
+                }
+                else
+                {
+                    ij_ = default;
+                }
+                string ik_ = ij_?.Value;
+                IEnumerable<string> il_ = context.Operators.Split(ik_, "/");
+                string im_ = context.Operators.Last<string>(il_);
+                bool? in_ = context.Operators.Equal(ii_, im_);
+                CodeableConcept io_ = M?.Code;
+                CqlConcept ip_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, io_);
+                CqlValueSet iq_ = this.Lisdexamfetamine(context);
+                bool? ir_ = context.Operators.ConceptInValueSet(ip_, iq_);
+                bool? is_ = context.Operators.And(in_, ir_);
+                return is_;
             }
 
-            bool? hu_ = context.Operators.WhereAny<Medication>(hs_, ht_);
-            return hu_;
+            bool? ig_ = context.Operators.WhereAny<Medication>(ie_, if_);
+            return ig_;
         }
 
         IEnumerable<MedicationRequest> bj_ = context.Operators.Where<MedicationRequest>(a_, bi_);
@@ -1485,59 +1692,68 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> bn_ = Status_1_15_000.Instance.isMedicationOrder(context, bm_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? bo_(MedicationRequest LisdexamfetamineMed) {
-            CqlInterval<CqlDate> ih_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, LisdexamfetamineMed);
-            CqlDate ii_ = context.Operators.Start(ih_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ij_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ih_, ii_);
-            return ij_;
+            CqlInterval<CqlDate> iw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, LisdexamfetamineMed);
+            CqlDate ix_ = context.Operators.Start(iw_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? iy_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, iw_, ix_);
+            return iy_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> bp_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(bn_, bo_);
 
         object bq_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate ik_ = @this?.periodStart;
-            return ik_;
+            CqlDate iz_ = @this?.periodStart;
+            return iz_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> br_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(bp_, bq_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? bs_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> il_ = @this?.period;
-            bool? im_ = context.Operators.Not((bool?)(il_ is null));
-            return im_;
+            CqlInterval<CqlDate> ja_ = @this?.period;
+            bool? jb_ = context.Operators.Not((bool?)(ja_ is null));
+            return jb_;
         }
 
 
         CqlInterval<CqlDate> bt_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> in_ = @this?.period;
-            return in_;
+            CqlInterval<CqlDate> jc_ = @this?.period;
+            return jc_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> bu_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_, bt_);
         IEnumerable<CqlInterval<CqlDate>> bv_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, bu_);
 
         bool? bw_(MedicationRequest MR) {
-            IEnumerable<Medication> io_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> jd_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ip_(Medication M) {
-                string ir_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType is_ = MR?.Medication;
-                object it_ = context.Operators.LateBoundProperty<object>(is_, "reference");
-                object iu_ = context.Operators.LateBoundProperty<object>(it_, "value");
-                IEnumerable<string> iv_ = context.Operators.Split((string)iu_, "/");
-                string iw_ = context.Operators.Last<string>(iv_);
-                bool? ix_ = context.Operators.Equal(ir_, iw_);
-                CodeableConcept iy_ = M?.Code;
-                CqlConcept iz_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, iy_);
-                CqlValueSet ja_ = this.Methylphenidate(context);
-                bool? jb_ = context.Operators.ConceptInValueSet(iz_, ja_);
-                bool? jc_ = context.Operators.And(ix_, jb_);
-                return jc_;
+            bool? je_(Medication M) {
+                Id jg_ = M?.IdElement;
+                string jh_ = jg_?.Value;
+                FhirString ji_;
+                DataType js_ = MR?.Medication;
+                bool jt_ = js_ is ResourceReference;
+                if (jt_)
+                {
+                    FhirString ju_ = (js_ as ResourceReference)?.ReferenceElement;
+                    ji_ = ju_;
+                }
+                else
+                {
+                    ji_ = default;
+                }
+                string jj_ = ji_?.Value;
+                IEnumerable<string> jk_ = context.Operators.Split(jj_, "/");
+                string jl_ = context.Operators.Last<string>(jk_);
+                bool? jm_ = context.Operators.Equal(jh_, jl_);
+                CodeableConcept jn_ = M?.Code;
+                CqlConcept jo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jn_);
+                CqlValueSet jp_ = this.Methylphenidate(context);
+                bool? jq_ = context.Operators.ConceptInValueSet(jo_, jp_);
+                bool? jr_ = context.Operators.And(jm_, jq_);
+                return jr_;
             }
 
-            bool? iq_ = context.Operators.WhereAny<Medication>(io_, ip_);
-            return iq_;
+            bool? jf_ = context.Operators.WhereAny<Medication>(jd_, je_);
+            return jf_;
         }
 
         IEnumerable<MedicationRequest> bx_ = context.Operators.Where<MedicationRequest>(a_, bw_);
@@ -1547,31 +1763,31 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> cb_ = Status_1_15_000.Instance.isMedicationOrder(context, ca_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? cc_(MedicationRequest MethylphenidateMed) {
-            CqlInterval<CqlDate> jd_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, MethylphenidateMed);
-            CqlDate je_ = context.Operators.Start(jd_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? jf_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, jd_, je_);
-            return jf_;
+            CqlInterval<CqlDate> jv_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, MethylphenidateMed);
+            CqlDate jw_ = context.Operators.Start(jv_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? jx_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, jv_, jw_);
+            return jx_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> cd_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(cb_, cc_);
 
         object ce_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate jg_ = @this?.periodStart;
-            return jg_;
+            CqlDate jy_ = @this?.periodStart;
+            return jy_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> cf_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(cd_, ce_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? cg_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> jh_ = @this?.period;
-            bool? ji_ = context.Operators.Not((bool?)(jh_ is null));
-            return ji_;
+            CqlInterval<CqlDate> jz_ = @this?.period;
+            bool? ka_ = context.Operators.Not((bool?)(jz_ is null));
+            return ka_;
         }
 
 
         CqlInterval<CqlDate> ch_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> jj_ = @this?.period;
-            return jj_;
+            CqlInterval<CqlDate> kb_ = @this?.period;
+            return kb_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> ci_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cf_, cg_, ch_);
@@ -1580,28 +1796,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> cl_ = context.Operators.Union<CqlInterval<CqlDate>>(bh_, ck_);
 
         bool? cm_(MedicationRequest MR) {
-            IEnumerable<Medication> jk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> kc_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? jl_(Medication M) {
-                string jn_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType jo_ = MR?.Medication;
-                object jp_ = context.Operators.LateBoundProperty<object>(jo_, "reference");
-                object jq_ = context.Operators.LateBoundProperty<object>(jp_, "value");
-                IEnumerable<string> jr_ = context.Operators.Split((string)jq_, "/");
-                string js_ = context.Operators.Last<string>(jr_);
-                bool? jt_ = context.Operators.Equal(jn_, js_);
-                CodeableConcept ju_ = M?.Code;
-                CqlConcept jv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ju_);
-                CqlValueSet jw_ = this.Guanfacine_Medications(context);
-                bool? jx_ = context.Operators.ConceptInValueSet(jv_, jw_);
-                bool? jy_ = context.Operators.And(jt_, jx_);
-                return jy_;
+            bool? kd_(Medication M) {
+                Id kf_ = M?.IdElement;
+                string kg_ = kf_?.Value;
+                FhirString kh_;
+                DataType kr_ = MR?.Medication;
+                bool ks_ = kr_ is ResourceReference;
+                if (ks_)
+                {
+                    FhirString kt_ = (kr_ as ResourceReference)?.ReferenceElement;
+                    kh_ = kt_;
+                }
+                else
+                {
+                    kh_ = default;
+                }
+                string ki_ = kh_?.Value;
+                IEnumerable<string> kj_ = context.Operators.Split(ki_, "/");
+                string kk_ = context.Operators.Last<string>(kj_);
+                bool? kl_ = context.Operators.Equal(kg_, kk_);
+                CodeableConcept km_ = M?.Code;
+                CqlConcept kn_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, km_);
+                CqlValueSet ko_ = this.Guanfacine_Medications(context);
+                bool? kp_ = context.Operators.ConceptInValueSet(kn_, ko_);
+                bool? kq_ = context.Operators.And(kl_, kp_);
+                return kq_;
             }
 
-            bool? jm_ = context.Operators.WhereAny<Medication>(jk_, jl_);
-            return jm_;
+            bool? ke_ = context.Operators.WhereAny<Medication>(kc_, kd_);
+            return ke_;
         }
 
         IEnumerable<MedicationRequest> cn_ = context.Operators.Where<MedicationRequest>(a_, cm_);
@@ -1611,60 +1836,69 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> cr_ = Status_1_15_000.Instance.isMedicationOrder(context, cq_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? cs_(MedicationRequest GuanfacineMed) {
-            CqlInterval<CqlDate> jz_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, GuanfacineMed);
-            CqlDate ka_ = context.Operators.Start(jz_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? kb_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, jz_, ka_);
-            return kb_;
+            CqlInterval<CqlDate> ku_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, GuanfacineMed);
+            CqlDate kv_ = context.Operators.Start(ku_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? kw_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ku_, kv_);
+            return kw_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> ct_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(cr_, cs_);
 
         object cu_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate kc_ = @this?.periodStart;
-            return kc_;
+            CqlDate kx_ = @this?.periodStart;
+            return kx_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> cv_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(ct_, cu_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? cw_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> kd_ = @this?.period;
-            bool? ke_ = context.Operators.Not((bool?)(kd_ is null));
-            return ke_;
+            CqlInterval<CqlDate> ky_ = @this?.period;
+            bool? kz_ = context.Operators.Not((bool?)(ky_ is null));
+            return kz_;
         }
 
 
         CqlInterval<CqlDate> cx_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> kf_ = @this?.period;
-            return kf_;
+            CqlInterval<CqlDate> la_ = @this?.period;
+            return la_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> cy_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(cv_, cw_, cx_);
         IEnumerable<CqlInterval<CqlDate>> cz_ = CumulativeMedicationDuration_6_0_000.Instance.rolloutIntervals(context, cy_);
 
         bool? da_(MedicationRequest MR) {
-            IEnumerable<Medication> kg_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> lb_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? kh_(Medication M) {
-                string kj_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType kk_ = MR?.Medication;
-                object kl_ = context.Operators.LateBoundProperty<object>(kk_, "reference");
-                object km_ = context.Operators.LateBoundProperty<object>(kl_, "value");
-                IEnumerable<string> kn_ = context.Operators.Split((string)km_, "/");
-                string ko_ = context.Operators.Last<string>(kn_);
-                bool? kp_ = context.Operators.Equal(kj_, ko_);
-                CodeableConcept kq_ = M?.Code;
-                CqlConcept kr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kq_);
-                CqlCode ks_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
-                CqlConcept kt_ = context.Operators.ConvertCodeToConcept(ks_);
-                bool? ku_ = context.Operators.Equivalent(kr_, kt_);
-                bool? kv_ = context.Operators.And(kp_, ku_);
-                return kv_;
+            bool? lc_(Medication M) {
+                Id le_ = M?.IdElement;
+                string lf_ = le_?.Value;
+                FhirString lg_;
+                DataType lr_ = MR?.Medication;
+                bool ls_ = lr_ is ResourceReference;
+                if (ls_)
+                {
+                    FhirString lt_ = (lr_ as ResourceReference)?.ReferenceElement;
+                    lg_ = lt_;
+                }
+                else
+                {
+                    lg_ = default;
+                }
+                string lh_ = lg_?.Value;
+                IEnumerable<string> li_ = context.Operators.Split(lh_, "/");
+                string lj_ = context.Operators.Last<string>(li_);
+                bool? lk_ = context.Operators.Equal(lf_, lj_);
+                CodeableConcept ll_ = M?.Code;
+                CqlConcept lm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ll_);
+                CqlCode ln_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet(context);
+                CqlConcept lo_ = context.Operators.ConvertCodeToConcept(ln_);
+                bool? lp_ = context.Operators.Equivalent(lm_, lo_);
+                bool? lq_ = context.Operators.And(lk_, lp_);
+                return lq_;
             }
 
-            bool? ki_ = context.Operators.WhereAny<Medication>(kg_, kh_);
-            return ki_;
+            bool? ld_ = context.Operators.WhereAny<Medication>(lb_, lc_);
+            return ld_;
         }
 
         IEnumerable<MedicationRequest> db_ = context.Operators.Where<MedicationRequest>(a_, da_);
@@ -1675,31 +1909,31 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> dg_ = Status_1_15_000.Instance.isMedicationOrder(context, df_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? dh_(MedicationRequest MethamphetamineMed) {
-            CqlInterval<CqlDate> kw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, MethamphetamineMed);
-            CqlDate kx_ = context.Operators.Start(kw_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? ky_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, kw_, kx_);
-            return ky_;
+            CqlInterval<CqlDate> lu_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, MethamphetamineMed);
+            CqlDate lv_ = context.Operators.Start(lu_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? lw_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, lu_, lv_);
+            return lw_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> di_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(dg_, dh_);
 
         object dj_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate kz_ = @this?.periodStart;
-            return kz_;
+            CqlDate lx_ = @this?.periodStart;
+            return lx_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> dk_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(di_, dj_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? dl_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> la_ = @this?.period;
-            bool? lb_ = context.Operators.Not((bool?)(la_ is null));
-            return lb_;
+            CqlInterval<CqlDate> ly_ = @this?.period;
+            bool? lz_ = context.Operators.Not((bool?)(ly_ is null));
+            return lz_;
         }
 
 
         CqlInterval<CqlDate> dm_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> lc_ = @this?.period;
-            return lc_;
+            CqlInterval<CqlDate> ma_ = @this?.period;
+            return ma_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> dn_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(dk_, dl_, dm_);
@@ -1708,28 +1942,37 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> dq_ = context.Operators.Union<CqlInterval<CqlDate>>(cl_, dp_);
 
         bool? dr_(MedicationRequest MR) {
-            IEnumerable<Medication> ld_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> mb_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? le_(Medication M) {
-                string lg_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType lh_ = MR?.Medication;
-                object li_ = context.Operators.LateBoundProperty<object>(lh_, "reference");
-                object lj_ = context.Operators.LateBoundProperty<object>(li_, "value");
-                IEnumerable<string> lk_ = context.Operators.Split((string)lj_, "/");
-                string ll_ = context.Operators.Last<string>(lk_);
-                bool? lm_ = context.Operators.Equal(lg_, ll_);
-                CodeableConcept ln_ = M?.Code;
-                CqlConcept lo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ln_);
-                CqlValueSet lp_ = this.Viloxazine(context);
-                bool? lq_ = context.Operators.ConceptInValueSet(lo_, lp_);
-                bool? lr_ = context.Operators.And(lm_, lq_);
-                return lr_;
+            bool? mc_(Medication M) {
+                Id me_ = M?.IdElement;
+                string mf_ = me_?.Value;
+                FhirString mg_;
+                DataType mq_ = MR?.Medication;
+                bool mr_ = mq_ is ResourceReference;
+                if (mr_)
+                {
+                    FhirString ms_ = (mq_ as ResourceReference)?.ReferenceElement;
+                    mg_ = ms_;
+                }
+                else
+                {
+                    mg_ = default;
+                }
+                string mh_ = mg_?.Value;
+                IEnumerable<string> mi_ = context.Operators.Split(mh_, "/");
+                string mj_ = context.Operators.Last<string>(mi_);
+                bool? mk_ = context.Operators.Equal(mf_, mj_);
+                CodeableConcept ml_ = M?.Code;
+                CqlConcept mm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ml_);
+                CqlValueSet mn_ = this.Viloxazine(context);
+                bool? mo_ = context.Operators.ConceptInValueSet(mm_, mn_);
+                bool? mp_ = context.Operators.And(mk_, mo_);
+                return mp_;
             }
 
-            bool? lf_ = context.Operators.WhereAny<Medication>(ld_, le_);
-            return lf_;
+            bool? md_ = context.Operators.WhereAny<Medication>(mb_, mc_);
+            return md_;
         }
 
         IEnumerable<MedicationRequest> ds_ = context.Operators.Where<MedicationRequest>(a_, dr_);
@@ -1739,31 +1982,31 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> dw_ = Status_1_15_000.Instance.isMedicationOrder(context, dv_);
 
         (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? dx_(MedicationRequest ViloxazineMed) {
-            CqlInterval<CqlDate> ls_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ViloxazineMed);
-            CqlDate lt_ = context.Operators.Start(ls_);
-            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? lu_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, ls_, lt_);
-            return lu_;
+            CqlInterval<CqlDate> mt_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, ViloxazineMed);
+            CqlDate mu_ = context.Operators.Start(mt_);
+            (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? mv_ = (CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD, mt_, mu_);
+            return mv_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> dy_ = context.Operators.Select<MedicationRequest, (CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(dw_, dx_);
 
         object dz_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlDate lv_ = @this?.periodStart;
-            return lv_;
+            CqlDate mw_ = @this?.periodStart;
+            return mw_;
         }
 
         IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?> ea_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?>(dy_, dz_, System.ComponentModel.ListSortDirection.Ascending);
 
         bool? eb_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> lw_ = @this?.period;
-            bool? lx_ = context.Operators.Not((bool?)(lw_ is null));
-            return lx_;
+            CqlInterval<CqlDate> mx_ = @this?.period;
+            bool? my_ = context.Operators.Not((bool?)(mx_ is null));
+            return my_;
         }
 
 
         CqlInterval<CqlDate> ec_((CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)? @this) {
-            CqlInterval<CqlDate> ly_ = @this?.period;
-            return ly_;
+            CqlInterval<CqlDate> mz_ = @this?.period;
+            return mz_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> ed_ = context.Operators.WhereSelect<(CqlTupleMetadata, CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(ea_, eb_, ec_);
@@ -1771,12 +2014,12 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlInterval<CqlDate>> ef_ = context.Operators.Union<CqlInterval<CqlDate>>(dq_, ee_);
 
         CqlInterval<CqlDate> eg_(CqlInterval<CqlDate> ADHDMedication) {
-            CqlDate lz_ = this.IPSD(context);
-            CqlQuantity ma_ = context.Operators.Quantity(300m, "days");
-            CqlDate mb_ = context.Operators.Add(lz_, ma_);
-            CqlInterval<CqlDate> mc_ = context.Operators.Interval(lz_, mb_, true, true);
-            CqlInterval<CqlDate> md_ = context.Operators.Intersect<CqlDate>(ADHDMedication, mc_);
-            return md_;
+            CqlDate na_ = this.IPSD(context);
+            CqlQuantity nb_ = context.Operators.Quantity(300m, "days");
+            CqlDate nc_ = context.Operators.Add(na_, nb_);
+            CqlInterval<CqlDate> nd_ = context.Operators.Interval(na_, nc_, true, true);
+            CqlInterval<CqlDate> ne_ = context.Operators.Intersect<CqlDate>(ADHDMedication, nd_);
+            return ne_;
         }
 
         IEnumerable<CqlInterval<CqlDate>> eh_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(ef_, eg_);

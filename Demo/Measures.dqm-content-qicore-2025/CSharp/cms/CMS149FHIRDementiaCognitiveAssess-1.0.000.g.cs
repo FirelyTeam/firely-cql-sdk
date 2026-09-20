@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -413,28 +413,27 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
         IEnumerable<Observation> g_ = context.Operators.Where<Observation>(e_, f_);
 
         bool? h_(Observation NoCognitiveAssessment) {
+            List<Extension> s_ = NoCognitiveAssessment?.Extension;
 
-            bool? s_(Extension @this) {
-                FhirUri z_ = @this?.UrlElement;
-                string aa_ = FHIRHelpers_4_4_000.Instance.ToString(context, z_);
-                bool? ab_ = context.Operators.Equal(aa_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                return ab_;
-            }
-
-
-            object t_(Extension @this) {
-                DataType ac_ = @this?.Value;
+            bool? t_(Extension @this) {
+                FhirUri aa_ = @this?.UrlElement;
+                string ab_ = FHIRHelpers_4_4_000.Instance.ToString(context, aa_);
+                bool? ac_ = context.Operators.Equal(ab_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                 return ac_;
             }
 
-            IEnumerable<object> u_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoCognitiveAssessment is DomainResource
-                ? (NoCognitiveAssessment as DomainResource).Extension
-                : default), s_, t_);
-            object v_ = context.Operators.SingletonFrom<object>(u_);
-            CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_ as CodeableConcept);
-            CqlValueSet x_ = this.Patient_Reason(context);
-            bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-            return y_;
+
+            object u_(Extension @this) {
+                DataType ad_ = @this?.Value;
+                return ad_;
+            }
+
+            IEnumerable<object> v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)s_, t_, u_);
+            object w_ = context.Operators.SingletonFrom<object>(v_);
+            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
+            CqlValueSet y_ = this.Patient_Reason(context);
+            bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+            return z_;
         }
 
         IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);

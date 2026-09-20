@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -534,13 +534,34 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_ as CodeableConcept);
             CqlValueSet f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
-            DataType h_ = PregnantObservation?.Effective;
-            CqlDateTime i_ = context.Operators.LateBoundProperty<CqlDateTime>(h_, "value");
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            bool? l_ = context.Operators.Overlaps(j_, k_, "day");
-            bool? m_ = context.Operators.And(g_, l_);
-            return m_;
+            CqlDateTime h_;
+            DataType m_ = PregnantObservation?.Effective;
+            bool n_ = m_ is FhirDateTime;
+            if (n_)
+            {
+                string o_ = context.Operators.Convert<string>(m_ as FhirDateTime);
+                CqlDateTime p_ = context.Operators.ConvertStringToDateTime(o_);
+                h_ = p_;
+            }
+            else
+            {
+                bool q_ = m_ is Instant;
+                if (q_)
+                {
+                    DateTimeOffset? r_ = (m_ as Instant)?.Value;
+                    CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
+                    h_ = s_;
+                }
+                else
+                {
+                    h_ = default;
+                }
+            }
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
+            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
+            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
+            bool? l_ = context.Operators.And(g_, k_);
+            return l_;
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);

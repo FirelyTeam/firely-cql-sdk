@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
@@ -708,85 +708,76 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         bool b_ = a_ is FhirDateTime;
         if (b_)
         {
-            DataType c_ = condition?.Abatement;
-            CqlDateTime d_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, c_ as FhirDateTime);
-            CqlInterval<CqlDateTime> e_ = context.Operators.Interval(d_, d_, true, true);
-            return e_;
+            CqlDateTime c_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, a_ as FhirDateTime);
+            CqlInterval<CqlDateTime> d_ = context.Operators.Interval(c_, c_, true, true);
+            return d_;
         }
         else
         {
-            DataType f_ = condition?.Abatement;
-            bool g_ = f_ is Period;
-            if (g_)
+            bool e_ = a_ is Period;
+            if (e_)
             {
-                DataType h_ = condition?.Abatement;
-                CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, h_ as Period);
-                return i_;
+                CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_ as Period);
+                return f_;
             }
             else
             {
-                DataType j_ = condition?.Abatement;
-                bool k_ = j_ is FhirString;
-                if (k_)
+                bool g_ = a_ is FhirString;
+                if (g_)
                 {
-                    CqlInterval<CqlDateTime> l_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
-                    return l_;
+                    CqlInterval<CqlDateTime> h_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
+                    return h_;
                 }
                 else
                 {
-                    DataType m_ = condition?.Abatement;
-                    bool n_ = m_ is Age;
-                    if (n_)
+                    bool i_ = a_ is Age;
+                    if (i_)
                     {
-                        Patient o_ = this.Patient(context);
-                        Date p_ = o_?.BirthDateElement;
-                        CqlDate q_ = FHIRHelpers_4_0_001.Instance.ToDate(context, p_);
-                        DataType r_ = condition?.Abatement;
-                        CqlQuantity s_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, r_ as Age);
-                        CqlDate t_ = context.Operators.Add(q_, s_);
-                        CqlDateTime u_ = context.Operators.ConvertDateToDateTime(t_);
-                        CqlQuantity v_ = context.Operators.Quantity(1m, "year");
-                        CqlDate w_ = context.Operators.Add(t_, v_);
-                        CqlDateTime x_ = context.Operators.ConvertDateToDateTime(w_);
-                        CqlInterval<CqlDateTime> y_ = context.Operators.Interval(u_, x_, true, false);
-                        return y_;
+                        Patient j_ = this.Patient(context);
+                        Date k_ = j_?.BirthDateElement;
+                        CqlDate l_ = FHIRHelpers_4_0_001.Instance.ToDate(context, k_);
+                        CqlQuantity m_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, a_ as Age);
+                        CqlDate n_ = context.Operators.Add(l_, m_);
+                        CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
+                        CqlQuantity p_ = context.Operators.Quantity(1m, "year");
+                        CqlDate q_ = context.Operators.Add(n_, p_);
+                        CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
+                        CqlInterval<CqlDateTime> s_ = context.Operators.Interval(o_, r_, true, false);
+                        return s_;
                     }
                     else
                     {
-                        DataType z_ = condition?.Abatement;
-                        bool aa_ = z_ is Range;
-                        if (aa_)
+                        bool t_ = a_ is Range;
+                        if (t_)
                         {
-                            Patient ab_ = this.Patient(context);
-                            Date ac_ = ab_?.BirthDateElement;
-                            CqlDate ad_ = FHIRHelpers_4_0_001.Instance.ToDate(context, ac_);
-                            DataType ae_ = condition?.Abatement;
-                            Quantity af_ = (ae_ as Range)?.Low;
-                            CqlQuantity ag_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, af_);
-                            CqlDate ah_ = context.Operators.Add(ad_, ag_);
-                            CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
-                            Quantity aj_ = (ae_ as Range)?.High;
-                            CqlQuantity ak_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, aj_);
-                            CqlDate al_ = context.Operators.Add(ad_, ak_);
-                            CqlQuantity am_ = context.Operators.Quantity(1m, "year");
-                            CqlDate an_ = context.Operators.Add(al_, am_);
-                            CqlDateTime ao_ = context.Operators.ConvertDateToDateTime(an_);
-                            CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ai_, ao_, true, false);
-                            return ap_;
+                            Patient u_ = this.Patient(context);
+                            Date v_ = u_?.BirthDateElement;
+                            CqlDate w_ = FHIRHelpers_4_0_001.Instance.ToDate(context, v_);
+                            Quantity x_ = (a_ as Range)?.Low;
+                            CqlQuantity y_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, x_);
+                            CqlDate z_ = context.Operators.Add(w_, y_);
+                            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+                            Quantity ab_ = (a_ as Range)?.High;
+                            CqlQuantity ac_ = FHIRHelpers_4_0_001.Instance.ToQuantity(context, ab_);
+                            CqlDate ad_ = context.Operators.Add(w_, ac_);
+                            CqlQuantity ae_ = context.Operators.Quantity(1m, "year");
+                            CqlDate af_ = context.Operators.Add(ad_, ae_);
+                            CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
+                            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(aa_, ag_, true, false);
+                            return ah_;
                         }
                         else
                         {
-                            DataType aq_ = condition?.Abatement;
-                            bool ar_ = aq_ is FhirBoolean;
-                            if (ar_)
+                            bool ai_ = a_ is FhirBoolean;
+                            if (ai_)
                             {
-                                DataType as_ = condition?.Onset;
-                                CqlInterval<CqlDateTime> at_ = this.Normalize_Interval(context, as_);
-                                CqlDateTime au_ = context.Operators.End(at_);
-                                FhirDateTime av_ = condition?.RecordedDateElement;
-                                CqlDateTime aw_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, av_);
-                                CqlInterval<CqlDateTime> ax_ = context.Operators.Interval(au_, aw_, true, false);
-                                return ax_;
+                                DataType aj_ = condition?.Onset;
+                                CqlInterval<CqlDateTime> ak_ = this.Normalize_Interval(context, aj_);
+                                CqlDateTime al_ = context.Operators.End(ak_);
+                                FhirDateTime am_ = condition?.RecordedDateElement;
+                                CqlDateTime an_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, am_);
+                                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(al_, an_, true, false);
+                                return ao_;
                             }
                             else
                             {
@@ -1098,28 +1089,27 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
         bool b_ = a_ is CodeableConcept;
         if (b_)
         {
-            DataType c_ = request?.Medication;
-            return c_ as CodeableConcept;
+            return a_ as CodeableConcept;
         }
         else
         {
-            IEnumerable<Medication> d_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
+            IEnumerable<Medication> c_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
 
-            bool? e_(Medication M) {
-                Id i_ = M?.IdElement;
-                string j_ = FHIRHelpers_4_0_001.Instance.ToString(context, i_);
-                DataType k_ = request?.Medication;
-                FhirString l_ = (k_ as ResourceReference)?.ReferenceElement;
-                string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-                string n_ = this.GetId(context, m_);
-                bool? o_ = context.Operators.Equal(j_, n_);
-                return o_;
+            bool? d_(Medication M) {
+                Id h_ = M?.IdElement;
+                string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
+                DataType j_ = request?.Medication;
+                FhirString k_ = (j_ as ResourceReference)?.ReferenceElement;
+                string l_ = FHIRHelpers_4_0_001.Instance.ToString(context, k_);
+                string m_ = this.GetId(context, l_);
+                bool? n_ = context.Operators.Equal(i_, m_);
+                return n_;
             }
 
-            IEnumerable<Medication> f_ = context.Operators.Where<Medication>(d_, e_);
-            Medication g_ = context.Operators.SingletonFrom<Medication>(f_);
-            CodeableConcept h_ = g_?.Code;
-            return h_;
+            IEnumerable<Medication> e_ = context.Operators.Where<Medication>(c_, d_);
+            Medication f_ = context.Operators.SingletonFrom<Medication>(e_);
+            CodeableConcept g_ = f_?.Code;
+            return g_;
         }
     }
 

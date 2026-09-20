@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS144FHIRHFBetaBlockerForLVSD", "1.0.000")]
 public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISingleton<CMS144FHIRHFBetaBlockerForLVSD_1_0_000>
 {
@@ -209,15 +209,24 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                string l_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType m_ = MR?.Medication;
-                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                Id l_ = M?.IdElement;
+                string m_ = l_?.Value;
+                FhirString n_;
+                DataType x_ = MR?.Medication;
+                bool y_ = x_ is ResourceReference;
+                if (y_)
+                {
+                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
+                    n_ = z_;
+                }
+                else
+                {
+                    n_ = default;
+                }
+                string o_ = n_?.Value;
+                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
                 string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(l_, q_);
+                bool? r_ = context.Operators.Equal(m_, q_);
                 CodeableConcept s_ = M?.Code;
                 CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
                 CqlValueSet u_ = this.Beta_Blocker_Therapy_for_LVSD(context);
@@ -236,8 +245,8 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest ActiveBetaBlocker) {
-            bool? x_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
-            return x_;
+            bool? aa_ = AHAOverall_4_1_000.Instance.overlapsAfterHeartFailureOutpatientEncounter(context, ActiveBetaBlocker);
+            return aa_;
         }
 
         bool? h_ = context.Operators.WhereAny<MedicationRequest>(f_, g_);
@@ -649,42 +658,28 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    DataType t_ = ImplantedCardiacPacer?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlDateTime;
+                    j_ = r_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType v_ = ImplantedCardiacPacer?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
-                    if (x_)
+                    bool t_ = r_ is CqlQuantity;
+                    if (t_)
                     {
-                        DataType y_ = ImplantedCardiacPacer?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = r_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType aa_ = ImplantedCardiacPacer?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
-                        if (ac_)
+                        bool u_ = r_ is CqlInterval<CqlDateTime>;
+                        if (u_)
                         {
-                            DataType ad_ = ImplantedCardiacPacer?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlInterval<CqlDateTime>;
+                            j_ = r_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType af_ = ImplantedCardiacPacer?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            bool ah_ = ag_ is CqlInterval<CqlQuantity>;
-                            if (ah_)
+                            bool v_ = r_ is CqlInterval<CqlQuantity>;
+                            if (v_)
                             {
-                                DataType ai_ = ImplantedCardiacPacer?.Performed;
-                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                                j_ = r_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -709,11 +704,11 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
         bool? e_(Procedure ImplantedCardiacPacer) {
-            Code<EventStatus> ak_ = ImplantedCardiacPacer?.StatusElement;
-            EventStatus? al_ = ak_?.Value;
-            string am_ = context.Operators.Convert<string>(al_);
-            bool? an_ = context.Operators.Equal(am_, "completed");
-            return an_;
+            Code<EventStatus> w_ = ImplantedCardiacPacer?.StatusElement;
+            EventStatus? x_ = w_?.Value;
+            string y_ = context.Operators.Convert<string>(x_);
+            bool? z_ = context.Operators.Equal(y_, "completed");
+            return z_;
         }
 
         bool? f_ = context.Operators.WhereAny<Procedure>(d_, e_);

@@ -31,10 +31,18 @@ internal partial class CSharpEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        private Scope(CSharpEmitter emitter, VariableNameGenerator names)
+        // Locals hoisted by enclosing block scopes that are declared before this scope's
+        // block and therefore in scope inside it (the branches and conditions of an if/else
+        // chain). A subexpression already hoisted there is reused instead of being evaluated
+        // again in every branch. Local-function scopes do not inherit: a local function may be
+        // invoked before an enclosing local is definitely assigned.
+        private readonly IReadOnlyDictionary<string, Atom> _inherited;
+
+        private Scope(CSharpEmitter emitter, VariableNameGenerator names, IReadOnlyDictionary<string, Atom>? inherited = null)
         {
             _emitter = emitter;
             _names = names;
+            _inherited = inherited ?? new Dictionary<string, Atom>();
         }
 
         public static Scope CreateRoot(CSharpEmitter emitter, IReadOnlyList<CodeLocal> parameters)
@@ -47,16 +55,31 @@ internal partial class CSharpEmitter
             return scope;
         }
 
-        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters)
+        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters, IReadOnlyDictionary<string, Atom>? inherited = null)
         {
             var nested = new Scope(
                 _emitter,
                 // The GENERATED letter sequence must never collide with a hint name visible in
                 // this lineage: the old VariableNameGenerator.Reserved list, threaded the same
                 // way (ForNewScope conses the new scope's names onto a copy of the parent's).
-                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()));
+                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()),
+                inherited);
             nested.NameParameters(parameters);
             return nested;
+        }
+
+        /// <summary>
+        /// The locals visible to a block nested in this scope at this point: those inherited
+        /// by this scope plus those it has hoisted so far. Taken when the nested block's
+        /// statement is added, not when it renders, because statements hoisted later in this
+        /// scope are declared after the block and must not be referenced from inside it.
+        /// </summary>
+        private Dictionary<string, Atom> VisibleLocals()
+        {
+            var visible = new Dictionary<string, Atom>(_inherited);
+            foreach (var (key, atom) in _dedup)
+                visible[key] = atom;
+            return visible;
         }
 
         private void NameParameters(IReadOnlyList<CodeLocal> parameters)
@@ -198,6 +221,8 @@ internal partial class CSharpEmitter
             // expressions from ever deduplicating with each other.)
             if (_dedup.TryGetValue(dedupKey, out var existing))
                 return existing;
+            if (_inherited.TryGetValue(dedupKey, out var visible))
+                return visible;
 
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
@@ -330,9 +355,12 @@ internal partial class CSharpEmitter
             CodeExpression @else,
             bool tailPosition)
         {
+            // The chain's blocks see the locals this scope has hoisted up to here.
+            var visible = VisibleLocals();
+
             if (tailPosition)
             {
-                _statements.Add(() => RenderChain(resultName: null, cases, @else));
+                _statements.Add(() => RenderChain(resultName: null, cases, @else, visible));
                 return null;
             }
 
@@ -343,7 +371,7 @@ internal partial class CSharpEmitter
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
             _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
-            _statements.Add(() => RenderChain(resultName, cases, @else));
+            _statements.Add(() => RenderChain(resultName, cases, @else, visible));
             return new Atom(resultName, resultLocal);
         }
 
@@ -352,10 +380,11 @@ internal partial class CSharpEmitter
         private string RenderChain(
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
-            CodeExpression @else)
+            CodeExpression @else,
+            IReadOnlyDictionary<string, Atom> visible)
         {
             var isb = new IndentedStringBuilder();
-            EmitChainLevel(isb, resultName, cases, 0, @else);
+            EmitChainLevel(isb, resultName, cases, 0, @else, visible);
             return isb.ToString().TrimEnd('\r', '\n');
         }
 
@@ -364,8 +393,13 @@ internal partial class CSharpEmitter
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             int start,
-            CodeExpression @else)
+            CodeExpression @else,
+            IReadOnlyDictionary<string, Atom> visible)
         {
+            // Locals a condition hoists at this level are declared in this block, before the
+            // if/else that follows, so the branches and the rest of the chain see them too.
+            var levelVisible = new Dictionary<string, Atom>(visible);
+
             var first = true;
             for (int i = start; i < cases.Count; i++)
             {
@@ -380,9 +414,11 @@ internal partial class CSharpEmitter
                 {
                     // The first condition at a nesting level can put its statements right
                     // here — nothing needs to run before them at this level.
-                    var testScope = CreateNested([]);
+                    var testScope = CreateNested([], levelVisible);
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
+                    foreach (var (key, hoisted) in testScope._dedup)
+                        levelVisible[key] = hoisted;
                     test = atom.Code;
                 }
                 else
@@ -392,18 +428,18 @@ internal partial class CSharpEmitter
                     isb.AppendLine("else");
                     isb.AppendLine("{");
                     using (isb.Indent())
-                        EmitChainLevel(isb, resultName, cases, i, @else);
+                        EmitChainLevel(isb, resultName, cases, i, @else, levelVisible);
                     isb.AppendLine("}");
                     return;
                 }
 
                 isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
-                EmitBranchBlock(isb, resultName, then);
+                EmitBranchBlock(isb, resultName, then, levelVisible);
                 first = false;
             }
 
             isb.AppendLine("else");
-            EmitBranchBlock(isb, resultName, @else);
+            EmitBranchBlock(isb, resultName, @else, levelVisible);
         }
 
         /// <summary>
@@ -472,12 +508,12 @@ internal partial class CSharpEmitter
         /// throw-expression (neither <c>return throw …</c> nor <c>x = throw …;</c> is wanted
         /// here; the throwing branch needs no assignment for definite assignment).
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value)
+        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value, IReadOnlyDictionary<string, Atom> visible)
         {
             isb.AppendLine("{");
             using (isb.Indent())
             {
-                var branchScope = CreateNested([]);
+                var branchScope = CreateNested([], visible);
                 var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)

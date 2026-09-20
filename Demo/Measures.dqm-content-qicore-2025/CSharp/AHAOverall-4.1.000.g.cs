@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -338,7 +338,16 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             bool? e_(object LVSDFindings) {
                 CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
-                object h_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
+                object h_;
+                if (LVSDFindings is Observation)
+                {
+                    DataType p_ = (LVSDFindings as Observation)?.Effective;
+                    h_ = p_;
+                }
+                else
+                {
+                    h_ = null;
+                }
                 object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
                 CqlDateTime k_ = context.Operators.Start(g_ ?? j_);
@@ -427,42 +436,28 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    DataType t_ = LVADPlacement?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlDateTime;
+                    j_ = r_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType v_ = LVADPlacement?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
-                    if (x_)
+                    bool t_ = r_ is CqlQuantity;
+                    if (t_)
                     {
-                        DataType y_ = LVADPlacement?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = r_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType aa_ = LVADPlacement?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
-                        if (ac_)
+                        bool u_ = r_ is CqlInterval<CqlDateTime>;
+                        if (u_)
                         {
-                            DataType ad_ = LVADPlacement?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlInterval<CqlDateTime>;
+                            j_ = r_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType af_ = LVADPlacement?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            bool ah_ = ag_ is CqlInterval<CqlQuantity>;
-                            if (ah_)
+                            bool v_ = r_ is CqlInterval<CqlQuantity>;
+                            if (v_)
                             {
-                                DataType ai_ = LVADPlacement?.Performed;
-                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                                j_ = r_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -487,11 +482,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
         bool? e_(Procedure LVADPlacement) {
-            Code<EventStatus> ak_ = LVADPlacement?.StatusElement;
-            EventStatus? al_ = ak_?.Value;
-            string am_ = context.Operators.Convert<string>(al_);
-            bool? an_ = context.Operators.Equal(am_, "completed");
-            return an_;
+            Code<EventStatus> w_ = LVADPlacement?.StatusElement;
+            EventStatus? x_ = w_?.Value;
+            string y_ = context.Operators.Convert<string>(x_);
+            bool? z_ = context.Operators.Equal(y_, "completed");
+            return z_;
         }
 
         bool? f_ = context.Operators.WhereAny<Procedure>(d_, e_);
@@ -610,42 +605,28 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    DataType t_ = HeartTransplant?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    j_ = u_ as CqlDateTime;
+                    j_ = r_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType v_ = HeartTransplant?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlQuantity;
-                    if (x_)
+                    bool t_ = r_ is CqlQuantity;
+                    if (t_)
                     {
-                        DataType y_ = HeartTransplant?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        j_ = z_ as CqlQuantity;
+                        j_ = r_ as CqlQuantity;
                     }
                     else
                     {
-                        DataType aa_ = HeartTransplant?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
-                        if (ac_)
+                        bool u_ = r_ is CqlInterval<CqlDateTime>;
+                        if (u_)
                         {
-                            DataType ad_ = HeartTransplant?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            j_ = ae_ as CqlInterval<CqlDateTime>;
+                            j_ = r_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            DataType af_ = HeartTransplant?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            bool ah_ = ag_ is CqlInterval<CqlQuantity>;
-                            if (ah_)
+                            bool v_ = r_ is CqlInterval<CqlQuantity>;
+                            if (v_)
                             {
-                                DataType ai_ = HeartTransplant?.Performed;
-                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
-                                j_ = aj_ as CqlInterval<CqlQuantity>;
+                                j_ = r_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -670,11 +651,11 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
 
         bool? e_(Procedure HeartTransplant) {
-            Code<EventStatus> ak_ = HeartTransplant?.StatusElement;
-            EventStatus? al_ = ak_?.Value;
-            string am_ = context.Operators.Convert<string>(al_);
-            bool? an_ = context.Operators.Equal(am_, "completed");
-            return an_;
+            Code<EventStatus> w_ = HeartTransplant?.StatusElement;
+            EventStatus? x_ = w_?.Value;
+            string y_ = context.Operators.Convert<string>(x_);
+            bool? z_ = context.Operators.Equal(y_, "completed");
+            return z_;
         }
 
         bool? f_ = context.Operators.WhereAny<Procedure>(d_, e_);
@@ -901,42 +882,28 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             bool p_ = o_ is CqlDateTime;
             if (p_)
             {
-                DataType q_ = Procedure?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                d_ = r_ as CqlDateTime;
+                d_ = o_ as CqlDateTime;
             }
             else
             {
-                DataType s_ = Procedure?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                bool u_ = t_ is CqlQuantity;
-                if (u_)
+                bool q_ = o_ is CqlQuantity;
+                if (q_)
                 {
-                    DataType v_ = Procedure?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    d_ = w_ as CqlQuantity;
+                    d_ = o_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType x_ = Procedure?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    bool z_ = y_ is CqlInterval<CqlDateTime>;
-                    if (z_)
+                    bool r_ = o_ is CqlInterval<CqlDateTime>;
+                    if (r_)
                     {
-                        DataType aa_ = Procedure?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        d_ = ab_ as CqlInterval<CqlDateTime>;
+                        d_ = o_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType ac_ = Procedure?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        bool ae_ = ad_ is CqlInterval<CqlQuantity>;
-                        if (ae_)
+                        bool s_ = o_ is CqlInterval<CqlQuantity>;
+                        if (s_)
                         {
-                            DataType af_ = Procedure?.Performed;
-                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                            d_ = ag_ as CqlInterval<CqlQuantity>;
+                            d_ = o_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -1151,18 +1118,46 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         }
         else if (choice is CqlInterval<CqlQuantity>)
         {
-            object a_ = context.Operators.LateBoundProperty<object>(choice, "low");
+            object a_;
+            if (choice is CqlInterval<CqlDateTime>)
+            {
+                CqlDateTime f_ = (choice as CqlInterval<CqlDateTime>)?.low;
+                a_ = f_;
+            }
+            else if (choice is CqlInterval<CqlQuantity>)
+            {
+                CqlQuantity g_ = (choice as CqlInterval<CqlQuantity>)?.low;
+                a_ = g_;
+            }
+            else
+            {
+                a_ = null;
+            }
             CqlDateTime b_ = context.Operators.Add(startDate, a_ as CqlQuantity);
-            object c_ = context.Operators.LateBoundProperty<object>(choice, "high");
+            object c_;
+            if (choice is CqlInterval<CqlDateTime>)
+            {
+                CqlDateTime h_ = (choice as CqlInterval<CqlDateTime>)?.high;
+                c_ = h_;
+            }
+            else if (choice is CqlInterval<CqlQuantity>)
+            {
+                CqlQuantity i_ = (choice as CqlInterval<CqlQuantity>)?.high;
+                c_ = i_;
+            }
+            else
+            {
+                c_ = null;
+            }
             CqlDateTime d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
             CqlInterval<CqlDateTime> e_ = context.Operators.Interval(b_, d_, true, true);
             return e_;
         }
         else if (choice is CqlQuantity)
         {
-            CqlDateTime f_ = context.Operators.Add(startDate, choice as CqlQuantity);
-            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(startDate, f_, true, false);
-            return g_;
+            CqlDateTime j_ = context.Operators.Add(startDate, choice as CqlQuantity);
+            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(startDate, j_, true, false);
+            return k_;
         }
         else
         {

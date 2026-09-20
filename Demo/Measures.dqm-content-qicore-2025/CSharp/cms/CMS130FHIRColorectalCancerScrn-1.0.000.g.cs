@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -221,42 +221,28 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             bool n_ = m_ is CqlDateTime;
             if (n_)
             {
-                DataType o_ = Colectomy?.Performed;
-                object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
-                f_ = p_ as CqlDateTime;
+                f_ = m_ as CqlDateTime;
             }
             else
             {
-                DataType q_ = Colectomy?.Performed;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                bool s_ = r_ is CqlQuantity;
-                if (s_)
+                bool o_ = m_ is CqlQuantity;
+                if (o_)
                 {
-                    DataType t_ = Colectomy?.Performed;
-                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
-                    f_ = u_ as CqlQuantity;
+                    f_ = m_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType v_ = Colectomy?.Performed;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    bool x_ = w_ is CqlInterval<CqlDateTime>;
-                    if (x_)
+                    bool p_ = m_ is CqlInterval<CqlDateTime>;
+                    if (p_)
                     {
-                        DataType y_ = Colectomy?.Performed;
-                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                        f_ = z_ as CqlInterval<CqlDateTime>;
+                        f_ = m_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType aa_ = Colectomy?.Performed;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        bool ac_ = ab_ is CqlInterval<CqlQuantity>;
-                        if (ac_)
+                        bool q_ = m_ is CqlInterval<CqlQuantity>;
+                        if (q_)
                         {
-                            DataType ad_ = Colectomy?.Performed;
-                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
-                            f_ = ae_ as CqlInterval<CqlQuantity>;
+                            f_ = m_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -325,31 +311,20 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             bool p_ = o_ is CqlDateTime;
             if (p_)
             {
-                DataType q_ = FecalOccultResult?.Effective;
-                object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                i_ = r_ as CqlDateTime;
+                i_ = o_ as CqlDateTime;
             }
             else
             {
-                DataType s_ = FecalOccultResult?.Effective;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                bool u_ = t_ is CqlDateTime;
-                if (u_)
+                if (p_)
                 {
-                    DataType v_ = FecalOccultResult?.Effective;
-                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                    i_ = w_ as CqlDateTime;
+                    i_ = o_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType x_ = FecalOccultResult?.Effective;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    bool z_ = y_ is CqlInterval<CqlDateTime>;
-                    if (z_)
+                    bool q_ = o_ is CqlInterval<CqlDateTime>;
+                    if (q_)
                     {
-                        DataType aa_ = FecalOccultResult?.Effective;
-                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                        i_ = ab_ as CqlInterval<CqlDateTime>;
+                        i_ = o_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -391,31 +366,20 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             bool u_ = t_ is CqlDateTime;
             if (u_)
             {
-                DataType v_ = sDNATest?.Effective;
-                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                i_ = w_ as CqlDateTime;
+                i_ = t_ as CqlDateTime;
             }
             else
             {
-                DataType x_ = sDNATest?.Effective;
-                object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                bool z_ = y_ is CqlDateTime;
-                if (z_)
+                if (u_)
                 {
-                    DataType aa_ = sDNATest?.Effective;
-                    object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                    i_ = ab_ as CqlDateTime;
+                    i_ = t_ as CqlDateTime;
                 }
                 else
                 {
-                    DataType ac_ = sDNATest?.Effective;
-                    object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    bool ae_ = ad_ is CqlInterval<CqlDateTime>;
-                    if (ae_)
+                    bool v_ = t_ is CqlInterval<CqlDateTime>;
+                    if (v_)
                     {
-                        DataType af_ = sDNATest?.Effective;
-                        object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                        i_ = ag_ as CqlInterval<CqlDateTime>;
+                        i_ = t_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -459,42 +423,28 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             bool r_ = q_ is CqlDateTime;
             if (r_)
             {
-                DataType s_ = FlexibleSigmoidoscopy?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                f_ = t_ as CqlDateTime;
+                f_ = q_ as CqlDateTime;
             }
             else
             {
-                DataType u_ = FlexibleSigmoidoscopy?.Performed;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                bool w_ = v_ is CqlQuantity;
-                if (w_)
+                bool s_ = q_ is CqlQuantity;
+                if (s_)
                 {
-                    DataType x_ = FlexibleSigmoidoscopy?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    f_ = y_ as CqlQuantity;
+                    f_ = q_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType z_ = FlexibleSigmoidoscopy?.Performed;
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                    if (ab_)
+                    bool t_ = q_ is CqlInterval<CqlDateTime>;
+                    if (t_)
                     {
-                        DataType ac_ = FlexibleSigmoidoscopy?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        f_ = q_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType ae_ = FlexibleSigmoidoscopy?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                        if (ag_)
+                        bool u_ = q_ is CqlInterval<CqlQuantity>;
+                        if (u_)
                         {
-                            DataType ah_ = FlexibleSigmoidoscopy?.Performed;
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            f_ = q_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {
@@ -571,42 +521,28 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
             bool r_ = q_ is CqlDateTime;
             if (r_)
             {
-                DataType s_ = ColonoscopyProcedure?.Performed;
-                object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                f_ = t_ as CqlDateTime;
+                f_ = q_ as CqlDateTime;
             }
             else
             {
-                DataType u_ = ColonoscopyProcedure?.Performed;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-                bool w_ = v_ is CqlQuantity;
-                if (w_)
+                bool s_ = q_ is CqlQuantity;
+                if (s_)
                 {
-                    DataType x_ = ColonoscopyProcedure?.Performed;
-                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                    f_ = y_ as CqlQuantity;
+                    f_ = q_ as CqlQuantity;
                 }
                 else
                 {
-                    DataType z_ = ColonoscopyProcedure?.Performed;
-                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
-                    bool ab_ = aa_ is CqlInterval<CqlDateTime>;
-                    if (ab_)
+                    bool t_ = q_ is CqlInterval<CqlDateTime>;
+                    if (t_)
                     {
-                        DataType ac_ = ColonoscopyProcedure?.Performed;
-                        object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                        f_ = ad_ as CqlInterval<CqlDateTime>;
+                        f_ = q_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        DataType ae_ = ColonoscopyProcedure?.Performed;
-                        object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
-                        bool ag_ = af_ is CqlInterval<CqlQuantity>;
-                        if (ag_)
+                        bool u_ = q_ is CqlInterval<CqlQuantity>;
+                        if (u_)
                         {
-                            DataType ah_ = ColonoscopyProcedure?.Performed;
-                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
-                            f_ = ai_ as CqlInterval<CqlQuantity>;
+                            f_ = q_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

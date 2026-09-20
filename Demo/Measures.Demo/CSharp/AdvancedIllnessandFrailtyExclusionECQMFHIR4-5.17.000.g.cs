@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibrary, ISingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>
 {
@@ -123,18 +123,28 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             bool? j_(Medication M) {
                 Id l_ = M?.IdElement;
                 string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
-                DataType n_ = MR?.Medication;
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "reference");
-                string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_ as FhirString);
-                IEnumerable<string> q_ = context.Operators.Split(p_, "/");
-                string r_ = context.Operators.Last<string>(q_);
-                bool? s_ = context.Operators.Equal(m_, r_);
-                CodeableConcept t_ = M?.Code;
-                CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
-                CqlValueSet v_ = this.Dementia_Medications(context);
-                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                bool? x_ = context.Operators.And(s_, w_);
-                return x_;
+                FhirString n_;
+                DataType x_ = MR?.Medication;
+                bool y_ = x_ is ResourceReference;
+                if (y_)
+                {
+                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
+                    n_ = z_;
+                }
+                else
+                {
+                    n_ = default;
+                }
+                string o_ = FHIRHelpers_4_0_001.Instance.ToString(context, n_);
+                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(m_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Dementia_Medications(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -145,23 +155,23 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(b_, e_);
 
         bool? g_(MedicationRequest DementiaMed) {
-            Code<MedicationRequest.MedicationrequestStatus> y_ = DementiaMed?.StatusElement;
-            string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
-            bool? aa_ = context.Operators.Equal(z_, "active");
-            Code<MedicationRequest.MedicationRequestIntent> ab_ = DementiaMed?.IntentElement;
-            string ac_ = FHIRHelpers_4_0_001.Instance.ToString(context, ab_);
-            bool? ad_ = context.Operators.Equal(ac_, "order");
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            CqlInterval<CqlDateTime> af_ = CumulativeMedicationDurationFHIR4_1_0_000.Instance.MedicationPeriod(context, DementiaMed);
-            CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
-            CqlDateTime ah_ = context.Operators.Start(ag_);
-            CqlQuantity ai_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
-            CqlDateTime ak_ = context.Operators.End(ag_);
-            CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, true, true);
-            bool? am_ = context.Operators.Overlaps(af_, al_, (string)default);
-            bool? an_ = context.Operators.And(ae_, am_);
-            return an_;
+            Code<MedicationRequest.MedicationrequestStatus> aa_ = DementiaMed?.StatusElement;
+            string ab_ = FHIRHelpers_4_0_001.Instance.ToString(context, aa_);
+            bool? ac_ = context.Operators.Equal(ab_, "active");
+            Code<MedicationRequest.MedicationRequestIntent> ad_ = DementiaMed?.IntentElement;
+            string ae_ = FHIRHelpers_4_0_001.Instance.ToString(context, ad_);
+            bool? af_ = context.Operators.Equal(ae_, "order");
+            bool? ag_ = context.Operators.And(ac_, af_);
+            CqlInterval<CqlDateTime> ah_ = CumulativeMedicationDurationFHIR4_1_0_000.Instance.MedicationPeriod(context, DementiaMed);
+            CqlInterval<CqlDateTime> ai_ = this.Measurement_Period(context);
+            CqlDateTime aj_ = context.Operators.Start(ai_);
+            CqlQuantity ak_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
+            CqlDateTime am_ = context.Operators.End(ai_);
+            CqlInterval<CqlDateTime> an_ = context.Operators.Interval(al_, am_, true, true);
+            bool? ao_ = context.Operators.Overlaps(ah_, an_, (string)default);
+            bool? ap_ = context.Operators.And(ag_, ao_);
+            return ap_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);

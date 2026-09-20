@@ -88,6 +88,18 @@ namespace Hl7.Cql.Fhir
             return result;
         }
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Only a datatype choice with an enumerated list of types qualifies. An element that may hold
+        /// any data type (its mapping lists <see cref="DataType"/> itself) and a contained-resource
+        /// choice are left unenumerated: their alternatives are the whole model.
+        /// </remarks>
+        internal override IReadOnlyList<Type>? GetChoiceTypes(PropertyInfo property) =>
+            property is FhirModelPropertyInfo { Mapping: { Choice: ChoiceType.DatatypeChoice, FhirType: { Length: > 1 } types } }
+            && !types.Contains(typeof(DataType))
+                ? types
+                : null;
+
         internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
             // This is not used by the data source, but we'll implement it nonetheless.
