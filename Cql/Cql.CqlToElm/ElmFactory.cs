@@ -502,7 +502,7 @@ namespace Hl7.Cql.CqlToElm
                     throw new ArgumentException($"Expected literal argument at index 3 to be a valid Boolean value.");
                 interval.highClosed = hc;
             }
-            else interval.highClosedExpression = arguments[2];
+            else interval.highClosedExpression = arguments[3];
             
             return interval;
         }
