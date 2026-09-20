@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -358,17 +358,21 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication M) {
-                object r_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object s_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
-                string u_ = context.Operators.Last<string>(t_);
-                bool? v_ = context.Operators.Equal(r_, u_);
-                CodeableConcept w_ = M?.Code;
-                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                CqlValueSet y_ = this.Medications_for_Above_Normal_BMI(context);
-                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-                bool? aa_ = context.Operators.And(v_, z_);
-                return aa_;
+                string r_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType s_ = MR?.Medication;
+                object t_ = context.Operators.LateBoundProperty<object>(s_, "reference");
+                object u_ = context.Operators.LateBoundProperty<object>(t_, "value");
+                IEnumerable<string> v_ = context.Operators.Split((string)u_, "/");
+                string w_ = context.Operators.Last<string>(v_);
+                bool? x_ = context.Operators.Equal(r_, w_);
+                CodeableConcept y_ = M?.Code;
+                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                CqlValueSet aa_ = this.Medications_for_Above_Normal_BMI(context);
+                bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+                bool? ac_ = context.Operators.And(x_, ab_);
+                return ac_;
             }
 
             bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -382,32 +386,32 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<object> l_ = context.Operators.Union<object>(e_ as IEnumerable<object>, k_ as IEnumerable<object>);
 
         bool? m_(object HighInterventionsOrdered) {
-            IEnumerable<CodeableConcept> ab_ = context.Operators.LateBoundProperty<IEnumerable<CodeableConcept>>(HighInterventionsOrdered, "reasonCode");
+            IEnumerable<CodeableConcept> ad_ = context.Operators.LateBoundProperty<IEnumerable<CodeableConcept>>(HighInterventionsOrdered, "reasonCode");
 
-            CqlConcept ac_(CodeableConcept @this) {
-                CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return am_;
+            CqlConcept ae_(CodeableConcept @this) {
+                CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return ao_;
             }
 
-            IEnumerable<CqlConcept> ad_ = context.Operators.Select<CodeableConcept, CqlConcept>(ab_, ac_);
-            CqlValueSet ae_ = this.Overweight_or_Obese(context);
-            bool? af_ = context.Operators.ConceptsInValueSet(ad_, ae_);
-            IEnumerable<Condition> ag_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> ai_ = context.Operators.Union<Condition>(ag_ as IEnumerable<Condition>, ah_ as IEnumerable<Condition>);
+            IEnumerable<CqlConcept> af_ = context.Operators.Select<CodeableConcept, CqlConcept>(ad_, ae_);
+            CqlValueSet ag_ = this.Overweight_or_Obese(context);
+            bool? ah_ = context.Operators.ConceptsInValueSet(af_, ag_);
+            IEnumerable<Condition> ai_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> ak_ = context.Operators.Union<Condition>(ai_ as IEnumerable<Condition>, aj_ as IEnumerable<Condition>);
 
-            bool? aj_(Condition OverweightObese) {
-                CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
-                CqlDateTime ao_ = context.Operators.Start(an_);
-                object ap_ = context.Operators.LateBoundProperty<object>(HighInterventionsOrdered, "authoredOn");
-                CqlDateTime aq_ = context.Operators.LateBoundProperty<CqlDateTime>(ap_, "value");
-                bool? ar_ = context.Operators.SameOrBefore(ao_, aq_, "day");
-                return ar_;
+            bool? al_(Condition OverweightObese) {
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
+                CqlDateTime aq_ = context.Operators.Start(ap_);
+                object ar_ = context.Operators.LateBoundProperty<object>(HighInterventionsOrdered, "authoredOn");
+                CqlDateTime as_ = context.Operators.LateBoundProperty<CqlDateTime>(ar_, "value");
+                bool? at_ = context.Operators.SameOrBefore(aq_, as_, "day");
+                return at_;
             }
 
-            bool? ak_ = context.Operators.WhereAny<Condition>(ai_, aj_);
-            bool? al_ = context.Operators.Or(af_, ak_);
-            return al_;
+            bool? am_ = context.Operators.WhereAny<Condition>(ak_, al_);
+            bool? an_ = context.Operators.Or(ah_, am_);
+            return an_;
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);
@@ -691,17 +695,21 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Medication> o_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? p_(Medication M) {
-                object r_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object s_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
-                string u_ = context.Operators.Last<string>(t_);
-                bool? v_ = context.Operators.Equal(r_, u_);
-                CodeableConcept w_ = M?.Code;
-                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
-                CqlValueSet y_ = this.Medications_for_Below_Normal_BMI(context);
-                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-                bool? aa_ = context.Operators.And(v_, z_);
-                return aa_;
+                string r_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType s_ = MR?.Medication;
+                object t_ = context.Operators.LateBoundProperty<object>(s_, "reference");
+                object u_ = context.Operators.LateBoundProperty<object>(t_, "value");
+                IEnumerable<string> v_ = context.Operators.Split((string)u_, "/");
+                string w_ = context.Operators.Last<string>(v_);
+                bool? x_ = context.Operators.Equal(r_, w_);
+                CodeableConcept y_ = M?.Code;
+                CqlConcept z_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, y_);
+                CqlValueSet aa_ = this.Medications_for_Below_Normal_BMI(context);
+                bool? ab_ = context.Operators.ConceptInValueSet(z_, aa_);
+                bool? ac_ = context.Operators.And(x_, ab_);
+                return ac_;
             }
 
             bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
@@ -715,35 +723,35 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         IEnumerable<object> l_ = context.Operators.Union<object>(e_ as IEnumerable<object>, k_ as IEnumerable<object>);
 
         bool? m_(object LowInterventionsOrdered) {
-            IEnumerable<CodeableConcept> ab_ = context.Operators.LateBoundProperty<IEnumerable<CodeableConcept>>(LowInterventionsOrdered, "reasonCode");
+            IEnumerable<CodeableConcept> ad_ = context.Operators.LateBoundProperty<IEnumerable<CodeableConcept>>(LowInterventionsOrdered, "reasonCode");
 
-            CqlConcept ac_(CodeableConcept @this) {
-                CqlConcept am_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return am_;
+            CqlConcept ae_(CodeableConcept @this) {
+                CqlConcept ao_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return ao_;
             }
 
-            IEnumerable<CqlConcept> ad_ = context.Operators.Select<CodeableConcept, CqlConcept>(ab_, ac_);
-            CqlValueSet ae_ = this.Underweight(context);
-            bool? af_ = context.Operators.ConceptsInValueSet(ad_, ae_);
-            IEnumerable<Condition> ag_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> ai_ = context.Operators.Union<Condition>(ag_ as IEnumerable<Condition>, ah_ as IEnumerable<Condition>);
+            IEnumerable<CqlConcept> af_ = context.Operators.Select<CodeableConcept, CqlConcept>(ad_, ae_);
+            CqlValueSet ag_ = this.Underweight(context);
+            bool? ah_ = context.Operators.ConceptsInValueSet(af_, ag_);
+            IEnumerable<Condition> ai_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
+            IEnumerable<Condition> aj_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
+            IEnumerable<Condition> ak_ = context.Operators.Union<Condition>(ai_ as IEnumerable<Condition>, aj_ as IEnumerable<Condition>);
 
-            bool? aj_(Condition UnderweightDiagnosis) {
-                CqlInterval<CqlDateTime> an_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
-                CqlDateTime ao_ = context.Operators.Start(an_);
-                object ap_ = context.Operators.LateBoundProperty<object>(LowInterventionsOrdered, "authoredOn");
-                CqlDateTime aq_ = context.Operators.LateBoundProperty<CqlDateTime>(ap_, "value");
-                bool? ar_ = context.Operators.SameOrBefore(ao_, aq_, "day");
-                CqlInterval<CqlDateTime> as_ = this.Measurement_Period(context);
-                bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, "day");
-                bool? au_ = context.Operators.And(ar_, at_);
-                return au_;
+            bool? al_(Condition UnderweightDiagnosis) {
+                CqlInterval<CqlDateTime> ap_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
+                CqlDateTime aq_ = context.Operators.Start(ap_);
+                object ar_ = context.Operators.LateBoundProperty<object>(LowInterventionsOrdered, "authoredOn");
+                CqlDateTime as_ = context.Operators.LateBoundProperty<CqlDateTime>(ar_, "value");
+                bool? at_ = context.Operators.SameOrBefore(aq_, as_, "day");
+                CqlInterval<CqlDateTime> au_ = this.Measurement_Period(context);
+                bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, "day");
+                bool? aw_ = context.Operators.And(at_, av_);
+                return aw_;
             }
 
-            bool? ak_ = context.Operators.WhereAny<Condition>(ai_, aj_);
-            bool? al_ = context.Operators.Or(af_, ak_);
-            return al_;
+            bool? am_ = context.Operators.WhereAny<Condition>(ak_, al_);
+            bool? an_ = context.Operators.Or(ah_, am_);
+            return an_;
         }
 
         IEnumerable<object> n_ = context.Operators.Where<object>(l_, m_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.27.000")]
 public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_27_000>
 {
@@ -249,17 +249,21 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
             IEnumerable<Medication> j_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? k_(Medication M) {
-                object m_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object n_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> o_ = context.Operators.Split((string)n_, "/");
-                string p_ = context.Operators.Last<string>(o_);
-                bool? q_ = context.Operators.Equal(m_, p_);
-                CodeableConcept r_ = M?.Code;
-                CqlConcept s_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, r_);
-                CqlValueSet t_ = this.Dementia_Medications(context);
-                bool? u_ = context.Operators.ConceptInValueSet(s_, t_);
-                bool? v_ = context.Operators.And(q_, u_);
-                return v_;
+                string m_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType n_ = MR?.Medication;
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "reference");
+                object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
+                IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
+                string r_ = context.Operators.Last<string>(q_);
+                bool? s_ = context.Operators.Equal(m_, r_);
+                CodeableConcept t_ = M?.Code;
+                CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
+                CqlValueSet v_ = this.Dementia_Medications(context);
+                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
+                bool? x_ = context.Operators.And(s_, w_);
+                return x_;
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -273,22 +277,22 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationActive(context, f_);
 
         bool? h_(MedicationRequest DementiaMedication) {
-            CqlInterval<CqlDate> w_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DementiaMedication);
-            CqlDate x_ = w_?.low;
-            CqlDateTime y_ = context.Operators.ConvertDateToDateTime(x_);
-            CqlDate z_ = w_?.high;
+            CqlInterval<CqlDate> y_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DementiaMedication);
+            CqlDate z_ = y_?.low;
             CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
-            bool? ab_ = w_?.lowClosed;
-            bool? ac_ = w_?.highClosed;
-            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(y_, aa_, ab_, ac_);
-            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
-            CqlDateTime af_ = context.Operators.Start(ae_);
-            CqlQuantity ag_ = context.Operators.Quantity(1m, "year");
-            CqlDateTime ah_ = context.Operators.Subtract(af_, ag_);
-            CqlDateTime ai_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> aj_ = context.Operators.Interval(ah_, ai_, true, true);
-            bool? ak_ = context.Operators.Overlaps(ad_, aj_, "day");
-            return ak_;
+            CqlDate ab_ = y_?.high;
+            CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
+            bool? ad_ = y_?.lowClosed;
+            bool? ae_ = y_?.highClosed;
+            CqlInterval<CqlDateTime> af_ = context.Operators.Interval(aa_, ac_, ad_, ae_);
+            CqlInterval<CqlDateTime> ag_ = this.Measurement_Period(context);
+            CqlDateTime ah_ = context.Operators.Start(ag_);
+            CqlQuantity ai_ = context.Operators.Quantity(1m, "year");
+            CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
+            CqlDateTime ak_ = context.Operators.End(ag_);
+            CqlInterval<CqlDateTime> al_ = context.Operators.Interval(aj_, ak_, true, true);
+            bool? am_ = context.Operators.Overlaps(af_, al_, "day");
+            return am_;
         }
 
         bool? i_ = context.Operators.WhereAny<MedicationRequest>(g_, h_);

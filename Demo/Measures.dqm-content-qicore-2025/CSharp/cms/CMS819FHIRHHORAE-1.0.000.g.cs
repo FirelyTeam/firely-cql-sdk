@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS819FHIRHHORAE", "1.0.000")]
 public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRHHORAE_1_0_000>
 {
@@ -138,17 +138,21 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
-                string o_ = context.Operators.Last<string>(n_);
-                bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Opioids__All(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                string l_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType m_ = MR?.Medication;
+                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(l_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Opioids__All(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -161,11 +165,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration Opioids) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> v_ = Opioids?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = Opioids?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
+            string z_ = context.Operators.Convert<string>(y_);
+            bool? aa_ = context.Operators.Equal(z_, "completed");
+            return aa_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -274,17 +278,21 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
-                string o_ = context.Operators.Last<string>(n_);
-                bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Opioid_Antagonist(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                string l_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType m_ = MR?.Medication;
+                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(l_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Opioid_Antagonist(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -297,11 +305,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration AntagonistGiven) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> v_ = AntagonistGiven?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            bool? y_ = context.Operators.Equal(x_, "completed");
-            return y_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = AntagonistGiven?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
+            string z_ = context.Operators.Convert<string>(y_);
+            bool? aa_ = context.Operators.Equal(z_, "completed");
+            return aa_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);

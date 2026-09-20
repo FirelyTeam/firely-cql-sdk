@@ -83,16 +83,28 @@ partial class CodeBuilderContext
                 }
                 if (sourceType != null)
                 {
-                    var property = _typeResolver.GetProperty(sourceType, propertyExpression.path);
+                    // The path is tried as one element name first (a quoted CQL identifier may
+                    // contain a dot); only when that fails is it resolved as a qualified path,
+                    // one segment at a time.
+                    string[] segments = _typeResolver.GetProperty(sourceType, propertyExpression.path) != null
+                        ? [propertyExpression.path]
+                        : propertyExpression.path.Split('.');
 
-                    // This is a temporary fix for the issue where the type the Firely SDK uses for a choice
-                    // property is `DataType`, whereas the type the CQL model uses is `object`.
-                    // Since GetProperty() cannot properly correct for this, we'll correct the type to `object` here.
-                    // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
-                    if (property != null)
-                        return property.PropertyType == typeof(DataType) ? typeof(object) : property.PropertyType;
+                    var type = sourceType;
+                    foreach (var segment in segments)
+                    {
+                        var property = _typeResolver.GetProperty(type, segment);
+                        if (property == null)
+                            return typeof(object); // this is likely a choice
 
-                    return typeof(object); // this is likely a choice
+                        // This is a temporary fix for the issue where the type the Firely SDK uses for a choice
+                        // property is `DataType`, whereas the type the CQL model uses is `object`.
+                        // Since GetProperty() cannot properly correct for this, we'll correct the type to `object` here.
+                        // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
+                        type = property.PropertyType == typeof(DataType) ? typeof(object) : property.PropertyType;
+                    }
+
+                    return type;
                 }
                 break;
             }

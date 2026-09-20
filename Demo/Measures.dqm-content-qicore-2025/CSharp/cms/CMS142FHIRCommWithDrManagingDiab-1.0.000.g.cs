@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS142FHIRCommWithDrManagingDiab", "1.0.000")]
 public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingleton<CMS142FHIRCommWithDrManagingDiab_1_0_000>
 {
@@ -559,28 +559,28 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             bool? h_(Encounter EncounterDiabeticRetinopathy) {
 
                 bool? j_(Extension @this) {
-                    FhirUri s_ = @this?.UrlElement;
-                    string t_ = FHIRHelpers_4_4_000.Instance.ToString(context, s_);
-                    bool? u_ = context.Operators.Equal(t_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                    return u_;
+                    FhirUri r_ = @this?.UrlElement;
+                    string s_ = FHIRHelpers_4_4_000.Instance.ToString(context, r_);
+                    bool? t_ = context.Operators.Equal(s_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    return t_;
                 }
 
 
-                DataType k_(Extension @this) {
-                    DataType v_ = @this?.Value;
+                object k_(Extension @this) {
+                    DataType u_ = @this?.Value;
+                    object v_ = context.Operators.LateBoundProperty<object>(u_, "value");
                     return v_;
                 }
 
-                IEnumerable<DataType> l_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(LevelOfSeverityNotCommunicated is DomainResource
+                IEnumerable<object> l_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(LevelOfSeverityNotCommunicated is DomainResource
                     ? (LevelOfSeverityNotCommunicated as DomainResource).Extension
                     : default), j_, k_);
-                DataType m_ = context.Operators.SingletonFrom<DataType>(l_);
-                FhirDateTime n_ = context.Operators.Convert<FhirDateTime>(m_);
-                CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
-                Period p_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
-                return r_;
+                object m_ = context.Operators.SingletonFrom<object>(l_);
+                CqlDateTime n_ = context.Operators.Convert<CqlDateTime>((FhirDateTime)m_);
+                Period o_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
+                return q_;
             }
 
             bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -622,28 +622,28 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             bool? h_(Encounter EncounterDiabeticRetinopathy) {
 
                 bool? j_(Extension @this) {
-                    FhirUri s_ = @this?.UrlElement;
-                    string t_ = FHIRHelpers_4_4_000.Instance.ToString(context, s_);
-                    bool? u_ = context.Operators.Equal(t_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                    return u_;
+                    FhirUri r_ = @this?.UrlElement;
+                    string s_ = FHIRHelpers_4_4_000.Instance.ToString(context, r_);
+                    bool? t_ = context.Operators.Equal(s_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    return t_;
                 }
 
 
-                DataType k_(Extension @this) {
-                    DataType v_ = @this?.Value;
+                object k_(Extension @this) {
+                    DataType u_ = @this?.Value;
+                    object v_ = context.Operators.LateBoundProperty<object>(u_, "value");
                     return v_;
                 }
 
-                IEnumerable<DataType> l_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(MacularEdemaAbsentNotCommunicated is DomainResource
+                IEnumerable<object> l_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(MacularEdemaAbsentNotCommunicated is DomainResource
                     ? (MacularEdemaAbsentNotCommunicated as DomainResource).Extension
                     : default), j_, k_);
-                DataType m_ = context.Operators.SingletonFrom<DataType>(l_);
-                FhirDateTime n_ = context.Operators.Convert<FhirDateTime>(m_);
-                CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
-                Period p_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
-                return r_;
+                object m_ = context.Operators.SingletonFrom<object>(l_);
+                CqlDateTime n_ = context.Operators.Convert<CqlDateTime>((FhirDateTime)m_);
+                Period o_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
+                return q_;
             }
 
             bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
@@ -685,28 +685,28 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
             bool? h_(Encounter EncounterDiabeticRetinopathy) {
 
                 bool? j_(Extension @this) {
-                    FhirUri s_ = @this?.UrlElement;
-                    string t_ = FHIRHelpers_4_4_000.Instance.ToString(context, s_);
-                    bool? u_ = context.Operators.Equal(t_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
-                    return u_;
+                    FhirUri r_ = @this?.UrlElement;
+                    string s_ = FHIRHelpers_4_4_000.Instance.ToString(context, r_);
+                    bool? t_ = context.Operators.Equal(s_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
+                    return t_;
                 }
 
 
-                DataType k_(Extension @this) {
-                    DataType v_ = @this?.Value;
+                object k_(Extension @this) {
+                    DataType u_ = @this?.Value;
+                    object v_ = context.Operators.LateBoundProperty<object>(u_, "value");
                     return v_;
                 }
 
-                IEnumerable<DataType> l_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(MacularEdemaPresentNotCommunicated is DomainResource
+                IEnumerable<object> l_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(MacularEdemaPresentNotCommunicated is DomainResource
                     ? (MacularEdemaPresentNotCommunicated as DomainResource).Extension
                     : default), j_, k_);
-                DataType m_ = context.Operators.SingletonFrom<DataType>(l_);
-                FhirDateTime n_ = context.Operators.Convert<FhirDateTime>(m_);
-                CqlDateTime o_ = context.Operators.Convert<CqlDateTime>(n_);
-                Period p_ = EncounterDiabeticRetinopathy?.Period;
-                CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-                bool? r_ = context.Operators.In<CqlDateTime>(o_, q_, "day");
-                return r_;
+                object m_ = context.Operators.SingletonFrom<object>(l_);
+                CqlDateTime n_ = context.Operators.Convert<CqlDateTime>((FhirDateTime)m_);
+                Period o_ = EncounterDiabeticRetinopathy?.Period;
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
+                bool? q_ = context.Operators.In<CqlDateTime>(n_, p_, "day");
+                return q_;
             }
 
             bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS832FHIRHHAKI", "1.0.000")]
 public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHHAKI_1_0_000>
 {
@@ -200,12 +200,12 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? c_(Encounter InpatientEncounter) {
             List<Extension> e_;
-            Patient aq_ = this.Patient(context);
-            bool ar_ = aq_ is DomainResource;
-            if (ar_)
+            Patient ap_ = this.Patient(context);
+            bool aq_ = ap_ is DomainResource;
+            if (aq_)
             {
-                Patient as_ = this.Patient(context);
-                e_ = (as_ as DomainResource).Extension;
+                Patient ar_ = this.Patient(context);
+                e_ = (ar_ as DomainResource).Extension;
             }
             else
             {
@@ -213,57 +213,57 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             }
 
             bool? f_(Extension @this) {
-                FhirUri at_ = @this?.UrlElement;
-                string au_ = FHIRHelpers_4_4_000.Instance.ToString(context, at_);
-                bool? av_ = context.Operators.Equal(au_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return av_;
+                FhirUri as_ = @this?.UrlElement;
+                string at_ = FHIRHelpers_4_4_000.Instance.ToString(context, as_);
+                bool? au_ = context.Operators.Equal(at_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return au_;
             }
 
 
-            DataType g_(Extension @this) {
-                DataType aw_ = @this?.Value;
+            object g_(Extension @this) {
+                DataType av_ = @this?.Value;
+                object aw_ = context.Operators.LateBoundProperty<object>(av_, "value");
                 return aw_;
             }
 
-            IEnumerable<DataType> h_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)e_, f_, g_);
-            DataType i_ = context.Operators.SingletonFrom<DataType>(h_);
-            string j_ = context.Operators.Convert<string>(i_);
-            CqlCode k_ = this.Male__finding_(context);
-            string l_ = k_?.code;
-            CqlCode m_ = this.Female__finding_(context);
-            string n_ = m_?.code;
-            string[] o_ = [
-                l_,
-                n_,
+            IEnumerable<object> h_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)e_, f_, g_);
+            object i_ = context.Operators.SingletonFrom<object>(h_);
+            CqlCode j_ = this.Male__finding_(context);
+            string k_ = j_?.code;
+            CqlCode l_ = this.Female__finding_(context);
+            string m_ = l_?.code;
+            string[] n_ = [
+                k_,
+                m_,
             ];
-            bool? p_ = context.Operators.In<string>(j_, (IEnumerable<string>)o_);
-            Period q_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
-            CqlDateTime s_ = context.Operators.End(r_);
-            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-            bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, "day");
-            bool? v_ = context.Operators.And(p_, u_);
-            Code<Encounter.EncounterStatus> w_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? x_ = w_?.Value;
-            Code<Encounter.EncounterStatus> y_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(x_);
-            bool? z_ = context.Operators.Equal(y_, "finished");
-            bool? aa_ = context.Operators.And(v_, z_);
-            Patient ab_ = this.Patient(context);
-            Date ac_ = ab_?.BirthDateElement;
-            string ad_ = ac_?.Value;
-            CqlDate ae_ = context.Operators.ConvertStringToDate(ad_);
-            CqlDateTime af_ = context.Operators.Start(r_);
-            CqlDate ag_ = context.Operators.DateFrom(af_);
-            int? ah_ = context.Operators.CalculateAgeAt(ae_, ag_, "year");
-            bool? ai_ = context.Operators.GreaterOrEqual(ah_, 18);
-            bool? aj_ = context.Operators.And(aa_, ai_);
-            CqlInterval<CqlDateTime> ak_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-            CqlDateTime al_ = context.Operators.Start(ak_);
-            CqlDateTime am_ = context.Operators.End(ak_);
-            int? an_ = context.Operators.DurationBetween(al_, am_, "hour");
-            bool? ao_ = context.Operators.GreaterOrEqual(an_, 48);
-            bool? ap_ = context.Operators.And(aj_, ao_);
-            return ap_;
+            bool? o_ = context.Operators.In<object>(i_, (IEnumerable<object>)((IEnumerable<string>)n_));
+            Period p_ = InpatientEncounter?.Period;
+            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+            CqlDateTime r_ = context.Operators.End(q_);
+            CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+            bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
+            bool? u_ = context.Operators.And(o_, t_);
+            Code<Encounter.EncounterStatus> v_ = InpatientEncounter?.StatusElement;
+            Encounter.EncounterStatus? w_ = v_?.Value;
+            Code<Encounter.EncounterStatus> x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(w_);
+            bool? y_ = context.Operators.Equal(x_, "finished");
+            bool? z_ = context.Operators.And(u_, y_);
+            Patient aa_ = this.Patient(context);
+            Date ab_ = aa_?.BirthDateElement;
+            string ac_ = ab_?.Value;
+            CqlDate ad_ = context.Operators.ConvertStringToDate(ac_);
+            CqlDateTime ae_ = context.Operators.Start(q_);
+            CqlDate af_ = context.Operators.DateFrom(ae_);
+            int? ag_ = context.Operators.CalculateAgeAt(ad_, af_, "year");
+            bool? ah_ = context.Operators.GreaterOrEqual(ag_, 18);
+            bool? ai_ = context.Operators.And(z_, ah_);
+            CqlInterval<CqlDateTime> aj_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
+            CqlDateTime ak_ = context.Operators.Start(aj_);
+            CqlDateTime al_ = context.Operators.End(aj_);
+            int? am_ = context.Operators.DurationBetween(ak_, al_, "hour");
+            bool? an_ = context.Operators.GreaterOrEqual(am_, 48);
+            bool? ao_ = context.Operators.And(ai_, an_);
+            return ao_;
         }
 
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
@@ -599,46 +599,47 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         }
 
 
-        DataType c_(Extension @this) {
+        object c_(Extension @this) {
             DataType o_ = @this?.Value;
-            return o_;
+            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
+            return p_;
         }
 
-        IEnumerable<DataType> d_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)a_, b_, c_);
-        DataType e_ = context.Operators.SingletonFrom<DataType>(d_);
+        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
+        object e_ = context.Operators.SingletonFrom<object>(d_);
         CqlCode f_ = this.Male__finding_(context);
         string g_ = f_?.code;
         bool? h_ = context.Operators.Equal(e_, g_);
         if (h_ ?? false)
         {
-            decimal? p_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity q_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? r_ = q_?.value;
-            decimal? s_ = context.Operators.Divide(r_, 0.9m);
-            decimal? t_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] u_ = [
-                s_,
+            decimal? q_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity r_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? s_ = r_?.value;
+            decimal? t_ = context.Operators.Divide(s_, 0.9m);
+            decimal? u_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] v_ = [
                 t_,
+                u_,
             ];
-            decimal? v_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)u_);
-            decimal? w_ = context.Operators.Negate(0.302m);
-            decimal? x_ = context.Operators.Power(v_, w_);
-            decimal? y_ = context.Operators.Multiply(p_, x_);
-            decimal? z_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)u_);
-            decimal? aa_ = context.Operators.Negate(1.200m);
-            decimal? ab_ = context.Operators.Power(z_, aa_);
-            decimal? ac_ = context.Operators.Multiply(y_, ab_);
-            Patient ad_ = this.Patient(context);
-            Date ae_ = ad_?.BirthDateElement;
-            string af_ = ae_?.Value;
-            CqlDateTime ag_ = context.Operators.ConvertStringToDateTime(af_);
-            CqlInterval<CqlDateTime> ah_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime ai_ = context.Operators.Start(ah_);
-            int? aj_ = context.Operators.CalculateAgeAt(ag_, ai_, "year");
-            decimal? ak_ = context.Operators.ConvertIntegerToDecimal(aj_);
-            decimal? al_ = context.Operators.Power(0.9938m, ak_);
-            decimal? am_ = context.Operators.Multiply(ac_, al_);
-            return am_;
+            decimal? w_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)v_);
+            decimal? x_ = context.Operators.Negate(0.302m);
+            decimal? y_ = context.Operators.Power(w_, x_);
+            decimal? z_ = context.Operators.Multiply(q_, y_);
+            decimal? aa_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)v_);
+            decimal? ab_ = context.Operators.Negate(1.200m);
+            decimal? ac_ = context.Operators.Power(aa_, ab_);
+            decimal? ad_ = context.Operators.Multiply(z_, ac_);
+            Patient ae_ = this.Patient(context);
+            Date af_ = ae_?.BirthDateElement;
+            string ag_ = af_?.Value;
+            CqlDateTime ah_ = context.Operators.ConvertStringToDateTime(ag_);
+            CqlInterval<CqlDateTime> ai_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime aj_ = context.Operators.Start(ai_);
+            int? ak_ = context.Operators.CalculateAgeAt(ah_, aj_, "year");
+            decimal? al_ = context.Operators.ConvertIntegerToDecimal(ak_);
+            decimal? am_ = context.Operators.Power(0.9938m, al_);
+            decimal? an_ = context.Operators.Multiply(ad_, am_);
+            return an_;
         }
         else
         {
@@ -990,47 +991,48 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         }
 
 
-        DataType c_(Extension @this) {
+        object c_(Extension @this) {
             DataType o_ = @this?.Value;
-            return o_;
+            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
+            return p_;
         }
 
-        IEnumerable<DataType> d_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)a_, b_, c_);
-        DataType e_ = context.Operators.SingletonFrom<DataType>(d_);
+        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
+        object e_ = context.Operators.SingletonFrom<object>(d_);
         CqlCode f_ = this.Female__finding_(context);
         string g_ = f_?.code;
         bool? h_ = context.Operators.Equal(e_, g_);
         if (h_ ?? false)
         {
-            decimal? p_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity q_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? r_ = q_?.value;
-            decimal? s_ = context.Operators.Divide(r_, 0.7m);
-            decimal? t_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] u_ = [
-                s_,
+            decimal? q_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity r_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? s_ = r_?.value;
+            decimal? t_ = context.Operators.Divide(s_, 0.7m);
+            decimal? u_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] v_ = [
                 t_,
+                u_,
             ];
-            decimal? v_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)u_);
-            decimal? w_ = context.Operators.Negate(0.241m);
-            decimal? x_ = context.Operators.Power(v_, w_);
-            decimal? y_ = context.Operators.Multiply(p_, x_);
-            decimal? z_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)u_);
-            decimal? aa_ = context.Operators.Negate(1.200m);
-            decimal? ab_ = context.Operators.Power(z_, aa_);
-            decimal? ac_ = context.Operators.Multiply(y_, ab_);
-            Patient ad_ = this.Patient(context);
-            Date ae_ = ad_?.BirthDateElement;
-            string af_ = ae_?.Value;
-            CqlDateTime ag_ = context.Operators.ConvertStringToDateTime(af_);
-            CqlInterval<CqlDateTime> ah_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime ai_ = context.Operators.Start(ah_);
-            int? aj_ = context.Operators.CalculateAgeAt(ag_, ai_, "year");
-            decimal? ak_ = context.Operators.ConvertIntegerToDecimal(aj_);
-            decimal? al_ = context.Operators.Power(0.9938m, ak_);
-            decimal? am_ = context.Operators.Multiply(ac_, al_);
-            decimal? an_ = context.Operators.Multiply(am_, 1.012m);
-            return an_;
+            decimal? w_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)v_);
+            decimal? x_ = context.Operators.Negate(0.241m);
+            decimal? y_ = context.Operators.Power(w_, x_);
+            decimal? z_ = context.Operators.Multiply(q_, y_);
+            decimal? aa_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)v_);
+            decimal? ab_ = context.Operators.Negate(1.200m);
+            decimal? ac_ = context.Operators.Power(aa_, ab_);
+            decimal? ad_ = context.Operators.Multiply(z_, ac_);
+            Patient ae_ = this.Patient(context);
+            Date af_ = ae_?.BirthDateElement;
+            string ag_ = af_?.Value;
+            CqlDateTime ah_ = context.Operators.ConvertStringToDateTime(ag_);
+            CqlInterval<CqlDateTime> ai_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime aj_ = context.Operators.Start(ai_);
+            int? ak_ = context.Operators.CalculateAgeAt(ah_, aj_, "year");
+            decimal? al_ = context.Operators.ConvertIntegerToDecimal(ak_);
+            decimal? am_ = context.Operators.Power(0.9938m, al_);
+            decimal? an_ = context.Operators.Multiply(ad_, am_);
+            decimal? ao_ = context.Operators.Multiply(an_, 1.012m);
+            return ao_;
         }
         else
         {
@@ -2069,25 +2071,26 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         }
 
 
-        DataType c_(Extension @this) {
+        object c_(Extension @this) {
             DataType o_ = @this?.Value;
-            return o_;
+            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
+            return p_;
         }
 
-        IEnumerable<DataType> d_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)a_, b_, c_);
-        DataType e_ = context.Operators.SingletonFrom<DataType>(d_);
+        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
+        object e_ = context.Operators.SingletonFrom<object>(d_);
         CqlCode f_ = this.Female__finding_(context);
         string g_ = f_?.code;
         bool? h_ = context.Operators.Equal(e_, g_);
         if (h_ ?? false)
         {
-            CqlQuantity p_ = context.Operators.Quantity(1.02m, "mg/dL");
-            return p_;
+            CqlQuantity q_ = context.Operators.Quantity(1.02m, "mg/dL");
+            return q_;
         }
         else
         {
-            CqlQuantity q_ = context.Operators.Quantity(1.18m, "mg/dL");
-            return q_;
+            CqlQuantity r_ = context.Operators.Quantity(1.18m, "mg/dL");
+            return r_;
         }
     }
 

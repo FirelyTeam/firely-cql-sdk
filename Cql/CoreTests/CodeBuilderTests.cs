@@ -479,6 +479,161 @@ namespace CoreTests
             CollectionAssert.AreEqual(new List<string> { "a", "b" }, ids);
         }
 
+        [TestMethod]
+        public void ScopedProperty_QualifiedPathOnTypedAlias_BindsEverySegmentStatically()
+        {
+            // The MADiE translator emits a scoped Property whose path is qualified and carries no
+            // result type, e.g. M.id.value inside a query over [Medication]. Every segment is known
+            // on the alias's static type, so the path binds as a typed member chain: no late binding.
+            var elmLibrary = QualifiedPathLibrary("QualifiedPathTypedAlias", "Medication", "id.value");
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "IdElement");
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "A path known on the static type must not be late-bound:\n" + cSharp);
+
+            var bundle = BundleOf(new Medication { Id = "med-1" });
+            CollectionAssert.AreEqual(new[] { "med-1" }, ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList());
+        }
+
+        [TestMethod]
+        public void ScopedProperty_QualifiedPathAcrossChoiceElement_LateBindsRemainderOneSegmentPerCall()
+        {
+            // MR.medication.reference.value: 'medication' is a choice element, statically DataType,
+            // so 'reference' cannot be bound at design time. The bound prefix stays typed and the
+            // remainder is late-bound one segment per call; no emitted call carries a dotted name.
+            var elmLibrary = QualifiedPathLibrary("QualifiedPathChoiceElement", "MedicationRequest", "medication.reference.value");
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "?.Medication");
+            StringAssert.Contains(cSharp, "\"reference\")");
+            StringAssert.Contains(cSharp, "\"value\")");
+            Assert.IsFalse(cSharp.Contains("\"medication.reference"), "No late-bound call may carry a dotted name:\n" + cSharp);
+
+            var bundle = BundleOf(new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") });
+            CollectionAssert.AreEqual(new[] { "Medication/med-1" }, ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList());
+        }
+
+        [TestMethod]
+        public void SourcedProperty_QualifiedPathWithUnresolvableSegment_DoesNotReturnThePartiallyWalkedValue()
+        {
+            // The source-based form of Property already walked a qualified path, but skipped a
+            // segment it could not resolve and returned the value walked so far: for
+            // medication.reference.value that is the DataType held by 'medication', not the string.
+            var retrieve = RetrieveOf("MedicationRequest");
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "QualifiedPathSourced", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Value",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Property
+                        {
+                            path = "medication.reference.value",
+                            source = new Hl7.Cql.Elm.SingletonFrom
+                            {
+                                operand = retrieve,
+                                resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "MedicationRequest"),
+                            },
+                        },
+                    },
+                ],
+            };
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
+
+            Assert.IsFalse(cSharp.Contains("\"medication.reference"), "No late-bound call may carry a dotted name:\n" + cSharp);
+
+            var bundle = BundleOf(new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") });
+            Assert.AreEqual("Medication/med-1", invoke(bundle));
+        }
+
+        /// <summary>
+        /// A library with one definition, <c>Values</c>: a query over a retrieve of
+        /// <paramref name="resourceType"/> aliased <c>R</c>, returning the scoped property
+        /// <paramref name="path"/> of each element. The property node deliberately carries no result
+        /// type, matching what the MADiE translator emits for a qualified path.
+        /// </summary>
+        private static Library QualifiedPathLibrary(string libraryName, string resourceType, string path) =>
+            new()
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = libraryName, version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Values",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Query
+                        {
+                            source =
+                            [
+                                new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf(resourceType) },
+                            ],
+                            @return = new Hl7.Cql.Elm.ReturnClause
+                            {
+                                distinct = false,
+                                expression = new Hl7.Cql.Elm.Property { scope = "R", path = path },
+                            },
+                        },
+                    },
+                ],
+            };
+
+        private static Hl7.Cql.Elm.Retrieve RetrieveOf(string resourceType) =>
+            new()
+            {
+                dataType = new System.Xml.XmlQualifiedName(resourceType, "http://hl7.org/fhir"),
+                templateId = $"http://hl7.org/fhir/StructureDefinition/{resourceType}",
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier
+                {
+                    elementType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", resourceType),
+                },
+            };
+
+        private static Bundle BundleOf(params Resource[] resources)
+        {
+            var bundle = new Bundle();
+            foreach (var resource in resources)
+                bundle.Entry.Add(new Bundle.EntryComponent { Resource = resource });
+            return bundle;
+        }
+
+        /// <summary>
+        /// Compiles <paramref name="elmLibrary"/> once and returns both the generated C# and a
+        /// function that evaluates <paramref name="definition"/> against a bundle.
+        /// </summary>
+        private static (string cSharp, Func<Bundle, object> invoke) CompileLibrary(Library elmLibrary, string definition)
+        {
+            var elmToolkit = new ElmToolkit()
+                            .AddElmLibraries([elmLibrary])
+                            .CompileToAssemblies();
+
+            var cSharp = elmToolkit.GetElmToCSharpResults().Single().cSharp;
+
+            var (libraryIdentifier, _, _, assemblyBinary, debugSymbols) = elmToolkit.GetElmToAssemblyResults().First();
+            var assembly = new AssemblyBinary(assemblyBinary, debugSymbols);
+            var invoker = new InvocationToolkit()
+                           .AddAssemblyBinaries([assembly])
+                           .CreateLibrarySetInvoker();
+
+            return (cSharp, bundle => invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(bundle: bundle), libraryIdentifier, definition));
+        }
+
         private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)
         {

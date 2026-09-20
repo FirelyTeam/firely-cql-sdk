@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -399,17 +399,21 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
-                string o_ = context.Operators.Last<string>(n_);
-                bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Anticoagulant_Medications(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                string l_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType m_ = MR?.Medication;
+                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(l_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Anticoagulant_Medications(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -422,20 +426,20 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest AntiCoagulant) {
-            Code<MedicationRequest.MedicationrequestStatus> v_ = AntiCoagulant?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? w_ = v_?.Value;
-            string x_ = context.Operators.Convert<string>(w_);
-            string[] y_ = [
+            Code<MedicationRequest.MedicationrequestStatus> x_ = AntiCoagulant?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? y_ = x_?.Value;
+            string z_ = context.Operators.Convert<string>(y_);
+            string[] aa_ = [
                 "active",
                 "completed",
             ];
-            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
-            Code<MedicationRequest.MedicationRequestIntent> aa_ = AntiCoagulant?.IntentElement;
-            MedicationRequest.MedicationRequestIntent? ab_ = aa_?.Value;
-            string ac_ = context.Operators.Convert<string>(ab_);
-            bool? ad_ = context.Operators.Equal(ac_, "order");
-            bool? ae_ = context.Operators.And(z_, ad_);
-            return ae_;
+            bool? ab_ = context.Operators.In<string>(z_, (IEnumerable<string>)aa_);
+            Code<MedicationRequest.MedicationRequestIntent> ac_ = AntiCoagulant?.IntentElement;
+            MedicationRequest.MedicationRequestIntent? ad_ = ac_?.Value;
+            string ae_ = context.Operators.Convert<string>(ad_);
+            bool? af_ = context.Operators.Equal(ae_, "order");
+            bool? ag_ = context.Operators.And(ab_, af_);
+            return ag_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
