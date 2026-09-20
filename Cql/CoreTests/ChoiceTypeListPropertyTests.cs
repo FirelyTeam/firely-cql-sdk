@@ -10,6 +10,8 @@
 
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
@@ -17,6 +19,8 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
+using CqlElm = Hl7.Cql.Elm;
+using ElmLibrary = Hl7.Cql.Elm.Library;
 
 namespace CoreTests;
 
@@ -36,6 +40,12 @@ public class ChoiceTypeListPropertyTests
     private const string InValueSetCode = "E66.01";
     private const string OutOfValueSetCode = "Z00.00";
 
+    private const string FhirNamespace = "http://hl7.org/fhir";
+    private const string ChoiceScopedAlias = "Intervention";
+
+    private static readonly FileInfo FixtureFile = new(Path.Combine("Input", "ELM", "Test", "ChoiceTypeListPropertyTest-1.0.0.json"));
+    private static readonly FileInfo FhirHelpersFile = new(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json"));
+
     private static LibrarySetInvoker _librarySetInvoker = null!;
     private static LibraryInvoker _library = null!;
     private static HashValueSetDictionary _valueSets = null!;
@@ -44,11 +54,8 @@ public class ChoiceTypeListPropertyTests
     public static void Initialize(TestContext _)
     {
         _librarySetInvoker = new ElmToolkit()
-                             .AddElmFiles((FileInfo[])
-                             [
-                                 new(Path.Combine("Input", "ELM", "Test", "ChoiceTypeListPropertyTest-1.0.0.json")),
-                                 new(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json")),
-                             ])
+                             .AddElmFiles(new[] { FhirHelpersFile })
+                             .AddElmLibraries(MadieShapedFixture())
                              .CreateLibrarySetInvoker();
 
         _library = _librarySetInvoker.LibraryInvokers[(CqlVersionedLibraryIdentifier)"ChoiceTypeListPropertyTest-1.0.0"]!;
@@ -109,6 +116,39 @@ public class ChoiceTypeListPropertyTests
     }
 
     /// <summary>
+    /// The translator types the choice-scoped <c>reasonCode</c> read; the MADiE translator does not.
+    /// The list recovery under test only runs for the untyped shape, so the fixture is stripped in
+    /// code rather than by hand, and this test pins that the strip is still doing something: were
+    /// the checked-in ELM to lose the result type, the other tests here would pass without
+    /// exercising the recovery at all.
+    /// </summary>
+    [TestMethod]
+    public void MadieShape_StripsTheResultTypeTheTranslatorEmits()
+    {
+        var translated = ChoiceScopedReasonCodeProperty(ElmLibrary.LoadFromJson(FixtureFile));
+        var madie = ChoiceScopedReasonCodeProperty(MadieShapedFixture());
+
+        translated.resultTypeSpecifier.Should().NotBeNull("the checked-in fixture is plain translator output, which types the read");
+        madie.resultTypeSpecifier.Should().BeNull();
+        madie.resultTypeName.Should().BeNull();
+    }
+
+    /// <summary>
+    /// When every member of the choice resolves, the path's list cardinality is read off the
+    /// members and the late-bound read is typed as that list.
+    /// </summary>
+    [TestMethod]
+    public void EveryMemberResolves_RecoversTheListCardinality()
+    {
+        var allMembersResolve = GenerateCSharp(MadieShapedFixture());
+
+        allMembersResolve.Should()
+                         .Contain(
+                             "LateBoundProperty<IEnumerable<CodeableConcept>>",
+                             "every member of the choice resolves, so reasonCode's list cardinality can be read off them");
+    }
+
+    /// <summary>
     /// A choice member whose type cannot be resolved has unknown cardinality, so the list recovery
     /// must be abandoned rather than inferred from the resolvable subset: were the read typed as a
     /// list off the members that do resolve, a runtime value of the unresolvable alternative whose
@@ -116,68 +156,131 @@ public class ChoiceTypeListPropertyTests
     /// this fix closes, pointed the other way.
     /// </summary>
     /// <remarks>
-    /// These two tests assert the emitted C#, not a runtime result, because declining the recovery
-    /// is an abstention, not a correct outcome: the <see cref="object"/>-typed emission still wraps
-    /// a list-valued <c>reasonCode</c> in a singleton and converts it to <see langword="null"/>, so
-    /// there is no runtime value these fixtures get right, and asserting one would pin a defect as
-    /// correct behaviour. The abstention restores the pre-fix behaviour rather than inventing a new
-    /// wrong answer, but it is a known remaining gap in #1636's coverage, not a complete fix for
-    /// this shape of input.
+    /// Declining the recovery is an abstention, not a correct outcome. On translator output the
+    /// scalar-typed read it leaves behind feeds a list-valued operator (<c>AnyInValueSet</c>), which
+    /// the compiler rejects, so these two tests assert that the build fails rather than that a
+    /// particular C# shape is emitted: a loud failure is the acceptable outcome here, and asserting
+    /// a runtime value would pin a defect as correct behaviour. Handling this shape of input is a
+    /// known remaining gap in #1636's coverage, not something this fix closes.
     /// </remarks>
     [TestMethod]
     public void UnresolvableChoiceMember_DeclinesTheListRecovery()
     {
-        var allMembersResolve = GenerateCSharp("ChoiceTypeListPropertyTest");
-        var oneMemberUnresolvable = GenerateCSharp("ChoiceTypeUnresolvedMemberTest");
+        var oneMemberUnresolvable = WithMedicationRequestChoiceMemberReplaced(
+            "ChoiceTypeUnresolvedMemberTest",
+            () => new CqlElm.NamedTypeSpecifier(FhirNamespace, "UnresolvableIntervention"));
 
-        allMembersResolve.Should()
-                         .Contain(
-                             "LateBoundProperty<IEnumerable<CodeableConcept>>",
-                             "every member of the choice resolves, so reasonCode's list cardinality can be read off them");
+        var act = () => GenerateCSharp(oneMemberUnresolvable);
 
-        oneMemberUnresolvable.Should()
-                             .NotContain(
-                                 "LateBoundProperty<IEnumerable<",
-                                 "a member that does not resolve cannot be shown to make the path list-valued");
-        oneMemberUnresolvable.Should()
-                             .Contain(
-                                 "LateBoundProperty<object>",
-                                 "the read falls back to the erased type the choice already has");
+        act.Should()
+           .Throw<CqlException<ExpressionBuildingError>>(
+               "a member that does not resolve cannot be shown to make the path list-valued, and the scalar read left behind does not fit the list-valued operator");
     }
 
     /// <summary>
     /// The other arm of the same guard: a member that is itself a heterogeneous choice resolves,
     /// but to <see cref="object"/>, which is just as uninspectable for the path - so the recovery
     /// must be declined here too. See the remarks on
-    /// <see cref="UnresolvableChoiceMember_DeclinesTheListRecovery"/> for why the emitted C#, not a
-    /// runtime result, is asserted.
+    /// <see cref="UnresolvableChoiceMember_DeclinesTheListRecovery"/> for why a build failure, not
+    /// an emitted shape or a runtime result, is asserted.
     /// </summary>
     [TestMethod]
     public void NestedHeterogeneousChoiceMember_DeclinesTheListRecovery()
     {
-        var oneMemberIsANestedChoice = GenerateCSharp("ChoiceTypeNestedChoiceMemberTest");
+        var oneMemberIsANestedChoice = WithMedicationRequestChoiceMemberReplaced(
+            "ChoiceTypeNestedChoiceMemberTest",
+            () => new CqlElm.ChoiceTypeSpecifier(
+                new CqlElm.NamedTypeSpecifier(FhirNamespace, "MedicationRequest"),
+                new CqlElm.NamedTypeSpecifier(FhirNamespace, "Condition")));
 
-        oneMemberIsANestedChoice.Should()
-                                .NotContain(
-                                    "LateBoundProperty<IEnumerable<",
-                                    "a nested heterogeneous choice collapses to object, which cannot be shown to make the path list-valued");
-        oneMemberIsANestedChoice.Should()
-                                .Contain(
-                                    "LateBoundProperty<object>",
-                                    "the read falls back to the erased type the choice already has");
+        var act = () => GenerateCSharp(oneMemberIsANestedChoice);
+
+        act.Should()
+           .Throw<CqlException<ExpressionBuildingError>>(
+               "a nested heterogeneous choice collapses to object, which cannot be shown to make the path list-valued, and the scalar read left behind does not fit the list-valued operator");
     }
 
-    private static string GenerateCSharp(string libraryName) =>
+    private static string GenerateCSharp(ElmLibrary library) =>
         new ElmToolkit()
-            .AddElmFiles((FileInfo[])
-            [
-                new(Path.Combine("Input", "ELM", "Test", $"{libraryName}-1.0.0.json")),
-                new(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json")),
-            ])
+            .AddElmFiles(new[] { FhirHelpersFile })
+            .AddElmLibraries(library)
             .CompileToAssemblies()
             .GetElmToCSharpResults()
-            .Single(result => result.libraryIdentifier.ToString() == $"{libraryName}-1.0.0")
+            .Single(result => result.libraryIdentifier.ToString() == $"{library.identifier.id}-{library.identifier.version}")
             .cSharp;
+
+    /// <summary>
+    /// The checked-in fixture in the shape the MADiE translator emits for it: the <c>reasonCode</c>
+    /// read off the choice-typed alias carries no result type, which leaves the choice type - erased
+    /// to <see cref="object"/> - as the compiler's only source of information about the path.
+    /// </summary>
+    private static ElmLibrary MadieShapedFixture(string? libraryName = null)
+    {
+        var library = ElmLibrary.LoadFromJson(FixtureFile);
+        if (libraryName is not null)
+            library.identifier.id = libraryName;
+
+        ChoiceScopedReasonCodeProperty(library).resultTypeSpecifier = null;
+        ChoiceScopedReasonCodeProperty(library).resultTypeName = null;
+        return library;
+    }
+
+    /// <summary>
+    /// The MADiE-shaped fixture with the <c>MedicationRequest</c> member of the choice-typed alias's
+    /// source type replaced by <paramref name="replacement"/>. Only the alias's source type is
+    /// changed - that is the type the compiler consults for the path's cardinality - so the retrieves
+    /// and the union keep their real types and the library still compiles. No CQL produces this ELM.
+    /// </summary>
+    private static ElmLibrary WithMedicationRequestChoiceMemberReplaced(string libraryName, Func<CqlElm.TypeSpecifier> replacement)
+    {
+        var library = MadieShapedFixture(libraryName);
+        var medicationRequest = new CqlElm.NamedTypeSpecifier(FhirNamespace, "MedicationRequest");
+        var source = FindNode<CqlElm.AliasedQuerySource>(library, s => s.alias == ChoiceScopedAlias);
+
+        foreach (var typeSpecifier in new[] { source.resultTypeSpecifier, source.expression.resultTypeSpecifier })
+        {
+            Walk(typeSpecifier, node =>
+            {
+                if (node is not CqlElm.ChoiceTypeSpecifier { choice: { } members })
+                    return false;
+
+                for (var i = 0; i < members.Length; i++)
+                {
+                    if (members[i] is CqlElm.NamedTypeSpecifier named && named.name == medicationRequest.name)
+                        members[i] = replacement();
+                }
+
+                // The replacement may itself name the member; do not descend into it.
+                return true;
+            });
+        }
+
+        return library;
+    }
+
+    private static CqlElm.Property ChoiceScopedReasonCodeProperty(ElmLibrary library) =>
+        FindNode<CqlElm.Property>(library, p => p.path == "reasonCode" && p.scope == ChoiceScopedAlias);
+
+    private static T FindNode<T>(ElmLibrary library, Func<T, bool> predicate)
+        where T : class
+    {
+        T? found = null;
+        Walk(library, node =>
+        {
+            if (found is null && node is T candidate && predicate(candidate))
+                found = candidate;
+            return found is not null;
+        });
+
+        return found ?? throw new AssertFailedException($"No {typeof(T).Name} matching the predicate in the fixture.");
+    }
+
+    /// <summary>
+    /// Visits every node under <paramref name="root"/>, depth first. The visitor returns
+    /// <see langword="true"/> to skip the children of the node it was given.
+    /// </summary>
+    private static void Walk(object root, Func<object, bool> visit) =>
+        CqlElm.ElmTreeWalker.Create((_, node) => visit(node)).Start(root);
 
     private static IEnumerable<object> Invoke(string define, Bundle bundle)
     {

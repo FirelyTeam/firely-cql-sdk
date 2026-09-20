@@ -1,7 +1,8 @@
-// Source for ChoiceTypeListPropertyTest-1.0.0.json. The checked-in ELM is not regenerated from
-// this file: its "reasonCode" Property node deliberately carries no resultTypeSpecifier, matching
-// the ELM the MADiE translator emits for this construct. That leaves the choice type - erased to
-// object - as the compiler's only source of information about the path.
+// Source for ChoiceTypeListPropertyTest-1.0.0.json, translated with result types enabled. The
+// checked-in ELM is plain translator output and may be regenerated. The shapes the tests need - a
+// "reasonCode" Property without a result type, as the MADiE translator emits it for a choice-typed
+// alias; a choice member that does not resolve; a nested choice member - are derived from that ELM
+// in code, in ChoiceTypeListPropertyTests.
 
 library ChoiceTypeListPropertyTest version '1.0.0'
 
