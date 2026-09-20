@@ -630,6 +630,53 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Property_OnChoiceWhoseAlternativesShareAType_EmitsOneBranchPerType()
+        {
+            // FHIR positiveInt and unsignedInt both map to Integer. In a choice that also has a
+            // string alternative (so the choice itself stays object), the two must yield one type
+            // test for Integer, not two identical ones.
+            const string fhir = "http://hl7.org/fhir";
+            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "positiveInt"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "unsignedInt"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"));
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "DedupedAlternatives", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = fhir, version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Value",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Property
+                        {
+                            path = "value",
+                            source = new Hl7.Cql.Elm.As
+                            {
+                                asTypeSpecifier = choiceType,
+                                operand = new Hl7.Cql.Elm.Null { resultTypeSpecifier = choiceType },
+                                resultTypeSpecifier = choiceType,
+                            },
+                        },
+                    },
+                ],
+            };
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
+
+            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis Integer\b").Count, "both integer alternatives resolve to Integer, so there is one branch for it:\n" + cSharp);
+            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis FhirString\b").Count, cSharp);
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
+            Assert.IsNull(invoke(BundleOf()), "a null choice value has no element value");
+        }
+
+        [TestMethod]
         public void Property_OnChoiceDeclaredInTheElm_DispatchesOnTheDeclaredAlternatives()
         {
             // The same read as the test above, but typed the way the CQL translator types it: the
