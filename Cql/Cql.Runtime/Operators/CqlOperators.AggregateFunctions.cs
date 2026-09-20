@@ -96,8 +96,10 @@ namespace Hl7.Cql.Operators
 
         #region Count
 
+        // A null source counts as 0, not null; see the Count operator in the CQL reference
+        // (spec/cql/condensed/09-b-cqlreference.md).
         public int? Count<T>(IEnumerable<T>? source) =>
-            source == null ? null : source.Where(t => t != null).Count();
+            source == null ? 0 : source.Where(t => t != null).Count();
 
         #endregion
 

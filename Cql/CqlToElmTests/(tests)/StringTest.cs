@@ -14,6 +14,41 @@ namespace Hl7.Cql.CqlToElm.Test
     public class StringTest : Base
     {
         [TestMethod]
+        public void SplitOnMatches_SplitsOnRegex()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("SplitOnMatches('A1B2C', '[0-9]')");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SplitOnMatches>();
+            Run<IEnumerable<string>?>(expr, library).Should().Equal("A", "B", "C");
+        }
+
+        [TestMethod]
+        public void SplitOnMatches_SeparatorNotFound()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("SplitOnMatches('ABC', ',')");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SplitOnMatches>();
+            Run<IEnumerable<string>?>(expr, library).Should().Equal("ABC");
+        }
+
+        [TestMethod]
+        public void Combine_EmptyListIsNull()
+        {
+            // Spec: "If the source argument is null, or the source list is empty, the result is null."
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Combine({})");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Combine>();
+            Run<string?>(expr, library).Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Combine_IgnoresNullElements()
+        {
+            // Spec: "null elements in the input list are ignored." Without a separator this held by
+            // accident; with one, a null element used to leave a trailing separator behind.
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Combine({'a', 'b', 'c', null}, '-')");
+            var expr = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Combine>();
+            Run<string?>(expr, library).Should().Be("a-b-c");
+        }
+
+        [TestMethod]
         public void ReplaceMatchesSpaces()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("ReplaceMatches('All that glitters is not gold', '\\\\s', '\\$')");

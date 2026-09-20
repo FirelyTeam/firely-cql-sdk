@@ -50,6 +50,7 @@ namespace Hl7.Cql.CqlToElm
                 Round round => Populate(round, arguments),
                 Slice slice => Populate(hasSignature, slice, arguments),
                 Split split => Populate(split, arguments),
+                SplitOnMatches som => Populate(som, arguments),
                 Substring sub => Populate(sub, arguments),
                 Time time => Populate(time, arguments),
 
@@ -605,6 +606,12 @@ namespace Hl7.Cql.CqlToElm
             split.stringToSplit = arguments[0];
             split.separator = arguments[1];
             return split;
+        }
+        internal SplitOnMatches Populate(SplitOnMatches splitOnMatches, Expression[] arguments)
+        {
+            splitOnMatches.stringToSplit = arguments[0];
+            splitOnMatches.separatorPattern = arguments[1];
+            return splitOnMatches;
         }
         internal Substring Populate(Substring substring, Expression[] arguments)
         {

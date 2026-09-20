@@ -16,7 +16,12 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return null;
-            var result = string.Join(separator ?? string.Empty, source);
+            // An empty source list yields null, and null elements are ignored; see the Combine
+            // operator in the CQL reference (spec/cql/condensed/09-b-cqlreference.md).
+            var elements = source as ICollection<string> ?? source.ToList();
+            if (elements.Count == 0)
+                return null;
+            var result = string.Join(separator ?? string.Empty, elements.Where(s => s is not null));
             return result;
         }
         #endregion

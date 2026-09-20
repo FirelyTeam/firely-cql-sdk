@@ -267,6 +267,7 @@ internal partial class CodeBuilderContext
             Ratio e              => [e.numerator, e.denominator],
             Round r              => [r.operand, r.precision],
             Split e              => [e.stringToSplit, e.separator],
+            SplitOnMatches e     => [e.stringToSplit, e.separatorPattern],
             Substring e          => [e.stringToSub, e.startIndex, e.length],
             Time e               => [e.hour, e.minute, e.second, e.millisecond],
             MinValue or MaxValue => [], // type is a generic type arg

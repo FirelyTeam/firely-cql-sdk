@@ -204,6 +204,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
             invoker: Invokers.Flatten);
         public static SystemFunction<Floor> Floor = unary<Floor>(DecimalType, IntegerType);
+        public static SystemFunction<GeometricMean> GeometricMean = aggregate<GeometricMean>(DecimalType, DecimalType);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
@@ -290,6 +291,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
+        public static SystemFunction<SplitOnMatches> SplitOnMatches = binary<SplitOnMatches>(StringType, StringType, StringType.ToListType());
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
         public static SystemFunction<Starts> Starts = binaryWithPrecision<Starts>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
 
