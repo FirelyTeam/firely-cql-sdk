@@ -19,4 +19,4 @@
   previously returned the partially walked value for a path it could not fully bind (for
   `E.value.value` on an `Extension`, the `Code` element instead of its string value), so comparisons
   against such a path silently failed and now match. Per [versioning.md](../../versioning.md) this
-  forces a **MESO** bump. (#1644)
+  forces a **MESO** bump. (#1646)
