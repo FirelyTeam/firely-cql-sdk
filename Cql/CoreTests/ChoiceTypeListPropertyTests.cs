@@ -160,8 +160,8 @@ public class ChoiceTypeListPropertyTests
     /// scalar-typed read it leaves behind feeds a list-valued operator (<c>AnyInValueSet</c>), which
     /// the compiler rejects, so these two tests assert that the build fails rather than that a
     /// particular C# shape is emitted: a loud failure is the acceptable outcome here, and asserting
-    /// a runtime value would pin a defect as correct behaviour. Handling this shape of input is a
-    /// known remaining gap in #1636's coverage, not something this fix closes.
+    /// a runtime value would pin a defect as correct behaviour. Evaluating this shape of input
+    /// correctly is tracked in #1645.
     /// </remarks>
     [TestMethod]
     public void UnresolvableChoiceMember_DeclinesTheListRecovery()

@@ -1,8 +1,10 @@
-// Source for ChoiceTypeListPropertyTest-1.0.0.json, translated with result types enabled. The
-// checked-in ELM is plain translator output and may be regenerated. The shapes the tests need - a
-// "reasonCode" Property without a result type, as the MADiE translator emits it for a choice-typed
-// alias; a choice member that does not resolve; a nested choice member - are derived from that ELM
-// in code, in ChoiceTypeListPropertyTests.
+// Source for ChoiceTypeListPropertyTest-1.0.0.json. The checked-in ELM is plain translator output:
+// the cql-to-elm CLI as Demo/Cql/Build/CqlTooling.Targets.xml invokes it (-locators true
+// -result-types true -signatures All, with FHIRHelpers-4.0.1.cql alongside this file), pretty-printed
+// the way that targets file does. No project regenerates Input/ELM/Test automatically. The shapes
+// the tests need - a "reasonCode" Property without a result type, as the MADiE translator emits it
+// for a choice-typed alias; a choice member that does not resolve; a nested choice member - are
+// derived from that ELM in code, in ChoiceTypeListPropertyTests.
 
 library ChoiceTypeListPropertyTest version '1.0.0'
 
