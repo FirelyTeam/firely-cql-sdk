@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Fhir.Metrics;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -218,5 +219,75 @@ namespace CoreTests
                 Assert.AreEqual(expected, distinct!.Count());
             }
         }
+
+        /// <summary>
+        /// A metric service that canonicalizes but will not convert between two units directly leaves the
+        /// canonical form as the only common ground, and the alignment falls back to it rather than
+        /// answering null: the two quantities are commensurable, so the spec has an answer to give
+        /// ("the dimensions of each quantity must be the same, but not necessarily the unit", ibid.,
+        /// section "5.1 Equal"), and null is reserved for units that do not reduce to a common base.
+        /// The fallback carries the rescaling this alignment exists to avoid, so it answers correctly
+        /// only while the canonical values stay above the CQL Decimal step size.
+        /// </summary>
+        [TestMethod]
+        public void Compare_ServiceThatWillNotConvertBetweenUnits_FallsBackToTheCanonicalForm()
+        {
+            var comparers = new CqlComparers(new CanonicalizeOnlyMetricService());
+
+            // Canonicalizing 'g' and 'mg' lands both on 1 'g', which is well above the step size.
+            Assert.AreEqual(true, comparers.Equals(Q(1m, "g"), Q(1000m, "mg"), null));
+            Assert.AreEqual(1, comparers.Compare(Q(2m, "g"), Q(1000m, "mg"), null));
+            Assert.AreEqual(-1, comparers.Compare(Q(1000m, "mg"), Q(2m, "g"), null));
+
+            // Incommensurable units are still null, so the fallback has not swallowed that answer.
+            Assert.IsNull(comparers.Compare(Q(1m, "cm"), Q(1m, "g"), null));
+
+            // The cost of the fallback, asserted so that it is visible rather than discovered: canonical
+            // 'mg/d' and 'ug/d' are both below the step size, where the Decimal comparer answers 0 for
+            // every pair. This is the defect the unit alignment removes for a service that does convert.
+            Assert.AreEqual(true, comparers.Equals(Q(0.25m, "mg/d"), Q(125m, "ug/d"), null));
+            Assert.AreEqual(true, comparers.Equals(Q(0.25m, "mg/d"), Q(500m, "ug/d"), null));
+        }
+
+        /// <summary>
+        /// Canonicalizes through the real UCUM service but refuses every direct unit-to-unit conversion,
+        /// which is the shape of a service that knows a unit without knowing how to rescale into it.
+        /// </summary>
+#pragma warning disable CS8767 // IMetricService is compiled without full NRT annotations; this stub matches the production implementation.
+        private sealed class CanonicalizeOnlyMetricService : IMetricService
+        {
+            private static readonly FhirMetricService Ucum = new();
+
+            public bool TryCanonicalize((string value, string unit, string? codesystem) quantity, out (string value, string unit, string? codesystem)? canonical) =>
+                Ucum.TryCanonicalize(quantity, out canonical);
+
+            public bool TryConvertTo((string value, string unit, string? codesystem) quantity, string targetUnit, out (string value, string unit, string? codesystem)? result) =>
+                Fail(out result);
+
+            public bool TryAdd((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result) =>
+                Fail(out result);
+
+            public bool TrySubtract((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result) =>
+                Fail(out result);
+
+            public bool TryMultiply((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result) =>
+                Fail(out result);
+
+            public bool TryDivide((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out (string value, string unit, string? codesystem)? result) =>
+                Fail(out result);
+
+            public bool TryCompare((string value, string unit, string? codesystem) x, (string value, string unit, string? codesystem) y, out int? result)
+            {
+                result = null;
+                return false;
+            }
+
+            private static bool Fail(out (string value, string unit, string? codesystem)? result)
+            {
+                result = null;
+                return false;
+            }
+        }
+#pragma warning restore CS8767
     }
 }

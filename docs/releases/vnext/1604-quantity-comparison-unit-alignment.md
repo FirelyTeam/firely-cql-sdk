@@ -26,4 +26,7 @@
   transitive — the `'1'` unit matches any unit, values are compared truncated to the CQL `Decimal` scale
   in the finer of the two operand units, and equivalence rounds to the least precise operand — so every
   value-derived hash separates some pair that compares equal. The cost is the bucket spread: these
-  operators degrade to a linear scan within the set.
+  operators degrade to a linear scan within the set, and each step of that scan is a unit-aware
+  quantity comparison that may call the metric service. Collections whose quantities all share one
+  unit take the same-unit fast path, which compares the values directly and never reaches the
+  service, so they are unaffected beyond the scan itself.
