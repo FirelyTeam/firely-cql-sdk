@@ -1,6 +1,6 @@
 # 1. Copilot Instructions for Firely CQL SDK
 
-**Version:** 3.17.0
+**Version:** 3.18.0
 
 This file is the decision-tree entry point. Route tasks here first, then open the focused sub-document before choosing tools.
 
@@ -12,7 +12,6 @@ This file is the decision-tree entry point. Route tasks here first, then open th
 - [3.0. Quick Navigation Index](#30-quick-navigation-index)
 - [4.0. Project Context (Brief)](#40-project-context-brief)
 - [5.0. Critical Files to Keep Updated (High-Level)](#50-critical-files-to-keep-updated-high-level)
-- [6.0. Appendix: Version History](#60-appendix-version-history)
 
 ## 2.0. Decision Tree / Task Taxonomy
 
@@ -98,77 +97,3 @@ This file is the decision-tree entry point. Route tasks here first, then open th
   - Any generator version constants and compatibility checks
   - Public API metadata files when adding public surfaces
 - Use [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) and [05-build-and-test.md](copilot-instructions/05-build-and-test.md) for detailed enforcement rules.
-
-## 6.0. Appendix: Version History
-
-- Section-number references in entries below refer to the numbering as it existed in that version; later inserted sections may have renumbered those headings.
-
-- 3.17.0
-  - Documented the SDK's versioning scheme at [docs/versioning.md](../docs/versioning.md), which is **canonical and deliberately not restated anywhere**: the package version uses **EffVer** (Intended Effort Versioning), not SemVer. Deliberately no `11-versioning.md` sub-document — per the DRY rule in [CLAUDE.md](../CLAUDE.md), a task-specific procedure gets one copy plus links, and a second full copy of the trigger list had already drifted from the first while this change was in review.
-  - Added a decision-tree entry (2.0) routing versioning tasks straight to that document.
-  - Added a short `## Versioning` section to [CLAUDE.md](../CLAUDE.md) and 4.6.3 to [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md) carrying only the two rules most often got wrong — a result-changing bug fix forces MESO, and public API additions alone do not raise the digit — plus the pointer. These are the universal gotchas the sync rule requires in both instruction sets; the full trigger list stays in one place.
-  - Added a required `### Version Level` section to [release-notes-template.md](../docs/releases/release-notes-template.md), a `## Versioning` section to the root [README.md](../README.md), and a one-line fragment-heading-to-digit rule to [docs/releases/vnext/README.md](../docs/releases/vnext/README.md).
-  - Scoped the "follow semantic versioning" line in [docs/technical-readme.md](../docs/technical-readme.md) and the "SemVer Compliance" line in [build/README.md](../build/README.md) so neither reads as an SDK-wide claim.
-  - Corrected the Vonk sync comment in both `cql-base.props` and `Demo/cql-demo.props`: `FhirNetApiVersion` in `Directory.Packages.props`, not `FirelyNetVersion` in `src/Vonk.props`.
-
-- 3.16.1
-  - Updated the integration-runner resource regeneration rule in [05-build-and-test.md](copilot-instructions/05-build-and-test.md): refreshing `passed.jsonl` is now gated on a complete, trustworthy run with no unexplained regressions; when blocked, preserve the existing baseline and track the blocker in an issue instead of replacing it with incomplete coverage.
-  - Mirrored the same guardrail into [CLAUDE.md](../CLAUDE.md).
-
-- 3.16.0
-  - Added 1.10.8 to [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md): when picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count ahead, second behind), report `mergeable` and `mergeStateStatus` when available, and ask whether to merge the base before reviewing rather than deciding unilaterally. This reflects the richer intent from [#1516](https://github.com/FirelyTeam/firely-cql-sdk/issues/1516), where an earlier quoted draft used behind-only wording. The rationale records both costs: reviewing stale code against a moved base, and re-triggered CI/conflict risk from an ill-timed base merge.
-  - Mirrored the same convention into [CLAUDE.md](../CLAUDE.md) under `Working style`.
-
-- 3.15.1
-  - Clarified the copyright-header rule in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md): existing file headers are never modified, even when they omit Firely, and the duplicate prohibition was consolidated into a single rule ([#1545](https://github.com/FirelyTeam/firely-cql-sdk/issues/1545)).
-  - Mirrored the same prohibition wording into [CLAUDE.md](../CLAUDE.md) so the Copilot and Claude instruction sets agree.
-
-- 3.15.0
-  - Added 1.6.2 to [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md): when an issue is too stale to act on because the code or symbols it names no longer exist, close it and file a fresh superseding issue, cross-referenced in both directions, rather than keeping the stale issue open with a rewrite note ([#1529](https://github.com/FirelyTeam/firely-cql-sdk/issues/1529)).
-  - Expanded the [file-github-issue](.claude/skills/file-github-issue/SKILL.md) skill with a new `Superseding a stale issue` section covering the canonical mechanics, including `develop` verification, bidirectional cross-references, `not planned` closure of the superseded issue, and emitted-C# acceptance criteria.
-  - Mirrored the skill pointer into [CLAUDE.md](../CLAUDE.md), and documented [#48](https://github.com/FirelyTeam/firely-cql-sdk/issues/48) -> [#1528](https://github.com/FirelyTeam/firely-cql-sdk/issues/1528) as the worked example for refiling a stale issue in current terms.
-
-- 3.14.0
-  - Added reflection guidance as a new numbered section in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md): `4.4. Reflection` now requires using [`ReflectionUtility`](../Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs) (`MethodOf`/`PropertyOf`/`ConstructorOf`/`GenericMethodDefinitionOf`) instead of string-based `GetMethod`/`GetProperty`, and clarifies why `nameof`-inside-string-lookup is insufficient.
-  - Renumbered the following sections in [04-development-guidelines.md](copilot-instructions/04-development-guidelines.md), including item prefixes and TOC entries: `4.4 Documentation` -> `4.5`, `4.5 Release Notes` -> `4.6`.
-  - Added review-workflow conventions in [01-user-workflow-preferences.md](copilot-instructions/01-user-workflow-preferences.md) and mirrored in [CLAUDE.md](../CLAUDE.md): reviewers do not push commits to PRs under review, instruction-file convention updates are filed and applied by `@copilot`, and `@copilot` dispatch/verification rules (comment-based dispatch with fully specified asks, plus multi-channel verification and precise `since` timestamps).
-
-- 3.13.0
-  - Broadened 1.8.1 (acceptance-criteria tracking): criteria are now ticked off automatically at every point where a checklist's truth may have changed — after pushing work, after a follow-up commit addressing review comments, and when reviewing a PR (including someone else's) — not only when first pushing. The `sync-acceptance-criteria` skill gains a "When to run this" section covering the three triggers plus how to resolve the linked issue when a PR uses `Refs` rather than `Fixes`. Mirrored into `CLAUDE.md`.
-  - Expanded the `resolve-pr-review-comments` skill (referenced from 1.9.1): step 4 now states what a reply must contain before a thread is resolved (commit SHA, what changed, the test that pins it, how it was verified), asks for one commit per comment, and adds guidance for a comment that turns out to be wrong — give the concrete evidence in place of a SHA rather than resolving with a bare "this is incorrect" ([#1463](https://github.com/FirelyTeam/firely-cql-sdk/issues/1463)).
-- 3.12.0
-  - Completed Phase 2 of the fragment-file convention ([#1445](https://github.com/FirelyTeam/firely-cql-sdk/issues/1445)): replaced `docs/releases/vnext-release-notes.md` with a static pointer doc; dropped the "Transitional exception" sentence from §4.5.1 and the dual-source description from §4.5.2; updated the `cut-release-notes` skill to remove the transitional callout and the `vnext-release-notes.md` sweep step; fragment files under `docs/releases/vnext/` are now the sole pending-content source. Mirrored into `CLAUDE.md`.
-- 3.11.0
-  - Updated 4.5.1 and 4.5.2: made explicit that when cutting a release, **both** pending-content sources must be consolidated and cleared — the `docs/releases/vnext/` fragment files (deleted) and `vnext-release-notes.md` (reset or replaced with a pointer). Also updated the `cut-release-notes` skill reference in 4.5.2 to name both sources, and added a prominent transitional-phase callout to the `cut-release-notes` skill itself. Mirrored into `CLAUDE.md`.
-  - Updated 4.2 (fragment-file naming): fragment files are now named `<PR-number>-<short-slug>.md` instead of `<issue-number>-<short-slug>.md`; the "known at branch creation" rationale removed. `docs/releases/vnext/README.md` is the canonical source; 4.5.1 delegates to it.
-- 3.10.0
-  - Updated 4.5.1: release-note entries now go in a new fragment file under `docs/releases/vnext/` (one per PR) instead of directly editing the shared `vnext-release-notes.md`, which caused recurring merge conflicts between parallel PRs. Transitional exception noted for PRs that already added a direct entry before this convention existed. See `docs/releases/vnext/README.md` for the naming/format convention and [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432) for the full rationale; mirrored into `CLAUDE.md`.
-  - Added 5.5 (Running Integration Runner Benchmarks): links to the new `run-integration-benchmarks` skill for running the `Firely.Cql.Sdk.Integration.Runner` submodule's BenchmarkDotNet project, appending a dated baseline file, and comparing medians against the most recent prior baseline.
-- 3.9.0
-  - Added a new rule (4.4.11) requiring Mermaid diagrams to be pre-rendered to `.svg` and embedded as an image rather than left as a raw fenced code block, since GitHub's inline renderer doesn't reliably support `classDiagram` `namespace`/`style`/`<<stereotype>>` syntax used in this repo's diagrams; mechanics live in the new `generate-svg-from-mermaid` skill (also mirrored into `CLAUDE.md`).
-- 3.8.1
-  - Simplified 5.1.4's CI skip-pattern description: `build/azure-pipelines.yml` now uses a single `^.*\.md$` pattern for all markdown files instead of separate entries per instruction-file location.
-- 3.8.0
-  - Added 5.1.4: CI's `build/azure-pipelines.yml` now skips the full build when every changed file is a documentation or AI-instruction file (`docs/`, `CLAUDE.md`, `.claude/`, `.github/copilot-instructions*`).
-- 3.7.0
-  - Added a new section (1.9, PR Review Comment Handling): after fixing a review comment and pushing, mark the conversation resolved via the GraphQL `resolveReviewThread` mutation — pushing a fix or replying does not resolve it automatically.
-- 3.6.1
-  - Fixed a broken relative link to `vnext-release-notes.md` in §4.5.1 (was missing a directory level), corrected `CodeGeneration.NET`/`LibraryInvoker` example paths in §5.3 to include the `Cql/` prefix, and scoped the `PublicAPI.Unshipped.txt` registration requirement in §10.3.3 to public `ICqlError` structs only (the project already has `internal` ones that don't belong there). Found by Copilot's automated review of PR #1386; mirrored into `CLAUDE.md` and `Cql/Cql.Abstractions/CLAUDE.md`.
-- 3.6.0
-  - Added a new section (1.8, Acceptance Criteria Tracking): after pushing work that completes checklist items in a linked issue or PR, tick them off before reporting the task done.
-- 3.5.0
-  - Added a rule (1.3.8) requiring these instructions and the root `CLAUDE.md`/`.claude/skills/` files to be kept in sync: any rule added, removed, or changed on one side must be checked against the other.
-- 3.4.0
-  - De-duplicated task-specific workflows against `.claude/skills/` (also used by Claude Code): PR description conventions, issue formatting, ticket pickup, release-note cutting, and ELM generation now link out to the corresponding skill file instead of restating the procedure. Each sub-document keeps only the universal trigger rules (e.g. breaking changes must land in `vnext-release-notes.md`); the step-by-step mechanics live in the linked skill.
-- 3.3.0
-  - Expanded code generation version management guidance: clarified that binder/compiler changes which alter generated C# (not only CodeGeneration.NET changes) require a `GeneratorToolVersion` bump, fixed the stale invoker reference, and added the requirement to regenerate checked-in `*.g.cs` files in the same pull request.
-- 3.2.0
-  - Added a durable documentation rule for copilot instruction docs: cap heading numbering at three segments and keep deeper numbering in body text instead of deeper headings.
-- 3.1.0
-  - Incorporated GitHub workflow guidance for GitHub CLI usage, issue formatting, ticket pickup, PR body synchronization, and instruction-maintenance safeguards.
-  - Incorporated documentation standards for heading numbering, TOC consistency, parent-document links, and cross-document linking rules.
-- 3.0.0
-  - Major reorganization: split monolithic instructions into decision tree plus focused sub-documents.
-  - Added task-taxonomy-first routing and quick index.
-- 2.10.0 and earlier
-  - Legacy monolithic structure retained in git history.

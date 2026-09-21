@@ -98,13 +98,17 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.4.4 `ReflectionUtility` is `internal` to `HL7.Cql.Abstractions`, whose `.csproj` grants `InternalsVisibleTo` to every SDK assembly and to `CoreTests`; if a project genuinely cannot see it, add the `InternalsVisibleTo` entry per 4.3 rather than falling back to a string lookup.
 
+4.4.5 **The only place backstory goes is the pull request description.** Why a thing was once done, which PR or issue caused it, what used to be pinned, broken or worked around, what a rule is a reaction to — none of it belongs in source, project or config files, **and none of it belongs in instruction or documentation files either**, these included. State the rule or the constraint as it is *now* ("raise this property rather than pinning one package") and stop; the reader does not need to know what it replaced. Release notes are the one exception, being a record of what each release shipped.
+
 ## 4.5. Documentation
 
 4.5.1 Update README files when adding new projects or significant features
 
 4.5.2 **When adding dependencies, also update the README's Dependencies section**
 
-4.5.2.1 **When bumping an existing package version, update the version number in the root `README.md`'s "External Dependencies" table** — sub-project READMEs don't state version numbers, so the root README's versioned table is the only consumer-visible record and silently drifts after version bumps. Also scan `docs/` for any design or assessment doc that mentions a version number for the same package.
+4.5.2.1 **External package versions are centrally managed: every version lives in the root `Directory.Packages.props`**, which explains the arrangement in full and is the one place to change a version. Projects carry a bare `<PackageReference Include="Foo" />` with no `Version` attribute; adding one is an error (`NU1008`). Two things are deliberately not centrally managed: `VersionPrefix` (the version we ship, in `cql-sdk.props` and `Demo/cql-demo.props`), and the private `Firely.Cql.Sdk.Integration.Runner` submodule, which opts out via `submodules/Directory.Packages.props` because it is a separate repository.
+
+4.5.2.2 **Documentation never restates a package version, so bumping one is a single-file change: edit `Directory.Packages.props` and stop.** No README, design doc or assessment doc may carry a copy of a pinned version; they link to that file instead, so there is nothing to keep in sync and nothing that can silently drift. If you find a markdown file stating a package version, remove the number and link to `Directory.Packages.props` rather than correcting it. The one exception is **release notes** — `docs/releases/release-notes-*.md` and `docs/releases/vnext/` fragments are a historical record and legitimately name the versions a release shipped or moved between; never "correct" those.
 
 4.5.3 Document experimental features clearly in preview projects
 
