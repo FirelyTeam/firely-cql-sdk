@@ -48,6 +48,33 @@ namespace Hl7.Cql.CqlToElm.Test
             query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
         }
         [TestMethod]
+        public void Return_defaults_to_distinct()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeTrue();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 2, 3);
+        }
+
+        [TestMethod]
+        public void Return_distinct_removes_duplicates()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return distinct N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeTrue();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 2, 3);
+        }
+
+        [TestMethod]
+        public void Return_all_keeps_duplicates()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return all N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeFalse();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 1, 2, 2, 3);
+        }
+
+        [TestMethod]
         public void Relationship_withscalarsources()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
