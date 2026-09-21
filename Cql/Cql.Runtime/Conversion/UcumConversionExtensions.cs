@@ -145,12 +145,27 @@ namespace Hl7.Cql.Conversion
                 return false;
             }
 
-            var commonUnit = PickFinerUnit(x.unit!, y.unit!, service);
-            if (commonUnit != null
-                && TryExpressIn(x, commonUnit, service, out alignedX)
-                && TryExpressIn(y, commonUnit, service, out alignedY))
+            // Two spellings of one unit ('mg/d' and 'mg.d-1') carry the same factor, so their values are
+            // already in one scale and converting either would only pad it out. Both operands keep the
+            // value they were authored with, which is also what keeps the result independent of the
+            // operand order: no operand is picked as the conversion target, so neither can be the one
+            // whose precision the other inherits.
+            if (TryGetUnitFactor(x.unit!, service, out var factorX)
+                && TryGetUnitFactor(y.unit!, service, out var factorY))
             {
-                return true;
+                if (factorX == factorY)
+                {
+                    alignedX = x;
+                    alignedY = y;
+                    return true;
+                }
+
+                var commonUnit = factorX < factorY ? x.unit! : y.unit!;
+                if (TryExpressIn(x, commonUnit, service, out alignedX)
+                    && TryExpressIn(y, commonUnit, service, out alignedY))
+                {
+                    return true;
+                }
             }
 
             // A unit that canonicalizes but that the service will not convert directly into leaves the canonical
@@ -162,15 +177,16 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
-        /// Expresses a quantity in <paramref name="unit"/>, returning it unchanged when it already carries that unit.
+        /// Expresses a quantity in <paramref name="unit"/>, returning it unchanged when it already carries that unit,
+        /// and otherwise converting it and stripping the padding the conversion adds.
         /// </summary>
         /// <remarks>
-        /// The shortcut is not only an optimization. Asking the metric service to convert a value into the unit it
-        /// already has pads the result out to the service's own working scale (0.25 'mg/d' comes back as
-        /// 0.2500000000000000000000000000 'mg/d'), and equivalence rounds to "the precision of the least precise
-        /// operand" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, 5.2 Equivalent). A padded operand is no longer
-        /// the least precise one, so the operand that genuinely was authored at two decimal places stops setting the
-        /// rounding precision and the comparison starts turning on digits the author never wrote.
+        /// Both halves guard the same thing: the operand's authored precision. Equivalence rounds to "the precision
+        /// of the least precise operand" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, 5.2 Equivalent), and the
+        /// metric service pads every result it produces out to its own working scale - 0.25 'mg/d' comes back as
+        /// 0.2500000000000000000000000000 'mg/d' even when converted into the unit it already has. A padded operand
+        /// is no longer the least precise one, so the operand that genuinely was authored at two decimal places
+        /// stops setting the rounding precision and the comparison starts turning on digits the author never wrote.
         /// </remarks>
         private static bool TryExpressIn(CqlQuantity quantity, string unit, M.IMetricService service, out CqlQuantity? expressed)
         {
@@ -180,25 +196,32 @@ namespace Hl7.Cql.Conversion
                 return true;
             }
 
-            return quantity.TryConvert(unit, service, out expressed);
+            if (!quantity.TryConvert(unit, service, out var converted))
+            {
+                expressed = null;
+                return false;
+            }
+
+            expressed = converted!.value is { } value
+                ? new CqlQuantity(Comparers.CqlComparerSharedMethods.NormalizeDecimalScale(value), converted.unit)
+                : converted;
+            return true;
         }
 
         /// <summary>
-        /// Returns whichever of the two units is the finer one - the unit whose single quantity has the smaller
-        /// canonical value - or <see langword="null"/> when neither can be canonicalized for the comparison.
+        /// Returns the canonical value of a single <paramref name="unit"/> - its factor against the base unit,
+        /// and so the measure of how fine the unit is - or <see langword="false"/> when it cannot be canonicalized.
         /// </summary>
-        private static string? PickFinerUnit(string unitX, string unitY, M.IMetricService service)
+        private static bool TryGetUnitFactor(string unit, M.IMetricService service, out decimal factor)
         {
-            if (string.Equals(unitX, unitY, StringComparison.Ordinal))
-                return unitX;
-
-            if (!new CqlQuantity(1m, unitX).TryCanonicalize(service, out var oneX)
-                || !new CqlQuantity(1m, unitY).TryCanonicalize(service, out var oneY))
+            if (new CqlQuantity(1m, unit).TryCanonicalize(service, out var one) && one!.value is { } value)
             {
-                return null;
+                factor = value;
+                return true;
             }
 
-            return oneX!.value <= oneY!.value ? unitX : unitY;
+            factor = default;
+            return false;
         }
 
         /// <summary>

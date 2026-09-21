@@ -67,15 +67,25 @@ namespace CoreTests
 
         /// <summary>
         /// Equivalence rounds to "the precision of the least precise operand" (ibid., section
-        /// "5.2 Equivalent"), so the operand already carrying the target unit must be left alone: asking
-        /// the metric service to convert a value into its own unit pads it out to the service's working
-        /// scale, and a padded operand stops being the least precise one.
+        /// "5.2 Equivalent"), so neither operand may inherit the other's precision from the alignment.
+        /// Two spellings of one unit carry the same factor and are therefore compared as authored,
+        /// which is what makes the answer independent of the operand order; a genuine conversion has
+        /// the padding the metric service adds stripped back off.
         /// </summary>
         [TestMethod]
         public void Equivalent_CanonicalOperandBelowDecimalStepSize_RoundsToTheAuthoredPrecision()
         {
             Assert.IsTrue(Context.Operators.Equivalent(Q(0.0000000028935185185185185185m, "g.s-1"), Q(0.25m, "mg/d")));
             Assert.IsTrue(Context.Operators.Equivalent(Q(0.25m, "mg/d"), Q(0.25m, "mg.d-1")));
+
+            // 0.2501 rounded to the two decimal places of the least precise operand is 0.25.
+            Assert.IsTrue(Context.Operators.Equivalent(Q(0.25m, "mg/d"), Q(0.2501m, "mg.d-1")));
+            Assert.IsTrue(Context.Operators.Equivalent(Q(0.2501m, "mg.d-1"), Q(0.25m, "mg/d")));
+
+            // Across a genuine conversion, in both operand orders: 1000.4 'mg' is 1.0004 'g', which
+            // rounds to the single decimal place of 1.0 'g'.
+            Assert.IsTrue(Context.Operators.Equivalent(Q(1.0m, "g"), Q(1000.4m, "mg")));
+            Assert.IsTrue(Context.Operators.Equivalent(Q(1000.4m, "mg"), Q(1.0m, "g")));
         }
 
         [TestMethod]
@@ -98,8 +108,18 @@ namespace CoreTests
         {
             Assert.AreEqual(true, Context.Operators.Equal(Q(1m, "wk"), Q(7m, "d")));
             Assert.AreEqual(true, Context.Operators.Equal(Q(1m, "day"), Q(24m, "h")));
-            Assert.AreEqual(true, Context.Operators.Equal(Q(1m, "a"), Q(1m, "year")));
             Assert.IsTrue(Context.Operators.Equivalent(Q(1m, "wk"), Q(7m, "d")));
+
+            // Equivalence between a calendar duration above days and its definite-time UCUM counterpart
+            // is explicit in the spec: "1 year ~ 1 'a'" (ibid., section "5.2 Equivalent").
+            Assert.IsTrue(Context.Operators.Equivalent(Q(1m, "a"), Q(1m, "year")));
+
+            // Equality of the same pair should be null - "UCUM definite-time duration quantities above
+            // days (and weeks) are not comparable to calendar duration quantities above days (and
+            // weeks)" (ibid., section "5.1 Equal") - but this comparer maps 'year' onto 'a' for equality
+            // too and answers true. That deviation predates the unit alignment this class covers and
+            // still needs a tracking issue; it is deliberately left unasserted either way, so that
+            // fixing it does not have to fight this test.
         }
 
         /// <summary>
@@ -145,10 +165,8 @@ namespace CoreTests
 
         /// <summary>
         /// Equality truncates both values to the CQL Decimal scale, so two quantities that differ only
-        /// below the step size are equal and have to hash alike - in the quantity's own unit, whether that
-        /// unit is finer than its UCUM base ('mg'), coarser than it ('kg', 'd'), or not UCUM at all.
-        /// Hashing the canonical value untruncated put such pairs in different buckets, so Distinct kept
-        /// both.
+        /// below the step size are equal and Distinct has to collapse them into one - whatever their
+        /// unit is relative to its UCUM base: finer ('mg'), coarser ('kg', 'd'), or not UCUM at all.
         /// </summary>
         [TestMethod]
         [DataRow("mg")]
@@ -156,14 +174,13 @@ namespace CoreTests
         [DataRow("d")]
         [DataRow("mg/d")]
         [DataRow("no-such-ucum-unit")]
-        public void GetHashCode_SameUnitDifferingBelowDecimalStepSize_HashesAlike(string unit)
+        public void Distinct_SameUnitDifferingBelowDecimalStepSize_Deduplicates(string unit)
         {
             var comparers = new CqlComparers();
             var x = Q(70.000000001m, unit);
             var y = Q(70.000000002m, unit);
 
             Assert.AreEqual(true, comparers.Equals(x, y, null));
-            Assert.AreEqual(comparers.GetHashCode(x), comparers.GetHashCode(y));
 
             var distinct = Context.Operators.Distinct<CqlQuantity>([x, y]);
             Assert.IsNotNull(distinct);
@@ -171,21 +188,35 @@ namespace CoreTests
         }
 
         /// <summary>
-        /// The truncation must not cost the cross-unit buckets: quantities equal across a unit conversion
-        /// keep hashing alike, and quantities that differ at or above the step size keep hashing apart.
+        /// Distinct has to follow equality in both directions: quantities equal across a unit conversion
+        /// collapse into one, and quantities that differ at or above the step size are both kept. Only
+        /// the first direction constrains the hash - unequal values are free to share a bucket - so it
+        /// is the set behavior that is asserted here, never the hash codes themselves.
         /// </summary>
         [TestMethod]
-        public void GetHashCode_EqualAcrossUnitsAndDistinctAboveStepSize_FollowsEquality()
+        public void Distinct_AcrossUnits_FollowsEquality()
         {
             var comparers = new CqlComparers();
 
-            Assert.AreEqual(comparers.GetHashCode(Q(1m, "mg")), comparers.GetHashCode(Q(0.001m, "g")));
-            Assert.AreEqual(comparers.GetHashCode(Q(1.000000001m, "mg")), comparers.GetHashCode(Q(0.001m, "g")));
-            Assert.AreEqual(comparers.GetHashCode(Q(0.25m, "mg/d")), comparers.GetHashCode(Q(0.25m, "mg.d-1")));
-            Assert.AreEqual(comparers.GetHashCode(Q(1.0m, "cm")), comparers.GetHashCode(Q(1.00m, "cm")));
+            AssertDistinctCount(1, Q(1m, "mg"), Q(0.001m, "g"));
+            AssertDistinctCount(1, Q(1.000000001m, "mg"), Q(0.001m, "g"));
+            AssertDistinctCount(1, Q(0.25m, "mg/d"), Q(0.25m, "mg.d-1"));
+            AssertDistinctCount(1, Q(1.0m, "cm"), Q(1.00m, "cm"));
+
+            // Equal because the comparison happens in 'mg', where neither value loses a digit to the
+            // truncation, while 'g' alone would drop the 4 below the step size.
+            Assert.AreEqual(true, comparers.Equals(Q(1.000000004m, "g"), Q(1000.000004m, "mg"), null));
+            AssertDistinctCount(1, Q(1.000000004m, "g"), Q(1000.000004m, "mg"));
 
             Assert.AreEqual(false, comparers.Equals(Q(70.00000001m, "kg"), Q(70.00000002m, "kg"), null));
-            Assert.AreNotEqual(comparers.GetHashCode(Q(70.00000001m, "kg")), comparers.GetHashCode(Q(70.00000002m, "kg")));
+            AssertDistinctCount(2, Q(70.00000001m, "kg"), Q(70.00000002m, "kg"));
+
+            static void AssertDistinctCount(int expected, CqlQuantity x, CqlQuantity y)
+            {
+                var distinct = Context.Operators.Distinct<CqlQuantity>([x, y]);
+                Assert.IsNotNull(distinct);
+                Assert.AreEqual(expected, distinct!.Count());
+            }
         }
     }
 }

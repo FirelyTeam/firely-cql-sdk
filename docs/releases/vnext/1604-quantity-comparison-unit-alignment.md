@@ -13,17 +13,17 @@
   scale the values were authored at, so the quantization is meaningful there. Commensurability is still
   decided on the canonical form, so incommensurable units keep answering `null` for comparison and
   `false` for equivalence, and the canonical form remains the fallback common unit when the metric
-  service will not convert between the operand units directly. Equivalence, which rounds to "the
-  precision of the least precise operand" (ibid., 5.2 Equivalent), leaves an operand that already
-  carries the target unit untouched rather than converting it into its own unit, which would pad it out
-  to the metric service's working scale and stop the genuinely least precise operand from setting the
-  rounding precision. **CQL evaluation results change** for cross-unit quantity comparisons; the CMS156
-  high-risk-medications-in-the-elderly test case of the MADiE corpus that compares an average daily dose
-  against a `'mg/d'` threshold passes.
-- **Runtime:** the hash code of a quantity is taken over its value truncated to the CQL `Decimal` scale,
-  in the quantity's own unit, before canonicalization. Equality already compared the truncated values, so
-  two quantities differing only below the step size of 10^-8 were equal but hashed differently, and the
-  set-based operators (`Distinct`, `Union`, `Except`) kept both. The truncation happens in the quantity's
-  own unit because that is where equality truncates; a truncated canonical value would collapse every
-  clinical dose rate to zero and would keep digits equality drops for units coarser than their base
-  (`'kg'`, `'d'`).
+  service will not convert between the operand units directly. Two spellings of one unit carry the same
+  factor, so neither operand is converted and the answer does not depend on the operand order; a genuine
+  conversion has the padding the metric service adds to its results stripped back off, so that
+  equivalence, which rounds to "the precision of the least precise operand" (ibid., 5.2 Equivalent),
+  still rounds to the precision the operands were authored at. **CQL evaluation results change** for
+  cross-unit quantity comparisons; the CMS156 high-risk-medications-in-the-elderly test case of the MADiE
+  corpus that compares an average daily dose against a `'mg/d'` threshold passes.
+- **Runtime:** every quantity now hashes to one bucket, so the set-based operators (`Distinct`, `Union`,
+  `Except`) collapse quantities the comparer calls equal. They previously kept both when the pair was
+  equal across a unit conversion or differed only below the step size of 10^-8. Quantity equality is not
+  transitive — the `'1'` unit matches any unit, values are compared truncated to the CQL `Decimal` scale
+  in the finer of the two operand units, and equivalence rounds to the least precise operand — so every
+  value-derived hash separates some pair that compares equal. The cost is the bucket spread: these
+  operators degrade to a linear scan within the set.
