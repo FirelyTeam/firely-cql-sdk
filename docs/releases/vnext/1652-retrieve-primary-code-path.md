@@ -9,7 +9,7 @@
   as `[Condition: "Diabetes"]` carried neither attribute, so a consumer without the model
   information could not tell which property to match, and a single-code retrieve always wrote the
   literal `code` as the path, even over an authored one. A type with no primary code path still
-  gets no `codeProperty`, and now gets the comparator, as in the reference.
+  gets no `codeProperty`, and now gets the comparator, as in the reference. (#1652)
 
   **This changes CQL evaluation results** wherever the emitted path changes. A retrieve with an
   authored path and a single code, such as `[Observation: category ~ "Metformin"]`, filtered on
