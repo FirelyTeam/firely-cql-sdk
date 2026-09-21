@@ -1,6 +1,6 @@
 ## Fixes
 
-- Scalar (point) `after` and `before` on Date, DateTime and Time now return `null` when either or
+- **Runtime:** scalar (point) `after` and `before` on Date, DateTime and Time now return `null` when either or
   both operands are null, as the CQL specification requires (§9.B After / Before: "If either or both
   arguments are null, the result is null"). Previously the point comparison fell through to the
   comparer's total ordering of null — the ordering that makes sorting deterministic — and so

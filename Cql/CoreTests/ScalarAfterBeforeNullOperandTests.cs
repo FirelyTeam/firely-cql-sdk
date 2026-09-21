@@ -16,8 +16,7 @@ namespace CoreTests;
 /// <summary>
 /// Covers the scalar (point) <c>after</c>/<c>before</c> operators on Date, DateTime and Time.
 /// Per the CQL spec (§9.B After / Before) "If either or both arguments are null, the result is
-/// null" — see https://github.com/FirelyTeam/firely-cql-sdk/issues/1598, where these returned a
-/// boolean because the point comparison fell through to the comparer's total ordering of null.
+/// null".
 /// The operands are cast to <see cref="object"/> so the <c>(object?, object?, string?)</c>
 /// overload binds, which is what generated code calls for point comparisons.
 /// </summary>
@@ -53,20 +52,12 @@ public class ScalarAfterBeforeNullOperandTests
         Assert.IsNull(Operators.After(Boxed(DateTime(2024, 1, 1)), Boxed((CqlDateTime?)null), null));
 
     [TestMethod]
-    public void DateTime_After_BothNull_IsNull() =>
-        Assert.IsNull(Operators.After(Boxed((CqlDateTime?)null), Boxed((CqlDateTime?)null), null));
-
-    [TestMethod]
     public void DateTime_Before_NullLeft_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed((CqlDateTime?)null), Boxed(DateTime(2024, 1, 1)), null));
 
     [TestMethod]
     public void DateTime_Before_NullRight_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed(DateTime(2024, 1, 1)), Boxed((CqlDateTime?)null), null));
-
-    [TestMethod]
-    public void DateTime_Before_BothNull_IsNull() =>
-        Assert.IsNull(Operators.Before(Boxed((CqlDateTime?)null), Boxed((CqlDateTime?)null), null));
 
     #endregion
 
@@ -81,20 +72,12 @@ public class ScalarAfterBeforeNullOperandTests
         Assert.IsNull(Operators.After(Boxed(Date(2024, 1, 1)), Boxed((CqlDate?)null), null));
 
     [TestMethod]
-    public void Date_After_BothNull_IsNull() =>
-        Assert.IsNull(Operators.After(Boxed((CqlDate?)null), Boxed((CqlDate?)null), null));
-
-    [TestMethod]
     public void Date_Before_NullLeft_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed((CqlDate?)null), Boxed(Date(2024, 1, 1)), null));
 
     [TestMethod]
     public void Date_Before_NullRight_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed(Date(2024, 1, 1)), Boxed((CqlDate?)null), null));
-
-    [TestMethod]
-    public void Date_Before_BothNull_IsNull() =>
-        Assert.IsNull(Operators.Before(Boxed((CqlDate?)null), Boxed((CqlDate?)null), null));
 
     #endregion
 
@@ -109,10 +92,6 @@ public class ScalarAfterBeforeNullOperandTests
         Assert.IsNull(Operators.After(Boxed(Time(10, 15, 0)), Boxed((CqlTime?)null), null));
 
     [TestMethod]
-    public void Time_After_BothNull_IsNull() =>
-        Assert.IsNull(Operators.After(Boxed((CqlTime?)null), Boxed((CqlTime?)null), null));
-
-    [TestMethod]
     public void Time_Before_NullLeft_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed((CqlTime?)null), Boxed(Time(10, 15, 0)), null));
 
@@ -120,9 +99,20 @@ public class ScalarAfterBeforeNullOperandTests
     public void Time_Before_NullRight_IsNull() =>
         Assert.IsNull(Operators.Before(Boxed(Time(10, 15, 0)), Boxed((CqlTime?)null), null));
 
+    #endregion
+
+    #region Both null — type-agnostic
+
+    // Both-null is a single case, not one per type: the boxed operands are plain null references
+    // and the guard short-circuits before any type is inspected.
+
     [TestMethod]
-    public void Time_Before_BothNull_IsNull() =>
-        Assert.IsNull(Operators.Before(Boxed((CqlTime?)null), Boxed((CqlTime?)null), null));
+    public void After_BothNull_IsNull() =>
+        Assert.IsNull(Operators.After((object?)null, (object?)null, null));
+
+    [TestMethod]
+    public void Before_BothNull_IsNull() =>
+        Assert.IsNull(Operators.Before((object?)null, (object?)null, null));
 
     #endregion
 
