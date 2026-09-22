@@ -67,7 +67,12 @@ namespace Hl7.Cql.Operators
 
         public bool? After(object? left, object? right, string? precision)
         {
-            var result = Comparer.Compare(left!, right!, precision);
+            // https://cql.hl7.org/09-b-cqlreference.html#after
+            // Spec: If either or both arguments are null, the result is null.
+            if (left is null || right is null)
+                return null;
+
+            var result = Comparer.Compare(left, right, precision);
             if (result == null)
                 return null;
             else if (result > 0)
@@ -81,7 +86,12 @@ namespace Hl7.Cql.Operators
 
         public bool? Before(object? left, object? right, string? precision)
         {
-            var result = Comparer.Compare(left!, right!, precision);
+            // https://cql.hl7.org/09-b-cqlreference.html#before
+            // Spec: If either or both arguments are null, the result is null.
+            if (left is null || right is null)
+                return null;
+
+            var result = Comparer.Compare(left, right, precision);
             if (result == null)
                 return null;
             else if (result < 0)

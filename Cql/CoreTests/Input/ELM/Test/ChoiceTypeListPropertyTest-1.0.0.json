@@ -1,0 +1,564 @@
+{
+  "library": {
+    "annotation": [
+      {
+        "type": "CqlToElmInfo",
+        "translatorVersion": "5.0.0",
+        "translatorOptions": "EnableLocators,EnableResultTypes",
+        "signatureLevel": "All"
+      }
+    ],
+    "identifier": {
+      "id": "ChoiceTypeListPropertyTest",
+      "version": "1.0.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "annotation": []
+        },
+        {
+          "locator": "8:1-8:26",
+          "localIdentifier": "FHIR",
+          "uri": "http://hl7.org/fhir",
+          "version": "4.0.1",
+          "annotation": []
+        }
+      ]
+    },
+    "includes": {
+      "def": [
+        {
+          "locator": "10:1-10:54",
+          "localIdentifier": "FHIRHelpers",
+          "path": "FHIRHelpers",
+          "version": "4.0.1",
+          "annotation": []
+        }
+      ]
+    },
+    "valueSets": {
+      "def": [
+        {
+          "locator": "12:1-12:64",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet",
+          "name": "Reasons",
+          "id": "http://fire.ly/ValueSet/late-bound-reasons",
+          "accessLevel": "Public",
+          "annotation": [],
+          "codeSystem": []
+        }
+      ]
+    },
+    "contexts": {
+      "def": [
+        {
+          "locator": "14:1-14:15",
+          "name": "Patient",
+          "annotation": []
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "locator": "14:1-14:15",
+          "name": "Patient",
+          "context": "Patient",
+          "annotation": [],
+          "expression": {
+            "type": "SingletonFrom",
+            "annotation": [],
+            "signature": [],
+            "operand": {
+              "type": "Retrieve",
+              "locator": "14:1-14:15",
+              "dataType": "{http://hl7.org/fhir}Patient",
+              "templateId": "http://hl7.org/fhir/StructureDefinition/Patient",
+              "annotation": [],
+              "include": [],
+              "codeFilter": [],
+              "dateFilter": [],
+              "otherFilter": []
+            }
+          }
+        },
+        {
+          "locator": "18:1-20:50",
+          "name": "Interventions With Reason",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "annotation": [],
+            "elementType": {
+              "type": "ChoiceTypeSpecifier",
+              "annotation": [],
+              "choice": [
+                {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}MedicationRequest",
+                  "annotation": []
+                },
+                {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}ServiceRequest",
+                  "annotation": []
+                }
+              ]
+            }
+          },
+          "expression": {
+            "type": "Query",
+            "locator": "19:5-20:50",
+            "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "annotation": [],
+              "elementType": {
+                "type": "ChoiceTypeSpecifier",
+                "annotation": [],
+                "choice": [
+                  {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}MedicationRequest",
+                    "annotation": []
+                  },
+                  {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}ServiceRequest",
+                    "annotation": []
+                  }
+                ]
+              }
+            },
+            "source": [
+              {
+                "locator": "19:5-19:63",
+                "alias": "Intervention",
+                "annotation": [],
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "ChoiceTypeSpecifier",
+                    "annotation": [],
+                    "choice": [
+                      {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}MedicationRequest",
+                        "annotation": []
+                      },
+                      {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}ServiceRequest",
+                        "annotation": []
+                      }
+                    ]
+                  }
+                },
+                "expression": {
+                  "type": "Union",
+                  "locator": "19:5-19:50",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "annotation": [],
+                    "elementType": {
+                      "type": "ChoiceTypeSpecifier",
+                      "annotation": [],
+                      "choice": [
+                        {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}MedicationRequest",
+                          "annotation": []
+                        },
+                        {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}ServiceRequest",
+                          "annotation": []
+                        }
+                      ]
+                    }
+                  },
+                  "signature": [
+                    {
+                      "type": "ListTypeSpecifier",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ChoiceTypeSpecifier",
+                        "annotation": [],
+                        "choice": [
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}MedicationRequest",
+                            "annotation": []
+                          },
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}ServiceRequest",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "ListTypeSpecifier",
+                      "annotation": [],
+                      "elementType": {
+                        "type": "ChoiceTypeSpecifier",
+                        "annotation": [],
+                        "choice": [
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}MedicationRequest",
+                            "annotation": []
+                          },
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}ServiceRequest",
+                            "annotation": []
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "operand": [
+                    {
+                      "type": "As",
+                      "annotation": [],
+                      "signature": [],
+                      "operand": {
+                        "type": "Retrieve",
+                        "locator": "19:7-19:22",
+                        "dataType": "{http://hl7.org/fhir}ServiceRequest",
+                        "templateId": "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
+                        "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}ServiceRequest",
+                            "annotation": []
+                          }
+                        },
+                        "include": [],
+                        "codeFilter": [],
+                        "dateFilter": [],
+                        "otherFilter": []
+                      },
+                      "asTypeSpecifier": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ChoiceTypeSpecifier",
+                          "annotation": [],
+                          "choice": [
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation": []
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}ServiceRequest",
+                              "annotation": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "type": "As",
+                      "annotation": [],
+                      "signature": [],
+                      "operand": {
+                        "type": "Retrieve",
+                        "locator": "19:30-19:48",
+                        "dataType": "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId": "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                        "annotation": [],
+                        "resultTypeSpecifier": {
+                          "type": "ListTypeSpecifier",
+                          "annotation": [],
+                          "elementType": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}MedicationRequest",
+                            "annotation": []
+                          }
+                        },
+                        "include": [],
+                        "codeFilter": [],
+                        "dateFilter": [],
+                        "otherFilter": []
+                      },
+                      "asTypeSpecifier": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "ChoiceTypeSpecifier",
+                          "annotation": [],
+                          "choice": [
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation": []
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}ServiceRequest",
+                              "annotation": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "where": {
+              "type": "AnyInValueSet",
+              "locator": "20:9-20:50",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+              "annotation": [],
+              "signature": [
+                {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Concept",
+                    "annotation": []
+                  }
+                }
+              ],
+              "codes": {
+                "type": "Query",
+                "annotation": [],
+                "source": [
+                  {
+                    "alias": "X",
+                    "annotation": [],
+                    "expression": {
+                      "type": "Property",
+                      "locator": "20:15-20:37",
+                      "path": "reasonCode",
+                      "scope": "Intervention",
+                      "annotation": []
+                    }
+                  }
+                ],
+                "let": [],
+                "relationship": [],
+                "return": {
+                  "distinct": false,
+                  "annotation": [],
+                  "expression": {
+                    "type": "FunctionRef",
+                    "name": "ToConcept",
+                    "libraryName": "FHIRHelpers",
+                    "annotation": [],
+                    "signature": [
+                      {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}CodeableConcept",
+                        "annotation": []
+                      }
+                    ],
+                    "operand": [
+                      {
+                        "type": "AliasRef",
+                        "name": "X",
+                        "annotation": []
+                      }
+                    ]
+                  }
+                },
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Concept",
+                    "annotation": []
+                  }
+                }
+              },
+              "valueset": {
+                "locator": "20:42-20:50",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet",
+                "name": "Reasons",
+                "preserve": true,
+                "annotation": []
+              }
+            }
+          }
+        },
+        {
+          "locator": "24:1-26:39",
+          "name": "Procedures With Reason",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "annotation": [],
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "annotation": [],
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Procedure",
+              "annotation": []
+            }
+          },
+          "expression": {
+            "type": "Query",
+            "locator": "25:5-26:39",
+            "annotation": [],
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "annotation": [],
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}Procedure",
+                "annotation": []
+              }
+            },
+            "source": [
+              {
+                "locator": "25:5-25:17",
+                "alias": "P",
+                "annotation": [],
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}Procedure",
+                    "annotation": []
+                  }
+                },
+                "expression": {
+                  "type": "Retrieve",
+                  "locator": "25:5-25:15",
+                  "dataType": "{http://hl7.org/fhir}Procedure",
+                  "templateId": "http://hl7.org/fhir/StructureDefinition/Procedure",
+                  "annotation": [],
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "annotation": [],
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Procedure",
+                      "annotation": []
+                    }
+                  },
+                  "include": [],
+                  "codeFilter": [],
+                  "dateFilter": [],
+                  "otherFilter": []
+                }
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "where": {
+              "type": "AnyInValueSet",
+              "locator": "26:9-26:39",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+              "annotation": [],
+              "signature": [
+                {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Concept",
+                    "annotation": []
+                  }
+                }
+              ],
+              "codes": {
+                "type": "Query",
+                "annotation": [],
+                "source": [
+                  {
+                    "alias": "X",
+                    "annotation": [],
+                    "expression": {
+                      "type": "Property",
+                      "locator": "26:15-26:26",
+                      "path": "reasonCode",
+                      "scope": "P",
+                      "annotation": [],
+                      "resultTypeSpecifier": {
+                        "type": "ListTypeSpecifier",
+                        "annotation": [],
+                        "elementType": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}CodeableConcept",
+                          "annotation": []
+                        }
+                      }
+                    }
+                  }
+                ],
+                "let": [],
+                "relationship": [],
+                "return": {
+                  "distinct": false,
+                  "annotation": [],
+                  "expression": {
+                    "type": "FunctionRef",
+                    "name": "ToConcept",
+                    "libraryName": "FHIRHelpers",
+                    "annotation": [],
+                    "signature": [
+                      {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}CodeableConcept",
+                        "annotation": []
+                      }
+                    ],
+                    "operand": [
+                      {
+                        "type": "AliasRef",
+                        "name": "X",
+                        "annotation": []
+                      }
+                    ]
+                  }
+                },
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "annotation": [],
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Concept",
+                    "annotation": []
+                  }
+                }
+              },
+              "valueset": {
+                "locator": "26:31-26:39",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet",
+                "name": "Reasons",
+                "preserve": true,
+                "annotation": []
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
