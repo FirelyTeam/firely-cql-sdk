@@ -48,7 +48,7 @@ partial class CqlComparers
             // step size of a CQL Decimal (0.25 'mg/d' canonicalizes to 0.0000000028935185 'g.s-1'),
             // where the Decimal comparer's 8-digit quantization answers 0 for every pair. See
             // UcumConversionExtensions.TryAlignUnits, which also establishes commensurability.
-            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1))
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1, out _))
             {
                 var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
@@ -86,13 +86,39 @@ partial class CqlComparers
             // may -- it "will always return true or false": units that cannot be canonicalized, or that
             // canonicalize to different base metrics (incommensurable), are simply not equivalent
             // (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
-            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1))
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1, out var step))
             {
+                // Rounding to the least precise operand has to happen at that operand's step size in the
+                // common unit, which the aligned values no longer carry: their scale describes the
+                // magnitude the conversion produced, not the precision either operand was authored at.
+                // Only when the alignment cannot tell what that step is does this fall back to the
+                // Decimal comparer's scale-based rounding.
+                if (step is { } stepValue && left1!.value is { } leftValue && right1!.value is { } rightValue)
+                    return EquivalentAtStep(leftValue, rightValue, stepValue);
+
                 var valueComparison = ValueComparer.Equivalent(left1!.value, right1!.value, precision);
                 return valueComparison;
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Compares two values in one unit after rounding both to <paramref name="step"/>, the step size of the
+        /// least precise of the two operands.
+        /// </summary>
+        private static bool EquivalentAtStep(decimal x, decimal y, decimal step)
+        {
+            try
+            {
+                return decimal.Round(x / step) == decimal.Round(y / step);
+            }
+            catch (OverflowException)
+            {
+                // A step far finer than the values it is applied to cannot change either of them, so an
+                // exact comparison is the same answer the rounding would have given.
+                return x == y;
+            }
         }
 
         /// <summary>
@@ -114,8 +140,10 @@ partial class CqlComparers
         /// </list>
         /// A value-derived hash therefore has to separate some pair that compares equal, which is what
         /// lets <c>Distinct</c>/<c>Union</c>/<c>Except</c> keep two quantities the comparer calls equal.
-        /// A constant cannot: it costs the bucket spread - these operators degrade to a linear scan
-        /// within the set - and buys the only answer that is correct for every pair.
+        /// A constant cannot: it buys the only answer that is correct for every pair, and costs the
+        /// bucket spread those operators rely on. Every insertion into their set becomes a linear scan,
+        /// making them quadratic in the number of quantities, and for operands in differing units each
+        /// step of that scan reaches the metric service.
         /// </remarks>
         protected override int GetHashCodeValue(CqlQuantity value) => 0;
 

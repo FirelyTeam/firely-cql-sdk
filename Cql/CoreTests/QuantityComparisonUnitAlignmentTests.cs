@@ -69,9 +69,9 @@ namespace CoreTests
         /// <summary>
         /// Equivalence rounds to "the precision of the least precise operand" (ibid., section
         /// "5.2 Equivalent"), so neither operand may inherit the other's precision from the alignment.
-        /// Two spellings of one unit carry the same factor and are therefore compared as authored,
-        /// which is what makes the answer independent of the operand order; a genuine conversion has
-        /// the padding the metric service adds stripped back off.
+        /// Across units that precision is an absolute step size and not a count of decimal places:
+        /// 1000.4 'mg' is written to one decimal place but resolves a tenth of a milligram, which is
+        /// finer than the single decimal place of 1.0 'g'.
         /// </summary>
         [TestMethod]
         public void Equivalent_CanonicalOperandBelowDecimalStepSize_RoundsToTheAuthoredPrecision()
@@ -82,11 +82,55 @@ namespace CoreTests
             // 0.2501 rounded to the two decimal places of the least precise operand is 0.25.
             Assert.IsTrue(Context.Operators.Equivalent(Q(0.25m, "mg/d"), Q(0.2501m, "mg.d-1")));
             Assert.IsTrue(Context.Operators.Equivalent(Q(0.2501m, "mg.d-1"), Q(0.25m, "mg/d")));
+        }
 
-            // Across a genuine conversion, in both operand orders: 1000.4 'mg' is 1.0004 'g', which
-            // rounds to the single decimal place of 1.0 'g'.
-            Assert.IsTrue(Context.Operators.Equivalent(Q(1.0m, "g"), Q(1000.4m, "mg")));
-            Assert.IsTrue(Context.Operators.Equivalent(Q(1000.4m, "mg"), Q(1.0m, "g")));
+        /// <summary>
+        /// Writing more decimal places on one operand may only make equivalence stricter. The least
+        /// precise operand here is 1.0 'g', whose step is a tenth of a gram, then 1.00 'g' at a
+        /// hundredth, then 1.0000 'g' at a ten-thousandth - which is finer than the tenth of a
+        /// milligram the other operand resolves, and so is the point where the pair stops being
+        /// equivalent.
+        /// </summary>
+        [TestMethod]
+        [DataRow("1.0", "1000.6", true)]
+        [DataRow("1.00", "1004", true)]
+        [DataRow("1.0", "1000.4", true)]
+        [DataRow("1.0000", "1000.4", false)]
+        public void Equivalent_AcrossAConversion_RoundsToTheCoarserStepSize(string grams, string milligrams, bool expected)
+        {
+            var g = Q(decimal.Parse(grams, CultureInfo.InvariantCulture), "g");
+            var mg = Q(decimal.Parse(milligrams, CultureInfo.InvariantCulture), "mg");
+
+            Assert.AreEqual(expected, Context.Operators.Equivalent(g, mg));
+            Assert.AreEqual(expected, Context.Operators.Equivalent(mg, g));
+        }
+
+        /// <summary>
+        /// A conversion that divides by a non-decimal factor does not come back exact - 0.25 'mg/d' in
+        /// 'ug/d' is 249.99999999999999999999999999 - and comparison truncates rather than rounds at the
+        /// eighth decimal, which would put that operand a full step below the 250 it is exactly equal to.
+        /// </summary>
+        [TestMethod]
+        public void Compare_ConversionThatIsNotExactInDecimal_StaysEqual()
+        {
+            Assert.AreEqual(true, Context.Operators.Equal(Q(0.25m, "mg/d"), Q(250m, "ug/d")));
+            Assert.AreEqual(true, Context.Operators.Equal(Q(250m, "ug/d"), Q(0.25m, "mg/d")));
+            Assert.AreEqual(true, Context.Operators.Equal(Q(6m, "mg/d"), Q(6000m, "ug/d")));
+            Assert.AreEqual(true, Context.Operators.GreaterOrEqual(Q(0.0000000028935185185185185185m, "g.s-1"), Q(0.25m, "mg/d")));
+        }
+
+        /// <summary>
+        /// Converting into the finer of the two units multiplies by the full factor ratio, which is
+        /// unbounded. A comparison may not abort the evaluation of the whole define over an operand it
+        /// cannot rescale, so an overflow degrades to the canonical fallback - the same path as a unit
+        /// the service will not convert into.
+        /// </summary>
+        [TestMethod]
+        public void Compare_ConversionThatOverflowsDecimal_DoesNotThrow()
+        {
+            Assert.AreEqual(false, Context.Operators.Equal(Q(1e20m, "m"), Q(1m, "fm")));
+            Assert.AreEqual(true, Context.Operators.Greater(Q(1e20m, "m"), Q(1m, "fm")));
+            Assert.IsFalse(Context.Operators.Equivalent(Q(1e20m, "m"), Q(1m, "fm")));
         }
 
         [TestMethod]
@@ -111,6 +155,11 @@ namespace CoreTests
             Assert.AreEqual(true, Context.Operators.Equal(Q(1m, "day"), Q(24m, "h")));
             Assert.IsTrue(Context.Operators.Equivalent(Q(1m, "wk"), Q(7m, "d")));
 
+            // The alias carries its UCUM spelling into the alignment, so this pair is brought into 'h'
+            // rather than falling back to the canonical 's': equivalence then rounds to the tenth of a
+            // day the left operand resolves, which 24.4 'h' is within.
+            Assert.IsTrue(Context.Operators.Equivalent(Q(1.0m, "day"), Q(24.4m, "h")));
+
             // Equivalence between a calendar duration above days and its definite-time UCUM counterpart
             // is explicit in the spec: "1 year ~ 1 'a'" (ibid., section "5.2 Equivalent").
             Assert.IsTrue(Context.Operators.Equivalent(Q(1m, "a"), Q(1m, "year")));
@@ -118,9 +167,10 @@ namespace CoreTests
             // Equality of the same pair should be null - "UCUM definite-time duration quantities above
             // days (and weeks) are not comparable to calendar duration quantities above days (and
             // weeks)" (ibid., section "5.1 Equal") - but this comparer maps 'year' onto 'a' for equality
-            // too and answers true. That deviation predates the unit alignment this class covers and
-            // still needs a tracking issue; it is deliberately left unasserted either way, so that
-            // fixing it does not have to fight this test.
+            // too and answers true. That deviation predates the unit alignment this class covers and is
+            // tracked in #1650; it is deliberately left unasserted either way, so that fixing it does
+            // not have to fight this test.
+            // Remove this comment and assert the corrected behaviour when #1650 is implemented.
         }
 
         /// <summary>
