@@ -23,7 +23,9 @@
   `FHIR.date.value` a `System.Date`), but the compiler read it as the .NET model's own
   representation (a `DateTimeOffset`, a `string`) wherever the ELM did not state the type it
   expected: in a MADiE-translated library, and in an arm of a choice dispatch whose alternatives
-  differ in type. The value now converts to the declared System type there too, so for example
+  differ in type. For every primitive whose .NET representation differs from the declared System
+  type and converts to it (`date`, `dateTime`, `instant`, `time`, `base64Binary`), the value now
+  converts to the declared System type there too, so for example
   `Observation.effective.value` is a `DateTime` for both its `dateTime` and its `instant`
   alternative, and `C.onset.value` yields a `DateTime` rather than the `FhirDateTime` itself.
   Accordingly, the QI-Core type `NotDoneRecorded` (the `recorded` element of the not-done profiles,

@@ -495,7 +495,8 @@ public class CSharpEmitterTests
     /// <summary>
     /// Asserts that <paramref name="body"/> is a syntactically valid body for a method returning
     /// <paramref name="returnType"/> with <paramref name="parameters"/>: the string assertions pin
-    /// the shape, this pins that the shape is C#.
+    /// the shape, this pins that the shape is C#. It checks syntax only: pattern-variable scope and
+    /// definite assignment are checked where generated libraries are compiled.
     /// </summary>
     private static void AssertParsesAsMethodBody(string body, string returnType, string parameters)
     {
