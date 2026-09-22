@@ -17,4 +17,4 @@
   A message built entirely from resolved types is byte-for-byte unchanged. A library that reaches
   this never translated successfully, so no evaluation result moves, and no public API change and no
   `GeneratorToolVersion` change: `MessageProvider` is internal and the emitted C# is untouched. Why
-  a result type is missing in the first place is unchanged and is separate work.
+  a result type is missing in the first place is unchanged and is separate work. (#1655)
