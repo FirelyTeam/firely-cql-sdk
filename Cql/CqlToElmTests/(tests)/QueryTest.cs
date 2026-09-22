@@ -48,6 +48,33 @@ namespace Hl7.Cql.CqlToElm.Test
             query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
         }
         [TestMethod]
+        public void Return_defaults_to_distinct()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeTrue();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 2, 3);
+        }
+
+        [TestMethod]
+        public void Return_distinct_removes_duplicates()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return distinct N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeTrue();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 2, 3);
+        }
+
+        [TestMethod]
+        public void Return_all_keeps_duplicates()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({ 1, 1, 2, 2, 3 }) N return all N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.@return.distinct.Should().BeFalse();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 1, 2, 2, 3);
+        }
+
+        [TestMethod]
         public void Relationship_withscalarsources()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
@@ -318,6 +345,33 @@ namespace Hl7.Cql.CqlToElm.Test
             var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             var with = q.relationship[0].Should().BeOfType<With>().Subject;
             var property = with.expression.Should().BeOfType<Property>().Subject;
+        }
+
+        [TestMethod]
+        public void SuchThat_WithAnyTypedElseBranch_TypesAsBoolean()
+        {
+            // Regression test for #1601: a such that clause built as `if <bool> then true else
+            // <Any-typed>` (the Any typically coming from a call the translator could not resolve
+            // to anything more specific) used to widen the whole conditional - and with it the
+            // relationship clause's lambda - to Any, so Cql.Compiler's Where<T> binder had nothing
+            // to bind against (`Func<T, object>` vs. the expected `Func<T, bool?>`). See
+            // ElmFactory.If and ConditionalBranchTypeTest for the underlying fix.
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Claims version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define function "Error"(message String): Message(null, true, 'E1', 'Error', message)
+
+                define q:
+                    from [Practitioner] p
+                        with [PractitionerRole] r
+                        such that if r.active then true else "Error"('not supported')
+                """);
+            var qDef = lib.ShouldDefine<ExpressionDef>("q");
+            var q = qDef.expression.Should().BeOfType<Query>().Subject;
+            var with = q.relationship[0].Should().BeOfType<With>().Subject;
+            with.suchThat.Should().HaveType(SystemTypes.BooleanType);
         }
 
         [TestMethod]

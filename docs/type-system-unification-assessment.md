@@ -4,7 +4,7 @@ Companion to `generated-csharp-optimization-opportunities.md` (§3, conversion
 specialization). Assessment of whether this repo should migrate its CQL primitives
 (`Hl7.Cql.Primitives` + `Hl7.Cql.Iso8601`) onto the Firely .NET SDK's System types
 (`Hl7.Fhir.ElementModel.Types`, "P.*"), reachable from POCOs via `IToSystemPrimitive`
-(SDK ≥ 5.13.1/6.0.0; this repo references 6.3.0).
+(SDK ≥ 5.13.1/6.0.0; this repo references 6.5.0).
 
 ## Why this is a semantics question, not just deduplication
 

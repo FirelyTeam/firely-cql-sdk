@@ -109,6 +109,98 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void AnyTypedElseBranch_DoesNotWidenTheThenBranchToAny()
+        {
+            // Regression test for #1601. An else branch typed Any - here, a call the translator
+            // could not resolve to anything more specific than Any, the same outcome an
+            // AllowUnresolvedExternals call or a Message(null, ...) source produces - used to
+            // reconcile by the general cost-based path below, which measured coercing the Boolean
+            // then branch *up* to Any as cheaper than coercing the Any else branch down to Boolean,
+            // and picked it. That silently widened an otherwise-Boolean conditional to Any; anywhere
+            // that conditional fed a lambda expecting bool? (a such that clause, for instance -
+            // see QueryTest.SuchThat_WithAnyTypedElseBranch_TypesAsBoolean), Cql.Compiler's binder
+            // then had no Func<T, object> overload to bind to.
+            //
+            // An Any-typed branch has no static type of its own to contribute, on either side - see
+            // AnyTypedThenBranch_DoesNotWidenTheElseBranchToAny for the exact mirror, and
+            // IfAndCase_AgreeOnAnyTypedBranchHandling for why this must be symmetric.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ReproIf version '1.0.0'
+
+                define function "Error"(message String): Message(null, true, 'E1', 'Error', message)
+
+                define "IfElseAny": if true then true else "Error"('not supported')
+                """);
+
+            var ifExpression = library.ShouldDefine<ExpressionDef>("IfElseAny").expression!;
+            ifExpression.resultTypeSpecifier.Should().Be(
+                SystemTypes.BooleanType,
+                "the then branch's static type must govern when the else branch is Any-typed, per the CQL specification's If semantics.");
+        }
+
+        [TestMethod]
+        public void AnyTypedThenBranch_DoesNotWidenTheElseBranchToAny()
+        {
+            // The exact mirror of AnyTypedElseBranch_DoesNotWidenTheThenBranchToAny, and the case
+            // that stayed broken after the first fix for #1601 handled only the else side: a
+            // then branch typed Any fell through to the same cost-based reconciliation, which
+            // preferred widening the Boolean else branch *up* to Any (a cheap Subtype coercion) over
+            // casting the Any then branch down (a costlier MoreCompatible coercion), so the whole
+            // conditional stayed typed Any. See IfAndCase_AgreeOnAnyTypedBranchHandling for why an
+            // Any-typed branch on either side must reconcile the same way.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ReproIfThenAny version '1.0.0'
+
+                define function "Error"(message String): Message(null, true, 'E1', 'Error', message)
+
+                define "IfThenAny": if true then "Error"('not supported') else true
+                """);
+
+            var ifExpression = library.ShouldDefine<ExpressionDef>("IfThenAny").expression!;
+            ifExpression.resultTypeSpecifier.Should().Be(
+                SystemTypes.BooleanType,
+                "the else branch's static type must govern when the then branch is Any-typed, exactly as the mirror case already requires of the else branch.");
+        }
+
+        [TestMethod]
+        public void IfAndCase_AgreeOnAnyTypedBranchHandling()
+        {
+            // Pinned since #1595 ("if behaves the way case already did") as an explicit invariant:
+            // If and Case must not diverge on how they treat an Any-typed branch, regardless of
+            // which branch carries it or which construct is used. Case already resolves this
+            // symmetrically - VisitCaseExpressionTerm drops Any from the set of branch result types
+            // regardless of which branch(es) it came from - so If reconciling asymmetrically (only
+            // one side generalized past a literal null) would make the two constructs disagree about
+            // the exact same CQL shape translated two different ways.
+            //
+            // A function declared `returns Any` (FunctionDefinitionTest.OptionalReturnTypesMayBeSupertype)
+            // is statically Any at every call site regardless of what its body evaluates to, so using
+            // one in a branch here means that branch's real value gets cast down to the other
+            // branch's type if that one wins - true for Case today already, so If doing the same is
+            // consistency with existing behavior, not a new class of defect. (The Java reference
+            // translator instead honors what the body evaluates to rather than the Any declaration;
+            // that divergence is a separate concern from whether If and Case agree with each other.)
+            const string cql = """
+                library IfCaseParity version '1.0.0'
+
+                define function "Error"(message String): Message(null, true, 'E1', 'Error', message)
+
+                define "IfThenAny": if true then "Error"('not supported') else true
+                define "IfElseAny": if true then true else "Error"('not supported')
+                define "CaseThenAny": case when true then "Error"('not supported') else true end
+                define "CaseElseAny": case when true then true else "Error"('not supported') end
+                """;
+
+            var library = CreateCqlToolkit().MakeLibrary(cql);
+            foreach (var name in new[] { "IfThenAny", "IfElseAny", "CaseThenAny", "CaseElseAny" })
+            {
+                library.ShouldDefine<ExpressionDef>(name).expression!.resultTypeSpecifier.Should().Be(
+                    SystemTypes.BooleanType,
+                    $"{name} must type as Boolean - If and Case must agree on Any-branch handling regardless of which branch carries Any or which construct is used.");
+            }
+        }
+
+        [TestMethod]
         public void PartiallyOverlappingChoiceBranches_UnionTheAlternatives()
         {
             // Both branches are already choices, overlapping only in String. CanBeCast is satisfied

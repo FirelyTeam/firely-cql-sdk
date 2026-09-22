@@ -92,8 +92,10 @@ MESO-level SDK change, because consumers regenerate.
 
 ## Recording the decision
 
-Every release-notes document carries a `### Version Level` section naming the level and the
-trigger that forced it. See [release-notes-template.md](releases/release-notes-template.md).
+The level and the trigger that forced it are recorded in the version-bump PR's description. The
+release-notes document itself does not discuss the version level — this document explains what the
+digits mean, so a per-release restatement only adds noise and drifts. See
+[release-notes-template.md](releases/release-notes-template.md).
 
 ## Tie-breaker
 

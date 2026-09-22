@@ -9,12 +9,6 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<!--
-			Keep FirelyNetVersion in sync between cql-base.props and cql-demo.props and README.md
-			The version must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/Directory.Packages.props
-			-->
-		<FirelyNetVersion>6.3.0</FirelyNetVersion>
-
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>
 		<DefineConstants Condition="'$(FhirRelease)'!=''">$(DefineConstants);FhirRelease$(FhirRelease)</DefineConstants>
@@ -49,7 +43,7 @@
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
-		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />
+		<PackageReference Include="JetBrains.Annotations" />
 	</ItemGroup>
 
 </Project>
