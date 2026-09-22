@@ -100,6 +100,10 @@ namespace Hl7.Cql.Fhir
                 ? types
                 : null;
 
+        /// <inheritdoc/>
+        internal override string? GetModelTypeName(Type type) =>
+            _inspector.FindClassMapping(type) is { } cm ? $"{{http://hl7.org/fhir}}{cm.Name}" : null;
+
         internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
             // This is not used by the data source, but we'll implement it nonetheless.

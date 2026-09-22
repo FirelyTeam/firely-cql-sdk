@@ -534,34 +534,19 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CqlConcept e_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, d_ as CodeableConcept);
             CqlValueSet f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
-            CqlDateTime h_;
-            DataType m_ = PregnantObservation?.Effective;
-            bool n_ = m_ is FhirDateTime;
-            if (n_)
+            DataType h_ = PregnantObservation?.Effective;
+            object i_ = h_;
+            CqlDateTime l_ = i_ switch
             {
-                string o_ = context.Operators.Convert<string>(m_ as FhirDateTime);
-                CqlDateTime p_ = context.Operators.ConvertStringToDateTime(o_);
-                h_ = p_;
-            }
-            else
-            {
-                bool q_ = m_ is Instant;
-                if (q_)
-                {
-                    DateTimeOffset? r_ = (m_ as Instant)?.Value;
-                    CqlDateTime s_ = context.Operators.Convert<CqlDateTime>(r_);
-                    h_ = s_;
-                }
-                else
-                {
-                    h_ = default;
-                }
-            }
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
-            CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
-            bool? k_ = context.Operators.Overlaps(i_, j_, "day");
-            bool? l_ = context.Operators.And(g_, k_);
-            return l_;
+                FhirDateTime j_ => context.Operators.Convert<CqlDateTime>(j_),
+                Instant k_ => context.Operators.Convert<CqlDateTime>(k_.Value),
+                _ => null,
+            };
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
+            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
+            bool? o_ = context.Operators.Overlaps(m_, n_, "day");
+            bool? p_ = context.Operators.And(g_, o_);
+            return p_;
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);

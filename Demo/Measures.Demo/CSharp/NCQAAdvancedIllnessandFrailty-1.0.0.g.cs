@@ -290,15 +290,20 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         bool? d_ = context.Operators.Not((bool?)(c_ is null));
         if (d_ ?? false)
         {
-            return c_;
+            IEnumerable<CqlDate> e_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+            IEnumerable<CqlDate> f_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+            IEnumerable<CqlDate> g_ = context.Operators.Union<CqlDate>(e_, f_);
+            return g_;
         }
         else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
         {
-            return b_;
+            IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+            return h_;
         }
         else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
         {
-            return a_;
+            IEnumerable<CqlDate> i_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+            return i_;
         }
         else
         {
@@ -431,28 +436,18 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             bool? k_(Medication M) {
                 Id m_ = M?.IdElement;
                 string n_ = FHIRHelpers_4_0_001.Instance.ToString(context, m_);
-                FhirString o_;
-                DataType y_ = MR?.Medication;
-                bool z_ = y_ is ResourceReference;
-                if (z_)
-                {
-                    FhirString aa_ = (y_ as ResourceReference)?.ReferenceElement;
-                    o_ = aa_;
-                }
-                else
-                {
-                    o_ = default;
-                }
-                string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_);
-                IEnumerable<string> q_ = context.Operators.Split(p_, "/");
-                string r_ = context.Operators.Last<string>(q_);
-                bool? s_ = context.Operators.Equal(n_, r_);
-                CodeableConcept t_ = M?.Code;
-                CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
-                CqlValueSet v_ = this.Dementia_Medications(context);
-                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                bool? x_ = context.Operators.And(s_, w_);
-                return x_;
+                DataType o_ = MR?.Medication;
+                FhirString q_ = o_ is ResourceReference p_ ? p_.ReferenceElement : null;
+                string r_ = FHIRHelpers_4_0_001.Instance.ToString(context, q_);
+                IEnumerable<string> s_ = context.Operators.Split(r_, "/");
+                string t_ = context.Operators.Last<string>(s_);
+                bool? u_ = context.Operators.Equal(n_, t_);
+                CodeableConcept v_ = M?.Code;
+                CqlConcept w_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, v_);
+                CqlValueSet x_ = this.Dementia_Medications(context);
+                bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                bool? z_ = context.Operators.And(u_, y_);
+                return z_;
             }
 
             bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
@@ -464,20 +459,20 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         IEnumerable<MedicationDispense> g_ = NCQAStatus_1_0_0.Instance.Dispensed_Medication(context, f_);
 
         bool? h_(MedicationDispense DementiaMedDispensed) {
-            FhirDateTime ab_ = DementiaMedDispensed?.WhenHandedOverElement;
-            CqlInterval<CqlDateTime> ac_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ab_);
-            CqlDateTime ad_ = context.Operators.Start(ac_);
-            CqlDate ae_ = context.Operators.DateFrom(ad_);
-            CqlInterval<CqlDateTime> af_ = this.Measurement_Period(context);
-            CqlDateTime ag_ = context.Operators.Start(af_);
-            CqlDate ah_ = context.Operators.DateFrom(ag_);
-            CqlQuantity ai_ = context.Operators.Quantity(1m, "year");
-            CqlDate aj_ = context.Operators.Subtract(ah_, ai_);
-            CqlDateTime ak_ = context.Operators.End(af_);
-            CqlDate al_ = context.Operators.DateFrom(ak_);
-            CqlInterval<CqlDate> am_ = context.Operators.Interval(aj_, al_, true, true);
-            bool? an_ = context.Operators.In<CqlDate>(ae_, am_, (string)default);
-            return an_;
+            FhirDateTime aa_ = DementiaMedDispensed?.WhenHandedOverElement;
+            CqlInterval<CqlDateTime> ab_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, aa_);
+            CqlDateTime ac_ = context.Operators.Start(ab_);
+            CqlDate ad_ = context.Operators.DateFrom(ac_);
+            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
+            CqlDateTime af_ = context.Operators.Start(ae_);
+            CqlDate ag_ = context.Operators.DateFrom(af_);
+            CqlQuantity ah_ = context.Operators.Quantity(1m, "year");
+            CqlDate ai_ = context.Operators.Subtract(ag_, ah_);
+            CqlDateTime aj_ = context.Operators.End(ae_);
+            CqlDate ak_ = context.Operators.DateFrom(aj_);
+            CqlInterval<CqlDate> al_ = context.Operators.Interval(ai_, ak_, true, true);
+            bool? am_ = context.Operators.In<CqlDate>(ad_, al_, (string)default);
+            return am_;
         }
 
         bool? i_ = context.Operators.WhereAny<MedicationDispense>(g_, h_);

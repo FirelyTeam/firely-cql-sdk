@@ -198,6 +198,8 @@ internal partial class CSharpEmitter
             CodeLambda lambda => PrintInlineLambda(lambda),
             CodeIfChain => throw new NotSupportedException(
                 "An if-chain cannot print as an inline expression; this subtree should not have been classified inline-only."),
+            CodeTypeSwitch => throw new NotSupportedException(
+                "A type switch binds variables and cannot print as an inline expression; this subtree should not have been classified inline-only."),
             _ => PrintShallow(node, child => new Atom(PrintFullyInline(child), child)),
         };
     }
@@ -344,32 +346,109 @@ internal partial class CSharpEmitter
     private string PrintTypeIs(CodeTypeIs typeIs, Func<CodeExpression, Atom> child)
     {
         var atom = child(typeIs.Operand);
-        var operand = atom.Code;
 
         // C# type patterns cannot test against nullable value types (CS8116); test the
         // underlying type instead — same runtime semantics (null never matches).
         var testedType = Nullable.GetUnderlyingType(typeIs.TestedType) ?? typeIs.TestedType;
 
-        // Tuple types print in C# tuple syntax, which is not legal in a type pattern;
-        // use the equivalent ValueTuple<...> form there instead.
-        string typeName;
-        if (_typeToCSharpConverter.ShouldUseTupleType(testedType))
+        return $"{PatternOperand(atom, testedType)} is {PatternTypeName(testedType)}";
+    }
+
+    /// <summary>
+    /// The operand of a type pattern. A value-typed operand must be boxed for the type test
+    /// to be legal C# (CS8121).
+    /// </summary>
+    private string PatternOperand(Atom operand, Type testedType) =>
+        operand.Type.IsValueType
+        || _typeToCSharpConverter.ShouldUseTupleType(operand.Type)
+        || testedType.IsValueType
+            ? $"((object){operand.Code.ParenthesizeIfNeeded()})"
+            : operand.Code;
+
+    /// <summary>
+    /// The type of a type pattern. Tuple types print in C# tuple syntax, which is not legal in
+    /// a type pattern; the equivalent <c>ValueTuple&lt;…&gt;</c> form is used there instead.
+    /// </summary>
+    private string PatternTypeName(Type testedType)
+    {
+        if (!_typeToCSharpConverter.ShouldUseTupleType(testedType))
+            return _typeToCSharpConverter.ToCSharp(testedType);
+
+        var elementTypes = _typeToCSharpConverter
+            .GetTupleProperties(testedType)
+            .Select(p => _typeToCSharpConverter.ToCSharp(p.Type));
+        return $"ValueTuple<{nameof(CqlTupleMetadata)}, {string.Join(", ", elementTypes)}>";
+    }
+
+    /// <summary>
+    /// The declaration pattern testing <paramref name="operand"/> for the type of
+    /// <paramref name="narrowed"/> and binding it to that variable: <c>x is T v</c>.
+    /// </summary>
+    private string PrintTypePattern(Atom operand, CodeLocal narrowed) =>
+        $"{SwitchOperand(operand, narrowed.Type)} is {PatternDesignation(narrowed)}";
+
+    /// <summary>
+    /// The operand of a type switch's pattern, parenthesized unless it is a single term, since
+    /// both <c>is</c> and <c>switch</c> bind tighter than most operators it may print with.
+    /// </summary>
+    private string SwitchOperand(Atom operand, Type testedType)
+    {
+        var code = PatternOperand(operand, testedType);
+        return code == operand.Code ? code.ParenthesizeIfNeeded() : code;
+    }
+
+    /// <summary>
+    /// The <c>T v</c> designation a type switch arm binds its narrowed value with, or just the
+    /// type when the arm binds no variable (see <see cref="BindsPatternVariable"/>).
+    /// </summary>
+    private string PatternDesignation(CodeLocal narrowed) =>
+        BindsPatternVariable(narrowed)
+            ? $"{PatternTypeName(narrowed.Type)} {_assignedNames[narrowed]}"
+            : PatternTypeName(narrowed.Type);
+
+    /// <summary>
+    /// Whether a type switch arm binds its narrowed value to a pattern variable. An arm for a
+    /// tuple type cannot: a type pattern names the tuple as <c>ValueTuple&lt;…&gt;</c>, which
+    /// carries no element names, so a variable of that type could not be read by element name.
+    /// Such an arm stands for its narrowed value with <see cref="PrintNarrowingCast"/> instead.
+    /// </summary>
+    internal bool BindsPatternVariable(CodeLocal narrowed) =>
+        !_typeToCSharpConverter.ShouldUseTupleType(narrowed.Type);
+
+    /// <summary>
+    /// The code that stands for the narrowed value of an arm that binds no pattern variable: the
+    /// operand, a variable, cast to the arm's type in its named form.
+    /// </summary>
+    private string PrintNarrowingCast(Atom operand, CodeLocal narrowed) =>
+        $"(({_typeToCSharpConverter.ToCSharp(narrowed.Type)}){operand.Code})";
+
+    /// <summary>
+    /// Prints a type switch whose arms all print inline as one expression. A single arm prints
+    /// as a conditional over a declaration pattern, more as a switch expression; the no-match
+    /// value prints <c>null</c> rather than <c>default</c>, so it cannot take the non-nullable
+    /// type of an arm when the expression's natural type is inferred.
+    /// </summary>
+    private string PrintTypeSwitchExpression(CodeTypeSwitch typeSwitch, Atom operand)
+    {
+        var otherwise = typeSwitch.Otherwise is CodeConstant { Value: null } && CodeTypeRules.IsNullAssignable(typeSwitch.Type)
+            ? "null"
+            : PrintFullyInline(typeSwitch.Otherwise);
+
+        if (typeSwitch.Arms is [var arm])
+            return $"{PrintTypePattern(operand, arm.Narrowed)} ? {PrintFullyInline(arm.Body)} : {otherwise}";
+
+        var testedTypes = typeSwitch.Arms.Select(a => a.Narrowed.Type);
+        var isb = new IndentedStringBuilder();
+        isb.AppendLine($"{SwitchOperand(operand, testedTypes.FirstOrDefault(t => t.IsValueType) ?? typeof(object))} switch");
+        isb.AppendLine("{");
+        using (isb.Indent())
         {
-            var elementTypes = _typeToCSharpConverter
-                .GetTupleProperties(testedType)
-                .Select(p => _typeToCSharpConverter.ToCSharp(p.Type));
-            typeName = $"ValueTuple<{nameof(CqlTupleMetadata)}, {string.Join(", ", elementTypes)}>";
+            foreach (var a in typeSwitch.Arms)
+                isb.AppendLine($"{PatternDesignation(a.Narrowed)} => {PrintFullyInline(a.Body)},");
+            isb.AppendLine($"_ => {otherwise},");
         }
-        else
-            typeName = _typeToCSharpConverter.ToCSharp(testedType);
-
-        // A value-typed operand must be boxed for the type test to be legal C# (CS8121).
-        if (atom.Type.IsValueType
-            || _typeToCSharpConverter.ShouldUseTupleType(atom.Type)
-            || testedType.IsValueType)
-            operand = $"((object){operand.ParenthesizeIfNeeded()})";
-
-        return $"{operand} is {typeName}";
+        isb.Append("}");
+        return isb;
     }
 
     private string PrintBinary(CodeBinary binary, Func<CodeExpression, Atom> child)

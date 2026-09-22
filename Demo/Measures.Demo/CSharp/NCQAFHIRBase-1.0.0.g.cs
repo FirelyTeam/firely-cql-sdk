@@ -43,30 +43,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (onset is Period)
         {
-            FhirDateTime c_;
-            if (onset is Period)
-            {
-                FhirDateTime h_ = (onset as Period)?.StartElement;
-                c_ = h_;
-            }
-            else
-            {
-                c_ = default;
-            }
-            CqlDateTime d_ = context.Operators.Convert<CqlDateTime>(c_);
-            FhirDateTime e_;
-            if (onset is Period)
-            {
-                FhirDateTime i_ = (onset as Period)?.EndElement;
-                e_ = i_;
-            }
-            else
-            {
-                e_ = default;
-            }
-            CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_);
-            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(d_, f_, true, true);
-            return g_;
+            FhirDateTime d_ = onset is Period c_ ? c_.StartElement : null;
+            CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
+            FhirDateTime g_ = onset is Period f_ ? f_.EndElement : null;
+            CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
+            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(e_, h_, true, true);
+            return i_;
         }
         else if (onset is FhirString)
         {
@@ -230,30 +212,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (abatement is Period)
         {
-            FhirDateTime c_;
-            if (abatement is Period)
-            {
-                FhirDateTime h_ = (abatement as Period)?.StartElement;
-                c_ = h_;
-            }
-            else
-            {
-                c_ = default;
-            }
-            CqlDateTime d_ = context.Operators.Convert<CqlDateTime>(c_);
-            FhirDateTime e_;
-            if (abatement is Period)
-            {
-                FhirDateTime i_ = (abatement as Period)?.EndElement;
-                e_ = i_;
-            }
-            else
-            {
-                e_ = default;
-            }
-            CqlDateTime f_ = context.Operators.Convert<CqlDateTime>(e_);
-            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(d_, f_, true, true);
-            return g_;
+            FhirDateTime d_ = abatement is Period c_ ? c_.StartElement : null;
+            CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
+            FhirDateTime g_ = abatement is Period f_ ? f_.EndElement : null;
+            CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
+            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(e_, h_, true, true);
+            return i_;
         }
         else if (abatement is FhirString)
         {
@@ -438,30 +402,12 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         }
         else if (choice is Period)
         {
-            FhirDateTime f_;
-            if (choice is Period)
-            {
-                FhirDateTime k_ = (choice as Period)?.StartElement;
-                f_ = k_;
-            }
-            else
-            {
-                f_ = default;
-            }
-            CqlDateTime g_ = context.Operators.Convert<CqlDateTime>(f_);
-            FhirDateTime h_;
-            if (choice is Period)
-            {
-                FhirDateTime l_ = (choice as Period)?.EndElement;
-                h_ = l_;
-            }
-            else
-            {
-                h_ = default;
-            }
-            CqlDateTime i_ = context.Operators.Convert<CqlDateTime>(h_);
-            CqlInterval<CqlDateTime> j_ = context.Operators.Interval(g_, i_, true, true);
-            return j_;
+            FhirDateTime g_ = choice is Period f_ ? f_.StartElement : null;
+            CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
+            FhirDateTime j_ = choice is Period i_ ? i_.EndElement : null;
+            CqlDateTime k_ = context.Operators.Convert<CqlDateTime>(j_);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(h_, k_, true, true);
+            return l_;
         }
         else if (choice is Instant)
         {
@@ -602,405 +548,438 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
+                        IEnumerable<CqlDate> ap_ = FirstList?.NewList;
+                        int? aq_ = FirstList?.IndexofNewDate;
+                        CqlDate ar_ = context.Operators.Indexer<CqlDate>(ap_, aq_);
 
-                        bool? ap_(CqlDate X) {
-                            IEnumerable<CqlDate> ax_ = FirstList?.NewList;
-                            int? ay_ = FirstList?.IndexofNewDate;
-                            CqlDate az_ = context.Operators.Indexer<CqlDate>(ax_, ay_);
-                            CqlQuantity ba_ = context.Operators.Quantity(1m, "day");
-                            CqlDate bb_ = context.Operators.Add(az_ as CqlDate, ba_);
-                            CqlQuantity bc_ = context.Operators.Quantity(30m, "days");
-                            CqlDate bd_ = context.Operators.Add(az_ as CqlDate, bc_);
-                            CqlInterval<CqlDate> be_ = context.Operators.Interval(bb_, bd_, true, true);
-                            bool? bf_ = context.Operators.In<CqlDate>(X, be_, (string)default);
-                            bool? bg_ = context.Operators.Not(bf_);
-                            return bg_;
+                        bool? as_(CqlDate X) {
+                            IEnumerable<CqlDate> ba_ = FirstList?.NewList;
+                            int? bb_ = FirstList?.IndexofNewDate;
+                            CqlDate bc_ = context.Operators.Indexer<CqlDate>(ba_, bb_);
+                            CqlQuantity bd_ = context.Operators.Quantity(1m, "day");
+                            CqlDate be_ = context.Operators.Add(bc_ as CqlDate, bd_);
+                            CqlQuantity bf_ = context.Operators.Quantity(30m, "days");
+                            CqlDate bg_ = context.Operators.Add(bc_ as CqlDate, bf_);
+                            CqlInterval<CqlDate> bh_ = context.Operators.Interval(be_, bg_, true, true);
+                            bool? bi_ = context.Operators.In<CqlDate>(X, bh_, (string)default);
+                            bool? bj_ = context.Operators.Not(bi_);
+                            return bj_;
                         }
 
-                        IEnumerable<CqlDate> aq_ = context.Operators.Where<CqlDate>(am_, ap_);
-                        int? ar_ = context.Operators.Add(an_, 1);
-                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? as_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ao_ as CqlDate, aq_, ar_);
-                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] at_ = [
-                            as_,
+                        IEnumerable<CqlDate> at_ = context.Operators.Where<CqlDate>(ap_, as_);
+                        int? au_ = context.Operators.Add(aq_, 1);
+                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? av_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ar_ as CqlDate, at_, au_);
+                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] aw_ = [
+                            av_,
                         ];
 
-                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? au_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SecondList) {
-                            IEnumerable<CqlDate> bh_ = SecondList?.NewList;
-                            int? bi_ = SecondList?.IndexofNewDate;
-                            CqlDate bj_ = context.Operators.Indexer<CqlDate>(bh_, bi_);
-                            if (bj_ is null)
+                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ax_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SecondList) {
+                            IEnumerable<CqlDate> bk_ = SecondList?.NewList;
+                            int? bl_ = SecondList?.IndexofNewDate;
+                            CqlDate bm_ = context.Operators.Indexer<CqlDate>(bk_, bl_);
+                            if (bm_ is null)
                             {
                                 return SecondList;
                             }
                             else
                             {
+                                IEnumerable<CqlDate> bn_ = SecondList?.NewList;
+                                int? bo_ = SecondList?.IndexofNewDate;
+                                CqlDate bp_ = context.Operators.Indexer<CqlDate>(bn_, bo_);
 
-                                bool? bk_(CqlDate X) {
-                                    IEnumerable<CqlDate> bs_ = SecondList?.NewList;
-                                    int? bt_ = SecondList?.IndexofNewDate;
-                                    CqlDate bu_ = context.Operators.Indexer<CqlDate>(bs_, bt_);
-                                    CqlQuantity bv_ = context.Operators.Quantity(1m, "day");
-                                    CqlDate bw_ = context.Operators.Add(bu_ as CqlDate, bv_);
-                                    CqlQuantity bx_ = context.Operators.Quantity(30m, "days");
-                                    CqlDate by_ = context.Operators.Add(bu_ as CqlDate, bx_);
-                                    CqlInterval<CqlDate> bz_ = context.Operators.Interval(bw_, by_, true, true);
-                                    bool? ca_ = context.Operators.In<CqlDate>(X, bz_, (string)default);
-                                    bool? cb_ = context.Operators.Not(ca_);
-                                    return cb_;
+                                bool? bq_(CqlDate X) {
+                                    IEnumerable<CqlDate> by_ = SecondList?.NewList;
+                                    int? bz_ = SecondList?.IndexofNewDate;
+                                    CqlDate ca_ = context.Operators.Indexer<CqlDate>(by_, bz_);
+                                    CqlQuantity cb_ = context.Operators.Quantity(1m, "day");
+                                    CqlDate cc_ = context.Operators.Add(ca_ as CqlDate, cb_);
+                                    CqlQuantity cd_ = context.Operators.Quantity(30m, "days");
+                                    CqlDate ce_ = context.Operators.Add(ca_ as CqlDate, cd_);
+                                    CqlInterval<CqlDate> cf_ = context.Operators.Interval(cc_, ce_, true, true);
+                                    bool? cg_ = context.Operators.In<CqlDate>(X, cf_, (string)default);
+                                    bool? ch_ = context.Operators.Not(cg_);
+                                    return ch_;
                                 }
 
-                                IEnumerable<CqlDate> bl_ = context.Operators.Where<CqlDate>(bh_, bk_);
-                                int? bm_ = context.Operators.Add(bi_, 1);
-                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bn_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, bj_ as CqlDate, bl_, bm_);
-                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] bo_ = [
-                                    bn_,
+                                IEnumerable<CqlDate> br_ = context.Operators.Where<CqlDate>(bn_, bq_);
+                                int? bs_ = context.Operators.Add(bo_, 1);
+                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bt_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, bp_ as CqlDate, br_, bs_);
+                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] bu_ = [
+                                    bt_,
                                 ];
 
-                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bp_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ThirdList) {
-                                    IEnumerable<CqlDate> cc_ = ThirdList?.NewList;
-                                    int? cd_ = ThirdList?.IndexofNewDate;
-                                    CqlDate ce_ = context.Operators.Indexer<CqlDate>(cc_, cd_);
-                                    if (ce_ is null)
+                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bv_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ThirdList) {
+                                    IEnumerable<CqlDate> ci_ = ThirdList?.NewList;
+                                    int? cj_ = ThirdList?.IndexofNewDate;
+                                    CqlDate ck_ = context.Operators.Indexer<CqlDate>(ci_, cj_);
+                                    if (ck_ is null)
                                     {
                                         return ThirdList;
                                     }
                                     else
                                     {
+                                        IEnumerable<CqlDate> cl_ = ThirdList?.NewList;
+                                        int? cm_ = ThirdList?.IndexofNewDate;
+                                        CqlDate cn_ = context.Operators.Indexer<CqlDate>(cl_, cm_);
 
-                                        bool? cf_(CqlDate X) {
-                                            IEnumerable<CqlDate> cn_ = ThirdList?.NewList;
-                                            int? co_ = ThirdList?.IndexofNewDate;
-                                            CqlDate cp_ = context.Operators.Indexer<CqlDate>(cn_, co_);
-                                            CqlQuantity cq_ = context.Operators.Quantity(1m, "day");
-                                            CqlDate cr_ = context.Operators.Add(cp_ as CqlDate, cq_);
-                                            CqlQuantity cs_ = context.Operators.Quantity(30m, "days");
-                                            CqlDate ct_ = context.Operators.Add(cp_ as CqlDate, cs_);
-                                            CqlInterval<CqlDate> cu_ = context.Operators.Interval(cr_, ct_, true, true);
-                                            bool? cv_ = context.Operators.In<CqlDate>(X, cu_, (string)default);
-                                            bool? cw_ = context.Operators.Not(cv_);
-                                            return cw_;
+                                        bool? co_(CqlDate X) {
+                                            IEnumerable<CqlDate> cw_ = ThirdList?.NewList;
+                                            int? cx_ = ThirdList?.IndexofNewDate;
+                                            CqlDate cy_ = context.Operators.Indexer<CqlDate>(cw_, cx_);
+                                            CqlQuantity cz_ = context.Operators.Quantity(1m, "day");
+                                            CqlDate da_ = context.Operators.Add(cy_ as CqlDate, cz_);
+                                            CqlQuantity db_ = context.Operators.Quantity(30m, "days");
+                                            CqlDate dc_ = context.Operators.Add(cy_ as CqlDate, db_);
+                                            CqlInterval<CqlDate> dd_ = context.Operators.Interval(da_, dc_, true, true);
+                                            bool? de_ = context.Operators.In<CqlDate>(X, dd_, (string)default);
+                                            bool? df_ = context.Operators.Not(de_);
+                                            return df_;
                                         }
 
-                                        IEnumerable<CqlDate> cg_ = context.Operators.Where<CqlDate>(cc_, cf_);
-                                        int? ch_ = context.Operators.Add(cd_, 1);
-                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ci_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ce_ as CqlDate, cg_, ch_);
-                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] cj_ = [
-                                            ci_,
+                                        IEnumerable<CqlDate> cp_ = context.Operators.Where<CqlDate>(cl_, co_);
+                                        int? cq_ = context.Operators.Add(cm_, 1);
+                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? cr_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, cn_ as CqlDate, cp_, cq_);
+                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] cs_ = [
+                                            cr_,
                                         ];
 
-                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ck_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FourthList) {
-                                            IEnumerable<CqlDate> cx_ = FourthList?.NewList;
-                                            int? cy_ = FourthList?.IndexofNewDate;
-                                            CqlDate cz_ = context.Operators.Indexer<CqlDate>(cx_, cy_);
-                                            if (cz_ is null)
+                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ct_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FourthList) {
+                                            IEnumerable<CqlDate> dg_ = FourthList?.NewList;
+                                            int? dh_ = FourthList?.IndexofNewDate;
+                                            CqlDate di_ = context.Operators.Indexer<CqlDate>(dg_, dh_);
+                                            if (di_ is null)
                                             {
                                                 return FourthList;
                                             }
                                             else
                                             {
+                                                IEnumerable<CqlDate> dj_ = FourthList?.NewList;
+                                                int? dk_ = FourthList?.IndexofNewDate;
+                                                CqlDate dl_ = context.Operators.Indexer<CqlDate>(dj_, dk_);
 
-                                                bool? da_(CqlDate X) {
-                                                    IEnumerable<CqlDate> di_ = FourthList?.NewList;
-                                                    int? dj_ = FourthList?.IndexofNewDate;
-                                                    CqlDate dk_ = context.Operators.Indexer<CqlDate>(di_, dj_);
-                                                    CqlQuantity dl_ = context.Operators.Quantity(1m, "day");
-                                                    CqlDate dm_ = context.Operators.Add(dk_ as CqlDate, dl_);
-                                                    CqlQuantity dn_ = context.Operators.Quantity(30m, "days");
-                                                    CqlDate do_ = context.Operators.Add(dk_ as CqlDate, dn_);
-                                                    CqlInterval<CqlDate> dp_ = context.Operators.Interval(dm_, do_, true, true);
-                                                    bool? dq_ = context.Operators.In<CqlDate>(X, dp_, (string)default);
-                                                    bool? dr_ = context.Operators.Not(dq_);
-                                                    return dr_;
+                                                bool? dm_(CqlDate X) {
+                                                    IEnumerable<CqlDate> du_ = FourthList?.NewList;
+                                                    int? dv_ = FourthList?.IndexofNewDate;
+                                                    CqlDate dw_ = context.Operators.Indexer<CqlDate>(du_, dv_);
+                                                    CqlQuantity dx_ = context.Operators.Quantity(1m, "day");
+                                                    CqlDate dy_ = context.Operators.Add(dw_ as CqlDate, dx_);
+                                                    CqlQuantity dz_ = context.Operators.Quantity(30m, "days");
+                                                    CqlDate ea_ = context.Operators.Add(dw_ as CqlDate, dz_);
+                                                    CqlInterval<CqlDate> eb_ = context.Operators.Interval(dy_, ea_, true, true);
+                                                    bool? ec_ = context.Operators.In<CqlDate>(X, eb_, (string)default);
+                                                    bool? ed_ = context.Operators.Not(ec_);
+                                                    return ed_;
                                                 }
 
-                                                IEnumerable<CqlDate> db_ = context.Operators.Where<CqlDate>(cx_, da_);
-                                                int? dc_ = context.Operators.Add(cy_, 1);
-                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dd_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, cz_ as CqlDate, db_, dc_);
-                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] de_ = [
-                                                    dd_,
+                                                IEnumerable<CqlDate> dn_ = context.Operators.Where<CqlDate>(dj_, dm_);
+                                                int? do_ = context.Operators.Add(dk_, 1);
+                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dp_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, dl_ as CqlDate, dn_, do_);
+                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] dq_ = [
+                                                    dp_,
                                                 ];
 
-                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? df_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FifthList) {
-                                                    IEnumerable<CqlDate> ds_ = FifthList?.NewList;
-                                                    int? dt_ = FifthList?.IndexofNewDate;
-                                                    CqlDate du_ = context.Operators.Indexer<CqlDate>(ds_, dt_);
-                                                    if (du_ is null)
+                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dr_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? FifthList) {
+                                                    IEnumerable<CqlDate> ee_ = FifthList?.NewList;
+                                                    int? ef_ = FifthList?.IndexofNewDate;
+                                                    CqlDate eg_ = context.Operators.Indexer<CqlDate>(ee_, ef_);
+                                                    if (eg_ is null)
                                                     {
                                                         return FifthList;
                                                     }
                                                     else
                                                     {
+                                                        IEnumerable<CqlDate> eh_ = FifthList?.NewList;
+                                                        int? ei_ = FifthList?.IndexofNewDate;
+                                                        CqlDate ej_ = context.Operators.Indexer<CqlDate>(eh_, ei_);
 
-                                                        bool? dv_(CqlDate X) {
-                                                            IEnumerable<CqlDate> ed_ = FifthList?.NewList;
-                                                            int? ee_ = FifthList?.IndexofNewDate;
-                                                            CqlDate ef_ = context.Operators.Indexer<CqlDate>(ed_, ee_);
-                                                            CqlQuantity eg_ = context.Operators.Quantity(1m, "day");
-                                                            CqlDate eh_ = context.Operators.Add(ef_ as CqlDate, eg_);
-                                                            CqlQuantity ei_ = context.Operators.Quantity(30m, "days");
-                                                            CqlDate ej_ = context.Operators.Add(ef_ as CqlDate, ei_);
-                                                            CqlInterval<CqlDate> ek_ = context.Operators.Interval(eh_, ej_, true, true);
-                                                            bool? el_ = context.Operators.In<CqlDate>(X, ek_, (string)default);
-                                                            bool? em_ = context.Operators.Not(el_);
-                                                            return em_;
+                                                        bool? ek_(CqlDate X) {
+                                                            IEnumerable<CqlDate> es_ = FifthList?.NewList;
+                                                            int? et_ = FifthList?.IndexofNewDate;
+                                                            CqlDate eu_ = context.Operators.Indexer<CqlDate>(es_, et_);
+                                                            CqlQuantity ev_ = context.Operators.Quantity(1m, "day");
+                                                            CqlDate ew_ = context.Operators.Add(eu_ as CqlDate, ev_);
+                                                            CqlQuantity ex_ = context.Operators.Quantity(30m, "days");
+                                                            CqlDate ey_ = context.Operators.Add(eu_ as CqlDate, ex_);
+                                                            CqlInterval<CqlDate> ez_ = context.Operators.Interval(ew_, ey_, true, true);
+                                                            bool? fa_ = context.Operators.In<CqlDate>(X, ez_, (string)default);
+                                                            bool? fb_ = context.Operators.Not(fa_);
+                                                            return fb_;
                                                         }
 
-                                                        IEnumerable<CqlDate> dw_ = context.Operators.Where<CqlDate>(ds_, dv_);
-                                                        int? dx_ = context.Operators.Add(dt_, 1);
-                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dy_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, du_ as CqlDate, dw_, dx_);
-                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] dz_ = [
-                                                            dy_,
+                                                        IEnumerable<CqlDate> el_ = context.Operators.Where<CqlDate>(eh_, ek_);
+                                                        int? em_ = context.Operators.Add(ei_, 1);
+                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? en_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ej_ as CqlDate, el_, em_);
+                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] eo_ = [
+                                                            en_,
                                                         ];
 
-                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ea_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SixthList) {
-                                                            IEnumerable<CqlDate> en_ = SixthList?.NewList;
-                                                            int? eo_ = SixthList?.IndexofNewDate;
-                                                            CqlDate ep_ = context.Operators.Indexer<CqlDate>(en_, eo_);
-                                                            if (ep_ is null)
+                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ep_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SixthList) {
+                                                            IEnumerable<CqlDate> fc_ = SixthList?.NewList;
+                                                            int? fd_ = SixthList?.IndexofNewDate;
+                                                            CqlDate fe_ = context.Operators.Indexer<CqlDate>(fc_, fd_);
+                                                            if (fe_ is null)
                                                             {
                                                                 return SixthList;
                                                             }
                                                             else
                                                             {
+                                                                IEnumerable<CqlDate> ff_ = SixthList?.NewList;
+                                                                int? fg_ = SixthList?.IndexofNewDate;
+                                                                CqlDate fh_ = context.Operators.Indexer<CqlDate>(ff_, fg_);
 
-                                                                bool? eq_(CqlDate X) {
-                                                                    IEnumerable<CqlDate> ey_ = SixthList?.NewList;
-                                                                    int? ez_ = SixthList?.IndexofNewDate;
-                                                                    CqlDate fa_ = context.Operators.Indexer<CqlDate>(ey_, ez_);
-                                                                    CqlQuantity fb_ = context.Operators.Quantity(1m, "day");
-                                                                    CqlDate fc_ = context.Operators.Add(fa_ as CqlDate, fb_);
-                                                                    CqlQuantity fd_ = context.Operators.Quantity(30m, "days");
-                                                                    CqlDate fe_ = context.Operators.Add(fa_ as CqlDate, fd_);
-                                                                    CqlInterval<CqlDate> ff_ = context.Operators.Interval(fc_, fe_, true, true);
-                                                                    bool? fg_ = context.Operators.In<CqlDate>(X, ff_, (string)default);
-                                                                    bool? fh_ = context.Operators.Not(fg_);
-                                                                    return fh_;
+                                                                bool? fi_(CqlDate X) {
+                                                                    IEnumerable<CqlDate> fq_ = SixthList?.NewList;
+                                                                    int? fr_ = SixthList?.IndexofNewDate;
+                                                                    CqlDate fs_ = context.Operators.Indexer<CqlDate>(fq_, fr_);
+                                                                    CqlQuantity ft_ = context.Operators.Quantity(1m, "day");
+                                                                    CqlDate fu_ = context.Operators.Add(fs_ as CqlDate, ft_);
+                                                                    CqlQuantity fv_ = context.Operators.Quantity(30m, "days");
+                                                                    CqlDate fw_ = context.Operators.Add(fs_ as CqlDate, fv_);
+                                                                    CqlInterval<CqlDate> fx_ = context.Operators.Interval(fu_, fw_, true, true);
+                                                                    bool? fy_ = context.Operators.In<CqlDate>(X, fx_, (string)default);
+                                                                    bool? fz_ = context.Operators.Not(fy_);
+                                                                    return fz_;
                                                                 }
 
-                                                                IEnumerable<CqlDate> er_ = context.Operators.Where<CqlDate>(en_, eq_);
-                                                                int? es_ = context.Operators.Add(eo_, 1);
-                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? et_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ep_ as CqlDate, er_, es_);
-                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] eu_ = [
-                                                                    et_,
+                                                                IEnumerable<CqlDate> fj_ = context.Operators.Where<CqlDate>(ff_, fi_);
+                                                                int? fk_ = context.Operators.Add(fg_, 1);
+                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fl_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, fh_ as CqlDate, fj_, fk_);
+                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] fm_ = [
+                                                                    fl_,
                                                                 ];
 
-                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ev_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SeventhList) {
-                                                                    IEnumerable<CqlDate> fi_ = SeventhList?.NewList;
-                                                                    int? fj_ = SeventhList?.IndexofNewDate;
-                                                                    CqlDate fk_ = context.Operators.Indexer<CqlDate>(fi_, fj_);
-                                                                    if (fk_ is null)
+                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fn_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? SeventhList) {
+                                                                    IEnumerable<CqlDate> ga_ = SeventhList?.NewList;
+                                                                    int? gb_ = SeventhList?.IndexofNewDate;
+                                                                    CqlDate gc_ = context.Operators.Indexer<CqlDate>(ga_, gb_);
+                                                                    if (gc_ is null)
                                                                     {
                                                                         return SeventhList;
                                                                     }
                                                                     else
                                                                     {
+                                                                        IEnumerable<CqlDate> gd_ = SeventhList?.NewList;
+                                                                        int? ge_ = SeventhList?.IndexofNewDate;
+                                                                        CqlDate gf_ = context.Operators.Indexer<CqlDate>(gd_, ge_);
 
-                                                                        bool? fl_(CqlDate X) {
-                                                                            IEnumerable<CqlDate> ft_ = SeventhList?.NewList;
-                                                                            int? fu_ = SeventhList?.IndexofNewDate;
-                                                                            CqlDate fv_ = context.Operators.Indexer<CqlDate>(ft_, fu_);
-                                                                            CqlQuantity fw_ = context.Operators.Quantity(1m, "day");
-                                                                            CqlDate fx_ = context.Operators.Add(fv_ as CqlDate, fw_);
-                                                                            CqlQuantity fy_ = context.Operators.Quantity(30m, "days");
-                                                                            CqlDate fz_ = context.Operators.Add(fv_ as CqlDate, fy_);
-                                                                            CqlInterval<CqlDate> ga_ = context.Operators.Interval(fx_, fz_, true, true);
-                                                                            bool? gb_ = context.Operators.In<CqlDate>(X, ga_, (string)default);
-                                                                            bool? gc_ = context.Operators.Not(gb_);
-                                                                            return gc_;
+                                                                        bool? gg_(CqlDate X) {
+                                                                            IEnumerable<CqlDate> go_ = SeventhList?.NewList;
+                                                                            int? gp_ = SeventhList?.IndexofNewDate;
+                                                                            CqlDate gq_ = context.Operators.Indexer<CqlDate>(go_, gp_);
+                                                                            CqlQuantity gr_ = context.Operators.Quantity(1m, "day");
+                                                                            CqlDate gs_ = context.Operators.Add(gq_ as CqlDate, gr_);
+                                                                            CqlQuantity gt_ = context.Operators.Quantity(30m, "days");
+                                                                            CqlDate gu_ = context.Operators.Add(gq_ as CqlDate, gt_);
+                                                                            CqlInterval<CqlDate> gv_ = context.Operators.Interval(gs_, gu_, true, true);
+                                                                            bool? gw_ = context.Operators.In<CqlDate>(X, gv_, (string)default);
+                                                                            bool? gx_ = context.Operators.Not(gw_);
+                                                                            return gx_;
                                                                         }
 
-                                                                        IEnumerable<CqlDate> fm_ = context.Operators.Where<CqlDate>(fi_, fl_);
-                                                                        int? fn_ = context.Operators.Add(fj_, 1);
-                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fo_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, fk_ as CqlDate, fm_, fn_);
-                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] fp_ = [
-                                                                            fo_,
+                                                                        IEnumerable<CqlDate> gh_ = context.Operators.Where<CqlDate>(gd_, gg_);
+                                                                        int? gi_ = context.Operators.Add(ge_, 1);
+                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gj_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, gf_ as CqlDate, gh_, gi_);
+                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] gk_ = [
+                                                                            gj_,
                                                                         ];
 
-                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fq_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EighthList) {
-                                                                            IEnumerable<CqlDate> gd_ = EighthList?.NewList;
-                                                                            int? ge_ = EighthList?.IndexofNewDate;
-                                                                            CqlDate gf_ = context.Operators.Indexer<CqlDate>(gd_, ge_);
-                                                                            if (gf_ is null)
+                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gl_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EighthList) {
+                                                                            IEnumerable<CqlDate> gy_ = EighthList?.NewList;
+                                                                            int? gz_ = EighthList?.IndexofNewDate;
+                                                                            CqlDate ha_ = context.Operators.Indexer<CqlDate>(gy_, gz_);
+                                                                            if (ha_ is null)
                                                                             {
                                                                                 return EighthList;
                                                                             }
                                                                             else
                                                                             {
+                                                                                IEnumerable<CqlDate> hb_ = EighthList?.NewList;
+                                                                                int? hc_ = EighthList?.IndexofNewDate;
+                                                                                CqlDate hd_ = context.Operators.Indexer<CqlDate>(hb_, hc_);
 
-                                                                                bool? gg_(CqlDate X) {
-                                                                                    IEnumerable<CqlDate> go_ = EighthList?.NewList;
-                                                                                    int? gp_ = EighthList?.IndexofNewDate;
-                                                                                    CqlDate gq_ = context.Operators.Indexer<CqlDate>(go_, gp_);
-                                                                                    CqlQuantity gr_ = context.Operators.Quantity(1m, "day");
-                                                                                    CqlDate gs_ = context.Operators.Add(gq_ as CqlDate, gr_);
-                                                                                    CqlQuantity gt_ = context.Operators.Quantity(30m, "days");
-                                                                                    CqlDate gu_ = context.Operators.Add(gq_ as CqlDate, gt_);
-                                                                                    CqlInterval<CqlDate> gv_ = context.Operators.Interval(gs_, gu_, true, true);
-                                                                                    bool? gw_ = context.Operators.In<CqlDate>(X, gv_, (string)default);
-                                                                                    bool? gx_ = context.Operators.Not(gw_);
-                                                                                    return gx_;
+                                                                                bool? he_(CqlDate X) {
+                                                                                    IEnumerable<CqlDate> hm_ = EighthList?.NewList;
+                                                                                    int? hn_ = EighthList?.IndexofNewDate;
+                                                                                    CqlDate ho_ = context.Operators.Indexer<CqlDate>(hm_, hn_);
+                                                                                    CqlQuantity hp_ = context.Operators.Quantity(1m, "day");
+                                                                                    CqlDate hq_ = context.Operators.Add(ho_ as CqlDate, hp_);
+                                                                                    CqlQuantity hr_ = context.Operators.Quantity(30m, "days");
+                                                                                    CqlDate hs_ = context.Operators.Add(ho_ as CqlDate, hr_);
+                                                                                    CqlInterval<CqlDate> ht_ = context.Operators.Interval(hq_, hs_, true, true);
+                                                                                    bool? hu_ = context.Operators.In<CqlDate>(X, ht_, (string)default);
+                                                                                    bool? hv_ = context.Operators.Not(hu_);
+                                                                                    return hv_;
                                                                                 }
 
-                                                                                IEnumerable<CqlDate> gh_ = context.Operators.Where<CqlDate>(gd_, gg_);
-                                                                                int? gi_ = context.Operators.Add(ge_, 1);
-                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gj_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, gf_ as CqlDate, gh_, gi_);
-                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] gk_ = [
-                                                                                    gj_,
+                                                                                IEnumerable<CqlDate> hf_ = context.Operators.Where<CqlDate>(hb_, he_);
+                                                                                int? hg_ = context.Operators.Add(hc_, 1);
+                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hh_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, hd_ as CqlDate, hf_, hg_);
+                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] hi_ = [
+                                                                                    hh_,
                                                                                 ];
 
-                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gl_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? NinethList) {
-                                                                                    IEnumerable<CqlDate> gy_ = NinethList?.NewList;
-                                                                                    int? gz_ = NinethList?.IndexofNewDate;
-                                                                                    CqlDate ha_ = context.Operators.Indexer<CqlDate>(gy_, gz_);
-                                                                                    if (ha_ is null)
+                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hj_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? NinethList) {
+                                                                                    IEnumerable<CqlDate> hw_ = NinethList?.NewList;
+                                                                                    int? hx_ = NinethList?.IndexofNewDate;
+                                                                                    CqlDate hy_ = context.Operators.Indexer<CqlDate>(hw_, hx_);
+                                                                                    if (hy_ is null)
                                                                                     {
                                                                                         return NinethList;
                                                                                     }
                                                                                     else
                                                                                     {
+                                                                                        IEnumerable<CqlDate> hz_ = NinethList?.NewList;
+                                                                                        int? ia_ = NinethList?.IndexofNewDate;
+                                                                                        CqlDate ib_ = context.Operators.Indexer<CqlDate>(hz_, ia_);
 
-                                                                                        bool? hb_(CqlDate X) {
-                                                                                            IEnumerable<CqlDate> hj_ = NinethList?.NewList;
-                                                                                            int? hk_ = NinethList?.IndexofNewDate;
-                                                                                            CqlDate hl_ = context.Operators.Indexer<CqlDate>(hj_, hk_);
-                                                                                            CqlQuantity hm_ = context.Operators.Quantity(1m, "day");
-                                                                                            CqlDate hn_ = context.Operators.Add(hl_ as CqlDate, hm_);
-                                                                                            CqlQuantity ho_ = context.Operators.Quantity(30m, "days");
-                                                                                            CqlDate hp_ = context.Operators.Add(hl_ as CqlDate, ho_);
-                                                                                            CqlInterval<CqlDate> hq_ = context.Operators.Interval(hn_, hp_, true, true);
-                                                                                            bool? hr_ = context.Operators.In<CqlDate>(X, hq_, (string)default);
-                                                                                            bool? hs_ = context.Operators.Not(hr_);
-                                                                                            return hs_;
+                                                                                        bool? ic_(CqlDate X) {
+                                                                                            IEnumerable<CqlDate> ik_ = NinethList?.NewList;
+                                                                                            int? il_ = NinethList?.IndexofNewDate;
+                                                                                            CqlDate im_ = context.Operators.Indexer<CqlDate>(ik_, il_);
+                                                                                            CqlQuantity in_ = context.Operators.Quantity(1m, "day");
+                                                                                            CqlDate io_ = context.Operators.Add(im_ as CqlDate, in_);
+                                                                                            CqlQuantity ip_ = context.Operators.Quantity(30m, "days");
+                                                                                            CqlDate iq_ = context.Operators.Add(im_ as CqlDate, ip_);
+                                                                                            CqlInterval<CqlDate> ir_ = context.Operators.Interval(io_, iq_, true, true);
+                                                                                            bool? is_ = context.Operators.In<CqlDate>(X, ir_, (string)default);
+                                                                                            bool? it_ = context.Operators.Not(is_);
+                                                                                            return it_;
                                                                                         }
 
-                                                                                        IEnumerable<CqlDate> hc_ = context.Operators.Where<CqlDate>(gy_, hb_);
-                                                                                        int? hd_ = context.Operators.Add(gz_, 1);
-                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? he_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ha_ as CqlDate, hc_, hd_);
-                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] hf_ = [
-                                                                                            he_,
+                                                                                        IEnumerable<CqlDate> id_ = context.Operators.Where<CqlDate>(hz_, ic_);
+                                                                                        int? ie_ = context.Operators.Add(ia_, 1);
+                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? if_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ib_ as CqlDate, id_, ie_);
+                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] ig_ = [
+                                                                                            if_,
                                                                                         ];
 
-                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hg_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? TenthList) {
-                                                                                            IEnumerable<CqlDate> ht_ = TenthList?.NewList;
-                                                                                            int? hu_ = TenthList?.IndexofNewDate;
-                                                                                            CqlDate hv_ = context.Operators.Indexer<CqlDate>(ht_, hu_);
-                                                                                            if (hv_ is null)
+                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ih_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? TenthList) {
+                                                                                            IEnumerable<CqlDate> iu_ = TenthList?.NewList;
+                                                                                            int? iv_ = TenthList?.IndexofNewDate;
+                                                                                            CqlDate iw_ = context.Operators.Indexer<CqlDate>(iu_, iv_);
+                                                                                            if (iw_ is null)
                                                                                             {
                                                                                                 return TenthList;
                                                                                             }
                                                                                             else
                                                                                             {
+                                                                                                IEnumerable<CqlDate> ix_ = TenthList?.NewList;
+                                                                                                int? iy_ = TenthList?.IndexofNewDate;
+                                                                                                CqlDate iz_ = context.Operators.Indexer<CqlDate>(ix_, iy_);
 
-                                                                                                bool? hw_(CqlDate X) {
-                                                                                                    IEnumerable<CqlDate> ie_ = TenthList?.NewList;
-                                                                                                    int? if_ = TenthList?.IndexofNewDate;
-                                                                                                    CqlDate ig_ = context.Operators.Indexer<CqlDate>(ie_, if_);
-                                                                                                    CqlQuantity ih_ = context.Operators.Quantity(1m, "day");
-                                                                                                    CqlDate ii_ = context.Operators.Add(ig_ as CqlDate, ih_);
-                                                                                                    CqlQuantity ij_ = context.Operators.Quantity(30m, "days");
-                                                                                                    CqlDate ik_ = context.Operators.Add(ig_ as CqlDate, ij_);
-                                                                                                    CqlInterval<CqlDate> il_ = context.Operators.Interval(ii_, ik_, true, true);
-                                                                                                    bool? im_ = context.Operators.In<CqlDate>(X, il_, (string)default);
-                                                                                                    bool? in_ = context.Operators.Not(im_);
-                                                                                                    return in_;
+                                                                                                bool? ja_(CqlDate X) {
+                                                                                                    IEnumerable<CqlDate> ji_ = TenthList?.NewList;
+                                                                                                    int? jj_ = TenthList?.IndexofNewDate;
+                                                                                                    CqlDate jk_ = context.Operators.Indexer<CqlDate>(ji_, jj_);
+                                                                                                    CqlQuantity jl_ = context.Operators.Quantity(1m, "day");
+                                                                                                    CqlDate jm_ = context.Operators.Add(jk_ as CqlDate, jl_);
+                                                                                                    CqlQuantity jn_ = context.Operators.Quantity(30m, "days");
+                                                                                                    CqlDate jo_ = context.Operators.Add(jk_ as CqlDate, jn_);
+                                                                                                    CqlInterval<CqlDate> jp_ = context.Operators.Interval(jm_, jo_, true, true);
+                                                                                                    bool? jq_ = context.Operators.In<CqlDate>(X, jp_, (string)default);
+                                                                                                    bool? jr_ = context.Operators.Not(jq_);
+                                                                                                    return jr_;
                                                                                                 }
 
-                                                                                                IEnumerable<CqlDate> hx_ = context.Operators.Where<CqlDate>(ht_, hw_);
-                                                                                                int? hy_ = context.Operators.Add(hu_, 1);
-                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hz_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, hv_ as CqlDate, hx_, hy_);
-                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] ia_ = [
-                                                                                                    hz_,
+                                                                                                IEnumerable<CqlDate> jb_ = context.Operators.Where<CqlDate>(ix_, ja_);
+                                                                                                int? jc_ = context.Operators.Add(iy_, 1);
+                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jd_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, iz_ as CqlDate, jb_, jc_);
+                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] je_ = [
+                                                                                                    jd_,
                                                                                                 ];
 
-                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ib_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EleventhList) {
-                                                                                                    IEnumerable<CqlDate> io_ = EleventhList?.NewList;
-                                                                                                    int? ip_ = EleventhList?.IndexofNewDate;
-                                                                                                    CqlDate iq_ = context.Operators.Indexer<CqlDate>(io_, ip_);
-                                                                                                    if (iq_ is null)
+                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jf_((CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? EleventhList) {
+                                                                                                    IEnumerable<CqlDate> js_ = EleventhList?.NewList;
+                                                                                                    int? jt_ = EleventhList?.IndexofNewDate;
+                                                                                                    CqlDate ju_ = context.Operators.Indexer<CqlDate>(js_, jt_);
+                                                                                                    if (ju_ is null)
                                                                                                     {
                                                                                                         return EleventhList;
                                                                                                     }
                                                                                                     else
                                                                                                     {
+                                                                                                        IEnumerable<CqlDate> jv_ = EleventhList?.NewList;
+                                                                                                        int? jw_ = EleventhList?.IndexofNewDate;
+                                                                                                        CqlDate jx_ = context.Operators.Indexer<CqlDate>(jv_, jw_);
 
-                                                                                                        bool? ir_(CqlDate X) {
-                                                                                                            IEnumerable<CqlDate> iv_ = EleventhList?.NewList;
-                                                                                                            int? iw_ = EleventhList?.IndexofNewDate;
-                                                                                                            CqlDate ix_ = context.Operators.Indexer<CqlDate>(iv_, iw_);
-                                                                                                            CqlQuantity iy_ = context.Operators.Quantity(1m, "day");
-                                                                                                            CqlDate iz_ = context.Operators.Add(ix_ as CqlDate, iy_);
-                                                                                                            CqlQuantity ja_ = context.Operators.Quantity(30m, "days");
-                                                                                                            CqlDate jb_ = context.Operators.Add(ix_ as CqlDate, ja_);
-                                                                                                            CqlInterval<CqlDate> jc_ = context.Operators.Interval(iz_, jb_, true, true);
-                                                                                                            bool? jd_ = context.Operators.In<CqlDate>(X, jc_, (string)default);
-                                                                                                            bool? je_ = context.Operators.Not(jd_);
-                                                                                                            return je_;
+                                                                                                        bool? jy_(CqlDate X) {
+                                                                                                            IEnumerable<CqlDate> kc_ = EleventhList?.NewList;
+                                                                                                            int? kd_ = EleventhList?.IndexofNewDate;
+                                                                                                            CqlDate ke_ = context.Operators.Indexer<CqlDate>(kc_, kd_);
+                                                                                                            CqlQuantity kf_ = context.Operators.Quantity(1m, "day");
+                                                                                                            CqlDate kg_ = context.Operators.Add(ke_ as CqlDate, kf_);
+                                                                                                            CqlQuantity kh_ = context.Operators.Quantity(30m, "days");
+                                                                                                            CqlDate ki_ = context.Operators.Add(ke_ as CqlDate, kh_);
+                                                                                                            CqlInterval<CqlDate> kj_ = context.Operators.Interval(kg_, ki_, true, true);
+                                                                                                            bool? kk_ = context.Operators.In<CqlDate>(X, kj_, (string)default);
+                                                                                                            bool? kl_ = context.Operators.Not(kk_);
+                                                                                                            return kl_;
                                                                                                         }
 
-                                                                                                        IEnumerable<CqlDate> is_ = context.Operators.Where<CqlDate>(io_, ir_);
-                                                                                                        int? it_ = context.Operators.Add(ip_, 1);
-                                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? iu_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, iq_ as CqlDate, is_, it_);
-                                                                                                        return iu_;
+                                                                                                        IEnumerable<CqlDate> jz_ = context.Operators.Where<CqlDate>(jv_, jy_);
+                                                                                                        int? ka_ = context.Operators.Add(jw_, 1);
+                                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? kb_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, jx_ as CqlDate, jz_, ka_);
+                                                                                                        return kb_;
                                                                                                     }
                                                                                                 }
 
-                                                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> ic_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)ia_, ib_);
-                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? id_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ic_);
-                                                                                                return id_;
+                                                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> jg_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)je_, jf_);
+                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(jg_);
+                                                                                                return jh_;
                                                                                             }
                                                                                         }
 
-                                                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> hh_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)hf_, hg_);
-                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hi_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(hh_);
-                                                                                        return hi_;
+                                                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> ii_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)ig_, ih_);
+                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ij_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ii_);
+                                                                                        return ij_;
                                                                                     }
                                                                                 }
 
-                                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> gm_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)gk_, gl_);
-                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gn_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(gm_);
-                                                                                return gn_;
+                                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> hk_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)hi_, hj_);
+                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hl_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(hk_);
+                                                                                return hl_;
                                                                             }
                                                                         }
 
-                                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> fr_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)fp_, fq_);
-                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fs_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(fr_);
-                                                                        return fs_;
+                                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> gm_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)gk_, gl_);
+                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? gn_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(gm_);
+                                                                        return gn_;
                                                                     }
                                                                 }
 
-                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> ew_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)eu_, ev_);
-                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ex_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ew_);
-                                                                return ex_;
+                                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> fo_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)fm_, fn_);
+                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fp_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(fo_);
+                                                                return fp_;
                                                             }
                                                         }
 
-                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> eb_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)dz_, ea_);
-                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ec_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(eb_);
-                                                        return ec_;
+                                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> eq_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)eo_, ep_);
+                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? er_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(eq_);
+                                                        return er_;
                                                     }
                                                 }
 
-                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> dg_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)de_, df_);
-                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dh_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(dg_);
-                                                return dh_;
+                                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> ds_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)dq_, dr_);
+                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dt_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ds_);
+                                                return dt_;
                                             }
                                         }
 
-                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> cl_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)cj_, ck_);
-                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? cm_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(cl_);
-                                        return cm_;
+                                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> cu_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)cs_, ct_);
+                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? cv_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(cu_);
+                                        return cv_;
                                     }
                                 }
 
-                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> bq_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)bo_, bp_);
-                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? br_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(bq_);
-                                return br_;
+                                IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> bw_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)bu_, bv_);
+                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bx_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(bw_);
+                                return bx_;
                             }
                         }
 
-                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> av_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)at_, au_);
-                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? aw_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(av_);
-                        return aw_;
+                        IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?> ay_ = context.Operators.SelectDistinct<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?, (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>((IEnumerable<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>)aw_, ax_);
+                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? az_ = context.Operators.SingletonFrom<(CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?>(ay_);
+                        return az_;
                     }
                 }
 

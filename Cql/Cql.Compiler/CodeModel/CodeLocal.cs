@@ -20,13 +20,19 @@ namespace Hl7.Cql.Compiler.CodeModel;
 /// the emitter allocates the final C# name per method scope (using <see cref="NameHint"/>
 /// where possible), so names never need to be unique at construction time.</para>
 /// </summary>
-internal sealed class CodeLocal(Type type, string? nameHint = null) : CodeExpression
+internal sealed class CodeLocal(Type type, string? nameHint = null, bool isNotNull = false) : CodeExpression
 {
     /// <summary>
     /// Optional preferred name (e.g. a CQL query alias). The emitter uses it when it is
     /// available and unique in the scope; otherwise it allocates a generated name.
     /// </summary>
     public string? NameHint { get; } = nameHint;
+
+    /// <summary>
+    /// Whether the variable never holds null, such as the variable a
+    /// <see cref="CodeTypeSwitchArm"/> binds. Member access on it needs no null propagation.
+    /// </summary>
+    public bool IsNotNull { get; } = isNotNull;
 
     public override Type Type { get; } = type;
 

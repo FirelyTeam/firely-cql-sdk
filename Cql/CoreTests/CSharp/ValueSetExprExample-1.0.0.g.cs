@@ -85,11 +85,12 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            bool? d_ = context.Operators.Equal(a_, "2");
-            if (d_ ?? false)
+            string d_ = this.ChosenSubCategory(context);
+            bool? e_ = context.Operators.Equal(d_, "2");
+            if (e_ ?? false)
             {
-                CqlValueSet e_ = this.ValueSet_A_2(context);
-                return e_;
+                CqlValueSet f_ = this.ValueSet_A_2(context);
+                return f_;
             }
             else
             {
@@ -116,11 +117,12 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            bool? d_ = context.Operators.Equal(a_, "2");
-            if (d_ ?? false)
+            string d_ = this.ChosenSubCategory(context);
+            bool? e_ = context.Operators.Equal(d_, "2");
+            if (e_ ?? false)
             {
-                CqlValueSet e_ = this.ValueSet_B_2(context);
-                return e_;
+                CqlValueSet f_ = this.ValueSet_B_2(context);
+                return f_;
             }
             else
             {
@@ -147,9 +149,10 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         }
         else
         {
-            CqlValueSet d_ = this.ValueSetB(context);
-            bool? e_ = context.Operators.CodeInValueSet(a_, d_);
-            if (e_ ?? false)
+            CqlCode d_ = this.ChosenCode(context);
+            CqlValueSet e_ = this.ValueSetB(context);
+            bool? f_ = context.Operators.CodeInValueSet(d_, e_);
+            if (f_ ?? false)
             {
                 return "b";
             }

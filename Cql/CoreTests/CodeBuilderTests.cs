@@ -507,7 +507,7 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "is ResourceReference");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "ResourceReference"), cSharp);
             StringAssert.Contains(cSharp, "ReferenceElement");
             StringAssert.Contains(cSharp, "IEnumerable<string>");
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice is known, so nothing may be late-bound:\n" + cSharp);
@@ -547,7 +547,7 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "is ServiceRequest");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "ServiceRequest"), cSharp);
             StringAssert.Contains(cSharp, "AuthoredOnElement");
             StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime>");
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Both alternatives of the union are known, so nothing may be late-bound:\n" + cSharp);
@@ -585,10 +585,10 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "is Age");
-            StringAssert.Contains(cSharp, "is FhirDateTime");
-            StringAssert.Contains(cSharp, "is FhirString");
-            Assert.IsFalse(cSharp.Contains("is Period"), "Period has no value element, so it gets no branch:\n" + cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
+            Assert.AreEqual(0, ArmsTesting(cSharp, "Period"), "Period has no value element, so it gets no branch:\n" + cSharp);
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice element is known, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(
@@ -597,7 +597,107 @@ namespace CoreTests
             var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList();
             Assert.AreEqual(2, values.Count);
             Assert.AreEqual(1, values.Count(v => v is null), "an onset Period has no value");
-            Assert.AreEqual(1, values.Count(v => v is not null), "an onset dateTime has a value");
+            var onset = values.OfType<Hl7.Cql.Primitives.CqlDateTime>().Single();
+            Assert.AreEqual(2026, onset.Value.Year, "the value of a dateTime is the System.DateTime the model declares");
+        }
+
+        [TestMethod]
+        public void Property_OnChoiceOfPrimitives_ReadsEachValueAsTheTypeTheModelDeclares()
+        {
+            // Observation.effective is dateTime | Period | Timing | instant per the model. The model
+            // declares the value of both dateTime and instant as a System.DateTime, so the element
+            // types agree and the result is a CqlDateTime, although the .NET model holds a dateTime's
+            // value as a string and an instant's as a DateTimeOffset.
+            var effectiveValue = new Hl7.Cql.Elm.Property
+            {
+                path = "value",
+                source = new Hl7.Cql.Elm.Property { path = "effective", scope = "R" },
+            };
+            var elmLibrary = QueryLibrary("PrimitiveValueDispatch", RetrieveOf("Observation"), effectiveValue);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime> Values(");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Instant"), cSharp);
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
+
+            var bundle = BundleOf(
+                new Observation { Id = "o-1", Status = ObservationStatus.Final, Code = new CodeableConcept(), Subject = new ResourceReference("Patient/1"), Effective = new FhirDateTime("2026-02-01") },
+                new Observation { Id = "o-2", Status = ObservationStatus.Final, Code = new CodeableConcept(), Subject = new ResourceReference("Patient/1"), Effective = new Instant(new DateTimeOffset(2026, 3, 4, 5, 6, 7, TimeSpan.Zero)) });
+            var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<Hl7.Cql.Primitives.CqlDateTime>().ToList();
+            CollectionAssert.AreEquivalent(new[] { 2, 3 }, values.Select(v => v.Value.Month).ToArray());
+        }
+
+        [TestMethod]
+        public void Property_OnQiCoreExtensionValue_IsTheSystemDateTimeTheProfileDeclares()
+        {
+            // The translator's rendering of QI-Core's ProcedureNotDone.recorded: the value's value
+            // of the qicore-recorded extension, typed QICore.NotDoneRecorded, which QI-Core declares
+            // as a System.DateTime. The read itself carries no result type; its consumer (here an
+            // As, in the corpus the operator it feeds) takes it as a NotDoneRecorded.
+            const string recordedUrl = "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded";
+            var recorded = new Hl7.Cql.Elm.SingletonFrom
+            {
+                resultTypeName = new System.Xml.XmlQualifiedName("NotDoneRecorded", "http://hl7.org/fhir"),
+                operand = new Hl7.Cql.Elm.Query
+                {
+                    source =
+                    [
+                        new Hl7.Cql.Elm.AliasedQuerySource
+                        {
+                            alias = "$this",
+                            expression = new Hl7.Cql.Elm.Property { path = "extension", source = new Hl7.Cql.Elm.AliasRef { name = "R" } },
+                        },
+                    ],
+                    where = new Hl7.Cql.Elm.Equal
+                    {
+                        operand =
+                        [
+                            new Hl7.Cql.Elm.Property { path = "url", scope = "$this" },
+                            new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = recordedUrl },
+                        ],
+                    },
+                    @return = new Hl7.Cql.Elm.ReturnClause
+                    {
+                        distinct = false,
+                        expression = new Hl7.Cql.Elm.Property { path = "value.value", source = new Hl7.Cql.Elm.AliasRef { name = "$this" } },
+                    },
+                },
+            };
+            var asRecorded = new Hl7.Cql.Elm.As
+            {
+                asTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "NotDoneRecorded"),
+                operand = recorded,
+            };
+            var elmLibrary = QueryLibrary("QiCoreRecorded", RetrieveOf("Procedure"), asRecorded);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime> Values(");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
+
+            var procedure = new Procedure { Id = "p-1", Status = EventStatus.NotDone, Subject = new ResourceReference("Patient/1") };
+            procedure.Extension.Add(new Extension(recordedUrl, new FhirDateTime("2026-04-05T06:07:08Z")));
+            var value = ((System.Collections.IEnumerable)invoke(BundleOf(procedure))).Cast<Hl7.Cql.Primitives.CqlDateTime>().Single();
+            Assert.AreEqual(4, value.Value.Month);
+            Assert.AreEqual(5, value.Value.Day);
+        }
+
+        [TestMethod]
+        public void Property_OnPrimitiveValueWithoutAResultType_HasTheTypeTheModelDeclares()
+        {
+            // P.birthDate.value, with no result type in the ELM (MADiE output): the model declares
+            // the value of a FHIR date as a System.Date, not the string the .NET model holds it as.
+            var elmLibrary = QualifiedPathLibrary("PrimitiveValueStatic", "Patient", "birthDate.value");
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "IEnumerable<CqlDate> Values(");
+
+            var bundle = BundleOf(new Patient { Id = "1", BirthDate = "1990-06-15" });
+            var birthDate = ((System.Collections.IEnumerable)invoke(bundle)).Cast<Hl7.Cql.Primitives.CqlDate>().Single();
+            Assert.AreEqual(1990, birthDate.Value.Year);
         }
 
         [TestMethod]
@@ -619,8 +719,8 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "is Age");
-            StringAssert.Contains(cSharp, "is FhirDateTime");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "The inner query's elements are a known choice, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") });
@@ -670,8 +770,8 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
 
-            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis Integer\b").Count, "both integer alternatives resolve to Integer, so there is one branch for it:\n" + cSharp);
-            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis FhirString\b").Count, cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Integer"), "both integer alternatives resolve to Integer, so there is one branch for it:\n" + cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
             Assert.IsNull(invoke(BundleOf()), "a null choice value has no element value");
         }
@@ -708,9 +808,9 @@ namespace CoreTests
 
             var (cSharp, _) = CompileLibrary(elmLibrary, "Values");
 
-            StringAssert.Contains(cSharp, "is Age");
-            StringAssert.Contains(cSharp, "is FhirDateTime");
-            StringAssert.Contains(cSharp, "is FhirString");
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
             Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative the ELM declares is known, so nothing may be late-bound:\n" + cSharp);
         }
 
@@ -839,6 +939,17 @@ namespace CoreTests
 
             return (cSharp, bundle => invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(bundle: bundle), libraryIdentifier, definition));
         }
+
+        /// <summary>
+        /// The number of type switch arms in <paramref name="cSharp"/> that test for
+        /// <paramref name="typeName"/>, in whichever form the emitter printed them: a declaration
+        /// pattern (<c>is T v</c>) or a switch expression arm (<c>T v =></c>).
+        /// </summary>
+        private static int ArmsTesting(string cSharp, string typeName) =>
+            System.Text.RegularExpressions.Regex.Matches(
+                cSharp,
+                $@"\bis {typeName} \w+\b|^\s*{typeName} \w+ =>",
+                System.Text.RegularExpressions.RegexOptions.Multiline).Count;
 
         private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(
             Hl7.Cql.Elm.ChoiceTypeSpecifier choiceType)

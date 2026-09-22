@@ -253,28 +253,42 @@ public partial class CMS165FHIRControllingHighBP_1_0_000 : ILibrary, ISingleton<
             bool q_ = p_ is CqlDateTime;
             if (q_)
             {
-                i_ = p_ as CqlDateTime;
+                DataType r_ = ESRDProcedure?.Performed;
+                object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+                i_ = s_ as CqlDateTime;
             }
             else
             {
-                bool r_ = p_ is CqlQuantity;
-                if (r_)
+                DataType t_ = ESRDProcedure?.Performed;
+                object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                bool v_ = u_ is CqlQuantity;
+                if (v_)
                 {
-                    i_ = p_ as CqlQuantity;
+                    DataType w_ = ESRDProcedure?.Performed;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    i_ = x_ as CqlQuantity;
                 }
                 else
                 {
-                    bool s_ = p_ is CqlInterval<CqlDateTime>;
-                    if (s_)
+                    DataType y_ = ESRDProcedure?.Performed;
+                    object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                    bool aa_ = z_ is CqlInterval<CqlDateTime>;
+                    if (aa_)
                     {
-                        i_ = p_ as CqlInterval<CqlDateTime>;
+                        DataType ab_ = ESRDProcedure?.Performed;
+                        object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+                        i_ = ac_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        bool t_ = p_ is CqlInterval<CqlQuantity>;
-                        if (t_)
+                        DataType ad_ = ESRDProcedure?.Performed;
+                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                        bool af_ = ae_ is CqlInterval<CqlQuantity>;
+                        if (af_)
                         {
-                            i_ = p_ as CqlInterval<CqlQuantity>;
+                            DataType ag_ = ESRDProcedure?.Performed;
+                            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                            i_ = ah_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

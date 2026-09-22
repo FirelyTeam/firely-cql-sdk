@@ -31,18 +31,10 @@ internal partial class CSharpEmitter
         private readonly List<Func<string>> _statements = [];
         private readonly Dictionary<string, Atom> _dedup = [];
 
-        // Locals hoisted by enclosing block scopes that are declared before this scope's
-        // block and therefore in scope inside it (the branches and conditions of an if/else
-        // chain). A subexpression already hoisted there is reused instead of being evaluated
-        // again in every branch. Local-function scopes do not inherit: a local function may be
-        // invoked before an enclosing local is definitely assigned.
-        private readonly IReadOnlyDictionary<string, Atom> _inherited;
-
-        private Scope(CSharpEmitter emitter, VariableNameGenerator names, IReadOnlyDictionary<string, Atom>? inherited = null)
+        private Scope(CSharpEmitter emitter, VariableNameGenerator names)
         {
             _emitter = emitter;
             _names = names;
-            _inherited = inherited ?? new Dictionary<string, Atom>();
         }
 
         public static Scope CreateRoot(CSharpEmitter emitter, IReadOnlyList<CodeLocal> parameters)
@@ -55,31 +47,16 @@ internal partial class CSharpEmitter
             return scope;
         }
 
-        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters, IReadOnlyDictionary<string, Atom>? inherited = null)
+        private Scope CreateNested(IReadOnlyList<CodeLocal> parameters)
         {
             var nested = new Scope(
                 _emitter,
                 // The GENERATED letter sequence must never collide with a hint name visible in
                 // this lineage: the old VariableNameGenerator.Reserved list, threaded the same
                 // way (ForNewScope conses the new scope's names onto a copy of the parent's).
-                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()),
-                inherited);
+                _names.ForNewScope(parameters.Select(p => p.NameHint).OfType<string>()));
             nested.NameParameters(parameters);
             return nested;
-        }
-
-        /// <summary>
-        /// The locals visible to a block nested in this scope at this point: those inherited
-        /// by this scope plus those it has hoisted so far. Taken when the nested block's
-        /// statement is added, not when it renders, because statements hoisted later in this
-        /// scope are declared after the block and must not be referenced from inside it.
-        /// </summary>
-        private Dictionary<string, Atom> VisibleLocals()
-        {
-            var visible = new Dictionary<string, Atom>(_inherited);
-            foreach (var (key, atom) in _dedup)
-                visible[key] = atom;
-            return visible;
         }
 
         private void NameParameters(IReadOnlyList<CodeLocal> parameters)
@@ -168,6 +145,9 @@ internal partial class CSharpEmitter
                 case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
+                case CodeTypeSwitch typeSwitch:
+                    return LinearizeTypeSwitch(typeSwitch, tailPosition);
+
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
                 // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
@@ -221,8 +201,6 @@ internal partial class CSharpEmitter
             // expressions from ever deduplicating with each other.)
             if (_dedup.TryGetValue(dedupKey, out var existing))
                 return existing;
-            if (_inherited.TryGetValue(dedupKey, out var visible))
-                return visible;
 
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
@@ -335,6 +313,80 @@ internal partial class CSharpEmitter
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
 
         /// <summary>
+        /// Emits a type switch over its operand, which is linearized (and so evaluated) once.
+        /// When every arm's value prints inline, the switch is one expression: a conditional
+        /// with a declaration pattern for a single arm, a switch expression otherwise.
+        /// Otherwise it becomes an <c>if</c>/<c>else if</c> chain testing the operand with a
+        /// declaration pattern per arm, each arm's statements in its own block; as with
+        /// <see cref="LinearizeConditionalStatements"/>, in tail position the blocks
+        /// <c>return</c> and no atom is returned.
+        /// </summary>
+        private Atom? LinearizeTypeSwitch(CodeTypeSwitch typeSwitch, bool tailPosition)
+        {
+            // The operand is tested by every arm, so it must be a variable: an expression that
+            // prints in place would be evaluated once per test (and a literal is no operand for a
+            // pattern at all).
+            var operand = Linearize(typeSwitch.Operand)!;
+            if (operand.Node is not (CodeLocal or CodeContextParameter))
+                operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
+
+            foreach (var arm in typeSwitch.Arms)
+            {
+                _emitter._assignedNames[arm.Narrowed] = _emitter.BindsPatternVariable(arm.Narrowed)
+                    ? AllocateName(arm.Narrowed.NameHint)
+                    : _emitter.PrintNarrowingCast(operand, arm.Narrowed);
+            }
+
+            if (typeSwitch.Arms.All(arm => ArmPrintsInline(arm.Body)) && ArmPrintsInline(typeSwitch.Otherwise))
+            {
+                var code = _emitter.PrintTypeSwitchExpression(typeSwitch, operand);
+                // A switch expression has no natural type when its arms disagree, so it may only
+                // print where it is target-typed: a declaration of its type, or a return.
+                return tailPosition ? new Atom(code, typeSwitch) : Hoist(code, code, typeSwitch);
+            }
+
+            if (tailPosition)
+            {
+                _statements.Add(() => RenderTypeSwitchChain(resultName: null, typeSwitch, operand));
+                return null;
+            }
+
+            var resultLocal = new CodeLocal(typeSwitch.Type);
+            var resultName = AllocateName(null);
+            _emitter._assignedNames[resultLocal] = resultName;
+
+            // Declared without an initializer, as in LinearizeConditionalStatements.
+            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(typeSwitch.Type)} {resultName};");
+            _statements.Add(() => RenderTypeSwitchChain(resultName, typeSwitch, operand));
+            return new Atom(resultName, resultLocal);
+        }
+
+        /// <summary>
+        /// Whether a type switch arm's value prints inline in a switch expression: within the
+        /// budget of an inline condition (see <see cref="ConditionPrintsInline"/>), and not
+        /// itself a conditional or switch, which would nest one expression form in another.
+        /// </summary>
+        private static bool ArmPrintsInline(CodeExpression value) =>
+            value is not (CodeConditional or CodeIfChain or CodeTypeSwitch) && ConditionPrintsInline(value);
+
+        /// <summary>Renders a type switch in statement form, deferred like
+        /// <see cref="RenderChain"/>.</summary>
+        private string RenderTypeSwitchChain(string? resultName, CodeTypeSwitch typeSwitch, Atom operand)
+        {
+            var isb = new IndentedStringBuilder();
+            for (var i = 0; i < typeSwitch.Arms.Count; i++)
+            {
+                var test = _emitter.PrintTypePattern(operand, typeSwitch.Arms[i].Narrowed);
+                isb.AppendLine(i == 0 ? $"if ({test})" : $"else if ({test})");
+                EmitBranchBlock(isb, resultName, typeSwitch.Arms[i].Body);
+            }
+
+            isb.AppendLine("else");
+            EmitBranchBlock(isb, resultName, typeSwitch.Otherwise);
+            return isb.ToString().TrimEnd('\r', '\n');
+        }
+
+        /// <summary>
         /// Emits a multi-branch conditional as native if/else statements. In tail position
         /// the branch blocks <c>return</c> directly and no atom is returned; otherwise a
         /// result local is declared up front, every branch block assigns it (or throws), and
@@ -355,12 +407,9 @@ internal partial class CSharpEmitter
             CodeExpression @else,
             bool tailPosition)
         {
-            // The chain's blocks see the locals this scope has hoisted up to here.
-            var visible = VisibleLocals();
-
             if (tailPosition)
             {
-                _statements.Add(() => RenderChain(resultName: null, cases, @else, visible));
+                _statements.Add(() => RenderChain(resultName: null, cases, @else));
                 return null;
             }
 
@@ -371,7 +420,7 @@ internal partial class CSharpEmitter
             // Declared without an initializer; the compiler's definite-assignment analysis
             // verifies every branch of the chain below assigns it (or throws).
             _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(resultType)} {resultName};");
-            _statements.Add(() => RenderChain(resultName, cases, @else, visible));
+            _statements.Add(() => RenderChain(resultName, cases, @else));
             return new Atom(resultName, resultLocal);
         }
 
@@ -380,11 +429,10 @@ internal partial class CSharpEmitter
         private string RenderChain(
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
-            CodeExpression @else,
-            IReadOnlyDictionary<string, Atom> visible)
+            CodeExpression @else)
         {
             var isb = new IndentedStringBuilder();
-            EmitChainLevel(isb, resultName, cases, 0, @else, visible);
+            EmitChainLevel(isb, resultName, cases, 0, @else);
             return isb.ToString().TrimEnd('\r', '\n');
         }
 
@@ -393,13 +441,8 @@ internal partial class CSharpEmitter
             string? resultName,
             IReadOnlyList<(CodeExpression When, CodeExpression Then)> cases,
             int start,
-            CodeExpression @else,
-            IReadOnlyDictionary<string, Atom> visible)
+            CodeExpression @else)
         {
-            // Locals a condition hoists at this level are declared in this block, before the
-            // if/else that follows, so the branches and the rest of the chain see them too.
-            var levelVisible = new Dictionary<string, Atom>(visible);
-
             var first = true;
             for (int i = start; i < cases.Count; i++)
             {
@@ -414,11 +457,9 @@ internal partial class CSharpEmitter
                 {
                     // The first condition at a nesting level can put its statements right
                     // here — nothing needs to run before them at this level.
-                    var testScope = CreateNested([], levelVisible);
+                    var testScope = CreateNested([]);
                     var atom = testScope.Linearize(when)!;
                     testScope.WriteStatements(isb);
-                    foreach (var (key, hoisted) in testScope._dedup)
-                        levelVisible[key] = hoisted;
                     test = atom.Code;
                 }
                 else
@@ -428,18 +469,18 @@ internal partial class CSharpEmitter
                     isb.AppendLine("else");
                     isb.AppendLine("{");
                     using (isb.Indent())
-                        EmitChainLevel(isb, resultName, cases, i, @else, levelVisible);
+                        EmitChainLevel(isb, resultName, cases, i, @else);
                     isb.AppendLine("}");
                     return;
                 }
 
                 isb.AppendLine(first ? $"if ({test})" : $"else if ({test})");
-                EmitBranchBlock(isb, resultName, then, levelVisible);
+                EmitBranchBlock(isb, resultName, then);
                 first = false;
             }
 
             isb.AppendLine("else");
-            EmitBranchBlock(isb, resultName, @else, levelVisible);
+            EmitBranchBlock(isb, resultName, @else);
         }
 
         /// <summary>
@@ -508,12 +549,12 @@ internal partial class CSharpEmitter
         /// throw-expression (neither <c>return throw …</c> nor <c>x = throw …;</c> is wanted
         /// here; the throwing branch needs no assignment for definite assignment).
         /// </summary>
-        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value, IReadOnlyDictionary<string, Atom> visible)
+        private void EmitBranchBlock(IndentedStringBuilder isb, string? resultName, CodeExpression value)
         {
             isb.AppendLine("{");
             using (isb.Indent())
             {
-                var branchScope = CreateNested([], visible);
+                var branchScope = CreateNested([]);
                 var atom = branchScope.Linearize(value, tailPosition: resultName is null);
                 branchScope.WriteStatements(isb);
                 if (atom is not null)

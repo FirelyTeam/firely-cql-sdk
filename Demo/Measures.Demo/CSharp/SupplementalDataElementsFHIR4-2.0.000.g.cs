@@ -191,8 +191,11 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         }
         else
         {
-            bool? e_ = context.Operators.Equal(c_, "female");
-            if (e_ ?? false)
+            Patient e_ = this.Patient(context);
+            Code<AdministrativeGender> f_ = e_?.GenderElement;
+            string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
+            bool? h_ = context.Operators.Equal(g_, "female");
+            if (h_ ?? false)
             {
                 return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", default, "Female");
             }

@@ -71,36 +71,45 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             }
             else
             {
-                bool? g_ = context.Operators.Equal(c_, "<=");
-                if (g_ ?? false)
+                Code<Quantity.QuantityComparator> g_ = quantity?.ComparatorElement;
+                Quantity.QuantityComparator? h_ = g_?.Value;
+                string i_ = context.Operators.Convert<string>(h_);
+                bool? j_ = context.Operators.Equal(i_, "<=");
+                if (j_ ?? false)
                 {
-                    CqlQuantity h_ = this.ToQuantityIgnoringComparator(context, quantity);
-                    CqlInterval<CqlQuantity> i_ = context.Operators.Interval(default, h_, true, true);
-                    return i_;
+                    CqlQuantity k_ = this.ToQuantityIgnoringComparator(context, quantity);
+                    CqlInterval<CqlQuantity> l_ = context.Operators.Interval(default, k_, true, true);
+                    return l_;
                 }
                 else
                 {
-                    bool? j_ = context.Operators.Equal(c_, ">=");
-                    if (j_ ?? false)
+                    Code<Quantity.QuantityComparator> m_ = quantity?.ComparatorElement;
+                    Quantity.QuantityComparator? n_ = m_?.Value;
+                    string o_ = context.Operators.Convert<string>(n_);
+                    bool? p_ = context.Operators.Equal(o_, ">=");
+                    if (p_ ?? false)
                     {
-                        CqlQuantity k_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> l_ = context.Operators.Interval(k_, default, true, true);
-                        return l_;
+                        CqlQuantity q_ = this.ToQuantityIgnoringComparator(context, quantity);
+                        CqlInterval<CqlQuantity> r_ = context.Operators.Interval(q_, default, true, true);
+                        return r_;
                     }
                     else
                     {
-                        bool? m_ = context.Operators.Equal(c_, ">");
-                        if (m_ ?? false)
+                        Code<Quantity.QuantityComparator> s_ = quantity?.ComparatorElement;
+                        Quantity.QuantityComparator? t_ = s_?.Value;
+                        string u_ = context.Operators.Convert<string>(t_);
+                        bool? v_ = context.Operators.Equal(u_, ">");
+                        if (v_ ?? false)
                         {
-                            CqlQuantity n_ = this.ToQuantityIgnoringComparator(context, quantity);
-                            CqlInterval<CqlQuantity> o_ = context.Operators.Interval(n_, default, false, true);
-                            return o_;
+                            CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
+                            CqlInterval<CqlQuantity> x_ = context.Operators.Interval(w_, default, false, true);
+                            return x_;
                         }
                         else
                         {
-                            CqlQuantity p_ = this.ToQuantity(context, quantity);
-                            CqlInterval<CqlQuantity> q_ = context.Operators.Interval(p_, p_, true, true);
-                            return q_;
+                            CqlQuantity y_ = this.ToQuantity(context, quantity);
+                            CqlInterval<CqlQuantity> z_ = context.Operators.Interval(y_, y_, true, true);
+                            return z_;
                         }
                     }
                 }
@@ -221,14 +230,16 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                     string r_ = q_?.Value;
                     string s_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", r_ ?? "");
                     string t_ = context.Operators.Concatenate(s_ ?? "", " (");
-                    string u_ = context.Operators.Concatenate(t_ ?? "", e_ ?? "");
-                    string v_ = context.Operators.Concatenate(u_ ?? "", "|");
-                    Code w_ = quantity?.CodeElement;
-                    string x_ = w_?.Value;
-                    string y_ = context.Operators.Concatenate(v_ ?? "", x_ ?? "");
-                    string z_ = context.Operators.Concatenate(y_ ?? "", ")");
-                    object aa_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", z_);
-                    return aa_ as CqlQuantity;
+                    FhirUri u_ = quantity?.SystemElement;
+                    string v_ = u_?.Value;
+                    string w_ = context.Operators.Concatenate(t_ ?? "", v_ ?? "");
+                    string x_ = context.Operators.Concatenate(w_ ?? "", "|");
+                    Code y_ = quantity?.CodeElement;
+                    string z_ = y_?.Value;
+                    string aa_ = context.Operators.Concatenate(x_ ?? "", z_ ?? "");
+                    string ab_ = context.Operators.Concatenate(aa_ ?? "", ")");
+                    object ac_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", ab_);
+                    return ac_ as CqlQuantity;
                 }
             }
         }
@@ -274,14 +285,16 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                 string o_ = n_?.Value;
                 string p_ = context.Operators.Concatenate("Invalid FHIR Quantity code: ", o_ ?? "");
                 string q_ = context.Operators.Concatenate(p_ ?? "", " (");
-                string r_ = context.Operators.Concatenate(q_ ?? "", b_ ?? "");
-                string s_ = context.Operators.Concatenate(r_ ?? "", "|");
-                Code t_ = quantity?.CodeElement;
-                string u_ = t_?.Value;
-                string v_ = context.Operators.Concatenate(s_ ?? "", u_ ?? "");
-                string w_ = context.Operators.Concatenate(v_ ?? "", ")");
-                object x_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", w_);
-                return x_ as CqlQuantity;
+                FhirUri r_ = quantity?.SystemElement;
+                string s_ = r_?.Value;
+                string t_ = context.Operators.Concatenate(q_ ?? "", s_ ?? "");
+                string u_ = context.Operators.Concatenate(t_ ?? "", "|");
+                Code v_ = quantity?.CodeElement;
+                string w_ = v_?.Value;
+                string x_ = context.Operators.Concatenate(u_ ?? "", w_ ?? "");
+                string y_ = context.Operators.Concatenate(x_ ?? "", ")");
+                object z_ = context.Operators.Message<object>((object)null, "FHIRHelpers.ToQuantity.InvalidFHIRQuantity", "Error", y_);
+                return z_ as CqlQuantity;
             }
         }
     }

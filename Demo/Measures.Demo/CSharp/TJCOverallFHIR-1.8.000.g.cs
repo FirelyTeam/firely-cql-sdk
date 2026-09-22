@@ -198,13 +198,14 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
                 Patient g_ = this.Patient(context);
                 Date h_ = g_?.BirthDateElement;
                 string i_ = h_?.Value;
-                CqlDateTime j_ = context.Operators.ConvertStringToDateTime(i_);
-                Period k_ = AllStrokeEncounter?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, k_);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                int? n_ = context.Operators.CalculateAgeAt(j_, m_, "year");
-                bool? o_ = context.Operators.GreaterOrEqual(n_, 18);
-                return o_;
+                CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+                CqlDateTime k_ = context.Operators.ConvertDateToDateTime(j_);
+                Period l_ = AllStrokeEncounter?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, l_);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                int? o_ = context.Operators.CalculateAgeAt(k_, n_, "year");
+                bool? p_ = context.Operators.GreaterOrEqual(o_, 18);
+                return p_;
             }
 
             bool? f_ = context.Operators.WhereAny<Patient>(d_, e_);
@@ -328,30 +329,12 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object g_;
-                if (ComfortMeasure is Procedure)
-                {
-                    DataType l_ = (ComfortMeasure as Procedure)?.Performed;
-                    g_ = l_;
-                }
-                else
-                {
-                    g_ = null;
-                }
-                FhirDateTime h_;
-                if (ComfortMeasure is ServiceRequest)
-                {
-                    FhirDateTime m_ = (ComfortMeasure as ServiceRequest)?.AuthoredOnElement;
-                    h_ = m_;
-                }
-                else
-                {
-                    h_ = default;
-                }
-                CqlDateTime i_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (g_ as FhirDateTime) ?? h_);
-                CqlInterval<CqlDateTime> j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, (string)default);
-                return k_;
+                object h_ = ComfortMeasure is Procedure g_ ? g_.Performed : null;
+                FhirDateTime j_ = ComfortMeasure is ServiceRequest i_ ? i_.AuthoredOnElement : null;
+                CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, (h_ as FhirDateTime) ?? j_);
+                CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? m_ = context.Operators.In<CqlDateTime>(k_, l_, (string)default);
+                return m_;
             }
 
             bool? f_ = context.Operators.WhereAny<object>(d_, e_);
@@ -377,32 +360,14 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
             IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
 
             bool? e_(object ComfortMeasure) {
-                object g_;
-                if (ComfortMeasure is Procedure)
-                {
-                    DataType n_ = (ComfortMeasure as Procedure)?.Performed;
-                    g_ = n_;
-                }
-                else
-                {
-                    g_ = null;
-                }
-                CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
-                CqlDateTime i_ = context.Operators.Start(h_);
-                FhirDateTime j_;
-                if (ComfortMeasure is ServiceRequest)
-                {
-                    FhirDateTime o_ = (ComfortMeasure as ServiceRequest)?.AuthoredOnElement;
-                    j_ = o_;
-                }
-                else
-                {
-                    j_ = default;
-                }
-                CqlDateTime k_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, j_);
-                CqlInterval<CqlDateTime> l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
-                bool? m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);
-                return m_;
+                object h_ = ComfortMeasure is Procedure g_ ? g_.Performed : null;
+                CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, h_);
+                CqlDateTime j_ = context.Operators.Start(i_);
+                FhirDateTime l_ = ComfortMeasure is ServiceRequest k_ ? k_.AuthoredOnElement : null;
+                CqlDateTime m_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, l_);
+                CqlInterval<CqlDateTime> n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, IschemicStrokeEncounter);
+                bool? o_ = context.Operators.In<CqlDateTime>(j_ ?? m_, n_, (string)default);
+                return o_;
             }
 
             bool? f_ = context.Operators.WhereAny<object>(d_, e_);

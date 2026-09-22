@@ -140,28 +140,18 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             bool? j_(Medication M) {
                 Id l_ = M?.IdElement;
                 string m_ = l_?.Value;
-                FhirString n_;
-                DataType x_ = MR?.Medication;
-                bool y_ = x_ is ResourceReference;
-                if (y_)
-                {
-                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
-                    n_ = z_;
-                }
-                else
-                {
-                    n_ = default;
-                }
-                string o_ = n_?.Value;
-                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(m_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Opioids__All(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                DataType n_ = MR?.Medication;
+                FhirString p_ = n_ is ResourceReference o_ ? o_.ReferenceElement : null;
+                string q_ = p_?.Value;
+                IEnumerable<string> r_ = context.Operators.Split(q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(m_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Opioids__All(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
+                return y_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -174,11 +164,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration Opioids) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> aa_ = Opioids?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? ab_ = aa_?.Value;
-            string ac_ = context.Operators.Convert<string>(ab_);
-            bool? ad_ = context.Operators.Equal(ac_, "completed");
-            return ad_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = Opioids?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? aa_ = z_?.Value;
+            string ab_ = context.Operators.Convert<string>(aa_);
+            bool? ac_ = context.Operators.Equal(ab_, "completed");
+            return ac_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -289,28 +279,18 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
             bool? j_(Medication M) {
                 Id l_ = M?.IdElement;
                 string m_ = l_?.Value;
-                FhirString n_;
-                DataType x_ = MR?.Medication;
-                bool y_ = x_ is ResourceReference;
-                if (y_)
-                {
-                    FhirString z_ = (x_ as ResourceReference)?.ReferenceElement;
-                    n_ = z_;
-                }
-                else
-                {
-                    n_ = default;
-                }
-                string o_ = n_?.Value;
-                IEnumerable<string> p_ = context.Operators.Split(o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(m_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Opioid_Antagonist(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                DataType n_ = MR?.Medication;
+                FhirString p_ = n_ is ResourceReference o_ ? o_.ReferenceElement : null;
+                string q_ = p_?.Value;
+                IEnumerable<string> r_ = context.Operators.Split(q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(m_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Opioid_Antagonist(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
+                return y_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -323,11 +303,11 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration AntagonistGiven) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> aa_ = AntagonistGiven?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? ab_ = aa_?.Value;
-            string ac_ = context.Operators.Convert<string>(ab_);
-            bool? ad_ = context.Operators.Equal(ac_, "completed");
-            return ad_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = AntagonistGiven?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? aa_ = z_?.Value;
+            string ab_ = context.Operators.Convert<string>(aa_);
+            bool? ac_ = context.Operators.Equal(ab_, "completed");
+            return ac_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);

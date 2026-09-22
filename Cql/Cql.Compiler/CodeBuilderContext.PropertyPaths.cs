@@ -93,6 +93,9 @@ partial class CodeBuilderContext
     /// </summary>
     private readonly Dictionary<Element, StaticValue> _staticValues = new(ReferenceEqualityComparer.Instance);
 
+    /// <summary>Memo of <see cref="ModelledValueType"/>, by the .NET type of the primitive.</summary>
+    private readonly Dictionary<Type, Type?> _modelledValueTypes = new();
+
     /// <summary>How one segment of a property path binds to the value before it.</summary>
     private enum SegmentBinding
     {
@@ -112,13 +115,13 @@ partial class CodeBuilderContext
     /// <summary>The resolution of one path segment.</summary>
     /// <param name="Segment">The element name.</param>
     /// <param name="Binding">How the segment binds.</param>
-    /// <param name="Branches">For <see cref="SegmentBinding.Dispatch"/>: each alternative that has the element, with the element.</param>
-    /// <param name="HasUninspectableAlternative">For <see cref="SegmentBinding.Dispatch"/>: whether an alternative could not be inspected, so a late-bound branch is needed.</param>
+    /// <param name="Branches">For <see cref="SegmentBinding.Dispatch"/>: each alternative that has the element, with the element and its type (see <see cref="ElementTypeOf"/>).</param>
+    /// <param name="HasUninspectableAlternative">For <see cref="SegmentBinding.Dispatch"/>: whether an alternative could not be inspected, so a late-bound arm is needed.</param>
     /// <param name="Result">What is known statically about the value the segment produces.</param>
     private sealed record SegmentResolution(
         string Segment,
         SegmentBinding Binding,
-        IReadOnlyList<(Type Alternative, PropertyInfo Member)>? Branches,
+        IReadOnlyList<(Type Alternative, PropertyInfo Member, Type ElementType)>? Branches,
         bool HasUninspectableAlternative,
         StaticValue Result);
 
@@ -148,16 +151,70 @@ partial class CodeBuilderContext
     }
 
     /// <summary>
-    /// The types a member may hold, as alternatives: the choice it declares, else its own type; an
-    /// erased type without declared alternatives is uninspectable.
+    /// The types a member may hold, as alternatives: the choice it declares, else its own type
+    /// (<paramref name="elementType"/>); an erased type without declared alternatives is uninspectable.
     /// </summary>
-    private IEnumerable<Type?> AlternativesHeldBy(PropertyInfo member)
+    private IEnumerable<Type?> AlternativesHeldBy(PropertyInfo member, Type elementType)
     {
         if (ChoiceAlternativesOf(member) is { } choice)
             return choice.Inspectable.Cast<Type?>().Concat(choice.HasUninspectable ? [null] : []);
 
-        var type = CqlTypeOf(member.PropertyType);
+        var type = CqlTypeOf(elementType);
         return [type == typeof(object) ? null : type];
+    }
+
+    /// <summary>
+    /// The type of element <paramref name="segment"/> of <paramref name="type"/>, bound to
+    /// <paramref name="member"/>: the member's type, except where the model declares the element as
+    /// a type the member does not have. That is the case for the value of a primitive, which the model
+    /// declares as a System type (<c>FHIR.instant.value</c> is a <c>System.DateTime</c>) and the .NET
+    /// model may hold in a representation of its own (a <see cref="DateTimeOffset"/>). Reading the
+    /// element then converts to the model's type, so the value means what the CQL model says it means
+    /// wherever it is read, whether or not the ELM states the type it expects.
+    /// </summary>
+    private Type ElementTypeOf(Type type, string segment, PropertyInfo member)
+    {
+        if (segment != "value")
+            return member.PropertyType;
+
+        if (!_modelledValueTypes.TryGetValue(type, out var modelled))
+            _modelledValueTypes[type] = modelled = ModelledValueType(type, member.PropertyType);
+
+        return modelled ?? member.PropertyType;
+    }
+
+    /// <summary>
+    /// The System type the model declares for the value of the primitive <paramref name="type"/>
+    /// implements, when that differs from <paramref name="memberType"/> and a value of
+    /// <paramref name="memberType"/> converts to it; otherwise <see langword="null"/>.
+    /// </summary>
+    private Type? ModelledValueType(Type type, Type memberType)
+    {
+        const string modelPrefix = "FHIR.";
+        const string systemPrefix = "System.";
+
+        for (var name = _typeResolver.GetModelTypeName(type);
+             name is not null && ModelMapping.TryGetValue(name, out var classInfo);
+             name = classInfo.baseType is { } baseType && baseType.StartsWith(modelPrefix, StringComparison.Ordinal)
+                 ? $"{{http://hl7.org/fhir}}{baseType[modelPrefix.Length..]}"
+                 : null)
+        {
+            if (classInfo.element?.FirstOrDefault(element => element.name == "value") is not { } valueElement)
+                continue;
+
+            // A complex type's value (Quantity.value) is an element of a model type, bound as such.
+            if (valueElement.elementType is not { } elementType || !elementType.StartsWith(systemPrefix, StringComparison.Ordinal))
+                return null;
+
+            var systemType = _typeResolver.ResolveType($"{{urn:hl7-org:elm-types:r1}}{elementType[systemPrefix.Length..]}", throwError: false);
+            return systemType is not null
+                   && systemType != memberType
+                   && _cqlOperatorsBinder.TryConvert(new CodeLocal(memberType), systemType, out _)
+                ? systemType
+                : null;
+        }
+
+        return null;
     }
 
     /// <summary>What is known statically about the value of an ELM expression.</summary>
@@ -270,7 +327,7 @@ partial class CodeBuilderContext
     {
         if (_typeResolver.GetProperty(value.Type, segment) is { } member)
             return new SegmentResolution(segment, SegmentBinding.Static, null, false,
-                new StaticValue(member.PropertyType, ChoiceAlternativesOf(member)));
+                new StaticValue(ElementTypeOf(value.Type, segment, member), ChoiceAlternativesOf(member)));
 
         if (_typeResolver.ShouldUseSourceObject(value.Type, segment))
             return new SegmentResolution(segment, SegmentBinding.SourceObject, null, false,
@@ -280,21 +337,21 @@ partial class CodeBuilderContext
             return new SegmentResolution(segment, SegmentBinding.Unresolved, null, false,
                 new StaticValue(typeof(object), null));
 
-        var branches = new List<(Type Alternative, PropertyInfo Member)>();
+        var branches = new List<(Type Alternative, PropertyInfo Member, Type ElementType)>();
         foreach (var alternative in alternatives.Inspectable)
         {
             if (_typeResolver.GetProperty(alternative, segment) is { } branchMember)
-                branches.Add((alternative, branchMember));
+                branches.Add((alternative, branchMember, ElementTypeOf(alternative, segment, branchMember)));
         }
 
         // The spec's sum type: one type when every alternative that has the element agrees, else a
         // choice of their types, represented as object. An uninspectable alternative is late-bound
         // to the agreed type, so it does not widen the result.
-        var branchTypes = branches.Select(branch => CqlTypeOf(branch.Member.PropertyType)).Distinct().ToList();
+        var branchTypes = branches.Select(branch => CqlTypeOf(branch.ElementType)).Distinct().ToList();
         var resultType = branchTypes.Count == 1 ? branchTypes[0] : typeof(object);
         var resultAlternatives = resultType == typeof(object)
             ? ChoiceAlternatives.From(
-                branches.SelectMany(branch => AlternativesHeldBy(branch.Member))
+                branches.SelectMany(branch => AlternativesHeldBy(branch.Member, branch.ElementType))
                         .Concat(alternatives.HasUninspectable ? [null] : []))
             : null;
 
@@ -347,10 +404,10 @@ partial class CodeBuilderContext
     }
 
     /// <summary>
-    /// Reads an element off a choice value: one type test per alternative that has the element,
-    /// each reading it as that alternative and converting to <paramref name="target"/>;
-    /// <see langword="null"/> when the value is none of them, or a late-bound read when the choice
-    /// has an alternative that could not be inspected.
+    /// Reads an element off a choice value: a dispatch on the value's type with one arm per
+    /// alternative that has the element, each reading it off the value narrowed to that alternative
+    /// and converting to <paramref name="target"/>; <see langword="null"/> when the value is none of
+    /// them, or a late-bound read when the choice has an alternative that could not be inspected.
     /// </summary>
     private CodeExpression BindChoiceSegment(
         CodeExpression source,
@@ -358,24 +415,21 @@ partial class CodeBuilderContext
         Type target,
         Element element)
     {
-        // Every branch, including the null one, must be assignable to the target.
+        // Every arm, including the null one, must be assignable to the target.
         if (target.IsValueType && Nullable.GetUnderlyingType(target) is null)
             target = target.MakeNullable();
 
-        var cases = new List<(CodeExpression When, CodeExpression Then)>();
-        foreach (var (alternative, member) in resolution.Branches!)
+        var arms = new List<CodeTypeSwitchArm>();
+        foreach (var (alternative, _, elementType) in resolution.Branches!)
         {
-            var castType = alternative.IsValueType && Nullable.GetUnderlyingType(alternative) is null
-                ? alternative.MakeNullable()
-                : alternative;
-            var typed = source.NewTypeAsExpression(castType);
+            var narrowed = new CodeLocal(Nullable.GetUnderlyingType(alternative) ?? alternative, isNotNull: true);
 
             // Read the element as its own type first, then convert to the target. When no
             // conversion exists (the ELM types the element differently from the model, e.g. a
-            // profile that constrains a list element to a single value), the branch falls back
+            // profile that constrains a list element to a single value), the arm falls back
             // to the late-bound read, which converts at run time or yields null, rather than
             // failing the build.
-            var read = PropertyHelper(typed, resolution.Segment, member.PropertyType);
+            var read = PropertyHelper(narrowed, resolution.Segment, elementType);
             var converted = ChangeType(read, target, out var conversion, throwOnError: false);
             if (conversion == TypeConversion.NoMatch)
             {
@@ -383,28 +437,30 @@ partial class CodeBuilderContext
                     FormatMessage(
                         $"Element {resolution.Segment} of {alternative.Name} is a {read.Type.Name} but the expression expects a {target.Name}; the read on this alternative is late-bound.",
                         element));
-                converted = LateBoundProperty(typed, resolution.Segment, target, element);
+                converted = LateBoundProperty(narrowed, resolution.Segment, target, element);
             }
 
-            cases.Add((source.NewTypeIsExpression(alternative), converted));
+            arms.Add(new CodeTypeSwitchArm(narrowed, converted));
         }
 
-        CodeExpression otherwise = resolution.HasUninspectableAlternative
-            ? LateBoundProperty(source, resolution.Segment, target, element)
-            : new CodeConstant(null, target);
-
-        if (cases.Count == 0)
+        if (resolution.HasUninspectableAlternative)
         {
-            if (!resolution.HasUninspectableAlternative)
-                _logger.LogWarning(
-                    FormatMessage($"No alternative of the choice type of the source has an element {resolution.Segment}; the property evaluates to null.", element));
+            // Any other value may be the uninspectable alternative: read the element late-bound.
+            // As the last arm it only sees values no typed arm claimed.
+            if (arms.Count == 0)
+                return LateBoundProperty(source, resolution.Segment, target, element);
 
-            return otherwise;
+            var other = new CodeLocal(typeof(object), isNotNull: true);
+            arms.Add(new CodeTypeSwitchArm(other, LateBoundProperty(other, resolution.Segment, target, element)));
+        }
+        else if (arms.Count == 0)
+        {
+            _logger.LogWarning(
+                FormatMessage($"No alternative of the choice type of the source has an element {resolution.Segment}; the property evaluates to null.", element));
+            return new CodeConstant(null, target);
         }
 
-        return cases.Count == 1
-            ? new CodeConditional(cases[0].When, cases[0].Then, otherwise, target)
-            : new CodeIfChain(cases, otherwise, target);
+        return new CodeTypeSwitch(source, arms, new CodeConstant(null, target), target);
     }
 
     /// <summary>

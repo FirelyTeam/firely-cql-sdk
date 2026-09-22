@@ -221,28 +221,42 @@ public partial class CMS50FHIRReceiptofSpecialistReport_1_0_000 : ILibrary, ISin
             bool ai_ = ah_ is CqlDateTime;
             if (ai_)
             {
-                ad_ = ah_ as CqlDateTime;
+                DataType aj_ = ValidIntervention?.Performed;
+                object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
+                ad_ = ak_ as CqlDateTime;
             }
             else
             {
-                bool aj_ = ah_ is CqlQuantity;
-                if (aj_)
+                DataType al_ = ValidIntervention?.Performed;
+                object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                bool an_ = am_ is CqlQuantity;
+                if (an_)
                 {
-                    ad_ = ah_ as CqlQuantity;
+                    DataType ao_ = ValidIntervention?.Performed;
+                    object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                    ad_ = ap_ as CqlQuantity;
                 }
                 else
                 {
-                    bool ak_ = ah_ is CqlInterval<CqlDateTime>;
-                    if (ak_)
+                    DataType aq_ = ValidIntervention?.Performed;
+                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                    bool as_ = ar_ is CqlInterval<CqlDateTime>;
+                    if (as_)
                     {
-                        ad_ = ah_ as CqlInterval<CqlDateTime>;
+                        DataType at_ = ValidIntervention?.Performed;
+                        object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
+                        ad_ = au_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        bool al_ = ah_ is CqlInterval<CqlQuantity>;
-                        if (al_)
+                        DataType av_ = ValidIntervention?.Performed;
+                        object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
+                        bool ax_ = aw_ is CqlInterval<CqlQuantity>;
+                        if (ax_)
                         {
-                            ad_ = ah_ as CqlInterval<CqlQuantity>;
+                            DataType ay_ = ValidIntervention?.Performed;
+                            object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
+                            ad_ = az_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

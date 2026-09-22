@@ -108,46 +108,25 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 
         bool? c_(Condition C) {
-            object e_;
-            DataType o_ = C?.Onset;
-            bool p_ = o_ is FhirDateTime;
-            if (p_)
+            DataType e_ = C?.Onset;
+            object f_ = e_;
+            object j_ = f_ switch
             {
-                string q_ = context.Operators.Convert<string>(o_ as FhirDateTime);
-                e_ = q_;
-            }
-            else
-            {
-                bool r_ = o_ is Age;
-                if (r_)
-                {
-                    FhirDecimal s_ = (o_ as Age)?.ValueElement;
-                    e_ = s_;
-                }
-                else
-                {
-                    bool t_ = o_ is FhirString;
-                    if (t_)
-                    {
-                        string u_ = (o_ as FhirString)?.Value;
-                        e_ = u_;
-                    }
-                    else
-                    {
-                        e_ = null;
-                    }
-                }
-            }
-            object f_ = this.Measurement_Period(context);
-            CqlDate g_ = ((CqlInterval<CqlDate>)f_)?.low;
-            CqlDateTime h_ = context.Operators.ConvertDateToDateTime(g_);
-            CqlDate i_ = ((CqlInterval<CqlDate>)f_)?.high;
-            CqlDateTime j_ = context.Operators.ConvertDateToDateTime(i_);
-            bool? k_ = ((CqlInterval<CqlDate>)f_)?.lowClosed;
-            bool? l_ = ((CqlInterval<CqlDate>)f_)?.highClosed;
-            CqlInterval<CqlDateTime> m_ = context.Operators.Interval(h_, j_, k_, l_);
-            bool? n_ = context.Operators.In<CqlDateTime>(e_ as CqlDateTime, m_, (string)default);
-            return n_;
+                FhirDateTime g_ => context.Operators.Convert<CqlDateTime>(g_),
+                Age h_ => h_.ValueElement,
+                FhirString i_ => i_.Value,
+                _ => null,
+            };
+            object k_ = this.Measurement_Period(context);
+            CqlDate l_ = ((CqlInterval<CqlDate>)k_)?.low;
+            CqlDateTime m_ = context.Operators.ConvertDateToDateTime(l_);
+            CqlDate n_ = ((CqlInterval<CqlDate>)k_)?.high;
+            CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
+            bool? p_ = ((CqlInterval<CqlDate>)k_)?.lowClosed;
+            bool? q_ = ((CqlInterval<CqlDate>)k_)?.highClosed;
+            CqlInterval<CqlDateTime> r_ = context.Operators.Interval(m_, o_, p_, q_);
+            bool? s_ = context.Operators.In<CqlDateTime>(j_ as CqlDateTime, r_, (string)default);
+            return s_;
         }
 
         IEnumerable<Condition> d_ = context.Operators.Where<Condition>(b_, c_);
@@ -166,37 +145,16 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 
         object b_(Condition @this) {
-            object e_;
-            DataType f_ = @this?.Onset;
-            bool g_ = f_ is Age;
-            if (g_)
+            DataType e_ = @this?.Onset;
+            object f_ = e_;
+            object j_ = f_ switch
             {
-                FhirDecimal h_ = (f_ as Age)?.ValueElement;
-                e_ = h_;
-            }
-            else
-            {
-                bool i_ = f_ is FhirDateTime;
-                if (i_)
-                {
-                    string j_ = context.Operators.Convert<string>(f_ as FhirDateTime);
-                    e_ = j_;
-                }
-                else
-                {
-                    bool k_ = f_ is FhirString;
-                    if (k_)
-                    {
-                        string l_ = (f_ as FhirString)?.Value;
-                        e_ = l_;
-                    }
-                    else
-                    {
-                        e_ = null;
-                    }
-                }
-            }
-            return e_ as CqlDateTime;
+                Age g_ => g_.ValueElement,
+                FhirDateTime h_ => context.Operators.Convert<CqlDateTime>(h_),
+                FhirString i_ => i_.Value,
+                _ => null,
+            };
+            return j_ as CqlDateTime;
         }
 
         IEnumerable<Condition> c_ = context.Operators.SortBy<Condition>(a_, b_, System.ComponentModel.ListSortDirection.Ascending);
@@ -232,82 +190,27 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
             ];
 
             bool? l_(Condition C) {
-                object q_;
-                DataType aa_ = C?.Onset;
-                bool ab_ = aa_ is FhirDateTime;
-                if (ab_)
+                DataType q_ = C?.Onset;
+                object r_ = q_;
+                object v_ = r_ switch
                 {
-                    string ac_ = context.Operators.Convert<string>(aa_ as FhirDateTime);
-                    q_ = ac_;
-                }
-                else
-                {
-                    bool ad_ = aa_ is Age;
-                    if (ad_)
-                    {
-                        FhirDecimal ae_ = (aa_ as Age)?.ValueElement;
-                        q_ = ae_;
-                    }
-                    else
-                    {
-                        bool af_ = aa_ is FhirString;
-                        if (af_)
-                        {
-                            string ag_ = (aa_ as FhirString)?.Value;
-                            q_ = ag_;
-                        }
-                        else
-                        {
-                            q_ = null;
-                        }
-                    }
-                }
-                CqlDateTime r_;
-                DataType ah_ = SD?.Occurrence;
-                bool ai_ = ah_ is FhirDateTime;
-                if (ai_)
-                {
-                    string aj_ = context.Operators.Convert<string>(ah_ as FhirDateTime);
-                    CqlDateTime ak_ = context.Operators.ConvertStringToDateTime(aj_);
-                    r_ = ak_;
-                }
-                else
-                {
-                    r_ = default;
-                }
-                CqlQuantity s_ = context.Operators.Quantity(7m, "days");
-                CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-                CqlDateTime u_;
-                DataType al_ = SD?.Occurrence;
-                bool am_ = al_ is FhirDateTime;
-                if (am_)
-                {
-                    string an_ = context.Operators.Convert<string>(al_ as FhirDateTime);
-                    CqlDateTime ao_ = context.Operators.ConvertStringToDateTime(an_);
-                    u_ = ao_;
-                }
-                else
-                {
-                    u_ = default;
-                }
-                CqlInterval<CqlDateTime> v_ = context.Operators.Interval(t_, u_, true, false);
-                bool? w_ = context.Operators.In<CqlDateTime>(q_ as CqlDateTime, v_, (string)default);
-                CqlDateTime x_;
-                DataType ap_ = SD?.Occurrence;
-                bool aq_ = ap_ is FhirDateTime;
-                if (aq_)
-                {
-                    string ar_ = context.Operators.Convert<string>(ap_ as FhirDateTime);
-                    CqlDateTime as_ = context.Operators.ConvertStringToDateTime(ar_);
-                    x_ = as_;
-                }
-                else
-                {
-                    x_ = default;
-                }
-                bool? y_ = context.Operators.Not((bool?)(x_ is null));
-                bool? z_ = context.Operators.And(w_, y_);
-                return z_;
+                    FhirDateTime s_ => context.Operators.Convert<CqlDateTime>(s_),
+                    Age t_ => t_.ValueElement,
+                    FhirString u_ => u_.Value,
+                    _ => null,
+                };
+                DataType w_ = SD?.Occurrence;
+                object x_ = w_;
+                CqlDateTime z_ = x_ is FhirDateTime y_ ? context.Operators.Convert<CqlDateTime>(y_) : null;
+                CqlQuantity aa_ = context.Operators.Quantity(7m, "days");
+                CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
+                CqlDateTime ad_ = x_ is FhirDateTime ac_ ? context.Operators.Convert<CqlDateTime>(ac_) : null;
+                CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(ab_, ad_, true, false);
+                bool? af_ = context.Operators.In<CqlDateTime>(v_ as CqlDateTime, ae_, (string)default);
+                CqlDateTime ah_ = x_ is FhirDateTime ag_ ? context.Operators.Convert<CqlDateTime>(ag_) : null;
+                bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+                bool? aj_ = context.Operators.And(af_, ai_);
+                return aj_;
             }
 
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);

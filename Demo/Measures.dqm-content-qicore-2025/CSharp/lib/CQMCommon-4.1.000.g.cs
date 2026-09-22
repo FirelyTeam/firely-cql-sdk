@@ -3245,24 +3245,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         bool c_ = b_ is CqlConcept;
         if (c_)
         {
-            return b_ as CqlConcept;
+            DataType d_ = request?.Medication;
+            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
+            return e_ as CqlConcept;
         }
         else
         {
-            IEnumerable<Medication> d_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> f_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? e_(Medication M) {
-                DataType j_ = request?.Medication;
-                object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                bool? l_ = QICoreCommon_4_0_000.Instance.references(context, k_ as ResourceReference, M);
-                return l_;
+            bool? g_(Medication M) {
+                DataType l_ = request?.Medication;
+                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference, M);
+                return n_;
             }
 
-            IEnumerable<Medication> f_ = context.Operators.Where<Medication>(d_, e_);
-            Medication g_ = context.Operators.SingletonFrom<Medication>(f_);
-            CodeableConcept h_ = g_?.Code;
-            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
-            return i_;
+            IEnumerable<Medication> h_ = context.Operators.Where<Medication>(f_, g_);
+            Medication i_ = context.Operators.SingletonFrom<Medication>(h_);
+            CodeableConcept j_ = i_?.Code;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            return k_;
         }
     }
 
@@ -3276,24 +3278,26 @@ public partial class CQMCommon_4_1_000 : ILibrary, ISingleton<CQMCommon_4_1_000>
         bool c_ = b_ is CqlConcept;
         if (c_)
         {
-            return b_ as CqlConcept;
+            DataType d_ = request?.Medication;
+            object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
+            return e_ as CqlConcept;
         }
         else
         {
-            IEnumerable<Medication> d_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> f_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? e_(Medication M) {
-                DataType j_ = request?.Medication;
-                object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-                bool? l_ = QICoreCommon_4_0_000.Instance.references(context, k_ as ResourceReference, M);
-                return l_;
+            bool? g_(Medication M) {
+                DataType l_ = request?.Medication;
+                object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
+                bool? n_ = QICoreCommon_4_0_000.Instance.references(context, m_ as ResourceReference, M);
+                return n_;
             }
 
-            IEnumerable<Medication> f_ = context.Operators.Where<Medication>(d_, e_);
-            Medication g_ = context.Operators.SingletonFrom<Medication>(f_);
-            CodeableConcept h_ = g_?.Code;
-            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
-            return i_;
+            IEnumerable<Medication> h_ = context.Operators.Where<Medication>(f_, g_);
+            Medication i_ = context.Operators.SingletonFrom<Medication>(h_);
+            CodeableConcept j_ = i_?.Code;
+            CqlConcept k_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, j_);
+            return k_;
         }
     }
 

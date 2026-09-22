@@ -71,7 +71,7 @@ partial class CodeBuilderContext
     {
         if (before.Type.IsValueType)
             return before;
-        return new CodeProperty(before, member, nullConditional: true);
+        return new CodeProperty(before, member, nullConditional: before is not CodeLocal { IsNotNull: true });
     }
 
     private static string TypeNameToIdentifier(Type type, CodeBuilderContext? ctx = null)

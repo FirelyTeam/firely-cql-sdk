@@ -146,28 +146,42 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
             bool as_ = ar_ is CqlDateTime;
             if (as_)
             {
-                am_ = ar_ as CqlDateTime;
+                DataType at_ = PalliativeIntervention?.Performed;
+                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
+                am_ = au_ as CqlDateTime;
             }
             else
             {
-                bool at_ = ar_ is CqlQuantity;
-                if (at_)
+                DataType av_ = PalliativeIntervention?.Performed;
+                object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
+                bool ax_ = aw_ is CqlQuantity;
+                if (ax_)
                 {
-                    am_ = ar_ as CqlQuantity;
+                    DataType ay_ = PalliativeIntervention?.Performed;
+                    object az_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ay_);
+                    am_ = az_ as CqlQuantity;
                 }
                 else
                 {
-                    bool au_ = ar_ is CqlInterval<CqlDateTime>;
-                    if (au_)
+                    DataType ba_ = PalliativeIntervention?.Performed;
+                    object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+                    bool bc_ = bb_ is CqlInterval<CqlDateTime>;
+                    if (bc_)
                     {
-                        am_ = ar_ as CqlInterval<CqlDateTime>;
+                        DataType bd_ = PalliativeIntervention?.Performed;
+                        object be_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bd_);
+                        am_ = be_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        bool av_ = ar_ is CqlInterval<CqlQuantity>;
-                        if (av_)
+                        DataType bf_ = PalliativeIntervention?.Performed;
+                        object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+                        bool bh_ = bg_ is CqlInterval<CqlQuantity>;
+                        if (bh_)
                         {
-                            am_ = ar_ as CqlInterval<CqlQuantity>;
+                            DataType bi_ = PalliativeIntervention?.Performed;
+                            object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+                            am_ = bj_ as CqlInterval<CqlQuantity>;
                         }
                         else
                         {

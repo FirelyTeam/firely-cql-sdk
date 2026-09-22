@@ -142,9 +142,9 @@ public class ChoiceTypeListPropertyTests
     {
         var allMembersResolve = GenerateCSharp(MadieShapedFixture());
 
-        allMembersResolve.Should().Contain("is ServiceRequest");
-        allMembersResolve.Should().Contain("is MedicationRequest");
-        allMembersResolve.Should().Contain("?.ReasonCode");
+        ArmsTesting(allMembersResolve, "ServiceRequest").Should().Be(1);
+        ArmsTesting(allMembersResolve, "MedicationRequest").Should().Be(1);
+        allMembersResolve.Should().Contain(".ReasonCode");
         allMembersResolve.Should()
                          .NotContain(
                              "LateBoundProperty",
@@ -166,7 +166,7 @@ public class ChoiceTypeListPropertyTests
 
         var (cSharp, invoke) = Compile(oneMemberUnresolvable);
 
-        cSharp.Should().Contain("is ServiceRequest", "the member that resolves gets a typed branch");
+        ArmsTesting(cSharp, "ServiceRequest").Should().Be(1, "the member that resolves gets a typed branch");
         cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>", "the member that does not resolve is served by a late-bound branch typed like the others");
 
         var bundle = BundleOf(
@@ -192,7 +192,7 @@ public class ChoiceTypeListPropertyTests
 
         var (cSharp, invoke) = Compile(oneMemberIsANestedChoice);
 
-        cSharp.Should().Contain("is ServiceRequest");
+        ArmsTesting(cSharp, "ServiceRequest").Should().Be(1);
         cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>");
 
         var bundle = BundleOf(
@@ -202,6 +202,17 @@ public class ChoiceTypeListPropertyTests
     }
 
     private static string GenerateCSharp(ElmLibrary library) => Compile(library).cSharp;
+
+    /// <summary>
+    /// The number of type switch arms in <paramref name="cSharp"/> that test for
+    /// <paramref name="typeName"/>, in whichever form the emitter printed them: a declaration
+    /// pattern (<c>is T v</c>) or a switch expression arm (<c>T v =></c>).
+    /// </summary>
+    private static int ArmsTesting(string cSharp, string typeName) =>
+        System.Text.RegularExpressions.Regex.Matches(
+            cSharp,
+            $@"\bis {typeName} \w+\b|^\s*{typeName} \w+ =>",
+            System.Text.RegularExpressions.RegexOptions.Multiline).Count;
 
     /// <summary>
     /// Compiles <paramref name="library"/> (with FHIRHelpers) once and returns both its generated

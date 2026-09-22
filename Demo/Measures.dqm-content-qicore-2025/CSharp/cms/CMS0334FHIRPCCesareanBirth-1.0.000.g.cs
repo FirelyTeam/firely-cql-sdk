@@ -302,20 +302,31 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool af_ = ae_ is CqlDateTime;
             if (af_)
             {
-                t_ = ae_ as CqlDateTime;
+                DataType ag_ = Gravida?.Effective;
+                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                t_ = ah_ as CqlDateTime;
             }
             else
             {
-                if (af_)
+                DataType ai_ = Gravida?.Effective;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                bool ak_ = aj_ is CqlDateTime;
+                if (ak_)
                 {
-                    t_ = ae_ as CqlDateTime;
+                    DataType al_ = Gravida?.Effective;
+                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                    t_ = am_ as CqlDateTime;
                 }
                 else
                 {
-                    bool ag_ = ae_ is CqlInterval<CqlDateTime>;
-                    if (ag_)
+                    DataType an_ = Gravida?.Effective;
+                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                    if (ap_)
                     {
-                        t_ = ae_ as CqlInterval<CqlDateTime>;
+                        DataType aq_ = Gravida?.Effective;
+                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                        t_ = ar_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -338,35 +349,46 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            object ah_;
-            DataType aj_ = @this?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            bool al_ = ak_ is CqlDateTime;
-            if (al_)
+            object as_;
+            DataType au_ = @this?.Effective;
+            object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+            bool aw_ = av_ is CqlDateTime;
+            if (aw_)
             {
-                ah_ = ak_ as CqlDateTime;
+                DataType ax_ = @this?.Effective;
+                object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                as_ = ay_ as CqlDateTime;
             }
             else
             {
-                if (al_)
+                DataType az_ = @this?.Effective;
+                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                bool bb_ = ba_ is CqlDateTime;
+                if (bb_)
                 {
-                    ah_ = ak_ as CqlDateTime;
+                    DataType bc_ = @this?.Effective;
+                    object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                    as_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    bool am_ = ak_ is CqlInterval<CqlDateTime>;
-                    if (am_)
+                    DataType be_ = @this?.Effective;
+                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
+                    if (bg_)
                     {
-                        ah_ = ak_ as CqlInterval<CqlDateTime>;
+                        DataType bh_ = @this?.Effective;
+                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
+                        as_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        ah_ = null;
+                        as_ = null;
                     }
                 }
             }
-            CqlDateTime ai_ = QICoreCommon_4_0_000.Instance.earliest(context, ah_);
-            return ai_;
+            CqlDateTime at_ = QICoreCommon_4_0_000.Instance.earliest(context, as_);
+            return at_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -391,20 +413,31 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool af_ = ae_ is CqlDateTime;
             if (af_)
             {
-                k_ = ae_ as CqlDateTime;
+                DataType ag_ = Parity?.Effective;
+                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                k_ = ah_ as CqlDateTime;
             }
             else
             {
-                if (af_)
+                DataType ai_ = Parity?.Effective;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                bool ak_ = aj_ is CqlDateTime;
+                if (ak_)
                 {
-                    k_ = ae_ as CqlDateTime;
+                    DataType al_ = Parity?.Effective;
+                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                    k_ = am_ as CqlDateTime;
                 }
                 else
                 {
-                    bool ag_ = ae_ is CqlInterval<CqlDateTime>;
-                    if (ag_)
+                    DataType an_ = Parity?.Effective;
+                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                    if (ap_)
                     {
-                        k_ = ae_ as CqlInterval<CqlDateTime>;
+                        DataType aq_ = Parity?.Effective;
+                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                        k_ = ar_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -440,35 +473,46 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            object ah_;
-            DataType aj_ = @this?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            bool al_ = ak_ is CqlDateTime;
-            if (al_)
+            object as_;
+            DataType au_ = @this?.Effective;
+            object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+            bool aw_ = av_ is CqlDateTime;
+            if (aw_)
             {
-                ah_ = ak_ as CqlDateTime;
+                DataType ax_ = @this?.Effective;
+                object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                as_ = ay_ as CqlDateTime;
             }
             else
             {
-                if (al_)
+                DataType az_ = @this?.Effective;
+                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                bool bb_ = ba_ is CqlDateTime;
+                if (bb_)
                 {
-                    ah_ = ak_ as CqlDateTime;
+                    DataType bc_ = @this?.Effective;
+                    object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                    as_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    bool am_ = ak_ is CqlInterval<CqlDateTime>;
-                    if (am_)
+                    DataType be_ = @this?.Effective;
+                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
+                    if (bg_)
                     {
-                        ah_ = ak_ as CqlInterval<CqlDateTime>;
+                        DataType bh_ = @this?.Effective;
+                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
+                        as_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        ah_ = null;
+                        as_ = null;
                     }
                 }
             }
-            CqlDateTime ai_ = QICoreCommon_4_0_000.Instance.earliest(context, ah_);
-            return ai_;
+            CqlDateTime at_ = QICoreCommon_4_0_000.Instance.earliest(context, as_);
+            return at_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -493,20 +537,31 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool af_ = ae_ is CqlDateTime;
             if (af_)
             {
-                k_ = ae_ as CqlDateTime;
+                DataType ag_ = PretermBirth?.Effective;
+                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                k_ = ah_ as CqlDateTime;
             }
             else
             {
-                if (af_)
+                DataType ai_ = PretermBirth?.Effective;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                bool ak_ = aj_ is CqlDateTime;
+                if (ak_)
                 {
-                    k_ = ae_ as CqlDateTime;
+                    DataType al_ = PretermBirth?.Effective;
+                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                    k_ = am_ as CqlDateTime;
                 }
                 else
                 {
-                    bool ag_ = ae_ is CqlInterval<CqlDateTime>;
-                    if (ag_)
+                    DataType an_ = PretermBirth?.Effective;
+                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                    if (ap_)
                     {
-                        k_ = ae_ as CqlInterval<CqlDateTime>;
+                        DataType aq_ = PretermBirth?.Effective;
+                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                        k_ = ar_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -542,35 +597,46 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            object ah_;
-            DataType aj_ = @this?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            bool al_ = ak_ is CqlDateTime;
-            if (al_)
+            object as_;
+            DataType au_ = @this?.Effective;
+            object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+            bool aw_ = av_ is CqlDateTime;
+            if (aw_)
             {
-                ah_ = ak_ as CqlDateTime;
+                DataType ax_ = @this?.Effective;
+                object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                as_ = ay_ as CqlDateTime;
             }
             else
             {
-                if (al_)
+                DataType az_ = @this?.Effective;
+                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                bool bb_ = ba_ is CqlDateTime;
+                if (bb_)
                 {
-                    ah_ = ak_ as CqlDateTime;
+                    DataType bc_ = @this?.Effective;
+                    object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                    as_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    bool am_ = ak_ is CqlInterval<CqlDateTime>;
-                    if (am_)
+                    DataType be_ = @this?.Effective;
+                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
+                    if (bg_)
                     {
-                        ah_ = ak_ as CqlInterval<CqlDateTime>;
+                        DataType bh_ = @this?.Effective;
+                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
+                        as_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        ah_ = null;
+                        as_ = null;
                     }
                 }
             }
-            CqlDateTime ai_ = QICoreCommon_4_0_000.Instance.earliest(context, ah_);
-            return ai_;
+            CqlDateTime at_ = QICoreCommon_4_0_000.Instance.earliest(context, as_);
+            return at_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -595,20 +661,31 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool af_ = ae_ is CqlDateTime;
             if (af_)
             {
-                k_ = ae_ as CqlDateTime;
+                DataType ag_ = TermBirth?.Effective;
+                object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+                k_ = ah_ as CqlDateTime;
             }
             else
             {
-                if (af_)
+                DataType ai_ = TermBirth?.Effective;
+                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                bool ak_ = aj_ is CqlDateTime;
+                if (ak_)
                 {
-                    k_ = ae_ as CqlDateTime;
+                    DataType al_ = TermBirth?.Effective;
+                    object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+                    k_ = am_ as CqlDateTime;
                 }
                 else
                 {
-                    bool ag_ = ae_ is CqlInterval<CqlDateTime>;
-                    if (ag_)
+                    DataType an_ = TermBirth?.Effective;
+                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
+                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
+                    if (ap_)
                     {
-                        k_ = ae_ as CqlInterval<CqlDateTime>;
+                        DataType aq_ = TermBirth?.Effective;
+                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                        k_ = ar_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -644,35 +721,46 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
 
         object f_(Observation @this) {
-            object ah_;
-            DataType aj_ = @this?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            bool al_ = ak_ is CqlDateTime;
-            if (al_)
+            object as_;
+            DataType au_ = @this?.Effective;
+            object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+            bool aw_ = av_ is CqlDateTime;
+            if (aw_)
             {
-                ah_ = ak_ as CqlDateTime;
+                DataType ax_ = @this?.Effective;
+                object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                as_ = ay_ as CqlDateTime;
             }
             else
             {
-                if (al_)
+                DataType az_ = @this?.Effective;
+                object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, az_);
+                bool bb_ = ba_ is CqlDateTime;
+                if (bb_)
                 {
-                    ah_ = ak_ as CqlDateTime;
+                    DataType bc_ = @this?.Effective;
+                    object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
+                    as_ = bd_ as CqlDateTime;
                 }
                 else
                 {
-                    bool am_ = ak_ is CqlInterval<CqlDateTime>;
-                    if (am_)
+                    DataType be_ = @this?.Effective;
+                    object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
+                    bool bg_ = bf_ is CqlInterval<CqlDateTime>;
+                    if (bg_)
                     {
-                        ah_ = ak_ as CqlInterval<CqlDateTime>;
+                        DataType bh_ = @this?.Effective;
+                        object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
+                        as_ = bi_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
-                        ah_ = null;
+                        as_ = null;
                     }
                 }
             }
-            CqlDateTime ai_ = QICoreCommon_4_0_000.Instance.earliest(context, ah_);
-            return ai_;
+            CqlDateTime at_ = QICoreCommon_4_0_000.Instance.earliest(context, as_);
+            return at_;
         }
 
         IEnumerable<Observation> g_ = context.Operators.SortBy<Observation>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
@@ -737,20 +825,31 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool ap_ = ao_ is CqlDateTime;
                 if (ap_)
                 {
-                    ad_ = ao_ as CqlDateTime;
+                    DataType aq_ = AbnormalPresentation?.Effective;
+                    object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+                    ad_ = ar_ as CqlDateTime;
                 }
                 else
                 {
-                    if (ap_)
+                    DataType as_ = AbnormalPresentation?.Effective;
+                    object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+                    bool au_ = at_ is CqlDateTime;
+                    if (au_)
                     {
-                        ad_ = ao_ as CqlDateTime;
+                        DataType av_ = AbnormalPresentation?.Effective;
+                        object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
+                        ad_ = aw_ as CqlDateTime;
                     }
                     else
                     {
-                        bool aq_ = ao_ is CqlInterval<CqlDateTime>;
-                        if (aq_)
+                        DataType ax_ = AbnormalPresentation?.Effective;
+                        object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
+                        bool az_ = ay_ is CqlInterval<CqlDateTime>;
+                        if (az_)
                         {
-                            ad_ = ao_ as CqlInterval<CqlDateTime>;
+                            DataType ba_ = AbnormalPresentation?.Effective;
+                            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
+                            ad_ = bb_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
@@ -777,35 +876,46 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<Observation> w_ = context.Operators.Where<Observation>(u_, v_);
 
             object x_(Observation @this) {
-                object ar_;
-                DataType at_ = @this?.Effective;
-                object au_ = FHIRHelpers_4_4_000.Instance.ToValue(context, at_);
-                bool av_ = au_ is CqlDateTime;
-                if (av_)
+                object bc_;
+                DataType be_ = @this?.Effective;
+                object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
+                bool bg_ = bf_ is CqlDateTime;
+                if (bg_)
                 {
-                    ar_ = au_ as CqlDateTime;
+                    DataType bh_ = @this?.Effective;
+                    object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
+                    bc_ = bi_ as CqlDateTime;
                 }
                 else
                 {
-                    if (av_)
+                    DataType bj_ = @this?.Effective;
+                    object bk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bj_);
+                    bool bl_ = bk_ is CqlDateTime;
+                    if (bl_)
                     {
-                        ar_ = au_ as CqlDateTime;
+                        DataType bm_ = @this?.Effective;
+                        object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
+                        bc_ = bn_ as CqlDateTime;
                     }
                     else
                     {
-                        bool aw_ = au_ is CqlInterval<CqlDateTime>;
-                        if (aw_)
+                        DataType bo_ = @this?.Effective;
+                        object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
+                        bool bq_ = bp_ is CqlInterval<CqlDateTime>;
+                        if (bq_)
                         {
-                            ar_ = au_ as CqlInterval<CqlDateTime>;
+                            DataType br_ = @this?.Effective;
+                            object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
+                            bc_ = bs_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            ar_ = null;
+                            bc_ = null;
                         }
                     }
                 }
-                CqlDateTime as_ = QICoreCommon_4_0_000.Instance.earliest(context, ar_);
-                return as_;
+                CqlDateTime bd_ = QICoreCommon_4_0_000.Instance.earliest(context, bc_);
+                return bd_;
             }
 
             IEnumerable<Observation> y_ = context.Operators.SortBy<Observation>(w_, x_, System.ComponentModel.ListSortDirection.Ascending);
@@ -815,436 +925,556 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             bool ac_ = ab_ is CqlDateTime;
             if (ac_)
             {
+                CqlValueSet bt_ = this.Abnormal_Presentation(context);
+                IEnumerable<Observation> bu_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, bt_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-                bool? ax_(Observation AbnormalPresentation) {
-                    object be_;
-                    DataType bo_ = AbnormalPresentation?.Effective;
-                    object bp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bo_);
-                    bool bq_ = bp_ is CqlDateTime;
-                    if (bq_)
+                bool? bv_(Observation AbnormalPresentation) {
+                    object cc_;
+                    DataType cm_ = AbnormalPresentation?.Effective;
+                    object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
+                    bool co_ = cn_ is CqlDateTime;
+                    if (co_)
                     {
-                        be_ = bp_ as CqlDateTime;
+                        DataType cp_ = AbnormalPresentation?.Effective;
+                        object cq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cp_);
+                        cc_ = cq_ as CqlDateTime;
                     }
                     else
                     {
-                        if (bq_)
+                        DataType cr_ = AbnormalPresentation?.Effective;
+                        object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
+                        bool ct_ = cs_ is CqlDateTime;
+                        if (ct_)
                         {
-                            be_ = bp_ as CqlDateTime;
+                            DataType cu_ = AbnormalPresentation?.Effective;
+                            object cv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cu_);
+                            cc_ = cv_ as CqlDateTime;
                         }
                         else
                         {
-                            bool br_ = bp_ is CqlInterval<CqlDateTime>;
-                            if (br_)
+                            DataType cw_ = AbnormalPresentation?.Effective;
+                            object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
+                            bool cy_ = cx_ is CqlInterval<CqlDateTime>;
+                            if (cy_)
                             {
-                                be_ = bp_ as CqlInterval<CqlDateTime>;
+                                DataType cz_ = AbnormalPresentation?.Effective;
+                                object da_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cz_);
+                                cc_ = da_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                be_ = null;
+                                cc_ = null;
                             }
                         }
                     }
-                    CqlDateTime bf_ = QICoreCommon_4_0_000.Instance.earliest(context, be_);
-                    CqlDateTime bg_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
-                    bool? bh_ = context.Operators.SameOrBefore(bf_, bg_, (string)default);
-                    Code<ObservationStatus> bi_ = AbnormalPresentation?.StatusElement;
-                    ObservationStatus? bj_ = bi_?.Value;
-                    string bk_ = context.Operators.Convert<string>(bj_);
-                    string[] bl_ = [
+                    CqlDateTime cd_ = QICoreCommon_4_0_000.Instance.earliest(context, cc_);
+                    CqlDateTime ce_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
+                    bool? cf_ = context.Operators.SameOrBefore(cd_, ce_, (string)default);
+                    Code<ObservationStatus> cg_ = AbnormalPresentation?.StatusElement;
+                    ObservationStatus? ch_ = cg_?.Value;
+                    string ci_ = context.Operators.Convert<string>(ch_);
+                    string[] cj_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? bm_ = context.Operators.In<string>(bk_, (IEnumerable<string>)bl_);
-                    bool? bn_ = context.Operators.And(bh_, bm_);
-                    return bn_;
+                    bool? ck_ = context.Operators.In<string>(ci_, (IEnumerable<string>)cj_);
+                    bool? cl_ = context.Operators.And(cf_, ck_);
+                    return cl_;
                 }
 
-                IEnumerable<Observation> ay_ = context.Operators.Where<Observation>(u_, ax_);
+                IEnumerable<Observation> bw_ = context.Operators.Where<Observation>(bu_, bv_);
 
-                object az_(Observation @this) {
-                    object bs_;
-                    DataType bu_ = @this?.Effective;
-                    object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-                    bool bw_ = bv_ is CqlDateTime;
-                    if (bw_)
+                object bx_(Observation @this) {
+                    object db_;
+                    DataType dd_ = @this?.Effective;
+                    object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
+                    bool df_ = de_ is CqlDateTime;
+                    if (df_)
                     {
-                        bs_ = bv_ as CqlDateTime;
+                        DataType dg_ = @this?.Effective;
+                        object dh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dg_);
+                        db_ = dh_ as CqlDateTime;
                     }
                     else
                     {
-                        if (bw_)
+                        DataType di_ = @this?.Effective;
+                        object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+                        bool dk_ = dj_ is CqlDateTime;
+                        if (dk_)
                         {
-                            bs_ = bv_ as CqlDateTime;
+                            DataType dl_ = @this?.Effective;
+                            object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
+                            db_ = dm_ as CqlDateTime;
                         }
                         else
                         {
-                            bool bx_ = bv_ is CqlInterval<CqlDateTime>;
-                            if (bx_)
+                            DataType dn_ = @this?.Effective;
+                            object do_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dn_);
+                            bool dp_ = do_ is CqlInterval<CqlDateTime>;
+                            if (dp_)
                             {
-                                bs_ = bv_ as CqlInterval<CqlDateTime>;
+                                DataType dq_ = @this?.Effective;
+                                object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
+                                db_ = dr_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                bs_ = null;
+                                db_ = null;
                             }
                         }
                     }
-                    CqlDateTime bt_ = QICoreCommon_4_0_000.Instance.earliest(context, bs_);
-                    return bt_;
+                    CqlDateTime dc_ = QICoreCommon_4_0_000.Instance.earliest(context, db_);
+                    return dc_;
                 }
 
-                IEnumerable<Observation> ba_ = context.Operators.SortBy<Observation>(ay_, az_, System.ComponentModel.ListSortDirection.Ascending);
-                Observation bb_ = context.Operators.Last<Observation>(ba_);
-                DataType bc_ = bb_?.Effective;
-                object bd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bc_);
-                d_ = bd_ as CqlDateTime;
+                IEnumerable<Observation> by_ = context.Operators.SortBy<Observation>(bw_, bx_, System.ComponentModel.ListSortDirection.Ascending);
+                Observation bz_ = context.Operators.Last<Observation>(by_);
+                DataType ca_ = bz_?.Effective;
+                object cb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ca_);
+                d_ = cb_ as CqlDateTime;
             }
             else
             {
+                CqlValueSet ds_ = this.Abnormal_Presentation(context);
+                IEnumerable<Observation> dt_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ds_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-                bool? by_(Observation AbnormalPresentation) {
-                    object cg_;
-                    DataType cq_ = AbnormalPresentation?.Effective;
-                    object cr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cq_);
-                    bool cs_ = cr_ is CqlDateTime;
-                    if (cs_)
+                bool? du_(Observation AbnormalPresentation) {
+                    object ec_;
+                    DataType em_ = AbnormalPresentation?.Effective;
+                    object en_ = FHIRHelpers_4_4_000.Instance.ToValue(context, em_);
+                    bool eo_ = en_ is CqlDateTime;
+                    if (eo_)
                     {
-                        cg_ = cr_ as CqlDateTime;
+                        DataType ep_ = AbnormalPresentation?.Effective;
+                        object eq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ep_);
+                        ec_ = eq_ as CqlDateTime;
                     }
                     else
                     {
-                        if (cs_)
+                        DataType er_ = AbnormalPresentation?.Effective;
+                        object es_ = FHIRHelpers_4_4_000.Instance.ToValue(context, er_);
+                        bool et_ = es_ is CqlDateTime;
+                        if (et_)
                         {
-                            cg_ = cr_ as CqlDateTime;
+                            DataType eu_ = AbnormalPresentation?.Effective;
+                            object ev_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eu_);
+                            ec_ = ev_ as CqlDateTime;
                         }
                         else
                         {
-                            bool ct_ = cr_ is CqlInterval<CqlDateTime>;
-                            if (ct_)
+                            DataType ew_ = AbnormalPresentation?.Effective;
+                            object ex_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ew_);
+                            bool ey_ = ex_ is CqlInterval<CqlDateTime>;
+                            if (ey_)
                             {
-                                cg_ = cr_ as CqlInterval<CqlDateTime>;
+                                DataType ez_ = AbnormalPresentation?.Effective;
+                                object fa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ez_);
+                                ec_ = fa_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                cg_ = null;
+                                ec_ = null;
                             }
                         }
                     }
-                    CqlDateTime ch_ = QICoreCommon_4_0_000.Instance.earliest(context, cg_);
-                    CqlDateTime ci_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
-                    bool? cj_ = context.Operators.SameOrBefore(ch_, ci_, (string)default);
-                    Code<ObservationStatus> ck_ = AbnormalPresentation?.StatusElement;
-                    ObservationStatus? cl_ = ck_?.Value;
-                    string cm_ = context.Operators.Convert<string>(cl_);
-                    string[] cn_ = [
+                    CqlDateTime ed_ = QICoreCommon_4_0_000.Instance.earliest(context, ec_);
+                    CqlDateTime ee_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
+                    bool? ef_ = context.Operators.SameOrBefore(ed_, ee_, (string)default);
+                    Code<ObservationStatus> eg_ = AbnormalPresentation?.StatusElement;
+                    ObservationStatus? eh_ = eg_?.Value;
+                    string ei_ = context.Operators.Convert<string>(eh_);
+                    string[] ej_ = [
                         "final",
                         "amended",
                         "corrected",
                     ];
-                    bool? co_ = context.Operators.In<string>(cm_, (IEnumerable<string>)cn_);
-                    bool? cp_ = context.Operators.And(cj_, co_);
-                    return cp_;
+                    bool? ek_ = context.Operators.In<string>(ei_, (IEnumerable<string>)ej_);
+                    bool? el_ = context.Operators.And(ef_, ek_);
+                    return el_;
                 }
 
-                IEnumerable<Observation> bz_ = context.Operators.Where<Observation>(u_, by_);
+                IEnumerable<Observation> dv_ = context.Operators.Where<Observation>(dt_, du_);
 
-                object ca_(Observation @this) {
-                    object cu_;
-                    DataType cw_ = @this?.Effective;
-                    object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-                    bool cy_ = cx_ is CqlDateTime;
-                    if (cy_)
+                object dw_(Observation @this) {
+                    object fb_;
+                    DataType fd_ = @this?.Effective;
+                    object fe_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fd_);
+                    bool ff_ = fe_ is CqlDateTime;
+                    if (ff_)
                     {
-                        cu_ = cx_ as CqlDateTime;
+                        DataType fg_ = @this?.Effective;
+                        object fh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fg_);
+                        fb_ = fh_ as CqlDateTime;
                     }
                     else
                     {
-                        if (cy_)
+                        DataType fi_ = @this?.Effective;
+                        object fj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fi_);
+                        bool fk_ = fj_ is CqlDateTime;
+                        if (fk_)
                         {
-                            cu_ = cx_ as CqlDateTime;
+                            DataType fl_ = @this?.Effective;
+                            object fm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fl_);
+                            fb_ = fm_ as CqlDateTime;
                         }
                         else
                         {
-                            bool cz_ = cx_ is CqlInterval<CqlDateTime>;
-                            if (cz_)
+                            DataType fn_ = @this?.Effective;
+                            object fo_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fn_);
+                            bool fp_ = fo_ is CqlInterval<CqlDateTime>;
+                            if (fp_)
                             {
-                                cu_ = cx_ as CqlInterval<CqlDateTime>;
+                                DataType fq_ = @this?.Effective;
+                                object fr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fq_);
+                                fb_ = fr_ as CqlInterval<CqlDateTime>;
                             }
                             else
                             {
-                                cu_ = null;
+                                fb_ = null;
                             }
                         }
                     }
-                    CqlDateTime cv_ = QICoreCommon_4_0_000.Instance.earliest(context, cu_);
-                    return cv_;
+                    CqlDateTime fc_ = QICoreCommon_4_0_000.Instance.earliest(context, fb_);
+                    return fc_;
                 }
 
-                IEnumerable<Observation> cb_ = context.Operators.SortBy<Observation>(bz_, ca_, System.ComponentModel.ListSortDirection.Ascending);
-                Observation cc_ = context.Operators.Last<Observation>(cb_);
-                DataType cd_ = cc_?.Effective;
-                object ce_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cd_);
-                bool cf_ = ce_ is CqlDateTime;
-                if (cf_)
+                IEnumerable<Observation> dx_ = context.Operators.SortBy<Observation>(dv_, dw_, System.ComponentModel.ListSortDirection.Ascending);
+                Observation dy_ = context.Operators.Last<Observation>(dx_);
+                DataType dz_ = dy_?.Effective;
+                object ea_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dz_);
+                bool eb_ = ea_ is CqlDateTime;
+                if (eb_)
                 {
+                    CqlValueSet fs_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> ft_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fs_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-                    bool? da_(Observation AbnormalPresentation) {
-                        object dh_;
-                        DataType dr_ = AbnormalPresentation?.Effective;
-                        object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
-                        bool dt_ = ds_ is CqlDateTime;
-                        if (dt_)
+                    bool? fu_(Observation AbnormalPresentation) {
+                        object gb_;
+                        DataType gl_ = AbnormalPresentation?.Effective;
+                        object gm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gl_);
+                        bool gn_ = gm_ is CqlDateTime;
+                        if (gn_)
                         {
-                            dh_ = ds_ as CqlDateTime;
+                            DataType go_ = AbnormalPresentation?.Effective;
+                            object gp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, go_);
+                            gb_ = gp_ as CqlDateTime;
                         }
                         else
                         {
-                            if (dt_)
+                            DataType gq_ = AbnormalPresentation?.Effective;
+                            object gr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gq_);
+                            bool gs_ = gr_ is CqlDateTime;
+                            if (gs_)
                             {
-                                dh_ = ds_ as CqlDateTime;
+                                DataType gt_ = AbnormalPresentation?.Effective;
+                                object gu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gt_);
+                                gb_ = gu_ as CqlDateTime;
                             }
                             else
                             {
-                                bool du_ = ds_ is CqlInterval<CqlDateTime>;
-                                if (du_)
+                                DataType gv_ = AbnormalPresentation?.Effective;
+                                object gw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gv_);
+                                bool gx_ = gw_ is CqlInterval<CqlDateTime>;
+                                if (gx_)
                                 {
-                                    dh_ = ds_ as CqlInterval<CqlDateTime>;
+                                    DataType gy_ = AbnormalPresentation?.Effective;
+                                    object gz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, gy_);
+                                    gb_ = gz_ as CqlInterval<CqlDateTime>;
                                 }
                                 else
                                 {
-                                    dh_ = null;
+                                    gb_ = null;
                                 }
                             }
                         }
-                        CqlDateTime di_ = QICoreCommon_4_0_000.Instance.earliest(context, dh_);
-                        CqlDateTime dj_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
-                        bool? dk_ = context.Operators.SameOrBefore(di_, dj_, (string)default);
-                        Code<ObservationStatus> dl_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? dm_ = dl_?.Value;
-                        string dn_ = context.Operators.Convert<string>(dm_);
-                        string[] do_ = [
+                        CqlDateTime gc_ = QICoreCommon_4_0_000.Instance.earliest(context, gb_);
+                        CqlDateTime gd_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
+                        bool? ge_ = context.Operators.SameOrBefore(gc_, gd_, (string)default);
+                        Code<ObservationStatus> gf_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? gg_ = gf_?.Value;
+                        string gh_ = context.Operators.Convert<string>(gg_);
+                        string[] gi_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? dp_ = context.Operators.In<string>(dn_, (IEnumerable<string>)do_);
-                        bool? dq_ = context.Operators.And(dk_, dp_);
-                        return dq_;
+                        bool? gj_ = context.Operators.In<string>(gh_, (IEnumerable<string>)gi_);
+                        bool? gk_ = context.Operators.And(ge_, gj_);
+                        return gk_;
                     }
 
-                    IEnumerable<Observation> db_ = context.Operators.Where<Observation>(u_, da_);
+                    IEnumerable<Observation> fv_ = context.Operators.Where<Observation>(ft_, fu_);
 
-                    object dc_(Observation @this) {
-                        object dv_;
-                        DataType dx_ = @this?.Effective;
-                        object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-                        bool dz_ = dy_ is CqlDateTime;
-                        if (dz_)
+                    object fw_(Observation @this) {
+                        object ha_;
+                        DataType hc_ = @this?.Effective;
+                        object hd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hc_);
+                        bool he_ = hd_ is CqlDateTime;
+                        if (he_)
                         {
-                            dv_ = dy_ as CqlDateTime;
+                            DataType hf_ = @this?.Effective;
+                            object hg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hf_);
+                            ha_ = hg_ as CqlDateTime;
                         }
                         else
                         {
-                            if (dz_)
+                            DataType hh_ = @this?.Effective;
+                            object hi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hh_);
+                            bool hj_ = hi_ is CqlDateTime;
+                            if (hj_)
                             {
-                                dv_ = dy_ as CqlDateTime;
+                                DataType hk_ = @this?.Effective;
+                                object hl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hk_);
+                                ha_ = hl_ as CqlDateTime;
                             }
                             else
                             {
-                                bool ea_ = dy_ is CqlInterval<CqlDateTime>;
-                                if (ea_)
+                                DataType hm_ = @this?.Effective;
+                                object hn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hm_);
+                                bool ho_ = hn_ is CqlInterval<CqlDateTime>;
+                                if (ho_)
                                 {
-                                    dv_ = dy_ as CqlInterval<CqlDateTime>;
+                                    DataType hp_ = @this?.Effective;
+                                    object hq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hp_);
+                                    ha_ = hq_ as CqlInterval<CqlDateTime>;
                                 }
                                 else
                                 {
-                                    dv_ = null;
+                                    ha_ = null;
                                 }
                             }
                         }
-                        CqlDateTime dw_ = QICoreCommon_4_0_000.Instance.earliest(context, dv_);
-                        return dw_;
+                        CqlDateTime hb_ = QICoreCommon_4_0_000.Instance.earliest(context, ha_);
+                        return hb_;
                     }
 
-                    IEnumerable<Observation> dd_ = context.Operators.SortBy<Observation>(db_, dc_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation de_ = context.Operators.Last<Observation>(dd_);
-                    DataType df_ = de_?.Effective;
-                    object dg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, df_);
-                    d_ = dg_ as CqlDateTime;
+                    IEnumerable<Observation> fx_ = context.Operators.SortBy<Observation>(fv_, fw_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation fy_ = context.Operators.Last<Observation>(fx_);
+                    DataType fz_ = fy_?.Effective;
+                    object ga_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fz_);
+                    d_ = ga_ as CqlDateTime;
                 }
                 else
                 {
+                    CqlValueSet hr_ = this.Abnormal_Presentation(context);
+                    IEnumerable<Observation> hs_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, hr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-                    bool? eb_(Observation AbnormalPresentation) {
-                        object ej_;
-                        DataType et_ = AbnormalPresentation?.Effective;
-                        object eu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, et_);
-                        bool ev_ = eu_ is CqlDateTime;
-                        if (ev_)
+                    bool? ht_(Observation AbnormalPresentation) {
+                        object ib_;
+                        DataType il_ = AbnormalPresentation?.Effective;
+                        object im_ = FHIRHelpers_4_4_000.Instance.ToValue(context, il_);
+                        bool in_ = im_ is CqlDateTime;
+                        if (in_)
                         {
-                            ej_ = eu_ as CqlDateTime;
+                            DataType io_ = AbnormalPresentation?.Effective;
+                            object ip_ = FHIRHelpers_4_4_000.Instance.ToValue(context, io_);
+                            ib_ = ip_ as CqlDateTime;
                         }
                         else
                         {
-                            if (ev_)
+                            DataType iq_ = AbnormalPresentation?.Effective;
+                            object ir_ = FHIRHelpers_4_4_000.Instance.ToValue(context, iq_);
+                            bool is_ = ir_ is CqlDateTime;
+                            if (is_)
                             {
-                                ej_ = eu_ as CqlDateTime;
+                                DataType it_ = AbnormalPresentation?.Effective;
+                                object iu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, it_);
+                                ib_ = iu_ as CqlDateTime;
                             }
                             else
                             {
-                                bool ew_ = eu_ is CqlInterval<CqlDateTime>;
-                                if (ew_)
+                                DataType iv_ = AbnormalPresentation?.Effective;
+                                object iw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, iv_);
+                                bool ix_ = iw_ is CqlInterval<CqlDateTime>;
+                                if (ix_)
                                 {
-                                    ej_ = eu_ as CqlInterval<CqlDateTime>;
+                                    DataType iy_ = AbnormalPresentation?.Effective;
+                                    object iz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, iy_);
+                                    ib_ = iz_ as CqlInterval<CqlDateTime>;
                                 }
                                 else
                                 {
-                                    ej_ = null;
+                                    ib_ = null;
                                 }
                             }
                         }
-                        CqlDateTime ek_ = QICoreCommon_4_0_000.Instance.earliest(context, ej_);
-                        CqlDateTime el_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
-                        bool? em_ = context.Operators.SameOrBefore(ek_, el_, (string)default);
-                        Code<ObservationStatus> en_ = AbnormalPresentation?.StatusElement;
-                        ObservationStatus? eo_ = en_?.Value;
-                        string ep_ = context.Operators.Convert<string>(eo_);
-                        string[] eq_ = [
+                        CqlDateTime ic_ = QICoreCommon_4_0_000.Instance.earliest(context, ib_);
+                        CqlDateTime id_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
+                        bool? ie_ = context.Operators.SameOrBefore(ic_, id_, (string)default);
+                        Code<ObservationStatus> if_ = AbnormalPresentation?.StatusElement;
+                        ObservationStatus? ig_ = if_?.Value;
+                        string ih_ = context.Operators.Convert<string>(ig_);
+                        string[] ii_ = [
                             "final",
                             "amended",
                             "corrected",
                         ];
-                        bool? er_ = context.Operators.In<string>(ep_, (IEnumerable<string>)eq_);
-                        bool? es_ = context.Operators.And(em_, er_);
-                        return es_;
+                        bool? ij_ = context.Operators.In<string>(ih_, (IEnumerable<string>)ii_);
+                        bool? ik_ = context.Operators.And(ie_, ij_);
+                        return ik_;
                     }
 
-                    IEnumerable<Observation> ec_ = context.Operators.Where<Observation>(u_, eb_);
+                    IEnumerable<Observation> hu_ = context.Operators.Where<Observation>(hs_, ht_);
 
-                    object ed_(Observation @this) {
-                        object ex_;
-                        DataType ez_ = @this?.Effective;
-                        object fa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ez_);
-                        bool fb_ = fa_ is CqlDateTime;
-                        if (fb_)
+                    object hv_(Observation @this) {
+                        object ja_;
+                        DataType jc_ = @this?.Effective;
+                        object jd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jc_);
+                        bool je_ = jd_ is CqlDateTime;
+                        if (je_)
                         {
-                            ex_ = fa_ as CqlDateTime;
+                            DataType jf_ = @this?.Effective;
+                            object jg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jf_);
+                            ja_ = jg_ as CqlDateTime;
                         }
                         else
                         {
-                            if (fb_)
+                            DataType jh_ = @this?.Effective;
+                            object ji_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jh_);
+                            bool jj_ = ji_ is CqlDateTime;
+                            if (jj_)
                             {
-                                ex_ = fa_ as CqlDateTime;
+                                DataType jk_ = @this?.Effective;
+                                object jl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jk_);
+                                ja_ = jl_ as CqlDateTime;
                             }
                             else
                             {
-                                bool fc_ = fa_ is CqlInterval<CqlDateTime>;
-                                if (fc_)
+                                DataType jm_ = @this?.Effective;
+                                object jn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jm_);
+                                bool jo_ = jn_ is CqlInterval<CqlDateTime>;
+                                if (jo_)
                                 {
-                                    ex_ = fa_ as CqlInterval<CqlDateTime>;
+                                    DataType jp_ = @this?.Effective;
+                                    object jq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jp_);
+                                    ja_ = jq_ as CqlInterval<CqlDateTime>;
                                 }
                                 else
                                 {
-                                    ex_ = null;
+                                    ja_ = null;
                                 }
                             }
                         }
-                        CqlDateTime ey_ = QICoreCommon_4_0_000.Instance.earliest(context, ex_);
-                        return ey_;
+                        CqlDateTime jb_ = QICoreCommon_4_0_000.Instance.earliest(context, ja_);
+                        return jb_;
                     }
 
-                    IEnumerable<Observation> ee_ = context.Operators.SortBy<Observation>(ec_, ed_, System.ComponentModel.ListSortDirection.Ascending);
-                    Observation ef_ = context.Operators.Last<Observation>(ee_);
-                    DataType eg_ = ef_?.Effective;
-                    object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
-                    bool ei_ = eh_ is CqlInterval<CqlDateTime>;
-                    if (ei_)
+                    IEnumerable<Observation> hw_ = context.Operators.SortBy<Observation>(hu_, hv_, System.ComponentModel.ListSortDirection.Ascending);
+                    Observation hx_ = context.Operators.Last<Observation>(hw_);
+                    DataType hy_ = hx_?.Effective;
+                    object hz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, hy_);
+                    bool ia_ = hz_ is CqlInterval<CqlDateTime>;
+                    if (ia_)
                     {
+                        CqlValueSet jr_ = this.Abnormal_Presentation(context);
+                        IEnumerable<Observation> js_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, jr_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-simple-observation"));
 
-                        bool? fd_(Observation AbnormalPresentation) {
-                            object fk_;
-                            DataType fu_ = AbnormalPresentation?.Effective;
-                            object fv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fu_);
-                            bool fw_ = fv_ is CqlDateTime;
-                            if (fw_)
+                        bool? jt_(Observation AbnormalPresentation) {
+                            object ka_;
+                            DataType kk_ = AbnormalPresentation?.Effective;
+                            object kl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kk_);
+                            bool km_ = kl_ is CqlDateTime;
+                            if (km_)
                             {
-                                fk_ = fv_ as CqlDateTime;
+                                DataType kn_ = AbnormalPresentation?.Effective;
+                                object ko_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kn_);
+                                ka_ = ko_ as CqlDateTime;
                             }
                             else
                             {
-                                if (fw_)
+                                DataType kp_ = AbnormalPresentation?.Effective;
+                                object kq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kp_);
+                                bool kr_ = kq_ is CqlDateTime;
+                                if (kr_)
                                 {
-                                    fk_ = fv_ as CqlDateTime;
+                                    DataType ks_ = AbnormalPresentation?.Effective;
+                                    object kt_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ks_);
+                                    ka_ = kt_ as CqlDateTime;
                                 }
                                 else
                                 {
-                                    bool fx_ = fv_ is CqlInterval<CqlDateTime>;
-                                    if (fx_)
+                                    DataType ku_ = AbnormalPresentation?.Effective;
+                                    object kv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ku_);
+                                    bool kw_ = kv_ is CqlInterval<CqlDateTime>;
+                                    if (kw_)
                                     {
-                                        fk_ = fv_ as CqlInterval<CqlDateTime>;
+                                        DataType kx_ = AbnormalPresentation?.Effective;
+                                        object ky_ = FHIRHelpers_4_4_000.Instance.ToValue(context, kx_);
+                                        ka_ = ky_ as CqlInterval<CqlDateTime>;
                                     }
                                     else
                                     {
-                                        fk_ = null;
+                                        ka_ = null;
                                     }
                                 }
                             }
-                            CqlDateTime fl_ = QICoreCommon_4_0_000.Instance.earliest(context, fk_);
-                            CqlDateTime fm_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
-                            bool? fn_ = context.Operators.SameOrBefore(fl_, fm_, (string)default);
-                            Code<ObservationStatus> fo_ = AbnormalPresentation?.StatusElement;
-                            ObservationStatus? fp_ = fo_?.Value;
-                            string fq_ = context.Operators.Convert<string>(fp_);
-                            string[] fr_ = [
+                            CqlDateTime kb_ = QICoreCommon_4_0_000.Instance.earliest(context, ka_);
+                            CqlDateTime kc_ = PCMaternal_5_25_000.Instance.lastTimeOfDelivery(context, ThirtySevenWeeksPlusEncounter);
+                            bool? kd_ = context.Operators.SameOrBefore(kb_, kc_, (string)default);
+                            Code<ObservationStatus> ke_ = AbnormalPresentation?.StatusElement;
+                            ObservationStatus? kf_ = ke_?.Value;
+                            string kg_ = context.Operators.Convert<string>(kf_);
+                            string[] kh_ = [
                                 "final",
                                 "amended",
                                 "corrected",
                             ];
-                            bool? fs_ = context.Operators.In<string>(fq_, (IEnumerable<string>)fr_);
-                            bool? ft_ = context.Operators.And(fn_, fs_);
-                            return ft_;
+                            bool? ki_ = context.Operators.In<string>(kg_, (IEnumerable<string>)kh_);
+                            bool? kj_ = context.Operators.And(kd_, ki_);
+                            return kj_;
                         }
 
-                        IEnumerable<Observation> fe_ = context.Operators.Where<Observation>(u_, fd_);
+                        IEnumerable<Observation> ju_ = context.Operators.Where<Observation>(js_, jt_);
 
-                        object ff_(Observation @this) {
-                            object fy_;
-                            DataType ga_ = @this?.Effective;
-                            object gb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ga_);
-                            bool gc_ = gb_ is CqlDateTime;
-                            if (gc_)
+                        object jv_(Observation @this) {
+                            object kz_;
+                            DataType lb_ = @this?.Effective;
+                            object lc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lb_);
+                            bool ld_ = lc_ is CqlDateTime;
+                            if (ld_)
                             {
-                                fy_ = gb_ as CqlDateTime;
+                                DataType le_ = @this?.Effective;
+                                object lf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, le_);
+                                kz_ = lf_ as CqlDateTime;
                             }
                             else
                             {
-                                if (gc_)
+                                DataType lg_ = @this?.Effective;
+                                object lh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lg_);
+                                bool li_ = lh_ is CqlDateTime;
+                                if (li_)
                                 {
-                                    fy_ = gb_ as CqlDateTime;
+                                    DataType lj_ = @this?.Effective;
+                                    object lk_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lj_);
+                                    kz_ = lk_ as CqlDateTime;
                                 }
                                 else
                                 {
-                                    bool gd_ = gb_ is CqlInterval<CqlDateTime>;
-                                    if (gd_)
+                                    DataType ll_ = @this?.Effective;
+                                    object lm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ll_);
+                                    bool ln_ = lm_ is CqlInterval<CqlDateTime>;
+                                    if (ln_)
                                     {
-                                        fy_ = gb_ as CqlInterval<CqlDateTime>;
+                                        DataType lo_ = @this?.Effective;
+                                        object lp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, lo_);
+                                        kz_ = lp_ as CqlInterval<CqlDateTime>;
                                     }
                                     else
                                     {
-                                        fy_ = null;
+                                        kz_ = null;
                                     }
                                 }
                             }
-                            CqlDateTime fz_ = QICoreCommon_4_0_000.Instance.earliest(context, fy_);
-                            return fz_;
+                            CqlDateTime la_ = QICoreCommon_4_0_000.Instance.earliest(context, kz_);
+                            return la_;
                         }
 
-                        IEnumerable<Observation> fg_ = context.Operators.SortBy<Observation>(fe_, ff_, System.ComponentModel.ListSortDirection.Ascending);
-                        Observation fh_ = context.Operators.Last<Observation>(fg_);
-                        DataType fi_ = fh_?.Effective;
-                        object fj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, fi_);
-                        d_ = fj_ as CqlInterval<CqlDateTime>;
+                        IEnumerable<Observation> jw_ = context.Operators.SortBy<Observation>(ju_, jv_, System.ComponentModel.ListSortDirection.Ascending);
+                        Observation jx_ = context.Operators.Last<Observation>(jw_);
+                        DataType jy_ = jx_?.Effective;
+                        object jz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, jy_);
+                        d_ = jz_ as CqlInterval<CqlDateTime>;
                     }
                     else
                     {
@@ -1258,17 +1488,17 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             IEnumerable<Condition> h_ = CQMCommon_4_1_000.Instance.encounterDiagnosis(context, ThirtySevenWeeksPlusEncounter);
 
             bool? i_(Condition @this) {
-                CodeableConcept ge_ = @this?.Code;
-                CqlConcept gf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ge_);
-                bool? gg_ = context.Operators.Not((bool?)(gf_ is null));
-                return gg_;
+                CodeableConcept lq_ = @this?.Code;
+                CqlConcept lr_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lq_);
+                bool? ls_ = context.Operators.Not((bool?)(lr_ is null));
+                return ls_;
             }
 
 
             CqlConcept j_(Condition @this) {
-                CodeableConcept gh_ = @this?.Code;
-                CqlConcept gi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gh_);
-                return gi_;
+                CodeableConcept lt_ = @this?.Code;
+                CqlConcept lu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lt_);
+                return lu_;
             }
 
             IEnumerable<CqlConcept> k_ = context.Operators.WhereSelect<Condition, CqlConcept>(h_, i_, j_);
@@ -1278,8 +1508,8 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
             List<CodeableConcept> o_ = ThirtySevenWeeksPlusEncounter?.ReasonCode;
 
             CqlConcept p_(CodeableConcept @this) {
-                CqlConcept gj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                return gj_;
+                CqlConcept lv_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                return lv_;
             }
 
             IEnumerable<CqlConcept> q_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)o_, p_);
@@ -1445,28 +1675,42 @@ public partial class CMS0334FHIRPCCesareanBirth_1_0_000 : ILibrary, ISingleton<C
                 bool s_ = r_ is CqlDateTime;
                 if (s_)
                 {
-                    i_ = r_ as CqlDateTime;
+                    DataType t_ = CSection?.Performed;
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    i_ = u_ as CqlDateTime;
                 }
                 else
                 {
-                    bool t_ = r_ is CqlQuantity;
-                    if (t_)
+                    DataType v_ = CSection?.Performed;
+                    object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
+                    bool x_ = w_ is CqlQuantity;
+                    if (x_)
                     {
-                        i_ = r_ as CqlQuantity;
+                        DataType y_ = CSection?.Performed;
+                        object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
+                        i_ = z_ as CqlQuantity;
                     }
                     else
                     {
-                        bool u_ = r_ is CqlInterval<CqlDateTime>;
-                        if (u_)
+                        DataType aa_ = CSection?.Performed;
+                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        bool ac_ = ab_ is CqlInterval<CqlDateTime>;
+                        if (ac_)
                         {
-                            i_ = r_ as CqlInterval<CqlDateTime>;
+                            DataType ad_ = CSection?.Performed;
+                            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                            i_ = ae_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            bool v_ = r_ is CqlInterval<CqlQuantity>;
-                            if (v_)
+                            DataType af_ = CSection?.Performed;
+                            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
+                            bool ah_ = ag_ is CqlInterval<CqlQuantity>;
+                            if (ah_)
                             {
-                                i_ = r_ as CqlInterval<CqlQuantity>;
+                                DataType ai_ = CSection?.Performed;
+                                object aj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ai_);
+                                i_ = aj_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
