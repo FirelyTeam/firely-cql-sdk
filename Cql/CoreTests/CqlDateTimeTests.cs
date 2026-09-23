@@ -382,4 +382,13 @@ public class CqlDateTimeTests
         var result = dateTime.Subtract(quantity);
         Assert.IsNull(result, "Subtracting years from minimum datetime should return null to prevent overflow");
     }
+
+    [TestMethod]
+    [DataRow("2026-13-45T10:00:00.000Z", DisplayName = "month and day out of range")]
+    [DataRow("2026-02-31T10:00:00.000Z", DisplayName = "day beyond the month")]
+    public void TryParse_DateThatDoesNotExist_ReturnsFalse(string value)
+    {
+        Assert.IsFalse(CqlDateTime.TryParse(value, out var dateTime));
+        Assert.IsNull(dateTime);
+    }
 }
