@@ -270,4 +270,21 @@ public class CqlDateTests
         var date = new CqlDate(2024, 3, 15);
         Assert.ThrowsException<CqlException<CqlUcumMonthArithmeticError>>(() => date.Subtract(new CqlQuantity(1m, "mo")));
     }
+
+    [TestMethod]
+    [DataRow("2026-13-45", DisplayName = "month and day out of range")]
+    [DataRow("2026-02-29", DisplayName = "29 February in a common year")]
+    [DataRow("0000-01-01", DisplayName = "year 0")]
+    public void TryParse_DateThatDoesNotExist_ReturnsFalse(string value)
+    {
+        Assert.IsFalse(CqlDate.TryParse(value, out var date));
+        Assert.IsNull(date);
+    }
+
+    [TestMethod]
+    public void TryParse_LeapDay_ReturnsTrue()
+    {
+        Assert.IsTrue(CqlDate.TryParse("2024-02-29", out var date));
+        Assert.AreEqual("2024-02-29", date!.ToString());
+    }
 }
