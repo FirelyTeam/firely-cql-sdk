@@ -13,17 +13,11 @@ namespace Hl7.Cql.Comparers;
 /// </summary>
 /// <remarks>
 /// Strings are normalized using <see cref="string.Normalize()"/>.
-/// Equality, ordering and hashing use the supplied <see cref="StringComparer"/>. The supplied
-/// <see cref="CqlComparerEquivalentImplementation"/> selects what equivalence means:
-/// <see cref="CqlComparerEquivalentImplementation.Equals"/> makes equivalence follow equality, and
-/// <see cref="CqlComparerEquivalentImplementation.Equivalent"/> gives it the CQL string semantics
-/// implemented by <see cref="EquivalentValues"/>.
+/// Equality, ordering and hashing use the supplied <see cref="StringComparer"/>. Equivalence always
+/// follows the CQL string semantics implemented by <see cref="EquivalentValues"/>.
 /// </remarks>
 internal class StringCqlComparer(
-    StringComparer stringComparer,
-    CqlComparerEquivalentImplementation equivalentImplementation = CqlComparerEquivalentImplementation.Equals) : CqlComparer<string>(
-    equivalentImplementation: equivalentImplementation
-    )
+    StringComparer stringComparer) : CqlComparer<string>()
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 

@@ -506,6 +506,15 @@ public class CqlComparersTests
     }
 
     [TestMethod]
+    public void String_Comparer_UsesConfiguredEqualityAndCqlEquivalence()
+    {
+        var comparer = new StringCqlComparer(StringComparer.OrdinalIgnoreCase);
+
+        Assert.AreEqual(false, comparer.Equals("a\tb", "a b", null));
+        Assert.AreEqual(true, comparer.Equivalent("a\tb", "a b", null));
+    }
+
+    [TestMethod]
     public void String_InvalidUnicode_HashesWithoutThrowing()
     {
         var comparers = new CqlComparers();

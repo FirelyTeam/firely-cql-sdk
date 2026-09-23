@@ -39,7 +39,7 @@ namespace Hl7.Cql.Comparers
 
             // CQL string equality is case- and whitespace-sensitive, while string equivalence ignores
             // case and locale and treats all whitespace characters as equivalent (§9.B Equivalent).
-            var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal, CqlComparerEquivalentImplementation.Equivalent);
+            var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal);
             Comparers.TryAdd(typeof(string), stringCqlComparer);
 
             var decimalCqlComparer = new DecimalCqlComparer();
