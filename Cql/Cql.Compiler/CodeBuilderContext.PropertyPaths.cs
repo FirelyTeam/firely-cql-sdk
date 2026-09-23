@@ -198,10 +198,17 @@ partial class CodeBuilderContext
         const string modelPrefix = "FHIR.";
         const string systemPrefix = "System.";
 
-        for (var name = _typeResolver.GetModelTypeName(type);
-             name is not null && ModelMapping.TryGetValue(name, out var classInfo);
-             name = classInfo.baseType is { } baseType && baseType.StartsWith(modelPrefix, StringComparison.Ordinal)
-                 ? $"{{http://hl7.org/fhir}}{baseType[modelPrefix.Length..]}"
+        // The type's own definition by its canonical; the model names its base types.
+        var classInfo = _typeResolver.GetModelTypeCanonical(type) is { } canonical
+                        && ModelMappingByIdentifier.TryGetValue(canonical, out var defined)
+            ? defined
+            : null;
+
+        for (; classInfo is not null;
+             classInfo = classInfo.baseType is { } baseType
+                         && baseType.StartsWith(modelPrefix, StringComparison.Ordinal)
+                         && ModelMapping.TryGetValue($"{{http://hl7.org/fhir}}{baseType[modelPrefix.Length..]}", out var @base)
+                 ? @base
                  : null)
         {
             if (classInfo.element?.FirstOrDefault(element => element.name == "value") is not { } valueElement)
@@ -477,6 +484,12 @@ partial class CodeBuilderContext
         // to the late-bound read, which converts at run time or yields null, rather than
         // failing the build.
         var value = read(narrowed);
+
+        // A value of a reference type the target is assignable from needs no conversion: it is
+        // already a value of the switch's type.
+        if (!value.Type.IsValueType && target.IsAssignableFrom(value.Type))
+            return new CodeTypeSwitchArm(narrowed, value);
+
         var converted = ChangeType(value, target, out var conversion, throwOnError: false);
         if (conversion == TypeConversion.NoMatch)
         {

@@ -170,13 +170,13 @@ namespace Hl7.Cql.Abstractions
         internal virtual IReadOnlyList<Type>? GetChoiceTypes(PropertyInfo property) => null;
 
         /// <summary>
-        /// Gets the qualified name of the model type that <paramref name="type"/> implements, in the form
-        /// <see cref="ResolveType(string, bool)"/> accepts (e.g. <c>{http://hl7.org/fhir}instant</c>), so the
-        /// model's own definition of the type can be consulted.
+        /// Gets the canonical URL of the definition of the model type that <paramref name="type"/> implements
+        /// (e.g. <c>http://hl7.org/fhir/StructureDefinition/instant</c>), which a model info gives as the
+        /// <c>identifier</c> of that type, so the model's own definition of the type can be consulted.
         /// </summary>
         /// <param name="type">The .NET type.</param>
-        /// <returns>The qualified model type name, or <see langword="null"/> when the type does not implement a model type.</returns>
-        internal virtual string? GetModelTypeName(Type type) => null;
+        /// <returns>The canonical URL, or <see langword="null"/> when the type does not implement a model type that has one.</returns>
+        internal virtual string? GetModelTypeCanonical(Type type) => null;
 
         /// <summary>
         /// Gets the type used to model the concept of a Patient.

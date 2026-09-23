@@ -1566,18 +1566,17 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 bool? n_ = context.Operators.ConceptInValueSet(l_, m_);
                 bool? o_ = context.Operators.And(j_, n_);
                 DataType p_ = PregStatus?.Effective;
-                object q_ = p_;
-                CqlDateTime t_ = q_ switch
+                CqlDateTime s_ = p_ switch
                 {
-                    FhirDateTime r_ => context.Operators.Convert<CqlDateTime>(r_),
-                    Instant s_ => context.Operators.Convert<CqlDateTime>(s_.Value),
+                    FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                    Instant r_ => context.Operators.Convert<CqlDateTime>(r_.Value),
                     _ => null,
                 };
-                Period u_ = EDwSTEMI?.Period;
-                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-                bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, (string)default);
-                bool? x_ = context.Operators.And(o_, w_);
-                return x_;
+                Period t_ = EDwSTEMI?.Period;
+                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
+                bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, (string)default);
+                bool? w_ = context.Operators.And(o_, v_);
+                return w_;
             }
 
             bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);

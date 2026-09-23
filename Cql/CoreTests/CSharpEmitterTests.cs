@@ -443,6 +443,29 @@ public class CSharpEmitterTests
     }
 
     [TestMethod]
+    public void TypeSwitch_OperandCastToObject_TestsTheVariableItself()
+    {
+        // A cast to object prints as nothing, so the operand already prints as a variable and is
+        // not copied into another one.
+        var e = new CodeLocal(typeof(Exception), "e");
+        var paramName = ReflectionUtility.PropertyOf(() => default(ArgumentException)!.ParamName);
+        var asArgument = new CodeLocal(typeof(ArgumentException), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            new CodeCast(e, typeof(object), CodeCastKind.Cast),
+            [new CodeTypeSwitchArm(asArgument, new CodeProperty(asArgument, paramName))],
+            new CodeConstant(null, typeof(string)),
+            typeof(string));
+
+        var expected =
+            "{\n" +
+            "    return e is ArgumentException a_ ? a_.ParamName : null;\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([e], typeSwitch));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "string", "Exception e");
+    }
+
+    [TestMethod]
     public void TypeSwitch_ArmWithStatements_PrintsIfChainOverDeclarationPatterns()
     {
         // An arm above the inline budget needs its own statements, so the switch becomes an if

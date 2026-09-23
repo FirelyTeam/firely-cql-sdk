@@ -240,33 +240,32 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
 
         bool? h_(Observation PregnantObservation) {
             DataType n_ = PregnantObservation?.Effective;
-            object o_ = n_;
-            CqlDateTime r_ = o_ switch
+            CqlDateTime q_ = n_ switch
             {
-                FhirDateTime p_ => context.Operators.Convert<CqlDateTime>(p_),
-                Instant q_ => context.Operators.Convert<CqlDateTime>(q_.Value),
+                FhirDateTime o_ => context.Operators.Convert<CqlDateTime>(o_),
+                Instant p_ => context.Operators.Convert<CqlDateTime>(p_.Value),
                 _ => null,
             };
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_4_0_000.Instance.toInterval(context, r_);
-            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
-            bool? u_ = context.Operators.Overlaps(s_, t_, "day");
-            Code<ObservationStatus> v_ = PregnantObservation?.StatusElement;
-            ObservationStatus? w_ = v_?.Value;
-            Code<ObservationStatus> x_ = context.Operators.Convert<Code<ObservationStatus>>(w_);
-            string y_ = context.Operators.Convert<string>(x_);
-            string[] z_ = [
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+            CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
+            bool? t_ = context.Operators.Overlaps(r_, s_, "day");
+            Code<ObservationStatus> u_ = PregnantObservation?.StatusElement;
+            ObservationStatus? v_ = u_?.Value;
+            Code<ObservationStatus> w_ = context.Operators.Convert<Code<ObservationStatus>>(v_);
+            string x_ = context.Operators.Convert<string>(w_);
+            string[] y_ = [
                 "final",
                 "amended",
                 "corrected",
             ];
-            bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
-            bool? ab_ = context.Operators.And(u_, aa_);
-            DataType ac_ = PregnantObservation?.Value;
-            CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ac_ as CodeableConcept);
-            CqlValueSet ae_ = this.Pregnancy_or_Other_Related_Diagnoses(context);
-            bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-            bool? ag_ = context.Operators.And(ab_, af_);
-            return ag_;
+            bool? z_ = context.Operators.In<string>(x_, (IEnumerable<string>)y_);
+            bool? aa_ = context.Operators.And(t_, z_);
+            DataType ab_ = PregnantObservation?.Value;
+            CqlConcept ac_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ab_ as CodeableConcept);
+            CqlValueSet ad_ = this.Pregnancy_or_Other_Related_Diagnoses(context);
+            bool? ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
+            bool? af_ = context.Operators.And(aa_, ae_);
+            return af_;
         }
 
         bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);

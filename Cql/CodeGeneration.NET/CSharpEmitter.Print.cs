@@ -685,6 +685,15 @@ internal partial class CSharpEmitter
     }
 
     /// <summary>
+    /// Whether <paramref name="atom"/> prints as a variable of a reference type: a local, a
+    /// parameter, or a cast of one that prints as nothing (see <see cref="PrintCast"/>).
+    /// </summary>
+    private static bool PrintsAsVariable(Atom atom) =>
+        SyntaxFacts.IsValidIdentifier(atom.Code)
+        && SyntaxFacts.GetKeywordKind(atom.Code) == SyntaxKind.None // not a literal such as null
+        && !GetPrintedType(atom.Node).IsValueType;
+
+    /// <summary>
     /// The static C# type of the code printed for a simple node, which can be narrower than
     /// its IR type: constants typed as object print as their underlying literal, and a
     /// value-typed-operand cast to object is boxing-elided (see <see cref="PrintCast"/>) so it

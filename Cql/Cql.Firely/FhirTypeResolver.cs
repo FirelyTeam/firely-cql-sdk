@@ -101,8 +101,8 @@ namespace Hl7.Cql.Fhir
                 : null;
 
         /// <inheritdoc/>
-        internal override string? GetModelTypeName(Type type) =>
-            _inspector.FindClassMapping(type) is { } cm ? $"{{http://hl7.org/fhir}}{cm.Name}" : null;
+        internal override string? GetModelTypeCanonical(Type type) =>
+            _inspector.FindClassMapping(type)?.Canonical;
 
         internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {

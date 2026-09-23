@@ -535,18 +535,17 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CqlValueSet f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
             DataType h_ = PregnantObservation?.Effective;
-            object i_ = h_;
-            CqlDateTime l_ = i_ switch
+            CqlDateTime k_ = h_ switch
             {
-                FhirDateTime j_ => context.Operators.Convert<CqlDateTime>(j_),
-                Instant k_ => context.Operators.Convert<CqlDateTime>(k_.Value),
+                FhirDateTime i_ => context.Operators.Convert<CqlDateTime>(i_),
+                Instant j_ => context.Operators.Convert<CqlDateTime>(j_.Value),
                 _ => null,
             };
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_4_0_000.Instance.toInterval(context, l_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            bool? o_ = context.Operators.Overlaps(m_, n_, "day");
-            bool? p_ = context.Operators.And(g_, o_);
-            return p_;
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            bool? n_ = context.Operators.Overlaps(l_, m_, "day");
+            bool? o_ = context.Operators.And(g_, n_);
+            return o_;
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);

@@ -323,11 +323,11 @@ internal partial class CSharpEmitter
         /// </summary>
         private Atom? LinearizeTypeSwitch(CodeTypeSwitch typeSwitch, bool tailPosition)
         {
-            // The operand is tested by every arm, so it must be a variable: an expression that
-            // prints in place would be evaluated once per test (and a literal is no operand for a
-            // pattern at all).
+            // The operand is tested by every arm, so it must print as a variable: an expression
+            // that prints in place would be evaluated once per test (and a literal is no operand
+            // for a pattern at all).
             var operand = Linearize(typeSwitch.Operand)!;
-            if (operand.Node is not (CodeLocal or CodeContextParameter))
+            if (!PrintsAsVariable(operand))
                 operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
 
             foreach (var arm in typeSwitch.Arms)
