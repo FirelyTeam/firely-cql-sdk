@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -506,6 +506,15 @@ public class CqlComparersTests
     }
 
     [TestMethod]
+    public void String_Comparer_UsesConfiguredEqualityAndCqlEquivalence()
+    {
+        var comparer = new StringCqlComparer(StringComparer.OrdinalIgnoreCase);
+
+        Assert.AreEqual(false, comparer.Equals("a\tb", "a b", null));
+        Assert.AreEqual(true, comparer.Equivalent("a\tb", "a b", null));
+    }
+
+    [TestMethod]
     public void String_InvalidUnicode_HashesWithoutThrowing()
     {
         var comparers = new CqlComparers();
@@ -761,6 +770,157 @@ public class CqlComparersTests
     }
 
     /// <summary>
+    /// CQL 1.5.3 &#167;9.B (Equivalent): "For decimals, equivalent means the values are the same with
+    /// the comparison done on values rounded to the precision of the least precise operand;
+    /// trailing zeroes after the decimal are ignored in determining precision for equivalent
+    /// comparison." Trailing zeroes therefore do not raise an operand's precision, so 1.000 is as
+    /// precise as 1 and both operands are rounded to whole numbers before 1.001 is compared to it.
+    /// </summary>
+    [DataTestMethod]
+    // Trailing zeroes are ignored: 1.000 has precision 0, so both sides round to 1.
+    [DataRow("1.001", "1.000", true)]
+    [DataRow("1.0", "1.0", true)]
+    [DataRow("1.0", "1", true)]
+    // Rounding is away from zero, so 1.55 becomes 1.6 at precision 1, not 1.5.
+    [DataRow("1.5", "1.55", false)]
+    [DataRow("1.55", "1.5", false)]
+    [DataRow("1.50", "1.55", false)]
+    [DataRow("1.05", "1.1", true)]
+    [DataRow("-1.55", "-1.5", false)]
+    [DataRow("-1.5", "-1.55", false)]
+    [DataRow("0.1", "0.15", false)]
+    [DataRow("2", "2.4", true)]
+    [DataRow("2", "2.5", false)]
+    // Zero carries no precision however it is written.
+    [DataRow("0", "0.00", true)]
+    [DataRow("0.000", "0.4", true)]
+    [DataRow("0.000", "0.5", false)]
+    public void Decimal_Equivalent_RoundsToLeastPreciseOperandIgnoringTrailingZeroes(string leftText, string rightText, bool expected)
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var left = decimal.Parse(leftText, CultureInfo.InvariantCulture);
+        var right = decimal.Parse(rightText, CultureInfo.InvariantCulture);
+
+        Assert.AreEqual(expected, comparers.Equivalent(left, right, null));
+        Assert.AreEqual(expected, operators.Equivalent(left, right));
+    }
+
+    /// <summary>
+    /// Equivalence rounds to the least precise operand; equality does not. Trailing zeroes are not
+    /// part of a decimal's value, so 1.5 equals 1.50, while 1.5 and 1.55 are different values.
+    /// </summary>
+    [TestMethod]
+    public void Decimal_Equality_IsUnaffectedByEquivalenceRounding()
+    {
+        var comparers = new CqlComparers();
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.IsTrue(comparers.Equals(1.5m, 1.50m, null) is true);
+        Assert.AreEqual(true, operators.Equal(1.5m, 1.50m));
+        Assert.AreEqual(0, comparers.Compare(1.5m, 1.50m, null));
+
+        Assert.IsTrue(comparers.Equals(1.5m, 1.55m, null) is false);
+        Assert.AreEqual(false, operators.Equal(1.5m, 1.55m));
+        Assert.AreNotEqual(0, comparers.Compare(1.5m, 1.55m, null));
+    }
+
+    /// <summary>
+    /// §9.B Equivalent: "For string values, equivalence returns true if the strings are the same value
+    /// while ignoring case and locale, and normalizing whitespace."
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("Abel", "abel")]
+    [DataRow("ABEL", "abel")]
+    [DataRow("abel", "abel")]
+    [DataRow("", "")]
+    public void String_Equivalent_IgnoresCase(string left, string right)
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        // Strings are scalars to the compiler, which binds them to the object overload of Equivalent;
+        // the casts take that same path rather than the IEnumerable<T> overload C# would pick here.
+        Assert.AreEqual(true, operators.Equivalent((object?)left, (object?)right));
+    }
+
+    /// <summary>
+    /// §9.B Equivalent: "Normalizing whitespace means that all whitespace characters are treated as
+    /// equivalent, with whitespace characters as defined in the whitespace lexical category" -- which
+    /// Appendix A, Lexer Rules, defines as <c>WS : [ \r\n\t]+</c>. Whitespace characters are equivalent
+    /// one for one; a run of them is not collapsed into one.
+    /// </summary>
+    [DataTestMethod]
+    [DataRow("a\tb", "a b", true)]
+    [DataRow("a\r\nb", "a  b", true)]
+    [DataRow("a\nb", "a\tb", true)]
+    [DataRow("a  b", "a b", false)]
+    [DataRow("a\r\nb", "a b", false)]
+    public void String_Equivalent_TreatsWhitespaceCharactersAsEquivalentWithoutCollapsingRuns(string left, string right, bool expected)
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(expected, operators.Equivalent((object?)left, (object?)right));
+    }
+
+    /// <summary>
+    /// Ignoring case and whitespace does not make unrelated strings equivalent.
+    /// </summary>
+    [TestMethod]
+    public void String_Equivalent_DifferingCharacters_IsFalse()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent((object?)"abc", (object?)"abd"));
+        Assert.AreEqual(false, operators.Equivalent((object?)"abc", (object?)"ab"));
+    }
+
+    /// <summary>
+    /// §9.B Equivalent: "Note that null is not equivalent to the empty string ('')."
+    /// </summary>
+    [TestMethod]
+    public void String_Equivalent_NullAndEmptyString_IsNotEquivalent()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent((object?)"", (object?)null));
+        Assert.AreEqual(false, operators.Equivalent((object?)null, (object?)""));
+        Assert.AreEqual(true, operators.Equivalent((object?)null, (object?)null));
+    }
+
+    /// <summary>
+    /// Equality (<c>=</c>) is unaffected by the equivalence semantics: it stays case-sensitive and
+    /// treats each whitespace character as the distinct character it is.
+    /// </summary>
+    [TestMethod]
+    public void String_Equal_StaysOrdinal()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equal("Abel", "abel"));
+        Assert.AreEqual(false, operators.Equal("a\tb", "a b"));
+        Assert.AreEqual(true, operators.Equal("abel", "abel"));
+        Assert.AreEqual(true, operators.Equal("a b", "a b"));
+    }
+
+    /// <summary>
+    /// Ordering and the hash-based set operators are driven by <c>CompareValues</c>/<c>GetHashCodeValue</c>,
+    /// which stay ordinal, so strings differing only in case or in which whitespace character they use are
+    /// kept apart by <c>Distinct</c> and sort case-sensitively.
+    /// </summary>
+    [TestMethod]
+    public void String_DistinctAndSort_StayOrdinal()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var deduplicated = operators.Distinct<string>(["Abel", "abel", "a\tb", "a b"])!.ToList();
+        Assert.AreEqual(4, deduplicated.Count);
+
+        var comparers = new CqlComparers();
+        Assert.AreNotEqual(0, comparers.Compare("Abel", "abel", null));
+        Assert.AreEqual(0, comparers.Compare("abel", "abel", null));
+    }
+
+    /// <summary>
     /// <c>Compare</c> gives null a total ordering -- null sorts above any value, and two nulls are
     /// equal -- so that <c>Sort</c>/<c>OrderBy</c> over a list containing nulls is deterministic.
     /// This is deliberately different from the CQL operators (<c>after</c>, <c>before</c>,
@@ -773,9 +933,9 @@ public class CqlComparersTests
         var comparers = new CqlComparers();
 
         var value = new CqlDateTime(2024, 1, 1, null, null, null, null, null, null);
-
         Assert.AreEqual(1, comparers.Compare(null, value, null));
         Assert.AreEqual(-1, comparers.Compare(value, null, null));
+        Assert.AreEqual(0, comparers.Compare(null, null, null));
         Assert.AreEqual(0, comparers.Compare(null, null, null));
     }
 }
