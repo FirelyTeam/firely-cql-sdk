@@ -782,7 +782,9 @@ namespace Hl7.Cql.Fhir
 
         internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
-            converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
+            // The model info declares FHIR.base64Binary.value as System.String: the base64 text of the content,
+            // whereas Base64Binary.Value holds the decoded bytes.
+            converter.AddConversion<byte[], string>(binary => System.Convert.ToBase64String(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             
