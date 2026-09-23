@@ -362,6 +362,11 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion((CqlInterval<long?> interval) => interval is null
                 ? null
                 : NumericIntervalToRange(interval.low, interval.high, interval.lowClosed, interval.highClosed, 1m));
+            // A FHIR Period has inclusive boundaries, so an exclusive CQL boundary is stepped inward by one
+            // unit of its own precision, exactly like NumericIntervalToRange does for a Range. The CQL
+            // interval itself keeps its exclusivity (the Interval selector no longer normalizes it away),
+            // because operators comparing at a coarser precision need the original boundary. See
+            // PeriodBoundary for what happens when that step is not representable.
             converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
             {
                 if (interval is null)
@@ -371,12 +376,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.StartElement = CqlDateTimeToFhirDateTime(low, dateTimeOffsetWhenAbsent);
+                        period.StartElement = CqlDateTimeToFhirDateTime(PeriodBoundary(low, interval.lowClosed, isLow: true), dateTimeOffsetWhenAbsent);
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.EndElement = CqlDateTimeToFhirDateTime(high, dateTimeOffsetWhenAbsent);
+                        period.EndElement = CqlDateTimeToFhirDateTime(PeriodBoundary(high, interval.highClosed, isLow: false), dateTimeOffsetWhenAbsent);
                     }
                     return period;
                 }
@@ -390,12 +395,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.Start = low.ToString();
+                        period.Start = PeriodBoundary(low, interval.lowClosed, isLow: true).ToString();
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.End = high.ToString();
+                        period.End = PeriodBoundary(high, interval.highClosed, isLow: false).ToString();
                     }
                     return period;
                 }
@@ -409,12 +414,12 @@ namespace Hl7.Cql.Fhir
                     var period = new M.Period();
                     if (interval.low is { } low)
                     {
-                        period.StartElement = CqlTimeToFhirDateTime(low);
+                        period.StartElement = CqlTimeToFhirDateTime(PeriodBoundary(low, interval.lowClosed, isLow: true));
                     }
 
                     if (interval.high is { } high)
                     {
-                        period.EndElement = CqlTimeToFhirDateTime(high);
+                        period.EndElement = CqlTimeToFhirDateTime(PeriodBoundary(high, interval.highClosed, isLow: false));
                     }
                     return period;
                 }
@@ -737,6 +742,61 @@ namespace Hl7.Cql.Fhir
         /// the CQL IG's FHIR type mapping to make the precision of a value explicit.
         /// </summary>
         internal const string QuantityPrecisionExtensionUrl = "http://hl7.org/fhir/StructureDefinition/quantity-precision";
+
+        /// <summary>
+        /// The inclusive equivalent of a CQL interval boundary, for conversion to a FHIR Period: a closed
+        /// boundary unchanged, an exclusive one stepped inward by one unit of its own precision - the same
+        /// value the CQL Start and End operators report for that boundary.
+        /// </summary>
+        /// <remarks>
+        /// That step is not always representable. The specification has it produce null at the ends of the
+        /// type range ("If the result of the operation cannot be represented (i.e. would result in an
+        /// overflow), the result is null", Appendix B - CQL Reference, sections "Successor" and
+        /// "Predecessor" of CQL 1.5.3 Errata 2), and <see cref="CqlDate"/>/<see cref="CqlDateTime"/> return
+        /// null there. When the step is not representable the boundary is emitted unstepped: it is off by a
+        /// single unit of its own precision, but it stays a valid FHIR value, whereas omitting the boundary
+        /// would turn a bounded interval into an unbounded Period. Such an interval is degenerate to begin
+        /// with - its own Start or End operator is null for the same reason - so no faithful Period exists.
+        /// </remarks>
+        private static CqlDateTime PeriodBoundary(CqlDateTime boundary, bool? closed, bool isLow)
+        {
+            if (closed ?? false)
+                return boundary;
+
+            CqlDateTime? stepped = isLow ? boundary.Successor() : boundary.Predecessor();
+            return stepped ?? boundary;
+        }
+
+        /// <inheritdoc cref="PeriodBoundary(CqlDateTime, bool?, bool)"/>
+        private static CqlDate PeriodBoundary(CqlDate boundary, bool? closed, bool isLow)
+        {
+            if (closed ?? false)
+                return boundary;
+
+            CqlDate? stepped = isLow ? boundary.Successor() : boundary.Predecessor();
+            return stepped ?? boundary;
+        }
+
+        /// <inheritdoc cref="PeriodBoundary(CqlDateTime, bool?, bool)"/>
+        /// <remarks>
+        /// A <see cref="CqlTime"/> step is TimeSpan arithmetic that neither overflows nor returns null:
+        /// past @T23:59:59.999 the successor wraps around to the start of the day, and below @T00:00:00.000
+        /// the predecessor yields negative components, which are not a valid time of day at all. Both are
+        /// rejected by requiring the stepped value to be a time of day that moved in the expected direction.
+        /// </remarks>
+        private static CqlTime PeriodBoundary(CqlTime boundary, bool? closed, bool isLow)
+        {
+            if (closed ?? false)
+                return boundary;
+
+            var stepped = isLow ? boundary.Successor() : boundary.Predecessor();
+            var steppedTimeOfDay = stepped.Value.TimeSpan;
+            var boundaryTimeOfDay = boundary.Value.TimeSpan;
+            var representable = steppedTimeOfDay >= TimeSpan.Zero
+                && (isLow ? steppedTimeOfDay > boundaryTimeOfDay : steppedTimeOfDay < boundaryTimeOfDay);
+
+            return representable ? stepped : boundary;
+        }
 
         /// <summary>
         /// Converts an interval of Integer, Decimal or Long to a FHIR Range of unit-less Quantities (FHIR-56226).
