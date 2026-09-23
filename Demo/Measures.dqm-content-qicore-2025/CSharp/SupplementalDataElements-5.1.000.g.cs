@@ -157,34 +157,20 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                 DataType aq_ = @this?.Value;
                 return aq_ switch
                 {
-                    Uuid ar_ => ar_.Value,
-                    Oid as_ => as_.Value,
-                    Markdown at_ => at_.Value,
-                    Integer au_ => au_.Value,
-                    Instant av_ => context.Operators.Convert<CqlDateTime>(av_.Value),
-                    Id aw_ => aw_.Value,
-                    Duration ax_ => ax_.ValueElement,
-                    Distance ay_ => ay_.ValueElement,
-                    FhirDecimal az_ => az_.Value,
-                    Date ba_ => context.Operators.ConvertStringToDate(ba_.Value),
-                    Count bb_ => bb_.ValueElement,
-                    FhirDateTime bc_ => context.Operators.Convert<CqlDateTime>(bc_),
-                    Time bd_ => context.Operators.ConvertStringToTime(bd_.Value),
-                    Age be_ => be_.ValueElement,
-                    FhirUrl bf_ => bf_.Value,
-                    FhirUri bg_ => bg_.Value,
-                    Base64Binary bh_ => context.Operators.Convert<string>(bh_.Value),
-                    FhirBoolean bi_ => bi_.Value,
-                    FhirString bj_ => bj_.Value,
-                    PositiveInt bk_ => bk_.Value,
-                    Code bl_ => bl_.Value,
-                    UnsignedInt bm_ => bm_.Value,
-                    Canonical bn_ => bn_.Value,
-                    Quantity bo_ => bo_.ValueElement,
-                    Identifier bp_ => bp_.ValueElement,
-                    Money bq_ => bq_.ValueElement,
-                    UsageContext br_ => br_.Value,
-                    ContactPoint bs_ => bs_.ValueElement,
+                    Instant ar_ => context.Operators.Convert<CqlDateTime>(ar_.Value),
+                    FhirDecimal as_ => as_.Value,
+                    Date at_ => context.Operators.ConvertStringToDate(at_.Value),
+                    FhirDateTime au_ => context.Operators.Convert<CqlDateTime>(au_),
+                    Time av_ => context.Operators.ConvertStringToTime(av_.Value),
+                    Base64Binary aw_ => context.Operators.Convert<string>(aw_.Value),
+                    FhirBoolean ax_ => ax_.Value,
+                    IValue<int?> ay_ => ay_.Value,
+                    IValue<string> az_ => az_.Value,
+                    Quantity ba_ => ba_.ValueElement,
+                    Identifier bb_ => bb_.ValueElement,
+                    Money bc_ => bc_.ValueElement,
+                    UsageContext bd_ => bd_.Value,
+                    ContactPoint be_ => be_.ValueElement,
                     _ => null,
                 };
             }
@@ -310,34 +296,20 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
                 DataType aq_ = @this?.Value;
                 return aq_ switch
                 {
-                    Uuid ar_ => ar_.Value,
-                    Oid as_ => as_.Value,
-                    Markdown at_ => at_.Value,
-                    Integer au_ => au_.Value,
-                    Instant av_ => context.Operators.Convert<CqlDateTime>(av_.Value),
-                    Id aw_ => aw_.Value,
-                    Duration ax_ => ax_.ValueElement,
-                    Distance ay_ => ay_.ValueElement,
-                    FhirDecimal az_ => az_.Value,
-                    Date ba_ => context.Operators.ConvertStringToDate(ba_.Value),
-                    Count bb_ => bb_.ValueElement,
-                    FhirDateTime bc_ => context.Operators.Convert<CqlDateTime>(bc_),
-                    Time bd_ => context.Operators.ConvertStringToTime(bd_.Value),
-                    Age be_ => be_.ValueElement,
-                    FhirUrl bf_ => bf_.Value,
-                    FhirUri bg_ => bg_.Value,
-                    Base64Binary bh_ => context.Operators.Convert<string>(bh_.Value),
-                    FhirBoolean bi_ => bi_.Value,
-                    FhirString bj_ => bj_.Value,
-                    PositiveInt bk_ => bk_.Value,
-                    Code bl_ => bl_.Value,
-                    UnsignedInt bm_ => bm_.Value,
-                    Canonical bn_ => bn_.Value,
-                    Quantity bo_ => bo_.ValueElement,
-                    Identifier bp_ => bp_.ValueElement,
-                    Money bq_ => bq_.ValueElement,
-                    UsageContext br_ => br_.Value,
-                    ContactPoint bs_ => bs_.ValueElement,
+                    Instant ar_ => context.Operators.Convert<CqlDateTime>(ar_.Value),
+                    FhirDecimal as_ => as_.Value,
+                    Date at_ => context.Operators.ConvertStringToDate(at_.Value),
+                    FhirDateTime au_ => context.Operators.Convert<CqlDateTime>(au_),
+                    Time av_ => context.Operators.ConvertStringToTime(av_.Value),
+                    Base64Binary aw_ => context.Operators.Convert<string>(aw_.Value),
+                    FhirBoolean ax_ => ax_.Value,
+                    IValue<int?> ay_ => ay_.Value,
+                    IValue<string> az_ => az_.Value,
+                    Quantity ba_ => ba_.ValueElement,
+                    Identifier bb_ => bb_.ValueElement,
+                    Money bc_ => bc_.ValueElement,
+                    UsageContext bd_ => bd_.Value,
+                    ContactPoint be_ => be_.ValueElement,
                     _ => null,
                 };
             }
@@ -377,34 +349,20 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
             DataType k_ = @this?.Value;
             return k_ switch
             {
-                Uuid l_ => l_.Value,
-                Oid m_ => m_.Value,
-                Markdown n_ => n_.Value,
-                Integer o_ => o_.Value,
-                Instant p_ => context.Operators.Convert<CqlDateTime>(p_.Value),
-                Id q_ => q_.Value,
-                Duration r_ => r_.ValueElement,
-                Distance s_ => s_.ValueElement,
-                FhirDecimal t_ => t_.Value,
-                Date u_ => context.Operators.ConvertStringToDate(u_.Value),
-                Count v_ => v_.ValueElement,
-                FhirDateTime w_ => context.Operators.Convert<CqlDateTime>(w_),
-                Time x_ => context.Operators.ConvertStringToTime(x_.Value),
-                Age y_ => y_.ValueElement,
-                FhirUrl z_ => z_.Value,
-                FhirUri aa_ => aa_.Value,
-                Base64Binary ab_ => context.Operators.Convert<string>(ab_.Value),
-                FhirBoolean ac_ => ac_.Value,
-                FhirString ad_ => ad_.Value,
-                PositiveInt ae_ => ae_.Value,
-                Code af_ => af_.Value,
-                UnsignedInt ag_ => ag_.Value,
-                Canonical ah_ => ah_.Value,
-                Quantity ai_ => ai_.ValueElement,
-                Identifier aj_ => aj_.ValueElement,
-                Money ak_ => ak_.ValueElement,
-                UsageContext al_ => al_.Value,
-                ContactPoint am_ => am_.ValueElement,
+                Instant l_ => context.Operators.Convert<CqlDateTime>(l_.Value),
+                FhirDecimal m_ => m_.Value,
+                Date n_ => context.Operators.ConvertStringToDate(n_.Value),
+                FhirDateTime o_ => context.Operators.Convert<CqlDateTime>(o_),
+                Time p_ => context.Operators.ConvertStringToTime(p_.Value),
+                Base64Binary q_ => context.Operators.Convert<string>(q_.Value),
+                FhirBoolean r_ => r_.Value,
+                IValue<int?> s_ => s_.Value,
+                IValue<string> t_ => t_.Value,
+                Quantity u_ => u_.ValueElement,
+                Identifier v_ => v_.ValueElement,
+                Money w_ => w_.ValueElement,
+                UsageContext x_ => x_.Value,
+                ContactPoint y_ => y_.ValueElement,
                 _ => null,
             };
         }
@@ -414,65 +372,51 @@ public partial class SupplementalDataElements_5_1_000 : ILibrary, ISingleton<Sup
         bool? g_ = context.Operators.Equal(f_, "248153007");
         if (g_ ?? false)
         {
-            CqlCode an_ = this.Male__finding_(context);
-            return an_;
+            CqlCode z_ = this.Male__finding_(context);
+            return z_;
         }
         else
         {
-            Patient ao_ = this.Patient(context);
-            List<Extension> ap_ = ao_?.Extension;
+            Patient aa_ = this.Patient(context);
+            List<Extension> ab_ = aa_?.Extension;
 
-            bool? aq_(Extension @this) {
-                FhirUri av_ = @this?.UrlElement;
-                string aw_ = FHIRHelpers_4_4_000.Instance.ToString(context, av_);
-                bool? ax_ = context.Operators.Equal(aw_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return ax_;
+            bool? ac_(Extension @this) {
+                FhirUri ah_ = @this?.UrlElement;
+                string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
+                bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return aj_;
             }
 
 
-            object ar_(Extension @this) {
-                DataType ay_ = @this?.Value;
-                return ay_ switch
+            object ad_(Extension @this) {
+                DataType ak_ = @this?.Value;
+                return ak_ switch
                 {
-                    Uuid az_ => az_.Value,
-                    Oid ba_ => ba_.Value,
-                    Markdown bb_ => bb_.Value,
-                    Integer bc_ => bc_.Value,
-                    Instant bd_ => context.Operators.Convert<CqlDateTime>(bd_.Value),
-                    Id be_ => be_.Value,
-                    Duration bf_ => bf_.ValueElement,
-                    Distance bg_ => bg_.ValueElement,
-                    FhirDecimal bh_ => bh_.Value,
-                    Date bi_ => context.Operators.ConvertStringToDate(bi_.Value),
-                    Count bj_ => bj_.ValueElement,
-                    FhirDateTime bk_ => context.Operators.Convert<CqlDateTime>(bk_),
-                    Time bl_ => context.Operators.ConvertStringToTime(bl_.Value),
-                    Age bm_ => bm_.ValueElement,
-                    FhirUrl bn_ => bn_.Value,
-                    FhirUri bo_ => bo_.Value,
-                    Base64Binary bp_ => context.Operators.Convert<string>(bp_.Value),
-                    FhirBoolean bq_ => bq_.Value,
-                    FhirString br_ => br_.Value,
-                    PositiveInt bs_ => bs_.Value,
-                    Code bt_ => bt_.Value,
-                    UnsignedInt bu_ => bu_.Value,
-                    Canonical bv_ => bv_.Value,
-                    Quantity bw_ => bw_.ValueElement,
-                    Identifier bx_ => bx_.ValueElement,
-                    Money by_ => by_.ValueElement,
-                    UsageContext bz_ => bz_.Value,
-                    ContactPoint ca_ => ca_.ValueElement,
+                    Instant al_ => context.Operators.Convert<CqlDateTime>(al_.Value),
+                    FhirDecimal am_ => am_.Value,
+                    Date an_ => context.Operators.ConvertStringToDate(an_.Value),
+                    FhirDateTime ao_ => context.Operators.Convert<CqlDateTime>(ao_),
+                    Time ap_ => context.Operators.ConvertStringToTime(ap_.Value),
+                    Base64Binary aq_ => context.Operators.Convert<string>(aq_.Value),
+                    FhirBoolean ar_ => ar_.Value,
+                    IValue<int?> as_ => as_.Value,
+                    IValue<string> at_ => at_.Value,
+                    Quantity au_ => au_.ValueElement,
+                    Identifier av_ => av_.ValueElement,
+                    Money aw_ => aw_.ValueElement,
+                    UsageContext ax_ => ax_.Value,
+                    ContactPoint ay_ => ay_.ValueElement,
                     _ => null,
                 };
             }
 
-            IEnumerable<object> as_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)ap_, aq_, ar_);
-            object at_ = context.Operators.SingletonFrom<object>(as_);
-            bool? au_ = context.Operators.Equal(at_, "248152002");
-            if (au_ ?? false)
+            IEnumerable<object> ae_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)ab_, ac_, ad_);
+            object af_ = context.Operators.SingletonFrom<object>(ae_);
+            bool? ag_ = context.Operators.Equal(af_, "248152002");
+            if (ag_ ?? false)
             {
-                CqlCode cb_ = this.Female__finding_(context);
-                return cb_;
+                CqlCode az_ = this.Female__finding_(context);
+                return az_;
             }
             else
             {

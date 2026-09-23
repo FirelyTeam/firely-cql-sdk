@@ -118,12 +118,17 @@ partial class CodeBuilderContext
     /// <param name="Branches">For <see cref="SegmentBinding.Dispatch"/>: each alternative that has the element, with the element and its type (see <see cref="ElementTypeOf"/>).</param>
     /// <param name="HasUninspectableAlternative">For <see cref="SegmentBinding.Dispatch"/>: whether an alternative could not be inspected, so a late-bound arm is needed.</param>
     /// <param name="Result">What is known statically about the value the segment produces.</param>
+    /// <param name="Inspected">For <see cref="SegmentBinding.Dispatch"/>: every inspectable alternative, with or without the element.</param>
     private sealed record SegmentResolution(
         string Segment,
         SegmentBinding Binding,
         IReadOnlyList<(Type Alternative, PropertyInfo Member, Type ElementType)>? Branches,
         bool HasUninspectableAlternative,
-        StaticValue Result);
+        StaticValue Result,
+        IReadOnlyList<Type>? Inspected = null);
+
+    /// <summary>One arm of a choice dispatch, with the alternatives it reads the element for.</summary>
+    private sealed record DispatchArm(IReadOnlyList<Type> Alternatives, CodeTypeSwitchArm Arm);
 
     /// <summary>
     /// The type the CQL model gives a value of <paramref name="type"/>: a FHIR choice element is
@@ -356,7 +361,7 @@ partial class CodeBuilderContext
             : null;
 
         return new SegmentResolution(segment, SegmentBinding.Dispatch, branches, alternatives.HasUninspectable,
-            new StaticValue(resultType, resultAlternatives));
+            new StaticValue(resultType, resultAlternatives), alternatives.Inspectable);
     }
 
     /// <summary>
@@ -408,6 +413,7 @@ partial class CodeBuilderContext
     /// alternative that has the element, each reading it off the value narrowed to that alternative
     /// and converting to <paramref name="target"/>; <see langword="null"/> when the value is none of
     /// them, or a late-bound read when the choice has an alternative that could not be inspected.
+    /// Alternatives that read the element the same way share one arm (see <see cref="MergeArmsReadingOneMember"/>).
     /// </summary>
     private CodeExpression BindChoiceSegment(
         CodeExpression source,
@@ -419,48 +425,226 @@ partial class CodeBuilderContext
         if (target.IsValueType && Nullable.GetUnderlyingType(target) is null)
             target = target.MakeNullable();
 
-        var arms = new List<CodeTypeSwitchArm>();
+        var arms = new List<DispatchArm>();
         foreach (var (alternative, _, elementType) in resolution.Branches!)
         {
-            var narrowed = new CodeLocal(Nullable.GetUnderlyingType(alternative) ?? alternative, isNotNull: true);
-
-            // Read the element as its own type first, then convert to the target. When no
-            // conversion exists (the ELM types the element differently from the model, e.g. a
-            // profile that constrains a list element to a single value), the arm falls back
-            // to the late-bound read, which converts at run time or yields null, rather than
-            // failing the build.
-            var read = PropertyHelper(narrowed, resolution.Segment, elementType);
-            var converted = ChangeType(read, target, out var conversion, throwOnError: false);
-            if (conversion == TypeConversion.NoMatch)
-            {
-                _logger.LogWarning(
-                    FormatMessage(
-                        $"Element {resolution.Segment} of {alternative.Name} is a {read.Type.Name} but the expression expects a {target.Name}; the read on this alternative is late-bound.",
-                        element));
-                converted = LateBoundProperty(narrowed, resolution.Segment, target, element);
-            }
-
-            arms.Add(new CodeTypeSwitchArm(narrowed, converted));
+            var arm = ChoiceArm(
+                Nullable.GetUnderlyingType(alternative) ?? alternative,
+                narrowed => PropertyHelper(narrowed, resolution.Segment, elementType),
+                resolution.Segment, target, element);
+            arms.Add(new DispatchArm([alternative], arm));
         }
+
+        MergeArmsReadingOneMember(arms, resolution, target, element);
+        var switchArms = arms.Select(arm => arm.Arm).ToList();
 
         if (resolution.HasUninspectableAlternative)
         {
             // Any other value may be the uninspectable alternative: read the element late-bound.
             // As the last arm it only sees values no typed arm claimed.
-            if (arms.Count == 0)
+            if (switchArms.Count == 0)
                 return LateBoundProperty(source, resolution.Segment, target, element);
 
             var other = new CodeLocal(typeof(object), isNotNull: true);
-            arms.Add(new CodeTypeSwitchArm(other, LateBoundProperty(other, resolution.Segment, target, element)));
+            switchArms.Add(new CodeTypeSwitchArm(other, LateBoundProperty(other, resolution.Segment, target, element)));
         }
-        else if (arms.Count == 0)
+        else if (switchArms.Count == 0)
         {
             _logger.LogWarning(
                 FormatMessage($"No alternative of the choice type of the source has an element {resolution.Segment}; the property evaluates to null.", element));
             return new CodeConstant(null, target);
         }
 
-        return new CodeTypeSwitch(source, arms, new CodeConstant(null, target), target);
+        return new CodeTypeSwitch(source, switchArms, new CodeConstant(null, target), target);
+    }
+
+    /// <summary>
+    /// One arm of a choice dispatch: the value narrowed to <paramref name="narrowedType"/>, the
+    /// element read off it by <paramref name="read"/>, converted to <paramref name="target"/>.
+    /// </summary>
+    private CodeTypeSwitchArm ChoiceArm(
+        Type narrowedType,
+        Func<CodeLocal, CodeExpression> read,
+        string segment,
+        Type target,
+        Element element)
+    {
+        var narrowed = new CodeLocal(narrowedType, isNotNull: true);
+
+        // Read the element as its own type first, then convert to the target. When no
+        // conversion exists (the ELM types the element differently from the model, e.g. a
+        // profile that constrains a list element to a single value), the arm falls back
+        // to the late-bound read, which converts at run time or yields null, rather than
+        // failing the build.
+        var value = read(narrowed);
+        var converted = ChangeType(value, target, out var conversion, throwOnError: false);
+        if (conversion == TypeConversion.NoMatch)
+        {
+            _logger.LogWarning(
+                FormatMessage(
+                    $"Element {segment} of {narrowedType.Name} is a {value.Type.Name} but the expression expects a {target.Name}; the read on this alternative is late-bound.",
+                    element));
+            converted = LateBoundProperty(narrowed, segment, target, element);
+        }
+
+        return new CodeTypeSwitchArm(narrowed, converted);
+    }
+
+    /// <summary>
+    /// Merges the arms of alternatives that read the element the same way: through one member,
+    /// which they inherit from a common base class or implement for a common interface, with the
+    /// same element type. The merged arm tests for that base class or interface and reads the
+    /// element through its member, so an open choice such as an extension's <c>value[x]</c> needs
+    /// one arm for all its string-valued primitives, not one each.
+    /// </summary>
+    /// <remarks>
+    /// The merged arm is placed after every arm it would otherwise claim values from (a <c>Date</c>
+    /// is an <c>IValue&lt;string&gt;</c> too, but reads as a <c>CqlDate</c>), and a merge is kept only if
+    /// each alternative is still claimed first by the arm that reads it, or by none when it has no
+    /// such element. The arms' results are unchanged.
+    /// </remarks>
+    private void MergeArmsReadingOneMember(
+        List<DispatchArm> arms,
+        SegmentResolution resolution,
+        Type target,
+        Element element)
+    {
+        var groups = resolution.Branches!
+            .Where(branch => !branch.Alternative.IsValueType
+                             && !_typeResolver.ShouldUseSourceObject(branch.Alternative, resolution.Segment))
+            .GroupBy(branch => (branch.Member.Name, branch.Member.PropertyType, branch.ElementType))
+            .Where(group => group.Count() > 1);
+
+        foreach (var group in groups)
+        {
+            // Members inherited from one base class first; what remains may share an interface.
+            var remaining = group.ToList();
+            foreach (var inheriting in remaining.GroupBy(branch => branch.Member.DeclaringType).Where(g => g.Count() > 1).ToList())
+            {
+                if (inheriting.Key is { IsInterface: false } declaring
+                    && declaring.GetProperty(group.Key.Name, BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly) is { } inherited
+                    && inherited.PropertyType == group.Key.PropertyType
+                    && TryMergeArms(arms, [.. inheriting.Select(branch => branch.Alternative)], inherited, group.Key.ElementType, resolution, target, element))
+                    remaining.RemoveAll(inheriting.Contains);
+            }
+
+            if (remaining.Count > 1
+                && SharedInterfaceMember([.. remaining.Select(branch => (branch.Alternative, branch.Member))]) is { } implemented)
+                TryMergeArms(arms, [.. remaining.Select(branch => branch.Alternative)], implemented, group.Key.ElementType, resolution, target, element);
+        }
+    }
+
+    /// <summary>
+    /// Replaces the arms of <paramref name="alternatives"/> by one arm testing for the type that
+    /// declares <paramref name="shared"/> and reading the element through it, placed so that no
+    /// alternative is claimed by another arm than its own (see <see cref="MergeArmsReadingOneMember"/>).
+    /// Leaves <paramref name="arms"/> unchanged and returns <see langword="false"/> when no such
+    /// place exists.
+    /// </summary>
+    private bool TryMergeArms(
+        List<DispatchArm> arms,
+        IReadOnlyList<Type> alternatives,
+        PropertyInfo shared,
+        Type elementType,
+        SegmentResolution resolution,
+        Type target,
+        Element element)
+    {
+        var testType = shared.DeclaringType!;
+        bool IsMember(DispatchArm arm) => arm.Alternatives.All(alternatives.Contains);
+
+        // After the group's own arms and after every other arm the merged test would steal from.
+        var last = arms.FindLastIndex(arm => IsMember(arm) || arm.Alternatives.Any(testType.IsAssignableFrom));
+        var reordered = new List<(IReadOnlyList<Type> Alternatives, Type TestType)>();
+        for (var i = 0; i < arms.Count; i++)
+        {
+            if (!IsMember(arms[i]))
+                reordered.Add((arms[i].Alternatives, arms[i].Arm.Narrowed.Type));
+            if (i == last)
+                reordered.Add((alternatives, testType));
+        }
+
+        if (!EachAlternativeClaimedByItsOwnArm(reordered, resolution.Inspected!))
+            return false;
+
+        var merged = new DispatchArm(
+            alternatives,
+            ChoiceArm(testType, narrowed => ChangeType(new CodeProperty(narrowed, shared), elementType, throwOnError: true), resolution.Segment, target, element));
+
+        var result = new List<DispatchArm>(arms.Count);
+        for (var i = 0; i < arms.Count; i++)
+        {
+            if (!IsMember(arms[i]))
+                result.Add(arms[i]);
+            if (i == last)
+                result.Add(merged);
+        }
+
+        arms.Clear();
+        arms.AddRange(result);
+        return true;
+    }
+
+    /// <summary>
+    /// An interface property that each alternative of <paramref name="members"/> implements with
+    /// its member, so that reading it reads the element on every one of them; <see langword="null"/>
+    /// when there is none.
+    /// </summary>
+    private static PropertyInfo? SharedInterfaceMember(IReadOnlyList<(Type Alternative, PropertyInfo Member)> members)
+    {
+        var (firstAlternative, firstMember) = members[0];
+        foreach (var candidate in firstAlternative.GetInterfaces().OrderBy(i => i.FullName, StringComparer.Ordinal))
+        {
+            if (candidate.GetProperty(firstMember.Name) is not { GetMethod: { } getter } property
+                || property.PropertyType != firstMember.PropertyType)
+                continue;
+
+            if (members.All(m => candidate.IsAssignableFrom(m.Alternative) && ImplementsWith(m.Alternative, candidate, getter, m.Member)))
+                return property;
+        }
+
+        return null;
+    }
+
+    /// <summary>Whether <paramref name="type"/> implements <paramref name="interfaceGetter"/> with the getter of <paramref name="member"/>.</summary>
+    private static bool ImplementsWith(Type type, Type @interface, MethodInfo interfaceGetter, PropertyInfo member)
+    {
+        if (member.GetMethod is not { } memberGetter)
+            return false;
+
+        var map = type.GetInterfaceMap(@interface);
+        var index = Array.IndexOf(map.InterfaceMethods, interfaceGetter);
+        return index >= 0
+               && map.TargetMethods[index].MetadataToken == memberGetter.MetadataToken
+               && map.TargetMethods[index].Module == memberGetter.Module;
+    }
+
+    /// <summary>
+    /// Whether, testing <paramref name="arms"/> in order, each of <paramref name="alternatives"/> is
+    /// claimed first by the arm that reads the element for it, or by no arm when none does.
+    /// </summary>
+    private static bool EachAlternativeClaimedByItsOwnArm(
+        IReadOnlyList<(IReadOnlyList<Type> Alternatives, Type TestType)> arms,
+        IReadOnlyList<Type> alternatives)
+    {
+        foreach (var alternative in alternatives)
+        {
+            var tested = Nullable.GetUnderlyingType(alternative) ?? alternative;
+            var claimedBy = -1;
+            var ownedBy = -1;
+            for (var i = 0; i < arms.Count; i++)
+            {
+                if (claimedBy < 0 && arms[i].TestType.IsAssignableFrom(tested))
+                    claimedBy = i;
+                if (ownedBy < 0 && arms[i].Alternatives.Contains(alternative))
+                    ownedBy = i;
+            }
+
+            if (claimedBy != ownedBy)
+                return false;
+        }
+
+        return true;
     }
 
     /// <summary>

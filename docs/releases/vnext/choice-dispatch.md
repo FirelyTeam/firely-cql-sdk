@@ -9,7 +9,10 @@
   type with one arm per alternative that has the element, `null` for the others. The value is
   evaluated once and narrowed per arm, and prints as a switch expression, a conditional over a
   declaration pattern (`x is Reference r ? r.ReferenceElement : null`), or, when an arm needs
-  statements of its own, an `if` chain over declaration patterns. When every alternative that has
+  statements of its own, an `if` chain over declaration patterns. Alternatives that read the element
+  through one member, inherited from a common base class or implemented for a common interface,
+  share an arm: the string-valued primitives of an open `value[x]` are one `IValue<string>` arm, and
+  `Age`, `Count`, `Distance` and `Duration` share the `Quantity` arm. When every alternative that has
   the element agrees on its type, the result has that plain type (`MR.medication.reference.value`
   is a `string`). Emission and type inference share one path resolver, so the inferred type of such
   a property follows the same rule. An alternative whose type cannot be inspected keeps a late-bound

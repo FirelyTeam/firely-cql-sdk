@@ -685,6 +685,54 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Property_OnOpenChoice_SharesOneArmBetweenAlternativesThatReadTheElementAlike()
+        {
+            // Extension.value is an open value[x]. Its string-valued primitives all read their value
+            // through IValue<string>, its integers through one integer interface, and Age, Count,
+            // Distance and Duration inherit Quantity's value, so each group shares one arm. Date also
+            // implements IValue<string> but reads as a CqlDate, so it keeps its own arm, tested first.
+            var extensionValues = new Hl7.Cql.Elm.Query
+            {
+                source =
+                [
+                    new Hl7.Cql.Elm.AliasedQuerySource
+                    {
+                        alias = "$this",
+                        expression = new Hl7.Cql.Elm.Property { path = "extension", source = new Hl7.Cql.Elm.AliasRef { name = "R" } },
+                    },
+                ],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    distinct = false,
+                    expression = new Hl7.Cql.Elm.Property { path = "value.value", source = new Hl7.Cql.Elm.AliasRef { name = "$this" } },
+                },
+            };
+            var elmLibrary = QueryLibrary("OpenChoiceValues", RetrieveOf("Patient"), extensionValues);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "IValue<string>"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Quantity"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Date"), cSharp);
+            foreach (var merged in new[] { "Oid", "Uuid", "FhirString", "Code", "Integer", "PositiveInt", "Age", "Duration" })
+                Assert.AreEqual(0, ArmsTesting(cSharp, merged), $"{merged} shares an arm:\n" + cSharp);
+            Assert.IsTrue(cSharp.IndexOf(" Date ", StringComparison.Ordinal) < cSharp.IndexOf("IValue<string> ", StringComparison.Ordinal),
+                "Date is an IValue<string> too, so its arm must come first:\n" + cSharp);
+
+            var patient = new Patient { Id = "1" };
+            patient.Extension.Add(new Extension("http://example.org/oid", new Oid("urn:oid:1.2.3")));
+            patient.Extension.Add(new Extension("http://example.org/integer", new PositiveInt(5)));
+            patient.Extension.Add(new Extension("http://example.org/age", new Age { Value = 3, Unit = "a" }));
+            patient.Extension.Add(new Extension("http://example.org/date", new Date("2026-01-02")));
+            var values = ((System.Collections.IEnumerable)((System.Collections.IEnumerable)invoke(BundleOf(patient))).Cast<object>().Single()).Cast<object>().ToList();
+
+            Assert.AreEqual("urn:oid:1.2.3", values[0]);
+            Assert.AreEqual(5, values[1]);
+            Assert.AreEqual(3m, ((FhirDecimal)values[2]).Value, "Quantity.value is a FHIR.decimal element");
+            Assert.AreEqual(2, ((Hl7.Cql.Primitives.CqlDate)values[3]).Value.Day);
+        }
+
+        [TestMethod]
         public void Property_OnPrimitiveValueWithoutAResultType_HasTheTypeTheModelDeclares()
         {
             // P.birthDate.value, with no result type in the ELM (MADiE output): the model declares
@@ -948,7 +996,7 @@ namespace CoreTests
         private static int ArmsTesting(string cSharp, string typeName) =>
             System.Text.RegularExpressions.Regex.Matches(
                 cSharp,
-                $@"\bis {typeName} \w+\b|^\s*{typeName} \w+ =>",
+                $@"\bis {System.Text.RegularExpressions.Regex.Escape(typeName)} \w+\b|^\s*{System.Text.RegularExpressions.Regex.Escape(typeName)} \w+ =>",
                 System.Text.RegularExpressions.RegexOptions.Multiline).Count;
 
         private static CqlDefinitionDictionary ProcessLibraryWithChoiceResult(

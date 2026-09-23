@@ -571,34 +571,20 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     DataType u_ = @this?.Value;
                     return u_ switch
                     {
-                        Uuid v_ => v_.Value,
-                        Oid w_ => w_.Value,
-                        Markdown x_ => x_.Value,
-                        Integer y_ => y_.Value,
-                        Instant z_ => context.Operators.Convert<CqlDateTime>(z_.Value),
-                        Id aa_ => aa_.Value,
-                        Duration ab_ => ab_.ValueElement,
-                        Distance ac_ => ac_.ValueElement,
-                        FhirDecimal ad_ => ad_.Value,
-                        Date ae_ => context.Operators.ConvertStringToDate(ae_.Value),
-                        Count af_ => af_.ValueElement,
-                        FhirDateTime ag_ => context.Operators.Convert<CqlDateTime>(ag_),
-                        Time ah_ => context.Operators.ConvertStringToTime(ah_.Value),
-                        Age ai_ => ai_.ValueElement,
-                        FhirUrl aj_ => aj_.Value,
-                        FhirUri ak_ => ak_.Value,
-                        Base64Binary al_ => context.Operators.Convert<string>(al_.Value),
-                        FhirBoolean am_ => am_.Value,
-                        FhirString an_ => an_.Value,
-                        PositiveInt ao_ => ao_.Value,
-                        Code ap_ => ap_.Value,
-                        UnsignedInt aq_ => aq_.Value,
-                        Canonical ar_ => ar_.Value,
-                        Quantity as_ => as_.ValueElement,
-                        Identifier at_ => at_.ValueElement,
-                        Money au_ => au_.ValueElement,
-                        UsageContext av_ => av_.Value,
-                        ContactPoint aw_ => aw_.ValueElement,
+                        Instant v_ => context.Operators.Convert<CqlDateTime>(v_.Value),
+                        FhirDecimal w_ => w_.Value,
+                        Date x_ => context.Operators.ConvertStringToDate(x_.Value),
+                        FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
+                        Time z_ => context.Operators.ConvertStringToTime(z_.Value),
+                        Base64Binary aa_ => context.Operators.Convert<string>(aa_.Value),
+                        FhirBoolean ab_ => ab_.Value,
+                        IValue<int?> ac_ => ac_.Value,
+                        IValue<string> ad_ => ad_.Value,
+                        Quantity ae_ => ae_.ValueElement,
+                        Identifier af_ => af_.ValueElement,
+                        Money ag_ => ag_.ValueElement,
+                        UsageContext ah_ => ah_.Value,
+                        ContactPoint ai_ => ai_.ValueElement,
                         _ => null,
                     };
                 }
@@ -618,14 +604,14 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication LevelOfSeverityNotCommunicated) {
-            CodeableConcept ax_ = LevelOfSeverityNotCommunicated?.StatusReason;
-            CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
-            CqlValueSet az_ = this.Medical_Reason(context);
-            bool? ba_ = context.Operators.ConceptInValueSet(ay_, az_);
-            CqlValueSet bb_ = this.Patient_Reason(context);
-            bool? bc_ = context.Operators.ConceptInValueSet(ay_, bb_);
-            bool? bd_ = context.Operators.Or(ba_, bc_);
-            return bd_;
+            CodeableConcept aj_ = LevelOfSeverityNotCommunicated?.StatusReason;
+            CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
+            CqlValueSet al_ = this.Medical_Reason(context);
+            bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
+            CqlValueSet an_ = this.Patient_Reason(context);
+            bool? ao_ = context.Operators.ConceptInValueSet(ak_, an_);
+            bool? ap_ = context.Operators.Or(am_, ao_);
+            return ap_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -662,34 +648,20 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     DataType u_ = @this?.Value;
                     return u_ switch
                     {
-                        Uuid v_ => v_.Value,
-                        Oid w_ => w_.Value,
-                        Markdown x_ => x_.Value,
-                        Integer y_ => y_.Value,
-                        Instant z_ => context.Operators.Convert<CqlDateTime>(z_.Value),
-                        Id aa_ => aa_.Value,
-                        Duration ab_ => ab_.ValueElement,
-                        Distance ac_ => ac_.ValueElement,
-                        FhirDecimal ad_ => ad_.Value,
-                        Date ae_ => context.Operators.ConvertStringToDate(ae_.Value),
-                        Count af_ => af_.ValueElement,
-                        FhirDateTime ag_ => context.Operators.Convert<CqlDateTime>(ag_),
-                        Time ah_ => context.Operators.ConvertStringToTime(ah_.Value),
-                        Age ai_ => ai_.ValueElement,
-                        FhirUrl aj_ => aj_.Value,
-                        FhirUri ak_ => ak_.Value,
-                        Base64Binary al_ => context.Operators.Convert<string>(al_.Value),
-                        FhirBoolean am_ => am_.Value,
-                        FhirString an_ => an_.Value,
-                        PositiveInt ao_ => ao_.Value,
-                        Code ap_ => ap_.Value,
-                        UnsignedInt aq_ => aq_.Value,
-                        Canonical ar_ => ar_.Value,
-                        Quantity as_ => as_.ValueElement,
-                        Identifier at_ => at_.ValueElement,
-                        Money au_ => au_.ValueElement,
-                        UsageContext av_ => av_.Value,
-                        ContactPoint aw_ => aw_.ValueElement,
+                        Instant v_ => context.Operators.Convert<CqlDateTime>(v_.Value),
+                        FhirDecimal w_ => w_.Value,
+                        Date x_ => context.Operators.ConvertStringToDate(x_.Value),
+                        FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
+                        Time z_ => context.Operators.ConvertStringToTime(z_.Value),
+                        Base64Binary aa_ => context.Operators.Convert<string>(aa_.Value),
+                        FhirBoolean ab_ => ab_.Value,
+                        IValue<int?> ac_ => ac_.Value,
+                        IValue<string> ad_ => ad_.Value,
+                        Quantity ae_ => ae_.ValueElement,
+                        Identifier af_ => af_.ValueElement,
+                        Money ag_ => ag_.ValueElement,
+                        UsageContext ah_ => ah_.Value,
+                        ContactPoint ai_ => ai_.ValueElement,
                         _ => null,
                     };
                 }
@@ -709,14 +681,14 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaAbsentNotCommunicated) {
-            CodeableConcept ax_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
-            CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
-            CqlValueSet az_ = this.Medical_Reason(context);
-            bool? ba_ = context.Operators.ConceptInValueSet(ay_, az_);
-            CqlValueSet bb_ = this.Patient_Reason(context);
-            bool? bc_ = context.Operators.ConceptInValueSet(ay_, bb_);
-            bool? bd_ = context.Operators.Or(ba_, bc_);
-            return bd_;
+            CodeableConcept aj_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+            CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
+            CqlValueSet al_ = this.Medical_Reason(context);
+            bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
+            CqlValueSet an_ = this.Patient_Reason(context);
+            bool? ao_ = context.Operators.ConceptInValueSet(ak_, an_);
+            bool? ap_ = context.Operators.Or(am_, ao_);
+            return ap_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);
@@ -753,34 +725,20 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
                     DataType u_ = @this?.Value;
                     return u_ switch
                     {
-                        Uuid v_ => v_.Value,
-                        Oid w_ => w_.Value,
-                        Markdown x_ => x_.Value,
-                        Integer y_ => y_.Value,
-                        Instant z_ => context.Operators.Convert<CqlDateTime>(z_.Value),
-                        Id aa_ => aa_.Value,
-                        Duration ab_ => ab_.ValueElement,
-                        Distance ac_ => ac_.ValueElement,
-                        FhirDecimal ad_ => ad_.Value,
-                        Date ae_ => context.Operators.ConvertStringToDate(ae_.Value),
-                        Count af_ => af_.ValueElement,
-                        FhirDateTime ag_ => context.Operators.Convert<CqlDateTime>(ag_),
-                        Time ah_ => context.Operators.ConvertStringToTime(ah_.Value),
-                        Age ai_ => ai_.ValueElement,
-                        FhirUrl aj_ => aj_.Value,
-                        FhirUri ak_ => ak_.Value,
-                        Base64Binary al_ => context.Operators.Convert<string>(al_.Value),
-                        FhirBoolean am_ => am_.Value,
-                        FhirString an_ => an_.Value,
-                        PositiveInt ao_ => ao_.Value,
-                        Code ap_ => ap_.Value,
-                        UnsignedInt aq_ => aq_.Value,
-                        Canonical ar_ => ar_.Value,
-                        Quantity as_ => as_.ValueElement,
-                        Identifier at_ => at_.ValueElement,
-                        Money au_ => au_.ValueElement,
-                        UsageContext av_ => av_.Value,
-                        ContactPoint aw_ => aw_.ValueElement,
+                        Instant v_ => context.Operators.Convert<CqlDateTime>(v_.Value),
+                        FhirDecimal w_ => w_.Value,
+                        Date x_ => context.Operators.ConvertStringToDate(x_.Value),
+                        FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
+                        Time z_ => context.Operators.ConvertStringToTime(z_.Value),
+                        Base64Binary aa_ => context.Operators.Convert<string>(aa_.Value),
+                        FhirBoolean ab_ => ab_.Value,
+                        IValue<int?> ac_ => ac_.Value,
+                        IValue<string> ad_ => ad_.Value,
+                        Quantity ae_ => ae_.ValueElement,
+                        Identifier af_ => af_.ValueElement,
+                        Money ag_ => ag_.ValueElement,
+                        UsageContext ah_ => ah_.Value,
+                        ContactPoint ai_ => ai_.ValueElement,
                         _ => null,
                     };
                 }
@@ -800,14 +758,14 @@ public partial class CMS142FHIRCommWithDrManagingDiab_1_0_000 : ILibrary, ISingl
         IEnumerable<Communication> d_ = context.Operators.Where<Communication>(b_, c_);
 
         bool? e_(Communication MacularEdemaPresentNotCommunicated) {
-            CodeableConcept ax_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-            CqlConcept ay_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ax_);
-            CqlValueSet az_ = this.Medical_Reason(context);
-            bool? ba_ = context.Operators.ConceptInValueSet(ay_, az_);
-            CqlValueSet bb_ = this.Patient_Reason(context);
-            bool? bc_ = context.Operators.ConceptInValueSet(ay_, bb_);
-            bool? bd_ = context.Operators.Or(ba_, bc_);
-            return bd_;
+            CodeableConcept aj_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+            CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
+            CqlValueSet al_ = this.Medical_Reason(context);
+            bool? am_ = context.Operators.ConceptInValueSet(ak_, al_);
+            CqlValueSet an_ = this.Patient_Reason(context);
+            bool? ao_ = context.Operators.ConceptInValueSet(ak_, an_);
+            bool? ap_ = context.Operators.Or(am_, ao_);
+            return ap_;
         }
 
         IEnumerable<Communication> f_ = context.Operators.Where<Communication>(d_, e_);

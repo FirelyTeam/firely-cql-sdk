@@ -211,7 +211,7 @@ public class ChoiceTypeListPropertyTests
     private static int ArmsTesting(string cSharp, string typeName) =>
         System.Text.RegularExpressions.Regex.Matches(
             cSharp,
-            $@"\bis {typeName} \w+\b|^\s*{typeName} \w+ =>",
+            $@"\bis {System.Text.RegularExpressions.Regex.Escape(typeName)} \w+\b|^\s*{System.Text.RegularExpressions.Regex.Escape(typeName)} \w+ =>",
             System.Text.RegularExpressions.RegexOptions.Multiline).Count;
 
     /// <summary>

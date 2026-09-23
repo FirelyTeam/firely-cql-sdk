@@ -361,34 +361,20 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                     DataType ae_ = @this?.Value;
                     return ae_ switch
                     {
-                        Uuid af_ => af_.Value,
-                        Oid ag_ => ag_.Value,
-                        Markdown ah_ => ah_.Value,
-                        Integer ai_ => ai_.Value,
-                        Instant aj_ => context.Operators.Convert<CqlDateTime>(aj_.Value),
-                        Id ak_ => ak_.Value,
-                        Duration al_ => al_.ValueElement,
-                        Distance am_ => am_.ValueElement,
-                        FhirDecimal an_ => an_.Value,
-                        Date ao_ => context.Operators.ConvertStringToDate(ao_.Value),
-                        Count ap_ => ap_.ValueElement,
-                        FhirDateTime aq_ => context.Operators.Convert<CqlDateTime>(aq_),
-                        Time ar_ => context.Operators.ConvertStringToTime(ar_.Value),
-                        Age as_ => as_.ValueElement,
-                        FhirUrl at_ => at_.Value,
-                        FhirUri au_ => au_.Value,
-                        Base64Binary av_ => context.Operators.Convert<string>(av_.Value),
-                        FhirBoolean aw_ => aw_.Value,
-                        FhirString ax_ => ax_.Value,
-                        PositiveInt ay_ => ay_.Value,
-                        Code az_ => az_.Value,
-                        UnsignedInt ba_ => ba_.Value,
-                        Canonical bb_ => bb_.Value,
-                        Quantity bc_ => bc_.ValueElement,
-                        Identifier bd_ => bd_.ValueElement,
-                        Money be_ => be_.ValueElement,
-                        UsageContext bf_ => bf_.Value,
-                        ContactPoint bg_ => bg_.ValueElement,
+                        Instant af_ => context.Operators.Convert<CqlDateTime>(af_.Value),
+                        FhirDecimal ag_ => ag_.Value,
+                        Date ah_ => context.Operators.ConvertStringToDate(ah_.Value),
+                        FhirDateTime ai_ => context.Operators.Convert<CqlDateTime>(ai_),
+                        Time aj_ => context.Operators.ConvertStringToTime(aj_.Value),
+                        Base64Binary ak_ => context.Operators.Convert<string>(ak_.Value),
+                        FhirBoolean al_ => al_.Value,
+                        IValue<int?> am_ => am_.Value,
+                        IValue<string> an_ => an_.Value,
+                        Quantity ao_ => ao_.ValueElement,
+                        Identifier ap_ => ap_.ValueElement,
+                        Money aq_ => aq_.ValueElement,
+                        UsageContext ar_ => ar_.Value,
+                        ContactPoint as_ => as_.ValueElement,
                         _ => null,
                     };
                 }
@@ -406,16 +392,16 @@ public partial class CMS68FHIRDocumentationCurrentMeds_1_0_000 : ILibrary, ISing
                 List<CodeableConcept> v_ = MedicationsNotDocumented?.ReasonCode;
 
                 CqlConcept w_(CodeableConcept @this) {
-                    CqlConcept bh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
-                    return bh_;
+                    CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, @this);
+                    return at_;
                 }
 
 
                 bool? x_(CqlConcept reasonItem) {
-                    CqlCode bi_ = this.Acute_health_crisis__finding_(context);
-                    CqlConcept bj_ = context.Operators.ConvertCodeToConcept(bi_);
-                    bool? bk_ = context.Operators.Equivalent(reasonItem, bj_);
-                    return bk_;
+                    CqlCode au_ = this.Acute_health_crisis__finding_(context);
+                    CqlConcept av_ = context.Operators.ConvertCodeToConcept(au_);
+                    bool? aw_ = context.Operators.Equivalent(reasonItem, av_);
+                    return aw_;
                 }
 
                 IEnumerable<CqlConcept> y_ = context.Operators.SelectWhere<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)v_, w_, x_);

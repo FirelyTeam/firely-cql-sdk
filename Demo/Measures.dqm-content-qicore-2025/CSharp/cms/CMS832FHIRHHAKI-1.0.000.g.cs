@@ -214,34 +214,20 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
                 DataType as_ = @this?.Value;
                 return as_ switch
                 {
-                    Uuid at_ => at_.Value,
-                    Oid au_ => au_.Value,
-                    Markdown av_ => av_.Value,
-                    Integer aw_ => aw_.Value,
-                    Instant ax_ => context.Operators.Convert<CqlDateTime>(ax_.Value),
-                    Id ay_ => ay_.Value,
-                    Duration az_ => az_.ValueElement,
-                    Distance ba_ => ba_.ValueElement,
-                    FhirDecimal bb_ => bb_.Value,
-                    Date bc_ => context.Operators.ConvertStringToDate(bc_.Value),
-                    Count bd_ => bd_.ValueElement,
-                    FhirDateTime be_ => context.Operators.Convert<CqlDateTime>(be_),
-                    Time bf_ => context.Operators.ConvertStringToTime(bf_.Value),
-                    Age bg_ => bg_.ValueElement,
-                    FhirUrl bh_ => bh_.Value,
-                    FhirUri bi_ => bi_.Value,
-                    Base64Binary bj_ => context.Operators.Convert<string>(bj_.Value),
-                    FhirBoolean bk_ => bk_.Value,
-                    FhirString bl_ => bl_.Value,
-                    PositiveInt bm_ => bm_.Value,
-                    Code bn_ => bn_.Value,
-                    UnsignedInt bo_ => bo_.Value,
-                    Canonical bp_ => bp_.Value,
-                    Quantity bq_ => bq_.ValueElement,
-                    Identifier br_ => br_.ValueElement,
-                    Money bs_ => bs_.ValueElement,
-                    UsageContext bt_ => bt_.Value,
-                    ContactPoint bu_ => bu_.ValueElement,
+                    Instant at_ => context.Operators.Convert<CqlDateTime>(at_.Value),
+                    FhirDecimal au_ => au_.Value,
+                    Date av_ => context.Operators.ConvertStringToDate(av_.Value),
+                    FhirDateTime aw_ => context.Operators.Convert<CqlDateTime>(aw_),
+                    Time ax_ => context.Operators.ConvertStringToTime(ax_.Value),
+                    Base64Binary ay_ => context.Operators.Convert<string>(ay_.Value),
+                    FhirBoolean az_ => az_.Value,
+                    IValue<int?> ba_ => ba_.Value,
+                    IValue<string> bb_ => bb_.Value,
+                    Quantity bc_ => bc_.ValueElement,
+                    Identifier bd_ => bd_.ValueElement,
+                    Money be_ => be_.ValueElement,
+                    UsageContext bf_ => bf_.Value,
+                    ContactPoint bg_ => bg_.ValueElement,
                     _ => null,
                 };
             }
@@ -612,34 +598,20 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             DataType m_ = @this?.Value;
             return m_ switch
             {
-                Uuid n_ => n_.Value,
-                Oid o_ => o_.Value,
-                Markdown p_ => p_.Value,
-                Integer q_ => q_.Value,
-                Instant r_ => context.Operators.Convert<CqlDateTime>(r_.Value),
-                Id s_ => s_.Value,
-                Duration t_ => t_.ValueElement,
-                Distance u_ => u_.ValueElement,
-                FhirDecimal v_ => v_.Value,
-                Date w_ => context.Operators.ConvertStringToDate(w_.Value),
-                Count x_ => x_.ValueElement,
-                FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
-                Time z_ => context.Operators.ConvertStringToTime(z_.Value),
-                Age aa_ => aa_.ValueElement,
-                FhirUrl ab_ => ab_.Value,
-                FhirUri ac_ => ac_.Value,
-                Base64Binary ad_ => context.Operators.Convert<string>(ad_.Value),
-                FhirBoolean ae_ => ae_.Value,
-                FhirString af_ => af_.Value,
-                PositiveInt ag_ => ag_.Value,
-                Code ah_ => ah_.Value,
-                UnsignedInt ai_ => ai_.Value,
-                Canonical aj_ => aj_.Value,
-                Quantity ak_ => ak_.ValueElement,
-                Identifier al_ => al_.ValueElement,
-                Money am_ => am_.ValueElement,
-                UsageContext an_ => an_.Value,
-                ContactPoint ao_ => ao_.ValueElement,
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
                 _ => null,
             };
         }
@@ -651,35 +623,35 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         bool? i_ = context.Operators.Equal(f_, h_);
         if (i_ ?? false)
         {
-            decimal? ap_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity aq_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? ar_ = aq_?.value;
-            decimal? as_ = context.Operators.Divide(ar_, 0.9m);
-            decimal? at_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] au_ = [
-                as_,
-                at_,
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity ac_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? ad_ = ac_?.value;
+            decimal? ae_ = context.Operators.Divide(ad_, 0.9m);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] ag_ = [
+                ae_,
+                af_,
             ];
-            decimal? av_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)au_);
-            decimal? aw_ = context.Operators.Negate(0.302m);
-            decimal? ax_ = context.Operators.Power(av_, aw_);
-            decimal? ay_ = context.Operators.Multiply(ap_, ax_);
-            decimal? az_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)au_);
-            decimal? ba_ = context.Operators.Negate(1.200m);
-            decimal? bb_ = context.Operators.Power(az_, ba_);
-            decimal? bc_ = context.Operators.Multiply(ay_, bb_);
-            Patient bd_ = this.Patient(context);
-            Date be_ = bd_?.BirthDateElement;
-            string bf_ = be_?.Value;
-            CqlDate bg_ = context.Operators.ConvertStringToDate(bf_);
-            CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-            CqlInterval<CqlDateTime> bi_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime bj_ = context.Operators.Start(bi_);
-            int? bk_ = context.Operators.CalculateAgeAt(bh_, bj_, "year");
-            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(bk_);
-            decimal? bm_ = context.Operators.Power(0.9938m, bl_);
-            decimal? bn_ = context.Operators.Multiply(bc_, bm_);
-            return bn_;
+            decimal? ah_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? ai_ = context.Operators.Negate(0.302m);
+            decimal? aj_ = context.Operators.Power(ah_, ai_);
+            decimal? ak_ = context.Operators.Multiply(ab_, aj_);
+            decimal? al_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? am_ = context.Operators.Negate(1.200m);
+            decimal? an_ = context.Operators.Power(al_, am_);
+            decimal? ao_ = context.Operators.Multiply(ak_, an_);
+            Patient ap_ = this.Patient(context);
+            Date aq_ = ap_?.BirthDateElement;
+            string ar_ = aq_?.Value;
+            CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
+            CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+            CqlInterval<CqlDateTime> au_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime av_ = context.Operators.Start(au_);
+            int? aw_ = context.Operators.CalculateAgeAt(at_, av_, "year");
+            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(aw_);
+            decimal? ay_ = context.Operators.Power(0.9938m, ax_);
+            decimal? az_ = context.Operators.Multiply(ao_, ay_);
+            return az_;
         }
         else
         {
@@ -1023,34 +995,20 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             DataType m_ = @this?.Value;
             return m_ switch
             {
-                Uuid n_ => n_.Value,
-                Oid o_ => o_.Value,
-                Markdown p_ => p_.Value,
-                Integer q_ => q_.Value,
-                Instant r_ => context.Operators.Convert<CqlDateTime>(r_.Value),
-                Id s_ => s_.Value,
-                Duration t_ => t_.ValueElement,
-                Distance u_ => u_.ValueElement,
-                FhirDecimal v_ => v_.Value,
-                Date w_ => context.Operators.ConvertStringToDate(w_.Value),
-                Count x_ => x_.ValueElement,
-                FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
-                Time z_ => context.Operators.ConvertStringToTime(z_.Value),
-                Age aa_ => aa_.ValueElement,
-                FhirUrl ab_ => ab_.Value,
-                FhirUri ac_ => ac_.Value,
-                Base64Binary ad_ => context.Operators.Convert<string>(ad_.Value),
-                FhirBoolean ae_ => ae_.Value,
-                FhirString af_ => af_.Value,
-                PositiveInt ag_ => ag_.Value,
-                Code ah_ => ah_.Value,
-                UnsignedInt ai_ => ai_.Value,
-                Canonical aj_ => aj_.Value,
-                Quantity ak_ => ak_.ValueElement,
-                Identifier al_ => al_.ValueElement,
-                Money am_ => am_.ValueElement,
-                UsageContext an_ => an_.Value,
-                ContactPoint ao_ => ao_.ValueElement,
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
                 _ => null,
             };
         }
@@ -1062,36 +1020,36 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         bool? i_ = context.Operators.Equal(f_, h_);
         if (i_ ?? false)
         {
-            decimal? ap_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity aq_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? ar_ = aq_?.value;
-            decimal? as_ = context.Operators.Divide(ar_, 0.7m);
-            decimal? at_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] au_ = [
-                as_,
-                at_,
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity ac_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? ad_ = ac_?.value;
+            decimal? ae_ = context.Operators.Divide(ad_, 0.7m);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] ag_ = [
+                ae_,
+                af_,
             ];
-            decimal? av_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)au_);
-            decimal? aw_ = context.Operators.Negate(0.241m);
-            decimal? ax_ = context.Operators.Power(av_, aw_);
-            decimal? ay_ = context.Operators.Multiply(ap_, ax_);
-            decimal? az_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)au_);
-            decimal? ba_ = context.Operators.Negate(1.200m);
-            decimal? bb_ = context.Operators.Power(az_, ba_);
-            decimal? bc_ = context.Operators.Multiply(ay_, bb_);
-            Patient bd_ = this.Patient(context);
-            Date be_ = bd_?.BirthDateElement;
-            string bf_ = be_?.Value;
-            CqlDate bg_ = context.Operators.ConvertStringToDate(bf_);
-            CqlDateTime bh_ = context.Operators.ConvertDateToDateTime(bg_);
-            CqlInterval<CqlDateTime> bi_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime bj_ = context.Operators.Start(bi_);
-            int? bk_ = context.Operators.CalculateAgeAt(bh_, bj_, "year");
-            decimal? bl_ = context.Operators.ConvertIntegerToDecimal(bk_);
-            decimal? bm_ = context.Operators.Power(0.9938m, bl_);
-            decimal? bn_ = context.Operators.Multiply(bc_, bm_);
-            decimal? bo_ = context.Operators.Multiply(bn_, 1.012m);
-            return bo_;
+            decimal? ah_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? ai_ = context.Operators.Negate(0.241m);
+            decimal? aj_ = context.Operators.Power(ah_, ai_);
+            decimal? ak_ = context.Operators.Multiply(ab_, aj_);
+            decimal? al_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? am_ = context.Operators.Negate(1.200m);
+            decimal? an_ = context.Operators.Power(al_, am_);
+            decimal? ao_ = context.Operators.Multiply(ak_, an_);
+            Patient ap_ = this.Patient(context);
+            Date aq_ = ap_?.BirthDateElement;
+            string ar_ = aq_?.Value;
+            CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
+            CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+            CqlInterval<CqlDateTime> au_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime av_ = context.Operators.Start(au_);
+            int? aw_ = context.Operators.CalculateAgeAt(at_, av_, "year");
+            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(aw_);
+            decimal? ay_ = context.Operators.Power(0.9938m, ax_);
+            decimal? az_ = context.Operators.Multiply(ao_, ay_);
+            decimal? ba_ = context.Operators.Multiply(az_, 1.012m);
+            return ba_;
         }
         else
         {
@@ -2122,34 +2080,20 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
             DataType m_ = @this?.Value;
             return m_ switch
             {
-                Uuid n_ => n_.Value,
-                Oid o_ => o_.Value,
-                Markdown p_ => p_.Value,
-                Integer q_ => q_.Value,
-                Instant r_ => context.Operators.Convert<CqlDateTime>(r_.Value),
-                Id s_ => s_.Value,
-                Duration t_ => t_.ValueElement,
-                Distance u_ => u_.ValueElement,
-                FhirDecimal v_ => v_.Value,
-                Date w_ => context.Operators.ConvertStringToDate(w_.Value),
-                Count x_ => x_.ValueElement,
-                FhirDateTime y_ => context.Operators.Convert<CqlDateTime>(y_),
-                Time z_ => context.Operators.ConvertStringToTime(z_.Value),
-                Age aa_ => aa_.ValueElement,
-                FhirUrl ab_ => ab_.Value,
-                FhirUri ac_ => ac_.Value,
-                Base64Binary ad_ => context.Operators.Convert<string>(ad_.Value),
-                FhirBoolean ae_ => ae_.Value,
-                FhirString af_ => af_.Value,
-                PositiveInt ag_ => ag_.Value,
-                Code ah_ => ah_.Value,
-                UnsignedInt ai_ => ai_.Value,
-                Canonical aj_ => aj_.Value,
-                Quantity ak_ => ak_.ValueElement,
-                Identifier al_ => al_.ValueElement,
-                Money am_ => am_.ValueElement,
-                UsageContext an_ => an_.Value,
-                ContactPoint ao_ => ao_.ValueElement,
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
                 _ => null,
             };
         }
@@ -2161,13 +2105,13 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         bool? i_ = context.Operators.Equal(f_, h_);
         if (i_ ?? false)
         {
-            CqlQuantity ap_ = context.Operators.Quantity(1.02m, "mg/dL");
-            return ap_;
+            CqlQuantity ab_ = context.Operators.Quantity(1.02m, "mg/dL");
+            return ab_;
         }
         else
         {
-            CqlQuantity aq_ = context.Operators.Quantity(1.18m, "mg/dL");
-            return aq_;
+            CqlQuantity ac_ = context.Operators.Quantity(1.18m, "mg/dL");
+            return ac_;
         }
     }
 
