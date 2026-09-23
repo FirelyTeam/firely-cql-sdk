@@ -759,4 +759,23 @@ public class CqlComparersTests
         Assert.AreEqual(false, operators.Equivalent(new CqlDate(2012, 1, null), new CqlDate(2012, 1, 1)));
         Assert.AreEqual(true, operators.Equivalent(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 1)));
     }
+
+    /// <summary>
+    /// <c>Compare</c> gives null a total ordering -- null sorts above any value, and two nulls are
+    /// equal -- so that <c>Sort</c>/<c>OrderBy</c> over a list containing nulls is deterministic.
+    /// This is deliberately different from the CQL operators (<c>after</c>, <c>before</c>,
+    /// <c>Greater</c>, <c>Less</c>), which return null for a null operand and guard for that
+    /// themselves rather than relying on the comparer.
+    /// </summary>
+    [TestMethod]
+    public void Compare_NullOperand_HasTotalOrdering()
+    {
+        var comparers = new CqlComparers();
+
+        var value = new CqlDateTime(2024, 1, 1, null, null, null, null, null, null);
+
+        Assert.AreEqual(1, comparers.Compare(null, value, null));
+        Assert.AreEqual(-1, comparers.Compare(value, null, null));
+        Assert.AreEqual(0, comparers.Compare(null, null, null));
+    }
 }
