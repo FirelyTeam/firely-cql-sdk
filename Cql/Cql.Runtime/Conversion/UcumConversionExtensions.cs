@@ -103,6 +103,219 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
+        /// Brings two commensurable quantities into a single common unit, so that their values may be compared or
+        /// combined without the rescaling that canonicalization applies.
+        /// </summary>
+        /// <remarks>
+        /// Commensurability is decided on the canonical form, because <c>TryCanonicalize</c> succeeds for any valid
+        /// UCUM unit: the canonical units have to agree before two values mean anything to each other, or the
+        /// comparison would answer as if both quantities were dimensionless (1 'cm' = 0.01 'g').
+        /// <para>
+        /// The common unit is the finer of the two operand units - the one whose single unit has the smaller canonical
+        /// value - and deliberately not the canonical base unit. Canonicalizing rescales a value by its unit's factor,
+        /// and for a clinical unit far from its base that factor drives the value below the step size of the CQL
+        /// Decimal type: 0.25 'mg/d' canonicalizes to 0.0000000028935185 'g.s-1', where a Decimal has "a <i>scale</i>
+        /// (meaning number of possible digits to the right of the decimal) of 8 [...] with a step size of 10^-8"
+        /// (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, 1.1 Decimal). Every quantity in a clinical range then
+        /// quantizes to zero and compares equal to every other. The operand units are the scale the values were
+        /// authored at, so Decimal quantization is meaningful there, and the finer of the two preserves the larger
+        /// magnitudes and hence the most significant digits.
+        /// </para>
+        /// </remarks>
+        /// <param name="x">The first quantity.</param>
+        /// <param name="y">The second quantity.</param>
+        /// <param name="service">The <see cref="M.IMetricService"/> to use for the conversions.</param>
+        /// <param name="alignedX"><paramref name="x"/> expressed in the common unit, when this method returns <see langword="true"/>.</param>
+        /// <param name="alignedY"><paramref name="y"/> expressed in the common unit, when this method returns <see langword="true"/>.</param>
+        /// <param name="equivalenceStep">
+        /// The step size of the least precise of the two operands, expressed in the common unit, or
+        /// <see langword="null"/> when it could not be determined. See <see cref="TryGetEquivalenceStep"/>.
+        /// </param>
+        /// <returns><see langword="true"/> when both quantities could be expressed in one common unit; otherwise <see langword="false"/>.</returns>
+        internal static bool TryAlignUnits(
+            this CqlQuantity x,
+            CqlQuantity y,
+            M.IMetricService service,
+            out CqlQuantity? alignedX,
+            out CqlQuantity? alignedY,
+            out decimal? equivalenceStep)
+        {
+            alignedX = null;
+            alignedY = null;
+            equivalenceStep = null;
+
+            if (!x.TryCanonicalize(service, out var canonicalX)
+                || !y.TryCanonicalize(service, out var canonicalY)
+                || canonicalX!.unit != canonicalY!.unit)
+            {
+                return false;
+            }
+
+            // The metric service does not know the CQL calendar duration aliases ('day', 'weeks'), only
+            // their UCUM equivalents, so an operand authored in one has to carry its UCUM spelling into
+            // the conversion or nothing below would resolve and every calendar pair would fall through
+            // to the canonical form.
+            var unitX = ToUcumUnit(x.unit!);
+            var unitY = ToUcumUnit(y.unit!);
+
+            // Two spellings of one unit ('mg/d' and 'mg.d-1') carry the same factor, so their values are
+            // already in one scale and converting either would only pad it out. Both operands keep the
+            // value they were authored with, which is also what keeps the result independent of the
+            // operand order: no operand is picked as the conversion target, so neither can be the one
+            // whose precision the other inherits.
+            if (TryGetUnitFactor(unitX, service, out var factorX)
+                && TryGetUnitFactor(unitY, service, out var factorY))
+            {
+                if (factorX == factorY)
+                {
+                    alignedX = x;
+                    alignedY = y;
+                    equivalenceStep = TryGetEquivalenceStep(x, factorX, y, factorY, factorX);
+                    return true;
+                }
+
+                var (commonUnit, factorCommon) = factorX < factorY ? (unitX, factorX) : (unitY, factorY);
+                if (TryExpressIn(x, unitX, commonUnit, service, out alignedX)
+                    && TryExpressIn(y, unitY, commonUnit, service, out alignedY))
+                {
+                    equivalenceStep = TryGetEquivalenceStep(x, factorX, y, factorY, factorCommon);
+                    return true;
+                }
+            }
+
+            // A unit that canonicalizes but that the service will not convert directly into leaves the canonical
+            // form as the only common ground. Its rescaling is what this method exists to avoid, so it is a fallback
+            // and never the first choice.
+            alignedX = canonicalX;
+            alignedY = canonicalY;
+            return true;
+        }
+
+        /// <summary>
+        /// Expresses a quantity in <paramref name="unit"/>, returning it unchanged when it already carries that unit,
+        /// and otherwise converting it from <paramref name="sourceUnit"/> and quantizing the result to the scale of
+        /// the CQL <c>Decimal</c> type.
+        /// </summary>
+        /// <remarks>
+        /// The metric service returns a result at its own working scale, which is both longer and, for a conversion
+        /// that divides by a non-decimal factor, inexact: 0.25 'mg/d' expressed in 'ug/d' comes back as
+        /// 249.99999999999999999999999999. Comparison truncates rather than rounds at the eighth decimal
+        /// ("a <i>scale</i> [...] of 8 [...] with a step size of 10^-8", CQL 1.5.3 Errata 2, Appendix B - CQL
+        /// Reference, 1.1 Decimal), which would drop that operand a full step below the 250 it is exactly equal to.
+        /// Rounding to the same scale first puts the converted value back on the step the comparison works in, and
+        /// stripping the trailing zeros leaves it in the shortest form of that value.
+        /// </remarks>
+        private static bool TryExpressIn(CqlQuantity quantity, string sourceUnit, string unit, M.IMetricService service, out CqlQuantity? expressed)
+        {
+            if (string.Equals(sourceUnit, unit, StringComparison.Ordinal))
+            {
+                expressed = quantity;
+                return true;
+            }
+
+            CqlQuantity? converted;
+            try
+            {
+                if (!new CqlQuantity(quantity.value, sourceUnit).TryConvert(unit, service, out converted))
+                {
+                    expressed = null;
+                    return false;
+                }
+            }
+            catch (OverflowException)
+            {
+                // Converting into the finer unit multiplies by the full factor ratio, which is unbounded
+                // (1e20 'm' in 'fm'), and a comparison may not abort the evaluation of the whole define
+                // over an operand it cannot rescale. Failing here sends the pair down the canonical
+                // fallback, which is the path for "these units cannot be converted between".
+                expressed = null;
+                return false;
+            }
+
+            expressed = converted!.value is { } value
+                ? new CqlQuantity(
+                    Comparers.CqlComparerSharedMethods.NormalizeDecimalScale(
+                        decimal.Round(value, Comparers.CqlComparerSharedMethods.CqlDecimalScale, MidpointRounding.AwayFromZero)),
+                    converted.unit)
+                : converted;
+            return true;
+        }
+
+        /// <summary>
+        /// Returns the step size of the least precise of the two operands, expressed in the common unit, or
+        /// <see langword="null"/> when it does not fit a <see cref="decimal"/>.
+        /// </summary>
+        /// <remarks>
+        /// Equivalence rounds to "the precision of the least precise operand" (CQL 1.5.3 Errata 2, Appendix B - CQL
+        /// Reference, 5.2 Equivalent), and across units that precision has to be compared as an absolute step size,
+        /// not as a count of decimal places: 1000.4 'mg' is written to one decimal place but resolves a tenth of a
+        /// milligram, which is finer than the single decimal place of 1.0 'g'. The scale of the converted value
+        /// cannot carry it either - it describes the magnitude the conversion produced rather than the precision the
+        /// author wrote - so the step is derived from the authored scale of each operand and its own unit's factor,
+        /// before any conversion.
+        /// </remarks>
+        private static decimal? TryGetEquivalenceStep(
+            CqlQuantity x,
+            decimal factorX,
+            CqlQuantity y,
+            decimal factorY,
+            decimal factorCommon)
+        {
+            if (x.value is not { } valueX || y.value is not { } valueY || factorCommon <= 0m)
+                return null;
+
+            try
+            {
+                var stepX = StepOf(valueX) * factorX / factorCommon;
+                var stepY = StepOf(valueY) * factorY / factorCommon;
+                var step = Math.Max(stepX, stepY);
+                return step > 0m ? step : null;
+            }
+            catch (OverflowException)
+            {
+                return null;
+            }
+            catch (DivideByZeroException)
+            {
+                return null;
+            }
+
+            // Bits[3] bits 16-23 hold the scale; 10^-scale is the smallest difference the value can express.
+            static decimal StepOf(decimal value) =>
+                new(1, 0, 0, false, (byte)(decimal.GetBits(value)[3] >> 16));
+        }
+
+        /// <summary>
+        /// Returns the UCUM spelling of a CQL calendar duration alias (<c>"day"</c> becomes <c>"d"</c>), or the unit
+        /// unchanged when it is not one.
+        /// </summary>
+        private static string ToUcumUnit(string unit) =>
+            CalendarDurationMapping.TryGetValue(unit, out var ucumUnit) ? ucumUnit : unit;
+
+        /// <summary>
+        /// Memoizes <see cref="TryGetUnitFactor"/> per metric service. A factor depends only on the unit string, the
+        /// set of unit strings a measure uses is small, and every cross-unit comparison needs two of them, so without
+        /// this each comparison pays two extra canonicalizations on top of its own.
+        /// </summary>
+        private static readonly ConditionalWeakTable<M.IMetricService, ConcurrentDictionary<string, decimal?>> UnitFactorCache = new();
+
+        /// <summary>
+        /// Returns the canonical value of a single <paramref name="unit"/> - its factor against the base unit,
+        /// and so the measure of how fine the unit is - or <see langword="false"/> when it cannot be canonicalized.
+        /// </summary>
+        private static bool TryGetUnitFactor(string unit, M.IMetricService service, out decimal factor)
+        {
+            var cache = UnitFactorCache.GetValue(service, static _ => new ConcurrentDictionary<string, decimal?>(StringComparer.Ordinal));
+            var cached = cache.GetOrAdd(
+                unit,
+                static (u, svc) => new CqlQuantity(1m, u).TryCanonicalize(svc, out var one) ? one!.value : null,
+                service);
+
+            factor = cached ?? default;
+            return cached is not null;
+        }
+
+        /// <summary>
         /// Returns <see langword="true"/> if both units are CQL calendar duration aliases that map to the same UCUM unit
         /// (e.g., <c>"day"</c> and <c>"days"</c> both map to <c>"d"</c>).
         /// </summary>

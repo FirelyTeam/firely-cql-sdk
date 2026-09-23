@@ -42,15 +42,15 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            // redo the comparison. TryCanonicalize succeeds for any valid UCUM unit, so the
-            // canonical units have to agree before the values may be compared: quantities of
-            // different base metrics are incommensurable, and comparing their canonical values
-            // would answer as if both were dimensionless (1 'cm' = 0.01 'g').
-            if (x.TryCanonicalize(MetricService, out var left1)
-                && y.TryCanonicalize(MetricService, out var right1)
-                && left1!.unit == right1!.unit)
+            // Redo the comparison with both quantities brought into one common unit. That unit is the
+            // finer of the two operand units rather than the canonical base unit: canonicalizing
+            // rescales the values, and for a clinical unit far from its base it pushes them below the
+            // step size of a CQL Decimal (0.25 'mg/d' canonicalizes to 0.0000000028935185 'g.s-1'),
+            // where the Decimal comparer's 8-digit quantization answers 0 for every pair. See
+            // UcumConversionExtensions.TryAlignUnits, which also establishes commensurability.
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1, out _))
             {
-                var valueComparison = ValueComparer.Compare(left1.value!, right1.value!, precision);
+                var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
             }
 
@@ -77,52 +77,75 @@ partial class CqlComparers
                 return valueComparison;
             }
 
-            // Spec §9.B: quantity equivalence considers unit conversion, so normalize the units
-            // using UCUM and redo the comparison. The canonical units must agree for the same
-            // reason they must in CompareValues, but where that method answers null, equivalence
-            // never may -- it "will always return true or false": units that cannot be
-            // canonicalized, or that canonicalize to different base metrics (incommensurable), are
-            // simply not equivalent (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
-            if (x.TryCanonicalize(MetricService, out var left1)
-                && y.TryCanonicalize(MetricService, out var right1)
-                && left1!.unit == right1!.unit)
+            // Spec §9.B: quantity equivalence considers unit conversion, so bring both quantities into
+            // one common unit and redo the comparison. Equivalence rounds to the precision of the
+            // least precise operand, which makes the choice of that unit matter even more than it does
+            // for CompareValues -- rounding two canonical values that both sit below 1e-8 makes every
+            // pair of clinical quantities equivalent. The units must be commensurable for the same
+            // reason they must in CompareValues, but where that method answers null, equivalence never
+            // may -- it "will always return true or false": units that cannot be canonicalized, or that
+            // canonicalize to different base metrics (incommensurable), are simply not equivalent
+            // (spec example: 3.5 'cm2' ~ 3.5 'cm' is false).
+            if (x.TryAlignUnits(y, MetricService, out var left1, out var right1, out var step))
             {
-                var valueComparison = ValueComparer.Equivalent(left1.value, right1.value, precision);
+                // Rounding to the least precise operand has to happen at that operand's step size in the
+                // common unit, which the aligned values no longer carry: their scale describes the
+                // magnitude the conversion produced, not the precision either operand was authored at.
+                // Only when the alignment cannot tell what that step is does this fall back to the
+                // Decimal comparer's scale-based rounding.
+                if (step is { } stepValue && left1!.value is { } leftValue && right1!.value is { } rightValue)
+                    return EquivalentAtStep(leftValue, rightValue, stepValue);
+
+                var valueComparison = ValueComparer.Equivalent(left1!.value, right1!.value, precision);
                 return valueComparison;
             }
 
             return false;
         }
 
-        protected override int GetHashCodeValue(CqlQuantity value)
+        /// <summary>
+        /// Compares two values in one unit after rounding both to <paramref name="step"/>, the step size of the
+        /// least precise of the two operands.
+        /// </summary>
+        private static bool EquivalentAtStep(decimal x, decimal y, decimal step)
         {
-            // Both equality (CompareValues) and equivalence (EquivalentValues) canonicalize units,
-            // so the hash has to be taken over the canonical form: 1 'cm' and 0.01 'm' are equal
-            // and must land in the same bucket for the HashSet-based operators (Distinct, Union,
-            // Except) to deduplicate them. Value normalization covers the same-unit case, where
-            // 1.0 'cm' and 1.00 'cm' are equal but have different decimal representations.
-            //
-            // Known hash-contract gaps (pre-existing, non-fixable without breaking the equality
-            // semantics themselves):
-            //   '1' unit wildcard: CompareValues treats unit '1' as matching any other unit, so
-            //     (v, '1') equals (v, 'cm'), but their hashes differ. This is inherently
-            //     non-transitive — (1,'1') equals both (1,'cm') and (1,'g') while those two are
-            //     unequal — so no consistent hash exists for the '1' case.
-            //   Rounding-based equivalence: EquivalentValues rounds to the least-precise operand,
-            //     which is also non-transitive (0.15 ~ 0.2, 0.2 ~ 0.24, 0.15 !~ 0.24).
-            //
-            // Skip canonicalization for null/wildcard units: these can never benefit from unit
-            // conversion (null has no UCUM meaning, '1' is already documented as unhashable above).
-            if (value.unit != null && value.unit != "1" && value.TryCanonicalize(MetricService, out var canonical))
-                return combine(canonical!.value, canonical.unit);
-
-            // A unit UCUM cannot canonicalize -- and a quantity whose value or unit is null, which
-            // this comparer does not treat as a null quantity -- must still hash without throwing.
-            return combine(value.value, value.unit);
-
-            static int combine(decimal? quantityValue, string? unit) =>
-                HashCode.Combine(quantityValue is { } v ? NormalizeDecimalScale(v) : (decimal?)null, unit);
+            try
+            {
+                return decimal.Round(x / step) == decimal.Round(y / step);
+            }
+            catch (OverflowException)
+            {
+                // A step far finer than the values it is applied to cannot change either of them, so an
+                // exact comparison is the same answer the rounding would have given.
+                return x == y;
+            }
         }
+
+        /// <summary>
+        /// Every quantity hashes to the same bucket, which is what the <see cref="IEqualityComparer{T}"/>
+        /// contract - equal values hash alike - reduces to for an equality relation that is not
+        /// transitive.
+        /// </summary>
+        /// <remarks>
+        /// Quantity equality here is not transitive, in three independent ways, and none of them can be
+        /// bucketed around:
+        /// <list type="bullet">
+        /// <item>the <c>'1'</c> unit matches any other unit, so <c>(1, '1')</c> equals both
+        /// <c>(1, 'cm')</c> and <c>(1, 'g')</c> while those two are not equal to each other;</item>
+        /// <item>values are compared truncated to the CQL Decimal scale in the finer of the two operand
+        /// units, so <c>1.000000004 'g'</c> equals both <c>1000.000004 'mg'</c> (compared in <c>'mg'</c>)
+        /// and <c>1.000000006 'g'</c> (compared in <c>'g'</c>), which are not equal to each other;</item>
+        /// <item>equivalence rounds to the least precise operand (<c>0.15 ~ 0.2</c>, <c>0.2 ~ 0.24</c>,
+        /// <c>0.15 !~ 0.24</c>).</item>
+        /// </list>
+        /// A value-derived hash therefore has to separate some pair that compares equal, which is what
+        /// lets <c>Distinct</c>/<c>Union</c>/<c>Except</c> keep two quantities the comparer calls equal.
+        /// A constant cannot: it buys the only answer that is correct for every pair, and costs the
+        /// bucket spread those operators rely on. Every insertion into their set becomes a linear scan,
+        /// making them quadratic in the number of quantities, and for operands in differing units each
+        /// step of that scan reaches the metric service.
+        /// </remarks>
+        protected override int GetHashCodeValue(CqlQuantity value) => 0;
 
     }
 }
