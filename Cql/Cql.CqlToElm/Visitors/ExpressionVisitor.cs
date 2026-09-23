@@ -187,14 +187,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => null
             };
 
-            if (terminology is CodeRef)
+            if (terminology is not null)
             {
-                codeComparator = "~";
-                codePath = "code";
-                terminology = new ToList
+                // Both are written into the ELM so that a consumer without the model information can
+                // process the retrieve: a list or a vocabulary (value set, code system) matches with
+                // `in`, a code or a concept with `~`, as in the reference translator.
+                codePath ??= ModelProvider.GetPrimaryCodePath(type);
+                var terminologyType = terminology.resultTypeSpecifier;
+                if (terminologyType is ListTypeSpecifier
+                    || terminologyType == SystemTypes.ValueSetType
+                    || terminologyType == SystemTypes.CodeSystemType)
+                    codeComparator ??= "in";
+                else
                 {
-                    operand = terminology
-                };
+                    codeComparator ??= "~";
+                    terminology = new ToList
+                    {
+                        operand = terminology
+                    };
+                }
             }
 
             var retrieve = new Retrieve
