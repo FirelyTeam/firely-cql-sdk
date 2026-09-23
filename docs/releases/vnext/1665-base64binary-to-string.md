@@ -12,4 +12,4 @@
 
   **CQL evaluation results change** wherever an expression turns a `base64Binary` into a `String`,
   which forces a MESO bump per [versioning.md](../../versioning.md). No public API change and no
-  `GeneratorToolVersion` change: the emitted C# is unchanged.
+  `GeneratorToolVersion` change: the emitted C# is unchanged. (#1665)
