@@ -282,11 +282,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     expression = expression,
                     alias = ctx.alias().identifier().Parse(),
                 };
-                if (expression.resultTypeSpecifier is null)
+                // A source that could not be resolved carries its error and no result type; it takes a
+                // list of Any so that translation continues far enough to report that error.
+                if (expression.resultTypeSpecifier is null
+                    && !expression.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
                     throw new InvalidOperationException($"Expression has a null result type specifier");
                 return source
                     .WithLocator(ctx.Locator())
-                    .WithResultType(expression.resultTypeSpecifier);
+                    .WithResultType(expression.resultTypeSpecifier ?? SystemTypes.AnyType.ToListType());
             }
 
             AggregateClause handleAggregate(ISymbolScope queryScope, cqlParser.AggregateClauseContext acCtx)
