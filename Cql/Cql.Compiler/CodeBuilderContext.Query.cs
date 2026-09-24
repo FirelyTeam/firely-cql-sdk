@@ -547,10 +547,18 @@ partial class CodeBuilderContext
             {
                 var (scopeExpression, scopeElement) = GetScope(op.scope!);
                 expectedType = TypeFor(op) ?? typeof(object);
-                var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
-                                     _typeResolver.GetProperty(scopeExpression.Type, op.path);
+                var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!);
                 if (pathMemberInfo == null)
+                {
+                    // A path that does not resolve as one element name may be qualified
+                    // ("medication.reference.value"). An element name that itself contains a dot
+                    // (a quoted CQL identifier) has been tried first, so it takes precedence.
+                    var segments = path.Split('.');
+                    if (segments.Length > 1)
+                        return BindQualifiedPath(scopeExpression, segments, expectedType, scopeElement, op);
+
                     return LateBoundProperty(scopeExpression, path!, expectedType, scopeElement, op);
+                }
 
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
                 string message = $"TupleBuilderCache failed to resolve type.";
@@ -567,22 +575,16 @@ partial class CodeBuilderContext
                 throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
 
             var source = TranslateArg(op.source);
-            var parts = path.Split('.');
-            if (parts.Length > 1)
+            if (_typeResolver.GetProperty(source.Type, path) == null)
             {
-                // support paths like birthDate.value on Patient
-                for (int i = 0; i < parts.Length; i++)
+                // support paths like birthDate.value on Patient; an element name that itself
+                // contains a dot (a quoted CQL identifier) has been tried first and takes precedence.
+                var segments = path.Split('.');
+                if (segments.Length > 1)
                 {
-                    var pathPart = parts[i];
-                    var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
-                    if (pathMemberInfo != null)
-                    {
-                        var propertyAccess = PropagateNull(source, pathMemberInfo);
-                        source = propertyAccess;
-                    }
+                    expectedType = TypeFor(op, throwIfNotFound: false) ?? typeof(object);
+                    return BindQualifiedPath(source, segments, expectedType, op.source, op);
                 }
-
-                return source;
             }
 
             // If we cannot determine the type from the ELM, let's try
@@ -649,6 +651,73 @@ partial class CodeBuilderContext
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Binds a qualified property path (<c>medication.reference.value</c>) one segment at a time.
+    /// Each segment whose element is known on the static type of the value before it is bound
+    /// directly; from the first segment that is not (typically an element of a choice type, whose
+    /// static type is the choice's erased base type), the remainder is late-bound one segment per
+    /// call, so no late-bound call ever carries a dotted name.
+    /// </summary>
+    /// <param name="source">The value the first segment is read from.</param>
+    /// <param name="segments">The path split on <c>.</c>; at least two segments.</param>
+    /// <param name="expectedType">The type the value of the last segment is converted to.</param>
+    /// <param name="sourceElement">The ELM element <paramref name="source"/> was built from, if any.</param>
+    /// <param name="element">The ELM property element being bound, for diagnostics.</param>
+    private CodeExpression BindQualifiedPath(
+        CodeExpression source,
+        string[] segments,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element)
+    {
+        var current = source;
+        var currentElement = sourceElement;
+        for (int i = 0; i < segments.Length; i++)
+        {
+            var segment = segments[i];
+            var isLast = i == segments.Length - 1;
+            var member = _typeResolver.GetProperty(current.Type, segment);
+            if (member == null && !_typeResolver.ShouldUseSourceObject(current.Type, segment))
+                return LateBoundPropertyChain(current, segments, i, expectedType, currentElement, element);
+
+            // PropertyHelper applies the source-object rule, the cast for an element declared on a
+            // derived type, and the conversion to the expected type.
+            var segmentType = isLast ? expectedType : member?.PropertyType ?? current.Type;
+            current = PropertyHelper(current, segment, segmentType, currentElement);
+            currentElement = null;
+        }
+
+        return current;
+    }
+
+    /// <summary>
+    /// Late-binds <paramref name="segments"/> from index <paramref name="start"/> onwards, one
+    /// <see cref="ICqlOperators.LateBoundProperty{T}"/> call per segment. Intermediate segments are
+    /// read as <see cref="object"/>; only the last is converted to <paramref name="expectedType"/>.
+    /// </summary>
+    private CodeExpression LateBoundPropertyChain(
+        CodeExpression source,
+        string[] segments,
+        int start,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element)
+    {
+        var current = source;
+        for (int i = start; i < segments.Length; i++)
+        {
+            var isLast = i == segments.Length - 1;
+            current = LateBoundProperty(
+                current,
+                segments[i],
+                isLast ? expectedType : typeof(object),
+                i == start ? sourceElement : null,
+                element);
+        }
+
+        return current;
     }
 
     /// <summary>

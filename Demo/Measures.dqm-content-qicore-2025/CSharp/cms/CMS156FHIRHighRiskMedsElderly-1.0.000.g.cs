@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -524,17 +524,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> dx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? dy_(Medication M) {
-                object ea_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object eb_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ec_ = context.Operators.Split((string)eb_, "/");
-                string ed_ = context.Operators.Last<string>(ec_);
-                bool? ee_ = context.Operators.Equal(ea_, ed_);
-                CodeableConcept ef_ = M?.Code;
-                CqlConcept eg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ef_);
-                CqlValueSet eh_ = this.Potentially_Harmful_Antihistamines_for_Older_Adults(context);
-                bool? ei_ = context.Operators.ConceptInValueSet(eg_, eh_);
-                bool? ej_ = context.Operators.And(ee_, ei_);
-                return ej_;
+                string ea_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType eb_ = MR?.Medication;
+                object ec_ = context.Operators.LateBoundProperty<object>(eb_, "reference");
+                object ed_ = context.Operators.LateBoundProperty<object>(ec_, "value");
+                IEnumerable<string> ee_ = context.Operators.Split((string)ed_, "/");
+                string ef_ = context.Operators.Last<string>(ee_);
+                bool? eg_ = context.Operators.Equal(ea_, ef_);
+                CodeableConcept eh_ = M?.Code;
+                CqlConcept ei_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, eh_);
+                CqlValueSet ej_ = this.Potentially_Harmful_Antihistamines_for_Older_Adults(context);
+                bool? ek_ = context.Operators.ConceptInValueSet(ei_, ej_);
+                bool? el_ = context.Operators.And(eg_, ek_);
+                return el_;
             }
 
             bool? dz_ = context.Operators.WhereAny<Medication>(dx_, dy_);
@@ -548,24 +552,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> g_ = this.moreThanOneOrder(context, f_);
 
         bool? h_(MedicationRequest MR) {
-            IEnumerable<Medication> ek_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> em_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? el_(Medication M) {
-                object en_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object eo_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ep_ = context.Operators.Split((string)eo_, "/");
-                string eq_ = context.Operators.Last<string>(ep_);
-                bool? er_ = context.Operators.Equal(en_, eq_);
-                CodeableConcept es_ = M?.Code;
-                CqlConcept et_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, es_);
-                CqlValueSet eu_ = this.Potentially_Harmful_Antiparkinsonian_Agents_for_Older_Adults(context);
-                bool? ev_ = context.Operators.ConceptInValueSet(et_, eu_);
-                bool? ew_ = context.Operators.And(er_, ev_);
-                return ew_;
+            bool? en_(Medication M) {
+                string ep_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType eq_ = MR?.Medication;
+                object er_ = context.Operators.LateBoundProperty<object>(eq_, "reference");
+                object es_ = context.Operators.LateBoundProperty<object>(er_, "value");
+                IEnumerable<string> et_ = context.Operators.Split((string)es_, "/");
+                string eu_ = context.Operators.Last<string>(et_);
+                bool? ev_ = context.Operators.Equal(ep_, eu_);
+                CodeableConcept ew_ = M?.Code;
+                CqlConcept ex_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ew_);
+                CqlValueSet ey_ = this.Potentially_Harmful_Antiparkinsonian_Agents_for_Older_Adults(context);
+                bool? ez_ = context.Operators.ConceptInValueSet(ex_, ey_);
+                bool? fa_ = context.Operators.And(ev_, ez_);
+                return fa_;
             }
 
-            bool? em_ = context.Operators.WhereAny<Medication>(ek_, el_);
-            return em_;
+            bool? eo_ = context.Operators.WhereAny<Medication>(em_, en_);
+            return eo_;
         }
 
         IEnumerable<MedicationRequest> i_ = context.Operators.Where<MedicationRequest>(a_, h_);
@@ -576,24 +584,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> n_ = context.Operators.Union<MedicationRequest>(g_, m_);
 
         bool? o_(MedicationRequest MR) {
-            IEnumerable<Medication> ex_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> fb_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? ey_(Medication M) {
-                object fa_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fb_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fc_ = context.Operators.Split((string)fb_, "/");
-                string fd_ = context.Operators.Last<string>(fc_);
-                bool? fe_ = context.Operators.Equal(fa_, fd_);
-                CodeableConcept ff_ = M?.Code;
-                CqlConcept fg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ff_);
-                CqlValueSet fh_ = this.Potentially_Harmful_Gastrointestinal_Antispasmodics_for_Older_Adults(context);
-                bool? fi_ = context.Operators.ConceptInValueSet(fg_, fh_);
-                bool? fj_ = context.Operators.And(fe_, fi_);
-                return fj_;
+            bool? fc_(Medication M) {
+                string fe_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType ff_ = MR?.Medication;
+                object fg_ = context.Operators.LateBoundProperty<object>(ff_, "reference");
+                object fh_ = context.Operators.LateBoundProperty<object>(fg_, "value");
+                IEnumerable<string> fi_ = context.Operators.Split((string)fh_, "/");
+                string fj_ = context.Operators.Last<string>(fi_);
+                bool? fk_ = context.Operators.Equal(fe_, fj_);
+                CodeableConcept fl_ = M?.Code;
+                CqlConcept fm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fl_);
+                CqlValueSet fn_ = this.Potentially_Harmful_Gastrointestinal_Antispasmodics_for_Older_Adults(context);
+                bool? fo_ = context.Operators.ConceptInValueSet(fm_, fn_);
+                bool? fp_ = context.Operators.And(fk_, fo_);
+                return fp_;
             }
 
-            bool? ez_ = context.Operators.WhereAny<Medication>(ex_, ey_);
-            return ez_;
+            bool? fd_ = context.Operators.WhereAny<Medication>(fb_, fc_);
+            return fd_;
         }
 
         IEnumerable<MedicationRequest> p_ = context.Operators.Where<MedicationRequest>(a_, o_);
@@ -603,24 +615,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> t_ = this.moreThanOneOrder(context, s_);
 
         bool? u_(MedicationRequest MR) {
-            IEnumerable<Medication> fk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> fq_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fl_(Medication M) {
-                object fn_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object fo_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> fp_ = context.Operators.Split((string)fo_, "/");
-                string fq_ = context.Operators.Last<string>(fp_);
-                bool? fr_ = context.Operators.Equal(fn_, fq_);
-                CodeableConcept fs_ = M?.Code;
-                CqlConcept ft_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, fs_);
-                CqlValueSet fu_ = this.Dipyridamole_Medications(context);
-                bool? fv_ = context.Operators.ConceptInValueSet(ft_, fu_);
-                bool? fw_ = context.Operators.And(fr_, fv_);
-                return fw_;
+            bool? fr_(Medication M) {
+                string ft_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType fu_ = MR?.Medication;
+                object fv_ = context.Operators.LateBoundProperty<object>(fu_, "reference");
+                object fw_ = context.Operators.LateBoundProperty<object>(fv_, "value");
+                IEnumerable<string> fx_ = context.Operators.Split((string)fw_, "/");
+                string fy_ = context.Operators.Last<string>(fx_);
+                bool? fz_ = context.Operators.Equal(ft_, fy_);
+                CodeableConcept ga_ = M?.Code;
+                CqlConcept gb_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ga_);
+                CqlValueSet gc_ = this.Dipyridamole_Medications(context);
+                bool? gd_ = context.Operators.ConceptInValueSet(gb_, gc_);
+                bool? ge_ = context.Operators.And(fz_, gd_);
+                return ge_;
             }
 
-            bool? fm_ = context.Operators.WhereAny<Medication>(fk_, fl_);
-            return fm_;
+            bool? fs_ = context.Operators.WhereAny<Medication>(fq_, fr_);
+            return fs_;
         }
 
         IEnumerable<MedicationRequest> v_ = context.Operators.Where<MedicationRequest>(a_, u_);
@@ -632,24 +648,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> ab_ = context.Operators.Union<MedicationRequest>(n_, aa_);
 
         bool? ac_(MedicationRequest MR) {
-            IEnumerable<Medication> fx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gf_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? fy_(Medication M) {
-                object ga_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object gb_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> gc_ = context.Operators.Split((string)gb_, "/");
-                string gd_ = context.Operators.Last<string>(gc_);
-                bool? ge_ = context.Operators.Equal(ga_, gd_);
-                CodeableConcept gf_ = M?.Code;
-                CqlConcept gg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gf_);
-                CqlValueSet gh_ = this.Guanfacine_Medications(context);
-                bool? gi_ = context.Operators.ConceptInValueSet(gg_, gh_);
-                bool? gj_ = context.Operators.And(ge_, gi_);
-                return gj_;
+            bool? gg_(Medication M) {
+                string gi_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType gj_ = MR?.Medication;
+                object gk_ = context.Operators.LateBoundProperty<object>(gj_, "reference");
+                object gl_ = context.Operators.LateBoundProperty<object>(gk_, "value");
+                IEnumerable<string> gm_ = context.Operators.Split((string)gl_, "/");
+                string gn_ = context.Operators.Last<string>(gm_);
+                bool? go_ = context.Operators.Equal(gi_, gn_);
+                CodeableConcept gp_ = M?.Code;
+                CqlConcept gq_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gp_);
+                CqlValueSet gr_ = this.Guanfacine_Medications(context);
+                bool? gs_ = context.Operators.ConceptInValueSet(gq_, gr_);
+                bool? gt_ = context.Operators.And(go_, gs_);
+                return gt_;
             }
 
-            bool? fz_ = context.Operators.WhereAny<Medication>(fx_, fy_);
-            return fz_;
+            bool? gh_ = context.Operators.WhereAny<Medication>(gf_, gg_);
+            return gh_;
         }
 
         IEnumerable<MedicationRequest> ad_ = context.Operators.Where<MedicationRequest>(a_, ac_);
@@ -659,24 +679,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> ah_ = this.moreThanOneOrder(context, ag_);
 
         bool? ai_(MedicationRequest MR) {
-            IEnumerable<Medication> gk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> gu_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? gl_(Medication M) {
-                object gn_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object go_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> gp_ = context.Operators.Split((string)go_, "/");
-                string gq_ = context.Operators.Last<string>(gp_);
-                bool? gr_ = context.Operators.Equal(gn_, gq_);
-                CodeableConcept gs_ = M?.Code;
-                CqlConcept gt_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, gs_);
-                CqlValueSet gu_ = this.Nifedipine_Medications(context);
-                bool? gv_ = context.Operators.ConceptInValueSet(gt_, gu_);
-                bool? gw_ = context.Operators.And(gr_, gv_);
-                return gw_;
+            bool? gv_(Medication M) {
+                string gx_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType gy_ = MR?.Medication;
+                object gz_ = context.Operators.LateBoundProperty<object>(gy_, "reference");
+                object ha_ = context.Operators.LateBoundProperty<object>(gz_, "value");
+                IEnumerable<string> hb_ = context.Operators.Split((string)ha_, "/");
+                string hc_ = context.Operators.Last<string>(hb_);
+                bool? hd_ = context.Operators.Equal(gx_, hc_);
+                CodeableConcept he_ = M?.Code;
+                CqlConcept hf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, he_);
+                CqlValueSet hg_ = this.Nifedipine_Medications(context);
+                bool? hh_ = context.Operators.ConceptInValueSet(hf_, hg_);
+                bool? hi_ = context.Operators.And(hd_, hh_);
+                return hi_;
             }
 
-            bool? gm_ = context.Operators.WhereAny<Medication>(gk_, gl_);
-            return gm_;
+            bool? gw_ = context.Operators.WhereAny<Medication>(gu_, gv_);
+            return gw_;
         }
 
         IEnumerable<MedicationRequest> aj_ = context.Operators.Where<MedicationRequest>(a_, ai_);
@@ -688,24 +712,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> ap_ = context.Operators.Union<MedicationRequest>(ab_, ao_);
 
         bool? aq_(MedicationRequest MR) {
-            IEnumerable<Medication> gx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> hj_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? gy_(Medication M) {
-                object ha_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object hb_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> hc_ = context.Operators.Split((string)hb_, "/");
-                string hd_ = context.Operators.Last<string>(hc_);
-                bool? he_ = context.Operators.Equal(ha_, hd_);
-                CodeableConcept hf_ = M?.Code;
-                CqlConcept hg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hf_);
-                CqlValueSet hh_ = this.Potentially_Harmful_Antidepressants_for_Older_Adults(context);
-                bool? hi_ = context.Operators.ConceptInValueSet(hg_, hh_);
-                bool? hj_ = context.Operators.And(he_, hi_);
-                return hj_;
+            bool? hk_(Medication M) {
+                string hm_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType hn_ = MR?.Medication;
+                object ho_ = context.Operators.LateBoundProperty<object>(hn_, "reference");
+                object hp_ = context.Operators.LateBoundProperty<object>(ho_, "value");
+                IEnumerable<string> hq_ = context.Operators.Split((string)hp_, "/");
+                string hr_ = context.Operators.Last<string>(hq_);
+                bool? hs_ = context.Operators.Equal(hm_, hr_);
+                CodeableConcept ht_ = M?.Code;
+                CqlConcept hu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ht_);
+                CqlValueSet hv_ = this.Potentially_Harmful_Antidepressants_for_Older_Adults(context);
+                bool? hw_ = context.Operators.ConceptInValueSet(hu_, hv_);
+                bool? hx_ = context.Operators.And(hs_, hw_);
+                return hx_;
             }
 
-            bool? gz_ = context.Operators.WhereAny<Medication>(gx_, gy_);
-            return gz_;
+            bool? hl_ = context.Operators.WhereAny<Medication>(hj_, hk_);
+            return hl_;
         }
 
         IEnumerable<MedicationRequest> ar_ = context.Operators.Where<MedicationRequest>(a_, aq_);
@@ -715,24 +743,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> av_ = this.moreThanOneOrder(context, au_);
 
         bool? aw_(MedicationRequest MR) {
-            IEnumerable<Medication> hk_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> hy_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? hl_(Medication M) {
-                object hn_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ho_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> hp_ = context.Operators.Split((string)ho_, "/");
-                string hq_ = context.Operators.Last<string>(hp_);
-                bool? hr_ = context.Operators.Equal(hn_, hq_);
-                CodeableConcept hs_ = M?.Code;
-                CqlConcept ht_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, hs_);
-                CqlValueSet hu_ = this.Potentially_Harmful_Barbiturates_for_Older_Adults(context);
-                bool? hv_ = context.Operators.ConceptInValueSet(ht_, hu_);
-                bool? hw_ = context.Operators.And(hr_, hv_);
-                return hw_;
+            bool? hz_(Medication M) {
+                string ib_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType ic_ = MR?.Medication;
+                object id_ = context.Operators.LateBoundProperty<object>(ic_, "reference");
+                object ie_ = context.Operators.LateBoundProperty<object>(id_, "value");
+                IEnumerable<string> if_ = context.Operators.Split((string)ie_, "/");
+                string ig_ = context.Operators.Last<string>(if_);
+                bool? ih_ = context.Operators.Equal(ib_, ig_);
+                CodeableConcept ii_ = M?.Code;
+                CqlConcept ij_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ii_);
+                CqlValueSet ik_ = this.Potentially_Harmful_Barbiturates_for_Older_Adults(context);
+                bool? il_ = context.Operators.ConceptInValueSet(ij_, ik_);
+                bool? im_ = context.Operators.And(ih_, il_);
+                return im_;
             }
 
-            bool? hm_ = context.Operators.WhereAny<Medication>(hk_, hl_);
-            return hm_;
+            bool? ia_ = context.Operators.WhereAny<Medication>(hy_, hz_);
+            return ia_;
         }
 
         IEnumerable<MedicationRequest> ax_ = context.Operators.Where<MedicationRequest>(a_, aw_);
@@ -744,25 +776,29 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(ap_, bc_);
 
         bool? be_(MedicationRequest MR) {
-            IEnumerable<Medication> hx_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> in_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? hy_(Medication M) {
-                object ia_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ib_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ic_ = context.Operators.Split((string)ib_, "/");
-                string id_ = context.Operators.Last<string>(ic_);
-                bool? ie_ = context.Operators.Equal(ia_, id_);
-                CodeableConcept if_ = M?.Code;
-                CqlConcept ig_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, if_);
-                CqlCode ih_ = this.ergoloid_mesylates__USP_1_MG_Oral_Tablet(context);
-                CqlConcept ii_ = context.Operators.ConvertCodeToConcept(ih_);
-                bool? ij_ = context.Operators.Equivalent(ig_, ii_);
-                bool? ik_ = context.Operators.And(ie_, ij_);
-                return ik_;
+            bool? io_(Medication M) {
+                string iq_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType ir_ = MR?.Medication;
+                object is_ = context.Operators.LateBoundProperty<object>(ir_, "reference");
+                object it_ = context.Operators.LateBoundProperty<object>(is_, "value");
+                IEnumerable<string> iu_ = context.Operators.Split((string)it_, "/");
+                string iv_ = context.Operators.Last<string>(iu_);
+                bool? iw_ = context.Operators.Equal(iq_, iv_);
+                CodeableConcept ix_ = M?.Code;
+                CqlConcept iy_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ix_);
+                CqlCode iz_ = this.ergoloid_mesylates__USP_1_MG_Oral_Tablet(context);
+                CqlConcept ja_ = context.Operators.ConvertCodeToConcept(iz_);
+                bool? jb_ = context.Operators.Equivalent(iy_, ja_);
+                bool? jc_ = context.Operators.And(iw_, jb_);
+                return jc_;
             }
 
-            bool? hz_ = context.Operators.WhereAny<Medication>(hx_, hy_);
-            return hz_;
+            bool? ip_ = context.Operators.WhereAny<Medication>(in_, io_);
+            return ip_;
         }
 
         IEnumerable<MedicationRequest> bf_ = context.Operators.Where<MedicationRequest>(a_, be_);
@@ -773,24 +809,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> bk_ = this.moreThanOneOrder(context, bj_);
 
         bool? bl_(MedicationRequest MR) {
-            IEnumerable<Medication> il_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> jd_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? im_(Medication M) {
-                object io_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ip_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> iq_ = context.Operators.Split((string)ip_, "/");
-                string ir_ = context.Operators.Last<string>(iq_);
-                bool? is_ = context.Operators.Equal(io_, ir_);
-                CodeableConcept it_ = M?.Code;
-                CqlConcept iu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, it_);
-                CqlValueSet iv_ = this.Meprobamate_Medications(context);
-                bool? iw_ = context.Operators.ConceptInValueSet(iu_, iv_);
-                bool? ix_ = context.Operators.And(is_, iw_);
-                return ix_;
+            bool? je_(Medication M) {
+                string jg_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType jh_ = MR?.Medication;
+                object ji_ = context.Operators.LateBoundProperty<object>(jh_, "reference");
+                object jj_ = context.Operators.LateBoundProperty<object>(ji_, "value");
+                IEnumerable<string> jk_ = context.Operators.Split((string)jj_, "/");
+                string jl_ = context.Operators.Last<string>(jk_);
+                bool? jm_ = context.Operators.Equal(jg_, jl_);
+                CodeableConcept jn_ = M?.Code;
+                CqlConcept jo_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jn_);
+                CqlValueSet jp_ = this.Meprobamate_Medications(context);
+                bool? jq_ = context.Operators.ConceptInValueSet(jo_, jp_);
+                bool? jr_ = context.Operators.And(jm_, jq_);
+                return jr_;
             }
 
-            bool? in_ = context.Operators.WhereAny<Medication>(il_, im_);
-            return in_;
+            bool? jf_ = context.Operators.WhereAny<Medication>(jd_, je_);
+            return jf_;
         }
 
         IEnumerable<MedicationRequest> bm_ = context.Operators.Where<MedicationRequest>(a_, bl_);
@@ -802,24 +842,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> bs_ = context.Operators.Union<MedicationRequest>(bd_, br_);
 
         bool? bt_(MedicationRequest MR) {
-            IEnumerable<Medication> iy_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> js_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? iz_(Medication M) {
-                object jb_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object jc_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> jd_ = context.Operators.Split((string)jc_, "/");
-                string je_ = context.Operators.Last<string>(jd_);
-                bool? jf_ = context.Operators.Equal(jb_, je_);
-                CodeableConcept jg_ = M?.Code;
-                CqlConcept jh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jg_);
-                CqlValueSet ji_ = this.Potentially_Harmful_Estrogens_for_Older_Adults(context);
-                bool? jj_ = context.Operators.ConceptInValueSet(jh_, ji_);
-                bool? jk_ = context.Operators.And(jf_, jj_);
-                return jk_;
+            bool? jt_(Medication M) {
+                string jv_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType jw_ = MR?.Medication;
+                object jx_ = context.Operators.LateBoundProperty<object>(jw_, "reference");
+                object jy_ = context.Operators.LateBoundProperty<object>(jx_, "value");
+                IEnumerable<string> jz_ = context.Operators.Split((string)jy_, "/");
+                string ka_ = context.Operators.Last<string>(jz_);
+                bool? kb_ = context.Operators.Equal(jv_, ka_);
+                CodeableConcept kc_ = M?.Code;
+                CqlConcept kd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kc_);
+                CqlValueSet ke_ = this.Potentially_Harmful_Estrogens_for_Older_Adults(context);
+                bool? kf_ = context.Operators.ConceptInValueSet(kd_, ke_);
+                bool? kg_ = context.Operators.And(kb_, kf_);
+                return kg_;
             }
 
-            bool? ja_ = context.Operators.WhereAny<Medication>(iy_, iz_);
-            return ja_;
+            bool? ju_ = context.Operators.WhereAny<Medication>(js_, jt_);
+            return ju_;
         }
 
         IEnumerable<MedicationRequest> bu_ = context.Operators.Where<MedicationRequest>(a_, bt_);
@@ -829,24 +873,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> by_ = this.moreThanOneOrder(context, bx_);
 
         bool? bz_(MedicationRequest MR) {
-            IEnumerable<Medication> jl_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> kh_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? jm_(Medication M) {
-                object jo_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object jp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> jq_ = context.Operators.Split((string)jp_, "/");
-                string jr_ = context.Operators.Last<string>(jq_);
-                bool? js_ = context.Operators.Equal(jo_, jr_);
-                CodeableConcept jt_ = M?.Code;
-                CqlConcept ju_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, jt_);
-                CqlValueSet jv_ = this.Potentially_Harmful_Sulfonylureas_for_Older_Adults(context);
-                bool? jw_ = context.Operators.ConceptInValueSet(ju_, jv_);
-                bool? jx_ = context.Operators.And(js_, jw_);
-                return jx_;
+            bool? ki_(Medication M) {
+                string kk_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType kl_ = MR?.Medication;
+                object km_ = context.Operators.LateBoundProperty<object>(kl_, "reference");
+                object kn_ = context.Operators.LateBoundProperty<object>(km_, "value");
+                IEnumerable<string> ko_ = context.Operators.Split((string)kn_, "/");
+                string kp_ = context.Operators.Last<string>(ko_);
+                bool? kq_ = context.Operators.Equal(kk_, kp_);
+                CodeableConcept kr_ = M?.Code;
+                CqlConcept ks_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kr_);
+                CqlValueSet kt_ = this.Potentially_Harmful_Sulfonylureas_for_Older_Adults(context);
+                bool? ku_ = context.Operators.ConceptInValueSet(ks_, kt_);
+                bool? kv_ = context.Operators.And(kq_, ku_);
+                return kv_;
             }
 
-            bool? jn_ = context.Operators.WhereAny<Medication>(jl_, jm_);
-            return jn_;
+            bool? kj_ = context.Operators.WhereAny<Medication>(kh_, ki_);
+            return kj_;
         }
 
         IEnumerable<MedicationRequest> ca_ = context.Operators.Where<MedicationRequest>(a_, bz_);
@@ -858,24 +906,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> cg_ = context.Operators.Union<MedicationRequest>(bs_, cf_);
 
         bool? ch_(MedicationRequest MR) {
-            IEnumerable<Medication> jy_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> kw_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? jz_(Medication M) {
-                object kb_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object kc_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> kd_ = context.Operators.Split((string)kc_, "/");
-                string ke_ = context.Operators.Last<string>(kd_);
-                bool? kf_ = context.Operators.Equal(kb_, ke_);
-                CodeableConcept kg_ = M?.Code;
-                CqlConcept kh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kg_);
-                CqlValueSet ki_ = this.Desiccated_Thyroid_Medications(context);
-                bool? kj_ = context.Operators.ConceptInValueSet(kh_, ki_);
-                bool? kk_ = context.Operators.And(kf_, kj_);
-                return kk_;
+            bool? kx_(Medication M) {
+                string kz_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType la_ = MR?.Medication;
+                object lb_ = context.Operators.LateBoundProperty<object>(la_, "reference");
+                object lc_ = context.Operators.LateBoundProperty<object>(lb_, "value");
+                IEnumerable<string> ld_ = context.Operators.Split((string)lc_, "/");
+                string le_ = context.Operators.Last<string>(ld_);
+                bool? lf_ = context.Operators.Equal(kz_, le_);
+                CodeableConcept lg_ = M?.Code;
+                CqlConcept lh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lg_);
+                CqlValueSet li_ = this.Desiccated_Thyroid_Medications(context);
+                bool? lj_ = context.Operators.ConceptInValueSet(lh_, li_);
+                bool? lk_ = context.Operators.And(lf_, lj_);
+                return lk_;
             }
 
-            bool? ka_ = context.Operators.WhereAny<Medication>(jy_, jz_);
-            return ka_;
+            bool? ky_ = context.Operators.WhereAny<Medication>(kw_, kx_);
+            return ky_;
         }
 
         IEnumerable<MedicationRequest> ci_ = context.Operators.Where<MedicationRequest>(a_, ch_);
@@ -885,24 +937,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> cm_ = this.moreThanOneOrder(context, cl_);
 
         bool? cn_(MedicationRequest MR) {
-            IEnumerable<Medication> kl_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ll_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? km_(Medication M) {
-                object ko_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object kp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> kq_ = context.Operators.Split((string)kp_, "/");
-                string kr_ = context.Operators.Last<string>(kq_);
-                bool? ks_ = context.Operators.Equal(ko_, kr_);
-                CodeableConcept kt_ = M?.Code;
-                CqlConcept ku_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, kt_);
-                CqlValueSet kv_ = this.Potentially_Harmful_Nonbenzodiazepine_Hypnotics_for_Older_Adults(context);
-                bool? kw_ = context.Operators.ConceptInValueSet(ku_, kv_);
-                bool? kx_ = context.Operators.And(ks_, kw_);
-                return kx_;
+            bool? lm_(Medication M) {
+                string lo_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType lp_ = MR?.Medication;
+                object lq_ = context.Operators.LateBoundProperty<object>(lp_, "reference");
+                object lr_ = context.Operators.LateBoundProperty<object>(lq_, "value");
+                IEnumerable<string> ls_ = context.Operators.Split((string)lr_, "/");
+                string lt_ = context.Operators.Last<string>(ls_);
+                bool? lu_ = context.Operators.Equal(lo_, lt_);
+                CodeableConcept lv_ = M?.Code;
+                CqlConcept lw_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lv_);
+                CqlValueSet lx_ = this.Potentially_Harmful_Nonbenzodiazepine_Hypnotics_for_Older_Adults(context);
+                bool? ly_ = context.Operators.ConceptInValueSet(lw_, lx_);
+                bool? lz_ = context.Operators.And(lu_, ly_);
+                return lz_;
             }
 
-            bool? kn_ = context.Operators.WhereAny<Medication>(kl_, km_);
-            return kn_;
+            bool? ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
+            return ln_;
         }
 
         IEnumerable<MedicationRequest> co_ = context.Operators.Where<MedicationRequest>(a_, cn_);
@@ -914,24 +970,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> cu_ = context.Operators.Union<MedicationRequest>(cg_, ct_);
 
         bool? cv_(MedicationRequest MR) {
-            IEnumerable<Medication> ky_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ma_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? kz_(Medication M) {
-                object lb_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object lc_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ld_ = context.Operators.Split((string)lc_, "/");
-                string le_ = context.Operators.Last<string>(ld_);
-                bool? lf_ = context.Operators.Equal(lb_, le_);
-                CodeableConcept lg_ = M?.Code;
-                CqlConcept lh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lg_);
-                CqlValueSet li_ = this.Potentially_Harmful_Skeletal_Muscle_Relaxants_for_Older_Adults(context);
-                bool? lj_ = context.Operators.ConceptInValueSet(lh_, li_);
-                bool? lk_ = context.Operators.And(lf_, lj_);
-                return lk_;
+            bool? mb_(Medication M) {
+                string md_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType me_ = MR?.Medication;
+                object mf_ = context.Operators.LateBoundProperty<object>(me_, "reference");
+                object mg_ = context.Operators.LateBoundProperty<object>(mf_, "value");
+                IEnumerable<string> mh_ = context.Operators.Split((string)mg_, "/");
+                string mi_ = context.Operators.Last<string>(mh_);
+                bool? mj_ = context.Operators.Equal(md_, mi_);
+                CodeableConcept mk_ = M?.Code;
+                CqlConcept ml_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mk_);
+                CqlValueSet mm_ = this.Potentially_Harmful_Skeletal_Muscle_Relaxants_for_Older_Adults(context);
+                bool? mn_ = context.Operators.ConceptInValueSet(ml_, mm_);
+                bool? mo_ = context.Operators.And(mj_, mn_);
+                return mo_;
             }
 
-            bool? la_ = context.Operators.WhereAny<Medication>(ky_, kz_);
-            return la_;
+            bool? mc_ = context.Operators.WhereAny<Medication>(ma_, mb_);
+            return mc_;
         }
 
         IEnumerable<MedicationRequest> cw_ = context.Operators.Where<MedicationRequest>(a_, cv_);
@@ -941,24 +1001,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> da_ = this.moreThanOneOrder(context, cz_);
 
         bool? db_(MedicationRequest MR) {
-            IEnumerable<Medication> ll_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> mp_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? lm_(Medication M) {
-                object lo_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object lp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> lq_ = context.Operators.Split((string)lp_, "/");
-                string lr_ = context.Operators.Last<string>(lq_);
-                bool? ls_ = context.Operators.Equal(lo_, lr_);
-                CodeableConcept lt_ = M?.Code;
-                CqlConcept lu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, lt_);
-                CqlValueSet lv_ = this.Potentially_Harmful_Pain_Medications_for_Older_Adults(context);
-                bool? lw_ = context.Operators.ConceptInValueSet(lu_, lv_);
-                bool? lx_ = context.Operators.And(ls_, lw_);
-                return lx_;
+            bool? mq_(Medication M) {
+                string ms_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType mt_ = MR?.Medication;
+                object mu_ = context.Operators.LateBoundProperty<object>(mt_, "reference");
+                object mv_ = context.Operators.LateBoundProperty<object>(mu_, "value");
+                IEnumerable<string> mw_ = context.Operators.Split((string)mv_, "/");
+                string mx_ = context.Operators.Last<string>(mw_);
+                bool? my_ = context.Operators.Equal(ms_, mx_);
+                CodeableConcept mz_ = M?.Code;
+                CqlConcept na_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mz_);
+                CqlValueSet nb_ = this.Potentially_Harmful_Pain_Medications_for_Older_Adults(context);
+                bool? nc_ = context.Operators.ConceptInValueSet(na_, nb_);
+                bool? nd_ = context.Operators.And(my_, nc_);
+                return nd_;
             }
 
-            bool? ln_ = context.Operators.WhereAny<Medication>(ll_, lm_);
-            return ln_;
+            bool? mr_ = context.Operators.WhereAny<Medication>(mp_, mq_);
+            return mr_;
         }
 
         IEnumerable<MedicationRequest> dc_ = context.Operators.Where<MedicationRequest>(a_, db_);
@@ -970,24 +1034,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> di_ = context.Operators.Union<MedicationRequest>(cu_, dh_);
 
         bool? dj_(MedicationRequest MR) {
-            IEnumerable<Medication> ly_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> ne_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? lz_(Medication M) {
-                object mb_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object mc_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> md_ = context.Operators.Split((string)mc_, "/");
-                string me_ = context.Operators.Last<string>(md_);
-                bool? mf_ = context.Operators.Equal(mb_, me_);
-                CodeableConcept mg_ = M?.Code;
-                CqlConcept mh_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mg_);
-                CqlValueSet mi_ = this.Megestrol_Medications(context);
-                bool? mj_ = context.Operators.ConceptInValueSet(mh_, mi_);
-                bool? mk_ = context.Operators.And(mf_, mj_);
-                return mk_;
+            bool? nf_(Medication M) {
+                string nh_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType ni_ = MR?.Medication;
+                object nj_ = context.Operators.LateBoundProperty<object>(ni_, "reference");
+                object nk_ = context.Operators.LateBoundProperty<object>(nj_, "value");
+                IEnumerable<string> nl_ = context.Operators.Split((string)nk_, "/");
+                string nm_ = context.Operators.Last<string>(nl_);
+                bool? nn_ = context.Operators.Equal(nh_, nm_);
+                CodeableConcept no_ = M?.Code;
+                CqlConcept np_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, no_);
+                CqlValueSet nq_ = this.Megestrol_Medications(context);
+                bool? nr_ = context.Operators.ConceptInValueSet(np_, nq_);
+                bool? ns_ = context.Operators.And(nn_, nr_);
+                return ns_;
             }
 
-            bool? ma_ = context.Operators.WhereAny<Medication>(ly_, lz_);
-            return ma_;
+            bool? ng_ = context.Operators.WhereAny<Medication>(ne_, nf_);
+            return ng_;
         }
 
         IEnumerable<MedicationRequest> dk_ = context.Operators.Where<MedicationRequest>(a_, dj_);
@@ -997,24 +1065,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> do_ = this.moreThanOneOrder(context, dn_);
 
         bool? dp_(MedicationRequest MR) {
-            IEnumerable<Medication> ml_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> nt_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? mm_(Medication M) {
-                object mo_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object mp_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> mq_ = context.Operators.Split((string)mp_, "/");
-                string mr_ = context.Operators.Last<string>(mq_);
-                bool? ms_ = context.Operators.Equal(mo_, mr_);
-                CodeableConcept mt_ = M?.Code;
-                CqlConcept mu_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, mt_);
-                CqlValueSet mv_ = this.Meperidine_Medications(context);
-                bool? mw_ = context.Operators.ConceptInValueSet(mu_, mv_);
-                bool? mx_ = context.Operators.And(ms_, mw_);
-                return mx_;
+            bool? nu_(Medication M) {
+                string nw_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType nx_ = MR?.Medication;
+                object ny_ = context.Operators.LateBoundProperty<object>(nx_, "reference");
+                object nz_ = context.Operators.LateBoundProperty<object>(ny_, "value");
+                IEnumerable<string> oa_ = context.Operators.Split((string)nz_, "/");
+                string ob_ = context.Operators.Last<string>(oa_);
+                bool? oc_ = context.Operators.Equal(nw_, ob_);
+                CodeableConcept od_ = M?.Code;
+                CqlConcept oe_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, od_);
+                CqlValueSet of_ = this.Meperidine_Medications(context);
+                bool? og_ = context.Operators.ConceptInValueSet(oe_, of_);
+                bool? oh_ = context.Operators.And(oc_, og_);
+                return oh_;
             }
 
-            bool? mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
-            return mn_;
+            bool? nv_ = context.Operators.WhereAny<Medication>(nt_, nu_);
+            return nv_;
         }
 
         IEnumerable<MedicationRequest> dq_ = context.Operators.Where<MedicationRequest>(a_, dp_);
@@ -1112,17 +1184,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> m_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? n_(Medication M) {
-                object p_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object q_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> r_ = context.Operators.Split((string)q_, "/");
-                string s_ = context.Operators.Last<string>(r_);
-                bool? t_ = context.Operators.Equal(p_, s_);
-                CodeableConcept u_ = M?.Code;
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
-                CqlValueSet w_ = this.Potentially_Harmful_Antiinfectives_for_Older_Adults(context);
-                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
-                bool? y_ = context.Operators.And(t_, x_);
-                return y_;
+                string p_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType q_ = MR?.Medication;
+                object r_ = context.Operators.LateBoundProperty<object>(q_, "reference");
+                object s_ = context.Operators.LateBoundProperty<object>(r_, "value");
+                IEnumerable<string> t_ = context.Operators.Split((string)s_, "/");
+                string u_ = context.Operators.Last<string>(t_);
+                bool? v_ = context.Operators.Equal(p_, u_);
+                CodeableConcept w_ = M?.Code;
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                CqlValueSet y_ = this.Potentially_Harmful_Antiinfectives_for_Older_Adults(context);
+                bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
+                bool? aa_ = context.Operators.And(v_, z_);
+                return aa_;
             }
 
             bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
@@ -1136,8 +1212,8 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> g_ = this.moreThanOneOrder(context, f_);
 
         decimal? h_(MedicationRequest AntiInfectives) {
-            decimal? z_ = this.medicationRequestPeriodInDays(context, AntiInfectives);
-            return z_;
+            decimal? ab_ = this.medicationRequestPeriodInDays(context, AntiInfectives);
+            return ab_;
         }
 
         IEnumerable<decimal?> i_ = context.Operators.Select<MedicationRequest, decimal?>(g_, h_);
@@ -1381,17 +1457,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> u_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? v_(Medication M) {
-                object x_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object y_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> z_ = context.Operators.Split((string)y_, "/");
-                string aa_ = context.Operators.Last<string>(z_);
-                bool? ab_ = context.Operators.Equal(x_, aa_);
-                CodeableConcept ac_ = M?.Code;
-                CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ac_);
-                CqlValueSet ae_ = this.Digoxin_Medications(context);
-                bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-                bool? ag_ = context.Operators.And(ab_, af_);
-                return ag_;
+                string x_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType y_ = MR?.Medication;
+                object z_ = context.Operators.LateBoundProperty<object>(y_, "reference");
+                object aa_ = context.Operators.LateBoundProperty<object>(z_, "value");
+                IEnumerable<string> ab_ = context.Operators.Split((string)aa_, "/");
+                string ac_ = context.Operators.Last<string>(ab_);
+                bool? ad_ = context.Operators.Equal(x_, ac_);
+                CodeableConcept ae_ = M?.Code;
+                CqlConcept af_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ae_);
+                CqlValueSet ag_ = this.Digoxin_Medications(context);
+                bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
+                bool? ai_ = context.Operators.And(ad_, ah_);
+                return ai_;
             }
 
             bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
@@ -1404,10 +1484,10 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest DigoxinOrdered) {
-            CqlQuantity ah_ = this.averageDailyDose(context, DigoxinOrdered);
-            CqlQuantity ai_ = context.Operators.Quantity(0.125m, "mg/d");
-            bool? aj_ = context.Operators.Greater(ah_, ai_);
-            return aj_;
+            CqlQuantity aj_ = this.averageDailyDose(context, DigoxinOrdered);
+            CqlQuantity ak_ = context.Operators.Quantity(0.125m, "mg/d");
+            bool? al_ = context.Operators.Greater(aj_, ak_);
+            return al_;
         }
 
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
@@ -1415,24 +1495,28 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         bool? j_ = context.Operators.Exists<MedicationRequest>(i_);
 
         bool? k_(MedicationRequest MR) {
-            IEnumerable<Medication> ak_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+            IEnumerable<Medication> am_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
-            bool? al_(Medication M) {
-                object an_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object ao_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> ap_ = context.Operators.Split((string)ao_, "/");
-                string aq_ = context.Operators.Last<string>(ap_);
-                bool? ar_ = context.Operators.Equal(an_, aq_);
-                CodeableConcept as_ = M?.Code;
-                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, as_);
-                CqlValueSet au_ = this.Doxepin_Medications(context);
-                bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
-                bool? aw_ = context.Operators.And(ar_, av_);
-                return aw_;
+            bool? an_(Medication M) {
+                string ap_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType aq_ = MR?.Medication;
+                object ar_ = context.Operators.LateBoundProperty<object>(aq_, "reference");
+                object as_ = context.Operators.LateBoundProperty<object>(ar_, "value");
+                IEnumerable<string> at_ = context.Operators.Split((string)as_, "/");
+                string au_ = context.Operators.Last<string>(at_);
+                bool? av_ = context.Operators.Equal(ap_, au_);
+                CodeableConcept aw_ = M?.Code;
+                CqlConcept ax_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aw_);
+                CqlValueSet ay_ = this.Doxepin_Medications(context);
+                bool? az_ = context.Operators.ConceptInValueSet(ax_, ay_);
+                bool? ba_ = context.Operators.And(av_, az_);
+                return ba_;
             }
 
-            bool? am_ = context.Operators.WhereAny<Medication>(ak_, al_);
-            return am_;
+            bool? ao_ = context.Operators.WhereAny<Medication>(am_, an_);
+            return ao_;
         }
 
         IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(a_, k_);
@@ -1441,10 +1525,10 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> o_ = context.Operators.Union<MedicationRequest>(l_, n_);
 
         bool? p_(MedicationRequest DoxepinOrdered) {
-            CqlQuantity ax_ = this.averageDailyDose(context, DoxepinOrdered);
-            CqlQuantity ay_ = context.Operators.Quantity(6m, "mg/d");
-            bool? az_ = context.Operators.Greater(ax_, ay_);
-            return az_;
+            CqlQuantity bb_ = this.averageDailyDose(context, DoxepinOrdered);
+            CqlQuantity bc_ = context.Operators.Quantity(6m, "mg/d");
+            bool? bd_ = context.Operators.Greater(bb_, bc_);
+            return bd_;
         }
 
         IEnumerable<MedicationRequest> q_ = context.Operators.Where<MedicationRequest>(o_, p_);
@@ -1487,17 +1571,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
-                string o_ = context.Operators.Last<string>(n_);
-                bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                string l_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType m_ = MR?.Medication;
+                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(l_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -1562,17 +1650,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? o_(Medication M) {
-                object q_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object r_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
-                string t_ = context.Operators.Last<string>(s_);
-                bool? u_ = context.Operators.Equal(q_, t_);
-                CodeableConcept v_ = M?.Code;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                CqlValueSet x_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
-                bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-                bool? z_ = context.Operators.And(u_, y_);
-                return z_;
+                string q_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType r_ = MR?.Medication;
+                object s_ = context.Operators.LateBoundProperty<object>(r_, "reference");
+                object t_ = context.Operators.LateBoundProperty<object>(s_, "value");
+                IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
+                string v_ = context.Operators.Last<string>(u_);
+                bool? w_ = context.Operators.Equal(q_, v_);
+                CodeableConcept x_ = M?.Code;
+                CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                CqlValueSet z_ = this.Potentially_Harmful_Antipsychotics_for_Older_Adults(context);
+                bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+                bool? ab_ = context.Operators.And(w_, aa_);
+                return ab_;
             }
 
             bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -1586,18 +1678,18 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         bool? h_(MedicationRequest AntipsychoticMedication) {
-            FhirDateTime aa_ = AntipsychoticMedication?.AuthoredOnElement;
-            CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
-            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
-            bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
-            return ad_;
+            FhirDateTime ac_ = AntipsychoticMedication?.AuthoredOnElement;
+            CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
+            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
+            bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, (string)default);
+            return af_;
         }
 
 
         CqlDateTime i_(MedicationRequest AntipsychoticMedication) {
-            FhirDateTime ae_ = AntipsychoticMedication?.AuthoredOnElement;
-            CqlDateTime af_ = context.Operators.Convert<CqlDateTime>(ae_);
-            return af_;
+            FhirDateTime ag_ = AntipsychoticMedication?.AuthoredOnElement;
+            CqlDateTime ah_ = context.Operators.Convert<CqlDateTime>(ag_);
+            return ah_;
         }
 
         IEnumerable<CqlDateTime> j_ = context.Operators.WhereSelect<MedicationRequest, CqlDateTime>(g_, h_, i_);
@@ -1622,17 +1714,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                object l_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object m_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> n_ = context.Operators.Split((string)m_, "/");
-                string o_ = context.Operators.Last<string>(n_);
-                bool? p_ = context.Operators.Equal(l_, o_);
-                CodeableConcept q_ = M?.Code;
-                CqlConcept r_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, q_);
-                CqlValueSet s_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
-                bool? t_ = context.Operators.ConceptInValueSet(r_, s_);
-                bool? u_ = context.Operators.And(p_, t_);
-                return u_;
+                string l_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType m_ = MR?.Medication;
+                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
+                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
+                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
+                string q_ = context.Operators.Last<string>(p_);
+                bool? r_ = context.Operators.Equal(l_, q_);
+                CodeableConcept s_ = M?.Code;
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CqlValueSet u_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
+                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
+                bool? w_ = context.Operators.And(r_, v_);
+                return w_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -1748,17 +1844,21 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> n_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? o_(Medication M) {
-                object q_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                object r_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
-                string t_ = context.Operators.Last<string>(s_);
-                bool? u_ = context.Operators.Equal(q_, t_);
-                CodeableConcept v_ = M?.Code;
-                CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                CqlValueSet x_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
-                bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-                bool? z_ = context.Operators.And(u_, y_);
-                return z_;
+                string q_ = (M is Resource
+                    ? (M as Resource).IdElement
+                    : default)?.Value;
+                DataType r_ = MR?.Medication;
+                object s_ = context.Operators.LateBoundProperty<object>(r_, "reference");
+                object t_ = context.Operators.LateBoundProperty<object>(s_, "value");
+                IEnumerable<string> u_ = context.Operators.Split((string)t_, "/");
+                string v_ = context.Operators.Last<string>(u_);
+                bool? w_ = context.Operators.Equal(q_, v_);
+                CodeableConcept x_ = M?.Code;
+                CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                CqlValueSet z_ = this.Potentially_Harmful_Benzodiazepines_for_Older_Adults(context);
+                bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+                bool? ab_ = context.Operators.And(w_, aa_);
+                return ab_;
             }
 
             bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
@@ -1772,18 +1872,18 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> g_ = Status_1_15_000.Instance.isMedicationOrder(context, f_);
 
         bool? h_(MedicationRequest BenzodiazepineMedication) {
-            FhirDateTime aa_ = BenzodiazepineMedication?.AuthoredOnElement;
-            CqlDateTime ab_ = context.Operators.Convert<CqlDateTime>(aa_);
-            CqlInterval<CqlDateTime> ac_ = this.Measurement_Period(context);
-            bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
-            return ad_;
+            FhirDateTime ac_ = BenzodiazepineMedication?.AuthoredOnElement;
+            CqlDateTime ad_ = context.Operators.Convert<CqlDateTime>(ac_);
+            CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
+            bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, (string)default);
+            return af_;
         }
 
 
         CqlDateTime i_(MedicationRequest BenzodiazepineMedication) {
-            FhirDateTime ae_ = BenzodiazepineMedication?.AuthoredOnElement;
-            CqlDateTime af_ = context.Operators.Convert<CqlDateTime>(ae_);
-            return af_;
+            FhirDateTime ag_ = BenzodiazepineMedication?.AuthoredOnElement;
+            CqlDateTime ah_ = context.Operators.Convert<CqlDateTime>(ag_);
+            return ah_;
         }
 
         IEnumerable<CqlDateTime> j_ = context.Operators.WhereSelect<MedicationRequest, CqlDateTime>(g_, h_, i_);

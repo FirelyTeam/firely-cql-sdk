@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -871,17 +871,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Anticoagulants_for_All_Indications(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Anticoagulants_for_All_Indications(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -894,55 +898,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest Anticoagulants) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = Anticoagulants?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = Anticoagulants?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = Anticoagulants?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = Anticoagulants?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = Anticoagulants?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = Anticoagulants?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -971,17 +975,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Anticoagulants_for_All_Indications(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Anticoagulants_for_All_Indications(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -994,22 +1002,22 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationAdministration> i_ = context.Operators.Union<MedicationAdministration>(f_, h_);
 
             bool? j_(MedicationAdministration Anticoagulants) {
-                DataType y_ = Anticoagulants?.Effective;
-                object z_ = FHIRHelpers_4_4_000.Instance.ToValue(context, y_);
-                CqlInterval<CqlDateTime> aa_ = QICoreCommon_4_0_000.Instance.toInterval(context, z_);
-                CqlDateTime ab_ = context.Operators.Start(aa_);
-                CqlInterval<CqlDateTime> ac_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
-                bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, (string)default);
-                Code<MedicationAdministration.MedicationAdministrationStatusCodes> ae_ = Anticoagulants?.StatusElement;
-                MedicationAdministration.MedicationAdministrationStatusCodes? af_ = ae_?.Value;
-                string ag_ = context.Operators.Convert<string>(af_);
-                string[] ah_ = [
+                DataType aa_ = Anticoagulants?.Effective;
+                object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.toInterval(context, ab_);
+                CqlDateTime ad_ = context.Operators.Start(ac_);
+                CqlInterval<CqlDateTime> ae_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
+                bool? af_ = context.Operators.In<CqlDateTime>(ad_, ae_, (string)default);
+                Code<MedicationAdministration.MedicationAdministrationStatusCodes> ag_ = Anticoagulants?.StatusElement;
+                MedicationAdministration.MedicationAdministrationStatusCodes? ah_ = ag_?.Value;
+                string ai_ = context.Operators.Convert<string>(ah_);
+                string[] aj_ = [
                     "in-progress",
                     "completed",
                 ];
-                bool? ai_ = context.Operators.In<string>(ag_, (IEnumerable<string>)ah_);
-                bool? aj_ = context.Operators.And(ad_, ai_);
-                return aj_;
+                bool? ak_ = context.Operators.In<string>(ai_, (IEnumerable<string>)aj_);
+                bool? al_ = context.Operators.And(af_, ak_);
+                return al_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
@@ -1038,17 +1046,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Antidepressants(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Antidepressants(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1061,55 +1073,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest AntidepressantMed) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = AntidepressantMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = AntidepressantMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = AntidepressantMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = AntidepressantMed?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = AntidepressantMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = AntidepressantMed?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1138,17 +1150,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Antihypertensives(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Antihypertensives(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1161,55 +1177,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest BPMed) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = BPMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = BPMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = BPMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = BPMed?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = BPMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = BPMed?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1238,17 +1254,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Central_Nervous_System_Depressants(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Central_Nervous_System_Depressants(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1261,55 +1281,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest CNSMed) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = CNSMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = CNSMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = CNSMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = CNSMed?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = CNSMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = CNSMed?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1338,17 +1358,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Diuretics(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Diuretics(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1361,55 +1385,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest DiureticMed) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = DiureticMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = DiureticMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = DiureticMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = DiureticMed?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = DiureticMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = DiureticMed?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -1438,17 +1462,21 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    object o_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object p_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> q_ = context.Operators.Split((string)p_, "/");
-                    string r_ = context.Operators.Last<string>(q_);
-                    bool? s_ = context.Operators.Equal(o_, r_);
-                    CodeableConcept t_ = M?.Code;
-                    CqlConcept u_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, t_);
-                    CqlValueSet v_ = this.Opioids(context);
-                    bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                    bool? x_ = context.Operators.And(s_, w_);
-                    return x_;
+                    string o_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType p_ = MR?.Medication;
+                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
+                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
+                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
+                    string t_ = context.Operators.Last<string>(s_);
+                    bool? u_ = context.Operators.Equal(o_, t_);
+                    CodeableConcept v_ = M?.Code;
+                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
+                    CqlValueSet x_ = this.Opioids(context);
+                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
+                    bool? z_ = context.Operators.And(u_, y_);
+                    return z_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -1461,55 +1489,55 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest OpioidMed) {
-                Code<MedicationRequest.MedicationrequestStatus> y_ = OpioidMed?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? z_ = y_?.Value;
-                string aa_ = context.Operators.Convert<string>(z_);
-                string[] ab_ = [
+                Code<MedicationRequest.MedicationrequestStatus> aa_ = OpioidMed?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
+                string ac_ = context.Operators.Convert<string>(ab_);
+                string[] ad_ = [
                     "active",
                     "completed",
                 ];
-                bool? ac_ = context.Operators.In<string>(aa_, (IEnumerable<string>)ab_);
-                Code<MedicationRequest.MedicationRequestIntent> ad_ = OpioidMed?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ae_ = ad_?.Value;
-                string af_ = context.Operators.Convert<string>(ae_);
-                bool? ag_ = context.Operators.Equal(af_, "order");
-                bool? ah_ = context.Operators.Equal(af_, "plan");
-                ResourceReference ai_ = OpioidMed?.Subject;
-                FhirString aj_ = ai_?.ReferenceElement;
-                string ak_ = aj_?.Value;
-                string al_ = QICoreCommon_4_0_000.Instance.getId(context, ak_);
-                Id am_;
-                Patient bg_ = this.Patient(context);
-                bool bh_ = bg_ is Resource;
-                if (bh_)
+                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
+                Code<MedicationRequest.MedicationRequestIntent> af_ = OpioidMed?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
+                string ah_ = context.Operators.Convert<string>(ag_);
+                bool? ai_ = context.Operators.Equal(ah_, "order");
+                bool? aj_ = context.Operators.Equal(ah_, "plan");
+                ResourceReference ak_ = OpioidMed?.Subject;
+                FhirString al_ = ak_?.ReferenceElement;
+                string am_ = al_?.Value;
+                string an_ = QICoreCommon_4_0_000.Instance.getId(context, am_);
+                Id ao_;
+                Patient bi_ = this.Patient(context);
+                bool bj_ = bi_ is Resource;
+                if (bj_)
                 {
-                    Patient bi_ = this.Patient(context);
-                    am_ = (bi_ as Resource).IdElement;
+                    Patient bk_ = this.Patient(context);
+                    ao_ = (bk_ as Resource).IdElement;
                 }
                 else
                 {
-                    am_ = default;
+                    ao_ = default;
                 }
-                string an_ = am_?.Value;
-                bool? ao_ = context.Operators.Equal(al_, an_);
-                bool? ap_ = context.Operators.And(ah_, ao_);
-                bool? aq_ = context.Operators.Or(ag_, ap_);
-                bool? ar_ = context.Operators.And(ac_, aq_);
-                bool? as_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
-                bool? at_ = context.Operators.And(ar_, as_);
-                CqlInterval<CqlDate> au_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
-                CqlDate av_ = au_?.low;
-                CqlDateTime aw_ = context.Operators.ConvertDateToDateTime(av_);
-                CqlDate ax_ = au_?.high;
+                string ap_ = ao_?.Value;
+                bool? aq_ = context.Operators.Equal(an_, ap_);
+                bool? ar_ = context.Operators.And(aj_, aq_);
+                bool? as_ = context.Operators.Or(ai_, ar_);
+                bool? at_ = context.Operators.And(ae_, as_);
+                bool? au_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
+                bool? av_ = context.Operators.And(at_, au_);
+                CqlInterval<CqlDate> aw_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
+                CqlDate ax_ = aw_?.low;
                 CqlDateTime ay_ = context.Operators.ConvertDateToDateTime(ax_);
-                bool? az_ = au_?.lowClosed;
-                bool? ba_ = au_?.highClosed;
-                CqlInterval<CqlDateTime> bb_ = context.Operators.Interval(aw_, ay_, az_, ba_);
-                Period bc_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> bd_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bc_);
-                bool? be_ = context.Operators.OverlapsBefore(bb_, bd_, "day");
-                bool? bf_ = context.Operators.And(at_, be_);
-                return bf_;
+                CqlDate az_ = aw_?.high;
+                CqlDateTime ba_ = context.Operators.ConvertDateToDateTime(az_);
+                bool? bb_ = aw_?.lowClosed;
+                bool? bc_ = aw_?.highClosed;
+                CqlInterval<CqlDateTime> bd_ = context.Operators.Interval(ay_, ba_, bb_, bc_);
+                Period be_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
+                bool? bg_ = context.Operators.OverlapsBefore(bd_, bf_, "day");
+                bool? bh_ = context.Operators.And(av_, bg_);
+                return bh_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);

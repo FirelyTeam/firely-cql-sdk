@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("CMS124FHIRCervicalCancerScreen", "1.0.000")]
 public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISingleton<CMS124FHIRCervicalCancerScreen_1_0_000>
 {
@@ -193,13 +193,14 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
         }
 
 
-        DataType m_(Extension @this) {
+        object m_(Extension @this) {
             DataType aa_ = @this?.Value;
-            return aa_;
+            object ab_ = context.Operators.LateBoundProperty<object>(aa_, "value");
+            return ab_;
         }
 
-        IEnumerable<DataType> n_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)k_, l_, m_);
-        DataType o_ = context.Operators.SingletonFrom<DataType>(n_);
+        IEnumerable<object> n_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)k_, l_, m_);
+        object o_ = context.Operators.SingletonFrom<object>(n_);
         bool? p_ = context.Operators.Equal(o_, "248152002");
         bool? q_ = context.Operators.And(j_, p_);
         IEnumerable<Encounter> r_ = this.Qualifying_Encounters(context);
