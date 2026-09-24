@@ -138,6 +138,20 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertBase64BinaryValue_String_IsBase64Text()
+        {
+            // Not a valid UTF-8 sequence, so a UTF-8 decoding could not round-trip these bytes.
+            byte[] bytes = [0xFF, 0xFE, 0x80, 0x00];
+            var base64Binary = new Base64Binary(bytes);
+
+            var converted = FhirTypeConverter.Convert<string>(base64Binary.Value);
+
+            Assert.AreEqual("//6AAA==", converted);
+            Assert.IsTrue(Base64Binary.IsValidValue(converted!));
+            CollectionAssert.AreEqual(bytes, System.Convert.FromBase64String(converted!));
+        }
+
+        [TestMethod]
         public void ConvertParameters_Decimal()
         {
             var parameter = new ParameterComponent()
