@@ -545,19 +545,12 @@ partial class CodeBuilderContext
 
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                var scopeExpression = GetScopeExpression(op.scope!);
+                var (scopeExpression, scopeElement) = GetScope(op.scope!);
                 expectedType = TypeFor(op) ?? typeof(object);
                 var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
                                      _typeResolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
-                {
-                    _logger.LogWarning(
-                        FormatMessage(
-                            $"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.",
-                            op));
-                    return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, new CodeConstant(op.path, typeof(string)),
-                                           new CodeConstant(expectedType, typeof(Type)));
-                }
+                    return LateBoundProperty(scopeExpression, path!, expectedType, scopeElement, op);
 
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
                 string message = $"TupleBuilderCache failed to resolve type.";
@@ -598,7 +591,7 @@ partial class CodeBuilderContext
                            ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
                            ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 
-            var result = PropertyHelper(source, path, expectedType);
+            var result = PropertyHelper(source, path, expectedType, op.source);
             return result;
         }
     }
@@ -606,7 +599,8 @@ partial class CodeBuilderContext
     protected CodeExpression PropertyHelper(
         CodeExpression source,
         string? path,
-        Type expectedType)
+        Type expectedType,
+        Elm.Element? sourceElement = null)
     {
         CodeExpression? result = null;
         if (_typeResolver.ShouldUseSourceObject(source.Type, path!))
@@ -618,13 +612,7 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-            {
-                _logger.LogWarning(
-                    FormatMessage(
-                        $"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
-                                       new CodeConstant(expectedType, typeof(Type)));
-            }
+                return LateBoundProperty(source, path!, expectedType, sourceElement);
 
             if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
             {
@@ -661,6 +649,83 @@ partial class CodeBuilderContext
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Emits a late-bound read of <paramref name="path"/> off <paramref name="source"/>, recovering
+    /// the path's cardinality from <paramref name="sourceElement"/>'s choice type where the erased
+    /// .NET type no longer carries it.
+    /// </summary>
+    private CodeExpression LateBoundProperty(
+        CodeExpression source,
+        string path,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element = null)
+    {
+        if (!_typeResolver.IsListType(source.Type)
+            && !_typeResolver.IsListType(expectedType)
+            && LateBoundListPropertyType(sourceElement, path) is { } listType)
+        {
+            expectedType = listType;
+        }
+
+        _logger.LogWarning(
+            FormatMessage(
+                $"Property {path} can't be known at design time and will be late-bound, which is slower and leaves the property's type and cardinality unchecked.  Consider casting the source first so that this property can be definitely bound.",
+                element));
+
+        return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
+                               new CodeConstant(expectedType, typeof(Type)));
+    }
+
+    /// <summary>
+    /// Resolves <paramref name="path"/> against the member types of <paramref name="sourceElement"/>'s
+    /// choice type, returning the list type to read it as, or <see langword="null"/> when the path
+    /// is not list-valued on every member that has it, when the members disagree, or when any
+    /// member's type cannot be inspected - an uninspectable member has unknown cardinality, so
+    /// recovery is abandoned rather than inferred from the resolvable subset.
+    /// </summary>
+    /// <remarks>
+    /// A choice type erases to <see cref="object"/>, so a path on it can only be late-bound, and a
+    /// late-bound read carries the value but not its cardinality. The query machinery decides list
+    /// versus singleton from the static type, so a list typed as <see cref="object"/> is wrapped in
+    /// a one-element array and cast to the element type - which yields <see langword="null"/>, and
+    /// with it a wrong answer rather than a failure. Reading the cardinality off the choice's
+    /// members keeps the emitted code the same shape as the strongly typed case.
+    /// </remarks>
+    private Type? LateBoundListPropertyType(
+        Elm.Element? sourceElement,
+        string path)
+    {
+        var typeSpecifier = sourceElement?.GetTypeSpecifier();
+        if (typeSpecifier is ListTypeSpecifier list)
+            typeSpecifier = list.elementType;
+
+        if (typeSpecifier is not ChoiceTypeSpecifier { choice: { Length: > 0 } choices })
+            return null;
+
+        Type? elementType = null;
+        foreach (var choiceTypeSpecifier in choices)
+        {
+            var memberType = TypeFor(choiceTypeSpecifier, throwIfNotFound: false);
+            if (memberType is null || memberType == typeof(object))
+                return null;
+
+            if (_typeResolver.GetProperty(memberType, path) is not { } property)
+                continue;
+
+            if (!_typeResolver.IsListType(property.PropertyType)
+                || _typeResolver.GetListElementType(property.PropertyType, throwError: false) is not { } memberElementType)
+                return null;
+
+            if (elementType != null && elementType != memberElementType)
+                return null;
+
+            elementType = memberElementType;
+        }
+
+        return elementType is null ? null : typeof(IEnumerable<>).MakeGenericType(elementType);
     }
 
     internal static PropertyInfo? GetProperty(
