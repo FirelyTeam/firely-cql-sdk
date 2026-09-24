@@ -8,6 +8,7 @@
 
 #nullable enable
 
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -186,7 +187,7 @@ namespace CoreTests
         [TestMethod]
         public void PointFrom_WiderThanOnePoint_StillThrows()
         {
-            Assert.ThrowsExactly<InvalidOperationException>(
+            Assert.ThrowsExactly<CqlException<CqlPointFromNonUnitIntervalError>>(
                 () => Context.Operators.PointFrom(new CqlInterval<CqlDate?>(D(2026, 1, 1), D(2026, 1, 4), false, false)));
         }
 

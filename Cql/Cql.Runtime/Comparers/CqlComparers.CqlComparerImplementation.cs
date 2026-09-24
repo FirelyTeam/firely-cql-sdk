@@ -25,6 +25,12 @@ partial class CqlComparers : CqlComparer<object>
         return this;
     }
 
+    /// <summary>
+    /// Equality is decided by the comparer registered for the values' type, since a type's own
+    /// equality may consider two values equal whose CQL equality is indeterminate.
+    /// </summary>
+    protected override bool DefaultEqualityImpliesEquality => false;
+
     protected override int? CompareValues(
         object x,
         object y,

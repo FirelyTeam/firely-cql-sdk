@@ -567,15 +567,17 @@ public class CqlComparersTests
     }
 
     [TestMethod]
-    public void Interval_OpenNullLowBoundary_HashesWithoutThrowing_AndMatchesEqualInterval()
+    public void Interval_OpenNullLowBoundary_HashesWithoutThrowing_AndIsEquivalentButNotKnownEqual()
     {
         var operators = FhirCqlContext.WithDataSource().Operators;
         var comparers = new CqlComparers().AddIntervalComparisons(operators);
         var left = new CqlInterval<int?>(null, 5, false, true);
         var right = new CqlInterval<int?>(null, 5, false, true);
 
-        Assert.AreEqual(0, comparers.Compare(left, right, null));
-        Assert.IsTrue(comparers.Equals(left, right, null) is true);
+        // The starts are unknown, so the intervals are not known to be equal, but they are equivalent.
+        Assert.IsNull(comparers.Compare(left, right, null));
+        Assert.IsNull(comparers.Equals(left, right, null));
+        Assert.IsTrue(comparers.Equivalent(left, right, null));
         Assert.AreEqual(comparers.GetHashCode(left), comparers.GetHashCode(right));
     }
 
