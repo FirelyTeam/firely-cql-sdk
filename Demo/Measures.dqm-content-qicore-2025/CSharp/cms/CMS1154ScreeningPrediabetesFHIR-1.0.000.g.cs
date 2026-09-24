@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS1154ScreeningPrediabetesFHIR", "1.0.000")]
 public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingleton<CMS1154ScreeningPrediabetesFHIR_1_0_000>
 {
@@ -535,12 +535,17 @@ public partial class CMS1154ScreeningPrediabetesFHIR_1_0_000 : ILibrary, ISingle
             CqlValueSet f_ = this.Pregnancy(context);
             bool? g_ = context.Operators.ConceptInValueSet(e_, f_);
             DataType h_ = PregnantObservation?.Effective;
-            CqlDateTime i_ = context.Operators.LateBoundProperty<CqlDateTime>(h_, "value");
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-            CqlInterval<CqlDateTime> k_ = this.Measurement_Period(context);
-            bool? l_ = context.Operators.Overlaps(j_, k_, "day");
-            bool? m_ = context.Operators.And(g_, l_);
-            return m_;
+            CqlDateTime k_ = h_ switch
+            {
+                FhirDateTime i_ => context.Operators.Convert<CqlDateTime>(i_),
+                Instant j_ => context.Operators.Convert<CqlDateTime>(j_.Value),
+                _ => null,
+            };
+            CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
+            CqlInterval<CqlDateTime> m_ = this.Measurement_Period(context);
+            bool? n_ = context.Operators.Overlaps(l_, m_, "day");
+            bool? o_ = context.Operators.And(g_, n_);
+            return o_;
         }
 
         bool? c_ = context.Operators.WhereAny<Observation>(a_, b_);

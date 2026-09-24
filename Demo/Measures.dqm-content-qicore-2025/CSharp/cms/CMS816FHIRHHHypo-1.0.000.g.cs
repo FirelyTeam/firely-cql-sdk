@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS816FHIRHHHypo", "1.0.000")]
 public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRHHHypo_1_0_000>
 {
@@ -125,21 +125,20 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             IEnumerable<Medication> i_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? j_(Medication M) {
-                string l_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType m_ = MR?.Medication;
-                object n_ = context.Operators.LateBoundProperty<object>(m_, "reference");
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "value");
-                IEnumerable<string> p_ = context.Operators.Split((string)o_, "/");
-                string q_ = context.Operators.Last<string>(p_);
-                bool? r_ = context.Operators.Equal(l_, q_);
-                CodeableConcept s_ = M?.Code;
-                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
-                CqlValueSet u_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-                bool? v_ = context.Operators.ConceptInValueSet(t_, u_);
-                bool? w_ = context.Operators.And(r_, v_);
-                return w_;
+                Id l_ = M?.IdElement;
+                string m_ = l_?.Value;
+                DataType n_ = MR?.Medication;
+                FhirString p_ = n_ is ResourceReference o_ ? o_.ReferenceElement : null;
+                string q_ = p_?.Value;
+                IEnumerable<string> r_ = context.Operators.Split(q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(m_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
+                return y_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -152,11 +151,11 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(c_, e_);
 
         bool? g_(MedicationAdministration HypoMedication) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> x_ = HypoMedication?.StatusElement;
-            MedicationAdministration.MedicationAdministrationStatusCodes? y_ = x_?.Value;
-            string z_ = context.Operators.Convert<string>(y_);
-            bool? aa_ = context.Operators.Equal(z_, "completed");
-            return aa_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = HypoMedication?.StatusElement;
+            MedicationAdministration.MedicationAdministrationStatusCodes? aa_ = z_?.Value;
+            string ab_ = context.Operators.Convert<string>(aa_);
+            bool? ac_ = context.Operators.Equal(ab_, "completed");
+            return ac_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);
@@ -751,19 +750,17 @@ public partial class CMS816FHIRHHHypo_1_0_000 : ILibrary, ISingleton<CMS816FHIRH
             IEnumerable<Observation> f_ = this.Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(context);
 
             bool? g_(Observation @this) {
-                string l_ = (@this is Resource
-                    ? (@this as Resource).IdElement
-                    : default)?.Value;
-                bool? m_ = context.Operators.Not((bool?)(l_ is null));
-                return m_;
+                Id l_ = @this?.IdElement;
+                string m_ = l_?.Value;
+                bool? n_ = context.Operators.Not((bool?)(m_ is null));
+                return n_;
             }
 
 
             string h_(Observation @this) {
-                string n_ = (@this is Resource
-                    ? (@this as Resource).IdElement
-                    : default)?.Value;
-                return n_;
+                Id o_ = @this?.IdElement;
+                string p_ = o_?.Value;
+                return p_;
             }
 
             IEnumerable<string> i_ = context.Operators.WhereSelect<Observation, string>(f_, g_, h_);

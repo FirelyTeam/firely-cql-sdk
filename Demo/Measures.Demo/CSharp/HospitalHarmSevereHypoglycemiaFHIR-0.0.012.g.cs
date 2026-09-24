@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
@@ -184,12 +184,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
             Patient d_ = this.Patient(context);
             Date e_ = d_?.BirthDateElement;
             string f_ = e_?.Value;
-            CqlDateTime g_ = context.Operators.ConvertStringToDateTime(f_);
-            CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            int? j_ = context.Operators.CalculateAgeAt(g_, i_, "year");
-            bool? k_ = context.Operators.GreaterOrEqual(j_, 18);
-            return k_;
+            CqlDate g_ = context.Operators.ConvertStringToDate(f_);
+            CqlDateTime h_ = context.Operators.ConvertDateToDateTime(g_);
+            CqlInterval<CqlDateTime> i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, InpatientEncounter);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            int? k_ = context.Operators.CalculateAgeAt(h_, j_, "year");
+            bool? l_ = context.Operators.GreaterOrEqual(k_, 18);
+            return l_;
         }
 
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
@@ -216,17 +217,17 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
                 Id l_ = M?.IdElement;
                 string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
                 DataType n_ = MR?.Medication;
-                object o_ = context.Operators.LateBoundProperty<object>(n_, "reference");
-                string p_ = FHIRHelpers_4_0_001.Instance.ToString(context, o_ as FhirString);
-                IEnumerable<string> q_ = context.Operators.Split(p_, "/");
-                string r_ = context.Operators.Last<string>(q_);
-                bool? s_ = context.Operators.Equal(m_, r_);
-                CodeableConcept t_ = M?.Code;
-                CqlConcept u_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, t_);
-                CqlValueSet v_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-                bool? w_ = context.Operators.ConceptInValueSet(u_, v_);
-                bool? x_ = context.Operators.And(s_, w_);
-                return x_;
+                FhirString p_ = n_ is ResourceReference o_ ? o_.ReferenceElement : null;
+                string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
+                IEnumerable<string> r_ = context.Operators.Split(q_, "/");
+                string s_ = context.Operators.Last<string>(r_);
+                bool? t_ = context.Operators.Equal(m_, s_);
+                CodeableConcept u_ = M?.Code;
+                CqlConcept v_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, u_);
+                CqlValueSet w_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
+                bool? x_ = context.Operators.ConceptInValueSet(v_, w_);
+                bool? y_ = context.Operators.And(t_, x_);
+                return y_;
             }
 
             bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
@@ -237,13 +238,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
         IEnumerable<MedicationAdministration> f_ = context.Operators.Union<MedicationAdministration>(b_, e_);
 
         bool? g_(MedicationAdministration HypoMedication) {
-            Code<MedicationAdministration.MedicationAdministrationStatusCodes> y_ = HypoMedication?.StatusElement;
-            string z_ = FHIRHelpers_4_0_001.Instance.ToString(context, y_);
-            bool? aa_ = context.Operators.Equal(z_, "completed");
-            bool? ab_ = context.Operators.Equal(z_, "not-done");
-            bool? ac_ = context.Operators.Not(ab_);
-            bool? ad_ = context.Operators.And(aa_, ac_);
-            return ad_;
+            Code<MedicationAdministration.MedicationAdministrationStatusCodes> z_ = HypoMedication?.StatusElement;
+            string aa_ = FHIRHelpers_4_0_001.Instance.ToString(context, z_);
+            bool? ab_ = context.Operators.Equal(aa_, "completed");
+            bool? ac_ = context.Operators.Equal(aa_, "not-done");
+            bool? ad_ = context.Operators.Not(ac_);
+            bool? ae_ = context.Operators.And(ab_, ad_);
+            return ae_;
         }
 
         IEnumerable<MedicationAdministration> h_ = context.Operators.Where<MedicationAdministration>(f_, g_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -373,15 +373,16 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
         Patient a_ = this.Patient(context);
         Date b_ = a_?.BirthDateElement;
         string c_ = b_?.Value;
-        CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
-        Observation e_ = this.Index_Depression_Assessment(context);
-        DataType f_ = e_?.Effective;
-        object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-        CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
-        CqlDateTime i_ = context.Operators.Start(h_);
-        int? j_ = context.Operators.CalculateAgeAt(d_, i_, "year");
-        bool? k_ = context.Operators.GreaterOrEqual(j_, 12);
-        return k_;
+        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+        CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+        Observation f_ = this.Index_Depression_Assessment(context);
+        DataType g_ = f_?.Effective;
+        object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+        CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
+        CqlDateTime j_ = context.Operators.Start(i_);
+        int? k_ = context.Operators.CalculateAgeAt(e_, j_, "year");
+        bool? l_ = context.Operators.GreaterOrEqual(k_, 12);
+        return l_;
     }
 
 

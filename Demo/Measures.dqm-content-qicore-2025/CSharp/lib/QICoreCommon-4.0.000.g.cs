@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("QICoreCommon", "4.0.000")]
 public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_0_000>
 {
@@ -834,25 +834,24 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("deprecated", "This function is no longer required in QICore 6.0.0 and above")]
     public bool? doNotPerform(CqlContext context, DeviceRequest deviceRequest)
     {
+        List<Extension> a_ = deviceRequest?.ModifierExtension;
 
-        bool? a_(Extension @this) {
-            FhirUri e_ = @this?.UrlElement;
-            string f_ = FHIRHelpers_4_4_000.Instance.ToString(context, e_);
-            bool? g_ = context.Operators.Equal(f_, "http://hl7.org/fhir/5.0/StructureDefinition/extension-DeviceRequest.doNotPerform");
-            return g_;
-        }
-
-
-        object b_(Extension @this) {
-            DataType h_ = @this?.Value;
+        bool? b_(Extension @this) {
+            FhirUri f_ = @this?.UrlElement;
+            string g_ = FHIRHelpers_4_4_000.Instance.ToString(context, f_);
+            bool? h_ = context.Operators.Equal(g_, "http://hl7.org/fhir/5.0/StructureDefinition/extension-DeviceRequest.doNotPerform");
             return h_;
         }
 
-        IEnumerable<object> c_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(deviceRequest is DomainResource
-            ? (deviceRequest as DomainResource).ModifierExtension
-            : default), a_, b_);
-        object d_ = context.Operators.SingletonFrom<object>(c_);
-        return (bool?)d_;
+
+        object c_(Extension @this) {
+            DataType i_ = @this?.Value;
+            return i_;
+        }
+
+        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
+        object e_ = context.Operators.SingletonFrom<object>(d_);
+        return (bool?)e_;
     }
 
 
@@ -891,21 +890,31 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date m_ = l_?.BirthDateElement;
             string n_ = m_?.Value;
             CqlDate o_ = context.Operators.ConvertStringToDate(n_);
-            object p_ = context.Operators.LateBoundProperty<object>(choice, "low");
-            CqlDate q_ = context.Operators.Add(o_, p_ as CqlQuantity);
-            CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
-            object s_ = context.Operators.LateBoundProperty<object>(choice, "high");
-            CqlDate t_ = context.Operators.Add(o_, s_ as CqlQuantity);
-            CqlQuantity u_ = context.Operators.Quantity(1m, "year");
-            CqlDate v_ = context.Operators.Add(t_, u_);
-            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
-            CqlInterval<CqlDateTime> x_ = context.Operators.Interval(r_, w_, true, false);
-            return x_;
+            object r_ = choice switch
+            {
+                CqlInterval<CqlDateTime> p_ => p_.low,
+                CqlInterval<CqlQuantity> q_ => q_.low,
+                _ => null,
+            };
+            CqlDate s_ = context.Operators.Add(o_, r_ as CqlQuantity);
+            CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_);
+            object w_ = choice switch
+            {
+                CqlInterval<CqlDateTime> u_ => u_.high,
+                CqlInterval<CqlQuantity> v_ => v_.high,
+                _ => null,
+            };
+            CqlDate x_ = context.Operators.Add(o_, w_ as CqlQuantity);
+            CqlQuantity y_ = context.Operators.Quantity(1m, "year");
+            CqlDate z_ = context.Operators.Add(x_, y_);
+            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(t_, aa_, true, false);
+            return ab_;
         }
         else if (choice is Timing)
         {
-            object y_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
-            return y_ as CqlInterval<CqlDateTime>;
+            object ac_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+            return ac_ as CqlInterval<CqlDateTime>;
         }
         else
         {
@@ -948,21 +957,31 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date m_ = l_?.BirthDateElement;
             string n_ = m_?.Value;
             CqlDate o_ = context.Operators.ConvertStringToDate(n_);
-            object p_ = context.Operators.LateBoundProperty<object>(choice, "low");
-            CqlDate q_ = context.Operators.Add(o_, p_ as CqlQuantity);
-            CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
-            object s_ = context.Operators.LateBoundProperty<object>(choice, "high");
-            CqlDate t_ = context.Operators.Add(o_, s_ as CqlQuantity);
-            CqlQuantity u_ = context.Operators.Quantity(1m, "year");
-            CqlDate v_ = context.Operators.Add(t_, u_);
-            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
-            CqlInterval<CqlDateTime> x_ = context.Operators.Interval(r_, w_, true, false);
-            return x_;
+            object r_ = choice switch
+            {
+                CqlInterval<CqlDateTime> p_ => p_.low,
+                CqlInterval<CqlQuantity> q_ => q_.low,
+                _ => null,
+            };
+            CqlDate s_ = context.Operators.Add(o_, r_ as CqlQuantity);
+            CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_);
+            object w_ = choice switch
+            {
+                CqlInterval<CqlDateTime> u_ => u_.high,
+                CqlInterval<CqlQuantity> v_ => v_.high,
+                _ => null,
+            };
+            CqlDate x_ = context.Operators.Add(o_, w_ as CqlQuantity);
+            CqlQuantity y_ = context.Operators.Quantity(1m, "year");
+            CqlDate z_ = context.Operators.Add(x_, y_);
+            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
+            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(t_, aa_, true, false);
+            return ab_;
         }
         else if (choice is Timing)
         {
-            object y_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
-            return y_ as CqlInterval<CqlDateTime>;
+            object ac_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+            return ac_ as CqlInterval<CqlDateTime>;
         }
         else
         {
@@ -1021,30 +1040,50 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlDate ab_ = context.Operators.ConvertStringToDate(aa_);
                     DataType ac_ = condition?.Abatement;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    object ae_ = context.Operators.LateBoundProperty<object>(ad_, "low");
-                    CqlDate af_ = context.Operators.Add(ab_, ae_ as CqlQuantity);
-                    CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
-                    object ah_ = context.Operators.LateBoundProperty<object>(ad_, "high");
-                    CqlDate ai_ = context.Operators.Add(ab_, ah_ as CqlQuantity);
-                    CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
-                    CqlDate ak_ = context.Operators.Add(ai_, aj_);
-                    CqlDateTime al_ = context.Operators.ConvertDateToDateTime(ak_);
-                    CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ag_, al_, true, false);
-                    return am_;
+                    object ag_ = ad_ switch
+                    {
+                        CqlInterval<CqlDateTime> ae_ => ae_.low,
+                        CqlInterval<CqlQuantity> af_ => af_.low,
+                        _ => null,
+                    };
+                    CqlDate ah_ = context.Operators.Add(ab_, ag_ as CqlQuantity);
+                    CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
+                    object al_ = ad_ switch
+                    {
+                        CqlInterval<CqlDateTime> aj_ => aj_.high,
+                        CqlInterval<CqlQuantity> ak_ => ak_.high,
+                        _ => null,
+                    };
+                    CqlDate am_ = context.Operators.Add(ab_, al_ as CqlQuantity);
+                    CqlQuantity an_ = context.Operators.Quantity(1m, "year");
+                    CqlDate ao_ = context.Operators.Add(am_, an_);
+                    CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(ao_);
+                    CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ai_, ap_, true, false);
+                    return aq_;
                 }
                 else
                 {
-                    DataType an_ = condition?.Abatement;
-                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
-                    if (ap_)
+                    DataType ar_ = condition?.Abatement;
+                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    if (at_)
                     {
-                        DataType aq_ = condition?.Abatement;
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        object as_ = context.Operators.LateBoundProperty<object>(ar_, "low");
-                        object at_ = context.Operators.LateBoundProperty<object>(ar_, "high");
-                        CqlInterval<CqlDateTime> au_ = context.Operators.Interval(as_ as CqlDateTime, at_ as CqlDateTime, true, false);
-                        return au_;
+                        DataType au_ = condition?.Abatement;
+                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+                        object ay_ = av_ switch
+                        {
+                            CqlInterval<CqlDateTime> aw_ => aw_.low,
+                            CqlInterval<CqlQuantity> ax_ => ax_.low,
+                            _ => null,
+                        };
+                        object bb_ = av_ switch
+                        {
+                            CqlInterval<CqlDateTime> az_ => az_.high,
+                            CqlInterval<CqlQuantity> ba_ => ba_.high,
+                            _ => null,
+                        };
+                        CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_ as CqlDateTime, bb_ as CqlDateTime, true, false);
+                        return bc_;
                     }
                     else
                     {
@@ -1105,30 +1144,50 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
                     CqlDate ab_ = context.Operators.ConvertStringToDate(aa_);
                     DataType ac_ = condition?.Abatement;
                     object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                    object ae_ = context.Operators.LateBoundProperty<object>(ad_, "low");
-                    CqlDate af_ = context.Operators.Add(ab_, ae_ as CqlQuantity);
-                    CqlDateTime ag_ = context.Operators.ConvertDateToDateTime(af_);
-                    object ah_ = context.Operators.LateBoundProperty<object>(ad_, "high");
-                    CqlDate ai_ = context.Operators.Add(ab_, ah_ as CqlQuantity);
-                    CqlQuantity aj_ = context.Operators.Quantity(1m, "year");
-                    CqlDate ak_ = context.Operators.Add(ai_, aj_);
-                    CqlDateTime al_ = context.Operators.ConvertDateToDateTime(ak_);
-                    CqlInterval<CqlDateTime> am_ = context.Operators.Interval(ag_, al_, true, false);
-                    return am_;
+                    object ag_ = ad_ switch
+                    {
+                        CqlInterval<CqlDateTime> ae_ => ae_.low,
+                        CqlInterval<CqlQuantity> af_ => af_.low,
+                        _ => null,
+                    };
+                    CqlDate ah_ = context.Operators.Add(ab_, ag_ as CqlQuantity);
+                    CqlDateTime ai_ = context.Operators.ConvertDateToDateTime(ah_);
+                    object al_ = ad_ switch
+                    {
+                        CqlInterval<CqlDateTime> aj_ => aj_.high,
+                        CqlInterval<CqlQuantity> ak_ => ak_.high,
+                        _ => null,
+                    };
+                    CqlDate am_ = context.Operators.Add(ab_, al_ as CqlQuantity);
+                    CqlQuantity an_ = context.Operators.Quantity(1m, "year");
+                    CqlDate ao_ = context.Operators.Add(am_, an_);
+                    CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(ao_);
+                    CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ai_, ap_, true, false);
+                    return aq_;
                 }
                 else
                 {
-                    DataType an_ = condition?.Abatement;
-                    object ao_ = FHIRHelpers_4_4_000.Instance.ToValue(context, an_);
-                    bool ap_ = ao_ is CqlInterval<CqlDateTime>;
-                    if (ap_)
+                    DataType ar_ = condition?.Abatement;
+                    object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
+                    bool at_ = as_ is CqlInterval<CqlDateTime>;
+                    if (at_)
                     {
-                        DataType aq_ = condition?.Abatement;
-                        object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
-                        object as_ = context.Operators.LateBoundProperty<object>(ar_, "low");
-                        object at_ = context.Operators.LateBoundProperty<object>(ar_, "high");
-                        CqlInterval<CqlDateTime> au_ = context.Operators.Interval(as_ as CqlDateTime, at_ as CqlDateTime, true, false);
-                        return au_;
+                        DataType au_ = condition?.Abatement;
+                        object av_ = FHIRHelpers_4_4_000.Instance.ToValue(context, au_);
+                        object ay_ = av_ switch
+                        {
+                            CqlInterval<CqlDateTime> aw_ => aw_.low,
+                            CqlInterval<CqlQuantity> ax_ => ax_.low,
+                            _ => null,
+                        };
+                        object bb_ = av_ switch
+                        {
+                            CqlInterval<CqlDateTime> az_ => az_.high,
+                            CqlInterval<CqlQuantity> ba_ => ba_.high,
+                            _ => null,
+                        };
+                        CqlInterval<CqlDateTime> bc_ = context.Operators.Interval(ay_ as CqlDateTime, bb_ as CqlDateTime, true, false);
+                        return bc_;
                     }
                     else
                     {

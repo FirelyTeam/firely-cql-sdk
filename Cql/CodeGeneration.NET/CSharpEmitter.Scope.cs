@@ -145,6 +145,9 @@ internal partial class CSharpEmitter
                 case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
+                case CodeTypeSwitch typeSwitch:
+                    return LinearizeTypeSwitch(typeSwitch, tailPosition);
+
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
                 // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
@@ -308,6 +311,80 @@ internal partial class CSharpEmitter
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
+
+        /// <summary>
+        /// Emits a type switch over its operand, which is linearized (and so evaluated) once.
+        /// When every arm's value prints inline, the switch is one expression: a conditional
+        /// with a declaration pattern for a single arm, a switch expression otherwise.
+        /// Otherwise it becomes an <c>if</c>/<c>else if</c> chain testing the operand with a
+        /// declaration pattern per arm, each arm's statements in its own block; as with
+        /// <see cref="LinearizeConditionalStatements"/>, in tail position the blocks
+        /// <c>return</c> and no atom is returned.
+        /// </summary>
+        private Atom? LinearizeTypeSwitch(CodeTypeSwitch typeSwitch, bool tailPosition)
+        {
+            // The operand is tested by every arm, so it must print as a variable: an expression
+            // that prints in place would be evaluated once per test (and a literal is no operand
+            // for a pattern at all).
+            var operand = Linearize(typeSwitch.Operand)!;
+            if (!PrintsAsVariable(operand))
+                operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
+
+            foreach (var arm in typeSwitch.Arms)
+            {
+                _emitter._assignedNames[arm.Narrowed] = _emitter.BindsPatternVariable(arm.Narrowed)
+                    ? AllocateName(arm.Narrowed.NameHint)
+                    : _emitter.PrintNarrowingCast(operand, arm.Narrowed);
+            }
+
+            if (typeSwitch.Arms.All(arm => ArmPrintsInline(arm.Body)) && ArmPrintsInline(typeSwitch.Otherwise))
+            {
+                var code = _emitter.PrintTypeSwitchExpression(typeSwitch, operand);
+                // A switch expression has no natural type when its arms disagree, so it may only
+                // print where it is target-typed: a declaration of its type, or a return.
+                return tailPosition ? new Atom(code, typeSwitch) : Hoist(code, code, typeSwitch);
+            }
+
+            if (tailPosition)
+            {
+                _statements.Add(() => RenderTypeSwitchChain(resultName: null, typeSwitch, operand));
+                return null;
+            }
+
+            var resultLocal = new CodeLocal(typeSwitch.Type);
+            var resultName = AllocateName(null);
+            _emitter._assignedNames[resultLocal] = resultName;
+
+            // Declared without an initializer, as in LinearizeConditionalStatements.
+            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(typeSwitch.Type)} {resultName};");
+            _statements.Add(() => RenderTypeSwitchChain(resultName, typeSwitch, operand));
+            return new Atom(resultName, resultLocal);
+        }
+
+        /// <summary>
+        /// Whether a type switch arm's value prints inline in a switch expression: within the
+        /// budget of an inline condition (see <see cref="ConditionPrintsInline"/>), and not
+        /// itself a conditional or switch, which would nest one expression form in another.
+        /// </summary>
+        private static bool ArmPrintsInline(CodeExpression value) =>
+            value is not (CodeConditional or CodeIfChain or CodeTypeSwitch) && ConditionPrintsInline(value);
+
+        /// <summary>Renders a type switch in statement form, deferred like
+        /// <see cref="RenderChain"/>.</summary>
+        private string RenderTypeSwitchChain(string? resultName, CodeTypeSwitch typeSwitch, Atom operand)
+        {
+            var isb = new IndentedStringBuilder();
+            for (var i = 0; i < typeSwitch.Arms.Count; i++)
+            {
+                var test = _emitter.PrintTypePattern(operand, typeSwitch.Arms[i].Narrowed);
+                isb.AppendLine(i == 0 ? $"if ({test})" : $"else if ({test})");
+                EmitBranchBlock(isb, resultName, typeSwitch.Arms[i].Body);
+            }
+
+            isb.AppendLine("else");
+            EmitBranchBlock(isb, resultName, typeSwitch.Otherwise);
+            return isb.ToString().TrimEnd('\r', '\n');
+        }
 
         /// <summary>
         /// Emits a multi-branch conditional as native if/else statements. In tail position

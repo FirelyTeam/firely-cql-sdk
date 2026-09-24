@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS135FHIRACEIorARBorARNIforHF", "1.0.000")]
 public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISingleton<CMS135FHIRACEIorARBorARNIforHF_1_0_000>
 {
@@ -384,35 +384,40 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
 
             bool? ab_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) {
                 DataType ad_ = PregnantObservation?.Effective;
-                CqlDateTime ae_ = context.Operators.LateBoundProperty<CqlDateTime>(ad_, "value");
-                CqlInterval<CqlDateTime> af_ = QICoreCommon_4_0_000.Instance.toInterval(context, ae_);
-                CqlDateTime ag_ = context.Operators.Start(af_);
-                Period ah_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ah_);
-                CqlDateTime aj_ = context.Operators.Start(ai_);
-                CqlQuantity ak_ = context.Operators.Quantity(9m, "months");
-                CqlDateTime al_ = context.Operators.Subtract(aj_, ak_);
-                CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, aj_, true, true);
-                bool? an_ = context.Operators.In<CqlDateTime>(ag_, am_, (string)default);
-                bool? ao_ = context.Operators.Not((bool?)(aj_ is null));
-                bool? ap_ = context.Operators.And(an_, ao_);
-                DataType aq_ = PregnantObservation?.Value;
-                CqlConcept ar_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aq_ as CodeableConcept);
-                CqlValueSet as_ = this.Pregnancy(context);
-                bool? at_ = context.Operators.ConceptInValueSet(ar_, as_);
-                Code<ObservationStatus> au_ = PregnantObservation?.StatusElement;
-                ObservationStatus? av_ = au_?.Value;
-                Code<ObservationStatus> aw_ = context.Operators.Convert<Code<ObservationStatus>>(av_);
-                string ax_ = context.Operators.Convert<string>(aw_);
-                string[] ay_ = [
+                CqlDateTime ag_ = ad_ switch
+                {
+                    FhirDateTime ae_ => context.Operators.Convert<CqlDateTime>(ae_),
+                    Instant af_ => context.Operators.Convert<CqlDateTime>(af_.Value),
+                    _ => null,
+                };
+                CqlInterval<CqlDateTime> ah_ = QICoreCommon_4_0_000.Instance.toInterval(context, ag_);
+                CqlDateTime ai_ = context.Operators.Start(ah_);
+                Period aj_ = ModerateOrSevereLVSDHFOutpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
+                CqlDateTime al_ = context.Operators.Start(ak_);
+                CqlQuantity am_ = context.Operators.Quantity(9m, "months");
+                CqlDateTime an_ = context.Operators.Subtract(al_, am_);
+                CqlInterval<CqlDateTime> ao_ = context.Operators.Interval(an_, al_, true, true);
+                bool? ap_ = context.Operators.In<CqlDateTime>(ai_, ao_, (string)default);
+                bool? aq_ = context.Operators.Not((bool?)(al_ is null));
+                bool? ar_ = context.Operators.And(ap_, aq_);
+                DataType as_ = PregnantObservation?.Value;
+                CqlConcept at_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, as_ as CodeableConcept);
+                CqlValueSet au_ = this.Pregnancy(context);
+                bool? av_ = context.Operators.ConceptInValueSet(at_, au_);
+                Code<ObservationStatus> aw_ = PregnantObservation?.StatusElement;
+                ObservationStatus? ax_ = aw_?.Value;
+                Code<ObservationStatus> ay_ = context.Operators.Convert<Code<ObservationStatus>>(ax_);
+                string az_ = context.Operators.Convert<string>(ay_);
+                string[] ba_ = [
                     "final",
                     "amended",
                     "corrected",
                 ];
-                bool? az_ = context.Operators.In<string>(ax_, (IEnumerable<string>)ay_);
-                bool? ba_ = context.Operators.And(at_, az_);
-                bool? bb_ = context.Operators.And(ap_, ba_);
-                return bb_;
+                bool? bb_ = context.Operators.In<string>(az_, (IEnumerable<string>)ba_);
+                bool? bc_ = context.Operators.And(av_, bb_);
+                bool? bd_ = context.Operators.And(ar_, bc_);
+                return bd_;
             }
 
             bool? ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);

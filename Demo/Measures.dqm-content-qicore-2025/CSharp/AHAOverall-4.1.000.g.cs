@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -338,15 +338,15 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
 
             bool? e_(object LVSDFindings) {
                 CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
-                object h_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                CqlDateTime k_ = context.Operators.Start(g_ ?? j_);
-                Period l_ = HFOutpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.End(m_);
-                bool? o_ = context.Operators.Before(k_, n_, (string)default);
-                return o_;
+                object i_ = LVSDFindings is Observation h_ ? h_.Effective : null;
+                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                CqlDateTime l_ = context.Operators.Start(g_ ?? k_);
+                Period m_ = HFOutpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlDateTime o_ = context.Operators.End(n_);
+                bool? p_ = context.Operators.Before(l_, o_, (string)default);
+                return p_;
             }
 
             bool? f_ = context.Operators.WhereAny<object>(d_, e_);
@@ -1151,18 +1151,28 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         }
         else if (choice is CqlInterval<CqlQuantity>)
         {
-            object a_ = context.Operators.LateBoundProperty<object>(choice, "low");
-            CqlDateTime b_ = context.Operators.Add(startDate, a_ as CqlQuantity);
-            object c_ = context.Operators.LateBoundProperty<object>(choice, "high");
+            object c_ = choice switch
+            {
+                CqlInterval<CqlDateTime> a_ => a_.low,
+                CqlInterval<CqlQuantity> b_ => b_.low,
+                _ => null,
+            };
             CqlDateTime d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
-            CqlInterval<CqlDateTime> e_ = context.Operators.Interval(b_, d_, true, true);
-            return e_;
+            object g_ = choice switch
+            {
+                CqlInterval<CqlDateTime> e_ => e_.high,
+                CqlInterval<CqlQuantity> f_ => f_.high,
+                _ => null,
+            };
+            CqlDateTime h_ = context.Operators.Add(startDate, g_ as CqlQuantity);
+            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(d_, h_, true, true);
+            return i_;
         }
         else if (choice is CqlQuantity)
         {
-            CqlDateTime f_ = context.Operators.Add(startDate, choice as CqlQuantity);
-            CqlInterval<CqlDateTime> g_ = context.Operators.Interval(startDate, f_, true, false);
-            return g_;
+            CqlDateTime j_ = context.Operators.Add(startDate, choice as CqlQuantity);
+            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(startDate, j_, true, false);
+            return k_;
         }
         else
         {

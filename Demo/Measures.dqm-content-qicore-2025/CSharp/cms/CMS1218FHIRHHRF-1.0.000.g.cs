@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS1218FHIRHHRF", "1.0.000")]
 public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRHHRF_1_0_000>
 {
@@ -2966,19 +2966,17 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Procedure> ab_ = this.Intubation_During_General_Anesthesia_And_MAC(context);
 
                 bool? ac_(Procedure @this) {
-                    string da_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    bool? db_ = context.Operators.Not((bool?)(da_ is null));
-                    return db_;
+                    Id da_ = @this?.IdElement;
+                    string db_ = da_?.Value;
+                    bool? dc_ = context.Operators.Not((bool?)(db_ is null));
+                    return dc_;
                 }
 
 
                 string ad_(Procedure @this) {
-                    string dc_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    return dc_;
+                    Id dd_ = @this?.IdElement;
+                    string de_ = dd_?.Value;
+                    return de_;
                 }
 
                 IEnumerable<string> ae_ = context.Operators.WhereSelect<Procedure, string>(ab_, ac_, ad_);
@@ -4222,19 +4220,17 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Procedure> aa_ = this.Extubation_With_Preceding_Noninvasive_Oxygen(context);
 
                 bool? ab_(Procedure @this) {
-                    string co_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    bool? cp_ = context.Operators.Not((bool?)(co_ is null));
-                    return cp_;
+                    Id co_ = @this?.IdElement;
+                    string cp_ = co_?.Value;
+                    bool? cq_ = context.Operators.Not((bool?)(cp_ is null));
+                    return cq_;
                 }
 
 
                 string ac_(Procedure @this) {
-                    string cq_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    return cq_;
+                    Id cr_ = @this?.IdElement;
+                    string cs_ = cr_?.Value;
+                    return cs_;
                 }
 
                 IEnumerable<string> ad_ = context.Operators.WhereSelect<Procedure, string>(aa_, ab_, ac_);
@@ -4244,19 +4240,17 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Procedure> ah_ = this.Extubation_During_General_Anesthesia(context);
 
                 bool? ai_(Procedure @this) {
-                    string cr_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    bool? cs_ = context.Operators.Not((bool?)(cr_ is null));
-                    return cs_;
+                    Id ct_ = @this?.IdElement;
+                    string cu_ = ct_?.Value;
+                    bool? cv_ = context.Operators.Not((bool?)(cu_ is null));
+                    return cv_;
                 }
 
 
                 string aj_(Procedure @this) {
-                    string ct_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    return ct_;
+                    Id cw_ = @this?.IdElement;
+                    string cx_ = cw_?.Value;
+                    return cx_;
                 }
 
                 IEnumerable<string> ak_ = context.Operators.WhereSelect<Procedure, string>(ah_, ai_, aj_);
@@ -4660,19 +4654,17 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 IEnumerable<Encounter> as_ = this.Encounter_With_Mechanical_Ventilation_Outside_Of_Procedural_Area_Within_30_Days_Of_End_Of_First_OR_Procedure_And_Preceded_By_Non_Invasive_Oxygen_Therapy(context);
 
                 bool? at_(Encounter @this) {
-                    string gz_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    bool? ha_ = context.Operators.Not((bool?)(gz_ is null));
-                    return ha_;
+                    Id gz_ = @this?.IdElement;
+                    string ha_ = gz_?.Value;
+                    bool? hb_ = context.Operators.Not((bool?)(ha_ is null));
+                    return hb_;
                 }
 
 
                 string au_(Encounter @this) {
-                    string hb_ = (@this is Resource
-                        ? (@this as Resource).IdElement
-                        : default)?.Value;
-                    return hb_;
+                    Id hc_ = @this?.IdElement;
+                    string hd_ = hc_?.Value;
+                    return hd_;
                 }
 
                 IEnumerable<string> av_ = context.Operators.WhereSelect<Encounter, string>(as_, at_, au_);
@@ -7217,19 +7209,32 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             bool? k_ = context.Operators.In<string>(i_, (IEnumerable<string>)j_);
             CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, QualifyingEncounter);
             DataType m_ = SMStatus?.Effective;
-            CqlDateTime n_ = context.Operators.LateBoundProperty<CqlDateTime>(m_, "value");
-            CqlDateTime o_ = QICoreCommon_4_0_000.Instance.latest(context, n_);
-            CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.toInterval(context, o_);
-            bool? q_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, p_, (string)default);
-            bool? r_ = context.Operators.Before(p_, l_, (string)default);
-            bool? s_ = context.Operators.Or(q_, r_);
-            bool? t_ = context.Operators.And(k_, s_);
-            DataType u_ = SMStatus?.Value;
-            object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
-            CqlValueSet w_ = this.Smoking_Status(context);
-            bool? x_ = context.Operators.ConceptInValueSet(v_ as CqlConcept, w_);
-            bool? y_ = context.Operators.And(t_, x_);
-            return y_;
+            CqlDateTime p_ = m_ switch
+            {
+                FhirDateTime n_ => context.Operators.Convert<CqlDateTime>(n_),
+                Instant o_ => context.Operators.Convert<CqlDateTime>(o_.Value),
+                _ => null,
+            };
+            CqlDateTime q_ = QICoreCommon_4_0_000.Instance.latest(context, p_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
+            bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, r_, (string)default);
+            CqlDateTime v_ = m_ switch
+            {
+                FhirDateTime t_ => context.Operators.Convert<CqlDateTime>(t_),
+                Instant u_ => context.Operators.Convert<CqlDateTime>(u_.Value),
+                _ => null,
+            };
+            CqlDateTime w_ = QICoreCommon_4_0_000.Instance.latest(context, v_);
+            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
+            bool? y_ = context.Operators.Before(x_, l_, (string)default);
+            bool? z_ = context.Operators.Or(s_, y_);
+            bool? aa_ = context.Operators.And(k_, z_);
+            DataType ab_ = SMStatus?.Value;
+            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
+            CqlValueSet ad_ = this.Smoking_Status(context);
+            bool? ae_ = context.Operators.ConceptInValueSet(ac_ as CqlConcept, ad_);
+            bool? af_ = context.Operators.And(aa_, ae_);
+            return af_;
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);

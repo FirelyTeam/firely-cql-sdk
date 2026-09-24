@@ -389,6 +389,146 @@ public class CSharpEmitterTests
     }
 
     [TestMethod]
+    public void TypeSwitch_InlineArms_PrintsSwitchExpression()
+    {
+        // Each arm reads off the narrowed variable, which is never null, so the access is plain.
+        var o = new CodeLocal(typeof(object), "o");
+        var asString = new CodeLocal(typeof(string), isNotNull: true);
+        var asVersion = new CodeLocal(typeof(Version), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            o,
+            [
+                new CodeTypeSwitchArm(asString, new CodeProperty(asString, StringLength)),
+                new CodeTypeSwitchArm(asVersion, new CodeProperty(asVersion, VersionMajor)),
+            ],
+            new CodeConstant(null, typeof(int?)),
+            typeof(int?));
+
+        var expected =
+            "{\n" +
+            "    return o switch\n" +
+            "    {\n" +
+            "        string a_ => a_.Length,\n" +
+            "        Version b_ => b_.Major,\n" +
+            "        _ => null,\n" +
+            "    };\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([o], typeSwitch));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int?", "object o");
+    }
+
+    [TestMethod]
+    public void TypeSwitch_SingleArm_PrintsConditionalOverADeclarationPattern()
+    {
+        // An operand that would print in place is hoisted first, so every test sees one value.
+        var e = new CodeLocal(typeof(Exception), "e");
+        var innerException = ReflectionUtility.PropertyOf(() => default(Exception)!.InnerException);
+        var paramName = ReflectionUtility.PropertyOf(() => default(ArgumentException)!.ParamName);
+        var asArgument = new CodeLocal(typeof(ArgumentException), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            new CodeProperty(e, innerException),
+            [new CodeTypeSwitchArm(asArgument, new CodeProperty(asArgument, paramName))],
+            new CodeConstant(null, typeof(string)),
+            typeof(string));
+
+        var expected =
+            "{\n" +
+            "    Exception a_ = e.InnerException;\n" +
+            "    return a_ is ArgumentException b_ ? b_.ParamName : null;\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([e], typeSwitch));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "string", "Exception e");
+    }
+
+    [TestMethod]
+    public void TypeSwitch_OperandCastToObject_TestsTheVariableItself()
+    {
+        // A cast to object prints as nothing, so the operand already prints as a variable and is
+        // not copied into another one.
+        var e = new CodeLocal(typeof(Exception), "e");
+        var paramName = ReflectionUtility.PropertyOf(() => default(ArgumentException)!.ParamName);
+        var asArgument = new CodeLocal(typeof(ArgumentException), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            new CodeCast(e, typeof(object), CodeCastKind.Cast),
+            [new CodeTypeSwitchArm(asArgument, new CodeProperty(asArgument, paramName))],
+            new CodeConstant(null, typeof(string)),
+            typeof(string));
+
+        var expected =
+            "{\n" +
+            "    return e is ArgumentException a_ ? a_.ParamName : null;\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([e], typeSwitch));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "string", "Exception e");
+    }
+
+    [TestMethod]
+    public void TypeSwitch_ArmWithStatements_PrintsIfChainOverDeclarationPatterns()
+    {
+        // An arm above the inline budget needs its own statements, so the switch becomes an if
+        // chain; the patterns test the one hoisted operand and bind the narrowed variables.
+        var o = new CodeLocal(typeof(object), "o");
+        var asString = new CodeLocal(typeof(string), isNotNull: true);
+        var asVersion = new CodeLocal(typeof(Version), isNotNull: true);
+        var twoCalls = new CodeInvoke(null, MathAbsInt, new CodeInvoke(null, MathAbsInt, new CodeProperty(asString, StringLength)));
+        var typeSwitch = new CodeTypeSwitch(
+            o,
+            [
+                new CodeTypeSwitchArm(asString, new CodeCast(twoCalls, typeof(int?), CodeCastKind.Cast)),
+                new CodeTypeSwitchArm(asVersion, new CodeCast(new CodeProperty(asVersion, VersionMajor), typeof(int?), CodeCastKind.Cast)),
+            ],
+            new CodeConstant(null, typeof(int?)),
+            typeof(int?));
+        var outer = new CodeInvoke(null, ReflectionUtility.MethodOf(() => Nullable.Equals(default(int?), default(int?))), typeSwitch, new CodeConstant(1, typeof(int?)));
+
+        var expected =
+            "{\n" +
+            "    int? c_;\n" +
+            "    if (o is string a_)\n" +
+            "    {\n" +
+            "        int e_ = Math.Abs(a_.Length);\n" +
+            "        int f_ = Math.Abs(e_);\n" +
+            "        c_ = (int?)f_;\n" +
+            "    }\n" +
+            "    else if (o is Version b_)\n" +
+            "    {\n" +
+            "        c_ = (int?)b_.Major;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        c_ = default;\n" +
+            "    }\n" +
+            "    bool d_ = Nullable.Equals<int>(c_, 1);\n" +
+            "    return d_;\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([o], outer));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "bool", "object o");
+    }
+
+    private static readonly PropertyInfo StringLength =
+        ReflectionUtility.PropertyOf(() => default(string)!.Length);
+
+    private static readonly PropertyInfo VersionMajor =
+        ReflectionUtility.PropertyOf(() => default(Version)!.Major);
+
+    /// <summary>
+    /// Asserts that <paramref name="body"/> is a syntactically valid body for a method returning
+    /// <paramref name="returnType"/> with <paramref name="parameters"/>: the string assertions pin
+    /// the shape, this pins that the shape is C#. It checks syntax only: pattern-variable scope and
+    /// definite assignment are checked where generated libraries are compiled.
+    /// </summary>
+    private static void AssertParsesAsMethodBody(string body, string returnType, string parameters)
+    {
+        var tree = Microsoft.CodeAnalysis.CSharp.CSharpSyntaxTree.ParseText($"class C {{ {returnType} M({parameters}) {body} }}");
+        var errors = tree.GetDiagnostics().Where(d => d.Severity == Microsoft.CodeAnalysis.DiagnosticSeverity.Error).ToList();
+        Assert.AreEqual(0, errors.Count, string.Join("\n", errors) + "\n" + body);
+    }
+
+    [TestMethod]
     public void Property_Instance_NullConditional_And_Static()
     {
         var stringLength = ReflectionUtility.PropertyOf(() => default(string)!.Length);

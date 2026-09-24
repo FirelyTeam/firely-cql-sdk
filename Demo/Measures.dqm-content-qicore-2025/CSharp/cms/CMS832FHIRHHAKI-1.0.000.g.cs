@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS832FHIRHHAKI", "1.0.000")]
 public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHHAKI_1_0_000>
 {
@@ -199,64 +199,69 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
         IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 
         bool? c_(Encounter InpatientEncounter) {
-            List<Extension> e_;
-            Patient ap_ = this.Patient(context);
-            bool aq_ = ap_ is DomainResource;
-            if (aq_)
-            {
-                Patient ar_ = this.Patient(context);
-                e_ = (ar_ as DomainResource).Extension;
-            }
-            else
-            {
-                e_ = default;
-            }
+            Patient e_ = this.Patient(context);
+            List<Extension> f_ = e_?.Extension;
 
-            bool? f_(Extension @this) {
-                FhirUri as_ = @this?.UrlElement;
-                string at_ = FHIRHelpers_4_4_000.Instance.ToString(context, as_);
-                bool? au_ = context.Operators.Equal(at_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-                return au_;
+            bool? g_(Extension @this) {
+                FhirUri ap_ = @this?.UrlElement;
+                string aq_ = FHIRHelpers_4_4_000.Instance.ToString(context, ap_);
+                bool? ar_ = context.Operators.Equal(aq_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+                return ar_;
             }
 
 
-            object g_(Extension @this) {
-                DataType av_ = @this?.Value;
-                object aw_ = context.Operators.LateBoundProperty<object>(av_, "value");
-                return aw_;
+            object h_(Extension @this) {
+                DataType as_ = @this?.Value;
+                return as_ switch
+                {
+                    Instant at_ => context.Operators.Convert<CqlDateTime>(at_.Value),
+                    FhirDecimal au_ => au_.Value,
+                    Date av_ => context.Operators.ConvertStringToDate(av_.Value),
+                    FhirDateTime aw_ => context.Operators.Convert<CqlDateTime>(aw_),
+                    Time ax_ => context.Operators.ConvertStringToTime(ax_.Value),
+                    Base64Binary ay_ => context.Operators.Convert<string>(ay_.Value),
+                    FhirBoolean az_ => az_.Value,
+                    IValue<int?> ba_ => ba_.Value,
+                    IValue<string> bb_ => bb_.Value,
+                    Quantity bc_ => bc_.ValueElement,
+                    Identifier bd_ => bd_.ValueElement,
+                    Money be_ => be_.ValueElement,
+                    UsageContext bf_ => bf_.Value,
+                    ContactPoint bg_ => bg_.ValueElement,
+                    _ => null,
+                };
             }
 
-            IEnumerable<object> h_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)e_, f_, g_);
-            object i_ = context.Operators.SingletonFrom<object>(h_);
-            CqlCode j_ = this.Male__finding_(context);
-            string k_ = j_?.code;
-            CqlCode l_ = this.Female__finding_(context);
-            string m_ = l_?.code;
-            string[] n_ = [
-                k_,
-                m_,
+            IEnumerable<object> i_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)f_, g_, h_);
+            object j_ = context.Operators.SingletonFrom<object>(i_);
+            CqlCode k_ = this.Male__finding_(context);
+            string l_ = k_?.code;
+            CqlCode m_ = this.Female__finding_(context);
+            string n_ = m_?.code;
+            string[] o_ = [
+                l_,
+                n_,
             ];
-            bool? o_ = context.Operators.In<object>(i_, (IEnumerable<object>)((IEnumerable<string>)n_));
-            Period p_ = InpatientEncounter?.Period;
-            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlInterval<CqlDateTime> s_ = this.Measurement_Period(context);
-            bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
-            bool? u_ = context.Operators.And(o_, t_);
-            Code<Encounter.EncounterStatus> v_ = InpatientEncounter?.StatusElement;
-            Encounter.EncounterStatus? w_ = v_?.Value;
-            Code<Encounter.EncounterStatus> x_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(w_);
-            bool? y_ = context.Operators.Equal(x_, "finished");
-            bool? z_ = context.Operators.And(u_, y_);
-            Patient aa_ = this.Patient(context);
-            Date ab_ = aa_?.BirthDateElement;
+            bool? p_ = context.Operators.In<object>(j_, (IEnumerable<object>)((IEnumerable<string>)o_));
+            Period q_ = InpatientEncounter?.Period;
+            CqlInterval<CqlDateTime> r_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, q_);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlInterval<CqlDateTime> t_ = this.Measurement_Period(context);
+            bool? u_ = context.Operators.In<CqlDateTime>(s_, t_, "day");
+            bool? v_ = context.Operators.And(p_, u_);
+            Code<Encounter.EncounterStatus> w_ = InpatientEncounter?.StatusElement;
+            Encounter.EncounterStatus? x_ = w_?.Value;
+            Code<Encounter.EncounterStatus> y_ = context.Operators.Convert<Code<Encounter.EncounterStatus>>(x_);
+            bool? z_ = context.Operators.Equal(y_, "finished");
+            bool? aa_ = context.Operators.And(v_, z_);
+            Date ab_ = e_?.BirthDateElement;
             string ac_ = ab_?.Value;
             CqlDate ad_ = context.Operators.ConvertStringToDate(ac_);
-            CqlDateTime ae_ = context.Operators.Start(q_);
+            CqlDateTime ae_ = context.Operators.Start(r_);
             CqlDate af_ = context.Operators.DateFrom(ae_);
             int? ag_ = context.Operators.CalculateAgeAt(ad_, af_, "year");
             bool? ah_ = context.Operators.GreaterOrEqual(ag_, 18);
-            bool? ai_ = context.Operators.And(z_, ah_);
+            bool? ai_ = context.Operators.And(aa_, ah_);
             CqlInterval<CqlDateTime> aj_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, InpatientEncounter);
             CqlDateTime ak_ = context.Operators.Start(aj_);
             CqlDateTime al_ = context.Operators.End(aj_);
@@ -578,68 +583,75 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
     [CqlFunctionDefinition("maleeGFR")]
     public decimal? maleeGFR(CqlContext context, Encounter QualifyingEncounter)
     {
-        List<Extension> a_;
-        Patient i_ = this.Patient(context);
-        bool j_ = i_ is DomainResource;
-        if (j_)
+        Patient a_ = this.Patient(context);
+        List<Extension> b_ = a_?.Extension;
+
+        bool? c_(Extension @this) {
+            FhirUri j_ = @this?.UrlElement;
+            string k_ = FHIRHelpers_4_4_000.Instance.ToString(context, j_);
+            bool? l_ = context.Operators.Equal(k_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return l_;
+        }
+
+
+        object d_(Extension @this) {
+            DataType m_ = @this?.Value;
+            return m_ switch
+            {
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
+                _ => null,
+            };
+        }
+
+        IEnumerable<object> e_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)b_, c_, d_);
+        object f_ = context.Operators.SingletonFrom<object>(e_);
+        CqlCode g_ = this.Male__finding_(context);
+        string h_ = g_?.code;
+        bool? i_ = context.Operators.Equal(f_, h_);
+        if (i_ ?? false)
         {
-            Patient k_ = this.Patient(context);
-            a_ = (k_ as DomainResource).Extension;
-        }
-        else
-        {
-            a_ = default;
-        }
-
-        bool? b_(Extension @this) {
-            FhirUri l_ = @this?.UrlElement;
-            string m_ = FHIRHelpers_4_4_000.Instance.ToString(context, l_);
-            bool? n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return n_;
-        }
-
-
-        object c_(Extension @this) {
-            DataType o_ = @this?.Value;
-            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
-            return p_;
-        }
-
-        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
-        object e_ = context.Operators.SingletonFrom<object>(d_);
-        CqlCode f_ = this.Male__finding_(context);
-        string g_ = f_?.code;
-        bool? h_ = context.Operators.Equal(e_, g_);
-        if (h_ ?? false)
-        {
-            decimal? q_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity r_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? s_ = r_?.value;
-            decimal? t_ = context.Operators.Divide(s_, 0.9m);
-            decimal? u_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] v_ = [
-                t_,
-                u_,
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity ac_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? ad_ = ac_?.value;
+            decimal? ae_ = context.Operators.Divide(ad_, 0.9m);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] ag_ = [
+                ae_,
+                af_,
             ];
-            decimal? w_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)v_);
-            decimal? x_ = context.Operators.Negate(0.302m);
-            decimal? y_ = context.Operators.Power(w_, x_);
-            decimal? z_ = context.Operators.Multiply(q_, y_);
-            decimal? aa_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)v_);
-            decimal? ab_ = context.Operators.Negate(1.200m);
-            decimal? ac_ = context.Operators.Power(aa_, ab_);
-            decimal? ad_ = context.Operators.Multiply(z_, ac_);
-            Patient ae_ = this.Patient(context);
-            Date af_ = ae_?.BirthDateElement;
-            string ag_ = af_?.Value;
-            CqlDateTime ah_ = context.Operators.ConvertStringToDateTime(ag_);
-            CqlInterval<CqlDateTime> ai_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime aj_ = context.Operators.Start(ai_);
-            int? ak_ = context.Operators.CalculateAgeAt(ah_, aj_, "year");
-            decimal? al_ = context.Operators.ConvertIntegerToDecimal(ak_);
-            decimal? am_ = context.Operators.Power(0.9938m, al_);
-            decimal? an_ = context.Operators.Multiply(ad_, am_);
-            return an_;
+            decimal? ah_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? ai_ = context.Operators.Negate(0.302m);
+            decimal? aj_ = context.Operators.Power(ah_, ai_);
+            decimal? ak_ = context.Operators.Multiply(ab_, aj_);
+            decimal? al_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? am_ = context.Operators.Negate(1.200m);
+            decimal? an_ = context.Operators.Power(al_, am_);
+            decimal? ao_ = context.Operators.Multiply(ak_, an_);
+            Patient ap_ = this.Patient(context);
+            Date aq_ = ap_?.BirthDateElement;
+            string ar_ = aq_?.Value;
+            CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
+            CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+            CqlInterval<CqlDateTime> au_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime av_ = context.Operators.Start(au_);
+            int? aw_ = context.Operators.CalculateAgeAt(at_, av_, "year");
+            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(aw_);
+            decimal? ay_ = context.Operators.Power(0.9938m, ax_);
+            decimal? az_ = context.Operators.Multiply(ao_, ay_);
+            return az_;
         }
         else
         {
@@ -665,33 +677,32 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? b_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? LabTestsLow) {
             string h_ = LabTestsLow?.CrEncInPtId;
-            string i_ = (QualifyingEncounter is Resource
-                ? (QualifyingEncounter as Resource).IdElement
-                : default)?.Value;
-            bool? j_ = context.Operators.Equal(h_, i_);
-            CqlDateTime k_ = LabTestsLow?.CrLabTime;
-            CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime m_ = context.Operators.Start(l_);
-            CqlQuantity n_ = context.Operators.Quantity(24m, "hours");
-            CqlDateTime o_ = context.Operators.Add(m_, n_);
-            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-            bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
-            bool? r_ = context.Operators.And(j_, q_);
-            return r_;
+            Id i_ = QualifyingEncounter?.IdElement;
+            string j_ = i_?.Value;
+            bool? k_ = context.Operators.Equal(h_, j_);
+            CqlDateTime l_ = LabTestsLow?.CrLabTime;
+            CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime n_ = context.Operators.Start(m_);
+            CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
+            CqlDateTime p_ = context.Operators.Add(n_, o_);
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
+            bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+            bool? s_ = context.Operators.And(k_, r_);
+            return s_;
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity s_ = @this?.CrLabResult;
-            bool? t_ = context.Operators.Not((bool?)(s_ is null));
-            return t_;
+            CqlQuantity t_ = @this?.CrLabResult;
+            bool? u_ = context.Operators.Not((bool?)(t_ is null));
+            return u_;
         }
 
 
         CqlQuantity e_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity u_ = @this?.CrLabResult;
-            return u_;
+            CqlQuantity v_ = @this?.CrLabResult;
+            return v_;
         }
 
         IEnumerable<CqlQuantity> f_ = context.Operators.WhereSelect<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?, CqlQuantity>(c_, d_, e_);
@@ -908,33 +919,32 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? b_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? LabTests48) {
             string h_ = LabTests48?.CrEncInPtId;
-            string i_ = (QualifyingEncounter is Resource
-                ? (QualifyingEncounter as Resource).IdElement
-                : default)?.Value;
-            bool? j_ = context.Operators.Equal(h_, i_);
-            CqlDateTime k_ = LabTests48?.CrLabTime;
-            CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime m_ = context.Operators.Start(l_);
-            CqlQuantity n_ = context.Operators.Quantity(48m, "hours");
-            CqlDateTime o_ = context.Operators.Add(m_, n_);
-            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(m_, o_, true, true);
-            bool? q_ = context.Operators.In<CqlDateTime>(k_, p_, (string)default);
-            bool? r_ = context.Operators.And(j_, q_);
-            return r_;
+            Id i_ = QualifyingEncounter?.IdElement;
+            string j_ = i_?.Value;
+            bool? k_ = context.Operators.Equal(h_, j_);
+            CqlDateTime l_ = LabTests48?.CrLabTime;
+            CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime n_ = context.Operators.Start(m_);
+            CqlQuantity o_ = context.Operators.Quantity(48m, "hours");
+            CqlDateTime p_ = context.Operators.Add(n_, o_);
+            CqlInterval<CqlDateTime> q_ = context.Operators.Interval(n_, p_, true, true);
+            bool? r_ = context.Operators.In<CqlDateTime>(l_, q_, (string)default);
+            bool? s_ = context.Operators.And(k_, r_);
+            return s_;
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlDateTime s_ = @this?.CrLabTime;
-            bool? t_ = context.Operators.Not((bool?)(s_ is null));
-            return t_;
+            CqlDateTime t_ = @this?.CrLabTime;
+            bool? u_ = context.Operators.Not((bool?)(t_ is null));
+            return u_;
         }
 
 
         CqlDateTime e_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlDateTime u_ = @this?.CrLabTime;
-            return u_;
+            CqlDateTime v_ = @this?.CrLabTime;
+            return v_;
         }
 
         IEnumerable<CqlDateTime> f_ = context.Operators.WhereSelect<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?, CqlDateTime>(c_, d_, e_);
@@ -970,69 +980,76 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
     [CqlFunctionDefinition("femaleeGFR")]
     public decimal? femaleeGFR(CqlContext context, Encounter QualifyingEncounter)
     {
-        List<Extension> a_;
-        Patient i_ = this.Patient(context);
-        bool j_ = i_ is DomainResource;
-        if (j_)
+        Patient a_ = this.Patient(context);
+        List<Extension> b_ = a_?.Extension;
+
+        bool? c_(Extension @this) {
+            FhirUri j_ = @this?.UrlElement;
+            string k_ = FHIRHelpers_4_4_000.Instance.ToString(context, j_);
+            bool? l_ = context.Operators.Equal(k_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return l_;
+        }
+
+
+        object d_(Extension @this) {
+            DataType m_ = @this?.Value;
+            return m_ switch
+            {
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
+                _ => null,
+            };
+        }
+
+        IEnumerable<object> e_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)b_, c_, d_);
+        object f_ = context.Operators.SingletonFrom<object>(e_);
+        CqlCode g_ = this.Female__finding_(context);
+        string h_ = g_?.code;
+        bool? i_ = context.Operators.Equal(f_, h_);
+        if (i_ ?? false)
         {
-            Patient k_ = this.Patient(context);
-            a_ = (k_ as DomainResource).Extension;
-        }
-        else
-        {
-            a_ = default;
-        }
-
-        bool? b_(Extension @this) {
-            FhirUri l_ = @this?.UrlElement;
-            string m_ = FHIRHelpers_4_4_000.Instance.ToString(context, l_);
-            bool? n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return n_;
-        }
-
-
-        object c_(Extension @this) {
-            DataType o_ = @this?.Value;
-            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
-            return p_;
-        }
-
-        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
-        object e_ = context.Operators.SingletonFrom<object>(d_);
-        CqlCode f_ = this.Female__finding_(context);
-        string g_ = f_?.code;
-        bool? h_ = context.Operators.Equal(e_, g_);
-        if (h_ ?? false)
-        {
-            decimal? q_ = context.Operators.ConvertIntegerToDecimal(142);
-            CqlQuantity r_ = this.indexCreatinine(context, QualifyingEncounter);
-            decimal? s_ = r_?.value;
-            decimal? t_ = context.Operators.Divide(s_, 0.7m);
-            decimal? u_ = context.Operators.ConvertIntegerToDecimal(1);
-            decimal?[] v_ = [
-                t_,
-                u_,
+            decimal? ab_ = context.Operators.ConvertIntegerToDecimal(142);
+            CqlQuantity ac_ = this.indexCreatinine(context, QualifyingEncounter);
+            decimal? ad_ = ac_?.value;
+            decimal? ae_ = context.Operators.Divide(ad_, 0.7m);
+            decimal? af_ = context.Operators.ConvertIntegerToDecimal(1);
+            decimal?[] ag_ = [
+                ae_,
+                af_,
             ];
-            decimal? w_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)v_);
-            decimal? x_ = context.Operators.Negate(0.241m);
-            decimal? y_ = context.Operators.Power(w_, x_);
-            decimal? z_ = context.Operators.Multiply(q_, y_);
-            decimal? aa_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)v_);
-            decimal? ab_ = context.Operators.Negate(1.200m);
-            decimal? ac_ = context.Operators.Power(aa_, ab_);
-            decimal? ad_ = context.Operators.Multiply(z_, ac_);
-            Patient ae_ = this.Patient(context);
-            Date af_ = ae_?.BirthDateElement;
-            string ag_ = af_?.Value;
-            CqlDateTime ah_ = context.Operators.ConvertStringToDateTime(ag_);
-            CqlInterval<CqlDateTime> ai_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
-            CqlDateTime aj_ = context.Operators.Start(ai_);
-            int? ak_ = context.Operators.CalculateAgeAt(ah_, aj_, "year");
-            decimal? al_ = context.Operators.ConvertIntegerToDecimal(ak_);
-            decimal? am_ = context.Operators.Power(0.9938m, al_);
-            decimal? an_ = context.Operators.Multiply(ad_, am_);
-            decimal? ao_ = context.Operators.Multiply(an_, 1.012m);
-            return ao_;
+            decimal? ah_ = context.Operators.Min<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? ai_ = context.Operators.Negate(0.241m);
+            decimal? aj_ = context.Operators.Power(ah_, ai_);
+            decimal? ak_ = context.Operators.Multiply(ab_, aj_);
+            decimal? al_ = context.Operators.Max<decimal?>((IEnumerable<decimal?>)ag_);
+            decimal? am_ = context.Operators.Negate(1.200m);
+            decimal? an_ = context.Operators.Power(al_, am_);
+            decimal? ao_ = context.Operators.Multiply(ak_, an_);
+            Patient ap_ = this.Patient(context);
+            Date aq_ = ap_?.BirthDateElement;
+            string ar_ = aq_?.Value;
+            CqlDate as_ = context.Operators.ConvertStringToDate(ar_);
+            CqlDateTime at_ = context.Operators.ConvertDateToDateTime(as_);
+            CqlInterval<CqlDateTime> au_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, QualifyingEncounter);
+            CqlDateTime av_ = context.Operators.Start(au_);
+            int? aw_ = context.Operators.CalculateAgeAt(at_, av_, "year");
+            decimal? ax_ = context.Operators.ConvertIntegerToDecimal(aw_);
+            decimal? ay_ = context.Operators.Power(0.9938m, ax_);
+            decimal? az_ = context.Operators.Multiply(ao_, ay_);
+            decimal? ba_ = context.Operators.Multiply(az_, 1.012m);
+            return ba_;
         }
         else
         {
@@ -1087,25 +1104,24 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? b_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? LabTests) {
             string h_ = LabTests?.CrEncInPtId;
-            string i_ = (QualifyingEncounter is Resource
-                ? (QualifyingEncounter as Resource).IdElement
-                : default)?.Value;
-            bool? j_ = context.Operators.Equal(h_, i_);
-            return j_;
+            Id i_ = QualifyingEncounter?.IdElement;
+            string j_ = i_?.Value;
+            bool? k_ = context.Operators.Equal(h_, j_);
+            return k_;
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity k_ = @this?.CrLabResult;
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            return l_;
+            CqlQuantity l_ = @this?.CrLabResult;
+            bool? m_ = context.Operators.Not((bool?)(l_ is null));
+            return m_;
         }
 
 
         CqlQuantity e_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity m_ = @this?.CrLabResult;
-            return m_;
+            CqlQuantity n_ = @this?.CrLabResult;
+            return n_;
         }
 
         IEnumerable<CqlQuantity> f_ = context.Operators.WhereSelect<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?, CqlQuantity>(c_, d_, e_);
@@ -1500,25 +1516,24 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? b_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? LabTestsEarly) {
             string h_ = LabTestsEarly?.CrEncInPtId;
-            string i_ = (QualifyingEncounter is Resource
-                ? (QualifyingEncounter as Resource).IdElement
-                : default)?.Value;
-            bool? j_ = context.Operators.Equal(h_, i_);
-            return j_;
+            Id i_ = QualifyingEncounter?.IdElement;
+            string j_ = i_?.Value;
+            bool? k_ = context.Operators.Equal(h_, j_);
+            return k_;
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlDateTime k_ = @this?.CrLabTime;
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            return l_;
+            CqlDateTime l_ = @this?.CrLabTime;
+            bool? m_ = context.Operators.Not((bool?)(l_ is null));
+            return m_;
         }
 
 
         CqlDateTime e_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlDateTime m_ = @this?.CrLabTime;
-            return m_;
+            CqlDateTime n_ = @this?.CrLabTime;
+            return n_;
         }
 
         IEnumerable<CqlDateTime> f_ = context.Operators.WhereSelect<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?, CqlDateTime>(c_, d_, e_);
@@ -2050,47 +2065,53 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
     private CqlQuantity Serum_Creatinine_Normal_Compute(CqlContext context)
     {
-        List<Extension> a_;
-        Patient i_ = this.Patient(context);
-        bool j_ = i_ is DomainResource;
-        if (j_)
+        Patient a_ = this.Patient(context);
+        List<Extension> b_ = a_?.Extension;
+
+        bool? c_(Extension @this) {
+            FhirUri j_ = @this?.UrlElement;
+            string k_ = FHIRHelpers_4_4_000.Instance.ToString(context, j_);
+            bool? l_ = context.Operators.Equal(k_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return l_;
+        }
+
+
+        object d_(Extension @this) {
+            DataType m_ = @this?.Value;
+            return m_ switch
+            {
+                Instant n_ => context.Operators.Convert<CqlDateTime>(n_.Value),
+                FhirDecimal o_ => o_.Value,
+                Date p_ => context.Operators.ConvertStringToDate(p_.Value),
+                FhirDateTime q_ => context.Operators.Convert<CqlDateTime>(q_),
+                Time r_ => context.Operators.ConvertStringToTime(r_.Value),
+                Base64Binary s_ => context.Operators.Convert<string>(s_.Value),
+                FhirBoolean t_ => t_.Value,
+                IValue<int?> u_ => u_.Value,
+                IValue<string> v_ => v_.Value,
+                Quantity w_ => w_.ValueElement,
+                Identifier x_ => x_.ValueElement,
+                Money y_ => y_.ValueElement,
+                UsageContext z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
+                _ => null,
+            };
+        }
+
+        IEnumerable<object> e_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)b_, c_, d_);
+        object f_ = context.Operators.SingletonFrom<object>(e_);
+        CqlCode g_ = this.Female__finding_(context);
+        string h_ = g_?.code;
+        bool? i_ = context.Operators.Equal(f_, h_);
+        if (i_ ?? false)
         {
-            Patient k_ = this.Patient(context);
-            a_ = (k_ as DomainResource).Extension;
+            CqlQuantity ab_ = context.Operators.Quantity(1.02m, "mg/dL");
+            return ab_;
         }
         else
         {
-            a_ = default;
-        }
-
-        bool? b_(Extension @this) {
-            FhirUri l_ = @this?.UrlElement;
-            string m_ = FHIRHelpers_4_4_000.Instance.ToString(context, l_);
-            bool? n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return n_;
-        }
-
-
-        object c_(Extension @this) {
-            DataType o_ = @this?.Value;
-            object p_ = context.Operators.LateBoundProperty<object>(o_, "value");
-            return p_;
-        }
-
-        IEnumerable<object> d_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)a_, b_, c_);
-        object e_ = context.Operators.SingletonFrom<object>(d_);
-        CqlCode f_ = this.Female__finding_(context);
-        string g_ = f_?.code;
-        bool? h_ = context.Operators.Equal(e_, g_);
-        if (h_ ?? false)
-        {
-            CqlQuantity q_ = context.Operators.Quantity(1.02m, "mg/dL");
-            return q_;
-        }
-        else
-        {
-            CqlQuantity r_ = context.Operators.Quantity(1.18m, "mg/dL");
-            return r_;
+            CqlQuantity ac_ = context.Operators.Quantity(1.18m, "mg/dL");
+            return ac_;
         }
     }
 
@@ -2102,25 +2123,24 @@ public partial class CMS832FHIRHHAKI_1_0_000 : ILibrary, ISingleton<CMS832FHIRHH
 
         bool? b_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? LabTests) {
             string h_ = LabTests?.CrEncInPtId;
-            string i_ = (QualifyingEncounter is Resource
-                ? (QualifyingEncounter as Resource).IdElement
-                : default)?.Value;
-            bool? j_ = context.Operators.Equal(h_, i_);
-            return j_;
+            Id i_ = QualifyingEncounter?.IdElement;
+            string j_ = i_?.Value;
+            bool? k_ = context.Operators.Equal(h_, j_);
+            return k_;
         }
 
         IEnumerable<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?> c_ = context.Operators.Where<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?>(a_, b_);
 
         bool? d_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity k_ = @this?.CrLabResult;
-            bool? l_ = context.Operators.Not((bool?)(k_ is null));
-            return l_;
+            CqlQuantity l_ = @this?.CrLabResult;
+            bool? m_ = context.Operators.Not((bool?)(l_ is null));
+            return m_;
         }
 
 
         CqlQuantity e_((CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)? @this) {
-            CqlQuantity m_ = @this?.CrLabResult;
-            return m_;
+            CqlQuantity n_ = @this?.CrLabResult;
+            return n_;
         }
 
         IEnumerable<CqlQuantity> f_ = context.Operators.WhereSelect<(CqlTupleMetadata, string CrEncInPtId, CqlInterval<CqlDateTime> CrHospitalization, string CrLabObsId, object CrLabObsCategory, IEnumerable<CqlConcept> CrLabObsCategory2, string CrLabObsStatus, CqlQuantity CrLabResult, string CrLabResultUnit, decimal? CrLabResultValue, CqlDateTime CrLabTime, CqlDateTime CrLabTimeIssued)?, CqlQuantity>(c_, d_, e_);

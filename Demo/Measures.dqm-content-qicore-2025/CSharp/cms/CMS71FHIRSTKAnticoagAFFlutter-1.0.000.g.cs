@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -440,47 +440,47 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
 
             bool? e_(object ComfortMeasure) {
                 object g_;
-                object n_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
-                bool p_ = o_ is CqlDateTime;
-                if (p_)
+                object p_ = ComfortMeasure is Procedure o_ ? o_.Performed : null;
+                object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
+                bool r_ = q_ is CqlDateTime;
+                if (r_)
                 {
-                    object q_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-                    g_ = r_ as CqlDateTime;
+                    object t_ = ComfortMeasure is Procedure s_ ? s_.Performed : null;
+                    object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
+                    g_ = u_ as CqlDateTime;
                 }
                 else
                 {
-                    object s_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                    object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
-                    bool u_ = t_ is CqlQuantity;
-                    if (u_)
+                    object w_ = ComfortMeasure is Procedure v_ ? v_.Performed : null;
+                    object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+                    bool y_ = x_ is CqlQuantity;
+                    if (y_)
                     {
-                        object v_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-                        g_ = w_ as CqlQuantity;
+                        object aa_ = ComfortMeasure is Procedure z_ ? z_.Performed : null;
+                        object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
+                        g_ = ab_ as CqlQuantity;
                     }
                     else
                     {
-                        object x_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                        object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
-                        bool z_ = y_ is CqlInterval<CqlDateTime>;
-                        if (z_)
+                        object ad_ = ComfortMeasure is Procedure ac_ ? ac_.Performed : null;
+                        object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+                        bool af_ = ae_ is CqlInterval<CqlDateTime>;
+                        if (af_)
                         {
-                            object aa_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
-                            g_ = ab_ as CqlInterval<CqlDateTime>;
+                            object ah_ = ComfortMeasure is Procedure ag_ ? ag_.Performed : null;
+                            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+                            g_ = ai_ as CqlInterval<CqlDateTime>;
                         }
                         else
                         {
-                            object ac_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
-                            bool ae_ = ad_ is CqlInterval<CqlQuantity>;
-                            if (ae_)
+                            object ak_ = ComfortMeasure is Procedure aj_ ? aj_.Performed : null;
+                            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+                            bool am_ = al_ is CqlInterval<CqlQuantity>;
+                            if (am_)
                             {
-                                object af_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
-                                object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-                                g_ = ag_ as CqlInterval<CqlQuantity>;
+                                object ao_ = ComfortMeasure is Procedure an_ ? an_.Performed : null;
+                                object ap_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ao_);
+                                g_ = ap_ as CqlInterval<CqlQuantity>;
                             }
                             else
                             {
@@ -491,11 +491,11 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 }
                 CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
                 CqlDateTime i_ = context.Operators.Start(h_);
-                object j_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "authoredOn");
-                CqlDateTime k_ = context.Operators.LateBoundProperty<CqlDateTime>(j_, "value");
-                CqlInterval<CqlDateTime> l_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, Encounter);
-                bool? m_ = context.Operators.In<CqlDateTime>(i_ ?? k_, l_, (string)default);
-                return m_;
+                FhirDateTime k_ = ComfortMeasure is ServiceRequest j_ ? j_.AuthoredOnElement : null;
+                CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(k_);
+                CqlInterval<CqlDateTime> m_ = CQMCommon_4_1_000.Instance.hospitalizationWithObservation(context, Encounter);
+                bool? n_ = context.Operators.In<CqlDateTime>(i_ ?? l_, m_, (string)default);
+                return n_;
             }
 
             bool? f_ = context.Operators.WhereAny<object>(d_, e_);
@@ -567,21 +567,20 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 IEnumerable<Medication> l_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? m_(Medication M) {
-                    string o_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType p_ = MR?.Medication;
-                    object q_ = context.Operators.LateBoundProperty<object>(p_, "reference");
-                    object r_ = context.Operators.LateBoundProperty<object>(q_, "value");
-                    IEnumerable<string> s_ = context.Operators.Split((string)r_, "/");
-                    string t_ = context.Operators.Last<string>(s_);
-                    bool? u_ = context.Operators.Equal(o_, t_);
-                    CodeableConcept v_ = M?.Code;
-                    CqlConcept w_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, v_);
-                    CqlValueSet x_ = this.Anticoagulant_Therapy(context);
-                    bool? y_ = context.Operators.ConceptInValueSet(w_, x_);
-                    bool? z_ = context.Operators.And(u_, y_);
-                    return z_;
+                    Id o_ = M?.IdElement;
+                    string p_ = o_?.Value;
+                    DataType q_ = MR?.Medication;
+                    FhirString s_ = q_ is ResourceReference r_ ? r_.ReferenceElement : null;
+                    string t_ = s_?.Value;
+                    IEnumerable<string> u_ = context.Operators.Split(t_, "/");
+                    string v_ = context.Operators.Last<string>(u_);
+                    bool? w_ = context.Operators.Equal(p_, v_);
+                    CodeableConcept x_ = M?.Code;
+                    CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_);
+                    CqlValueSet z_ = this.Anticoagulant_Therapy(context);
+                    bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+                    bool? ab_ = context.Operators.And(w_, aa_);
+                    return ab_;
                 }
 
                 bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
@@ -594,54 +593,54 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             IEnumerable<MedicationRequest> i_ = context.Operators.Union<MedicationRequest>(f_, h_);
 
             bool? j_(MedicationRequest DischargeAnticoagulant) {
-                Code<MedicationRequest.MedicationrequestStatus> aa_ = DischargeAnticoagulant?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? ab_ = aa_?.Value;
-                string ac_ = context.Operators.Convert<string>(ab_);
-                string[] ad_ = [
+                Code<MedicationRequest.MedicationrequestStatus> ac_ = DischargeAnticoagulant?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;
+                string ae_ = context.Operators.Convert<string>(ad_);
+                string[] af_ = [
                     "active",
                     "completed",
                 ];
-                bool? ae_ = context.Operators.In<string>(ac_, (IEnumerable<string>)ad_);
-                Code<MedicationRequest.MedicationRequestIntent> af_ = DischargeAnticoagulant?.IntentElement;
-                MedicationRequest.MedicationRequestIntent? ag_ = af_?.Value;
-                string ah_ = context.Operators.Convert<string>(ag_);
-                string[] ai_ = [
+                bool? ag_ = context.Operators.In<string>(ae_, (IEnumerable<string>)af_);
+                Code<MedicationRequest.MedicationRequestIntent> ah_ = DischargeAnticoagulant?.IntentElement;
+                MedicationRequest.MedicationRequestIntent? ai_ = ah_?.Value;
+                string aj_ = context.Operators.Convert<string>(ai_);
+                string[] ak_ = [
                     "order",
                     "original-order",
                     "reflex-order",
                     "filler-order",
                     "instance-order",
                 ];
-                bool? aj_ = context.Operators.In<string>(ah_, (IEnumerable<string>)ai_);
-                bool? ak_ = context.Operators.And(ae_, aj_);
-                bool? al_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
-                bool? am_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest);
-                bool? an_ = context.Operators.Or(al_, am_);
-                bool? ao_ = context.Operators.And(ak_, an_);
-                FhirDateTime ap_ = DischargeAnticoagulant?.AuthoredOnElement;
-                CqlDateTime aq_ = context.Operators.Convert<CqlDateTime>(ap_);
-                Period ar_ = Encounter?.Period;
-                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ar_);
-                bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, (string)default);
-                bool? au_ = context.Operators.And(ao_, at_);
-                IEnumerable<Task> av_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+                bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
+                bool? am_ = context.Operators.And(ag_, al_);
+                bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
+                bool? ao_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest);
+                bool? ap_ = context.Operators.Or(an_, ao_);
+                bool? aq_ = context.Operators.And(am_, ap_);
+                FhirDateTime ar_ = DischargeAnticoagulant?.AuthoredOnElement;
+                CqlDateTime as_ = context.Operators.Convert<CqlDateTime>(ar_);
+                Period at_ = Encounter?.Period;
+                CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
+                bool? av_ = context.Operators.In<CqlDateTime>(as_, au_, (string)default);
+                bool? aw_ = context.Operators.And(aq_, av_);
+                IEnumerable<Task> ax_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
-                bool? aw_(Task TaskReject) {
-                    ResourceReference ba_ = TaskReject?.Focus;
-                    bool? bb_ = QICoreCommon_4_0_000.Instance.references(context, ba_, DischargeAnticoagulant);
-                    CodeableConcept bc_ = TaskReject?.Code;
-                    CqlConcept bd_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bc_);
-                    CqlCode be_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-                    CqlConcept bf_ = context.Operators.ConvertCodeToConcept(be_);
-                    bool? bg_ = context.Operators.Equivalent(bd_, bf_);
-                    bool? bh_ = context.Operators.And(bb_, bg_);
-                    return bh_;
+                bool? ay_(Task TaskReject) {
+                    ResourceReference bc_ = TaskReject?.Focus;
+                    bool? bd_ = QICoreCommon_4_0_000.Instance.references(context, bc_, DischargeAnticoagulant);
+                    CodeableConcept be_ = TaskReject?.Code;
+                    CqlConcept bf_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, be_);
+                    CqlCode bg_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+                    CqlConcept bh_ = context.Operators.ConvertCodeToConcept(bg_);
+                    bool? bi_ = context.Operators.Equivalent(bf_, bh_);
+                    bool? bj_ = context.Operators.And(bd_, bi_);
+                    return bj_;
                 }
 
-                bool? ax_ = context.Operators.WhereAny<Task>(av_, aw_);
-                bool? ay_ = context.Operators.Not(ax_);
-                bool? az_ = context.Operators.And(au_, ay_);
-                return az_;
+                bool? az_ = context.Operators.WhereAny<Task>(ax_, ay_);
+                bool? ba_ = context.Operators.Not(az_);
+                bool? bb_ = context.Operators.And(aw_, ba_);
+                return bb_;
             }
 
             bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
@@ -721,21 +720,20 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             IEnumerable<Medication> ap_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
             bool? aq_(Medication M) {
-                string as_ = (M is Resource
-                    ? (M as Resource).IdElement
-                    : default)?.Value;
-                DataType at_ = MR?.Medication;
-                object au_ = context.Operators.LateBoundProperty<object>(at_, "reference");
-                object av_ = context.Operators.LateBoundProperty<object>(au_, "value");
-                IEnumerable<string> aw_ = context.Operators.Split((string)av_, "/");
-                string ax_ = context.Operators.Last<string>(aw_);
-                bool? ay_ = context.Operators.Equal(as_, ax_);
-                CodeableConcept az_ = M?.Code;
-                CqlConcept ba_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, az_);
-                CqlValueSet bb_ = this.Anticoagulant_Therapy(context);
-                bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
-                bool? bd_ = context.Operators.And(ay_, bc_);
-                return bd_;
+                Id as_ = M?.IdElement;
+                string at_ = as_?.Value;
+                DataType au_ = MR?.Medication;
+                FhirString aw_ = au_ is ResourceReference av_ ? av_.ReferenceElement : null;
+                string ax_ = aw_?.Value;
+                IEnumerable<string> ay_ = context.Operators.Split(ax_, "/");
+                string az_ = context.Operators.Last<string>(ay_);
+                bool? ba_ = context.Operators.Equal(at_, az_);
+                CodeableConcept bb_ = M?.Code;
+                CqlConcept bc_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bb_);
+                CqlValueSet bd_ = this.Anticoagulant_Therapy(context);
+                bool? be_ = context.Operators.ConceptInValueSet(bc_, bd_);
+                bool? bf_ = context.Operators.And(ba_, be_);
+                return bf_;
             }
 
             bool? ar_ = context.Operators.WhereAny<Medication>(ap_, aq_);
@@ -747,39 +745,39 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> j_ = context.Operators.Union<MedicationRequest>(h_, i_);
 
         bool? k_(MedicationRequest MedReqAntiCoagulant) {
-            IEnumerable<Task> be_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
+            IEnumerable<Task> bg_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-taskrejected"));
 
-            bool? bf_(Task TaskReject) {
-                ResourceReference bh_ = TaskReject?.Focus;
-                bool? bi_ = QICoreCommon_4_0_000.Instance.references(context, bh_, MedReqAntiCoagulant);
-                CodeableConcept bj_ = TaskReject?.StatusReason;
-                CqlConcept bk_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bj_);
-                CqlValueSet bl_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
-                bool? bm_ = context.Operators.ConceptInValueSet(bk_, bl_);
-                CqlValueSet bn_ = this.Patient_Refusal(context);
-                bool? bo_ = context.Operators.ConceptInValueSet(bk_, bn_);
-                bool? bp_ = context.Operators.Or(bm_, bo_);
-                bool? bq_ = context.Operators.And(bi_, bp_);
-                Code<MedicationRequest.MedicationrequestStatus> br_ = MedReqAntiCoagulant?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? bs_ = br_?.Value;
-                string bt_ = context.Operators.Convert<string>(bs_);
-                string[] bu_ = [
+            bool? bh_(Task TaskReject) {
+                ResourceReference bj_ = TaskReject?.Focus;
+                bool? bk_ = QICoreCommon_4_0_000.Instance.references(context, bj_, MedReqAntiCoagulant);
+                CodeableConcept bl_ = TaskReject?.StatusReason;
+                CqlConcept bm_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bl_);
+                CqlValueSet bn_ = this.Medical_Reason_For_Not_Providing_Treatment(context);
+                bool? bo_ = context.Operators.ConceptInValueSet(bm_, bn_);
+                CqlValueSet bp_ = this.Patient_Refusal(context);
+                bool? bq_ = context.Operators.ConceptInValueSet(bm_, bp_);
+                bool? br_ = context.Operators.Or(bo_, bq_);
+                bool? bs_ = context.Operators.And(bk_, br_);
+                Code<MedicationRequest.MedicationrequestStatus> bt_ = MedReqAntiCoagulant?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bu_ = bt_?.Value;
+                string bv_ = context.Operators.Convert<string>(bu_);
+                string[] bw_ = [
                     "active",
                     "completed",
                 ];
-                bool? bv_ = context.Operators.In<string>(bt_, (IEnumerable<string>)bu_);
-                bool? bw_ = context.Operators.And(bq_, bv_);
-                CodeableConcept bx_ = TaskReject?.Code;
-                CqlConcept by_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bx_);
-                CqlCode bz_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
-                CqlConcept ca_ = context.Operators.ConvertCodeToConcept(bz_);
-                bool? cb_ = context.Operators.Equivalent(by_, ca_);
-                bool? cc_ = context.Operators.And(bw_, cb_);
-                return cc_;
+                bool? bx_ = context.Operators.In<string>(bv_, (IEnumerable<string>)bw_);
+                bool? by_ = context.Operators.And(bs_, bx_);
+                CodeableConcept bz_ = TaskReject?.Code;
+                CqlConcept ca_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bz_);
+                CqlCode cb_ = QICoreCommon_4_0_000.Instance.Fulfill(context);
+                CqlConcept cc_ = context.Operators.ConvertCodeToConcept(cb_);
+                bool? cd_ = context.Operators.Equivalent(ca_, cc_);
+                bool? ce_ = context.Operators.And(by_, cd_);
+                return ce_;
             }
 
-            bool? bg_ = context.Operators.WhereAny<Task>(be_, bf_);
-            return bg_;
+            bool? bi_ = context.Operators.WhereAny<Task>(bg_, bh_);
+            return bi_;
         }
 
         IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);

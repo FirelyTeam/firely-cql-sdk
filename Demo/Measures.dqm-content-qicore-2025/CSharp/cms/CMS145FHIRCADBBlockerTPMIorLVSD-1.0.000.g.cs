@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS145FHIRCADBBlockerTPMIorLVSD", "1.0.000")]
 public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingleton<CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000>
 {
@@ -821,15 +821,15 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
             bool? e_(object LVSDFindings) {
                 CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LVSDFindings as Condition);
-                object h_ = context.Operators.LateBoundProperty<object>(LVSDFindings, "effective");
-                object i_ = FHIRHelpers_4_4_000.Instance.ToValue(context, h_);
-                CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.toInterval(context, i_);
-                CqlDateTime k_ = context.Operators.Start(g_ ?? j_);
-                Period l_ = EncounterWithCADProxy?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlDateTime n_ = context.Operators.End(m_);
-                bool? o_ = context.Operators.Before(k_, n_, (string)default);
-                return o_;
+                object i_ = LVSDFindings is Observation h_ ? h_.Effective : null;
+                object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.toInterval(context, j_);
+                CqlDateTime l_ = context.Operators.Start(g_ ?? k_);
+                Period m_ = EncounterWithCADProxy?.Period;
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlDateTime o_ = context.Operators.End(n_);
+                bool? p_ = context.Operators.Before(l_, o_, (string)default);
+                return p_;
             }
 
             bool? f_ = context.Operators.WhereAny<object>(d_, e_);
@@ -1544,41 +1544,70 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         bool? a_(Encounter Visit) {
             if (Event is AllergyIntolerance)
             {
-                object d_ = context.Operators.LateBoundProperty<object>(Event, "onset");
-                object e_ = FHIRHelpers_4_4_000.Instance.ToValue(context, d_);
-                CqlInterval<CqlDateTime> f_ = QICoreCommon_4_0_000.Instance.toInterval(context, e_);
-                CqlDateTime g_ = context.Operators.Start(f_);
-                object h_ = context.Operators.LateBoundProperty<object>(Event, "lastOccurrence");
-                CqlDateTime i_ = context.Operators.LateBoundProperty<CqlDateTime>(h_, "value");
-                CqlInterval<CqlDateTime> j_ = context.Operators.Interval(g_, i_, true, true);
-                Period k_ = Visit?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                bool? m_ = context.Operators.OverlapsAfter(j_, l_, "day");
-                object n_ = context.Operators.LateBoundProperty<object>(Event, "clinicalStatus");
-                CqlConcept o_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, n_ as CodeableConcept);
-                CqlCode p_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
-                CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
-                bool? r_ = context.Operators.Equivalent(o_, q_);
-                bool? s_ = context.Operators.Or((bool?)(o_ is null), r_);
-                bool? t_ = context.Operators.And(m_, s_);
-                object u_ = context.Operators.LateBoundProperty<object>(Event, "verificationStatus");
-                CqlConcept v_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, u_ as CodeableConcept);
-                CqlCode w_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
-                CqlConcept x_ = context.Operators.ConvertCodeToConcept(w_);
-                bool? y_ = context.Operators.Equivalent(v_, x_);
-                bool? z_ = context.Operators.Or((bool?)(v_ is null), y_);
-                bool? aa_ = context.Operators.And(t_, z_);
-                return aa_;
+                object f_ = Event switch
+                {
+                    AllergyIntolerance d_ => d_.Onset,
+                    Condition e_ => e_.Onset,
+                    _ => null,
+                };
+                object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
+                CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.toInterval(context, g_);
+                CqlDateTime i_ = context.Operators.Start(h_);
+                FhirDateTime k_ = Event is AllergyIntolerance j_ ? j_.LastOccurrenceElement : null;
+                CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(k_);
+                CqlInterval<CqlDateTime> m_ = context.Operators.Interval(i_, l_, true, true);
+                Period n_ = Visit?.Period;
+                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+                bool? p_ = context.Operators.OverlapsAfter(m_, o_, "day");
+                CodeableConcept s_ = Event switch
+                {
+                    AllergyIntolerance q_ => q_.ClinicalStatus,
+                    Condition r_ => r_.ClinicalStatus,
+                    _ => null,
+                };
+                CqlConcept t_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, s_);
+                CodeableConcept w_ = Event switch
+                {
+                    AllergyIntolerance u_ => u_.ClinicalStatus,
+                    Condition v_ => v_.ClinicalStatus,
+                    _ => null,
+                };
+                CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_);
+                CqlCode y_ = QICoreCommon_4_0_000.Instance.allergy_active(context);
+                CqlConcept z_ = context.Operators.ConvertCodeToConcept(y_);
+                bool? aa_ = context.Operators.Equivalent(x_, z_);
+                bool? ab_ = context.Operators.Or((bool?)(t_ is null), aa_);
+                bool? ac_ = context.Operators.And(p_, ab_);
+                CodeableConcept af_ = Event switch
+                {
+                    AllergyIntolerance ad_ => ad_.VerificationStatus,
+                    Condition ae_ => ae_.VerificationStatus,
+                    _ => null,
+                };
+                CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_);
+                CodeableConcept aj_ = Event switch
+                {
+                    AllergyIntolerance ah_ => ah_.VerificationStatus,
+                    Condition ai_ => ai_.VerificationStatus,
+                    _ => null,
+                };
+                CqlConcept ak_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aj_);
+                CqlCode al_ = QICoreCommon_4_0_000.Instance.allergy_confirmed(context);
+                CqlConcept am_ = context.Operators.ConvertCodeToConcept(al_);
+                bool? an_ = context.Operators.Equivalent(ak_, am_);
+                bool? ao_ = context.Operators.Or((bool?)(ag_ is null), an_);
+                bool? ap_ = context.Operators.And(ac_, ao_);
+                return ap_;
             }
             else if (Event is Condition)
             {
-                bool? ab_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
-                CqlInterval<CqlDateTime> ac_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, (Event as Condition) as Condition);
-                Period ad_ = Visit?.Period;
-                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ad_);
-                bool? af_ = context.Operators.OverlapsAfter(ac_, ae_, "day");
-                bool? ag_ = context.Operators.And(ab_, af_);
-                return ag_;
+                bool? aq_ = AHAOverall_4_1_000.Instance.isVerified(context, Event as AllergyIntolerance);
+                CqlInterval<CqlDateTime> ar_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, (Event as Condition) as Condition);
+                Period as_ = Visit?.Period;
+                CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, as_);
+                bool? au_ = context.Operators.OverlapsAfter(ar_, at_, "day");
+                bool? av_ = context.Operators.And(aq_, au_);
+                return av_;
             }
             else
             {

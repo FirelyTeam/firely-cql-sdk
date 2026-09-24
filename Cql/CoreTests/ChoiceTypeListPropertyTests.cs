@@ -8,10 +8,9 @@
 
 #nullable enable
 
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
@@ -134,58 +133,56 @@ public class ChoiceTypeListPropertyTests
     }
 
     /// <summary>
-    /// When every member of the choice resolves, the path's list cardinality is read off the
-    /// members and the late-bound read is typed as that list.
+    /// When every member of the choice is known, the read dispatches on the members that have the
+    /// element: one typed branch per member, and the element's list cardinality follows from the
+    /// branches' types. Nothing is late-bound.
     /// </summary>
     [TestMethod]
-    public void EveryMemberResolves_RecoversTheListCardinality()
+    public void EveryMemberResolves_DispatchesOnTheMembers()
     {
         var allMembersResolve = GenerateCSharp(MadieShapedFixture());
 
+        ArmsTesting(allMembersResolve, "ServiceRequest").Should().Be(1);
+        ArmsTesting(allMembersResolve, "MedicationRequest").Should().Be(1);
+        allMembersResolve.Should().Contain(".ReasonCode");
         allMembersResolve.Should()
-                         .Contain(
-                             "LateBoundProperty<IEnumerable<CodeableConcept>>",
-                             "every member of the choice resolves, so reasonCode's list cardinality can be read off them");
+                         .NotContain(
+                             "LateBoundProperty",
+                             "every member of the choice is known, so reasonCode is read per member");
     }
 
     /// <summary>
-    /// A choice member whose type cannot be resolved has unknown cardinality, so the list recovery
-    /// must be abandoned rather than inferred from the resolvable subset: were the read typed as a
-    /// list off the members that do resolve, a runtime value of the unresolvable alternative whose
-    /// path is scalar would convert to <see langword="null"/> - the same silent-wrong-answer class
-    /// this fix closes, pointed the other way.
+    /// A choice member whose type cannot be resolved may hold the element with any type. The
+    /// members that do resolve get their typed branches, and the uninspectable member is served by
+    /// a late-bound branch typed like the others, so the library builds and every resolvable member
+    /// evaluates correctly (#1645).
     /// </summary>
-    /// <remarks>
-    /// Declining the recovery is an abstention, not a correct outcome. On translator output the
-    /// scalar-typed read it leaves behind feeds a list-valued operator (<c>AnyInValueSet</c>), which
-    /// the compiler rejects, so these two tests assert that the build fails rather than that a
-    /// particular C# shape is emitted: a loud failure is the acceptable outcome here, and asserting
-    /// a runtime value would pin a defect as correct behaviour. Evaluating this shape of input
-    /// correctly is tracked in #1645.
-    /// </remarks>
     [TestMethod]
-    public void UnresolvableChoiceMember_DeclinesTheListRecovery()
+    public void UnresolvableChoiceMember_KeepsALateBoundBranchForIt()
     {
         var oneMemberUnresolvable = WithMedicationRequestChoiceMemberReplaced(
             "ChoiceTypeUnresolvedMemberTest",
             () => new CqlElm.NamedTypeSpecifier(FhirNamespace, "UnresolvableIntervention"));
 
-        var act = () => GenerateCSharp(oneMemberUnresolvable);
+        var (cSharp, invoke) = Compile(oneMemberUnresolvable);
 
-        act.Should()
-           .Throw<CqlException<ExpressionBuildingError>>(
-               "a member that does not resolve cannot be shown to make the path list-valued, and the scalar read left behind does not fit the list-valued operator");
+        ArmsTesting(cSharp, "ServiceRequest").Should().Be(1, "the member that resolves gets a typed branch");
+        cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>", "the member that does not resolve is served by a late-bound branch typed like the others");
+
+        var bundle = BundleOf(
+            ServiceRequestWithReasons("sr", InValueSetCode),
+            MedicationRequestWithReasons("mr", InValueSetCode),
+            ServiceRequestWithReasons("sr-out", OutOfValueSetCode));
+        invoke("Interventions With Reason", bundle).Should().HaveCount(2, "the typed branch and the late-bound branch both find the reason");
     }
 
     /// <summary>
     /// The other arm of the same guard: a member that is itself a heterogeneous choice resolves,
-    /// but to <see cref="object"/>, which is just as uninspectable for the path - so the recovery
-    /// must be declined here too. See the remarks on
-    /// <see cref="UnresolvableChoiceMember_DeclinesTheListRecovery"/> for why a build failure, not
-    /// an emitted shape or a runtime result, is asserted.
+    /// but to <see cref="object"/>, which is just as uninspectable for the element, so it is served
+    /// by the late-bound branch too.
     /// </summary>
     [TestMethod]
-    public void NestedHeterogeneousChoiceMember_DeclinesTheListRecovery()
+    public void NestedHeterogeneousChoiceMember_KeepsALateBoundBranchForIt()
     {
         var oneMemberIsANestedChoice = WithMedicationRequestChoiceMemberReplaced(
             "ChoiceTypeNestedChoiceMemberTest",
@@ -193,21 +190,56 @@ public class ChoiceTypeListPropertyTests
                 new CqlElm.NamedTypeSpecifier(FhirNamespace, "MedicationRequest"),
                 new CqlElm.NamedTypeSpecifier(FhirNamespace, "Condition")));
 
-        var act = () => GenerateCSharp(oneMemberIsANestedChoice);
+        var (cSharp, invoke) = Compile(oneMemberIsANestedChoice);
 
-        act.Should()
-           .Throw<CqlException<ExpressionBuildingError>>(
-               "a nested heterogeneous choice collapses to object, which cannot be shown to make the path list-valued, and the scalar read left behind does not fit the list-valued operator");
+        ArmsTesting(cSharp, "ServiceRequest").Should().Be(1);
+        cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>");
+
+        var bundle = BundleOf(
+            ServiceRequestWithReasons("sr", InValueSetCode),
+            MedicationRequestWithReasons("mr", InValueSetCode));
+        invoke("Interventions With Reason", bundle).Should().HaveCount(2);
     }
 
-    private static string GenerateCSharp(ElmLibrary library) =>
-        new ElmToolkit()
-            .AddElmFiles(new[] { FhirHelpersFile })
-            .AddElmLibraries(library)
-            .CompileToAssemblies()
-            .GetElmToCSharpResults()
-            .Single(result => result.libraryIdentifier.ToString() == $"{library.identifier.id}-{library.identifier.version}")
-            .cSharp;
+    private static string GenerateCSharp(ElmLibrary library) => Compile(library).cSharp;
+
+    /// <summary>
+    /// The number of type switch arms in <paramref name="cSharp"/> that test for
+    /// <paramref name="typeName"/>, in whichever form the emitter printed them: a declaration
+    /// pattern (<c>is T v</c>) or a switch expression arm (<c>T v =></c>).
+    /// </summary>
+    private static int ArmsTesting(string cSharp, string typeName) =>
+        System.Text.RegularExpressions.Regex.Matches(
+            cSharp,
+            $@"\bis {System.Text.RegularExpressions.Regex.Escape(typeName)} \w+\b|^\s*{System.Text.RegularExpressions.Regex.Escape(typeName)} \w+ =>",
+            System.Text.RegularExpressions.RegexOptions.Multiline).Count;
+
+    /// <summary>
+    /// Compiles <paramref name="library"/> (with FHIRHelpers) once and returns both its generated
+    /// C# and a function that evaluates one of its definitions against a bundle.
+    /// </summary>
+    private static (string cSharp, Func<string, Bundle, IEnumerable<object>> invoke) Compile(ElmLibrary library)
+    {
+        var identifier = $"{library.identifier.id}-{library.identifier.version}";
+        var elmToolkit = new ElmToolkit()
+                         .AddElmFiles(new[] { FhirHelpersFile })
+                         .AddElmLibraries(library)
+                         .CompileToAssemblies();
+
+        var cSharp = elmToolkit.GetElmToCSharpResults().Single(result => result.libraryIdentifier.ToString() == identifier).cSharp;
+
+        var librarySetInvoker = new InvocationToolkit()
+                                .AddAssemblyBinaries(elmToolkit.GetElmToAssemblyResults().Select(r => new AssemblyBinary(r.assemblyBinary, r.debugSymbolsBinary)))
+                                .CreateLibrarySetInvoker();
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[(CqlVersionedLibraryIdentifier)identifier]!;
+
+        return (cSharp, (define, bundle) =>
+        {
+            var context = FhirCqlContext.ForBundle(bundle: bundle, valueSets: _valueSets);
+            return libraryInvoker.Invoke<IEnumerable<object>>(define, context)
+                   ?? throw new AssertFailedException($"'{define}' returned null.");
+        });
+    }
 
     /// <summary>
     /// The checked-in fixture in the shape the MADiE translator emits for it: the <c>reasonCode</c>

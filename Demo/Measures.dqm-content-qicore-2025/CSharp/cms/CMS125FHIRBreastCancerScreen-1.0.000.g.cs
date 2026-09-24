@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -129,31 +129,36 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
         CqlInterval<int?> i_ = context.Operators.Interval(42, 74, true, true);
         bool? j_ = context.Operators.In<int?>(h_, i_, (string)default);
-        List<Extension> k_;
-        Patient u_ = this.Patient(context);
-        bool v_ = u_ is DomainResource;
-        if (v_)
-        {
-            Patient w_ = this.Patient(context);
-            k_ = (w_ as DomainResource).Extension;
-        }
-        else
-        {
-            k_ = default;
-        }
+        List<Extension> k_ = a_?.Extension;
 
         bool? l_(Extension @this) {
-            FhirUri x_ = @this?.UrlElement;
-            string y_ = FHIRHelpers_4_4_000.Instance.ToString(context, x_);
-            bool? z_ = context.Operators.Equal(y_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
-            return z_;
+            FhirUri u_ = @this?.UrlElement;
+            string v_ = FHIRHelpers_4_4_000.Instance.ToString(context, u_);
+            bool? w_ = context.Operators.Equal(v_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-sex");
+            return w_;
         }
 
 
         object m_(Extension @this) {
-            DataType aa_ = @this?.Value;
-            object ab_ = context.Operators.LateBoundProperty<object>(aa_, "value");
-            return ab_;
+            DataType x_ = @this?.Value;
+            return x_ switch
+            {
+                Instant y_ => context.Operators.Convert<CqlDateTime>(y_.Value),
+                FhirDecimal z_ => z_.Value,
+                Date aa_ => context.Operators.ConvertStringToDate(aa_.Value),
+                FhirDateTime ab_ => context.Operators.Convert<CqlDateTime>(ab_),
+                Time ac_ => context.Operators.ConvertStringToTime(ac_.Value),
+                Base64Binary ad_ => context.Operators.Convert<string>(ad_.Value),
+                FhirBoolean ae_ => ae_.Value,
+                IValue<int?> af_ => af_.Value,
+                IValue<string> ag_ => ag_.Value,
+                Quantity ah_ => ah_.ValueElement,
+                Identifier ai_ => ai_.ValueElement,
+                Money aj_ => aj_.ValueElement,
+                UsageContext ak_ => ak_.Value,
+                ContactPoint al_ => al_.ValueElement,
+                _ => null,
+            };
         }
 
         IEnumerable<object> n_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)k_, l_, m_);

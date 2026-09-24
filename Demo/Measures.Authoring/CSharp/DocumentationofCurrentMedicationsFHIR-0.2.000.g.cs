@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, ISingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>
 {
@@ -245,8 +245,9 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
             IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
 
             bool? g_(Procedure MedicationsNotDocumented) {
+                List<Extension> i_ = MedicationsNotDocumented?.Extension;
 
-                bool? i_(Extension @this) {
+                bool? j_(Extension @this) {
                     FhirUri ab_ = @this?.UrlElement;
                     string ac_ = FHIRHelpers_4_3_000.Instance.ToString(context, ab_);
                     bool? ad_ = context.Operators.Equal(ac_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded");
@@ -254,20 +255,33 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 }
 
 
-                object j_(Extension @this) {
+                object k_(Extension @this) {
                     DataType ae_ = @this?.Value;
-                    object af_ = context.Operators.LateBoundProperty<object>(ae_, "value");
-                    return af_;
+                    return ae_ switch
+                    {
+                        Instant af_ => context.Operators.Convert<CqlDateTime>(af_.Value),
+                        FhirDecimal ag_ => ag_.Value,
+                        Date ah_ => context.Operators.ConvertStringToDate(ah_.Value),
+                        FhirDateTime ai_ => context.Operators.Convert<CqlDateTime>(ai_),
+                        Time aj_ => context.Operators.ConvertStringToTime(aj_.Value),
+                        Base64Binary ak_ => context.Operators.Convert<string>(ak_.Value),
+                        FhirBoolean al_ => al_.Value,
+                        IValue<int?> am_ => am_.Value,
+                        IValue<string> an_ => an_.Value,
+                        Quantity ao_ => ao_.ValueElement,
+                        Identifier ap_ => ap_.ValueElement,
+                        Money aq_ => aq_.ValueElement,
+                        UsageContext ar_ => ar_.Value,
+                        ContactPoint as_ => as_.ValueElement,
+                        _ => null,
+                    };
                 }
 
-                IEnumerable<object> k_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
-                    ? (MedicationsNotDocumented as DomainResource).Extension
-                    : default), i_, j_);
-                object l_ = context.Operators.SingletonFrom<object>(k_);
-                CqlDateTime m_ = context.Operators.Convert<CqlDateTime>((FhirDateTime)l_);
+                IEnumerable<object> l_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)i_, j_, k_);
+                object m_ = context.Operators.SingletonFrom<object>(l_);
                 Period n_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, n_);
-                bool? p_ = context.Operators.In<CqlDateTime>(m_, o_, (string)default);
+                bool? p_ = context.Operators.In<CqlDateTime>((CqlDateTime)m_, o_, (string)default);
                 Code<EventStatus> q_ = MedicationsNotDocumented?.StatusElement;
                 EventStatus? r_ = q_?.Value;
                 string s_ = context.Operators.Convert<string>(r_);
@@ -276,8 +290,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 List<CodeableConcept> v_ = MedicationsNotDocumented?.ReasonCode;
 
                 CqlConcept w_(CodeableConcept @this) {
-                    CqlConcept ag_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
-                    return ag_;
+                    CqlConcept at_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
+                    return at_;
                 }
 
                 IEnumerable<CqlConcept> x_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)v_, w_);

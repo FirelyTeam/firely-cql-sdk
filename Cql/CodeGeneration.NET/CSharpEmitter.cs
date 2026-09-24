@@ -20,7 +20,9 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <item>identical right-hand sides reuse the earlier local, keyed on the printed code and
 /// declared type;</item>
 /// <item>lambdas print as local functions, and if-chains as native <c>if</c>/<c>else</c>
-/// statements.</item>
+/// statements;</item>
+/// <item>type switches print as switch expressions, or as <c>if</c>/<c>else</c> chains over
+/// declaration patterns when an arm needs statements.</item>
 /// </list>
 ///
 /// <para>The printed output is pinned by the golden-file tests

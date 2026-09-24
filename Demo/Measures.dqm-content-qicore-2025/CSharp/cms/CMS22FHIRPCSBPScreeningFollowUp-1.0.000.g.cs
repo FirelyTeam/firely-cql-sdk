@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -1988,21 +1988,20 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 IEnumerable<Medication> av_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? aw_(Medication M) {
-                    string ay_ = (M is Resource
-                        ? (M as Resource).IdElement
-                        : default)?.Value;
-                    DataType az_ = MR?.Medication;
-                    object ba_ = context.Operators.LateBoundProperty<object>(az_, "reference");
-                    object bb_ = context.Operators.LateBoundProperty<object>(ba_, "value");
-                    IEnumerable<string> bc_ = context.Operators.Split((string)bb_, "/");
-                    string bd_ = context.Operators.Last<string>(bc_);
-                    bool? be_ = context.Operators.Equal(ay_, bd_);
-                    CodeableConcept bf_ = M?.Code;
-                    CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bf_);
-                    CqlValueSet bh_ = this.Pharmacologic_Therapy_for_Hypertension(context);
-                    bool? bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
-                    bool? bj_ = context.Operators.And(be_, bi_);
-                    return bj_;
+                    Id ay_ = M?.IdElement;
+                    string az_ = ay_?.Value;
+                    DataType ba_ = MR?.Medication;
+                    FhirString bc_ = ba_ is ResourceReference bb_ ? bb_.ReferenceElement : null;
+                    string bd_ = bc_?.Value;
+                    IEnumerable<string> be_ = context.Operators.Split(bd_, "/");
+                    string bf_ = context.Operators.Last<string>(be_);
+                    bool? bg_ = context.Operators.Equal(az_, bf_);
+                    CodeableConcept bh_ = M?.Code;
+                    CqlConcept bi_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bh_);
+                    CqlValueSet bj_ = this.Pharmacologic_Therapy_for_Hypertension(context);
+                    bool? bk_ = context.Operators.ConceptInValueSet(bi_, bj_);
+                    bool? bl_ = context.Operators.And(bg_, bk_);
+                    return bl_;
                 }
 
                 bool? ax_ = context.Operators.WhereAny<Medication>(av_, aw_);
@@ -2015,20 +2014,20 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<MedicationRequest> as_ = context.Operators.Union<MedicationRequest>(ap_, ar_);
 
             bool? at_(MedicationRequest Medications) {
-                FhirDateTime bk_ = Medications?.AuthoredOnElement;
-                CqlDateTime bl_ = context.Operators.Convert<CqlDateTime>(bk_);
-                CqlInterval<CqlDateTime> bm_ = this.Measurement_Period(context);
-                bool? bn_ = context.Operators.In<CqlDateTime>(bl_, bm_, "day");
-                Code<MedicationRequest.MedicationrequestStatus> bo_ = Medications?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? bp_ = bo_?.Value;
-                string bq_ = context.Operators.Convert<string>(bp_);
-                string[] br_ = [
+                FhirDateTime bm_ = Medications?.AuthoredOnElement;
+                CqlDateTime bn_ = context.Operators.Convert<CqlDateTime>(bm_);
+                CqlInterval<CqlDateTime> bo_ = this.Measurement_Period(context);
+                bool? bp_ = context.Operators.In<CqlDateTime>(bn_, bo_, "day");
+                Code<MedicationRequest.MedicationrequestStatus> bq_ = Medications?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? br_ = bq_?.Value;
+                string bs_ = context.Operators.Convert<string>(br_);
+                string[] bt_ = [
                     "active",
                     "completed",
                 ];
-                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
-                bool? bt_ = context.Operators.And(bn_, bs_);
-                return bt_;
+                bool? bu_ = context.Operators.In<string>(bs_, (IEnumerable<string>)bt_);
+                bool? bv_ = context.Operators.And(bp_, bu_);
+                return bv_;
             }
 
             bool? au_ = context.Operators.WhereAny<MedicationRequest>(as_, at_);
@@ -2141,51 +2140,48 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Period t_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
                 bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, "day");
+                List<Extension> w_ = NoBPScreen?.Extension;
 
-                bool? w_(Extension @this) {
-                    FhirUri am_ = @this?.UrlElement;
-                    string an_ = FHIRHelpers_4_4_000.Instance.ToString(context, am_);
-                    bool? ao_ = context.Operators.Equal(an_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                    return ao_;
-                }
-
-
-                object x_(Extension @this) {
-                    DataType ap_ = @this?.Value;
+                bool? x_(Extension @this) {
+                    FhirUri an_ = @this?.UrlElement;
+                    string ao_ = FHIRHelpers_4_4_000.Instance.ToString(context, an_);
+                    bool? ap_ = context.Operators.Equal(ao_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                     return ap_;
                 }
 
-                IEnumerable<object> y_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-                    ? (NoBPScreen as DomainResource).Extension
-                    : default), w_, x_);
-                object z_ = context.Operators.SingletonFrom<object>(y_);
-                CqlConcept aa_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, z_ as CodeableConcept);
-                CqlValueSet ab_ = this.Patient_Declined(context);
-                bool? ac_ = context.Operators.ConceptInValueSet(aa_, ab_);
 
-                bool? ad_(Extension @this) {
-                    FhirUri aq_ = @this?.UrlElement;
-                    string ar_ = FHIRHelpers_4_4_000.Instance.ToString(context, aq_);
-                    bool? as_ = context.Operators.Equal(ar_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
-                    return as_;
+                object y_(Extension @this) {
+                    DataType aq_ = @this?.Value;
+                    return aq_;
                 }
 
+                IEnumerable<object> z_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)w_, x_, y_);
+                object aa_ = context.Operators.SingletonFrom<object>(z_);
+                CqlConcept ab_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, aa_ as CodeableConcept);
+                CqlValueSet ac_ = this.Patient_Declined(context);
+                bool? ad_ = context.Operators.ConceptInValueSet(ab_, ac_);
 
-                object ae_(Extension @this) {
-                    DataType at_ = @this?.Value;
+                bool? ae_(Extension @this) {
+                    FhirUri ar_ = @this?.UrlElement;
+                    string as_ = FHIRHelpers_4_4_000.Instance.ToString(context, ar_);
+                    bool? at_ = context.Operators.Equal(as_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-notDoneReason");
                     return at_;
                 }
 
-                IEnumerable<object> af_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-                    ? (NoBPScreen as DomainResource).Extension
-                    : default), ad_, ae_);
-                object ag_ = context.Operators.SingletonFrom<object>(af_);
-                CqlConcept ah_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ag_ as CodeableConcept);
-                CqlValueSet ai_ = this.Medical_Reason(context);
-                bool? aj_ = context.Operators.ConceptInValueSet(ah_, ai_);
-                bool? ak_ = context.Operators.Or(ac_, aj_);
-                bool? al_ = context.Operators.And(v_, ak_);
-                return al_;
+
+                object af_(Extension @this) {
+                    DataType au_ = @this?.Value;
+                    return au_;
+                }
+
+                IEnumerable<object> ag_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)w_, ae_, af_);
+                object ah_ = context.Operators.SingletonFrom<object>(ag_);
+                CqlConcept ai_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ah_ as CodeableConcept);
+                CqlValueSet aj_ = this.Medical_Reason(context);
+                bool? ak_ = context.Operators.ConceptInValueSet(ai_, aj_);
+                bool? al_ = context.Operators.Or(ad_, ak_);
+                bool? am_ = context.Operators.And(v_, al_);
+                return am_;
             }
 
             bool? p_ = context.Operators.WhereAny<Observation>(n_, o_);
@@ -2236,29 +2232,28 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 "on-hold",
             ];
             bool? aa_ = context.Operators.In<string>(y_, (IEnumerable<string>)z_);
+            List<Extension> ab_ = NonPharmIntervention?.Extension;
 
-            bool? ab_(Extension @this) {
-                FhirUri aj_ = @this?.UrlElement;
-                string ak_ = FHIRHelpers_4_4_000.Instance.ToString(context, aj_);
-                bool? al_ = context.Operators.Equal(ak_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                return al_;
-            }
-
-
-            object ac_(Extension @this) {
-                DataType am_ = @this?.Value;
+            bool? ac_(Extension @this) {
+                FhirUri ak_ = @this?.UrlElement;
+                string al_ = FHIRHelpers_4_4_000.Instance.ToString(context, ak_);
+                bool? am_ = context.Operators.Equal(al_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
                 return am_;
             }
 
-            IEnumerable<object> ad_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(NonPharmIntervention is DomainResource
-                ? (NonPharmIntervention as DomainResource).Extension
-                : default), ab_, ac_);
-            object ae_ = context.Operators.SingletonFrom<object>(ad_);
-            CqlConcept af_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ae_ as CodeableConcept);
-            CqlValueSet ag_ = this.Patient_Declined(context);
-            bool? ah_ = context.Operators.ConceptInValueSet(af_, ag_);
-            bool? ai_ = context.Operators.And(aa_, ah_);
-            return ai_;
+
+            object ad_(Extension @this) {
+                DataType an_ = @this?.Value;
+                return an_;
+            }
+
+            IEnumerable<object> ae_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)ab_, ac_, ad_);
+            object af_ = context.Operators.SingletonFrom<object>(ae_);
+            CqlConcept ag_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, af_ as CodeableConcept);
+            CqlValueSet ah_ = this.Patient_Declined(context);
+            bool? ai_ = context.Operators.ConceptInValueSet(ag_, ah_);
+            bool? aj_ = context.Operators.And(aa_, ai_);
+            return aj_;
         }
 
         IEnumerable<ServiceRequest> u_ = context.Operators.Where<ServiceRequest>(s_, t_);
@@ -2297,29 +2292,28 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 "on-hold",
             ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            List<Extension> t_ = LabECGNotDone?.Extension;
 
-            bool? t_(Extension @this) {
-                FhirUri ab_ = @this?.UrlElement;
-                string ac_ = FHIRHelpers_4_4_000.Instance.ToString(context, ab_);
-                bool? ad_ = context.Operators.Equal(ac_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                return ad_;
-            }
-
-
-            object u_(Extension @this) {
-                DataType ae_ = @this?.Value;
+            bool? u_(Extension @this) {
+                FhirUri ac_ = @this?.UrlElement;
+                string ad_ = FHIRHelpers_4_4_000.Instance.ToString(context, ac_);
+                bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
                 return ae_;
             }
 
-            IEnumerable<object> v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(LabECGNotDone is DomainResource
-                ? (LabECGNotDone as DomainResource).Extension
-                : default), t_, u_);
-            object w_ = context.Operators.SingletonFrom<object>(v_);
-            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
-            CqlValueSet y_ = this.Patient_Declined(context);
-            bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-            bool? aa_ = context.Operators.And(s_, z_);
-            return aa_;
+
+            object v_(Extension @this) {
+                DataType af_ = @this?.Value;
+                return af_;
+            }
+
+            IEnumerable<object> w_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)t_, u_, v_);
+            object x_ = context.Operators.SingletonFrom<object>(w_);
+            CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_ as CodeableConcept);
+            CqlValueSet z_ = this.Patient_Declined(context);
+            bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+            bool? ab_ = context.Operators.And(s_, aa_);
+            return ab_;
         }
 
         IEnumerable<ServiceRequest> m_ = context.Operators.Where<ServiceRequest>(k_, l_);
@@ -2354,29 +2348,28 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 "on-hold",
             ];
             bool? s_ = context.Operators.In<string>(q_, (IEnumerable<string>)r_);
+            List<Extension> t_ = SecondHTNDeclinedReferralAndFollowUp?.Extension;
 
-            bool? t_(Extension @this) {
-                FhirUri ab_ = @this?.UrlElement;
-                string ac_ = FHIRHelpers_4_4_000.Instance.ToString(context, ab_);
-                bool? ad_ = context.Operators.Equal(ac_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                return ad_;
-            }
-
-
-            object u_(Extension @this) {
-                DataType ae_ = @this?.Value;
+            bool? u_(Extension @this) {
+                FhirUri ac_ = @this?.UrlElement;
+                string ad_ = FHIRHelpers_4_4_000.Instance.ToString(context, ac_);
+                bool? ae_ = context.Operators.Equal(ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
                 return ae_;
             }
 
-            IEnumerable<object> v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(SecondHTNDeclinedReferralAndFollowUp is DomainResource
-                ? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
-                : default), t_, u_);
-            object w_ = context.Operators.SingletonFrom<object>(v_);
-            CqlConcept x_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, w_ as CodeableConcept);
-            CqlValueSet y_ = this.Patient_Declined(context);
-            bool? z_ = context.Operators.ConceptInValueSet(x_, y_);
-            bool? aa_ = context.Operators.And(s_, z_);
-            return aa_;
+
+            object v_(Extension @this) {
+                DataType af_ = @this?.Value;
+                return af_;
+            }
+
+            IEnumerable<object> w_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)t_, u_, v_);
+            object x_ = context.Operators.SingletonFrom<object>(w_);
+            CqlConcept y_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, x_ as CodeableConcept);
+            CqlValueSet z_ = this.Patient_Declined(context);
+            bool? aa_ = context.Operators.ConceptInValueSet(y_, z_);
+            bool? ab_ = context.Operators.And(s_, aa_);
+            return ab_;
         }
 
         IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
@@ -2415,29 +2408,28 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 "on-hold",
             ];
             bool? y_ = context.Operators.In<string>(w_, (IEnumerable<string>)x_);
+            List<Extension> z_ = SecondHTN140Over90ReferralFollowUpNotDone?.Extension;
 
-            bool? z_(Extension @this) {
-                FhirUri ah_ = @this?.UrlElement;
-                string ai_ = FHIRHelpers_4_4_000.Instance.ToString(context, ah_);
-                bool? aj_ = context.Operators.Equal(ai_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                return aj_;
-            }
-
-
-            object aa_(Extension @this) {
-                DataType ak_ = @this?.Value;
+            bool? aa_(Extension @this) {
+                FhirUri ai_ = @this?.UrlElement;
+                string aj_ = FHIRHelpers_4_4_000.Instance.ToString(context, ai_);
+                bool? ak_ = context.Operators.Equal(aj_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
                 return ak_;
             }
 
-            IEnumerable<object> ab_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(SecondHTN140Over90ReferralFollowUpNotDone is DomainResource
-                ? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
-                : default), z_, aa_);
-            object ac_ = context.Operators.SingletonFrom<object>(ab_);
-            CqlConcept ad_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ac_ as CodeableConcept);
-            CqlValueSet ae_ = this.Patient_Declined(context);
-            bool? af_ = context.Operators.ConceptInValueSet(ad_, ae_);
-            bool? ag_ = context.Operators.And(y_, af_);
-            return ag_;
+
+            object ab_(Extension @this) {
+                DataType al_ = @this?.Value;
+                return al_;
+            }
+
+            IEnumerable<object> ac_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)z_, aa_, ab_);
+            object ad_ = context.Operators.SingletonFrom<object>(ac_);
+            CqlConcept ae_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ad_ as CodeableConcept);
+            CqlValueSet af_ = this.Patient_Declined(context);
+            bool? ag_ = context.Operators.ConceptInValueSet(ae_, af_);
+            bool? ah_ = context.Operators.And(y_, ag_);
+            return ah_;
         }
 
         IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
@@ -2446,15 +2438,15 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<MedicationRequest> l_ = context.Operators.Union<MedicationRequest>(k_, k_);
 
         bool? m_(MedicationRequest MedicationRequestNotOrdered) {
-            Code<MedicationRequest.MedicationrequestStatus> al_ = MedicationRequestNotOrdered?.StatusElement;
-            MedicationRequest.MedicationrequestStatus? am_ = al_?.Value;
-            string an_ = context.Operators.Convert<string>(am_);
-            string[] ao_ = [
+            Code<MedicationRequest.MedicationrequestStatus> am_ = MedicationRequestNotOrdered?.StatusElement;
+            MedicationRequest.MedicationrequestStatus? an_ = am_?.Value;
+            string ao_ = context.Operators.Convert<string>(an_);
+            string[] ap_ = [
                 "active",
                 "completed",
             ];
-            bool? ap_ = context.Operators.In<string>(an_, (IEnumerable<string>)ao_);
-            return ap_;
+            bool? aq_ = context.Operators.In<string>(ao_, (IEnumerable<string>)ap_);
+            return aq_;
         }
 
         IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(l_, m_);
@@ -2503,29 +2495,28 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 ];
                 bool? ao_ = context.Operators.In<string>(am_, (IEnumerable<string>)an_);
                 bool? ap_ = context.Operators.And(ai_, ao_);
+                List<Extension> aq_ = ElevatedBPDeclinedInterventions?.Extension;
 
-                bool? aq_(Extension @this) {
-                    FhirUri ay_ = @this?.UrlElement;
-                    string az_ = FHIRHelpers_4_4_000.Instance.ToString(context, ay_);
-                    bool? ba_ = context.Operators.Equal(az_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                    return ba_;
-                }
-
-
-                object ar_(Extension @this) {
-                    DataType bb_ = @this?.Value;
+                bool? ar_(Extension @this) {
+                    FhirUri az_ = @this?.UrlElement;
+                    string ba_ = FHIRHelpers_4_4_000.Instance.ToString(context, az_);
+                    bool? bb_ = context.Operators.Equal(ba_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
                     return bb_;
                 }
 
-                IEnumerable<object> as_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(ElevatedBPDeclinedInterventions is DomainResource
-                    ? (ElevatedBPDeclinedInterventions as DomainResource).Extension
-                    : default), aq_, ar_);
-                object at_ = context.Operators.SingletonFrom<object>(as_);
-                CqlConcept au_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, at_ as CodeableConcept);
-                CqlValueSet av_ = this.Patient_Declined(context);
-                bool? aw_ = context.Operators.ConceptInValueSet(au_, av_);
-                bool? ax_ = context.Operators.And(ap_, aw_);
-                return ax_;
+
+                object as_(Extension @this) {
+                    DataType bc_ = @this?.Value;
+                    return bc_;
+                }
+
+                IEnumerable<object> at_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)aq_, ar_, as_);
+                object au_ = context.Operators.SingletonFrom<object>(at_);
+                CqlConcept av_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, au_ as CodeableConcept);
+                CqlValueSet aw_ = this.Patient_Declined(context);
+                bool? ax_ = context.Operators.ConceptInValueSet(av_, aw_);
+                bool? ay_ = context.Operators.And(ap_, ax_);
+                return ay_;
             }
 
             bool? ad_ = context.Operators.WhereAny<ServiceRequest>(ab_, ac_);
@@ -2535,19 +2526,19 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 
         bool? d_(Encounter ElevatedBPEncounter) {
-            IEnumerable<ServiceRequest> bc_ = this.NonPharmacological_Intervention_Not_Ordered(context);
+            IEnumerable<ServiceRequest> bd_ = this.NonPharmacological_Intervention_Not_Ordered(context);
 
-            bool? bd_(ServiceRequest NotOrdered) {
-                FhirDateTime bf_ = NotOrdered?.AuthoredOnElement;
-                CqlDateTime bg_ = context.Operators.Convert<CqlDateTime>(bf_);
-                Period bh_ = ElevatedBPEncounter?.Period;
-                CqlInterval<CqlDateTime> bi_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bh_);
-                bool? bj_ = context.Operators.In<CqlDateTime>(bg_, bi_, "day");
-                return bj_;
+            bool? be_(ServiceRequest NotOrdered) {
+                FhirDateTime bg_ = NotOrdered?.AuthoredOnElement;
+                CqlDateTime bh_ = context.Operators.Convert<CqlDateTime>(bg_);
+                Period bi_ = ElevatedBPEncounter?.Period;
+                CqlInterval<CqlDateTime> bj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bi_);
+                bool? bk_ = context.Operators.In<CqlDateTime>(bh_, bj_, "day");
+                return bk_;
             }
 
-            bool? be_ = context.Operators.WhereAny<ServiceRequest>(bc_, bd_);
-            return be_;
+            bool? bf_ = context.Operators.WhereAny<ServiceRequest>(bd_, be_);
+            return bf_;
         }
 
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(a_, d_);
@@ -2555,76 +2546,75 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Encounter> g_ = this.Encounter_with_First_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_130_OR_DBP_Greater_than_or_Equal_to_80(context);
 
         bool? h_(Encounter FirstHTNEncounter) {
-            CqlValueSet bk_ = this.Follow_Up_Within_4_Weeks(context);
-            IEnumerable<ServiceRequest> bl_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
-            IEnumerable<ServiceRequest> bm_ = context.Operators.Union<ServiceRequest>(bl_, bl_);
-            CqlValueSet bn_ = this.Referral_to_Primary_Care_or_Alternate_Provider(context);
-            IEnumerable<ServiceRequest> bo_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bn_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
-            IEnumerable<ServiceRequest> bp_ = context.Operators.Union<ServiceRequest>(bo_, bo_);
-            IEnumerable<ServiceRequest> bq_ = context.Operators.Union<ServiceRequest>(bm_, bp_);
+            CqlValueSet bl_ = this.Follow_Up_Within_4_Weeks(context);
+            IEnumerable<ServiceRequest> bm_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+            IEnumerable<ServiceRequest> bn_ = context.Operators.Union<ServiceRequest>(bm_, bm_);
+            CqlValueSet bo_ = this.Referral_to_Primary_Care_or_Alternate_Provider(context);
+            IEnumerable<ServiceRequest> bp_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bo_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+            IEnumerable<ServiceRequest> bq_ = context.Operators.Union<ServiceRequest>(bp_, bp_);
+            IEnumerable<ServiceRequest> br_ = context.Operators.Union<ServiceRequest>(bn_, bq_);
 
-            bool? br_(ServiceRequest FirstHTNDeclinedInterventions) {
-                FhirDateTime bt_ = FirstHTNDeclinedInterventions?.AuthoredOnElement;
-                CqlDateTime bu_ = context.Operators.Convert<CqlDateTime>(bt_);
-                Period bv_ = FirstHTNEncounter?.Period;
-                CqlInterval<CqlDateTime> bw_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bv_);
-                bool? bx_ = context.Operators.In<CqlDateTime>(bu_, bw_, "day");
-                Code<RequestStatus> by_ = FirstHTNDeclinedInterventions?.StatusElement;
-                RequestStatus? bz_ = by_?.Value;
-                Code<RequestStatus> ca_ = context.Operators.Convert<Code<RequestStatus>>(bz_);
-                string cb_ = context.Operators.Convert<string>(ca_);
-                string[] cc_ = [
+            bool? bs_(ServiceRequest FirstHTNDeclinedInterventions) {
+                FhirDateTime bu_ = FirstHTNDeclinedInterventions?.AuthoredOnElement;
+                CqlDateTime bv_ = context.Operators.Convert<CqlDateTime>(bu_);
+                Period bw_ = FirstHTNEncounter?.Period;
+                CqlInterval<CqlDateTime> bx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, bw_);
+                bool? by_ = context.Operators.In<CqlDateTime>(bv_, bx_, "day");
+                Code<RequestStatus> bz_ = FirstHTNDeclinedInterventions?.StatusElement;
+                RequestStatus? ca_ = bz_?.Value;
+                Code<RequestStatus> cb_ = context.Operators.Convert<Code<RequestStatus>>(ca_);
+                string cc_ = context.Operators.Convert<string>(cb_);
+                string[] cd_ = [
                     "active",
                     "completed",
                     "on-hold",
                 ];
-                bool? cd_ = context.Operators.In<string>(cb_, (IEnumerable<string>)cc_);
-                bool? ce_ = context.Operators.And(bx_, cd_);
+                bool? ce_ = context.Operators.In<string>(cc_, (IEnumerable<string>)cd_);
+                bool? cf_ = context.Operators.And(by_, ce_);
+                List<Extension> cg_ = FirstHTNDeclinedInterventions?.Extension;
 
-                bool? cf_(Extension @this) {
-                    FhirUri cn_ = @this?.UrlElement;
-                    string co_ = FHIRHelpers_4_4_000.Instance.ToString(context, cn_);
-                    bool? cp_ = context.Operators.Equal(co_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
-                    return cp_;
+                bool? ch_(Extension @this) {
+                    FhirUri cp_ = @this?.UrlElement;
+                    string cq_ = FHIRHelpers_4_4_000.Instance.ToString(context, cp_);
+                    bool? cr_ = context.Operators.Equal(cq_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerformReason");
+                    return cr_;
                 }
 
 
-                object cg_(Extension @this) {
-                    DataType cq_ = @this?.Value;
-                    return cq_;
+                object ci_(Extension @this) {
+                    DataType cs_ = @this?.Value;
+                    return cs_;
                 }
 
-                IEnumerable<object> ch_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(FirstHTNDeclinedInterventions is DomainResource
-                    ? (FirstHTNDeclinedInterventions as DomainResource).Extension
-                    : default), cf_, cg_);
-                object ci_ = context.Operators.SingletonFrom<object>(ch_);
-                CqlConcept cj_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ci_ as CodeableConcept);
-                CqlValueSet ck_ = this.Patient_Declined(context);
-                bool? cl_ = context.Operators.ConceptInValueSet(cj_, ck_);
-                bool? cm_ = context.Operators.And(ce_, cl_);
-                return cm_;
+                IEnumerable<object> cj_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)cg_, ch_, ci_);
+                object ck_ = context.Operators.SingletonFrom<object>(cj_);
+                CqlConcept cl_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, ck_ as CodeableConcept);
+                CqlValueSet cm_ = this.Patient_Declined(context);
+                bool? cn_ = context.Operators.ConceptInValueSet(cl_, cm_);
+                bool? co_ = context.Operators.And(cf_, cn_);
+                return co_;
             }
 
-            bool? bs_ = context.Operators.WhereAny<ServiceRequest>(bq_, br_);
-            return bs_;
+            bool? bt_ = context.Operators.WhereAny<ServiceRequest>(br_, bs_);
+            return bt_;
         }
 
         IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
 
         bool? j_(Encounter FirstHTNEncounter) {
-            IEnumerable<ServiceRequest> cr_ = this.NonPharmacological_Intervention_Not_Ordered(context);
+            IEnumerable<ServiceRequest> ct_ = this.NonPharmacological_Intervention_Not_Ordered(context);
 
-            bool? cs_(ServiceRequest NoNonPharm) {
-                FhirDateTime cu_ = NoNonPharm?.AuthoredOnElement;
-                CqlDateTime cv_ = context.Operators.Convert<CqlDateTime>(cu_);
-                Period cw_ = FirstHTNEncounter?.Period;
-                CqlInterval<CqlDateTime> cx_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cw_);
-                bool? cy_ = context.Operators.In<CqlDateTime>(cv_, cx_, "day");
-                return cy_;
+            bool? cu_(ServiceRequest NoNonPharm) {
+                FhirDateTime cw_ = NoNonPharm?.AuthoredOnElement;
+                CqlDateTime cx_ = context.Operators.Convert<CqlDateTime>(cw_);
+                Period cy_ = FirstHTNEncounter?.Period;
+                CqlInterval<CqlDateTime> cz_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, cy_);
+                bool? da_ = context.Operators.In<CqlDateTime>(cx_, cz_, "day");
+                return da_;
             }
 
-            bool? ct_ = context.Operators.WhereAny<ServiceRequest>(cr_, cs_);
-            return ct_;
+            bool? cv_ = context.Operators.WhereAny<ServiceRequest>(ct_, cu_);
+            return cv_;
         }
 
         IEnumerable<Encounter> k_ = context.Operators.Where<Encounter>(g_, j_);
@@ -2633,38 +2623,43 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<Encounter> n_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89(context);
 
         bool? o_(Encounter SecondHTNEncounter) {
-            IEnumerable<ServiceRequest> cz_ = this.Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined(context);
+            IEnumerable<ServiceRequest> db_ = this.Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined(context);
 
-            bool? da_(ServiceRequest SecondHTNDeclinedInterventions) {
-                FhirDateTime dc_ = SecondHTNDeclinedInterventions?.AuthoredOnElement;
-                CqlDateTime dd_ = context.Operators.Convert<CqlDateTime>(dc_);
-                Period de_ = SecondHTNEncounter?.Period;
-                CqlInterval<CqlDateTime> df_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, de_);
-                bool? dg_ = context.Operators.In<CqlDateTime>(dd_, df_, "day");
-                return dg_;
+            bool? dc_(ServiceRequest SecondHTNDeclinedInterventions) {
+                FhirDateTime de_ = SecondHTNDeclinedInterventions?.AuthoredOnElement;
+                CqlDateTime df_ = context.Operators.Convert<CqlDateTime>(de_);
+                Period dg_ = SecondHTNEncounter?.Period;
+                CqlInterval<CqlDateTime> dh_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dg_);
+                bool? di_ = context.Operators.In<CqlDateTime>(df_, dh_, "day");
+                return di_;
             }
 
-            bool? db_ = context.Operators.WhereAny<ServiceRequest>(cz_, da_);
-            return db_;
+            bool? dd_ = context.Operators.WhereAny<ServiceRequest>(db_, dc_);
+            return dd_;
         }
 
         IEnumerable<Encounter> p_ = context.Operators.Where<Encounter>(n_, o_);
         IEnumerable<Encounter> q_ = this.Encounter_with_Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90(context);
 
         bool? r_(Encounter SecondHTN140Over90Encounter) {
-            IEnumerable<object> dh_ = this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(context);
+            IEnumerable<object> dj_ = this.Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined(context);
 
-            bool? di_(object SecondHTN140Over90DeclinedInterventions) {
-                object dk_ = context.Operators.LateBoundProperty<object>(SecondHTN140Over90DeclinedInterventions, "authoredOn");
-                CqlDateTime dl_ = context.Operators.LateBoundProperty<CqlDateTime>(dk_, "value");
-                Period dm_ = SecondHTN140Over90Encounter?.Period;
-                CqlInterval<CqlDateTime> dn_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dm_);
-                bool? do_ = context.Operators.In<CqlDateTime>(dl_, dn_, "day");
-                return do_;
+            bool? dk_(object SecondHTN140Over90DeclinedInterventions) {
+                FhirDateTime do_ = SecondHTN140Over90DeclinedInterventions switch
+                {
+                    MedicationRequest dm_ => dm_.AuthoredOnElement,
+                    ServiceRequest dn_ => dn_.AuthoredOnElement,
+                    _ => null,
+                };
+                CqlDateTime dp_ = context.Operators.Convert<CqlDateTime>(do_);
+                Period dq_ = SecondHTN140Over90Encounter?.Period;
+                CqlInterval<CqlDateTime> dr_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, dq_);
+                bool? ds_ = context.Operators.In<CqlDateTime>(dp_, dr_, "day");
+                return ds_;
             }
 
-            bool? dj_ = context.Operators.WhereAny<object>(dh_, di_);
-            return dj_;
+            bool? dl_ = context.Operators.WhereAny<object>(dj_, dk_);
+            return dl_;
         }
 
         IEnumerable<Encounter> s_ = context.Operators.Where<Encounter>(q_, r_);

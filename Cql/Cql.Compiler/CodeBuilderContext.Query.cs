@@ -60,11 +60,15 @@ partial class CodeBuilderContext
             {
                 var sourceParameterName = TypeNameToIdentifier(returnElementType, this);
                 scopeParameter = new CodeLocal(returnElementType, sourceParameterName);
+                // Each tuple property stands for one aliased source; the scope keeps that source
+                // as the alias's element, so what is known about the source's elements is known
+                // about the alias.
                 var scopes =
                     (
                         from property in returnElementType!.GetProperties()
                         let propertyAccess = new CodeProperty(scopeParameter, property)
-                        select new CodeExpressionElementPairForIdentifier(property.Name, (propertyAccess, (Elm.Element)query))
+                        let aliasedSource = sources.FirstOrDefault(source => source.alias is { } alias && IdentifierNormalizer.Normalize(alias) == property.Name)
+                        select new CodeExpressionElementPairForIdentifier(property.Name, (propertyAccess, (Elm.Element?)aliasedSource ?? query))
                     )
                     .ToArray();
                 PushScopes(ImpliedAlias, scopes);
@@ -146,6 +150,16 @@ partial class CodeBuilderContext
             {
                 @return = new CodeNewArray(@return.Type, @return);
             }
+
+            // What is known about the query's elements, for an alias or a property over this
+            // query: the return expression's alternatives, or the single source's when the
+            // query keeps its source elements. Resolved here, while the query's scopes are live.
+            var elementAlternatives = query.@return?.expression is { } returned
+                ? StaticValueFor(returned, throwIfNotFound: false)?.Alternatives
+                : sources.Length == 1
+                    ? ScopeStaticValue(sources[0].alias).Alternatives
+                    : null;
+            _staticValues[query] = new StaticValue(@return.Type, elementAlternatives);
 
             return @return;
         }
@@ -541,68 +555,36 @@ partial class CodeBuilderContext
                 throw this.NewExpressionBuildingException("Property expression cannot have null or empty path");
             var path = op.path;
 
+            CodeExpression source;
+            StaticValue sourceValue;
             Type? expectedType;
-
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                var (scopeExpression, scopeElement) = GetScope(op.scope!);
+                source = GetScopeExpression(op.scope!);
+                sourceValue = ScopeStaticValue(op.scope!);
                 expectedType = TypeFor(op) ?? typeof(object);
-                var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!);
-                if (pathMemberInfo == null)
-                {
-                    // A path that does not resolve as one element name may be qualified
-                    // ("medication.reference.value"). An element name that itself contains a dot
-                    // (a quoted CQL identifier) has been tried first, so it takes precedence.
-                    var segments = path.Split('.');
-                    if (segments.Length > 1)
-                        return BindQualifiedPath(scopeExpression, segments, expectedType, scopeElement, op);
-
-                    return LateBoundProperty(scopeExpression, path!, expectedType, scopeElement, op);
-                }
-
-                var propogate = PropagateNull(scopeExpression, pathMemberInfo);
-                string message = $"TupleBuilderCache failed to resolve type.";
-                var resultType = TypeFor(op) ?? throw this.NewExpressionBuildingException(message);
-                if (resultType != propogate.Type)
-                {
-                    propogate = ChangeType(propogate, resultType, throwOnError: true);
-                }
-
-                return propogate;
             }
-
-            if (op.source == null)
-                throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
-
-            var source = TranslateArg(op.source);
-            if (_typeResolver.GetProperty(source.Type, path) == null)
+            else
             {
-                // support paths like birthDate.value on Patient; an element name that itself
-                // contains a dot (a quoted CQL identifier) has been tried first and takes precedence.
-                var segments = path.Split('.');
-                if (segments.Length > 1)
-                {
-                    expectedType = TypeFor(op, throwIfNotFound: false) ?? typeof(object);
-                    return BindQualifiedPath(source, segments, expectedType, op.source, op);
-                }
+                if (op.source == null)
+                    throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
+
+                source = TranslateArg(op.source);
+                // The translated source has the authoritative .NET type; the ELM contributes the
+                // alternatives when that type erases a choice.
+                sourceValue = new StaticValue(source.Type, StaticValueFor(op.source, throwIfNotFound: false)?.Alternatives);
+                // Without a result type in the ELM, the type follows from resolving the path.
+                expectedType = TypeFor(op, throwIfNotFound: false);
             }
 
-            // If we cannot determine the type from the ELM, let's try
-            // if the POCO model can help us.
-            expectedType = TypeFor(op, throwIfNotFound: false)
-                           ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
-                           ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
-
-            var result = PropertyHelper(source, path, expectedType, op.source);
-            return result;
+            return BindPropertyPath(source, sourceValue, path, expectedType, op);
         }
     }
 
     protected CodeExpression PropertyHelper(
         CodeExpression source,
         string? path,
-        Type expectedType,
-        Elm.Element? sourceElement = null)
+        Type expectedType)
     {
         CodeExpression? result = null;
         if (_typeResolver.ShouldUseSourceObject(source.Type, path!))
@@ -614,9 +596,9 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-                return LateBoundProperty(source, path!, expectedType, sourceElement);
+                return LateBoundProperty(source, path!, expectedType, element: null);
 
-            if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
+            if (!pathMemberInfo.DeclaringType!.IsAssignableFrom(source.Type)) // the property is on a derived type, so cast it
             {
                 var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
                 var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
@@ -651,150 +633,6 @@ partial class CodeBuilderContext
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Binds a qualified property path (<c>medication.reference.value</c>) one segment at a time.
-    /// Each segment whose element is known on the static type of the value before it is bound
-    /// directly; from the first segment that is not (typically an element of a choice type, whose
-    /// static type is the choice's erased base type), the remainder is late-bound one segment per
-    /// call, so no late-bound call ever carries a dotted name.
-    /// </summary>
-    /// <param name="source">The value the first segment is read from.</param>
-    /// <param name="segments">The path split on <c>.</c>; at least two segments.</param>
-    /// <param name="expectedType">The type the value of the last segment is converted to.</param>
-    /// <param name="sourceElement">The ELM element <paramref name="source"/> was built from, if any.</param>
-    /// <param name="element">The ELM property element being bound, for diagnostics.</param>
-    private CodeExpression BindQualifiedPath(
-        CodeExpression source,
-        string[] segments,
-        Type expectedType,
-        Elm.Element? sourceElement,
-        Elm.Element? element)
-    {
-        var current = source;
-        var currentElement = sourceElement;
-        for (int i = 0; i < segments.Length; i++)
-        {
-            var segment = segments[i];
-            var isLast = i == segments.Length - 1;
-            var member = _typeResolver.GetProperty(current.Type, segment);
-            if (member == null && !_typeResolver.ShouldUseSourceObject(current.Type, segment))
-                return LateBoundPropertyChain(current, segments, i, expectedType, currentElement, element);
-
-            // PropertyHelper applies the source-object rule, the cast for an element declared on a
-            // derived type, and the conversion to the expected type.
-            var segmentType = isLast ? expectedType : member?.PropertyType ?? current.Type;
-            current = PropertyHelper(current, segment, segmentType, currentElement);
-            currentElement = null;
-        }
-
-        return current;
-    }
-
-    /// <summary>
-    /// Late-binds <paramref name="segments"/> from index <paramref name="start"/> onwards, one
-    /// <see cref="ICqlOperators.LateBoundProperty{T}"/> call per segment. Intermediate segments are
-    /// read as <see cref="object"/>; only the last is converted to <paramref name="expectedType"/>.
-    /// </summary>
-    private CodeExpression LateBoundPropertyChain(
-        CodeExpression source,
-        string[] segments,
-        int start,
-        Type expectedType,
-        Elm.Element? sourceElement,
-        Elm.Element? element)
-    {
-        var current = source;
-        for (int i = start; i < segments.Length; i++)
-        {
-            var isLast = i == segments.Length - 1;
-            current = LateBoundProperty(
-                current,
-                segments[i],
-                isLast ? expectedType : typeof(object),
-                i == start ? sourceElement : null,
-                element);
-        }
-
-        return current;
-    }
-
-    /// <summary>
-    /// Emits a late-bound read of <paramref name="path"/> off <paramref name="source"/>, recovering
-    /// the path's cardinality from <paramref name="sourceElement"/>'s choice type where the erased
-    /// .NET type no longer carries it.
-    /// </summary>
-    private CodeExpression LateBoundProperty(
-        CodeExpression source,
-        string path,
-        Type expectedType,
-        Elm.Element? sourceElement,
-        Elm.Element? element = null)
-    {
-        if (!_typeResolver.IsListType(source.Type)
-            && !_typeResolver.IsListType(expectedType)
-            && LateBoundListPropertyType(sourceElement, path) is { } listType)
-        {
-            expectedType = listType;
-        }
-
-        _logger.LogWarning(
-            FormatMessage(
-                $"Property {path} can't be known at design time and will be late-bound, which is slower and leaves the property's type and cardinality unchecked.  Consider casting the source first so that this property can be definitely bound.",
-                element));
-
-        return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
-                               new CodeConstant(expectedType, typeof(Type)));
-    }
-
-    /// <summary>
-    /// Resolves <paramref name="path"/> against the member types of <paramref name="sourceElement"/>'s
-    /// choice type, returning the list type to read it as, or <see langword="null"/> when the path
-    /// is not list-valued on every member that has it, when the members disagree, or when any
-    /// member's type cannot be inspected - an uninspectable member has unknown cardinality, so
-    /// recovery is abandoned rather than inferred from the resolvable subset.
-    /// </summary>
-    /// <remarks>
-    /// A choice type erases to <see cref="object"/>, so a path on it can only be late-bound, and a
-    /// late-bound read carries the value but not its cardinality. The query machinery decides list
-    /// versus singleton from the static type, so a list typed as <see cref="object"/> is wrapped in
-    /// a one-element array and cast to the element type - which yields <see langword="null"/>, and
-    /// with it a wrong answer rather than a failure. Reading the cardinality off the choice's
-    /// members keeps the emitted code the same shape as the strongly typed case.
-    /// </remarks>
-    private Type? LateBoundListPropertyType(
-        Elm.Element? sourceElement,
-        string path)
-    {
-        var typeSpecifier = sourceElement?.GetTypeSpecifier();
-        if (typeSpecifier is ListTypeSpecifier list)
-            typeSpecifier = list.elementType;
-
-        if (typeSpecifier is not ChoiceTypeSpecifier { choice: { Length: > 0 } choices })
-            return null;
-
-        Type? elementType = null;
-        foreach (var choiceTypeSpecifier in choices)
-        {
-            var memberType = TypeFor(choiceTypeSpecifier, throwIfNotFound: false);
-            if (memberType is null || memberType == typeof(object))
-                return null;
-
-            if (_typeResolver.GetProperty(memberType, path) is not { } property)
-                continue;
-
-            if (!_typeResolver.IsListType(property.PropertyType)
-                || _typeResolver.GetListElementType(property.PropertyType, throwError: false) is not { } memberElementType)
-                return null;
-
-            if (elementType != null && elementType != memberElementType)
-                return null;
-
-            elementType = memberElementType;
-        }
-
-        return elementType is null ? null : typeof(IEnumerable<>).MakeGenericType(elementType);
     }
 
     internal static PropertyInfo? GetProperty(

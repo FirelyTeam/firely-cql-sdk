@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -583,15 +583,16 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         Patient a_ = this.Patient(context);
         Date b_ = a_?.BirthDateElement;
         string c_ = b_?.Value;
-        CqlDateTime d_ = context.Operators.ConvertStringToDateTime(c_);
-        CqlInterval<CqlDateTime> e_ = this.Measurement_Period(context);
-        CqlDateTime f_ = context.Operators.Start(e_);
-        int? g_ = context.Operators.CalculateAgeAt(d_, f_, "year");
-        bool? h_ = context.Operators.GreaterOrEqual(g_, 18);
-        IEnumerable<Encounter> i_ = this.Diabetic_Retinopathy_Encounter(context);
-        bool? j_ = context.Operators.Exists<Encounter>(i_);
-        bool? k_ = context.Operators.And(h_, j_);
-        return k_;
+        CqlDate d_ = context.Operators.ConvertStringToDate(c_);
+        CqlDateTime e_ = context.Operators.ConvertDateToDateTime(d_);
+        CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
+        CqlDateTime g_ = context.Operators.Start(f_);
+        int? h_ = context.Operators.CalculateAgeAt(e_, g_, "year");
+        bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
+        IEnumerable<Encounter> j_ = this.Diabetic_Retinopathy_Encounter(context);
+        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        bool? l_ = context.Operators.And(i_, k_);
+        return l_;
     }
 
 
