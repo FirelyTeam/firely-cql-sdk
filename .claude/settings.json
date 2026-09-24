@@ -1,0 +1,11 @@
+{
+  "extraKnownMarketplaces": {
+    "firely-agent-skills-internal": {
+      "source": { "source": "github", "repo": "FirelyTeam/skills-internal" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "firely-skills-internal@firely-agent-skills-internal": true
+  }
+}
