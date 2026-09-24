@@ -94,7 +94,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
 /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
 /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
-/// The default value is <see langword="false"/>.
+/// The default value is <see langword="true"/>.
 /// </param>
 ///
 /// <param name="ValidateIntervals">
@@ -126,7 +126,7 @@ public record CqlToolkitConfig(
     // Intervals
     bool EnableIntervalDemotion = true,
     bool EnableIntervalPromotion = true,
-    bool AllowNullIntervals = false,
+    bool AllowNullIntervals = true,
     bool ValidateIntervals = true,
     // Longs
     bool LongsRequireSuffix = true,
@@ -223,9 +223,9 @@ public record CqlToolkitConfig(
     /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
     /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
     /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
-    /// The default value is <see langword="false"/>.
+    /// The default value is <see langword="true"/>.
     /// </summary>
-    /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
+    /// <seealso href="https://cql.hl7.org/04-logicalspecification.html#interval" />
     public bool AllowNullIntervals { get; init; } = AllowNullIntervals;
 
     /// <summary>

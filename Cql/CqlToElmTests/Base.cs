@@ -221,7 +221,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool DisableListDemotion = true,
             bool EnableIntervalPromotion = true,
             bool EnableIntervalDemotion = true,
-            bool AllowNullIntervals = false)
+            bool AllowNullIntervals = true)
         {
             Debug.Assert(CqlToolkitConfig.DefaultCqlModels.SetEquals([CqlModel.ElmR1, CqlModel.Fhir401]));
             return new CqlToolkit(LoggerFactory,

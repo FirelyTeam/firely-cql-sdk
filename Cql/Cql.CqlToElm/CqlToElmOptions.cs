@@ -107,10 +107,10 @@ namespace Hl7.Cql.CqlToElm
         /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
         /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
         /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
-        /// The default value is <see langword="false"/>.
+        /// The default value is <see langword="true"/>.
         /// </summary>
-        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
-        public bool? AllowNullIntervals { get; set; } = false;
+        /// <seealso href="https://cql.hl7.org/04-logicalspecification.html#interval" />
+        public bool? AllowNullIntervals { get; set; } = true;
 
         /// <summary>
         /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
