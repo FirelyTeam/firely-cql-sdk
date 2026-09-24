@@ -647,6 +647,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlDate>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -680,12 +684,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -709,6 +717,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlDateTime>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -737,12 +749,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -766,6 +782,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<CqlTime>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -799,12 +819,16 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
-                var high = next?.Subtract(onePrior);
+                // The partition ends one step before the next start. When that start cannot be represented, the end is
+                // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
                 var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
                 if (!endsOnOrBeforeHigh)
                     break;
 
                 expanded.Add(listItem);
+                if (next is null)
+                    break;
                 listItem = next;
             }
 
@@ -828,6 +852,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<decimal?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -891,6 +919,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<int?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -913,16 +945,17 @@ namespace Hl7.Cql.Operators
             var listItem = interval.low!.Value;
             while (true)
             {
-                var next = listItem + intQuantity;
-
-                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
-                var high = Predecessor(next);
-                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                if (!endsOnOrBeforeHigh)
+                // The starting point is only returned for a partition of size per that ends on or before the
+                // upper boundary. The end is computed in a wider type so a partition reaching the type's
+                // maximum is still emitted, after which there is no next start.
+                var end = (long)listItem + intQuantity - 1;
+                if (end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
-                listItem = next;
+                if (end == int.MaxValue)
+                    break;
+                listItem = (int)(end + 1);
             }
 
             return expanded;
@@ -945,6 +978,10 @@ namespace Hl7.Cql.Operators
                 return null;
 
             var interval = ToClosed(argument!)!;
+
+            // A boundary whose closed equivalent cannot be represented is unknown, so the interval contributes nothing.
+            if (interval.low == null || interval.high == null)
+                return null;
             var expanded = new List<long?>();
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
@@ -967,16 +1004,17 @@ namespace Hl7.Cql.Operators
             var listItem = interval.low!.Value;
             while (true)
             {
-                var next = listItem + intQuantity;
-
-                // The starting point is only returned for intervals of size per that end on or before the upper boundary.
-                var high = Predecessor(next);
-                var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                if (!endsOnOrBeforeHigh)
+                // The starting point is only returned for a partition of size per that ends on or before the
+                // upper boundary. The end is computed in a wider type so a partition reaching the type's
+                // maximum is still emitted, after which there is no next start.
+                var end = (decimal)listItem + intQuantity - 1;
+                if (end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
-                listItem = next;
+                if (end == long.MaxValue)
+                    break;
+                listItem = (long)(end + 1);
             }
 
             return expanded;
@@ -1881,41 +1919,123 @@ namespace Hl7.Cql.Operators
 
         public bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision)
         {
-            if (left == null)
-                return null;
-            else if (left.low == null && left.high == null)
-                return null;
-            else if (right == null)
-                return null;
-            else if (right.low == null && right.high == null)
+            if (left == null || right == null)
                 return null;
 
-            // "This operator uses the semantics described in the Start and End operators to determine
-            // interval boundaries." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Properly
-            // Included In"), so both operands are compared - and tested for being the same interval - on
-            // their effective boundaries, a step inward at the boundary's own precision for an exclusive
-            // one. Interval(@2026-01-01, @2026-01-05] and Interval[@2026-01-02, @2026-01-05] are the same
-            // interval, so neither properly includes the other, which only the effective boundaries show.
-            left = ToClosedForPointType(left)!;
-            right = ToClosedForPointType(right)!;
+            // Only the nullable point forms can carry an unknown boundary, which the normalisation
+            // below may produce, so a non-nullable numeric interval is evaluated in its nullable form.
+            switch (left, right)
+            {
+                case (CqlInterval<int> l, CqlInterval<int> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<long> l, CqlInterval<long> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> r):
+                    return IntervalProperlyIncludedInInterval(ToNullablePoints(l), ToNullablePoints(r), precision);
+            }
 
-            var min = MinValue<T>()!;
+            // An open boundary with a value is the successor or predecessor of that value under
+            // Start/End semantics, so both operands are normalised to closed boundaries first;
+            // [1, 10] and (0, 11) then compare as the same interval.
+            left = ToClosedBoundaries(left)!;
+            right = ToClosedBoundaries(right)!;
 
-            var low = Comparer.Compare(left!.low ?? min!, right.low ?? min, precision);
-            if (low < 0)
-                return false;
-            var max = MaxValue<T>()!;
-            var high = Comparer.Compare(left.high ?? max, right.high ?? max, precision);
-            if (high > 0)
-                return false;
-            // and they are not the same interval.
-            if (low == 0 && high == 0 && left.lowClosed == right.lowClosed && left.highClosed == right.highClosed)
-                return false;
-            return true;
+            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
+            // point type, while a null open boundary is unknown, leaving comparisons against it
+            // indeterminate.
+            var lowIncluded = IsUnknownBoundary(right.low, right.lowClosed) || IsUnknownBoundary(left.low, left.lowClosed)
+                ? RangeLessOrEqual(LowBoundaryRange(right), LowBoundaryRange(left), precision)
+                : Comparer.Compare(right.low ?? MinValue<T>()!, left.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    <= 0 => true,
+                    _    => false,
+                };
+            var highIncluded = IsUnknownBoundary(right.high, right.highClosed) || IsUnknownBoundary(left.high, left.highClosed)
+                ? RangeGreaterOrEqual(HighBoundaryRange(right), HighBoundaryRange(left), precision)
+                : Comparer.Compare(right.high ?? MaxValue<T>()!, left.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    >= 0 => true,
+                    _    => false,
+                };
+
+            // Complete inclusion is only proper inclusion when the two are not the same interval.
+            return AndAllowingUnknown(lowIncluded, highIncluded) switch
+            {
+                true => SameInterval(left, right, precision) switch
+                {
+                    true  => false,
+                    false => true,
+                    null  => null,
+                },
+                var included => included,
+            };
         }
 
         public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision) =>
             IntervalProperlyIncludedInInterval(right, left, precision);
+
+        /// <summary>
+        /// Whether both intervals cover the same range under Start/End semantics: equal boundary
+        /// values - a null closed boundary being the minimum or maximum value of the point type -
+        /// and equal closedness on both ends. An unknown boundary leaves the answer indeterminate.
+        /// </summary>
+        private bool? SameInterval<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision)
+        {
+            // Each end is compared on its own, so a definite difference on one end decides the answer
+            // even when the other end is unknown.
+            var sameLow = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
+                ? null
+                : (left.lowClosed ?? false) != (right.lowClosed ?? false)
+                    ? false
+                    : SameBoundary(Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision));
+            var sameHigh = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
+                ? null
+                : (left.highClosed ?? false) != (right.highClosed ?? false)
+                    ? false
+                    : SameBoundary(Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision));
+            return AndAllowingUnknown(sameLow, sameHigh);
+        }
+
+        private static bool? SameBoundary(int? comparison) =>
+            comparison switch
+            {
+                null => null,
+                0    => true,
+                _    => false,
+            };
+
+        /// <summary>
+        /// Whether both boundaries of the interval are known once it is normalised to closed
+        /// boundaries, so that it covers a representable range rather than an unknown or
+        /// unbounded one.
+        /// </summary>
+        private bool HasKnownBoundaries<T>(CqlInterval<T>? interval) =>
+            ToClosedBoundaries(interval) is { low: not null, high: not null };
+
+        /// <summary>
+        /// Normalises an interval's open boundaries with a value to their closed equivalent
+        /// (successor for the low boundary, predecessor for the high boundary) for every point
+        /// type that has a successor and predecessor. A null open boundary stays open, since it is
+        /// unknown; an interval over any other point type is returned as is.
+        /// </summary>
+        private CqlInterval<T>? ToClosedBoundaries<T>(CqlInterval<T>? interval) =>
+            interval switch
+            {
+                null                          => null,
+                CqlInterval<int?> i           => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<long?> i          => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<decimal?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlQuantity?> i   => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlDate?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlDateTime?> i   => (CqlInterval<T>?)(object?)ToClosed(i),
+                CqlInterval<CqlTime?> i       => (CqlInterval<T>?)(object?)ToClosed(i),
+                _                             => interval,
+            };
+
+        private static CqlInterval<T?> ToNullablePoints<T>(CqlInterval<T> interval) where T : struct =>
+            new(interval.low, interval.high, interval.lowClosed, interval.highClosed);
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
@@ -2356,11 +2476,18 @@ namespace Hl7.Cql.Operators
 
             if ((interval!.lowClosed ?? false) && (interval.highClosed ?? false)) return interval;
 
+            // An open boundary whose successor or predecessor cannot be represented (the value is
+            // already the maximum or minimum of the type) has no known closed equivalent and stays
+            // open and null, so it is treated as unknown rather than as the opposite extreme.
             T newLow, newHigh;
             if (!(interval.lowClosed ?? false))
             {
                 if (interval.low != null)
+                {
                     newLow = successor(interval.low);
+                    if (newLow is null)
+                        lowClosed = false;
+                }
                 else
                 {
                     lowClosed = false;
@@ -2376,7 +2503,11 @@ namespace Hl7.Cql.Operators
 
             {
                 if (interval.high != null)
+                {
                     newHigh = predecessor(interval.high);
+                    if (newHigh is null)
+                        highClosed = false;
+                }
                 else
                 {
                     highClosed = false;

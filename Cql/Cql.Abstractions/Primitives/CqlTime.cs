@@ -107,24 +107,37 @@ namespace Hl7.Cql.Primitives
         /// Adds the given quantity to this time.
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
-        /// <returns>A new time with <paramref name="quantity"/> added to it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new time with <paramref name="quantity"/> added to it, or <see langword="null"/> if the result would fall outside the day.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
             var span = Value.TimeSpan;
-            span = unit switch
+            try
             {
-                UCUMUnits.Minute or "minute" or "minutes" => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
-                UCUMUnits.Millisecond or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
-                UCUMUnits.Day or "day" or "days" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
-                UCUMUnits.Week or "week" or "weeks" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
-                UCUMUnits.Hour or "hour" or "hours" => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
-                UCUMUnits.Second or "second" or "seconds" => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
-                _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
-            };
+                span = unit switch
+                {
+                    UCUMUnits.Minute or "minute" or "minutes" => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
+                    UCUMUnits.Millisecond or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
+                    UCUMUnits.Day or "day" or "days" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
+                    UCUMUnits.Week or "week" or "weeks" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
+                    UCUMUnits.Hour or "hour" or "hours" => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
+                    UCUMUnits.Second or "second" or "seconds" => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
+                    _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                };
+            }
+            catch (OverflowException)
+            {
+                // A quantity too large for a TimeSpan lands outside the day just the same.
+                return null;
+            }
+
+            // A time-of-day outside 00:00:00.000 to 23:59:59.999 cannot be represented, so the
+            // result is null rather than a wrapped-around time.
+            if (span < TimeSpan.Zero || span >= TimeSpan.FromDays(1))
+                return null;
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
             var result = new CqlTime(newIsoTime);
@@ -135,8 +148,8 @@ namespace Hl7.Cql.Primitives
         /// Subtracts the given quantity from this time.
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
-        /// <returns>A new time with <paramref name="quantity"/> subtracted from it.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
+        /// <returns>A new time with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the result would fall outside the day.</returns>
+        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>
@@ -178,8 +191,8 @@ namespace Hl7.Cql.Primitives
         /// <remarks>
         /// For example, if <see cref="Precision"/> is in <see cref="DateTimePrecision.Year"/>, this method will return the preceding year.
         /// </remarks>
-        /// <returns>The immediate predecessor value.</returns>
-        public CqlTime Predecessor() => Subtract(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
+        /// <returns>The immediate predecessor value, or <see langword="null"/> if this value is the minimum time.</returns>
+        public CqlTime? Predecessor() => Subtract(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision]);
 
         /// <summary>
         /// Gets the immediate successor of this value in its precision.
@@ -187,8 +200,8 @@ namespace Hl7.Cql.Primitives
         /// <remarks>
         /// For example, if <see cref="Precision"/> is in <see cref="DateTimePrecision.Year"/>, this method will return the following year.
         /// </remarks>
-        /// <returns>The immediate predecessor value.</returns>
-        public CqlTime Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
+        /// <returns>The immediate successor value, or <see langword="null"/> if this value is the maximum time.</returns>
+        public CqlTime? Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision]);
 
         /// <summary>
         /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
