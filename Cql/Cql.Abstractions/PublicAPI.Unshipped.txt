@@ -1,1 +1,5 @@
 #nullable enable
+*REMOVED*Hl7.Cql.Primitives.CqlTime.Predecessor() -> Hl7.Cql.Primitives.CqlTime!
+*REMOVED*Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime!
+Hl7.Cql.Primitives.CqlTime.Predecessor() -> Hl7.Cql.Primitives.CqlTime?
+Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime?

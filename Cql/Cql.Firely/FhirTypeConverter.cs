@@ -778,24 +778,13 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <inheritdoc cref="PeriodBoundary(CqlDateTime, bool?, bool)"/>
-        /// <remarks>
-        /// A <see cref="CqlTime"/> step is TimeSpan arithmetic that neither overflows nor returns null:
-        /// past @T23:59:59.999 the successor wraps around to the start of the day, and below @T00:00:00.000
-        /// the predecessor yields negative components, which are not a valid time of day at all. Both are
-        /// rejected by requiring the stepped value to be a time of day that moved in the expected direction.
-        /// </remarks>
         private static CqlTime PeriodBoundary(CqlTime boundary, bool? closed, bool isLow)
         {
             if (closed ?? false)
                 return boundary;
 
-            var stepped = isLow ? boundary.Successor() : boundary.Predecessor();
-            var steppedTimeOfDay = stepped.Value.TimeSpan;
-            var boundaryTimeOfDay = boundary.Value.TimeSpan;
-            var representable = steppedTimeOfDay >= TimeSpan.Zero
-                && (isLow ? steppedTimeOfDay > boundaryTimeOfDay : steppedTimeOfDay < boundaryTimeOfDay);
-
-            return representable ? stepped : boundary;
+            CqlTime? stepped = isLow ? boundary.Successor() : boundary.Predecessor();
+            return stepped ?? boundary;
         }
 
         /// <summary>
