@@ -242,6 +242,9 @@ partial class CodeBuilderContext
 
             case OperandRef { name: { } name } operandRef when _operands?.TryGetValue(name, out var operand) == true:
             {
+                if (NarrowedStaticValue(operand) is { } narrowed)
+                    return narrowed;
+
                 var typeSpecifier = operandRef.resultTypeSpecifier
                                     ?? (_operandTypeSpecifiers.TryGetValue(name, out var declared) ? declared : null);
                 return new StaticValue(operand.Type, ChoiceAlternativesOf(typeSpecifier, unwrapList: false));
@@ -271,6 +274,9 @@ partial class CodeBuilderContext
     private StaticValue ScopeStaticValue(string alias)
     {
         var (expression, element) = GetScope(alias);
+        if (NarrowedStaticValue(expression) is { } narrowed)
+            return narrowed;
+
         // A RelationshipClause (with/without) is an AliasedQuerySource too.
         Expression? sourceExpression = element switch
         {

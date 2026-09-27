@@ -733,6 +733,200 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Case_OfIsTestsOnAnAlias_NarrowsTheAliasInEachBranch()
+        {
+            // from ([Condition] X return X.onset) R return case when R is Age then R.value
+            // when R is dateTime then R.value when R is Period then R as Period else null end.
+            // Within each branch R is known to be the tested type, so its value binds statically
+            // and the as-cast is the narrowed value itself: one type switch, no dispatch inside it.
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var narrowing = new Hl7.Cql.Elm.Case
+            {
+                caseItem =
+                [
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "dateTime"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Period"), then = new Hl7.Cql.Elm.As { operand = r, asTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Period") } },
+                ],
+                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.AnyType.name },
+            };
+            var elmLibrary = QueryLibrary("NarrowedCase", OnsetsOfConditions(), narrowing);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, SwitchExpressionsIn(cSharp), "one type switch over R, nothing dispatched inside it:\n" + cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Period"), cSharp);
+            Assert.IsFalse(cSharp.Contains(" as Period") || cSharp.Contains(" as Age"), "an as-cast of the narrowed value is the value itself:\n" + cSharp);
+
+            var period = new Period { Start = "2026-01-01" };
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") },
+                new Condition { Id = "c-3", Subject = new ResourceReference("Patient/1"), Onset = period },
+                new Condition { Id = "c-4", Subject = new ResourceReference("Patient/1"), Onset = new FhirString("childhood") }))).Cast<object>().ToList();
+
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.AreEqual(2, ((Hl7.Cql.Primitives.CqlDateTime)values[1]).Value.Month);
+            Assert.AreSame(period, values[2]);
+            Assert.IsNull(values[3], "a string onset matches no branch");
+        }
+
+        [TestMethod]
+        public void If_OnAnIsTestOfAnAlias_NarrowsTheAliasInTheThenBranch()
+        {
+            // ... return if R is Age then R.value else null: one arm, as a conditional over a
+            // declaration pattern, and R.value is Age's value rather than a dispatch.
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var narrowing = new Hl7.Cql.Elm.If
+            {
+                condition = IsOf(r, "Age"),
+                then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" },
+                @else = new Hl7.Cql.Elm.Null { resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "decimal") },
+            };
+            var elmLibrary = QueryLibrary("NarrowedIf", OnsetsOfConditions(), narrowing);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.AreEqual(0, SwitchExpressionsIn(cSharp), "R.value on the narrowed R is not dispatched:\n" + cSharp);
+
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") }))).Cast<object>().ToList();
+
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.IsNull(values[1]);
+        }
+
+        [TestMethod]
+        public void Case_WithAConditionOtherThanAnIsTest_NarrowsOnlyTheLeadingIsTests()
+        {
+            // case when R is Age then R.value when true then 'reached' when R is dateTime then ...
+            // A branch after the unrelated condition is reached only once every earlier test failed,
+            // which says nothing about R's type, so only the first branch narrows.
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var mixed = new Hl7.Cql.Elm.Case
+            {
+                caseItem =
+                [
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
+                    new Hl7.Cql.Elm.CaseItem
+                    {
+                        when = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.BooleanType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.BooleanType.name, value = "true" },
+                        then = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = "reached" },
+                    },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "dateTime"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
+                ],
+                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.AnyType.name },
+            };
+            var elmLibrary = QueryLibrary("PartlyNarrowedCase", OnsetsOfConditions(), mixed);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis Age \w+\)").Count, "the leading Is test narrows:\n" + cSharp);
+            Assert.AreEqual(0, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bis FhirDateTime \w+\)").Count,
+                "the Is test after the unrelated condition is an ordinary condition:\n" + cSharp);
+
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") }))).Cast<object>().ToList();
+
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.AreEqual("reached", values[1], "the unrelated condition is tested before the later Is test");
+        }
+
+        [TestMethod]
+        public void Case_WithAnIsTestAnEarlierOneCovers_DropsTheUnreachableBranch()
+        {
+            // case when R is Quantity then 'quantity' when R is Age then 'age' else null: an Age is a
+            // Quantity, so the second branch can never be taken, and a switch arm for it would not
+            // compile (CS8510).
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            Hl7.Cql.Elm.Literal Text(string value) =>
+                new() { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = value };
+            var covered = new Hl7.Cql.Elm.Case
+            {
+                caseItem =
+                [
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Quantity"), then = Text("quantity") },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = Text("age") },
+                ],
+                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name },
+            };
+            var elmLibrary = QueryLibrary("CoveredCase", OnsetsOfConditions(), covered);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Quantity"), cSharp);
+            Assert.AreEqual(0, ArmsTesting(cSharp, "Age"), "the branch an earlier test covers is dropped:\n" + cSharp);
+
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } }))).Cast<object>().ToList();
+            CollectionAssert.AreEqual(new object[] { "quantity" }, values);
+        }
+
+        [TestMethod]
+        public void If_OnAnIsTestForAValueType_NarrowsToTheValue()
+        {
+            // from { 5, 'five' } (as Choice<Integer, String>) R return if R is Integer then R + 1 else null
+            var choice = new Hl7.Cql.Elm.ChoiceTypeSpecifier(Hl7.Cql.Elm.SystemTypes.IntegerType, Hl7.Cql.Elm.SystemTypes.StringType);
+            var values = new Hl7.Cql.Elm.List
+            {
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = choice },
+                element =
+                [
+                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "5" } },
+                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = "five" } },
+                ],
+            };
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var plusOne = new Hl7.Cql.Elm.If
+            {
+                condition = new Hl7.Cql.Elm.Is { operand = r, isTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType },
+                then = new Hl7.Cql.Elm.Add
+                {
+                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
+                    operand =
+                    [
+                        new Hl7.Cql.Elm.As { operand = r, asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType, resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType },
+                        new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "1" },
+                    ],
+                },
+                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name },
+            };
+            var elmLibrary = QueryLibrary("NarrowedValueType", values, plusOne);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "int"), cSharp);
+
+            var results = ((System.Collections.IEnumerable)invoke(BundleOf())).Cast<object>().ToList();
+            CollectionAssert.AreEqual(new object[] { 6, null }, results);
+        }
+
+        /// <summary>The number of switch expressions in <paramref name="cSharp"/>.</summary>
+        private static int SwitchExpressionsIn(string cSharp) =>
+            System.Text.RegularExpressions.Regex.Matches(cSharp, @" switch\r?$", System.Text.RegularExpressions.RegexOptions.Multiline).Count;
+
+        /// <summary><c>x is FHIR.<paramref name="fhirType"/></c>.</summary>
+        private static Hl7.Cql.Elm.Is IsOf(Hl7.Cql.Elm.Expression operand, string fhirType) =>
+            new() { operand = operand, isTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", fhirType) };
+
+        /// <summary><c>[Condition] X return X.onset</c>: a query whose elements are Condition.onset values.</summary>
+        private static Hl7.Cql.Elm.Query OnsetsOfConditions() =>
+            new()
+            {
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "X", expression = RetrieveOf("Condition") }],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    distinct = false,
+                    expression = new Hl7.Cql.Elm.Property { path = "onset", scope = "X" },
+                },
+            };
+
+        [TestMethod]
         public void Property_OnPrimitiveValueWithoutAResultType_HasTheTypeTheModelDeclares()
         {
             // P.birthDate.value, with no result type in the ELM (MADiE output): the model declares

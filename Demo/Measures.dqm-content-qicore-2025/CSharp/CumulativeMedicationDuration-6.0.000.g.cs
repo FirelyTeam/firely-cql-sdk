@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.5.0")]
 [CqlLibrary("CumulativeMedicationDuration", "6.0.000")]
 public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton<CumulativeMedicationDuration_6_0_000>
 {
@@ -1961,43 +1961,23 @@ public partial class CumulativeMedicationDuration_6_0_000 : ILibrary, ISingleton
 
 
     [CqlFunctionDefinition("MedicationPeriod")]
-    public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication)
+    public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication) =>
+    medication switch
     {
-        if (medication is MedicationRequest)
-        {
-            CqlInterval<CqlDate> a_ = this.MedicationRequestPeriod(context, medication as MedicationRequest);
-            return a_;
-        }
-        else if (medication is MedicationDispense)
-        {
-            CqlInterval<CqlDate> b_ = this.MedicationDispensePeriod(context, medication as MedicationDispense);
-            return b_;
-        }
-        else
-        {
-            return null as CqlInterval<CqlDate>;
-        }
-    }
+        MedicationRequest a_ => this.MedicationRequestPeriod(context, a_),
+        MedicationDispense b_ => this.MedicationDispensePeriod(context, b_),
+        _ => null as CqlInterval<CqlDate>,
+    };
 
 
     [CqlFunctionDefinition("medicationPeriod")]
-    public CqlInterval<CqlDate> medicationPeriod(CqlContext context, object medication)
+    public CqlInterval<CqlDate> medicationPeriod(CqlContext context, object medication) =>
+    medication switch
     {
-        if (medication is MedicationRequest)
-        {
-            CqlInterval<CqlDate> a_ = this.medicationRequestPeriod(context, medication as MedicationRequest);
-            return a_;
-        }
-        else if (medication is MedicationDispense)
-        {
-            CqlInterval<CqlDate> b_ = this.medicationDispensePeriod(context, medication as MedicationDispense);
-            return b_;
-        }
-        else
-        {
-            return null as CqlInterval<CqlDate>;
-        }
-    }
+        MedicationRequest a_ => this.medicationRequestPeriod(context, a_),
+        MedicationDispense b_ => this.medicationDispensePeriod(context, b_),
+        _ => null as CqlInterval<CqlDate>,
+    };
 
 
     [CqlFunctionDefinition("CumulativeMedicationDuration")]

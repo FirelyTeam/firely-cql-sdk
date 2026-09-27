@@ -543,7 +543,7 @@ partial class CodeBuilderContext
     protected CodeExpression OperandRef(OperandRef ore)
     {
         if (_operands?.TryGetValue(ore.name!, out var expression) == true)
-            return expression;
+            return Narrowed(expression);
         throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
     }
 

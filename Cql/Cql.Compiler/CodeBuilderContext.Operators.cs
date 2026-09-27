@@ -410,6 +410,9 @@ partial class CodeBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
+                    if (AsOfNarrowed(operand, type, castKind, @as) is { } narrowed)
+                        return narrowed;
+
                     var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast: true);
                     switch (typeConversion)
                     {
@@ -448,6 +451,9 @@ partial class CodeBuilderContext
                        ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
             var operand = TranslateArg(@as.operand);
+            if (AsOfNarrowed(operand, type, castKind, @as) is { } narrowed)
+                return narrowed;
+
             if (!type.IsAssignableTo(operand.Type))
             {
                 _logger.LogWarning(FormatMessage(
@@ -512,6 +518,9 @@ partial class CodeBuilderContext
 
     protected CodeExpression Case(Case ce)
     {
+        if (CaseAsTypeSwitch(ce) is { } typeSwitch)
+            return typeSwitch;
+
         //[{ when1, then1 }, { when2, then2}, { when3, then3 }]
         // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
         if (ce.caseItem?.Length > 0 && ce.@else != null)
@@ -562,6 +571,9 @@ partial class CodeBuilderContext
 
     protected CodeExpression If(If @if)
     {
+        if (IfAsTypeSwitch(@if) is { } typeSwitch)
+            return typeSwitch;
+
         var rc = TranslateArg(@if.condition!);
         var condition = rc.Coalesce();
         var then = TranslateArg(@if.then!);

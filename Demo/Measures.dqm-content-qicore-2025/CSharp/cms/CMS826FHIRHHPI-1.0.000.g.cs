@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.5.0")]
 [CqlLibrary("CMS826FHIRHHPI", "1.0.000")]
 public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHPI_1_0_000>
 {
@@ -259,27 +259,19 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
         CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
         bool? j_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, (string)default);
         bool? k_ = context.Operators.And(e_, j_);
-        bool? l_;
-        if (observation is Observation)
+        bool? m_;
+        if (observation is Observation l_)
         {
-            DataType n_ = (observation as Observation)?.Value;
-            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
+            object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_.Value);
             bool? p_ = context.Operators.ConceptInValueSet(o_ as CqlConcept, vset);
-            l_ = p_;
-        }
-        else if (observation is Observation)
-        {
-            DataType q_ = (observation as Observation)?.Value;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            bool? s_ = context.Operators.ConceptInValueSet(r_ as CqlConcept, vset);
-            l_ = s_;
+            m_ = p_;
         }
         else
         {
-            l_ = default;
+            m_ = default;
         }
-        bool? m_ = context.Operators.And(k_, l_);
-        return m_;
+        bool? n_ = context.Operators.And(k_, m_);
+        return n_;
     }
 
 

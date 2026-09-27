@@ -84,7 +84,7 @@ partial class CodeBuilderContext
             case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
             {
                 var scope = GetScope(aliasRef.name);
-                return scope.Item1.Type;
+                return Narrowed(scope.Item1).Type;
             }
 
             case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
@@ -92,7 +92,7 @@ partial class CodeBuilderContext
                 CodeLocal? operand = null;
                 _operands?.TryGetValue(operandRef.name, out operand);
                 if (operand != null)
-                    return operand.Type;
+                    return Narrowed(operand).Type;
                 break;
             }
         }

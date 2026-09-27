@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.5.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -1145,34 +1145,22 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     [CqlFunctionDefinition("TimingBoundToInterval")]
     public CqlInterval<CqlDateTime> TimingBoundToInterval(CqlContext context, CqlDateTime startDate, object choice)
     {
-        if (choice is CqlInterval<CqlDateTime>)
+        if (choice is CqlInterval<CqlDateTime> a_)
         {
-            return choice as CqlInterval<CqlDateTime>;
+            return a_;
         }
-        else if (choice is CqlInterval<CqlQuantity>)
+        else if (choice is CqlInterval<CqlQuantity> b_)
         {
-            object c_ = choice switch
-            {
-                CqlInterval<CqlDateTime> a_ => a_.low,
-                CqlInterval<CqlQuantity> b_ => b_.low,
-                _ => null,
-            };
-            CqlDateTime d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
-            object g_ = choice switch
-            {
-                CqlInterval<CqlDateTime> e_ => e_.high,
-                CqlInterval<CqlQuantity> f_ => f_.high,
-                _ => null,
-            };
-            CqlDateTime h_ = context.Operators.Add(startDate, g_ as CqlQuantity);
-            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(d_, h_, true, true);
-            return i_;
+            CqlDateTime d_ = context.Operators.Add(startDate, b_.low as CqlQuantity);
+            CqlDateTime e_ = context.Operators.Add(startDate, b_.high as CqlQuantity);
+            CqlInterval<CqlDateTime> f_ = context.Operators.Interval(d_, e_, true, true);
+            return f_;
         }
-        else if (choice is CqlQuantity)
+        else if (choice is CqlQuantity c_)
         {
-            CqlDateTime j_ = context.Operators.Add(startDate, choice as CqlQuantity);
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(startDate, j_, true, false);
-            return k_;
+            CqlDateTime g_ = context.Operators.Add(startDate, c_);
+            CqlInterval<CqlDateTime> h_ = context.Operators.Interval(startDate, g_, true, false);
+            return h_;
         }
         else
         {

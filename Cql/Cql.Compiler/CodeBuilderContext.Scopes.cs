@@ -50,7 +50,8 @@ partial class CodeBuilderContext
             throw this.NewExpressionBuildingException(
                 $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
 
-        return kv.expr;
+        // Within a branch guarded by an Is test of the alias, the alias is the narrowed value.
+        return Narrowed(kv.expr);
     }
 
     protected (CodeExpression, Elm.Element) GetScope(string elmAlias)

@@ -225,6 +225,12 @@ internal partial class CodeBuilderContext
                 CodeExpression ConvertToResultType()
                 {
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
+
+                    // A narrowed reference keeps its type: the ELM types the reference as what it
+                    // is outside the branch that narrows it (see CodeBuilderContext.Narrowing.cs).
+                    if (expression is CodeLocal { IsNotNull: true } narrowed && tsType?.IsAssignableFrom(narrowed.Type) == true)
+                        return expression;
+
                     if (tsType is not null)
                     {
                         return ChangeType(expression!, element.resultTypeSpecifier, throwOnError: true);
