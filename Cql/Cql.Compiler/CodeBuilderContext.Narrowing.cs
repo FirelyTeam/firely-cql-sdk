@@ -86,6 +86,14 @@ partial class CodeBuilderContext
         return tested is null ? null : (@is.operand, tested);
     }
 
+    /// <summary>
+    /// The expression a reference's own lookups return, for its translation <paramref name="subject"/>:
+    /// the translation may convert the reference to its ELM type, a choice, which is a cast to
+    /// <see cref="object"/> that the lookups in the branch do not see.
+    /// </summary>
+    private static CodeExpression NarrowingKey(CodeExpression subject) =>
+        subject is CodeCast { Operand: var reference } cast && cast.Type == typeof(object) ? reference : subject;
+
     /// <summary>Whether two references name the same operand, alias or <c>let</c>.</summary>
     private static bool SameReference(Expression a, Expression b) =>
         (a, b) switch
@@ -153,7 +161,7 @@ partial class CodeBuilderContext
 
         var arms = run.Select(entry => new CodeTypeSwitchArm(
                               entry.Narrowed,
-                              AssignableTo(TranslateNarrowed(entry.Item.then!, subject, entry.Narrowed), resultType)))
+                              AssignableTo(TranslateNarrowed(entry.Item.then!, NarrowingKey(subject), entry.Narrowed), resultType)))
                       .ToList();
 
         var rest = new List<(CodeExpression When, CodeExpression Then)>();
@@ -182,7 +190,7 @@ partial class CodeBuilderContext
         if (NarrowedVariable(subject, test.Tested) is not { } narrowed)
             return null;
 
-        var then = TranslateNarrowed(@if.then!, subject, narrowed);
+        var then = TranslateNarrowed(@if.then!, NarrowingKey(subject), narrowed);
 
         // CQL values are nullable; a narrowed value-typed variable is not.
         if (then.Type.IsValueType && Nullable.GetUnderlyingType(then.Type) is null)

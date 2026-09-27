@@ -838,6 +838,45 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Case_OfIsTestsOnAFunctionOperand_NarrowsTheOperandInEachBranch()
+        {
+            // The QICoreCommon toInterval shape: a choice-typed function operand, tested with is and
+            // read with an explicit as. The translator types the operand reference as the choice, and
+            // the narrowed operand must keep its narrowed type through that. The second branch casts
+            // to the other alternative, which always yields null; it compiles on the un-narrowed
+            // operand, as without narrowing.
+            var libraryString = CqlLibraryString.Parse("""
+               library NarrowedOperand version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define function RecordedOf(E Choice<FHIR.Condition, FHIR.AllergyIntolerance>):
+                 case
+                   when E is FHIR.Condition then (E as FHIR.Condition).recordedDate
+                   when E is FHIR.AllergyIntolerance then (E as FHIR.Condition).recordedDate
+                   else null
+                 end
+
+               define "Recorded Dates": [Condition] C return RecordedOf(C)
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Recorded Dates");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Condition"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "AllergyIntolerance"), cSharp);
+            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bE as Condition\b").Count,
+                "only the cast to the other alternative remains, on the un-narrowed operand:\n" + cSharp);
+            Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(cSharp, @"\w+_ as Condition"), "no cast of a narrowed variable:\n" + cSharp);
+
+            var recorded = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), RecordedDateElement = new FhirDateTime("2026-03-04") }))).Cast<object>().Single();
+            Assert.IsNotNull(recorded, "a Condition's recorded date is read off the narrowed operand");
+        }
+
+        [TestMethod]
         public void Case_WithAnIsTestAnEarlierOneCovers_DropsTheUnreachableBranch()
         {
             // case when R is Quantity then 'quantity' when R is Age then 'age' else null: an Age is a
