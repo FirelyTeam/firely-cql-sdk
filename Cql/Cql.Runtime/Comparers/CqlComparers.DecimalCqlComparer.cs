@@ -28,15 +28,15 @@ partial class CqlComparers
             [DisallowNull] decimal? y,
             string? precision)
         {
-            // Decimal.Scale is the number of digits after the decimal point, counting trailing zeros.
-            var @thisPrecision = x.Value.Scale;
-            var otherPrecision = y.Value.Scale;
-            if (@thisPrecision < otherPrecision)
-                y = decimal.Round(y.Value, thisPrecision);
-            else if (thisPrecision > otherPrecision)
-                x = decimal.Round(x.Value, otherPrecision);
-            var areEqual = x == y;
-            return areEqual;
+            // CQL 1.5.3 §9.B (Equivalent): "For decimals, equivalent means the values are the same
+            // with the comparison done on values rounded to the precision of the least precise
+            // operand; trailing zeroes after the decimal are ignored in determining precision for
+            // equivalent comparison."
+            var left = StripTrailingZeroes(x.Value);
+            var right = StripTrailingZeroes(y.Value);
+            var leastPrecise = Math.Min(left.Scale, right.Scale);
+            return decimal.Round(left, leastPrecise, MidpointRounding.AwayFromZero)
+                   == decimal.Round(right, leastPrecise, MidpointRounding.AwayFromZero);
         }
 
         // Hashes intentionally align with CompareValues (CQL equality semantics), not
@@ -44,6 +44,17 @@ partial class CqlComparers
         // non-transitive and therefore has no consistent hash.
         protected override int GetHashCodeValue([DisallowNull] decimal? value) =>
             TruncateDigits(value ?? 0, MaxDecimalDigits).GetHashCode();
+
+        /// <summary>
+        /// Returns <paramref name="value"/> with any trailing zeroes after the decimal point removed,
+        /// so that its <see cref="decimal.Scale"/> is the count of significant fractional digits:
+        /// 1.000 yields scale 0, 1.50 yields scale 1 and 1.55 yields scale 2.
+        /// </summary>
+        /// <remarks>
+        /// Dividing by one normalizes the scale of the quotient to the minimum needed to represent it.
+        /// </remarks>
+        private static decimal StripTrailingZeroes(decimal value) =>
+            value / 1.000000000000000000000000000000000m;
 
         private static decimal TruncateDigits(decimal value, int places)
         {

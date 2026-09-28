@@ -554,5 +554,18 @@ namespace Hl7.Cql.CqlToElm.Test
             var byExpression = expression.sort.by[0].Should().BeOfType<ByExpression>().Subject;
             byExpression.direction.Should().Be(SortDirection.desc);
         }
+
+        [TestMethod]
+        public void UnresolvedQuerySourceIsReported()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library UnresolvedQuerySource version '1.0.0'
+
+                define private Query: NoSuchDefine E return E
+                """, "Could not resolve identifier NoSuchDefine in the current library.");
+
+            library.ShouldDefine<ExpressionDef>("Query")
+                   .expression!.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>();
+        }
     }
 }
