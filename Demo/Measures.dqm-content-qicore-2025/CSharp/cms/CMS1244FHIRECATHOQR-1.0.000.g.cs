@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS1244FHIRECATHOQR", "1.0.000")]
 public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244FHIRECATHOQR_1_0_000>
 {
@@ -395,7 +395,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return x_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 
@@ -730,7 +730,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 
@@ -831,7 +831,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 
@@ -925,7 +925,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 
@@ -988,7 +988,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 
@@ -1044,7 +1044,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
                 return q_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Encounter>(e_, f_);
             return g_;
         }
 

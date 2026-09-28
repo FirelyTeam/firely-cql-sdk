@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS72FHIRSTKAntithromboticDay2", "1.0.000")]
 public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISingleton<CMS72FHIRSTKAntithromboticDay2_1_0_000>
 {
@@ -218,7 +218,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return v_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 
@@ -254,7 +254,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return ad_;
             }
 
-            bool? t_ = context.Operators.WhereAny<Medication>(r_, s_);
+            bool? t_ = context.Operators.AnyRelated<Medication>(r_, s_);
             return t_;
         }
 
@@ -403,7 +403,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return p_;
             }
 
-            bool? f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, object effective)?>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<(CqlTupleMetadata, string id, object effective)?>(d_, e_);
             return f_;
         }
 
@@ -569,7 +569,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                     return x_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -606,7 +606,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return as_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationAdministration>(i_, j_);
             return k_;
         }
 
@@ -716,7 +716,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return bg_;
             }
 
-            bool? aw_ = context.Operators.WhereAny<Medication>(au_, av_);
+            bool? aw_ = context.Operators.AnyRelated<Medication>(au_, av_);
             return aw_;
         }
 
@@ -756,7 +756,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return cf_;
             }
 
-            bool? bj_ = context.Operators.WhereAny<Task>(bh_, bi_);
+            bool? bj_ = context.Operators.AnyRelated<Task>(bh_, bi_);
             return bj_;
         }
 
@@ -905,7 +905,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return r_;
             }
 
-            bool? f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<(CqlTupleMetadata, string id, CqlDateTime authoredOn)?>(d_, e_);
             return f_;
         }
 
@@ -944,7 +944,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                     return x_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -981,7 +981,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return as_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationAdministration>(i_, j_);
             return k_;
         }
 
@@ -1037,7 +1037,7 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 return af_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 

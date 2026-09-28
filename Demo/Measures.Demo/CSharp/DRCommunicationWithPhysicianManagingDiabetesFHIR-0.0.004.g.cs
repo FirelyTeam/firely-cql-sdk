@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -270,7 +270,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return q_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Condition>(e_, f_);
             return g_;
         }
 
@@ -358,7 +358,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return n_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -440,7 +440,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return o_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Encounter>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Encounter>(i_, j_);
             return k_;
         }
 
@@ -521,7 +521,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return n_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -618,7 +618,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 
@@ -685,7 +685,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -729,7 +729,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return q_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Encounter>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Encounter>(i_, j_);
             return k_;
         }
 
@@ -772,7 +772,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 

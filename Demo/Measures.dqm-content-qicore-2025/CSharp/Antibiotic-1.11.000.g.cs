@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -70,7 +70,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 return q_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Condition>(comorbidConditions, e_);
+            bool? f_ = context.Operators.AnyRelated<Condition>(comorbidConditions, e_);
             return f_;
         }
 
@@ -102,7 +102,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 return q_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Condition>(competingConditions, e_);
+            bool? f_ = context.Operators.AnyRelated<Condition>(competingConditions, e_);
             return f_;
         }
 
@@ -134,7 +134,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
                 return o_;
             }
 
-            bool? d_ = context.Operators.WhereAny<MedicationRequest>(antibioticMedications, c_);
+            bool? d_ = context.Operators.AnyRelated<MedicationRequest>(antibioticMedications, c_);
             return d_;
         }
 

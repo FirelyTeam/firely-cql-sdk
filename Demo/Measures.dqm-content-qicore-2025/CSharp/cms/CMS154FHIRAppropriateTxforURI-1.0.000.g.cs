@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -435,7 +435,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 return av_;
             }
 
-            bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
+            bool? al_ = context.Operators.AnyRelated<Medication>(aj_, ak_);
             return al_;
         }
 
@@ -495,7 +495,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                     return ab_;
                 }
 
-                bool? r_ = context.Operators.WhereAny<Medication>(p_, q_);
+                bool? r_ = context.Operators.AnyRelated<Medication>(p_, q_);
                 return r_;
             }
 
@@ -520,7 +520,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
                 return am_;
             }
 
-            bool? n_ = context.Operators.WhereAny<MedicationRequest>(l_, m_);
+            bool? n_ = context.Operators.AnyRelated<MedicationRequest>(l_, m_);
             bool? o_ = context.Operators.Not(n_);
             return o_;
         }

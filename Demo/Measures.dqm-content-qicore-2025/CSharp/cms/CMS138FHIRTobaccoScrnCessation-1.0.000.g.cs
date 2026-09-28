@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -719,7 +719,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 return v_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Medication>(j_, k_);
             return l_;
         }
 
@@ -791,7 +791,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
                 return v_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Medication>(j_, k_);
             return l_;
         }
 

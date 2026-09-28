@@ -16,6 +16,53 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        #region AnyRelated
+
+        /// <summary>
+        /// Evaluates the <c>such that</c> condition of a query relationship clause against its
+        /// related list: returns <see langword="true"/> when <paramref name="suchThat"/> is
+        /// <see langword="true"/> for at least one element of <paramref name="related"/>, and
+        /// <see langword="false"/> otherwise. A <c>with</c> clause keeps a source element exactly
+        /// when this is <see langword="true"/>, a <c>without</c> clause exactly when it is
+        /// <see langword="false"/>. Never returns <see langword="null"/>.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// A null element of <paramref name="related"/> is an element like any other: it is passed
+        /// to <paramref name="suchThat"/> and satisfies the clause whenever that returns
+        /// <see langword="true"/>. ELM logical specification, "With": <i>"The With clause restricts
+        /// the elements of a given source to only those elements that have elements in the related
+        /// source that satisfy the suchThat condition."</i> This is where the operator differs from
+        /// <c>Exists(Where(related, suchThat))</c> and its fused form <see cref="WhereAny{T}"/>,
+        /// which implement <c>exists (X where c)</c> and therefore ignore null elements.
+        /// </para>
+        /// <para>
+        /// A null <paramref name="related"/> list has no elements, so nothing satisfies the clause
+        /// and the result is <see langword="false"/>.
+        /// </para>
+        /// <para>
+        /// <paramref name="suchThat"/> is evaluated for every element, with no early exit after the
+        /// first match, so its <see cref="ICqlOperators.Message{T}"/> side effects are those of
+        /// <c>Where</c> over the whole related list.
+        /// </para>
+        /// </remarks>
+        public bool? AnyRelated<T>(IEnumerable<T>? related, Func<T, bool?> suchThat)
+        {
+            if (related == null)
+                return false;
+
+            var any = false;
+            foreach (var element in related)
+            {
+                // No early exit: the predicate runs for every element, as Where would run it.
+                if (suchThat(element) == true)
+                    any = true;
+            }
+            return any;
+        }
+
+        #endregion
+
         #region Contains
         public bool? Contains<T>(IEnumerable<T?>? list, T? item)
         {

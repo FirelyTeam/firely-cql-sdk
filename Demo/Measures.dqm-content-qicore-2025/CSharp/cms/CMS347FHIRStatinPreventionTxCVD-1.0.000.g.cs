@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -1016,7 +1016,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return ag_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Encounter>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Encounter>(n_, o_);
             return p_;
         }
 
@@ -1079,7 +1079,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return ag_;
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            bool? w_ = context.Operators.AnyRelated<Medication>(u_, v_);
             return w_;
         }
 
@@ -1105,7 +1105,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return at_;
             }
 
-            bool? aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
+            bool? aj_ = context.Operators.AnyRelated<Medication>(ah_, ai_);
             return aj_;
         }
 
@@ -1132,7 +1132,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return bg_;
             }
 
-            bool? aw_ = context.Operators.WhereAny<Medication>(au_, av_);
+            bool? aw_ = context.Operators.AnyRelated<Medication>(au_, av_);
             return aw_;
         }
 
@@ -1203,7 +1203,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return ag_;
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            bool? w_ = context.Operators.AnyRelated<Medication>(u_, v_);
             return w_;
         }
 
@@ -1229,7 +1229,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return at_;
             }
 
-            bool? aj_ = context.Operators.WhereAny<Medication>(ah_, ai_);
+            bool? aj_ = context.Operators.AnyRelated<Medication>(ah_, ai_);
             return aj_;
         }
 
@@ -1256,7 +1256,7 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
                 return bg_;
             }
 
-            bool? aw_ = context.Operators.WhereAny<Medication>(au_, av_);
+            bool? aw_ = context.Operators.AnyRelated<Medication>(au_, av_);
             return aw_;
         }
 

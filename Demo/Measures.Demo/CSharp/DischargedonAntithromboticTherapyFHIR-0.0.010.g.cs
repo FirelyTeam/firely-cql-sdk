@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
@@ -216,7 +216,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 
@@ -299,7 +299,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 
@@ -425,7 +425,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 

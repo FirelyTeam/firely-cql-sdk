@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS645FHIRBoneDensityPCADTherapy", "1.0.000")]
 public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingleton<CMS645FHIRBoneDensityPCADTherapy_1_0_000>
 {
@@ -150,7 +150,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return w_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Medication>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Medication>(k_, l_);
             return m_;
         }
 
@@ -389,7 +389,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return w_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Medication>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Medication>(k_, l_);
             return m_;
         }
 
@@ -648,7 +648,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return u_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Condition>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Condition>(h_, i_);
             return j_;
         }
 
@@ -780,7 +780,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return af_;
             }
 
-            bool? p_ = context.Operators.WhereAny<ServiceRequest>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<ServiceRequest>(n_, o_);
             return p_;
         }
 
@@ -833,7 +833,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return bm_;
             }
 
-            bool? at_ = context.Operators.WhereAny<ServiceRequest>(ar_, as_);
+            bool? at_ = context.Operators.AnyRelated<ServiceRequest>(ar_, as_);
             return at_;
         }
 
@@ -923,7 +923,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return z_;
             }
 
-            bool? h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<ServiceRequest>(f_, g_);
             return h_;
         }
 
@@ -984,7 +984,7 @@ public partial class CMS645FHIRBoneDensityPCADTherapy_1_0_000 : ILibrary, ISingl
                 return aa_;
             }
 
-            bool? h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<ServiceRequest>(f_, g_);
             return h_;
         }
 
