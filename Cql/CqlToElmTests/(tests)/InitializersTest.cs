@@ -50,5 +50,22 @@ namespace Hl7.Cql.CqlToElm.Test
             ids.Distinct().Should().HaveCount(objects.Length);
             idsAskedAgain.Should().Equal(ids);
         }
+
+        [TestMethod]
+        public void NextId_ForTheSameNewObjectsFromManyThreadsAtOnce_TakesOneNumberPerObject()
+        {
+            // Every pass walks the same new objects in the same order, and the passes run at once, so several threads
+            // meet an object for the first time together. The object still takes one number from the counter, so the
+            // numbers the objects get follow on from each other without a gap.
+            const int passes = 8;
+            var objects = Enumerable.Range(0, 50_000).Select(_ => new object()).ToArray();
+            var ids = new string[passes][];
+
+            Parallel.For(0, passes, pass => ids[pass] = objects.Select(Initializers.NextId).ToArray());
+
+            var numbers = ids[0].Select(long.Parse).ToArray();
+            (numbers.Max() - numbers.Min() + 1).Should().Be(objects.Length);
+            ids.Should().AllSatisfy(passIds => passIds.Should().Equal(ids[0]));
+        }
     }
 }
