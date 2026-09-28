@@ -8,18 +8,25 @@
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+using System.Threading;
+
 namespace Hl7.Cql.Elm
 {
     internal static class Initializers
     {
-#pragma warning disable SYSLIB0050 // ObjectIDGenerator is obsolete!
-        private static readonly ObjectIDGenerator _idGenerator = new();
-#pragma warning restore SYSLIB0050
+        // Every translation and compilation in the process numbers its elements here, possibly on several threads at
+        // once, so the table is thread-safe; it holds its keys weakly, so an element's id does not keep the element alive.
+        private static readonly ConditionalWeakTable<object, string> _ids = new();
+        private static long _lastId;
 
-        public static string NextId(object context) => _idGenerator.GetId(context, out _)
-                .ToString(CultureInfo.InvariantCulture);
+        /// <summary>
+        /// The id of <paramref name="context"/>: the same id every time for the same object, and a different one for
+        /// every other object. Ids count up from 1 in the order the objects are first seen.
+        /// </summary>
+        public static string NextId(object context) => _ids.GetValue(context, static _ => NextId());
 
-        public static string NextId() => NextId(Random.Shared.Next());
+        /// <summary>A new id, not given to any object.</summary>
+        public static string NextId() => Interlocked.Increment(ref _lastId).ToString(CultureInfo.InvariantCulture);
 
         public static T WithId<T>(this T t) where T : Element
         {
