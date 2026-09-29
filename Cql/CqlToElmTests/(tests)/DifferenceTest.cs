@@ -113,6 +113,14 @@ namespace Hl7.Cql.CqlToElm.Test
                 """, "For Date values, precision must be one of: years, months, weeks, or days.");
 
         [TestMethod]
+        public void Difference_Between_Date_In_Hours_By_Function_Syntax() =>
+            CreateCqlToolkit().MakeLibrary("""
+                library DifferenceTest version '1.0.0'
+
+                define private Difference_Between_Date_In_Hours: DifferenceBetween(@2023-01-01, @2024-02-01, 'Hour')
+                """, "For Date values, precision must be one of: years, months, weeks, or days.");
+
+        [TestMethod]
         public void Difference_Between_Hours()
         {
             var library = CreateCqlToolkit().MakeLibrary("""

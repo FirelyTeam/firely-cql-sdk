@@ -22,17 +22,24 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
+        /// <summary>
+        /// Renders a type for a message. Some expressions rejected during validation carry no result
+        /// type, and the message describing a later failure on such an expression is built from it,
+        /// so a missing type renders the way <see cref="FunctionDef.ToString"/> renders one.
+        /// </summary>
+        private static string TypeName(TypeSpecifier? type) => type?.ToString() ?? "(missing)";
+
         public string AmbiguousType(string name, params string[] modelNames)
             => string.Format(Culture, Messages.AmbiguousTypeName, name, string.Join(", ", modelNames));
 
         public string CallIsAmbiguous(string name, Expression[] arguments, SignatureMatchResult[] others) {
-            var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+            var argTypeString = string.Join(", ", arguments.Select(a => TypeName(a.resultTypeSpecifier)));
             // match cql-to-elm reference implementation (Java) error messages
             var errorSb = new StringBuilder();
             errorSb.AppendLine(string.Format(Culture, Messages.CallIsAmbiguous, name, argTypeString));
             foreach (var match in others)
             {
-                var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                var matchTypeString = string.Join(", ", match.Arguments.Select(od => TypeName(od.Result.resultTypeSpecifier)));
                 errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {name}({matchTypeString})");
             }
             return errorSb.ToString();
@@ -43,9 +50,9 @@ namespace Hl7.Cql.CqlToElm
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
             string.Format(Culture, Messages.CouldNotResolveContextName, contextName, string.Join(", ", modelNames));
         public string CouldNotResolveFunction(string functionName, params Expression[] arguments) =>
-            string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString())));
-        public string CouldNotResolveFunction(string functionName, params TypeSpecifier[] types) =>
-            string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", types.Select(t => t.ToString())));
+            string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", arguments.Select(a => TypeName(a.resultTypeSpecifier))));
+        public string CouldNotResolveFunction(string functionName, params TypeSpecifier?[] types) =>
+            string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", types.Select(TypeName)));
         public string CouldNotResolveInLibrary(string identifier, string library) =>
             string.Format(Culture, Messages.CouldNotResolveInLibrary, identifier, library);
         public string CouldNotResolveInCurrent(string identifier) =>

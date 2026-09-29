@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS1157FHIRHIVRetention", "1.0.000")]
 public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1157FHIRHIVRetention_1_0_000>
 {
@@ -318,7 +318,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 return bd_;
             }
 
-            bool? an_ = context.Operators.WhereAny<Condition>(al_, am_);
+            bool? an_ = context.Operators.AnyRelated<Condition>(al_, am_);
             return an_;
         }
 
@@ -373,7 +373,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 return ae_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -411,7 +411,7 @@ public partial class CMS1157FHIRHIVRetention_1_0_000 : ILibrary, ISingleton<CMS1
                 return r_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 

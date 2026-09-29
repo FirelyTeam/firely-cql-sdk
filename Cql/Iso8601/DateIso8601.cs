@@ -209,9 +209,23 @@ namespace Hl7.Cql.Iso8601
                 return false;
             }
 
+            if (!IsRepresentable(year!.Value, month, day))
+            {
+                dateValue = null;
+                return false;
+            }
+
             dateValue = new DateIso8601(stringValue, year!.Value, month, day);
             return true;
         }
+
+        /// <summary>
+        /// Whether a year, month and day name a date that exists and that a <see cref="DateTimeOffset"/> can hold.
+        /// </summary>
+        internal static bool IsRepresentable(int year, int? month, int? day) =>
+            year is >= 1 and <= 9999
+            && month is null or (>= 1 and <= 12)
+            && (day is null || (month is { } m && day >= 1 && day <= DateTime.DaysInMonth(year, m)));
 
         private static string Format(int year, int? month, int? day, DateTimePrecision precision)
         {

@@ -353,5 +353,17 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
+
+        [TestMethod]
+        public void InvokeIntervalWithNonLiteralClosedArguments()
+        {
+            // Each closed expression comes from its own argument.
+            var lowClosed = InvocationBuilder.Invoke(SystemLibrary.Greater, Integer(1), Integer(2));
+            var highClosed = InvocationBuilder.Invoke(SystemLibrary.Less, Integer(1), Integer(2));
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Interval, Integer(1), Integer(10), lowClosed, highClosed);
+            var interval = expression.Should().BeOfType<Interval>().Subject;
+            interval.lowClosedExpression.Should().BeSameAs(lowClosed);
+            interval.highClosedExpression.Should().BeSameAs(highClosed);
+        }
     }
 }

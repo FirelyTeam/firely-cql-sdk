@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<SupplementalDataElements_3_4_000>
 {
@@ -89,16 +89,16 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension E) {
 
             bool? o_(Extension @this) {
-                FhirUri ag_ = @this?.UrlElement;
-                string ah_ = FHIRHelpers_4_3_000.Instance.ToString(context, ag_);
-                bool? ai_ = context.Operators.Equal(ah_, "ombCategory");
-                return ai_;
+                FhirUri af_ = @this?.UrlElement;
+                string ag_ = FHIRHelpers_4_3_000.Instance.ToString(context, af_);
+                bool? ah_ = context.Operators.Equal(ag_, "ombCategory");
+                return ah_;
             }
 
 
             object p_(Extension @this) {
-                DataType aj_ = @this?.Value;
-                return aj_;
+                DataType ai_ = @this?.Value;
+                return ai_;
             }
 
             IEnumerable<object> q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(E is Element
@@ -111,16 +111,16 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             ];
 
             bool? u_(Extension @this) {
-                FhirUri ak_ = @this?.UrlElement;
-                string al_ = FHIRHelpers_4_3_000.Instance.ToString(context, ak_);
-                bool? am_ = context.Operators.Equal(al_, "detailed");
-                return am_;
+                FhirUri aj_ = @this?.UrlElement;
+                string ak_ = FHIRHelpers_4_3_000.Instance.ToString(context, aj_);
+                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                return al_;
             }
 
 
             object v_(Extension @this) {
-                DataType an_ = @this?.Value;
-                return an_;
+                DataType am_ = @this?.Value;
+                return am_;
             }
 
             IEnumerable<object> w_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(E is Element
@@ -128,33 +128,33 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 : default), u_, v_);
 
             CqlCode x_(object @this) {
-                CqlCode ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
-                return ao_;
+                CqlCode an_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                return an_;
             }
 
             IEnumerable<CqlCode> y_ = context.Operators.Select<object, CqlCode>(w_, x_);
             IEnumerable<CqlCode> z_ = context.Operators.ValueSetUnion((IEnumerable<CqlCode>)t_, y_);
 
             bool? aa_(Extension @this) {
-                FhirUri ap_ = @this?.UrlElement;
-                string aq_ = FHIRHelpers_4_3_000.Instance.ToString(context, ap_);
-                bool? ar_ = context.Operators.Equal(aq_, "text");
-                return ar_;
+                FhirUri ao_ = @this?.UrlElement;
+                string ap_ = FHIRHelpers_4_3_000.Instance.ToString(context, ao_);
+                bool? aq_ = context.Operators.Equal(ap_, "text");
+                return aq_;
             }
 
 
-            DataType ab_(Extension @this) {
-                DataType as_ = @this?.Value;
+            object ab_(Extension @this) {
+                DataType ar_ = @this?.Value;
+                object as_ = context.Operators.LateBoundProperty<object>(ar_, "value");
                 return as_;
             }
 
-            IEnumerable<DataType> ac_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(E is Element
+            IEnumerable<object> ac_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(E is Element
                 ? (E as Element).Extension
                 : default), aa_, ab_);
-            DataType ad_ = context.Operators.SingletonFrom<DataType>(ac_);
-            string ae_ = context.Operators.Convert<string>(ad_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? af_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, z_, ae_);
-            return af_;
+            object ad_ = context.Operators.SingletonFrom<object>(ac_);
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ae_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, z_, (string)ad_);
+            return ae_;
         }
 
         IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
@@ -225,16 +225,16 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension R) {
 
             bool? o_(Extension @this) {
-                FhirUri af_ = @this?.UrlElement;
-                string ag_ = FHIRHelpers_4_3_000.Instance.ToString(context, af_);
-                bool? ah_ = context.Operators.Equal(ag_, "ombCategory");
-                return ah_;
+                FhirUri ae_ = @this?.UrlElement;
+                string af_ = FHIRHelpers_4_3_000.Instance.ToString(context, ae_);
+                bool? ag_ = context.Operators.Equal(af_, "ombCategory");
+                return ag_;
             }
 
 
             object p_(Extension @this) {
-                DataType ai_ = @this?.Value;
-                return ai_;
+                DataType ah_ = @this?.Value;
+                return ah_;
             }
 
             IEnumerable<object> q_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(R is Element
@@ -242,23 +242,23 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 : default), o_, p_);
 
             CqlCode r_(object @this) {
-                CqlCode aj_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
-                return aj_;
+                CqlCode ai_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                return ai_;
             }
 
             IEnumerable<CqlCode> s_ = context.Operators.Select<object, CqlCode>(q_, r_);
 
             bool? t_(Extension @this) {
-                FhirUri ak_ = @this?.UrlElement;
-                string al_ = FHIRHelpers_4_3_000.Instance.ToString(context, ak_);
-                bool? am_ = context.Operators.Equal(al_, "detailed");
-                return am_;
+                FhirUri aj_ = @this?.UrlElement;
+                string ak_ = FHIRHelpers_4_3_000.Instance.ToString(context, aj_);
+                bool? al_ = context.Operators.Equal(ak_, "detailed");
+                return al_;
             }
 
 
             object u_(Extension @this) {
-                DataType an_ = @this?.Value;
-                return an_;
+                DataType am_ = @this?.Value;
+                return am_;
             }
 
             IEnumerable<object> v_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(R is Element
@@ -266,33 +266,33 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
                 : default), t_, u_);
 
             CqlCode w_(object @this) {
-                CqlCode ao_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
-                return ao_;
+                CqlCode an_ = FHIRHelpers_4_3_000.Instance.ToCode(context, @this as Coding);
+                return an_;
             }
 
             IEnumerable<CqlCode> x_ = context.Operators.Select<object, CqlCode>(v_, w_);
             IEnumerable<CqlCode> y_ = context.Operators.ValueSetUnion(s_, x_);
 
             bool? z_(Extension @this) {
-                FhirUri ap_ = @this?.UrlElement;
-                string aq_ = FHIRHelpers_4_3_000.Instance.ToString(context, ap_);
-                bool? ar_ = context.Operators.Equal(aq_, "text");
-                return ar_;
+                FhirUri ao_ = @this?.UrlElement;
+                string ap_ = FHIRHelpers_4_3_000.Instance.ToString(context, ao_);
+                bool? aq_ = context.Operators.Equal(ap_, "text");
+                return aq_;
             }
 
 
-            DataType aa_(Extension @this) {
-                DataType as_ = @this?.Value;
+            object aa_(Extension @this) {
+                DataType ar_ = @this?.Value;
+                object as_ = context.Operators.LateBoundProperty<object>(ar_, "value");
                 return as_;
             }
 
-            IEnumerable<DataType> ab_ = context.Operators.WhereSelect<Extension, DataType>((IEnumerable<Extension>)(R is Element
+            IEnumerable<object> ab_ = context.Operators.WhereSelect<Extension, object>((IEnumerable<Extension>)(R is Element
                 ? (R as Element).Extension
                 : default), z_, aa_);
-            DataType ac_ = context.Operators.SingletonFrom<DataType>(ab_);
-            string ad_ = context.Operators.Convert<string>(ac_);
-            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ae_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, y_, ad_);
-            return ae_;
+            object ac_ = context.Operators.SingletonFrom<object>(ab_);
+            (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ad_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, y_, (string)ac_);
+            return ad_;
         }
 
         IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.SelectDistinct<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);

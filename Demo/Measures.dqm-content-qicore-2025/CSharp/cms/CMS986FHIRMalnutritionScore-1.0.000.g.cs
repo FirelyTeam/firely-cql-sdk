@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS986FHIRMalnutritionScore", "1.0.000")]
 public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<CMS986FHIRMalnutritionScore_1_0_000>
 {
@@ -383,7 +383,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return h_;
             }
 
-            bool? f_ = context.Operators.WhereAny<CqlDateTime>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<CqlDateTime>(d_, e_);
             return f_;
         }
 
@@ -551,7 +551,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return h_;
             }
 
-            bool? f_ = context.Operators.WhereAny<CqlDateTime>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<CqlDateTime>(d_, e_);
             return f_;
         }
 
@@ -598,7 +598,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return w_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -645,7 +645,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return w_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -880,7 +880,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return ah_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -972,7 +972,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return ae_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -1061,7 +1061,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return ab_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -1233,7 +1233,7 @@ public partial class CMS986FHIRMalnutritionScore_1_0_000 : ILibrary, ISingleton<
                 return r_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 

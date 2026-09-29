@@ -8,7 +8,7 @@
 		</test>
 		<test name="CombineEmptyList">
 			<expression>Combine({})</expression>
-			<output>''</output>
+			<output>null</output>
 		</test>
 		<test name="CombineABC">
 			<expression>Combine({'a', 'b', 'c'})</expression>
@@ -17,6 +17,10 @@
 		<test name="CombineABCSepDash">
 			<expression>Combine({'a', 'b', 'c'}, '-')</expression>
 			<output>'a-b-c'</output>
+		</test>
+		<test name="CombineWithNulls">
+			<expression>Combine({'A', 'B', 'C', null})</expression>
+			<output>'ABC'</output>
 		</test>
 	</group>
 	<group name="Concatenate">

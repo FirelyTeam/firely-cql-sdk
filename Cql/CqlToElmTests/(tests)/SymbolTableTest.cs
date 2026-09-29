@@ -307,5 +307,35 @@ namespace Hl7.Cql.CqlToElm.Test
             st.TryAdd(function);
             st.TryResolveFunction("Add", out var resolved).Should().BeTrue();
         }
+
+        [TestMethod]
+        [DataRow("Between(1, 0, 2)", "Between", "Integer, Integer, Integer")]
+        [DataRow("ProperBetween(1, 0, 2)", "ProperBetween", "Integer, Integer, Integer")]
+        [DataRow("\"Interval\"(1, 10, true, true)", "Interval", "Integer, Integer, Boolean, Boolean")]
+        [DataRow("NotEqual(1, 2)", "NotEqual", "Integer, Integer")]
+        [DataRow("\"NotEqual\"(1, 2)", "NotEqual", "Integer, Integer")]
+        [DataRow("Case(true, 1, 2)", "Case", "Boolean, Integer, Integer")]
+        [DataRow("ToList(1)", "ToList", "Integer")]
+        [DataRow("MinValue()", "MinValue", "")]
+        [DataRow("MaxValue()", "MaxValue", "")]
+        public void OperatorOnlySymbol_NotResolvedByFunctionSyntax(string expression, string name, string signature)
+        {
+            // CQL defines no function of these names; only Interval is a reserved word that needs quoting.
+            CreateCqlToolkit().MakeLibraryFromExpression(expression,
+                [$"Could not resolve call to operator {name} with signature ({signature})."]);
+        }
+
+        [TestMethod]
+        public void OperatorOnlySymbol_UserFunctionOfSameNameResolves()
+        {
+            // The internal operator is not in the symbol table, so the local function is the only candidate.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library SymbolTableTest version '1.0.0'
+
+                define function NotEqual(a Integer, b Integer): a = b
+                define private Call: NotEqual(1, 2)
+                """);
+            library.ShouldDefine<ExpressionDef>("Call").expression.Should().BeOfType<FunctionRef>();
+        }
     }
 }

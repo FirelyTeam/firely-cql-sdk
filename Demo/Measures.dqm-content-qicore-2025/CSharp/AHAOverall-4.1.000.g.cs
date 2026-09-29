@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -238,7 +238,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return q_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Condition>(i_, j_);
             return k_;
         }
 
@@ -349,7 +349,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return o_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 
@@ -389,7 +389,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return u_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Encounter>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Encounter>(i_, j_);
             return k_;
         }
 
@@ -480,7 +480,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 
@@ -530,7 +530,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return u_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Encounter>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Encounter>(i_, j_);
             return k_;
         }
 
@@ -663,7 +663,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 
@@ -715,7 +715,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
                 return y_;
             }
 
-            bool? s_ = context.Operators.WhereAny<Encounter>(q_, r_);
+            bool? s_ = context.Operators.AnyRelated<Encounter>(q_, r_);
             return s_;
         }
 

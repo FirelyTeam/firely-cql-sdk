@@ -417,11 +417,19 @@ partial class CodeBuilderContext
         //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
         //    bundle.Entry.ByResourceType<Encounter>()
         //    .Where(E =>
-        //        bundle.Entry.ByResourceType<Condition>() // <--
-        //            .Where(P => true) // such that goes here
-        //            .Any());          // negated for a 'without'
+        //        context.Operators.AnyRelated(
+        //            bundle.Entry.ByResourceType<Condition>(), // <--
+        //            P => true));                              // such that goes here
+        //                                                      // negated for a 'without'
         var source = TranslateArg(with.expression);
-        if (!_typeResolver.IsListType(source.Type))
+
+        // A list source relates through every one of its elements, null elements included, so it
+        // is tested with AnyRelated. A singleton source relates through its value only when that
+        // value is not null: a null singleton is an empty related source. Promoting the singleton
+        // to a one-element array and testing it with Exists(Where(...)) gives exactly that, since
+        // Exists ignores the null element such a promotion produces.
+        var sourceIsList = _typeResolver.IsListType(source.Type);
+        if (!sourceIsList)
         {
             // e.g.:
             // with "Index Prescription Start Date" IPSD
@@ -439,11 +447,12 @@ partial class CodeBuilderContext
             var suchThatBody = TranslateArg(with.suchThat);
 
             var whereLambda = new CodeLambda([whereLambdaParameter], suchThatBody);
-            var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
-            var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
+            var related = sourceIsList
+                ? BindCqlOperator(nameof(ICqlOperators.AnyRelated), [source, whereLambda], [sourceElementType])
+                : BindCqlOperator(nameof(ICqlOperators.Exists), BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda));
             if (with is Without)
-                exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
-            return new CodeLambda([rootScopeParameter], exists);
+                related = BindCqlOperator(nameof(ICqlOperators.Not), related);
+            return new CodeLambda([rootScopeParameter], related);
         }
     }
 
@@ -545,18 +554,19 @@ partial class CodeBuilderContext
 
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                var scopeExpression = GetScopeExpression(op.scope!);
+                var (scopeExpression, scopeElement) = GetScope(op.scope!);
                 expectedType = TypeFor(op) ?? typeof(object);
-                var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
-                                     _typeResolver.GetProperty(scopeExpression.Type, op.path);
+                var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!);
                 if (pathMemberInfo == null)
                 {
-                    _logger.LogWarning(
-                        FormatMessage(
-                            $"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.",
-                            op));
-                    return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), scopeExpression, new CodeConstant(op.path, typeof(string)),
-                                           new CodeConstant(expectedType, typeof(Type)));
+                    // A path that does not resolve as one element name may be qualified
+                    // ("medication.reference.value"). An element name that itself contains a dot
+                    // (a quoted CQL identifier) has been tried first, so it takes precedence.
+                    var segments = path.Split('.');
+                    if (segments.Length > 1)
+                        return BindQualifiedPath(scopeExpression, segments, expectedType, scopeElement, op);
+
+                    return LateBoundProperty(scopeExpression, path!, expectedType, scopeElement, op);
                 }
 
                 var propogate = PropagateNull(scopeExpression, pathMemberInfo);
@@ -574,22 +584,16 @@ partial class CodeBuilderContext
                 throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
 
             var source = TranslateArg(op.source);
-            var parts = path.Split('.');
-            if (parts.Length > 1)
+            if (_typeResolver.GetProperty(source.Type, path) == null)
             {
-                // support paths like birthDate.value on Patient
-                for (int i = 0; i < parts.Length; i++)
+                // support paths like birthDate.value on Patient; an element name that itself
+                // contains a dot (a quoted CQL identifier) has been tried first and takes precedence.
+                var segments = path.Split('.');
+                if (segments.Length > 1)
                 {
-                    var pathPart = parts[i];
-                    var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
-                    if (pathMemberInfo != null)
-                    {
-                        var propertyAccess = PropagateNull(source, pathMemberInfo);
-                        source = propertyAccess;
-                    }
+                    expectedType = TypeFor(op, throwIfNotFound: false) ?? typeof(object);
+                    return BindQualifiedPath(source, segments, expectedType, op.source, op);
                 }
-
-                return source;
             }
 
             // If we cannot determine the type from the ELM, let's try
@@ -598,7 +602,7 @@ partial class CodeBuilderContext
                            ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
                            ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
 
-            var result = PropertyHelper(source, path, expectedType);
+            var result = PropertyHelper(source, path, expectedType, op.source);
             return result;
         }
     }
@@ -606,7 +610,8 @@ partial class CodeBuilderContext
     protected CodeExpression PropertyHelper(
         CodeExpression source,
         string? path,
-        Type expectedType)
+        Type expectedType,
+        Elm.Element? sourceElement = null)
     {
         CodeExpression? result = null;
         if (_typeResolver.ShouldUseSourceObject(source.Type, path!))
@@ -618,13 +623,7 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-            {
-                _logger.LogWarning(
-                    FormatMessage(
-                        $"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound."));
-                return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
-                                       new CodeConstant(expectedType, typeof(Type)));
-            }
+                return LateBoundProperty(source, path!, expectedType, sourceElement);
 
             if (pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
             {
@@ -661,6 +660,150 @@ partial class CodeBuilderContext
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Binds a qualified property path (<c>medication.reference.value</c>) one segment at a time.
+    /// Each segment whose element is known on the static type of the value before it is bound
+    /// directly; from the first segment that is not (typically an element of a choice type, whose
+    /// static type is the choice's erased base type), the remainder is late-bound one segment per
+    /// call, so no late-bound call ever carries a dotted name.
+    /// </summary>
+    /// <param name="source">The value the first segment is read from.</param>
+    /// <param name="segments">The path split on <c>.</c>; at least two segments.</param>
+    /// <param name="expectedType">The type the value of the last segment is converted to.</param>
+    /// <param name="sourceElement">The ELM element <paramref name="source"/> was built from, if any.</param>
+    /// <param name="element">The ELM property element being bound, for diagnostics.</param>
+    private CodeExpression BindQualifiedPath(
+        CodeExpression source,
+        string[] segments,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element)
+    {
+        var current = source;
+        var currentElement = sourceElement;
+        for (int i = 0; i < segments.Length; i++)
+        {
+            var segment = segments[i];
+            var isLast = i == segments.Length - 1;
+            var member = _typeResolver.GetProperty(current.Type, segment);
+            if (member == null && !_typeResolver.ShouldUseSourceObject(current.Type, segment))
+                return LateBoundPropertyChain(current, segments, i, expectedType, currentElement, element);
+
+            // PropertyHelper applies the source-object rule, the cast for an element declared on a
+            // derived type, and the conversion to the expected type.
+            var segmentType = isLast ? expectedType : member?.PropertyType ?? current.Type;
+            current = PropertyHelper(current, segment, segmentType, currentElement);
+            currentElement = null;
+        }
+
+        return current;
+    }
+
+    /// <summary>
+    /// Late-binds <paramref name="segments"/> from index <paramref name="start"/> onwards, one
+    /// <see cref="ICqlOperators.LateBoundProperty{T}"/> call per segment. Intermediate segments are
+    /// read as <see cref="object"/>; only the last is converted to <paramref name="expectedType"/>.
+    /// </summary>
+    private CodeExpression LateBoundPropertyChain(
+        CodeExpression source,
+        string[] segments,
+        int start,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element)
+    {
+        var current = source;
+        for (int i = start; i < segments.Length; i++)
+        {
+            var isLast = i == segments.Length - 1;
+            current = LateBoundProperty(
+                current,
+                segments[i],
+                isLast ? expectedType : typeof(object),
+                i == start ? sourceElement : null,
+                element);
+        }
+
+        return current;
+    }
+
+    /// <summary>
+    /// Emits a late-bound read of <paramref name="path"/> off <paramref name="source"/>, recovering
+    /// the path's cardinality from <paramref name="sourceElement"/>'s choice type where the erased
+    /// .NET type no longer carries it.
+    /// </summary>
+    private CodeExpression LateBoundProperty(
+        CodeExpression source,
+        string path,
+        Type expectedType,
+        Elm.Element? sourceElement,
+        Elm.Element? element = null)
+    {
+        if (!_typeResolver.IsListType(source.Type)
+            && !_typeResolver.IsListType(expectedType)
+            && LateBoundListPropertyType(sourceElement, path) is { } listType)
+        {
+            expectedType = listType;
+        }
+
+        _logger.LogWarning(
+            FormatMessage(
+                $"Property {path} can't be known at design time and will be late-bound, which is slower and leaves the property's type and cardinality unchecked.  Consider casting the source first so that this property can be definitely bound.",
+                element));
+
+        return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
+                               new CodeConstant(expectedType, typeof(Type)));
+    }
+
+    /// <summary>
+    /// Resolves <paramref name="path"/> against the member types of <paramref name="sourceElement"/>'s
+    /// choice type, returning the list type to read it as, or <see langword="null"/> when the path
+    /// is not list-valued on every member that has it, when the members disagree, or when any
+    /// member's type cannot be inspected - an uninspectable member has unknown cardinality, so
+    /// recovery is abandoned rather than inferred from the resolvable subset.
+    /// </summary>
+    /// <remarks>
+    /// A choice type erases to <see cref="object"/>, so a path on it can only be late-bound, and a
+    /// late-bound read carries the value but not its cardinality. The query machinery decides list
+    /// versus singleton from the static type, so a list typed as <see cref="object"/> is wrapped in
+    /// a one-element array and cast to the element type - which yields <see langword="null"/>, and
+    /// with it a wrong answer rather than a failure. Reading the cardinality off the choice's
+    /// members keeps the emitted code the same shape as the strongly typed case.
+    /// </remarks>
+    private Type? LateBoundListPropertyType(
+        Elm.Element? sourceElement,
+        string path)
+    {
+        var typeSpecifier = sourceElement?.GetTypeSpecifier();
+        if (typeSpecifier is ListTypeSpecifier list)
+            typeSpecifier = list.elementType;
+
+        if (typeSpecifier is not ChoiceTypeSpecifier { choice: { Length: > 0 } choices })
+            return null;
+
+        Type? elementType = null;
+        foreach (var choiceTypeSpecifier in choices)
+        {
+            var memberType = TypeFor(choiceTypeSpecifier, throwIfNotFound: false);
+            if (memberType is null || memberType == typeof(object))
+                return null;
+
+            if (_typeResolver.GetProperty(memberType, path) is not { } property)
+                continue;
+
+            if (!_typeResolver.IsListType(property.PropertyType)
+                || _typeResolver.GetListElementType(property.PropertyType, throwError: false) is not { } memberElementType)
+                return null;
+
+            if (elementType != null && elementType != memberElementType)
+                return null;
+
+            elementType = memberElementType;
+        }
+
+        return elementType is null ? null : typeof(IEnumerable<>).MakeGenericType(elementType);
     }
 
     internal static PropertyInfo? GetProperty(

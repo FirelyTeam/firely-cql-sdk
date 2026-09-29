@@ -147,8 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateCqlToolkit(
                 DisableListPromotion: false,
-                DisableListDemotion: false,
-                AllowNullIntervals: true
+                DisableListDemotion: false
                 ).MakeLibraryFromExpression("Interval[null, null] overlaps Interval[1, 10]");
             var overlaps = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Overlaps>();
             overlaps.Should().HaveType(SystemTypes.BooleanType);

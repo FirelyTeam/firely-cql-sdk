@@ -261,6 +261,17 @@ namespace Hl7.Cql.CqlToElm
                 return null;
         }
 
+        /// <summary>
+        /// The primary code path the model declares for <paramref name="type"/>, or null when it
+        /// declares none.
+        /// </summary>
+        internal static string? GetPrimaryCodePath(this IModelProvider provider, Elm.NamedTypeSpecifier type)
+        {
+            var (_, typeInfo) = provider.FindTypeInfoByNamedType(type);
+            return typeInfo is ClassInfo { primaryCodePath: var path } && !string.IsNullOrWhiteSpace(path)
+                ? path
+                : null;
+        }
 
         /// <summary>
         /// Gets the basetype for the given type, or null if it is the root of the inheritance chain.

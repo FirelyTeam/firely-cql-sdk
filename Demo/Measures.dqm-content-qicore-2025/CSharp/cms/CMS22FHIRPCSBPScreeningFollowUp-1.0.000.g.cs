@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -310,7 +310,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return m_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Condition>(e_, f_);
             return g_;
         }
 
@@ -705,7 +705,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return p_;
             }
 
-            bool? k_ = context.Operators.WhereAny<ServiceRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<ServiceRequest>(i_, j_);
             return k_;
         }
 
@@ -723,7 +723,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return x_;
             }
 
-            bool? s_ = context.Operators.WhereAny<ServiceRequest>(q_, r_);
+            bool? s_ = context.Operators.AnyRelated<ServiceRequest>(q_, r_);
             return s_;
         }
 
@@ -741,7 +741,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return af_;
             }
 
-            bool? aa_ = context.Operators.WhereAny<ServiceRequest>(y_, z_);
+            bool? aa_ = context.Operators.AnyRelated<ServiceRequest>(y_, z_);
             return aa_;
         }
 
@@ -1268,7 +1268,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return x_;
             }
 
-            bool? i_ = context.Operators.WhereAny<ServiceRequest>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<ServiceRequest>(g_, h_);
             return i_;
         }
 
@@ -1301,7 +1301,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<ServiceRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<ServiceRequest>(d_, e_);
             return f_;
         }
 
@@ -1609,7 +1609,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return p_;
             }
 
-            bool? h_ = context.Operators.WhereAny<ServiceRequest>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<ServiceRequest>(f_, g_);
             return h_;
         }
 
@@ -1626,7 +1626,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return w_;
             }
 
-            bool? s_ = context.Operators.WhereAny<ServiceRequest>(q_, r_);
+            bool? s_ = context.Operators.AnyRelated<ServiceRequest>(q_, r_);
             return s_;
         }
 
@@ -1657,7 +1657,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<ServiceRequest>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<ServiceRequest>(g_, h_);
             return i_;
         }
 
@@ -1675,7 +1675,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return v_;
             }
 
-            bool? q_ = context.Operators.WhereAny<ServiceRequest>(o_, p_);
+            bool? q_ = context.Operators.AnyRelated<ServiceRequest>(o_, p_);
             return q_;
         }
 
@@ -1958,7 +1958,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return af_;
             }
 
-            bool? k_ = context.Operators.WhereAny<ServiceRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<ServiceRequest>(i_, j_);
             return k_;
         }
 
@@ -1975,7 +1975,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return am_;
             }
 
-            bool? ai_ = context.Operators.WhereAny<ServiceRequest>(ag_, ah_);
+            bool? ai_ = context.Operators.AnyRelated<ServiceRequest>(ag_, ah_);
             return ai_;
         }
 
@@ -1988,20 +1988,24 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 IEnumerable<Medication> av_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
 
                 bool? aw_(Medication M) {
-                    object ay_ = context.Operators.LateBoundProperty<object>(M, "id.value");
-                    object az_ = context.Operators.LateBoundProperty<object>(MR, "medication.reference.value");
-                    IEnumerable<string> ba_ = context.Operators.Split((string)az_, "/");
-                    string bb_ = context.Operators.Last<string>(ba_);
-                    bool? bc_ = context.Operators.Equal(ay_, bb_);
-                    CodeableConcept bd_ = M?.Code;
-                    CqlConcept be_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bd_);
-                    CqlValueSet bf_ = this.Pharmacologic_Therapy_for_Hypertension(context);
-                    bool? bg_ = context.Operators.ConceptInValueSet(be_, bf_);
-                    bool? bh_ = context.Operators.And(bc_, bg_);
-                    return bh_;
+                    string ay_ = (M is Resource
+                        ? (M as Resource).IdElement
+                        : default)?.Value;
+                    DataType az_ = MR?.Medication;
+                    object ba_ = context.Operators.LateBoundProperty<object>(az_, "reference");
+                    object bb_ = context.Operators.LateBoundProperty<object>(ba_, "value");
+                    IEnumerable<string> bc_ = context.Operators.Split((string)bb_, "/");
+                    string bd_ = context.Operators.Last<string>(bc_);
+                    bool? be_ = context.Operators.Equal(ay_, bd_);
+                    CodeableConcept bf_ = M?.Code;
+                    CqlConcept bg_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, bf_);
+                    CqlValueSet bh_ = this.Pharmacologic_Therapy_for_Hypertension(context);
+                    bool? bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
+                    bool? bj_ = context.Operators.And(be_, bi_);
+                    return bj_;
                 }
 
-                bool? ax_ = context.Operators.WhereAny<Medication>(av_, aw_);
+                bool? ax_ = context.Operators.AnyRelated<Medication>(av_, aw_);
                 return ax_;
             }
 
@@ -2011,23 +2015,23 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<MedicationRequest> as_ = context.Operators.Union<MedicationRequest>(ap_, ar_);
 
             bool? at_(MedicationRequest Medications) {
-                FhirDateTime bi_ = Medications?.AuthoredOnElement;
-                CqlDateTime bj_ = context.Operators.Convert<CqlDateTime>(bi_);
-                CqlInterval<CqlDateTime> bk_ = this.Measurement_Period(context);
-                bool? bl_ = context.Operators.In<CqlDateTime>(bj_, bk_, "day");
-                Code<MedicationRequest.MedicationrequestStatus> bm_ = Medications?.StatusElement;
-                MedicationRequest.MedicationrequestStatus? bn_ = bm_?.Value;
-                string bo_ = context.Operators.Convert<string>(bn_);
-                string[] bp_ = [
+                FhirDateTime bk_ = Medications?.AuthoredOnElement;
+                CqlDateTime bl_ = context.Operators.Convert<CqlDateTime>(bk_);
+                CqlInterval<CqlDateTime> bm_ = this.Measurement_Period(context);
+                bool? bn_ = context.Operators.In<CqlDateTime>(bl_, bm_, "day");
+                Code<MedicationRequest.MedicationrequestStatus> bo_ = Medications?.StatusElement;
+                MedicationRequest.MedicationrequestStatus? bp_ = bo_?.Value;
+                string bq_ = context.Operators.Convert<string>(bp_);
+                string[] br_ = [
                     "active",
                     "completed",
                 ];
-                bool? bq_ = context.Operators.In<string>(bo_, (IEnumerable<string>)bp_);
-                bool? br_ = context.Operators.And(bl_, bq_);
-                return br_;
+                bool? bs_ = context.Operators.In<string>(bq_, (IEnumerable<string>)br_);
+                bool? bt_ = context.Operators.And(bn_, bs_);
+                return bt_;
             }
 
-            bool? au_ = context.Operators.WhereAny<MedicationRequest>(as_, at_);
+            bool? au_ = context.Operators.AnyRelated<MedicationRequest>(as_, at_);
             return au_;
         }
 
@@ -2058,7 +2062,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<ServiceRequest>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<ServiceRequest>(g_, h_);
             return i_;
         }
 
@@ -2076,7 +2080,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return v_;
             }
 
-            bool? q_ = context.Operators.WhereAny<ServiceRequest>(o_, p_);
+            bool? q_ = context.Operators.AnyRelated<ServiceRequest>(o_, p_);
             return q_;
         }
 
@@ -2184,7 +2188,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return al_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Observation>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Observation>(n_, o_);
             return p_;
         }
 
@@ -2524,7 +2528,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return ax_;
             }
 
-            bool? ad_ = context.Operators.WhereAny<ServiceRequest>(ab_, ac_);
+            bool? ad_ = context.Operators.AnyRelated<ServiceRequest>(ab_, ac_);
             return ad_;
         }
 
@@ -2542,7 +2546,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return bj_;
             }
 
-            bool? be_ = context.Operators.WhereAny<ServiceRequest>(bc_, bd_);
+            bool? be_ = context.Operators.AnyRelated<ServiceRequest>(bc_, bd_);
             return be_;
         }
 
@@ -2601,7 +2605,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return cm_;
             }
 
-            bool? bs_ = context.Operators.WhereAny<ServiceRequest>(bq_, br_);
+            bool? bs_ = context.Operators.AnyRelated<ServiceRequest>(bq_, br_);
             return bs_;
         }
 
@@ -2619,7 +2623,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return cy_;
             }
 
-            bool? ct_ = context.Operators.WhereAny<ServiceRequest>(cr_, cs_);
+            bool? ct_ = context.Operators.AnyRelated<ServiceRequest>(cr_, cs_);
             return ct_;
         }
 
@@ -2640,7 +2644,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return dg_;
             }
 
-            bool? db_ = context.Operators.WhereAny<ServiceRequest>(cz_, da_);
+            bool? db_ = context.Operators.AnyRelated<ServiceRequest>(cz_, da_);
             return db_;
         }
 
@@ -2659,7 +2663,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 return do_;
             }
 
-            bool? dj_ = context.Operators.WhereAny<object>(dh_, di_);
+            bool? dj_ = context.Operators.AnyRelated<object>(dh_, di_);
             return dj_;
         }
 
