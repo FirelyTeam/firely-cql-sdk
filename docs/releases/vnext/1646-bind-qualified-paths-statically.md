@@ -12,7 +12,7 @@
   inferred for such a property follows the same walk, so consumers of the value are typed
   (`string` instead of `object`) where every segment is known.
 
-  **This changes generated C#**: `GeneratorToolVersion` moves to `5.2.3.0` (patch: the generated
+  **This changes generated C#**: `GeneratorToolVersion` moves to `5.3.1.0` (patch: the generated
   API is unchanged) and every checked-in `*.g.cs` with a qualified late-bound path is regenerated.
   For the scoped form, evaluation results do not change relative to a runtime that already walks
   qualified paths in `LateBoundProperty`. **The source-based form changes evaluation results**: it
