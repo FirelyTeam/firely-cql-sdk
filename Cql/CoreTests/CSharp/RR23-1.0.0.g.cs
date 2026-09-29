@@ -200,13 +200,11 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
                 CqlDateTime x_ = v_ is FhirDateTime w_ ? context.Operators.Convert<CqlDateTime>(w_) : null;
                 CqlQuantity y_ = context.Operators.Quantity(7m, "days");
                 CqlDateTime z_ = context.Operators.Subtract(x_, y_);
-                CqlDateTime ab_ = v_ is FhirDateTime aa_ ? context.Operators.Convert<CqlDateTime>(aa_) : null;
-                CqlInterval<CqlDateTime> ac_ = context.Operators.Interval(z_, ab_, true, false);
-                bool? ad_ = context.Operators.In<CqlDateTime>(u_ as CqlDateTime, ac_, (string)default);
-                CqlDateTime af_ = v_ is FhirDateTime ae_ ? context.Operators.Convert<CqlDateTime>(ae_) : null;
-                bool? ag_ = context.Operators.Not((bool?)(af_ is null));
-                bool? ah_ = context.Operators.And(ad_, ag_);
-                return ah_;
+                CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(z_, x_, true, false);
+                bool? ab_ = context.Operators.In<CqlDateTime>(u_ as CqlDateTime, aa_, (string)default);
+                bool? ac_ = context.Operators.Not((bool?)(x_ is null));
+                bool? ad_ = context.Operators.And(ab_, ac_);
+                return ad_;
             }
 
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>((IEnumerable<Condition>)k_, l_);

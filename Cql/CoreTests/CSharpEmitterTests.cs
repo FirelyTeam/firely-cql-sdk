@@ -509,6 +509,43 @@ public class CSharpEmitterTests
         AssertParsesAsMethodBody(body, "bool", "object o");
     }
 
+    [TestMethod]
+    public void TypeSwitch_Repeated_ReusesTheFirstLocal()
+    {
+        // Two reads of the same choice element build two switches with their own narrowed
+        // locals; they differ only in the names those get, so the second reuses the first.
+        var o = new CodeLocal(typeof(object), "o");
+        CodeTypeSwitch LengthOrMajor()
+        {
+            var asString = new CodeLocal(typeof(string), isNotNull: true);
+            var asVersion = new CodeLocal(typeof(Version), isNotNull: true);
+            return new CodeTypeSwitch(
+                o,
+                [
+                    new CodeTypeSwitchArm(asString, new CodeCast(new CodeProperty(asString, StringLength), typeof(int?), CodeCastKind.Cast)),
+                    new CodeTypeSwitchArm(asVersion, new CodeCast(new CodeProperty(asVersion, VersionMajor), typeof(int?), CodeCastKind.Cast)),
+                ],
+                new CodeConstant(null, typeof(int?)),
+                typeof(int?));
+        }
+        var outer = new CodeInvoke(null, ReflectionUtility.MethodOf(() => Nullable.Equals(default(int?), default(int?))), LengthOrMajor(), LengthOrMajor());
+
+        var expected =
+            "{\n" +
+            "    int? c_ = o switch\n" +
+            "    {\n" +
+            "        string a_ => (int?)a_.Length,\n" +
+            "        Version b_ => (int?)b_.Major,\n" +
+            "        _ => null,\n" +
+            "    };\n" +
+            "    bool d_ = Nullable.Equals<int>(c_, c_);\n" +
+            "    return d_;\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([o], outer));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "bool", "object o");
+    }
+
     private static readonly PropertyInfo StringLength =
         ReflectionUtility.PropertyOf(() => default(string)!.Length);
 

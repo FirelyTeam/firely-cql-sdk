@@ -7218,23 +7218,15 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
             CqlDateTime q_ = QICoreCommon_4_0_000.Instance.latest(context, p_);
             CqlInterval<CqlDateTime> r_ = QICoreCommon_4_0_000.Instance.toInterval(context, q_);
             bool? s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, r_, (string)default);
-            CqlDateTime v_ = m_ switch
-            {
-                FhirDateTime t_ => context.Operators.Convert<CqlDateTime>(t_),
-                Instant u_ => context.Operators.Convert<CqlDateTime>(u_.Value),
-                _ => null,
-            };
-            CqlDateTime w_ = QICoreCommon_4_0_000.Instance.latest(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_4_0_000.Instance.toInterval(context, w_);
-            bool? y_ = context.Operators.Before(x_, l_, (string)default);
-            bool? z_ = context.Operators.Or(s_, y_);
-            bool? aa_ = context.Operators.And(k_, z_);
-            DataType ab_ = SMStatus?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            CqlValueSet ad_ = this.Smoking_Status(context);
-            bool? ae_ = context.Operators.ConceptInValueSet(ac_ as CqlConcept, ad_);
-            bool? af_ = context.Operators.And(aa_, ae_);
-            return af_;
+            bool? t_ = context.Operators.Before(r_, l_, (string)default);
+            bool? u_ = context.Operators.Or(s_, t_);
+            bool? v_ = context.Operators.And(k_, u_);
+            DataType w_ = SMStatus?.Value;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlValueSet y_ = this.Smoking_Status(context);
+            bool? z_ = context.Operators.ConceptInValueSet(x_ as CqlConcept, y_);
+            bool? aa_ = context.Operators.And(v_, z_);
+            return aa_;
         }
 
         IEnumerable<Observation> c_ = context.Operators.Where<Observation>(a_, b_);
