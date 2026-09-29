@@ -107,7 +107,7 @@
     },
     "PackageCLI elm (Measures.Authoring)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(MeasuresAuthoringDemoDir)/input/cql\" --elm \"$(MeasuresAuthoringDemoDir)/Elm\" --fhir \"$(MeasuresAuthoringDemoDir)/Resources\" --cs \"$(MeasuresAuthoringDemoDir)/CSharp\" --log-file packager.log",
+      "commandLineArgs": "elm --cql \"$(MeasuresAuthoringDemoDir)/Input/cql\" --elm \"$(MeasuresAuthoringDemoDir)/Elm\" --fhir \"$(MeasuresAuthoringDemoDir)/Resources\" --cs \"$(MeasuresAuthoringDemoDir)/CSharp\" --log-file packager.log",
       "environmentVariables": {
         "CQLPACKAGE_PROFILE": "Demo"
       }
