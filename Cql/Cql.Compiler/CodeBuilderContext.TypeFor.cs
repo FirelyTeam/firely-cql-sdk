@@ -97,10 +97,8 @@ partial class CodeBuilderContext
                         if (property == null)
                             return typeof(object); // this is likely a choice
 
-                        // This is a temporary fix for the issue where the type the Firely SDK uses for a choice
-                        // property is `DataType`, whereas the type the CQL model uses is `object`.
-                        // Since GetProperty() cannot properly correct for this, we'll correct the type to `object` here.
-                        // Task https://github.com/FirelyTeam/firely-cql-sdk/issues/493 will clean this up.
+                        // The Firely SDK declares a choice element as its base data type, DataType; the CQL model
+                        // represents a choice as object.
                         type = property.PropertyType == typeof(DataType) ? typeof(object) : property.PropertyType;
                     }
 
