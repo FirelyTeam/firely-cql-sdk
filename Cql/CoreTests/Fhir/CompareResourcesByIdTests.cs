@@ -200,6 +200,29 @@ public class CompareResourcesByIdTests
     }
 
     /// <summary>
+    /// Equivalence (<c>~</c>) of resources compared by id follows the caller's <see cref="StringComparer"/>
+    /// exactly as equality does, rather than the CQL string equivalence that ignores case: the option
+    /// defines when two resources are the same resource, for both operators.
+    /// </summary>
+    [TestMethod]
+    public void SuppliedStringComparer_DecidesIdEquivalence()
+    {
+        var lower = new Patient { Id = "abc" };
+        var upper = new Patient { Id = "ABC" };
+
+        var ordinal = ComparersById(StringComparer.Ordinal);
+        Assert.IsFalse(ordinal.Equivalent(lower, upper, null));
+        Assert.IsFalse(ordinal.Equivalent(new Observation { Id = "abc" }, new Observation { Id = "ABC" }, null));
+
+        var ignoreCase = ComparersById(StringComparer.OrdinalIgnoreCase);
+        Assert.IsTrue(ignoreCase.Equivalent(lower, upper, null));
+        Assert.IsTrue(ignoreCase.Equivalent(new Observation { Id = "abc" }, new Observation { Id = "ABC" }, null));
+
+        // Ids that differ by more than case are not equivalent under either comparer.
+        Assert.IsFalse(ignoreCase.Equivalent(lower, new Patient { Id = "abd" }, null));
+    }
+
+    /// <summary>
     /// Defined in the test assembly, so the model-assembly sweep can never see it directly.
     /// </summary>
     private sealed class DerivedPatient : Patient;
