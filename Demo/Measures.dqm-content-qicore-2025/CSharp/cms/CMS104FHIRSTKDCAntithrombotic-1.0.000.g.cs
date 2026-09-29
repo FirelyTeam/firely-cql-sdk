@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -147,7 +147,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -207,7 +207,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return az_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -301,7 +301,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return bd_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<Medication>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<Medication>(ap_, aq_);
             return ar_;
         }
 
@@ -341,7 +341,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return cc_;
             }
 
-            bool? bg_ = context.Operators.WhereAny<Task>(be_, bf_);
+            bool? bg_ = context.Operators.AnyRelated<Task>(be_, bf_);
             return bg_;
         }
 
@@ -373,7 +373,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 
@@ -413,7 +413,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return w_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -477,7 +477,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 

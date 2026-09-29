@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS1206FHIRCTOQR", "1.0.000")]
 public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIRCTOQR_1_0_000>
 {
@@ -163,7 +163,7 @@ public partial class CMS1206FHIRCTOQR_1_0_000 : ILibrary, ISingleton<CMS1206FHIR
                 return x_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Encounter>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Encounter>(e_, f_);
             bool? h_ = context.Operators.Not(g_);
             return h_;
         }

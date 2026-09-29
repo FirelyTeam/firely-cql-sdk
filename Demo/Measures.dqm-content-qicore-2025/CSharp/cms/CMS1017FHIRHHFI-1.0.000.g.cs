@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -335,7 +335,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return m_;
             }
 
-            bool? g_ = context.Operators.WhereAny<AdverseEvent>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<AdverseEvent>(e_, f_);
             return g_;
         }
 
@@ -640,7 +640,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return x_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Encounter>(f_, g_);
             return h_;
         }
 
@@ -888,7 +888,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -949,7 +949,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -992,7 +992,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1020,7 +1020,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return al_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationAdministration>(i_, j_);
             return k_;
         }
 
@@ -1063,7 +1063,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1124,7 +1124,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -1167,7 +1167,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1228,7 +1228,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -1271,7 +1271,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1332,7 +1332,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -1375,7 +1375,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1436,7 +1436,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -1479,7 +1479,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                     return z_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1540,7 +1540,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 return bh_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 

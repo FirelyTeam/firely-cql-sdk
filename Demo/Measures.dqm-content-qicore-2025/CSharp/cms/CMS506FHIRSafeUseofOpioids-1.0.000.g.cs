@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS506FHIRSafeUseofOpioids", "1.0.000")]
 public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<CMS506FHIRSafeUseofOpioids_1_0_000>
 {
@@ -164,7 +164,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return w_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -237,7 +237,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return w_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -304,7 +304,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return m_;
             }
 
-            bool? h_ = context.Operators.WhereAny<MedicationRequest>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<MedicationRequest>(f_, g_);
             return h_;
         }
 
@@ -512,7 +512,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return w_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -638,7 +638,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return x_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Procedure>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Procedure>(h_, i_);
             return j_;
         }
 
@@ -661,7 +661,7 @@ public partial class CMS506FHIRSafeUseofOpioids_1_0_000 : ILibrary, ISingleton<C
                 return be_;
             }
 
-            bool? av_ = context.Operators.WhereAny<Condition>(at_, au_);
+            bool? av_ = context.Operators.AnyRelated<Condition>(at_, au_);
             return av_;
         }
 

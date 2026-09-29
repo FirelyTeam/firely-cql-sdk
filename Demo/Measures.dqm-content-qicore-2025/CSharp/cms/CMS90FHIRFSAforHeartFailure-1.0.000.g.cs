@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -344,7 +344,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
                 return o_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Encounter>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Encounter>(d_, e_);
             return f_;
         }
 

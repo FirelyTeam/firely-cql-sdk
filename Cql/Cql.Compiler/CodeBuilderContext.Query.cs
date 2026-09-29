@@ -417,11 +417,19 @@ partial class CodeBuilderContext
         //Func<Bundle, Context, IEnumerable<Encounter>> x = (bundle, ctx) =>
         //    bundle.Entry.ByResourceType<Encounter>()
         //    .Where(E =>
-        //        bundle.Entry.ByResourceType<Condition>() // <--
-        //            .Where(P => true) // such that goes here
-        //            .Any());          // negated for a 'without'
+        //        context.Operators.AnyRelated(
+        //            bundle.Entry.ByResourceType<Condition>(), // <--
+        //            P => true));                              // such that goes here
+        //                                                      // negated for a 'without'
         var source = TranslateArg(with.expression);
-        if (!_typeResolver.IsListType(source.Type))
+
+        // A list source relates through every one of its elements, null elements included, so it
+        // is tested with AnyRelated. A singleton source relates through its value only when that
+        // value is not null: a null singleton is an empty related source. Promoting the singleton
+        // to a one-element array and testing it with Exists(Where(...)) gives exactly that, since
+        // Exists ignores the null element such a promotion produces.
+        var sourceIsList = _typeResolver.IsListType(source.Type);
+        if (!sourceIsList)
         {
             // e.g.:
             // with "Index Prescription Start Date" IPSD
@@ -439,11 +447,12 @@ partial class CodeBuilderContext
             var suchThatBody = TranslateArg(with.suchThat);
 
             var whereLambda = new CodeLambda([whereLambdaParameter], suchThatBody);
-            var callWhereOnSource = BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda);
-            var exists = BindCqlOperator(nameof(ICqlOperators.Exists), callWhereOnSource);
+            var related = sourceIsList
+                ? BindCqlOperator(nameof(ICqlOperators.AnyRelated), [source, whereLambda], [sourceElementType])
+                : BindCqlOperator(nameof(ICqlOperators.Exists), BindCqlOperator(nameof(ICqlOperators.Where), source, whereLambda));
             if (with is Without)
-                exists = BindCqlOperator(nameof(ICqlOperators.Not), exists);
-            return new CodeLambda([rootScopeParameter], exists);
+                related = BindCqlOperator(nameof(ICqlOperators.Not), related);
+            return new CodeLambda([rootScopeParameter], related);
         }
     }
 

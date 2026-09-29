@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.3.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibrary, ISingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>
 {
@@ -234,7 +234,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 return t_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -283,7 +283,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 return ac_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Medication>(n_, o_);
             return p_;
         }
 
@@ -352,7 +352,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 return v_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Observation>(g_, h_);
             return i_;
         }
 
