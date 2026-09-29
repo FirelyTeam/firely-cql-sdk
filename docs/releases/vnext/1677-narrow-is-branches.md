@@ -17,4 +17,4 @@
   **This changes generated C#**: `GeneratorToolVersion` moves to `5.3.3.0` (patch: the generated
   API is unchanged), and every checked-in `*.g.cs` with such a `case` or `if` is regenerated. CQL
   evaluation results do not change: within the branch the value already is of the tested type.
-  (#1661)
+  (#1661, #1677)
