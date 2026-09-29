@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS819FHIRHHORAE", "1.0.000")]
 public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRHHORAE_1_0_000>
 {
@@ -154,7 +154,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 return y_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -228,7 +228,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 return q_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationAdministration>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationAdministration>(d_, e_);
             return f_;
         }
 
@@ -293,7 +293,7 @@ public partial class CMS819FHIRHHORAE_1_0_000 : ILibrary, ISingleton<CMS819FHIRH
                 return y_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 

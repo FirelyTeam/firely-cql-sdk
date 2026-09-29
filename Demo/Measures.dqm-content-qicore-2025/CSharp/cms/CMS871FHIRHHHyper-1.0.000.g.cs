@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -270,7 +270,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 return bl_;
             }
 
-            bool? o_ = context.Operators.WhereAny<Condition>(m_, n_);
+            bool? o_ = context.Operators.AnyRelated<Condition>(m_, n_);
             return o_;
         }
 
@@ -317,7 +317,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 return ad_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Medication>(n_, o_);
             return p_;
         }
 
@@ -437,7 +437,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 return x_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Observation>(g_, h_);
             return i_;
         }
 
@@ -1267,7 +1267,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 return o_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 

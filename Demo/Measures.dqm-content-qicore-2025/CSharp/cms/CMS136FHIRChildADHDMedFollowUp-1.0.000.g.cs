@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS136FHIRChildADHDMedFollowUp", "1.0.000")]
 public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISingleton<CMS136FHIRChildADHDMedFollowUp_1_0_000>
 {
@@ -256,7 +256,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return cb_;
             }
 
-            bool? bn_ = context.Operators.WhereAny<Medication>(bl_, bm_);
+            bool? bn_ = context.Operators.AnyRelated<Medication>(bl_, bm_);
             return bn_;
         }
 
@@ -285,7 +285,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return cs_;
             }
 
-            bool? ce_ = context.Operators.WhereAny<Medication>(cc_, cd_);
+            bool? ce_ = context.Operators.AnyRelated<Medication>(cc_, cd_);
             return ce_;
         }
 
@@ -315,7 +315,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return dj_;
             }
 
-            bool? cv_ = context.Operators.WhereAny<Medication>(ct_, cu_);
+            bool? cv_ = context.Operators.AnyRelated<Medication>(ct_, cu_);
             return cv_;
         }
 
@@ -345,7 +345,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ea_;
             }
 
-            bool? dm_ = context.Operators.WhereAny<Medication>(dk_, dl_);
+            bool? dm_ = context.Operators.AnyRelated<Medication>(dk_, dl_);
             return dm_;
         }
 
@@ -375,7 +375,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return er_;
             }
 
-            bool? ed_ = context.Operators.WhereAny<Medication>(eb_, ec_);
+            bool? ed_ = context.Operators.AnyRelated<Medication>(eb_, ec_);
             return ed_;
         }
 
@@ -406,7 +406,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return fj_;
             }
 
-            bool? eu_ = context.Operators.WhereAny<Medication>(es_, et_);
+            bool? eu_ = context.Operators.AnyRelated<Medication>(es_, et_);
             return eu_;
         }
 
@@ -437,7 +437,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ga_;
             }
 
-            bool? fm_ = context.Operators.WhereAny<Medication>(fk_, fl_);
+            bool? fm_ = context.Operators.AnyRelated<Medication>(fk_, fl_);
             return fm_;
         }
 
@@ -467,7 +467,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return gr_;
             }
 
-            bool? gd_ = context.Operators.WhereAny<Medication>(gb_, gc_);
+            bool? gd_ = context.Operators.AnyRelated<Medication>(gb_, gc_);
             return gd_;
         }
 
@@ -497,7 +497,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return hi_;
             }
 
-            bool? gu_ = context.Operators.WhereAny<Medication>(gs_, gt_);
+            bool? gu_ = context.Operators.AnyRelated<Medication>(gs_, gt_);
             return gu_;
         }
 
@@ -542,7 +542,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return kl_;
                 }
 
-                bool? jx_ = context.Operators.WhereAny<Medication>(jv_, jw_);
+                bool? jx_ = context.Operators.AnyRelated<Medication>(jv_, jw_);
                 return jx_;
             }
 
@@ -571,7 +571,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return lc_;
                 }
 
-                bool? ko_ = context.Operators.WhereAny<Medication>(km_, kn_);
+                bool? ko_ = context.Operators.AnyRelated<Medication>(km_, kn_);
                 return ko_;
             }
 
@@ -601,7 +601,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return lt_;
                 }
 
-                bool? lf_ = context.Operators.WhereAny<Medication>(ld_, le_);
+                bool? lf_ = context.Operators.AnyRelated<Medication>(ld_, le_);
                 return lf_;
             }
 
@@ -631,7 +631,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return mk_;
                 }
 
-                bool? lw_ = context.Operators.WhereAny<Medication>(lu_, lv_);
+                bool? lw_ = context.Operators.AnyRelated<Medication>(lu_, lv_);
                 return lw_;
             }
 
@@ -661,7 +661,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return nb_;
                 }
 
-                bool? mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
+                bool? mn_ = context.Operators.AnyRelated<Medication>(ml_, mm_);
                 return mn_;
             }
 
@@ -692,7 +692,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return nt_;
                 }
 
-                bool? ne_ = context.Operators.WhereAny<Medication>(nc_, nd_);
+                bool? ne_ = context.Operators.AnyRelated<Medication>(nc_, nd_);
                 return ne_;
             }
 
@@ -723,7 +723,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return ok_;
                 }
 
-                bool? nw_ = context.Operators.WhereAny<Medication>(nu_, nv_);
+                bool? nw_ = context.Operators.AnyRelated<Medication>(nu_, nv_);
                 return nw_;
             }
 
@@ -753,7 +753,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return pb_;
                 }
 
-                bool? on_ = context.Operators.WhereAny<Medication>(ol_, om_);
+                bool? on_ = context.Operators.AnyRelated<Medication>(ol_, om_);
                 return on_;
             }
 
@@ -783,7 +783,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                     return ps_;
                 }
 
-                bool? pe_ = context.Operators.WhereAny<Medication>(pc_, pd_);
+                bool? pe_ = context.Operators.AnyRelated<Medication>(pc_, pd_);
                 return pe_;
             }
 
@@ -807,7 +807,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return qb_;
             }
 
-            bool? jt_ = context.Operators.WhereAny<MedicationRequest>(jr_, js_);
+            bool? jt_ = context.Operators.AnyRelated<MedicationRequest>(jr_, js_);
             bool? ju_ = context.Operators.Not(jt_);
             return ju_;
         }
@@ -1204,7 +1204,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ey_;
             }
 
-            bool? ek_ = context.Operators.WhereAny<Medication>(ei_, ej_);
+            bool? ek_ = context.Operators.AnyRelated<Medication>(ei_, ej_);
             return ek_;
         }
 
@@ -1265,7 +1265,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return fw_;
             }
 
-            bool? fi_ = context.Operators.WhereAny<Medication>(fg_, fh_);
+            bool? fi_ = context.Operators.AnyRelated<Medication>(fg_, fh_);
             return fi_;
         }
 
@@ -1327,7 +1327,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return gu_;
             }
 
-            bool? gg_ = context.Operators.WhereAny<Medication>(ge_, gf_);
+            bool? gg_ = context.Operators.AnyRelated<Medication>(ge_, gf_);
             return gg_;
         }
 
@@ -1388,7 +1388,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return hs_;
             }
 
-            bool? he_ = context.Operators.WhereAny<Medication>(hc_, hd_);
+            bool? he_ = context.Operators.AnyRelated<Medication>(hc_, hd_);
             return he_;
         }
 
@@ -1451,7 +1451,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return iq_;
             }
 
-            bool? ic_ = context.Operators.WhereAny<Medication>(ia_, ib_);
+            bool? ic_ = context.Operators.AnyRelated<Medication>(ia_, ib_);
             return ic_;
         }
 
@@ -1512,7 +1512,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return jo_;
             }
 
-            bool? ja_ = context.Operators.WhereAny<Medication>(iy_, iz_);
+            bool? ja_ = context.Operators.AnyRelated<Medication>(iy_, iz_);
             return ja_;
         }
 
@@ -1575,7 +1575,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return km_;
             }
 
-            bool? jy_ = context.Operators.WhereAny<Medication>(jw_, jx_);
+            bool? jy_ = context.Operators.AnyRelated<Medication>(jw_, jx_);
             return jy_;
         }
 
@@ -1637,7 +1637,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return ll_;
             }
 
-            bool? kw_ = context.Operators.WhereAny<Medication>(ku_, kv_);
+            bool? kw_ = context.Operators.AnyRelated<Medication>(ku_, kv_);
             return kw_;
         }
 
@@ -1701,7 +1701,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return mj_;
             }
 
-            bool? lv_ = context.Operators.WhereAny<Medication>(lt_, lu_);
+            bool? lv_ = context.Operators.AnyRelated<Medication>(lt_, lu_);
             return lv_;
         }
 
@@ -1990,7 +1990,7 @@ public partial class CMS136FHIRChildADHDMedFollowUp_1_0_000 : ILibrary, ISinglet
                 return q_;
             }
 
-            bool? k_ = context.Operators.WhereAny<CqlDate>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<CqlDate>(i_, j_);
             return k_;
         }
 

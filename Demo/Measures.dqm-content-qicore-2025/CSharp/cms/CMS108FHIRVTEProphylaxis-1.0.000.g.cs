@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS108FHIRVTEProphylaxis", "1.0.000")]
 public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS108FHIRVTEProphylaxis_1_0_000>
 {
@@ -593,7 +593,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return u_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 
@@ -1033,7 +1033,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return bp_;
             }
 
-            bool? bb_ = context.Operators.WhereAny<Medication>(az_, ba_);
+            bool? bb_ = context.Operators.AnyRelated<Medication>(az_, ba_);
             return bb_;
         }
 
@@ -1078,7 +1078,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return cq_;
             }
 
-            bool? cc_ = context.Operators.WhereAny<Medication>(ca_, cb_);
+            bool? cc_ = context.Operators.AnyRelated<Medication>(ca_, cb_);
             return cc_;
         }
 
@@ -1118,7 +1118,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return dl_;
             }
 
-            bool? cx_ = context.Operators.WhereAny<Medication>(cv_, cw_);
+            bool? cx_ = context.Operators.AnyRelated<Medication>(cv_, cw_);
             return cx_;
         }
 
@@ -1157,7 +1157,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return eg_;
             }
 
-            bool? ds_ = context.Operators.WhereAny<Medication>(dq_, dr_);
+            bool? ds_ = context.Operators.AnyRelated<Medication>(dq_, dr_);
             return ds_;
         }
 
@@ -1198,7 +1198,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return fb_;
             }
 
-            bool? en_ = context.Operators.WhereAny<Medication>(el_, em_);
+            bool? en_ = context.Operators.AnyRelated<Medication>(el_, em_);
             return en_;
         }
 
@@ -1739,7 +1739,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return ap_;
             }
 
-            bool? ab_ = context.Operators.WhereAny<Medication>(z_, aa_);
+            bool? ab_ = context.Operators.AnyRelated<Medication>(z_, aa_);
             return ab_;
         }
 
@@ -1806,7 +1806,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return cc_;
             }
 
-            bool? bo_ = context.Operators.WhereAny<Medication>(bm_, bn_);
+            bool? bo_ = context.Operators.AnyRelated<Medication>(bm_, bn_);
             return bo_;
         }
 
@@ -2165,7 +2165,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return ai_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Condition>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Condition>(k_, l_);
             return m_;
         }
 
@@ -2236,7 +2236,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return bv_;
             }
 
-            bool? ao_ = context.Operators.WhereAny<Condition>(am_, an_);
+            bool? ao_ = context.Operators.AnyRelated<Condition>(am_, an_);
             return ao_;
         }
 
@@ -2328,7 +2328,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return v_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Procedure>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Procedure>(h_, i_);
             return j_;
         }
 
@@ -2473,7 +2473,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return cx_;
             }
 
-            bool? cj_ = context.Operators.WhereAny<Medication>(ch_, ci_);
+            bool? cj_ = context.Operators.AnyRelated<Medication>(ch_, ci_);
             return cj_;
         }
 
@@ -2513,7 +2513,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return dt_;
             }
 
-            bool? df_ = context.Operators.WhereAny<Medication>(dd_, de_);
+            bool? df_ = context.Operators.AnyRelated<Medication>(dd_, de_);
             return df_;
         }
 
@@ -2543,7 +2543,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return ek_;
             }
 
-            bool? dw_ = context.Operators.WhereAny<Medication>(du_, dv_);
+            bool? dw_ = context.Operators.AnyRelated<Medication>(du_, dv_);
             return dw_;
         }
 
@@ -2607,7 +2607,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return p_;
             }
 
-            bool? f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<(CqlTupleMetadata, string id, CqlDateTime LowRiskDatetime)?>(d_, e_);
             return f_;
         }
 
@@ -3107,7 +3107,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return ej_;
             }
 
-            bool? dv_ = context.Operators.WhereAny<Medication>(dt_, du_);
+            bool? dv_ = context.Operators.AnyRelated<Medication>(dt_, du_);
             return dv_;
         }
 
@@ -3135,7 +3135,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return fa_;
             }
 
-            bool? em_ = context.Operators.WhereAny<Medication>(ek_, el_);
+            bool? em_ = context.Operators.AnyRelated<Medication>(ek_, el_);
             return em_;
         }
 
@@ -3164,7 +3164,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return fr_;
             }
 
-            bool? fd_ = context.Operators.WhereAny<Medication>(fb_, fc_);
+            bool? fd_ = context.Operators.AnyRelated<Medication>(fb_, fc_);
             return fd_;
         }
 
@@ -3193,7 +3193,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return gi_;
             }
 
-            bool? fu_ = context.Operators.WhereAny<Medication>(fs_, ft_);
+            bool? fu_ = context.Operators.AnyRelated<Medication>(fs_, ft_);
             return fu_;
         }
 
@@ -3222,7 +3222,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return gz_;
             }
 
-            bool? gl_ = context.Operators.WhereAny<Medication>(gj_, gk_);
+            bool? gl_ = context.Operators.AnyRelated<Medication>(gj_, gk_);
             return gl_;
         }
 
@@ -3309,7 +3309,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return t_;
             }
 
-            bool? f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<(CqlTupleMetadata, string id, IEnumerable<CqlConcept> medicationStatusReason, CqlDateTime authoredOn)?>(d_, e_);
             return f_;
         }
 
@@ -3551,7 +3551,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return t_;
             }
 
-            bool? f_ = context.Operators.WhereAny<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<(CqlTupleMetadata, string id, CqlConcept requestStatusReason, CqlDateTime authoredOn)?>(d_, e_);
             return f_;
         }
 
@@ -4292,7 +4292,7 @@ public partial class CMS108FHIRVTEProphylaxis_1_0_000 : ILibrary, ISingleton<CMS
                 return p_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 

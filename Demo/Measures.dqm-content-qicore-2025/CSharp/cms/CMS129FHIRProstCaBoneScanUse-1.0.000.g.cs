@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -788,7 +788,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -861,7 +861,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -948,7 +948,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 return r_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Condition>(e_, f_);
             return g_;
         }
 

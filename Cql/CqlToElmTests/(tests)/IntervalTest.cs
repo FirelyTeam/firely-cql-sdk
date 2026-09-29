@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -388,7 +389,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii, library);
-            Assert.IsNull(result);
+            Assert.AreEqual(true, result);
         }
 
         [TestMethod]
@@ -397,10 +398,51 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
             var result = Run(pii, library);
-            Assert.IsNull(result);
+            Assert.AreEqual(false, result);
         }
 
+        [TestMethod]
+        public void Untyped_Max_Interval_Starts_Itself()
+        {
+            var library = CreateCqlToolkit(AllowNullIntervals: true).MakeLibraryFromExpression("Interval[null, null] starts Interval[null, null]");
+            var starts = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
+            Assert.AreEqual(true, Run(starts, library));
+        }
 
+        [TestMethod]
+        public void Untyped_Unknown_Interval_Starts_Max_Interval_Is_Null()
+        {
+            var library = CreateCqlToolkit(AllowNullIntervals: true).MakeLibraryFromExpression("Interval(null, null) starts Interval[null, null]");
+            var starts = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
+            Assert.IsNull(Run(starts, library));
+        }
+
+        [TestMethod]
+        public void AllowNullIntervals_Defaults_To_True()
+        {
+            Assert.IsTrue(new CqlToElmOptions().AllowNullIntervals);
+            Assert.IsTrue(new CqlToolkitConfig().AllowNullIntervals);
+            Assert.IsTrue(CqlToolkitConfig.Default.AllowNullIntervals);
+        }
+
+        [TestMethod]
+        public void Interval_Untyped_Null_Null_Is_Interval_Of_Any()
+        {
+            // The parameterless toolkit runs on the production defaults, not on the test helper's.
+            var library = new CqlToolkit().MakeLibraryFromExpression("Interval[null, null]");
+            var interval = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Interval>();
+            interval.Should().HaveType(SystemTypes.AnyType.ToIntervalType());
+        }
+
+        [TestMethod]
+        public void Interval_Untyped_Null_Null_Errors_When_AllowNullIntervals_Is_False()
+        {
+            CreateCqlToolkit(AllowNullIntervals: false).MakeLibrary("""
+                library IntervalTest version '1.0.0'
+
+                define private Interval_Untyped_Null_Null: Interval[null, null]
+                """, "Could not resolve call to operator Interval*");
+        }
 
     }
 }

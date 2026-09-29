@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("PCMaternal", "5.25.000")]
 public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_000>
 {
@@ -411,7 +411,7 @@ public partial class PCMaternal_5_25_000 : ILibrary, ISingleton<PCMaternal_5_25_
                 return q_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 

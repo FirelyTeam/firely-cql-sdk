@@ -14,7 +14,7 @@
   resolves a call on a choice to another alternative's overload, is compiled on the un-narrowed
   value as before and logged, since it always yields `null`.
 
-  **This changes generated C#**: `GeneratorToolVersion` moves to `5.2.5.0` (patch: the generated
+  **This changes generated C#**: `GeneratorToolVersion` moves to `5.3.3.0` (patch: the generated
   API is unchanged), and every checked-in `*.g.cs` with such a `case` or `if` is regenerated. CQL
   evaluation results do not change: within the branch the value already is of the tested type.
   (#1661)

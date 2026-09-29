@@ -68,13 +68,21 @@ internal abstract class CqlComparer<T>(
             ? EqualsValuesShared(tx, ty, precision)
             : false;
 
+    /// <summary>
+    /// Whether two values that the type's own equality considers equal are equal, and compare as
+    /// 0, without consulting <see cref="CompareValues"/> or <see cref="EqualsValues"/>. A comparer
+    /// whose values can be equal in representation yet indeterminate in CQL equality, such as an
+    /// interval with an unknown boundary, turns this off.
+    /// </summary>
+    protected virtual bool DefaultEqualityImpliesEquality => true;
+
     private bool? EqualsValuesShared(
         [DisallowNull] T x,
         [DisallowNull] T y,
         string? precision)
     {
         // Do a quick check for equality
-        if (EqualityComparer<T>.Default.Equals(x, y))
+        if (DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
            return true;
 
         switch (EqualsImplementation)
@@ -217,7 +225,7 @@ internal abstract class CqlComparer<T>(
         string? precision)
     {
         // Do a quick check for equality
-        if (EqualityComparer<T>.Default.Equals(x, y))
+        if (DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
             return 0;
 
         return CompareValues(x!, y!, precision);

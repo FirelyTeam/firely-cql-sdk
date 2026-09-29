@@ -1700,5 +1700,21 @@ namespace Hl7.Cql.CqlToElm.Test
             var equalsCall = Run(invokeEquals, input);
             Assert.AreEqual(true, equalsCall);
         }
+
+        [TestMethod]
+        public void DateErrors()
+        {
+            CreateCqlToolkit().MakeLibrary("""
+                library DateErrors version '1.0.0'
+
+                define private Date_Literal: @2026-13-45
+                """, "Unparseable date literal '2026-13-45'.");
+
+            CreateCqlToolkit().MakeLibrary("""
+                library DateTimeErrors version '1.0.0'
+
+                define private DateTime_Literal: @2026-13-45T10:00:00.000Z
+                """, "Unparseable date/time literal '2026-13-45T10:00:00.000Z'.");
+        }
     }
 }

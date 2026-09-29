@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS159FHIRDepRemissionat12Months", "1.0.000")]
 public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingleton<CMS159FHIRDepRemissionat12Months_1_0_000>
 {
@@ -305,7 +305,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return t_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Condition>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Condition>(e_, f_);
             return g_;
         }
 
@@ -342,7 +342,7 @@ public partial class CMS159FHIRDepRemissionat12Months_1_0_000 : ILibrary, ISingl
                 return t_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 

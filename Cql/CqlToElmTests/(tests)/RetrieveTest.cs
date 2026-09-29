@@ -6,8 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
 using Task = System.Threading.Tasks.Task;
 
@@ -231,7 +233,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var retrieve = (Retrieve)aliasedQuerySource.expression;
             Assert.AreEqual("{http://hl7.org/fhir}Observation", retrieve.dataType?.Name);
-            // Note: codeProperty and codeComparator may not be set when using list syntax in retrieves
+            Assert.AreEqual("code", retrieve.codeProperty);
+            Assert.AreEqual("in", retrieve.codeComparator);
             Assert.IsNotNull(retrieve.codes);
             Assert.IsInstanceOfType(retrieve.codes, typeof(Elm.List));
 
@@ -242,6 +245,155 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var codeRef = (CodeRef)list.element[0];
             Assert.AreEqual("Systolic BP", codeRef.name);
+        }
+
+        [TestMethod]
+        public void Retrieve_ValueSetWithoutCodePath_CarriesThePrimaryCodePath()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                valueset "terminology": 'http://fire.ly/ValueSet/Test'
+                define "Conditions": [Condition: "terminology"]
+                """);
+            var retrieve = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
+            retrieve.codeProperty.Should().Be("code");
+            retrieve.codeComparator.Should().Be("in");
+            retrieve.codes.Should().BeOfType<ValueSetRef>();
+        }
+
+        [TestMethod]
+        public void Retrieve_PrimaryCodePathIsTheModelsNotTheLiteralCode()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                codesystem "RxNorm": 'http://www.nlm.nih.gov/research/umls/rxnorm'
+                code "Metformin": '6809' from "RxNorm"
+                concept "Metformins": { "Metformin" }
+                valueset "Statins": 'http://fire.ly/ValueSet/Statins'
+                define "By code": [MedicationRequest: "Metformin"]
+                define "By concept": [MedicationRequest: "Metformins"]
+                define "By value set": [MedicationRequest: "Statins"]
+                define "By code system": [MedicationRequest: "RxNorm"]
+                define "Immunizations": [Immunization: "Statins"]
+                define "Encounters": [Encounter: "Statins"]
+                define "Patients": [Patient: "Statins"]
+                """);
+            var byName = lib.statements.ToDictionary(s => s.name, s => (Retrieve)s.expression);
+
+            byName["By code"].codeProperty.Should().Be("medication");
+            byName["By code"].codeComparator.Should().Be("~");
+            byName["By code"].codes.Should().BeOfType<ToList>();
+
+            byName["By concept"].codeProperty.Should().Be("medication");
+            byName["By concept"].codeComparator.Should().Be("~");
+            byName["By concept"].codes.Should().BeOfType<ToList>();
+
+            byName["By value set"].codeProperty.Should().Be("medication");
+            byName["By value set"].codeComparator.Should().Be("in");
+
+            byName["By code system"].codeComparator.Should().Be("in");
+            byName["By code system"].codes.Should().BeOfType<CodeSystemRef>();
+
+            byName["Immunizations"].codeProperty.Should().Be("vaccineCode");
+            byName["Encounters"].codeProperty.Should().Be("type");
+
+            // Patient declares no primary code path.
+            byName["Patients"].codeProperty.Should().BeNull();
+            byName["Patients"].codeComparator.Should().Be("in");
+        }
+
+        [TestMethod]
+        public void Retrieve_ExplicitCodePathAndComparatorAreKept()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var cqlLibraryString = CqlLibraryString.Parse("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                codesystem "RxNorm": 'http://www.nlm.nih.gov/research/umls/rxnorm'
+                code "Metformin": '6809' from "RxNorm"
+                valueset "terminology": 'http://fire.ly/ValueSet/Test'
+                define "By category": [Observation: category ~ "Metformin"]
+                define "By category in value set": [Observation: category in "terminology"]
+                """);
+            var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
+            var byName = lib.statements.ToDictionary(s => s.name, s => (Retrieve)s.expression);
+
+            byName["By category"].codeProperty.Should().Be("category");
+            byName["By category"].codeComparator.Should().Be("~");
+            byName["By category"].codes.Should().BeOfType<ToList>();
+            byName["By category in value set"].codeProperty.Should().Be("category");
+            byName["By category in value set"].codeComparator.Should().Be("in");
+
+            // The authored path is the one the SDK filters on.
+            var bundle = new Bundle
+            {
+                Entry = new List<Bundle.EntryComponent>
+                {
+                    new Bundle.EntryComponent
+                    {
+                        Resource = new Observation
+                        {
+                            Id = "1",
+                            Category = new List<CodeableConcept> { new CodeableConcept("http://www.nlm.nih.gov/research/umls/rxnorm", "6809") },
+                            Code = new CodeableConcept("http://loinc.org", "1234-5")
+                        }
+                    },
+                    new Bundle.EntryComponent
+                    {
+                        Resource = new Observation
+                        {
+                            Id = "2",
+                            Code = new CodeableConcept("http://www.nlm.nih.gov/research/umls/rxnorm", "6809")
+                        }
+                    }
+                }
+            };
+            using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+            var result = librarySetInvoker.InvokeLibraryDefinition(
+                FhirCqlContext.ForBundle(bundle), cqlLibraryString.LibraryIdentifier, "By category");
+            var observations = ((IEnumerable<Observation>)result!).ToList();
+            observations.Should().ContainSingle().Which.Id.Should().Be("1");
+        }
+
+        [TestMethod]
+        public void Retrieve_TerminologyTheAnalyzerCannotEnumerate_PackagesWithoutACodeFilter()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                codesystem "RxNorm": 'http://www.nlm.nih.gov/research/umls/rxnorm'
+                code "Metformin": '6809' from "RxNorm"
+                code "Other": '1234' from "RxNorm"
+                define "Codes": { "Metformin", "Other" }
+                define "Observations": [Observation: "Codes"]
+                """);
+            var retrieve = (Retrieve)lib.statements.Single(s => s.name == "Observations").expression;
+            retrieve.codeProperty.Should().Be("code");
+
+            var requirements = new DataRequirementsAnalyzer(new LibrarySet("Test", lib), lib).Analyze();
+            var observation = requirements.Should().ContainSingle(r => r.Type == FHIRAllTypes.Observation).Subject;
+            observation.CodeFilter.Should().BeEmpty();
+            observation.MustSupport.Should().Contain("code");
+        }
+
+        [TestMethod]
+        public void Retrieve_ValueSet_PackagesWithACodeFilter()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                valueset "Statins": 'http://fire.ly/ValueSet/Statins'
+                define "Immunizations": [Immunization: "Statins"]
+                """);
+
+            var requirements = new DataRequirementsAnalyzer(new LibrarySet("Test", lib), lib).Analyze();
+            var immunization = requirements.Should().ContainSingle(r => r.Type == FHIRAllTypes.Immunization).Subject;
+            var codeFilter = immunization.CodeFilter.Should().ContainSingle().Subject;
+            codeFilter.Path.Should().Be("vaccineCode");
+            codeFilter.ValueSet.Should().Be("http://fire.ly/ValueSet/Statins");
+            immunization.MustSupport.Should().Contain("vaccineCode");
         }
     }
 }

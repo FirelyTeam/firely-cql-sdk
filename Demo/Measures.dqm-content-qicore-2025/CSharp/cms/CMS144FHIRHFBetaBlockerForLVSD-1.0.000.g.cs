@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS144FHIRHFBetaBlockerForLVSD", "1.0.000")]
 public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISingleton<CMS144FHIRHFBetaBlockerForLVSD_1_0_000>
 {
@@ -225,7 +225,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 return y_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -366,7 +366,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 return n_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 
@@ -701,7 +701,7 @@ public partial class CMS144FHIRHFBetaBlockerForLVSD_1_0_000 : ILibrary, ISinglet
                 return p_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 

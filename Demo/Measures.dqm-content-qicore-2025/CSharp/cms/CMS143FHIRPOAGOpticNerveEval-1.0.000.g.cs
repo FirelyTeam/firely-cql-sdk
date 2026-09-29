@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS143FHIRPOAGOpticNerveEval", "1.0.000")]
 public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton<CMS143FHIRPOAGOpticNerveEval_1_0_000>
 {
@@ -261,7 +261,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -332,7 +332,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -392,7 +392,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return p_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -468,7 +468,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 
@@ -520,7 +520,7 @@ public partial class CMS143FHIRPOAGOpticNerveEval_1_0_000 : ILibrary, ISingleton
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Encounter>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Encounter>(g_, h_);
             return i_;
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS133FHIRCataracts2040BCVA90Days", "1.0.000")]
 public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISingleton<CMS133FHIRCataracts2040BCVA90Days_1_0_000>
 {
@@ -854,7 +854,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 return jy_;
             }
 
-            bool? js_ = context.Operators.WhereAny<Condition>(jq_, jr_);
+            bool? js_ = context.Operators.AnyRelated<Condition>(jq_, jr_);
             return js_;
         }
 
@@ -1079,7 +1079,7 @@ public partial class CMS133FHIRCataracts2040BCVA90Days_1_0_000 : ILibrary, ISing
                 return ao_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Observation>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Observation>(i_, j_);
             return k_;
         }
 

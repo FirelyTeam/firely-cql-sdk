@@ -1,1 +1,2 @@
 #nullable enable
+Hl7.Cql.Operators.ICqlOperators.AnyRelated<T>(System.Collections.Generic.IEnumerable<T>? related, System.Func<T, bool?>! suchThat) -> bool?
