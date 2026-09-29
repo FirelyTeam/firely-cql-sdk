@@ -60,7 +60,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var high = Visit(expressions[1]);
 
             // When enabled, allow Interval<Any> to be created for Interval[null, null].
-            // This is normally disabled.
             if ((CqlToElmOptions.AllowNullIntervals ?? false)
                 && low is Null
                 && low.resultTypeSpecifier == SystemTypes.AnyType

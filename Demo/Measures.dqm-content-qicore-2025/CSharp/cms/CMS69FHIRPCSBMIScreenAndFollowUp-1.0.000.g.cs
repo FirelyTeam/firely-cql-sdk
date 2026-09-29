@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -371,7 +371,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return aa_;
             }
 
-            bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
+            bool? q_ = context.Operators.AnyRelated<Medication>(o_, p_);
             return q_;
         }
 
@@ -640,7 +640,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return p_;
             }
 
-            bool? h_ = context.Operators.WhereAny<object>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<object>(f_, g_);
             return h_;
         }
 
@@ -704,7 +704,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return aa_;
             }
 
-            bool? q_ = context.Operators.WhereAny<Medication>(o_, p_);
+            bool? q_ = context.Operators.AnyRelated<Medication>(o_, p_);
             return q_;
         }
 
@@ -1037,7 +1037,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return p_;
             }
 
-            bool? h_ = context.Operators.WhereAny<object>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<object>(f_, g_);
             return h_;
         }
 
@@ -1131,7 +1131,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return aj_;
             }
 
-            bool? ad_ = context.Operators.WhereAny<Encounter>(ab_, ac_);
+            bool? ad_ = context.Operators.AnyRelated<Encounter>(ab_, ac_);
             return ad_;
         }
 
@@ -1189,7 +1189,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return bi_;
             }
 
-            bool? bc_ = context.Operators.WhereAny<Encounter>(ba_, bb_);
+            bool? bc_ = context.Operators.AnyRelated<Encounter>(ba_, bb_);
             return bc_;
         }
 
@@ -1247,7 +1247,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 return r_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 

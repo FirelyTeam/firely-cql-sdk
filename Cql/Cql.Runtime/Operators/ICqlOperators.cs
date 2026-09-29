@@ -73,6 +73,7 @@ namespace Hl7.Cql.Operators
         bool?                                    And(bool? left, Lazy<bool?> right);
         bool?                                    And(Lazy<bool?> left, bool? right);
         bool?                                    And(Lazy<bool?> left, Lazy<bool?> right);
+        bool?                                    AnyRelated<T>(IEnumerable<T>? related, Func<T, bool?> suchThat);
         bool?                                    AnyTrue(IEnumerable<bool?> argument);
         bool?                                    AnyTrue(IEnumerable<Lazy<bool?>> argument);
         decimal?                                 Avg(IEnumerable<decimal?>? argument);

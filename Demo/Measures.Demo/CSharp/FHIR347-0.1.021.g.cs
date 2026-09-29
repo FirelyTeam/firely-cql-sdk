@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 {
@@ -922,7 +922,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ai_;
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            bool? w_ = context.Operators.AnyRelated<Medication>(u_, v_);
             return w_;
         }
 
@@ -950,7 +950,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ax_;
             }
 
-            bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
+            bool? al_ = context.Operators.AnyRelated<Medication>(aj_, ak_);
             return al_;
         }
 
@@ -979,7 +979,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return bm_;
             }
 
-            bool? ba_ = context.Operators.WhereAny<Medication>(ay_, az_);
+            bool? ba_ = context.Operators.AnyRelated<Medication>(ay_, az_);
             return ba_;
         }
 
@@ -1043,7 +1043,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ai_;
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            bool? w_ = context.Operators.AnyRelated<Medication>(u_, v_);
             return w_;
         }
 
@@ -1071,7 +1071,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return ax_;
             }
 
-            bool? al_ = context.Operators.WhereAny<Medication>(aj_, ak_);
+            bool? al_ = context.Operators.AnyRelated<Medication>(aj_, ak_);
             return al_;
         }
 
@@ -1100,7 +1100,7 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
                 return bm_;
             }
 
-            bool? ba_ = context.Operators.WhereAny<Medication>(ay_, az_);
+            bool? ba_ = context.Operators.AnyRelated<Medication>(ay_, az_);
             return ba_;
         }
 
