@@ -16,6 +16,53 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        #region AnyRelated
+
+        /// <summary>
+        /// Evaluates the <c>such that</c> condition of a query relationship clause against its
+        /// related list: returns <see langword="true"/> when <paramref name="suchThat"/> is
+        /// <see langword="true"/> for at least one element of <paramref name="related"/>, and
+        /// <see langword="false"/> otherwise. A <c>with</c> clause keeps a source element exactly
+        /// when this is <see langword="true"/>, a <c>without</c> clause exactly when it is
+        /// <see langword="false"/>. Never returns <see langword="null"/>.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        /// A null element of <paramref name="related"/> is an element like any other: it is passed
+        /// to <paramref name="suchThat"/> and satisfies the clause whenever that returns
+        /// <see langword="true"/>. ELM logical specification, "With": <i>"The With clause restricts
+        /// the elements of a given source to only those elements that have elements in the related
+        /// source that satisfy the suchThat condition."</i> This is where the operator differs from
+        /// <c>Exists(Where(related, suchThat))</c> and its fused form <see cref="WhereAny{T}"/>,
+        /// which implement <c>exists (X where c)</c> and therefore ignore null elements.
+        /// </para>
+        /// <para>
+        /// A null <paramref name="related"/> list has no elements, so nothing satisfies the clause
+        /// and the result is <see langword="false"/>.
+        /// </para>
+        /// <para>
+        /// <paramref name="suchThat"/> is evaluated for every element, with no early exit after the
+        /// first match, so its <see cref="ICqlOperators.Message{T}"/> side effects are those of
+        /// <c>Where</c> over the whole related list.
+        /// </para>
+        /// </remarks>
+        public bool? AnyRelated<T>(IEnumerable<T>? related, Func<T, bool?> suchThat)
+        {
+            if (related == null)
+                return false;
+
+            var any = false;
+            foreach (var element in related)
+            {
+                // No early exit: the predicate runs for every element, as Where would run it.
+                if (suchThat(element) == true)
+                    any = true;
+            }
+            return any;
+        }
+
+        #endregion
+
         #region Contains
         public bool? Contains<T>(IEnumerable<T?>? list, T? item)
         {
@@ -135,7 +182,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument!, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlDate?>>();
             foreach (var item in collapsed)
@@ -184,7 +232,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -193,6 +243,8 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlDate?>(listItem, high, true, true);
                         expanded.Add(listInterval);
+                        if (next is null)
+                            break;
                         listItem = next;
                     }
                 }
@@ -208,7 +260,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlDateTime?>>();
             foreach (var item in collapsed)
@@ -251,7 +304,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval, null) <= 0;
@@ -260,7 +315,9 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlDateTime?>(listItem, high, true, true);
                         expanded.Add(listInterval);
-                        listItem = next!;
+                        if (next is null)
+                            break;
+                        listItem = next;
                     }
                 }
             }
@@ -276,7 +333,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument!, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<CqlTime?>>();
             foreach (var item in collapsed)
@@ -324,7 +382,9 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
-                        var high = next?.Subtract(onePrior);
+                        // The partition ends one step before the next start. When that start cannot be represented, the end is
+                        // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
+                        var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
 
                         // Only intervals of size per that end on or before the upper boundary are contributed.
                         var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, highInterval!, null) <= 0;
@@ -333,6 +393,8 @@ namespace Hl7.Cql.Operators
 
                         var listInterval = new CqlInterval<CqlTime?>(listItem, high, true, true);
                         expanded.Add(listInterval);
+                        if (next is null)
+                            break;
                         listItem = next;
                     }
                 }
@@ -349,7 +411,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<decimal?>>();
             foreach (var item in collapsed)
@@ -422,7 +485,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<int?>>();
             foreach (var item in collapsed)
@@ -459,18 +523,19 @@ namespace Hl7.Cql.Operators
                     var listItem = interval.low!.Value;
                     while (true)
                     {
-                        var next = listItem + intQuantity;
-                        var high = Predecessor(next);
-
-                        // Only intervals of size per that end on or before the upper boundary are contributed.
-                        var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                        if (!endsOnOrBeforeHigh)
+                        // Only a partition of size per that ends on or before the upper boundary is contributed. The end
+                        // is computed in a wider type so a partition reaching the type's maximum is still emitted,
+                        // after which there is no next start.
+                        var end = (long)listItem + intQuantity - 1;
+                        if (end > interval.high!.Value)
                             break;
 
-                        var listInterval = new CqlInterval<int?>(listItem, high, true, true);
+                        var listInterval = new CqlInterval<int?>(listItem, (int)end, true, true);
                         expanded.Add(listInterval);
 
-                        listItem = next;
+                        if (end == int.MaxValue)
+                            break;
+                        listItem = (int)(end + 1);
                     }
                 }
             }
@@ -486,7 +551,8 @@ namespace Hl7.Cql.Operators
             if (per?.value is <= 0)
                 return null;
 
-            var collapsed = Collapse(argument, null)!;
+            // An interval whose closed form lacks a boundary would contribute the whole domain, so it is left out before collapsing.
+            var collapsed = Collapse(argument.Where(HasKnownBoundaries).ToList(), null)!;
 
             var expanded = new List<CqlInterval<long?>>();
             foreach (var item in collapsed)
@@ -523,18 +589,19 @@ namespace Hl7.Cql.Operators
                     var listItem = interval.low!.Value;
                     while (true)
                     {
-                        var next = listItem + intQuantity;
-                        var high = Predecessor(next);
-
-                        // Only intervals of size per that end on or before the upper boundary are contributed.
-                        var endsOnOrBeforeHigh = high is not null && Comparer.Compare(high, interval.high!, null) <= 0;
-                        if (!endsOnOrBeforeHigh)
+                        // Only a partition of size per that ends on or before the upper boundary is contributed. The end
+                        // is computed in a wider type so a partition reaching the type's maximum is still emitted,
+                        // after which there is no next start.
+                        var end = (decimal)listItem + intQuantity - 1;
+                        if (end > interval.high!.Value)
                             break;
 
-                        var listInterval = new CqlInterval<long?>(listItem, high, true, true);
+                        var listInterval = new CqlInterval<long?>(listItem, (long)end, true, true);
                         expanded.Add(listInterval);
 
-                        listItem = next;
+                        if (end == long.MaxValue)
+                            break;
+                        listItem = (long)(end + 1);
                     }
                 }
             }
@@ -552,6 +619,18 @@ namespace Hl7.Cql.Operators
             var coarsest = low < high ? low : high;
             Units.DatePrecisionToCqlUnits.TryGetValue(coarsest.ToString(), out var cqlUnits);
             return new CqlQuantity(1, cqlUnits);
+        }
+
+        /// <summary>
+        /// The per quantity shortened by one step of the boundary unit and expressed in that unit. A weekly per is
+        /// the only case where per and the boundary step differ in unit, since weeks align to day precision.
+        /// </summary>
+        private static CqlQuantity PerLessOneStep(CqlQuantity per, string? stepUnit)
+        {
+            var value = per.value ?? 1;
+            if (per.unit is "week" or "weeks" or UCUMUnits.Week)
+                value *= CqlDateTimeMath.DaysPerWeek;
+            return new CqlQuantity(value - 1, stepUnit);
         }
 
         /// <summary>

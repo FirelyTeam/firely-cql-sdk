@@ -65,6 +65,22 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Start_of_max_interval()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("start of Interval[null as Integer, null as Integer]");
+            var start = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Start>();
+            Assert.AreEqual(int.MinValue, Run<int?>(start, library));
+        }
+
+        [TestMethod]
+        public void End_of_max_interval()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("end of Interval[null as Integer, null as Integer]");
+            var end = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<End>();
+            Assert.AreEqual(int.MaxValue, Run<int?>(end, library));
+        }
+
+        [TestMethod]
         public void Start_of_point_null()
         {
             var library = CreateCqlToolkit().MakeLibrary("""

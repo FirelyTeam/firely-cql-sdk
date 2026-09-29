@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -228,7 +228,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return bv_;
             }
 
-            bool? az_ = context.Operators.WhereAny<Condition>(ax_, ay_);
+            bool? az_ = context.Operators.AnyRelated<Condition>(ax_, ay_);
             return az_;
         }
 
@@ -296,7 +296,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return cl_;
             }
 
-            bool? bz_ = context.Operators.WhereAny<Observation>(bx_, by_);
+            bool? bz_ = context.Operators.AnyRelated<Observation>(bx_, by_);
             return bz_;
         }
 
@@ -332,7 +332,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return ea_;
             }
 
-            bool? de_ = context.Operators.WhereAny<Condition>(dc_, dd_);
+            bool? de_ = context.Operators.AnyRelated<Condition>(dc_, dd_);
             return de_;
         }
 
@@ -383,7 +383,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return af_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Condition>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Condition>(h_, i_);
             return j_;
         }
 
@@ -498,7 +498,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return n_;
             }
 
-            bool? f_ = context.Operators.WhereAny<object>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<object>(d_, e_);
             return f_;
         }
 
@@ -583,7 +583,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                     return ab_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -643,7 +643,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return bb_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -736,7 +736,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return bf_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<Medication>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<Medication>(ap_, aq_);
             return ar_;
         }
 
@@ -776,7 +776,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return ce_;
             }
 
-            bool? bi_ = context.Operators.WhereAny<Task>(bg_, bh_);
+            bool? bi_ = context.Operators.AnyRelated<Task>(bg_, bh_);
             return bi_;
         }
 
@@ -808,7 +808,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 return k_;
             }
 
-            bool? f_ = context.Operators.WhereAny<MedicationRequest>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<MedicationRequest>(d_, e_);
             return f_;
         }
 

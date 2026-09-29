@@ -348,7 +348,15 @@
 		</test>
 	</group>
 	<group name="Ends">
-		<test name="TestEndsNull">
+		<test name="TestNullEndsNull">
+			<expression>Interval[1, 10] ends null</expression>
+			<output>null</output>
+		</test>
+		<test name="TestMaxIntervalEndsFalse">
+			<expression>Interval[1, 10] ends Interval[null, null]</expression>
+			<output>false</output>
+		</test>
+		<test name="TestUnknownIntervalEndsNull">
 			<expression>Interval[1, 10] ends Interval(null, null)</expression>
 			<output>null</output>
 		</test>
@@ -440,12 +448,12 @@
 		</test>
 	</group>
 	<group name="Except">
-		<test name="NullInterval">
-			<expression>Interval[null, null]</expression>
+		<test name="TestMaxIntervalExceptNull">
+			<expression>Interval[null, null] except Interval[null, null]</expression>
 			<output>null</output>
 		</test>
-		<test name="TestExceptNull">
-			<expression>Interval[null, null] except Interval[null, null]</expression>
+		<test name="TestUnitIntervalExceptNull">
+			<expression>Interval[1, 1] except Interval[1, 1]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalExcept1to3">
@@ -490,9 +498,13 @@
 		</test>
 	</group>
 	<group name="In">
-		<test name="TestInNullBoundaries">
+		<test name="TestIntegerInMaxIntervalTrue">
 			<expression>5 in Interval[null, null]</expression>
-			<output>false</output>
+			<output>true</output>
+		</test>
+		<test name="TestIntegerInUnknownIntervalNull">
+			<expression>5 in Interval(null, null)</expression>
+			<output>null</output>
 		</test>
 		<test name="IntegerIntervalInTrue">
 			<expression>5 in Interval[1, 10]</expression>
@@ -993,8 +1005,12 @@
 		</test>
 	</group>
 	<group name="Overlaps">
-		<test name="TestOverlapsNull">
+		<test name="TestMaxIntervalOverlapsTrue">
 			<expression>Interval[null, null] overlaps Interval[1, 10]</expression>
+			<output>true</output>
+		</test>
+		<test name="TestUnknownIntervalOverlapsNull">
+			<expression>Interval(null, null) overlaps Interval[1, 10]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalOverlapsTrue">
@@ -1039,8 +1055,12 @@
 		</test>
 	</group>
 	<group name="OverlapsBefore">
-		<test name="TestOverlapsBeforeNull">
+		<test name="TestMaxIntervalOverlapsBeforeTrue">
 			<expression>Interval[null, null] overlaps before Interval[1, 10]</expression>
+			<output>true</output>
+		</test>
+		<test name="TestUnknownIntervalOverlapsBeforeNull">
+			<expression>Interval(null, null) overlaps before Interval[1, 10]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalOverlapsBeforeTrue">
@@ -1085,8 +1105,12 @@
 		</test>
 	</group>
 	<group name="OverlapsAfter">
-		<test name="TestOverlapsAfterNull">
+		<test name="TestMaxIntervalOverlapsAfterTrue">
 			<expression>Interval[null, null] overlaps after Interval[1, 10]</expression>
+			<output>true</output>
+		</test>
+		<test name="TestUnknownIntervalOverlapsAfterNull">
+			<expression>Interval(null, null) overlaps after Interval[1, 10]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalOverlapsAfterTrue">
@@ -1132,7 +1156,14 @@
 	</group>
 	<group name="PointFrom">
 		<test name="TestPointFromNull">
-			<expression>point from Interval[null, null]</expression>
+			<expression>point from (null as Interval&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
+		<test name="TestPointFromMaxIntervalError">
+			<expression invalid="true">point from Interval[null, null]</expression>
+		</test>
+		<test name="TestPointFromUnknownIntervalNull">
+			<expression>point from Interval(null, null)</expression>
 			<output>null</output>
 		</test>
 		<test name="TestPointFromInteger">
@@ -1203,7 +1234,7 @@
 	<group name="ProperlyIncludes">
 		<test name="NullBoundariesProperlyIncludesIntegerInterval">
 			<expression>Interval[null as Integer, null as Integer] properly includes Interval[1, 10]</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="IntegerIntervalProperlyIncludesTrue">
 			<expression>Interval[1, 10] properly includes Interval[4, 10]</expression>
@@ -1247,9 +1278,9 @@
 		</test>
 	</group>
 	<group name="ProperlyIncludedIn">
-		<test name="IntegerIntervalProperlyIncludedInNullBoundaries">
+		<test name="IntegerIntervalProperlyIncludedInMaxIntervalTrue">
 			<expression>Interval[1, 10] properly included in Interval[null, null]</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="IntegerIntervalProperlyIncludedInTrue">
 			<expression>Interval[4, 10] properly included in Interval[1, 10]</expression>
@@ -1315,8 +1346,16 @@
 		</test>
 	</group>
 	<group name="Starts">
-		<test name="TestStartsNull">
+		<test name="TestNullStartsNull">
+			<expression>null starts Interval[1, 10]</expression>
+			<output>null</output>
+		</test>
+		<test name="TestMaxIntervalStartsFalse">
 			<expression>Interval[null, null] starts Interval[1, 10]</expression>
+			<output>false</output>
+		</test>
+		<test name="TestUnknownIntervalStartsNull">
+			<expression>Interval(null, null) starts Interval[1, 10]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalStartsTrue">
@@ -1361,8 +1400,12 @@
 		</test>
 	</group>
 	<group name="Union">
-		<test name="TestUnionNull">
+		<test name="TestUnionMaxInterval">
 			<expression>Interval[null, null] union Interval[1, 10]</expression>
+			<output>Interval[null, null]</output>
+		</test>
+		<test name="TestUnionUnknownInterval">
+			<expression>Interval(null, null) union Interval[1, 10]</expression>
 			<output>null</output>
 		</test>
 		<test name="IntegerIntervalUnion1To15">

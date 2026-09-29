@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS646FHIRIntravesicalBCGTherapy", "1.0.000")]
 public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingleton<CMS646FHIRIntravesicalBCGTherapy_1_0_000>
 {
@@ -337,7 +337,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return s_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Condition>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Condition>(k_, l_);
             return m_;
         }
 
@@ -875,7 +875,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return aa_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Medication>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Medication>(k_, l_);
             return m_;
         }
 
@@ -1516,7 +1516,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return aj_;
             }
 
-            bool? v_ = context.Operators.WhereAny<Medication>(t_, u_);
+            bool? v_ = context.Operators.AnyRelated<Medication>(t_, u_);
             return v_;
         }
 
@@ -2347,7 +2347,7 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                 return ad_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Medication>(n_, o_);
             return p_;
         }
 

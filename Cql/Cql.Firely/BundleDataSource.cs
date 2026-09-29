@@ -183,8 +183,11 @@ namespace Hl7.Cql.Fhir
 
             bool listFilter(Coding l) => allowedCodes.Any(allowed =>
                 allowed is not null &&
-                _systemComparer.Equivalent(l.System, allowed.system, null) &&
-                _codeComparer.Equivalent(l.Code, allowed.code, null));
+                matchOrBothNull(_systemComparer, l.System, allowed.system) &&
+                matchOrBothNull(_codeComparer, l.Code, allowed.code));
+
+            static bool matchOrBothNull(ICqlComparer<string> comparer, string? left, string? right) =>
+                (left is null && right is null) || comparer.Equals(left, right, null) is true;
         }
 
         /// <summary>
@@ -192,10 +195,10 @@ namespace Hl7.Cql.Fhir
         /// <paramref name="allowedCodes"/> with the default comparers, but does not grow with the number of codes.
         /// </summary>
         /// <remarks>
-        /// The default comparers consider two strings equivalent when both are null, or when neither is null and
-        /// their Unicode normalized forms are equal ignoring case. The set reproduces that: keys hold the
-        /// normalized system and code, a null system or code stays null and so only matches another null, and
-        /// the keys are compared case-insensitively.
+        /// The default comparers match two strings when they are both null, or when neither is null and their
+        /// Unicode normalized forms are equal ignoring case. The set reproduces that: keys hold the normalized
+        /// system and code, a null system or code stays null and so only matches another null, and the keys are
+        /// compared case-insensitively.
         /// </remarks>
         private static Predicate<Coding> BuildSetFilter(IEnumerable<CqlCode?> allowedCodes)
         {

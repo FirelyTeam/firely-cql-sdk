@@ -37,6 +37,8 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(long?), longCqlComparer);
             Comparers.TryAdd(typeof(long), longCqlComparer);
 
+            // CQL string equality is case- and whitespace-sensitive, while string equivalence ignores
+            // case and locale and treats all whitespace characters as equivalent (§9.B Equivalent).
             var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal);
             Comparers.TryAdd(typeof(string), stringCqlComparer);
 
@@ -57,6 +59,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
+            Comparers.TryAdd(typeof(AnyExtreme), new AnyExtremeComparer());
 
             ComparerFactories.TryAdd(typeof(System.Collections.Generic.KeyValuePair<,>), (type, self) =>
             {

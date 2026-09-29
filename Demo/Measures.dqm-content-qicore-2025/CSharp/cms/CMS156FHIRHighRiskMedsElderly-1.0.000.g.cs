@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS156FHIRHighRiskMedsElderly", "1.0.000")]
 public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleton<CMS156FHIRHighRiskMedsElderly_1_0_000>
 {
@@ -499,7 +499,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ar_;
             }
 
-            bool? h_ = context.Operators.WhereAny<MedicationRequest>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<MedicationRequest>(f_, g_);
             return h_;
         }
 
@@ -540,7 +540,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return en_;
             }
 
-            bool? dz_ = context.Operators.WhereAny<Medication>(dx_, dy_);
+            bool? dz_ = context.Operators.AnyRelated<Medication>(dx_, dy_);
             return dz_;
         }
 
@@ -570,7 +570,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return fe_;
             }
 
-            bool? eq_ = context.Operators.WhereAny<Medication>(eo_, ep_);
+            bool? eq_ = context.Operators.AnyRelated<Medication>(eo_, ep_);
             return eq_;
         }
 
@@ -601,7 +601,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return fv_;
             }
 
-            bool? fh_ = context.Operators.WhereAny<Medication>(ff_, fg_);
+            bool? fh_ = context.Operators.AnyRelated<Medication>(ff_, fg_);
             return fh_;
         }
 
@@ -631,7 +631,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return gm_;
             }
 
-            bool? fy_ = context.Operators.WhereAny<Medication>(fw_, fx_);
+            bool? fy_ = context.Operators.AnyRelated<Medication>(fw_, fx_);
             return fy_;
         }
 
@@ -663,7 +663,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return hd_;
             }
 
-            bool? gp_ = context.Operators.WhereAny<Medication>(gn_, go_);
+            bool? gp_ = context.Operators.AnyRelated<Medication>(gn_, go_);
             return gp_;
         }
 
@@ -693,7 +693,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return hu_;
             }
 
-            bool? hg_ = context.Operators.WhereAny<Medication>(he_, hf_);
+            bool? hg_ = context.Operators.AnyRelated<Medication>(he_, hf_);
             return hg_;
         }
 
@@ -725,7 +725,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return il_;
             }
 
-            bool? hx_ = context.Operators.WhereAny<Medication>(hv_, hw_);
+            bool? hx_ = context.Operators.AnyRelated<Medication>(hv_, hw_);
             return hx_;
         }
 
@@ -755,7 +755,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return jc_;
             }
 
-            bool? io_ = context.Operators.WhereAny<Medication>(im_, in_);
+            bool? io_ = context.Operators.AnyRelated<Medication>(im_, in_);
             return io_;
         }
 
@@ -788,7 +788,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ju_;
             }
 
-            bool? jf_ = context.Operators.WhereAny<Medication>(jd_, je_);
+            bool? jf_ = context.Operators.AnyRelated<Medication>(jd_, je_);
             return jf_;
         }
 
@@ -819,7 +819,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return kl_;
             }
 
-            bool? jx_ = context.Operators.WhereAny<Medication>(jv_, jw_);
+            bool? jx_ = context.Operators.AnyRelated<Medication>(jv_, jw_);
             return jx_;
         }
 
@@ -851,7 +851,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return lc_;
             }
 
-            bool? ko_ = context.Operators.WhereAny<Medication>(km_, kn_);
+            bool? ko_ = context.Operators.AnyRelated<Medication>(km_, kn_);
             return ko_;
         }
 
@@ -881,7 +881,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return lt_;
             }
 
-            bool? lf_ = context.Operators.WhereAny<Medication>(ld_, le_);
+            bool? lf_ = context.Operators.AnyRelated<Medication>(ld_, le_);
             return lf_;
         }
 
@@ -913,7 +913,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return mk_;
             }
 
-            bool? lw_ = context.Operators.WhereAny<Medication>(lu_, lv_);
+            bool? lw_ = context.Operators.AnyRelated<Medication>(lu_, lv_);
             return lw_;
         }
 
@@ -943,7 +943,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return nb_;
             }
 
-            bool? mn_ = context.Operators.WhereAny<Medication>(ml_, mm_);
+            bool? mn_ = context.Operators.AnyRelated<Medication>(ml_, mm_);
             return mn_;
         }
 
@@ -975,7 +975,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ns_;
             }
 
-            bool? ne_ = context.Operators.WhereAny<Medication>(nc_, nd_);
+            bool? ne_ = context.Operators.AnyRelated<Medication>(nc_, nd_);
             return ne_;
         }
 
@@ -1005,7 +1005,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return oj_;
             }
 
-            bool? nv_ = context.Operators.WhereAny<Medication>(nt_, nu_);
+            bool? nv_ = context.Operators.AnyRelated<Medication>(nt_, nu_);
             return nv_;
         }
 
@@ -1037,7 +1037,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return pa_;
             }
 
-            bool? om_ = context.Operators.WhereAny<Medication>(ok_, ol_);
+            bool? om_ = context.Operators.AnyRelated<Medication>(ok_, ol_);
             return om_;
         }
 
@@ -1067,7 +1067,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return pr_;
             }
 
-            bool? pd_ = context.Operators.WhereAny<Medication>(pb_, pc_);
+            bool? pd_ = context.Operators.AnyRelated<Medication>(pb_, pc_);
             return pd_;
         }
 
@@ -1176,7 +1176,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ac_;
             }
 
-            bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
+            bool? o_ = context.Operators.AnyRelated<Medication>(m_, n_);
             return o_;
         }
 
@@ -1448,7 +1448,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ak_;
             }
 
-            bool? w_ = context.Operators.WhereAny<Medication>(u_, v_);
+            bool? w_ = context.Operators.AnyRelated<Medication>(u_, v_);
             return w_;
         }
 
@@ -1488,7 +1488,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return be_;
             }
 
-            bool? aq_ = context.Operators.WhereAny<Medication>(ao_, ap_);
+            bool? aq_ = context.Operators.AnyRelated<Medication>(ao_, ap_);
             return aq_;
         }
 
@@ -1560,7 +1560,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return y_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -1638,7 +1638,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ad_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Medication>(n_, o_);
             return p_;
         }
 
@@ -1701,7 +1701,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return y_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Medication>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Medication>(i_, j_);
             return k_;
         }
 
@@ -1830,7 +1830,7 @@ public partial class CMS156FHIRHighRiskMedsElderly_1_0_000 : ILibrary, ISingleto
                 return ad_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Medication>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Medication>(n_, o_);
             return p_;
         }
 

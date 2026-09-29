@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -488,7 +488,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ah_;
             }
 
-            bool? g_ = context.Operators.WhereAny<AllergyIntolerance>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<AllergyIntolerance>(e_, f_);
             return g_;
         }
 
@@ -530,7 +530,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return v_;
             }
 
-            bool? g_ = context.Operators.WhereAny<AdverseEvent>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<AdverseEvent>(e_, f_);
             return g_;
         }
 
@@ -579,7 +579,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ac_;
             }
 
-            bool? y_ = context.Operators.WhereAny<Condition>(w_, x_);
+            bool? y_ = context.Operators.AnyRelated<Condition>(w_, x_);
             return y_;
         }
 
@@ -621,7 +621,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ab_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -659,7 +659,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ax_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationRequest>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationRequest>(i_, j_);
             return k_;
         }
 
@@ -699,7 +699,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return t_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Condition>(i_, j_);
             return k_;
         }
 
@@ -783,7 +783,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return aw_;
             }
 
-            bool? aj_ = context.Operators.WhereAny<Condition>(ah_, ai_);
+            bool? aj_ = context.Operators.AnyRelated<Condition>(ah_, ai_);
             return aj_;
         }
 
@@ -930,7 +930,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ac_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -1080,7 +1080,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return af_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Procedure>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Procedure>(h_, i_);
             return j_;
         }
 
@@ -1125,7 +1125,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return y_;
             }
 
-            bool? p_ = context.Operators.WhereAny<Condition>(n_, o_);
+            bool? p_ = context.Operators.AnyRelated<Condition>(n_, o_);
             return p_;
         }
 
@@ -1218,7 +1218,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return x_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -1579,7 +1579,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return w_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Observation>(d_, e_);
             return f_;
         }
 
@@ -1652,7 +1652,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return p_;
             }
 
-            bool? k_ = context.Operators.WhereAny<Condition>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<Condition>(i_, j_);
             return k_;
         }
 
@@ -1725,7 +1725,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return x_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -1811,7 +1811,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return aa_;
             }
 
-            bool? h_ = context.Operators.WhereAny<MedicationAdministration>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<MedicationAdministration>(f_, g_);
             return h_;
         }
 
@@ -1926,7 +1926,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                     return ab_;
                 }
 
-                bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+                bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
                 return n_;
             }
 
@@ -1955,7 +1955,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return ar_;
             }
 
-            bool? k_ = context.Operators.WhereAny<MedicationAdministration>(i_, j_);
+            bool? k_ = context.Operators.AnyRelated<MedicationAdministration>(i_, j_);
             return k_;
         }
 
@@ -2046,7 +2046,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
                 return v_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 

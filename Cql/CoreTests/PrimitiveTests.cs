@@ -9,6 +9,7 @@
 #nullable enable
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -3192,7 +3193,9 @@ namespace CoreTests
 
         #region Interval_Same_Or_Before
         /// <summary>
-        /// Handles ([null, @2022] same or before [null, @2023]
+        /// Handles ([null, @2022] same or before [null, @2023]. Both intervals start at the minimum
+        /// Date, the value a null closed boundary stands for, so the first does not end on or before
+        /// the second starts.
         /// </summary>
         [TestMethod]
         public void Interval_Same_Or_Before_Overlapping()
@@ -3204,7 +3207,7 @@ namespace CoreTests
 
             var sameOrBefore = fcq.SameOrBefore((CqlInterval<CqlDate?>)(object)thru2022, (CqlInterval<CqlDate?>)(object)thru2023, null);
 
-            Assert.AreEqual(true, sameOrBefore);
+            Assert.AreEqual(false, sameOrBefore);
         }
 
         /// <summary>
@@ -3480,15 +3483,547 @@ namespace CoreTests
             Assert.IsFalse(result);
         }
 
+        /// <summary>
+        /// A null closed boundary is the minimum/maximum value of the point type, so an interval with
+        /// two null closed boundaries covers the whole range and properly includes any bounded interval.
+        /// </summary>
         [TestMethod]
         public void NullBoundariesProperlyIncludesIntegerInterval()
         {
             var ops = GetNewContext().Operators;
-            var lhs = new CqlInterval<int?>(null, null, true, true);
-            var rhs = new CqlInterval<int?>(1, 10, true, true);
-            var result = ops.IntervalProperlyIncludedInInterval(lhs, rhs, null);
-            Assert.IsNull(result);
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
 
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(nullBoundaries, oneToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTen, nullBoundaries, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalDoesNotProperlyIncludeNullBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, nullBoundaries, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(nullBoundaries, oneToTen, null));
+        }
+
+        /// <summary>
+        /// Two intervals covering the whole range are the same interval, and an interval never
+        /// properly includes itself.
+        /// </summary>
+        [TestMethod]
+        public void NullBoundariesProperlyIncludedInNullBoundariesIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var nullBoundaries = new CqlInterval<int?>(null, null, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(nullBoundaries, nullBoundaries, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(nullBoundaries, nullBoundaries, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInNullLowBoundary()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var upToTen = new CqlInterval<int?>(null, 10, true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTen, upToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(upToTen, oneToTen, null));
+        }
+
+        /// <summary>
+        /// A null open boundary is unknown - neither the minimum/maximum value nor any other -
+        /// so nothing can be concluded about inclusion in such an interval.
+        /// </summary>
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInOpenNullBoundariesIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var openNullBoundaries = new CqlInterval<int?>(null, null, false, false);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, openNullBoundaries, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(openNullBoundaries, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInOpenNullHighBoundaryIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var fromOne = new CqlInterval<int?>(1, null, true, false);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, fromOne, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(fromOne, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(oneToTen, null, null));
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(null, oneToTen, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(oneToTen, null, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(null, oneToTen, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalProperlyIncludedInItselfIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var sameAsOneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTen, sameAsOneToTen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, sameAsOneToTen, null));
+        }
+
+        [TestMethod]
+        public void SmallerIntegerIntervalIsProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var twoToNine = new CqlInterval<int?>(2, 9, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(twoToNine, oneToTen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(oneToTen, twoToNine, null));
+        }
+
+        [TestMethod]
+        public void IntegerIntervalStartingBeforeIsNotProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var zeroToTen = new CqlInterval<int?>(0, 10, true, true);
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(zeroToTen, oneToTen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTen, zeroToTen, null));
+        }
+
+        /// <summary>
+        /// Comparisons are performed at the requested precision: at month precision January is
+        /// properly included in January through February, while January 15-28 and all of January
+        /// are the same interval and therefore not properly included in one another.
+        /// </summary>
+        [TestMethod]
+        public void DateIntervalProperlyIncludedInAtMonthPrecision()
+        {
+            var ops = GetNewContext().Operators;
+            var midJanuary = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 15), new CqlDate(2012, 1, 28), true, true);
+            var januaryThroughFebruary = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 2, 28), true, true);
+            var january = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 1, 31), true, true);
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(midJanuary, januaryThroughFebruary, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(januaryThroughFebruary, midJanuary, "month"));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(midJanuary, january, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(midJanuary, january, "day"));
+        }
+
+        /// <summary>
+        /// A boundary comparison between dates of different precision is indeterminate unless a
+        /// precision is given, so the inclusion result is null rather than a definite answer, the
+        /// same way <c>included in</c> treats an indeterminate boundary comparison.
+        /// </summary>
+        [TestMethod]
+        public void DateIntervalProperlyIncludedInWithMixedPrecisionBoundariesIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var januaryToMarch = new CqlInterval<CqlDate>(new CqlDate(2012, 1, null), new CqlDate(2012, 3, null), true, true);
+            var wholeYear = new CqlInterval<CqlDate>(new CqlDate(2012, 1, 1), new CqlDate(2012, 12, 31), true, true);
+
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(januaryToMarch, wholeYear, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(wholeYear, januaryToMarch, null));
+            Assert.IsNull(ops.IntervalIncludedIn(januaryToMarch, wholeYear, null));
+
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(januaryToMarch, wholeYear, "month"));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesInterval(wholeYear, januaryToMarch, "month"));
+        }
+
+        /// <summary>
+        /// Under Start/End semantics an open boundary with a value denotes its successor or
+        /// predecessor, so (0, 11) covers the same range as [1, 10]: neither properly includes
+        /// the other, while a strictly smaller interval is properly included in either form.
+        /// </summary>
+        [TestMethod]
+        public void OpenAndClosedRepresentationsOfTheSameRangeAreTheSameInterval()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTenClosed = new CqlInterval<int?>(1, 10, true, true);
+            var oneToTenOpen = new CqlInterval<int?>(0, 11, false, false);
+            var twoToNine = new CqlInterval<int?>(2, 9, true, true);
+            var zeroToEleven = new CqlInterval<int?>(0, 11, true, true);
+
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenClosed, oneToTenOpen, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, oneToTenClosed, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTenOpen, oneToTenClosed, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(twoToNine, oneToTenOpen, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(oneToTenOpen, zeroToEleven, null));
+
+            // The non-nullable point form is normalised the same way.
+            var oneToTenClosedInt = new CqlInterval<int>(1, 10, true, true);
+            var oneToTenOpenInt = new CqlInterval<int>(0, 11, false, false);
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(oneToTenClosedInt, oneToTenOpenInt, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesInterval(oneToTenOpenInt, oneToTenClosedInt, null));
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(new CqlInterval<int>(2, 9, true, true), oneToTenOpenInt, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(new CqlInterval<long>(1L, 10L, true, true), new CqlInterval<long>(0L, 11L, false, false), null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(new CqlInterval<decimal>(1.0m, 10.0m, true, true), new CqlInterval<decimal>(0.99999999m, 10.00000001m, false, false), null));
+        }
+
+        /// <summary>
+        /// The successor of the maximum value and the predecessor of the minimum value of a type
+        /// cannot be represented and are null.
+        /// </summary>
+        [TestMethod]
+        public void SuccessorOfMaximumAndPredecessorOfMinimumAreNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Successor(int.MaxValue));
+            Assert.IsNull(ops.Successor(long.MaxValue));
+            Assert.IsNull(ops.Successor(decimal.MaxValue));
+            Assert.IsNull(ops.Successor(new CqlQuantity(decimal.MaxValue, "1")));
+            Assert.IsNull(ops.Successor(new CqlDate(9999, 12, 31)));
+            Assert.IsNull(ops.Successor(new CqlTime(23, 59, 59, 999, null, null)));
+
+            Assert.IsNull(ops.Predecessor(int.MinValue));
+            Assert.IsNull(ops.Predecessor(long.MinValue));
+            Assert.IsNull(ops.Predecessor(decimal.MinValue));
+            Assert.IsNull(ops.Predecessor(new CqlQuantity(decimal.MinValue, "1")));
+            Assert.IsNull(ops.Predecessor(new CqlDate(1, 1, 1)));
+            Assert.IsNull(ops.Predecessor(new CqlTime(0, 0, 0, 0, null, null)));
+
+            Assert.AreEqual(int.MaxValue, ops.Successor(int.MaxValue - 1));
+            Assert.AreEqual(int.MinValue, ops.Predecessor(int.MinValue + 1));
+        }
+
+        /// <summary>
+        /// Adding a quantity to a time yields null whenever the result cannot be represented as a
+        /// time of day, whether it merely leaves the day or is too large for the arithmetic itself.
+        /// </summary>
+        [TestMethod]
+        public void TimeAddOutsideTheDayIsNull()
+        {
+            var ten = new CqlTime(10, 0, 0, 0, null, null);
+            Assert.IsNull(ten.Add(new CqlQuantity(14m, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(-11m, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(decimal.MaxValue, "hours")));
+            Assert.IsNull(ten.Add(new CqlQuantity(decimal.MinValue, "milliseconds")));
+            Assert.AreEqual(new CqlTime(23, 0, 0, 0, null, null).ToString(), ten.Add(new CqlQuantity(13m, "hours"))!.ToString());
+        }
+
+        /// <summary>
+        /// An open boundary at the extreme of its type has no representable closed equivalent, so
+        /// closing the interval leaves that boundary open and null (unknown) instead of turning it
+        /// into the opposite extreme, and inclusion against it is indeterminate.
+        /// </summary>
+        [TestMethod]
+        public void OpenBoundaryAtTypeExtremeStaysUnknownWhenClosed()
+        {
+            var ops = GetNewContext().Operators;
+            var openAtMax = new CqlInterval<int?>(int.MaxValue, int.MaxValue, false, true);
+            var closed = ops.ToClosed(openAtMax)!;
+            Assert.IsNull(closed.low);
+            Assert.AreEqual(false, closed.lowClosed);
+            Assert.AreEqual(int.MaxValue, closed.high);
+
+            var wholeRange = new CqlInterval<int?>(null, null, true, true);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(openAtMax, wholeRange, null));
+            Assert.IsNull(ops.IntervalProperlyIncludesInterval(wholeRange, openAtMax, null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            var openAtLastDay = new CqlInterval<CqlDate>(lastDay, lastDay, false, true);
+            var allDates = new CqlInterval<CqlDate>(new CqlDate(1, 1, 1), lastDay, true, true);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(openAtLastDay, allDates, null));
+        }
+
+        [TestMethod]
+        public void ExpandOfOpenBoundaryAtTypeExtremeIsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            // The open low boundary sits at the type's maximum, so its closed equivalent is unknown and the interval contributes nothing.
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(int.MaxValue, int.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<long?>(long.MaxValue, long.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<decimal?>(decimal.MaxValue, decimal.MaxValue, false, true), null));
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(int.MinValue, int.MinValue, true, false), null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            Assert.IsNull(ops.Expand(new CqlInterval<CqlDate>(lastDay, lastDay, false, true), null));
+
+            // A closed null boundary would contribute the whole domain, which is also not expanded.
+            Assert.IsNull(ops.Expand(new CqlInterval<int?>(0, null, true, true), null));
+
+            // In a list, such an interval is skipped while the others still expand.
+            var expanded = ops.Expand(
+                new List<CqlInterval<int?>?>
+                {
+                    new(int.MaxValue, int.MaxValue, false, true),
+                    new(1, 2, true, true),
+                },
+                new CqlQuantity(1, null));
+            Assert.IsNotNull(expanded);
+            var list = expanded.ToList();
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(1, list[0].low);
+            Assert.AreEqual(2, list[1].low);
+        }
+
+        [TestMethod]
+        public void ExpandEmitsThePartitionThatEndsAtTheTypeMaximum()
+        {
+            var ops = GetNewContext().Operators;
+            var one = new CqlQuantity(1, null);
+
+            var ints = ops.Expand(new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true), one)!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 1, int.MaxValue }, ints);
+            var longs = ops.Expand(new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true), one)!.ToList();
+            CollectionAssert.AreEqual(new List<long?> { long.MaxValue - 1, long.MaxValue }, longs);
+
+            // A partition of size two that ends exactly at the maximum is emitted, one that would pass it is not.
+            var twos = ops.Expand(new CqlInterval<int?>(int.MaxValue - 3, int.MaxValue, true, true), new CqlQuantity(2, null))!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 3, int.MaxValue - 1 }, twos);
+            var threes = ops.Expand(new CqlInterval<int?>(int.MaxValue - 3, int.MaxValue, true, true), new CqlQuantity(3, null))!.ToList();
+            CollectionAssert.AreEqual(new List<int?> { int.MaxValue - 3 }, threes);
+
+            var intIntervals = ops.Expand(new List<CqlInterval<int?>?> { new(int.MaxValue - 1, int.MaxValue, true, true) }, one)!.ToList();
+            Assert.AreEqual(2, intIntervals.Count);
+            Assert.AreEqual(int.MaxValue, intIntervals[1].low);
+            Assert.AreEqual(int.MaxValue, intIntervals[1].high);
+            var longIntervals = ops.Expand(new List<CqlInterval<long?>?> { new(long.MaxValue, long.MaxValue, true, true) }, one)!.ToList();
+            Assert.AreEqual(1, longIntervals.Count);
+            Assert.AreEqual(long.MaxValue, longIntervals[0].low);
+            Assert.AreEqual(long.MaxValue, longIntervals[0].high);
+
+            var hour = new CqlQuantity(1, "hour");
+            var t22 = new CqlTime(22, null, null, null, null, null);
+            var t23 = new CqlTime(23, null, null, null, null, null);
+            var times = ops.Expand(new CqlInterval<CqlTime>(t23, t23, true, true), hour)!.ToList();
+            Assert.AreEqual(1, times.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, times[0], null));
+            var timeIntervals = ops.Expand(new List<CqlInterval<CqlTime?>?> { new(t22, t23, true, true) }, hour)!.ToList();
+            Assert.AreEqual(2, timeIntervals.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, timeIntervals[1].low, null));
+            Assert.AreEqual(0, ops.Comparer.Compare(t23, timeIntervals[1].high, null));
+
+            var lastDay = new CqlDate(9999, 12, 31);
+            var days = ops.Expand(new CqlInterval<CqlDate>(new CqlDate(9999, 12, 30), lastDay, true, true), new CqlQuantity(1, "day"))!.ToList();
+            Assert.AreEqual(2, days.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastDay, days[1], null));
+
+            // A weekly per steps in days, so the last week of the calendar is one partition and a shorter tail is none.
+            var week = new CqlQuantity(1, "week");
+            var lastWeekStart = new CqlDate(9999, 12, 25);
+            var weeks = ops.Expand(new CqlInterval<CqlDate>(lastWeekStart, lastDay, true, true), week)!.ToList();
+            Assert.AreEqual(1, weeks.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastWeekStart, weeks[0], null));
+            Assert.AreEqual(0, ops.Expand(new CqlInterval<CqlDate>(lastWeekStart, lastWeekStart, true, true), week)!.Count());
+            var weekIntervals = ops.Expand(new List<CqlInterval<CqlDate?>?> { new(lastWeekStart, lastDay, true, true) }, week)!.ToList();
+            Assert.AreEqual(1, weekIntervals.Count);
+            Assert.AreEqual(0, ops.Comparer.Compare(lastWeekStart, weekIntervals[0].low, null));
+            Assert.AreEqual(0, ops.Comparer.Compare(lastDay, weekIntervals[0].high, null));
+            var lastWeekOfDateTimes = ops.Expand(
+                new CqlInterval<CqlDateTime>(new CqlDateTime(9999, 12, 25, 0, 0, 0, 0, 0, 0), new CqlDateTime(9999, 12, 31, 0, 0, 0, 0, 0, 0), true, true),
+                week)!.ToList();
+            Assert.AreEqual(1, lastWeekOfDateTimes.Count);
+
+            // A partition spanning the whole domain starts at the minimum and ends at the maximum.
+            var wholeDay = ops.Expand(new CqlInterval<CqlTime>(new CqlTime(0, null, null, null, null, null), t23, true, true), new CqlQuantity(24, "hours"))!.ToList();
+            Assert.AreEqual(1, wholeDay.Count);
+            Assert.AreEqual(0, wholeDay[0].Value.Hour);
+            var allYears = ops.Expand(new CqlInterval<CqlDate>(new CqlDate(1, null, null), new CqlDate(9999, null, null), true, true), new CqlQuantity(9999, "years"))!.ToList();
+            Assert.AreEqual(1, allYears.Count);
+            Assert.AreEqual(1, allYears[0].Value.Year);
+            var allYearIntervals = ops.Expand(new List<CqlInterval<CqlDate?>?> { new(new CqlDate(1, null, null), new CqlDate(9999, null, null), true, true) }, new CqlQuantity(9999, "years"))!.ToList();
+            Assert.AreEqual(1, allYearIntervals.Count);
+            Assert.AreEqual(9999, allYearIntervals[0].high!.Value.Year);
+            Assert.AreEqual(0, ops.Expand(new CqlInterval<CqlDate>(new CqlDate(2, null, null), new CqlDate(9999, null, null), true, true), new CqlQuantity(9999, "years"))!.Count());
+        }
+
+        [TestMethod]
+        public void ExpandOfListLeavesOutUnboundedIntervalsBeforeCollapsing()
+        {
+            var ops = GetNewContext().Operators;
+            var intervals = new List<CqlInterval<int?>?>
+            {
+                new(null, null, true, true),
+                new(1, 2, true, true),
+                new(null, 5, false, true),
+                new(int.MaxValue, int.MaxValue, false, true),
+                null,
+            };
+
+            // Only the bounded interval contributes; the others would cover the whole domain or are unknown.
+            var expanded = ops.Expand(intervals, new CqlQuantity(1, null))!.ToList();
+            Assert.AreEqual(2, expanded.Count);
+            Assert.AreEqual(1, expanded[0].low);
+            Assert.AreEqual(1, expanded[0].high);
+            Assert.AreEqual(2, expanded[1].low);
+            Assert.AreEqual(2, expanded[1].high);
+        }
+
+        [TestMethod]
+        public void UnknownStartWithADifferentEndIsProperlyIncluded()
+        {
+            var ops = GetNewContext().Operators;
+            var wholeRange = new CqlInterval<int?>(null, null, true, true);
+            var unknownStart = new CqlInterval<int?>(null, 10, false, true);
+
+            // The starts cannot be compared, but the ends differ, so the intervals are not the same.
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(unknownStart, wholeRange, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(wholeRange, unknownStart, null));
+
+            var unknown = new CqlInterval<int?>(null, null, false, false);
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(unknown, wholeRange, null));
+        }
+
+        [TestMethod]
+        public void StartAndEndOfMaxIntervalAreTheTypeExtremes()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(int.MinValue, ops.Start(new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(int.MaxValue, ops.End(new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(long.MinValue, ops.Start(new CqlInterval<long?>(null, null, true, true)));
+            Assert.AreEqual(decimal.MaxValue, ops.End(new CqlInterval<decimal?>(null, null, true, true)));
+            Assert.AreEqual(0, ops.Comparer.Compare(CqlDate.MinValue, ops.Start(new CqlInterval<CqlDate?>(null, null, true, true)), null));
+            Assert.AreEqual(0, ops.Comparer.Compare(CqlTime.MaxValue, ops.End(new CqlInterval<CqlTime?>(null, null, true, true)), null));
+
+            // An unknown boundary has no start or end, and a null interval has neither.
+            Assert.IsNull(ops.Start(new CqlInterval<int?>(null, null, false, false)));
+            Assert.IsNull(ops.End(new CqlInterval<int?>(null, null, false, false)));
+            Assert.IsNull(ops.Start((CqlInterval<int?>?)null));
+        }
+
+        [TestMethod]
+        public void SameOrBeforeComparesTheEndWithTheOtherStart()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            var tenToTwenty = new CqlInterval<int?>(10, 20, true, true);
+            var nineToTwenty = new CqlInterval<int?>(9, 20, true, true);
+
+            // An interval does not end on or before its own start.
+            Assert.AreEqual(false, ops.SameOrBefore(oneToTen, oneToTen));
+            Assert.AreEqual(false, ops.SameOrAfter(oneToTen, oneToTen));
+            Assert.AreEqual(true, ops.SameOrBefore(oneToTen, tenToTwenty));
+            Assert.AreEqual(true, ops.SameOrAfter(tenToTwenty, oneToTen));
+            Assert.AreEqual(false, ops.SameOrBefore(oneToTen, nineToTwenty));
+            Assert.AreEqual(false, ops.SameOrAfter(nineToTwenty, oneToTen));
+
+            var max = new CqlInterval<int?>(null, null, true, true);
+            Assert.AreEqual(false, ops.SameOrBefore(max, oneToTen));
+            Assert.AreEqual(false, ops.SameOrAfter(max, oneToTen));
+            Assert.AreEqual(false, ops.SameOrBefore(max, max));
+
+            var unknown = new CqlInterval<int?>(null, null, false, false);
+            Assert.IsNull(ops.SameOrBefore(unknown, unknown));
+            Assert.IsNull(ops.SameOrBefore(oneToTen, unknown));
+            Assert.IsNull(ops.SameOrAfter(unknown, oneToTen));
+        }
+
+        [TestMethod]
+        public void TemporalSameOrBeforeOnlyConsidersTheComparedBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+            var earlier = new CqlInterval<CqlDate?>(new CqlDate(2019, null, null), new CqlDate(2020, 1, 1), true, true);
+            var later = new CqlInterval<CqlDate?>(new CqlDate(2020, 1, 2), new CqlDate(2021, null, null), true, true);
+
+            // The unrelated boundaries have year precision, but the compared ones have day precision.
+            Assert.AreEqual(true, ops.SameOrBefore(earlier, later, null));
+            Assert.AreEqual(true, ops.SameOrAfter(later, earlier, null));
+            Assert.AreEqual(true, ops.SameOrBefore(earlier, later, "day"));
+            Assert.AreEqual(true, ops.SameOrAfter(later, earlier, "day"));
+            Assert.AreEqual(false, ops.SameOrBefore(later, earlier, null));
+
+            // A compared boundary coarser than the requested precision leaves the answer unknown.
+            var coarseEnd = new CqlInterval<CqlDate?>(new CqlDate(2019, 1, 1), new CqlDate(2020, null, null), true, true);
+            Assert.IsNull(ops.SameOrBefore(coarseEnd, later, "day"));
+            Assert.IsNull(ops.SameOrBefore(coarseEnd, later, null));
+        }
+
+        [TestMethod]
+        public void IntervalEqualityIsDecidedByAKnownBoundary()
+        {
+            var ops = GetNewContext().Operators;
+            var toFive = new CqlInterval<int?>(null, 5, false, true);
+            var toSix = new CqlInterval<int?>(null, 6, false, true);
+
+            // The ends differ, so the intervals are not equal even though the starts are unknown.
+            Assert.AreEqual(false, ops.Equal(toFive, toSix));
+            Assert.IsFalse(ops.Comparer.Equivalent(toFive, toSix, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(toFive, new CqlInterval<int?>(null, 5, false, true), null));
+            Assert.IsFalse(ops.Comparer.Equivalent(toFive, new CqlInterval<int?>(null, 5, true, true), null));
+            Assert.IsTrue(ops.Comparer.Equivalent(new CqlInterval<int?>(null, null, false, false), new CqlInterval<int?>(null, null, false, false), null));
+            Assert.IsTrue(ops.Comparer.Equivalent(new CqlInterval<int?>(null, null, true, true), new CqlInterval<int?>(null, null, true, true), null));
+
+            // A closed null boundary is the extreme of the point type, so it orders beyond any finite boundary.
+            Assert.IsTrue(ops.Comparer.Compare(new CqlInterval<int?>(1, null, true, true), new CqlInterval<int?>(1, 10, true, true), null) > 0);
+            Assert.IsTrue(ops.Comparer.Compare(new CqlInterval<int?>(null, 10, true, true), new CqlInterval<int?>(1, 10, true, true), null) < 0);
+            Assert.AreEqual(0, ops.Comparer.Compare(new CqlInterval<int?>(1, null, true, true), new CqlInterval<int?>(1, null, true, true), null));
+        }
+
+        [TestMethod]
+        public void IntervalsWithTheSameUnknownBoundaryAreNotKnownToBeEqual()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Equal(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 5, false, true)));
+            Assert.IsNull(ops.Equal(new CqlInterval<int?>(null, null, false, false), new CqlInterval<int?>(null, null, false, false)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(1, 10, true, true), new CqlInterval<int?>(1, 10, true, true)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(null, null, true, true), new CqlInterval<int?>(null, null, true, true)));
+            Assert.AreEqual(true, ops.Equal(new CqlInterval<int?>(null, 5, true, true), new CqlInterval<int?>(null, 5, true, true)));
+        }
+
+        [TestMethod]
+        public void ClosedNullBoundaryEqualsTheWrittenOutExtreme()
+        {
+            var ops = GetNewContext().Operators;
+            var fromMinimum = new CqlInterval<int?>(null, 5, true, true);
+            var fromWrittenMinimum = new CqlInterval<int?>(int.MinValue, 5, true, true);
+            var toMaximum = new CqlInterval<int?>(1, null, true, true);
+            var toWrittenMaximum = new CqlInterval<int?>(1, int.MaxValue, true, true);
+
+            Assert.AreEqual(true, ops.Equal(fromMinimum, fromWrittenMinimum));
+            Assert.AreEqual(true, ops.Equal(toMaximum, toWrittenMaximum));
+            Assert.AreEqual(0, ops.Comparer.Compare(fromMinimum, fromWrittenMinimum, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(fromMinimum, fromWrittenMinimum, null));
+            Assert.IsTrue(ops.Comparer.Equivalent(toMaximum, toWrittenMaximum, null));
+            Assert.AreEqual(ops.Comparer.GetHashCode(fromMinimum), ops.Comparer.GetHashCode(fromWrittenMinimum));
+            Assert.AreEqual(ops.Comparer.GetHashCode(toMaximum), ops.Comparer.GetHashCode(toWrittenMaximum));
+            Assert.AreEqual(false, ops.Equal(fromMinimum, new CqlInterval<int?>(int.MinValue + 1, 5, true, true)));
+        }
+
+        [TestMethod]
+        public void SameAsPropagatesAnIndeterminateComparison()
+        {
+            var ops = GetNewContext().Operators;
+            var oneToTen = new CqlInterval<int?>(1, 10, true, true);
+            Assert.AreEqual(true, ops.SameAs(oneToTen, new CqlInterval<int?>(1, 10, true, true), null));
+            Assert.AreEqual(false, ops.SameAs(oneToTen, new CqlInterval<int?>(1, 11, true, true), null));
+            Assert.IsNull(ops.SameAs(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 5, false, true), null));
+            Assert.AreEqual(false, ops.SameAs(new CqlInterval<int?>(null, 5, false, true), new CqlInterval<int?>(null, 6, false, true), null));
+        }
+
+        [TestMethod]
+        public void OperatorsOverTwoIntervalsOfAnyUseTheExtremesOfAny()
+        {
+            var ops = GetNewContext().Operators;
+            var max = new CqlInterval<object>(null, null, true, true);
+            var unknown = new CqlInterval<object>(null, null, false, false);
+
+            Assert.AreEqual(true, ops.Starts(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.Ends(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.Equal(max, new CqlInterval<object>(null, null, true, true)));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludedInInterval(max, new CqlInterval<object>(null, null, true, true), null));
+            Assert.AreEqual(true, ops.IntervalIncludesInterval(max, new CqlInterval<object>(null, null, true, true), null));
+
+            Assert.IsNull(ops.Starts(unknown, max, null));
+            Assert.IsNull(ops.Ends(max, unknown, null));
+            Assert.IsNull(ops.Equal(max, unknown));
+            Assert.IsNull(ops.IntervalProperlyIncludedInInterval(unknown, max, null));
         }
 
         [TestMethod]
@@ -4071,6 +4606,218 @@ namespace CoreTests
             Assert.AreEqual(expected, actual);
         }
         #endregion
+
+        #region All-null interval boundaries
+
+        /// <summary>
+        /// A closed null boundary is the minimum or maximum value of the point type, so the
+        /// factory yields the interval covering the whole domain rather than null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalFactory_ClosedNullPoints_ReturnsMaximalInterval()
+        {
+            var ops = GetNewContext().Operators;
+
+            var interval = ops.Interval((int?)null, (int?)null, true, true);
+
+            Assert.IsNotNull(interval);
+            Assert.IsNull(interval.low);
+            Assert.IsNull(interval.high);
+            Assert.AreEqual(true, interval.lowClosed);
+            Assert.AreEqual(true, interval.highClosed);
+        }
+
+        /// <summary>
+        /// An open null boundary is unknown, so the factory yields an interval whose boundaries
+        /// are unknown rather than null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalFactory_OpenNullPoints_ReturnsIntervalWithUnknownBoundaries()
+        {
+            var ops = GetNewContext().Operators;
+
+            var interval = ops.Interval((int?)null, (int?)null, false, false);
+
+            Assert.IsNotNull(interval);
+            Assert.IsNull(interval.low);
+            Assert.IsNull(interval.high);
+            Assert.AreEqual(false, interval.lowClosed);
+            Assert.AreEqual(false, interval.highClosed);
+        }
+
+        [TestMethod]
+        public void IntegerInMaxIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(true, ops.In((int?)5, MaxInterval, null));
+        }
+
+        [TestMethod]
+        public void IntegerInUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.In((int?)5, UnknownInterval, null));
+        }
+
+        [TestMethod]
+        public void MaxIntervalOverlapsBoundedIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.AreEqual(true, ops.Overlaps(MaxInterval, OneToTen));
+            Assert.AreEqual(true, ops.OverlapsBefore(MaxInterval, OneToTen));
+            Assert.AreEqual(true, ops.OverlapsAfter(MaxInterval, OneToTen));
+        }
+
+        [TestMethod]
+        public void UnknownIntervalOverlapsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Overlaps(UnknownInterval, OneToTen));
+            Assert.IsNull(ops.OverlapsBefore(UnknownInterval, OneToTen));
+            Assert.IsNull(ops.OverlapsAfter(UnknownInterval, OneToTen));
+        }
+
+        /// <summary>
+        /// The maximal interval starts at the minimum value of the point type, not at 1, so it
+        /// does not start Interval[1, 10].
+        /// </summary>
+        [TestMethod]
+        public void MaxIntervalStartsBoundedIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Starts(MaxInterval, OneToTen, null));
+        }
+
+        [TestMethod]
+        public void UnknownIntervalStartsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Starts(UnknownInterval, OneToTen, null));
+        }
+
+        [TestMethod]
+        public void NullIntervalStartsBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Starts(null, OneToTen, null));
+        }
+
+        /// <summary>
+        /// The maximal interval ends at the maximum value of the point type, not at 10, so
+        /// Interval[1, 10] does not end it.
+        /// </summary>
+        [TestMethod]
+        public void BoundedIntervalEndsMaxIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Ends(OneToTen, MaxInterval, null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEndsUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Ends(OneToTen, UnknownInterval, null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEndsNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Ends(OneToTen, null!, null));
+        }
+
+        [TestMethod]
+        public void MaxIntervalUnionBoundedIntervalIsMaxInterval()
+        {
+            var ops = GetNewContext().Operators;
+
+            var union = ops.Union(MaxInterval, OneToTen);
+
+            Assert.IsNotNull(union);
+            Assert.IsNull(union.low);
+            Assert.IsNull(union.high);
+            Assert.AreEqual(true, union.lowClosed);
+            Assert.AreEqual(true, union.highClosed);
+        }
+
+        [TestMethod]
+        public void UnknownIntervalUnionBoundedIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Union(UnknownInterval, OneToTen));
+        }
+
+        /// <summary>
+        /// Removing an interval from itself leaves no interval that can be expressed, so the
+        /// result is null.
+        /// </summary>
+        [TestMethod]
+        public void IntervalExceptItselfIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            var one = new CqlInterval<int?>(1, 1, true, true);
+
+            Assert.IsNull(ops.Except(MaxInterval, new CqlInterval<int?>(null, null, true, true)));
+            Assert.IsNull(ops.Except(one, new CqlInterval<int?>(1, 1, true, true)));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalProperlyIncludedInMaxIntervalIsTrue()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(true, ops.IntervalProperlyIncludedInInterval(OneToTen, MaxInterval, null));
+        }
+
+        /// <summary>
+        /// The maximal interval spans the whole domain, so it is not the unit interval the
+        /// point from operator requires.
+        /// </summary>
+        [TestMethod]
+        public void PointFromMaxIntervalSignalsAnError()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.ThrowsException<CqlException<CqlPointFromNonUnitIntervalError>>(() => ops.PointFrom(MaxInterval));
+        }
+
+        [TestMethod]
+        public void PointFromUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.PointFrom(UnknownInterval));
+        }
+
+        [TestMethod]
+        public void PointFromNullIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.PointFrom((CqlInterval<int?>?)null));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEqualUnknownIntervalIsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.Equal(OneToTen, UnknownInterval));
+        }
+
+        [TestMethod]
+        public void BoundedIntervalEqualMaxIntervalIsFalse()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(false, ops.Equal(OneToTen, MaxInterval));
+        }
+
+        private static CqlInterval<int?> MaxInterval => new(null, null, true, true);
+
+        private static CqlInterval<int?> UnknownInterval => new(null, null, false, false);
+
+        private static CqlInterval<int?> OneToTen => new(1, 10, true, true);
+
+        #endregion
+
     
     [TestMethod]
     public void TupleEqual_NullElement_WithDifferentValues_ReturnsFalse()

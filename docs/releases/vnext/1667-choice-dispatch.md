@@ -35,7 +35,7 @@
   read as the value of the `qicore-recorded` extension's value) now resolves to `System.DateTime`,
   as QI-Core declares it, rather than to `FHIR.dateTime`.
 
-  **This changes generated C#**: `GeneratorToolVersion` moves to `5.2.4.0` (patch: the generated API
+  **This changes generated C#**: `GeneratorToolVersion` moves to `5.3.2.0` (patch: the generated API
   is unchanged), and every checked-in `*.g.cs` with a choice-typed property access is regenerated.
 
   **This changes CQL evaluation results.** At former late-bound sites, an empty list-valued element

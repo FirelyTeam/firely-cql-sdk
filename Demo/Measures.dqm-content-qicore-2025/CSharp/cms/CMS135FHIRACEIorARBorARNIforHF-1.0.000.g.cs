@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS135FHIRACEIorARBorARNIforHF", "1.0.000")]
 public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISingleton<CMS135FHIRACEIorARBorARNIforHF_1_0_000>
 {
@@ -372,7 +372,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 return z_;
             }
 
-            bool? m_ = context.Operators.WhereAny<Encounter>(k_, l_);
+            bool? m_ = context.Operators.AnyRelated<Encounter>(k_, l_);
             return m_;
         }
 
@@ -420,7 +420,7 @@ public partial class CMS135FHIRACEIorARBorARNIforHF_1_0_000 : ILibrary, ISinglet
                 return bd_;
             }
 
-            bool? ac_ = context.Operators.WhereAny<Encounter>(aa_, ab_);
+            bool? ac_ = context.Operators.AnyRelated<Encounter>(aa_, ab_);
             return ac_;
         }
 

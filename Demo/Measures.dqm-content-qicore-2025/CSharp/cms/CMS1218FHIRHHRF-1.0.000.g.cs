@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS1218FHIRHHRF", "1.0.000")]
 public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRHHRF_1_0_000>
 {
@@ -441,7 +441,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return y_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -636,7 +636,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return m_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -889,7 +889,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return w_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -1169,7 +1169,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return am_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Observation>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Observation>(g_, h_);
             return i_;
         }
 
@@ -1388,7 +1388,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return fa_;
             }
 
-            bool? dw_ = context.Operators.WhereAny<Observation>(du_, dv_);
+            bool? dw_ = context.Operators.AnyRelated<Observation>(du_, dv_);
             return dw_;
         }
 
@@ -1620,7 +1620,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return ak_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Observation>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Observation>(e_, f_);
             return g_;
         }
 
@@ -1945,7 +1945,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return r_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -2091,7 +2091,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return t_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -2621,7 +2621,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return t_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Location>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Location>(e_, f_);
             return g_;
         }
 
@@ -2988,7 +2988,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return aj_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -4067,7 +4067,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return o_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Location>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Location>(e_, f_);
             return g_;
         }
 
@@ -4264,7 +4264,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return ar_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -4678,7 +4678,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return bc_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -4913,7 +4913,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return v_;
             }
 
-            bool? j_ = context.Operators.WhereAny<Encounter>(h_, i_);
+            bool? j_ = context.Operators.AnyRelated<Encounter>(h_, i_);
             return j_;
         }
 
@@ -4967,7 +4967,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
                 return x_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Encounter>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Encounter>(f_, g_);
             return h_;
         }
 

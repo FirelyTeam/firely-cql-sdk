@@ -256,7 +256,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] properly includes Interval[1, 10]");
             var intersect = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludes>();
             var result = Run<bool?>(intersect, library);
-            result.Should().BeNull();
+            result.Should().BeTrue();
         }
 
 

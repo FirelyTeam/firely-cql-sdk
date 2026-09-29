@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -718,7 +718,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ab_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -849,7 +849,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return m_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -980,7 +980,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return m_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -1064,7 +1064,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Procedure>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Procedure>(g_, h_);
             return i_;
         }
 
@@ -1148,7 +1148,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return o_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Procedure>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Procedure>(g_, h_);
             return i_;
         }
 
@@ -1344,7 +1344,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ac_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -1734,7 +1734,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ao_;
             }
 
-            bool? af_ = context.Operators.WhereAny<CqlDate>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<CqlDate>(ad_, ae_);
             return af_;
         }
 
@@ -1757,7 +1757,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<CqlDate>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<CqlDate>(ap_, aq_);
             return ar_;
         }
 
@@ -1885,7 +1885,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ao_;
             }
 
-            bool? af_ = context.Operators.WhereAny<CqlDate>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<CqlDate>(ad_, ae_);
             return af_;
         }
 
@@ -1908,7 +1908,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<CqlDate>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<CqlDate>(ap_, aq_);
             return ar_;
         }
 
@@ -2073,7 +2073,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ao_;
             }
 
-            bool? af_ = context.Operators.WhereAny<CqlDate>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<CqlDate>(ad_, ae_);
             return af_;
         }
 
@@ -2096,7 +2096,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<CqlDate>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<CqlDate>(ap_, aq_);
             return ar_;
         }
 
@@ -2261,7 +2261,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ao_;
             }
 
-            bool? af_ = context.Operators.WhereAny<CqlDate>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<CqlDate>(ad_, ae_);
             return af_;
         }
 
@@ -2284,7 +2284,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<CqlDate>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<CqlDate>(ap_, aq_);
             return ar_;
         }
 
@@ -2449,7 +2449,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return ao_;
             }
 
-            bool? af_ = context.Operators.WhereAny<CqlDate>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<CqlDate>(ad_, ae_);
             return af_;
         }
 
@@ -2472,7 +2472,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
                 return bb_;
             }
 
-            bool? ar_ = context.Operators.WhereAny<CqlDate>(ap_, aq_);
+            bool? ar_ = context.Operators.AnyRelated<CqlDate>(ap_, aq_);
             return ar_;
         }
 

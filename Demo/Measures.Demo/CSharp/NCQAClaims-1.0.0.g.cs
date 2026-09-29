@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 {
@@ -1445,7 +1445,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return an_;
                         }
 
-                        bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
+                        bool? y_ = context.Operators.AnyRelated<ClaimResponse.ItemComponent>(w_, x_);
                         return y_;
                     }
 
@@ -1857,7 +1857,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return an_;
                         }
 
-                        bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
+                        bool? y_ = context.Operators.AnyRelated<ClaimResponse.ItemComponent>(w_, x_);
                         return y_;
                     }
 
@@ -2192,7 +2192,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return an_;
                         }
 
-                        bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
+                        bool? y_ = context.Operators.AnyRelated<ClaimResponse.ItemComponent>(w_, x_);
                         return y_;
                     }
 
@@ -2460,7 +2460,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                             return an_;
                         }
 
-                        bool? y_ = context.Operators.WhereAny<ClaimResponse.ItemComponent>(w_, x_);
+                        bool? y_ = context.Operators.AnyRelated<ClaimResponse.ItemComponent>(w_, x_);
                         return y_;
                     }
 
@@ -2804,7 +2804,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         return bk_;
                     }
 
-                    bool? bh_ = context.Operators.WhereAny<Claim>(bf_, bg_);
+                    bool? bh_ = context.Operators.AnyRelated<Claim>(bf_, bg_);
                     return bh_;
                 }
 
@@ -2820,7 +2820,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
                         return br_;
                     }
 
-                    bool? bn_ = context.Operators.WhereAny<Claim>(bl_, bm_);
+                    bool? bn_ = context.Operators.AnyRelated<Claim>(bl_, bm_);
                     bool? bo_ = context.Operators.Not(bn_);
                     return bo_;
                 }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -232,7 +232,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return z_;
             }
 
-            bool? i_ = context.Operators.WhereAny<Condition>(g_, h_);
+            bool? i_ = context.Operators.AnyRelated<Condition>(g_, h_);
             return i_;
         }
 
@@ -337,7 +337,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return y_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Encounter>(j_, k_);
             return l_;
         }
 
@@ -406,7 +406,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
                 return r_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Encounter>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Encounter>(j_, k_);
             return l_;
         }
 
