@@ -3,3 +3,22 @@
 *REMOVED*Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime!
 Hl7.Cql.Primitives.CqlTime.Predecessor() -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime?
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError() -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError(object? Low, object? High, bool LowClosed, bool HighClosed) -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Deconstruct(out object? Low, out object? High, out bool LowClosed, out bool HighClosed) -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Equals(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError other) -> bool
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.High.get -> object?
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.High.init -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.HighClosed.get -> bool
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.HighClosed.init -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Low.get -> object?
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Low.init -> void
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.LowClosed.get -> bool
+Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.LowClosed.init -> void
+override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.operator !=(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError right) -> bool
+static Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.operator ==(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError right) -> bool
+~override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.ToString() -> string
