@@ -9,6 +9,7 @@
 
 using Fhir.Metrics;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
@@ -433,7 +434,10 @@ namespace Hl7.Cql.Operators
             { typeof(CqlDateTime), CqlDateTime.MaxValue },
             { typeof(CqlTime), CqlTime.MaxValue },
         };
-        public T MaxValue<T>() => (T)MaxValues[typeof(T)];
+        public T MaxValue<T>() =>
+            MaxValues.TryGetValue(typeof(T), out var value) ? (T)value
+            : typeof(T) == typeof(object) ? (T)(object)AnyExtreme.Maximum
+            : throw new KeyNotFoundException($"The type {typeof(T)} has no maximum value.");
 
         #endregion
 
@@ -453,7 +457,11 @@ namespace Hl7.Cql.Operators
             { typeof(CqlTime), CqlTime.MinValue },
         };
 
-        public T MinValue<T>() => (T)MinValues[typeof(T)];
+        // An interval over Any carries only null boundaries, so the extremes of Any stand in for its Start and End.
+        public T MinValue<T>() =>
+            MinValues.TryGetValue(typeof(T), out var value) ? (T)value
+            : typeof(T) == typeof(object) ? (T)(object)AnyExtreme.Minimum
+            : throw new KeyNotFoundException($"The type {typeof(T)} has no minimum value.");
 
         #endregion
 
