@@ -13,7 +13,7 @@
     "DisableListPromotion": true,
     "EnableIntervalDemotion": true,
     "EnableIntervalPromotion": true,
-    "AllowNullIntervals": false,
+    "AllowNullIntervals": true,
     "ValidateIntervals": false,
     "LongsRequireSuffix": true,
     "ValidateLiterals": true
