@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -324,7 +324,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                     return y_;
                 }
 
-                bool? o_ = context.Operators.WhereAny<Medication>(m_, n_);
+                bool? o_ = context.Operators.AnyRelated<Medication>(m_, n_);
                 return o_;
             }
 
@@ -350,7 +350,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 return ak_;
             }
 
-            bool? l_ = context.Operators.WhereAny<MedicationRequest>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<MedicationRequest>(j_, k_);
             return l_;
         }
 
@@ -514,7 +514,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
                 return ap_;
             }
 
-            bool? af_ = context.Operators.WhereAny<Medication>(ad_, ae_);
+            bool? af_ = context.Operators.AnyRelated<Medication>(ad_, ae_);
             return af_;
         }
 

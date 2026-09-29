@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS157FHIRPainIntensityQuantified", "1.0.000")]
 public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISingleton<CMS157FHIRPainIntensityQuantified_1_0_000>
 {
@@ -507,7 +507,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 return p_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Condition>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Condition>(j_, k_);
             return l_;
         }
 
@@ -603,7 +603,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 return l_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Observation>(d_, e_);
             return f_;
         }
 
@@ -672,7 +672,7 @@ public partial class CMS157FHIRPainIntensityQuantified_1_0_000 : ILibrary, ISing
                 }
             }
 
-            bool? f_ = context.Operators.WhereAny<Observation>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Observation>(d_, e_);
             return f_;
         }
 

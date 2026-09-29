@@ -37,14 +37,16 @@ internal sealed class LibraryInstanceInvoker_5_0 : LibraryInstanceInvoker
     /// The first (exclusive) CQL code generator tool version this invoker does not support.
     /// </summary>
     /// <remarks>
-    /// Widened from 5.2.0.0 to 5.3.0.0 for generator version 5.2.0.0 (operator fusion, #1484).
-    /// That was a minor bump because the generated C# began calling four new
-    /// <c>ICqlOperators</c> members, but nothing this invoker binds to changed - the library
-    /// shape (the <c>Instance</c> property, <c>ILibrary</c>, <c>CqlDefinitionAttribute</c>, the
-    /// definition method signatures) is exactly as before - so the existing invoker keeps
-    /// working and no new one is needed.
+    /// The minor generator versions 5.2 and 5.3 each make the generated C# call
+    /// <c>ICqlOperators</c> members that earlier runtimes do not have (the fused list operators,
+    /// and <c>AnyRelated</c> for query relationship clauses), which is why they are minor bumps:
+    /// an older invoker, whose range ends before them, skips such libraries instead of loading
+    /// code that calls a missing member. Nothing this invoker binds to differs across the range -
+    /// the library shape (the <c>Instance</c> property, <c>ILibrary</c>,
+    /// <c>CqlDefinitionAttribute</c>, the definition method signatures) is the same - so this
+    /// invoker covers all of them and no new one is needed.
     /// </remarks>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,3,0,0);
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = new(5,4,0,0);
 
     public override IReadOnlyDictionary<DefinitionSignature, DefinitionInvoker> Definitions { get; }
 

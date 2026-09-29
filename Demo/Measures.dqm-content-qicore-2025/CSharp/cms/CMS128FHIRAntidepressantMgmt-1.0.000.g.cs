@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS128FHIRAntidepressantMgmt", "1.0.000")]
 public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton<CMS128FHIRAntidepressantMgmt_1_0_000>
 {
@@ -181,7 +181,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 return ab_;
             }
 
-            bool? r_ = context.Operators.WhereAny<Medication>(p_, q_);
+            bool? r_ = context.Operators.AnyRelated<Medication>(p_, q_);
             return r_;
         }
 
@@ -387,7 +387,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 return x_;
             }
 
-            bool? n_ = context.Operators.WhereAny<Medication>(l_, m_);
+            bool? n_ = context.Operators.AnyRelated<Medication>(l_, m_);
             return n_;
         }
 
@@ -450,7 +450,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 return v_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Medication>(j_, k_);
             return l_;
         }
 
@@ -530,7 +530,7 @@ public partial class CMS128FHIRAntidepressantMgmt_1_0_000 : ILibrary, ISingleton
                 return v_;
             }
 
-            bool? l_ = context.Operators.WhereAny<Medication>(j_, k_);
+            bool? l_ = context.Operators.AnyRelated<Medication>(j_, k_);
             return l_;
         }
 

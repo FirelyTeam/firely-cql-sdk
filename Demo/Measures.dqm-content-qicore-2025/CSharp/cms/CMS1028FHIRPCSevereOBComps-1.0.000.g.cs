@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -713,7 +713,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return q_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -816,7 +816,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return q_;
             }
 
-            bool? g_ = context.Operators.WhereAny<Procedure>(e_, f_);
+            bool? g_ = context.Operators.AnyRelated<Procedure>(e_, f_);
             return g_;
         }
 
@@ -921,7 +921,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
                 return p_;
             }
 
-            bool? f_ = context.Operators.WhereAny<Procedure>(d_, e_);
+            bool? f_ = context.Operators.AnyRelated<Procedure>(d_, e_);
             return f_;
         }
 

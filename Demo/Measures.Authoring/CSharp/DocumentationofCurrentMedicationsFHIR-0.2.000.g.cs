@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, ISingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>
 {
@@ -220,7 +220,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return t_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 
@@ -287,7 +287,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return ab_;
             }
 
-            bool? h_ = context.Operators.WhereAny<Procedure>(f_, g_);
+            bool? h_ = context.Operators.AnyRelated<Procedure>(f_, g_);
             return h_;
         }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>
 {
@@ -170,7 +170,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     return ah_;
                 }
 
-                bool? v_ = context.Operators.WhereAny<Medication>(t_, u_);
+                bool? v_ = context.Operators.AnyRelated<Medication>(t_, u_);
                 return v_;
             }
 
@@ -198,7 +198,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                     return aw_;
                 }
 
-                bool? ak_ = context.Operators.WhereAny<Medication>(ai_, aj_);
+                bool? ak_ = context.Operators.AnyRelated<Medication>(ai_, aj_);
                 return ak_;
             }
 
@@ -240,7 +240,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 return bq_;
             }
 
-            bool? s_ = context.Operators.WhereAny<MedicationRequest>(q_, r_);
+            bool? s_ = context.Operators.AnyRelated<MedicationRequest>(q_, r_);
             return s_;
         }
 
@@ -365,7 +365,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 return ae_;
             }
 
-            bool? z_ = context.Operators.WhereAny<MedicationRequest>(x_, y_);
+            bool? z_ = context.Operators.AnyRelated<MedicationRequest>(x_, y_);
             return z_;
         }
 
@@ -384,7 +384,7 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
                 return an_;
             }
 
-            bool? ai_ = context.Operators.WhereAny<MedicationRequest>(ag_, ah_);
+            bool? ai_ = context.Operators.AnyRelated<MedicationRequest>(ag_, ah_);
             return ai_;
         }
 
