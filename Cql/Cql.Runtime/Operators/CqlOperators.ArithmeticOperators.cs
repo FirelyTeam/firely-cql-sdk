@@ -230,6 +230,11 @@ namespace Hl7.Cql.Operators
                 var completion = greatest != negative
                     ? kept + (UnitAtScale(kept.Scale) - UnitAtScale(scale))
                     : kept + ZeroAtScale(scale);
+                // Decimal keeps at most 28 to 29 significant digits. Where the completion needs more, the addition
+                // rounds and drops decimals instead of throwing, so a result that lost the requested scale is not
+                // the boundary; only values beyond the CQL Decimal range (whose whole part has at most 20 digits) get here.
+                if (completion.Scale != scale)
+                    return null;
                 return negative ? -completion : completion;
             }
             catch (OverflowException e)
