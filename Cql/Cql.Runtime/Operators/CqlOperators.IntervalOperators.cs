@@ -76,17 +76,8 @@ namespace Hl7.Cql.Operators
             var leftClosed = toClosed(left)!;
             var rightClosed = toClosed(right)!;
 
-            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
-            // point type, while a null open boundary is unknown, leaving comparisons against it
-            // indeterminate.
-            return IsUnknownBoundary(leftClosed.low, leftClosed.lowClosed) || IsUnknownBoundary(rightClosed.high, rightClosed.highClosed)
-                ? RangeGreaterThan(LowBoundaryRange(leftClosed), HighBoundaryRange(rightClosed), precision)
-                : Comparer.Compare(leftClosed.low ?? MinValue<T>()!, rightClosed.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    > 0  => true,
-                    _    => false,
-                };
+            // The first interval starts after the second one ends, under Start/End semantics.
+            return IsAfter(Boundary<T?>.LowOf(leftClosed), Boundary<T?>.HighOf(rightClosed), precision);
         }
 
         public bool? After(CqlInterval<int?>? left, int? right, string? precision) =>
@@ -109,26 +100,9 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var low = left.low;
-            var high = left.high;
-
-            if (low == null)
-            {
-                if (left.lowClosed ?? false)
-                    low = MinValue<T>();
-                else
-                    return null;
-            }
-
-            var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
-            var closed = toClosed(interval!);
-
-            return Comparer.Compare(closed!.low!, right, precision) switch
-            {
-                null => (bool?)null,
-                > 0  => true,
-                _    => false,
-            };
+            // The interval starts after the point, under Start/End semantics.
+            var closed = toClosed(left!)!;
+            return IsAfter(Boundary<T?>.LowOf(closed), Boundary<T?>.Of(right), precision);
         }
 
         public bool? After(int? left, CqlInterval<int?>? right, string? precision) =>
@@ -151,26 +125,9 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var low = right.low;
-            var high = right.high;
-
-            if (high == null)
-            {
-                if (right.highClosed ?? false)
-                    high = MaxValue<T>();
-                else
-                    return null;
-            }
-
-            var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
-            var closed = toClosed(interval!);
-
-            return Comparer.Compare(left, closed!.high!, precision) switch
-            {
-                null => (bool?)null,
-                > 0  => true,
-                _    => false,
-            };
+            // The point is after the interval's end, under Start/End semantics.
+            var closed = toClosed(right!)!;
+            return IsAfter(Boundary<T?>.Of(left), Boundary<T?>.HighOf(closed), precision);
         }
 
         #endregion
@@ -201,17 +158,8 @@ namespace Hl7.Cql.Operators
             var leftClosed = toClosed(left)!;
             var rightClosed = toClosed(right)!;
 
-            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
-            // point type, while a null open boundary is unknown, leaving comparisons against it
-            // indeterminate.
-            return IsUnknownBoundary(leftClosed.high, leftClosed.highClosed) || IsUnknownBoundary(rightClosed.low, rightClosed.lowClosed)
-                ? RangeLessThan(HighBoundaryRange(leftClosed), LowBoundaryRange(rightClosed), precision)
-                : Comparer.Compare(leftClosed.high ?? MaxValue<T>()!, rightClosed.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    < 0  => true,
-                    _    => false,
-                };
+            // The first interval ends before the second one starts, under Start/End semantics.
+            return IsBefore(Boundary<T?>.HighOf(leftClosed), Boundary<T?>.LowOf(rightClosed), precision);
         }
 
         public bool? Before(CqlInterval<int?>? left, int? right, string? precision) =>
@@ -235,26 +183,9 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var low = left.low;
-            var high = left.high;
-
-            if (high == null)
-            {
-                if (left.highClosed ?? false)
-                    high = MaxValue<T>();
-                else
-                    return null;
-            }
-
-            var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
-            var closed = toClosed(interval!);
-
-            return Comparer.Compare(closed!.high!, right, precision) switch
-            {
-                null => (bool?)null,
-                < 0  => true,
-                _    => false,
-            };
+            // The interval ends before the point, under Start/End semantics.
+            var closed = toClosed(left!)!;
+            return IsBefore(Boundary<T?>.HighOf(closed), Boundary<T?>.Of(right), precision);
         }
 
         public bool? Before(int? left, CqlInterval<int?>? right, string? precision) =>
@@ -277,26 +208,9 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var low = right.low;
-            var high = right.high;
-
-            if (low == null)
-            {
-                if (right.lowClosed ?? false)
-                    low = MinValue<T>();
-                else
-                    return null;
-            }
-
-            var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
-            var closed = toClosed(interval!);
-
-            return Comparer.Compare(left, closed!.low!, precision) switch
-            {
-                null => (bool?)null,
-                < 0  => true,
-                _    => false,
-            };
+            // The point is before the interval's start, under Start/End semantics.
+            var closed = toClosed(right!)!;
+            return IsBefore(Boundary<T?>.Of(left), Boundary<T?>.LowOf(closed), precision);
         }
 
         #endregion
@@ -533,25 +447,8 @@ namespace Hl7.Cql.Operators
             left = ToClosedBoundaries(left)!;
             right = ToClosedBoundaries(right)!;
 
-            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
-            // point type, while a null open boundary is unknown, leaving comparisons against it
-            // indeterminate.
-            var startsNoEarlier = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
-                ? RangeGreaterOrEqual(LowBoundaryRange(left), LowBoundaryRange(right), precision)
-                : Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    >= 0 => true,
-                    _    => false,
-                };
-            var sameEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
-                ? RangeEqual(HighBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    0    => true,
-                    _    => false,
-                };
+            var startsNoEarlier = IsAtOrAfter(Boundary<T>.LowOf(left), Boundary<T>.LowOf(right), precision);
+            var sameEnd = IsSame(Boundary<T>.HighOf(left), Boundary<T>.HighOf(right), precision);
 
             return AndAllowingUnknown(startsNoEarlier, sameEnd);
         }
@@ -1003,22 +900,28 @@ namespace Hl7.Cql.Operators
             if (t == null) return null;
             if (interval == null) return false;
 
-            if (interval.low == null && (interval.lowClosed ?? false) == false)
-                return null;
-            else if (interval.high == null && (interval.highClosed ?? false) == false)
-                return null;
+            // "For open interval boundaries, exclusive comparison operators are used. For closed interval boundaries,
+            // if the interval boundary is null, the result of the boundary comparison is considered true." (CQL 1.5.3
+            // Errata 2, Appendix B - CQL Reference, section "In"). The boundaries are compared as given, not as the
+            // effective ones: stepping an open boundary inward by one unit of its own precision would turn the exclusive
+            // comparison into an inclusive one whenever the comparison runs at a coarser precision. An open boundary
+            // without a value leaves its comparison unknown.
+            var point = Boundary<T>.Of(t);
+            var low = interval.low is { } lowValue
+                ? interval.lowClosed ?? false
+                    ? IsAtOrBefore(Boundary<T>.Of(lowValue), point, precision)
+                    : IsBefore(Boundary<T>.Of(lowValue), point, precision)
+                : interval.lowClosed ?? false ? true : null;
+            if (low == false)
+                return false;
 
-            // https://cql.hl7.org/09-b-cqlreference.html#in
-            // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
-            var lowClosed = interval.lowClosed ?? false;
-            var highClosed = interval.highClosed ?? false;
-            var lowCompare = Comparer.Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Comparer.Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
+            var high = interval.high is { } highValue
+                ? interval.highClosed ?? false
+                    ? IsAtOrAfter(Boundary<T>.Of(highValue), point, precision)
+                    : IsAfter(Boundary<T>.Of(highValue), point, precision)
+                : interval.highClosed ?? false ? true : null;
 
-            var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
-            var high = highClosed ? highCompare <= 0 : highCompare < 0;
-
-            return low && high;
+            return AndAllowingUnknown(low, high);
         }
         #endregion
 
@@ -1040,22 +943,8 @@ namespace Hl7.Cql.Operators
             larger = ToClosedForPointType(larger)!;
             smaller = ToClosedForPointType(smaller)!;
 
-            var lowIncluded = IsUnknownBoundary(larger.low, larger.lowClosed) || IsUnknownBoundary(smaller.low, smaller.lowClosed)
-                ? RangeLessOrEqual(LowBoundaryRange(larger), LowBoundaryRange(smaller), precision)
-                : Comparer.Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    <= 0 => true,
-                    _    => false,
-                };
-            var highIncluded = IsUnknownBoundary(larger.high, larger.highClosed) || IsUnknownBoundary(smaller.high, smaller.highClosed)
-                ? RangeGreaterOrEqual(HighBoundaryRange(larger), HighBoundaryRange(smaller), precision)
-                : Comparer.Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    >= 0 => true,
-                    _    => false,
-                };
+            var lowIncluded = IsAtOrBefore(Boundary<T>.LowOf(larger), Boundary<T>.LowOf(smaller), precision);
+            var highIncluded = IsAtOrAfter(Boundary<T>.HighOf(larger), Boundary<T>.HighOf(smaller), precision);
             // Preserve the existing combination: an indeterminate comparison makes the
             // whole result null, matching the previous null-compare behavior.
             return (lowIncluded, highIncluded) switch
@@ -1238,12 +1127,12 @@ namespace Hl7.Cql.Operators
                 return null;
 
             // A definite adjacency on either side decides true; otherwise an uncertain candidate leaves the
-            // result unknown, and a boundary without a value is definitely not adjacent to anything.
-            var meetsBefore = MeetsAtBoundary(left.high, right.low, precision, predecessor);
+            // result unknown.
+            var meetsBefore = MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, predecessor);
             if (meetsBefore == true)
                 return true;
 
-            return OrAllowingUnknown(meetsBefore, MeetsAtBoundary(right.high, left.low, precision, predecessor));
+            return OrAllowingUnknown(meetsBefore, MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, predecessor));
         }
 
         #endregion
@@ -1321,28 +1210,8 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            var same = SameBoundaryValue(left.low, right.high, precision);
-            if (same == true)
-                return true;
-
-            return OrAllowingUnknown(
-                same,
-                (left.lowClosed ?? false) && (right.highClosed ?? false) && left.low is { } low
-                    ? SameBoundaryValue(predecessor(low), right.high, precision)
-                    : false);
-        }
-
-        private bool? MeetsAfterIgnoringClosed<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
-        {
-            if (left == null || right == null)
-                return null;
-            if (Comparer.Compare(left.low!, right.high!, precision) == 0)
-                return true;
-
-            if (Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
-                return true;
-
-            return false;
+            // The first interval starts where the second one ends.
+            return MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, predecessor);
         }
 
         #endregion
@@ -1413,33 +1282,39 @@ namespace Hl7.Cql.Operators
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
 
-        private bool? MeetsBeforeIgnoringClosed<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
-        {
-            if (left == null || right == null)
-                return null;
-            if (Comparer.Compare(left.high!, right.low!, precision) == 0)
-                return true;
-
-            if (Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
-                return true;
-
-            return false;
-        }
         private bool? MeetsBeforeHelper<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
         {
             if (left == null || right == null)
                 return null;
 
-            var same = SameBoundaryValue(left.high, right.low, precision);
+            // The first interval ends where the second one starts.
+            return MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, predecessor);
+        }
+
+        /// <summary>
+        /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>: the end
+        /// is the start itself or its predecessor. The predecessor is only computed when the direct comparison does not
+        /// already decide it. Nothing precedes the minimum, and the predecessor of an unknown start ranges over the
+        /// predecessors of the values the start can take.
+        /// </summary>
+        private bool? MeetsAt<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> predecessor)
+        {
+            var same = IsSame(end, start, precision);
             if (same == true)
                 return true;
 
-            return OrAllowingUnknown(
-                same,
-                (right.lowClosed ?? false) && (left.highClosed ?? false) && right.low is { } low
-                    ? SameBoundaryValue(left.high, predecessor(low), precision)
-                    : false);
+            bool? precedes = start.Kind switch
+            {
+                BoundaryKind.Value   => predecessor(start.Value!) is { } value ? IsSame(end, Boundary<T>.Of(value), precision) : false,
+                BoundaryKind.Unknown => IsSame(end, Boundary<T>.UnknownBetween(PredecessorOrExtreme(start.RangeLow, predecessor), PredecessorOrExtreme(start.RangeHigh, predecessor)), precision),
+                _                    => false,
+            };
+            return OrAllowingUnknown(same, precedes);
         }
+
+        /// <summary>The predecessor of a range bound; a bound at an extreme (<c>null</c>) or without a predecessor stays at the extreme.</summary>
+        private static T? PredecessorOrExtreme<T>(T? bound, Func<T, T> predecessor) =>
+            bound is { } value ? predecessor(value) : default;
 
         #endregion
 
@@ -1525,17 +1400,8 @@ namespace Hl7.Cql.Operators
             var thisClosed = toClosed(@this)!;
             var otherClosed = toClosed(other)!;
 
-            // The first interval starts on or after the second one ends. Start/End semantics: a null
-            // closed boundary is the minimum or maximum value of the point type, while a null open
-            // boundary is unknown, leaving comparisons against it indeterminate.
-            return IsUnknownBoundary(thisClosed.low, thisClosed.lowClosed) || IsUnknownBoundary(otherClosed.high, otherClosed.highClosed)
-                ? RangeGreaterOrEqual(LowBoundaryRange(thisClosed), HighBoundaryRange(otherClosed), precision)
-                : Comparer.Compare(thisClosed.low ?? MinValue<T>()!, otherClosed.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    >= 0 => true,
-                    _    => false,
-                };
+            // The first interval starts on or after the second one ends, under Start/End semantics.
+            return IsAtOrAfter(Boundary<T?>.LowOf(thisClosed), Boundary<T?>.HighOf(otherClosed), precision);
         }
 
         #endregion
@@ -1604,17 +1470,8 @@ namespace Hl7.Cql.Operators
             var thisClosed = toClosed(@this)!;
             var otherClosed = toClosed(other)!;
 
-            // The first interval ends on or before the second one starts. Start/End semantics: a null
-            // closed boundary is the minimum or maximum value of the point type, while a null open
-            // boundary is unknown, leaving comparisons against it indeterminate.
-            return IsUnknownBoundary(thisClosed.high, thisClosed.highClosed) || IsUnknownBoundary(otherClosed.low, otherClosed.lowClosed)
-                ? RangeLessOrEqual(HighBoundaryRange(thisClosed), LowBoundaryRange(otherClosed), precision)
-                : Comparer.Compare(thisClosed.high ?? MaxValue<T>()!, otherClosed.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    <= 0 => true,
-                    _    => false,
-                };
+            // The first interval ends on or before the second one starts, under Start/End semantics.
+            return IsAtOrBefore(Boundary<T?>.HighOf(thisClosed), Boundary<T?>.LowOf(otherClosed), precision);
         }
 
         #endregion
@@ -1644,14 +1501,11 @@ namespace Hl7.Cql.Operators
             left = toClosed!(left!)!;
             right = toClosed!(right!)!;
 
-            // A null open boundary is unknown, so a comparison against it has no answer;
-            // only null closed boundaries are interpreted as the minimum/maximum value.
-            bool? startsBeforeEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.low, right.lowClosed)
-                ? RangeGreaterOrEqual(HighBoundaryRange(left), LowBoundaryRange(right), precision)
-                : HighReachesLow(left.high, right.low, precision);
-            bool? endsAfterStart = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
-                ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), precision)
-                : LowReachesHigh(left.low, right.high, precision);
+            // "if the ending point of the first interval is greater than or equal to the starting point of the
+            // second interval, and the starting point of the first interval is less than or equal to the ending
+            // point of the second interval" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Overlaps").
+            var startsBeforeEnd = IsAtOrAfter(Boundary<T?>.HighOf(left), Boundary<T?>.LowOf(right), precision);
+            var endsAfterStart = IsAtOrBefore(Boundary<T?>.LowOf(left), Boundary<T?>.HighOf(right), precision);
 
             return AndAllowingUnknown(startsBeforeEnd, endsAfterStart);
         }
@@ -1662,79 +1516,6 @@ namespace Hl7.Cql.Operators
         /// </summary>
         private static bool IsUnknownBoundary<T>(T? value, bool? closed) =>
             value is null && !(closed ?? false);
-
-        private static bool? AndAllowingUnknown(bool? left, bool? right) =>
-            (left, right) switch
-            {
-                (false, _) or (_, false) => false,
-                (null, _) or (_, null)   => null,
-                _                        => true,
-            };
-
-        private static bool? OrAllowingUnknown(bool? left, bool? right) =>
-            (left, right) switch
-            {
-                (true, _) or (_, true) => true,
-                (null, _) or (_, null) => null,
-                _                      => false,
-            };
-
-        // Three-valued comparisons between known boundaries, where a boundary without a value is closed
-        // and stands for the point type's maximum (a high) or minimum (a low). The extreme settles a
-        // comparison on its own wherever it can, so the comparer only sees values; comparing a value
-        // against the extreme itself would be uncertain whenever the value is less precise than it.
-        // Otherwise a null comparison (values of different precision that agree at the coarser one)
-        // leaves the predicate unknown.
-
-        /// <summary>
-        /// Applies a predicate to a comparison result, keeping an unknown comparison (<c>null</c>) unknown.
-        /// </summary>
-        private static bool? Decide(int? comparison, Func<int, bool> predicate) =>
-            comparison is { } known ? predicate(known) : null;
-
-        /// <summary>Whether a high boundary is at or after a low boundary; true when either is the extreme.</summary>
-        private bool? HighReachesLow<T>(T? high, T? low, string? precision) =>
-            high is null || low is null ? true : Decide(Comparer.Compare(high, low, precision), static c => c >= 0);
-
-        /// <summary>Whether a low boundary is at or before a high boundary; true when either is the extreme.</summary>
-        private bool? LowReachesHigh<T>(T? low, T? high, string? precision) =>
-            low is null || high is null ? true : Decide(Comparer.Compare(low, high, precision), static c => c <= 0);
-
-        /// <summary>
-        /// Whether one high boundary is strictly after another. Nothing is after the maximum, so a missing
-        /// second boundary decides false; a missing first boundary is compared as the maximum value, which is
-        /// uncertain only against a value that reaches it at its own precision.
-        /// </summary>
-        private bool? HighAfterHigh<T>(T? high, T? other, string? precision) =>
-            other is null ? false : Decide(Comparer.Compare(high ?? MaxValue<T>()!, other, precision), static c => c > 0);
-
-        /// <summary>
-        /// Whether one low boundary is strictly before another. Nothing is before the minimum, so a missing
-        /// second boundary decides false; a missing first boundary is compared as the minimum value.
-        /// </summary>
-        private bool? LowBeforeLow<T>(T? low, T? other, string? precision) =>
-            other is null ? false : Decide(Comparer.Compare(low ?? MinValue<T>()!, other, precision), static c => c < 0);
-
-        /// <summary>
-        /// Whether two boundary values are the same point: unknown when their comparison is, and
-        /// false when either has no value.
-        /// </summary>
-        private bool? SameBoundaryValue<T>(T? x, T? y, string? precision) =>
-            x is null || y is null ? false : SameBoundary(Comparer.Compare(x, y, precision));
-
-        /// <summary>
-        /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>:
-        /// the end is the start itself or its predecessor. The predecessor is only computed when the direct
-        /// comparison does not already decide it.
-        /// </summary>
-        private bool? MeetsAtBoundary<T>(T? end, T? start, string? precision, Func<T, T> predecessor)
-        {
-            var same = SameBoundaryValue(end, start, precision);
-            if (same == true)
-                return true;
-
-            return OrAllowingUnknown(same, SameBoundaryValue(end, start is { } value ? predecessor(value) : default, precision));
-        }
 
         /// <summary>
         /// The possible values of an interval's low boundary: a single value when known
@@ -1828,12 +1609,8 @@ namespace Hl7.Cql.Operators
             // A null closed low boundary is the minimum value and a null closed high boundary
             // the maximum (see #1356: these substitutions used to be inverted, so intervals
             // with an unbounded end never overlapped after anything).
-            bool? startsBeforeEnd = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
-                ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), precision)
-                : LowReachesHigh(left.low, right.high, precision);
-            bool? endsAfterEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
-                ? RangeGreaterThan(HighBoundaryRange(left), HighBoundaryRange(right), precision)
-                : HighAfterHigh(left.high, right.high, precision);
+            var startsBeforeEnd = IsAtOrBefore(Boundary<T?>.LowOf(left), Boundary<T?>.HighOf(right), precision);
+            var endsAfterEnd = IsAfter(Boundary<T?>.HighOf(left), Boundary<T?>.HighOf(right), precision);
 
             return AndAllowingUnknown(startsBeforeEnd, endsAfterEnd);
         }
@@ -1864,12 +1641,8 @@ namespace Hl7.Cql.Operators
             left = toClosed(left);
             right = toClosed(right);
 
-            bool? endsAfterStart = IsUnknownBoundary(left!.high, left.highClosed) || IsUnknownBoundary(right!.low, right.lowClosed)
-                ? RangeGreaterOrEqual(HighBoundaryRange(left), LowBoundaryRange(right!), precision)
-                : HighReachesLow(left.high, right!.low, precision);
-            bool? startsBeforeStart = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right!.low, right.lowClosed)
-                ? RangeLessThan(LowBoundaryRange(left), LowBoundaryRange(right!), precision)
-                : LowBeforeLow(left.low, right!.low, precision);
+            var endsAfterStart = IsAtOrAfter(Boundary<T?>.HighOf(left!), Boundary<T?>.LowOf(right!), precision);
+            var startsBeforeStart = IsBefore(Boundary<T?>.LowOf(left!), Boundary<T?>.LowOf(right!), precision);
 
             return AndAllowingUnknown(endsAfterStart, startsBeforeStart);
         }
@@ -1934,25 +1707,8 @@ namespace Hl7.Cql.Operators
             left = ToClosedBoundaries(left)!;
             right = ToClosedBoundaries(right)!;
 
-            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
-            // point type, while a null open boundary is unknown, leaving comparisons against it
-            // indeterminate.
-            var lowIncluded = IsUnknownBoundary(right.low, right.lowClosed) || IsUnknownBoundary(left.low, left.lowClosed)
-                ? RangeLessOrEqual(LowBoundaryRange(right), LowBoundaryRange(left), precision)
-                : Comparer.Compare(right.low ?? MinValue<T>()!, left.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    <= 0 => true,
-                    _    => false,
-                };
-            var highIncluded = IsUnknownBoundary(right.high, right.highClosed) || IsUnknownBoundary(left.high, left.highClosed)
-                ? RangeGreaterOrEqual(HighBoundaryRange(right), HighBoundaryRange(left), precision)
-                : Comparer.Compare(right.high ?? MaxValue<T>()!, left.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    >= 0 => true,
-                    _    => false,
-                };
+            var lowIncluded = IsAtOrBefore(Boundary<T>.LowOf(right), Boundary<T>.LowOf(left), precision);
+            var highIncluded = IsAtOrAfter(Boundary<T>.HighOf(right), Boundary<T>.HighOf(left), precision);
 
             // Complete inclusion is only proper inclusion when the two are not the same interval.
             return AndAllowingUnknown(lowIncluded, highIncluded) switch
@@ -1979,21 +1735,10 @@ namespace Hl7.Cql.Operators
         {
             // Each end is compared on its own, so a definite difference on one end decides the answer
             // even when the other end is unknown.
-            var sameLow = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
-                ? null
-                : (left.lowClosed ?? false) != (right.lowClosed ?? false)
-                    ? false
-                    : SameBoundary(Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision));
-            var sameHigh = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
-                ? null
-                : (left.highClosed ?? false) != (right.highClosed ?? false)
-                    ? false
-                    : SameBoundary(Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision));
+            var sameLow = IsSame(Boundary<T>.LowOf(left), Boundary<T>.LowOf(right), precision);
+            var sameHigh = IsSame(Boundary<T>.HighOf(left), Boundary<T>.HighOf(right), precision);
             return AndAllowingUnknown(sameLow, sameHigh);
         }
-
-        private static bool? SameBoundary(int? comparison) =>
-            Decide(comparison, static c => c == 0);
 
         /// <summary>
         /// Whether both boundaries of the interval are known once it is normalised to closed
@@ -2296,25 +2041,8 @@ namespace Hl7.Cql.Operators
             starts = ToClosedBoundaries(starts)!;
             other = ToClosedBoundaries(other)!;
 
-            // Start/End semantics: a null closed boundary is the minimum or maximum value of the
-            // point type, while a null open boundary is unknown, leaving comparisons against it
-            // indeterminate.
-            var sameStart = IsUnknownBoundary(starts.low, starts.lowClosed) || IsUnknownBoundary(other.low, other.lowClosed)
-                ? RangeEqual(LowBoundaryRange(starts), LowBoundaryRange(other), precision)
-                : Comparer.Compare(starts.low ?? MinValue<T>()!, other.low ?? MinValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    0    => true,
-                    _    => false,
-                };
-            var endsNoLater = IsUnknownBoundary(starts.high, starts.highClosed) || IsUnknownBoundary(other.high, other.highClosed)
-                ? RangeLessOrEqual(HighBoundaryRange(starts), HighBoundaryRange(other), precision)
-                : Comparer.Compare(starts.high ?? MaxValue<T>()!, other.high ?? MaxValue<T>()!, precision) switch
-                {
-                    null => (bool?)null,
-                    <= 0 => true,
-                    _    => false,
-                };
+            var sameStart = IsSame(Boundary<T>.LowOf(starts), Boundary<T>.LowOf(other), precision);
+            var endsNoLater = IsAtOrBefore(Boundary<T>.HighOf(starts), Boundary<T>.HighOf(other), precision);
 
             return AndAllowingUnknown(sameStart, endsNoLater);
         }
