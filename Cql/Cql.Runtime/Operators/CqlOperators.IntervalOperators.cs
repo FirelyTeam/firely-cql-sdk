@@ -1011,8 +1011,9 @@ namespace Hl7.Cql.Operators
             // https://cql.hl7.org/09-b-cqlreference.html#in
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
             // An open boundary without a value was handled above, so a boundary without a value here is closed and satisfied
-            // without comparing. A null comparison means the comparison is uncertain (the point is less precise than the
-            // boundary and matches it at the point's precision), so the boundary comparison, and with it the result, is unknown.
+            // without comparing. A null comparison (such as a point less precise than the boundary that matches it at the
+            // point's precision, or quantities with incommensurable units) leaves that boundary's predicate unknown, and the
+            // three-valued and below decides the result.
             var lowClosed = interval.lowClosed ?? false;
             var highClosed = interval.highClosed ?? false;
 
