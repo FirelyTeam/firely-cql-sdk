@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS56FHIRFuncStatHipReplacement", "1.0.000")]
 public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingleton<CMS56FHIRFuncStatHipReplacement_1_0_000>
 {
@@ -490,7 +490,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(c_ as IEnumerable<Condition>, d_ as IEnumerable<Condition>);
+        IEnumerable<Condition> e_ = context.Operators.Union<Condition>(c_, d_);
 
         bool? f_(Condition Dementia) {
             CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Dementia);
@@ -546,7 +546,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlValueSet d_ = this.Lower_Body_Fractures_Excluding_Ankle_and_Foot(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_, f_);
 
             bool? h_(Condition LowerBodyFracture) {
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, LowerBodyFracture);
@@ -1000,7 +1000,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition MalignantNeoplasm) {
             IEnumerable<Procedure> g_ = this.Total_Hip_Arthroplasty_Procedure(context);
@@ -1084,7 +1084,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition MechanicalComplications) {
             IEnumerable<Procedure> g_ = this.Total_Hip_Arthroplasty_Procedure(context);
@@ -1563,7 +1563,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime aj_ = context.Operators.Start(ai_);
             CqlDate ak_ = context.Operators.DateFrom(aj_);
             bool? al_ = context.Operators.SameAs(af_, ak_, "day");
-            DataType am_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport as Observation)?.Value;
+            DataType am_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSport?.Value;
             object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
             bool? ao_ = context.Operators.Not((bool?)(an_ is null));
             bool? ap_ = context.Operators.And(al_, ao_);
@@ -1574,7 +1574,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDate au_ = context.Operators.DateFrom(at_);
             bool? av_ = context.Operators.SameAs(af_, au_, "day");
             bool? aw_ = context.Operators.And(ap_, av_);
-            DataType ax_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore as Observation)?.Value;
+            DataType ax_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSActivityScore?.Value;
             object ay_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ax_);
             bool? az_ = context.Operators.Not((bool?)(ay_ is null));
             bool? ba_ = context.Operators.And(aw_, az_);
@@ -1585,7 +1585,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDate bf_ = context.Operators.DateFrom(be_);
             bool? bg_ = context.Operators.SameAs(af_, bf_, "day");
             bool? bh_ = context.Operators.And(ba_, bg_);
-            DataType bi_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms as Observation)?.Value;
+            DataType bi_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSSymptoms?.Value;
             object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
             bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
             bool? bl_ = context.Operators.And(bh_, bk_);
@@ -1596,11 +1596,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDate bq_ = context.Operators.DateFrom(bp_);
             bool? br_ = context.Operators.SameAs(af_, bq_, "day");
             bool? bs_ = context.Operators.And(bl_, br_);
-            DataType bt_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain as Observation)?.Value;
+            DataType bt_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSPain?.Value;
             object bu_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bt_);
             bool? bv_ = context.Operators.Not((bool?)(bu_ is null));
             bool? bw_ = context.Operators.And(bs_, bv_);
-            DataType bx_ = (tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality as Observation)?.Value;
+            DataType bx_ = tuple_eipfmazvhfscjijaofhicpvmb?.HOOSLifeQuality?.Value;
             object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
             bool? bz_ = context.Operators.Not((bool?)(by_ is null));
             bool? ca_ = context.Operators.And(bw_, bz_);
@@ -1780,7 +1780,7 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isAssessmentPerformed(context, c_);
 
         bool? e_(Observation HOOSJr) {
-            DataType i_ = (HOOSJr as Observation)?.Value;
+            DataType i_ = HOOSJr?.Value;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             bool? k_ = context.Operators.Not((bool?)(j_ is null));
             return k_;
@@ -1953,11 +1953,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
+            DataType aa_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
+            DataType ae_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -2141,11 +2141,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -2329,11 +2329,11 @@ public partial class CMS56FHIRFuncStatHipReplacement_1_0_000 : ILibrary, ISingle
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);

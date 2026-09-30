@@ -294,13 +294,13 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         ];
 
         bool? b_(Encounter Visit) {
-            bool? g_ = AHAOverall_4_1_000.Instance.isVerified(context, Diagnosis as Condition);
+            bool? g_ = AHAOverall_4_1_000.Instance.isVerified(context, Diagnosis);
             return g_;
         }
 
 
         bool? c_(Encounter Visit) {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Diagnosis as Condition);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Diagnosis);
             Period i_ = Visit?.Period;
             CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
             bool? k_ = context.Operators.Overlaps(h_, j_, "day");
@@ -328,10 +328,10 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             CqlValueSet d_ = this.Coronary_Artery_Disease_No_MI(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_, f_);
 
             bool? h_(Condition CoronaryArteryDisease) {
-                bool? j_ = this.overlapsDayOfEncounter(context, CoronaryArteryDisease as Condition, ValidQualifyingEncounter);
+                bool? j_ = this.overlapsDayOfEncounter(context, CoronaryArteryDisease, ValidQualifyingEncounter);
                 return j_;
             }
 
@@ -506,7 +506,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
             CqlValueSet d_ = this.Myocardial_Infarction(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_, f_);
 
             bool? h_(Condition MyocardialInfarction) {
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, MyocardialInfarction);
@@ -902,7 +902,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(MedicationRequest BetaBlockerForLVSDOrdered) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_History_of_Moderate_or_Severe_LVSD(context);
-            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerForLVSDOrdered as MedicationRequest, e_);
+            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerForLVSDOrdered, e_);
             return f_;
         }
 
@@ -1056,7 +1056,7 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
 
         bool? c_(MedicationRequest BetaBlockerOrdered) {
             IEnumerable<Encounter> e_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerOrdered as MedicationRequest, e_);
+            bool? f_ = this.authoredDuringDayOfEncounter(context, BetaBlockerOrdered, e_);
             return f_;
         }
 
@@ -1804,11 +1804,11 @@ public partial class CMS145FHIRCADBBlockerTPMIorLVSD_1_0_000 : ILibrary, ISingle
         CqlValueSet a_ = this.Hypotension(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition HypotensionDiagnosis) {
             IEnumerable<Encounter> g_ = this.Qualifying_CAD_Encounter_and_Prior_MI(context);
-            bool? h_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis as Condition, g_);
+            bool? h_ = this.overlapsDayOfEncounter(context, HypotensionDiagnosis, g_);
             return h_;
         }
 

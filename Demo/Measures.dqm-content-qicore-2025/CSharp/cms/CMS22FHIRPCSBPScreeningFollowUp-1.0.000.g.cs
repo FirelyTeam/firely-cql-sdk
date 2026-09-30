@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS22FHIRPCSBPScreeningFollowUp", "1.0.000")]
 public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingleton<CMS22FHIRPCSBPScreeningFollowUp_1_0_000>
 {
@@ -289,7 +289,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
 
             bool? f_(Condition Hypertension) {
                 CqlInterval<CqlDateTime> h_;
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 if (o_ is null)
                 {
@@ -297,7 +297,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 }
                 else
                 {
-                    CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension as Condition);
+                    CqlInterval<CqlDateTime> p_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypertension);
                     CqlDateTime q_ = context.Operators.Start(p_);
                     CqlInterval<CqlDateTime> r_ = context.Operators.Interval(q_, q_, true, true);
                     h_ = r_;
@@ -305,7 +305,7 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
                 Period i_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
                 bool? k_ = context.Operators.SameOrBefore(h_, j_, "day");
-                bool? l_ = this.isVerified(context, Hypertension as Condition);
+                bool? l_ = this.isVerified(context, Hypertension);
                 bool? m_ = context.Operators.And(k_, l_);
                 return m_;
             }
@@ -2452,9 +2452,9 @@ public partial class CMS22FHIRPCSBPScreeningFollowUp_1_0_000 : ILibrary, ISingle
         IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(l_, m_);
         IEnumerable<object> o_ = context.Operators.Union<object>(i_ as IEnumerable<object>, n_ as IEnumerable<object>);
         IEnumerable<ServiceRequest> p_ = this.Laboratory_Test_or_ECG_for_Hypertension_Not_Ordered(context);
-        IEnumerable<object> q_ = context.Operators.Union<object>(o_ as IEnumerable<object>, p_ as IEnumerable<object>);
+        IEnumerable<object> q_ = context.Operators.Union<object>(o_, p_ as IEnumerable<object>);
         IEnumerable<ServiceRequest> r_ = this.NonPharmacological_Intervention_Not_Ordered(context);
-        IEnumerable<object> s_ = context.Operators.Union<object>(q_ as IEnumerable<object>, r_ as IEnumerable<object>);
+        IEnumerable<object> s_ = context.Operators.Union<object>(q_, r_ as IEnumerable<object>);
         return s_;
     }
 

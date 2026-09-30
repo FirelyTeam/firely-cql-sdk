@@ -890,9 +890,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date r_ = q_?.BirthDateElement;
             string s_ = r_?.Value;
             CqlDate t_ = context.Operators.ConvertStringToDate(s_);
-            CqlDate u_ = context.Operators.Add(t_, d_.low as CqlQuantity);
+            CqlDate u_ = context.Operators.Add(t_, d_.low);
             CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
-            CqlDate w_ = context.Operators.Add(t_, d_.high as CqlQuantity);
+            CqlDate w_ = context.Operators.Add(t_, d_.high);
             CqlQuantity x_ = context.Operators.Quantity(1m, "year");
             CqlDate y_ = context.Operators.Add(w_, x_);
             CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
@@ -945,9 +945,9 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
             Date r_ = q_?.BirthDateElement;
             string s_ = r_?.Value;
             CqlDate t_ = context.Operators.ConvertStringToDate(s_);
-            CqlDate u_ = context.Operators.Add(t_, d_.low as CqlQuantity);
+            CqlDate u_ = context.Operators.Add(t_, d_.low);
             CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
-            CqlDate w_ = context.Operators.Add(t_, d_.high as CqlQuantity);
+            CqlDate w_ = context.Operators.Add(t_, d_.high);
             CqlQuantity x_ = context.Operators.Quantity(1m, "year");
             CqlDate y_ = context.Operators.Add(w_, x_);
             CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS1173FHIRDiagnosticDelayVTE", "1.0.000")]
 public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleton<CMS1173FHIRDiagnosticDelayVTE_1_0_000>
 {
@@ -339,7 +339,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
 
             bool? j_(Condition VTESymptomCondition) {
-                bool? n_ = this.isVerified(context, VTESymptomCondition as Condition);
+                bool? n_ = this.isVerified(context, VTESymptomCondition);
                 List<ResourceReference> o_ = IndexPCPVisit?.ReasonReference;
                 bool? p_ = QICoreCommon_4_0_000.Instance.references(context, (IEnumerable<ResourceReference>)o_, VTESymptomCondition);
                 bool? q_ = context.Operators.And(n_, p_);
@@ -765,7 +765,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Condition> ac_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
 
             bool? ad_(Condition HospiceCareDiagnosis) {
-                CqlInterval<CqlDateTime> eh_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis as Condition);
+                CqlInterval<CqlDateTime> eh_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareDiagnosis);
                 Period ei_ = QualifiedVTEEncounter?.Period;
                 CqlInterval<CqlDateTime> ej_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ei_);
                 CqlDateTime ek_ = context.Operators.Start(ej_);
@@ -774,7 +774,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlDateTime en_ = context.Operators.End(ej_);
                 CqlInterval<CqlDateTime> eo_ = context.Operators.Interval(em_, en_, true, true);
                 bool? ep_ = context.Operators.Overlaps(eh_, eo_, "day");
-                bool? eq_ = this.isVerified(context, HospiceCareDiagnosis as Condition);
+                bool? eq_ = this.isVerified(context, HospiceCareDiagnosis);
                 bool? er_ = context.Operators.And(ep_, eq_);
                 return er_;
             }
@@ -784,7 +784,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Condition> ag_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? ah_(Condition HospiceCareConcern) {
-                CqlInterval<CqlDateTime> es_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareConcern as Condition);
+                CqlInterval<CqlDateTime> es_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HospiceCareConcern);
                 Period et_ = QualifiedVTEEncounter?.Period;
                 CqlInterval<CqlDateTime> eu_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, et_);
                 CqlDateTime ev_ = context.Operators.Start(eu_);
@@ -793,7 +793,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlDateTime ey_ = context.Operators.End(eu_);
                 CqlInterval<CqlDateTime> ez_ = context.Operators.Interval(ex_, ey_, true, true);
                 bool? fa_ = context.Operators.Overlaps(es_, ez_, "day");
-                bool? fb_ = this.isVerified(context, HospiceCareConcern as Condition);
+                bool? fb_ = this.isVerified(context, HospiceCareConcern);
                 bool? fc_ = context.Operators.And(fa_, fb_);
                 return fc_;
             }
@@ -853,7 +853,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
 
             bool? k_(Condition PalliativeCareDiagnosis) {
-                CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeCareDiagnosis as Condition);
+                CqlInterval<CqlDateTime> as_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeCareDiagnosis);
                 Period at_ = QualifiedVTEEncounter?.Period;
                 CqlInterval<CqlDateTime> au_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, at_);
                 CqlDateTime av_ = context.Operators.Start(au_);
@@ -862,7 +862,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlDateTime ay_ = context.Operators.End(au_);
                 CqlInterval<CqlDateTime> az_ = context.Operators.Interval(ax_, ay_, true, true);
                 bool? ba_ = context.Operators.Overlaps(as_, az_, "day");
-                bool? bb_ = this.isVerified(context, PalliativeCareDiagnosis as Condition);
+                bool? bb_ = this.isVerified(context, PalliativeCareDiagnosis);
                 bool? bc_ = context.Operators.And(ba_, bb_);
                 return bc_;
             }
@@ -872,7 +872,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
             IEnumerable<Condition> n_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? o_(Condition PalliativeCareConcern) {
-                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeCareConcern as Condition);
+                CqlInterval<CqlDateTime> bd_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PalliativeCareConcern);
                 Period be_ = QualifiedVTEEncounter?.Period;
                 CqlInterval<CqlDateTime> bf_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, be_);
                 CqlDateTime bg_ = context.Operators.Start(bf_);
@@ -881,7 +881,7 @@ public partial class CMS1173FHIRDiagnosticDelayVTE_1_0_000 : ILibrary, ISingleto
                 CqlDateTime bj_ = context.Operators.End(bf_);
                 CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(bi_, bj_, true, true);
                 bool? bl_ = context.Operators.Overlaps(bd_, bk_, "day");
-                bool? bm_ = this.isVerified(context, PalliativeCareConcern as Condition);
+                bool? bm_ = this.isVerified(context, PalliativeCareConcern);
                 bool? bn_ = context.Operators.And(bl_, bm_);
                 return bn_;
             }

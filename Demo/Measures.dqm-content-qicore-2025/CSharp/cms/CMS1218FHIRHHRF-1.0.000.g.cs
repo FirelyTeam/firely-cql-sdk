@@ -337,7 +337,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         Condition b_(ResourceReference D) {
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+            IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_, e_);
 
             bool? g_(Condition C) {
                 Id j_ = C?.IdElement;
@@ -4937,7 +4937,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         CqlQuantity c_(Observation BMI) {
             DataType y_ = BMI?.Value;
             CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
-            return z_ as CqlQuantity;
+            return z_;
         }
 
         IEnumerable<CqlQuantity> d_ = context.Operators.WhereSelect<Observation, CqlQuantity>(a_, b_, c_);
@@ -5829,7 +5829,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         Observation f_ = context.Operators.First<Observation>(e_);
         DataType g_ = f_?.Value;
         CqlQuantity h_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, g_ as Quantity);
-        return h_ as CqlQuantity;
+        return h_;
     }
 
 
@@ -5899,7 +5899,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         Observation h_ = context.Operators.First<Observation>(g_);
         DataType i_ = h_?.Value;
         CqlQuantity j_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, i_ as Quantity);
-        return j_ as CqlQuantity;
+        return j_;
     }
 
 
@@ -6163,7 +6163,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         Observation h_ = context.Operators.First<Observation>(g_);
         DataType i_ = h_?.Value;
         CqlQuantity j_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, i_ as Quantity);
-        return j_ as CqlQuantity;
+        return j_;
     }
 
 
@@ -6718,7 +6718,7 @@ public partial class CMS1218FHIRHHRF_1_0_000 : ILibrary, ISingleton<CMS1218FHIRH
         Observation h_ = context.Operators.First<Observation>(g_);
         DataType i_ = h_?.Value;
         CqlQuantity j_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, i_ as Quantity);
-        return j_ as CqlQuantity;
+        return j_;
     }
 
 

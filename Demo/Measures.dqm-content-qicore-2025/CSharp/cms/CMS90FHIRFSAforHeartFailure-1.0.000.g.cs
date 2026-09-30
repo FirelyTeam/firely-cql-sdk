@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS90FHIRFSAforHeartFailure", "1.0.000")]
 public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<CMS90FHIRFSAforHeartFailure_1_0_000>
 {
@@ -373,7 +373,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         CqlValueSet j_ = this.Heart_Failure(context);
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(k_, l_);
         IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
         bool? o_(Condition HeartFailure) {
@@ -418,7 +418,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+        IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_, e_);
         IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
 
         bool? h_(Condition SevereCognitiveImpairment) {
@@ -470,11 +470,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore as Observation)?.Value;
+            DataType aa_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore as Observation)?.Value;
+            DataType ae_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -781,11 +781,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -899,11 +899,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -1017,11 +1017,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -1135,11 +1135,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment as Observation)?.Value;
+            DataType aa_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment as Observation)?.Value;
+            DataType ae_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -1253,11 +1253,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical as Observation)?.Value;
+            DataType aa_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional as Observation)?.Value;
+            DataType ae_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -1371,11 +1371,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime x_ = context.Operators.Start(w_);
             CqlDate y_ = context.Operators.DateFrom(x_);
             bool? z_ = context.Operators.SameAs(t_, y_, "day");
-            DataType aa_ = (tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item as Observation)?.Value;
+            DataType aa_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Value;
             object ab_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aa_);
             bool? ac_ = context.Operators.Not((bool?)(ab_ is null));
             bool? ad_ = context.Operators.And(z_, ac_);
-            DataType ae_ = (tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary as Observation)?.Value;
+            DataType ae_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary?.Value;
             object af_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ae_);
             bool? ag_ = context.Operators.Not((bool?)(af_ is null));
             bool? ah_ = context.Operators.And(ad_, ag_);
@@ -1505,7 +1505,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDateTime an_ = context.Operators.Start(am_);
             CqlDate ao_ = context.Operators.DateFrom(an_);
             bool? ap_ = context.Operators.SameAs(aj_, ao_, "day");
-            DataType aq_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability as Observation)?.Value;
+            DataType aq_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability?.Value;
             object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
             bool? as_ = context.Operators.Not((bool?)(ar_ is null));
             bool? at_ = context.Operators.And(ap_, as_);
@@ -1516,7 +1516,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDate ay_ = context.Operators.DateFrom(ax_);
             bool? az_ = context.Operators.SameAs(aj_, ay_, "day");
             bool? ba_ = context.Operators.And(at_, az_);
-            DataType bb_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy as Observation)?.Value;
+            DataType bb_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy?.Value;
             object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
             bool? bd_ = context.Operators.Not((bool?)(bc_ is null));
             bool? be_ = context.Operators.And(ba_, bd_);
@@ -1527,7 +1527,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDate bj_ = context.Operators.DateFrom(bi_);
             bool? bk_ = context.Operators.SameAs(aj_, bj_, "day");
             bool? bl_ = context.Operators.And(be_, bk_);
-            DataType bm_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms as Observation)?.Value;
+            DataType bm_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms?.Value;
             object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
             bool? bo_ = context.Operators.Not((bool?)(bn_ is null));
             bool? bp_ = context.Operators.And(bl_, bo_);
@@ -1538,7 +1538,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDate bu_ = context.Operators.DateFrom(bt_);
             bool? bv_ = context.Operators.SameAs(aj_, bu_, "day");
             bool? bw_ = context.Operators.And(bp_, bv_);
-            DataType bx_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits as Observation)?.Value;
+            DataType bx_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits?.Value;
             object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
             bool? bz_ = context.Operators.Not((bool?)(by_ is null));
             bool? ca_ = context.Operators.And(bw_, bz_);
@@ -1549,11 +1549,11 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
             CqlDate cf_ = context.Operators.DateFrom(ce_);
             bool? cg_ = context.Operators.SameAs(aj_, cf_, "day");
             bool? ch_ = context.Operators.And(ca_, cg_);
-            DataType ci_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits as Observation)?.Value;
+            DataType ci_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits?.Value;
             object cj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ci_);
             bool? ck_ = context.Operators.Not((bool?)(cj_ is null));
             bool? cl_ = context.Operators.And(ch_, ck_);
-            DataType cm_ = (tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality as Observation)?.Value;
+            DataType cm_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Value;
             object cn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cm_);
             bool? co_ = context.Operators.Not((bool?)(cn_ is null));
             bool? cp_ = context.Operators.And(cl_, co_);
@@ -1645,7 +1645,7 @@ public partial class CMS90FHIRFSAforHeartFailure_1_0_000 : ILibrary, ISingleton<
         IEnumerable<Observation> d_ = Status_1_15_000.Instance.isAssessmentPerformed(context, c_);
 
         bool? e_(Observation KCCQSummaryScore) {
-            DataType i_ = (KCCQSummaryScore as Observation)?.Value;
+            DataType i_ = KCCQSummaryScore?.Value;
             object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
             bool? k_ = context.Operators.Not((bool?)(j_ is null));
             return k_;

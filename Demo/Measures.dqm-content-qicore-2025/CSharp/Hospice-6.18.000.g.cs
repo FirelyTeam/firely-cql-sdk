@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("Hospice", "6.18.000")]
 public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
 {
@@ -255,7 +255,7 @@ public partial class Hospice_6_18_000 : ILibrary, ISingleton<Hospice_6_18_000>
         CqlValueSet ad_ = this.Hospice_Diagnosis(context);
         IEnumerable<Condition> ae_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> af_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> ag_ = context.Operators.Union<Condition>(ae_ as IEnumerable<Condition>, af_ as IEnumerable<Condition>);
+        IEnumerable<Condition> ag_ = context.Operators.Union<Condition>(ae_, af_);
         IEnumerable<Condition> ah_ = Status_1_15_000.Instance.verified(context, ag_);
 
         bool? ai_(Condition HospiceCareDiagnosis) {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS104FHIRSTKDCAntithrombotic", "1.0.000")]
 public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleton<CMS104FHIRSTKDCAntithrombotic_1_0_000>
 {
@@ -176,8 +176,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
                 ];
                 bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
-                bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic as MedicationRequest);
-                bool? ao_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic as MedicationRequest);
+                bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAntithrombotic);
+                bool? ao_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAntithrombotic);
                 bool? ap_ = context.Operators.Or(an_, ao_);
                 bool? aq_ = context.Operators.And(am_, ap_);
                 FhirDateTime ar_ = DischargeAntithrombotic?.AuthoredOnElement;
@@ -248,8 +248,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
             CqlValueSet u_ = this.Patient_Refusal(context);
             bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
             bool? w_ = context.Operators.Or(r_, v_);
-            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge as MedicationRequest);
-            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge as MedicationRequest);
+            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAntithromboticDischarge);
+            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAntithromboticDischarge);
             bool? z_ = context.Operators.Or(x_, y_);
             bool? aa_ = context.Operators.And(w_, z_);
             Code<MedicationRequest.MedicationrequestStatus> ab_ = NoAntithromboticDischarge?.StatusElement;
@@ -344,7 +344,7 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         }
 
         IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
-        IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest>, l_ as IEnumerable<MedicationRequest>);
+        IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(e_, l_);
         return m_;
     }
 
@@ -420,8 +420,8 @@ public partial class CMS104FHIRSTKDCAntithrombotic_1_0_000 : ILibrary, ISingleto
         IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 
         bool? g_(MedicationRequest PharmacologicalContraindications) {
-            bool? z_ = QICoreCommon_4_0_000.Instance.isCommunity(context, PharmacologicalContraindications as MedicationRequest);
-            bool? aa_ = QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications as MedicationRequest);
+            bool? z_ = QICoreCommon_4_0_000.Instance.isCommunity(context, PharmacologicalContraindications);
+            bool? aa_ = QICoreCommon_4_0_000.Instance.isDischarge(context, PharmacologicalContraindications);
             bool? ab_ = context.Operators.Or(z_, aa_);
             Code<MedicationRequest.MedicationrequestStatus> ac_ = PharmacologicalContraindications?.StatusElement;
             MedicationRequest.MedicationrequestStatus? ad_ = ac_?.Value;

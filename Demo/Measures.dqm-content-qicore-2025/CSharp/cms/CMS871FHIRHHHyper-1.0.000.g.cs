@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS871FHIRHHHyper", "1.0.000")]
 public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIRHHHyper_1_0_000>
 {
@@ -214,7 +214,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 CqlValueSet v_ = this.Diabetes(context);
                 bool? w_ = context.Operators.ConceptsInValueSet(u_, v_);
                 bool? x_ = context.Operators.Or(r_, w_);
-                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesEncounter as Condition);
+                CqlInterval<CqlDateTime> y_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesEncounter);
                 CqlDateTime z_ = context.Operators.Start(y_);
                 CqlInterval<CqlDateTime> aa_ = Hospitalization?.hospitalizationPeriod;
                 CqlDateTime ab_ = context.Operators.End(aa_);
@@ -245,7 +245,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
                 CqlConcept au_ = context.Operators.ConvertCodeToConcept(at_);
                 bool? av_ = context.Operators.Equivalent(ag_, au_);
                 bool? aw_ = context.Operators.Or(as_, av_);
-                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesProblem as Condition);
+                CqlInterval<CqlDateTime> ax_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesProblem);
                 CqlDateTime ay_ = context.Operators.Start(ax_);
                 CqlInterval<CqlDateTime> az_ = Hospitalization?.hospitalizationPeriod;
                 CqlDateTime ba_ = context.Operators.End(az_);
@@ -256,7 +256,7 @@ public partial class CMS871FHIRHHHyper_1_0_000 : ILibrary, ISingleton<CMS871FHIR
             }
 
             IEnumerable<Condition> l_ = context.Operators.Where<Condition>(j_, k_);
-            IEnumerable<Condition> m_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+            IEnumerable<Condition> m_ = context.Operators.Union<Condition>(i_, l_);
 
             bool? n_(Condition DiabetesCondition) {
                 ResourceReference be_ = DiabetesCondition?.Subject;

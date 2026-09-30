@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS2FHIRPCSDepScreenAndFollowUp", "1.0.000")]
 public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS2FHIRPCSDepScreenAndFollowUp_1_0_000>
 {
@@ -243,7 +243,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
             IEnumerable<Encounter> e_ = this.Qualifying_Encounter_During_Measurement_Period(context);
 
             bool? f_(Encounter QualifyingEncounter) {
-                CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BipolarDiagnosis as Condition);
+                CqlInterval<CqlDateTime> h_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, BipolarDiagnosis);
                 CqlDateTime i_ = context.Operators.Start(h_);
                 Period j_ = QualifyingEncounter?.Period;
                 CqlInterval<CqlDateTime> k_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, j_);
@@ -450,12 +450,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 bool? ay_ = context.Operators.Not((bool?)(at_ is null));
                 bool? az_ = context.Operators.And(ax_, ay_);
                 CqlInterval<CqlDate> ba_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdolescentMed);
-                CqlDate bb_ = (ba_ as CqlInterval<CqlDate>)?.low;
+                CqlDate bb_ = ba_?.low;
                 CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
-                CqlDate bd_ = (ba_ as CqlInterval<CqlDate>)?.high;
+                CqlDate bd_ = ba_?.high;
                 CqlDateTime be_ = context.Operators.ConvertDateToDateTime(bd_);
-                bool? bf_ = (ba_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bg_ = (ba_ as CqlInterval<CqlDate>)?.highClosed;
+                bool? bf_ = ba_?.lowClosed;
+                bool? bg_ = ba_?.highClosed;
                 CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(bc_, be_, bf_, bg_);
                 CqlInterval<CqlDateTime> bi_ = QICoreCommon_4_0_000.Instance.toInterval(context, bh_);
                 bool? bj_ = context.Operators.OverlapsAfter(bi_, as_, "day");
@@ -525,7 +525,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
-        IEnumerable<object> r_ = context.Operators.Union<object>(m_ as IEnumerable<object>, q_ as IEnumerable<object>);
+        IEnumerable<object> r_ = context.Operators.Union<object>(m_, q_ as IEnumerable<object>);
         return r_;
     }
 
@@ -902,12 +902,12 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
                 bool? ay_ = context.Operators.Not((bool?)(at_ is null));
                 bool? az_ = context.Operators.And(ax_, ay_);
                 CqlInterval<CqlDate> ba_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AdultMed);
-                CqlDate bb_ = (ba_ as CqlInterval<CqlDate>)?.low;
+                CqlDate bb_ = ba_?.low;
                 CqlDateTime bc_ = context.Operators.ConvertDateToDateTime(bb_);
-                CqlDate bd_ = (ba_ as CqlInterval<CqlDate>)?.high;
+                CqlDate bd_ = ba_?.high;
                 CqlDateTime be_ = context.Operators.ConvertDateToDateTime(bd_);
-                bool? bf_ = (ba_ as CqlInterval<CqlDate>)?.lowClosed;
-                bool? bg_ = (ba_ as CqlInterval<CqlDate>)?.highClosed;
+                bool? bf_ = ba_?.lowClosed;
+                bool? bg_ = ba_?.highClosed;
                 CqlInterval<CqlDateTime> bh_ = context.Operators.Interval(bc_, be_, bf_, bg_);
                 CqlInterval<CqlDateTime> bi_ = QICoreCommon_4_0_000.Instance.toInterval(context, bh_);
                 bool? bj_ = context.Operators.OverlapsAfter(bi_, as_, "day");
@@ -977,7 +977,7 @@ public partial class CMS2FHIRPCSDepScreenAndFollowUp_1_0_000 : ILibrary, ISingle
         }
 
         IEnumerable<Procedure> q_ = context.Operators.Where<Procedure>(o_, p_);
-        IEnumerable<object> r_ = context.Operators.Union<object>(m_ as IEnumerable<object>, q_ as IEnumerable<object>);
+        IEnumerable<object> r_ = context.Operators.Union<object>(m_, q_ as IEnumerable<object>);
         return r_;
     }
 

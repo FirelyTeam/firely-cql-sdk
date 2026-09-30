@@ -289,7 +289,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
         bool? d_(Observation ClinicalSkinExam) {
             CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
-            bool? g_ = this.isIn(context, ClinicalSkinExam as Observation, f_);
+            bool? g_ = this.isIn(context, ClinicalSkinExam, f_);
             return g_;
         }
 
@@ -312,7 +312,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
 
         bool? d_(Observation ObsSkinExam) {
             CqlValueSet f_ = this.Pressure_Injury_Stage_2__3__4_or_Unstageable(context);
-            bool? g_ = this.isIn(context, ObsSkinExam as Observation, f_);
+            bool? g_ = this.isIn(context, ObsSkinExam, f_);
             return g_;
         }
 
@@ -331,7 +331,7 @@ public partial class CMS826FHIRHHPI_1_0_000 : ILibrary, ISingleton<CMS826FHIRHHP
     {
         IEnumerable<Observation> a_ = this.Clinical_Skin_Exams_With_Pressure_Injury(context);
         IEnumerable<Observation> b_ = this.Simple_Skin_Exams_With_Pressure_Injury(context);
-        IEnumerable<Observation> c_ = context.Operators.Union<Observation>(a_ as IEnumerable<Observation>, b_ as IEnumerable<Observation>);
+        IEnumerable<Observation> c_ = context.Operators.Union<Observation>(a_, b_);
         return c_;
     }
 

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS1028FHIRPCSevereOBComps", "1.0.000")]
 public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<CMS1028FHIRPCSevereOBComps_1_0_000>
 {
@@ -2722,7 +2722,7 @@ public partial class CMS1028FHIRPCSevereOBComps_1_0_000 : ILibrary, ISingleton<C
             DataType s_ = r_?.Effective;
             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV, e_, m_, u_);
             return v_;
         }
 
