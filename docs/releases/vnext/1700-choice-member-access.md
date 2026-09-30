@@ -6,4 +6,4 @@
   remains, and a choice of the distinct types otherwise. This is the ELM the Java translator
   produces, so the compiler emits the same dispatch for it. A library that reaches this never
   translated before, so no evaluation result moves and there is no `GeneratorToolVersion` change.
-  (#1648)
+  (#1648, #1700)
