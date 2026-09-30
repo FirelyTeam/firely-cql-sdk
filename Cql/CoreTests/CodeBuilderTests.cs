@@ -1307,7 +1307,7 @@ namespace CoreTests
                 OnsetsOfConditions(),
                 new Hl7.Cql.Elm.Property { scope = "R", path = "value", resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.BooleanType });
 
-            AssertUnboundProperty(elmLibrary, "value", "its type on ");
+            AssertUnboundProperty(elmLibrary, "value", "its type on FhirDateTime is CqlDateTime, which does not convert to bool?, the type the expression expects.");
         }
 
         [TestMethod]
