@@ -1137,28 +1137,40 @@ namespace Hl7.Cql.Operators
 
         // The later of two low boundaries at least one of which is unknown: the boundary that is not earlier
         // than any value the other can take, or an unknown (null open) boundary when that depends on the
-        // unknown value.
+        // unknown value. When neither can be earlier than the other (the unknown boundary's range collapses
+        // to the known boundary's value) the known boundary is taken, so the result does not depend on the
+        // order of the arguments.
         private (T? value, bool closed) LaterUncertainLowBoundary<T>(CqlInterval<T> left, CqlInterval<T> right)
         {
             var leftRange = LowBoundaryRange(left);
             var rightRange = LowBoundaryRange(right);
-            if (RangeGreaterOrEqual(leftRange, rightRange, null) == true)
+            var leftIsLater = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
+            var rightIsLater = RangeLessOrEqual(leftRange, rightRange, null) == true;
+            if (leftIsLater && rightIsLater)
+                return left.low is not null ? (left.low, left.lowClosed ?? false) : (right.low, right.lowClosed ?? false);
+            if (leftIsLater)
                 return (left.low, left.lowClosed ?? false);
-            if (RangeLessOrEqual(leftRange, rightRange, null) == true)
+            if (rightIsLater)
                 return (right.low, right.lowClosed ?? false);
             return (default, false);
         }
 
         // The earlier of two high boundaries at least one of which is unknown: the boundary that is not later
         // than any value the other can take, or an unknown (null open) boundary when that depends on the
-        // unknown value.
+        // unknown value. When neither can be later than the other (the unknown boundary's range collapses
+        // to the known boundary's value) the known boundary is taken, so the result does not depend on the
+        // order of the arguments.
         private (T? value, bool closed) EarlierUncertainHighBoundary<T>(CqlInterval<T> left, CqlInterval<T> right)
         {
             var leftRange = HighBoundaryRange(left);
             var rightRange = HighBoundaryRange(right);
-            if (RangeLessOrEqual(leftRange, rightRange, null) == true)
+            var leftIsEarlier = RangeLessOrEqual(leftRange, rightRange, null) == true;
+            var rightIsEarlier = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
+            if (leftIsEarlier && rightIsEarlier)
+                return left.high is not null ? (left.high, left.highClosed ?? false) : (right.high, right.highClosed ?? false);
+            if (leftIsEarlier)
                 return (left.high, left.highClosed ?? false);
-            if (RangeGreaterOrEqual(leftRange, rightRange, null) == true)
+            if (rightIsEarlier)
                 return (right.high, right.highClosed ?? false);
             return (default, false);
         }
