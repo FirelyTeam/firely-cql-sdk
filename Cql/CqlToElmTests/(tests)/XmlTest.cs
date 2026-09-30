@@ -138,6 +138,17 @@ namespace Hl7.Cql.CqlToElm.Test
             return $"{tc.File}: {tc.Category}/{tc.TestName}";
         }
 
+        // The specification version this SDK implements. A test whose feature was introduced in a later version
+        // (`version`), or last appears in an earlier one (`versionTo`), does not apply.
+        private static readonly Version TargetVersion = new(1, 5, 3);
+
+        private static bool AppliesToTargetVersion(string? version, string? versionTo) =>
+            (version is null || ParseVersion(version) <= TargetVersion)
+            && (versionTo is null || ParseVersion(versionTo) >= TargetVersion);
+
+        private static Version ParseVersion(string version) =>
+            Version.Parse(version.Contains('.') ? version : version + ".0");
+
         public static IEnumerable<object[]> GetTests()
         {
             var dir = new DirectoryInfo(Path.Combine("Input", "DQIC"));
@@ -150,10 +161,12 @@ namespace Hl7.Cql.CqlToElm.Test
                     if (group.test is not null)
                         foreach (var test in group.test)
                         {
-                            if (!test.expression.invalidSpecified)
-                            {
-                                yield return new object[] { new TestCase(xml.Name, group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
-                            }
+                            if (test.expression.invalidSpecified)
+                                continue;
+                            if (!AppliesToTargetVersion(test.version ?? group.version ?? tests.version, test.versionTo ?? group.versionTo ?? tests.versionTo))
+                                continue;
+
+                            yield return new object[] { new TestCase(xml.Name, group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
                         }
                 }
             }

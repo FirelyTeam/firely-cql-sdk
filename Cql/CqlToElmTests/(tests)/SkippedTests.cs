@@ -34,7 +34,23 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
 
-            { "TestMaxIntervalExceptNull", "Except over two Interval<Any> operands is ambiguous with every typed interval overload (#1627)." }
+            { "TestMaxIntervalExceptNull", "Except over two Interval<Any> operands is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandListWithNull", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandEmptyList", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing)." },
+
+            { "FloorIntegerLessThanMinInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
+            { "FloorIntegerGreaterThanMaxInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
+
+            { "RatioEqual", "The expression builder does not support Ratio." },
+            { "RatioNotEqualDiffNumerator", "The expression builder does not support Ratio." },
+            { "RatioNotEqualDiffDenominator", "The expression builder does not support Ratio." },
+            { "RatioEquivalent", "The expression builder does not support Ratio." },
+            { "RatioNotEquivalentDiffNumerator", "The expression builder does not support Ratio." },
+            { "RatioNotEquivalentDiffDenominator", "The expression builder does not support Ratio." },
+
+            { "MegaMultiDistinct", "`aggregate distinct` over a multi-source query binds Distinct with the aggregate's type instead of the source tuple type, and no overload matches." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
@@ -53,6 +69,51 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
+
+            { "CeilingDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "CeilingDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorMinIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+
+            { "HighBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
+            { "LowBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
+
+            { "YearsBetweenLeapYearDatesEquals2", "`years between` a 29 February start and 28 February of a year without a leap day is one year short (#1681)." },
+            { "YearsBetweenLeapYearDateTimesEquals2", "`years between` a 29 February start and 28 February of a year without a leap day is one year short (#1681)." },
+
+            { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+            { "DateTimeSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+            { "DateSubtract33Days", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+
+            { "DateTimeOverlapsPrecisioLeftPossiblyEndsDuringRight", "Overlaps decides a boundary comparison between DateTimes of different precision instead of leaving it unknown." },
+            { "DateTimeOverlapsPrecisionLeftPossiblyStartsDuringRight", "Overlaps decides a boundary comparison between DateTimes of different precision instead of leaving it unknown." },
+            { "DateTimeOverlapsPrecisionLeftPossiblyStartsAndEndsDuringRight", "Overlaps decides a boundary comparison between DateTimes of different precision instead of leaving it unknown." },
+
+            { "TestIntersectNull", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
+            { "TestIntersectNull1", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
+            { "TestIntersectNull2", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
+            { "TestIntersectNull3", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
+            { "TestIntersectNull4", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
+
+            { "TestQuantityYearEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityYearNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityYearsNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthNotEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthsNotEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestYearEquivalentDays", "1 year ~ 365 days returns false; a calendar duration is not equivalent to its length in days (#1650)." },
+            { "TestMonthEquivalentDays", "1 month ~ 30 days returns false; a calendar duration is not equivalent to its length in days (#1650)." },
+
+            { "TupleEqDifferentNamesWithOneNullId", "Tuple equality returns false when one element differs and another is null; the suite expects null." },
+            { "TupleNotEqDifferingNamesWithOneNullId", "Tuple inequality returns true when one element differs and another is null; the suite expects null." },
+            { "Equal123AndABC", "Equality of two List<Any> whose elements have different types returns null instead of false." },
+            { "Equal123AndString123", "Equality of two List<Any> whose elements have different types returns null instead of false." },
+            { "ProperContains1", "`properly includes` with a null list returns null instead of false." },
+            { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
+
+            { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
         };
     }
 

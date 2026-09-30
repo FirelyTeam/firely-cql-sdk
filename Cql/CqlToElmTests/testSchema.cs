@@ -469,6 +469,9 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
         @false,
 
         /// <remarks/>
+        syntax,
+
+        /// <remarks/>
         semantic,
 
         /// <remarks/>
