@@ -84,6 +84,24 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Boundary_AtTheEdgeOfTheDecimalRange_IsNullWhenTheCompletionCannotBeRepresented()
+        {
+            // The greatest CQL Decimal, (10^28 - 1) / 10^8, has every decimal, so it is its own boundary.
+            Assert.AreEqual("99999999999999999999.99999999", Text(Context.Operators.HighBoundary(99999999999999999999.99999999m, null)));
+            Assert.AreEqual("99999999999999999999.99999999", Text(Context.Operators.HighBoundary(99999999999999999999m, null)));
+            Assert.AreEqual("-99999999999999999999.99999999", Text(Context.Operators.LowBoundary(-99999999999999999999m, null)));
+            // The .NET extremes have 29 digits. Their completion away from zero does not fit; the answer is null, not
+            // an exception. Their completion towards zero is the value itself, which decimal holds without the zeros.
+            Assert.IsNull(Context.Operators.HighBoundary(decimal.MaxValue, null));
+            Assert.IsNull(Context.Operators.LowBoundary(decimal.MinValue, null));
+            Assert.AreEqual(decimal.MaxValue, Context.Operators.LowBoundary(decimal.MaxValue, null));
+            Assert.AreEqual(decimal.MinValue, Context.Operators.HighBoundary(decimal.MinValue, null));
+            // With no decimals requested the extremes are their own boundaries.
+            Assert.AreEqual(decimal.MaxValue, Context.Operators.LowBoundary(decimal.MaxValue, 0));
+            Assert.AreEqual(decimal.MinValue, Context.Operators.HighBoundary(decimal.MinValue, 0));
+        }
+
+        [TestMethod]
         public void Boundary_NullInput_IsNull()
         {
             Assert.IsNull(Context.Operators.HighBoundary((decimal?)null, 8));

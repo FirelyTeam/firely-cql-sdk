@@ -212,7 +212,7 @@ namespace Hl7.Cql.Operators
         /// completion is the least magnitude and the other way round. The greatest precision a Decimal has is
         /// <see cref="MaxDecimalBoundaryPrecision"/> decimals; a precision beyond it has no answer.
         /// </summary>
-        private static decimal? DecimalBoundary(decimal? input, int? precision, bool greatest)
+        private decimal? DecimalBoundary(decimal? input, int? precision, bool greatest)
         {
             if (input is not { } value)
                 return null;
@@ -221,18 +221,23 @@ namespace Hl7.Cql.Operators
                 return null;
             var scale = (byte)requested;
 
-            var magnitude = Math.Abs(value);
-            var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
-            var leastMagnitude = kept + ZeroAtScale(scale);
-            var greatestMagnitude = kept + UnitAtScale(kept.Scale) - UnitAtScale(scale);
-
-            return (greatest, value < 0) switch
+            try
             {
-                (true, false)  => greatestMagnitude,
-                (false, false) => leastMagnitude,
-                (true, true)   => -leastMagnitude,
-                (false, true)  => -greatestMagnitude,
-            };
+                var negative = value < 0;
+                var magnitude = Math.Abs(value);
+                var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
+                // Only the completion asked for is computed, so the other one cannot overflow on its behalf.
+                var completion = greatest != negative
+                    ? kept + (UnitAtScale(kept.Scale) - UnitAtScale(scale))
+                    : kept + ZeroAtScale(scale);
+                return negative ? -completion : completion;
+            }
+            catch (OverflowException e)
+            {
+                // A completion of a value at the edge of the decimal range cannot be represented.
+                Message(new { input, precision, greatest, e }, "CqlOperators.ArithmeticOperators.DecimalBoundary", "Warning", "Ignored overflow errors from a decimal boundary, returned null.");
+                return null;
+            }
         }
 
         /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
