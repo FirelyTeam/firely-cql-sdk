@@ -106,6 +106,15 @@ namespace CoreTests
             var knownHigh = Interval(int.MaxValue, int.MaxValue, true, true);
             AssertInterval(Context.Operators.Intersect(unknownHigh, knownHigh), int.MaxValue, int.MaxValue, lowClosed: true, highClosed: true);
             AssertInterval(Context.Operators.Intersect(knownHigh, unknownHigh), int.MaxValue, int.MaxValue, lowClosed: true, highClosed: true);
+
+            // A closed null boundary is the known minimum or maximum, so it is taken over an open null one too.
+            var closedNullLow = Interval(null, int.MinValue, true, true);
+            AssertInterval(Context.Operators.Intersect(unknownLow, closedNullLow), null, int.MinValue, lowClosed: true, highClosed: true);
+            AssertInterval(Context.Operators.Intersect(closedNullLow, unknownLow), null, int.MinValue, lowClosed: true, highClosed: true);
+
+            var closedNullHigh = Interval(int.MaxValue, null, true, true);
+            AssertInterval(Context.Operators.Intersect(unknownHigh, closedNullHigh), int.MaxValue, null, lowClosed: true, highClosed: true);
+            AssertInterval(Context.Operators.Intersect(closedNullHigh, unknownHigh), int.MaxValue, null, lowClosed: true, highClosed: true);
         }
 
         [TestMethod]
