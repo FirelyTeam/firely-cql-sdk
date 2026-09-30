@@ -1003,22 +1003,32 @@ namespace Hl7.Cql.Operators
             if (t == null) return null;
             if (interval == null) return false;
 
-            if (interval.low == null && (interval.lowClosed ?? false) == false)
-                return null;
-            else if (interval.high == null && (interval.highClosed ?? false) == false)
+            if (IsUnknownBoundary(interval.low, interval.lowClosed) || IsUnknownBoundary(interval.high, interval.highClosed))
                 return null;
 
             // https://cql.hl7.org/09-b-cqlreference.html#in
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
-            var lowClosed = interval.lowClosed ?? false;
-            var highClosed = interval.highClosed ?? false;
-            var lowCompare = Comparer.Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Comparer.Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
+            // A boundary without a value here is closed, since the open case returned above, and every point satisfies it. A point
+            // that compares as null (such as one less precise than the boundary that matches it at the point's precision, or
+            // quantities with incommensurable units) leaves that boundary's predicate unknown; one that matches the boundary
+            // satisfies it only when the boundary is closed.
+            bool? low = interval.low is null ? true : Comparer.Compare(t, interval.low, precision) switch
+            {
+                null => null,
+                0 => interval.lowClosed ?? false,
+                int c => c > 0,
+            };
+            if (low == false)
+                return false;
 
-            var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
-            var high = highClosed ? highCompare <= 0 : highCompare < 0;
+            bool? high = interval.high is null ? true : Comparer.Compare(t, interval.high, precision) switch
+            {
+                null => null,
+                0 => interval.highClosed ?? false,
+                int c => c < 0,
+            };
 
-            return low && high;
+            return AndAllowingUnknown(low, high);
         }
         #endregion
 
