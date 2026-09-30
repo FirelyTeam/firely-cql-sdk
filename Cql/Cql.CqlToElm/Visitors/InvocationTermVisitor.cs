@@ -261,27 +261,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // result is a choice of those types.
         private Property navigateIntoChoice(Expression source, Elm.ChoiceTypeSpecifier cts, string memberName)
         {
-            // Each alternative is probed on a stand-in reference, so that the "member not found"
-            // errors of the alternatives that lack the member stay off the resulting Property. A
-            // nested choice is flattened first: probed whole, the error of a list alternative
-            // inside it would drop the nested choice as though it did not have the member.
-            var members = ElmFactory.FlattenChoice(cts)
-                .Select(alternative => (alternative, member: navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName)))
-                .Where(probe => probe.member.GetErrors().Length == 0)
-                .ToArray();
-
+            // A nested choice is flattened first, so that every alternative is judged on its own.
+            var alternatives = ElmFactory.FlattenChoice(cts).ToArray();
             var prop = makeProp(source, memberName);
 
             // Only a Property result can be merged into one: navigating into a list alternative
             // builds a query over its elements instead, which a single property access on the
             // choice cannot express.
-            var listAlternative = members.FirstOrDefault(probe => probe.member is not Property).alternative;
+            var listAlternative = alternatives.OfType<Elm.ListTypeSpecifier>().FirstOrDefault(hasMember);
             if (listAlternative is not null)
                 return prop.AddError($"Member '{memberName}' of type {cts} is on its list alternative {listAlternative}, " +
                     $"which member access on a choice cannot navigate into. Cast the value to {listAlternative} with 'as' first.");
 
-            var memberTypes = members
-                .SelectMany(probe => ElmFactory.FlattenChoice(probe.member.resultTypeSpecifier))
+            var memberTypes = alternatives
+                .Where(alternative => alternative is not Elm.ListTypeSpecifier)
+                .Select(probe)
+                .Where(member => member.GetErrors().Length == 0)
+                .SelectMany(member => ElmFactory.FlattenChoice(member.resultTypeSpecifier))
                 .Distinct()
                 .ToArray();
 
@@ -290,6 +286,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 [] => prop.AddError($"Type {cts} has no members."),
                 [var single] => prop.WithResultType(single),
                 _ => prop.WithResultType(new Elm.ChoiceTypeSpecifier(memberTypes)),
+            };
+
+            // Navigates into an alternative on a stand-in reference, so that the "member not found"
+            // errors of the alternatives that lack the member stay off the resulting Property. Only
+            // an alternative that is neither a list nor a choice is probed, so an error here means
+            // the member is absent - never an unsupported navigation nested inside it.
+            Expression probe(Elm.TypeSpecifier alternative) =>
+                navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName);
+
+            // Whether the member can be reached from the type at all, looking through lists and
+            // choices to the types that are probed.
+            bool hasMember(Elm.TypeSpecifier type) => type switch
+            {
+                Elm.ListTypeSpecifier list => hasMember(list.elementType),
+                Elm.ChoiceTypeSpecifier choice => ElmFactory.FlattenChoice(choice).Any(hasMember),
+                _ => probe(type).GetErrors().Length == 0,
             };
         }
 

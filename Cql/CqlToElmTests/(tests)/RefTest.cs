@@ -509,6 +509,34 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void InvokeChoiceMemberOnListOfChoiceWithListAlternative()
+        {
+            // The list's elements are a choice whose own list alternative has the member: the
+            // outer list alternative still has it, and must be reported rather than dropped in
+            // favour of the outer Tuple alternative.
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Choice<List<Tuple { a Integer }>, Tuple { a Integer }>>, Tuple { a Integer }> : external
+                define error: choice().a
+                """, "Member 'a' of type Choice<* is on its list alternative List<*, which member access on a choice cannot navigate into. Cast the value to List<* with 'as' first.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberBesideListAlternativeWithoutIt()
+        {
+            // A list alternative that does not have the member is dropped like any other.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Integer>, Tuple { a Integer }> : external
+                define member: choice().a
+                """);
+
+            shouldDefineExpression(library, "member").expression.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+        }
+
+        [TestMethod]
         public void InvokeChoiceMemberOnListAlternativeOfNestedChoice()
         {
             // The outer Tuple alternative has the member too, so dropping the nested choice would
