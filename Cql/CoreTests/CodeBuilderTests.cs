@@ -877,6 +877,75 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void If_NarrowsTheSameReferenceAgainInANestedBranch()
+        {
+            var libraryString = CqlLibraryString.Parse("""
+               library NestedNarrowing version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define function RecordedOf(E FHIR.Resource):
+                 if E is FHIR.DomainResource then
+                   if E is FHIR.Condition then E.recordedDate
+                   else null
+                 else null
+
+               define "Recorded Dates": [Condition] C return RecordedOf(C)
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Recorded Dates");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "DomainResource"), cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Condition"), cSharp);
+
+            var recorded = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), RecordedDateElement = new FhirDateTime("2026-03-04") })))
+                .Cast<object>().Single();
+            Assert.AreEqual("2026-03-04", ((FhirDateTime)recorded).Value);
+        }
+
+        [TestMethod]
+        public void Case_InnerAliasShadowingANarrowedAliasUsesItsOwnValue()
+        {
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var patientIds = new Hl7.Cql.Elm.Query
+            {
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Patient") }],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    distinct = false,
+                    expression = new Hl7.Cql.Elm.Property { path = "id", scope = "R" },
+                },
+            };
+            var idList = new Hl7.Cql.Elm.ListTypeSpecifier
+            {
+                elementType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "id"),
+            };
+            var shadowed = new Hl7.Cql.Elm.Case
+            {
+                resultTypeSpecifier = idList,
+                caseItem = [new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = patientIds }],
+                @else = new Hl7.Cql.Elm.Null { resultTypeSpecifier = idList },
+            };
+            var elmLibrary = QueryLibrary("ShadowedNarrowing", OnsetsOfConditions(), shadowed);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            StringAssert.Contains(cSharp, "Patient");
+            var results = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Patient { Id = "p-1" },
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") })))
+                .Cast<object>().ToList();
+            var patientIdsResult = ((System.Collections.IEnumerable)results[0]).Cast<object>().ToList();
+            Assert.AreEqual("p-1", ((Id)patientIdsResult[0]).Value);
+            Assert.IsNull(results[1]);
+        }
+
+        [TestMethod]
         public void As_OverAnAsOfANarrowedOperand_CastsTheUnnarrowedOperand()
         {
             // A translator may wrap a reference in an as of its own (CMS145 has
