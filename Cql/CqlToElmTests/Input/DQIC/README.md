@@ -1,12 +1,12 @@
 # 1. CQL conformance test inputs
 
-The XML files in this folder drive `XmlTest` in `CqlToElmTests`: every `<test>` is translated, evaluated and compared with its `<output>`.
+The XML files in this folder drive `XmlTest` in `CqlToElmTests`. It runs every `<test>` that has an `<expression>` without an `invalid` attribute and applies to the specification version the SDK implements (the `version` and `versionTo` attributes of the suite, group or test): the expression is translated, evaluated and compared with its `<output>`. Tests that expect an error, tests that provide a `<library>` instead of an expression, and tests for other specification versions are not run.
 
 ## 1.1. Source
 
 All files except the two listed in [1.2](#12-firelys-own-files) are unmodified copies of `tests/cql/*.xml` from the HL7 CQL conformance suite, [cqframework/cql-tests](https://github.com/cqframework/cql-tests), at commit `9e921932877bcf7a92e14a19c36a2b9cff077654`.
 
-A test that does not hold for this SDK is listed in `../../(tests)/SkippedTests.cs` with the reason, not edited here. `XmlTest` runs only the tests that apply to the specification version the SDK implements (the `version` and `versionTo` attributes of the suite).
+A test that does not hold for this SDK is listed in `../../(tests)/SkippedTests.cs` with the reason, not edited here.
 
 ## 1.2. Firely's own files
 
