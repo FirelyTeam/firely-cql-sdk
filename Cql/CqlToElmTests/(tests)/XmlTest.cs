@@ -156,18 +156,18 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 using var file = xml.OpenRead();
                 var tests = (Xml.Tests)Serializer.Deserialize(file)!;
-                foreach (var group in tests.group)
+                foreach (var group in tests.group ?? [])
                 {
-                    if (group.test is not null)
-                        foreach (var test in group.test)
-                        {
-                            if (test.expression.invalidSpecified)
-                                continue;
-                            if (!AppliesToTargetVersion(test.version ?? group.version ?? tests.version, test.versionTo ?? group.versionTo ?? tests.versionTo))
-                                continue;
+                    foreach (var test in group.test ?? [])
+                    {
+                        // A test that provides a library instead of an expression, or expects an error, is not run.
+                        if (test.expression is not { invalidSpecified: false } expression)
+                            continue;
+                        if (!AppliesToTargetVersion(test.version ?? group.version ?? tests.version, test.versionTo ?? group.versionTo ?? tests.versionTo))
+                            continue;
 
-                            yield return new object[] { new TestCase(xml.Name, group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
-                        }
+                        yield return new object[] { new TestCase(xml.Name, group.name!, test.name!, expression.Value!, test.output?.Single().Value) };
+                    }
                 }
             }
         }

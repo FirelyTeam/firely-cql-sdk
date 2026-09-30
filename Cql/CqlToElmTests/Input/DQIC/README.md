@@ -15,17 +15,11 @@ A test that does not hold for this SDK is listed in `../../(tests)/SkippedTests.
 
 ## 1.3. Schema
 
-`../../testSchema.xsd` is an unmodified copy of `tests/testSchema.xsd` from the same cql-tests commit, and `../../testSchema.cs` holds the classes generated from it with the .NET Framework `xsd` tool:
-
-```powershell
-xsd.exe testSchema.xsd /classes /namespace:Hl7.Cql.CqlToElm.Test.Xml
-```
-
-`XmlTest` reads only the `version` and `versionTo` attributes, the `invalid` attribute of the expression, and the test, group and expression names and outputs, so the generated classes need only cover those.
+`../../testSchema.xsd` is an unmodified copy of `tests/testSchema.xsd` from the same cql-tests commit, kept as the reference for the suite's file format. `../../testSchema.cs` is a hand-maintained model of the part of that schema `XmlTest` reads: the `version` and `versionTo` attributes of suites, groups and tests, their names, the expression with its `invalid` attribute, and the outputs. The serializer ignores everything else the schema defines, so the model is extended only when `XmlTest` needs more of the schema.
 
 ## 1.4. Refreshing
 
-1. Copy `tests/cql/*.xml` from the cql-tests checkout over the files here, leaving the two files above in place, and `tests/testSchema.xsd` over `../../testSchema.xsd`; regenerate `../../testSchema.cs` when the schema changed (see [1.3](#13-schema)).
+1. Copy `tests/cql/*.xml` from the cql-tests checkout over the files here, leaving the two files above in place, and `tests/testSchema.xsd` over `../../testSchema.xsd`; extend `../../testSchema.cs` if `XmlTest` needs something the schema added (see [1.3](#13-schema)).
 2. Run `XmlTest` (`dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --filter FullyQualifiedName~XmlTest`).
 3. For each failure, either fix the SDK or add the test to `SkippedTests.cs` with its reason; remove entries for tests the suite no longer has.
 4. Update the commit hash in [1.1](#11-source).
