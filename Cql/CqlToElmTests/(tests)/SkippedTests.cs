@@ -80,8 +80,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "HighBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
             { "LowBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
 
-            { "YearsBetweenLeapYearDatesEquals2", "`years between` a 29 February start and 28 February of a year without a leap day is one year short (#1681)." },
-            { "YearsBetweenLeapYearDateTimesEquals2", "`years between` a 29 February start and 28 February of a year without a leap day is one year short (#1681)." },
 
             { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
             { "DateTimeSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
