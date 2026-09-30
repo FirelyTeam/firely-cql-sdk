@@ -208,7 +208,7 @@ public class CqlDateTimeTests
 
         Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
         boundariesBetween = new CqlDateTime(startDate!).WholeCalendarPeriodsBetween(cqlStartDate!, "year");
-        Assert.AreEqual(0, boundariesBetween); // 1 full year occurs on mar 1, not feb 28
+        Assert.AreEqual(1, boundariesBetween); // 28 February is the anniversary of a leap day in a year without one
 
         Assert.IsTrue(CqlDateTime.TryParse("2021-03-01", out cqlStartDate));
         boundariesBetween = new CqlDateTime(startDate!).WholeCalendarPeriodsBetween(cqlStartDate!, "year");
