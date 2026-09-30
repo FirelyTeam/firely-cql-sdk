@@ -172,6 +172,21 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void GetTests_SelectsTheCasesThatApplyToTheTargetVersion()
+        {
+            var names = GetTests().Select(data => ((TestCase)data[0]).TestName).ToHashSet();
+
+            // Introduced in a later version (version="2.0").
+            Assert.IsFalse(names.Contains("SliceAll"));
+            // Last appears in an earlier version (versionTo="1.3").
+            Assert.IsFalse(names.Contains("DateTimeComponentFromTimezoneOffset"));
+            // Last appears in the target version itself (versionTo="1.5.3").
+            Assert.IsTrue(names.Contains("PredecessorOf1D"));
+            // Inherits its version from the group and file (version="1.0").
+            Assert.IsTrue(names.Contains("HighBoundaryNull"));
+        }
+
         public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);
     }
 
