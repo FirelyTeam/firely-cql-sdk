@@ -262,17 +262,27 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private Property navigateIntoChoice(Expression source, Elm.ChoiceTypeSpecifier cts, string memberName)
         {
             // Each alternative is probed on a stand-in reference, so that the "member not found"
-            // errors of the alternatives that lack the member stay off the resulting Property. Only
-            // a Property result can be merged into one: navigating into a list alternative builds a
-            // query over its elements instead.
-            var memberTypes = (cts.choice ?? [])
-                .Select(alternative => navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName))
-                .Where(member => member is Property && member.GetErrors().Length == 0)
-                .SelectMany(member => ElmFactory.FlattenChoice(member.resultTypeSpecifier))
-                .Distinct()
+            // errors of the alternatives that lack the member stay off the resulting Property.
+            var members = (cts.choice ?? [])
+                .Select(alternative => (alternative, member: navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName)))
+                .Where(probe => probe.member.GetErrors().Length == 0)
                 .ToArray();
 
             var prop = makeProp(source, memberName);
+
+            // Only a Property result can be merged into one: navigating into a list alternative
+            // builds a query over its elements instead, which a single property access on the
+            // choice cannot express.
+            var listAlternative = members.FirstOrDefault(probe => probe.member is not Property).alternative;
+            if (listAlternative is not null)
+                return prop.AddError($"Member '{memberName}' of type {cts} is on its list alternative {listAlternative}, " +
+                    $"which member access on a choice cannot navigate into. Cast the value to {listAlternative} with 'as' first.");
+
+            var memberTypes = members
+                .SelectMany(probe => ElmFactory.FlattenChoice(probe.member.resultTypeSpecifier))
+                .Distinct()
+                .ToArray();
+
             return memberTypes switch
             {
                 [] => prop.AddError($"Type {cts} has no members."),

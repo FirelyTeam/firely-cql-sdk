@@ -498,6 +498,17 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void InvokeChoiceMemberOnListAlternative()
+        {
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Tuple { a Integer }>, Integer> : external
+                define error: choice().a
+                """, "Member 'a' of type Choice<* is on its list alternative List<*, which member access on a choice cannot navigate into. Cast the value to List<* with 'as' first.");
+        }
+
+        [TestMethod]
         public void InvokeChoiceMemberInSortBy()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
