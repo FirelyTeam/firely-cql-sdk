@@ -241,7 +241,10 @@ partial class CodeBuilderContext
         // E.g. a translator resolving a call on a choice to one alternative's overload, inside the
         // branch for another alternative. C# rejects the cast on the narrowed variable.
         _logger.LogWarning(FormatMessage(
-            $"The value is a {narrowed.Type.Name} here, so as {type.Name} always results in null.", element));
+            castKind == CodeCastKind.Cast
+                ? $"The value is a {narrowed.Type.Name} here, so a cast to {type.Name} always fails."
+                : $"The value is a {narrowed.Type.Name} here, so as {type.Name} always results in null.",
+            element));
         return new CodeCast(unnarrowed, type, castKind);
     }
 
