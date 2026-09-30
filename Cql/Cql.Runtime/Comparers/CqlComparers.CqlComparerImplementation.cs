@@ -136,21 +136,12 @@ partial class CqlComparers : CqlComparer<object>
             }
         }
 
-        if (Comparers.TryGetValue(xType, out var comparer))
-        {
-            return comparer.Equivalent(x, y, precision);
-        }
+        // The same resolution Compare uses, so a type registered only through its base type is
+        // equivalent through that registration exactly as it is equal through it.
+        var comparer = SelectComparer(x, xType);
 
-        if (xType.IsGenericType)
-        {
-            var gtd = xType.GetGenericTypeDefinition();
-            if (ComparerFactories.TryGetValue(gtd, out var factory))
-            {
-                var gc = factory(xType, this);
-                Comparers.TryAdd(xType, gc);
-                return gc.Equivalent(x, y, precision);
-            }
-        }
+        if (comparer != null)
+            return comparer.Equivalent(x, y, precision);
 
         throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
     }

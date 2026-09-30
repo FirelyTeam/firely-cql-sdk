@@ -12,5 +12,19 @@ using Hl7.Fhir.Model;
 namespace Hl7.Cql.Fhir.Comparers
 {
     internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) :
-        CqlComparerWrapper<Resource, string>(idComparer, r => r.Id);
+        CqlComparerWrapper<Resource, string>(idComparer, r => r.Id)
+    {
+        private ICqlComparer<string> IdComparer { get; } = idComparer;
+
+        /// <summary>
+        /// Two resources are equivalent exactly when <see cref="IdComparer"/> compares their ids as the same, as for
+        /// resource equality: the configured id comparer decides resource identity for both operators, not the CQL
+        /// string equivalence, which ignores case.
+        /// </summary>
+        protected override bool EquivalentValues(
+            [DisallowNull] Resource x,
+            [DisallowNull] Resource y,
+            string? precision) =>
+            IdComparer.Compare(x.Id, y.Id, precision) == 0;
+    }
 }
