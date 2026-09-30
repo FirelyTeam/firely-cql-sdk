@@ -3401,7 +3401,11 @@ namespace CoreTests
             var rhs = new CqlInterval<int?>(5, null, true, false);
             var ops = GetNewContext().Operators;
             var result = ops.Intersect(lhs, rhs);
-            Assert.IsNull(result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result.low);
+            Assert.IsNull(result.high);
+            Assert.AreEqual(true, result.lowClosed);
+            Assert.AreEqual(false, result.highClosed);
         }
 
         [TestMethod]
