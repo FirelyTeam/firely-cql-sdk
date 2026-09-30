@@ -92,6 +92,23 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Intersect_UnknownBoundaryRangeCollapsesToKnownBoundary_IsCommutative()
+        {
+            // The unknown low of Interval(null, int.MinValue] can only be int.MinValue, which is also the known
+            // low of Interval[int.MinValue, int.MinValue]: the known boundary is taken whichever argument comes
+            // first, and likewise for an unknown high that can only be int.MaxValue.
+            var unknownLow = Interval(null, int.MinValue, false, true);
+            var knownLow = Interval(int.MinValue, int.MinValue, true, true);
+            AssertInterval(Context.Operators.Intersect(unknownLow, knownLow), int.MinValue, int.MinValue, lowClosed: true, highClosed: true);
+            AssertInterval(Context.Operators.Intersect(knownLow, unknownLow), int.MinValue, int.MinValue, lowClosed: true, highClosed: true);
+
+            var unknownHigh = Interval(int.MaxValue, null, true, false);
+            var knownHigh = Interval(int.MaxValue, int.MaxValue, true, true);
+            AssertInterval(Context.Operators.Intersect(unknownHigh, knownHigh), int.MaxValue, int.MaxValue, lowClosed: true, highClosed: true);
+            AssertInterval(Context.Operators.Intersect(knownHigh, unknownHigh), int.MaxValue, int.MaxValue, lowClosed: true, highClosed: true);
+        }
+
+        [TestMethod]
         public void Intersect_OpenNullLow_KeepsUnknownStartAndKnownEnd()
         {
             // Interval(null, 5] starts at some value up to 5, so the intersection with Interval[1, 10] starts
