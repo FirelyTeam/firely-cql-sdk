@@ -650,7 +650,7 @@ namespace CoreTests
                         operand =
                         [
                             new Hl7.Cql.Elm.Property { path = "url", scope = "$this" },
-                            new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = recordedUrl },
+                            StringLiteral(recordedUrl),
                         ],
                     },
                     @return = new Hl7.Cql.Elm.ReturnClause
@@ -809,8 +809,8 @@ namespace CoreTests
                     new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
                     new Hl7.Cql.Elm.CaseItem
                     {
-                        when = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.BooleanType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.BooleanType.name, value = "true" },
-                        then = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = "reached" },
+                        when = LiteralOf(Hl7.Cql.Elm.SystemTypes.BooleanType, "true"),
+                        then = StringLiteral("reached"),
                     },
                     new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "dateTime"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
                 ],
@@ -948,37 +948,22 @@ namespace CoreTests
             // undoes the upcast, so it is the value itself.
             var integerInterval = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = Hl7.Cql.Elm.SystemTypes.IntegerType };
             var choice = new Hl7.Cql.Elm.ChoiceTypeSpecifier(integerInterval, Hl7.Cql.Elm.SystemTypes.IntegerType);
-            Hl7.Cql.Elm.Literal Integer(string value) =>
-                new() { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = value };
-            var values = new Hl7.Cql.Elm.List
-            {
-                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = choice },
-                element =
-                [
-                    new Hl7.Cql.Elm.As
-                    {
-                        asTypeSpecifier = choice,
-                        resultTypeSpecifier = choice,
-                        operand = new Hl7.Cql.Elm.Interval { low = Integer("1"), high = Integer("2"), lowClosed = true, highClosed = true, resultTypeSpecifier = integerInterval },
-                    },
-                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = Integer("5") },
-                ],
-            };
+            var values = ListOf(
+                choice,
+                AsType(new Hl7.Cql.Elm.Interval { low = IntegerLiteral("1"), high = IntegerLiteral("2"), lowClosed = true, highClosed = true, resultTypeSpecifier = integerInterval }, choice),
+                AsType(IntegerLiteral("5"), choice));
             var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
             var low = new Hl7.Cql.Elm.If
             {
                 condition = new Hl7.Cql.Elm.Is { operand = r, isTypeSpecifier = integerInterval },
-                then = new Hl7.Cql.Elm.As
-                {
-                    operand = new Hl7.Cql.Elm.Property
+                then = AsType(
+                    new Hl7.Cql.Elm.Property
                     {
                         path = "low",
                         source = r,
                         resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(Hl7.Cql.Elm.SystemTypes.IntegerType, Hl7.Cql.Elm.SystemTypes.StringType),
                     },
-                    asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
-                    resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
-                },
+                    Hl7.Cql.Elm.SystemTypes.IntegerType),
                 @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name },
             };
             var elmLibrary = QueryLibrary("UpcastAs", values, low);
@@ -999,14 +984,12 @@ namespace CoreTests
             // Quantity, so the second branch can never be taken, and a switch arm for it would not
             // compile (CS8510).
             var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            Hl7.Cql.Elm.Literal Text(string value) =>
-                new() { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = value };
             var covered = new Hl7.Cql.Elm.Case
             {
                 caseItem =
                 [
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Quantity"), then = Text("quantity") },
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = Text("age") },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Quantity"), then = StringLiteral("quantity") },
+                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = StringLiteral("age") },
                 ],
                 @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name },
             };
@@ -1027,15 +1010,7 @@ namespace CoreTests
         {
             // from { 5, 'five' } (as Choice<Integer, String>) R return if R is Integer then R + 1 else null
             var choice = new Hl7.Cql.Elm.ChoiceTypeSpecifier(Hl7.Cql.Elm.SystemTypes.IntegerType, Hl7.Cql.Elm.SystemTypes.StringType);
-            var values = new Hl7.Cql.Elm.List
-            {
-                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = choice },
-                element =
-                [
-                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "5" } },
-                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.StringType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name, value = "five" } },
-                ],
-            };
+            var values = ListOf(choice, AsType(IntegerLiteral("5"), choice), AsType(StringLiteral("five"), choice));
             var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
             var plusOne = new Hl7.Cql.Elm.If
             {
@@ -1045,8 +1020,8 @@ namespace CoreTests
                     resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
                     operand =
                     [
-                        new Hl7.Cql.Elm.As { operand = r, asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType, resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType },
-                        new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "1" },
+                        AsType(r, Hl7.Cql.Elm.SystemTypes.IntegerType),
+                        IntegerLiteral("1"),
                     ],
                 },
                 @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name },
@@ -1157,35 +1132,21 @@ namespace CoreTests
             // [Condition] R sort by recordedDate, with no result types (MADiE output). The identifier
             // names an element of the sorted elements, @this; resolving it must not loop back into the
             // sort expression itself.
-            var elmLibrary = new Library
+            var elmLibrary = LibraryWith("SortByIdentifier", "Values", new Hl7.Cql.Elm.Query
             {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "SortByIdentifier", version = "1.0.0" },
-                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
-                statements =
-                [
-                    new Hl7.Cql.Elm.ExpressionDef
-                    {
-                        name = "Values",
-                        context = "Patient",
-                        expression = new Hl7.Cql.Elm.Query
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
+                sort = new Hl7.Cql.Elm.SortClause
+                {
+                    by =
+                    [
+                        new Hl7.Cql.Elm.ByExpression
                         {
-                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
-                            sort = new Hl7.Cql.Elm.SortClause
-                            {
-                                by =
-                                [
-                                    new Hl7.Cql.Elm.ByExpression
-                                    {
-                                        direction = Hl7.Cql.Elm.SortDirection.desc,
-                                        expression = new Hl7.Cql.Elm.IdentifierRef { name = "recordedDate" },
-                                    },
-                                ],
-                            },
+                            direction = Hl7.Cql.Elm.SortDirection.desc,
+                            expression = new Hl7.Cql.Elm.IdentifierRef { name = "recordedDate" },
                         },
-                    },
-                ],
-            };
+                    ],
+                },
+            });
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1299,33 +1260,15 @@ namespace CoreTests
             // The source-based form of Property already walked a qualified path, but skipped a
             // segment it could not resolve and returned the value walked so far: for
             // medication.reference.value that is the DataType held by 'medication', not the string.
-            var retrieve = RetrieveOf("MedicationRequest");
-            var elmLibrary = new Library
+            var elmLibrary = LibraryWith("QualifiedPathSourced", "Value", new Hl7.Cql.Elm.Property
             {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "QualifiedPathSourced", version = "1.0.0" },
-                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings =
-                [
-                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
-                ],
-                statements =
-                [
-                    new Hl7.Cql.Elm.ExpressionDef
-                    {
-                        name = "Value",
-                        context = "Patient",
-                        expression = new Hl7.Cql.Elm.Property
-                        {
-                            path = "medication.reference.value",
-                            source = new Hl7.Cql.Elm.SingletonFrom
-                            {
-                                operand = retrieve,
-                                resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "MedicationRequest"),
-                            },
-                        },
-                    },
-                ],
-            };
+                path = "medication.reference.value",
+                source = new Hl7.Cql.Elm.SingletonFrom
+                {
+                    operand = RetrieveOf("MedicationRequest"),
+                    resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "MedicationRequest"),
+                },
+            });
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
 
@@ -1348,19 +1291,7 @@ namespace CoreTests
         public void Property_OnASourceOfUnknownType_FailsTheBuild()
         {
             // from { 5 as Any } R return R.code: R is an Any, which is no choice with known alternatives.
-            var values = new Hl7.Cql.Elm.List
-            {
-                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = Hl7.Cql.Elm.SystemTypes.AnyType },
-                element =
-                [
-                    new Hl7.Cql.Elm.As
-                    {
-                        asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.AnyType,
-                        resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.AnyType,
-                        operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "5" },
-                    },
-                ],
-            };
+            var values = ListOf(Hl7.Cql.Elm.SystemTypes.AnyType, AsType(IntegerLiteral("5"), Hl7.Cql.Elm.SystemTypes.AnyType));
             var elmLibrary = QueryLibrary("UnboundOnAny", values, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
 
             AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known");
@@ -1383,36 +1314,22 @@ namespace CoreTests
         public void Sort_ByAColumnTheElementsDoNotHave_FailsTheBuild()
         {
             // [Condition] R sort by nonexistent
-            var elmLibrary = new Library
+            var elmLibrary = LibraryWith("UnboundSortColumn", "Values", new Hl7.Cql.Elm.Query
             {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "UnboundSortColumn", version = "1.0.0" },
-                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
-                statements =
-                [
-                    new Hl7.Cql.Elm.ExpressionDef
-                    {
-                        name = "Values",
-                        context = "Patient",
-                        expression = new Hl7.Cql.Elm.Query
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
+                sort = new Hl7.Cql.Elm.SortClause
+                {
+                    by =
+                    [
+                        new Hl7.Cql.Elm.ByColumn
                         {
-                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
-                            sort = new Hl7.Cql.Elm.SortClause
-                            {
-                                by =
-                                [
-                                    new Hl7.Cql.Elm.ByColumn
-                                    {
-                                        direction = Hl7.Cql.Elm.SortDirection.asc,
-                                        path = "nonexistent",
-                                        resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name,
-                                    },
-                                ],
-                            },
+                            direction = Hl7.Cql.Elm.SortDirection.asc,
+                            path = "nonexistent",
+                            resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name,
                         },
-                    },
-                ],
-            };
+                    ],
+                },
+            });
 
             AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
         }
@@ -1442,35 +1359,40 @@ namespace CoreTests
         /// aliased <c>R</c>, returning <paramref name="returnExpression"/> for each element.
         /// </summary>
         private static Library QueryLibrary(string libraryName, Hl7.Cql.Elm.Expression source, Hl7.Cql.Elm.Expression returnExpression) =>
+            LibraryWith(libraryName, "Values", new Hl7.Cql.Elm.Query
+            {
+                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = source }],
+                @return = new Hl7.Cql.Elm.ReturnClause { distinct = false, expression = returnExpression },
+            });
+
+        /// <summary>
+        /// A library using FHIR 4.0.1 with one definition, <paramref name="definition"/>, in the
+        /// Patient context.
+        /// </summary>
+        private static Library LibraryWith(string libraryName, string definition, Hl7.Cql.Elm.Expression expression) =>
             new()
             {
                 identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = libraryName, version = "1.0.0" },
                 schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings =
-                [
-                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
-                ],
-                statements =
-                [
-                    new Hl7.Cql.Elm.ExpressionDef
-                    {
-                        name = "Values",
-                        context = "Patient",
-                        expression = new Hl7.Cql.Elm.Query
-                        {
-                            source =
-                            [
-                                new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = source },
-                            ],
-                            @return = new Hl7.Cql.Elm.ReturnClause
-                            {
-                                distinct = false,
-                                expression = returnExpression,
-                            },
-                        },
-                    },
-                ],
+                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
+                statements = [new Hl7.Cql.Elm.ExpressionDef { name = definition, context = "Patient", expression = expression }],
             };
+
+        /// <summary>A literal of the System type <paramref name="type"/>.</summary>
+        private static Hl7.Cql.Elm.Literal LiteralOf(Hl7.Cql.Elm.NamedTypeSpecifier type, string value) =>
+            new() { valueType = type.name, resultTypeName = type.name, value = value };
+
+        private static Hl7.Cql.Elm.Literal IntegerLiteral(string value) => LiteralOf(Hl7.Cql.Elm.SystemTypes.IntegerType, value);
+
+        private static Hl7.Cql.Elm.Literal StringLiteral(string value) => LiteralOf(Hl7.Cql.Elm.SystemTypes.StringType, value);
+
+        /// <summary><c>operand as T</c>, typed as <paramref name="type"/>.</summary>
+        private static Hl7.Cql.Elm.As AsType(Hl7.Cql.Elm.Expression operand, Hl7.Cql.Elm.TypeSpecifier type) =>
+            new() { operand = operand, asTypeSpecifier = type, resultTypeSpecifier = type };
+
+        /// <summary>A list of <paramref name="elements"/>, typed as a list of <paramref name="elementType"/>.</summary>
+        private static Hl7.Cql.Elm.List ListOf(Hl7.Cql.Elm.TypeSpecifier elementType, params Hl7.Cql.Elm.Expression[] elements) =>
+            new() { resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = elementType }, element = elements };
 
         private static Hl7.Cql.Elm.Retrieve RetrieveOf(string resourceType) =>
             new()
