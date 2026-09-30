@@ -217,10 +217,10 @@ partial class CodeBuilderContext
             : value.NewAssignToTypeExpression(type);
 
     /// <summary>
-    /// <c>x as T</c> on a narrowed variable, whose type is known: the variable itself when it already
-    /// is a <c>T</c> (an upcast for a supertype of its type, which cannot fail); when its type cannot
-    /// be a <c>T</c> at all, the cast of the reference as it is outside the branch, which yields what
-    /// it would have without narrowing (null, or for a strict cast a failure). <see langword="null"/>
+    /// <c>x as T</c> on a narrowed variable, whose type is known: for a supertype of its type an
+    /// upcast, which cannot fail (<see cref="AsOfKnownType"/> has returned it as is for its own type);
+    /// when its type cannot be a <c>T</c> at all, the cast of the reference as it is outside the
+    /// branch, which yields what it would have without narrowing (null, or for a strict cast a failure). <see langword="null"/>
     /// when <paramref name="operand"/> is not a narrowed variable or the ordinary <c>as</c> applies.
     /// </summary>
     /// <remarks>
@@ -233,7 +233,7 @@ partial class CodeBuilderContext
             return null;
 
         if (type.IsAssignableFrom(narrowed.Type))
-            return narrowed.Type == type ? narrowed : new CodeCast(narrowed, type, CodeCastKind.Cast);
+            return new CodeCast(narrowed, type, CodeCastKind.Cast);
 
         if (narrowed.Type.IsAssignableFrom(type) || narrowed.Type.IsInterface || type.IsInterface)
             return null;

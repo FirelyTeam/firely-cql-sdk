@@ -912,6 +912,92 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void As_ToTheTypeTheOperandHas_EmitsNoCast()
+        {
+            // The QICoreCommon toInterval shape: within the branch for Interval<Quantity>, the low of
+            // the narrowed choice already is a Quantity, so an as Quantity on it is the value itself.
+            var libraryString = CqlLibraryString.Parse("""
+               library IdentityAs version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define function LowOf(choice Choice<System.Quantity, Interval<System.Quantity>>):
+                 case
+                   when choice is Interval<System.Quantity> then (choice as Interval<System.Quantity>).low as System.Quantity
+                   else null
+                 end
+
+               define "Low": LowOf(Interval[1 'mg', 2 'mg'])
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Low");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "CqlInterval<CqlQuantity>"), cSharp);
+            Assert.IsFalse(cSharp.Contains(".low as CqlQuantity"), "the low of the narrowed interval already is a CqlQuantity:\n" + cSharp);
+
+            var low = (Hl7.Cql.Primitives.CqlQuantity)invoke(BundleOf())!;
+            Assert.AreEqual(1m, low.value);
+            Assert.AreEqual("mg", low.unit);
+        }
+
+        [TestMethod]
+        public void As_OfAChoiceTypedValueToTheTypeItHas_EmitsNoCast()
+        {
+            // from { Interval[1, 2], 5 } (as Choice<Interval<Integer>, Integer>) R
+            // return if R is Interval<Integer> then R.low as Integer else null, with R.low typed as
+            // the choice Choice<Integer, String>, as a MADiE translator types choice.low in
+            // QICoreCommon. The low of the narrowed R is an int?, upcast to that choice; the as
+            // undoes the upcast, so it is the value itself.
+            var integerInterval = new Hl7.Cql.Elm.IntervalTypeSpecifier { pointType = Hl7.Cql.Elm.SystemTypes.IntegerType };
+            var choice = new Hl7.Cql.Elm.ChoiceTypeSpecifier(integerInterval, Hl7.Cql.Elm.SystemTypes.IntegerType);
+            Hl7.Cql.Elm.Literal Integer(string value) =>
+                new() { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = value };
+            var values = new Hl7.Cql.Elm.List
+            {
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = choice },
+                element =
+                [
+                    new Hl7.Cql.Elm.As
+                    {
+                        asTypeSpecifier = choice,
+                        resultTypeSpecifier = choice,
+                        operand = new Hl7.Cql.Elm.Interval { low = Integer("1"), high = Integer("2"), lowClosed = true, highClosed = true, resultTypeSpecifier = integerInterval },
+                    },
+                    new Hl7.Cql.Elm.As { asTypeSpecifier = choice, resultTypeSpecifier = choice, operand = Integer("5") },
+                ],
+            };
+            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
+            var low = new Hl7.Cql.Elm.If
+            {
+                condition = new Hl7.Cql.Elm.Is { operand = r, isTypeSpecifier = integerInterval },
+                then = new Hl7.Cql.Elm.As
+                {
+                    operand = new Hl7.Cql.Elm.Property
+                    {
+                        path = "low",
+                        source = r,
+                        resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(Hl7.Cql.Elm.SystemTypes.IntegerType, Hl7.Cql.Elm.SystemTypes.StringType),
+                    },
+                    asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
+                    resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType,
+                },
+                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name },
+            };
+            var elmLibrary = QueryLibrary("UpcastAs", values, low);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "CqlInterval<int?>"), cSharp);
+            Assert.IsFalse(cSharp.Contains(".low as int?"), "the low of the narrowed interval already is an int?:\n" + cSharp);
+
+            var results = ((System.Collections.IEnumerable)invoke(BundleOf())).Cast<object>().ToList();
+            CollectionAssert.AreEqual(new object[] { 1, null }, results);
+        }
+
+        [TestMethod]
         public void Case_WithAnIsTestAnEarlierOneCovers_DropsTheUnreachableBranch()
         {
             // case when R is Quantity then 'quantity' when R is Age then 'age' else null: an Age is a
