@@ -1010,15 +1010,18 @@ namespace Hl7.Cql.Operators
 
             // https://cql.hl7.org/09-b-cqlreference.html#in
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
+            // A closed boundary without a value is its type's minimum or maximum, which every point satisfies. A null comparison
+            // means the comparison is uncertain (the point is less precise than the boundary and matches it at the point's
+            // precision), so the boundary comparison, and with it the result, is unknown.
             var lowClosed = interval.lowClosed ?? false;
             var highClosed = interval.highClosed ?? false;
-            var lowCompare = Comparer.Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Comparer.Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
+            var lowCompare = Comparer.Compare(t, interval.low ?? MinValue<T>()!, precision);
+            var highCompare = Comparer.Compare(t, interval.high ?? MaxValue<T>()!, precision);
 
-            var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
-            var high = highClosed ? highCompare <= 0 : highCompare < 0;
+            bool? low = lowCompare is null ? null : lowClosed ? lowCompare >= 0 : lowCompare > 0;
+            bool? high = highCompare is null ? null : highClosed ? highCompare <= 0 : highCompare < 0;
 
-            return low && high;
+            return AndAllowingUnknown(low, high);
         }
         #endregion
 
