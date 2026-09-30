@@ -155,29 +155,14 @@ partial class CqlOperatorsBinder
 
         if (elementType == typeof(object))
         {
-            // This scenario can happen in late-bound property chains
+            // A list whose element type erases a choice, e.g. one read from alternatives that
+            // disagree on the element's list type: whether an element is a list is known only at
+            // run time.
             var call = BindToDirectMethod(nameof(ICqlOperators.FlattenLateBoundList), operand);
             return call;
         }
 
         return operand; // flatten is being called on a list that is already flat.
-    }
-
-    private CodeInvoke LateBoundProperty(
-        CodeExpression source,
-        CodeExpression propertyName,
-        CodeExpression typeExpression)
-    {
-        if (typeExpression is CodeConstant { Value: Type type })
-        {
-            if (source.Type != typeof(object))
-                source = source.NewTypeAsExpression(typeof(object));
-
-            var call = BindToBestMethodOverload(nameof(ICqlOperators.LateBoundProperty), [source, propertyName], [type!])!;
-            return call;
-        }
-
-        throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
     }
 
     /// <summary>
