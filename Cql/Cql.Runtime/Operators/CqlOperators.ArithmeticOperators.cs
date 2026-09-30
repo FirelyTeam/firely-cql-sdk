@@ -23,6 +23,18 @@ namespace Hl7.Cql.Operators
         /// </summary>
         internal const decimal MinDecimalPrecisionValue = 0.00000001m;
 
+        // HighBoundary and LowBoundary use the greatest precision of the input's type when no precision is given.
+        // CQL spec §9.B, sections "HighBoundary" and "LowBoundary": "If no precision is specified, the greatest
+        // precision of the type of the input value is used (i.e. at least 8 for Decimal, 4 for Date, at least 17
+        // for DateTime, and at least 9 for Time)." The greatest precision of a Date is its day (8 digits, YYYYMMDD);
+        // DateTime and Time hold milliseconds at most (17 and 9 digits). At that greatest precision the boundary
+        // keeps every component the input has and fills only the missing ones: "The HighBoundary function returns
+        // the greatest possible value of the input to the specified precision", and LowBoundary the least.
+        private const int MaxDecimalBoundaryPrecision = 8;
+        private const int MaxDateBoundaryPrecision = 8;
+        private const int MaxDateTimeBoundaryPrecision = 17;
+        private const int MaxTimeBoundaryPrecision = 9;
+
         #region Abs
 
         public int? Abs(int? argument)
@@ -192,7 +204,8 @@ namespace Hl7.Cql.Operators
 
         public decimal? HighBoundary(decimal? input, int? precision)
         {
-            if (input == null || precision == null) return null;
+            if (input == null) return null;
+            precision ??= MaxDecimalBoundaryPrecision;
             if (precision < 8) return null;
 
             StringBuilder strPrec = new("0.");
@@ -211,8 +224,9 @@ namespace Hl7.Cql.Operators
 
         public CqlDate? HighBoundary(CqlDate? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateBoundaryPrecision;
             switch (precision)
             {
                 case 4: return new CqlDate(9999, null, null);
@@ -220,28 +234,8 @@ namespace Hl7.Cql.Operators
                 case 8:
                     {
                         var month = input.Value.Month ?? 12;
-                        switch (month)
-                        {
-                            case 1:
-                            case 3:
-                            case 5:
-                            case 7:
-                            case 8:
-                            case 10:
-                            case 12:
-                                return new CqlDate(input.Value.Year, month, 31);
-                            case 4:
-                            case 6:
-                            case 9:
-                            case 11:
-                                return new CqlDate(input.Value.Year, month, 30);
-                            case 2:
-                                return System.DateTime.IsLeapYear(input.Value.Year)
-                                    ? new CqlDate(input.Value.Year, month, 29)
-                                    : new CqlDate(input.Value.Year, month, 28);
-                            default:
-                                return null;
-                        }
+                        var day = input.Value.Day ?? System.DateTime.DaysInMonth(input.Value.Year, month);
+                        return new CqlDate(input.Value.Year, month, day);
                     }
                 default:
                     return null;
@@ -250,8 +244,9 @@ namespace Hl7.Cql.Operators
 
         public CqlDateTime? HighBoundary(CqlDateTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
 
@@ -288,7 +283,12 @@ namespace Hl7.Cql.Operators
                 case 10: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, 23, null, null, null, offsetHour, offsetMinute);
                 case 12: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, 59, null, null, offsetHour, offsetMinute);
                 case 14: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, input.Value.Minute ?? 59, 59, null, offsetHour, offsetMinute);
-                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, input.Value.Minute ?? 59, input.Value.Second ?? 59, 999, offsetHour, offsetMinute);
+                case 17:
+                    {
+                        var month = input.Value.Month ?? 12;
+                        var day = input.Value.Day ?? System.DateTime.DaysInMonth(input.Value.Year, month);
+                        return new CqlDateTime(input.Value.Year, month, day, input.Value.Hour ?? 23, input.Value.Minute ?? 59, input.Value.Second ?? 59, input.Value.Millisecond ?? 999, offsetHour, offsetMinute);
+                    }
                 default:
                     return null;
             }
@@ -296,8 +296,9 @@ namespace Hl7.Cql.Operators
 
         public CqlTime? HighBoundary(CqlTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
             switch (precision)
@@ -305,7 +306,7 @@ namespace Hl7.Cql.Operators
                 case 2: return new CqlTime(23, null, null, null, offsetHour, offsetMinute);
                 case 4: return new CqlTime(input.Value.Hour, 59, null, null, offsetHour, offsetMinute);
                 case 6: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, 59, null, offsetHour, offsetMinute);
-                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, input.Value.Second ?? 59, 999, offsetHour, offsetMinute);
+                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, input.Value.Second ?? 59, input.Value.Millisecond ?? 999, offsetHour, offsetMinute);
                 default:
                     return null;
             }
@@ -336,7 +337,8 @@ namespace Hl7.Cql.Operators
 
         public decimal? LowBoundary(decimal? input, int? precision)
         {
-            if (input == null || precision == null) return null;
+            if (input == null) return null;
+            precision ??= MaxDecimalBoundaryPrecision;
             if (precision < 8) return null;
 
             StringBuilder strPrec = new("0.");
@@ -354,13 +356,14 @@ namespace Hl7.Cql.Operators
 
         public CqlDate? LowBoundary(CqlDate? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateBoundaryPrecision;
             switch (precision)
             {
                 case 4: return new CqlDate(1, null, null);
                 case 6: return new CqlDate(input.Value.Year, 1, null);
-                case 8: return new CqlDate(input.Value.Year, input.Value.Month, 1);
+                case 8: return new CqlDate(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1);
                 default:
                     return null;
             }
@@ -368,8 +371,9 @@ namespace Hl7.Cql.Operators
 
         public CqlDateTime? LowBoundary(CqlDateTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
 
@@ -381,7 +385,7 @@ namespace Hl7.Cql.Operators
                 case 10: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, 0, null, null, null, offsetHour, offsetMinute);
                 case 12: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, 0, null, null, offsetHour, offsetMinute);
                 case 14: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, 0, null, offsetHour, offsetMinute);
-                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, input.Value.Second ?? 0, 0, offsetHour, offsetMinute);
+                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, input.Value.Second ?? 0, input.Value.Millisecond ?? 0, offsetHour, offsetMinute);
                 default:
                     return null;
             }
@@ -389,8 +393,9 @@ namespace Hl7.Cql.Operators
 
         public CqlTime? LowBoundary(CqlTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
             switch (precision)
@@ -398,7 +403,7 @@ namespace Hl7.Cql.Operators
                 case 2: return new CqlTime(0, null, null, null, offsetHour, offsetMinute);
                 case 4: return new CqlTime(input.Value.Hour, 0, null, null, offsetHour, offsetMinute);
                 case 6: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, 0, null, offsetHour, offsetMinute);
-                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, input.Value.Second ?? 0, 0, offsetHour, offsetMinute);
+                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, input.Value.Second ?? 0, input.Value.Millisecond ?? 0, offsetHour, offsetMinute);
                 default:
                     return null;
             }
