@@ -65,11 +65,19 @@ namespace CoreTests
         [TestMethod]
         public void In_UncertainOnOneBoundary_AndOutsideTheOther_IsFalse()
         {
-            // The low comparison is uncertain, but the point is definitely after the closed high, so it is
-            // definitely not in the interval.
+            // The low is only known to the day, so a point during that day compares to it as uncertain, but the
+            // point is definitely after the closed high, so it is definitely not in the interval.
+            var window = new CqlInterval<CqlDateTime?>(Dt("2026-03-29"), Dt("2026-03-29T06:00:00.000Z"), true, true);
+
+            Assert.IsNull(Context.Operators.Comparer.Compare(Dt("2026-03-29T12:00:00.000Z"), window.low, null));
+            Assert.AreEqual(false, Context.Operators.In(Dt("2026-03-29T12:00:00.000Z"), window, null));
+        }
+
+        [TestMethod]
+        public void In_UncertainOnBothBoundaries_IsNull()
+        {
             var window = new CqlInterval<CqlDateTime?>(Dt("2026-03-29T00:00:00.000Z"), Dt("2026-03-29T00:00:00.000Z"), true, true);
 
-            Assert.AreEqual(false, Context.Operators.In(Dt("2026-03-30"), window, null));
             Assert.IsNull(Context.Operators.In(Dt("2026-03-29"), window, null));
         }
 
@@ -80,6 +88,18 @@ namespace CoreTests
             var fromTheStartOfTime = new CqlInterval<CqlDateTime?>(null, Dt("2026-09-29T00:00:00.000Z"), true, true);
 
             Assert.AreEqual(true, Context.Operators.In(Dt("2026-03-30"), fromTheStartOfTime, null));
+        }
+
+        [TestMethod]
+        public void In_ClosedBoundaryWithoutAValue_IsSatisfiedByAnImprecisePointAtTheTypesLimit()
+        {
+            // Year 1 and year 9999 are the first and last years of a DateTime. At year precision they match its
+            // minimum and maximum, but a closed boundary without a value is satisfied without comparing to them.
+            var fromTheStartOfTime = new CqlInterval<CqlDateTime?>(null, Dt("2026-09-29T00:00:00.000Z"), true, true);
+            var untilTheEndOfTime = new CqlInterval<CqlDateTime?>(Dt("2026-09-29T00:00:00.000Z"), null, true, true);
+
+            Assert.AreEqual(true, Context.Operators.In(Dt("0001"), fromTheStartOfTime, null));
+            Assert.AreEqual(true, Context.Operators.In(Dt("9999"), untilTheEndOfTime, null));
         }
 
         [TestMethod]
