@@ -208,19 +208,17 @@ namespace Hl7.Cql.Operators
             precision ??= MaxDecimalBoundaryPrecision;
             if (precision < 8) return null;
 
-            StringBuilder strPrec = new("0.");
-            strPrec.Append('0', (int)precision - 1);
-            strPrec.Append('1');
-
-            StringBuilder strInp = new("0.");
-            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
-                .Last()
-                .Length - 1);
-            strInp.Append('1');
-            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
-            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
-            return input;
+            // The greatest value with the requested number of decimals that still rounds down to the input: one
+            // unit of the input's own scale up, one unit of the requested precision back. A whole number has scale
+            // zero, so its unit is 1 (HighBoundary(1, 8) is 1.99999999).
+            return input.Value + UnitAtScale(input.Value.Scale) - UnitAtScale((byte)precision.Value);
         }
+
+        /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
+        private static decimal UnitAtScale(byte scale) => new(1, 0, 0, false, scale);
+
+        /// <summary>The value 0 at the given number of decimals; adding it sets a result's scale.</summary>
+        private static decimal ZeroAtScale(byte scale) => new(0, 0, 0, false, scale);
 
         public CqlDate? HighBoundary(CqlDate? input, int? precision)
         {
@@ -341,17 +339,9 @@ namespace Hl7.Cql.Operators
             precision ??= MaxDecimalBoundaryPrecision;
             if (precision < 8) return null;
 
-            StringBuilder strPrec = new("0.");
-            strPrec.Append('0', (int)precision);
-
-            StringBuilder strInp = new("0.");
-            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
-                .Last()
-                .Length);
-
-            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
-            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
-            return input;
+            // The least value with the requested number of decimals that rounds to the input is the input itself,
+            // written at that precision.
+            return input.Value + ZeroAtScale((byte)precision.Value);
         }
 
         public CqlDate? LowBoundary(CqlDate? input, int? precision)
