@@ -250,7 +250,34 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Elm.TupleTypeSpecifier tts => navigateIntoTuple(source, tts, memberName),
                 Elm.IntervalTypeSpecifier ivs => navigateIntoInterval(source, ivs, memberName),
                 Elm.ListTypeSpecifier lts => navigateIntoList(source, lts, memberName),
+                Elm.ChoiceTypeSpecifier cts => navigateIntoChoice(source, cts, memberName),
                 _ => makeProp(source, memberName).AddError($"Type {source.resultTypeSpecifier} has no members.")
+            };
+        }
+
+        // https://cql.hl7.org/03-developersguide.html#choice-types
+        // Any element of any alternative of a choice can be accessed. The alternatives that do not
+        // have the element are dropped; when the remaining ones disagree on the element's type, the
+        // result is a choice of those types.
+        private Property navigateIntoChoice(Expression source, Elm.ChoiceTypeSpecifier cts, string memberName)
+        {
+            // Each alternative is probed on a stand-in reference, so that the "member not found"
+            // errors of the alternatives that lack the member stay off the resulting Property. Only
+            // a Property result can be merged into one: navigating into a list alternative builds a
+            // query over its elements instead.
+            var memberTypes = (cts.choice ?? [])
+                .Select(alternative => navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName))
+                .Where(member => member is Property && member.GetErrors().Length == 0)
+                .SelectMany(member => ElmFactory.FlattenChoice(member.resultTypeSpecifier))
+                .Distinct()
+                .ToArray();
+
+            var prop = makeProp(source, memberName);
+            return memberTypes switch
+            {
+                [] => prop.AddError($"Type {cts} has no members."),
+                [var single] => prop.WithResultType(single),
+                _ => prop.WithResultType(new Elm.ChoiceTypeSpecifier(memberTypes)),
             };
         }
 
