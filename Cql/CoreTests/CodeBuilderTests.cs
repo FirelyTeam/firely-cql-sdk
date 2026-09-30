@@ -946,6 +946,42 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Case_OfIsTestsOnAQueryLet_NarrowsTheLetInEachBranch()
+        {
+            // A let's scope stores the expression it binds, not an aliased source, so it resolves
+            // through a path of its own. Within the Age branch, O as Age is the narrowed let itself.
+            var libraryString = CqlLibraryString.Parse("""
+               library NarrowedLet version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Onset Values":
+                 [Condition] C
+                   let O: C.onset
+                   return
+                     case
+                       when O is FHIR.Age then (O as FHIR.Age).value
+                       else null
+                     end
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Onset Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+            Assert.IsFalse(System.Text.RegularExpressions.Regex.IsMatch(cSharp, @"\bas Age\b"), "an as-cast of the narrowed let is the let itself:\n" + cSharp);
+
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") }))).Cast<object>().ToList();
+
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.IsNull(values[1], "a dateTime onset matches no branch");
+        }
+
+        [TestMethod]
         public void As_OverAnAsOfANarrowedOperand_CastsTheUnnarrowedOperand()
         {
             // A translator may wrap a reference in an as of its own (CMS145 has
