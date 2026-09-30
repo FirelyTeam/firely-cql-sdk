@@ -498,6 +498,24 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void InvokeChoiceMemberInSortBy()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Sorted by onset": [Condition] C sort by (onset.value as DateTime)
+                """);
+
+            // The bare onset resolves on $this, the element being sorted.
+            var query = shouldDefineExpression(library, "Sorted by onset").expression.Should().BeOfType<Query>().Subject;
+            var by = query.sort.by.Should().ContainSingle().Which.Should().BeOfType<ByExpression>().Subject;
+            var value = by.expression.Should().BeOfType<As>().Which.operand.Should().BeOfType<Property>().Subject;
+            value.path.Should().Be("value");
+            value.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Which.choice.Should().HaveCount(3);
+        }
+
+        [TestMethod]
         public void InvokeChoiceMemberThroughListNavigation()
         {
             var library = CreateCqlToolkit().MakeLibrary("""

@@ -238,6 +238,7 @@ public class CodeModelPipelineTests : Base
         // as the Java translator leaving the parameter untyped.
         AssertEqualCSharp(Dispatch(javaBody), Dispatch(body));
 
+        // Assumes a single, flat switch expression: it ends at the first "};" after it.
         static string Dispatch(string body)
         {
             var lines = body.Split('\n');
