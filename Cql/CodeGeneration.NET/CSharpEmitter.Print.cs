@@ -701,8 +701,8 @@ internal partial class CSharpEmitter
     private static bool CanPatternMatch(Type operandType, Type testedType) =>
         operandType.IsAssignableFrom(testedType)
         || testedType.IsAssignableFrom(operandType)
-        || operandType.IsInterface
-        || testedType.IsInterface;
+        || (operandType.IsInterface && !testedType.IsSealed)
+        || (testedType.IsInterface && !operandType.IsSealed);
 
     /// <summary>
     /// The static C# type of the code printed for a simple node, which can be narrower than
