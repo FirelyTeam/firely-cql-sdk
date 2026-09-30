@@ -89,11 +89,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "DateTimeOverlapsPrecisionLeftPossiblyStartsDuringRight", "Overlaps decides a boundary comparison between DateTimes of different precision instead of leaving it unknown." },
             { "DateTimeOverlapsPrecisionLeftPossiblyStartsAndEndsDuringRight", "Overlaps decides a boundary comparison between DateTimes of different precision instead of leaving it unknown." },
 
-            { "TestIntersectNull", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
-            { "TestIntersectNull1", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
-            { "TestIntersectNull2", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
-            { "TestIntersectNull3", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
-            { "TestIntersectNull4", "Intersect with a null interval boundary returns null instead of the intersection (#1457)." },
 
             { "TestQuantityYearEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
             { "TestQuantityYearNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
@@ -112,6 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
 
             { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
+            { "TestIntersectNull", "The expected result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm it; CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
         };
     }
 
