@@ -225,6 +225,7 @@ partial class CodeBuilderContext
                 var normalizedName = IdentifierNormalizer.Normalize(operandDef.name);
                 var parameter = new CodeLocal(operandType, normalizedName);
                 _operands.Add(operandDef.name, parameter);
+                _operandTypeSpecifiers[operandDef.name] = operandDef.operandTypeSpecifier;
                 parameterTypes[i++] = parameter.Type;
 
                 // Store original name if it differs from the normalized name.

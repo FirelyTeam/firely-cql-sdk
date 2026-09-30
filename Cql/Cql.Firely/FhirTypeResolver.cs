@@ -25,7 +25,7 @@ namespace Hl7.Cql.Fhir
             _inspector = inspector;
 
             AddTypesFromInspector();
-            // Fix lack of inheritance in the SDK
+            // Types the model has but the SDK has no class for
             adjust();
         }
 
@@ -88,6 +88,22 @@ namespace Hl7.Cql.Fhir
             return result;
         }
 
+        /// <inheritdoc/>
+        /// <remarks>
+        /// Only a datatype choice with an enumerated list of types qualifies. An element that may hold
+        /// any data type (its mapping lists <see cref="DataType"/> itself) and a contained-resource
+        /// choice are left unenumerated: their alternatives are the whole model.
+        /// </remarks>
+        internal override IReadOnlyList<Type>? GetChoiceTypes(PropertyInfo property) =>
+            property is FhirModelPropertyInfo { Mapping: { Choice: ChoiceType.DatatypeChoice, FhirType: { Length: > 1 } types } }
+            && !types.Contains(typeof(DataType))
+                ? types
+                : null;
+
+        /// <inheritdoc/>
+        internal override string? GetModelTypeCanonical(Type type) =>
+            _inspector.FindClassMapping(type)?.Canonical;
+
         internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
             // This is not used by the data source, but we'll implement it nonetheless.
@@ -128,9 +144,8 @@ namespace Hl7.Cql.Fhir
 
         private void adjust()
         {
-            Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
-            Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
-
+            // Profiles of Quantity, whose instances are Quantity POCOs. Specialized primitives such as
+            // positiveInt resolve to their own classes: those are not subclasses of their base's class.
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }

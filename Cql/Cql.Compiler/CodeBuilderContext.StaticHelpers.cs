@@ -22,6 +22,13 @@ partial class CodeBuilderContext
     // Yeah, hardwired to FHIR 4.0.1 for now.
     private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
+    // The same classes by their identifier, the canonical URL of the StructureDefinition defining each.
+    private static readonly IReadOnlyDictionary<string, ClassInfo> ModelMappingByIdentifier =
+        ModelMapping.Values
+                    .Where(classInfo => classInfo.identifier is not null)
+                    .GroupBy(classInfo => classInfo.identifier)
+                    .ToDictionary(group => group.Key, group => group.First());
+
 
     private static readonly Dictionary<(Type, Type), Type> KnownErrors = new()
     {
@@ -71,7 +78,7 @@ partial class CodeBuilderContext
     {
         if (before.Type.IsValueType)
             return before;
-        return new CodeProperty(before, member, nullConditional: true);
+        return new CodeProperty(before, member, nullConditional: before is not CodeLocal { IsNotNull: true });
     }
 
     private static string TypeNameToIdentifier(Type type, CodeBuilderContext? ctx = null)

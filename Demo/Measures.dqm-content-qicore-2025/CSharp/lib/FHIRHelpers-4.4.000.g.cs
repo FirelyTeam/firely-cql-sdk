@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("FHIRHelpers", "4.4.000")]
 public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_000>
 {
@@ -467,9 +467,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             string o_ = (value as Oid)?.Value;
             return o_;
         }
-        else if (value is Integer)
+        else if (value is PositiveInt)
         {
-            int? p_ = (value as Integer)?.Value;
+            int? p_ = (value as PositiveInt)?.Value;
             return p_;
         }
         else if (value is FhirString)
@@ -483,9 +483,9 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
             CqlTime s_ = context.Operators.ConvertStringToTime(r_);
             return s_;
         }
-        else if (value is Integer)
+        else if (value is UnsignedInt)
         {
-            int? t_ = (value as Integer)?.Value;
+            int? t_ = (value as UnsignedInt)?.Value;
             return t_;
         }
         else if (value is FhirUri)

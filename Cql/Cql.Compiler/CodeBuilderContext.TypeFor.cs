@@ -24,7 +24,7 @@ partial class CodeBuilderContext
         bool throwIfNotFound = true)
     {
         if (element?.resultTypeSpecifier != null)
-            return TypeFor(element.resultTypeSpecifier);
+            return TypeFor(element.resultTypeSpecifier, throwIfNotFound);
 
         if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
             return _typeResolver.ResolveType(element!.resultTypeName!.Name, throwIfNotFound);
@@ -73,37 +73,11 @@ partial class CodeBuilderContext
 
             case Property propertyExpression when !string.IsNullOrWhiteSpace(propertyExpression.path):
             {
-                Type? sourceType = null;
-                if (propertyExpression.source != null)
-                    sourceType = TypeFor(propertyExpression.source!, throwIfNotFound);
-                else if (propertyExpression.scope != null)
-                {
-                    var scope = GetScope(propertyExpression.scope);
-                    sourceType = scope.Item1.Type;
-                }
-                if (sourceType != null)
-                {
-                    // The path is tried as one element name first (a quoted CQL identifier may
-                    // contain a dot); only when that fails is it resolved as a qualified path,
-                    // one segment at a time.
-                    string[] segments = _typeResolver.GetProperty(sourceType, propertyExpression.path) != null
-                        ? [propertyExpression.path]
-                        : propertyExpression.path.Split('.');
-
-                    var type = sourceType;
-                    foreach (var segment in segments)
-                    {
-                        var property = _typeResolver.GetProperty(type, segment);
-                        if (property == null)
-                            return typeof(object); // this is likely a choice
-
-                        // The Firely SDK declares a choice element as its base data type, DataType; the CQL model
-                        // represents a choice as object.
-                        type = property.PropertyType == typeof(DataType) ? typeof(object) : property.PropertyType;
-                    }
-
-                    return type;
-                }
+                // The same resolution that emits the access (see CodeBuilderContext.PropertyPaths.cs):
+                // the path is walked segment by segment against the static type of the source and,
+                // where that type erases a choice, against the alternatives of the choice.
+                if (PropertyStaticValue(propertyExpression, throwIfNotFound) is { } value)
+                    return CqlTypeOf(value.Type);
                 break;
             }
 

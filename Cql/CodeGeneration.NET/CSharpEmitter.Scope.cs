@@ -145,6 +145,9 @@ internal partial class CSharpEmitter
                 case CodeIfChain chain:
                     return LinearizeIfChain(chain, tailPosition);
 
+                case CodeTypeSwitch typeSwitch:
+                    return LinearizeTypeSwitch(typeSwitch, tailPosition);
+
                 // Pass-through composites: printed inline over their (spine-linearized)
                 // children instead of being hoisted into a local. This mirrors the old
                 // SimplifyExpressionsVisitor's dispatch exactly — Constant/Parameter/New/
@@ -189,16 +192,15 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
-            var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
             // statement, which burned a letter out of the naming sequence and, because that
             // burned name keyed the duplicate for its parents, kept identical parent
             // expressions from ever deduplicating with each other.)
-            if (_dedup.TryGetValue(dedupKey, out var existing))
+            if (TryGetHoisted(keyCode, node, out var existing))
                 return existing;
 
+            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
@@ -206,9 +208,18 @@ internal partial class CSharpEmitter
             _statements.Add(() => statement);
 
             var atom = new Atom(name, name, local);
-            _dedup[dedupKey] = atom;
+            _dedup[DedupKey(keyCode, node)] = atom;
             return atom;
         }
+
+        /// <summary>The local an earlier <see cref="Hoist"/> in this scope assigned the same
+        /// value to: code that keys as <paramref name="keyCode"/>, of the type of
+        /// <paramref name="node"/>.</summary>
+        private bool TryGetHoisted(string keyCode, CodeExpression node, [NotNullWhen(true)] out Atom? existing) =>
+            _dedup.TryGetValue(DedupKey(keyCode, node), out existing);
+
+        private string DedupKey(string keyCode, CodeExpression node) =>
+            $"{keyCode}::{_emitter._typeToCSharpConverter.ToCSharp(node.Type)}";
 
         private Atom HoistLocalFunction(CodeLambda lambda)
         {
@@ -308,6 +319,101 @@ internal partial class CSharpEmitter
 
         private Atom? LinearizeIfChain(CodeIfChain chain, bool tailPosition) =>
             LinearizeConditionalStatements(chain.Type, chain.Cases, chain.Else, tailPosition);
+
+        /// <summary>
+        /// Emits a type switch over its operand, which is linearized (and so evaluated) once.
+        /// When every arm's value prints inline, the switch is one expression: a conditional
+        /// with a declaration pattern for a single arm, a switch expression otherwise.
+        /// Otherwise it becomes an <c>if</c>/<c>else if</c> chain testing the operand with a
+        /// declaration pattern per arm, each arm's statements in its own block; as with
+        /// <see cref="LinearizeConditionalStatements"/>, in tail position the blocks
+        /// <c>return</c> and no atom is returned.
+        /// </summary>
+        private Atom? LinearizeTypeSwitch(CodeTypeSwitch typeSwitch, bool tailPosition)
+        {
+            // The operand is tested by every arm, so it must print as a variable: an expression
+            // that prints in place would be evaluated once per test (and a literal is no operand
+            // for a pattern at all).
+            var operand = Linearize(typeSwitch.Operand)!;
+            if (!PrintsAsVariable(operand))
+                operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
+
+            if (typeSwitch.Arms.All(arm => ArmPrintsInline(arm.Body)) && ArmPrintsInline(typeSwitch.Otherwise))
+            {
+                // The dedup key names each arm's pattern variable by its position, not by a name
+                // from the sequence, so a repeat of the same switch keys the same as the first
+                // and reuses its local before burning any names of its own.
+                var keyOperand = operand with { Code = operand.KeyCode };
+                NameArms(typeSwitch, keyOperand, i => $"<arm{i}>");
+                var keyCode = _emitter.PrintTypeSwitchExpression(typeSwitch, keyOperand);
+                if (!tailPosition && TryGetHoisted(keyCode, typeSwitch, out var existing))
+                    return existing;
+
+                NameArms(typeSwitch, operand, i => AllocateName(typeSwitch.Arms[i].Narrowed.NameHint));
+                var code = _emitter.PrintTypeSwitchExpression(typeSwitch, operand);
+                // A switch expression has no natural type when its arms disagree, so it may only
+                // print where it is target-typed: a declaration of its type, or a return.
+                return tailPosition ? new Atom(code, typeSwitch) : Hoist(code, keyCode, typeSwitch);
+            }
+
+            NameArms(typeSwitch, operand, i => AllocateName(typeSwitch.Arms[i].Narrowed.NameHint));
+
+            if (tailPosition)
+            {
+                _statements.Add(() => RenderTypeSwitchChain(resultName: null, typeSwitch, operand));
+                return null;
+            }
+
+            var resultLocal = new CodeLocal(typeSwitch.Type);
+            var resultName = AllocateName(null);
+            _emitter._assignedNames[resultLocal] = resultName;
+
+            // Declared without an initializer, as in LinearizeConditionalStatements.
+            _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(typeSwitch.Type)} {resultName};");
+            _statements.Add(() => RenderTypeSwitchChain(resultName, typeSwitch, operand));
+            return new Atom(resultName, resultLocal);
+        }
+
+        /// <summary>
+        /// Names what each arm's narrowed value prints as: the pattern variable named by
+        /// <paramref name="patternVariableName"/> (given the arm's index), or, for an arm that
+        /// binds none, a cast of <paramref name="operand"/>.
+        /// </summary>
+        private void NameArms(CodeTypeSwitch typeSwitch, Atom operand, Func<int, string> patternVariableName)
+        {
+            for (var i = 0; i < typeSwitch.Arms.Count; i++)
+            {
+                var narrowed = typeSwitch.Arms[i].Narrowed;
+                _emitter._assignedNames[narrowed] = _emitter.BindsPatternVariable(narrowed)
+                    ? patternVariableName(i)
+                    : _emitter.PrintNarrowingCast(operand, narrowed);
+            }
+        }
+
+        /// <summary>
+        /// Whether a type switch arm's value prints inline in a switch expression: within the
+        /// budget of an inline condition (see <see cref="ConditionPrintsInline"/>), and not
+        /// itself a conditional or switch, which would nest one expression form in another.
+        /// </summary>
+        private static bool ArmPrintsInline(CodeExpression value) =>
+            value is not (CodeConditional or CodeIfChain or CodeTypeSwitch) && ConditionPrintsInline(value);
+
+        /// <summary>Renders a type switch in statement form, deferred like
+        /// <see cref="RenderChain"/>.</summary>
+        private string RenderTypeSwitchChain(string? resultName, CodeTypeSwitch typeSwitch, Atom operand)
+        {
+            var isb = new IndentedStringBuilder();
+            for (var i = 0; i < typeSwitch.Arms.Count; i++)
+            {
+                var test = _emitter.PrintTypePattern(operand, typeSwitch.Arms[i].Narrowed);
+                isb.AppendLine(i == 0 ? $"if ({test})" : $"else if ({test})");
+                EmitBranchBlock(isb, resultName, typeSwitch.Arms[i].Body);
+            }
+
+            isb.AppendLine("else");
+            EmitBranchBlock(isb, resultName, typeSwitch.Otherwise);
+            return isb.ToString().TrimEnd('\r', '\n');
+        }
 
         /// <summary>
         /// Emits a multi-branch conditional as native if/else statements. In tail position

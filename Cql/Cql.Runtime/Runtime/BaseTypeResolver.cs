@@ -166,7 +166,8 @@ namespace Hl7.Cql.Runtime
         private static string CorrectQiCoreExtensionTypes(string typeSpecifier) =>
             typeSpecifier switch
             {
-                "{http://hl7.org/fhir}NotDoneRecorded" => "{http://hl7.org/fhir}dateTime",
+                // QI-Core declares it as a System.DateTime, read as the value of the extension's dateTime value.
+                "{http://hl7.org/fhir}NotDoneRecorded" => "{urn:hl7-org:elm-types:r1}DateTime",
                 "{http://hl7.org/fhir}EncounterProcedureExtension" => "{http://hl7.org/fhir}Extension",
                 "{http://hl7.org/fhir}DoNotPerformReason" => "{http://hl7.org/fhir}CodeableConcept",
                 _ => typeSpecifier
