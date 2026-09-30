@@ -877,6 +877,41 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void As_OverAnAsOfANarrowedOperand_CastsTheUnnarrowedOperand()
+        {
+            // A translator may wrap a reference in an as of its own (CMS145 has
+            // (Event as Condition) as Choice<Condition, Condition>). The inner as is the narrowed
+            // variable itself; the outer one, to a type that variable cannot have, compiles on the
+            // un-narrowed operand, since C# rejects the cast of the narrowed variable (CS0039).
+            var libraryString = CqlLibraryString.Parse("""
+               library NestedAs version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define function RecordedOf(E Choice<FHIR.Condition, FHIR.AllergyIntolerance>):
+                 case
+                   when E is FHIR.AllergyIntolerance then ((E as FHIR.AllergyIntolerance) as FHIR.Condition).recordedDate
+                   else null
+                 end
+
+               define "Recorded Dates": [AllergyIntolerance] A return RecordedOf(A)
+               """);
+            var elmLibrary = CreateElmLibrary(libraryString);
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Recorded Dates");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "AllergyIntolerance"), cSharp);
+            Assert.AreEqual(1, System.Text.RegularExpressions.Regex.Matches(cSharp, @"\bE as Condition\b").Count,
+                "the outer as compiles on the un-narrowed operand:\n" + cSharp);
+
+            var recorded = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new AllergyIntolerance { Id = "a-1", Patient = new ResourceReference("Patient/1") }))).Cast<object>().Single();
+            Assert.IsNull(recorded, "an AllergyIntolerance is no Condition");
+        }
+
+        [TestMethod]
         public void Case_WithAnIsTestAnEarlierOneCovers_DropsTheUnreachableBranch()
         {
             // case when R is Quantity then 'quantity' when R is Age then 'age' else null: an Age is a

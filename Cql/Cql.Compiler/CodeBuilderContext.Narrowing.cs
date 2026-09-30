@@ -30,28 +30,18 @@ partial class CodeBuilderContext
 {
     /// <summary>
     /// The variable each narrowed reference stands for within the branch being translated, by the
-    /// expression the reference translates to outside it. A reference narrowed again inside a branch
-    /// is keyed by its outer narrowed variable.
+    /// value the reference resolves to outside it (see <see cref="ResolveReference"/>). A reference
+    /// narrowed again inside a branch is keyed by its outer narrowed variable.
     /// </summary>
     private readonly Dictionary<CodeExpression, CodeLocal> _narrowings = new(ReferenceEqualityComparer.Instance);
 
-    /// <summary>What <paramref name="reference"/> stands for in the branch being translated.</summary>
-    private CodeExpression Narrowed(CodeExpression reference)
+    /// <summary>What a reference bound to <paramref name="bound"/> stands for in the branch being translated.</summary>
+    private CodeExpression Narrowed(CodeExpression bound)
     {
-        while (_narrowings.TryGetValue(reference, out var narrowed))
-            reference = narrowed;
-        return reference;
+        while (_narrowings.TryGetValue(bound, out var narrowed))
+            bound = narrowed;
+        return bound;
     }
-
-    /// <summary>
-    /// What is known statically about a reference that is narrowed in the branch being translated,
-    /// or <see langword="null"/> when it is not narrowed. A narrowed value has one concrete type, so
-    /// it has no alternatives.
-    /// </summary>
-    private StaticValue? NarrowedStaticValue(CodeExpression reference) =>
-        Narrowed(reference) is var narrowed && !ReferenceEquals(narrowed, reference)
-            ? new StaticValue(narrowed.Type, null)
-            : null;
 
     /// <summary>Translates <paramref name="branch"/> with <paramref name="reference"/> standing for <paramref name="narrowed"/>.</summary>
     private CodeExpression TranslateNarrowed(Expression branch, CodeExpression reference, CodeLocal narrowed)
@@ -85,14 +75,6 @@ partial class CodeBuilderContext
 
         return tested is null ? null : (@is.operand, tested);
     }
-
-    /// <summary>
-    /// The expression a reference's own lookups return, for its translation <paramref name="subject"/>:
-    /// the translation may convert the reference to its ELM type, a choice, which is a cast to
-    /// <see cref="object"/> that the lookups in the branch do not see.
-    /// </summary>
-    private static CodeExpression NarrowingKey(CodeExpression subject) =>
-        subject is CodeCast { Operand: var reference } cast && cast.Type == typeof(object) ? reference : subject;
 
     /// <summary>Whether two references name the same operand, alias or <c>let</c>.</summary>
     private static bool SameReference(Expression a, Expression b) =>
@@ -130,7 +112,8 @@ partial class CodeBuilderContext
     private CodeExpression? CaseAsTypeSwitch(Elm.Case ce)
     {
         if (ce.comparand != null || ce.caseItem is not { Length: > 0 } items || ce.@else is null
-            || NarrowingTest(items[0].when) is not { } first)
+            || NarrowingTest(items[0].when) is not { } first
+            || ResolveReference(first.Reference) is not { } reference)
             return null;
 
         var subject = TranslateArg(first.Reference);
@@ -161,7 +144,7 @@ partial class CodeBuilderContext
 
         var arms = run.Select(entry => new CodeTypeSwitchArm(
                               entry.Narrowed,
-                              AssignableTo(TranslateNarrowed(entry.Item.then!, NarrowingKey(subject), entry.Narrowed), resultType)))
+                              AssignableTo(TranslateNarrowed(entry.Item.then!, reference.Value, entry.Narrowed), resultType)))
                       .ToList();
 
         var rest = new List<(CodeExpression When, CodeExpression Then)>();
@@ -183,14 +166,15 @@ partial class CodeBuilderContext
     /// </summary>
     private CodeExpression? IfAsTypeSwitch(Elm.If @if)
     {
-        if (NarrowingTest(@if.condition) is not { } test)
+        if (NarrowingTest(@if.condition) is not { } test
+            || ResolveReference(test.Reference) is not { } reference)
             return null;
 
         var subject = TranslateArg(test.Reference);
         if (NarrowedVariable(subject, test.Tested) is not { } narrowed)
             return null;
 
-        var then = TranslateNarrowed(@if.then!, NarrowingKey(subject), narrowed);
+        var then = TranslateNarrowed(@if.then!, reference.Value, narrowed);
 
         // CQL values are nullable; a narrowed value-typed variable is not.
         if (then.Type.IsValueType && Nullable.GetUnderlyingType(then.Type) is null)
@@ -239,10 +223,13 @@ partial class CodeBuilderContext
     /// it would have without narrowing (null, or for a strict cast a failure). <see langword="null"/>
     /// when <paramref name="operand"/> is not a narrowed variable or the ordinary <c>as</c> applies.
     /// </summary>
+    /// <remarks>
+    /// The operand is recognised by its translation, not by its ELM: a translator may wrap a
+    /// reference in an <c>as</c> of its own before the one being translated.
+    /// </remarks>
     private CodeExpression? AsOfNarrowed(CodeExpression operand, Type type, CodeCastKind castKind, Element element)
     {
-        if (operand is not CodeLocal { IsNotNull: true } narrowed
-            || _narrowings.FirstOrDefault(entry => ReferenceEquals(entry.Value, narrowed)).Key is not { } reference)
+        if (operand is not CodeLocal { IsNotNull: true } narrowed || UnnarrowedOf(narrowed) is not { } unnarrowed)
             return null;
 
         if (type.IsAssignableFrom(narrowed.Type))
@@ -255,15 +242,20 @@ partial class CodeBuilderContext
         // branch for another alternative. C# rejects the cast on the narrowed variable.
         _logger.LogWarning(FormatMessage(
             $"The value is a {narrowed.Type.Name} here, so as {type.Name} always results in null.", element));
-        return new CodeCast(Unnarrowed(reference), type, castKind);
+        return new CodeCast(unnarrowed, type, castKind);
     }
 
-    /// <summary>The reference as it is outside every branch narrowing it.</summary>
-    private CodeExpression Unnarrowed(CodeExpression reference)
+    /// <summary>
+    /// What a reference narrowed to <paramref name="narrowed"/> is bound to outside every branch
+    /// narrowing it; <see langword="null"/> when <paramref name="narrowed"/> is no narrowed variable.
+    /// </summary>
+    private CodeExpression? UnnarrowedOf(CodeLocal narrowed)
     {
-        while (reference is CodeLocal { IsNotNull: true } narrowed
-               && _narrowings.FirstOrDefault(entry => ReferenceEquals(entry.Value, narrowed)).Key is { } outer)
-            reference = outer;
-        return reference;
+        CodeExpression? bound = null;
+        for (CodeExpression current = narrowed;
+             current is CodeLocal local && _narrowings.FirstOrDefault(entry => ReferenceEquals(entry.Value, local)).Key is { } outer;
+             current = outer)
+            bound = outer;
+        return bound;
     }
 }
