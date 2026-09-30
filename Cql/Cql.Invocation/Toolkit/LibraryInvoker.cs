@@ -149,7 +149,7 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        if (!LibraryInstanceInvoker_5_0.SupportsVersion(cqlToolVersion))
+        if (!LibraryInstanceInvoker_6_0.SupportsVersion(cqlToolVersion))
         {
             logger?.LogWarning(
                 "Skipping type {type} because it was generated with an unsupported version {ver} of the CQL tool.",
@@ -158,7 +158,7 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        return LibraryInstanceInvoker_5_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker);
+        return LibraryInstanceInvoker_6_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker);
     }
 
 
