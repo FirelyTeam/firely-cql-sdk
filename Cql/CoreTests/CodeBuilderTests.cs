@@ -908,6 +908,51 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void If_NarrowsAQueryLetAndEvaluatesItsBoundValue()
+        {
+            var onset = new Hl7.Cql.Elm.QueryLetRef { name = "Onset" };
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "QueryLetNarrowing", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Values",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Query
+                        {
+                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "C", expression = RetrieveOf("Condition") }],
+                            let = [new Hl7.Cql.Elm.LetClause { identifier = "Onset", expression = new Hl7.Cql.Elm.Property { path = "onset", scope = "C" } }],
+                            @return = new Hl7.Cql.Elm.ReturnClause
+                            {
+                                distinct = false,
+                                expression = new Hl7.Cql.Elm.If
+                                {
+                                    condition = IsOf(onset, "Age"),
+                                    then = new Hl7.Cql.Elm.Property { path = "value", scope = "Onset" },
+                                },
+                            },
+                        },
+                    },
+                ],
+            };
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
+
+            var values = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new Age { Value = 3, Unit = "a" } },
+                new Condition { Id = "c-2", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") })))
+                .Cast<object>().ToList();
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.IsNull(values[1]);
+        }
+
+        [TestMethod]
         public void Case_InnerAliasShadowingANarrowedAliasUsesItsOwnValue()
         {
             var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
