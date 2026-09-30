@@ -53,6 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
+            { "TestIntersectNull", "The result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm any expectation; the vendored expectation of null also disagrees with the Language Semantics example. CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
         };
     }
 

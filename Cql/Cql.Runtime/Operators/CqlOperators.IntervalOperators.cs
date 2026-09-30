@@ -1100,60 +1100,89 @@ namespace Hl7.Cql.Operators
             left = ToClosedForPointType(left)!;
             right = ToClosedForPointType(right)!;
 
-            if (left.low == null
-               || left.high == null
-               || right.low == null
-               || right.high == null)
+            // "Note that open null boundaries of intervals are treaterd [sic] as uncertainties for the purposes
+            // of interval computation." For Interval[1, 10] intersect Interval[5, null): "This results in an
+            // interval that begins at 5, and ends at some value between 5 and 10." (CQL 1.5.3 Errata 2,
+            // Language Semantics, section "Interval Operators"). A null closed boundary is the minimum or
+            // maximum value of the point type; a null open boundary is unknown and ranges over the values its
+            // own interval permits. Whether the intervals overlap, and which argument supplies each boundary
+            // of the result, are decided over those ranges. When the overlap cannot be decided the result is
+            // null; when the boundary cannot be decided it is emitted as a null open (unknown) boundary.
+            var startsBeforeEnd = IsUnknownBoundary(right.low, right.lowClosed) || IsUnknownBoundary(left.high, left.highClosed)
+                ? RangeGreaterOrEqual(HighBoundaryRange(left), LowBoundaryRange(right), null)
+                : !(Comparer.Compare(right.low ?? MinValue<T>()!, left.high ?? MaxValue<T>()!, null) > 0);
+            var endsAfterStart = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
+                ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), null)
+                : !(Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, null) > 0);
+            if (AndAllowingUnknown(startsBeforeEnd, endsAfterStart) != true)
                 return null;
 
-            var leftLow = left.low ?? MinValue<T>();
-            var leftHigh = left.high ?? MaxValue<T>();
-            var rightLow = right.low ?? MinValue<T>();
-            var rightHigh = right.high ?? MaxValue<T>();
-            if (Comparer.Compare(leftLow!, rightHigh!, null) > 0 || Comparer.Compare(rightLow!, leftHigh!, null) > 0) return null;
-            else
+            var (lowValue, lowClosed) = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.low, right.lowClosed)
+                ? LaterUncertainLowBoundary(left, right)
+                : LaterLowBoundary(left, right);
+            var (highValue, highClosed) = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
+                ? EarlierUncertainHighBoundary(left, right)
+                : EarlierHighBoundary(left, right);
+
+            return new CqlInterval<T>(lowValue, highValue, lowClosed, highClosed);
+        }
+
+        // The later of two known low boundaries; a null (closed) low boundary is the minimum value.
+        private (T? value, bool closed) LaterLowBoundary<T>(CqlInterval<T> left, CqlInterval<T> right) =>
+            Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, null) switch
             {
-                T LowValue;
-                bool LowValueClosed;
-                T HighValue;
-                bool HighValueClosed;
+                > 0 => (left.low, left.lowClosed ?? false),
+                0   => (left.low, (left.lowClosed ?? false) && (right.lowClosed ?? false)),
+                _   => (right.low, right.lowClosed ?? false),
+            };
 
-                var leftCompare = Comparer.Compare(leftLow!, rightLow!, null);
-                if (leftCompare > 0)
-                {
-                    LowValue = left.low;
-                    LowValueClosed = left.lowClosed ?? false;
-                }
-                else if (leftCompare == 0)
-                {
-                    LowValue = left.low;
-                    LowValueClosed = (left.lowClosed ?? false) && (right.lowClosed ?? false);
-                }
-                else
-                {
-                    LowValue = right.low;
-                    LowValueClosed = right.lowClosed ?? false;
-                }
+        // The earlier of two known high boundaries; a null (closed) high boundary is the maximum value.
+        private (T? value, bool closed) EarlierHighBoundary<T>(CqlInterval<T> left, CqlInterval<T> right) =>
+            Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, null) switch
+            {
+                < 0 => (left.high, left.highClosed ?? false),
+                0   => (left.high, (left.highClosed ?? false) && (right.highClosed ?? false)),
+                _   => (right.high, right.highClosed ?? false),
+            };
 
-                var rightCompare = Comparer.Compare(leftHigh!, rightHigh!, null);
-                if (rightCompare < 0)
-                {
-                    HighValue = left.high;
-                    HighValueClosed = left.highClosed ?? false;
-                }
-                else if (rightCompare == 0)
-                {
-                    HighValue = left.high;
-                    HighValueClosed = (left.highClosed ?? false) && (right.highClosed ?? false);
-                }
-                else
-                {
-                    HighValue = right.high;
-                    HighValueClosed = right.highClosed ?? false;
-                }
+        // The later of two low boundaries at least one of which is unknown: the boundary that is not earlier
+        // than any value the other can take, or an unknown (null open) boundary when that depends on the
+        // unknown value. When neither can be earlier than the other (the unknown boundary's range collapses
+        // to the known boundary's value) the known boundary is taken, so the result does not depend on the
+        // order of the arguments.
+        private (T? value, bool closed) LaterUncertainLowBoundary<T>(CqlInterval<T> left, CqlInterval<T> right)
+        {
+            var leftRange = LowBoundaryRange(left);
+            var rightRange = LowBoundaryRange(right);
+            var leftIsLater = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
+            var rightIsLater = RangeLessOrEqual(leftRange, rightRange, null) == true;
+            if (leftIsLater && rightIsLater)
+                return !IsUnknownBoundary(left.low, left.lowClosed) ? (left.low, left.lowClosed ?? false) : (right.low, right.lowClosed ?? false);
+            if (leftIsLater)
+                return (left.low, left.lowClosed ?? false);
+            if (rightIsLater)
+                return (right.low, right.lowClosed ?? false);
+            return (default, false);
+        }
 
-                return new CqlInterval<T>(LowValue, HighValue, LowValueClosed, HighValueClosed);
-            }
+        // The earlier of two high boundaries at least one of which is unknown: the boundary that is not later
+        // than any value the other can take, or an unknown (null open) boundary when that depends on the
+        // unknown value. When neither can be later than the other (the unknown boundary's range collapses
+        // to the known boundary's value) the known boundary is taken, so the result does not depend on the
+        // order of the arguments.
+        private (T? value, bool closed) EarlierUncertainHighBoundary<T>(CqlInterval<T> left, CqlInterval<T> right)
+        {
+            var leftRange = HighBoundaryRange(left);
+            var rightRange = HighBoundaryRange(right);
+            var leftIsEarlier = RangeLessOrEqual(leftRange, rightRange, null) == true;
+            var rightIsEarlier = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
+            if (leftIsEarlier && rightIsEarlier)
+                return !IsUnknownBoundary(left.high, left.highClosed) ? (left.high, left.highClosed ?? false) : (right.high, right.highClosed ?? false);
+            if (leftIsEarlier)
+                return (left.high, left.highClosed ?? false);
+            if (rightIsEarlier)
+                return (right.high, right.highClosed ?? false);
+            return (default, false);
         }
 
         #endregion
