@@ -16,7 +16,8 @@ namespace CoreTests
 {
     /// <summary>
     /// Two DateTime boundaries of different precision that agree at the coarser one compare as uncertain
-    /// (<c>null</c>). The interval relationship operators built from boundary comparisons leave the result
+    /// (<c>null</c>), as do two Quantity boundaries whose units are not commensurable. The interval
+    /// relationship operators built from boundary comparisons leave the result
     /// unknown when it depends on such a comparison, and decide it when the other comparisons settle it.
     /// CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Overlaps": the operator "returns true if
     /// the first interval overlaps the second. More precisely, if the starting or ending point of either
@@ -37,6 +38,9 @@ namespace CoreTests
 
         private static CqlInterval<CqlDateTime?> Closed(string low, string high) =>
             new(Dt(low), Dt(high), true, true);
+
+        private static CqlInterval<CqlQuantity?> Closed(decimal low, decimal high, string unit) =>
+            new(new CqlQuantity(low, unit), new CqlQuantity(high, unit), true, true);
 
         [TestMethod]
         public void Overlaps_LeftPossiblyStartsDuringRight_IsNull() =>
@@ -65,9 +69,9 @@ namespace CoreTests
 
         [TestMethod]
         public void Overlaps_UncertainOnOneSide_DefinitelyApartOnTheOther_IsFalse() =>
-            // The high of the first is uncertain against the low of the second, but the first starts
-            // after the second ends, so they cannot overlap.
-            Assert.AreEqual(false, Context.Operators.Overlaps(Closed("2012-04-01", "2012-05"), Closed("2012-02", "2012-03-15"), null));
+            // The high of the first (2012-05) is uncertain against the low of the second (2012), but the first
+            // starts (2012-04-01) after the second ends (2012-03-15), so they cannot overlap.
+            Assert.AreEqual(false, Context.Operators.Overlaps(Closed("2012-04-01", "2012-05"), Closed("2012", "2012-03-15"), null));
 
         [TestMethod]
         public void Overlaps_AtAnExplicitPrecision_ComparesMixedPrecisionBoundariesAtThatPrecision()
@@ -151,9 +155,9 @@ namespace CoreTests
 
         [TestMethod]
         public void Meets_DefiniteAdjacency_WinsOverAnUncertainCandidate() =>
-            // The first interval's low (2012-01) against the second's high (2012-01-25) is uncertain, but its
-            // high (2012-01-14) is definitely the predecessor of the second's low (2012-01-15).
-            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01", "2012-01-14"), Closed("2012-01-15", "2012-01-25"), null));
+            // The first interval's high (2012-01-25) against the second's low (2012-01) is uncertain, but the
+            // second's high (2012-01-14) is definitely the predecessor of the first's low (2012-01-15).
+            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-15", "2012-01-25"), Closed("2012-01", "2012-01-14"), null));
 
         [TestMethod]
         public void Meets_AtAnExplicitPrecision_ComparesMixedPrecisionBoundariesAtThatPrecision()
@@ -178,6 +182,48 @@ namespace CoreTests
             Assert.AreEqual(false, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-03", "2012-03-25"), null));
             Assert.AreEqual(false, Context.Operators.MeetsBefore(Closed("2012-01-07", "2012-01-14"), Closed("2012-03", "2012-03-25"), null));
             Assert.AreEqual(false, Context.Operators.MeetsAfter(Closed("2012-03", "2012-03-25"), Closed("2012-01-07", "2012-01-14"), null));
+        }
+
+        [TestMethod]
+        public void Overlaps_QuantityIntervalsWithIncommensurableUnits_IsNull()
+        {
+            // CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Comparison Operators", subsection
+            // "Greater" (stated the same way for the other comparison operators): "For comparisons involving
+            // quantities, the dimensions of each quantity must be the same, but not necessarily the unit. [...]
+            // Attempting to operate on quantities with invalid units will result in a null." A length against a
+            // mass cannot be compared, so every boundary comparison is uncertain.
+            Assert.IsNull(Context.Operators.Overlaps(Closed(1, 5, "cm"), Closed(2, 3, "g")));
+            Assert.IsNull(Context.Operators.OverlapsBefore(Closed(1, 5, "cm"), Closed(2, 3, "g")));
+            Assert.IsNull(Context.Operators.OverlapsAfter(Closed(1, 5, "cm"), Closed(2, 3, "g")));
+        }
+
+        [TestMethod]
+        public void Overlaps_QuantityIntervalsWithConvertibleUnits_IsDecided()
+        {
+            // Different units of the same dimension compare after conversion, so the result is certain.
+            Assert.AreEqual(true, Context.Operators.Overlaps(Closed(1, 2, "m"), Closed(150, 300, "cm")));
+            Assert.AreEqual(false, Context.Operators.Overlaps(Closed(1, 2, "m"), Closed(250, 300, "cm")));
+            Assert.AreEqual(true, Context.Operators.OverlapsBefore(Closed(1, 2, "m"), Closed(150, 300, "cm")));
+            Assert.AreEqual(true, Context.Operators.OverlapsAfter(Closed(150, 300, "cm"), Closed(1, 2, "m")));
+        }
+
+        [TestMethod]
+        public void Meets_QuantityIntervalsWithIncommensurableUnits_IsNull()
+        {
+            Assert.IsNull(Context.Operators.Meets(Closed(1, 5, "cm"), Closed(2, 3, "g"), null));
+            Assert.IsNull(Context.Operators.MeetsBefore(Closed(1, 5, "cm"), Closed(2, 3, "g"), null));
+            Assert.IsNull(Context.Operators.MeetsAfter(Closed(2, 3, "g"), Closed(1, 5, "cm"), null));
+        }
+
+        [TestMethod]
+        public void Meets_QuantityIntervalsWithConvertibleUnits_IsDecided()
+        {
+            // 200 'cm' is 2 'm', so an interval ending at the predecessor of 2 'm' meets one starting at 200 'cm'.
+            var upToTwoMetres = new CqlInterval<CqlQuantity?>(new CqlQuantity(1, "m"), new CqlQuantity(2, "m"), true, false);
+            Assert.AreEqual(true, Context.Operators.Meets(upToTwoMetres, Closed(200, 300, "cm"), null));
+            Assert.AreEqual(true, Context.Operators.MeetsBefore(upToTwoMetres, Closed(200, 300, "cm"), null));
+            Assert.AreEqual(true, Context.Operators.MeetsAfter(Closed(200, 300, "cm"), upToTwoMetres, null));
+            Assert.AreEqual(false, Context.Operators.Meets(upToTwoMetres, Closed(250, 300, "cm"), null));
         }
     }
 }
