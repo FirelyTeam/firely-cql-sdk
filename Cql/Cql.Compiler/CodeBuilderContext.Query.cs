@@ -153,12 +153,15 @@ partial class CodeBuilderContext
 
             // What is known about the query's elements, for an alias or a property over this
             // query: the return expression's alternatives, or the single source's when the
-            // query keeps its source elements. Resolved here, while the query's scopes are live.
-            var elementAlternatives = query.@return?.expression is { } returned
-                ? StaticValueFor(returned, throwIfNotFound: false)?.Alternatives
-                : sources.Length == 1
-                    ? ScopeStaticValue(sources[0].alias).Alternatives
-                    : null;
+            // query keeps its source elements. An aggregate's result is not an element of its
+            // source. Resolved here, while the query's scopes are live.
+            var elementAlternatives = query.aggregate is not null
+                ? null
+                : query.@return?.expression is { } returned
+                    ? StaticValueFor(returned, throwIfNotFound: false)?.Alternatives
+                    : sources.Length == 1
+                        ? ScopeStaticValue(sources[0].alias).Alternatives
+                        : null;
             _staticValues[query] = new StaticValue(@return.Type, elementAlternatives);
 
             return @return;
@@ -373,8 +376,11 @@ partial class CodeBuilderContext
                             var parameterName = "@this";
                             var returnElementType = _typeResolver.GetListElementType(@return.Type, true)!;
                             var sortMemberParameter = new CodeLocal(returnElementType, parameterName);
+                            // @this is an element of what the query returns.
+                            Elm.Element sortedElements = query.@return?.expression as Elm.Element
+                                                         ?? (query.source is [var single] ? single : query.sort);
                             using (PushScopes(parameterName,
-                                              new CodeExpressionElementPairForIdentifier(parameterName, (sortMemberParameter, (Elm.Element)byExpression.expression))))
+                                              new CodeExpressionElementPairForIdentifier(parameterName, (sortMemberParameter, sortedElements))))
                             {
                                 var sortMemberExpression = TranslateArg(byExpression.expression);
                                 var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
@@ -605,7 +611,7 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-                return LateBoundProperty(source, path!, expectedType, element: null);
+                return LateBoundProperty(source, path!, expectedType, element: _elementStack.TryPeek(out var current) ? current : null);
 
             if (!pathMemberInfo.DeclaringType!.IsAssignableFrom(source.Type)) // the property is on a derived type, so cast it
             {

@@ -57,24 +57,20 @@ partial class CodeBuilderContext
                 if (type is null || type == typeof(object))
                     hasUninspectable = true;
                 else if (!inspectable.Contains(type))
-                    inspectable.Add(type);
+                {
+                    // A type test for a derived alternative must come before the test for its base
+                    // (a base class or an interface), or the base would claim the value first. Each
+                    // alternative goes just before the first one it derives from and otherwise keeps
+                    // its declared place, so the order is the declared one wherever it can be.
+                    var firstBase = inspectable.FindIndex(earlier => earlier.IsAssignableFrom(type));
+                    inspectable.Insert(firstBase < 0 ? inspectable.Count : firstBase, type);
+                }
             }
 
             if (inspectable.Count == 0 && !hasUninspectable)
                 return null;
 
-            // A type test for a derived alternative must come before the test for its base,
-            // or the base would claim the value first.
-            inspectable.Sort((a, b) => InheritanceDepth(b).CompareTo(InheritanceDepth(a)));
             return new ChoiceAlternatives(inspectable, hasUninspectable);
-        }
-
-        private static int InheritanceDepth(Type type)
-        {
-            var depth = 0;
-            for (var t = type.BaseType; t is not null; t = t.BaseType)
-                depth++;
-            return depth;
         }
     }
 
@@ -232,8 +228,14 @@ partial class CodeBuilderContext
     /// <summary>What is known statically about the value of an ELM expression.</summary>
     private StaticValue? StaticValueFor(Expression expression, bool throwIfNotFound)
     {
+        // What translating the node learned; where that has no alternatives (the model types the
+        // node as an open data type), the node's own ELM choice still applies, as it did before the
+        // node was translated.
         if (_staticValues.TryGetValue(expression, out var known))
-            return known;
+            return known.Alternatives is null
+                   && ChoiceAlternativesOf(expression.GetTypeSpecifier(), unwrapList: _typeResolver.IsListType(known.Type)) is { } declared
+                ? known with { Alternatives = declared }
+                : known;
 
         switch (expression)
         {
@@ -244,7 +246,7 @@ partial class CodeBuilderContext
             {
                 var typeSpecifier = operandRef.resultTypeSpecifier
                                     ?? (_operandTypeSpecifiers.TryGetValue(name, out var declared) ? declared : null);
-                return new StaticValue(operand.Type, ChoiceAlternativesOf(typeSpecifier, unwrapList: false));
+                return new StaticValue(operand.Type, ChoiceAlternativesOf(typeSpecifier, unwrapList: _typeResolver.IsListType(operand.Type)));
             }
 
             case Property { resultTypeSpecifier: null, resultTypeName: null } property when !string.IsNullOrWhiteSpace(property.path):
@@ -266,11 +268,34 @@ partial class CodeBuilderContext
     /// What is known statically about a query alias: its .NET type, and the alternatives of the
     /// expression it ranges over. The scope stores the source expression for a single-source
     /// query, the aliased source for a multi-source one, the bound expression for a <c>let</c>,
-    /// and the relationship clause for a <c>with</c>.
+    /// the relationship clause for a <c>with</c>, and for the <c>@this</c> of a sort the query's
+    /// return expression or single source.
     /// </summary>
+    /// <remarks>
+    /// A scope whose element refers back to the scope itself would resolve forever; while a scope is
+    /// being resolved, a reference back to it is answered by its .NET type alone.
+    /// </remarks>
     private StaticValue ScopeStaticValue(string alias)
     {
         var (expression, element) = GetScope(alias);
+        if (!_scopesBeingResolved.Add(expression))
+            return new StaticValue(expression.Type, null);
+
+        try
+        {
+            return ScopeStaticValue(expression, element);
+        }
+        finally
+        {
+            _scopesBeingResolved.Remove(expression);
+        }
+    }
+
+    /// <summary>The scopes <see cref="ScopeStaticValue(string)"/> is resolving, by their expression.</summary>
+    private readonly HashSet<CodeExpression> _scopesBeingResolved = new(ReferenceEqualityComparer.Instance);
+
+    private StaticValue ScopeStaticValue(CodeExpression expression, Element element)
+    {
         // A RelationshipClause (with/without) is an AliasedQuerySource too.
         Expression? sourceExpression = element switch
         {

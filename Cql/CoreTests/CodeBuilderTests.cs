@@ -780,49 +780,135 @@ namespace CoreTests
         [TestMethod]
         public void Property_OnChoiceWhoseAlternativesShareAType_EmitsOneBranchPerType()
         {
-            // FHIR positiveInt and unsignedInt both map to Integer. In a choice that also has a
-            // string alternative (so the choice itself stays object), the two must yield one type
-            // test for Integer, not two identical ones.
+            // SimpleQuantity is a profile of Quantity, and its values are Quantity instances, so both
+            // resolve to Quantity. With a string alternative (so the choice itself stays object), the
+            // two must yield one type test for Quantity, not two identical ones.
             const string fhir = "http://hl7.org/fhir";
             var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "positiveInt"),
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "unsignedInt"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "SimpleQuantity"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Quantity"),
                 new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"));
+            var elmLibrary = QueryLibrary("DedupedAlternatives", RetrieveOf("Patient"), ExtensionValuesAs(choiceType, "value"));
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(1, ArmsTesting(cSharp, "Quantity"), "both quantity alternatives resolve to Quantity, so there is one branch for it:\n" + cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
+
+            var patient = new Patient { Id = "1" };
+            patient.Extension.Add(new Extension("http://example.org/quantity", new Quantity(3m, "mg")));
+            patient.Extension.Add(new Extension("http://example.org/string", new FhirString("three")));
+            var values = ExtensionValuesOf(invoke, patient);
+            Assert.AreEqual(3m, ((FhirDecimal)values[0]).Value);
+            Assert.AreEqual("three", values[1]);
+        }
+
+        [TestMethod]
+        public void Sort_ByAnIdentifierWithoutAResultType_ResolvesAgainstTheQuerysElements()
+        {
+            // [Condition] R sort by recordedDate, with no result types (MADiE output). The identifier
+            // names an element of the sorted elements, @this; resolving it must not loop back into the
+            // sort expression itself.
             var elmLibrary = new Library
             {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "DedupedAlternatives", version = "1.0.0" },
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "SortByIdentifier", version = "1.0.0" },
                 schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings =
-                [
-                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = fhir, version = "4.0.1" },
-                ],
+                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
                 statements =
                 [
                     new Hl7.Cql.Elm.ExpressionDef
                     {
-                        name = "Value",
+                        name = "Values",
                         context = "Patient",
-                        expression = new Hl7.Cql.Elm.Property
+                        expression = new Hl7.Cql.Elm.Query
                         {
-                            path = "value",
-                            source = new Hl7.Cql.Elm.As
+                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
+                            sort = new Hl7.Cql.Elm.SortClause
                             {
-                                asTypeSpecifier = choiceType,
-                                operand = new Hl7.Cql.Elm.Null { resultTypeSpecifier = choiceType },
-                                resultTypeSpecifier = choiceType,
+                                by =
+                                [
+                                    new Hl7.Cql.Elm.ByExpression
+                                    {
+                                        direction = Hl7.Cql.Elm.SortDirection.desc,
+                                        expression = new Hl7.Cql.Elm.IdentifierRef { name = "recordedDate" },
+                                    },
+                                ],
                             },
                         },
                     },
                 ],
             };
 
-            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
-            Assert.AreEqual(1, ArmsTesting(cSharp, "Integer"), "both integer alternatives resolve to Integer, so there is one branch for it:\n" + cSharp);
-            Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
-            Assert.IsNull(invoke(BundleOf()), "a null choice value has no element value");
+            StringAssert.Contains(cSharp, "SortBy");
+            var sorted = ((System.Collections.IEnumerable)invoke(BundleOf(
+                new Condition { Id = "early", Subject = new ResourceReference("Patient/1"), RecordedDateElement = new FhirDateTime("2026-01-01") },
+                new Condition { Id = "late", Subject = new ResourceReference("Patient/1"), RecordedDateElement = new FhirDateTime("2026-06-01") }))).Cast<Condition>();
+            CollectionAssert.AreEqual(new[] { "late", "early" }, sorted.Select(c => c.Id).ToArray());
         }
+
+        [TestMethod]
+        public void Property_OnChoiceOfSpecializedIntegers_ReadsEachAlternativesValue()
+        {
+            // FHIR positiveInt and unsignedInt have classes of their own, PositiveInt and UnsignedInt,
+            // which are not Integers: each value must match an arm for its own class. Both read their
+            // value through IValue<int?>, so they share one arm.
+            const string fhir = "http://hl7.org/fhir";
+            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "positiveInt"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "unsignedInt"),
+                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"));
+            var elmLibrary = QueryLibrary("SpecializedIntegers", RetrieveOf("Patient"), ExtensionValuesAs(choiceType, "value"));
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.AreEqual(0, ArmsTesting(cSharp, "Integer"), "no alternative is an Integer:\n" + cSharp);
+            Assert.AreEqual(1, ArmsTesting(cSharp, "IValue<int?>"), cSharp);
+            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
+
+            var patient = new Patient { Id = "1" };
+            patient.Extension.Add(new Extension("http://example.org/positive", new PositiveInt(5)));
+            patient.Extension.Add(new Extension("http://example.org/unsigned", new UnsignedInt(0)));
+            patient.Extension.Add(new Extension("http://example.org/string", new FhirString("five")));
+            CollectionAssert.AreEqual(new object[] { 5, 0, "five" }, ExtensionValuesOf(invoke, patient).ToArray());
+        }
+
+        /// <summary>
+        /// For each element <c>R</c>: <c>R.extension $this return ($this.value as <paramref name="choice"/>).<paramref name="path"/></c>,
+        /// reading off extension values the ELM declares as <paramref name="choice"/>.
+        /// </summary>
+        private static Hl7.Cql.Elm.Query ExtensionValuesAs(Hl7.Cql.Elm.ChoiceTypeSpecifier choice, string path) =>
+            new()
+            {
+                source =
+                [
+                    new Hl7.Cql.Elm.AliasedQuerySource
+                    {
+                        alias = "$this",
+                        expression = new Hl7.Cql.Elm.Property { path = "extension", source = new Hl7.Cql.Elm.AliasRef { name = "R" } },
+                    },
+                ],
+                @return = new Hl7.Cql.Elm.ReturnClause
+                {
+                    distinct = false,
+                    expression = new Hl7.Cql.Elm.Property
+                    {
+                        path = path,
+                        source = new Hl7.Cql.Elm.As
+                        {
+                            asTypeSpecifier = choice,
+                            resultTypeSpecifier = choice,
+                            operand = new Hl7.Cql.Elm.Property { path = "value", source = new Hl7.Cql.Elm.AliasRef { name = "$this" } },
+                        },
+                    },
+                },
+            };
+
+        /// <summary>The values <see cref="ExtensionValuesAs"/> reads off <paramref name="patient"/>'s extensions.</summary>
+        private static List<object> ExtensionValuesOf(Func<Bundle, object> invoke, Patient patient) =>
+            ((System.Collections.IEnumerable)((System.Collections.IEnumerable)invoke(BundleOf(patient))).Cast<object>().Single()).Cast<object>().ToList();
 
         [TestMethod]
         public void Property_OnChoiceDeclaredInTheElm_DispatchesOnTheDeclaredAlternatives()
