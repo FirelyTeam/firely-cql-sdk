@@ -1147,7 +1147,7 @@ namespace Hl7.Cql.Operators
             var leftIsLater = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
             var rightIsLater = RangeLessOrEqual(leftRange, rightRange, null) == true;
             if (leftIsLater && rightIsLater)
-                return left.low is not null ? (left.low, left.lowClosed ?? false) : (right.low, right.lowClosed ?? false);
+                return !IsUnknownBoundary(left.low, left.lowClosed) ? (left.low, left.lowClosed ?? false) : (right.low, right.lowClosed ?? false);
             if (leftIsLater)
                 return (left.low, left.lowClosed ?? false);
             if (rightIsLater)
@@ -1167,7 +1167,7 @@ namespace Hl7.Cql.Operators
             var leftIsEarlier = RangeLessOrEqual(leftRange, rightRange, null) == true;
             var rightIsEarlier = RangeGreaterOrEqual(leftRange, rightRange, null) == true;
             if (leftIsEarlier && rightIsEarlier)
-                return left.high is not null ? (left.high, left.highClosed ?? false) : (right.high, right.highClosed ?? false);
+                return !IsUnknownBoundary(left.high, left.highClosed) ? (left.high, left.highClosed ?? false) : (right.high, right.highClosed ?? false);
             if (leftIsEarlier)
                 return (left.high, left.highClosed ?? false);
             if (rightIsEarlier)
