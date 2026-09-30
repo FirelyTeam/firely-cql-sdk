@@ -160,10 +160,13 @@ namespace Hl7.Cql.Primitives
                         }
 
                         // In a year without a leap day the anniversary of 29 February is 28 February, the year's 59th day,
-                        // which is also where adding a year to the leap day lands.
+                        // which is also where adding a year to the leap day lands. On the anniversary date itself the
+                        // year is whole once the start's time of day has been reached.
                         // born 2-29-2020
                         // age as of 2-28-2025 = 5
-                        if (secondDayInYear >= 59)
+                        if (secondDayInYear > 59)
+                            return yearDiff;
+                        if (secondDayInYear == 59 && (yearDiff < 0 || secondDto.TimeOfDay >= firstDto.TimeOfDay))
                             return yearDiff;
 
                         return yearDiff - 1;

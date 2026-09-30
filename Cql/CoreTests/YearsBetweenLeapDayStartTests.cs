@@ -42,8 +42,12 @@ namespace CoreTests
             Assert.AreEqual(expected, Context.Operators.DurationBetween(new CqlDate(2012, 2, 29), new CqlDate(year, month, day), "year"));
 
         [TestMethod]
-        public void YearsBetween_FromALeapDayDateTime_ToTheSameTimeOn28February_IsWhole() =>
-            Assert.AreEqual(2, Context.Operators.DurationBetween(Dt("2012-02-29T12:34:56"), Dt("2014-02-28T12:34:56"), "year"));
+        [DataRow("2014-02-28T12:34:55", 1, DisplayName = "a second before the start's time of day on 28 February is short of the anniversary")]
+        [DataRow("2014-02-28T12:34:56", 2, DisplayName = "the start's time of day on 28 February completes the year")]
+        [DataRow("2014-02-28T12:34:57", 2, DisplayName = "a second after the start's time of day on 28 February")]
+        [DataRow("2014-03-01T00:00:00", 2, DisplayName = "1 March at any time of day")]
+        public void YearsBetween_FromALeapDayDateTime_On28February_TheTimeOfDayDecides(string end, int expected) =>
+            Assert.AreEqual(expected, Context.Operators.DurationBetween(Dt("2012-02-29T12:34:56"), Dt(end), "year"));
 
         [TestMethod]
         public void YearsBetween_From28FebruaryBackToTheLeapDay_IsTheNegativeOfTheForwardResult()
