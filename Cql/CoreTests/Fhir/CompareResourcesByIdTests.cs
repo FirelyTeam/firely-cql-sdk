@@ -223,6 +223,23 @@ public class CompareResourcesByIdTests
     }
 
     /// <summary>
+    /// A resource type the sweep never registers is equivalent by id through its registered base type,
+    /// exactly as it is equal through it, on a fresh comparer that has not resolved the type before.
+    /// </summary>
+    [TestMethod]
+    public void ResourceSubtypeOutsideModelAssembly_IsEquivalentByIdViaBaseTypeRegistration()
+    {
+        var comparers = ComparersById(StringComparer.Ordinal);
+
+        // Differing content, so only the id can make them equivalent.
+        var a = new DerivedPatient { Id = "p1", Active = true };
+        var b = new DerivedPatient { Id = "p1", Active = false };
+
+        Assert.IsTrue(comparers.Equivalent(a, b, null));
+        Assert.IsFalse(comparers.Equivalent(a, new DerivedPatient { Id = "P1" }, null));
+    }
+
+    /// <summary>
     /// Defined in the test assembly, so the model-assembly sweep can never see it directly.
     /// </summary>
     private sealed class DerivedPatient : Patient;
