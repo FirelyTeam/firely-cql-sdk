@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
@@ -302,23 +302,19 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<CodeableConcept> l_ = a?.ReasonCode;
             List<ResourceReference> m_ = a?.ReasonReference;
             UnsignedInt n_ = a?.PriorityElement;
-            Integer o_ = context.Operators.Convert<Integer>(n_);
-            UnsignedInt p_ = context.Operators.Convert<UnsignedInt>(o_);
-            FhirString q_ = a?.DescriptionElement;
-            List<ResourceReference> r_ = a?.SupportingInformation;
-            Instant s_ = a?.StartElement;
-            Instant t_ = a?.EndElement;
-            PositiveInt u_ = a?.MinutesDurationElement;
-            Integer v_ = context.Operators.Convert<Integer>(u_);
-            PositiveInt w_ = context.Operators.Convert<PositiveInt>(v_);
-            List<ResourceReference> x_ = a?.Slot;
-            FhirDateTime y_ = a?.CreatedElement;
-            FhirString z_ = a?.CommentElement;
-            FhirString aa_ = a?.PatientInstructionElement;
-            List<ResourceReference> ab_ = a?.BasedOn;
-            List<Appointment.ParticipantComponent> ac_ = a?.Participant;
-            List<Period> ad_ = a?.RequestedPeriod;
-            Appointment ae_ = new Appointment
+            FhirString o_ = a?.DescriptionElement;
+            List<ResourceReference> p_ = a?.SupportingInformation;
+            Instant q_ = a?.StartElement;
+            Instant r_ = a?.EndElement;
+            PositiveInt s_ = a?.MinutesDurationElement;
+            List<ResourceReference> t_ = a?.Slot;
+            FhirDateTime u_ = a?.CreatedElement;
+            FhirString v_ = a?.CommentElement;
+            FhirString w_ = a?.PatientInstructionElement;
+            List<ResourceReference> x_ = a?.BasedOn;
+            List<Appointment.ParticipantComponent> y_ = a?.Participant;
+            List<Period> z_ = a?.RequestedPeriod;
+            Appointment aa_ = new Appointment
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -329,21 +325,21 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 AppointmentType = k_,
                 ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
                 ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-                PriorityElement = p_,
-                DescriptionElement = q_,
-                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-                StartElement = s_,
-                EndElement = t_,
-                MinutesDurationElement = w_,
-                Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-                CreatedElement = y_,
-                CommentElement = z_,
-                PatientInstructionElement = aa_,
-                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-                Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)ac_),
-                RequestedPeriod = new List<Period>((IEnumerable<Period>)ad_),
+                PriorityElement = n_,
+                DescriptionElement = o_,
+                SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+                StartElement = q_,
+                EndElement = r_,
+                MinutesDurationElement = s_,
+                Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+                CreatedElement = u_,
+                CommentElement = v_,
+                PatientInstructionElement = w_,
+                BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+                Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)y_),
+                RequestedPeriod = new List<Period>((IEnumerable<Period>)z_),
             };
-            return ae_;
+            return aa_;
         }
 
         IEnumerable<Appointment> c_ = context.Operators.SelectDistinct<Appointment, Appointment>((IEnumerable<Appointment>)a_, b_);
@@ -1073,12 +1069,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             Code<CodeSystemContentMode> y_ = a?.ContentElement;
             Canonical z_ = a?.SupplementsElement;
             UnsignedInt aa_ = a?.CountElement;
-            Integer ab_ = context.Operators.Convert<Integer>(aa_);
-            UnsignedInt ac_ = context.Operators.Convert<UnsignedInt>(ab_);
-            List<CodeSystem.FilterComponent> ad_ = a?.Filter;
-            List<CodeSystem.PropertyComponent> ae_ = a?.Property;
-            List<CodeSystem.ConceptDefinitionComponent> af_ = a?.Concept;
-            CodeSystem ag_ = new CodeSystem
+            List<CodeSystem.FilterComponent> ab_ = a?.Filter;
+            List<CodeSystem.PropertyComponent> ac_ = a?.Property;
+            List<CodeSystem.ConceptDefinitionComponent> ad_ = a?.Concept;
+            CodeSystem ae_ = new CodeSystem
             {
                 UrlElement = e_,
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
@@ -1102,12 +1096,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 VersionNeededElement = x_,
                 ContentElement = y_,
                 SupplementsElement = z_,
-                CountElement = ac_,
-                Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)ad_),
-                Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)ae_),
-                Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)af_),
+                CountElement = aa_,
+                Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)ab_),
+                Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)ac_),
+                Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)ad_),
             };
-            return ag_;
+            return ae_;
         }
 
         IEnumerable<CodeSystem> c_ = context.Operators.SelectDistinct<CodeSystem, CodeSystem>((IEnumerable<CodeSystem>)a_, b_);
@@ -1559,13 +1553,11 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<ResourceReference> o_ = a?.Payor;
             List<Coverage.ClassComponent> p_ = a?.Class;
             PositiveInt q_ = a?.OrderElement;
-            Integer r_ = context.Operators.Convert<Integer>(q_);
-            PositiveInt s_ = context.Operators.Convert<PositiveInt>(r_);
-            FhirString t_ = a?.NetworkElement;
-            List<Coverage.CostToBeneficiaryComponent> u_ = a?.CostToBeneficiary;
-            FhirBoolean v_ = a?.SubrogationElement;
-            List<ResourceReference> w_ = a?.Contract;
-            Coverage x_ = new Coverage
+            FhirString r_ = a?.NetworkElement;
+            List<Coverage.CostToBeneficiaryComponent> s_ = a?.CostToBeneficiary;
+            FhirBoolean t_ = a?.SubrogationElement;
+            List<ResourceReference> u_ = a?.Contract;
+            Coverage v_ = new Coverage
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -1579,13 +1571,13 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Period = n_,
                 Payor = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
                 Class = new List<Coverage.ClassComponent>((IEnumerable<Coverage.ClassComponent>)p_),
-                OrderElement = s_,
-                NetworkElement = t_,
-                CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)u_),
-                SubrogationElement = v_,
-                Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+                OrderElement = q_,
+                NetworkElement = r_,
+                CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)s_),
+                SubrogationElement = t_,
+                Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
             };
-            return x_;
+            return v_;
         }
 
         IEnumerable<Coverage> c_ = context.Operators.SelectDistinct<Coverage, Coverage>((IEnumerable<Coverage>)a_, b_);
@@ -2751,21 +2743,19 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<ExplanationOfBenefit.DiagnosisComponent> ag_ = a?.Diagnosis;
             List<ExplanationOfBenefit.ProcedureComponent> ah_ = a?.Procedure;
             PositiveInt ai_ = a?.PrecedenceElement;
-            Integer aj_ = context.Operators.Convert<Integer>(ai_);
-            PositiveInt ak_ = context.Operators.Convert<PositiveInt>(aj_);
-            List<ExplanationOfBenefit.InsuranceComponent> al_ = a?.Insurance;
-            ExplanationOfBenefit.AccidentComponent am_ = a?.Accident;
-            List<ExplanationOfBenefit.ItemComponent> an_ = a?.Item;
-            List<ExplanationOfBenefit.AddedItemComponent> ao_ = a?.AddItem;
-            List<ExplanationOfBenefit.AdjudicationComponent> ap_ = a?.Adjudication;
-            List<ExplanationOfBenefit.TotalComponent> aq_ = a?.Total;
-            ExplanationOfBenefit.PaymentComponent ar_ = a?.Payment;
-            CodeableConcept as_ = a?.FormCode;
-            Attachment at_ = a?.Form;
-            List<ExplanationOfBenefit.NoteComponent> au_ = a?.ProcessNote;
-            Period av_ = a?.BenefitPeriod;
-            List<ExplanationOfBenefit.BenefitBalanceComponent> aw_ = a?.BenefitBalance;
-            ExplanationOfBenefit ax_ = new ExplanationOfBenefit
+            List<ExplanationOfBenefit.InsuranceComponent> aj_ = a?.Insurance;
+            ExplanationOfBenefit.AccidentComponent ak_ = a?.Accident;
+            List<ExplanationOfBenefit.ItemComponent> al_ = a?.Item;
+            List<ExplanationOfBenefit.AddedItemComponent> am_ = a?.AddItem;
+            List<ExplanationOfBenefit.AdjudicationComponent> an_ = a?.Adjudication;
+            List<ExplanationOfBenefit.TotalComponent> ao_ = a?.Total;
+            ExplanationOfBenefit.PaymentComponent ap_ = a?.Payment;
+            CodeableConcept aq_ = a?.FormCode;
+            Attachment ar_ = a?.Form;
+            List<ExplanationOfBenefit.NoteComponent> as_ = a?.ProcessNote;
+            Period at_ = a?.BenefitPeriod;
+            List<ExplanationOfBenefit.BenefitBalanceComponent> au_ = a?.BenefitBalance;
+            ExplanationOfBenefit av_ = new ExplanationOfBenefit
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -2797,21 +2787,21 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 SupportingInfo = new List<ExplanationOfBenefit.SupportingInformationComponent>((IEnumerable<ExplanationOfBenefit.SupportingInformationComponent>)af_),
                 Diagnosis = new List<ExplanationOfBenefit.DiagnosisComponent>((IEnumerable<ExplanationOfBenefit.DiagnosisComponent>)ag_),
                 Procedure = new List<ExplanationOfBenefit.ProcedureComponent>((IEnumerable<ExplanationOfBenefit.ProcedureComponent>)ah_),
-                PrecedenceElement = ak_,
-                Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)al_),
-                Accident = am_,
-                Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)an_),
-                AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)ao_),
-                Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)ap_),
-                Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)aq_),
-                Payment = ar_,
-                FormCode = as_,
-                Form = at_,
-                ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)au_),
-                BenefitPeriod = av_,
-                BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)aw_),
+                PrecedenceElement = ai_,
+                Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)aj_),
+                Accident = ak_,
+                Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)al_),
+                AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)am_),
+                Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)an_),
+                Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)ao_),
+                Payment = ap_,
+                FormCode = aq_,
+                Form = ar_,
+                ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)as_),
+                BenefitPeriod = at_,
+                BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)au_),
             };
-            return ax_;
+            return av_;
         }
 
         IEnumerable<ExplanationOfBenefit> c_ = context.Operators.SelectDistinct<ExplanationOfBenefit, ExplanationOfBenefit>((IEnumerable<ExplanationOfBenefit>)a_, b_);
@@ -2979,12 +2969,10 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             CodeableConcept i_ = a?.Code;
             FhirString j_ = a?.NameElement;
             UnsignedInt k_ = a?.QuantityElement;
-            Integer l_ = context.Operators.Convert<Integer>(k_);
-            UnsignedInt m_ = context.Operators.Convert<UnsignedInt>(l_);
-            ResourceReference n_ = a?.ManagingEntity;
-            List<Group.CharacteristicComponent> o_ = a?.Characteristic;
-            List<Group.MemberComponent> p_ = a?.Member;
-            Group q_ = new Group
+            ResourceReference l_ = a?.ManagingEntity;
+            List<Group.CharacteristicComponent> m_ = a?.Characteristic;
+            List<Group.MemberComponent> n_ = a?.Member;
+            Group o_ = new Group
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 ActiveElement = f_,
@@ -2992,12 +2980,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 ActualElement = h_,
                 Code = i_,
                 NameElement = j_,
-                QuantityElement = m_,
-                ManagingEntity = n_,
-                Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)o_),
-                Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)p_),
+                QuantityElement = k_,
+                ManagingEntity = l_,
+                Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)m_),
+                Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)n_),
             };
-            return q_;
+            return o_;
         }
 
         IEnumerable<Group> c_ = context.Operators.SelectDistinct<Group, Group>((IEnumerable<Group>)a_, b_);
@@ -3143,20 +3131,16 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
             List<ResourceReference> m_ = a?.Interpreter;
             List<ResourceReference> n_ = a?.Endpoint;
             UnsignedInt o_ = a?.NumberOfSeriesElement;
-            Integer p_ = context.Operators.Convert<Integer>(o_);
-            UnsignedInt q_ = context.Operators.Convert<UnsignedInt>(p_);
-            UnsignedInt r_ = a?.NumberOfInstancesElement;
-            Integer s_ = context.Operators.Convert<Integer>(r_);
-            UnsignedInt t_ = context.Operators.Convert<UnsignedInt>(s_);
-            ResourceReference u_ = a?.ProcedureReference;
-            List<CodeableConcept> v_ = a?.ProcedureCode;
-            ResourceReference w_ = a?.Location;
-            List<CodeableConcept> x_ = a?.ReasonCode;
-            List<ResourceReference> y_ = a?.ReasonReference;
-            List<Annotation> z_ = a?.Note;
-            FhirString aa_ = a?.DescriptionElement;
-            List<ImagingStudy.SeriesComponent> ab_ = a?.Series;
-            ImagingStudy ac_ = new ImagingStudy
+            UnsignedInt p_ = a?.NumberOfInstancesElement;
+            ResourceReference q_ = a?.ProcedureReference;
+            List<CodeableConcept> r_ = a?.ProcedureCode;
+            ResourceReference s_ = a?.Location;
+            List<CodeableConcept> t_ = a?.ReasonCode;
+            List<ResourceReference> u_ = a?.ReasonReference;
+            List<Annotation> v_ = a?.Note;
+            FhirString w_ = a?.DescriptionElement;
+            List<ImagingStudy.SeriesComponent> x_ = a?.Series;
+            ImagingStudy y_ = new ImagingStudy
             {
                 Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
                 StatusElement = f_,
@@ -3168,18 +3152,18 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
                 Referrer = l_,
                 Interpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
                 Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-                NumberOfSeriesElement = q_,
-                NumberOfInstancesElement = t_,
-                ProcedureReference = u_,
-                ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-                Location = w_,
-                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-                Note = new List<Annotation>((IEnumerable<Annotation>)z_),
-                DescriptionElement = aa_,
-                Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)ab_),
+                NumberOfSeriesElement = o_,
+                NumberOfInstancesElement = p_,
+                ProcedureReference = q_,
+                ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
+                Location = s_,
+                ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
+                ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
+                Note = new List<Annotation>((IEnumerable<Annotation>)v_),
+                DescriptionElement = w_,
+                Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)x_),
             };
-            return ac_;
+            return y_;
         }
 
         IEnumerable<ImagingStudy> c_ = context.Operators.SelectDistinct<ImagingStudy, ImagingStudy>((IEnumerable<ImagingStudy>)a_, b_);

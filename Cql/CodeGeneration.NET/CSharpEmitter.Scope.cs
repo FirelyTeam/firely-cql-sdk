@@ -192,16 +192,15 @@ internal partial class CSharpEmitter
 
         private Atom Hoist(string code, string keyCode, CodeExpression node)
         {
-            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
-            var dedupKey = $"{keyCode}::{typeSyntax}";
             // A duplicate reuses the original's local — name, key identity and all. (The old
             // pipeline allocated a fresh name for the duplicate before the deduper removed its
             // statement, which burned a letter out of the naming sequence and, because that
             // burned name keyed the duplicate for its parents, kept identical parent
             // expressions from ever deduplicating with each other.)
-            if (_dedup.TryGetValue(dedupKey, out var existing))
+            if (TryGetHoisted(keyCode, node, out var existing))
                 return existing;
 
+            var typeSyntax = _emitter._typeToCSharpConverter.ToCSharp(node.Type);
             var local = new CodeLocal(node.Type);
             var name = AllocateName(null);
             _emitter._assignedNames[local] = name;
@@ -209,9 +208,18 @@ internal partial class CSharpEmitter
             _statements.Add(() => statement);
 
             var atom = new Atom(name, name, local);
-            _dedup[dedupKey] = atom;
+            _dedup[DedupKey(keyCode, node)] = atom;
             return atom;
         }
+
+        /// <summary>The local an earlier <see cref="Hoist"/> in this scope assigned the same
+        /// value to: code that keys as <paramref name="keyCode"/>, of the type of
+        /// <paramref name="node"/>.</summary>
+        private bool TryGetHoisted(string keyCode, CodeExpression node, [NotNullWhen(true)] out Atom? existing) =>
+            _dedup.TryGetValue(DedupKey(keyCode, node), out existing);
+
+        private string DedupKey(string keyCode, CodeExpression node) =>
+            $"{keyCode}::{_emitter._typeToCSharpConverter.ToCSharp(node.Type)}";
 
         private Atom HoistLocalFunction(CodeLambda lambda)
         {
@@ -331,20 +339,25 @@ internal partial class CSharpEmitter
                 || !typeSwitch.Arms.All(arm => CanPatternMatch(GetPrintedType(operand.Node), arm.Narrowed.Type)))
                 operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
 
-            foreach (var arm in typeSwitch.Arms)
-            {
-                _emitter._assignedNames[arm.Narrowed] = _emitter.BindsPatternVariable(arm.Narrowed)
-                    ? AllocateName(arm.Narrowed.NameHint)
-                    : _emitter.PrintNarrowingCast(operand, arm.Narrowed);
-            }
-
             if (typeSwitch.Arms.All(arm => ArmPrintsInline(arm.Body)) && ArmPrintsInline(typeSwitch.Otherwise))
             {
+                // The dedup key names each arm's pattern variable by its position, not by a name
+                // from the sequence, so a repeat of the same switch keys the same as the first
+                // and reuses its local before burning any names of its own.
+                var keyOperand = operand with { Code = operand.KeyCode };
+                NameArms(typeSwitch, keyOperand, i => $"<arm{i}>");
+                var keyCode = _emitter.PrintTypeSwitchExpression(typeSwitch, keyOperand);
+                if (!tailPosition && TryGetHoisted(keyCode, typeSwitch, out var existing))
+                    return existing;
+
+                NameArms(typeSwitch, operand, i => AllocateName(typeSwitch.Arms[i].Narrowed.NameHint));
                 var code = _emitter.PrintTypeSwitchExpression(typeSwitch, operand);
                 // A switch expression has no natural type when its arms disagree, so it may only
                 // print where it is target-typed: a declaration of its type, or a return.
-                return tailPosition ? new Atom(code, typeSwitch) : Hoist(code, code, typeSwitch);
+                return tailPosition ? new Atom(code, typeSwitch) : Hoist(code, keyCode, typeSwitch);
             }
+
+            NameArms(typeSwitch, operand, i => AllocateName(typeSwitch.Arms[i].Narrowed.NameHint));
 
             if (tailPosition)
             {
@@ -360,6 +373,22 @@ internal partial class CSharpEmitter
             _statements.Add(() => $"{_emitter._typeToCSharpConverter.ToCSharp(typeSwitch.Type)} {resultName};");
             _statements.Add(() => RenderTypeSwitchChain(resultName, typeSwitch, operand));
             return new Atom(resultName, resultLocal);
+        }
+
+        /// <summary>
+        /// Names what each arm's narrowed value prints as: the pattern variable named by
+        /// <paramref name="patternVariableName"/> (given the arm's index), or, for an arm that
+        /// binds none, a cast of <paramref name="operand"/>.
+        /// </summary>
+        private void NameArms(CodeTypeSwitch typeSwitch, Atom operand, Func<int, string> patternVariableName)
+        {
+            for (var i = 0; i < typeSwitch.Arms.Count; i++)
+            {
+                var narrowed = typeSwitch.Arms[i].Narrowed;
+                _emitter._assignedNames[narrowed] = _emitter.BindsPatternVariable(narrowed)
+                    ? patternVariableName(i)
+                    : _emitter.PrintNarrowingCast(operand, narrowed);
+            }
         }
 
         /// <summary>

@@ -35,11 +35,20 @@
   read as the value of the `qicore-recorded` extension's value) now resolves to `System.DateTime`,
   as QI-Core declares it, rather than to `FHIR.dateTime`.
 
+- **`FHIR.positiveInt` and `FHIR.unsignedInt` resolve to their own classes.** They resolved to
+  `Integer`, but the SDK's `PositiveInt` and `UnsignedInt` are not `Integer`s, so a real value of
+  either never passed a test for its type: `x is FHIR.positiveInt` was false for every
+  `positiveInt`, `x as FHIR.positiveInt` was `null`, and FHIRHelpers' `ToValue` returned a
+  `positiveInt` or `unsignedInt` value's FHIR instance instead of its `Integer` value. They now
+  resolve to `PositiveInt` and `UnsignedInt`. A test for `FHIR.integer` still does not match them,
+  although the CQL model declares them its subtypes (#1680).
+
   **This changes generated C#**: `GeneratorToolVersion` moves to `5.3.2.0` (patch: the generated API
   is unchanged), and every checked-in `*.g.cs` with a choice-typed property access is regenerated.
 
   **This changes CQL evaluation results.** At former late-bound sites, an empty list-valued element
   now evaluates to the empty list rather than to `null`, and a conversion that fails inside an arm
   now surfaces instead of degrading to `null`. A primitive's value read without an ELM result type
-  now has its System type rather than the .NET model's. Per [versioning.md](../../versioning.md) this
+  now has its System type rather than the .NET model's. A test for, or cast to, `FHIR.positiveInt` or
+  `FHIR.unsignedInt` now matches real values of those types. Per [versioning.md](../../versioning.md) this
   forces a **MESO** bump. (#1647)

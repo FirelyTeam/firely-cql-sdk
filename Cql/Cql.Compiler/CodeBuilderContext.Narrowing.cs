@@ -145,8 +145,8 @@ partial class CodeBuilderContext
 
             runLength++;
 
-            // A test for a type an earlier test already covers can never succeed (FHIR's
-            // positiveInt and unsignedInt both bind to Integer): its branch is unreachable.
+            // A test for a type an earlier test already covers can never succeed (an Age after a
+            // Quantity, or two types that resolve to one class): its branch is unreachable.
             if (run.Any(earlier => earlier.Narrowed.Type.IsAssignableFrom(narrowed.Type)))
                 continue;
 

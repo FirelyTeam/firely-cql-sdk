@@ -186,20 +186,20 @@ public partial class CMS124FHIRCervicalCancerScreen_1_0_000 : ILibrary, ISinglet
             DataType x_ = @this?.Value;
             return x_ switch
             {
-                Instant y_ => context.Operators.Convert<CqlDateTime>(y_.Value),
-                FhirDecimal z_ => z_.Value,
-                Date aa_ => context.Operators.ConvertStringToDate(aa_.Value),
-                FhirDateTime ab_ => context.Operators.Convert<CqlDateTime>(ab_),
-                Time ac_ => context.Operators.ConvertStringToTime(ac_.Value),
-                Base64Binary ad_ => context.Operators.Convert<string>(ad_.Value),
-                FhirBoolean ae_ => ae_.Value,
-                IValue<int?> af_ => af_.Value,
-                IValue<string> ag_ => ag_.Value,
+                Base64Binary y_ => context.Operators.Convert<string>(y_.Value),
+                FhirBoolean z_ => z_.Value,
+                ContactPoint aa_ => aa_.ValueElement,
+                Date ab_ => context.Operators.ConvertStringToDate(ab_.Value),
+                FhirDateTime ac_ => context.Operators.Convert<CqlDateTime>(ac_),
+                FhirDecimal ad_ => ad_.Value,
+                Identifier ae_ => ae_.ValueElement,
+                Instant af_ => context.Operators.Convert<CqlDateTime>(af_.Value),
+                Money ag_ => ag_.ValueElement,
                 Quantity ah_ => ah_.ValueElement,
-                Identifier ai_ => ai_.ValueElement,
-                Money aj_ => aj_.ValueElement,
+                Time ai_ => context.Operators.ConvertStringToTime(ai_.Value),
+                IValue<int?> aj_ => aj_.Value,
                 UsageContext ak_ => ak_.Value,
-                ContactPoint al_ => al_.ValueElement,
+                IValue<string> al_ => al_.Value,
                 _ => null,
             };
         }

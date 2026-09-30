@@ -771,17 +771,10 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
                 };
                 CqlDateTime ay_ = context.Operators.Convert<CqlDateTime>(ax_);
                 bool? az_ = context.Operators.SameOrBefore(au_, ay_, "day");
-                FhirDateTime bc_ = LowInterventionsOrdered switch
-                {
-                    MedicationRequest ba_ => ba_.AuthoredOnElement,
-                    ServiceRequest bb_ => bb_.AuthoredOnElement,
-                    _ => null,
-                };
-                CqlDateTime bd_ = context.Operators.Convert<CqlDateTime>(bc_);
-                CqlInterval<CqlDateTime> be_ = this.Measurement_Period(context);
-                bool? bf_ = context.Operators.In<CqlDateTime>(bd_, be_, "day");
-                bool? bg_ = context.Operators.And(az_, bf_);
-                return bg_;
+                CqlInterval<CqlDateTime> ba_ = this.Measurement_Period(context);
+                bool? bb_ = context.Operators.In<CqlDateTime>(ay_, ba_, "day");
+                bool? bc_ = context.Operators.And(az_, bb_);
+                return bc_;
             }
 
             bool? aq_ = context.Operators.WhereAny<Condition>(ao_, ap_);
