@@ -262,8 +262,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private Property navigateIntoChoice(Expression source, Elm.ChoiceTypeSpecifier cts, string memberName)
         {
             // Each alternative is probed on a stand-in reference, so that the "member not found"
-            // errors of the alternatives that lack the member stay off the resulting Property.
-            var members = (cts.choice ?? [])
+            // errors of the alternatives that lack the member stay off the resulting Property. A
+            // nested choice is flattened first: probed whole, the error of a list alternative
+            // inside it would drop the nested choice as though it did not have the member.
+            var members = ElmFactory.FlattenChoice(cts)
                 .Select(alternative => (alternative, member: navigateIntoType(new AliasRef { name = "$this" }.WithResultType(alternative), memberName)))
                 .Where(probe => probe.member.GetErrors().Length == 0)
                 .ToArray();
