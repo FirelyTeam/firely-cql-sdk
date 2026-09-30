@@ -490,7 +490,6 @@ namespace CoreTests
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
             StringAssert.Contains(cSharp, "IdElement");
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "A path known on the static type must not be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(new Medication { Id = "med-1" });
             CollectionAssert.AreEqual(new[] { "med-1" }, ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList());
@@ -510,7 +509,6 @@ namespace CoreTests
             Assert.AreEqual(1, ArmsTesting(cSharp, "ResourceReference"), cSharp);
             StringAssert.Contains(cSharp, "ReferenceElement");
             StringAssert.Contains(cSharp, "IEnumerable<string>");
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice is known, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(
                 new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") },
@@ -550,7 +548,6 @@ namespace CoreTests
             Assert.AreEqual(1, ArmsTesting(cSharp, "ServiceRequest"), cSharp);
             StringAssert.Contains(cSharp, "AuthoredOnElement");
             StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime>");
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Both alternatives of the union are known, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(
                 new Procedure { Id = "p-1", Status = EventStatus.Completed, Subject = new ResourceReference("Patient/1") },
@@ -589,7 +586,6 @@ namespace CoreTests
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
             Assert.AreEqual(0, ArmsTesting(cSharp, "Period"), "Period has no value element, so it gets no branch:\n" + cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative of the choice element is known, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(
                 new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") },
@@ -620,7 +616,6 @@ namespace CoreTests
             StringAssert.Contains(cSharp, "IEnumerable<CqlDateTime> Values(");
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "Instant"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
 
             var bundle = BundleOf(
                 new Observation { Id = "o-1", Status = ObservationStatus.Final, Code = new CodeableConcept(), Subject = new ResourceReference("Patient/1"), Effective = new FhirDateTime("2026-02-01") },
@@ -1123,7 +1118,6 @@ namespace CoreTests
 
             Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "The inner query's elements are a known choice, so nothing may be late-bound:\n" + cSharp);
 
             var bundle = BundleOf(new Condition { Id = "c-1", Subject = new ResourceReference("Patient/1"), Onset = new FhirDateTime("2026-02-01") });
             var values = ((System.Collections.IEnumerable)invoke(bundle)).Cast<object>().ToList();
@@ -1148,7 +1142,6 @@ namespace CoreTests
 
             Assert.AreEqual(1, ArmsTesting(cSharp, "Quantity"), "both quantity alternatives resolve to Quantity, so there is one branch for it:\n" + cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
 
             var patient = new Patient { Id = "1" };
             patient.Extension.Add(new Extension("http://example.org/quantity", new Quantity(3m, "mg")));
@@ -1220,7 +1213,6 @@ namespace CoreTests
 
             Assert.AreEqual(0, ArmsTesting(cSharp, "Integer"), "no alternative is an Integer:\n" + cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "IValue<int?>"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), cSharp);
 
             var patient = new Patient { Id = "1" };
             patient.Extension.Add(new Extension("http://example.org/positive", new PositiveInt(5)));
@@ -1299,7 +1291,6 @@ namespace CoreTests
             Assert.AreEqual(1, ArmsTesting(cSharp, "Age"), cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirDateTime"), cSharp);
             Assert.AreEqual(1, ArmsTesting(cSharp, "FhirString"), cSharp);
-            Assert.IsFalse(cSharp.Contains("LateBoundProperty"), "Every alternative the ELM declares is known, so nothing may be late-bound:\n" + cSharp);
         }
 
         [TestMethod]
@@ -1338,10 +1329,103 @@ namespace CoreTests
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Value");
 
-            Assert.IsFalse(cSharp.Contains("\"medication.reference"), "No late-bound call may carry a dotted name:\n" + cSharp);
+            Assert.IsFalse(cSharp.Contains("\"medication.reference"), "The path binds segment by segment:\n" + cSharp);
 
             var bundle = BundleOf(new MedicationRequest { Id = "mr-1", Medication = new ResourceReference("Medication/med-1") });
             Assert.AreEqual("Medication/med-1", invoke(bundle));
+        }
+
+        [TestMethod]
+        public void Property_ThatTheSourcesTypeDoesNotHave_FailsTheBuild()
+        {
+            // [Condition] R return R.nonexistent
+            var elmLibrary = QueryLibrary("UnboundOnType", RetrieveOf("Condition"), new Hl7.Cql.Elm.Property { scope = "R", path = "nonexistent" });
+
+            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+        }
+
+        [TestMethod]
+        public void Property_OnASourceOfUnknownType_FailsTheBuild()
+        {
+            // from { 5 as Any } R return R.code: R is an Any, which is no choice with known alternatives.
+            var values = new Hl7.Cql.Elm.List
+            {
+                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = Hl7.Cql.Elm.SystemTypes.AnyType },
+                element =
+                [
+                    new Hl7.Cql.Elm.As
+                    {
+                        asTypeSpecifier = Hl7.Cql.Elm.SystemTypes.AnyType,
+                        resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.AnyType,
+                        operand = new Hl7.Cql.Elm.Literal { valueType = Hl7.Cql.Elm.SystemTypes.IntegerType.name, resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name, value = "5" },
+                    },
+                ],
+            };
+            var elmLibrary = QueryLibrary("UnboundOnAny", values, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
+
+            AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known");
+        }
+
+        [TestMethod]
+        public void Property_OnChoiceWhoseElementDoesNotConvertToTheExpectedType_FailsTheBuild()
+        {
+            // ([Condition] X return X.onset) R return R.value, typed by the ELM as a Boolean, which the
+            // value of no alternative converts to.
+            var elmLibrary = QueryLibrary(
+                "UnboundConversion",
+                OnsetsOfConditions(),
+                new Hl7.Cql.Elm.Property { scope = "R", path = "value", resultTypeSpecifier = Hl7.Cql.Elm.SystemTypes.BooleanType });
+
+            AssertUnboundProperty(elmLibrary, "value", "its type on ");
+        }
+
+        [TestMethod]
+        public void Sort_ByAColumnTheElementsDoNotHave_FailsTheBuild()
+        {
+            // [Condition] R sort by nonexistent
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "UnboundSortColumn", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Values",
+                        context = "Patient",
+                        expression = new Hl7.Cql.Elm.Query
+                        {
+                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Condition") }],
+                            sort = new Hl7.Cql.Elm.SortClause
+                            {
+                                by =
+                                [
+                                    new Hl7.Cql.Elm.ByColumn
+                                    {
+                                        direction = Hl7.Cql.Elm.SortDirection.asc,
+                                        path = "nonexistent",
+                                        resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name,
+                                    },
+                                ],
+                            },
+                        },
+                    },
+                ],
+            };
+
+            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+        }
+
+        /// <summary>
+        /// Asserts that compiling <paramref name="elmLibrary"/> fails because <paramref name="property"/>
+        /// cannot be bound at compile time, for a reason that starts with <paramref name="reason"/>.
+        /// </summary>
+        private static void AssertUnboundProperty(Library elmLibrary, string property, string reason)
+        {
+            var exception = Assert.ThrowsException<Hl7.Cql.Exceptions.CqlException<Hl7.Cql.Compiler.ExpressionBuildingError>>(
+                () => CompileLibrary(elmLibrary, "Values"));
+            StringAssert.Contains(exception.Message, $"Property {property} cannot be bound at compile time: {reason}");
         }
 
         /// <summary>

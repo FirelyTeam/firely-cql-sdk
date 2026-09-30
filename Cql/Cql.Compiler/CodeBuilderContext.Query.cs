@@ -612,7 +612,7 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-                return LateBoundProperty(source, path!, expectedType, element: _elementStack.TryPeek(out var current) ? current : null);
+                throw UnboundElement(path!, source.Type, _elementStack.TryPeek(out var current) ? current : null);
 
             if (!pathMemberInfo.DeclaringType!.IsAssignableFrom(source.Type)) // the property is on a derived type, so cast it
             {
