@@ -1220,16 +1220,13 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            // An uncertain comparison leaves that adjacency unknown; a definite adjacency elsewhere still
-            // decides true, and a boundary without a value is definitely not adjacent to anything.
-            var meetsBefore = OrAllowingUnknown(
-                SameBoundaryValue(left.high, right.low, precision),
-                SameBoundaryValue(left.high, right.low is { } rightLow ? predecessor(rightLow) : default, precision));
-            var meetsAfter = OrAllowingUnknown(
-                SameBoundaryValue(left.low, right.high, precision),
-                SameBoundaryValue(left.low is { } leftLow ? predecessor(leftLow) : default, right.high, precision));
+            // A definite adjacency on either side decides true; otherwise an uncertain candidate leaves the
+            // result unknown, and a boundary without a value is definitely not adjacent to anything.
+            var meetsBefore = MeetsAtBoundary(left.high, right.low, precision, predecessor);
+            if (meetsBefore == true)
+                return true;
 
-            return OrAllowingUnknown(meetsBefore, meetsAfter);
+            return OrAllowingUnknown(meetsBefore, MeetsAtBoundary(right.high, left.low, precision, predecessor));
         }
 
         #endregion
@@ -1307,8 +1304,12 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
+            var same = SameBoundaryValue(left.low, right.high, precision);
+            if (same == true)
+                return true;
+
             return OrAllowingUnknown(
-                SameBoundaryValue(left.low, right.high, precision),
+                same,
                 (left.lowClosed ?? false) && (right.highClosed ?? false) && left.low is { } low
                     ? SameBoundaryValue(predecessor(low), right.high, precision)
                     : false);
@@ -1412,8 +1413,12 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
+            var same = SameBoundaryValue(left.high, right.low, precision);
+            if (same == true)
+                return true;
+
             return OrAllowingUnknown(
-                SameBoundaryValue(left.high, right.low, precision),
+                same,
                 (right.lowClosed ?? false) && (left.highClosed ?? false) && right.low is { } low
                     ? SameBoundaryValue(left.high, predecessor(low), precision)
                     : false);
@@ -1673,6 +1678,20 @@ namespace Hl7.Cql.Operators
         /// </summary>
         private bool? SameBoundaryValue<T>(T? x, T? y, string? precision) =>
             x is null || y is null ? false : SameBoundary(Comparer.Compare(x, y, precision));
+
+        /// <summary>
+        /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>:
+        /// the end is the start itself or its predecessor. The predecessor is only computed when the direct
+        /// comparison does not already decide it.
+        /// </summary>
+        private bool? MeetsAtBoundary<T>(T? end, T? start, string? precision, Func<T, T> predecessor)
+        {
+            var same = SameBoundaryValue(end, start, precision);
+            if (same == true)
+                return true;
+
+            return OrAllowingUnknown(same, SameBoundaryValue(end, start is { } value ? predecessor(value) : default, precision));
+        }
 
         /// <summary>
         /// The possible values of an interval's low boundary: a single value when known

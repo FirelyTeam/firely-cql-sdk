@@ -70,17 +70,39 @@ namespace CoreTests
             Assert.AreEqual(false, Context.Operators.Overlaps(Closed("2012-04-01", "2012-05"), Closed("2012-02", "2012-03-15"), null));
 
         [TestMethod]
-        public void Overlaps_AtAPrecisionBothBoundariesHave_IsDecided() =>
-            // At day precision the boundaries compare as equal days, so the comparison is certain.
+        public void Overlaps_AtAnExplicitPrecision_ComparesMixedPrecisionBoundariesAtThatPrecision()
+        {
+            // The same boundaries that are uncertain without a precision compare as equal months at
+            // month precision, so the comparison is certain.
+            Assert.AreEqual(true, Context.Operators.Overlaps(Closed("2012-01-25", "2012-02-26"), Closed("2012-02", "2012-03-28"), "month"));
             Assert.AreEqual(true, Context.Operators.Overlaps(Closed("2012-01-25", "2012-02-26T10"), Closed("2012-02-26T12", "2012-03-28"), "day"));
+        }
 
         [TestMethod]
         public void OverlapsBefore_EndUncertainAgainstTheOtherStart_IsNull() =>
             Assert.IsNull(Context.Operators.OverlapsBefore(Closed("2012-01-25", "2012-02-26"), Closed("2012-02", "2012-03-28"), null));
 
         [TestMethod]
+        public void OverlapsBefore_Decided_KeepsItsAnswer()
+        {
+            // Both comparisons certain: starts before and ends inside the other (true); starts after it (false).
+            Assert.AreEqual(true, Context.Operators.OverlapsBefore(Closed("2012-01-25", "2012-02-26"), Closed("2012-02-10", "2012-03-28"), null));
+            Assert.AreEqual(false, Context.Operators.OverlapsBefore(Closed("2012-03-01", "2012-04"), Closed("2012-02-10", "2012-03-28"), null));
+            // The uncertain comparison becomes certain at month precision.
+            Assert.AreEqual(true, Context.Operators.OverlapsBefore(Closed("2012-01-25", "2012-02-26"), Closed("2012-02", "2012-03-28"), "month"));
+        }
+
+        [TestMethod]
         public void OverlapsAfter_StartUncertainAgainstTheOtherEnd_IsNull() =>
             Assert.IsNull(Context.Operators.OverlapsAfter(Closed("2012-02", "2012-03-28"), Closed("2012-01-25", "2012-02-26"), null));
+
+        [TestMethod]
+        public void OverlapsAfter_Decided_KeepsItsAnswer()
+        {
+            Assert.AreEqual(true, Context.Operators.OverlapsAfter(Closed("2012-02-10", "2012-03-28"), Closed("2012-01-25", "2012-02-26"), null));
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(Closed("2012-01", "2012-02-10"), Closed("2012-01-25", "2012-02-26"), null));
+            Assert.AreEqual(true, Context.Operators.OverlapsAfter(Closed("2012-02", "2012-03-28"), Closed("2012-01-25", "2012-02-26"), "month"));
+        }
 
         [TestMethod]
         public void Meets_EndUncertainAgainstTheOtherStart_IsNull()
@@ -92,11 +114,34 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Meets_DefinitelyAdjacent_IsTrue() =>
-            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-01-15", "2012-01-25"), null));
+        public void Meets_DefiniteAdjacency_WinsOverAnUncertainCandidate() =>
+            // The first interval's low (2012-01) against the second's high (2012-01-25) is uncertain, but its
+            // high (2012-01-14) is definitely the predecessor of the second's low (2012-01-15).
+            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01", "2012-01-14"), Closed("2012-01-15", "2012-01-25"), null));
 
         [TestMethod]
-        public void Meets_DefinitelyApart_IsFalse() =>
+        public void Meets_AtAnExplicitPrecision_ComparesMixedPrecisionBoundariesAtThatPrecision()
+        {
+            // At month precision 2012-01-14 and 2012-01 are the same month, so the intervals meet.
+            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-01", "2012-01-25"), "month"));
+            Assert.AreEqual(true, Context.Operators.MeetsBefore(Closed("2012-01-07", "2012-01-14"), Closed("2012-01", "2012-01-25"), "month"));
+            Assert.AreEqual(true, Context.Operators.MeetsAfter(Closed("2012-01", "2012-01-25"), Closed("2012-01-07", "2012-01-14"), "month"));
+        }
+
+        [TestMethod]
+        public void Meets_DefinitelyAdjacent_IsTrue()
+        {
+            Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-01-15", "2012-01-25"), null));
+            Assert.AreEqual(true, Context.Operators.MeetsBefore(Closed("2012-01-07", "2012-01-14"), Closed("2012-01-15", "2012-01-25"), null));
+            Assert.AreEqual(true, Context.Operators.MeetsAfter(Closed("2012-01-15", "2012-01-25"), Closed("2012-01-07", "2012-01-14"), null));
+        }
+
+        [TestMethod]
+        public void Meets_DefinitelyApart_IsFalse()
+        {
             Assert.AreEqual(false, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-03", "2012-03-25"), null));
+            Assert.AreEqual(false, Context.Operators.MeetsBefore(Closed("2012-01-07", "2012-01-14"), Closed("2012-03", "2012-03-25"), null));
+            Assert.AreEqual(false, Context.Operators.MeetsAfter(Closed("2012-03", "2012-03-25"), Closed("2012-01-07", "2012-01-14"), null));
+        }
     }
 }
