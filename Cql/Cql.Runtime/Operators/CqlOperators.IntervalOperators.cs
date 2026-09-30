@@ -902,16 +902,21 @@ namespace Hl7.Cql.Operators
 
             // "For open interval boundaries, exclusive comparison operators are used. For closed interval boundaries,
             // if the interval boundary is null, the result of the boundary comparison is considered true." (CQL 1.5.3
-            // Errata 2, Appendix B - CQL Reference, section "In"). The boundaries are compared as given, not as the
-            // effective ones: stepping an open boundary inward by one unit of its own precision would turn the exclusive
-            // comparison into an inclusive one whenever the comparison runs at a coarser precision. An open boundary
-            // without a value leaves its comparison unknown.
+            // Errata 2, Appendix B - CQL Reference, section "In"). An open boundary without a value is unknown, and so
+            // is the result. The boundaries are compared as given, not as the effective ones: stepping an open boundary
+            // inward by one unit of its own precision would turn the exclusive comparison into an inclusive one whenever
+            // the comparison runs at a coarser precision. A point that compares as unknown against a boundary (such as
+            // one less precise than the boundary that matches it at the point's precision, or quantities with
+            // incommensurable units) leaves that boundary's predicate unknown.
+            if (IsUnknownBoundary(interval.low, interval.lowClosed) || IsUnknownBoundary(interval.high, interval.highClosed))
+                return null;
+
             var point = Boundary<T>.Of(t);
             var low = interval.low is { } lowValue
                 ? interval.lowClosed ?? false
                     ? IsAtOrBefore(Boundary<T>.Of(lowValue), point, precision)
                     : IsBefore(Boundary<T>.Of(lowValue), point, precision)
-                : interval.lowClosed ?? false ? true : null;
+                : true;
             if (low == false)
                 return false;
 
@@ -919,7 +924,7 @@ namespace Hl7.Cql.Operators
                 ? interval.highClosed ?? false
                     ? IsAtOrAfter(Boundary<T>.Of(highValue), point, precision)
                     : IsAfter(Boundary<T>.Of(highValue), point, precision)
-                : interval.highClosed ?? false ? true : null;
+                : true;
 
             return AndAllowingUnknown(low, high);
         }
