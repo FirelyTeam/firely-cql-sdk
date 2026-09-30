@@ -1669,17 +1669,19 @@ namespace Hl7.Cql.Operators
         // Otherwise a null comparison (values of different precision that agree at the coarser one)
         // leaves the predicate unknown.
 
+        /// <summary>
+        /// Applies a predicate to a comparison result, keeping an unknown comparison (<c>null</c>) unknown.
+        /// </summary>
+        private static bool? Decide(int? comparison, Func<int, bool> predicate) =>
+            comparison is { } known ? predicate(known) : null;
+
         /// <summary>Whether a high boundary is at or after a low boundary; true when either is the extreme.</summary>
         private bool? HighReachesLow<T>(T? high, T? low, string? precision) =>
-            high is null || low is null
-                ? true
-                : Comparer.Compare(high, low, precision) switch { null => null, >= 0 => true, _ => false };
+            high is null || low is null ? true : Decide(Comparer.Compare(high, low, precision), static c => c >= 0);
 
         /// <summary>Whether a low boundary is at or before a high boundary; true when either is the extreme.</summary>
         private bool? LowReachesHigh<T>(T? low, T? high, string? precision) =>
-            low is null || high is null
-                ? true
-                : Comparer.Compare(low, high, precision) switch { null => null, <= 0 => true, _ => false };
+            low is null || high is null ? true : Decide(Comparer.Compare(low, high, precision), static c => c <= 0);
 
         /// <summary>
         /// Whether one high boundary is strictly after another. Nothing is after the maximum, so a missing
@@ -1687,18 +1689,14 @@ namespace Hl7.Cql.Operators
         /// uncertain only against a value that reaches it at its own precision.
         /// </summary>
         private bool? HighAfterHigh<T>(T? high, T? other, string? precision) =>
-            other is null
-                ? false
-                : Comparer.Compare(high ?? MaxValue<T>()!, other, precision) switch { null => null, > 0 => true, _ => false };
+            other is null ? false : Decide(Comparer.Compare(high ?? MaxValue<T>()!, other, precision), static c => c > 0);
 
         /// <summary>
         /// Whether one low boundary is strictly before another. Nothing is before the minimum, so a missing
         /// second boundary decides false; a missing first boundary is compared as the minimum value.
         /// </summary>
         private bool? LowBeforeLow<T>(T? low, T? other, string? precision) =>
-            other is null
-                ? false
-                : Comparer.Compare(low ?? MinValue<T>()!, other, precision) switch { null => null, < 0 => true, _ => false };
+            other is null ? false : Decide(Comparer.Compare(low ?? MinValue<T>()!, other, precision), static c => c < 0);
 
         /// <summary>
         /// Whether two boundary values are the same point: unknown when their comparison is, and
@@ -1978,12 +1976,7 @@ namespace Hl7.Cql.Operators
         }
 
         private static bool? SameBoundary(int? comparison) =>
-            comparison switch
-            {
-                null => null,
-                0    => true,
-                _    => false,
-            };
+            Decide(comparison, static c => c == 0);
 
         /// <summary>
         /// Whether both boundaries of the interval are known once it is normalised to closed
