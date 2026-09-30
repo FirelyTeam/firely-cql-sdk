@@ -25,6 +25,20 @@ namespace Hl7.Cql.Packaging;
 internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary focusLibrary)
 {
     /// <summary>
+    /// Caches the direct (non-transitive) data requirements produced by walking a single library's
+    /// own ELM nodes, keyed by the <see cref="ElmLibrary"/> instance. Analyzing a library's own
+    /// nodes is a pure function of that library's content (it does not depend on which focus
+    /// library triggered the walk), but <see cref="Visit(ElmLibrary,List{DataRequirement})"/>
+    /// previously re-walked every dependency's ELM tree from scratch for each focus library that
+    /// (transitively) depends on it. Since large library sets share common dependencies across
+    /// hundreds of libraries (e.g. HEDIS "Elements"/"Concepts" shared libraries), this made
+    /// packaging quadratic-ish in the number of libraries; caching each library's own direct
+    /// requirements avoids the redundant re-walking. <see cref="System.Runtime.CompilerServices.ConditionalWeakTable{TKey,TValue}"/>
+    /// is used so cached entries do not outlive the <see cref="ElmLibrary"/> instances they're keyed by.
+    /// </summary>
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>> _directRequirementsCache = new();
+
+    /// <summary>
     /// Visits the ELM in the LibrarySet and extracts the DataRequirements from it.
     /// </summary>
     public IReadOnlyCollection<DataRequirement> Analyze()
@@ -37,8 +51,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
     private void Visit(ElmLibrary library, List<DataRequirement> allRequirements)
     {
-        var walker = new Elm.ElmTreeWalker(n => Visit(library, allRequirements, n));
-        walker.Start(library);
+        allRequirements.AddRange(GetDirectRequirements(library));
 
         var dependencies = librarySet.GetLibraryDependencies(library);
         foreach (var dependency in dependencies)
@@ -46,6 +59,21 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
             Visit(dependency, allRequirements);
         }
     }
+
+    /// <summary>
+    /// Gets (computing and caching if necessary) the data requirements produced by walking only
+    /// <paramref name="library"/>'s own ELM nodes -- not its dependencies. Safe to call
+    /// concurrently for different libraries; <see cref="System.Runtime.CompilerServices.ConditionalWeakTable{TKey,TValue}.GetValue"/>
+    /// guarantees a single factory result is published per key even if the factory races.
+    /// </summary>
+    private List<DataRequirement> GetDirectRequirements(ElmLibrary library) =>
+        _directRequirementsCache.GetValue(library, lib =>
+        {
+            var direct = new List<DataRequirement>();
+            var walker = new Elm.ElmTreeWalker(n => Visit(lib, direct, n));
+            walker.Start(lib);
+            return direct;
+        });
 
     private bool Visit(
         ElmLibrary library,
@@ -82,8 +110,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         // Set code path if specified
         if (retrieve.codeProperty is { } codeProperty)
         {
-            if (codeFilterBuilder.ToCodeFilterComponent(codeProperty, retrieve.codes) is { } codeFilter)
-                dr.CodeFilter.Add(codeFilter);
+            dr.CodeFilter.Add(
+                codeFilterBuilder.ToCodeFilterComponent(codeProperty, retrieve.codes));
 
             ps.Add(codeProperty);
         }
@@ -93,13 +121,13 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         {
             foreach (var cfe in retrieve.codeFilter)
             {
-                if (codeFilterBuilder.ToCodeFilterComponent(cfe.property, cfe.value) is { } codeFilter)
-                    dr.CodeFilter.Add(codeFilter);
+                dr.CodeFilter.Add(
+                    codeFilterBuilder.ToCodeFilterComponent(cfe.property, cfe.value));
             }
         }
 
         // Add any properties as mustSupport items
-        dr.MustSupportElement = [..ps.Select(s => new FhirString(s))];
+        dr.MustSupportElement = [.. ps.Select(s => new FhirString(s))];
 
         // Only add the requirement if we don't already have it.
         if (!result.Any(r => r.IsExactly(dr)))
@@ -108,7 +136,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         return true;
     }
 
-    private static EqualityComparer<T> GetComparer<T>() where T:Base =>
+    private static EqualityComparer<T> GetComparer<T>() where T : Base =>
         EqualityComparer<T>.Create((a, b) => a!.IsExactly(b), _ => 0);
 
     internal static List<DataRequirement> Combine(List<DataRequirement> initialDataRequirements)
@@ -133,19 +161,14 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
         return result;
     }
-    
+
     private static string ToReference(Elm.ValueSetDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
     //   private static string ToReference(Elm.CodeSystemDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
 
 
     private class CodeFilterComponentBuilder(ElmLibrarySet librarySet, ElmLibrary contextLibrary)
     {
-        /// <summary>
-        /// The code filter for a retrieve's terminology, or null when the terminology cannot be
-        /// enumerated statically (an expression reference, a code system), in which case the
-        /// retrieve contributes no code filter.
-        /// </summary>
-        public DataRequirement.CodeFilterComponent? ToCodeFilterComponent(
+        public DataRequirement.CodeFilterComponent ToCodeFilterComponent(
             string property,
             Elm.Expression value)
         {
@@ -164,45 +187,38 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                         throw new UnresolvedReferenceError(contextLibrary, vsr).ToException();
                     break;
                 case Elm.ToList toList:
-                    if (ResolveCodeFilterCodes(toList.operand) is { } codes)
-                        cfc.Code.AddRange(codes);
-                    else
-                        return null;
+                    cfc.Code.AddRange(ResolveCodeFilterCodes(toList.operand));
                     break;
                 case Elm.List codeList:
-                    foreach (var element in codeList.element)
-                    {
-                        if (ResolveCodeFilterCodes(element) is { } elementCodes)
-                            cfc.Code.AddRange(elementCodes);
-                        else
-                            return null;
-                    }
+                    cfc.Code.AddRange(codeList.element.SelectMany(ResolveCodeFilterCodes));
                     break;
                 case Elm.Literal l:
                     // TODO: no system???
                     cfc.Code.Add(new Coding { Code = l.value });
                     break;
                 default:
-                    return null;
+                    throw new NotSupportedException(
+                        $"Unexpected Elm expression of type {value.GetType()} in code filter.");
             }
 
             return cfc;
         }
 
-        private List<Coding>? ResolveCodeFilterCodes(Elm.Expression toListOperand)
+        private List<Coding> ResolveCodeFilterCodes(Elm.Expression toListOperand)
         {
             return toListOperand switch
             {
-                Elm.CodeRef codeRef       => [BuildCoding(codeRef)],
-                Elm.Code code             => [BuildCoding(code)],
+                Elm.CodeRef codeRef => [BuildCoding(codeRef)],
+                Elm.Code code => [BuildCoding(code)],
                 Elm.ConceptRef conceptRef => BuildCodeableConcept(conceptRef).Coding,
-                Elm.Concept concept       => BuildCodeableConcept(concept).Coding,
+                Elm.Concept concept => BuildCodeableConcept(concept).Coding,
                 Elm.Literal literal =>
                     // TODO: no system???
                     [
                         new Coding { Code = literal.value }
                     ],
-                _ => null
+                _ => throw new NotSupportedException(
+                         $"Unexpected Elm expression of type {toListOperand.GetType()} in code filter codes.")
             };
         }
 

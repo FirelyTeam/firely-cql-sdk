@@ -1,12 +1,14 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
+* Copyright (c) 2023, NCQA and contributors
+* See the file CONTRIBUTORS for details.
+*
+* This file is licensed under the BSD 3-Clause license
+* available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+*/
 
 using System.Collections.Concurrent;
+using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
@@ -91,7 +93,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             bool allowInvalidCSharp = false,
             BatchProcessExceptionHandlingStrategyBuilder<(ElmLibrary library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
-            Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
 
             // Materialized once: librariesWithCSharp is a lazy, side-effecting iterator in the
@@ -106,38 +107,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             // from an ImmutableDictionary.Values enumeration, whose order is hash-bucket-driven
             // and varies per process, not insertion-stable).
             var sourceByIdentifier = materialized.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
-            var currentlyCompiling = new HashSet<CqlVersionedLibraryIdentifier>();
 
-            AssemblyBinaryWithSourceCode CompileWithDependenciesFirst(CqlVersionedLibraryIdentifier identifier)
-            {
-                if (results.TryGetValue(identifier, out var existing))
-                    return existing;
-
-                if (!currentlyCompiling.Add(identifier))
-                    throw new InvalidOperationException($"Circular dependency detected involving library '{identifier}'.");
-
-                try
-                {
-                    if (!sourceByIdentifier.TryGetValue(identifier, out var self))
-                        throw new InvalidOperationException(
-                            $"No C# source was generated for library '{identifier}', but it's a declared dependency of another library.");
-
-                    foreach (var dependency in librarySet.GetLibraryDependencies(identifier))
-                        CompileWithDependenciesFirst(dependency.VersionedLibraryIdentifier);
-
-                    var compiled = CompileNode(self.csharp, results, librarySet, self.library, assemblyReferences, debugSymbolsFormat);
-                    results[identifier] = compiled;
-                    return compiled;
-                }
-                finally
-                {
-                    currentlyCompiling.Remove(identifier);
-                }
-            }
+            CompileLibrariesInDependencyWaves(librarySet, assemblyReferences, debugSymbolsFormat, sourceByIdentifier, out var results, out var failures);
 
             return materialized
                 .TrySelect(
-                    t => (t.library, assemblyBinaryWithSourceCode: CompileWithDependenciesFirst(t.library.VersionedLibraryIdentifier)),
+                    t => (t.library, assemblyBinaryWithSourceCode: GetResultOrThrow(t.library.VersionedLibraryIdentifier, results, failures)),
                     buildExceptionHandlingStrategy,
                     allowInvalidCSharp ? YieldWithoutAssemblyBinary : null);
 
@@ -152,6 +127,93 @@ namespace Hl7.Cql.CodeGeneration.NET
                 );
         }
 
+        /// <summary>
+        /// Compiles all libraries in <paramref name="sourceByIdentifier"/> to assemblies, level by
+        /// level in dependency order: within a level, libraries whose dependencies have all
+        /// already been compiled (or failed) are compiled concurrently via <see cref="Parallel.ForEach{TSource}(IEnumerable{TSource},Action{TSource})"/>.
+        /// </summary>
+        /// <remarks>
+        /// Roslyn's <c>Compilation.Emit(...)</c>
+        /// is CPU-bound and each library's compilation is otherwise independent once its
+        /// dependencies are compiled. Large library sets (e.g. hundreds of HEDIS measure/shared
+        /// libraries) previously compiled one library at a time via recursive memoization, which
+        /// made this step dominate the overall build time; compiling independent libraries in
+        /// parallel lets it scale with available cores instead.
+        /// </remarks>
+        private void CompileLibrariesInDependencyWaves(
+            LibrarySet librarySet,
+            Assembly[] assemblyReferences,
+            DebugSymbolsFormat debugSymbolsFormat,
+            Dictionary<CqlVersionedLibraryIdentifier, (ElmLibrary library, string csharp)> sourceByIdentifier,
+            out ConcurrentDictionary<CqlVersionedLibraryIdentifier, AssemblyBinaryWithSourceCode> results,
+            out ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo> failures)
+        {
+            var concurrentResults = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, AssemblyBinaryWithSourceCode>();
+            var concurrentFailures = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo>();
+            results = concurrentResults;
+            failures = concurrentFailures;
+
+            var remaining = new HashSet<CqlVersionedLibraryIdentifier>(sourceByIdentifier.Keys);
+            while (remaining.Count > 0)
+            {
+                var ready = remaining
+                    .Where(id => librarySet.GetLibraryDependencies(id)
+                        .All(dep => !sourceByIdentifier.ContainsKey(dep.VersionedLibraryIdentifier)
+                                    || concurrentResults.ContainsKey(dep.VersionedLibraryIdentifier)
+                                    || concurrentFailures.ContainsKey(dep.VersionedLibraryIdentifier)))
+                    .ToList();
+
+                if (ready.Count == 0)
+                    throw new InvalidOperationException(
+                        $"Circular dependency detected involving one of: {string.Join(", ", remaining)}.");
+
+                Parallel.ForEach(ready, identifier =>
+                {
+                    // If any dependency already failed to compile, don't bother attempting to
+                    // compile this library -- surface that same failure so downstream item-level
+                    // error handling (TrySelect) reports a sensible cause. (CqlVersionedLibraryIdentifier
+                    // is a value type, so FirstOrDefault()+null-check can't be used to detect "not found".)
+                    CqlVersionedLibraryIdentifier? failedDependency = null;
+                    foreach (var dep in librarySet.GetLibraryDependencies(identifier))
+                    {
+                        if (concurrentFailures.ContainsKey(dep.VersionedLibraryIdentifier))
+                        {
+                            failedDependency = dep.VersionedLibraryIdentifier;
+                            break;
+                        }
+                    }
+                    if (failedDependency is { } failedId)
+                    {
+                        concurrentFailures[identifier] = concurrentFailures[failedId];
+                        return;
+                    }
+
+                    try
+                    {
+                        var self = sourceByIdentifier[identifier];
+                        var compiled = CompileNode(self.csharp, concurrentResults, librarySet, self.library, assemblyReferences, debugSymbolsFormat);
+                        concurrentResults[identifier] = compiled;
+                    }
+                    catch (Exception ex)
+                    {
+                        concurrentFailures[identifier] = ExceptionDispatchInfo.Capture(ex);
+                    }
+                });
+
+                remaining.ExceptWith(ready);
+            }
+        }
+
+        private static AssemblyBinaryWithSourceCode GetResultOrThrow(
+            CqlVersionedLibraryIdentifier identifier,
+            ConcurrentDictionary<CqlVersionedLibraryIdentifier, AssemblyBinaryWithSourceCode> results,
+            ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo> failures)
+        {
+            if (failures.TryGetValue(identifier, out var edi))
+                edi.Throw();
+            return results[identifier];
+        }
+
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
             DebugSymbolsFormat debugSymbolsFormat) =>
             new(
@@ -163,7 +225,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private AssemblyBinaryWithSourceCode CompileNode(
             string librarySourceString,
-            Dictionary<string, AssemblyBinaryWithSourceCode> assemblies,
+            IReadOnlyDictionary<CqlVersionedLibraryIdentifier, AssemblyBinaryWithSourceCode> assemblies,
             LibrarySet librarySet,
             ElmLibrary library,
             IEnumerable<Assembly> assemblyReferences,
@@ -196,10 +258,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 else
                 {
                     // Should be structurally unreachable: CompileEachLibraryToAssemblies compiles
-                    // dependencies before dependents via recursive memoization (CompileWithDependenciesFirst),
-                    // not by trusting a pre-computed enumeration order. Fail loudly rather than silently
-                    // drop the reference (which used to surface later as a confusing unrelated CS0103 --
-                    // see firely-cql-sdk#1373).
+                    // dependencies before dependents by scheduling libraries in dependency-order
+                    // waves (CompileLibrariesInDependencyWaves), not by trusting a pre-computed
+                    // enumeration order. Fail loudly rather than silently drop the reference
+                    // (which used to surface later as a confusing unrelated CS0103 -- see
+                    // firely-cql-sdk#1373).
                     throw new InvalidOperationException(
                         $"Library '{libraryVersionedIdentifier}' depends on '{libraryDependency.VersionedLibraryIdentifier}', " +
                         "which has not been compiled yet.");
@@ -223,7 +286,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             using var pdbStreamDisposable = pdbStream as IDisposable;
 
             var emitOptions = CreateEmitOptions(debugSymbolsFormat);
-            var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions, embeddedTexts: embeddedTexts);
+            var compilationResult = compilation.Emit(codeStream, pdbStream, options: emitOptions, embeddedTexts: embeddedTexts);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
@@ -256,7 +319,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             var bytes = codeStream.ToArray();
             var debugSymbols = pdbStream?.ToArray();
-            var asmData = new AssemblyBinaryWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
+            var asmData = new AssemblyBinaryWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString } }, debugSymbols);
             return asmData;
         }
 

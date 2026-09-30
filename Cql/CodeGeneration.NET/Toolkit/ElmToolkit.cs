@@ -105,11 +105,11 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         var count = elmLibraries
                     .Select(elmLibrary => new ElmToolkitArtifacts(elmLibrary))
                     .TryForEach(conversionRecord =>
-                                {
-                                    var libId = conversionRecord.LibraryIdentifier;
-                                    logger.LogInformation("Adding ELM library to ElmToolkit: {lib}", libId);
-                                    builder.Add(libId, conversionRecord); // This fails on duplicate key and value
-                                },
+                    {
+                        var libId = conversionRecord.LibraryIdentifier;
+                        logger.LogInformation("Adding ELM library to ElmToolkit: {lib}", libId);
+                        builder.Add(libId, conversionRecord); // This fails on duplicate key and value
+                    },
                                 errorStrategy => errorStrategy
                                                  .SetContinuation(BatchProcessExceptionContinuation)
                                                  .AddLoggerExceptionHandler(
@@ -145,13 +145,16 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
+        var librarySetDefinitions = BuildLibrarySetDefinitions(servicesScope.LibrarySetCodeBuilder, librarySet);
+
         // Produces one generated C# source per library in the set.
         var cSharps = GenerateCSharp(
             _services.LibrarySetCSharpCodeGenerator,
             librarySet,
-            BuildLibrarySetDefinitions(servicesScope.LibrarySetCodeBuilder, librarySet),
-            cSharpNamespace);
-        var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
+            librarySetDefinitions,
+            cSharpNamespace).ToList();
+
+        var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat).ToList();
 
         var entriesBuilder = _artifactsById.ToBuilder();
         var hasChanged = UpdateArtifacts(assemblyBinaries, entriesBuilder, logger);
