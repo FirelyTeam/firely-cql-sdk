@@ -1220,21 +1220,16 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            // updates to fix returning true because the left.low and right.high are null
-            if (left.high != null || right.low != null)
-            {
-                if (Comparer.Compare(left.high!, right.low!, precision) == 0
-                    || Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
-                    return true;
-            }
-            if (left.low != null || right.high != null)
-            {
-                if (Comparer.Compare(left.low!, right.high!, precision) == 0
-                    || Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
-                    return true;
-            }
+            // An uncertain comparison leaves that adjacency unknown; a definite adjacency elsewhere still
+            // decides true, and a boundary without a value is definitely not adjacent to anything.
+            var meetsBefore = OrAllowingUnknown(
+                SameBoundaryValue(left.high, right.low, precision),
+                SameBoundaryValue(left.high, right.low is { } rightLow ? predecessor(rightLow) : default, precision));
+            var meetsAfter = OrAllowingUnknown(
+                SameBoundaryValue(left.low, right.high, precision),
+                SameBoundaryValue(left.low is { } leftLow ? predecessor(leftLow) : default, right.high, precision));
 
-            return false;
+            return OrAllowingUnknown(meetsBefore, meetsAfter);
         }
 
         #endregion
@@ -1311,14 +1306,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else if (left.low == null && right.high == null)
-                return false;
-            else if (Comparer.Compare(left.low!, right.high!, precision) == 0)
-                return true;
-            else if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
-                return true;
 
-            return false;
+            return OrAllowingUnknown(
+                SameBoundaryValue(left.low, right.high, precision),
+                (left.lowClosed ?? false) && (right.highClosed ?? false) && left.low is { } low
+                    ? SameBoundaryValue(predecessor(low), right.high, precision)
+                    : false);
         }
 
         private bool? MeetsAfterIgnoringClosed<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
@@ -1418,13 +1411,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else if (left.high == null && right.low == null)
-                return false;
-            else if (Comparer.Compare(left.high!, right.low!, precision) == 0)
-                return true;
-            else if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
-                return true;
-            else return false;
+
+            return OrAllowingUnknown(
+                SameBoundaryValue(left.high, right.low, precision),
+                (right.lowClosed ?? false) && (left.highClosed ?? false) && right.low is { } low
+                    ? SameBoundaryValue(left.high, predecessor(low), precision)
+                    : false);
         }
 
         #endregion
@@ -1634,10 +1626,20 @@ namespace Hl7.Cql.Operators
             // only null closed boundaries are interpreted as the minimum/maximum value.
             bool? startsBeforeEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.low, right.lowClosed)
                 ? RangeGreaterOrEqual(HighBoundaryRange(left), LowBoundaryRange(right), precision)
-                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) >= 0;
+                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    >= 0 => true,
+                    _    => false,
+                };
             bool? endsAfterStart = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
                 ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0;
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    <= 0 => true,
+                    _    => false,
+                };
 
             return AndAllowingUnknown(startsBeforeEnd, endsAfterStart);
         }
@@ -1656,6 +1658,21 @@ namespace Hl7.Cql.Operators
                 (null, _) or (_, null)   => null,
                 _                        => true,
             };
+
+        private static bool? OrAllowingUnknown(bool? left, bool? right) =>
+            (left, right) switch
+            {
+                (true, _) or (_, true) => true,
+                (null, _) or (_, null) => null,
+                _                      => false,
+            };
+
+        /// <summary>
+        /// Whether two boundary values are the same point: unknown when their comparison is, and
+        /// false when either has no value.
+        /// </summary>
+        private bool? SameBoundaryValue<T>(T? x, T? y, string? precision) =>
+            x is null || y is null ? false : SameBoundary(Comparer.Compare(x, y, precision));
 
         /// <summary>
         /// The possible values of an interval's low boundary: a single value when known
@@ -1751,10 +1768,20 @@ namespace Hl7.Cql.Operators
             // with an unbounded end never overlapped after anything).
             bool? startsBeforeEnd = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right.high, right.highClosed)
                 ? RangeLessOrEqual(LowBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0;
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    <= 0 => true,
+                    _    => false,
+                };
             bool? endsAfterEnd = IsUnknownBoundary(left.high, left.highClosed) || IsUnknownBoundary(right.high, right.highClosed)
                 ? RangeGreaterThan(HighBoundaryRange(left), HighBoundaryRange(right), precision)
-                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0;
+                : Comparer.Compare(left.high ?? MaxValue<T>()!, right.high ?? MaxValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    > 0  => true,
+                    _    => false,
+                };
 
             return AndAllowingUnknown(startsBeforeEnd, endsAfterEnd);
         }
@@ -1787,10 +1814,20 @@ namespace Hl7.Cql.Operators
 
             bool? endsAfterStart = IsUnknownBoundary(left!.high, left.highClosed) || IsUnknownBoundary(right!.low, right.lowClosed)
                 ? RangeGreaterOrEqual(HighBoundaryRange(left), LowBoundaryRange(right!), precision)
-                : Comparer.Compare(left.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) >= 0;
+                : Comparer.Compare(left.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    >= 0 => true,
+                    _    => false,
+                };
             bool? startsBeforeStart = IsUnknownBoundary(left.low, left.lowClosed) || IsUnknownBoundary(right!.low, right.lowClosed)
                 ? RangeLessThan(LowBoundaryRange(left), LowBoundaryRange(right!), precision)
-                : Comparer.Compare(left.low ?? MinValue<T>()!, right!.low ?? MinValue<T>()!, precision) < 0;
+                : Comparer.Compare(left.low ?? MinValue<T>()!, right!.low ?? MinValue<T>()!, precision) switch
+                {
+                    null => (bool?)null,
+                    < 0  => true,
+                    _    => false,
+                };
 
             return AndAllowingUnknown(endsAfterStart, startsBeforeStart);
         }
