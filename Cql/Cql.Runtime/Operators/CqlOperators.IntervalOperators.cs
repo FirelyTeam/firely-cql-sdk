@@ -123,8 +123,12 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
             var closed = toClosed(interval!);
 
-            var after = Comparer.Compare(closed!.low!, right, precision);
-            return after > 0;
+            return Comparer.Compare(closed!.low!, right, precision) switch
+            {
+                null => (bool?)null,
+                > 0  => true,
+                _    => false,
+            };
         }
 
         public bool? After(int? left, CqlInterval<int?>? right, string? precision) =>
@@ -161,8 +165,12 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
             var closed = toClosed(interval!);
 
-            var after = Comparer.Compare(left, closed!.high!, precision);
-            return after > 0;
+            return Comparer.Compare(left, closed!.high!, precision) switch
+            {
+                null => (bool?)null,
+                > 0  => true,
+                _    => false,
+            };
         }
 
         #endregion
@@ -241,8 +249,12 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
             var closed = toClosed(interval!);
 
-            var before = Comparer.Compare(closed!.high!, right, precision);
-            return before < 0;
+            return Comparer.Compare(closed!.high!, right, precision) switch
+            {
+                null => (bool?)null,
+                < 0  => true,
+                _    => false,
+            };
         }
 
         public bool? Before(int? left, CqlInterval<int?>? right, string? precision) =>
@@ -279,8 +291,12 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
             var closed = toClosed(interval!);
 
-            var before = Comparer.Compare(left, closed!.low!, precision);
-            return before < 0;
+            return Comparer.Compare(left, closed!.low!, precision) switch
+            {
+                null => (bool?)null,
+                < 0  => true,
+                _    => false,
+            };
         }
 
         #endregion

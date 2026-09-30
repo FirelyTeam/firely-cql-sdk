@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -39,8 +39,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
-            { "TestAfterNull", "There is no point-interval overload for 'after', so the null point is promoted to Interval[null, null] - the maximal interval - which does not start after Interval[1, 10]; the result is false rather than null (#1626)." },
-            { "TestBeforeNull", "There is no point-interval overload for 'before', so the null point is promoted to Interval[null, null] - the maximal interval - which does not end before Interval[1, 10]; the result is false rather than null (#1626)." },
             { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },
