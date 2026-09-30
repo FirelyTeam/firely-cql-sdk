@@ -105,6 +105,42 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Overlaps_ClosedBoundaryWithoutAValue_IsTheExtreme_EvenAgainstAnImprecisePointThere()
+        {
+            // A closed null high is the maximum DateTime and a closed null low the minimum. Year 9999 and year 1
+            // match those extremes at year precision; the extreme still decides the comparison.
+            var untilTheEndOfTime = new CqlInterval<CqlDateTime?>(Dt("9998"), null, true, true);
+            var fromTheStartOfTime = new CqlInterval<CqlDateTime?>(null, Dt("0002"), true, true);
+
+            Assert.AreEqual(true, Context.Operators.Overlaps(untilTheEndOfTime, Closed("9999", "9999"), null));
+            Assert.AreEqual(true, Context.Operators.Overlaps(Closed("9999", "9999"), untilTheEndOfTime, null));
+            Assert.AreEqual(true, Context.Operators.Overlaps(fromTheStartOfTime, Closed("0001", "0001"), null));
+            Assert.AreEqual(true, Context.Operators.Overlaps(Closed("0001", "0001"), fromTheStartOfTime, null));
+        }
+
+        [TestMethod]
+        public void OverlapsAfter_ClosedBoundaryWithoutAValue_IsTheExtreme()
+        {
+            var untilTheEndOfTime = new CqlInterval<CqlDateTime?>(Dt("2012-06"), null, true, true);
+
+            // Ends at the maximum, so it ends after any bounded interval it overlaps.
+            Assert.AreEqual(true, Context.Operators.OverlapsAfter(untilTheEndOfTime, Closed("2012", "2012-09"), null));
+            // Nothing ends after the maximum, even a year that matches it at year precision.
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(Closed("2012-06", "9999"), new CqlInterval<CqlDateTime?>(Dt("2012"), null, true, true), null));
+        }
+
+        [TestMethod]
+        public void OverlapsBefore_ClosedBoundaryWithoutAValue_IsTheExtreme()
+        {
+            var fromTheStartOfTime = new CqlInterval<CqlDateTime?>(null, Dt("2012-06"), true, true);
+
+            // Starts at the minimum, so it starts before any bounded interval it overlaps.
+            Assert.AreEqual(true, Context.Operators.OverlapsBefore(fromTheStartOfTime, Closed("2012-03", "2012-09"), null));
+            // Nothing starts before the minimum, even a year that matches it at year precision.
+            Assert.AreEqual(false, Context.Operators.OverlapsBefore(Closed("0001", "0001-06"), new CqlInterval<CqlDateTime?>(null, Dt("0002"), true, true), null));
+        }
+
+        [TestMethod]
         public void Meets_EndUncertainAgainstTheOtherStart_IsNull()
         {
             // 2012-01-14 against 2012-01 is uncertain; the other pairings are definitely not adjacent.
