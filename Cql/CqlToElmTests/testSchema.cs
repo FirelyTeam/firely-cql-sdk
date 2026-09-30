@@ -40,6 +40,8 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
 
         private string versionField;
 
+        private string versionToField;
+
         private string descriptionField;
 
         private string referenceField;
@@ -89,6 +91,17 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string versionTo {
+            get {
+                return this.versionToField;
+            }
+            set {
+                this.versionToField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string description {
             get {
                 return this.descriptionField;
@@ -125,6 +138,8 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
         private string nameField;
 
         private string versionField;
+
+        private string versionToField;
 
         private string descriptionField;
 
@@ -175,6 +190,17 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string versionTo {
+            get {
+                return this.versionToField;
+            }
+            set {
+                this.versionToField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
         public string description {
             get {
                 return this.descriptionField;
@@ -213,6 +239,8 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
         private string nameField;
 
         private string versionField;
+
+        private string versionToField;
 
         private string descriptionField;
 
@@ -286,6 +314,17 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
             }
             set {
                 this.versionField = value;
+            }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlAttributeAttribute()]
+        public string versionTo {
+            get {
+                return this.versionToField;
+            }
+            set {
+                this.versionToField = value;
             }
         }
 
@@ -473,6 +512,9 @@ namespace Hl7.Cql.CqlToElm.Test.Xml {
 
         /// <remarks/>
         semantic,
+
+        /// <remarks/>
+        execution,
 
         /// <remarks/>
         @true,
