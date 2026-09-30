@@ -2093,20 +2093,20 @@ public partial class CMS646FHIRIntravesicalBCGTherapy_1_0_000 : ILibrary, ISingl
                     DataType ai_ = @this?.Value;
                     return ai_ switch
                     {
-                        Instant aj_ => context.Operators.Convert<CqlDateTime>(aj_.Value),
-                        FhirDecimal ak_ => ak_.Value,
-                        Date al_ => context.Operators.ConvertStringToDate(al_.Value),
-                        FhirDateTime am_ => context.Operators.Convert<CqlDateTime>(am_),
-                        Time an_ => context.Operators.ConvertStringToTime(an_.Value),
-                        Base64Binary ao_ => context.Operators.Convert<string>(ao_.Value),
-                        FhirBoolean ap_ => ap_.Value,
-                        IValue<int?> aq_ => aq_.Value,
-                        IValue<string> ar_ => ar_.Value,
+                        Base64Binary aj_ => context.Operators.Convert<string>(aj_.Value),
+                        FhirBoolean ak_ => ak_.Value,
+                        ContactPoint al_ => al_.ValueElement,
+                        Date am_ => context.Operators.ConvertStringToDate(am_.Value),
+                        FhirDateTime an_ => context.Operators.Convert<CqlDateTime>(an_),
+                        FhirDecimal ao_ => ao_.Value,
+                        Identifier ap_ => ap_.ValueElement,
+                        Instant aq_ => context.Operators.Convert<CqlDateTime>(aq_.Value),
+                        Money ar_ => ar_.ValueElement,
                         Quantity as_ => as_.ValueElement,
-                        Identifier at_ => at_.ValueElement,
-                        Money au_ => au_.ValueElement,
+                        Time at_ => context.Operators.ConvertStringToTime(at_.Value),
+                        IValue<int?> au_ => au_.Value,
                         UsageContext av_ => av_.Value,
-                        ContactPoint aw_ => aw_.ValueElement,
+                        IValue<string> aw_ => aw_.Value,
                         _ => null,
                     };
                 }

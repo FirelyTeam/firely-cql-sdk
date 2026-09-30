@@ -658,20 +658,20 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
             DataType al_ = @this?.Value;
             return al_ switch
             {
-                Instant am_ => context.Operators.Convert<CqlDateTime>(am_.Value),
-                FhirDecimal an_ => an_.Value,
-                Date ao_ => context.Operators.ConvertStringToDate(ao_.Value),
-                FhirDateTime ap_ => context.Operators.Convert<CqlDateTime>(ap_),
-                Time aq_ => context.Operators.ConvertStringToTime(aq_.Value),
-                Base64Binary ar_ => context.Operators.Convert<string>(ar_.Value),
-                FhirBoolean as_ => as_.Value,
-                IValue<int?> at_ => at_.Value,
-                IValue<string> au_ => au_.Value,
+                Base64Binary am_ => context.Operators.Convert<string>(am_.Value),
+                FhirBoolean an_ => an_.Value,
+                ContactPoint ao_ => ao_.ValueElement,
+                Date ap_ => context.Operators.ConvertStringToDate(ap_.Value),
+                FhirDateTime aq_ => context.Operators.Convert<CqlDateTime>(aq_),
+                FhirDecimal ar_ => ar_.Value,
+                Identifier as_ => as_.ValueElement,
+                Instant at_ => context.Operators.Convert<CqlDateTime>(at_.Value),
+                Money au_ => au_.ValueElement,
                 Quantity av_ => av_.ValueElement,
-                Identifier aw_ => aw_.ValueElement,
-                Money ax_ => ax_.ValueElement,
+                Time aw_ => context.Operators.ConvertStringToTime(aw_.Value),
+                IValue<int?> ax_ => ax_.Value,
                 UsageContext ay_ => ay_.Value,
-                ContactPoint az_ => az_.ValueElement,
+                IValue<string> az_ => az_.Value,
                 _ => null,
             };
         }

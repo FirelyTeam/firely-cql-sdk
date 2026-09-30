@@ -840,20 +840,20 @@ public partial class CMS72FHIRSTKAntithromboticDay2_1_0_000 : ILibrary, ISinglet
                 DataType ae_ = @this?.Value;
                 return ae_ switch
                 {
-                    Instant af_ => context.Operators.Convert<CqlDateTime>(af_.Value),
-                    FhirDecimal ag_ => ag_.Value,
-                    Date ah_ => context.Operators.ConvertStringToDate(ah_.Value),
-                    FhirDateTime ai_ => context.Operators.Convert<CqlDateTime>(ai_),
-                    Time aj_ => context.Operators.ConvertStringToTime(aj_.Value),
-                    Base64Binary ak_ => context.Operators.Convert<string>(ak_.Value),
-                    FhirBoolean al_ => al_.Value,
-                    IValue<int?> am_ => am_.Value,
-                    IValue<string> an_ => an_.Value,
+                    Base64Binary af_ => context.Operators.Convert<string>(af_.Value),
+                    FhirBoolean ag_ => ag_.Value,
+                    ContactPoint ah_ => ah_.ValueElement,
+                    Date ai_ => context.Operators.ConvertStringToDate(ai_.Value),
+                    FhirDateTime aj_ => context.Operators.Convert<CqlDateTime>(aj_),
+                    FhirDecimal ak_ => ak_.Value,
+                    Identifier al_ => al_.ValueElement,
+                    Instant am_ => context.Operators.Convert<CqlDateTime>(am_.Value),
+                    Money an_ => an_.ValueElement,
                     Quantity ao_ => ao_.ValueElement,
-                    Identifier ap_ => ap_.ValueElement,
-                    Money aq_ => aq_.ValueElement,
+                    Time ap_ => context.Operators.ConvertStringToTime(ap_.Value),
+                    IValue<int?> aq_ => aq_.Value,
                     UsageContext ar_ => ar_.Value,
-                    ContactPoint as_ => as_.ValueElement,
+                    IValue<string> as_ => as_.Value,
                     _ => null,
                 };
             }
