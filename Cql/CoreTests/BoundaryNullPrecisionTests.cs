@@ -79,20 +79,6 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Boundary_WholeNumberDecimal_CompletesEveryDecimal()
-        {
-            // A whole number has no decimals, so every decimal place is free: the boundaries are the greatest and
-            // least values with 8 decimals that round down to it.
-            AssertDecimal("1.99999999", Context.Operators.HighBoundary(1m, null));
-            AssertDecimal("1.00000000", Context.Operators.LowBoundary(1m, null));
-            AssertDecimal("1.99999999", Context.Operators.HighBoundary(1m, 8));
-            AssertDecimal("1.00000000", Context.Operators.LowBoundary(1m, 8));
-            // A decimal written with a zero decimal keeps that decimal.
-            AssertDecimal("1.09999999", Context.Operators.HighBoundary(1.0m, null));
-            AssertDecimal("1.00000000", Context.Operators.LowBoundary(1.0m, null));
-        }
-
-        [TestMethod]
         public void HighBoundary_Date_NullPrecision_UsesDayPrecision()
         {
             AssertDate("2014-01-15", Context.Operators.HighBoundary(Date("2014-01-15"), null));

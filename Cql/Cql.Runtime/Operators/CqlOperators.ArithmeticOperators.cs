@@ -202,16 +202,37 @@ namespace Hl7.Cql.Operators
 
         #region HighBoundary
 
-        public decimal? HighBoundary(decimal? input, int? precision)
-        {
-            if (input == null) return null;
-            precision ??= MaxDecimalBoundaryPrecision;
-            if (precision < 8) return null;
+        public decimal? HighBoundary(decimal? input, int? precision) => DecimalBoundary(input, precision, greatest: true);
 
-            // The greatest value with the requested number of decimals that still rounds down to the input: one
-            // unit of the input's own scale up, one unit of the requested precision back. A whole number has scale
-            // zero, so its unit is 1 (HighBoundary(1, 8) is 1.99999999).
-            return input.Value + UnitAtScale(input.Value.Scale) - UnitAtScale((byte)precision.Value);
+        /// <summary>
+        /// The greatest or least Decimal value the input can stand for at the requested number of decimals.
+        /// A Decimal with <c>s</c> decimals stands for every value that shares those digits; at a finer precision the
+        /// missing decimals are completed with 9s for the greatest value and 0s for the least, at a coarser one the
+        /// surplus decimals are dropped. The digits are those of the magnitude, so for a negative value the greatest
+        /// completion is the least magnitude and the other way round. The greatest precision a Decimal has is
+        /// <see cref="MaxDecimalBoundaryPrecision"/> decimals; a precision beyond it has no answer.
+        /// </summary>
+        private static decimal? DecimalBoundary(decimal? input, int? precision, bool greatest)
+        {
+            if (input is not { } value)
+                return null;
+            var requested = precision ?? MaxDecimalBoundaryPrecision;
+            if (requested is < 0 or > MaxDecimalBoundaryPrecision)
+                return null;
+            var scale = (byte)requested;
+
+            var magnitude = Math.Abs(value);
+            var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
+            var leastMagnitude = kept + ZeroAtScale(scale);
+            var greatestMagnitude = kept + UnitAtScale(kept.Scale) - UnitAtScale(scale);
+
+            return (greatest, value < 0) switch
+            {
+                (true, false)  => greatestMagnitude,
+                (false, false) => leastMagnitude,
+                (true, true)   => -leastMagnitude,
+                (false, true)  => -greatestMagnitude,
+            };
         }
 
         /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
@@ -333,16 +354,7 @@ namespace Hl7.Cql.Operators
 
         #region LowBoundary
 
-        public decimal? LowBoundary(decimal? input, int? precision)
-        {
-            if (input == null) return null;
-            precision ??= MaxDecimalBoundaryPrecision;
-            if (precision < 8) return null;
-
-            // The least value with the requested number of decimals that rounds to the input is the input itself,
-            // written at that precision.
-            return input.Value + ZeroAtScale((byte)precision.Value);
-        }
+        public decimal? LowBoundary(decimal? input, int? precision) => DecimalBoundary(input, precision, greatest: false);
 
         public CqlDate? LowBoundary(CqlDate? input, int? precision)
         {
