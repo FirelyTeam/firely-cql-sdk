@@ -3391,7 +3391,9 @@ namespace CoreTests
                 true,
                 true);
             var ops = GetNewContext().Operators;
-            var result = ops.IntervalIncludesInterval(lhs, rhs, null);
+            // Conformance case DateTimeIncludedInNull: lhs included in rhs. The low boundaries agree at second
+            // precision, so that comparison is uncertain, and the high boundary of lhs is inside rhs.
+            var result = ops.IntervalIncludesInterval(rhs, lhs, null);
             Assert.IsNull(result);
         }
         [TestMethod]

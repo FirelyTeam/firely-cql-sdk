@@ -902,21 +902,19 @@ namespace Hl7.Cql.Operators
 
             // "For open interval boundaries, exclusive comparison operators are used. For closed interval boundaries,
             // if the interval boundary is null, the result of the boundary comparison is considered true." (CQL 1.5.3
-            // Errata 2, Appendix B - CQL Reference, section "In"). An open boundary without a value is unknown, and so
-            // is the result. The boundaries are compared as given, not as the effective ones: stepping an open boundary
-            // inward by one unit of its own precision would turn the exclusive comparison into an inclusive one whenever
-            // the comparison runs at a coarser precision. A point that compares as unknown against a boundary (such as
-            // one less precise than the boundary that matches it at the point's precision, or quantities with
-            // incommensurable units) leaves that boundary's predicate unknown.
-            if (IsUnknownBoundary(interval.low, interval.lowClosed) || IsUnknownBoundary(interval.high, interval.highClosed))
-                return null;
-
+            // Errata 2, Appendix B - CQL Reference, section "In"). An open boundary without a value leaves its
+            // comparison unknown, and the other boundary can still settle the result. The boundaries are compared as
+            // given, not as the effective ones: stepping an open boundary inward by one unit of its own precision would
+            // turn the exclusive comparison into an inclusive one whenever the comparison runs at a coarser precision. A
+            // point that compares as unknown against a boundary (such as one less precise than the boundary that
+            // matches it at the point's precision, or quantities with incommensurable units) leaves that boundary's
+            // predicate unknown as well.
             var point = Boundary<T>.Of(t);
             var low = interval.low is { } lowValue
                 ? interval.lowClosed ?? false
                     ? IsAtOrBefore(Boundary<T>.Of(lowValue), point, precision)
                     : IsBefore(Boundary<T>.Of(lowValue), point, precision)
-                : true;
+                : interval.lowClosed ?? false ? true : null;
             if (low == false)
                 return false;
 
@@ -924,7 +922,7 @@ namespace Hl7.Cql.Operators
                 ? interval.highClosed ?? false
                     ? IsAtOrAfter(Boundary<T>.Of(highValue), point, precision)
                     : IsAfter(Boundary<T>.Of(highValue), point, precision)
-                : true;
+                : interval.highClosed ?? false ? true : null;
 
             return AndAllowingUnknown(low, high);
         }
@@ -949,15 +947,11 @@ namespace Hl7.Cql.Operators
             smaller = ToClosedForPointType(smaller)!;
 
             var lowIncluded = IsAtOrBefore(Boundary<T>.LowOf(larger), Boundary<T>.LowOf(smaller), precision);
+            if (lowIncluded == false)
+                return false;
+
             var highIncluded = IsAtOrAfter(Boundary<T>.HighOf(larger), Boundary<T>.HighOf(smaller), precision);
-            // Preserve the existing combination: an indeterminate comparison makes the
-            // whole result null, matching the previous null-compare behavior.
-            return (lowIncluded, highIncluded) switch
-            {
-                (null, _) or (_, null) => null,
-                (true, true)           => true,
-                _                      => false,
-            };
+            return AndAllowingUnknown(lowIncluded, highIncluded);
         }
 
         #endregion
@@ -1077,8 +1071,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
-                return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
@@ -1086,16 +1078,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
-                return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
         public bool? Meets(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
                 return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
@@ -1105,8 +1093,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
-                return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
@@ -1115,8 +1101,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
-                return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
@@ -1124,16 +1108,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
-                return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
         public bool? Meets(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if ((left.high == null && right.high == null) || (left.low == null && right.low == null))
                 return null;
 
             return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
@@ -1160,8 +1140,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.high == null && right.high == null)
-                return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
         }
@@ -1170,8 +1148,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.high == null && right.high == null)
-                return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
         }
@@ -1179,8 +1155,6 @@ namespace Hl7.Cql.Operators
         public bool? MeetsAfter(CqlInterval<decimal?>? left, CqlInterval<decimal?> right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if (left.high == null && right.high == null)
                 return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
@@ -1191,8 +1165,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.high == null && right.high == null)
-                return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
         }
@@ -1200,7 +1172,6 @@ namespace Hl7.Cql.Operators
         public bool? MeetsAfter(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?> right, string? precision)
         {
             if (left == null || right == null) return null;
-            if (left.high == null && right.high == null) return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
         }
@@ -1208,15 +1179,12 @@ namespace Hl7.Cql.Operators
         public bool? MeetsAfter(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?> right, string? precision)
         {
             if (left == null || right == null) return null;
-            if (left.high == null && right.high == null) return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
         }
         public bool? MeetsAfter(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?> right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if (left.high == null && right.high == null)
                 return null;
 
             return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
@@ -1239,16 +1207,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.low == null && right.low == null)
-                return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<long?> left, CqlInterval<long?> right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if (left.low == null && right.low == null)
                 return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
@@ -1257,16 +1221,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.low == null && right.low == null)
-                return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlQuantity?> left, CqlInterval<CqlQuantity?> right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if (left.low == null && right.low == null)
                 return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
@@ -1275,8 +1235,6 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.low == null && right.low == null)
-                return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
@@ -1284,16 +1242,12 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (left.low == null && right.low == null)
-                return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlTime?> left, CqlInterval<CqlTime?> right, string? precision)
         {
             if (left == null || right == null)
-                return null;
-            if (left.low == null && right.low == null)
                 return null;
 
             return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
