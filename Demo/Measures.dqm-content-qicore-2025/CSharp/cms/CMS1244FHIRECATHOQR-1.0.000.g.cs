@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS1244FHIRECATHOQR", "1.0.000")]
 public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244FHIRECATHOQR_1_0_000>
 {
@@ -804,7 +804,7 @@ public partial class CMS1244FHIRECATHOQR_1_0_000 : ILibrary, ISingleton<CMS1244F
         }
 
         IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-        IEnumerable<Observation> f_ = context.Operators.Union<Observation>(b_ as IEnumerable<Observation>, e_ as IEnumerable<Observation>);
+        IEnumerable<Observation> f_ = context.Operators.Union<Observation>(b_, e_);
         return f_;
     }
 

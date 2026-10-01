@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS347FHIRStatinPreventionTxCVD", "1.0.000")]
 public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingleton<CMS347FHIRStatinPreventionTxCVD_1_0_000>
 {
@@ -275,12 +275,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> r_ = context.Operators.Union<Condition>(l_, q_);
 
         bool? s_(Condition ASCVDDiagnosis) {
-            CqlInterval<CqlDateTime> ai_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ASCVDDiagnosis as Condition);
+            CqlInterval<CqlDateTime> ai_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ASCVDDiagnosis);
             CqlDateTime aj_ = context.Operators.Start(ai_);
             CqlInterval<CqlDateTime> ak_ = this.Measurement_Period(context);
             CqlDateTime al_ = context.Operators.End(ak_);
             bool? am_ = context.Operators.SameOrBefore(aj_, al_, "day");
-            bool? an_ = this.isVerified(context, ASCVDDiagnosis as Condition);
+            bool? an_ = this.isVerified(context, ASCVDDiagnosis);
             bool? ao_ = context.Operators.And(am_, an_);
             return ao_;
         }
@@ -515,12 +515,12 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
         bool? c_(Condition Hypercholesterolemia) {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypercholesterolemia as Condition);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, Hypercholesterolemia);
             CqlDateTime f_ = context.Operators.Start(e_);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
             CqlDateTime h_ = context.Operators.End(g_);
             bool? i_ = context.Operators.SameOrBefore(f_, h_, "day");
-            bool? j_ = this.isVerified(context, Hypercholesterolemia as Condition);
+            bool? j_ = this.isVerified(context, Hypercholesterolemia);
             bool? k_ = context.Operators.And(i_, j_);
             return k_;
         }
@@ -580,10 +580,10 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
         bool? c_(Condition DiabetesDiagnosis) {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis as Condition);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, DiabetesDiagnosis);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            bool? h_ = this.isVerified(context, DiabetesDiagnosis as Condition);
+            bool? h_ = this.isVerified(context, DiabetesDiagnosis);
             bool? i_ = context.Operators.And(g_, h_);
             return i_;
         }
@@ -808,9 +808,9 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_, f_);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_, h_);
 
         bool? j_(Condition ExclusionDiagnosis) {
             CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ExclusionDiagnosis);
@@ -875,10 +875,10 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
 
         bool? i_(Condition HepatitisLiverDisease) {
-            CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepatitisLiverDisease as Condition);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HepatitisLiverDisease);
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             bool? m_ = context.Operators.Overlaps(k_, l_, "day");
-            bool? n_ = this.isVerified(context, HepatitisLiverDisease as Condition);
+            bool? n_ = this.isVerified(context, HepatitisLiverDisease);
             bool? o_ = context.Operators.And(m_, n_);
             return o_;
         }
@@ -900,10 +900,10 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
         bool? c_(Condition StatinMuscleSymptom) {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, StatinMuscleSymptom as Condition);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, StatinMuscleSymptom);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            bool? h_ = this.isVerified(context, StatinMuscleSymptom as Condition);
+            bool? h_ = this.isVerified(context, StatinMuscleSymptom);
             bool? i_ = context.Operators.And(g_, h_);
             return i_;
         }
@@ -925,10 +925,10 @@ public partial class CMS347FHIRStatinPreventionTxCVD_1_0_000 : ILibrary, ISingle
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
         bool? c_(Condition ESRD) {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ESRD as Condition);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ESRD);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            bool? h_ = this.isVerified(context, ESRD as Condition);
+            bool? h_ = this.isVerified(context, ESRD);
             bool? i_ = context.Operators.And(g_, h_);
             return i_;
         }

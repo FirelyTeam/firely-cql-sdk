@@ -151,6 +151,9 @@ namespace Hl7.Cql.CqlToElm.Test
         private ExpressionDef shouldDefineExpression(Library l, string name) =>
             l.ShouldDefine<ExpressionDef>(name);
 
+        private static NamedTypeSpecifier FhirType(string name) =>
+            new System.Xml.XmlQualifiedName($"{{http://hl7.org/fhir}}{name}").ToNamedType();
+
         [TestMethod]
         public void Expression()
         {
@@ -439,6 +442,148 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function choice() returns Choice<String,Integer> : external
                 define error: choice().left
                 """, "Type Choice<String, Integer> has no members.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnSeveralAlternatives()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Onset values": [Condition] C return C.onset.value
+                """);
+
+            var query = shouldDefineExpression(library, "Onset values").expression.Should().BeOfType<Query>().Subject;
+            var value = query.@return.expression.Should().BeOfType<Property>().Subject;
+            value.path.Should().Be("value");
+            value.source.Should().BeOfType<Property>().Which.path.Should().Be("onset");
+
+            // Age.value, dateTime.value and string.value; Period and Range have no value element.
+            value.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Which.choice.Should().BeEquivalentTo(
+                new TypeSpecifier[]
+                {
+                    FhirType("decimal"),
+                    SystemTypes.DateTimeType,
+                    SystemTypes.StringType,
+                });
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnSingleAlternative()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Onset lows": [Condition] C return C.onset.low
+                """);
+
+            // Only Range has a low element, so the result is its type rather than a one-member choice.
+            var query = shouldDefineExpression(library, "Onset lows").expression.Should().BeOfType<Query>().Subject;
+            var low = query.@return.expression.Should().BeOfType<Property>().Subject;
+            low.path.Should().Be("low");
+            low.resultTypeSpecifier.Should().Be(FhirType("SimpleQuantity"));
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnNoAlternative()
+        {
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Onset colours": [Condition] C return C.onset.colour
+                """, "Type Choice<* has no members.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnListAlternative()
+        {
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Tuple { a Integer }>, Integer> : external
+                define error: choice().a
+                """, "Member 'a' of type Choice<* is on its list alternative List<*, which member access on a choice cannot navigate into. Cast the value to List<* with 'as' first.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnListOfChoiceWithListAlternative()
+        {
+            // The list's elements are a choice whose own list alternative has the member: the
+            // outer list alternative still has it, and must be reported rather than dropped in
+            // favour of the outer Tuple alternative.
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Choice<List<Tuple { a Integer }>, Tuple { a Integer }>>, Tuple { a Integer }> : external
+                define error: choice().a
+                """, "Member 'a' of type Choice<* is on its list alternative List<*, which member access on a choice cannot navigate into. Cast the value to List<* with 'as' first.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberBesideListAlternativeWithoutIt()
+        {
+            // A list alternative that does not have the member is dropped like any other.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<List<Integer>, Tuple { a Integer }> : external
+                define member: choice().a
+                """);
+
+            shouldDefineExpression(library, "member").expression.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberOnListAlternativeOfNestedChoice()
+        {
+            // The outer Tuple alternative has the member too, so dropping the nested choice would
+            // let the list alternative inside it go unreported.
+            _ = CreateCqlToolkit().MakeLibrary("""
+                library BareMinimum version '0.0.1'
+
+                define function choice() returns Choice<Choice<List<Tuple { a Integer }>, String>, Tuple { a Integer }> : external
+                define error: choice().a
+                """, "Member 'a' of type Choice<* is on its list alternative List<*, which member access on a choice cannot navigate into. Cast the value to List<* with 'as' first.");
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberInSortBy()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Sorted by onset": [Condition] C sort by (onset.value as DateTime)
+                """);
+
+            // The bare onset resolves on $this, the element being sorted.
+            var query = shouldDefineExpression(library, "Sorted by onset").expression.Should().BeOfType<Query>().Subject;
+            var by = query.sort.by.Should().ContainSingle().Which.Should().BeOfType<ByExpression>().Subject;
+            var value = by.expression.Should().BeOfType<As>().Which.operand.Should().BeOfType<Property>().Subject;
+            value.path.Should().Be("value");
+            value.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Which.choice.Should().HaveCount(3);
+        }
+
+        [TestMethod]
+        public void InvokeChoiceMemberThroughListNavigation()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library ChoiceMember version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define "Onset values": ([Condition]).onset.value
+                """);
+
+            // Navigating into the list builds a query over its elements, whose return is the
+            // member access on the choice-typed onset.
+            var query = shouldDefineExpression(library, "Onset values").expression.Should().BeOfType<Query>().Subject;
+            var value = query.@return.expression.Should().BeOfType<Property>().Subject;
+            value.path.Should().Be("value");
+            var choice = value.resultTypeSpecifier.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
+            query.resultTypeSpecifier.Should().Be(choice.ToListType());
         }
 
         [TestMethod]

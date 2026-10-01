@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS71FHIRSTKAnticoagAFFlutter", "1.0.000")]
 public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleton<CMS71FHIRSTKAnticoagAFFlutter_1_0_000>
 {
@@ -613,8 +613,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
                 ];
                 bool? al_ = context.Operators.In<string>(aj_, (IEnumerable<string>)ak_);
                 bool? am_ = context.Operators.And(ag_, al_);
-                bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant as MedicationRequest);
-                bool? ao_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant as MedicationRequest);
+                bool? an_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DischargeAnticoagulant);
+                bool? ao_ = QICoreCommon_4_0_000.Instance.isDischarge(context, DischargeAnticoagulant);
                 bool? ap_ = context.Operators.Or(an_, ao_);
                 bool? aq_ = context.Operators.And(am_, ap_);
                 FhirDateTime ar_ = DischargeAnticoagulant?.AuthoredOnElement;
@@ -685,8 +685,8 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
             CqlValueSet u_ = this.Patient_Refusal(context);
             bool? v_ = context.Operators.ConceptsInValueSet(t_, u_);
             bool? w_ = context.Operators.Or(r_, v_);
-            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant as MedicationRequest);
-            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant as MedicationRequest);
+            bool? x_ = QICoreCommon_4_0_000.Instance.isCommunity(context, NoAnticoagulant);
+            bool? y_ = QICoreCommon_4_0_000.Instance.isDischarge(context, NoAnticoagulant);
             bool? z_ = context.Operators.Or(x_, y_);
             bool? aa_ = context.Operators.And(w_, z_);
             Code<MedicationRequest.MedicationrequestStatus> ab_ = NoAnticoagulant?.StatusElement;
@@ -781,7 +781,7 @@ public partial class CMS71FHIRSTKAnticoagAFFlutter_1_0_000 : ILibrary, ISingleto
         }
 
         IEnumerable<MedicationRequest> l_ = context.Operators.Where<MedicationRequest>(j_, k_);
-        IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(e_ as IEnumerable<MedicationRequest>, l_ as IEnumerable<MedicationRequest>);
+        IEnumerable<MedicationRequest> m_ = context.Operators.Union<MedicationRequest>(e_, l_);
         return m_;
     }
 

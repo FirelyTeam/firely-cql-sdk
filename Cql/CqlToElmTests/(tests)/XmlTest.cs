@@ -138,6 +138,17 @@ namespace Hl7.Cql.CqlToElm.Test
             return $"{tc.File}: {tc.Category}/{tc.TestName}";
         }
 
+        // The specification version this SDK implements. A test whose feature was introduced in a later version
+        // (`version`), or last appears in an earlier one (`versionTo`), does not apply.
+        private static readonly Version TargetVersion = new(1, 5, 3);
+
+        private static bool AppliesToTargetVersion(string? version, string? versionTo) =>
+            (version is null || ParseVersion(version) <= TargetVersion)
+            && (versionTo is null || ParseVersion(versionTo) >= TargetVersion);
+
+        private static Version ParseVersion(string version) =>
+            Version.Parse(version.Contains('.') ? version : version + ".0");
+
         public static IEnumerable<object[]> GetTests()
         {
             var dir = new DirectoryInfo(Path.Combine("Input", "DQIC"));
@@ -145,18 +156,35 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 using var file = xml.OpenRead();
                 var tests = (Xml.Tests)Serializer.Deserialize(file)!;
-                foreach (var group in tests.group)
+                foreach (var group in tests.group ?? [])
                 {
-                    if (group.test is not null)
-                        foreach (var test in group.test)
-                        {
-                            if (!test.expression.invalidSpecified)
-                            {
-                                yield return new object[] { new TestCase(xml.Name, group.name, test.name, test.expression.Value, test.output?.Single()?.Value) };
-                            }
-                        }
+                    foreach (var test in group.test ?? [])
+                    {
+                        // A test that provides a library instead of an expression, or expects an error, is not run.
+                        if (test.expression is not { invalidSpecified: false } expression)
+                            continue;
+                        if (!AppliesToTargetVersion(test.version ?? group.version ?? tests.version, test.versionTo ?? group.versionTo ?? tests.versionTo))
+                            continue;
+
+                        yield return new object[] { new TestCase(xml.Name, group.name!, test.name!, expression.Value!, test.output?.Single().Value) };
+                    }
                 }
             }
+        }
+
+        [TestMethod]
+        public void GetTests_SelectsTheCasesThatApplyToTheTargetVersion()
+        {
+            var names = GetTests().Select(data => ((TestCase)data[0]).TestName).ToHashSet();
+
+            // Introduced in a later version (version="2.0").
+            Assert.IsFalse(names.Contains("SliceAll"));
+            // Last appears in an earlier version (versionTo="1.3").
+            Assert.IsFalse(names.Contains("DateTimeComponentFromTimezoneOffset"));
+            // Last appears in the target version itself (versionTo="1.5.3").
+            Assert.IsTrue(names.Contains("PredecessorOf1D"));
+            // Inherits its version from the group and file (version="1.0").
+            Assert.IsTrue(names.Contains("HighBoundaryNull"));
         }
 
         public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);

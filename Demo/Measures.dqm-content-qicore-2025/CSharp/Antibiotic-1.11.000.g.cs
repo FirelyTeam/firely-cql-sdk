@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("Antibiotic", "1.11.000")]
 public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_000>
 {
@@ -56,7 +56,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
         bool? a_(Encounter episode) {
 
             bool? e_(Condition comcondition) {
-                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition as Condition);
+                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, comcondition);
                 CqlDateTime h_ = context.Operators.Start(g_);
                 CqlDate i_ = context.Operators.DateFrom(h_);
                 Period j_ = episode?.Period;
@@ -88,7 +88,7 @@ public partial class Antibiotic_1_11_000 : ILibrary, ISingleton<Antibiotic_1_11_
         bool? a_(Encounter episode) {
 
             bool? e_(Condition competcondition) {
-                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition as Condition);
+                CqlInterval<CqlDateTime> g_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, competcondition);
                 CqlDateTime h_ = context.Operators.Start(g_);
                 Period i_ = episode?.Period;
                 CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);

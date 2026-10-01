@@ -41,14 +41,14 @@
 			The CQL SDK legitimately leads for a while - Vonk moves to this version as part of taking
 			the release that carries it - so the two being unequal between releases is expected.
 			-->
-		<FirelyNetVersion>6.5.0</FirelyNetVersion>
+		<FirelyNetVersion>6.6.0</FirelyNetVersion>
 		<FhirMetricsVersion>1.4.0</FhirMetricsVersion>
 
 		<!-- Keep MicrosoftCodeAnalysisVersion in sync with Vonk's property of the same name -->
 		<MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>
 
 		<!-- Drives the whole Microsoft.Extensions.* family; raise this rather than pinning one package -->
-		<MicrosoftExtensionsVersion>10.0.3</MicrosoftExtensionsVersion>
+		<MicrosoftExtensionsVersion>10.0.9</MicrosoftExtensionsVersion>
 		<MSTestVersion>3.8.3</MSTestVersion>
 		<BenchmarkDotNetVersion>0.14.0</BenchmarkDotNetVersion>
 		<SystemCommandLineVersion>2.0.0-beta4.22272.1</SystemCommandLineVersion>

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMSFHIR529HybridHospitalWideReadmission", "0.5.001")]
 public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary, ISingleton<CMSFHIR529HybridHospitalWideReadmission_0_5_001>
 {
@@ -282,7 +282,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType s_ = r_?.Effective;
             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK, e_, m_, u_);
             return v_;
         }
 
@@ -380,7 +380,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType s_ = r_?.Effective;
             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ, e_, m_, u_);
             return v_;
         }
 
@@ -479,7 +479,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType t_ = s_?.Effective;
             object u_ = FHIRHelpers_4_4_000.Instance.ToValue(context, t_);
             CqlDateTime v_ = QICoreCommon_4_0_000.Instance.earliest(context, u_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA, e_, n_ as CqlQuantity, v_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA, e_, n_, v_);
             return w_;
         }
 
@@ -577,7 +577,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType s_ = r_?.Effective;
             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM, e_, m_, u_);
             return v_;
         }
 
@@ -2032,7 +2032,7 @@ public partial class CMSFHIR529HybridHospitalWideReadmission_0_5_001 : ILibrary,
             DataType s_ = r_?.Effective;
             object t_ = FHIRHelpers_4_4_000.Instance.ToValue(context, s_);
             CqlDateTime u_ = QICoreCommon_4_0_000.Instance.earliest(context, t_);
-            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, m_ as CqlQuantity, u_);
+            (CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? v_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, m_, u_);
             return v_;
         }
 

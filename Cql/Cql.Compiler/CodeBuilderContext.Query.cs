@@ -160,7 +160,7 @@ partial class CodeBuilderContext
                 : query.@return?.expression is { } returned
                     ? StaticValueFor(returned, throwIfNotFound: false)?.Alternatives
                     : sources.Length == 1
-                        ? ScopeStaticValue(sources[0].alias).Alternatives
+                        ? ReferenceStaticValue(ResolveScope(sources[0].alias)).Alternatives
                         : null;
             _staticValues[query] = new StaticValue(@return.Type, elementAlternatives);
 
@@ -538,7 +538,7 @@ partial class CodeBuilderContext
     {
         if (string.Equals("$this", ire.name) && ImpliedAlias != null)
         {
-            var scopeExpression = GetScopeExpression(ImpliedAlias!);
+            var scopeExpression = ResolveScope(ImpliedAlias!).Value;
             return scopeExpression;
         }
 
@@ -557,8 +557,8 @@ partial class CodeBuilderContext
 
     protected CodeExpression OperandRef(OperandRef ore)
     {
-        if (_operands?.TryGetValue(ore.name!, out var expression) == true)
-            return expression;
+        if (ResolveReference(ore) is { } operand)
+            return operand.Value;
         throw this.NewExpressionBuildingException($"Operand reference to {ore.name} not found in definition operands.");
     }
 
@@ -575,8 +575,9 @@ partial class CodeBuilderContext
             Type? expectedType;
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
-                source = GetScopeExpression(op.scope!);
-                sourceValue = ScopeStaticValue(op.scope!);
+                var scope = ResolveScope(op.scope!);
+                source = scope.Value;
+                sourceValue = ReferenceStaticValue(scope);
                 expectedType = TypeFor(op) ?? typeof(object);
             }
             else
@@ -611,7 +612,7 @@ partial class CodeBuilderContext
             var pathMemberInfo = _typeResolver.GetProperty(source.Type, path!);
 
             if (pathMemberInfo == null)
-                return LateBoundProperty(source, path!, expectedType, element: _elementStack.TryPeek(out var current) ? current : null);
+                throw UnboundElement(path!, source.Type, _elementStack.TryPeek(out var current) ? current : null);
 
             if (!pathMemberInfo.DeclaringType!.IsAssignableFrom(source.Type)) // the property is on a derived type, so cast it
             {

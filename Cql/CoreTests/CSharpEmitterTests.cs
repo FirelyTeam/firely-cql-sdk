@@ -466,6 +466,26 @@ public class CSharpEmitterTests
     }
 
     [TestMethod]
+    public void TypeSwitch_OperandOfASealedClassTestedForAnInterfaceItLacks_IsHoistedAsObject()
+    {
+        // string is sealed and not IFormattable, so "s is IFormattable" can never match and C#
+        // rejects it (CS8121). The operand is hoisted into a variable of its IR type, object.
+        var s = new CodeLocal(typeof(string), "s");
+        var asFormattable = new CodeLocal(typeof(IFormattable), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            new CodeCast(s, typeof(object), CodeCastKind.Cast),
+            [new CodeTypeSwitchArm(asFormattable, new CodeConstant(1, typeof(int?)))],
+            new CodeConstant(null, typeof(int?)),
+            typeof(int?));
+
+        var body = EmitBody(new CodeLambda([s], typeSwitch));
+        StringAssert.Contains(body, "object a_ = s;");
+        StringAssert.Contains(body, "a_ is IFormattable");
+        Assert.IsFalse(body.Contains("s is IFormattable"), body);
+        AssertParsesAsMethodBody(body, "int?", "string s");
+    }
+
+    [TestMethod]
     public void TypeSwitch_ArmWithStatements_PrintsIfChainOverDeclarationPatterns()
     {
         // An arm above the inline budget needs its own statements, so the switch becomes an if
