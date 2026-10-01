@@ -105,12 +105,8 @@ public static partial class ElmToolkitExtensions
     }
 
     /// <summary>
-    /// Loads ELM libraries from <paramref name="files"/> in parallel (JSON deserialization of each file is
-    /// independent and CPU-bound, and large library sets -- e.g. hundreds of HEDIS measure/shared libraries --
-    /// previously loaded one file at a time, which made this step dominate the overall build time), then
-    /// re-surfaces the results/exceptions through <paramref name="buildExceptionHandlingStrategy"/> in the
-    /// original file order so downstream item-level error handling (continuation policy, logging) behaves
-    /// exactly as if loading had happened sequentially.
+    /// Loads ELM libraries from <paramref name="files"/> in parallel and re-surfaces results and
+    /// exceptions through <paramref name="buildExceptionHandlingStrategy"/> in original file order.
     /// </summary>
     private static IEnumerable<(FileInfo file, ElmLibrary library)> LoadElmFilesInParallel(
         IEnumerable<FileInfo> files,
