@@ -372,7 +372,6 @@ namespace Hl7.Cql.Operators
         bool?                                    IsTrue(bool? b);
         T?                                       Last<T>(IEnumerable<T> enumerable);
         int?                                     LastPositionOf(string? argument, string? pattern);
-        T                                        LateBoundProperty<T>(object? source, string propertyName);
         int?                                     Length(string argument);
         int?                                     Length<T>(IEnumerable<T>? list);
         bool?                                    Less(object? left, object? right);

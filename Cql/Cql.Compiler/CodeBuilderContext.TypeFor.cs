@@ -126,7 +126,7 @@ partial class CodeBuilderContext
             // ELM produced by some translators contains choice types whose alternatives are all
             // the same type (e.g. Choice<Condition, Condition>). In that case, use the single
             // distinct type so the generated code stays strongly typed instead of falling back
-            // to object (and late-bound property access).
+            // to object (and a dispatch over the alternatives for every property access).
             if (choice.choice is { Length: > 0 } choices)
             {
                 Type? singleType = null;

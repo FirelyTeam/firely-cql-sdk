@@ -10,7 +10,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Operators;
+using Hl7.Cql.Exceptions;
 using Hl7.Fhir.Model;
 using Element = Hl7.Cql.Elm.Element;
 using Expression = Hl7.Cql.Elm.Expression;
@@ -29,7 +29,7 @@ namespace Hl7.Cql.Compiler;
 /// specification defines access to an element of a choice type as access on every alternative that
 /// has the element, the result being the choice of the alternatives' element types - a single type
 /// when they all agree. Where the alternatives are known, that rule is applied at compile time by
-/// emitting one type test per alternative; only where they are not is the read late-bound.
+/// emitting one type test per alternative; where they are not, binding the read fails the build.
 /// </remarks>
 partial class CodeBuilderContext
 {
@@ -39,8 +39,8 @@ partial class CodeBuilderContext
     /// <param name="Inspectable">The alternatives that resolve to a .NET type, distinct, derived types before their bases.</param>
     /// <param name="HasUninspectable">
     /// Whether the choice has an alternative whose elements cannot be inspected: one that does not
-    /// resolve to a type, or one that is itself a heterogeneous choice. Such an alternative may hold
-    /// the element with any type, so a read must keep a late-bound branch for it.
+    /// resolve to a type, or one whose type erases a choice without declaring its alternatives. Such
+    /// an alternative may hold the element with any type, so binding a read of it fails the build.
     /// </param>
     private sealed record ChoiceAlternatives(IReadOnlyList<Type> Inspectable, bool HasUninspectable)
     {
@@ -104,7 +104,7 @@ partial class CodeBuilderContext
         /// <summary>The static type erases a choice; the element is read per alternative that has it.</summary>
         Dispatch,
 
-        /// <summary>Neither the static type nor any known alternative has the element; the read is late-bound.</summary>
+        /// <summary>Neither the static type nor any known alternative has the element; binding the read fails the build.</summary>
         Unresolved,
     }
 
@@ -112,7 +112,7 @@ partial class CodeBuilderContext
     /// <param name="Segment">The element name.</param>
     /// <param name="Binding">How the segment binds.</param>
     /// <param name="Branches">For <see cref="SegmentBinding.Dispatch"/>: each alternative that has the element, with the element and its type (see <see cref="ElementTypeOf"/>).</param>
-    /// <param name="HasUninspectableAlternative">For <see cref="SegmentBinding.Dispatch"/>: whether an alternative could not be inspected, so a late-bound arm is needed.</param>
+    /// <param name="HasUninspectableAlternative">For <see cref="SegmentBinding.Dispatch"/>: whether an alternative could not be inspected, so binding the read fails the build.</param>
     /// <param name="Result">What is known statically about the value the segment produces.</param>
     /// <param name="Inspected">For <see cref="SegmentBinding.Dispatch"/>: every inspectable alternative, with or without the element.</param>
     private sealed record SegmentResolution(
@@ -147,8 +147,13 @@ partial class CodeBuilderContext
         if (typeSpecifier is not ChoiceTypeSpecifier { choice: { Length: > 0 } choices })
             return null;
 
-        // A nested heterogeneous choice resolves to object, which From() records as uninspectable.
-        return ChoiceAlternatives.From(choices.Select(choice => TypeFor(choice, throwIfNotFound: false)));
+        // A nested choice contributes its own alternatives.
+        static IEnumerable<TypeSpecifier> Flattened(IEnumerable<TypeSpecifier> specifiers) =>
+            specifiers.SelectMany(specifier => specifier is ChoiceTypeSpecifier { choice: { Length: > 0 } nested }
+                                      ? Flattened(nested)
+                                      : [specifier]);
+
+        return ChoiceAlternatives.From(Flattened(choices).Select(choice => TypeFor(choice, throwIfNotFound: false)));
     }
 
     /// <summary>
@@ -307,8 +312,8 @@ partial class CodeBuilderContext
 
     /// <summary>
     /// Resolves <paramref name="segments"/> against <paramref name="source"/>, one segment at a
-    /// time. Resolution stops at the first segment that cannot be resolved; the segments after it
-    /// are late-bound.
+    /// time. Resolution stops at the first segment that cannot be resolved; binding such a path
+    /// fails the build.
     /// </summary>
     private (IReadOnlyList<SegmentResolution> Resolutions, StaticValue Result) ResolvePath(StaticValue source, string[] segments)
     {
@@ -352,8 +357,8 @@ partial class CodeBuilderContext
         }
 
         // The spec's sum type: one type when every alternative that has the element agrees, else a
-        // choice of their types, represented as object. An uninspectable alternative is late-bound
-        // to the agreed type, so it does not widen the result.
+        // choice of their types, represented as object. An uninspectable alternative does not widen
+        // the result: binding a read of it fails the build.
         var branchTypes = branches.Select(branch => CqlTypeOf(branch.ElementType)).Distinct().ToList();
         var resultType = branchTypes.Count == 1 ? branchTypes[0] : typeof(object);
         var resultAlternatives = resultType == typeof(object)
@@ -369,8 +374,7 @@ partial class CodeBuilderContext
     /// <summary>
     /// Binds a property path off <paramref name="source"/>, one segment at a time: a member of the
     /// static type binds directly, an element of a choice is read per alternative that has it
-    /// (<see cref="BindChoiceSegment"/>), and from the first segment that resolves neither way the
-    /// remainder is late-bound one segment per call, so no late-bound call ever carries a dotted name.
+    /// (<see cref="BindChoiceSegment"/>), and a segment that resolves neither way fails the build.
     /// </summary>
     /// <param name="source">The value the first segment is read from.</param>
     /// <param name="sourceValue">What is known statically about <paramref name="source"/>; its type must be <paramref name="source"/>'s.</param>
@@ -393,11 +397,7 @@ partial class CodeBuilderContext
         {
             var resolution = resolutions[i];
             if (resolution.Binding == SegmentBinding.Unresolved)
-            {
-                current = LateBoundPropertyChain(current, segments, i, expectedType, element);
-                _staticValues[element] = new StaticValue(current.Type, null);
-                return current;
-            }
+                throw UnboundElement(resolution.Segment, current.Type, element);
 
             var isLast = i == segments.Length - 1;
             var target = isLast ? expectedType : resolution.Result.Type;
@@ -414,7 +414,7 @@ partial class CodeBuilderContext
     /// Reads an element off a choice value: a dispatch on the value's type with one arm per
     /// alternative that has the element, each reading it off the value narrowed to that alternative
     /// and converting to <paramref name="target"/>; <see langword="null"/> when the value is none of
-    /// them, or a late-bound read when the choice has an alternative that could not be inspected.
+    /// them. A choice with an alternative that could not be inspected fails the build.
     /// Alternatives that read the element the same way share one arm (see <see cref="MergeArmsReadingOneMember"/>).
     /// </summary>
     private CodeExpression BindChoiceSegment(
@@ -440,17 +440,14 @@ partial class CodeBuilderContext
         MergeArmsReadingOneMember(arms, resolution, target, element);
         var switchArms = arms.Select(arm => arm.Arm).ToList();
 
+        // An alternative that cannot be inspected may hold the element with any type, or not at all.
         if (resolution.HasUninspectableAlternative)
-        {
-            // Any other value may be the uninspectable alternative: read the element late-bound.
-            // As the last arm it only sees values no typed arm claimed.
-            if (switchArms.Count == 0)
-                return LateBoundProperty(source, resolution.Segment, target, element);
+            throw UnboundElement(
+                resolution.Segment,
+                "an alternative of its source's choice type does not resolve to a type, or erases a choice without declaring its alternatives",
+                element);
 
-            var other = new CodeLocal(typeof(object), isNotNull: true);
-            switchArms.Add(new CodeTypeSwitchArm(other, LateBoundProperty(other, resolution.Segment, target, element)));
-        }
-        else if (switchArms.Count == 0)
+        if (switchArms.Count == 0)
         {
             _logger.LogWarning(
                 FormatMessage($"No alternative of the choice type of the source has an element {resolution.Segment}; the property evaluates to null.", element));
@@ -475,9 +472,7 @@ partial class CodeBuilderContext
 
         // Read the element as its own type first, then convert to the target. When no
         // conversion exists (the ELM types the element differently from the model, e.g. a
-        // profile that constrains a list element to a single value), the arm falls back
-        // to the late-bound read, which converts at run time or yields null, rather than
-        // failing the build.
+        // profile that constrains a list element to a single value), the build fails.
         var value = read(narrowed);
 
         // A value of a reference type the target is assignable from needs no conversion: it is
@@ -487,13 +482,9 @@ partial class CodeBuilderContext
 
         var converted = ChangeType(value, target, out var conversion, throwOnError: false);
         if (conversion == TypeConversion.NoMatch)
-        {
-            _logger.LogWarning(
-                FormatMessage(
-                    $"Element {segment} of {narrowedType.Name} is a {value.Type.Name} but the expression expects a {target.Name}; the read on this alternative is late-bound.",
-                    element));
-            converted = LateBoundProperty(narrowed, segment, target, element);
-        }
+            throw this.NewExpressionBuildingException(FormatMessage(
+                $"Property {segment} cannot be bound at compile time: its type on {narrowedType.ToCSharpString(MessageTypeFormat)} is {value.Type.ToCSharpString(MessageTypeFormat)}, which does not convert to {target.ToCSharpString(MessageTypeFormat)}, the type the expression expects.",
+                element));
 
         return new CodeTypeSwitchArm(narrowed, converted);
     }
@@ -655,45 +646,28 @@ partial class CodeBuilderContext
         return true;
     }
 
-    /// <summary>
-    /// Late-binds <paramref name="segments"/> from index <paramref name="start"/> onwards, one
-    /// <see cref="ICqlOperators.LateBoundProperty{T}"/> call per segment. Intermediate segments are
-    /// read as <see cref="object"/>; only the last is converted to <paramref name="expectedType"/>.
-    /// </summary>
-    private CodeExpression LateBoundPropertyChain(
-        CodeExpression source,
-        string[] segments,
-        int start,
-        Type expectedType,
-        Element? element)
-    {
-        var current = source;
-        for (var i = start; i < segments.Length; i++)
-        {
-            var isLast = i == segments.Length - 1;
-            current = LateBoundProperty(current, segments[i], isLast ? expectedType : typeof(object), element);
-        }
-
-        return current;
-    }
+    /// <summary>How the build errors below name a type: as in C#, without namespaces.</summary>
+    private static readonly TypeCSharpFormat MessageTypeFormat = new(UseKeywords: true, NoNamespaces: true);
 
     /// <summary>
-    /// Emits a late-bound read of <paramref name="path"/> off <paramref name="source"/>: the
-    /// fallback when neither the static type of the source nor the alternatives of its choice type
-    /// resolve the element at compile time.
+    /// The build error for element <paramref name="segment"/> of a value it cannot be bound on at
+    /// compile time, for <paramref name="reason"/>. An explicit <c>as</c> of the source to the type
+    /// that has the element makes the read bindable.
     /// </summary>
-    private CodeExpression LateBoundProperty(
-        CodeExpression source,
-        string path,
-        Type expectedType,
-        Element? element)
-    {
-        _logger.LogWarning(
-            FormatMessage(
-                $"Property {path} can't be known at design time and will be late-bound, which is slower and leaves the property's type and cardinality unchecked.  Consider casting the source first so that this property can be definitely bound.",
-                element));
+    private CqlException UnboundElement(string segment, string reason, Element? element) =>
+        this.NewExpressionBuildingException(FormatMessage(
+            $"Property {segment} cannot be bound at compile time: {reason}. Cast its source with an explicit 'as' to the type that has the element.",
+            element));
 
-        return BindCqlOperator(nameof(ICqlOperators.LateBoundProperty), source, new CodeConstant(path, typeof(string)),
-                               new CodeConstant(expectedType, typeof(Type)));
-    }
+    /// <summary>
+    /// The build error for element <paramref name="segment"/> of a value of <paramref name="sourceType"/>,
+    /// which neither has the element nor is a choice with known alternatives.
+    /// </summary>
+    private CqlException UnboundElement(string segment, Type sourceType, Element? element) =>
+        UnboundElement(
+            segment,
+            sourceType == typeof(object)
+                ? "the type of its source is not known"
+                : $"{sourceType.ToCSharpString(MessageTypeFormat)} has no such element",
+            element);
 }
