@@ -34,7 +34,23 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "ExpandPer0D1", "Throws NotSupportedException: a fractional per over integer intervals would produce Decimal intervals (value-dependent typing); the reference Java translator rejects this expression at compile time." },
 
-            { "TestMaxIntervalExceptNull", "Except over two Interval<Any> operands is ambiguous with every typed interval overload (#1627)." }
+            { "TestMaxIntervalExceptNull", "Except over two Interval<Any> operands is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandListWithNull", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandEmptyList", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
+            { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing)." },
+
+            { "FloorIntegerLessThanMinInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
+            { "FloorIntegerGreaterThanMaxInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
+
+            { "RatioEqual", "The expression builder does not support Ratio." },
+            { "RatioNotEqualDiffNumerator", "The expression builder does not support Ratio." },
+            { "RatioNotEqualDiffDenominator", "The expression builder does not support Ratio." },
+            { "RatioEquivalent", "The expression builder does not support Ratio." },
+            { "RatioNotEquivalentDiffNumerator", "The expression builder does not support Ratio." },
+            { "RatioNotEquivalentDiffDenominator", "The expression builder does not support Ratio." },
+
+            { "MegaMultiDistinct", "`aggregate distinct` over a multi-source query binds Distinct with the aggregate's type instead of the source tuple type, and no overload matches." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
@@ -53,7 +69,42 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ReplaceMatchesSpaces", "Returns 'All\\$that...': .NET keeps backslash escapes in the Regex.Replace substitution literally, unlike Java's Matcher." },
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
-            { "TestIntersectNull", "The result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm any expectation; the vendored expectation of null also disagrees with the Language Semantics example. CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
+
+            { "CeilingDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "CeilingDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+            { "FloorMinIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
+
+            { "HighBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
+            { "LowBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
+
+
+            { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+            { "DateTimeSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+            { "DateSubtract33Days", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
+
+
+
+            { "TestQuantityYearEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityYearNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityYearsNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthNotEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestQuantityMonthsNotEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
+            { "TestYearEquivalentDays", "1 year ~ 365 days returns false; the suite expects the calendar-duration conversion the specification lists for equivalence (1 year ~ 365 days), which an implementation is not required to support." },
+            { "TestMonthEquivalentDays", "1 month ~ 30 days returns false; the suite expects the calendar-duration conversion the specification lists for equivalence (1 month ~ 30 days), which an implementation is not required to support." },
+
+            { "TupleEqDifferentNamesWithOneNullId", "Conflicting suite expectation: tuple equality is false when one element differs, even if another is null (specification example: { x: 1, y: 1 } = { x: null, y: 2 } is false, and the suite's own TupleEqJohn1John2WithNullName expects false); this case expects null." },
+            { "TupleNotEqDifferingNamesWithOneNullId", "Conflicting suite expectation: tuple inequality is true when one element differs, even if another is null (the suite's own TupleNotEqJohn1John2WithNullName expects true); this case expects null." },
+            { "Equal123AndABC", "Equality of two List<Any> whose elements have different types returns null instead of false." },
+            { "Equal123AndString123", "Equality of two List<Any> whose elements have different types returns null instead of false." },
+            { "ProperContains1", "`properly includes` with a null list returns null instead of false." },
+            { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
+
+            { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
+            { "TestIntersectNull", "The expected result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm it; CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
         };
     }
 
