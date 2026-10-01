@@ -152,9 +152,9 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
             _services.LibrarySetCSharpCodeGenerator,
             librarySet,
             librarySetDefinitions,
-            cSharpNamespace).ToList();
+            cSharpNamespace);
 
-        var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat).ToList();
+        var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = _artifactsById.ToBuilder();
         var hasChanged = UpdateArtifacts(assemblyBinaries, entriesBuilder, logger);
@@ -204,10 +204,10 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="cSharps">The C# code to compile.</param>
     /// <param name="debugSymbolsFormat">The format for debug information.</param>
     /// <returns>The compiled assemblies.</returns>
-    private IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
+    private (ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)[] CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
-        IEnumerable<(ElmLibrary library, string cSharp)> cSharps,
+        IReadOnlyList<(ElmLibrary library, string cSharp)> cSharps,
         DebugSymbolsFormat debugSymbolsFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
@@ -219,7 +219,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                                             .AddLoggerExceptionHandler(
                                                                 _services.Logger,
                                                                 (pair, logMessage) =>
-                                                                    logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)));
+                                                                    logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.VersionedLibraryIdentifier)))
+            .ToArray();
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -229,7 +230,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     /// <param name="librarySetDefinitions">The definitions for the library set.</param>
     /// <param name="namespace">The C# namespace to use for generated code.</param>
     /// <returns>The generated C# code.</returns>
-    private IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
+    private (ElmLibrary library, string cSharp)[] GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
         CqlDefinitionDictionary librarySetDefinitions,
@@ -244,7 +245,8 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C#: {lib}", library.VersionedLibraryIdentifier)),
-                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier));
+                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.VersionedLibraryIdentifier))
+            .ToArray();
 
     /// <summary>
     /// Builds the library set definitions.
