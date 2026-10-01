@@ -410,6 +410,9 @@ partial class CodeBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
+                    if (AsOfKnownType(operand, type, castKind, @as) is { } known)
+                        return known;
+
                     var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast: true);
                     switch (typeConversion)
                     {
@@ -426,11 +429,11 @@ partial class CodeBuilderContext
 
                         case TypeConversion.ExpressionTypeAs:
                         default:
-                            // NOTE(phase4): ported as-is — even when typeConversion came back as
-                            // ExactType (equal types; there is no case label for it above), this
-                            // falls into the default arm and still wraps in a cast/as node built
-                            // from the original operand, rather than returning operand or
-                            // converted directly.
+                            // NOTE(phase4): ported as-is — an operand of the type itself was returned
+                            // above, but ExactType also comes back for a constant ChangeType retyped
+                            // (there is no case label for it above), which falls into the default arm
+                            // and still wraps in a cast/as node built from the original operand,
+                            // rather than returning converted directly.
                             return new CodeCast(operand, type, castKind);
                     }
                 }
@@ -448,6 +451,9 @@ partial class CodeBuilderContext
                        ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
 
             var operand = TranslateArg(@as.operand);
+            if (AsOfKnownType(operand, type, castKind, @as) is { } known)
+                return known;
+
             if (!type.IsAssignableTo(operand.Type))
             {
                 _logger.LogWarning(FormatMessage(
@@ -458,6 +464,27 @@ partial class CodeBuilderContext
             return new CodeCast(operand, type, castKind);
         }
     }
+
+    /// <summary>
+    /// <c>x as T</c> where the static type of <paramref name="operand"/> decides the result:
+    /// <paramref name="operand"/> itself when it already has type <paramref name="type"/>, the value
+    /// it upcasts when that has the type, and on a narrowed variable what <see cref="AsOfNarrowed"/>
+    /// makes of it; <see langword="null"/> when the cast is translated as usual.
+    /// </summary>
+    /// <remarks>
+    /// The upcast is typically to the ELM type of the operand, a choice, when the value's own type is
+    /// one of its alternatives: <c>choice.low</c> is a <c>Choice&lt;DateTime, Quantity&gt;</c> in the
+    /// ELM, and a <see cref="CqlQuantity"/> within the branch that narrows <c>choice</c> to an
+    /// <c>Interval&lt;Quantity&gt;</c>.
+    /// </remarks>
+    private CodeExpression? AsOfKnownType(CodeExpression operand, Type type, CodeCastKind castKind, Element element) =>
+        operand.Type == type
+            ? operand
+            : operand is CodeCast { Kind: CodeCastKind.Cast, Operand: var upcast } cast
+              && upcast.Type == type
+              && cast.Type.IsAssignableFrom(upcast.Type)
+                ? upcast
+                : AsOfNarrowed(operand, type, castKind, element);
 
     protected CodeExpression Is(Is @is) // @TODO: Cast - Is
     {
@@ -512,6 +539,9 @@ partial class CodeBuilderContext
 
     protected CodeExpression Case(Case ce)
     {
+        if (CaseAsTypeSwitch(ce) is { } typeSwitch)
+            return typeSwitch;
+
         //[{ when1, then1 }, { when2, then2}, { when3, then3 }]
         // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
         if (ce.caseItem?.Length > 0 && ce.@else != null)
@@ -562,6 +592,9 @@ partial class CodeBuilderContext
 
     protected CodeExpression If(If @if)
     {
+        if (IfAsTypeSwitch(@if) is { } typeSwitch)
+            return typeSwitch;
+
         var rc = TranslateArg(@if.condition!);
         var condition = rc.Coalesce();
         var then = TranslateArg(@if.then!);

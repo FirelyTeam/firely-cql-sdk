@@ -239,15 +239,8 @@ partial class CodeBuilderContext
 
         switch (expression)
         {
-            case AliasRef { name: { } alias } when !string.IsNullOrWhiteSpace(alias):
-                return ScopeStaticValue(alias);
-
-            case OperandRef { name: { } name } operandRef when _operands?.TryGetValue(name, out var operand) == true:
-            {
-                var typeSpecifier = operandRef.resultTypeSpecifier
-                                    ?? (_operandTypeSpecifiers.TryGetValue(name, out var declared) ? declared : null);
-                return new StaticValue(operand.Type, ChoiceAlternativesOf(typeSpecifier, unwrapList: _typeResolver.IsListType(operand.Type)));
-            }
+            case Elm.AliasRef or Elm.OperandRef or Elm.QueryLetRef when ResolveReference(expression) is { } reference:
+                return ReferenceStaticValue(reference);
 
             case Property { resultTypeSpecifier: null, resultTypeName: null } property when !string.IsNullOrWhiteSpace(property.path):
                 return PropertyStaticValue(property, throwIfNotFound);
@@ -271,29 +264,6 @@ partial class CodeBuilderContext
     /// the relationship clause for a <c>with</c>, and for the <c>@this</c> of a sort the query's
     /// return expression or single source.
     /// </summary>
-    /// <remarks>
-    /// A scope whose element refers back to the scope itself would resolve forever; while a scope is
-    /// being resolved, a reference back to it is answered by its .NET type alone.
-    /// </remarks>
-    private StaticValue ScopeStaticValue(string alias)
-    {
-        var (expression, element) = GetScope(alias);
-        if (!_scopesBeingResolved.Add(expression))
-            return new StaticValue(expression.Type, null);
-
-        try
-        {
-            return ScopeStaticValue(expression, element);
-        }
-        finally
-        {
-            _scopesBeingResolved.Remove(expression);
-        }
-    }
-
-    /// <summary>The scopes <see cref="ScopeStaticValue(string)"/> is resolving, by their expression.</summary>
-    private readonly HashSet<CodeExpression> _scopesBeingResolved = new(ReferenceEqualityComparer.Instance);
-
     private StaticValue ScopeStaticValue(CodeExpression expression, Element element)
     {
         // A RelationshipClause (with/without) is an AliasedQuerySource too.
@@ -319,7 +289,7 @@ partial class CodeBuilderContext
         StaticValue? source = property.source is { } sourceExpression
             ? StaticValueFor(sourceExpression, throwIfNotFound)
             : !string.IsNullOrWhiteSpace(property.scope)
-                ? ScopeStaticValue(property.scope)
+                ? ReferenceStaticValue(ResolveScope(property.scope))
                 : null;
 
         if (source is not { } sourceValue)

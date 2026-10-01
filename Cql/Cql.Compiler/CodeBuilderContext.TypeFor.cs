@@ -81,20 +81,8 @@ partial class CodeBuilderContext
                 break;
             }
 
-            case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
-            {
-                var scope = GetScope(aliasRef.name);
-                return scope.Item1.Type;
-            }
-
-            case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
-            {
-                CodeLocal? operand = null;
-                _operands?.TryGetValue(operandRef.name, out operand);
-                if (operand != null)
-                    return operand.Type;
-                break;
-            }
+            case Elm.AliasRef or Elm.OperandRef or Elm.QueryLetRef when ResolveReference((Elm.Expression)element) is { } reference:
+                return reference.Value.Type;
         }
 
         if (throwIfNotFound)

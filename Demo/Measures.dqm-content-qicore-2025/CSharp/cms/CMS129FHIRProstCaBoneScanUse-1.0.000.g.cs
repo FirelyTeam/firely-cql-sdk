@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS129FHIRProstCaBoneScanUse", "1.0.000")]
 public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton<CMS129FHIRProstCaBoneScanUse_1_0_000>
 {
@@ -230,10 +230,10 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
         bool? c_(Condition ProstateCancer) {
-            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer as Condition);
+            CqlInterval<CqlDateTime> e_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancer);
             CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
             bool? g_ = context.Operators.Overlaps(e_, f_, "day");
-            bool? h_ = this.isVerified(context, ProstateCancer as Condition);
+            bool? h_ = this.isVerified(context, ProstateCancer);
             bool? i_ = context.Operators.And(g_, h_);
             return i_;
         }
@@ -782,7 +782,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.toInterval(context, k_);
                 CqlDateTime m_ = context.Operators.Start(l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as Condition);
+                CqlInterval<CqlDateTime> n_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime o_ = context.Operators.Start(n_);
                 bool? p_ = context.Operators.After(m_, o_, (string)default);
                 return p_;
@@ -845,7 +845,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
         CqlValueSet a_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition ProstateCancerPain) {
             IEnumerable<Condition> g_ = this.Prostate_Cancer_Diagnosis(context);
@@ -853,7 +853,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
             bool? h_(Condition ActiveProstateCancer) {
                 CqlInterval<CqlDateTime> j_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ProstateCancerPain);
                 CqlDateTime k_ = context.Operators.Start(j_);
-                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as Condition);
+                CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime m_ = context.Operators.Start(l_);
                 bool? n_ = context.Operators.After(k_, m_, (string)default);
                 bool? o_ = this.isVerified(context, ProstateCancerPain);
@@ -937,7 +937,7 @@ public partial class CMS129FHIRProstCaBoneScanUse_1_0_000 : ILibrary, ISingleton
                 }
                 CqlInterval<CqlDateTime> i_ = QICoreCommon_4_0_000.Instance.toInterval(context, h_);
                 CqlDateTime j_ = context.Operators.Start(i_);
-                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer as Condition);
+                CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, ActiveProstateCancer);
                 CqlDateTime l_ = context.Operators.Start(k_);
                 bool? m_ = context.Operators.After(j_, l_, (string)default);
                 Code<EventStatus> n_ = SalvageTherapy?.StatusElement;

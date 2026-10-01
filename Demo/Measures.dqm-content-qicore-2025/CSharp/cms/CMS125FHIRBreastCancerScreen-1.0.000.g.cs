@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS125FHIRBreastCancerScreen", "1.0.000")]
 public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton<CMS125FHIRBreastCancerScreen_1_0_000>
 {
@@ -196,11 +196,11 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         CqlValueSet a_ = this.Status_Post_Right_Mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         CqlValueSet e_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_, g_);
 
         bool? i_(Condition UnilateralMastectomyDiagnosis) {
             List<CodeableConcept> o_ = UnilateralMastectomyDiagnosis?.BodySite;
@@ -328,11 +328,11 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         CqlValueSet a_ = this.Status_Post_Left_Mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         CqlValueSet e_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_, g_);
 
         bool? i_(Condition UnilateralMastectomyDiagnosis) {
             List<CodeableConcept> o_ = UnilateralMastectomyDiagnosis?.BodySite;
@@ -460,7 +460,7 @@ public partial class CMS125FHIRBreastCancerScreen_1_0_000 : ILibrary, ISingleton
         CqlValueSet a_ = this.History_of_bilateral_mastectomy(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition BilateralMastectomyHistory) {

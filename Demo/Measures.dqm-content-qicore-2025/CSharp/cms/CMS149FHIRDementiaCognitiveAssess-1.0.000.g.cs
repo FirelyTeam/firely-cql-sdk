@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS149FHIRDementiaCognitiveAssess", "1.0.000")]
 public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISingleton<CMS149FHIRDementiaCognitiveAssess_1_0_000>
 {
@@ -209,7 +209,7 @@ public partial class CMS149FHIRDementiaCognitiveAssess_1_0_000 : ILibrary, ISing
             CqlValueSet d_ = this.Dementia__and__Mental_Degenerations(context);
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+            IEnumerable<Condition> g_ = context.Operators.Union<Condition>(e_, f_);
 
             bool? h_(Condition Dementia) {
                 CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);

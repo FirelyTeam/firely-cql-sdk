@@ -169,8 +169,8 @@ internal partial class CodeBuilderContext
                     ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
                     Coalesce e         => Coalesce(e),
                     Equivalent e       => Equivalent(e),
-                    AliasRef e         => GetScopeExpression(e.name!),
-                    QueryLetRef e      => GetScopeExpression(e.name!),
+                    AliasRef e         => ResolveScope(e.name!).Value,
+                    QueryLetRef e      => ResolveScope(e.name!).Value,
                     IdentifierRef e    => IdentifierRef(e),
                     If e               => If(e),
                     IncludedIn e       => IncludedIn(e),
@@ -225,6 +225,14 @@ internal partial class CodeBuilderContext
                 CodeExpression ConvertToResultType()
                 {
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
+
+                    // A narrowed reference keeps its type: the ELM types the reference as what it
+                    // is outside the branch that narrows it (see CodeBuilderContext.Narrowing.cs).
+                    if (expression is CodeLocal { IsNotNull: true } narrowed
+                        && UnnarrowedOf(narrowed) is not null
+                        && tsType?.IsAssignableFrom(narrowed.Type) == true)
+                        return expression;
+
                     if (tsType is not null)
                     {
                         return ChangeType(expression!, element.resultTypeSpecifier, throwOnError: true);

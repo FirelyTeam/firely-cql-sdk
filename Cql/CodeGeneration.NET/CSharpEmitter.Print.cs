@@ -694,6 +694,18 @@ internal partial class CSharpEmitter
         && !GetPrintedType(atom.Node).IsValueType;
 
     /// <summary>
+    /// Whether C# accepts a pattern testing a value of static type <paramref name="operandType"/>
+    /// for <paramref name="testedType"/>: it rejects one that can never match (CS8121), such as a
+    /// variable of one resource type tested for another, or of a sealed class tested for an
+    /// interface it does not implement.
+    /// </summary>
+    private static bool CanPatternMatch(Type operandType, Type testedType) =>
+        operandType.IsAssignableFrom(testedType)
+        || testedType.IsAssignableFrom(operandType)
+        || (operandType.IsInterface && !testedType.IsSealed)
+        || (testedType.IsInterface && !operandType.IsSealed);
+
+    /// <summary>
     /// The static C# type of the code printed for a simple node, which can be narrower than
     /// its IR type: constants typed as object print as their underlying literal, and a
     /// value-typed-operand cast to object is boxing-elided (see <see cref="PrintCast"/>) so it

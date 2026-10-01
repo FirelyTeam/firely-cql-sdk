@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.27.000")]
 public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_27_000>
 {
@@ -158,7 +158,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlValueSet n_ = this.Frailty_Diagnosis(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> q_ = context.Operators.Union<Condition>(o_ as IEnumerable<Condition>, p_ as IEnumerable<Condition>);
+        IEnumerable<Condition> q_ = context.Operators.Union<Condition>(o_, p_);
         IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 
         bool? s_(Condition FrailtyDiagnosis) {
@@ -214,7 +214,7 @@ public partial class AdvancedIllnessandFrailty_1_27_000 : ILibrary, ISingleton<A
         CqlValueSet a_ = this.Advanced_Illness(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition AdvancedIllnessDiagnosis) {

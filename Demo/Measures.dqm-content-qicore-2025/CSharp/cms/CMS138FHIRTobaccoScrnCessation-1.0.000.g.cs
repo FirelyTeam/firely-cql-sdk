@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS138FHIRTobaccoScrnCessation", "1.0.000")]
 public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISingleton<CMS138FHIRTobaccoScrnCessation_1_0_000>
 {
@@ -690,7 +690,7 @@ public partial class CMS138FHIRTobaccoScrnCessation_1_0_000 : ILibrary, ISinglet
         IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(h_, i_);
         IEnumerable<Condition> k_ = Status_1_15_000.Instance.verified(context, j_);
 
         bool? l_(Condition TobaccoCounseling) {

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.3.0")]
 [CqlLibrary("CMS146FHIRApproTestPharyngitis", "1.0.000")]
 public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISingleton<CMS146FHIRApproTestPharyngitis_1_0_000>
 {
@@ -375,7 +375,7 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         CqlValueSet c_ = this.Acute_Tonsillitis(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
-        Condition f_(Condition X) => X as Condition;
+        Condition f_(Condition X) => X;
         IEnumerable<Condition> g_ = context.Operators.Select<Condition, Condition>(e_, f_);
         IEnumerable<Condition> h_ = Status_1_15_000.Instance.verified(context, g_);
         return h_;
@@ -491,10 +491,10 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> b_ = this.Encounter_With_Pharyngitis_or_Tonsillitis_With_Antibiotic(context);
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition e_(Condition X) => X as Condition;
+        Condition e_(Condition X) => X;
         IEnumerable<Condition> f_ = context.Operators.Select<Condition, Condition>(d_, e_);
         IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
-        Condition h_(Condition X) => X as Condition;
+        Condition h_(Condition X) => X;
         IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
@@ -532,10 +532,10 @@ public partial class CMS146FHIRApproTestPharyngitis_1_0_000 : ILibrary, ISinglet
         IEnumerable<Encounter> s_ = Antibiotic_1_11_000.Instance.Encounter_with_Antibiotic_Medication_History(context, b_, r_);
         CqlValueSet t_ = this.Competing_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> u_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition v_(Condition X) => X as Condition;
+        Condition v_(Condition X) => X;
         IEnumerable<Condition> w_ = context.Operators.Select<Condition, Condition>(u_, v_);
         IEnumerable<Condition> x_ = Status_1_15_000.Instance.verified(context, w_);
-        Condition y_(Condition X) => X as Condition;
+        Condition y_(Condition X) => X;
         IEnumerable<Condition> z_ = context.Operators.Select<Condition, Condition>(x_, y_);
         IEnumerable<Encounter> aa_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, z_);
         IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(s_, aa_);
