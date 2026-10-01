@@ -100,8 +100,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "TupleNotEqDifferingNamesWithOneNullId", "Conflicting suite expectation: tuple inequality is true when one element differs, even if another is null (the suite's own TupleNotEqJohn1John2WithNullName expects true); this case expects null." },
             { "Equal123AndABC", "Equality of two List<Any> whose elements have different types returns null instead of false." },
             { "Equal123AndString123", "Equality of two List<Any> whose elements have different types returns null instead of false." },
-            { "ProperContains1", "`properly includes` with a null list returns null instead of false." },
-            { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
 
             { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
             { "TestIntersectNull", "The expected result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm it; CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
