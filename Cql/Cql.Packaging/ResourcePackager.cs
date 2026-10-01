@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Concurrent;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Hl7.Cql.Abstractions;
@@ -28,6 +27,8 @@ internal class ResourcePackager(
         byte[] AssemblyBinary,
         byte[]? DebugSymbols);
 
+    /// <summary>Packages each library's FHIR resources.</summary>
+    /// <remarks><paramref name="onNextLibrary"/> is invoked concurrently for libraries in arbitrary order.</remarks>
     public IEnumerable<(string libraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
         Func<string, InputArtifacts> inputsById,
@@ -43,30 +44,34 @@ internal class ResourcePackager(
         var libraries = librarySet.ToList();
 
         // Package each library in parallel after materializing the dependency graph.
-        var results = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)>();
-        var failures = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo>();
-
-        Parallel.ForEach(libraries, elmLibrary =>
+        var results = new (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)?[libraries.Count];
+        var failures = new ExceptionDispatchInfo?[libraries.Count];
+        var parallelOptions = new ParallelOptions
         {
-            onNextLibrary?.Invoke(elmLibrary);
+            MaxDegreeOfParallelism = Math.Min(4, Environment.ProcessorCount)
+        };
+
+        Parallel.For(0, libraries.Count, parallelOptions, index =>
+        {
+            var elmLibrary = libraries[index];
             try
             {
-                results[elmLibrary.VersionedLibraryIdentifier] = PackageResource(elmLibrary);
+                onNextLibrary?.Invoke(elmLibrary);
+                results[index] = PackageResource(elmLibrary);
             }
             catch (Exception ex)
             {
-                failures[elmLibrary.VersionedLibraryIdentifier] = ExceptionDispatchInfo.Capture(ex);
+                failures[index] = ExceptionDispatchInfo.Capture(ex);
             }
         });
 
-        return libraries.TrySelect(
-            elmLibrary =>
+        return libraries.TrySelectToArray(
+            (elmLibrary, index) =>
             {
-                var identifier = elmLibrary.VersionedLibraryIdentifier;
-                if (failures.TryGetValue(identifier, out var edi))
+                if (failures[index] is { } edi)
                     edi.Throw();
-                var (fhirLibrary, fhirMeasure) = results[identifier];
-                return (versionedIdentifier: (string)identifier, fhirLibrary, fhirMeasure);
+                var (fhirLibrary, fhirMeasure) = results[index]!.Value;
+                return (versionedIdentifier: (string)elmLibrary.VersionedLibraryIdentifier, fhirLibrary, fhirMeasure);
             },
             buildExceptionHandlingStrategy);
 

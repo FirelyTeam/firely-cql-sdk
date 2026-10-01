@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Concurrent;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -93,7 +92,7 @@ public static partial class ElmToolkitExtensions
     {
         var logger = elmToolkit.CreateLogger();
         var libraries = LoadElmFilesInParallel(
-            files,
+            files.ToArray(),
             logger,
             s => s
                  .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
@@ -108,34 +107,39 @@ public static partial class ElmToolkitExtensions
     /// Loads ELM libraries from <paramref name="files"/> in parallel and re-surfaces results and
     /// exceptions through <paramref name="buildExceptionHandlingStrategy"/> in original file order.
     /// </summary>
-    private static IEnumerable<(FileInfo file, ElmLibrary library)> LoadElmFilesInParallel(
-        IEnumerable<FileInfo> files,
+    private static (FileInfo file, ElmLibrary library)[] LoadElmFilesInParallel(
+        IReadOnlyCollection<FileInfo> files,
         ILogger logger,
         BatchProcessExceptionHandlingStrategyBuilder<FileInfo>? buildExceptionHandlingStrategy)
     {
-        var materialized = files as IReadOnlyList<FileInfo> ?? files.ToList();
-        var results = new ConcurrentDictionary<FileInfo, ElmLibrary>();
-        var failures = new ConcurrentDictionary<FileInfo, ExceptionDispatchInfo>();
-
-        Parallel.ForEach(materialized, f =>
+        var materialized = files as FileInfo[] ?? files.ToArray();
+        var results = new ElmLibrary[materialized.Length];
+        var failures = new ExceptionDispatchInfo?[materialized.Length];
+        var parallelOptions = new ParallelOptions
         {
+            MaxDegreeOfParallelism = Math.Min(4, Environment.ProcessorCount)
+        };
+
+        Parallel.For(0, materialized.Length, parallelOptions, index =>
+        {
+            var file = materialized[index];
             try
             {
-                logger.LogInformation("Loading ELM library from file: {file}", f);
-                results[f] = ElmLibrary.LoadFromJson(f);
+                logger.LogInformation("Loading ELM library from file: {file}", file);
+                results[index] = ElmLibrary.LoadFromJson(file);
             }
             catch (Exception ex)
             {
-                failures[f] = ExceptionDispatchInfo.Capture(ex);
+                failures[index] = ExceptionDispatchInfo.Capture(ex);
             }
         });
 
-        return materialized.TrySelect(
-            f =>
+        return materialized.TrySelectToArray(
+            (file, index) =>
             {
-                if (failures.TryGetValue(f, out var edi))
+                if (failures[index] is { } edi)
                     edi.Throw();
-                return (f, results[f]);
+                return (file, results[index]);
             },
             buildExceptionHandlingStrategy);
     }

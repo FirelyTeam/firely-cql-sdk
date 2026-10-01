@@ -161,32 +161,58 @@ namespace Hl7.Cql.CodeGeneration.NET
             // substantial work on independent, later waves).
             var continuation = (buildExceptionHandlingStrategy?.Invoke(default) ?? default).ExceptionContinuation;
 
-            var remaining = new HashSet<CqlVersionedLibraryIdentifier>(sourceByIdentifier.Keys);
-            while (remaining.Count > 0)
+            var sourceOrder = sourceByIdentifier.Keys.ToArray();
+            var dependenciesByIdentifier = new Dictionary<CqlVersionedLibraryIdentifier, CqlVersionedLibraryIdentifier[]>();
+            var dependentsByIdentifier = sourceOrder.ToDictionary(
+                identifier => identifier,
+                _ => new List<CqlVersionedLibraryIdentifier>());
+            var unmetDependencyCounts = new Dictionary<CqlVersionedLibraryIdentifier, int>();
+            foreach (var identifier in sourceOrder)
             {
-                var ready = remaining
-                    .Where(id => librarySet.GetLibraryDependencies(id)
-                        .All(dep => !sourceByIdentifier.ContainsKey(dep.VersionedLibraryIdentifier)
-                                    || concurrentResults.ContainsKey(dep.VersionedLibraryIdentifier)
-                                    || concurrentFailures.ContainsKey(dep.VersionedLibraryIdentifier)))
-                    .ToList();
+                var dependencies = librarySet.GetLibraryDependencies(identifier)
+                    .Select(dependency => dependency.VersionedLibraryIdentifier)
+                    .Distinct()
+                    .ToArray();
+                dependenciesByIdentifier[identifier] = dependencies;
 
-                if (ready.Count == 0)
-                    throw new InvalidOperationException(
-                        $"Circular dependency detected involving one of: {string.Join(", ", remaining)}.");
+                var sourceDependencies = dependencies
+                    .Where(sourceByIdentifier.ContainsKey)
+                    .ToArray();
+                unmetDependencyCounts[identifier] = sourceDependencies.Length;
+                foreach (var dependency in sourceDependencies)
+                    dependentsByIdentifier[dependency].Add(identifier);
+            }
 
-                Parallel.ForEach(ready, identifier =>
+            var ready = sourceOrder
+                .Where(identifier => unmetDependencyCounts[identifier] == 0)
+                .ToList();
+            var completed = new HashSet<CqlVersionedLibraryIdentifier>();
+            var parallelOptions = new ParallelOptions
+            {
+                MaxDegreeOfParallelism = Math.Min(4, Environment.ProcessorCount)
+            };
+
+            while (ready.Count > 0)
+            {
+                Parallel.ForEach(ready, parallelOptions, identifier =>
                 {
-                    // If any dependency already failed to compile, don't bother attempting to
-                    // compile this library -- surface that same failure so downstream item-level
-                    // error handling (TrySelect) reports a sensible cause. (CqlVersionedLibraryIdentifier
-                    // is a value type, so FirstOrDefault()+null-check can't be used to detect "not found".)
-                    CqlVersionedLibraryIdentifier? failedDependency = null;
-                    foreach (var dep in librarySet.GetLibraryDependencies(identifier))
+                    foreach (var dependency in dependenciesByIdentifier[identifier])
                     {
-                        if (concurrentFailures.ContainsKey(dep.VersionedLibraryIdentifier))
+                        if (!sourceByIdentifier.ContainsKey(dependency))
                         {
-                            failedDependency = dep.VersionedLibraryIdentifier;
+                            concurrentFailures[identifier] = ExceptionDispatchInfo.Capture(
+                                new InvalidOperationException(
+                                    $"No C# source was generated for library '{dependency}', but it's a declared dependency of another library."));
+                            return;
+                        }
+                    }
+
+                    CqlVersionedLibraryIdentifier? failedDependency = null;
+                    foreach (var dependency in dependenciesByIdentifier[identifier])
+                    {
+                        if (concurrentFailures.ContainsKey(dependency))
+                        {
+                            failedDependency = dependency;
                             break;
                         }
                     }
@@ -208,26 +234,44 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 });
 
-                remaining.ExceptWith(ready);
-
-                // Honor the configured stop-on-error policy: if anything failed in this wave and
-                // the policy is not Continue, don't start additional waves. Mark the remaining,
-                // not-yet-attempted libraries as failed (rather than silently leaving them absent
-                // from both dictionaries) so downstream TrySelect handling has a sensible cause for
-                // each of them instead of a bare KeyNotFoundException.
-                if (continuation != BatchProcessExceptionContinuation.Continue && !concurrentFailures.IsEmpty && remaining.Count > 0)
+                var nextReady = new List<CqlVersionedLibraryIdentifier>();
+                foreach (var identifier in ready)
                 {
-                    foreach (var skippedId in remaining)
+                    completed.Add(identifier);
+                    foreach (var dependent in dependentsByIdentifier[identifier])
                     {
-                        concurrentFailures.TryAdd(
-                            skippedId,
-                            ExceptionDispatchInfo.Capture(
-                                new InvalidOperationException(
-                                    $"Compilation of library '{skippedId}' was skipped because an earlier library failed to compile and the configured exception continuation policy is '{continuation}'.")));
+                        if (--unmetDependencyCounts[dependent] == 0)
+                            nextReady.Add(dependent);
+                    }
+                }
+
+                // Stop scheduling further waves for Throw/Break, but keep the original failure
+                // associated with skipped libraries so TrySelect cannot mask its diagnostics.
+                if (continuation != BatchProcessExceptionContinuation.Continue
+                    && ready.Any(concurrentFailures.ContainsKey)
+                    && completed.Count < sourceOrder.Length)
+                {
+                    ExceptionDispatchInfo? firstFailure = null;
+                    foreach (var identifier in sourceOrder)
+                    {
+                        if (concurrentFailures.TryGetValue(identifier, out firstFailure))
+                            break;
+                    }
+
+                    foreach (var identifier in sourceOrder)
+                    {
+                        if (!completed.Contains(identifier))
+                            concurrentFailures.TryAdd(identifier, firstFailure!);
                     }
                     break;
                 }
+
+                ready = nextReady;
             }
+
+            if (completed.Count < sourceOrder.Length && ready.Count == 0)
+                throw new InvalidOperationException(
+                    $"Circular dependency detected involving one of: {string.Join(", ", sourceOrder.Where(id => !completed.Contains(id)))}.");
         }
 
         private static AssemblyBinaryWithSourceCode GetResultOrThrow(

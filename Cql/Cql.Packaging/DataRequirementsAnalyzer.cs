@@ -20,15 +20,17 @@ namespace Hl7.Cql.Packaging;
 /// <remarks>
 /// We're just focusing on getting the basics for now, which is just the list of
 /// Resources used by the retrieves. There's much more to it, as can be glanced
-/// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequiremen[...]
+/// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequirementsProcessor.java
 /// </remarks>
 internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary focusLibrary)
 {
     /// <summary>
     /// Caches the direct, non-transitive data requirements produced from each library's ELM nodes.
-    /// Entries remain alive only while their <see cref="ElmLibrary"/> keys are alive.
+    /// Entries are scoped to their <see cref="ElmLibrarySet"/> and remain alive only while their keys are alive.
     /// </summary>
-    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>> _directRequirementsCache = new();
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<
+        ElmLibrarySet,
+        System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>>> _directRequirementsCache = new();
 
     /// <summary>
     /// Visits the ELM in the LibrarySet and extracts the DataRequirements from it.
@@ -36,19 +38,22 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
     public IReadOnlyCollection<DataRequirement> Analyze()
     {
         var result = new List<DataRequirement>();
-        Visit(focusLibrary, result);
+        Visit(focusLibrary, result, []);
         result = Combine(result);
         return result;
     }
 
-    private void Visit(ElmLibrary library, List<DataRequirement> allRequirements)
+    private void Visit(ElmLibrary library, List<DataRequirement> allRequirements, HashSet<ElmLibrary> visited)
     {
+        if (!visited.Add(library))
+            return;
+
         allRequirements.AddRange(GetDirectRequirements(library).Select(r => (DataRequirement)r.DeepCopy()));
 
         var dependencies = librarySet.GetLibraryDependencies(library);
         foreach (var dependency in dependencies)
         {
-            Visit(dependency, allRequirements);
+            Visit(dependency, allRequirements, visited);
         }
     }
 
@@ -59,7 +64,9 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
     /// guarantees a single factory result is published per key even if the factory races.
     /// </summary>
     private List<DataRequirement> GetDirectRequirements(ElmLibrary library) =>
-        _directRequirementsCache.GetValue(library, lib =>
+        _directRequirementsCache.GetValue(librarySet, _ =>
+            new System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>>())
+        .GetValue(library, lib =>
         {
             var direct = new List<DataRequirement>();
             var walker = new Elm.ElmTreeWalker(n => Visit(lib, direct, n));
