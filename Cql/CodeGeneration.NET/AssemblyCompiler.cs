@@ -1,10 +1,10 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- *
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
- */
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
 
 using System.Collections.Concurrent;
 using System.Runtime.ExceptionServices;
@@ -108,7 +108,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             // and varies per process, not insertion-stable).
             var sourceByIdentifier = materialized.ToDictionary(t => t.library.VersionedLibraryIdentifier, t => t);
 
-            CompileLibrariesInDependencyWaves(librarySet, assemblyReferences, debugSymbolsFormat, sourceByIdentifier, out var results, out var failures);
+            CompileLibrariesInDependencyWaves(librarySet, assemblyReferences, debugSymbolsFormat, sourceByIdentifier, buildExceptionHandlingStrategy, out var results, out var failures);
 
             return materialized
                 .TrySelect(
@@ -145,6 +145,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Assembly[] assemblyReferences,
             DebugSymbolsFormat debugSymbolsFormat,
             Dictionary<CqlVersionedLibraryIdentifier, (ElmLibrary library, string csharp)> sourceByIdentifier,
+            BatchProcessExceptionHandlingStrategyBuilder<(ElmLibrary library, string csharp)>? buildExceptionHandlingStrategy,
             out ConcurrentDictionary<CqlVersionedLibraryIdentifier, AssemblyBinaryWithSourceCode> results,
             out ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo> failures)
         {
@@ -152,6 +153,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             var concurrentFailures = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo>();
             results = concurrentResults;
             failures = concurrentFailures;
+
+            // Determine the configured continuation policy up front so wave scheduling can honor
+            // Throw/Break by not starting further waves once a failure occurs, instead of
+            // compiling the entire graph regardless and only applying the policy afterward in
+            // TrySelect (which would contradict the documented stop-on-error behavior and waste
+            // substantial work on independent, later waves).
+            var continuation = (buildExceptionHandlingStrategy?.Invoke(default) ?? default).ExceptionContinuation;
 
             var remaining = new HashSet<CqlVersionedLibraryIdentifier>(sourceByIdentifier.Keys);
             while (remaining.Count > 0)
@@ -201,6 +209,24 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
 
                 remaining.ExceptWith(ready);
+
+                // Honor the configured stop-on-error policy: if anything failed in this wave and
+                // the policy is not Continue, don't start additional waves. Mark the remaining,
+                // not-yet-attempted libraries as failed (rather than silently leaving them absent
+                // from both dictionaries) so downstream TrySelect handling has a sensible cause for
+                // each of them instead of a bare KeyNotFoundException.
+                if (continuation != BatchProcessExceptionContinuation.Continue && !concurrentFailures.IsEmpty && remaining.Count > 0)
+                {
+                    foreach (var skippedId in remaining)
+                    {
+                        concurrentFailures.TryAdd(
+                            skippedId,
+                            ExceptionDispatchInfo.Capture(
+                                new InvalidOperationException(
+                                    $"Compilation of library '{skippedId}' was skipped because an earlier library failed to compile and the configured exception continuation policy is '{continuation}'.")));
+                    }
+                    break;
+                }
             }
         }
 
