@@ -152,6 +152,20 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void SameAsAndIncludes_NonNullablePointForm_IsNormalisedLikeTheNullableOne()
+        {
+            // An open boundary with a value is a step inward, for value-type points as for nullable ones.
+            Assert.AreEqual(true, Context.Operators.SameAs(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, false, false), null));
+            Assert.AreEqual(false, Context.Operators.SameAs(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, true, false), null));
+            Assert.AreEqual(true, Context.Operators.SameAs(new CqlInterval<long>(1L, 5L, true, true), new CqlInterval<long>(0L, 6L, false, false), null));
+            Assert.AreEqual(true, Context.Operators.SameAs(new CqlInterval<decimal>(1.0m, 5.0m, true, true), new CqlInterval<decimal>(0.99999999m, 5.00000001m, false, false), null));
+            Assert.AreEqual(true, Context.Operators.IntervalIncludesInterval(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, false, false), null));
+            Assert.AreEqual(false, Context.Operators.IntervalIncludesInterval(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, true, false), null));
+            Assert.AreEqual(true, Context.Operators.IntervalIncludesInterval(new CqlInterval<long>(1L, 5L, true, true), new CqlInterval<long>(0L, 6L, false, false), null));
+            Assert.AreEqual(true, Context.Operators.IntervalIncludesInterval(new CqlInterval<decimal>(1.0m, 5.0m, true, true), new CqlInterval<decimal>(0.99999999m, 5.00000001m, false, false), null));
+        }
+
+        [TestMethod]
         public void Meets_ClosedNullBoundaryOnOneSide_IsDecidedAgainstTheOther()
         {
             // Interval[null, 4] meets Interval[5, null]: 4 is the predecessor of 5.

@@ -937,6 +937,18 @@ namespace Hl7.Cql.Operators
             if (larger == null || smaller == null)
                 return null;
 
+            // Only the nullable point forms can be normalised and carry an unknown boundary, so a non-nullable
+            // numeric interval is evaluated in its nullable form.
+            switch (larger, smaller)
+            {
+                case (CqlInterval<int> l, CqlInterval<int> s):
+                    return IntervalIncludesInterval(ToNullablePoints(l), ToNullablePoints(s), precision);
+                case (CqlInterval<long> l, CqlInterval<long> s):
+                    return IntervalIncludesInterval(ToNullablePoints(l), ToNullablePoints(s), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> s):
+                    return IntervalIncludesInterval(ToNullablePoints(l), ToNullablePoints(s), precision);
+            }
+
             // "This operator uses the semantics described in the Start and End operators to determine
             // interval boundaries." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Includes"),
             // so an exclusive boundary is compared as the effective one - a step inward at the boundary's
@@ -1295,6 +1307,18 @@ namespace Hl7.Cql.Operators
         {
             if (@this == null || other == null)
                 return null;
+
+            // Only the nullable point forms can be normalised and carry an unknown boundary, so a non-nullable
+            // numeric interval is evaluated in its nullable form.
+            switch (@this, other)
+            {
+                case (CqlInterval<int> l, CqlInterval<int> r):
+                    return SameAs(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<long> l, CqlInterval<long> r):
+                    return SameAs(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> r):
+                    return SameAs(ToNullablePoints(l), ToNullablePoints(r), precision);
+            }
 
             // "This operator uses the semantics described in the Start and End operators to determine interval
             // boundaries." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Same As").
