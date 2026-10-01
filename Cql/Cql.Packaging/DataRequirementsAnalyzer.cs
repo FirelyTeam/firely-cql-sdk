@@ -25,16 +25,8 @@ namespace Hl7.Cql.Packaging;
 internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary focusLibrary)
 {
     /// <summary>
-    /// Caches the direct (non-transitive) data requirements produced by walking a single library's
-    /// own ELM nodes, keyed by the <see cref="ElmLibrary"/> instance. Analyzing a library's own
-    /// nodes is a pure function of that library's content (it does not depend on which focus
-    /// library triggered the walk), but <see cref="Visit(ElmLibrary,List{DataRequirement})"/>
-    /// previously re-walked every dependency's ELM tree from scratch for each focus library that
-    /// (transitively) depends on it. Since large library sets share common dependencies across
-    /// hundreds of libraries (e.g. HEDIS "Elements"/"Concepts" shared libraries), this made
-    /// packaging quadratic-ish in the number of libraries; caching each library's own direct
-    /// requirements avoids the redundant re-walking. <see cref="System.Runtime.CompilerServices.ConditionalWeakTable{TKey,TValue}"/>
-    /// is used so cached entries do not outlive the <see cref="ElmLibrary"/> instances they're keyed by.
+    /// Caches the direct, non-transitive data requirements produced from each library's ELM nodes.
+    /// Entries remain alive only while their <see cref="ElmLibrary"/> keys are alive.
     /// </summary>
     private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>> _directRequirementsCache = new();
 
