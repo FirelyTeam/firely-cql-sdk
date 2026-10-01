@@ -124,6 +124,21 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Meets_UnknownEndWhoseEveryValueMeetsTheStart_IsTrue()
+        {
+            // Interval[int.MaxValue - 1, null) ends at int.MaxValue - 1 or int.MaxValue; either is the start of
+            // Interval[int.MaxValue, int.MaxValue] or the value just before it, so the intervals meet whatever the end is.
+            var endsNearTheMaximum = Interval(int.MaxValue - 1, null, true, false);
+            var atTheMaximum = Interval(int.MaxValue, int.MaxValue, true, true);
+            Assert.AreEqual(true, Context.Operators.MeetsBefore(endsNearTheMaximum, atTheMaximum, null));
+            Assert.AreEqual(true, Context.Operators.Meets(endsNearTheMaximum, atTheMaximum, null));
+            Assert.AreEqual(true, Context.Operators.MeetsAfter(atTheMaximum, endsNearTheMaximum, null));
+            // An unknown end that may also fall short of the start, or run past it, leaves the answer unknown.
+            Assert.IsNull(Context.Operators.MeetsBefore(Interval(1, null, true, false), Interval(3, 5, true, true), null));
+            Assert.IsNull(Context.Operators.MeetsBefore(Interval(int.MaxValue - 2, null, true, false), atTheMaximum, null));
+        }
+
+        [TestMethod]
         public void SameAs_IsDecidedFromTheBoundaries()
         {
             // The same range, written with open and closed boundaries.

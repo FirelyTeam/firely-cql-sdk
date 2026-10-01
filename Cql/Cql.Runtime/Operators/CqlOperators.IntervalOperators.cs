@@ -1264,42 +1264,28 @@ namespace Hl7.Cql.Operators
 
         /// <summary>
         /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>: the end
-        /// is the start itself or its predecessor. The predecessor is only computed when the direct comparison does not
-        /// already decide it. Nothing precedes the minimum, and the predecessor of an unknown start ranges over the
-        /// predecessors of the values the start can take.
+        /// is the start itself or the value just before it, that is, at or after the start's predecessor and at or
+        /// before the start. Over the values an unknown boundary can take, each range comparison holds for all of
+        /// them, fails for all of them, or is unknown, so their conjunction is the three-valued answer.
         /// </summary>
-        private bool? MeetsAt<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> predecessor)
-        {
-            var same = IsSame(end, start, precision);
-            if (same == true)
-                return true;
-
-            bool? precedes = start.Kind switch
-            {
-                BoundaryKind.Value   => predecessor(start.Value!) is { } value ? IsSame(end, Boundary<T>.Of(value), precision) : false,
-                BoundaryKind.Unknown => PredecessorsOf(start, predecessor) is { } predecessors ? IsSame(end, predecessors, precision) : false,
-                _                    => false,
-            };
-            return OrAllowingUnknown(same, precedes);
-        }
+        private bool? MeetsAt<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> predecessor) =>
+            AndAllowingUnknown(IsAtOrAfter(end, PredecessorOf(start, predecessor), precision), IsAtOrBefore(end, start, precision));
 
         /// <summary>
-        /// The boundary just before an unknown one: the predecessors of every value it can take. <c>null</c> when it
-        /// has none, because the greatest value it can take is the minimum of the point type. A range bound at an
-        /// extreme stays at the extreme.
+        /// The boundary one step before <paramref name="start"/>, for every value an unknown start can take. The
+        /// minimum of the point type has no predecessor and stays the minimum: an end can only meet a start there by
+        /// being the minimum itself.
         /// </summary>
-        private static Boundary<T>? PredecessorsOf<T>(Boundary<T> unknown, Func<T, T> predecessor)
-        {
-            T? high = default;
-            if (unknown.RangeHigh is { } rangeHigh)
+        private Boundary<T> PredecessorOf<T>(Boundary<T> start, Func<T, T> predecessor) =>
+            start.Kind switch
             {
-                if (predecessor(rangeHigh) is not { } highPredecessor)
-                    return null;
-                high = highPredecessor;
-            }
-            var low = unknown.RangeLow is { } rangeLow ? predecessor(rangeLow) : default;
-            return Boundary<T>.UnknownBetween(low, high);
-        }
+                BoundaryKind.Value   => predecessor(start.Value!) is { } value ? Boundary<T>.Of(value) : Boundary<T>.Minimum,
+                BoundaryKind.Unknown => Boundary<T>.UnknownBetween(
+                    start.RangeLow is { } low ? predecessor(low) : default,
+                    predecessor(start.RangeHigh ?? MaxValue<T>()!) ?? MinValue<T>()),
+                BoundaryKind.Minimum => Boundary<T>.Minimum,
+                _                    => predecessor(MaxValue<T>()!) is { } value ? Boundary<T>.Of(value) : Boundary<T>.Maximum,
+            };
 
         #endregion
 
