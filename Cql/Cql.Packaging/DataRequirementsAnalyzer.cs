@@ -20,7 +20,7 @@ namespace Hl7.Cql.Packaging;
 /// <remarks>
 /// We're just focusing on getting the basics for now, which is just the list of
 /// Resources used by the retrieves. There's much more to it, as can be glanced
-/// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequirementsProcessor.java
+/// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequiremen[...]
 /// </remarks>
 internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary focusLibrary)
 {
@@ -102,8 +102,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         // Set code path if specified
         if (retrieve.codeProperty is { } codeProperty)
         {
-            dr.CodeFilter.Add(
-                codeFilterBuilder.ToCodeFilterComponent(codeProperty, retrieve.codes));
+            if (codeFilterBuilder.ToCodeFilterComponent(codeProperty, retrieve.codes) is { } codeFilter)
+                dr.CodeFilter.Add(codeFilter);
 
             ps.Add(codeProperty);
         }
@@ -113,8 +113,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         {
             foreach (var cfe in retrieve.codeFilter)
             {
-                dr.CodeFilter.Add(
-                    codeFilterBuilder.ToCodeFilterComponent(cfe.property, cfe.value));
+                if (codeFilterBuilder.ToCodeFilterComponent(cfe.property, cfe.value) is { } codeFilter)
+                    dr.CodeFilter.Add(codeFilter);
             }
         }
 
@@ -160,7 +160,12 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
     private class CodeFilterComponentBuilder(ElmLibrarySet librarySet, ElmLibrary contextLibrary)
     {
-        public DataRequirement.CodeFilterComponent ToCodeFilterComponent(
+        /// <summary>
+        /// The code filter for a retrieve's terminology, or null when the terminology cannot be
+        /// enumerated statically (an expression reference, a code system, or an inline expression-backed list),
+        /// in which case the retrieve contributes no code filter.
+        /// </summary>
+        public DataRequirement.CodeFilterComponent? ToCodeFilterComponent(
             string property,
             Elm.Expression value)
         {
@@ -179,24 +184,33 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                         throw new UnresolvedReferenceError(contextLibrary, vsr).ToException();
                     break;
                 case Elm.ToList toList:
-                    cfc.Code.AddRange(ResolveCodeFilterCodes(toList.operand));
+                    if (ResolveCodeFilterCodes(toList.operand) is { } codes)
+                        cfc.Code.AddRange(codes);
+                    else
+                        return null;
                     break;
                 case Elm.List codeList:
-                    cfc.Code.AddRange(codeList.element.SelectMany(ResolveCodeFilterCodes));
+                    foreach (var element in codeList.element)
+                    {
+                        if (ResolveCodeFilterCodes(element) is { } elementCodes)
+                            cfc.Code.AddRange(elementCodes);
+                        else
+                            return null;
+                    }
                     break;
                 case Elm.Literal l:
                     // TODO: no system???
                     cfc.Code.Add(new Coding { Code = l.value });
                     break;
                 default:
-                    throw new NotSupportedException(
-                        $"Unexpected Elm expression of type {value.GetType()} in code filter.");
+                    // Unsupported expression type: cannot enumerate terminology statically
+                    return null;
             }
 
             return cfc;
         }
 
-        private List<Coding> ResolveCodeFilterCodes(Elm.Expression toListOperand)
+        private List<Coding>? ResolveCodeFilterCodes(Elm.Expression toListOperand)
         {
             return toListOperand switch
             {
@@ -209,8 +223,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                     [
                         new Coding { Code = literal.value }
                     ],
-                _ => throw new NotSupportedException(
-                         $"Unexpected Elm expression of type {toListOperand.GetType()} in code filter codes.")
+                _ => null  // Unsupported expression type: cannot enumerate codes statically
             };
         }
 
