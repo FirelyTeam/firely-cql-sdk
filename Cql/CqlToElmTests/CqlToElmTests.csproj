@@ -38,6 +38,9 @@
 		<None Update="Input\FHIRHelpers-4.0.1.cql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Include="..\CoreTests\Input\ELM\HL7\RR23.json" Link="Input\RR23.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>
