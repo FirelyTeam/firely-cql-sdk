@@ -298,7 +298,11 @@ namespace Hl7.Cql.CqlToElm
         private static ChoiceTypeSpecifier ChoiceOf(TypeSpecifier a, TypeSpecifier b) =>
             new(FlattenChoice(a).Concat(FlattenChoice(b)).Distinct());
 
-        private static IEnumerable<TypeSpecifier> FlattenChoice(TypeSpecifier type) =>
+        /// <summary>
+        /// The alternatives of <paramref name="type"/>, with nested choices flattened; a type that
+        /// is not a choice is its own single alternative.
+        /// </summary>
+        internal static IEnumerable<TypeSpecifier> FlattenChoice(TypeSpecifier type) =>
             type is ChoiceTypeSpecifier choice
                 ? (choice.choice ?? []).SelectMany(FlattenChoice)
                 : [type];

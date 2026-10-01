@@ -9,10 +9,10 @@
   `choice.low as Quantity` under `when choice is Interval<Quantity>` reads a `CqlQuantity`
   directly. Only the leading run of `is` tests narrows; a branch after a condition of any other
   kind is compiled as before. A branch whose test an earlier test already covers (an `Age` after a
-  `Quantity`) can never be taken and is dropped. An `as`
-  within a branch to a type the narrowed value cannot have, which the translator emits when it
-  resolves a call on a choice to another alternative's overload, is compiled on the un-narrowed
-  value as before and logged, since it always yields `null`. (#1661, #1677)
+  `Quantity`) can never be taken and is dropped. An `as` within a branch to a type the narrowed
+  value cannot have, which the translator emits when it resolves a call on a choice to another
+  alternative's overload, is compiled on the un-narrowed value as before and logged, since it
+  always yields `null`, or for a strict cast always fails. (#1661, #1677)
 
 - **An `as` to a type its operand already has emits no cast.** `x as T` compiled to a C# `as` even
   when `x` already was a `T`, or was upcast to a choice from a `T`. It now compiles to `x` itself.

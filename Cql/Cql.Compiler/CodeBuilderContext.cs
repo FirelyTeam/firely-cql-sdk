@@ -228,7 +228,9 @@ internal partial class CodeBuilderContext
 
                     // A narrowed reference keeps its type: the ELM types the reference as what it
                     // is outside the branch that narrows it (see CodeBuilderContext.Narrowing.cs).
-                    if (expression is CodeLocal { IsNotNull: true } narrowed && tsType?.IsAssignableFrom(narrowed.Type) == true)
+                    if (expression is CodeLocal { IsNotNull: true } narrowed
+                        && UnnarrowedOf(narrowed) is not null
+                        && tsType?.IsAssignableFrom(narrowed.Type) == true)
                         return expression;
 
                     if (tsType is not null)
