@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -780,18 +780,21 @@ partial class CodeBuilderContext
         bool throwOnError = false,
         bool considerSafeUpcast = false) // @TODO: Cast - ChangeType
     {
-        // A covariant list conversion (e.g. IEnumerable<Derived> as IEnumerable<Base>) is not
-        // an option when compiler-generated tuple types are involved: the C# code generator
-        // lowers those element types to value tuples, and IEnumerable<T> covariance does not
-        // apply to value types, so the emitted 'as' cast would silently yield null at runtime
-        // (see #1354). Convert such lists element-wise below instead.
-        bool isTupleListConversion =
+        // A covariant list conversion (IEnumerable<Derived> as IEnumerable<Base>) is only an
+        // option between reference element types: IEnumerable<T> covariance does not apply to
+        // value types, so a whole-list 'as' cast is null at runtime when the input element type
+        // is a value type (an IEnumerable<int?> as IEnumerable<object>, which is how a
+        // List<Integer> as List<Any> arrives here) or a compiler-generated tuple type, which the
+        // C# code generator lowers to a value tuple. Such lists are converted element-wise below.
+        bool isListConversionWithoutCovariance =
             _typeResolver.GetListElementType(input.Type, throwError: false) is { } inputListElemType
             && _typeResolver.GetListElementType(outputType, throwError: false) is { } outputListElemType
             && inputListElemType != outputListElemType
-            && (inputListElemType.IsTupleBaseType() || outputListElemType.IsTupleBaseType());
+            && (inputListElemType.IsTupleBaseType()
+                || outputListElemType.IsTupleBaseType()
+                || (inputListElemType.IsValueType && !outputListElemType.IsValueType));
 
-        if (!isTupleListConversion)
+        if (!isListConversionWithoutCovariance)
         {
             var (expression, tc) = input.TryNewAssignToTypeExpression(outputType, false, considerSafeUpcast);
             if (tc != TypeConversion.NoMatch)
@@ -874,10 +877,9 @@ partial class CodeBuilderContext
             var select = BindCqlOperator(nameof(ICqlOperators.Select), input, lambda);
 
             // The element-wise Select is the conversion: callers such as the As handler must
-            // use it rather than fall back to a type-as cast on the whole list, which for
-            // tuple-typed elements would yield null at runtime after the C# code generator
-            // lowers them to value tuples (see #1354).
-            if (isTupleListConversion)
+            // use it rather than fall back to a type-as cast on the whole list, which is null at
+            // runtime for the element types listed above.
+            if (isListConversionWithoutCovariance)
                 typeConversion = TypeConversion.OperatorConvert;
 
             return select;

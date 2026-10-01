@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -64,6 +64,34 @@ namespace Hl7.Cql.CqlToElm.Test
                     });
         }
 
+
+        [TestMethod]
+        public void IntegerList_As_ListOfAny_IsTheListItself()
+        {
+            // Spec (§9.B, As): "The as operator allows the result of an expression to be cast as a
+            // given target type." A List<Integer> is a List<Any>, so widening it keeps every element;
+            // the list's element type is a value type, which the generated C# must box element-wise
+            // because IEnumerable<T> covariance does not apply to it.
+            var expression = CreateCqlToolkit().Expression("{ 1, 2, 3 } as List<Any>");
+            Assert.IsFalse(expression.GetErrors().Any());
+
+            var result = Run(expression, CreateTempLibrary(), FhirCqlContext.ForBundle());
+
+            Assert.IsNotNull(result);
+            CollectionAssert.AreEqual(new object[] { 1, 2, 3 }, ((System.Collections.IEnumerable)result).Cast<object>().ToList());
+        }
+
+        [TestMethod]
+        public void IntegerList_CastAs_ListOfAny_IsTheListItself()
+        {
+            var expression = CreateCqlToolkit().Expression("cast { 1, 2, 3 } as List<Any>");
+            Assert.IsFalse(expression.GetErrors().Any());
+
+            var result = Run(expression, CreateTempLibrary(), FhirCqlContext.ForBundle());
+
+            Assert.IsNotNull(result);
+            CollectionAssert.AreEqual(new object[] { 1, 2, 3 }, ((System.Collections.IEnumerable)result).Cast<object>().ToList());
+        }
 
         [TestMethod]
         public void Null_As_Decimal()
