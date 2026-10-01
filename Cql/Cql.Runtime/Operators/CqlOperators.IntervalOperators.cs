@@ -444,6 +444,18 @@ namespace Hl7.Cql.Operators
             // precision - not as the raw endpoint. Interval[@2026-01-01, @2026-01-03) ends
             // Interval[@2026-01-01, @2026-01-03] would otherwise be true on the equal raw high boundaries,
             // even though the first interval effectively ends a day earlier, on @2026-01-02.
+            switch (left, right)
+            {
+                // Only the nullable point forms can be normalised and carry an unknown boundary, so a non-nullable
+                // numeric interval is evaluated in its nullable form.
+                case (CqlInterval<int> l, CqlInterval<int> r):
+                    return Ends(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<long> l, CqlInterval<long> r):
+                    return Ends(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> r):
+                    return Ends(ToNullablePoints(l), ToNullablePoints(r), precision);
+            }
+
             left = ToClosedBoundaries(left)!;
             right = ToClosedBoundaries(right)!;
 
@@ -902,19 +914,23 @@ namespace Hl7.Cql.Operators
 
             // "For open interval boundaries, exclusive comparison operators are used. For closed interval boundaries,
             // if the interval boundary is null, the result of the boundary comparison is considered true." (CQL 1.5.3
-            // Errata 2, Appendix B - CQL Reference, section "In"). An open boundary without a value leaves its
-            // comparison unknown, and the other boundary can still settle the result. The boundaries are compared as
-            // given, not as the effective ones: stepping an open boundary inward by one unit of its own precision would
-            // turn the exclusive comparison into an inclusive one whenever the comparison runs at a coarser precision. A
-            // point that compares as unknown against a boundary (such as one less precise than the boundary that
-            // matches it at the point's precision, or quantities with incommensurable units) leaves that boundary's
-            // predicate unknown as well.
+            // Errata 2, Appendix B - CQL Reference, section "In"). A boundary with a value is compared as given, not
+            // as the effective one: stepping an open boundary inward by one unit of its own precision would turn the
+            // exclusive comparison into an inclusive one whenever the comparison runs at a coarser precision. An open
+            // boundary without a value is unknown but ranges over the values its interval permits, up to the effective
+            // other boundary (see <see cref="Boundary{T}"/>), so a point at that boundary is in the interval whatever
+            // the unknown one turns out to be, and a point beyond it is not. A point that compares as unknown against
+            // a boundary (such as one less precise than the boundary that matches it at the point's precision, or
+            // quantities with incommensurable units) leaves that boundary's predicate unknown as well.
             var point = Boundary<T>.Of(t);
+            var effective = ToClosedForPointType(interval)!;
             var low = interval.low is { } lowValue
                 ? interval.lowClosed ?? false
                     ? IsAtOrBefore(Boundary<T>.Of(lowValue), point, precision)
                     : IsBefore(Boundary<T>.Of(lowValue), point, precision)
-                : interval.lowClosed ?? false ? true : null;
+                : interval.lowClosed ?? false
+                    ? true
+                    : IsAtOrBefore(Boundary<T>.UnknownBetween(default, effective.high), point, precision);
             if (low == false)
                 return false;
 
@@ -922,7 +938,9 @@ namespace Hl7.Cql.Operators
                 ? interval.highClosed ?? false
                     ? IsAtOrAfter(Boundary<T>.Of(highValue), point, precision)
                     : IsAfter(Boundary<T>.Of(highValue), point, precision)
-                : interval.highClosed ?? false ? true : null;
+                : interval.highClosed ?? false
+                    ? true
+                    : IsAtOrAfter(Boundary<T>.UnknownBetween(effective.low, default), point, precision);
 
             return AndAllowingUnknown(low, high);
         }
@@ -1084,21 +1102,21 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? Meets(CqlInterval<long?>? left, CqlInterval<long?>? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? Meets(CqlInterval<decimal?>? left, CqlInterval<decimal?>? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
 
         public bool? Meets(CqlInterval<CqlQuantity?>? left, CqlInterval<CqlQuantity?>? right, string? precision)
@@ -1106,7 +1124,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
 
         public bool? Meets(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right, string? precision)
@@ -1114,34 +1132,34 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? Meets(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?>? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? Meets(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?>? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
-        private bool? MeetsHelper<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
+        private bool? MeetsHelper<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> successor, Func<T, T> predecessor)
         {
             if (left == null || right == null)
                 return null;
 
             // A definite adjacency on either side decides true; otherwise an uncertain candidate leaves the
             // result unknown.
-            var meetsBefore = MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, predecessor);
+            var meetsBefore = MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, successor, predecessor);
             if (meetsBefore == true)
                 return true;
 
-            return OrAllowingUnknown(meetsBefore, MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, predecessor));
+            return OrAllowingUnknown(meetsBefore, MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, successor, predecessor));
         }
 
         #endregion
@@ -1153,7 +1171,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
         public bool? MeetsAfter(CqlInterval<long?>? left, CqlInterval<long?> right, string? precision)
@@ -1161,7 +1179,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
         public bool? MeetsAfter(CqlInterval<decimal?>? left, CqlInterval<decimal?> right, string? precision)
@@ -1169,7 +1187,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
 
@@ -1178,37 +1196,37 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
         public bool? MeetsAfter(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?> right, string? precision)
         {
             if (left == null || right == null) return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
         public bool? MeetsAfter(CqlInterval<CqlDateTime?>? left, CqlInterval<CqlDateTime?> right, string? precision)
         {
             if (left == null || right == null) return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
         public bool? MeetsAfter(CqlInterval<CqlTime?>? left, CqlInterval<CqlTime?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Predecessor);
+            return MeetsAfterHelper(ToClosed(left), ToClosed(right), precision, Successor, Predecessor);
         }
 
-        private bool? MeetsAfterHelper<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision, Func<T, T> predecessor)
+        private bool? MeetsAfterHelper<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision, Func<T, T> successor, Func<T, T> predecessor)
         {
             if (left == null || right == null)
                 return null;
 
             // The first interval starts where the second one ends.
-            return MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, predecessor);
+            return MeetsAt(Boundary<T>.HighOf(right), Boundary<T>.LowOf(left), precision, successor, predecessor);
         }
 
         #endregion
@@ -1220,83 +1238,133 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<long?> left, CqlInterval<long?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<decimal?> left, CqlInterval<decimal?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlQuantity?> left, CqlInterval<CqlQuantity?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlDate?> left, CqlInterval<CqlDate?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlDateTime?> left, CqlInterval<CqlDateTime?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
         public bool? MeetsBefore(CqlInterval<CqlTime?> left, CqlInterval<CqlTime?> right, string? precision)
         {
             if (left == null || right == null)
                 return null;
 
-            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Predecessor);
+            return MeetsBeforeHelper(ToClosed(left)!, ToClosed(right)!, precision, Successor, Predecessor);
         }
 
-        private bool? MeetsBeforeHelper<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
+        private bool? MeetsBeforeHelper<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> successor, Func<T, T> predecessor)
         {
             if (left == null || right == null)
                 return null;
 
             // The first interval ends where the second one starts.
-            return MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, predecessor);
+            return MeetsAt(Boundary<T>.HighOf(left), Boundary<T>.LowOf(right), precision, successor, predecessor);
         }
 
         /// <summary>
-        /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>: the end
-        /// is the start itself or the value just before it, that is, at or after the start's predecessor and at or
-        /// before the start. Over the values an unknown boundary can take, each range comparison holds for all of
-        /// them, fails for all of them, or is unknown, so their conjunction is the three-valued answer.
+        /// Whether an interval ending at <paramref name="end"/> meets one starting at <paramref name="start"/>. "The
+        /// meets operator returns true if the first interval ends immediately before the second interval starts, or if
+        /// the first interval starts immediately after the second interval ends. In other words, if the ending point
+        /// of the first interval is equal to the predecessor of the starting point of the second, or if the starting
+        /// point of the first interval is equal to the successor of the ending point of the second." (CQL 1.5.3
+        /// Errata 2, Appendix B - CQL Reference, section "Meets"). For values of one precision the two forms agree.
+        /// The successor or predecessor of a Date, DateTime or Time is taken at the value's own precision and compared
+        /// at the requested precision, where the forms can differ: an interval ending on @2023-06-01 meets, at month
+        /// precision, one starting on @2023-07-01 because the day before that start is in June, and one ending on
+        /// @2023-03-01 meets one starting on @2023-03-01 because the day after that end is in March. The intervals
+        /// meet when either form holds. An end equal to the start is a shared point, so the intervals overlap rather
+        /// than meet. Over the values an unknown boundary can take, a form holds for all of them, fails for all of
+        /// them, or is unknown; the maximum of the point type has no successor and the minimum no predecessor, so a
+        /// form fails for those values.
         /// </summary>
-        private bool? MeetsAt<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> predecessor) =>
-            AndAllowingUnknown(IsAtOrAfter(end, PredecessorOf(start, predecessor), precision), IsAtOrBefore(end, start, precision));
+        private bool? MeetsAt<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> successor, Func<T, T> predecessor) =>
+            OrAllowingUnknown(
+                StartIsSuccessorOfEnd(end, start, precision, successor),
+                EndIsPredecessorOfStart(end, start, precision, predecessor));
+
+        private bool? StartIsSuccessorOfEnd<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> successor)
+        {
+            var (next, someHaveNoSuccessor) = SuccessorOf(end, successor);
+            if (next is not { } following)
+                return false;
+
+            var same = IsSame(following, start, precision);
+            return someHaveNoSuccessor ? (same == false ? false : null) : same;
+        }
+
+        private bool? EndIsPredecessorOfStart<T>(Boundary<T> end, Boundary<T> start, string? precision, Func<T, T> predecessor)
+        {
+            var (previous, someHaveNoPredecessor) = PredecessorOf(start, predecessor);
+            if (previous is not { } preceding)
+                return false;
+
+            var same = IsSame(end, preceding, precision);
+            return someHaveNoPredecessor ? (same == false ? false : null) : same;
+        }
 
         /// <summary>
-        /// The boundary one step before <paramref name="start"/>, for every value an unknown start can take. The
-        /// minimum of the point type has no predecessor and stays the minimum: an end can only meet a start there by
-        /// being the minimum itself.
+        /// The boundary one step after <paramref name="end"/>, for every value an unknown end can take, and whether
+        /// some of those values have no successor (they are the maximum of the point type). The boundary is
+        /// <c>null</c> when none of them has one.
         /// </summary>
-        private Boundary<T> PredecessorOf<T>(Boundary<T> start, Func<T, T> predecessor) =>
+        private (Boundary<T>? Next, bool SomeHaveNoSuccessor) SuccessorOf<T>(Boundary<T> end, Func<T, T> successor) =>
+            end.Kind switch
+            {
+                BoundaryKind.Value   => successor(end.Value!) is { } value ? (Boundary<T>.Of(value), false) : (null, true),
+                BoundaryKind.Unknown => successor(end.RangeLow ?? MinValue<T>()!) is { } least
+                    ? (Boundary<T>.UnknownBetween(least, end.RangeHigh is { } high ? successor(high) : default),
+                       end.RangeHigh is not { } greatest || successor(greatest) is null)
+                    : (null, true),
+                BoundaryKind.Minimum => successor(MinValue<T>()!) is { } value ? (Boundary<T>.Of(value), false) : (null, true),
+                _                    => (null, true),
+            };
+
+        /// <summary>
+        /// The boundary one step before <paramref name="start"/>, for every value an unknown start can take, and
+        /// whether some of those values have no predecessor (they are the minimum of the point type). The boundary is
+        /// <c>null</c> when none of them has one.
+        /// </summary>
+        private (Boundary<T>? Previous, bool SomeHaveNoPredecessor) PredecessorOf<T>(Boundary<T> start, Func<T, T> predecessor) =>
             start.Kind switch
             {
-                BoundaryKind.Value   => predecessor(start.Value!) is { } value ? Boundary<T>.Of(value) : Boundary<T>.Minimum,
-                BoundaryKind.Unknown => Boundary<T>.UnknownBetween(
-                    start.RangeLow is { } low ? predecessor(low) : default,
-                    predecessor(start.RangeHigh ?? MaxValue<T>()!) ?? MinValue<T>()),
-                BoundaryKind.Minimum => Boundary<T>.Minimum,
-                _                    => predecessor(MaxValue<T>()!) is { } value ? Boundary<T>.Of(value) : Boundary<T>.Maximum,
+                BoundaryKind.Value   => predecessor(start.Value!) is { } value ? (Boundary<T>.Of(value), false) : (null, true),
+                BoundaryKind.Unknown => predecessor(start.RangeHigh ?? MaxValue<T>()!) is { } greatest
+                    ? (Boundary<T>.UnknownBetween(start.RangeLow is { } low ? predecessor(low) : default, greatest),
+                       start.RangeLow is not { } least || predecessor(least) is null)
+                    : (null, true),
+                BoundaryKind.Maximum => predecessor(MaxValue<T>()!) is { } value ? (Boundary<T>.Of(value), false) : (null, true),
+                _                    => (null, true),
             };
 
         #endregion
@@ -1780,7 +1848,7 @@ namespace Hl7.Cql.Operators
             }
 
             // The interval's boundaries are its effective ones - see the interval-interval overload above.
-            return StrictlyBetweenTheBoundaries(left, ToClosedForPointType(right)!, null);
+            return InsideAndNotTheOnlyPoint(left, ToClosedForPointType(right)!, null);
         }
 
         public bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string? precision)
@@ -1834,33 +1902,17 @@ namespace Hl7.Cql.Operators
             // The interval's boundaries are its effective ones - see the interval-interval overload above.
             // The precision guards above are applied to the operand as given: closing a date/time boundary
             // steps it by one unit of its own precision and so preserves that precision either way.
-            return StrictlyBetweenTheBoundaries(left, ToClosedForPointType(right)!, precision);
-        }
-
-        /// <summary>
-        /// Whether <paramref name="point"/> lies strictly between the effective boundaries of <paramref name="closed"/>:
-        /// in the interval, and equal to neither of its endpoints. This is the rule the cqframework conformance suite
-        /// expects of the point forms other than Date and DateTime (<c>Interval[@T12:00:00.000, @T21:59:59.999]
-        /// properly includes @T12:00:00.000</c> is <c>false</c>); the Date and DateTime overloads apply the unit-interval
-        /// rule of the specification instead, see <see cref="InsideAndNotTheOnlyPoint{T}"/>. A boundary without a value
-        /// is decided by what it stands for (see <see cref="Boundary{T}"/>), so either boundary can settle the result on
-        /// its own.
-        /// </summary>
-        private bool? StrictlyBetweenTheBoundaries<T>(T point, CqlInterval<T> closed, string? precision)
-        {
-            var boundary = Boundary<T>.Of(point);
-            return AndAllowingUnknown(
-                IsAfter(boundary, Boundary<T>.LowOf(closed), precision),
-                IsBefore(boundary, Boundary<T>.HighOf(closed), precision));
+            return InsideAndNotTheOnlyPoint(left, ToClosedForPointType(right)!, precision);
         }
 
         /// <summary>
         /// Whether <paramref name="point"/> is in <paramref name="closed"/> and the interval is not a unit interval
         /// containing only that point. "For the point-interval overload, this operator returns true if the point is in
         /// (i.e. included in) the interval, and the interval is not a unit interval containing only the point."
-        /// (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Properly Included In"). A boundary without a value
-        /// is decided by what it stands for (see <see cref="Boundary{T}"/>), so either boundary can settle the result
-        /// on its own; an unknown boundary that may coincide with the point leaves it unknown.
+        /// (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Properly Included In"). A point at a boundary of
+        /// a wider interval is therefore properly included. A boundary without a value is decided by what it stands
+        /// for (see <see cref="Boundary{T}"/>), so either boundary can settle the result on its own; an unknown
+        /// boundary that may coincide with the point leaves it unknown.
         /// </summary>
         private bool? InsideAndNotTheOnlyPoint<T>(T point, CqlInterval<T> closed, string? precision)
         {
@@ -2032,6 +2084,18 @@ namespace Hl7.Cql.Operators
             // precision - not as the raw endpoint. Interval(@2026-01-01, @2026-01-02] starts
             // Interval[@2026-01-01, @2026-01-03] would otherwise be true on its raw low boundary, even
             // though its effective start is @2026-01-02.
+            switch (starts, other)
+            {
+                // Only the nullable point forms can be normalised and carry an unknown boundary, so a non-nullable
+                // numeric interval is evaluated in its nullable form.
+                case (CqlInterval<int> l, CqlInterval<int> r):
+                    return Starts(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<long> l, CqlInterval<long> r):
+                    return Starts(ToNullablePoints(l), ToNullablePoints(r), precision);
+                case (CqlInterval<decimal> l, CqlInterval<decimal> r):
+                    return Starts(ToNullablePoints(l), ToNullablePoints(r), precision);
+            }
+
             starts = ToClosedBoundaries(starts)!;
             other = ToClosedBoundaries(other)!;
 

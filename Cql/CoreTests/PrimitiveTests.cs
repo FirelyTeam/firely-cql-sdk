@@ -3478,15 +3478,21 @@ namespace CoreTests
             Assert.IsTrue(equal);
         }
 
+        /// <summary>
+        /// "For the interval-point overload, this operator returns true if the interval contains (i.e. includes) the
+        /// point, and the interval is not a unit interval containing only the point." (CQL 1.5.3 Errata 2, Appendix B -
+        /// CQL Reference, section "Properly Includes"): a point at the boundary of a wider interval is properly included.
+        /// The conformance suite's TimeProperContainsFalse expects false here and is skipped.
+        /// </summary>
         [TestMethod]
-        public void TimeProperContainsFalse()
+        public void TimeProperContainsAtTheLowBoundaryOfAWiderInterval()
         {
             var ops = GetNewContext().Operators;
             var noon = new CqlTime(12, 0, 0, 0, null, null);
             var x = new CqlTime(21, 59, 59, 999, null, null);
             var interval = new CqlInterval<CqlTime>(noon, x, true, true);
-            var result = ops.IntervalProperlyIncludesElement(interval, noon, null);
-            Assert.IsFalse(result);
+            Assert.AreEqual(true, ops.IntervalProperlyIncludesElement(interval, noon, null));
+            Assert.AreEqual(false, ops.IntervalProperlyIncludesElement(new CqlInterval<CqlTime>(noon, noon, true, true), noon, null));
         }
 
         /// <summary>

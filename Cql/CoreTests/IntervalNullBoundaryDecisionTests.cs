@@ -124,16 +124,30 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Meets_UnknownEndWhoseEveryValueMeetsTheStart_IsTrue()
+        public void Meets_EndEqualToTheStart_Overlaps()
         {
-            // Interval[int.MaxValue - 1, null) ends at int.MaxValue - 1 or int.MaxValue; either is the start of
-            // Interval[int.MaxValue, int.MaxValue] or the value just before it, so the intervals meet whatever the end is.
+            // "the ending point of the first interval is equal to the predecessor of the starting point of the second"
+            // (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Meets"): an end equal to the start itself is a
+            // shared point, so the intervals overlap rather than meet.
+            Assert.AreEqual(false, Context.Operators.Meets(Interval(1, 5, true, true), Interval(5, 9, true, true), null));
+            Assert.AreEqual(false, Context.Operators.MeetsBefore(Interval(1, 5, true, true), Interval(5, 9, true, true), null));
+            Assert.AreEqual(false, Context.Operators.MeetsAfter(Interval(5, 9, true, true), Interval(1, 5, true, true), null));
+            Assert.AreEqual(true, Context.Operators.Meets(Interval(1, 4, true, true), Interval(5, 9, true, true), null));
+            Assert.AreEqual(true, Context.Operators.Meets(Interval(1, 5, true, false), Interval(5, 9, true, true), null));
+            Assert.AreEqual(false, Context.Operators.Meets(Interval(1, 3, true, true), Interval(5, 9, true, true), null));
+        }
+
+        [TestMethod]
+        public void Meets_UnknownEndThatMayBeTheStartOrItsPredecessor_IsUnknown()
+        {
+            // Interval[int.MaxValue - 1, null) ends at int.MaxValue - 1, just before Interval[int.MaxValue, int.MaxValue]
+            // starts, or at int.MaxValue, where the two intervals share a point: whether they meet is unknown.
             var endsNearTheMaximum = Interval(int.MaxValue - 1, null, true, false);
             var atTheMaximum = Interval(int.MaxValue, int.MaxValue, true, true);
-            Assert.AreEqual(true, Context.Operators.MeetsBefore(endsNearTheMaximum, atTheMaximum, null));
-            Assert.AreEqual(true, Context.Operators.Meets(endsNearTheMaximum, atTheMaximum, null));
-            Assert.AreEqual(true, Context.Operators.MeetsAfter(atTheMaximum, endsNearTheMaximum, null));
-            // An unknown end that may also fall short of the start, or run past it, leaves the answer unknown.
+            Assert.IsNull(Context.Operators.MeetsBefore(endsNearTheMaximum, atTheMaximum, null));
+            Assert.IsNull(Context.Operators.Meets(endsNearTheMaximum, atTheMaximum, null));
+            Assert.IsNull(Context.Operators.MeetsAfter(atTheMaximum, endsNearTheMaximum, null));
+            // An unknown end that may also fall short of the start, or run past it, leaves the answer unknown as well.
             Assert.IsNull(Context.Operators.MeetsBefore(Interval(1, null, true, false), Interval(3, 5, true, true), null));
             Assert.IsNull(Context.Operators.MeetsBefore(Interval(int.MaxValue - 2, null, true, false), atTheMaximum, null));
         }
@@ -149,6 +163,36 @@ namespace CoreTests
             Assert.IsNull(Context.Operators.SameAs(Interval(1, 5, true, true), Interval(1, null, true, false), null));
             Assert.AreEqual(false, Context.Operators.SameAs(Interval(1, 5, true, true), Interval(7, null, true, false), null));
             Assert.AreEqual(false, Context.Operators.SameAs(Interval(1, 5, true, true), Interval(1, 6, true, true), null));
+        }
+
+        [TestMethod]
+        public void StartsAndEnds_NonNullablePointForm_IsNormalisedLikeTheNullableOne()
+        {
+            // Interval(0, 6) runs from 1 to 5, so Interval[1, 5] starts and ends it.
+            Assert.AreEqual(true, Context.Operators.Starts(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, false, false), null));
+            Assert.AreEqual(true, Context.Operators.Ends(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, false, false), null));
+            Assert.AreEqual(false, Context.Operators.Starts(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, true, false), null));
+            Assert.AreEqual(false, Context.Operators.Ends(new CqlInterval<int>(1, 5, true, true), new CqlInterval<int>(0, 6, false, true), null));
+            Assert.AreEqual(true, Context.Operators.Starts(new CqlInterval<long>(1L, 5L, true, true), new CqlInterval<long>(0L, 6L, false, false), null));
+            Assert.AreEqual(true, Context.Operators.Ends(new CqlInterval<long>(1L, 5L, true, true), new CqlInterval<long>(0L, 6L, false, false), null));
+            Assert.AreEqual(true, Context.Operators.Starts(new CqlInterval<decimal>(1.0m, 5.0m, true, true), new CqlInterval<decimal>(0.99999999m, 5.00000001m, false, false), null));
+            Assert.AreEqual(true, Context.Operators.Ends(new CqlInterval<decimal>(1.0m, 5.0m, true, true), new CqlInterval<decimal>(0.99999999m, 5.00000001m, false, false), null));
+        }
+
+        [TestMethod]
+        public void ProperlyIncludesPoint_IncommensurableQuantity_IsUnknown()
+        {
+            // A point in metres compared against boundaries in kilograms: neither comparison can be made, so the
+            // answer is unknown rather than true.
+            var kilograms = new CqlInterval<CqlQuantity?>(new CqlQuantity(1m, "kg"), new CqlQuantity(10m, "kg"), true, true);
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(new CqlQuantity(5m, "m"), kilograms));
+            Assert.IsNull(Context.Operators.IntervalProperlyIncludesElement(kilograms, new CqlQuantity(5m, "m")));
+            // Commensurable units are converted and decided: 1000 g is the low boundary of an interval wider than the
+            // point, 50 kg is above the high, and Interval[1 kg, 1 kg] contains only 1000 g.
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(new CqlQuantity(5000m, "g"), kilograms));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(new CqlQuantity(1000m, "g"), kilograms));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(new CqlQuantity(50m, "kg"), kilograms));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(new CqlQuantity(1000m, "g"), new CqlInterval<CqlQuantity?>(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "kg"), true, true)));
         }
 
         [TestMethod]
@@ -186,33 +230,36 @@ namespace CoreTests
             // 0 properly included in Interval[1, null): below the low, wherever the high is.
             Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(0, Interval(1, null, true, false)));
             Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(2, Interval(1, null, true, false)));
-            // The known endpoint is never properly included, wherever the other boundary is.
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1, Interval(1, null, true, false)));
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(3, Interval(null, 3, false, true)));
+            // The known boundary itself: in the interval, which may or may not be a unit interval containing only it.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(1, Interval(1, null, true, false)));
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(3, Interval(null, 3, false, true)));
         }
 
         [TestMethod]
         public void ProperlyIncludesPoint_ClosedNullBoundary_IsTheExtreme()
         {
             Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(5, Interval(null, 7, true, true)));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue + 1, Interval(null, 7, true, true)));
             Assert.AreEqual(true, Context.Operators.IntervalProperlyIncludesElement(Interval(1, null, true, true), int.MaxValue - 1));
-            // The extreme itself is the interval's endpoint.
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue, Interval(null, 7, true, true)));
-            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesElement(Interval(1, null, true, true), int.MaxValue));
+            // The extreme itself is a boundary of an interval wider than the point, so it is properly included.
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue, Interval(null, 7, true, true)));
+            Assert.AreEqual(true, Context.Operators.IntervalProperlyIncludesElement(Interval(1, null, true, true), int.MaxValue));
+            // Interval[null, int.MinValue] contains only the minimum.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue, Interval(null, int.MinValue, true, true)));
         }
 
         [TestMethod]
         public void ProperlyIncludesPoint_NonNullablePointForm_IsNormalisedLikeTheNullableOne()
         {
-            // Interval(0, 6) runs from 1 to 5: 1 is its endpoint and 3 is strictly inside.
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 6, false, false)));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3, new CqlInterval<int>(0, 6, false, false)));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 6, true, false)));
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1L, new CqlInterval<long>(0L, 6L, false, false)));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3L, new CqlInterval<long>(0L, 6L, false, false)));
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1.0m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3.0m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
+            // Interval(0, 6) runs from 1 to 5, so 0 is outside it and 1 is a boundary of an interval wider than the point;
+            // Interval(0, 2) contains only 1.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(0, new CqlInterval<int>(0, 6, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 6, false, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 2, false, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(0L, new CqlInterval<long>(0L, 6L, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(1L, new CqlInterval<long>(0L, 6L, false, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(0.99999999m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(1.0m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1.0m, new CqlInterval<decimal>(0.99999999m, 1.00000001m, false, false)));
         }
 
         [TestMethod]
@@ -238,15 +285,21 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ProperlyIncludesTimePoint_OpenNullBoundary_TheOtherBoundaryStillSettlesTheResult()
+        public void ProperlyIncludesTimePoint_IsDecidedFromTheBoundariesLikeEveryOtherPointType()
         {
             var noon = new CqlTime(12, 0, 0, 0, null, null);
+            var one = new CqlTime(13, 0, 0, 0, null, null);
+            var eleven = new CqlTime(11, 0, 0, 0, null, null);
 
-            // Interval(null, @T12:00:00.000] properly includes @T12:00:00.000: the high endpoint is excluded, wherever the low is.
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
-            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(13, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
-            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(11, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
-            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(11, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
+            // Above the high, wherever the low is.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(one, new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            // At the high: in the interval, which may contain only that point.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            // Below the high with an unknown low: unknown whether it is in the interval at all.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(eleven, new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            // A closed null low is the first moment of the day, so the interval is wider than the point.
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(eleven, new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
         }
     }
 }
