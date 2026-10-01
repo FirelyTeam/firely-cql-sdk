@@ -146,14 +146,10 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         foreach (var group in grouped)
         {
             var dr = group.First();
-            dr.MustSupportElement = group.SelectMany(g => g.MustSupportElement).ToList();
-            dr.MustSupportElement = dr.MustSupportElement.Distinct(GetComparer<FhirString>()).ToList();
-            dr.CodeFilter = group.SelectMany(g => g.CodeFilter).ToList();
-            dr.CodeFilter = dr.CodeFilter.Distinct(GetComparer<DataRequirement.CodeFilterComponent>()).ToList();
-            dr.ProfileElement = group.SelectMany(g => g.ProfileElement).ToList();
-            dr.ProfileElement = dr.ProfileElement.Distinct(GetComparer<Canonical>()).ToList();
-            dr.DateFilter = group.SelectMany(g => g.DateFilter).ToList();
-            dr.DateFilter = dr.DateFilter.Distinct(GetComparer<DataRequirement.DateFilterComponent>()).ToList();
+            dr.MustSupportElement = group.SelectMany(g => g.MustSupportElement).Distinct(GetComparer<FhirString>()).ToList();
+            dr.CodeFilter = group.SelectMany(g => g.CodeFilter).Distinct(GetComparer<DataRequirement.CodeFilterComponent>()).ToList();
+            dr.ProfileElement = group.SelectMany(g => g.ProfileElement).Distinct(GetComparer<Canonical>()).ToList();
+            dr.DateFilter = group.SelectMany(g => g.DateFilter).Distinct(GetComparer<DataRequirement.DateFilterComponent>()).ToList();
 
             result.Add(dr);
         }

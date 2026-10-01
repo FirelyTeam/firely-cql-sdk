@@ -108,21 +108,20 @@ public static partial class ElmToolkitExtensions
     /// exceptions through <paramref name="buildExceptionHandlingStrategy"/> in original file order.
     /// </summary>
     private static (FileInfo file, ElmLibrary library)[] LoadElmFilesInParallel(
-        IReadOnlyCollection<FileInfo> files,
+        FileInfo[] files,
         ILogger logger,
         BatchProcessExceptionHandlingStrategyBuilder<FileInfo>? buildExceptionHandlingStrategy)
     {
-        var materialized = files as FileInfo[] ?? files.ToArray();
-        var results = new ElmLibrary[materialized.Length];
-        var failures = new ExceptionDispatchInfo?[materialized.Length];
+        var results = new ElmLibrary[files.Length];
+        var failures = new ExceptionDispatchInfo?[files.Length];
         var parallelOptions = new ParallelOptions
         {
             MaxDegreeOfParallelism = Math.Min(4, Environment.ProcessorCount)
         };
 
-        Parallel.For(0, materialized.Length, parallelOptions, index =>
+        Parallel.For(0, files.Length, parallelOptions, index =>
         {
-            var file = materialized[index];
+            var file = files[index];
             try
             {
                 logger.LogInformation("Loading ELM library from file: {file}", file);
@@ -134,7 +133,7 @@ public static partial class ElmToolkitExtensions
             }
         });
 
-        return materialized.TrySelectToArray(
+        return files.TrySelectToArray(
             (file, index) =>
             {
                 if (failures[index] is { } edi)
@@ -180,7 +179,7 @@ public static partial class ElmToolkitExtensions
         ElmToolkit elmToolkit,
         AddElmFilesFromDirectoryOptions opt)
     {
-        var files = opt.GetFilesToAdd().ToList();
+        var files = opt.GetFilesToAdd().ToArray();
         var logger = elmToolkit.CreateLogger();
         var baseDirectory = opt.Directory.FullName;
 
@@ -191,8 +190,7 @@ public static partial class ElmToolkitExtensions
                  .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
                  .AddLoggerExceptionHandler(
                      logger,
-                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))) // Log errors
-            .ToList();
+                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName)));
 
         // Relative-path tracking is applied sequentially in original file order after the parallel
         // load (SubdirectoryPreserver's internal dictionary is not thread-safe).
