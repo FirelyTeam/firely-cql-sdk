@@ -23,6 +23,18 @@ namespace Hl7.Cql.Operators
         /// </summary>
         internal const decimal MinDecimalPrecisionValue = 0.00000001m;
 
+        // HighBoundary and LowBoundary use the greatest precision of the input's type when no precision is given.
+        // CQL spec §9.B, sections "HighBoundary" and "LowBoundary": "If no precision is specified, the greatest
+        // precision of the type of the input value is used (i.e. at least 8 for Decimal, 4 for Date, at least 17
+        // for DateTime, and at least 9 for Time)." The greatest precision of a Date is its day (8 digits, YYYYMMDD);
+        // DateTime and Time hold milliseconds at most (17 and 9 digits). At that greatest precision the boundary
+        // keeps every component the input has and fills only the missing ones: "The HighBoundary function returns
+        // the greatest possible value of the input to the specified precision", and LowBoundary the least.
+        private const int MaxDecimalBoundaryPrecision = 8;
+        private const int MaxDateBoundaryPrecision = 8;
+        private const int MaxDateTimeBoundaryPrecision = 17;
+        private const int MaxTimeBoundaryPrecision = 9;
+
         #region Abs
 
         public int? Abs(int? argument)
@@ -190,29 +202,60 @@ namespace Hl7.Cql.Operators
 
         #region HighBoundary
 
-        public decimal? HighBoundary(decimal? input, int? precision)
+        public decimal? HighBoundary(decimal? input, int? precision) => DecimalBoundary(input, precision, greatest: true);
+
+        /// <summary>
+        /// The greatest or least Decimal value the input can stand for at the requested number of decimals.
+        /// A Decimal with <c>s</c> decimals stands for every value that shares those digits; at a finer precision the
+        /// missing decimals are completed with 9s for the greatest value and 0s for the least, at a coarser one the
+        /// surplus decimals are dropped. The digits are those of the magnitude, so for a negative value the greatest
+        /// completion is the least magnitude and the other way round. The greatest precision a Decimal has is
+        /// <see cref="MaxDecimalBoundaryPrecision"/> decimals; a precision beyond it has no answer.
+        /// </summary>
+        private decimal? DecimalBoundary(decimal? input, int? precision, bool greatest)
         {
-            if (input == null || precision == null) return null;
-            if (precision < 8) return null;
+            if (input is not { } value)
+                return null;
+            var requested = precision ?? MaxDecimalBoundaryPrecision;
+            if (requested is < 0 or > MaxDecimalBoundaryPrecision)
+                return null;
+            var scale = (byte)requested;
 
-            StringBuilder strPrec = new("0.");
-            strPrec.Append('0', (int)precision - 1);
-            strPrec.Append('1');
-
-            StringBuilder strInp = new("0.");
-            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
-                .Last()
-                .Length - 1);
-            strInp.Append('1');
-            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
-            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
-            return input;
+            try
+            {
+                var negative = value < 0;
+                var magnitude = Math.Abs(value);
+                var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
+                // Only the completion asked for is computed, so the other one cannot overflow on its behalf.
+                var completion = greatest != negative
+                    ? kept + (UnitAtScale(kept.Scale) - UnitAtScale(scale))
+                    : kept + ZeroAtScale(scale);
+                // Decimal keeps at most 28 to 29 significant digits. Where the completion needs more, the addition
+                // rounds and drops decimals instead of throwing, so a result that lost the requested scale is not
+                // the boundary; only values beyond the CQL Decimal range (whose whole part has at most 20 digits) get here.
+                if (completion.Scale != scale)
+                    return null;
+                return negative ? -completion : completion;
+            }
+            catch (OverflowException e)
+            {
+                // A completion of a value at the edge of the decimal range cannot be represented.
+                Message(new { input, precision, greatest, e }, "CqlOperators.ArithmeticOperators.DecimalBoundary", "Warning", "Ignored overflow errors from a decimal boundary, returned null.");
+                return null;
+            }
         }
+
+        /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
+        private static decimal UnitAtScale(byte scale) => new(1, 0, 0, false, scale);
+
+        /// <summary>The value 0 at the given number of decimals; adding it sets a result's scale.</summary>
+        private static decimal ZeroAtScale(byte scale) => new(0, 0, 0, false, scale);
 
         public CqlDate? HighBoundary(CqlDate? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateBoundaryPrecision;
             switch (precision)
             {
                 case 4: return new CqlDate(9999, null, null);
@@ -220,28 +263,8 @@ namespace Hl7.Cql.Operators
                 case 8:
                     {
                         var month = input.Value.Month ?? 12;
-                        switch (month)
-                        {
-                            case 1:
-                            case 3:
-                            case 5:
-                            case 7:
-                            case 8:
-                            case 10:
-                            case 12:
-                                return new CqlDate(input.Value.Year, month, 31);
-                            case 4:
-                            case 6:
-                            case 9:
-                            case 11:
-                                return new CqlDate(input.Value.Year, month, 30);
-                            case 2:
-                                return System.DateTime.IsLeapYear(input.Value.Year)
-                                    ? new CqlDate(input.Value.Year, month, 29)
-                                    : new CqlDate(input.Value.Year, month, 28);
-                            default:
-                                return null;
-                        }
+                        var day = input.Value.Day ?? System.DateTime.DaysInMonth(input.Value.Year, month);
+                        return new CqlDate(input.Value.Year, month, day);
                     }
                 default:
                     return null;
@@ -250,8 +273,9 @@ namespace Hl7.Cql.Operators
 
         public CqlDateTime? HighBoundary(CqlDateTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
 
@@ -288,7 +312,12 @@ namespace Hl7.Cql.Operators
                 case 10: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, 23, null, null, null, offsetHour, offsetMinute);
                 case 12: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, 59, null, null, offsetHour, offsetMinute);
                 case 14: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, input.Value.Minute ?? 59, 59, null, offsetHour, offsetMinute);
-                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 12, input.Value.Day ?? 31, input.Value.Hour ?? 23, input.Value.Minute ?? 59, input.Value.Second ?? 59, 999, offsetHour, offsetMinute);
+                case 17:
+                    {
+                        var month = input.Value.Month ?? 12;
+                        var day = input.Value.Day ?? System.DateTime.DaysInMonth(input.Value.Year, month);
+                        return new CqlDateTime(input.Value.Year, month, day, input.Value.Hour ?? 23, input.Value.Minute ?? 59, input.Value.Second ?? 59, input.Value.Millisecond ?? 999, offsetHour, offsetMinute);
+                    }
                 default:
                     return null;
             }
@@ -296,8 +325,9 @@ namespace Hl7.Cql.Operators
 
         public CqlTime? HighBoundary(CqlTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
             switch (precision)
@@ -305,7 +335,7 @@ namespace Hl7.Cql.Operators
                 case 2: return new CqlTime(23, null, null, null, offsetHour, offsetMinute);
                 case 4: return new CqlTime(input.Value.Hour, 59, null, null, offsetHour, offsetMinute);
                 case 6: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, 59, null, offsetHour, offsetMinute);
-                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, input.Value.Second ?? 59, 999, offsetHour, offsetMinute);
+                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 59, input.Value.Second ?? 59, input.Value.Millisecond ?? 999, offsetHour, offsetMinute);
                 default:
                     return null;
             }
@@ -334,33 +364,18 @@ namespace Hl7.Cql.Operators
 
         #region LowBoundary
 
-        public decimal? LowBoundary(decimal? input, int? precision)
-        {
-            if (input == null || precision == null) return null;
-            if (precision < 8) return null;
-
-            StringBuilder strPrec = new("0.");
-            strPrec.Append('0', (int)precision);
-
-            StringBuilder strInp = new("0.");
-            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
-                .Last()
-                .Length);
-
-            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
-            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
-            return input;
-        }
+        public decimal? LowBoundary(decimal? input, int? precision) => DecimalBoundary(input, precision, greatest: false);
 
         public CqlDate? LowBoundary(CqlDate? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateBoundaryPrecision;
             switch (precision)
             {
                 case 4: return new CqlDate(1, null, null);
                 case 6: return new CqlDate(input.Value.Year, 1, null);
-                case 8: return new CqlDate(input.Value.Year, input.Value.Month, 1);
+                case 8: return new CqlDate(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1);
                 default:
                     return null;
             }
@@ -368,8 +383,9 @@ namespace Hl7.Cql.Operators
 
         public CqlDateTime? LowBoundary(CqlDateTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxDateTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
 
@@ -381,7 +397,7 @@ namespace Hl7.Cql.Operators
                 case 10: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, 0, null, null, null, offsetHour, offsetMinute);
                 case 12: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, 0, null, null, offsetHour, offsetMinute);
                 case 14: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, 0, null, offsetHour, offsetMinute);
-                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, input.Value.Second ?? 0, 0, offsetHour, offsetMinute);
+                case 17: return new CqlDateTime(input.Value.Year, input.Value.Month ?? 1, input.Value.Day ?? 1, input.Value.Hour ?? 0, input.Value.Minute ?? 0, input.Value.Second ?? 0, input.Value.Millisecond ?? 0, offsetHour, offsetMinute);
                 default:
                     return null;
             }
@@ -389,8 +405,9 @@ namespace Hl7.Cql.Operators
 
         public CqlTime? LowBoundary(CqlTime? input, int? precision)
         {
-            if (input == null || precision == null)
+            if (input == null)
                 return null;
+            precision ??= MaxTimeBoundaryPrecision;
             var offsetHour = input.Value.OffsetHour;
             var offsetMinute = input.Value.OffsetMinute;
             switch (precision)
@@ -398,7 +415,7 @@ namespace Hl7.Cql.Operators
                 case 2: return new CqlTime(0, null, null, null, offsetHour, offsetMinute);
                 case 4: return new CqlTime(input.Value.Hour, 0, null, null, offsetHour, offsetMinute);
                 case 6: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, 0, null, offsetHour, offsetMinute);
-                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, input.Value.Second ?? 0, 0, offsetHour, offsetMinute);
+                case 9: return new CqlTime(input.Value.Hour, input.Value.Minute ?? 0, input.Value.Second ?? 0, input.Value.Millisecond ?? 0, offsetHour, offsetMinute);
                 default:
                     return null;
             }
