@@ -320,10 +320,32 @@ namespace CoreTests
             // Decided true when every value agrees: Interval[1, 3] overlaps before Interval[2, null) whatever its end.
             Assert.AreEqual(true, Context.Operators.OverlapsBefore(Interval(1, 3, true, true), Interval(2, null, true, false)));
 
-            // The same for dates, with the day as the step.
+            // The same for every point type with a successor and predecessor: the step is the day for a Date, the
+            // millisecond for a DateTime and a Time, 1e-8 of the unit for a Quantity.
             var day = new CqlDate(2012, 1, 14);
             Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlDate?>(day, day, true, true), new CqlInterval<CqlDate?>(new CqlDate(2012, 1, 1), null, true, false), "day"));
             Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(new CqlInterval<CqlDate?>(day, day, true, true), new CqlInterval<CqlDate?>(null, null, false, false), "day"));
+
+            var moment = new CqlDateTime(2012, 1, 14, 10, 30, 0, 0, 0, 0);
+            var earlier = new CqlDateTime(2012, 1, 14, 10, 0, 0, 0, 0, 0);
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlDateTime?>(moment, moment, true, true), new CqlInterval<CqlDateTime?>(earlier, null, true, false), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.OverlapsBefore(new CqlInterval<CqlDateTime?>(moment, moment, true, true), new CqlInterval<CqlDateTime?>(null, moment, false, true), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(new CqlInterval<CqlDateTime?>(moment, moment, true, true), new CqlInterval<CqlDateTime?>(null, null, false, false), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludedInInterval(new CqlInterval<CqlDateTime?>(null, null, false, false), new CqlInterval<CqlDateTime?>(moment, moment, true, true), "millisecond"));
+            // Unknown when the values the boundary can take disagree.
+            Assert.IsNull(Context.Operators.OverlapsAfter(new CqlInterval<CqlDateTime?>(earlier, moment, true, true), new CqlInterval<CqlDateTime?>(earlier, null, true, false), "millisecond"));
+            // At hour precision every end at or after 10:00 is in hour 10 or later, so 10:30 never ends after it; an
+            // interval ending at 11:30 ends after the ends in hour 10 and not after the later ones.
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlDateTime?>(moment, moment, true, true), new CqlInterval<CqlDateTime?>(earlier, null, true, false), "hour"));
+            Assert.IsNull(Context.Operators.OverlapsAfter(new CqlInterval<CqlDateTime?>(moment, new CqlDateTime(2012, 1, 14, 11, 30, 0, 0, 0, 0), true, true), new CqlInterval<CqlDateTime?>(earlier, null, true, false), "hour"));
+
+            var noon = new CqlTime(12, 0, 0, 0, null, null);
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlTime?>(noon, noon, true, true), new CqlInterval<CqlTime?>(new CqlTime(11, 0, 0, 0, null, null), null, true, false), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(new CqlInterval<CqlTime?>(noon, noon, true, true), new CqlInterval<CqlTime?>(null, null, false, false), "millisecond"));
+
+            var kilogram = new CqlQuantity(1m, "kg");
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlQuantity?>(kilogram, kilogram, true, true), new CqlInterval<CqlQuantity?>(new CqlQuantity(500m, "g"), null, true, false)));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(new CqlInterval<CqlQuantity?>(kilogram, kilogram, true, true), new CqlInterval<CqlQuantity?>(null, null, false, false), null));
         }
     }
 }
