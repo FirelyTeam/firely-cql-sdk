@@ -42,13 +42,7 @@ internal class ResourcePackager(
         // Parallel.ForEach below the first time each library's dependencies are queried.
         var libraries = librarySet.ToList();
 
-        // Packaging a single library (data requirements analysis, related-artifact/measure
-        // construction, JSON-attachment building) is CPU-bound and otherwise independent per
-        // library -- it only reads the shared, now-warmed-up, librarySet. Large library sets
-        // (e.g. 400+ HEDIS measure/shared libraries) previously packaged one library at a time,
-        // which made this step one of the most expensive parts of the overall packaging run;
-        // compiling independent libraries' resources in parallel lets it scale with available
-        // cores instead.
+        // Package each library in parallel after materializing the dependency graph.
         var results = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)>();
         var failures = new ConcurrentDictionary<CqlVersionedLibraryIdentifier, ExceptionDispatchInfo>();
 
