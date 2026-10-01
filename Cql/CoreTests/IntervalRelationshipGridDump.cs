@@ -247,10 +247,17 @@ namespace CoreTests
                         w.WriteLine($"{k} before {R(() => Ops.Before(a, b, precision))}");
                         w.WriteLine($"{k} after {R(() => Ops.After(a, b, precision))}");
                         w.WriteLine($"{k} meets {R(() => Ops.Meets(a, b, precision))}");
+                        w.WriteLine($"{k} meetsBefore {R(() => Ops.MeetsBefore(a, b, precision))}");
+                        w.WriteLine($"{k} meetsAfter {R(() => Ops.MeetsAfter(a, b, precision))}");
                         w.WriteLine($"{k} overlaps {R(() => Ops.Overlaps(a, b, precision))}");
+                        w.WriteLine($"{k} overlapsBefore {R(() => Ops.OverlapsBefore(a, b, precision))}");
+                        w.WriteLine($"{k} overlapsAfter {R(() => Ops.OverlapsAfter(a, b, precision))}");
                         w.WriteLine($"{k} includes {R(() => Ops.IntervalIncludesInterval(a, b, precision))}");
                         w.WriteLine($"{k} properlyIncludes {R(() => Ops.IntervalProperlyIncludesInterval(a, b, precision))}");
+                        w.WriteLine($"{k} properlyIncludedIn {R(() => Ops.IntervalProperlyIncludedInInterval(a, b, precision))}");
                         w.WriteLine($"{k} sameAs {R(() => Ops.SameAs(a, b, precision))}");
+                        w.WriteLine($"{k} sameOrBefore {R(() => Ops.SameOrBefore(a, b, precision))}");
+                        w.WriteLine($"{k} sameOrAfter {R(() => Ops.SameOrAfter(a, b, precision))}");
                         w.WriteLine($"{k} starts {R(() => Ops.Starts(a, b, precision))}");
                         w.WriteLine($"{k} ends {R(() => Ops.Ends(a, b, precision))}");
                     }
@@ -260,8 +267,11 @@ namespace CoreTests
                     {
                         var k = $"time@{pr} {V(p)} {S(b)}";
                         w.WriteLine($"{k} in {R(() => Ops.In(p, b, precision))}");
+                        w.WriteLine($"{k} includesElement {R(() => Ops.IntervalIncludesElement(b, p, precision))}");
                         w.WriteLine($"{k} pointBefore {R(() => Ops.Before(p, b, precision))}");
                         w.WriteLine($"{k} pointAfter {R(() => Ops.After(p, b, precision))}");
+                        w.WriteLine($"{k} intervalBeforePoint {R(() => Ops.Before(b, p, precision))}");
+                        w.WriteLine($"{k} intervalAfterPoint {R(() => Ops.After(b, p, precision))}");
                         w.WriteLine($"{k} properlyIncludedIn {R(() => p is null ? null : Ops.ElementProperlyIncludedInInterval(p, b, precision))}");
                         w.WriteLine($"{k} properlyIncludesElement {R(() => p is null ? null : Ops.IntervalProperlyIncludesElement(b, p, precision))}");
                     }
