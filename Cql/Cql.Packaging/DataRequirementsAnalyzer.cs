@@ -51,7 +51,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
 
     private void Visit(ElmLibrary library, List<DataRequirement> allRequirements)
     {
-        allRequirements.AddRange(GetDirectRequirements(library));
+        allRequirements.AddRange(GetDirectRequirements(library).Select(r => (DataRequirement)r.DeepCopy()));
 
         var dependencies = librarySet.GetLibraryDependencies(library);
         foreach (var dependency in dependencies)
