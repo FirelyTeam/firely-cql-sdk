@@ -47,7 +47,11 @@ The version passed through `5.2.2.0` (#1639), `5.2.3.0` (#1629), `5.3.0.0` (#167
 
 - **Build tooling:** external package versions are now managed centrally in a root `Directory.Packages.props` instead of per-project. Internal to how the SDK is built. (#1615)
 - **Documentation:** the root `README.md`'s "External Dependencies" table has been removed because it restated pinned versions by hand and drifted. Read [`Directory.Packages.props`](https://github.com/FirelyTeam/firely-cql-sdk/blob/develop/Directory.Packages.props) instead — it is what the build uses, so it cannot be out of date. (#1615)
-- `Microsoft.Extensions.Logging.Abstractions` moves `10.0.7` → `10.0.3`, back in line with the rest of the `Microsoft.Extensions.*` family, and with it `Microsoft.Extensions.DependencyInjection.Abstractions` and `System.Diagnostics.DiagnosticSource`. For consumers this **lowers a minimum**, so it is not breaking: an application already resolving `10.0.7` or newer keeps doing so. (#1615)
+- `FirelyNetVersion`: `6.5.0` → `6.6.0`, bumping `Hl7.Fhir.Base` and `Hl7.Fhir.R4` for every package that consumes Firely .NET SDK types (`Hl7.Cql.Fhir`, `Hl7.Cql.Packaging`, `Hl7.Cql.Packager`) and for the demo projects. A consumer with its own direct reference to the Firely .NET SDK should move it to `6.6.0` as well. No public API, generated C# output, or CQL evaluation result changes with it. (#1710)
+- `MicrosoftExtensionsVersion`: `10.0.3` → `10.0.9`, moving the whole `Microsoft.Extensions.*` family together. `Hl7.Fhir.Base` `6.6.0` depends on `Microsoft.Extensions.Caching.Memory` `10.0.9`, which requires `Microsoft.Extensions.Logging.Abstractions` at that version or newer, so the dependency floor the affected `Hl7.Cql.*` packages declare rises accordingly. An application already resolving `10.0.9` or newer is unaffected. (#1710)
+- `Microsoft.Extensions.Logging.Abstractions` was separately pinned at `10.0.7` and is folded back into the family property, and with it `Microsoft.Extensions.DependencyInjection.Abstractions` and `System.Diagnostics.DiagnosticSource`. (#1615)
+
+  **Net effect across this release**, since the two changes above touch the same packages: `Microsoft.Extensions.Logging.Abstractions` and the rest of the `Microsoft.Extensions.*` family end at `10.0.9`. The intermediate drop to `10.0.3` from unpinning is not a state any released version is in.
 
 #### Potentially Breaking
 
@@ -151,7 +155,7 @@ Many of the entries below **change CQL evaluation results**. See the Upgrade Che
 - New or changed exception types: `CqlException<CqlPointFromNonUnitIntervalError>` replaces `InvalidOperationException` from `point from` over a non-unit interval.
 - Public runtime/operator API changes: `LateBoundProperty<T>` removed, `AnyRelated<T>` added, `CqlTime.Successor()`/`Predecessor()` now nullable.
 - Generator version and invoker range: stated above under `### Generated Code Compatibility`; both moved.
-- `FirelyNetVersion`: `6.5.0`, unchanged, and equal to Vonk's `FhirNetApiVersion` at cut time.
+- `FirelyNetVersion`: `6.5.0` → `6.6.0` (#1710). Vonk's `FhirNetApiVersion` is `6.5.0` at cut time, so the SDK leads — which is the expected sequencing rather than drift. Vonk moves to `6.6.0` as part of adopting this release, and must do so in the same step as bumping `FirelyCqlVersion`, since `Hl7.Cql.Fhir` `2.16.0` declares `Hl7.Fhir.Base >= 6.6.0` and Vonk pins `Hl7.Fhir.Base` directly.
 - Packager CLI argument changes: none. The example configuration carries the new `AllowNullIntervals` default.
 - MSBuild property, target or script-flag changes: package versions moved to `Directory.Packages.props` (#1615).
 - Content previously drafted in `docs/releases/vnext-release-notes.md`: none (static pointer doc).
@@ -163,6 +167,7 @@ Many of the entries below **change CQL evaluation results**. See the Upgrade Che
 
 | PR | Title |
 | --- | --- |
+| [#1710](https://github.com/FirelyTeam/firely-cql-sdk/pull/1710) | Update Firely .NET SDK to 6.6.0 |
 | [#1701](https://github.com/FirelyTeam/firely-cql-sdk/pull/1701) | Remove LateBoundProperty (generator 6.0) |
 | [#1700](https://github.com/FirelyTeam/firely-cql-sdk/pull/1700) | CQL-to-ELM: translate member access on a choice-typed value |
 | [#1694](https://github.com/FirelyTeam/firely-cql-sdk/pull/1694) | Use greatest precision in High/LowBoundary |
