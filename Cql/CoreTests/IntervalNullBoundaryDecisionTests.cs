@@ -174,5 +174,79 @@ namespace CoreTests
             Assert.AreEqual(true, Context.Operators.MeetsAfter(Interval(5, null, true, true), Interval(null, 4, true, true), null));
             Assert.AreEqual(false, Context.Operators.Meets(Interval(null, 3, true, true), Interval(5, null, true, true), null));
         }
+
+        [TestMethod]
+        public void ProperlyIncludesPoint_OpenNullBoundary_TheOtherBoundaryStillSettlesTheResult()
+        {
+            // Interval(null, 3] properly includes 5: above the high, wherever the low is.
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesElement(Interval(null, 3, false, true), 5));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(5, Interval(null, 3, false, true)));
+            // 5 properly included in Interval(null, 7]: below the high, and the low is unknown.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(5, Interval(null, 7, false, true)));
+            // 0 properly included in Interval[1, null): below the low, wherever the high is.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(0, Interval(1, null, true, false)));
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(2, Interval(1, null, true, false)));
+            // The known endpoint is never properly included, wherever the other boundary is.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1, Interval(1, null, true, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(3, Interval(null, 3, false, true)));
+        }
+
+        [TestMethod]
+        public void ProperlyIncludesPoint_ClosedNullBoundary_IsTheExtreme()
+        {
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(5, Interval(null, 7, true, true)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue + 1, Interval(null, 7, true, true)));
+            Assert.AreEqual(true, Context.Operators.IntervalProperlyIncludesElement(Interval(1, null, true, true), int.MaxValue - 1));
+            // The extreme itself is the interval's endpoint.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(int.MinValue, Interval(null, 7, true, true)));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesElement(Interval(1, null, true, true), int.MaxValue));
+        }
+
+        [TestMethod]
+        public void ProperlyIncludesPoint_NonNullablePointForm_IsNormalisedLikeTheNullableOne()
+        {
+            // Interval(0, 6) runs from 1 to 5: 1 is its endpoint and 3 is strictly inside.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 6, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3, new CqlInterval<int>(0, 6, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(1, new CqlInterval<int>(0, 6, true, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1L, new CqlInterval<long>(0L, 6L, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3L, new CqlInterval<long>(0L, 6L, false, false)));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(1.0m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(3.0m, new CqlInterval<decimal>(0.99999999m, 6.0m, false, false)));
+        }
+
+        [TestMethod]
+        public void ProperlyIncludesDatePoint_UnknownBoundaryThatMayMakeItAUnitInterval_IsUnknown()
+        {
+            var day = new CqlDate(2026, 1, 5);
+            var later = new CqlDate(2026, 1, 9);
+
+            // Interval(null, @2026-01-05] properly includes @2026-01-05: the interval may contain that day alone.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(day, new CqlInterval<CqlDate>(null, day, false, true), "day"));
+            Assert.IsNull(Context.Operators.IntervalProperlyIncludesElement(new CqlInterval<CqlDate>(null, day, false, true), day, "day"));
+            // Interval[null, @2026-01-05] starts at the minimum date, so it is wider than the point.
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(day, new CqlInterval<CqlDate>(null, day, true, true), "day"));
+            // @2026-01-09 is above the high, wherever the low is.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(later, new CqlInterval<CqlDate>(null, day, false, true), "day"));
+            // Interval(null, @2026-01-09] properly includes @2026-01-05: unknown whether the day is in it at all.
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(day, new CqlInterval<CqlDate>(null, later, false, true), "day"));
+
+            var noon = new CqlDateTime(2026, 1, 5, 12, 0, 0, 0, 0, 0);
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlDateTime>(noon, null, true, false), "millisecond"));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlDateTime>(noon, null, true, true), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(new CqlDateTime(2026, 1, 5, 11, 0, 0, 0, 0, 0), new CqlInterval<CqlDateTime>(noon, null, true, false), "millisecond"));
+        }
+
+        [TestMethod]
+        public void ProperlyIncludesTimePoint_OpenNullBoundary_TheOtherBoundaryStillSettlesTheResult()
+        {
+            var noon = new CqlTime(12, 0, 0, 0, null, null);
+
+            // Interval(null, @T12:00:00.000] properly includes @T12:00:00.000: the high endpoint is excluded, wherever the low is.
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            Assert.AreEqual(false, Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(13, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            Assert.IsNull(Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(11, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, false, true), "millisecond"));
+            Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(new CqlTime(11, 0, 0, 0, null, null), new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
+        }
     }
 }

@@ -1764,27 +1764,28 @@ namespace Hl7.Cql.Operators
 
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
-            if (left == null || right == null || right.low == null || right.high == null)
+            if (left == null || right == null)
                 return null;
 
-            // The interval's boundaries are its effective ones - see the interval-interval overload above.
-            right = ToClosedForPointType(right)!;
+            // Only the nullable point forms can be normalised and carry an unknown boundary, so a non-nullable
+            // numeric interval is evaluated in its nullable form.
+            switch (right)
+            {
+                case CqlInterval<int> r:
+                    return ElementProperlyIncludedInInterval((int?)(object)left, ToNullablePoints(r));
+                case CqlInterval<long> r:
+                    return ElementProperlyIncludedInInterval((long?)(object)left, ToNullablePoints(r));
+                case CqlInterval<decimal> r:
+                    return ElementProperlyIncludedInInterval((decimal?)(object)left, ToNullablePoints(r));
+            }
 
-            var low = Comparer.Compare(left, right.low, null);
-            var high = Comparer.Compare(left, right.high, null);
-            if (low < 0)
-                return false;
-            if (high > 0)
-                return false;
-            // an element is only properly contained if it is not equal to either endpoint
-            if (low == 0 || high == 0)
-                return false;
-            return true;
+            // The interval's boundaries are its effective ones - see the interval-interval overload above.
+            return StrictlyBetweenTheBoundaries(left, ToClosedForPointType(right)!, null);
         }
 
         public bool? ElementProperlyIncludedInInterval(CqlDate left, CqlInterval<CqlDate>? right, string? precision)
         {
-            if (left == null || right == null || right.low == null || right.high == null)
+            if (left == null || right == null)
                 return null;
 
             if (precision == null && (SamePrecision(left, right.high) == false || SamePrecision(left, right.low) == false))
@@ -1797,24 +1798,12 @@ namespace Hl7.Cql.Operators
             // The interval's boundaries are its effective ones - see the interval-interval overload above.
             // The precision guards above are applied to the operand as given: closing a date/time boundary
             // steps it by one unit of its own precision and so preserves that precision either way.
-            right = ToClosedForPointType(right)!;
-
-            var low = Comparer.Compare(left, right.low, precision);
-            var high = Comparer.Compare(left, right.high, precision);
-            if (low < 0)
-                return false;
-            if (high > 0)
-                return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
-                return false;
-            return true;
+            return InsideAndNotTheOnlyPoint(left, ToClosedForPointType(right)!, precision);
         }
-
 
         public bool? ElementProperlyIncludedInInterval(CqlDateTime left, CqlInterval<CqlDateTime>? right, string? precision)
         {
-            if (left == null || right == null || right.low == null || right.high == null)
+            if (left == null || right == null)
                 return null;
 
             if (precision == null && (SamePrecision(left, right.high) == false || SamePrecision(left, right.low) == false))
@@ -1827,28 +1816,16 @@ namespace Hl7.Cql.Operators
             // The interval's boundaries are its effective ones - see the interval-interval overload above.
             // The precision guards above are applied to the operand as given: closing a date/time boundary
             // steps it by one unit of its own precision and so preserves that precision either way.
-            right = ToClosedForPointType(right)!;
-
-            var low = Comparer.Compare(left, right.low, precision);
-            var high = Comparer.Compare(left, right.high, precision);
-            if (low < 0)
-                return false;
-            if (high > 0)
-                return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
-                return false;
-            return true;
+            return InsideAndNotTheOnlyPoint(left, ToClosedForPointType(right)!, precision);
         }
 
         public bool? ElementProperlyIncludedInInterval(CqlTime left, CqlInterval<CqlTime>? right, string? precision)
         {
-            if (left == null || right == null || right.low == null || right.high == null)
+            if (left == null || right == null)
                 return null;
 
             if (precision == null && (SamePrecision(left, right.high) == false || SamePrecision(left, right.low) == false))
                 return null;
-
             else if (GreaterOrSamePrecision(left, precision) == false
                      || GreaterOrSamePrecision(right.low, precision) == false
                      || GreaterOrSamePrecision(right.high, precision) == false)
@@ -1857,20 +1834,46 @@ namespace Hl7.Cql.Operators
             // The interval's boundaries are its effective ones - see the interval-interval overload above.
             // The precision guards above are applied to the operand as given: closing a date/time boundary
             // steps it by one unit of its own precision and so preserves that precision either way.
-            right = ToClosedForPointType(right)!;
-
-            var low = Comparer.Compare(left, right.low, precision);
-            var high = Comparer.Compare(left, right.high, precision);
-            if (low < 0)
-                return false;
-            if (high > 0)
-                return false;
-            // properly contains requires the element not equal either endpoint
-            if (low == 0 || high == 0)
-                return false;
-            return true;
+            return StrictlyBetweenTheBoundaries(left, ToClosedForPointType(right)!, precision);
         }
 
+        /// <summary>
+        /// Whether <paramref name="point"/> lies strictly between the effective boundaries of <paramref name="closed"/>:
+        /// in the interval, and equal to neither of its endpoints. This is the rule the cqframework conformance suite
+        /// expects of the point forms other than Date and DateTime (<c>Interval[@T12:00:00.000, @T21:59:59.999]
+        /// properly includes @T12:00:00.000</c> is <c>false</c>); the Date and DateTime overloads apply the unit-interval
+        /// rule of the specification instead, see <see cref="InsideAndNotTheOnlyPoint{T}"/>. A boundary without a value
+        /// is decided by what it stands for (see <see cref="Boundary{T}"/>), so either boundary can settle the result on
+        /// its own.
+        /// </summary>
+        private bool? StrictlyBetweenTheBoundaries<T>(T point, CqlInterval<T> closed, string? precision)
+        {
+            var boundary = Boundary<T>.Of(point);
+            return AndAllowingUnknown(
+                IsAfter(boundary, Boundary<T>.LowOf(closed), precision),
+                IsBefore(boundary, Boundary<T>.HighOf(closed), precision));
+        }
+
+        /// <summary>
+        /// Whether <paramref name="point"/> is in <paramref name="closed"/> and the interval is not a unit interval
+        /// containing only that point. "For the point-interval overload, this operator returns true if the point is in
+        /// (i.e. included in) the interval, and the interval is not a unit interval containing only the point."
+        /// (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Properly Included In"). A boundary without a value
+        /// is decided by what it stands for (see <see cref="Boundary{T}"/>), so either boundary can settle the result
+        /// on its own; an unknown boundary that may coincide with the point leaves it unknown.
+        /// </summary>
+        private bool? InsideAndNotTheOnlyPoint<T>(T point, CqlInterval<T> closed, string? precision)
+        {
+            var boundary = Boundary<T>.Of(point);
+            var low = Boundary<T>.LowOf(closed);
+            var high = Boundary<T>.HighOf(closed);
+
+            var inside = AndAllowingUnknown(IsAtOrAfter(boundary, low, precision), IsAtOrBefore(boundary, high, precision));
+            if (inside != true)
+                return inside;
+
+            return !AndAllowingUnknown(IsSame(boundary, low, precision), IsSame(boundary, high, precision));
+        }
 
         public bool? IntervalProperlyIncludesElement<T>(CqlInterval<T>? left, T right) =>
             ElementProperlyIncludedInInterval(right, left);
