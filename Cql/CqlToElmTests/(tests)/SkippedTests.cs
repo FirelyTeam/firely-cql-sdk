@@ -77,8 +77,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "FloorDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
             { "FloorMinIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
 
-            { "HighBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
-            { "LowBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
 
 
             { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
