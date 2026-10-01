@@ -206,6 +206,50 @@ public class CodeModelPipelineTests : Base
     }
 
     [TestMethod]
+    public void PropertyAccessOverChoice_EmitsTheDispatchOfJavaTranslatedElm()
+    {
+        // The definition from the RR23 corpus, whose ELM was produced by the Java translator.
+        const string definition = "Injury due to falling rock within measurement period";
+        var library = CreateCqlToolkit().AddFHIRHelpers().MakeLibrary($"""
+            library RR23 version '1.0.0'
+            using FHIR version '4.0.1'
+            include FHIRHelpers version '4.0.1'
+
+            valueset "Injury due to falling rock": 'http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock'
+
+            parameter "Measurement Period" default Interval[@2023-01-01, @2023-12-31]
+
+            context Patient
+
+            define "{definition}":
+                [Condition: "Injury due to falling rock"] C
+                   where (C.onset.value as DateTime) during "Measurement Period"
+            """);
+        var javaLibrary = Library.LoadFromJson(new FileInfo(Path.Combine("Input", "RR23.json")));
+        // The other definitions call into FHIRHelpers, which this single-library build cannot resolve.
+        javaLibrary.statements = javaLibrary.statements.Where(s => s.name is definition or "Patient").ToArray();
+
+        var body = EmitDefinition(library, BuildCqlDefinitions(library), definition);
+        var javaBody = EmitDefinition(javaLibrary, BuildCqlDefinitions(javaLibrary), definition);
+
+        AssertWellFormedBody(body);
+        Assert.IsFalse(body.Contains("LateBoundProperty"), $"Expected a compile-time dispatch, got:\n{body}");
+        // Only the dispatch is compared: the rest of the body differs for reasons of its own, such
+        // as the Java translator leaving the parameter untyped.
+        AssertEqualCSharp(Dispatch(javaBody), Dispatch(body));
+
+        // Assumes a single, flat switch expression: it ends at the first "};" after it.
+        static string Dispatch(string body)
+        {
+            var lines = body.Split('\n');
+            var start = Array.FindIndex(lines, l => l.EndsWith(" switch"));
+            Assert.IsTrue(start >= 0, $"Expected a switch in the emitted body, got:\n{body}");
+            var end = Array.FindIndex(lines, start, l => l.Trim() == "};");
+            return string.Join("\n", lines[start..(end + 1)]);
+        }
+    }
+
+    [TestMethod]
     public void TupleLiteral_EmitsValueTuple()
     {
         var (library, definitions) = BuildIr("""
