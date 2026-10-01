@@ -1277,15 +1277,29 @@ namespace Hl7.Cql.Operators
             bool? precedes = start.Kind switch
             {
                 BoundaryKind.Value   => predecessor(start.Value!) is { } value ? IsSame(end, Boundary<T>.Of(value), precision) : false,
-                BoundaryKind.Unknown => IsSame(end, Boundary<T>.UnknownBetween(PredecessorOrExtreme(start.RangeLow, predecessor), PredecessorOrExtreme(start.RangeHigh, predecessor)), precision),
+                BoundaryKind.Unknown => PredecessorsOf(start, predecessor) is { } predecessors ? IsSame(end, predecessors, precision) : false,
                 _                    => false,
             };
             return OrAllowingUnknown(same, precedes);
         }
 
-        /// <summary>The predecessor of a range bound; a bound at an extreme (<c>null</c>) or without a predecessor stays at the extreme.</summary>
-        private static T? PredecessorOrExtreme<T>(T? bound, Func<T, T> predecessor) =>
-            bound is { } value ? predecessor(value) : default;
+        /// <summary>
+        /// The boundary just before an unknown one: the predecessors of every value it can take. <c>null</c> when it
+        /// has none, because the greatest value it can take is the minimum of the point type. A range bound at an
+        /// extreme stays at the extreme.
+        /// </summary>
+        private static Boundary<T>? PredecessorsOf<T>(Boundary<T> unknown, Func<T, T> predecessor)
+        {
+            T? high = default;
+            if (unknown.RangeHigh is { } rangeHigh)
+            {
+                if (predecessor(rangeHigh) is not { } highPredecessor)
+                    return null;
+                high = highPredecessor;
+            }
+            var low = unknown.RangeLow is { } rangeLow ? predecessor(rangeLow) : default;
+            return Boundary<T>.UnknownBetween(low, high);
+        }
 
         #endregion
 
@@ -1296,13 +1310,9 @@ namespace Hl7.Cql.Operators
             if (@this == null || other == null)
                 return null;
 
-            // An indeterminate comparison, such as between intervals sharing an unknown boundary, stays unknown.
-            return Comparer.Compare(@this, other, precision) switch
-            {
-                null => null,
-                0    => true,
-                _    => false,
-            };
+            // "This operator uses the semantics described in the Start and End operators to determine interval
+            // boundaries." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Same As").
+            return SameInterval(ToClosedForPointType(@this)!, ToClosedForPointType(other)!, precision);
         }
 
         #endregion

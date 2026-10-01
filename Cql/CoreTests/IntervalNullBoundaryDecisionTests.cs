@@ -110,6 +110,33 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Meets_UnknownStartThatCanOnlyBeTheMinimum_HasNothingBeforeIt()
+        {
+            // Interval(null, int.MinValue] can only start at the minimum, which has no predecessor, so no interval
+            // ends just before it: the answer is false, not unknown.
+            var startsAtTheMinimum = Interval(null, int.MinValue, false, true);
+            Assert.AreEqual(false, Context.Operators.MeetsBefore(Interval(0, 0, true, true), startsAtTheMinimum, null));
+            Assert.AreEqual(false, Context.Operators.MeetsAfter(startsAtTheMinimum, Interval(0, 0, true, true), null));
+            Assert.AreEqual(false, Context.Operators.Meets(Interval(0, 0, true, true), startsAtTheMinimum, null));
+            // An unknown start that can be anything from the minimum up to 5 has predecessors up to 4.
+            Assert.IsNull(Context.Operators.MeetsBefore(Interval(0, 2, true, true), Interval(null, 5, false, true), null));
+            Assert.AreEqual(false, Context.Operators.MeetsBefore(Interval(0, 7, true, true), Interval(null, 5, false, true), null));
+        }
+
+        [TestMethod]
+        public void SameAs_IsDecidedFromTheBoundaries()
+        {
+            // The same range, written with open and closed boundaries.
+            Assert.AreEqual(true, Context.Operators.SameAs(Interval(1, 5, true, true), Interval(0, 6, false, false), null));
+            // A closed null low is the minimum.
+            Assert.AreEqual(true, Context.Operators.SameAs(Interval(null, 5, true, true), Interval(int.MinValue, 5, true, true), null));
+            // An unknown high beside a known one: unknown when it may coincide, false when it cannot.
+            Assert.IsNull(Context.Operators.SameAs(Interval(1, 5, true, true), Interval(1, null, true, false), null));
+            Assert.AreEqual(false, Context.Operators.SameAs(Interval(1, 5, true, true), Interval(7, null, true, false), null));
+            Assert.AreEqual(false, Context.Operators.SameAs(Interval(1, 5, true, true), Interval(1, 6, true, true), null));
+        }
+
+        [TestMethod]
         public void Meets_ClosedNullBoundaryOnOneSide_IsDecidedAgainstTheOther()
         {
             // Interval[null, 4] meets Interval[5, null]: 4 is the predecessor of 5.
