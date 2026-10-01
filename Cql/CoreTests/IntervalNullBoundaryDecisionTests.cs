@@ -301,5 +301,29 @@ namespace CoreTests
             Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(eleven, new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
             Assert.AreEqual(true, Context.Operators.ElementProperlyIncludedInInterval(noon, new CqlInterval<CqlTime>(null, noon, true, true), "millisecond"));
         }
+
+        [TestMethod]
+        public void ConjunctionsOnOneUnknownBoundary_AreDecidedOverTheValuesItCanTake()
+        {
+            // Interval[1, 1] overlaps after Interval[0, null): overlapping needs an end at or after 1, ending after it
+            // needs an end below 1; no end satisfies both.
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(Interval(1, 1, true, true), Interval(0, null, true, false)));
+            Assert.AreEqual(false, Context.Operators.OverlapsBefore(Interval(1, 1, true, true), Interval(null, 2, false, true)));
+            // Interval[0, 0] includes Interval(null, null) only when the latter is Interval[0, 0] itself.
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(Interval(0, 0, true, true), Interval(null, null, false, false), null));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludedInInterval(Interval(null, null, false, false), Interval(0, 0, true, true), null));
+            // Interval(null, 2] properly includes Interval[null, 2]: the former starts at or after the minimum the latter starts at.
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(Interval(null, 2, false, true), Interval(null, 2, true, true), null));
+            // Still unknown when the values the boundary can take disagree: Interval(null, 5] may or may not start before 1.
+            Assert.IsNull(Context.Operators.IntervalProperlyIncludedInInterval(Interval(1, 5, true, true), Interval(null, 5, false, true), null));
+            Assert.IsNull(Context.Operators.OverlapsAfter(Interval(1, 3, true, true), Interval(0, null, true, false)));
+            // Decided true when every value agrees: Interval[1, 3] overlaps before Interval[2, null) whatever its end.
+            Assert.AreEqual(true, Context.Operators.OverlapsBefore(Interval(1, 3, true, true), Interval(2, null, true, false)));
+
+            // The same for dates, with the day as the step.
+            var day = new CqlDate(2012, 1, 14);
+            Assert.AreEqual(false, Context.Operators.OverlapsAfter(new CqlInterval<CqlDate?>(day, day, true, true), new CqlInterval<CqlDate?>(new CqlDate(2012, 1, 1), null, true, false), "day"));
+            Assert.AreEqual(false, Context.Operators.IntervalProperlyIncludesInterval(new CqlInterval<CqlDate?>(day, day, true, true), new CqlInterval<CqlDate?>(null, null, false, false), "day"));
+        }
     }
 }
