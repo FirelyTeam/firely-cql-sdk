@@ -90,5 +90,15 @@ namespace Hl7.Cql.CqlToElm.Test
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
         }
+
+        [TestMethod]
+        public void TypeFoundIsNotExpected_ProducesCorrectMessage()
+        {
+            var fluentCqlToolkit = CreateCqlToolkit();
+            var messageProvider = fluentCqlToolkit.GetMessageProvider();
+            var message = messageProvider.TypeFoundIsNotExpected(SystemTypes.IntegerType, SystemTypes.BooleanType);
+
+            message.Should().Be("Expected an expression of type '{urn:hl7-org:elm-types:r1}Boolean', but found an expression of type '{urn:hl7-org:elm-types:r1}Integer'.");
+        }
     }
 }
