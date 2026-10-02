@@ -16,8 +16,8 @@ namespace Hl7.Cql.Packaging.Toolkit;
 /// </summary>
 /// <remarks>
 /// <para>
-/// All three values affect whitespace only. Where the library was read from a file its JSON is reused,
-/// reformatted a token at a time where that is needed, so none of them walks the ELM object graph. A
+/// All three values change formatting only, never content. Where the library was read from a file its
+/// JSON is reused, rewritten only where that is needed, so none of them walks the ELM object graph. A
 /// library built in memory has no source JSON, and is serialized with the requested indentation.
 /// </para>
 /// <para>
@@ -37,12 +37,14 @@ public enum ElmAttachmentFormatting
     Passthrough,
 
     /// <summary>
-    /// Format the ELM JSON with indentation and line breaks.
+    /// Format the ELM JSON with indentation and line breaks. The text is rewritten, so whitespace and
+    /// string escaping may differ from the source even where the source was already indented.
     /// </summary>
     Indented,
 
     /// <summary>
-    /// Format the ELM JSON without indentation, producing a smaller attachment.
+    /// Format the ELM JSON without indentation, producing a smaller attachment. The text is rewritten, so
+    /// string escaping may differ from the source.
     /// </summary>
     Compact,
 }

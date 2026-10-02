@@ -78,6 +78,10 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     public ElmToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
         BatchProcessExceptionContinuation = continuation;
+
+        // Compilation honours this policy, so a later call must be allowed to redo the set under the new
+        // one rather than being skipped as unchanged.
+        _compiledArtifactsSnapshot = null;
         return this;
     }
 

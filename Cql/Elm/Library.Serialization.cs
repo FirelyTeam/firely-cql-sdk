@@ -127,8 +127,8 @@ public partial class Library
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     /// <remarks>
     /// When <see cref="SourceJsonUtf8"/> is available the result is that JSON with only its insignificant
-    /// whitespace changed, which is not the same as serializing: see <see cref="SourceJsonUtf8"/> for how
-    /// the two differ.
+    /// formatting changed — whitespace, and string escaping normalized by the writer — which is not the
+    /// same as serializing: see <see cref="SourceJsonUtf8"/> for how the two differ.
     /// </remarks>
     internal byte[] ToJsonUtf8(bool writeIndented) =>
         SourceJsonUtf8 is { } sourceJson

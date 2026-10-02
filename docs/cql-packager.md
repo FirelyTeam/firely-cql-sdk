@@ -277,11 +277,13 @@ formatted is set in the `Packaging` section of the settings file (there is no co
 | `Indented` | Format the ELM JSON with indentation and line breaks |
 | `Compact` | Format the ELM JSON without indentation, for a smaller attachment |
 
-All three affect whitespace only. Where a library was read from a file its JSON is reused — reformatted a
-token at a time where that is needed — so none of them rebuilds the ELM from the object graph. That
-rebuild walks every ELM node through the polymorphic type resolver and dominated packaging time on large
-library sets. A library built in memory has no source JSON and is serialized with the requested
-indentation.
+All three change formatting only, never content. Where a library was read from a file its JSON is reused —
+rewritten only where that is needed — so none of them rebuilds the ELM from the object graph. That rebuild
+walks every ELM node through the polymorphic type resolver and dominated packaging time on large library
+sets. A library built in memory has no source JSON and is serialized with the requested indentation.
+
+Only `Passthrough` reproduces the source file byte for byte. `Indented` and `Compact` rewrite the text, so
+besides whitespace their string escaping may differ from the source.
 
 Reused JSON is not identical to what serializing the graph produces: it keeps empty collections such as
 `annotation` and `signature` that serialization omits, and it lacks what serialization adds —

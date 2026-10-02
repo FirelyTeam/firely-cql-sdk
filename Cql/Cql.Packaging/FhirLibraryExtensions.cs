@@ -88,7 +88,9 @@ internal static class FhirLibraryExtensions
                     // reuses the bytes the library was read from and skips that entirely.
                     elmBytes = elmAttachmentFormatting switch
                     {
-                        ElmAttachmentFormatting.Passthrough when elmLibrary.SourceJsonUtf8 is { } sourceJson => sourceJson,
+                        // Copied, not aliased: this array becomes Attachment.Data on a resource handed to
+                        // the caller, while the library keeps its copy for any later packaging of it.
+                        ElmAttachmentFormatting.Passthrough when elmLibrary.SourceJsonUtf8 is { } sourceJson => sourceJson.ToArray(),
                         ElmAttachmentFormatting.Compact => elmLibrary.ToJsonUtf8(writeIndented: false),
                         _ => elmLibrary.ToJsonUtf8(writeIndented: true),
                     };

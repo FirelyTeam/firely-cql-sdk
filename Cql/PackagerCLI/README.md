@@ -191,10 +191,11 @@ set in the `Packaging` section of the settings file (there is no command-line fl
 - `Indented` - format the ELM JSON with indentation and line breaks.
 - `Compact` - format the ELM JSON without indentation, for a smaller attachment.
 
-All three affect whitespace only. Where a library was read from a file its JSON is reused, so none of
-them rebuilds the ELM from the object graph — that rebuild walks every ELM node through the polymorphic
-type resolver and dominated packaging time. A library built in memory is serialized with the requested
-indentation.
+All three change formatting only, never content. Where a library was read from a file its JSON is reused,
+so none of them rebuilds the ELM from the object graph — that rebuild walks every ELM node through the
+polymorphic type resolver and dominated packaging time. A library built in memory is serialized with the
+requested indentation. Only `Passthrough` reproduces the source file byte for byte; `Indented` and
+`Compact` rewrite the text, so their string escaping may also differ from the source.
 
 Reused JSON is not identical to what serializing the graph produces: it keeps empty collections such as
 `annotation` and `signature`, and lacks what serialization adds — `accessLevel` written out explicitly,
