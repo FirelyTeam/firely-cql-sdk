@@ -785,22 +785,27 @@ namespace CoreTests
         [TestMethod]
         public void Case_OfIsTestsOnAnAlias_NarrowsTheAliasInEachBranch()
         {
-            // from ([Condition] X return X.onset) R return case when R is Age then R.value
-            // when R is dateTime then R.value when R is Period then R as Period else null end.
             // Within each branch R is known to be the tested type, so its value binds statically
             // and the as-cast is the narrowed value itself: one type switch, no dispatch inside it.
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var narrowing = new Hl7.Cql.Elm.Case
-            {
-                caseItem =
-                [
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "dateTime"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Period"), then = new Hl7.Cql.Elm.As { operand = r, asTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Period") } },
-                ],
-                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.AnyType.name },
-            };
-            var elmLibrary = QueryLibrary("NarrowedCase", OnsetsOfConditions(), narrowing);
+            // The translator types each R.value as the choice of the alternatives' value types; a
+            // narrowed dateTime's value is still the System.DateTime the model declares.
+            var elmLibrary = CreateElmLibrary(CqlLibraryString.Parse("""
+               library NarrowedCase version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values":
+                 from ([Condition] X return X.onset) R
+                   return
+                     case
+                       when R is FHIR.Age then R.value
+                       when R is FHIR.dateTime then R.value
+                       when R is FHIR.Period then R as FHIR.Period
+                       else null
+                     end
+               """));
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
