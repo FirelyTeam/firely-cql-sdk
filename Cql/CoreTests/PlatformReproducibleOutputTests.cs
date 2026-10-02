@@ -9,7 +9,14 @@
 #nullable enable
 
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
+using Hl7.Fhir.Model;
+using DateTime = System.DateTime;
+using Library = Hl7.Cql.Elm.Library;
+using ElmLibrarySet = Hl7.Cql.Compiler.LibrarySet;
 
 namespace CoreTests;
 
@@ -77,16 +84,46 @@ public class PlatformReproducibleOutputTests
         Assert.AreEqual(expected, Build(CrLf));
     }
 
+    /// <summary>
+    /// Packages the same library twice, with the CQL written each way, and compares the attachment the
+    /// packager actually produces.
+    /// </summary>
+    /// <remarks>
+    /// Deliberately goes through <see cref="ResourcePackager"/> rather than calling the normalization
+    /// helper directly: a test on the helper alone stays green if the production call site is removed,
+    /// which is the regression that matters.
+    /// </remarks>
     [TestMethod]
-    public void CqlAttachmentText_IsTheSameWhicheverNewLineTheSourceFileUses()
+    public void PackagedCqlAttachment_IsTheSameWhicheverNewLineTheSourceFileUses()
     {
-        const string cql = "library Test version '1.0.0'@define \"X\": true@";
+        const string cqlTemplate = "library Test version '1.0.0'@@define \"X\": true@";
 
-        var lf = ResourcePackager.NormalizeNewLines(cql.Replace("@", Lf));
-        var crlf = ResourcePackager.NormalizeNewLines(cql.Replace("@", CrLf));
+        var lf = PackageAndReadCqlAttachment(cqlTemplate.Replace("@", Lf));
+        var crlf = PackageAndReadCqlAttachment(cqlTemplate.Replace("@", CrLf));
 
-        Assert.AreEqual(lf, crlf);
-        Assert.IsFalse(crlf.Contains('\r'));
+        Assert.IsFalse(crlf.Contains((byte)'\r'), "The packaged CQL attachment carried a CR.");
+        CollectionAssert.AreEqual(lf, crlf);
+    }
+
+    private static byte[] PackageAndReadCqlAttachment(string cql)
+    {
+        var elmLibrary = new Library
+        {
+            identifier = new VersionedIdentifier { id = "Test", version = "1.0.0" },
+        };
+
+        var packager = new ResourcePackager(
+            new FhirTypeResolver(ModelInfo.ModelInspector),
+            (_, _, _) => "test.firely");
+
+        var packaged = packager.PackageEachElmLibraryToFhirResources(
+            librarySet: new ElmLibrarySet("", [elmLibrary]),
+            inputsById: _ => new ResourcePackager.InputArtifacts(cql, elmLibrary, "namespace Test {}", [], null),
+            overrideDate: new DateTime(2001, 2, 3, 4, 5, 6, DateTimeKind.Local)).Single();
+
+        return packaged.fhirLibrary.Content
+                       .Single(c => c.ContentType == "text/cql")
+                       .Data!;
     }
 
     [TestMethod]
