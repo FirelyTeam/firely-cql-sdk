@@ -36,6 +36,16 @@ public record PackagingToolkitConfig(
     /// </summary>
     public string? MeasureGroupCodeSystem { get; init; }
 
+    /// <summary>
+    /// How the ELM JSON embedded as the <c>application/elm+json</c> attachment is formatted. The default,
+    /// <see cref="ElmAttachmentFormatting.Passthrough"/>, embeds the JSON a library was read from without
+    /// rebuilding it, which is substantially faster on large library sets. Set
+    /// <see cref="ElmAttachmentFormatting.Indented"/> or <see cref="ElmAttachmentFormatting.Compact"/> to
+    /// reformat that JSON instead; neither re-serializes the ELM graph. See
+    /// <see cref="ElmAttachmentFormatting"/> for how the output differs.
+    /// </summary>
+    public ElmAttachmentFormatting ElmAttachmentFormatting { get; init; } = ElmAttachmentFormatting.Passthrough;
+
     private static ReadOnlyDictionary<CqlLibraryIdentifier, string> CreateDefaultFixedLibraryCanonicals() =>
         new Dictionary<CqlLibraryIdentifier, string> { { (CqlLibraryIdentifier)"FHIRHelpers", "http://hl7.org/fhir/uv/cql/Library/FHIRHelpers" } }
             .AsReadOnly();

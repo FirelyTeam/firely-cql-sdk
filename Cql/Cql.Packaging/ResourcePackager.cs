@@ -9,6 +9,7 @@
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging;
@@ -35,7 +36,8 @@ internal class ResourcePackager(
         SysDateTime? overrideDate = null,
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null,
-        string? measureGroupCodeSystem = null)
+        string? measureGroupCodeSystem = null,
+        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough)
     {
         // Materialized once, single-threaded: this is also what forces ElmLibrarySet's internal
         // dependency graph (topological sort, root libraries) to be computed. That computation is
@@ -92,7 +94,8 @@ internal class ResourcePackager(
                 GetCSharpSourceCodeByName(),
                 librarySet,
                 resourceCanonicalBuilder,
-                localOverrideDate);
+                localOverrideDate,
+                elmAttachmentFormatting);
 
             IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
             {
