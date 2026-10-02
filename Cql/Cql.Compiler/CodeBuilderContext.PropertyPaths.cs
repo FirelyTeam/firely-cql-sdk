@@ -401,33 +401,14 @@ partial class CodeBuilderContext
 
             var isLast = i == segments.Length - 1;
             var target = isLast ? expectedType : resolution.Result.Type;
-            current = resolution.Binding switch
-            {
-                SegmentBinding.Dispatch => BindChoiceSegment(current, resolution, target, element),
-                // Where the model declares the element with a type of its own (a dateTime's value is
-                // a System.DateTime), a target wider than that type, such as the object of an ELM
-                // choice, would take the raw read as it is and skip the model's conversion. Read the
-                // element as its modelled type first, as a dispatch arm does.
-                SegmentBinding.Static when target != resolution.Result.Type
-                                           && target.IsAssignableFrom(resolution.Result.Type)
-                                           && _typeResolver.GetProperty(current.Type, resolution.Segment)?.PropertyType != resolution.Result.Type
-                    => Widen(PropertyHelper(current, resolution.Segment, resolution.Result.Type), target),
-                _ => PropertyHelper(current, resolution.Segment, target),
-            };
+            current = resolution.Binding == SegmentBinding.Dispatch
+                ? BindChoiceSegment(current, resolution, target, element)
+                : PropertyHelper(current, resolution.Segment, target);
         }
 
         _staticValues[element] = new StaticValue(current.Type, result.Alternatives);
         return current;
     }
-
-    /// <summary>
-    /// <paramref name="value"/> as a value of <paramref name="target"/>, which it is assignable to:
-    /// a reference needs no conversion, a value type is converted.
-    /// </summary>
-    private CodeExpression Widen(CodeExpression value, Type target) =>
-        !value.Type.IsValueType && target.IsAssignableFrom(value.Type)
-            ? value
-            : ChangeType(value, target, throwOnError: true);
 
     /// <summary>
     /// Reads an element off a choice value: a dispatch on the value's type with one arm per
