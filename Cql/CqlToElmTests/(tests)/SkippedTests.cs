@@ -19,12 +19,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "TestNullElement1", "This expression is ambiguous between the List and Interval overloads." },
             { "In1Null", "This expression is ambiguous between the List and Interval overloads." },
 
-            { "EquivalentABCAnd123", "Equivalent is not defined for two disparate list types." },
-            { "Equivalent123AndABC",  "Equivalent is not defined for two disparate list types." },
-            { "Equivalent123AndString123",  "Equivalent is not defined for two disparate list types." },
-            { "NotEqualABCAnd123",  "Equal is not defined for two disparate list types." },
-            { "NotEqual123AndABC",  "Equal is not defined for two disparate list types." },
-            { "NotEqual123AndString123",  "Equal is not defined for two disparate list types." },
 
             { "CodeToConcept1", "Requires ListPromotion to be enabled; without it translation reports an error because Code cannot be converted to the List<Code> type of Concept.codes." },
 
@@ -77,8 +71,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "FloorDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
             { "FloorMinIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
 
-            { "HighBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
-            { "LowBoundaryNullPrecision", "A null precision returns null instead of the maximum precision of the type." },
 
 
             { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
@@ -98,8 +90,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "TupleEqDifferentNamesWithOneNullId", "Conflicting suite expectation: tuple equality is false when one element differs, even if another is null (specification example: { x: 1, y: 1 } = { x: null, y: 2 } is false, and the suite's own TupleEqJohn1John2WithNullName expects false); this case expects null." },
             { "TupleNotEqDifferingNamesWithOneNullId", "Conflicting suite expectation: tuple inequality is true when one element differs, even if another is null (the suite's own TupleNotEqJohn1John2WithNullName expects true); this case expects null." },
-            { "Equal123AndABC", "Equality of two List<Any> whose elements have different types returns null instead of false." },
-            { "Equal123AndString123", "Equality of two List<Any> whose elements have different types returns null instead of false." },
             { "ProperContains1", "`properly includes` with a null list returns null instead of false." },
             { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
 
