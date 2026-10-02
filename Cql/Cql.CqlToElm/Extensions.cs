@@ -27,14 +27,32 @@ namespace Hl7.Cql.CqlToElm
     internal static class Extensions
     {
 
+        /// <summary>
+        /// The locator of the source text spanned by <paramref name="context"/>: <c>line:char-line:char</c>, with
+        /// 1-based characters, running from the first character of the first token through the last character of the
+        /// last token, or <c>line:char</c> when that span is a single character.
+        /// </summary>
         public static string Locator(this ParserRuleContext context)
         {
             return context switch
             {
                 StringLocatorRuleContext jlr => jlr.Locator,
-                _ => $"{context.Start.Line}:{context.Start.Column}-{context.Stop.Line}:{context.Stop.Column}"
+                _ => FormatLocator(
+                    context.Start.Line,
+                    context.Start.Column + 1,
+                    context.Stop.Line,
+                    context.Stop.Column + context.Stop.Text.Length)
             };
         }
+
+        /// <summary>
+        /// Formats a locator for the span from <paramref name="startLine"/>:<paramref name="startChar"/> through
+        /// <paramref name="endLine"/>:<paramref name="endChar"/>, inclusive, with 1-based characters.
+        /// </summary>
+        public static string FormatLocator(int startLine, int startChar, int endLine, int endChar) =>
+            startLine == endLine && startChar == endChar
+                ? $"{startLine}:{startChar}"
+                : $"{startLine}:{startChar}-{endLine}:{endChar}";
 
         public static string? Locator(this IParseTree pt) => pt is ParserRuleContext ctx ? ctx.Locator() : null;
 
