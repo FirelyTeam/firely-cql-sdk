@@ -187,7 +187,7 @@ set in the `Packaging` section of the settings file (there is no command-line fl
 }
 ```
 
-- `Passthrough` (default) - embed the ELM exactly as it was read, without reformatting it.
+- `Passthrough` (default) - embed the ELM as it was read, without reformatting it.
 - `Indented` - format the ELM JSON with indentation and line breaks.
 - `Compact` - format the ELM JSON without indentation, for a smaller attachment.
 
@@ -201,6 +201,9 @@ Reused JSON is not identical to what serializing the graph produces: it keeps em
 `annotation` and `signature`, and lacks what serialization adds — `accessLevel` written out explicitly,
 and `resultTypeSpecifier` derived from a legacy `type` discriminator. Either form parses back to an
 equivalent library through this SDK.
+
+All three normalize line endings to LF, so the attachment does not depend on how the ELM file was checked
+out.
 
 This is distinct from `--json-pretty`, which controls indentation of the FHIR resource JSON written out.
 
