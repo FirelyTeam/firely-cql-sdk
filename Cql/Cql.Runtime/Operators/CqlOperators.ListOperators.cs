@@ -969,7 +969,15 @@ namespace Hl7.Cql.Operators
 
         #region Properly Includes
 
-        public bool? ListProperlyIncludesElement<T>(IEnumerable<T>? left, T right) => ListProperlyIncludesList(left, new T[] { right });
+        /// <summary>
+        /// "For the singleton-list overload, this operator returns true if the list contains (i.e. includes) the
+        /// element, and it is not the only element in the list." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference,
+        /// List Operators, section "Properly Includes"). A null list contains nothing, as for <c>contains</c>: "If the
+        /// second argument is null, the result is false." (section "In"); only the list-list overload is null for a
+        /// null argument.
+        /// </summary>
+        public bool? ListProperlyIncludesElement<T>(IEnumerable<T>? left, T right) =>
+            left is null ? false : ListProperlyIncludesList(left, new T[] { right });
 
         public bool? ListProperlyIncludesList<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
