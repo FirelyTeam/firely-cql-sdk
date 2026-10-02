@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -222,7 +222,7 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Expected an expression of type &apos;{0}&apos;, but found an expression of type &apos;{1}&apos;.&quot;.
+        ///   Looks up a localized string similar to Expected an expression of type &apos;{0}&apos;, but found an expression of type &apos;{1}&apos;..
         /// </summary>
         internal static string TypeFoundIsNotExpected {
             get {
