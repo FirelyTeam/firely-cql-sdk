@@ -36,7 +36,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 cqlParser.StartsIntervalOperatorPhraseContext ctx         => HandleStarts(ctx, lhs, rhs),
                 cqlParser.EndsIntervalOperatorPhraseContext ctx           => HandleEnds(ctx, lhs, rhs),
 
-                _ => throw new NotImplementedException()
+                var phrase => new Null()
+                    .WithResultType(SystemTypes.AnyType)
+                    .AddError($"Interval operator phrase '{phrase?.GetText()}' is not supported.")
+                    .WithLocator(context.Locator()),
             };
         }
 
@@ -52,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "starts" => InvocationBuilder.Invoke(SystemLibrary.Start, lhs),
                 "ends"   => InvocationBuilder.Invoke(SystemLibrary.End, lhs),
-                "occurs" => throw new NotImplementedException("Occurs is not supported yet"),
+                // 'occurs' is optional and ignored: "X occurs within Q of Y" means "X within Q of Y".
                 _        => lhs
             };
             var (value, unit) = context.quantity().Parse();
@@ -109,7 +112,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var intervalArgs = new[]
                 {
-                    rhs, rhs, ElmFactory.Literal(true), ElmFactory.Literal(true),
+                    InvocationBuilder.Invoke(SystemLibrary.Subtract, [rhs, quantity]),
+                    InvocationBuilder.Invoke(SystemLibrary.Add, [rhs, quantity]),
+                    rhsClosed,
+                    rhsClosed,
                 };
                 rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
             }

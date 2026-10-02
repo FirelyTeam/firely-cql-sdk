@@ -6,7 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using Hl7.Cql.Elm;
+using ElmExpression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -90,6 +93,79 @@ namespace Hl7.Cql.CqlToElm.Test
                     Interval[@2024-07-23, @2024-07-30] starts within 1 day of end of Interval[@2024-07-17, @2024-07-24]
                 """);
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+        }
+
+        [TestMethod]
+        [DataRow("@2024-01-05", "", "@2024-01-03", DisplayName = "point within point")]
+        [DataRow("@2024-01-05", "properly ", "@2024-01-03", DisplayName = "point properly within point")]
+        [DataRow("@2024-01-05", "", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "point within interval")]
+        [DataRow("@2024-01-05", "properly ", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "point properly within interval")]
+        [DataRow("@2024-01-05", "", "start Interval[@2024-01-01, @2024-01-03]", DisplayName = "point within start of interval")]
+        [DataRow("@2024-01-05", "properly ", "end Interval[@2024-01-01, @2024-01-03]", DisplayName = "point properly within end of interval")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "@2024-01-03", DisplayName = "interval within point")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "@2024-01-03", DisplayName = "interval properly within point")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "interval within interval")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "interval properly within interval")]
+        public void Occurs_Within_IsTranslatedAsWithin(string left, string properly, string right)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                library InTest version '1.0.0'
+
+                define Occurs: {left} occurs {properly}within 3 days of {right}
+                define Plain: {left} {properly}within 3 days of {right}
+                """);
+            library.GetErrors().Should().BeEmpty();
+
+            var occurs = library.statements.Single(s => s.name == "Occurs").expression;
+            var plain = library.statements.Single(s => s.name == "Plain").expression;
+            occurs.Should().BeOfType<In>();
+
+            var occursJson = WithoutIdsAndLocators(occurs);
+            var plainJson = WithoutIdsAndLocators(plain);
+            JsonNode.DeepEquals(occursJson, plainJson).Should().BeTrue(
+                $"'occurs' is ignored, so the ELM should be the same.{Environment.NewLine}occurs: {occursJson}{Environment.NewLine}plain: {plainJson}");
+        }
+
+        [TestMethod]
+        [DataRow("@2024-01-05", "", true, DisplayName = "inside the range")]
+        [DataRow("@2023-12-31", "", true, DisplayName = "on the lower boundary")]
+        [DataRow("@2024-01-06", "", true, DisplayName = "on the upper boundary")]
+        [DataRow("@2024-01-06", "properly ", false, DisplayName = "properly, on the upper boundary")]
+        [DataRow("@2024-01-05", "properly ", true, DisplayName = "properly, inside the range")]
+        [DataRow("@2024-01-10", "", false, DisplayName = "outside the range")]
+        public void Occurs_Within_PointOfPoint_Evaluates(string left, string properly, bool expected)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                library InTest version '1.0.0'
+
+                define f: {left} occurs {properly}within 3 days of @2024-01-03
+                """);
+            var @in = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+            Run<bool?>(@in, library).Should().Be(expected);
+        }
+
+        private static JsonNode WithoutIdsAndLocators(ElmExpression expression)
+        {
+            var node = JsonSerializer.SerializeToNode<ElmExpression>(expression, Library.BuildSerializerOptions())!;
+            strip(node);
+            return node;
+
+            static void strip(JsonNode? node)
+            {
+                switch (node)
+                {
+                    case JsonObject obj:
+                        obj.Remove("localId");
+                        obj.Remove("locator");
+                        foreach (var (_, child) in obj)
+                            strip(child);
+                        break;
+                    case JsonArray array:
+                        foreach (var child in array)
+                            strip(child);
+                        break;
+                }
+            }
         }
 
         // Integration test for the bug described in the issue: @2026-05-14 in c.onset
