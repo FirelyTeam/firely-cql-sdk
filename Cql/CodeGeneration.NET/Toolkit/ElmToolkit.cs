@@ -49,6 +49,12 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
     public static readonly Version GeneratorToolVersion = new(LibrarySetCSharpCodeGenerator.GeneratorToolVersion);
 
     private ElmToolkitArtifactsById _artifactsById;
+
+    /// <summary>
+    /// The artifact set as it stood after the last <see cref="CompileToAssemblies"/> call, used to make a
+    /// repeat call on unchanged artifacts a genuine no-op.
+    /// </summary>
+    private ElmToolkitArtifactsById? _compiledArtifactsSnapshot;
     private readonly ElmToolkitServices _services;
 
     /// <inheritdoc />
@@ -131,6 +137,13 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         if (_artifactsById.Values.All(predicate: lc => lc is { Results.AssemblyBinary: not null }))
             return this;
 
+        // The check above stays false for the whole run whenever any library legitimately produces no
+        // assembly, so it cannot carry the "nothing to do" case on its own. Compiling is driven by the
+        // artifact set, which is immutable and replaced wholesale on change, so an unchanged reference
+        // means a repeat call would redo the entire set and discard the result.
+        if (ReferenceEquals(_artifactsById, _compiledArtifactsSnapshot))
+            return this;
+
         var logger = _services.Logger;
         using var servicesScope = _services.CreateScopedState();
 
@@ -161,6 +174,7 @@ public sealed class ElmToolkit : IToolkit<ElmToolkit>
         if (hasChanged)
             ReplaceArtifactsById(entriesBuilder.ToImmutable());
 
+        _compiledArtifactsSnapshot = _artifactsById;
         return this;
     }
 

@@ -85,8 +85,14 @@ public partial class Library
         if (!file.Exists)
             throw new FileNotFoundException($"File {file.FullName} does not exist.");
 
-        using var stream = file.OpenRead();
-        return LoadFromJson(stream, validate, originalFilePath: file.FullName);
+        var utf8Json = File.ReadAllBytes(file.FullName);
+
+        var node = JsonNode.Parse(utf8Json, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
+                   throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
+
+        var library = LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, originalFilePath: file.FullName);
+        library.SourceJsonUtf8 = utf8Json;
+        return library;
     }
 
     /// <summary>
@@ -113,6 +119,21 @@ public partial class Library
     {
         return LibraryJsonSerializer.SerializeToJson(this, writeIndented);
     }
+
+    /// <summary>
+    /// Returns this library as UTF-8 JSON with the requested indentation, reusing the JSON it was read
+    /// from where possible so the ELM graph does not have to be serialized again.
+    /// </summary>
+    /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    /// <remarks>
+    /// When <see cref="SourceJsonUtf8"/> is available the result is that JSON with only its insignificant
+    /// whitespace changed, which is not the same as serializing: see <see cref="SourceJsonUtf8"/> for how
+    /// the two differ.
+    /// </remarks>
+    internal byte[] ToJsonUtf8(bool writeIndented) =>
+        SourceJsonUtf8 is { } sourceJson
+            ? LibraryJsonSerializer.ReformatUtf8Json(sourceJson, writeIndented)
+            : Encoding.UTF8.GetBytes(SerializeToJson(writeIndented));
 
     /// <summary>
     /// Writes this library in JSON format to <paramref name="stream"/>.

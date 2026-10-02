@@ -217,7 +217,7 @@ public class CqlToFhirProgram
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
-                    .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .CompileToAssemblies() // A no-op while the ElmToolkit's artifacts are unchanged since its last compile
                     .SaveAssemblyBinariesToDirectory(
                         opt.DllOutDir,
                         opt.PdbOutDir ?? opt.DllOutDir,
