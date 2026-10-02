@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS154FHIRAppropriateTxforURI", "1.0.000")]
 public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleton<CMS154FHIRAppropriateTxforURI_1_0_000>
 {
@@ -305,7 +305,7 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> a_ = this.Qualifying_Encounters(context);
         CqlValueSet b_ = this.Upper_Respiratory_Infection(context);
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition d_(Condition X) => X as Condition;
+        Condition d_(Condition X) => X;
         IEnumerable<Condition> e_ = context.Operators.Select<Condition, Condition>(c_, d_);
         IEnumerable<Condition> f_ = Status_1_15_000.Instance.verified(context, e_);
         IEnumerable<ValueTuple<Encounter, Condition>> g_ = context.Operators.CrossJoin<Encounter, Condition>(a_, f_);
@@ -409,10 +409,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         IEnumerable<Encounter> b_ = this.Encounter_with_Upper_Respiratory_Infection(context);
         CqlValueSet c_ = this.Comorbid_Conditions_for_Respiratory_Conditions(context);
         IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition e_(Condition X) => X as Condition;
+        Condition e_(Condition X) => X;
         IEnumerable<Condition> f_ = context.Operators.Select<Condition, Condition>(d_, e_);
         IEnumerable<Condition> g_ = Status_1_15_000.Instance.verified(context, f_);
-        Condition h_(Condition X) => X as Condition;
+        Condition h_(Condition X) => X;
         IEnumerable<Condition> i_ = context.Operators.Select<Condition, Condition>(g_, h_);
         IEnumerable<Encounter> j_ = Antibiotic_1_11_000.Instance.Encounter_with_Comorbid_Condition_History(context, b_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(a_, j_);
@@ -456,10 +456,10 @@ public partial class CMS154FHIRAppropriateTxforURI_1_0_000 : ILibrary, ISingleto
         CqlValueSet y_ = this.Acute_Tonsillitis(context);
         IEnumerable<Condition> z_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> aa_ = context.Operators.Union<Condition>(x_, z_);
-        Condition ab_(Condition X) => X as Condition;
+        Condition ab_(Condition X) => X;
         IEnumerable<Condition> ac_ = context.Operators.Select<Condition, Condition>(aa_, ab_);
         IEnumerable<Condition> ad_ = Status_1_15_000.Instance.verified(context, ac_);
-        Condition ae_(Condition X) => X as Condition;
+        Condition ae_(Condition X) => X;
         IEnumerable<Condition> af_ = context.Operators.Select<Condition, Condition>(ad_, ae_);
         IEnumerable<Encounter> ag_ = Antibiotic_1_11_000.Instance.Encounter_with_Competing_Diagnosis_History(context, b_, af_);
         IEnumerable<Encounter> ah_ = context.Operators.Union<Encounter>(s_, ag_);

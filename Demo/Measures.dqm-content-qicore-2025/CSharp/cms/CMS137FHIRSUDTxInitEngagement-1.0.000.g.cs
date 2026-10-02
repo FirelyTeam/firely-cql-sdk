@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS137FHIRSUDTxInitEngagement", "1.0.000")]
 public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleton<CMS137FHIRSUDTxInitEngagement_1_0_000>
 {
@@ -165,7 +165,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         bool? b_(Encounter ValidEncounters) {
             CqlValueSet j_ = this.Substance_Use_Disorder(context);
             IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            Condition l_(Condition X) => X as Condition;
+            Condition l_(Condition X) => X;
             IEnumerable<Condition> m_ = context.Operators.Select<Condition, Condition>(k_, l_);
             IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
@@ -484,7 +484,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         }
 
         IEnumerable<MedicationRequest> ak_ = context.Operators.Where<MedicationRequest>(ai_, aj_);
-        IEnumerable<object> al_ = context.Operators.Union<object>(v_ as IEnumerable<object>, ak_ as IEnumerable<object>);
+        IEnumerable<object> al_ = context.Operators.Union<object>(v_, ak_ as IEnumerable<object>);
         return al_;
     }
 
@@ -1076,7 +1076,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
         CqlValueSet b_ = this.Substance_Use_Disorder_Short_Acting_Medication_Administration(context);
         IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
         IEnumerable<Procedure> d_ = Status_1_15_000.Instance.isProcedurePerformed(context, c_);
-        IEnumerable<object> e_ = context.Operators.Union<object>(a_ as IEnumerable<object>, d_ as IEnumerable<object>);
+        IEnumerable<object> e_ = context.Operators.Union<object>(a_, d_ as IEnumerable<object>);
 
         bool? f_(object ShortActingTreatment) {
             IEnumerable<CqlDate> v_ = this.Treatment_Initiation_With_Non_Medication_Intervention_Dates(context);
@@ -1225,7 +1225,7 @@ public partial class CMS137FHIRSUDTxInitEngagement_1_0_000 : ILibrary, ISingleto
 
         MedicationRequest q_(MedicationRequest ShortActingMedOrder) => ShortActingMedOrder;
         IEnumerable<MedicationRequest> r_ = context.Operators.WhereSelect<MedicationRequest, MedicationRequest>(o_, p_, q_);
-        IEnumerable<object> s_ = context.Operators.Union<object>(h_ as IEnumerable<object>, r_ as IEnumerable<object>);
+        IEnumerable<object> s_ = context.Operators.Union<object>(h_, r_ as IEnumerable<object>);
         int? t_ = context.Operators.Count<object>(s_);
         bool? u_ = context.Operators.GreaterOrEqual(t_, 2);
         return u_;

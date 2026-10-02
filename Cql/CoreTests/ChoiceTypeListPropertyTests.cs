@@ -25,11 +25,11 @@ namespace CoreTests;
 
 /// <summary>
 /// A union of two resource types is a CQL choice type, which the generator erases to
-/// <see cref="object"/>, so a property of the union's elements can only be reached by late
-/// binding. Late binding has to preserve the property's cardinality: read as a scalar, a
-/// list-valued element yields a value that no longer converts, and the filter then evaluates
-/// against <see langword="null"/> instead of against the element's actual codes - a wrong answer
-/// rather than a failure.
+/// <see cref="object"/>, so a property of the union's elements is read per alternative of the
+/// choice. The read has to preserve the property's cardinality: read as a scalar, a list-valued
+/// element yields a value that no longer converts, and the filter then evaluates against
+/// <see langword="null"/> instead of against the element's actual codes - a wrong answer rather
+/// than a failure.
 /// </summary>
 [TestClass]
 public class ChoiceTypeListPropertyTests
@@ -79,8 +79,8 @@ public class ChoiceTypeListPropertyTests
     }
 
     /// <summary>
-    /// The matching code is the second entry, so a late-bound read that kept only the list's first
-    /// element would miss it too.
+    /// The matching code is the second entry, so a read that kept only the list's first element
+    /// would miss it too.
     /// </summary>
     [TestMethod]
     public void ChoiceTypedSource_MatchesOnAnyElementOfTheList()
@@ -102,7 +102,7 @@ public class ChoiceTypeListPropertyTests
 
     /// <summary>
     /// The strongly typed control: a single retrieve resolves <c>reasonCode</c> at design time, so
-    /// this path never goes through late binding. It pins what the choice-typed definition above
+    /// this path never dispatches over a choice. It pins what the choice-typed definition above
     /// has to agree with.
     /// </summary>
     [TestMethod]
@@ -135,7 +135,7 @@ public class ChoiceTypeListPropertyTests
     /// <summary>
     /// When every member of the choice is known, the read dispatches on the members that have the
     /// element: one typed branch per member, and the element's list cardinality follows from the
-    /// branches' types. Nothing is late-bound.
+    /// branches' types.
     /// </summary>
     [TestMethod]
     public void EveryMemberResolves_DispatchesOnTheMembers()
@@ -145,44 +145,33 @@ public class ChoiceTypeListPropertyTests
         ArmsTesting(allMembersResolve, "ServiceRequest").Should().Be(1);
         ArmsTesting(allMembersResolve, "MedicationRequest").Should().Be(1);
         allMembersResolve.Should().Contain(".ReasonCode");
-        allMembersResolve.Should()
-                         .NotContain(
-                             "LateBoundProperty",
-                             "every member of the choice is known, so reasonCode is read per member");
     }
 
     /// <summary>
-    /// A choice member whose type cannot be resolved may hold the element with any type. The
-    /// members that do resolve get their typed branches, and the uninspectable member is served by
-    /// a late-bound branch typed like the others, so the library builds and every resolvable member
-    /// evaluates correctly (#1645).
+    /// A choice member whose type cannot be resolved may hold the element with any type, or not at
+    /// all, so the read cannot be bound at compile time: the build fails at the property, naming it
+    /// and asking for an explicit <c>as</c>.
     /// </summary>
     [TestMethod]
-    public void UnresolvableChoiceMember_KeepsALateBoundBranchForIt()
+    public void UnresolvableChoiceMember_FailsTheBuild()
     {
         var oneMemberUnresolvable = WithMedicationRequestChoiceMemberReplaced(
             "ChoiceTypeUnresolvedMemberTest",
             () => new CqlElm.NamedTypeSpecifier(FhirNamespace, "UnresolvableIntervention"));
 
-        var (cSharp, invoke) = Compile(oneMemberUnresolvable);
+        var compile = () => Compile(oneMemberUnresolvable);
 
-        ArmsTesting(cSharp, "ServiceRequest").Should().Be(1, "the member that resolves gets a typed branch");
-        cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>", "the member that does not resolve is served by a late-bound branch typed like the others");
-
-        var bundle = BundleOf(
-            ServiceRequestWithReasons("sr", InValueSetCode),
-            MedicationRequestWithReasons("mr", InValueSetCode),
-            ServiceRequestWithReasons("sr-out", OutOfValueSetCode));
-        invoke("Interventions With Reason", bundle).Should().HaveCount(2, "the typed branch and the late-bound branch both find the reason");
+        compile.Should().Throw<Hl7.Cql.Exceptions.CqlException<Hl7.Cql.Compiler.ExpressionBuildingError>>()
+               .WithMessage("ChoiceTypeUnresolvedMemberTest-1.0.0 line 20:15-20:37: Property reasonCode cannot be bound at compile time: *explicit 'as'*");
     }
 
     /// <summary>
-    /// The other arm of the same guard: a member that is itself a heterogeneous choice resolves,
-    /// but to <see cref="object"/>, which is just as uninspectable for the element, so it is served
-    /// by the late-bound branch too.
+    /// A member that is itself a choice contributes its own alternatives: the read dispatches over
+    /// them like over the others, and the alternative without the element (a <c>Condition</c>) gets
+    /// no branch.
     /// </summary>
     [TestMethod]
-    public void NestedHeterogeneousChoiceMember_KeepsALateBoundBranchForIt()
+    public void NestedChoiceMember_DispatchesOnItsAlternatives()
     {
         var oneMemberIsANestedChoice = WithMedicationRequestChoiceMemberReplaced(
             "ChoiceTypeNestedChoiceMemberTest",
@@ -193,7 +182,8 @@ public class ChoiceTypeListPropertyTests
         var (cSharp, invoke) = Compile(oneMemberIsANestedChoice);
 
         ArmsTesting(cSharp, "ServiceRequest").Should().Be(1);
-        cSharp.Should().Contain("LateBoundProperty<List<CodeableConcept>>");
+        ArmsTesting(cSharp, "MedicationRequest").Should().Be(1, "the nested choice's MedicationRequest has the element");
+        ArmsTesting(cSharp, "Condition").Should().Be(0, "a Condition has no reasonCode");
 
         var bundle = BundleOf(
             ServiceRequestWithReasons("sr", InValueSetCode),

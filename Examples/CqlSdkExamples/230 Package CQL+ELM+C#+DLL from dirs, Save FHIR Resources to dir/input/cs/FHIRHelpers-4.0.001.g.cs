@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("FHIRHelpers", "4.0.001")]
 public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_001>
 {
@@ -61,9 +61,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         else
         {
             Quantity a_ = range?.Low;
-            CqlQuantity b_ = this.ToQuantity(context, a_ as Quantity);
+            CqlQuantity b_ = this.ToQuantity(context, a_);
             Quantity c_ = range?.High;
-            CqlQuantity d_ = this.ToQuantity(context, c_ as Quantity);
+            CqlQuantity d_ = this.ToQuantity(context, c_);
             CqlInterval<CqlQuantity> e_ = context.Operators.Interval(b_, d_, true, true);
             return e_;
         }
