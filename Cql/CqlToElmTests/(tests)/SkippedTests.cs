@@ -90,8 +90,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "TupleEqDifferentNamesWithOneNullId", "Conflicting suite expectation: tuple equality is false when one element differs, even if another is null (specification example: { x: 1, y: 1 } = { x: null, y: 2 } is false, and the suite's own TupleEqJohn1John2WithNullName expects false); this case expects null." },
             { "TupleNotEqDifferingNamesWithOneNullId", "Conflicting suite expectation: tuple inequality is true when one element differs, even if another is null (the suite's own TupleNotEqJohn1John2WithNullName expects true); this case expects null." },
-            { "ProperContains1", "`properly includes` with a null list returns null instead of false." },
-            { "ProperIn1", "`properly included in` with a null list returns null instead of false." },
 
             { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
             { "TimeProperContainsFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },

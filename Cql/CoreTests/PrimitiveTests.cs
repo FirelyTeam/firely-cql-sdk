@@ -3479,6 +3479,29 @@ namespace CoreTests
         }
 
         /// <summary>
+        /// "For the singleton-list overload, this operator returns true if the list contains (i.e. includes) the
+        /// element, and it is not the only element in the list." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference,
+        /// List Operators, section "Properly Includes"); a null list contains nothing, so the answer is false, while
+        /// the list-list overload is null for a null argument.
+        /// </summary>
+        [TestMethod]
+        public void ListProperlyIncludesElement_NullList_IsFalse()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.AreEqual(false, ops.ListProperlyIncludesElement<string?>(null, "a"));
+            Assert.AreEqual(false, ops.ElementProperlyIncludedInList<string?>("a", null!));
+            Assert.AreEqual(false, ops.ListProperlyIncludesElement<string?>(new string?[0], "a"));
+            Assert.AreEqual(false, ops.ListProperlyIncludesElement<string?>(new string?[] { "a" }, "a"));
+            Assert.AreEqual(true, ops.ListProperlyIncludesElement<string?>(new string?[] { "a", "b" }, "a"));
+            Assert.AreEqual(false, ops.ListProperlyIncludesElement<string?>(new string?[] { "a", "b" }, "c"));
+            Assert.AreEqual(true, ops.ListProperlyIncludesElement<string?>(new string?[] { null, null }, null));
+
+            Assert.IsNull(ops.ListProperlyIncludesList<string?>(null, new string?[] { "a" }));
+            Assert.IsNull(ops.ListProperlyIncludedInList<string?>(new string?[] { "a" }, null!));
+        }
+
+        /// <summary>
         /// "For the interval-point overload, this operator returns true if the interval contains (i.e. includes) the
         /// point, and the interval is not a unit interval containing only the point." (CQL 1.5.3 Errata 2, Appendix B -
         /// CQL Reference, section "Properly Includes"): a point at the boundary of a wider interval is properly included.
