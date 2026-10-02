@@ -29,7 +29,16 @@
     ]
   },
   "Packaging": {
-    "JsonPretty": false, // --json-pretty
+    "JsonPretty": false, // --json-pretty : indentation of the FHIR resource JSON that is written out
+    // Formatting of the ELM JSON embedded as the application/elm+json attachment:
+    //   "Passthrough" (default) embeds the ELM exactly as it was read, without reformatting it.
+    //   "Indented"    formats the ELM JSON with indentation.
+    //   "Compact"     formats the ELM JSON without indentation, for a smaller attachment.
+    // All three change formatting only, reusing the JSON a library was read from rather than rebuilding
+    // it from the ELM graph. That reused JSON keeps empty collections and lacks the normalizations
+    // serializing applies (explicit accessLevel, resultTypeSpecifier derived from a legacy "type").
+    // Only "Passthrough" reproduces the source file byte for byte.
+    "ElmAttachmentFormatting": "Passthrough",
     "ExitOnError": false,
     "CanonicalRootUrl": "https://fire.ly/fhir/", // --canonical-root-url
     "OverrideDate": null, // --override-utc-date-time eg. "2023-10-01T00:00:00Z",

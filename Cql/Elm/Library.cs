@@ -46,6 +46,18 @@ public partial class Library
         EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.VersionedLibraryIdentifier);
 
     internal string? OriginalFilePath { get; private set; }
+
+    /// <summary>
+    /// The UTF-8 JSON this library was loaded from, when it was loaded from a file. Consumers that need
+    /// the library's JSON representation use this in preference to <see cref="SerializeToJson"/>, which
+    /// rebuilds it from the object graph at considerable cost.
+    /// </summary>
+    /// <remarks>
+    /// This is the JSON exactly as it was on disk, which is not identical to what <see cref="SerializeToJson"/>
+    /// produces: serialization omits empty collections, writes defaulted properties such as
+    /// <c>accessLevel</c> explicitly, and carries the legacy-construct corrections applied while reading.
+    /// </remarks>
+    internal byte[]? SourceJsonUtf8 { get; set; }
 }
 
 internal class LibraryByVersionedIdentifierHashSet : HashSet<Library>
