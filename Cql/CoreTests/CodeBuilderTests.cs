@@ -831,16 +831,9 @@ namespace CoreTests
         [TestMethod]
         public void If_OnAnIsTestOfAnAlias_NarrowsTheAliasInTheThenBranch()
         {
-            // ... return if R is Age then R.value else null: one arm, as a conditional over a
-            // declaration pattern, and R.value is Age's value rather than a dispatch.
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var narrowing = new Hl7.Cql.Elm.If
-            {
-                condition = IsOf(r, "Age"),
-                then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" },
-                @else = new Hl7.Cql.Elm.Null { resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "decimal") },
-            };
-            var elmLibrary = QueryLibrary("NarrowedIf", OnsetsOfConditions(), narrowing);
+            // One arm, as a conditional over a declaration pattern, and R.value is Age's value
+            // rather than a dispatch.
+            var elmLibrary = OnsetsLibrary("NarrowedIf", "if R is FHIR.Age then R.value else null");
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -858,25 +851,16 @@ namespace CoreTests
         [TestMethod]
         public void Case_WithAConditionOtherThanAnIsTest_NarrowsOnlyTheLeadingIsTests()
         {
-            // case when R is Age then R.value when true then 'reached' when R is dateTime then ...
             // A branch after the unrelated condition is reached only once every earlier test failed,
             // which says nothing about R's type, so only the first branch narrows.
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var mixed = new Hl7.Cql.Elm.Case
-            {
-                caseItem =
-                [
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
-                    new Hl7.Cql.Elm.CaseItem
-                    {
-                        when = LiteralOf(Hl7.Cql.Elm.SystemTypes.BooleanType, "true"),
-                        then = StringLiteral("reached"),
-                    },
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "dateTime"), then = new Hl7.Cql.Elm.Property { path = "value", scope = "R" } },
-                ],
-                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.AnyType.name },
-            };
-            var elmLibrary = QueryLibrary("PartlyNarrowedCase", OnsetsOfConditions(), mixed);
+            var elmLibrary = OnsetsLibrary("PartlyNarrowedCase", """
+                case
+                  when R is FHIR.Age then R.value
+                  when true then 'reached'
+                  when R is FHIR.dateTime then R.value
+                  else null
+                end
+                """);
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -965,35 +949,18 @@ namespace CoreTests
         [TestMethod]
         public void If_NarrowsAQueryLetAndEvaluatesItsBoundValue()
         {
-            var onset = new Hl7.Cql.Elm.QueryLetRef { name = "Onset" };
-            var elmLibrary = new Library
-            {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "QueryLetNarrowing", version = "1.0.0" },
-                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
-                usings = [new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" }],
-                statements =
-                [
-                    new Hl7.Cql.Elm.ExpressionDef
-                    {
-                        name = "Values",
-                        context = "Patient",
-                        expression = new Hl7.Cql.Elm.Query
-                        {
-                            source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "C", expression = RetrieveOf("Condition") }],
-                            let = [new Hl7.Cql.Elm.LetClause { identifier = "Onset", expression = new Hl7.Cql.Elm.Property { path = "onset", scope = "C" } }],
-                            @return = new Hl7.Cql.Elm.ReturnClause
-                            {
-                                distinct = false,
-                                expression = new Hl7.Cql.Elm.If
-                                {
-                                    condition = IsOf(onset, "Age"),
-                                    then = new Hl7.Cql.Elm.Property { path = "value", scope = "Onset" },
-                                },
-                            },
-                        },
-                    },
-                ],
-            };
+            var elmLibrary = CreateElmLibrary(CqlLibraryString.Parse("""
+               library QueryLetNarrowing version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values":
+                 [Condition] C
+                   let Onset: C.onset
+                   return if Onset is FHIR.Age then Onset.value else null
+               """));
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1010,27 +977,12 @@ namespace CoreTests
         [TestMethod]
         public void Case_InnerAliasShadowingANarrowedAliasUsesItsOwnValue()
         {
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var patientIds = new Hl7.Cql.Elm.Query
-            {
-                source = [new Hl7.Cql.Elm.AliasedQuerySource { alias = "R", expression = RetrieveOf("Patient") }],
-                @return = new Hl7.Cql.Elm.ReturnClause
-                {
-                    distinct = false,
-                    expression = new Hl7.Cql.Elm.Property { path = "id", scope = "R" },
-                },
-            };
-            var idList = new Hl7.Cql.Elm.ListTypeSpecifier
-            {
-                elementType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "id"),
-            };
-            var shadowed = new Hl7.Cql.Elm.Case
-            {
-                resultTypeSpecifier = idList,
-                caseItem = [new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = patientIds }],
-                @else = new Hl7.Cql.Elm.Null { resultTypeSpecifier = idList },
-            };
-            var elmLibrary = QueryLibrary("ShadowedNarrowing", OnsetsOfConditions(), shadowed);
+            var elmLibrary = OnsetsLibrary("ShadowedNarrowing", """
+                case
+                  when R is FHIR.Age then [Patient] R return R.id
+                  else null
+                end
+                """);
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1190,20 +1142,15 @@ namespace CoreTests
         [TestMethod]
         public void Case_WithAnIsTestAnEarlierOneCovers_DropsTheUnreachableBranch()
         {
-            // case when R is Quantity then 'quantity' when R is Age then 'age' else null: an Age is a
-            // Quantity, so the second branch can never be taken, and a switch arm for it would not
-            // compile (CS8510).
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var covered = new Hl7.Cql.Elm.Case
-            {
-                caseItem =
-                [
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Quantity"), then = StringLiteral("quantity") },
-                    new Hl7.Cql.Elm.CaseItem { when = IsOf(r, "Age"), then = StringLiteral("age") },
-                ],
-                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.StringType.name },
-            };
-            var elmLibrary = QueryLibrary("CoveredCase", OnsetsOfConditions(), covered);
+            // An Age is a Quantity, so the second branch can never be taken, and a switch arm for it
+            // would not compile (CS8510).
+            var elmLibrary = OnsetsLibrary("CoveredCase", """
+                case
+                  when R is FHIR.Quantity then 'quantity'
+                  when R is FHIR.Age then 'age'
+                  else null
+                end
+                """);
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1218,25 +1165,17 @@ namespace CoreTests
         [TestMethod]
         public void If_OnAnIsTestForAValueType_NarrowsToTheValue()
         {
-            // from { 5, 'five' } (as Choice<Integer, String>) R return if R is Integer then R + 1 else null
-            var choice = new Hl7.Cql.Elm.ChoiceTypeSpecifier(Hl7.Cql.Elm.SystemTypes.IntegerType, Hl7.Cql.Elm.SystemTypes.StringType);
-            var values = ListOf(choice, AsType(IntegerLiteral("5"), choice), AsType(StringLiteral("five"), choice));
-            var r = new Hl7.Cql.Elm.AliasRef { name = "R" };
-            var plusOne = new Hl7.Cql.Elm.If
-            {
-                condition = new Hl7.Cql.Elm.Is { operand = r, isTypeSpecifier = Hl7.Cql.Elm.SystemTypes.IntegerType },
-                then = new Hl7.Cql.Elm.Add
-                {
-                    resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name,
-                    operand =
-                    [
-                        AsType(r, Hl7.Cql.Elm.SystemTypes.IntegerType),
-                        IntegerLiteral("1"),
-                    ],
-                },
-                @else = new Hl7.Cql.Elm.Null { resultTypeName = Hl7.Cql.Elm.SystemTypes.IntegerType.name },
-            };
-            var elmLibrary = QueryLibrary("NarrowedValueType", values, plusOne);
+            var elmLibrary = CreateElmLibrary(CqlLibraryString.Parse("""
+               library NarrowedValueType version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values":
+                 from ({ 5 as Choice<Integer, String>, 'five' as Choice<Integer, String> }) R
+                   return if R is Integer then (R as Integer) + 1 else null
+               """));
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1253,6 +1192,25 @@ namespace CoreTests
         /// <summary><c>x is FHIR.<paramref name="fhirType"/></c>.</summary>
         private static Hl7.Cql.Elm.Is IsOf(Hl7.Cql.Elm.Expression operand, string fhirType) =>
             new() { operand = operand, isTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", fhirType) };
+
+        /// <summary>
+        /// A library with one definition, <c>Values</c>, translated from CQL: a query over
+        /// <c>[Condition] X return X.onset</c> aliased <c>R</c>, returning <paramref name="returnExpression"/>
+        /// for each onset.
+        /// </summary>
+        private static Library OnsetsLibrary(string libraryName, string returnExpression) =>
+            CreateElmLibrary(CqlLibraryString.Parse($"""
+               library {libraryName} version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values":
+                 from ([Condition] X return X.onset) R
+                   return
+               {returnExpression}
+               """));
 
         /// <summary><c>[Condition] X return X.onset</c>: a query whose elements are Condition.onset values.</summary>
         private static Hl7.Cql.Elm.Query OnsetsOfConditions() =>
@@ -1316,12 +1274,7 @@ namespace CoreTests
             // SimpleQuantity is a profile of Quantity, and its values are Quantity instances, so both
             // resolve to Quantity. With a string alternative (so the choice itself stays object), the
             // two must yield one type test for Quantity, not two identical ones.
-            const string fhir = "http://hl7.org/fhir";
-            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "SimpleQuantity"),
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Quantity"),
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"));
-            var elmLibrary = QueryLibrary("DedupedAlternatives", RetrieveOf("Patient"), ExtensionValuesAs(choiceType, "value"));
+            var elmLibrary = ExtensionValuesLibrary("DedupedAlternatives", "Choice<FHIR.SimpleQuantity, FHIR.Quantity, FHIR.string>");
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1373,12 +1326,7 @@ namespace CoreTests
             // FHIR positiveInt and unsignedInt have classes of their own, PositiveInt and UnsignedInt,
             // which are not Integers: each value must match an arm for its own class. Both read their
             // value through IValue<int?>, so they share one arm.
-            const string fhir = "http://hl7.org/fhir";
-            var choiceType = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "positiveInt"),
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "unsignedInt"),
-                new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"));
-            var elmLibrary = QueryLibrary("SpecializedIntegers", RetrieveOf("Patient"), ExtensionValuesAs(choiceType, "value"));
+            var elmLibrary = ExtensionValuesLibrary("SpecializedIntegers", "Choice<FHIR.positiveInt, FHIR.unsignedInt, FHIR.string>");
 
             var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
 
@@ -1393,69 +1341,40 @@ namespace CoreTests
         }
 
         /// <summary>
-        /// For each element <c>R</c>: <c>R.extension $this return ($this.value as <paramref name="choice"/>).<paramref name="path"/></c>,
-        /// reading off extension values the ELM declares as <paramref name="choice"/>.
+        /// A library with one definition, <c>Values</c>, translated from CQL: for each patient, the
+        /// value of each extension's value, read as the choice <paramref name="choice"/>.
         /// </summary>
-        private static Hl7.Cql.Elm.Query ExtensionValuesAs(Hl7.Cql.Elm.ChoiceTypeSpecifier choice, string path) =>
-            new()
-            {
-                source =
-                [
-                    new Hl7.Cql.Elm.AliasedQuerySource
-                    {
-                        alias = "$this",
-                        expression = new Hl7.Cql.Elm.Property { path = "extension", source = new Hl7.Cql.Elm.AliasRef { name = "R" } },
-                    },
-                ],
-                @return = new Hl7.Cql.Elm.ReturnClause
-                {
-                    distinct = false,
-                    expression = new Hl7.Cql.Elm.Property
-                    {
-                        path = path,
-                        source = new Hl7.Cql.Elm.As
-                        {
-                            asTypeSpecifier = choice,
-                            resultTypeSpecifier = choice,
-                            operand = new Hl7.Cql.Elm.Property { path = "value", source = new Hl7.Cql.Elm.AliasRef { name = "$this" } },
-                        },
-                    },
-                },
-            };
+        private static Library ExtensionValuesLibrary(string libraryName, string choice) =>
+            CreateElmLibrary(CqlLibraryString.Parse($"""
+               library {libraryName} version '1.0.0'
 
-        /// <summary>The values <see cref="ExtensionValuesAs"/> reads off <paramref name="patient"/>'s extensions.</summary>
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values": [Patient] R return (R.extension E return (E.value as {choice}).value)
+               """));
+
+        /// <summary>The values <see cref="ExtensionValuesLibrary"/> reads off <paramref name="patient"/>'s extensions.</summary>
         private static List<object> ExtensionValuesOf(Func<Bundle, object> invoke, Patient patient) =>
             ((System.Collections.IEnumerable)((System.Collections.IEnumerable)invoke(BundleOf(patient))).Cast<object>().Single()).Cast<object>().ToList();
 
         [TestMethod]
         public void Property_OnChoiceDeclaredInTheElm_DispatchesOnTheDeclaredAlternatives()
         {
-            // The same read as the test above, but typed the way the CQL translator types it: the
-            // choice element carries Choice<Age, Period, Range, string, dateTime> and the value
-            // read carries the sum of the alternatives' value types. The alternatives are taken
-            // from the ELM, not the model, and the result stays object.
-            const string fhir = "http://hl7.org/fhir";
-            const string system = "urn:hl7-org:elm-types:r1";
-            var onsetValue = new Hl7.Cql.Elm.Property
-            {
-                path = "value",
-                resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
-                    new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "decimal"),
-                    new Hl7.Cql.Elm.NamedTypeSpecifier(system, "DateTime"),
-                    new Hl7.Cql.Elm.NamedTypeSpecifier(system, "String")),
-                source = new Hl7.Cql.Elm.Property
-                {
-                    path = "onset",
-                    scope = "R",
-                    resultTypeSpecifier = new Hl7.Cql.Elm.ChoiceTypeSpecifier(
-                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Age"),
-                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Period"),
-                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "Range"),
-                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "string"),
-                        new Hl7.Cql.Elm.NamedTypeSpecifier(fhir, "dateTime")),
-                },
-            };
-            var elmLibrary = QueryLibrary("ElmChoiceValueDispatch", RetrieveOf("Condition"), onsetValue);
+            // The same read as Property_OnChoiceWithDifferentElementTypes_DispatchesToObject, but
+            // translated from CQL: the choice element carries Choice<Age, Period, Range, dateTime,
+            // string> and the value read carries the choice of the alternatives' value types. The
+            // alternatives are taken from the ELM, not the model, and the result stays object.
+            var elmLibrary = CreateElmLibrary(CqlLibraryString.Parse("""
+               library ElmChoiceValueDispatch version '1.0.0'
+
+               using FHIR version '4.0.1'
+
+               context Patient
+
+               define "Values": [Condition] R return R.onset.value
+               """));
 
             var (cSharp, _) = CompileLibrary(elmLibrary, "Values");
 
