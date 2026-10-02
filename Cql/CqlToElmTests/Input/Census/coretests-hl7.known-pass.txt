@@ -1,0 +1,15 @@
+# Libraries in Cql/CoreTests/Input/ELM/HL7 that the .NET translator translates without errors
+# Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.
+# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
+ConceptDefTest-1.0.0
+CqlBooleanTest-1.0.000
+CqlNestedTupleTest-1.0.0
+FHIRHelpers-4.0.1
+FusedOperatorsTest-1.0.0
+ParameterNameTest-1.0.0
+RR23-1.0.0
+TestCodeSystemConceptRetrieve-1.0.0
+TestCodeSystemInclude-1.0.0
+TestRetrieve-1.0.1
+TestRetrieveInclude-1.0.1
+ValueSetExprExample-1.0.0

@@ -1,0 +1,8 @@
+# Translation outcome counts for submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Cql.
+# Checked by TranslatorCensusTest: the test fails when fewer libraries than 'clean' translate without errors.
+# Only counts are kept here because the corpus is licensed content; see README.md.
+# Refresh by copying the candidate file the test writes next to its report over this one.
+total=382
+clean=328
+errors=42
+crash=12
