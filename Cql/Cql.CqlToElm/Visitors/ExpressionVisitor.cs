@@ -35,6 +35,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private string NextId() => LibraryBuilder.NextId();
 
+        /// <summary>
+        /// A construct without a translation becomes a <see cref="Null"/> of type Any that carries an error
+        /// naming the construct, so translation continues and the gap is reported.
+        /// </summary>
+        protected override Expression UnhandledRule(Antlr4.Runtime.ParserRuleContext context) =>
+            new Null()
+                .AddError(MessagingProvider.ConstructNotImplemented(RuleName(context), SourceText(context)))
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.AnyType);
+
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
         // TODO: make a system function & validate it

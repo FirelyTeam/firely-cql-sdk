@@ -47,6 +47,8 @@ namespace Hl7.Cql.CqlToElm
 
         public string CannotResolveCircularReference() =>
              Messages.CannotResolveCircularReference;
+        public string ConstructNotImplemented(string ruleName, string sourceText) =>
+            string.Format(Culture, Messages.ConstructNotImplemented, ruleName, sourceText);
         public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
             string.Format(Culture, Messages.CouldNotResolveContextName, contextName, string.Join(", ", modelNames));
         public string CouldNotResolveFunction(string functionName, params Expression[] arguments) =>
