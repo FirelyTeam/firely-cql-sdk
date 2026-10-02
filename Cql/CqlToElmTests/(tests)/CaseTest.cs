@@ -90,5 +90,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
+        [TestMethod]
+        public void Case_NonBooleanWhen_ReportsExpectedThenFoundType()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(
+                "case when 1 then 2 else 3 end",
+                ["Expected an expression of type 'Boolean', but found an expression of type 'Integer'."]);
+
+            library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
+        }
+
     }
 }

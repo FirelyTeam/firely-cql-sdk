@@ -72,8 +72,8 @@ namespace Hl7.Cql.CqlToElm
         public string NamedTypeRequiredInContext() => Messages.NamedTypeRequiredInContext;
         public string TypeCannotBeCast(TypeSpecifier from, TypeSpecifier to) =>
             string.Format(Culture, Messages.TypeCannotBeCast, from, to);
-        public string TypeFoundIsNotExpected(TypeSpecifier from, TypeSpecifier to) =>
-            string.Format(Culture, Messages.TypeFoundIsNotExpected, from, to);
+        public string TypeFoundIsNotExpected(TypeSpecifier found, TypeSpecifier expected) =>
+            string.Format(Culture, Messages.TypeFoundIsNotExpected, expected, found);
         public string UnexpectedLibraryReference() =>
             Messages.UnexpectedLibraryReference;
         public string UnableToResolveLibrary(string library, string? version = null) =>
