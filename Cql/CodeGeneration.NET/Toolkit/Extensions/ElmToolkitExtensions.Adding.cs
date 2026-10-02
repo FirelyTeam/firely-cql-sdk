@@ -6,10 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.ExceptionServices;
+using System.Threading.Tasks;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -39,7 +42,7 @@ public static partial class ElmToolkitExtensions
     {
         var cqlToolkitResults = cqlToolkit.GetCqlToolkitResults();
 
-        if (libraryPredicate is {} fn)
+        if (libraryPredicate is { } fn)
             cqlToolkitResults = cqlToolkitResults
                 .Where(t => fn(t.libraryIdentifier));
 
@@ -88,19 +91,56 @@ public static partial class ElmToolkitExtensions
         IEnumerable<FileInfo> files)
     {
         var logger = elmToolkit.CreateLogger();
-        var libraries = files
-            .TrySelect(f =>
-            {
-                logger.LogInformation("Loading ELM library from file: {file}", f);
-                var library = ElmLibrary.LoadFromJson(f);
-                return library;
-            },
+        var libraries = LoadElmFilesInParallel(
+            files.ToArray(),
+            logger,
             s => s
                  .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
                  .AddLoggerExceptionHandler(
                      logger,
-                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))); // Log errors
+                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))) // Log errors
+            .Select(t => t.library);
         return elmToolkit.AddElmLibraries(libraries);
+    }
+
+    /// <summary>
+    /// Loads ELM libraries from <paramref name="files"/> in parallel and re-surfaces results and
+    /// exceptions through <paramref name="buildExceptionHandlingStrategy"/> in original file order.
+    /// </summary>
+    private static (FileInfo file, ElmLibrary library)[] LoadElmFilesInParallel(
+        FileInfo[] files,
+        ILogger logger,
+        BatchProcessExceptionHandlingStrategyBuilder<FileInfo>? buildExceptionHandlingStrategy)
+    {
+        var results = new ElmLibrary[files.Length];
+        var failures = new ExceptionDispatchInfo?[files.Length];
+        var parallelOptions = new ParallelOptions
+        {
+            MaxDegreeOfParallelism = Math.Min(4, Environment.ProcessorCount)
+        };
+
+        Parallel.For(0, files.Length, parallelOptions, index =>
+        {
+            var file = files[index];
+            try
+            {
+                logger.LogInformation("Loading ELM library from file: {file}", file);
+                results[index] = ElmLibrary.LoadFromJson(file);
+            }
+            catch (Exception ex)
+            {
+                failures[index] = ExceptionDispatchInfo.Capture(ex);
+            }
+        });
+
+        return files.TrySelectToArray(
+            (file, index) =>
+            {
+                if (failures[index] is { } edi)
+                    edi.Throw();
+                return (file, results[index]);
+            },
+            buildExceptionHandlingStrategy);
     }
 
     /// <summary>
@@ -139,33 +179,33 @@ public static partial class ElmToolkitExtensions
         ElmToolkit elmToolkit,
         AddElmFilesFromDirectoryOptions opt)
     {
-        var files = opt.GetFilesToAdd();
+        var files = opt.GetFilesToAdd().ToArray();
         var logger = elmToolkit.CreateLogger();
         var baseDirectory = opt.Directory.FullName;
 
-        var libraries = files
-            .TrySelect(f =>
-            {
-                logger.LogInformation("Loading ELM library from file: {file}", f);
-                var library = ElmLibrary.LoadFromJson(f);
-                
-                // Track relative path if subdirectory preserver is provided
-                if (opt.SubdirectoryPreserver is not null)
-                {
-                    var relativePath = Path.GetRelativePath(baseDirectory, Path.GetDirectoryName(f.FullName) ?? baseDirectory);
-                    if (relativePath == ".")
-                        relativePath = string.Empty;
-                    opt.SubdirectoryPreserver.AddRelativePath(relativePath, library.VersionedLibraryIdentifier);
-                }
-
-                return library;
-            },
+        var fileLibraryPairs = LoadElmFilesInParallel(
+            files,
+            logger,
             s => s
                  .SetContinuation(elmToolkit.BatchProcessExceptionContinuation)
                  .AddLoggerExceptionHandler(
                      logger,
-                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName))); // Log errors
-        return elmToolkit.AddElmLibraries(libraries);
+                     (fileInfo, logMessage) => logMessage("Could not load ELM library from file: {file}", fileInfo.FullName)));
+
+        // Relative-path tracking is applied sequentially in original file order after the parallel
+        // load (SubdirectoryPreserver's internal dictionary is not thread-safe).
+        if (opt.SubdirectoryPreserver is { } subdirectoryPreserver)
+        {
+            foreach (var (file, library) in fileLibraryPairs)
+            {
+                var relativePath = Path.GetRelativePath(baseDirectory, Path.GetDirectoryName(file.FullName) ?? baseDirectory);
+                if (relativePath == ".")
+                    relativePath = string.Empty;
+                subdirectoryPreserver.AddRelativePath(relativePath, library.VersionedLibraryIdentifier);
+            }
+        }
+
+        return elmToolkit.AddElmLibraries(fileLibraryPairs.Select(t => t.library));
     }
 
     /// <summary>
