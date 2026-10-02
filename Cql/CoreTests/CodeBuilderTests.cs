@@ -480,6 +480,61 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void As_ListOfValueTypedElementsToListOfAny_ConvertsElementWise()
+        {
+            // IEnumerable<T> covariance applies to reference types only, so a whole-list
+            // 'as IEnumerable<object>' over an IEnumerable<int?> is null at run time. The list
+            // must be boxed element-wise instead, and the define must evaluate to the list.
+            var integerType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "Integer");
+            var anyType = new Hl7.Cql.Elm.NamedTypeSpecifier("urn:hl7-org:elm-types:r1", "Any");
+            var listOfAny = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = anyType };
+
+            Hl7.Cql.Elm.Literal Integer(string value) => new()
+            {
+                value = value,
+                valueType = new System.Xml.XmlQualifiedName("{urn:hl7-org:elm-types:r1}Integer"),
+                resultTypeSpecifier = integerType,
+            };
+
+            var elmLibrary = new Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "ListAsAnyTest", version = "1.0.0" },
+                schemaIdentifier = new Hl7.Cql.Elm.VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                usings =
+                [
+                    new Hl7.Cql.Elm.UsingDef { localIdentifier = "FHIR", uri = "http://hl7.org/fhir", version = "4.0.1" },
+                ],
+                statements =
+                [
+                    new Hl7.Cql.Elm.ExpressionDef
+                    {
+                        name = "Values",
+                        context = "Unfiltered",
+                        expression = new Hl7.Cql.Elm.As
+                        {
+                            asTypeSpecifier = listOfAny,
+                            resultTypeSpecifier = listOfAny,
+                            operand = new Hl7.Cql.Elm.List
+                            {
+                                resultTypeSpecifier = new Hl7.Cql.Elm.ListTypeSpecifier { elementType = integerType },
+                                element = [Integer("1"), Integer("2"), Integer("3")],
+                            },
+                        },
+                    },
+                ],
+            };
+
+            var (cSharp, invoke) = CompileLibrary(elmLibrary, "Values");
+
+            Assert.IsFalse(cSharp.Contains("as IEnumerable<object>"), cSharp);
+            StringAssert.Contains(cSharp, "Select<int?, object>", cSharp);
+
+            var result = invoke(BundleOf());
+            Assert.IsNotNull(result, "a List<Integer> widened to List<Any> must not evaluate to null");
+            CollectionAssert.AreEqual(new object[] { 1, 2, 3 }, ((System.Collections.IEnumerable)result).Cast<object>().ToList());
+        }
+
+        [TestMethod]
         public void ScopedProperty_QualifiedPathOnTypedAlias_BindsEverySegmentStatically()
         {
             // The MADiE translator emits a scoped Property whose path is qualified and carries no
