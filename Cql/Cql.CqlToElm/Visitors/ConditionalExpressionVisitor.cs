@@ -80,40 +80,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 })
                 .ToArray();
 
-            var resultTypes = new HashSet<TypeSpecifier>(caseItems
+            // Every branch is coerced to the one type they have in common, so the case has a single
+            // static type: an implicit conversion where one exists, otherwise a choice of the branch types.
+            var returnType = CoercionProvider.FindCompatibleType(caseItems
+                .Where(item => item.then is not null)
                 .Select(item => item.then.resultTypeSpecifier)
-                .Append(@else.resultTypeSpecifier))
-                .Except(new[] { SystemTypes.AnyType })
-                .ToList();
-            TypeSpecifier returnType;
-            if (resultTypes.Count == 0)
-                returnType = SystemTypes.AnyType;
-            if (resultTypes.Count == 1)
-                returnType = resultTypes.Single();
-            else
-                returnType = new ChoiceTypeSpecifier(resultTypes);
-            foreach (var item in caseItems)
+                .Append(@else.resultTypeSpecifier));
+            foreach (var item in caseItems.Where(item => item.then is not null))
             {
-                var then = item.then;
-                var thenCastResult = CoercionProvider.Coerce(then, returnType);
-                if (thenCastResult.Success)
-                {
-                    item.then = thenCastResult.Result;
-                    item.resultTypeSpecifier = item.then.resultTypeSpecifier;
-                }
-                else
-                    item.AddError(MessagingProvider.TypeFoundIsNotExpected(then.resultTypeSpecifier, returnType));
+                item.then = ElmFactory.CoerceBranch(item, item.then, returnType);
+                item.resultTypeSpecifier = item.then.resultTypeSpecifier;
             }
-            var elseCastResult = CoercionProvider.Coerce(@else, returnType);
-            if (elseCastResult.Success)
-                @else = elseCastResult.Result;
-            else
-                @else.AddError(MessagingProvider.TypeFoundIsNotExpected(@else.resultTypeSpecifier, returnType));
+            var @case = (Case)ElmFactory.Case(comparand, caseItems, @else);
+            @case.@else = ElmFactory.CoerceBranch(@case, @else, returnType);
 
-
-            return ElmFactory.Case(comparand, caseItems, @else)
-                             .WithId()
-                             .WithLocator(context.Locator());
+            return @case
+                .WithId()
+                .WithLocator(context.Locator())
+                .WithResultType(returnType);
         }
     }
 }
