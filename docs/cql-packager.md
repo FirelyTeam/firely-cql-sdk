@@ -260,6 +260,40 @@ All commands share the following logging options:
 
 Log levels: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, `None`
 
+## ELM Attachment Formatting
+
+Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. How that JSON is
+formatted is set in the `Packaging` section of the settings file (there is no command-line flag):
+
+```jsonc
+"Packaging": {
+  "ElmAttachmentFormatting": "Passthrough"
+}
+```
+
+| Value | Effect |
+|-------|--------|
+| `Passthrough` (default) | Embed the ELM exactly as it was read, without reformatting it |
+| `Indented` | Format the ELM JSON with indentation and line breaks |
+| `Compact` | Format the ELM JSON without indentation, for a smaller attachment |
+
+All three change formatting only, never content. Where a library was read from a file its JSON is reused —
+rewritten only where that is needed — so none of them rebuilds the ELM from the object graph. That rebuild
+walks every ELM node through the polymorphic type resolver and dominated packaging time on large library
+sets. A library built in memory has no source JSON and is serialized with the requested indentation.
+
+Only `Passthrough` reproduces the source file byte for byte. `Indented` and `Compact` rewrite the text, so
+besides whitespace their string escaping may differ from the source.
+
+Reused JSON is not identical to what serializing the graph produces: it keeps empty collections such as
+`annotation` and `signature` that serialization omits, and it lacks what serialization adds —
+`accessLevel` written out explicitly, and `resultTypeSpecifier` derived from a legacy `type`
+discriminator. Parsing either form through this SDK yields an equivalent library, since those corrections
+are applied on load.
+
+Note that `--json-pretty` is a separate setting: it controls indentation of the FHIR resource JSON that
+is written out, not of this embedded attachment.
+
 ## Debug Symbols
 
 The `--debug-symbols` option controls how debug information is generated when producing .NET assemblies:

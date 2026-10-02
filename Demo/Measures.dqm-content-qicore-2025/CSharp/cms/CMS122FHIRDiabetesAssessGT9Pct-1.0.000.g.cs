@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS122FHIRDiabetesAssessGT9Pct", "1.0.000")]
 public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISingleton<CMS122FHIRDiabetesAssessGT9Pct_1_0_000>
 {
@@ -384,7 +384,7 @@ public partial class CMS122FHIRDiabetesAssessGT9Pct_1_0_000 : ILibrary, ISinglet
         bool? m_ = context.Operators.And(j_, l_);
         CqlValueSet n_ = this.Diabetes(context);
         IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        Condition p_(Condition X) => X as Condition;
+        Condition p_(Condition X) => X;
         IEnumerable<Condition> q_ = context.Operators.Select<Condition, Condition>(o_, p_);
         IEnumerable<Condition> r_ = Status_1_15_000.Instance.verified(context, q_);
 

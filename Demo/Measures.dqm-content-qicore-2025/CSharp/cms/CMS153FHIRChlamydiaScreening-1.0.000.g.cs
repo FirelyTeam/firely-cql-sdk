@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS153FHIRChlamydiaScreening", "1.0.000")]
 public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton<CMS153FHIRChlamydiaScreening_1_0_000>
 {
@@ -328,17 +328,17 @@ public partial class CMS153FHIRChlamydiaScreening_1_0_000 : ILibrary, ISingleton
         CqlValueSet a_ = this.Diagnoses_Used_to_Indicate_Sexual_Activity(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         CqlValueSet e_ = this.HIV(context);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, f_ as IEnumerable<Condition>);
+        IEnumerable<Condition> g_ = context.Operators.Union<Condition>(d_, f_);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+        IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_, h_);
         CqlValueSet j_ = this.Complications_of_Pregnancy__Childbirth_and_the_Puerperium(context);
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> l_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, k_ as IEnumerable<Condition>);
+        IEnumerable<Condition> l_ = context.Operators.Union<Condition>(i_, k_);
         IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(l_ as IEnumerable<Condition>, m_ as IEnumerable<Condition>);
+        IEnumerable<Condition> n_ = context.Operators.Union<Condition>(l_, m_);
         IEnumerable<Condition> o_ = Status_1_15_000.Instance.verified(context, n_);
 
         bool? p_(Condition SexualActivityDiagnosis) {

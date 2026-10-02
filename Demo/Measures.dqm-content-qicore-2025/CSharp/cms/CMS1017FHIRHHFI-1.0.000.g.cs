@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS1017FHIRHHFI", "1.0.000")]
 public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRHHFI_1_0_000>
 {
@@ -244,7 +244,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
         Condition b_(ResourceReference EncDiag) {
             IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
             IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_ as IEnumerable<Condition>, e_ as IEnumerable<Condition>);
+            IEnumerable<Condition> f_ = context.Operators.Union<Condition>(d_, e_);
 
             bool? g_(Condition Cond) {
                 Id j_ = Cond?.IdElement;
@@ -648,7 +648,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
         CqlQuantity c_(Observation BMI) {
             DataType y_ = BMI?.Value;
             CqlQuantity z_ = FHIRHelpers_4_4_000.Instance.ToQuantity(context, y_ as Quantity);
-            return z_ as CqlQuantity;
+            return z_;
         }
 
         IEnumerable<CqlQuantity> d_ = context.Operators.WhereSelect<Observation, CqlQuantity>(a_, b_, c_);
@@ -921,7 +921,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, Anticoagulants);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, Anticoagulants);
                 CqlDate ba_ = az_?.low;
@@ -1084,7 +1084,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, AntidepressantMed);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, AntidepressantMed);
                 CqlDate ba_ = az_?.low;
@@ -1177,7 +1177,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, BPMed);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, BPMed);
                 CqlDate ba_ = az_?.low;
@@ -1270,7 +1270,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, CNSMed);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, CNSMed);
                 CqlDate ba_ = az_?.low;
@@ -1363,7 +1363,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, DiureticMed);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, DiureticMed);
                 CqlDate ba_ = az_?.low;
@@ -1456,7 +1456,7 @@ public partial class CMS1017FHIRHHFI_1_0_000 : ILibrary, ISingleton<CMS1017FHIRH
                 bool? au_ = context.Operators.And(al_, at_);
                 bool? av_ = context.Operators.Or(ak_, au_);
                 bool? aw_ = context.Operators.And(ag_, av_);
-                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed as MedicationRequest);
+                bool? ax_ = QICoreCommon_4_0_000.Instance.isCommunity(context, OpioidMed);
                 bool? ay_ = context.Operators.And(aw_, ax_);
                 CqlInterval<CqlDate> az_ = CumulativeMedicationDuration_6_0_000.Instance.medicationRequestPeriod(context, OpioidMed);
                 CqlDate ba_ = az_?.low;

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS177FHIRChildMDDSuicideAssmt", "1.0.000")]
 public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISingleton<CMS177FHIRChildMDDSuicideAssmt_1_0_000>
 {
@@ -223,7 +223,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             }
 
             IEnumerable<Condition> ao_ = context.Operators.Where<Condition>(am_, an_);
-            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(al_ as IEnumerable<Condition>, ao_ as IEnumerable<Condition>);
+            IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(al_, ao_);
             bool? aq_ = context.Operators.Exists<Condition>(ap_);
             bool? ar_ = context.Operators.And(ah_, aq_);
             return ar_;
@@ -455,7 +455,7 @@ public partial class CMS177FHIRChildMDDSuicideAssmt_1_0_000 : ILibrary, ISinglet
             IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-screening-assessment"));
             IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation-clinical-result"));
-            IEnumerable<Observation> h_ = context.Operators.Union<Observation>(f_ as IEnumerable<Observation>, g_ as IEnumerable<Observation>);
+            IEnumerable<Observation> h_ = context.Operators.Union<Observation>(f_, g_);
 
             bool? i_(Observation ObservationSuicideRiskAssmt) {
                 Period k_ = MDDEncounter?.Period;

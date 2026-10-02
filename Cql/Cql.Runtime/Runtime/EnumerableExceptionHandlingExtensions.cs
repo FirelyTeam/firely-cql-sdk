@@ -20,15 +20,108 @@ internal static class EnumerableExceptionHandlingExtensions
     public static int TryForEach<T>(
         this IEnumerable<T> inputs,
         Action<T> withValue,
-        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null) =>
-        inputs.TrySelect(
-                  input =>
-                  {
-                      withValue(input);
-                      return 0;
-                  },
-                  buildExceptionHandlingStrategy)
-              .Count();
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null)
+    {
+        var count = 0;
+        var firstException = true;
+        BatchProcessExceptionHandlingStrategy<T> strategy = default;
+        foreach (var input in inputs)
+        {
+            try
+            {
+                withValue(input);
+                count++;
+            }
+            catch (Exception e)
+            {
+                EnrichException<T, int>(input, e);
+
+                if (firstException)
+                {
+                    firstException = false;
+                    strategy = buildExceptionHandlingStrategy?.Invoke(default) ?? default;
+                }
+
+                strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
+                switch (strategy.ExceptionContinuation)
+                {
+                    case BatchProcessExceptionContinuation.Continue:
+                        continue;
+                    case BatchProcessExceptionContinuation.Break:
+                        return count;
+                    default:
+                        throw;
+                }
+            }
+        }
+
+        return count;
+    }
+
+    public static TReturn[] TrySelectToArray<T, TReturn>(
+        this IReadOnlyCollection<T> inputs,
+        Func<T, TReturn> selector,
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null,
+        YieldValueWhenExceptionIgnoredHandler<T, TReturn>? yieldReturnWhenExceptionIgnored = null) =>
+        inputs.TrySelectToArray(
+            (input, _) => selector(input),
+            buildExceptionHandlingStrategy,
+            yieldReturnWhenExceptionIgnored);
+
+    public static TReturn[] TrySelectToArray<T, TReturn>(
+        this IReadOnlyCollection<T> inputs,
+        Func<T, int, TReturn> selector,
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null,
+        YieldValueWhenExceptionIgnoredHandler<T, TReturn>? yieldReturnWhenExceptionIgnored = null)
+    {
+        var result = new TReturn[inputs.Count];
+        var resultCount = 0;
+        var index = 0;
+        var firstException = true;
+        BatchProcessExceptionHandlingStrategy<T> strategy = default;
+        foreach (var input in inputs)
+        {
+            TReturn next;
+            try
+            {
+                next = selector(input, index);
+            }
+            catch (Exception e)
+            {
+                EnrichException<T, TReturn>(input, e);
+
+                if (firstException)
+                {
+                    firstException = false;
+                    strategy = buildExceptionHandlingStrategy?.Invoke(default) ?? default;
+                }
+
+                strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
+                switch (strategy.ExceptionContinuation, yieldReturnWhenExceptionIgnored)
+                {
+                    case (BatchProcessExceptionContinuation.Continue or BatchProcessExceptionContinuation.Break, { } getYieldValue)
+                        when getYieldValue(input) is (shouldYield: true, {} yieldValue):
+                        next = yieldValue;
+                        break;
+                    case (BatchProcessExceptionContinuation.Continue, null):
+                        index++;
+                        continue;
+                    case (BatchProcessExceptionContinuation.Break, null):
+                        Array.Resize(ref result, resultCount);
+                        return result;
+                    default:
+                        throw;
+                }
+            }
+
+            result[resultCount++] = next;
+            index++;
+        }
+
+        if (resultCount != result.Length)
+            Array.Resize(ref result, resultCount);
+        return result;
+    }
 
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,

@@ -176,6 +176,36 @@ Replace or add attachments in an existing FHIR Library resource. This command is
 **Formatting Options:**
 - `--json-pretty` - Output JSON using multiline and indentation
 
+### ELM Attachment Formatting
+
+Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. Its formatting is
+set in the `Packaging` section of the settings file (there is no command-line flag):
+
+```jsonc
+"Packaging": {
+  "ElmAttachmentFormatting": "Passthrough"
+}
+```
+
+- `Passthrough` (default) - embed the ELM exactly as it was read, without reformatting it.
+- `Indented` - format the ELM JSON with indentation and line breaks.
+- `Compact` - format the ELM JSON without indentation, for a smaller attachment.
+
+All three change formatting only, never content. Where a library was read from a file its JSON is reused,
+so none of them rebuilds the ELM from the object graph — that rebuild walks every ELM node through the
+polymorphic type resolver and dominated packaging time. A library built in memory is serialized with the
+requested indentation. Only `Passthrough` reproduces the source file byte for byte; `Indented` and
+`Compact` rewrite the text, so their string escaping may also differ from the source.
+
+Reused JSON is not identical to what serializing the graph produces: it keeps empty collections such as
+`annotation` and `signature`, and lacks what serialization adds — `accessLevel` written out explicitly,
+and `resultTypeSpecifier` derived from a legacy `type` discriminator. Either form parses back to an
+equivalent library through this SDK.
+
+This is distinct from `--json-pretty`, which controls indentation of the FHIR resource JSON written out.
+
+See [docs/cql-packager.md](../../docs/cql-packager.md) for the full reference.
+
 ### Disclaimer
 
 While this repository includes a .NET-based CQL to ELM converter (accessible via the `cql` command), 

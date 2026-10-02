@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Text.Encodings.Web;
 using Hl7.Cql.Exceptions;
 
 namespace Hl7.Cql.Elm.Serialization;
@@ -85,9 +86,8 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        // I hope (and think) this will clone the original options,
-        // including all cached metadata, otherwise serialization will be a
-        // lot slower than it should be.
+        // The cost here is the walk over the ELM graph through PolymorphicTypeResolver and its modifiers,
+        // not the construction of these options.
         var options = new JsonSerializerOptions(_jsonSerializerOptions)
         {
             WriteIndented = writeIndented
@@ -112,6 +112,46 @@ internal static class LibraryJsonSerializer
 
         var container = new LibraryContainer(library);
         JsonSerializer.Serialize(stream, container, options);
+    }
+
+    /// <summary>
+    /// Re-indents already-serialized ELM JSON without going through the object model.
+    /// </summary>
+    /// <param name="utf8Json">The UTF-8 JSON to reformat.</param>
+    /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    /// <returns>The same JSON content, differing only in insignificant JSON formatting.</returns>
+    /// <remarks>
+    /// This writes the parsed document straight back out, so it costs a single pass over the text rather
+    /// than a walk over every ELM node through <see cref="PolymorphicTypeResolver"/> and its modifiers.
+    /// Unlike <see cref="SerializeToJson"/> it neither drops empty collections nor applies the corrections
+    /// made while reading, so the content is unchanged. The text is not guaranteed byte-identical to the
+    /// input even when <paramref name="writeIndented"/> matches it: whitespace is regenerated, and string
+    /// escaping is normalized to the writer's encoder.
+    /// </remarks>
+    internal static byte[] ReformatUtf8Json(byte[] utf8Json, bool writeIndented)
+    {
+        using var document = JsonDocument.Parse(utf8Json, _jsonDocumentOptions);
+
+        // Indented output is larger than its input, so size for growth rather than making the stream
+        // double its buffer part way through.
+        using var buffer = new MemoryStream(writeIndented ? utf8Json.Length * 2 : utf8Json.Length);
+        var writerOptions = new JsonWriterOptions
+        {
+            Indented = writeIndented,
+            SkipValidation = true,
+            // The default encoder escapes characters that are legal unescaped in JSON, such as '<' and
+            // '&', which appear in the CQL annotations ELM carries. Relaxed escaping keeps the output
+            // closer to the source text; it is safe here because this JSON is embedded as an attachment,
+            // never interpolated into HTML.
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+        };
+
+        using (var writer = new Utf8JsonWriter(buffer, writerOptions))
+        {
+            document.RootElement.WriteTo(writer);
+        }
+
+        return buffer.ToArray();
     }
 
     /// <summary>

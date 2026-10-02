@@ -335,7 +335,8 @@ internal partial class CSharpEmitter
             // that prints in place would be evaluated once per test (and a literal is no operand
             // for a pattern at all).
             var operand = Linearize(typeSwitch.Operand)!;
-            if (!PrintsAsVariable(operand))
+            if (!PrintsAsVariable(operand)
+                || !typeSwitch.Arms.All(arm => CanPatternMatch(GetPrintedType(operand.Node), arm.Narrowed.Type)))
                 operand = Hoist(operand.Code, operand.KeyCode, typeSwitch.Operand);
 
             if (typeSwitch.Arms.All(arm => ArmPrintsInline(arm.Body)) && ArmPrintsInline(typeSwitch.Otherwise))

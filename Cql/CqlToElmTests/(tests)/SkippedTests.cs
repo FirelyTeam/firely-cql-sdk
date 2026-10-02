@@ -102,6 +102,10 @@ namespace Hl7.Cql.CqlToElm.Test
             { "Equal123AndString123", "Equality of two List<Any> whose elements have different types returns null instead of false." },
 
             { "SubstringEmptyAnd0", "Returns null, as the specification requires for a startIndex that is out of range (index 0 of an empty string); the suite expects ''." },
+            { "TimeProperContainsFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },
+            { "TimeProperContainsPrecisionFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },
+            { "TimeProperInFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },
+            { "TimeProperInPrecisionFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },
             { "TestIntersectNull", "The expected result, Interval[5, null), has a null boundary, so comparing it with CQL Equal is null and cannot confirm it; CoreTests.IntervalIntersectNullBoundaryTests checks the boundaries directly." },
         };
     }

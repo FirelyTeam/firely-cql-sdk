@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.1.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS130FHIRColorectalCancerScrn", "1.0.000")]
 public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISingleton<CMS130FHIRColorectalCancerScrn_1_0_000>
 {
@@ -185,7 +185,7 @@ public partial class CMS130FHIRColorectalCancerScrn_1_0_000 : ILibrary, ISinglet
         CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
         IEnumerable<Condition> e_ = Status_1_15_000.Instance.verified(context, d_);
 
         bool? f_(Condition ColorectalCancer) {

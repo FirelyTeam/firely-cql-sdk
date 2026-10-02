@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS69FHIRPCSBMIScreenAndFollowUp", "1.0.000")]
 public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingleton<CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000>
 {
@@ -226,7 +226,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         CqlValueSet a_ = this.Pregnancy_or_Other_Related_Diagnoses(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition PregnancyDiagnosis) {
             CqlInterval<CqlDateTime> k_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, PregnancyDiagnosis);
@@ -407,7 +407,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
             IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> ao_ = context.Operators.Union<Condition>(am_ as IEnumerable<Condition>, an_ as IEnumerable<Condition>);
+            IEnumerable<Condition> ao_ = context.Operators.Union<Condition>(am_, an_);
 
             bool? ap_(Condition OverweightObese) {
                 CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
@@ -458,7 +458,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? k_(Condition OverweightObese) {
-                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese as Condition);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, OverweightObese);
                 CqlDateTime p_ = context.Operators.Start(o_);
                 object q_;
                 DataType ab_ = HighInterventionsPerformed?.Performed;
@@ -595,7 +595,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         bool? b_(Observation HighBMI) {
             IEnumerable<object> d_ = this.High_BMI_Interventions_Ordered(context);
             IEnumerable<Procedure> e_ = this.High_BMI_Interventions_Performed(context);
-            IEnumerable<object> f_ = context.Operators.Union<object>(d_ as IEnumerable<object>, e_ as IEnumerable<object>);
+            IEnumerable<object> f_ = context.Operators.Union<object>(d_, e_ as IEnumerable<object>);
 
             bool? g_(object HighBMIInterventions) {
                 object i_;
@@ -758,7 +758,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             bool? al_ = context.Operators.ConceptsInValueSet(aj_, ak_);
             IEnumerable<Condition> am_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> ao_ = context.Operators.Union<Condition>(am_ as IEnumerable<Condition>, an_ as IEnumerable<Condition>);
+            IEnumerable<Condition> ao_ = context.Operators.Union<Condition>(am_, an_);
 
             bool? ap_(Condition UnderweightDiagnosis) {
                 CqlInterval<CqlDateTime> at_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
@@ -817,8 +817,8 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
             IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
 
             bool? p_(Condition UnderweightDiagnosis) {
-                bool? t_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis as Condition);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis as Condition);
+                bool? t_ = QICoreCommon_4_0_000.Instance.isHealthConcern(context, UnderweightDiagnosis);
+                CqlInterval<CqlDateTime> u_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, UnderweightDiagnosis);
                 CqlDateTime v_ = context.Operators.Start(u_);
                 object w_;
                 DataType an_ = LowInterventionsPerformed?.Performed;
@@ -1010,7 +1010,7 @@ public partial class CMS69FHIRPCSBMIScreenAndFollowUp_1_0_000 : ILibrary, ISingl
         bool? b_(Observation LowBMI) {
             IEnumerable<object> d_ = this.Low_BMI_Interventions_Ordered(context);
             IEnumerable<Procedure> e_ = this.Low_BMI_Interventions_Performed(context);
-            IEnumerable<object> f_ = context.Operators.Union<object>(d_ as IEnumerable<object>, e_ as IEnumerable<object>);
+            IEnumerable<object> f_ = context.Operators.Union<object>(d_, e_ as IEnumerable<object>);
 
             bool? g_(object LowBMIInterventions) {
                 object i_;

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.2.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("PalliativeCare", "1.18.000")]
 public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCare_1_18_000>
 {
@@ -109,7 +109,7 @@ public partial class PalliativeCare_1_18_000 : ILibrary, ISingleton<PalliativeCa
         CqlValueSet g_ = this.Palliative_Care_Diagnosis(context);
         IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(h_ as IEnumerable<Condition>, i_ as IEnumerable<Condition>);
+        IEnumerable<Condition> j_ = context.Operators.Union<Condition>(h_, i_);
         IEnumerable<Condition> k_ = Status_1_15_000.Instance.verified(context, j_);
 
         bool? l_(Condition PalliativeDiagnosis) {
