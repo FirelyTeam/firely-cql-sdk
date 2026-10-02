@@ -160,12 +160,17 @@ namespace CoreTests
             Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-15", "2012-01-25"), Closed("2012-01", "2012-01-14"), null));
 
         [TestMethod]
-        public void Meets_AtAnExplicitPrecision_ComparesMixedPrecisionBoundariesAtThatPrecision()
+        public void Meets_AtAnExplicitPrecision_HoldsWhenEitherSpecificationFormMatchesAtThatPrecision()
         {
-            // At month precision 2012-01-14 and 2012-01 are the same month, so the intervals meet.
+            // The day after 2012-01-14 is in the same month as 2012-01: the start is the successor of the end.
             Assert.AreEqual(true, Context.Operators.Meets(Closed("2012-01-07", "2012-01-14"), Closed("2012-01", "2012-01-25"), "month"));
             Assert.AreEqual(true, Context.Operators.MeetsBefore(Closed("2012-01-07", "2012-01-14"), Closed("2012-01", "2012-01-25"), "month"));
             Assert.AreEqual(true, Context.Operators.MeetsAfter(Closed("2012-01", "2012-01-25"), Closed("2012-01-07", "2012-01-14"), "month"));
+            // The month before 2012-01 is December: the end is the predecessor of the start.
+            Assert.AreEqual(true, Context.Operators.Meets(Closed("2011-12-07", "2011-12-14"), Closed("2012-01", "2012-01-25"), "month"));
+            Assert.AreEqual(true, Context.Operators.MeetsBefore(Closed("2011-12-07", "2011-12-14"), Closed("2012-01", "2012-01-25"), "month"));
+            // Neither form: the day after 2011-11-14 is in November, the month before 2012-01 is December.
+            Assert.AreEqual(false, Context.Operators.Meets(Closed("2011-11-07", "2011-11-14"), Closed("2012-01", "2012-01-25"), "month"));
         }
 
         [TestMethod]
