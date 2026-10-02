@@ -77,7 +77,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
       5.3.2.2.3 **Patch version** (x.y.z.0): Bug fixes that don't change the generated API
 
-5.3.2.3 **Check compatibility**: Ensure the current `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`, currently `LibraryInvoker.6.0.cs`)
+5.3.2.3 **Check compatibility**: Ensure the applicable `LibraryInstanceInvoker_<major>_<minor>.SupportsVersion` covers the new version (check `MinSupportedGeneratorToolVersion` and `FirstUnsupportedGeneratorToolVersion` in `Cql/Cql.Invocation/Toolkit/Internal/LibraryInvoker.<major>.<minor>.cs`)
 
 5.3.2.4 **Create new invoker if needed**: For major version changes, a new `LibraryInstanceInvoker_X_Y` may be required
 
