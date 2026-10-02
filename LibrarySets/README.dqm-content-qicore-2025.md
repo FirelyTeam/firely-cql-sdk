@@ -1,34 +1,52 @@
-# DQM Content QICore 2025
+# 1. DQM Content QICore 2025
 
 This library set contains CQL and ELM files from the Digital Quality Measures (DQM) Content QICore 2025 repository.
 
-## About
+## 1.1. About
 
 This content represents quality measures and clinical decision support logic written in Clinical Quality Language (CQL) and compiled to Expression Logical Model (ELM) format, based on the QICore profile of FHIR.
 
-## Modifications
+## 1.2. Layout
+
+The library set lives in [dqm-content-qicore-2025/](dqm-content-qicore-2025/):
+
+| Folder | Contents |
+|--------|----------|
+| `Cql/` | One `.cql` file per library, copied from the source repository's `input/cql` tree, with the patches listed under [1.3. Modifications](#13-modifications) applied. Each patched line carries a `Modified by sync-dqm-2025.ps1` comment, and some patched files also keep their unpatched copy next to them as `<name>.cql.original`. |
+| `Elm/` | One ELM JSON file per library in `Cql/`, flat, named after the library (`<name>.json`). `sync-dqm-2025.ps1` compiles them from `Cql/` with the Java reference translator. There are no subfolders. |
+| `Replaced/` | The packaged `CMS56FHIRFuncStatHipReplacement` FHIR Library resource that the packager's `extract-library-attachments` and [`replace-library-attachments`](../docs/cql-packager.md#replace-library-attachments--update-a-fhir-library) launch profiles in [launchSettings.json](../Cql/PackagerCLI/Properties/launchSettings.json) read. `.json.original` is the same resource with its original `contained` parameters. |
+| `Extracted/` | The CQL, ELM and C# attachments of that resource, unpacked by the packager's [`extract-library-attachments`](../docs/cql-packager.md#extract-library-attachments--unpack-a-fhir-library) command. `Extracted/CSharp/` is the golden file for `CSharpGenerationGoldenTests` in `Cql/CoreTests`. |
+
+Consumers read `Cql/` and `Elm/`:
+[Demo/Measures.dqm-content-qicore-2025](../Demo/Measures.dqm-content-qicore-2025/Measures.dqm-content-qicore-2025.csproj)
+includes `Cql/*` and `Elm/*`, and the `Cql/CoreTests` tests load libraries from `Elm/` by name.
+
+`sync-dqm-2025.ps1` deletes and recreates the whole `dqm-content-qicore-2025/` folder, so it
+regenerates `Cql/` and `Elm/` but not `Extracted/` or `Replaced/`; restore those two from git
+after a sync.
+
+## 1.3. Modifications
 
 Manual changes were made to the following files after copying from the source repository:
 
-### QICoreCommon.cql
+### 1.3.1. QICoreCommon.cql
 Addresses C# code generator issues:
 1. Added explicit `as DateTime` type casts in the `ToAbatementInterval` function definition
 2. Added explicit `as DateTime` type casts in the `abatementInterval` function definition
 
 These changes were necessary to resolve type inference issues in the CQL-to-ELM translator.
 
-### CMS69FHIRPCSBMIScreenAndFollowUp.cql
+### 1.3.2. CMS69FHIRPCSBMIScreenAndFollowUp.cql
 Fixed a syntax error in the `ObservationCancelled` query definition.
-Key structural change example from the `ToAbatementInterval` function:
 
-## Source
+## 1.4. Source
 
 The CQL and ELM files in this library set are sourced from:
-- **Repository/Path**: [cqframework/dqm-content-qicore-2025/tree/master/input/cql](https://github.com/cqframework/dqm-content-qicore-2025[link text](https://github.com/cqframework/dqm-content-qicore-2025/tree/master/input/cql))
+- **Repository/Path**: [cqframework/dqm-content-qicore-2025/tree/master/input/cql](https://github.com/cqframework/dqm-content-qicore-2025/tree/master/input/cql)
 - **Commit ID**: `c89ea1a7`
 - **Commit Date**: 2026-01-14
 
-## Value set corpus sync
+## 1.5. Value set corpus sync
 
 Besides the CQL/ELM sync, `sync-dqm-2025.ps1` also repairs the integration runner's
 value set corpus (`IntegrationRunner/Test Data/Value Sets` in the
