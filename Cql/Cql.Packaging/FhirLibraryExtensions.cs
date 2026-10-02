@@ -2,6 +2,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 
@@ -71,7 +72,8 @@ internal static class FhirLibraryExtensions
             IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
             ElmLibrarySet elmLibrarySet,
             ResourceCanonicalBuilder resourceCanonicalBuilder,
-            SysDateTime? elmFileLastWriteTimeUtc = null)
+            SysDateTime? elmFileLastWriteTimeUtc = null,
+            ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough)
         {
             switch (elmLibrary, elmBytes)
             {
@@ -81,7 +83,23 @@ internal static class FhirLibraryExtensions
                     elmLibrary = ElmLibrary.ParseFromJson(Encoding.UTF8.GetString(elmBytes));
                     break;
                 case (not null, null):
-                    elmBytes = Encoding.UTF8.GetBytes(elmLibrary.SerializeToJson(true));
+                    // Rebuilding the JSON from the object graph walks every ELM node through the
+                    // polymorphic resolver and its modifiers, which dominates packaging time. Passthrough
+                    // reuses the bytes the library was read from and skips that entirely.
+                    elmBytes = elmAttachmentFormatting switch
+                    {
+                        // Copied, not aliased: this array becomes Attachment.Data on a resource handed to
+                        // the caller, while the library keeps its copy for any later packaging of it.
+                        ElmAttachmentFormatting.Passthrough when elmLibrary.SourceJsonUtf8 is { } sourceJson => sourceJson.ToArray(),
+
+                        // Passthrough falls through to here when the library has no source JSON to pass on.
+                        ElmAttachmentFormatting.Passthrough or ElmAttachmentFormatting.Indented => elmLibrary.ToJsonUtf8(writeIndented: true),
+                        ElmAttachmentFormatting.Compact => elmLibrary.ToJsonUtf8(writeIndented: false),
+                        _ => throw new ArgumentOutOfRangeException(
+                                 nameof(elmAttachmentFormatting),
+                                 elmAttachmentFormatting,
+                                 $"Unknown {nameof(ElmAttachmentFormatting)} value."),
+                    };
                     break;
             }
 

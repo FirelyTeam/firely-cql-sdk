@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("FHIRHelpers", "4.4.000")]
 public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_000>
 {
@@ -402,162 +402,40 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     [CqlFunctionDefinition("ToValue")]
     [CqlTag("description", "Converts the given value to a CQL value using the appropriate accessor or conversion function.")]
     [CqlTag("comment", "TODO: document conversion")]
-    public object ToValue(CqlContext context, object value)
+    public object ToValue(CqlContext context, object value) =>
+    value switch
     {
-        if (value is Base64Binary)
-        {
-            byte[] a_ = (value as Base64Binary)?.Value;
-            string b_ = context.Operators.Convert<string>(a_);
-            return b_;
-        }
-        else if (value is FhirBoolean)
-        {
-            bool? c_ = (value as FhirBoolean)?.Value;
-            return c_;
-        }
-        else if (value is Canonical)
-        {
-            string d_ = (value as Canonical)?.Value;
-            return d_;
-        }
-        else if (value is Code)
-        {
-            string e_ = (value as Code)?.Value;
-            return e_;
-        }
-        else if (value is Date)
-        {
-            string f_ = (value as Date)?.Value;
-            CqlDate g_ = context.Operators.ConvertStringToDate(f_);
-            return g_;
-        }
-        else if (value is FhirDateTime)
-        {
-            CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(value as FhirDateTime);
-            return h_;
-        }
-        else if (value is FhirDecimal)
-        {
-            decimal? i_ = (value as FhirDecimal)?.Value;
-            return i_;
-        }
-        else if (value is Id)
-        {
-            string j_ = (value as Id)?.Value;
-            return j_;
-        }
-        else if (value is Instant)
-        {
-            DateTimeOffset? k_ = (value as Instant)?.Value;
-            CqlDateTime l_ = context.Operators.Convert<CqlDateTime>(k_);
-            return l_;
-        }
-        else if (value is Integer)
-        {
-            int? m_ = (value as Integer)?.Value;
-            return m_;
-        }
-        else if (value is Markdown)
-        {
-            string n_ = (value as Markdown)?.Value;
-            return n_;
-        }
-        else if (value is Oid)
-        {
-            string o_ = (value as Oid)?.Value;
-            return o_;
-        }
-        else if (value is PositiveInt)
-        {
-            int? p_ = (value as PositiveInt)?.Value;
-            return p_;
-        }
-        else if (value is FhirString)
-        {
-            string q_ = (value as FhirString)?.Value;
-            return q_;
-        }
-        else if (value is Time)
-        {
-            string r_ = (value as Time)?.Value;
-            CqlTime s_ = context.Operators.ConvertStringToTime(r_);
-            return s_;
-        }
-        else if (value is UnsignedInt)
-        {
-            int? t_ = (value as UnsignedInt)?.Value;
-            return t_;
-        }
-        else if (value is FhirUri)
-        {
-            string u_ = (value as FhirUri)?.Value;
-            return u_;
-        }
-        else if (value is FhirUrl)
-        {
-            string v_ = (value as FhirUrl)?.Value;
-            return v_;
-        }
-        else if (value is Uuid)
-        {
-            string w_ = (value as Uuid)?.Value;
-            return w_;
-        }
-        else if (value is Age)
-        {
-            CqlQuantity x_ = this.ToQuantity(context, value as Age);
-            return x_;
-        }
-        else if (value is CodeableConcept)
-        {
-            CqlConcept y_ = this.ToConcept(context, value as CodeableConcept);
-            return y_;
-        }
-        else if (value is Coding)
-        {
-            CqlCode z_ = this.ToCode(context, value as Coding);
-            return z_;
-        }
-        else if (value is Count)
-        {
-            CqlQuantity aa_ = this.ToQuantity(context, value as Count);
-            return aa_;
-        }
-        else if (value is Distance)
-        {
-            CqlQuantity ab_ = this.ToQuantity(context, value as Distance);
-            return ab_;
-        }
-        else if (value is Duration)
-        {
-            CqlQuantity ac_ = this.ToQuantity(context, value as Duration);
-            return ac_;
-        }
-        else if (value is Quantity)
-        {
-            CqlQuantity ad_ = this.ToQuantity(context, value as Quantity);
-            return ad_;
-        }
-        else if (value is Range)
-        {
-            CqlInterval<CqlQuantity> ae_ = this.ToInterval(context, value as Range);
-            return ae_;
-        }
-        else if (value is Period)
-        {
-            CqlInterval<CqlDateTime> af_ = this.ToInterval(context, value as Period);
-            return af_;
-        }
-        else if (value is Ratio)
-        {
-            CqlRatio ag_ = this.ToRatio(context, value as Ratio);
-            return ag_;
-        }
-        else
-        {
-            return value;
-        }
-    }
+        Base64Binary a_ => context.Operators.Convert<string>(a_.Value),
+        FhirBoolean b_ => b_.Value,
+        Canonical c_ => c_.Value,
+        Code d_ => d_.Value,
+        Date e_ => context.Operators.ConvertStringToDate(e_.Value),
+        FhirDateTime f_ => context.Operators.Convert<CqlDateTime>(f_),
+        FhirDecimal g_ => g_.Value,
+        Id h_ => h_.Value,
+        Instant i_ => context.Operators.Convert<CqlDateTime>(i_.Value),
+        Integer j_ => j_.Value,
+        Markdown k_ => k_.Value,
+        Oid l_ => l_.Value,
+        PositiveInt m_ => m_.Value,
+        FhirString n_ => n_.Value,
+        Time o_ => context.Operators.ConvertStringToTime(o_.Value),
+        UnsignedInt p_ => p_.Value,
+        FhirUri q_ => q_.Value,
+        FhirUrl r_ => r_.Value,
+        Uuid s_ => s_.Value,
+        Age t_ => this.ToQuantity(context, t_),
+        CodeableConcept u_ => this.ToConcept(context, u_),
+        Coding v_ => this.ToCode(context, v_),
+        Count w_ => this.ToQuantity(context, w_),
+        Distance x_ => this.ToQuantity(context, x_),
+        Duration y_ => this.ToQuantity(context, y_),
+        Quantity z_ => this.ToQuantity(context, z_),
+        Range aa_ => this.ToInterval(context, aa_),
+        Period ab_ => this.ToInterval(context, ab_),
+        Ratio ac_ => this.ToRatio(context, ac_),
+        _ => value,
+    };
 
 
     [CqlFunctionDefinition("resolve")]

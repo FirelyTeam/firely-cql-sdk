@@ -43,25 +43,6 @@ partial class CodeBuilderContext
             ? item.impliedAlias
             : null;
 
-    protected CodeExpression GetScopeExpression(string elmAlias)
-    {
-        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
-        if (!Scopes.TryGetValue(normalized, out var kv))
-            throw this.NewExpressionBuildingException(
-                $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
-
-        return kv.expr;
-    }
-
-    protected (CodeExpression, Elm.Element) GetScope(string elmAlias)
-    {
-        var normalized = IdentifierNormalizer.Normalize(elmAlias!)!;
-        if (!Scopes.TryGetValue(normalized, out var kv))
-            throw this.NewExpressionBuildingException(
-                $"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
-        return kv;
-    }
-
     protected bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
 
     protected IPopToken PushScopes(

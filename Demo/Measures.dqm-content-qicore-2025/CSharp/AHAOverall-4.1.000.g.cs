@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("AHAOverall", "4.1.000")]
 public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_000>
 {
@@ -226,7 +226,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
             CqlValueSet f_ = this.Heart_Failure(context);
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_ as IEnumerable<Condition>, h_ as IEnumerable<Condition>);
+            IEnumerable<Condition> i_ = context.Operators.Union<Condition>(g_, h_);
 
             bool? j_(Condition HeartFailure) {
                 CqlInterval<CqlDateTime> l_ = QICoreCommon_4_0_000.Instance.prevalenceInterval(context, HeartFailure);
@@ -293,12 +293,12 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet e_ = this.Moderate_or_Severe_LVSD(context);
         IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+        IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_, g_);
         CqlCode i_ = this.Left_ventricular_systolic_dysfunction__disorder_(context);
         IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
         IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
         IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(k_ as IEnumerable<Condition>, l_ as IEnumerable<Condition>);
+        IEnumerable<Condition> m_ = context.Operators.Union<Condition>(k_, l_);
 
         bool? n_(Condition LVSDDiagnosis) {
             CodeableConcept ad_ = LVSDDiagnosis?.Severity;
@@ -370,7 +370,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet a_ = this.Heart_Transplant_Complications(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition HeartTransplantComplications) {
             IEnumerable<Encounter> i_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
@@ -511,7 +511,7 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
         CqlValueSet a_ = this.Left_Ventricular_Assist_Device_Complications(context);
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
         IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_ as IEnumerable<Condition>, c_ as IEnumerable<Condition>);
+        IEnumerable<Condition> d_ = context.Operators.Union<Condition>(b_, c_);
 
         bool? e_(Condition LVADComplications) {
             IEnumerable<Encounter> i_ = this.Heart_Failure_Outpatient_Encounter_with_History_of_Moderate_or_Severe_LVSD(context);
@@ -1145,34 +1145,22 @@ public partial class AHAOverall_4_1_000 : ILibrary, ISingleton<AHAOverall_4_1_00
     [CqlFunctionDefinition("TimingBoundToInterval")]
     public CqlInterval<CqlDateTime> TimingBoundToInterval(CqlContext context, CqlDateTime startDate, object choice)
     {
-        if (choice is CqlInterval<CqlDateTime>)
+        if (choice is CqlInterval<CqlDateTime> a_)
         {
-            return choice as CqlInterval<CqlDateTime>;
+            return a_;
         }
-        else if (choice is CqlInterval<CqlQuantity>)
+        else if (choice is CqlInterval<CqlQuantity> b_)
         {
-            object c_ = choice switch
-            {
-                CqlInterval<CqlDateTime> a_ => a_.low,
-                CqlInterval<CqlQuantity> b_ => b_.low,
-                _ => null,
-            };
-            CqlDateTime d_ = context.Operators.Add(startDate, c_ as CqlQuantity);
-            object g_ = choice switch
-            {
-                CqlInterval<CqlDateTime> e_ => e_.high,
-                CqlInterval<CqlQuantity> f_ => f_.high,
-                _ => null,
-            };
-            CqlDateTime h_ = context.Operators.Add(startDate, g_ as CqlQuantity);
-            CqlInterval<CqlDateTime> i_ = context.Operators.Interval(d_, h_, true, true);
-            return i_;
+            CqlDateTime d_ = context.Operators.Add(startDate, b_.low);
+            CqlDateTime e_ = context.Operators.Add(startDate, b_.high);
+            CqlInterval<CqlDateTime> f_ = context.Operators.Interval(d_, e_, true, true);
+            return f_;
         }
-        else if (choice is CqlQuantity)
+        else if (choice is CqlQuantity c_)
         {
-            CqlDateTime j_ = context.Operators.Add(startDate, choice as CqlQuantity);
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(startDate, j_, true, false);
-            return k_;
+            CqlDateTime g_ = context.Operators.Add(startDate, c_);
+            CqlInterval<CqlDateTime> h_ = context.Operators.Interval(startDate, g_, true, false);
+            return h_;
         }
         else
         {

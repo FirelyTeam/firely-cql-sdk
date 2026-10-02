@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("CMS996FHIRAptTxforSTEMI", "2.0.000")]
 public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS996FHIRAptTxforSTEMI_2_0_000>
 {
@@ -375,7 +375,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? h_ = context.Operators.ConceptsInValueSet(f_, g_);
             IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> k_ = context.Operators.Union<Condition>(i_ as IEnumerable<Condition>, j_ as IEnumerable<Condition>);
+            IEnumerable<Condition> k_ = context.Operators.Union<Condition>(i_, j_);
             IEnumerable<Condition> l_ = Status_1_15_000.Instance.verified(context, k_);
 
             bool? m_(Condition DxSTEMI) {
@@ -567,7 +567,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
             IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
-            Condition u_(Condition X) => X as Condition;
+            Condition u_(Condition X) => X;
             IEnumerable<Condition> v_ = context.Operators.Select<Condition, Condition>(t_, u_);
             IEnumerable<Condition> w_ = Status_1_15_000.Instance.verified(context, v_);
 
@@ -683,7 +683,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_, g_);
             IEnumerable<Condition> i_ = Status_1_15_000.Instance.verified(context, h_);
 
             bool? j_(Condition LongTermAnticoagulant) {
@@ -762,7 +762,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Condition> ac_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> ad_ = context.Operators.Union<Condition>(aa_, ac_);
             IEnumerable<Condition> ae_ = context.Operators.Union<Condition>(x_, ad_);
-            Condition af_(Condition X) => X as Condition;
+            Condition af_(Condition X) => X;
             IEnumerable<Condition> ag_ = context.Operators.Select<Condition, Condition>(ae_, af_);
             IEnumerable<Condition> ah_ = Status_1_15_000.Instance.verified(context, ag_);
 
@@ -1108,7 +1108,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             CqlValueSet i_ = this.Active_Peptic_Ulcer(context);
             IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
-            Condition l_(Condition X) => X as Condition;
+            Condition l_(Condition X) => X;
             IEnumerable<Condition> m_ = context.Operators.Select<Condition, Condition>(k_, l_);
             IEnumerable<Condition> n_ = Status_1_15_000.Instance.verified(context, m_);
 
@@ -1348,7 +1348,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<Observation> r_ = Status_1_15_000.Instance.isAssessmentPerformed(context, q_);
 
             bool? s_(Observation HospiceAssessment) {
-                DataType bz_ = (HospiceAssessment as Observation)?.Value;
+                DataType bz_ = HospiceAssessment?.Value;
                 object ca_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bz_);
                 CqlCode cb_ = this.Yes__qualifier_value_(context);
                 CqlConcept cc_ = context.Operators.ConvertCodeToConcept(cb_);
@@ -1518,7 +1518,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             bool? af_ = context.Operators.Or(aa_, ae_);
             CqlValueSet ag_ = this.Hospice_Diagnosis(context);
             IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
-            Condition ai_(Condition X) => X as Condition;
+            Condition ai_(Condition X) => X;
             IEnumerable<Condition> aj_ = context.Operators.Select<Condition, Condition>(ah_, ai_);
             IEnumerable<Condition> ak_ = Status_1_15_000.Instance.verified(context, aj_);
 
@@ -1640,7 +1640,7 @@ public partial class CMS996FHIRAptTxforSTEMI_2_0_000 : ILibrary, ISingleton<CMS9
             IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
             IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-problems-health-concerns"));
             IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition-encounter-diagnosis"));
-            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_ as IEnumerable<Condition>, g_ as IEnumerable<Condition>);
+            IEnumerable<Condition> h_ = context.Operators.Union<Condition>(f_, g_);
             IEnumerable<Condition> i_ = Status_1_15_000.Instance.verified(context, h_);
 
             bool? j_(Condition TPA) {

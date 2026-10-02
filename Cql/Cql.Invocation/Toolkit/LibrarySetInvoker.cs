@@ -65,12 +65,12 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     /// <summary>
     /// Gets the minimum generator tool version that this invoker supports for executing generated code.
     /// </summary>
-    public static readonly Version MinSupportedGeneratorToolVersion = LibraryInstanceInvoker_5_0.MinSupportedGeneratorToolVersion;
+    public static readonly Version MinSupportedGeneratorToolVersion = LibraryInstanceInvoker_6_0.MinSupportedGeneratorToolVersion;
 
     /// <summary>
     /// Gets the first generator tool version that this invoker does not support for executing generated code.
     /// </summary>
-    public static readonly Version FirstUnsupportedGeneratorToolVersion = LibraryInstanceInvoker_5_0.FirstUnsupportedGeneratorToolVersion;
+    public static readonly Version FirstUnsupportedGeneratorToolVersion = LibraryInstanceInvoker_6_0.FirstUnsupportedGeneratorToolVersion;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.

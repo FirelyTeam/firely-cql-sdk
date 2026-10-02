@@ -70,7 +70,6 @@ internal partial class CqlOperatorsBinder(
             ("Coalesce"         ,0 , >=1)  => Coalesce(args[0]),
             ("Flatten"          ,0 , >=1)  => Flatten(args[0]),
             ("InList"           ,0 , >=2)  => InList(args[0], args[1]),
-            ("LateBoundProperty",0 , >=3)  => LateBoundProperty(args[0], args[1], args[2]),
             ("Union"            ,0 , >=2)  => Union(args[0], args[1]),
             ("ListUnion"        ,0 , >=2)  => Union(args[0], args[1]),
             ("ResolveValueSet"  ,0 , >=1)  => ResolveValueSet(args[0]),

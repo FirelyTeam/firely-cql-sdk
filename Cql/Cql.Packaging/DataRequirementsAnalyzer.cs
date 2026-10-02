@@ -25,27 +25,54 @@ namespace Hl7.Cql.Packaging;
 internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary focusLibrary)
 {
     /// <summary>
+    /// Caches the direct, non-transitive data requirements produced from each library's ELM nodes.
+    /// Entries are scoped to their <see cref="ElmLibrarySet"/> and remain alive only while their keys are alive.
+    /// </summary>
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<
+        ElmLibrarySet,
+        System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>>> _directRequirementsCache = new();
+
+    /// <summary>
     /// Visits the ELM in the LibrarySet and extracts the DataRequirements from it.
     /// </summary>
     public IReadOnlyCollection<DataRequirement> Analyze()
     {
         var result = new List<DataRequirement>();
-        Visit(focusLibrary, result);
+        Visit(focusLibrary, result, []);
         result = Combine(result);
         return result;
     }
 
-    private void Visit(ElmLibrary library, List<DataRequirement> allRequirements)
+    private void Visit(ElmLibrary library, List<DataRequirement> allRequirements, HashSet<ElmLibrary> visited)
     {
-        var walker = new Elm.ElmTreeWalker(n => Visit(library, allRequirements, n));
-        walker.Start(library);
+        if (!visited.Add(library))
+            return;
+
+        allRequirements.AddRange(GetDirectRequirements(library).Select(r => (DataRequirement)r.DeepCopy()));
 
         var dependencies = librarySet.GetLibraryDependencies(library);
         foreach (var dependency in dependencies)
         {
-            Visit(dependency, allRequirements);
+            Visit(dependency, allRequirements, visited);
         }
     }
+
+    /// <summary>
+    /// Gets (computing and caching if necessary) the data requirements produced by walking only
+    /// <paramref name="library"/>'s own ELM nodes -- not its dependencies. Safe to call
+    /// concurrently for different libraries; <see cref="System.Runtime.CompilerServices.ConditionalWeakTable{TKey,TValue}.GetValue"/>
+    /// guarantees a single factory result is published per key even if the factory races.
+    /// </summary>
+    private List<DataRequirement> GetDirectRequirements(ElmLibrary library) =>
+        _directRequirementsCache.GetValue(librarySet, _ =>
+            new System.Runtime.CompilerServices.ConditionalWeakTable<ElmLibrary, List<DataRequirement>>())
+        .GetValue(library, lib =>
+        {
+            var direct = new List<DataRequirement>();
+            var walker = new Elm.ElmTreeWalker(n => Visit(lib, direct, n));
+            walker.Start(lib);
+            return direct;
+        });
 
     private bool Visit(
         ElmLibrary library,
@@ -99,7 +126,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         }
 
         // Add any properties as mustSupport items
-        dr.MustSupportElement = [..ps.Select(s => new FhirString(s))];
+        dr.MustSupportElement = [.. ps.Select(s => new FhirString(s))];
 
         // Only add the requirement if we don't already have it.
         if (!result.Any(r => r.IsExactly(dr)))
@@ -108,7 +135,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         return true;
     }
 
-    private static EqualityComparer<T> GetComparer<T>() where T:Base =>
+    private static EqualityComparer<T> GetComparer<T>() where T : Base =>
         EqualityComparer<T>.Create((a, b) => a!.IsExactly(b), _ => 0);
 
     internal static List<DataRequirement> Combine(List<DataRequirement> initialDataRequirements)
@@ -119,21 +146,17 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         foreach (var group in grouped)
         {
             var dr = group.First();
-            dr.MustSupportElement = group.SelectMany(g => g.MustSupportElement).ToList();
-            dr.MustSupportElement = dr.MustSupportElement.Distinct(GetComparer<FhirString>()).ToList();
-            dr.CodeFilter = group.SelectMany(g => g.CodeFilter).ToList();
-            dr.CodeFilter = dr.CodeFilter.Distinct(GetComparer<DataRequirement.CodeFilterComponent>()).ToList();
-            dr.ProfileElement = group.SelectMany(g => g.ProfileElement).ToList();
-            dr.ProfileElement = dr.ProfileElement.Distinct(GetComparer<Canonical>()).ToList();
-            dr.DateFilter = group.SelectMany(g => g.DateFilter).ToList();
-            dr.DateFilter = dr.DateFilter.Distinct(GetComparer<DataRequirement.DateFilterComponent>()).ToList();
+            dr.MustSupportElement = group.SelectMany(g => g.MustSupportElement).Distinct(GetComparer<FhirString>()).ToList();
+            dr.CodeFilter = group.SelectMany(g => g.CodeFilter).Distinct(GetComparer<DataRequirement.CodeFilterComponent>()).ToList();
+            dr.ProfileElement = group.SelectMany(g => g.ProfileElement).Distinct(GetComparer<Canonical>()).ToList();
+            dr.DateFilter = group.SelectMany(g => g.DateFilter).Distinct(GetComparer<DataRequirement.DateFilterComponent>()).ToList();
 
             result.Add(dr);
         }
 
         return result;
     }
-    
+
     private static string ToReference(Elm.ValueSetDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
     //   private static string ToReference(Elm.CodeSystemDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
 
@@ -142,8 +165,8 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
     {
         /// <summary>
         /// The code filter for a retrieve's terminology, or null when the terminology cannot be
-        /// enumerated statically (an expression reference, a code system), in which case the
-        /// retrieve contributes no code filter.
+        /// enumerated statically (an expression reference, a code system, or an inline expression-backed list),
+        /// in which case the retrieve contributes no code filter.
         /// </summary>
         public DataRequirement.CodeFilterComponent? ToCodeFilterComponent(
             string property,
@@ -183,6 +206,7 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
                     cfc.Code.Add(new Coding { Code = l.value });
                     break;
                 default:
+                    // Unsupported expression type: cannot enumerate terminology statically
                     return null;
             }
 
@@ -193,16 +217,16 @@ internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, ElmLibrary foc
         {
             return toListOperand switch
             {
-                Elm.CodeRef codeRef       => [BuildCoding(codeRef)],
-                Elm.Code code             => [BuildCoding(code)],
+                Elm.CodeRef codeRef => [BuildCoding(codeRef)],
+                Elm.Code code => [BuildCoding(code)],
                 Elm.ConceptRef conceptRef => BuildCodeableConcept(conceptRef).Coding,
-                Elm.Concept concept       => BuildCodeableConcept(concept).Coding,
+                Elm.Concept concept => BuildCodeableConcept(concept).Coding,
                 Elm.Literal literal =>
                     // TODO: no system???
                     [
                         new Coding { Code = literal.value }
                     ],
-                _ => null
+                _ => null  // Unsupported expression type: cannot enumerate codes statically
             };
         }
 

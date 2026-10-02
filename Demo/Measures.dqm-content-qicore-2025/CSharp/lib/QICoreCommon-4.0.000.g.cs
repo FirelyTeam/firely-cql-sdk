@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "5.3.2.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "6.0.0.0")]
 [CqlLibrary("QICoreCommon", "4.0.000")]
 public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_0_000>
 {
@@ -861,60 +861,48 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("deprecated", "This function is deprecated. Use the fluent function `toInterval()` instead")]
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, object choice)
     {
-        if (choice is CqlDateTime)
+        if (choice is CqlDateTime a_)
         {
-            CqlInterval<CqlDateTime> a_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
-            return a_;
+            CqlInterval<CqlDateTime> f_ = context.Operators.Interval(a_, a_, true, true);
+            return f_;
         }
-        else if (choice is CqlInterval<CqlDateTime>)
+        else if (choice is CqlInterval<CqlDateTime> b_)
         {
-            return choice as CqlInterval<CqlDateTime>;
+            return b_;
         }
-        else if (choice is CqlQuantity)
+        else if (choice is CqlQuantity c_)
         {
-            Patient b_ = this.Patient(context);
-            Date c_ = b_?.BirthDateElement;
-            string d_ = c_?.Value;
-            CqlDate e_ = context.Operators.ConvertStringToDate(d_);
-            CqlDate f_ = context.Operators.Add(e_, choice as CqlQuantity);
-            CqlDateTime g_ = context.Operators.ConvertDateToDateTime(f_);
-            CqlQuantity h_ = context.Operators.Quantity(1m, "year");
-            CqlDate i_ = context.Operators.Add(f_, h_);
-            CqlDateTime j_ = context.Operators.ConvertDateToDateTime(i_);
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(g_, j_, true, false);
-            return k_;
+            Patient g_ = this.Patient(context);
+            Date h_ = g_?.BirthDateElement;
+            string i_ = h_?.Value;
+            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+            CqlDate k_ = context.Operators.Add(j_, c_);
+            CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
+            CqlQuantity m_ = context.Operators.Quantity(1m, "year");
+            CqlDate n_ = context.Operators.Add(k_, m_);
+            CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
+            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(l_, o_, true, false);
+            return p_;
         }
-        else if (choice is CqlInterval<CqlQuantity>)
+        else if (choice is CqlInterval<CqlQuantity> d_)
         {
-            Patient l_ = this.Patient(context);
-            Date m_ = l_?.BirthDateElement;
-            string n_ = m_?.Value;
-            CqlDate o_ = context.Operators.ConvertStringToDate(n_);
-            object r_ = choice switch
-            {
-                CqlInterval<CqlDateTime> p_ => p_.low,
-                CqlInterval<CqlQuantity> q_ => q_.low,
-                _ => null,
-            };
-            CqlDate s_ = context.Operators.Add(o_, r_ as CqlQuantity);
-            CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_);
-            object w_ = choice switch
-            {
-                CqlInterval<CqlDateTime> u_ => u_.high,
-                CqlInterval<CqlQuantity> v_ => v_.high,
-                _ => null,
-            };
-            CqlDate x_ = context.Operators.Add(o_, w_ as CqlQuantity);
-            CqlQuantity y_ = context.Operators.Quantity(1m, "year");
-            CqlDate z_ = context.Operators.Add(x_, y_);
-            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
-            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(t_, aa_, true, false);
-            return ab_;
+            Patient q_ = this.Patient(context);
+            Date r_ = q_?.BirthDateElement;
+            string s_ = r_?.Value;
+            CqlDate t_ = context.Operators.ConvertStringToDate(s_);
+            CqlDate u_ = context.Operators.Add(t_, d_.low);
+            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
+            CqlDate w_ = context.Operators.Add(t_, d_.high);
+            CqlQuantity x_ = context.Operators.Quantity(1m, "year");
+            CqlDate y_ = context.Operators.Add(w_, x_);
+            CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
+            CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(v_, z_, true, false);
+            return aa_;
         }
-        else if (choice is Timing)
+        else if (choice is Timing e_)
         {
-            object ac_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
-            return ac_ as CqlInterval<CqlDateTime>;
+            object ab_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+            return ab_ as CqlInterval<CqlDateTime>;
         }
         else
         {
@@ -928,60 +916,48 @@ public partial class QICoreCommon_4_0_000 : ILibrary, ISingleton<QICoreCommon_4_
     [CqlTag("comment", "Normalizes a choice type of DateTime, Quanitty, Interval<DateTime>, or Interval<Quantity> types\nto an equivalent interval. This selection of choice types is a superset of the majority of choice types that are used as possible\nrepresentations for timing-valued elements in QICore, allowing this function to be used across any resource.\nThe input can be provided as a DateTime, Quantity, Interval<DateTime> or Interval<Quantity>.\nThe intent of this function is to provide a clear and concise mechanism to treat single\nelements that have multiple possible representations as intervals so that logic doesn't have to account\nfor the variability. More complex calculations (such as medication request period or dispense period\ncalculation) need specific guidance and consideration. That guidance may make use of this function, but\nthe focus of this function is on single element calculations where the semantics are unambiguous.\nIf the input is a DateTime, the result a DateTime Interval beginning and ending on that DateTime.\nIf the input is a Quantity, the quantity is expected to be a calendar-duration interpreted as an Age,\nand the result is a DateTime Interval beginning on the Date the patient turned that age and ending immediately before one year later.\nIf the input is a DateTime Interval, the result is the input.\nIf the input is a Quantity Interval, the quantities are expected to be calendar-durations interpreted as an Age, and the result\nis a DateTime Interval beginning on the date the patient turned the age given as the start of the quantity interval, and ending\nimmediately before one year later than the date the patient turned the age given as the end of the quantity interval.\nIf the input is a Timing, an error will be thrown indicating that Timing calculations are not implemented. Any other input will reslt in a null DateTime Interval")]
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
     {
-        if (choice is CqlDateTime)
+        if (choice is CqlDateTime a_)
         {
-            CqlInterval<CqlDateTime> a_ = context.Operators.Interval(choice as CqlDateTime, choice as CqlDateTime, true, true);
-            return a_;
+            CqlInterval<CqlDateTime> f_ = context.Operators.Interval(a_, a_, true, true);
+            return f_;
         }
-        else if (choice is CqlInterval<CqlDateTime>)
+        else if (choice is CqlInterval<CqlDateTime> b_)
         {
-            return choice as CqlInterval<CqlDateTime>;
+            return b_;
         }
-        else if (choice is CqlQuantity)
+        else if (choice is CqlQuantity c_)
         {
-            Patient b_ = this.Patient(context);
-            Date c_ = b_?.BirthDateElement;
-            string d_ = c_?.Value;
-            CqlDate e_ = context.Operators.ConvertStringToDate(d_);
-            CqlDate f_ = context.Operators.Add(e_, choice as CqlQuantity);
-            CqlDateTime g_ = context.Operators.ConvertDateToDateTime(f_);
-            CqlQuantity h_ = context.Operators.Quantity(1m, "year");
-            CqlDate i_ = context.Operators.Add(f_, h_);
-            CqlDateTime j_ = context.Operators.ConvertDateToDateTime(i_);
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(g_, j_, true, false);
-            return k_;
+            Patient g_ = this.Patient(context);
+            Date h_ = g_?.BirthDateElement;
+            string i_ = h_?.Value;
+            CqlDate j_ = context.Operators.ConvertStringToDate(i_);
+            CqlDate k_ = context.Operators.Add(j_, c_);
+            CqlDateTime l_ = context.Operators.ConvertDateToDateTime(k_);
+            CqlQuantity m_ = context.Operators.Quantity(1m, "year");
+            CqlDate n_ = context.Operators.Add(k_, m_);
+            CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
+            CqlInterval<CqlDateTime> p_ = context.Operators.Interval(l_, o_, true, false);
+            return p_;
         }
-        else if (choice is CqlInterval<CqlQuantity>)
+        else if (choice is CqlInterval<CqlQuantity> d_)
         {
-            Patient l_ = this.Patient(context);
-            Date m_ = l_?.BirthDateElement;
-            string n_ = m_?.Value;
-            CqlDate o_ = context.Operators.ConvertStringToDate(n_);
-            object r_ = choice switch
-            {
-                CqlInterval<CqlDateTime> p_ => p_.low,
-                CqlInterval<CqlQuantity> q_ => q_.low,
-                _ => null,
-            };
-            CqlDate s_ = context.Operators.Add(o_, r_ as CqlQuantity);
-            CqlDateTime t_ = context.Operators.ConvertDateToDateTime(s_);
-            object w_ = choice switch
-            {
-                CqlInterval<CqlDateTime> u_ => u_.high,
-                CqlInterval<CqlQuantity> v_ => v_.high,
-                _ => null,
-            };
-            CqlDate x_ = context.Operators.Add(o_, w_ as CqlQuantity);
-            CqlQuantity y_ = context.Operators.Quantity(1m, "year");
-            CqlDate z_ = context.Operators.Add(x_, y_);
-            CqlDateTime aa_ = context.Operators.ConvertDateToDateTime(z_);
-            CqlInterval<CqlDateTime> ab_ = context.Operators.Interval(t_, aa_, true, false);
-            return ab_;
+            Patient q_ = this.Patient(context);
+            Date r_ = q_?.BirthDateElement;
+            string s_ = r_?.Value;
+            CqlDate t_ = context.Operators.ConvertStringToDate(s_);
+            CqlDate u_ = context.Operators.Add(t_, d_.low);
+            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
+            CqlDate w_ = context.Operators.Add(t_, d_.high);
+            CqlQuantity x_ = context.Operators.Quantity(1m, "year");
+            CqlDate y_ = context.Operators.Add(w_, x_);
+            CqlDateTime z_ = context.Operators.ConvertDateToDateTime(y_);
+            CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(v_, z_, true, false);
+            return aa_;
         }
-        else if (choice is Timing)
+        else if (choice is Timing e_)
         {
-            object ac_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
-            return ac_ as CqlInterval<CqlDateTime>;
+            object ab_ = context.Operators.Message<object>((object)null, "NOT_IMPLEMENTED", "Error", "Calculation of an interval from a Timing value is not supported");
+            return ab_ as CqlInterval<CqlDateTime>;
         }
         else
         {

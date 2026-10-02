@@ -1,1 +1,7 @@
 #nullable enable
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Compact = 2 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Indented = 1 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Passthrough = 0 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ElmAttachmentFormatting.get -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ElmAttachmentFormatting.init -> void
