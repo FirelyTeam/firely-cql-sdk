@@ -46,6 +46,7 @@ Full rules, including where this deviates from EffVer as published: [docs/versio
 - The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
 - The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
 - The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
+- The [CQL-to-ELM Completion Plan](docs/cql-to-elm-completion-plan.md) measuring the .NET translator against the CQL corpora and laying out the phased work to make it complete.
 
 ### Quick Start: Invoking CQL
 
