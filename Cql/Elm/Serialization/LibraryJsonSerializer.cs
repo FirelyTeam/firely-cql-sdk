@@ -86,9 +86,8 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        // This copy does not carry the source's cached type metadata, but caching one options instance
-        // per WriteIndented value does not speed serialization up either: the cost is the walk over the
-        // ELM graph through PolymorphicTypeResolver and its modifiers, not metadata construction.
+        // The cost here is the walk over the ELM graph through PolymorphicTypeResolver and its modifiers,
+        // not the construction of these options.
         var options = new JsonSerializerOptions(_jsonSerializerOptions)
         {
             WriteIndented = writeIndented

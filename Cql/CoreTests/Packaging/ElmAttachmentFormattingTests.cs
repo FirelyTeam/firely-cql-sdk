@@ -121,6 +121,21 @@ public class ElmAttachmentFormattingTests
     }
 
     /// <summary>
+    /// Configuration binding accepts numeric enum values and a caller can cast one, so a value outside the
+    /// enum has to be rejected rather than quietly treated as one of the defined formats.
+    /// </summary>
+    [TestMethod]
+    public void AnUndefinedFormattingValue_IsRejected()
+    {
+        var elmLibrary = Library.LoadFromJson(ElmFile);
+
+        var ex = Assert.ThrowsException<ArgumentOutOfRangeException>(
+            () => Package(elmLibrary, (ElmAttachmentFormatting)42));
+
+        Assert.AreEqual("elmAttachmentFormatting", ex.ParamName);
+    }
+
+    /// <summary>
     /// Caller-supplied ELM bytes are embedded as given, whatever the formatting says — the option governs
     /// how a library's own JSON is rendered, not bytes the caller already holds.
     /// </summary>

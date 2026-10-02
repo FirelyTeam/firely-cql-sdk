@@ -41,7 +41,8 @@ public record PackagingToolkitConfig(
     /// <see cref="ElmAttachmentFormatting.Passthrough"/>, embeds the JSON a library was read from without
     /// rebuilding it, which is substantially faster on large library sets. Set
     /// <see cref="ElmAttachmentFormatting.Indented"/> or <see cref="ElmAttachmentFormatting.Compact"/> to
-    /// re-serialize instead; see <see cref="ElmAttachmentFormatting"/> for how the output differs.
+    /// reformat that JSON instead; neither re-serializes the ELM graph. See
+    /// <see cref="ElmAttachmentFormatting"/> for how the output differs.
     /// </summary>
     public ElmAttachmentFormatting ElmAttachmentFormatting { get; init; } = ElmAttachmentFormatting.Passthrough;
 

@@ -91,8 +91,14 @@ internal static class FhirLibraryExtensions
                         // Copied, not aliased: this array becomes Attachment.Data on a resource handed to
                         // the caller, while the library keeps its copy for any later packaging of it.
                         ElmAttachmentFormatting.Passthrough when elmLibrary.SourceJsonUtf8 is { } sourceJson => sourceJson.ToArray(),
+
+                        // Passthrough falls through to here when the library has no source JSON to pass on.
+                        ElmAttachmentFormatting.Passthrough or ElmAttachmentFormatting.Indented => elmLibrary.ToJsonUtf8(writeIndented: true),
                         ElmAttachmentFormatting.Compact => elmLibrary.ToJsonUtf8(writeIndented: false),
-                        _ => elmLibrary.ToJsonUtf8(writeIndented: true),
+                        _ => throw new ArgumentOutOfRangeException(
+                                 nameof(elmAttachmentFormatting),
+                                 elmAttachmentFormatting,
+                                 $"Unknown {nameof(ElmAttachmentFormatting)} value."),
                     };
                     break;
             }
