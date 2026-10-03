@@ -64,13 +64,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "SortDatesAsc", "Sort tests shouldn't contain differing precision" },
             { "SortDatesDesc", "Sort tests shouldn't contain differing precision" },
 
-            { "CeilingDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-            { "CeilingDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-            { "CeilingMaxIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-            { "FloorDecimalLessThanMinInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-            { "FloorDecimalGreaterThanMaxInteger", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-            { "FloorMinIntegerAsDecimalWhereDecimalIsNonZero", "Throws OverflowException for a result outside the Integer range instead of returning null." },
-
 
 
             { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
