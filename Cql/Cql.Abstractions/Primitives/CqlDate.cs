@@ -100,6 +100,7 @@ namespace Hl7.Cql.Primitives
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
+            (value, unit) = CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Day);
             var dto = Value.DateTimeOffset;
             const string supportedUnitsMessage = "For Date values, the quantity unit must be one of: years, months, weeks, or days.";
 

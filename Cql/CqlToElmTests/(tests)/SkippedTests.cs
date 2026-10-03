@@ -73,12 +73,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
 
-            { "DateSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
-            { "DateTimeSubtract2YearsAsMonthsRem1", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
-            { "DateSubtract33Days", "A quantity finer than the date's precision is subtracted at its own precision instead of being truncated to the date's precision first." },
-
-
-
             { "TestQuantityYearEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
             { "TestQuantityYearNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
             { "TestQuantityYearsNotEqualA", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
