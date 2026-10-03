@@ -34,15 +34,44 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static string Locator(this ParserRuleContext context)
         {
-            return context switch
+            switch (context)
             {
-                StringLocatorRuleContext jlr => jlr.Locator,
-                _ => FormatLocator(
-                    context.Start.Line,
-                    context.Start.Column + 1,
-                    context.Stop.Line,
-                    context.Stop.Column + context.Stop.Text.Length)
-            };
+                case StringLocatorRuleContext jlr:
+                    return jlr.Locator;
+                default:
+                    var (endLine, endChar) = EndOf(context.Stop);
+                    return FormatLocator(context.Start.Line, context.Start.Column + 1, endLine, endChar);
+            }
+        }
+
+        /// <summary>
+        /// The line and 1-based character of the last character of <paramref name="token"/>. A string or quoted
+        /// identifier may span lines, so the end is found by scanning the token's text for line breaks
+        /// (<c>\r\n</c>, <c>\n</c> or <c>\r</c>) rather than assuming it ends on the line it starts on.
+        /// </summary>
+        private static (int Line, int Char) EndOf(IToken token)
+        {
+            var text = token.Text;
+            var line = token.Line;
+            var lastLineStart = -1;
+
+            for (var i = 0; i < text.Length; i++)
+            {
+                if (text[i] == '\r')
+                {
+                    if (i + 1 < text.Length && text[i + 1] == '\n')
+                        i++;
+                }
+                else if (text[i] != '\n')
+                    continue;
+
+                line++;
+                lastLineStart = i + 1;
+            }
+
+            return lastLineStart < 0
+                ? (line, token.Column + text.Length)
+                : (line, text.Length - lastLineStart);
         }
 
         /// <summary>

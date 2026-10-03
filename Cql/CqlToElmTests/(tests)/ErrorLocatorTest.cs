@@ -129,6 +129,28 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [DataRow("\n", DisplayName = "LF")]
+        [DataRow("\r\n", DisplayName = "CRLF")]
+        public void Locators_Of_Tokens_Spanning_Lines_End_On_The_Last_Line_Of_The_Token(string newline)
+        {
+            var library = CreateCqlToolkit().MakeLibrary(string.Join(newline,
+                "library MultilineLocatorTest version '1.0.0'",
+                "",
+                "define \"Multiline String\": 'first",
+                "second'",
+                "define \"Split",
+                "Name\": 1",
+                "define \"Reference\": \"Split",
+                "Name\""));
+
+            var literal = library.ShouldDefine<ExpressionDef>("Multiline String").expression.Should().BeOfType<Literal>().Subject;
+            literal.locator.Should().Be("3:28-4:7");
+
+            var reference = library.ShouldDefine<ExpressionDef>("Reference").expression.Should().BeOfType<ExpressionRef>().Subject;
+            reference.locator.Should().Be("7:21-8:5");
+        }
+
+        [TestMethod]
         public void An_Error_Takes_The_Locator_Of_Its_Node_Whichever_Is_Set_First()
         {
             var located = new Null().WithLocator("2:3-4:5").AddError("located first");
