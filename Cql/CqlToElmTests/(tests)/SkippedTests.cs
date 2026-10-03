@@ -34,8 +34,8 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing)." },
 
-            { "FloorIntegerLessThanMinInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
-            { "FloorIntegerGreaterThanMaxInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
+            { "FloorIntegerLessThanMinInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
+            { "FloorIntegerGreaterThanMaxInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
 
             { "RatioEqual", "The expression builder does not support Ratio." },
             { "RatioNotEqualDiffNumerator", "The expression builder does not support Ratio." },
