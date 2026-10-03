@@ -1,0 +1,5 @@
+# Libraries in LibrarySets/RR23/Cql that the .NET translator translates without errors
+# Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.
+# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
+FHIRHelpers-4.0.1
+RR23-1.0.0
