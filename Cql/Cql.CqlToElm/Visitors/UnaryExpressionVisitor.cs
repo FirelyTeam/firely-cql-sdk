@@ -325,7 +325,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "distinct" => InvocationBuilder.Invoke(SystemLibrary.Distinct, operand),
                 "flatten"  => handleFlatten(operand),
-                _          => throw new NotImplementedException(),
+                var keyword => new Null()
+                    .WithResultType(SystemTypes.AnyType)
+                    .AddError($"Aggregate expression '{keyword}' is not supported."),
             };
             return expression
                 .WithId()
