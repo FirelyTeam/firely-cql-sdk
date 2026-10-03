@@ -20,11 +20,48 @@ namespace Hl7.Cql.CqlToElm.Test
     /// reference lists must be covered by a declared overload. Deliberate and tracked omissions are
     /// listed in <see cref="SystemLibrarySpecAllowlist"/>.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// A declared overload covers a concrete reference signature when each declared operand accepts the reference
+    /// operand and the declared result is exactly the reference result. A declared <c>Any</c> operand accepts every
+    /// type; a declared <c>T</c> operand accepts a type other than a list or interval and binds <c>T</c> to it, and
+    /// every other occurrence of <c>T</c> in the overload must then be that same type. A declared result is never
+    /// allowed to be wider than the reference result: a declared <c>T</c> result must be what the operands bound
+    /// <c>T</c> to, and a declared <c>Any</c> result covers only a reference <c>Any</c> result.
+    /// </para>
+    /// <para>
+    /// A reference signature in the generic type parameter <c>T</c> is covered when every instantiation of it, over a
+    /// canonical set of types for <c>T</c>, is covered by some declared overload: a generic overload covers them all,
+    /// a set of concrete overloads only the types it lists. The canonical set depends on the reference section the
+    /// signature is in: the ordered types (Integer, Long, Decimal, Quantity, Date, DateTime, Time, String) for the
+    /// comparison operators, the interval point types (the ordered types without String) for the arithmetic operators
+    /// (predecessor, successor, minimum, maximum) and the interval operators, and otherwise the ordered types together
+    /// with Boolean, Code and Concept. The sets are written out here, from the spec, rather than taken from
+    /// <see cref="SystemTypes"/>, which is what the system library declares its overloads with; a test checks the two agree.
+    /// </para>
+    /// </remarks>
     [TestClass]
     public class SystemLibrarySpecTest
     {
         private static readonly Lazy<CqlReferenceSignatures> Reference = new(() =>
             CqlReferenceSignatures.Load(Path.Combine(AppContext.BaseDirectory, "SpecMirror", "09-b-cqlreference.md")));
+
+        private static readonly SpecType[] IntervalPointTypes = Types("Integer", "Long", "Decimal", "Quantity", "Date", "DateTime", "Time");
+        private static readonly SpecType[] OrderedTypes = IntervalPointTypes.Concat(Types("String")).ToArray();
+        private static readonly SpecType[] SimpleTypes = OrderedTypes.Concat(Types("Boolean", "Code", "Concept")).ToArray();
+
+        /// <summary>
+        /// The canonical types the generic type parameter of a reference signature is instantiated with, by
+        /// reference section; <see cref="SimpleTypes"/> for any other section.
+        /// </summary>
+        private static readonly Dictionary<string, SpecType[]> InstantiationsBySection = new()
+        {
+            ["Comparison Operators"] = OrderedTypes,
+            ["Arithmetic Operators"] = IntervalPointTypes,
+            ["Interval Operators"] = IntervalPointTypes,
+        };
+
+        private static SpecType[] Types(params string[] names) => names.Select(n => new SpecType(n)).ToArray();
 
         [TestMethod]
         public void Reference_Is_Parsed()
@@ -57,6 +94,10 @@ namespace Hl7.Cql.CqlToElm.Test
             operators["DateTimeComponentFrom"].Should().HaveCount(3);
             operators["TimezoneOffsetFrom"].Should().ContainSingle();
             operators["MeetsBefore"].Should().ContainSingle();
+            // Attributed to the section the signature is in.
+            operators["Collapse"].Should().OnlyContain(s => s.Section == "Interval Operators");
+            operators["Add"].Single(s => s.OperandKey == "Integer, Integer").Section.Should().Be("Arithmetic Operators");
+            operators["Add"].Single(s => s.OperandKey == "Date, Quantity").Section.Should().Be("Date and Time Operators");
 
             Reference.Value.SyntaxForms.Should().ContainSingle().Which.Text.Should().Be("convert <quantity> to <unit>");
         }
@@ -75,8 +116,20 @@ namespace Hl7.Cql.CqlToElm.Test
                     continue;
                 }
 
-                foreach (var signature in signatures.Where(s => !overloads.Any(o => o.Covers(s))))
-                    findings.Add(signature.ToString(), $"{signature}: no overload covers '{signature.Text}' (declared: {string.Join("; ", overloads)})");
+                foreach (var signature in signatures)
+                {
+                    var declaredText = string.Join("; ", overloads);
+                    if (!signature.IsGeneric)
+                    {
+                        if (!overloads.Any(o => o.Covers(signature)))
+                            findings.Add(signature.ToString(), $"{signature}: no overload covers '{signature.Text}' (declared: {declaredText})");
+                        continue;
+                    }
+
+                    var missing = MissingInstantiations(signature, overloads);
+                    if (missing.Count > 0)
+                        findings.Add(signature.ToString(), $"{signature}: no overload covers '{signature.Text}' for T in {{{string.Join(", ", missing)}}} (declared: {declaredText})");
+                }
             }
 
             var allowlist = SystemLibrarySpecAllowlist.Entries;
@@ -99,6 +152,72 @@ namespace Hl7.Cql.CqlToElm.Test
 
             if (message.Length > 0)
                 Assert.Fail(message.ToString());
+        }
+
+        [TestMethod]
+        public void Canonical_Instantiations_Agree_With_SystemTypes()
+        {
+            SystemTypes.OrderedTypes.Select(DeclaredOverload.ToSpecType).Should().BeEquivalentTo(OrderedTypes,
+                "SystemTypes.OrderedTypes should list the ordered types of the spec");
+            SystemTypes.IntervalPointTypes.Select(DeclaredOverload.ToSpecType).Should().BeEquivalentTo(IntervalPointTypes,
+                "SystemTypes.IntervalPointTypes should list the interval point types of the spec");
+        }
+
+        [TestMethod]
+        public void Matcher_Rejects_A_Wider_Declared_Result()
+        {
+            var add = Signature("Add", "Arithmetic Operators", "Integer", "Integer", "Integer");
+
+            Overload("Add", "Any", "Integer", "Integer").Covers(add).Should().BeFalse();
+            Overload("Add", "Integer", "Integer", "Integer").Covers(add).Should().BeTrue();
+
+            var distinct = Signature("Distinct", "List Operators", "List<Integer>", "List<Integer>");
+            Overload("Distinct", "List<Any>", "List<Integer>").Covers(distinct).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Matcher_Binds_A_Declared_Generic_Parameter()
+        {
+            var generic = Overload("Add", "T", "T", "T");
+
+            generic.Covers(Signature("Add", "Arithmetic Operators", "Integer", "Integer", "Integer")).Should().BeTrue();
+            generic.Covers(Signature("Add", "Arithmetic Operators", "Decimal", "Integer", "Integer")).Should().BeFalse();
+            generic.Covers(Signature("Add", "Arithmetic Operators", "Integer", "Integer", "Decimal")).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Matcher_Requires_Every_Instantiation_Of_A_Generic_Reference_Signature()
+        {
+            var collapse = Signature("Collapse", "Interval Operators", "List<Interval<T>>", "List<Interval<T>>");
+            var integerOnly = new[]
+            {
+                Overload("Collapse", "List<Interval<Integer>>", "List<Interval<Integer>>"),
+                Overload("Collapse", "List<Interval<Integer>>", "List<Interval<Integer>>", "Quantity"),
+            };
+
+            MissingInstantiations(collapse, integerOnly).Should().Equal(Types("Long", "Decimal", "Quantity", "Date", "DateTime", "Time"));
+
+            var everyPointType = IntervalPointTypes
+                .Select(t => Overload("Collapse", $"List<Interval<{t}>>", $"List<Interval<{t}>>"))
+                .ToList();
+            MissingInstantiations(collapse, everyPointType).Should().BeEmpty();
+            MissingInstantiations(collapse, new[] { Overload("Collapse", "List<Interval<T>>", "List<Interval<T>>") }).Should().BeEmpty();
+        }
+
+        private static SpecSignature Signature(string name, string section, string result, params string[] operands) =>
+            new(name, section, name, $"{name}({string.Join(", ", operands)}) {result}", operands.Select(SpecType.Parse).ToList(), SpecType.Parse(result));
+
+        private static DeclaredOverload Overload(string name, string result, params string[] operands) =>
+            new(name, operands.Select(SpecType.Parse).ToList(), operands.Length, SpecType.Parse(result));
+
+        /// <summary>
+        /// The types of the canonical set for the section of <paramref name="signature"/> for which no overload
+        /// covers the instantiation of the generic signature.
+        /// </summary>
+        internal static IReadOnlyList<SpecType> MissingInstantiations(SpecSignature signature, IReadOnlyCollection<DeclaredOverload> overloads)
+        {
+            var types = InstantiationsBySection.TryGetValue(signature.Section, out var sectionTypes) ? sectionTypes : SimpleTypes;
+            return types.Where(type => !overloads.Any(o => o.Covers(signature.Instantiate(type)))).ToList();
         }
 
         /// <summary>
@@ -140,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Test
         /// <summary>
         /// A declared overload, accepting every arity from its required parameter count to its operand count.
         /// </summary>
-        private sealed record DeclaredOverload(string Name, IReadOnlyList<SpecType> Operands, int RequiredCount, SpecType Result)
+        internal sealed record DeclaredOverload(string Name, IReadOnlyList<SpecType> Operands, int RequiredCount, SpecType Result)
         {
             public static DeclaredOverload From(SystemFunction function)
             {
@@ -156,36 +275,64 @@ namespace Hl7.Cql.CqlToElm.Test
                 return new DeclaredOverload(function.name, operands, required, ToSpecType(function.resultTypeSpecifier));
             }
 
-            public bool Covers(SpecSignature signature)
+            /// <summary>
+            /// Whether this overload covers a reference signature: it accepts each reference operand, binding its
+            /// generic parameter <c>T</c> consistently, and declares exactly the reference result. The signature is
+            /// meant to be concrete (see <see cref="SpecSignature.Instantiate"/>); a reference <c>T</c> is matched
+            /// only by a declared <c>T</c> or <c>Any</c>, never by a concrete declared type.
+            /// </summary>
+            internal bool Covers(SpecSignature signature)
             {
                 var arity = signature.Operands.Count;
                 if (arity < RequiredCount || arity > Operands.Count)
                     return false;
+                SpecType? bound = null;
                 for (var i = 0; i < arity; i++)
                 {
-                    if (!Accepts(signature.Operands[i], Operands[i]))
+                    if (!AcceptsOperand(signature.Operands[i], Operands[i], ref bound))
                         return false;
                 }
-                return signature.Result is null || Accepts(signature.Result, Result);
+                return signature.Result is null || MatchesResult(signature.Result, Result, bound);
             }
 
             /// <summary>
-            /// Whether a declared type accepts a reference type. A declared <c>Any</c> accepts everything; a
-            /// declared <c>T</c> accepts any type except a list or interval (it does not bind to those, see the
-            /// note in <see cref="SystemLibrary"/>). A reference <c>T</c> is satisfied by any declared type.
+            /// Whether a declared operand type accepts a reference operand type. A declared <c>Any</c> accepts
+            /// everything; a declared <c>T</c> accepts any type except a list or interval (it does not bind to those,
+            /// see the note in <see cref="SystemLibrary"/>), and binds <c>T</c> to it: a <c>T</c> already bound to a
+            /// different type does not accept it. Otherwise the names must match, and so must the type arguments.
             /// </summary>
-            private static bool Accepts(SpecType reference, SpecType declared) =>
-                declared.Name == "Any"
-                || (declared.IsGenericParameter && !reference.IsConstructed)
-                || reference.IsGenericParameter
-                || (reference.Name == declared.Name
+            private static bool AcceptsOperand(SpecType reference, SpecType declared, ref SpecType? bound)
+            {
+                if (declared.Name == "Any" && !declared.IsConstructed)
+                    return true;
+                if (declared.IsGenericParameter)
+                {
+                    if (reference.IsConstructed)
+                        return false;
+                    bound ??= reference;
+                    return bound == reference;
+                }
+                return reference.Name == declared.Name
                     && (reference.Argument is null) == (declared.Argument is null)
-                    && (reference.Argument is null || Accepts(reference.Argument, declared.Argument!)));
+                    && (reference.Argument is null || AcceptsOperand(reference.Argument, declared.Argument!, ref bound));
+            }
+
+            /// <summary>
+            /// Whether a declared result type is exactly the reference result type: a declared <c>T</c> must have been
+            /// bound by the operands to the reference type, a declared <c>Any</c> matches only a reference <c>Any</c>,
+            /// and otherwise the names and type arguments must match.
+            /// </summary>
+            private static bool MatchesResult(SpecType reference, SpecType declared, SpecType? bound) =>
+                declared.IsGenericParameter
+                    ? bound is not null && bound == reference
+                    : reference.Name == declared.Name
+                        && (reference.Argument is null) == (declared.Argument is null)
+                        && (reference.Argument is null || MatchesResult(reference.Argument, declared.Argument!, bound));
 
             public override string ToString() =>
                 $"{Name}({string.Join(", ", Operands.Select((o, i) => i < RequiredCount ? o.ToString() : $"[{o}]"))}) {Result}";
 
-            private static SpecType ToSpecType(TypeSpecifier type) => type switch
+            internal static SpecType ToSpecType(TypeSpecifier type) => type switch
             {
                 // System type names are written as "{urn:hl7-org:elm-types:r1}Integer".
                 NamedTypeSpecifier named => new SpecType(named.name.Name[(named.name.Name.LastIndexOf('}') + 1)..]),

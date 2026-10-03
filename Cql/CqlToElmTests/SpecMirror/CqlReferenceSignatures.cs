@@ -24,6 +24,15 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
         /// <summary>A <c>List</c> or <c>Interval</c>.</summary>
         public bool IsConstructed => Argument is not null;
 
+        /// <summary>Whether the type is, or has as its (nested) argument, the generic type parameter.</summary>
+        public bool ContainsGenericParameter => IsGenericParameter || Argument?.ContainsGenericParameter == true;
+
+        /// <summary>The type with every occurrence of the generic type parameter replaced by <paramref name="type"/>.</summary>
+        public SpecType Substitute(SpecType type) =>
+            IsGenericParameter ? type
+            : Argument is null ? this
+            : this with { Argument = Argument.Substitute(type) };
+
         public override string ToString() => Argument is null ? Name : $"{Name}<{Argument}>";
 
         /// <summary>
@@ -63,14 +72,25 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
     /// declared under in the system library.
     /// </summary>
     /// <param name="Name">The system-library name the signature belongs to.</param>
+    /// <param name="Section">The reference section (e.g. <c>Interval Operators</c>) the signature was found in.</param>
     /// <param name="Heading">The reference heading the signature was found under.</param>
     /// <param name="Text">The signature as written in the reference, with continuation lines joined.</param>
     /// <param name="Operands">The operand types.</param>
     /// <param name="Result">The result type, or <see langword="null"/> where the reference omits it.</param>
-    internal sealed record SpecSignature(string Name, string Heading, string Text, IReadOnlyList<SpecType> Operands, SpecType? Result)
+    internal sealed record SpecSignature(string Name, string Section, string Heading, string Text, IReadOnlyList<SpecType> Operands, SpecType? Result)
     {
         /// <summary>The identity of the signature within its name: the operand types.</summary>
         public string OperandKey => string.Join(", ", Operands);
+
+        /// <summary>Whether an operand or the result mentions the generic type parameter.</summary>
+        public bool IsGeneric => Operands.Any(o => o.ContainsGenericParameter) || Result?.ContainsGenericParameter == true;
+
+        /// <summary>The signature with the generic type parameter replaced by <paramref name="type"/> in its operands and result.</summary>
+        public SpecSignature Instantiate(SpecType type) => this with
+        {
+            Operands = Operands.Select(o => o.Substitute(type)).ToList(),
+            Result = Result?.Substitute(type),
+        };
 
         public override string ToString() => $"{Name}({OperandKey})" + (Result is null ? "" : $" {Result}");
     }
@@ -128,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
             ["Date and Time Component From"] = "DateTimeComponentFrom",
         };
 
-        private static readonly Regex HeadingLine = new(@"^#{3,5} (?<title>.+?)\s*$", RegexOptions.Compiled);
+        private static readonly Regex HeadingLine = new(@"^(?<level>#{3,5}) (?<title>.+?)\s*$", RegexOptions.Compiled);
         private static readonly Regex FunctionName = new(@"^[A-Z][A-Za-z]*$", RegexOptions.Compiled);
 
         /// <summary>Parses the reference in the spec mirror.</summary>
@@ -140,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
             var operators = new Dictionary<string, List<SpecSignature>>();
             var syntaxForms = new List<SpecSyntaxForm>();
 
-            foreach (var (heading, signatureTexts) in ReadSignatureBlocks(lines))
+            foreach (var (section, heading, signatureTexts) in ReadSignatureBlocks(lines))
             {
                 var parsed = new List<(string Prefix, IReadOnlyList<SpecType> Operands, SpecType? Result, string Text)>();
                 foreach (var text in signatureTexts)
@@ -164,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
                     if (!operators.TryGetValue(name, out var signatures))
                         operators.Add(name, signatures = new List<SpecSignature>());
 
-                    var signature = new SpecSignature(name, heading, text, operands, result);
+                    var signature = new SpecSignature(name, section, heading, text, operands, result);
                     if (signatures.All(s => s.OperandKey != signature.OperandKey))
                         signatures.Add(signature);
                 }
@@ -219,10 +239,12 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
 
         /// <summary>
         /// Reads the code block that follows each <c>**Signature:**</c>/<c>**Signatures:**</c> marker,
-        /// returning one entry per signature with continuation lines joined.
+        /// returning one entry per signature with continuation lines joined, together with the heading and the
+        /// section (the enclosing <c>###</c> heading) it was found under.
         /// </summary>
-        private static IEnumerable<(string Heading, IReadOnlyList<string> Signatures)> ReadSignatureBlocks(IEnumerable<string> lines)
+        private static IEnumerable<(string Section, string Heading, IReadOnlyList<string> Signatures)> ReadSignatureBlocks(IEnumerable<string> lines)
         {
+            string? section = null;
             string? heading = null;
             var state = 0; // 0: prose, 1: after a signature marker, 2: inside its code block
             var signatures = new List<string>();
@@ -235,7 +257,11 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
                     case 0:
                         var match = HeadingLine.Match(line);
                         if (match.Success)
+                        {
                             heading = match.Groups["title"].Value;
+                            if (match.Groups["level"].Length == 3)
+                                section = heading;
+                        }
                         else if (line.StartsWith("**Signature", StringComparison.Ordinal))
                             state = 1;
                         break;
@@ -250,9 +276,9 @@ namespace Hl7.Cql.CqlToElm.Test.SpecMirror
                         {
                             if (pending.Length > 0)
                                 throw new FormatException($"Unterminated signature '{pending}' under '{heading}'.");
-                            if (heading is null)
+                            if (heading is null || section is null)
                                 throw new FormatException("Signature block before any heading.");
-                            yield return (heading, signatures.ToList());
+                            yield return (section, heading, signatures.ToList());
                             signatures.Clear();
                             state = 0;
                             break;

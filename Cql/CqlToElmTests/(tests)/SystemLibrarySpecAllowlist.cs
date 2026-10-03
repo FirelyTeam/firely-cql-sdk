@@ -69,6 +69,15 @@ namespace Hl7.Cql.CqlToElm.Test
             { "AgeInHoursAt(DateTime) Integer", "Declared binary; the spec signature is unary (#1738)." },
             { "AgeInMinutesAt(DateTime) Integer", "Declared binary; the spec signature is unary (#1738)." },
             { "AgeInSecondsAt(DateTime) Integer", "Declared binary; the spec signature is unary (#1738)." },
+
+            // Reached without a declared overload of that exact signature.
+            { "SameOrAfter(T, Interval<T>) Boolean", "No point-interval overload for Integer, Long, Decimal, Quantity, Date, DateTime or Time; the point is promoted to a point interval and resolves to SameOrAfter(Interval<T>, Interval<T>)." },
+            { "SameOrAfter(Interval<T>, T) Boolean", "No interval-point overload for Integer, Long, Decimal, Quantity, Date, DateTime or Time; the point is promoted to a point interval and resolves to SameOrAfter(Interval<T>, Interval<T>)." },
+            { "SameOrBefore(T, Interval<T>) Boolean", "No point-interval overload for Integer, Long, Decimal, Quantity, Date, DateTime or Time; the point is promoted to a point interval and resolves to SameOrBefore(Interval<T>, Interval<T>)." },
+            { "SameOrBefore(Interval<T>, T) Boolean", "No interval-point overload for Integer, Long, Decimal, Quantity, Date, DateTime or Time; the point is promoted to a point interval and resolves to SameOrBefore(Interval<T>, Interval<T>)." },
+            { "Equivalent(Code, Concept) Boolean", "No mixed overload; the Code operand converts implicitly to Concept (a conversion the spec defines) and resolves to Equivalent(T, T) at Concept." },
+            { "Equivalent(Concept, Code) Boolean", "No mixed overload; the Code operand converts implicitly to Concept (a conversion the spec defines) and resolves to Equivalent(T, T) at Concept." },
+            { "ProperIncludes(T, List<T>) Boolean", "The reference lists the operands in the wrong order; its description and example put the list on the left, which ProperIncludes(List<T>, T) covers." },
         };
     }
 }
