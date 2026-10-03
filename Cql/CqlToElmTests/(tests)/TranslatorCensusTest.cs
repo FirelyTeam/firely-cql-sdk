@@ -100,7 +100,7 @@ public class TranslatorCensusTest
         var repositoryRoot = new DirectoryInfo(AppContext.BaseDirectory).FindParentDirectoryContaining(RepositoryRootMarker)
                              ?? throw new InvalidOperationException($"Could not find a parent directory of '{AppContext.BaseDirectory}' containing '{RepositoryRootMarker}'.");
         var corpusDirectory = new DirectoryInfo(Path.Combine(repositoryRoot.FullName, corpus.RelativeDirectory));
-        var cqlFileCount = corpusDirectory.Exists ? corpusDirectory.EnumerateFiles("*.cql", SearchOption.AllDirectories).Count() : 0;
+        var cqlFileCount = corpusDirectory.Exists ? CqlFiles(corpusDirectory).Count() : 0;
 
         if (cqlFileCount == 0)
         {
@@ -133,8 +133,9 @@ public class TranslatorCensusTest
         TestContext.WriteLine(string.Create(CultureInfo.InvariantCulture, $"{corpus.Name}: {counts} in {stopwatch.Elapsed.TotalSeconds:F1}s"));
         TestContext.WriteLine($"Report: {reportPath}");
         TestContext.WriteLine($"Candidate baseline: {candidatePath}");
+        // Every file must have an outcome: a file that cannot be loaded is a crash, not a silent omission.
         if (cqlFileCount != counts.Total)
-            TestContext.WriteLine($"WARNING: {cqlFileCount} CQL files, but only {counts.Total} libraries were added to the toolkit.");
+            Assert.Fail($"{corpus.Name}: {cqlFileCount} CQL files, but {counts.Total} outcomes ({counts}); every file must have exactly one outcome. See the report file for details.");
 
         if (!File.Exists(baselinePath))
             Assert.Fail($"Baseline file '{corpus.BaselineFileName}' is missing from Input/Census. Copy the candidate '{candidatePath}' there.");
@@ -143,6 +144,36 @@ public class TranslatorCensusTest
             CompareCounts(corpus, counts, baselinePath);
         else
             CompareKnownPass(corpus, results, baselinePath);
+    }
+
+    /// <summary>
+    /// A file whose library declaration cannot be parsed, or whose identifier another file already declares,
+    /// gets a crash outcome instead of being left out of the census.
+    /// </summary>
+    [TestMethod]
+    public void TranslatorCensusRecordsUnloadableFilesAsCrashes()
+    {
+        var directory = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), $"TranslatorCensus-{Guid.NewGuid():N}"));
+        try
+        {
+            File.WriteAllText(Path.Combine(directory.FullName, "a-valid.cql"), "library Valid version '1.0.0'\n\ndefine X: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "b-duplicate.cql"), "library Valid version '1.0.0'\n\ndefine Y: 2\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "c-malformed.cql"), "this is not a library declaration\n");
+
+            var results = Translate(directory, LoadModelInfos([]));
+
+            Assert.AreEqual(CqlFiles(directory).Count(), results.Count);
+            var byId = results.ToDictionary(r => r.Id, StringComparer.Ordinal);
+            Assert.AreEqual(Outcome.Clean, byId["Valid-1.0.0"].Outcome);
+            Assert.AreEqual(Outcome.Crash, byId["b-duplicate.cql"].Outcome);
+            StringAssert.Contains(byId["b-duplicate.cql"].Details.Single(), "duplicate library identifier");
+            Assert.AreEqual(Outcome.Crash, byId["c-malformed.cql"].Outcome);
+            StringAssert.StartsWith(byId["c-malformed.cql"].Details.Single(), "load failed:");
+        }
+        finally
+        {
+            directory.Delete(recursive: true);
+        }
     }
 
     /// <summary>
@@ -228,7 +259,10 @@ public class TranslatorCensusTest
     /// <summary>
     /// The translation result of one library.
     /// </summary>
-    /// <param name="Id">The library identifier, as <see cref="CqlVersionedLibraryIdentifier.ToString"/> prints it.</param>
+    /// <param name="Id">
+    /// The library identifier, as <see cref="CqlVersionedLibraryIdentifier.ToString"/> prints it; for a file that
+    /// could not be loaded, its path relative to the corpus directory.
+    /// </param>
     /// <param name="Outcome">Whether translation was clean, reported errors, or crashed.</param>
     /// <param name="Details">The error messages, or for a crash a single line describing the exception.</param>
     /// <param name="UnspecifiedSeverityCount">The number of annotations without a specified severity, which the error filter treats as info.</param>
@@ -253,22 +287,31 @@ public class TranslatorCensusTest
     }
 
     /// <summary>
+    /// The CQL files of a corpus directory, including its subdirectories.
+    /// </summary>
+    private static IEnumerable<FileInfo> CqlFiles(DirectoryInfo directory) =>
+        directory.EnumerateFiles("*.cql", SearchOption.AllDirectories);
+
+    /// <summary>
     /// Translates each library in the directory individually, so one exception cannot hide the others.
+    /// Returns exactly one result per CQL file: a file that cannot be loaded is a <see cref="Outcome.Crash"/>.
     /// </summary>
     private static IReadOnlyList<LibraryResult> Translate(DirectoryInfo directory, ImmutableHashSet<ModelInfo> modelInfos)
     {
+        var (libraries, results) = LoadLibraries(directory);
         var toolkit = new CqlToolkit(
                           NullLoggerFactory.Instance,
                           new CqlToolkitConfig(ModelInfos: modelInfos, AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferModel))
                       .SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation.Continue);
-        toolkit.AddCqlLibrariesFromDirectory(directory);
+        toolkit.AddCqlLibraries(libraries);
         var provider = (LibraryBuilderProvider)toolkit.ServiceProvider.GetRequiredService<ILibraryProvider>();
 
-        var results = new List<LibraryResult>();
-        foreach (var id in toolkit.ArtifactsById.Keys.OrderBy(k => k.ToString(), StringComparer.Ordinal))
+        foreach (var id in libraries.Select(l => l.LibraryIdentifier))
         {
             try
             {
+                if (!toolkit.ArtifactsById.ContainsKey(id))
+                    throw new InvalidOperationException("the toolkit did not register the library");
                 if (!provider.TryResolveLibrary(id, out var builder, out var error))
                     throw new InvalidOperationException($"resolve failed: {error}");
 
@@ -288,7 +331,46 @@ public class TranslatorCensusTest
             }
         }
 
-        return results;
+        return results.OrderBy(r => r.Id, StringComparer.Ordinal).ToList();
+    }
+
+    /// <summary>
+    /// Parses the library declaration of every CQL file in the directory. A file that cannot be parsed, or that
+    /// declares an identifier an earlier file already declared, becomes a <see cref="Outcome.Crash"/> result keyed
+    /// by its path relative to the directory, so it is counted instead of being dropped.
+    /// </summary>
+    private static (List<CqlLibraryString> Libraries, List<LibraryResult> LoadFailures) LoadLibraries(DirectoryInfo directory)
+    {
+        var libraries = new List<CqlLibraryString>();
+        var loadFailures = new List<LibraryResult>();
+        var loadedFrom = new Dictionary<CqlVersionedLibraryIdentifier, string>();
+
+        foreach (var file in CqlFiles(directory).OrderBy(f => f.FullName, StringComparer.Ordinal))
+        {
+            var relativePath = Path.GetRelativePath(directory.FullName, file.FullName).Replace(Path.DirectorySeparatorChar, '/');
+            CqlLibraryString library;
+            try
+            {
+                library = CqlLibraryString.Parse(File.ReadAllText(file.FullName));
+            }
+            catch (Exception e)
+            {
+                var (description, location) = DescribeCrash(e);
+                loadFailures.Add(new LibraryResult(relativePath, Outcome.Crash, [$"load failed: {description}"], 0, location));
+                continue;
+            }
+
+            if (loadedFrom.TryGetValue(library.LibraryIdentifier, out var firstPath))
+            {
+                loadFailures.Add(new LibraryResult(relativePath, Outcome.Crash, [$"duplicate library identifier '{library.LibraryIdentifier}', already declared in '{firstPath}'"], 0));
+                continue;
+            }
+
+            loadedFrom.Add(library.LibraryIdentifier, relativePath);
+            libraries.Add(library);
+        }
+
+        return (libraries, loadFailures);
     }
 
     /// <summary>

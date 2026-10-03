@@ -4,11 +4,13 @@
 
 ## 1.1. What the test measures
 
-Each library in a corpus is resolved through the toolkit's library provider and built on its own, so an exception in one library cannot hide the result of another. Every library ends up in one of three outcomes:
+Each library in a corpus is resolved through the toolkit's library provider and built on its own, so an exception in one library cannot hide the result of another. Every CQL file ends up in exactly one of three outcomes:
 
 - **clean**: the ELM carries no annotation with error severity (warnings and infos are ignored);
 - **errors**: the ELM carries one or more error-severity annotations;
-- **crash**: translation threw an exception.
+- **crash**: translation threw an exception, or the file could not be loaded at all: its library declaration cannot be parsed, or it declares the same library identifier as another file. A file that cannot be loaded is reported under its path relative to the corpus directory instead of a library identifier.
+
+The test fails when the number of outcomes differs from the number of CQL files, so no file can drop out of the census unnoticed.
 
 The test has one row per corpus run:
 
@@ -39,6 +41,8 @@ The QICore corpora run both without and with the model infos, so the effect of t
 `hedis-2025.counts.txt` holds only the number of libraries per outcome (`total`, `clean`, `errors`, `crash` as `key=value` lines). The test fails when fewer libraries translate cleanly than `clean`; other differences are reported as warnings.
 
 The HEDIS corpus lives in a private submodule and is licensed content, so nothing that identifies its libraries is committed to this repository: no names in the baseline, and only counts in the test output and failure messages. The per-library detail is written to the report file only, which stays with the test results of the run (see [1.3.](#13-the-report)). When the submodule is not checked out, this row is inconclusive rather than failing.
+
+In CI, the HEDIS row runs in the HEDIS job (`TestHedisNet10` in [`build/build-test-sign.yml`](../../../../build/build-test-sign.yml)), which checks out the submodules and runs the census on .NET 10. The multi-target test jobs check out no submodules, so the row is inconclusive there.
 
 ## 1.3. The report
 
