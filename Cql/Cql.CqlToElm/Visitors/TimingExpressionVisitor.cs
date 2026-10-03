@@ -66,6 +66,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var rhsClosed = properly ? ElmFactory.Literal(false) : ElmFactory.Literal(true);
 
+            // A closed interval around a null point has null, inclusive boundaries, which membership
+            // treats as unbounded, so the spec requires "and B is not null" for a point B. An open
+            // boundary that is null is unknown, so the 'properly' form needs no guard.
+            Expression? notNullGuard = null;
+
             if (rhs.resultTypeSpecifier is IntervalTypeSpecifier)
             {
                 if (kwLast == "start" || kwLast == "end")
@@ -110,6 +115,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
+                if (!properly)
+                {
+                    notNullGuard = InvocationBuilder.Invoke(SystemLibrary.Not,
+                                                            InvocationBuilder.Invoke(SystemLibrary.IsNull, rhs)
+                                                                             .WithId()
+                                                                             .WithLocator(context.Locator()))
+                                                    .WithId()
+                                                    .WithLocator(context.Locator());
+                }
+
                 var intervalArgs = new[]
                 {
                     InvocationBuilder.Invoke(SystemLibrary.Subtract, [rhs, quantity]),
@@ -121,7 +136,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
 
             var @in = (In)InvocationBuilder.Invoke(SystemLibrary.In, lhs, rhs);
-            return @in
+            @in = @in
+                .WithId()
+                .WithLocator(context.Locator());
+
+            if (notNullGuard is null)
+                return @in;
+
+            return InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullGuard)
                 .WithId()
                 .WithLocator(context.Locator());
         }

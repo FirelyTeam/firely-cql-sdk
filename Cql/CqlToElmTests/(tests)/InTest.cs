@@ -92,21 +92,23 @@ namespace Hl7.Cql.CqlToElm.Test
                 define f:
                     Interval[@2024-07-23, @2024-07-30] starts within 1 day of end of Interval[@2024-07-17, @2024-07-24]
                 """);
-            library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+            // 'end of ...' is a point operand, so the closed form carries the "and B is not null" guard.
+            library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>()
+                .operand[0].Should().BeOfType<In>();
         }
 
         [TestMethod]
-        [DataRow("@2024-01-05", "", "@2024-01-03", DisplayName = "point within point")]
-        [DataRow("@2024-01-05", "properly ", "@2024-01-03", DisplayName = "point properly within point")]
-        [DataRow("@2024-01-05", "", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "point within interval")]
-        [DataRow("@2024-01-05", "properly ", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "point properly within interval")]
-        [DataRow("@2024-01-05", "", "start Interval[@2024-01-01, @2024-01-03]", DisplayName = "point within start of interval")]
-        [DataRow("@2024-01-05", "properly ", "end Interval[@2024-01-01, @2024-01-03]", DisplayName = "point properly within end of interval")]
-        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "@2024-01-03", DisplayName = "interval within point")]
-        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "@2024-01-03", DisplayName = "interval properly within point")]
-        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "interval within interval")]
-        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "Interval[@2024-01-01, @2024-01-03]", DisplayName = "interval properly within interval")]
-        public void Occurs_Within_IsTranslatedAsWithin(string left, string properly, string right)
+        [DataRow("@2024-01-05", "", "@2024-01-03", true, DisplayName = "point within point")]
+        [DataRow("@2024-01-05", "properly ", "@2024-01-03", false, DisplayName = "point properly within point")]
+        [DataRow("@2024-01-05", "", "Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "point within interval")]
+        [DataRow("@2024-01-05", "properly ", "Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "point properly within interval")]
+        [DataRow("@2024-01-05", "", "start Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "point within start of interval")]
+        [DataRow("@2024-01-05", "properly ", "end Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "point properly within end of interval")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "@2024-01-03", true, DisplayName = "interval within point")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "@2024-01-03", false, DisplayName = "interval properly within point")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "", "Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "interval within interval")]
+        [DataRow("Interval[@2024-01-05, @2024-01-06]", "properly ", "Interval[@2024-01-01, @2024-01-03]", false, DisplayName = "interval properly within interval")]
+        public void Occurs_Within_IsTranslatedAsWithin(string left, string properly, string right, bool guardedAgainstNullPoint)
         {
             var library = CreateCqlToolkit().MakeLibrary($"""
                 library InTest version '1.0.0'
@@ -118,7 +120,21 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var occurs = library.statements.Single(s => s.name == "Occurs").expression;
             var plain = library.statements.Single(s => s.name == "Plain").expression;
-            occurs.Should().BeOfType<In>();
+
+            // The spec defines a closed 'within' of a point B as "... in [B - Q, B + Q] and B is not null".
+            if (guardedAgainstNullPoint)
+            {
+                var and = occurs.Should().BeOfType<And>().Subject;
+                and.operand.Should().HaveCount(2);
+                and.operand[0].Should().BeOfType<In>();
+                var not = and.operand[1].Should().BeOfType<Not>().Subject;
+                var isNull = not.operand.Should().BeOfType<IsNull>().Subject;
+                // IsNull takes Any, so the point may arrive cast to it.
+                var point = isNull.operand is As { operand: { } cast } ? cast : isNull.operand;
+                point.Should().BeOfType<Date>();
+            }
+            else
+                occurs.Should().BeOfType<In>();
 
             var occursJson = WithoutIdsAndLocators(occurs);
             var plainJson = WithoutIdsAndLocators(plain);
@@ -127,21 +143,28 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [DataRow("@2024-01-05", "", true, DisplayName = "inside the range")]
-        [DataRow("@2023-12-31", "", true, DisplayName = "on the lower boundary")]
-        [DataRow("@2024-01-06", "", true, DisplayName = "on the upper boundary")]
-        [DataRow("@2024-01-06", "properly ", false, DisplayName = "properly, on the upper boundary")]
-        [DataRow("@2024-01-05", "properly ", true, DisplayName = "properly, inside the range")]
-        [DataRow("@2024-01-10", "", false, DisplayName = "outside the range")]
-        public void Occurs_Within_PointOfPoint_Evaluates(string left, string properly, bool expected)
+        [DataRow("@2024-01-05", "", "@2024-01-03", true, DisplayName = "inside the range")]
+        [DataRow("@2023-12-31", "", "@2024-01-03", true, DisplayName = "on the lower boundary")]
+        [DataRow("@2024-01-06", "", "@2024-01-03", true, DisplayName = "on the upper boundary")]
+        [DataRow("@2024-01-06", "properly ", "@2024-01-03", false, DisplayName = "properly, on the upper boundary")]
+        [DataRow("@2024-01-05", "properly ", "@2024-01-03", true, DisplayName = "properly, inside the range")]
+        [DataRow("@2024-01-10", "", "@2024-01-03", false, DisplayName = "outside the range")]
+        // Closed boundaries computed from a null point are null, which membership reads as unbounded,
+        // so the membership is true and the "and B is not null" guard makes the whole phrase false.
+        [DataRow("@2020-01-05", "", "(null as Date)", false, DisplayName = "of a null point")]
+        // Open boundaries that are null are unknown, so the membership itself is null.
+        [DataRow("@2020-01-05", "properly ", "(null as Date)", null, DisplayName = "properly, of a null point")]
+        public void Occurs_Within_PointOfPoint_Evaluates(string left, string properly, string right, bool? expected)
         {
             var library = CreateCqlToolkit().MakeLibrary($"""
                 library InTest version '1.0.0'
 
-                define f: {left} occurs {properly}within 3 days of @2024-01-03
+                define f: {left} occurs {properly}within 3 days of {right}
                 """);
-            var @in = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
-            Run<bool?>(@in, library).Should().Be(expected);
+            ElmExpression expression = properly.Length == 0
+                ? library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<And>()
+                : library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
+            Run<bool?>(expression, library).Should().Be(expected);
         }
 
         private static JsonNode WithoutIdsAndLocators(ElmExpression expression)
