@@ -9,10 +9,13 @@
 #nullable enable
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Reflection;
 
@@ -192,6 +195,115 @@ namespace CoreTests
                 ((Property)p.source).resultTypeName.Name.Should().Be("{http://hl7.org/fhir}UnitsOfTime");
             });
         }
+
+        [TestMethod]
+        public void DuplicateExpressionDefs_SurvivePreprocessing_AndFailWhenCompiled()
+        {
+            // Hand-edited ELM that defines the same expression twice. Preprocessing keeps both definitions;
+            // adding the second one to the library's definitions then fails.
+            var lib = new Library
+            {
+                identifier = new VersionedIdentifier { id = "DuplicateExpressionTest", version = "1.0.0" },
+                schemaIdentifier = new VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+                statements =
+                [
+                    IntegerExpressionDef("Dup", IntegerLiteral("1")),
+                    IntegerExpressionDef("Dup", IntegerLiteral("2")),
+                    IntegerExpressionDef("UsesDup", new ExpressionRef
+                    {
+                        name = "Dup",
+                        resultTypeSpecifier = SystemTypes.IntegerType,
+                        resultTypeName = SystemTypes.IntegerType.name
+                    })
+                ]
+            };
+
+            new LibraryPreprocessor(new LibrarySet("", lib), NullLoggerFactory.Instance).PreprocessLibrary(lib);
+            lib.statements.Where(s => s.name == "Dup").Should().HaveCount(2);
+
+            var build = () => BuildLibrary(lib);
+            var exception = build.Should().Throw<CqlException<ExpressionBuildingError>>().Which;
+            ExceptionChain(exception).OfType<ArgumentException>()
+                .Should().ContainSingle().Which.Message.Should().Contain("Overload already exists");
+        }
+
+        [TestMethod]
+        public void DuplicateFunctionDefs_SurvivePreprocessing_AndFailWhereCallIsResolved()
+        {
+            // Hand-edited ELM that defines F(Integer) twice next to an F(String) overload. Preprocessing keeps
+            // all three definitions.
+            var typedCallLib = DuplicateFunctionLibrary(callResultType: SystemTypes.IntegerType);
+            new LibraryPreprocessor(new LibrarySet("", typedCallLib), NullLoggerFactory.Instance).PreprocessLibrary(typedCallLib);
+            typedCallLib.statements.OfType<FunctionDef>().Should().HaveCount(3);
+
+            // A call whose result type the preprocessor has to resolve finds two equally good F(Integer)
+            // candidates. A call that already carries its result type is compiled without that check.
+            var untypedCallLib = DuplicateFunctionLibrary(callResultType: null);
+            var build = () => BuildLibrary(untypedCallLib);
+            var exception = build.Should().Throw<CqlException<ExpressionBuildingError>>().Which;
+            ExceptionChain(exception).OfType<CqlException<AmbiguousMatch>>()
+                .Should().ContainSingle().Which.Error.Ref.name.Should().Be("F");
+        }
+
+        private static Library DuplicateFunctionLibrary(NamedTypeSpecifier? callResultType) => new()
+        {
+            identifier = new VersionedIdentifier { id = "DuplicateFunctionTest", version = "1.0.0" },
+            schemaIdentifier = new VersionedIdentifier { id = "urn:hl7-org:elm", version = "r1" },
+            statements =
+            [
+                IntegerFunctionDef("F", SystemTypes.StringType),
+                IntegerFunctionDef("F", SystemTypes.IntegerType),
+                IntegerFunctionDef("F", SystemTypes.IntegerType),
+                IntegerExpressionDef("CallsF", new FunctionRef
+                {
+                    name = "F",
+                    signature = [SystemTypes.IntegerType],
+                    operand = [IntegerLiteral("1")],
+                    resultTypeSpecifier = callResultType,
+                    resultTypeName = callResultType?.name
+                })
+            ]
+        };
+
+        private static CqlDefinitionDictionary BuildLibrary(Library lib)
+        {
+            using var serviceProvider = ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+            using var servicesScope = serviceProvider.CreateScope();
+            return servicesScope.ServiceProvider.GetRequiredService<LibraryCodeBuilder>().ProcessLibrary(lib);
+        }
+
+        private static IEnumerable<Exception> ExceptionChain(Exception? e)
+        {
+            for (; e is not null; e = e.InnerException)
+                yield return e;
+        }
+
+        private static Literal IntegerLiteral(string value) => new()
+        {
+            value = value,
+            valueType = SystemTypes.IntegerType.name,
+            resultTypeSpecifier = SystemTypes.IntegerType,
+            resultTypeName = SystemTypes.IntegerType.name
+        };
+
+        private static ExpressionDef IntegerExpressionDef(string name, Expression expression) => new()
+        {
+            name = name,
+            context = "Patient",
+            expression = expression,
+            resultTypeSpecifier = SystemTypes.IntegerType,
+            resultTypeName = SystemTypes.IntegerType.name
+        };
+
+        private static FunctionDef IntegerFunctionDef(string name, NamedTypeSpecifier operandType) => new()
+        {
+            name = name,
+            context = "Patient",
+            operand = [new OperandDef { name = "x", operandTypeSpecifier = operandType, operandType = operandType.name }],
+            expression = IntegerLiteral("0"),
+            resultTypeSpecifier = SystemTypes.IntegerType,
+            resultTypeName = SystemTypes.IntegerType.name
+        };
 
         private static Library LoadDqm(string name) =>
             Library.LoadFromJson(new FileInfo(Path.Combine(LibrarySetsDirs.DqmQiCore2025.ElmDir.FullName, name + ".json")));
