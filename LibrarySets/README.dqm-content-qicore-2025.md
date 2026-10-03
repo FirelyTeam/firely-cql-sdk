@@ -39,6 +39,9 @@ These changes were necessary to resolve type inference issues in the CQL-to-ELM 
 ### 1.3.2. CMS69FHIRPCSBMIScreenAndFollowUp.cql
 Fixed a syntax error in the `ObservationCancelled` query definition.
 
+### 1.3.3. CMS832FHIRHHAKI.cql
+Renamed the second of two tuple elements named `CrLabObsCategory` to `CrLabObsCategory2`, so the tuple has distinct element names. The unpatched file is kept next to it as `CMS832FHIRHHAKI.cql.original`.
+
 ## 1.4. Source
 
 The CQL and ELM files in this library set are sourced from:
