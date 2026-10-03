@@ -153,6 +153,7 @@ namespace Hl7.Cql.Primitives
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
+            (value, unit) = CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Millisecond);
             var dto = Value.DateTimeOffset;
             
             try
