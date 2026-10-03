@@ -45,7 +45,6 @@ namespace Hl7.Cql.Primitives
         private const long MillisecondsPerHour = MinutesPerHour * MillisecondsPerMinute;
         private const long MillisecondsPerDay = HoursPerDay * MillisecondsPerHour;
 
-
         /// <summary>
         /// Returns the number of boundaries crossed for the specified precision between this and the argument.
         /// If this is after the second argument, the result is negative.
