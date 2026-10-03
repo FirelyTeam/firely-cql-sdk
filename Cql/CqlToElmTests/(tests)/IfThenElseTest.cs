@@ -83,22 +83,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void String_Integer_Integer()
         {
             var fluentCqlToolkit = CreateCqlToolkit();
-            var messageProvider = fluentCqlToolkit.GetMessageProvider();
-            string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
+            string[] expectedErrors = ["Expected an expression of type 'Boolean', but found an expression of type 'String'."];
             var library = fluentCqlToolkit.MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
-        }
-
-        [TestMethod]
-        public void TypeFoundIsNotExpected_ProducesCorrectMessage()
-        {
-            var fluentCqlToolkit = CreateCqlToolkit();
-            var messageProvider = fluentCqlToolkit.GetMessageProvider();
-            var message = messageProvider.TypeFoundIsNotExpected(SystemTypes.IntegerType, SystemTypes.BooleanType);
-
-            message.Should().Be("Expected an expression of type '{urn:hl7-org:elm-types:r1}Boolean', but found an expression of type '{urn:hl7-org:elm-types:r1}Integer'.");
         }
     }
 }
