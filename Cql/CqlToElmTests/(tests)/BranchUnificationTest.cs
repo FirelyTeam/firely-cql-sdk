@@ -193,6 +193,25 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void If_List_And_Element_ConvertsTheSecondBranchToTheFirst()
+        {
+            // When each branch converts to the other (here list promotion one way and list demotion the
+            // other), the second branch is converted to the first, as the reference translator does:
+            // `if … then {1, 2} else 3` is a List<Integer> and `if … then 3 else {1, 2}` an Integer.
+            var toolkit = CreateCqlToolkit(DisableListPromotion: false, DisableListDemotion: false);
+
+            var listFirst = toolkit.MakeLibraryFromExpression("if true then {1, 2} else 3")
+                .Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
+            listFirst.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType.ToListType());
+            listFirst.@else.Should().BeOfType<ToList>();
+
+            var elementFirst = toolkit.MakeLibraryFromExpression("if true then 3 else {1, 2}")
+                .Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
+            elementFirst.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            elementFirst.@else.Should().BeOfType<SingletonFrom>();
+        }
+
+        [TestMethod]
         public void If_ModelPrimitive_And_SystemType_WithoutDirectConversion_IsChoice()
         {
             var library = FhirLibrary("""define "X": if true then Patient.birthDate else @2020-01-01T00:00:00.000""");
