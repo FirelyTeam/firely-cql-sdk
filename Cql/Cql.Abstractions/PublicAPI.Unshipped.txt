@@ -45,3 +45,18 @@ static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator !=(Hl7.Cql.Primit
 static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator ==(Hl7.Cql.Primitives.CqlExpandFractionalPerError left, Hl7.Cql.Primitives.CqlExpandFractionalPerError right) -> bool
 ~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.Equals(object obj) -> bool
 ~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.ToString() -> string
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError(object? First, object? Second) -> void
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Deconstruct(out object? First, out object? Second) -> void
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Equals(Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError other) -> bool
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.First.get -> object?
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.First.init -> void
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Second.get -> object?
+Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Second.init -> void
+override Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.operator !=(Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError right) -> bool
+static Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError right) -> bool
+~override Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.ToString() -> string
