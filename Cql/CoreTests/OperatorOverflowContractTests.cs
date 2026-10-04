@@ -35,8 +35,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
-            "Expand(CqlInterval<int?>, CqlQuantity)",
-            "Expand(CqlInterval<long?>, CqlQuantity)",
         };
 
         /// <summary>
