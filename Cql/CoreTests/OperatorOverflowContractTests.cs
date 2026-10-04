@@ -35,6 +35,8 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
+            "Expand(CqlInterval<int?>, CqlQuantity)",
+            "Expand(CqlInterval<long?>, CqlQuantity)",
         };
 
         /// <summary>
@@ -44,9 +46,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownNonTerminating = new(StringComparer.Ordinal)
         {
-            "Expand(CqlInterval<CqlDate>, CqlQuantity)",
-            "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
-            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
         };
 
         /// <summary>
