@@ -358,6 +358,7 @@ namespace Hl7.Cql.Operators
             {
                 var nonNull = source
                     .Where(d => d.HasValue)
+                    .Select(d => d!.Value)
                     .ToList();
                 if (nonNull.Count == 0)
                 {
@@ -366,16 +367,10 @@ namespace Hl7.Cql.Operators
                 else
                 {
                     // Formula: Sqrt( summation(each value from population - population mean)^2 / size of population)
-                    var mean = Avg(nonNull)!.Value;
-                    var summation = nonNull
-                        .Select(d => d!.Value)
-                        .Sum(d =>
-                        {
-                            var a = d - mean;
-                            return a * a;
-                        });
-                    var overCount = (double)(summation / nonNull.Count);
-                    var result = (decimal)Math.Sqrt(overCount);
+                    if (PopulationVarianceOf(nonNull) is not { } overCount)
+                        return Overflowed<decimal?>(new { source }, "CqlOperators.AggregateFunctions.PopulationStdDev", "type decimal population standard deviation");
+                    // The root of a value in the Decimal range is within that range.
+                    var result = (decimal)Math.Sqrt((double)overCount);
                     return result;
                 }
 
@@ -402,22 +397,42 @@ namespace Hl7.Cql.Operators
                 {
                     var unit = nonNull.Select(q => q!.unit).FirstOrDefault() ?? "1";
                     // Formula: Sqrt( summation(each value from population - population mean)^2 / size of population)
-                    var mean = Avg(nonNull.Select(q => q!.value));
-                    var summation = nonNull
-                        .Select(q => q!.value)
-                        .Sum(d =>
-                        {
-                            var a = d - mean;
-                            return a * a;
-                        });
-                    var overCount = (double)(summation! / nonNull.Count);
-                    var result = (decimal)Math.Sqrt(overCount);
+                    if (PopulationVarianceOf(nonNull.Select(q => q!.value!.Value).ToList()) is not { } overCount)
+                        return Overflowed<CqlQuantity>(new { source }, "CqlOperators.AggregateFunctions.PopulationStdDev", "type CqlQuantity population standard deviation");
+                    // The root of a value in the Decimal range is within that range.
+                    var result = (decimal)Math.Sqrt((double)overCount);
                     return new CqlQuantity(result, unit);
                 }
             }
         }
 
+        /// <summary>
+        /// The mean of the squared deviations of <paramref name="values"/> from their mean, or <see langword="null"/>
+        /// when their total, a deviation, its square or the sum of the squares cannot be represented.
+        /// </summary>
+        private static decimal? PopulationVarianceOf(List<decimal> values)
+        {
+            decimal total = 0;
+            foreach (var value in values)
+            {
+                if (OverflowGuard.Add(total, value) is not { } nextTotal)
+                    return null;
+                total = nextTotal;
+            }
 
+            var mean = total / values.Count;
+            decimal summation = 0;
+            foreach (var value in values)
+            {
+                if (OverflowGuard.Subtract(value, mean) is not { } deviation
+                    || OverflowGuard.Multiply(deviation, deviation) is not { } square
+                    || OverflowGuard.Add(summation, square) is not { } nextSummation)
+                    return null;
+                summation = nextSummation;
+            }
+
+            return summation / values.Count;
+        }
 
         #endregion
 
@@ -433,6 +448,7 @@ namespace Hl7.Cql.Operators
             {
                 var nonNull = source
                     .Where(d => d.HasValue)
+                    .Select(d => d!.Value)
                     .ToList();
                 if (nonNull.Count == 0)
                 {
@@ -440,17 +456,9 @@ namespace Hl7.Cql.Operators
                 }
                 else
                 {
-                    // Formula: Sqrt( summation(each value from population - population mean)^2 / size of population)
-                    var mean = Avg(nonNull)!.Value;
-                    var summation = nonNull
-                        .Select(d => d!.Value)
-                        .Sum(d =>
-                        {
-                            var a = d - mean;
-                            return a * a;
-                        });
-                    decimal result = summation / nonNull.Count;
-                    return result;
+                    // Formula: summation(each value from population - population mean)^2 / size of population
+                    return PopulationVarianceOf(nonNull)
+                        ?? Overflowed<decimal?>(new { source }, "CqlOperators.AggregateFunctions.PopulationVariance", "type decimal population variance");
                 }
             }
         }
@@ -475,14 +483,8 @@ namespace Hl7.Cql.Operators
                 {
                     var unit = nonNull.Select(q => q!.unit).FirstOrDefault() ?? "1";
 
-                    decimal mean = Avg(nonNull.Select(q => q!.value))!.Value;
-                    var summation = nonNull
-                        .Sum(d =>
-                        {
-                            decimal a = d!.value!.Value - mean;
-                            return a * a;
-                        });
-                    var result = summation / nonNull!.Count;
+                    if (PopulationVarianceOf(nonNull.Select(q => q!.value!.Value).ToList()) is not { } result)
+                        return Overflowed<CqlQuantity>(new { source }, "CqlOperators.AggregateFunctions.PopulationVariance", "type CqlQuantity population variance");
                     return new CqlQuantity(result, unit);
                 }
             }
@@ -553,41 +555,69 @@ namespace Hl7.Cql.Operators
         {
             if (argument is null) return null;
 
-            double result = 0;
             var nonNull = argument
                 .Where(d => d != null)
                 .Select(d => (double)d!.Value)
                 .ToArray();
             if (nonNull.Length == 0)
                 return null;
-            double average = nonNull.Average();
-            var sum = nonNull.Sum(d => Math.Pow(d - average, 2));
-            result = Math.Sqrt((sum) / (nonNull.Count() - 1));
-            return (decimal)result;
+            if (SampleStdDev(nonNull) is not { } result)
+                return null;
+            return OverflowGuard.ToDecimal(result)
+                ?? Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.StdDev", "type decimal standard deviation");
         }
 
         public CqlQuantity? StdDev(IEnumerable<CqlQuantity?>? argument)
         {
             if (argument is null) return null;
 
+            if (QuantityValues(argument, "CqlOperators.AggregateFunctions.StdDev", "type CqlQuantity standard deviation") is not var (values, unit))
+                return null;
+            if (SampleStdDev(values) is not { } result)
+                return null;
+            return OverflowGuard.ToDecimal(result) is { } value
+                ? new CqlQuantity(value, unit)
+                : Overflowed<CqlQuantity>(new { argument }, "CqlOperators.AggregateFunctions.StdDev", "type CqlQuantity standard deviation");
+        }
+
+        /// <summary>
+        /// The sample standard deviation, or <see langword="null"/> for fewer than two values: it divides by one less
+        /// than the number of values, and "operations that cause arithmetic overflow or underflow, or otherwise cannot
+        /// be performed (such as division by 0) will result in null" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference,
+        /// section "Arithmetic Operators").
+        /// </summary>
+        private static double? SampleStdDev(double[] values)
+        {
+            if (values.Length < 2)
+                return null;
+
+            var average = values.Average();
+            var sum = values.Sum(d => Math.Pow(d - average, 2));
+            return Math.Sqrt(sum / (values.Length - 1));
+        }
+
+        /// <summary>
+        /// The values of the quantities that have one, as doubles, and their common unit; or <see langword="null"/>
+        /// when there are none, or when their units differ, which is reported as a warning.
+        /// </summary>
+        private (double[] Values, string Unit)? QuantityValues(IEnumerable<CqlQuantity?> argument, string code, string operation)
+        {
             var nonNull = argument
                 .Where(d => d != null && d.value != null)
                 .ToArray();
             if (nonNull.Length == 0)
                 return null;
-            var values = nonNull
-                .Select(q => (double)q!.value!.Value);
             var units = nonNull
                 .Select(q => q!.unit ?? "1")
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .ToArray();
             if (units.Length != 1)
-                throw new NotSupportedException("Mixed units are not supported.");
+            {
+                InconsistentUnits(new { argument }, code, operation);
+                return null;
+            }
 
-            var average = values.Average();
-            var sum = values.Sum(d => Math.Pow(d - average, 2));
-            var result = (decimal)Math.Sqrt((sum) / (nonNull.Count() - 1));
-            return new CqlQuantity(result, units[0]);
+            return (nonNull.Select(q => (double)q!.value!.Value).ToArray(), units[0]);
         }
 
         #endregion
@@ -654,20 +684,36 @@ namespace Hl7.Cql.Operators
 
         public decimal? Variance(IEnumerable<decimal?>? argument)
         {
-            var stdDev = StdDev(argument);
-            if (stdDev == null) return null;
-            return (decimal)Math.Pow((double)stdDev.Value, 2);
+            if (argument is null) return null;
+
+            var nonNull = argument
+                .Where(d => d != null)
+                .Select(d => (double)d!.Value)
+                .ToArray();
+            if (nonNull.Length == 0 || SampleStdDev(nonNull) is not { } stdDev)
+                return null;
+            return SquareOfStdDev(stdDev)
+                ?? Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.Variance", "type decimal variance");
         }
 
         public CqlQuantity? Variance(IEnumerable<CqlQuantity?>? argument)
         {
-            var stdDev = StdDev(argument);
-            if (stdDev == null || stdDev.value == null)
-                return null;
+            if (argument is null) return null;
 
-            var varianceVal = (decimal)Math.Pow((double)stdDev!.value!.Value, 2);
-            return new CqlQuantity(varianceVal, stdDev.unit);
+            if (QuantityValues(argument, "CqlOperators.AggregateFunctions.Variance", "type CqlQuantity variance") is not var (values, unit)
+                || SampleStdDev(values) is not { } stdDev)
+                return null;
+            return SquareOfStdDev(stdDev) is { } varianceVal
+                ? new CqlQuantity(varianceVal, unit)
+                : Overflowed<CqlQuantity>(new { argument }, "CqlOperators.AggregateFunctions.Variance", "type CqlQuantity variance");
         }
+
+        /// <summary>
+        /// The square of a standard deviation taken to Decimal, or <see langword="null"/> when the standard deviation or
+        /// its square is outside the Decimal range.
+        /// </summary>
+        private static decimal? SquareOfStdDev(double stdDev) =>
+            OverflowGuard.ToDecimal(stdDev) is { } value ? OverflowGuard.ToDecimal(Math.Pow((double)value, 2)) : null;
 
         #endregion
     }

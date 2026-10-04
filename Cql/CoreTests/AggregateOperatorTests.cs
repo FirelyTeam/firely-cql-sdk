@@ -15,9 +15,9 @@ using Hl7.Cql.Primitives;
 namespace CoreTests;
 
 /// <summary>
-/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>, <c>Product</c>): the
-/// values they return per spec §9.B, null with a warning where a result cannot be represented, and the fact that the
-/// first three read their source exactly once.
+/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>, <c>Product</c>,
+/// <c>StdDev</c>, <c>Variance</c> and their population forms): the values they return per spec §9.B, null with a
+/// warning where a result cannot be represented, and the fact that the first three read their source exactly once.
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
@@ -377,6 +377,73 @@ public class AggregateOperatorTests
         AssertNullWithOneWarning(
             o => o.Product([new CqlQuantity(2m, "mg"), new CqlQuantity(3m, "g")]),
             "CqlOperators.AggregateFunctions.Product");
+    }
+
+    #endregion
+
+    #region StdDev, Variance, PopulationStdDev, PopulationVariance
+
+    /// <summary>
+    /// The sample standard deviation and variance divide by one less than the number of values, which is zero for a
+    /// single value; division by zero results in null.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_SingleValue_AreNull()
+    {
+        Assert.IsNull(Operators().StdDev(new decimal?[] { 1m, null }));
+        Assert.IsNull(Operators().Variance(new decimal?[] { 1m, null }));
+        Assert.IsNull(Operators().StdDev([new CqlQuantity(1m, "mg")]));
+        Assert.IsNull(Operators().Variance([new CqlQuantity(1m, "mg")]));
+    }
+
+    [TestMethod]
+    public void StdDev_OutsideDecimalRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.StdDev(new decimal?[] { decimal.MaxValue, decimal.MinValue }), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(
+            o => o.StdDev([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(decimal.MinValue, "mg")]),
+            "CqlOperators.AggregateFunctions.StdDev");
+    }
+
+    /// <summary>
+    /// The standard deviation of these values is representable, its square is not.
+    /// </summary>
+    [TestMethod]
+    public void Variance_OutsideDecimalRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Variance(new decimal?[] { 1e15m, -1e15m }), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(
+            o => o.Variance([new CqlQuantity(1e15m, "mg"), new CqlQuantity(-1e15m, "mg")]),
+            "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    [TestMethod]
+    public void StdDevAndVariance_QuantitiesOfDifferentUnits_AreNullWithOneWarning()
+    {
+        CqlQuantity?[] quantities = [new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "g")];
+
+        AssertNullWithOneWarning(o => o.StdDev(quantities), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.Variance(quantities), "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// The total of the values, a deviation from their mean or its square leaves the Decimal range.
+    /// </summary>
+    [TestMethod]
+    public void PopulationStdDevAndVariance_OutsideDecimalRange_AreNullWithOneWarning()
+    {
+        foreach (var values in new[] { new decimal?[] { decimal.MaxValue, decimal.MaxValue }, [decimal.MaxValue, decimal.MinValue], [1e15m, -1e15m] })
+        {
+            AssertNullWithOneWarning(o => o.PopulationVariance(values), "CqlOperators.AggregateFunctions.PopulationVariance");
+            AssertNullWithOneWarning(
+                o => o.PopulationVariance(values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg"))),
+                "CqlOperators.AggregateFunctions.PopulationVariance");
+        }
+
+        AssertNullWithOneWarning(o => o.PopulationStdDev(new decimal?[] { decimal.MaxValue, decimal.MinValue }), "CqlOperators.AggregateFunctions.PopulationStdDev");
+        AssertNullWithOneWarning(
+            o => o.PopulationStdDev([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(decimal.MinValue, "mg")]),
+            "CqlOperators.AggregateFunctions.PopulationStdDev");
     }
 
     #endregion
