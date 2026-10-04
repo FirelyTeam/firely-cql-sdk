@@ -37,13 +37,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "FloorIntegerLessThanMinInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
             { "FloorIntegerGreaterThanMaxInteger", "An integer literal outside the Integer range is not read as a Long literal, so the call has no argument to resolve." },
 
-            { "RatioEqual", "The expression builder does not support Ratio." },
-            { "RatioNotEqualDiffNumerator", "The expression builder does not support Ratio." },
-            { "RatioNotEqualDiffDenominator", "The expression builder does not support Ratio." },
-            { "RatioEquivalent", "The expression builder does not support Ratio." },
-            { "RatioNotEquivalentDiffNumerator", "The expression builder does not support Ratio." },
-            { "RatioNotEquivalentDiffDenominator", "The expression builder does not support Ratio." },
-
             { "MegaMultiDistinct", "`aggregate distinct` over a multi-source query binds Distinct with the aggregate's type instead of the source tuple type, and no overload matches." },
         };
 

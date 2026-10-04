@@ -940,4 +940,155 @@ public class CqlComparersTests
         Assert.AreEqual(0, comparers.Compare(null, null, null));
         Assert.AreEqual(0, comparers.Compare(null, null, null));
     }
+
+    private static CqlRatio Ratio(decimal? numerator, string numeratorUnit, decimal? denominator, string denominatorUnit) =>
+        new(new CqlQuantity(numerator, numeratorUnit), new CqlQuantity(denominator, denominatorUnit));
+
+    /// <summary>
+    /// Ratio equality compares numerator with numerator and denominator with denominator using
+    /// quantity equality semantics (CQL 1.5.3, Appendix B, Comparison Operators, "Equal": "For ratios,
+    /// this means that the numerator and denominator must be the same, using quantity equality
+    /// semantics."), including the specification's examples <c>1:8 = 1:8</c> and <c>1:8 = 2:16</c>.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equal_ComparesNumeratorsAndDenominators()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(true, operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 2m, "cm")));
+        Assert.AreEqual(false, operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(1.1m, "cm", 2m, "cm")));
+        Assert.AreEqual(false, operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 2.1m, "cm")));
+        Assert.AreEqual(true, operators.Equal(Ratio(1m, "1", 8m, "1"), Ratio(1m, "1", 8m, "1")));
+        Assert.AreEqual(false, operators.Equal(Ratio(1m, "1", 8m, "1"), Ratio(2m, "1", 16m, "1")));
+        Assert.AreEqual(true, operators.NotEqual(Ratio(1m, "1", 8m, "1"), Ratio(2m, "1", 16m, "1")));
+
+        // Quantity equality converts units, so the parts may be written in different units.
+        Assert.AreEqual(true, operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(10m, "mm", 0.02m, "m")));
+    }
+
+    /// <summary>
+    /// A part whose quantity comparison is unknown makes the ratio comparison unknown, unless the
+    /// other part is known to differ. A null ratio operand gives null.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equal_IsNullWhenAPartIsUnknownAndNoPartDiffers()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        // Incommensurable denominators: quantity equality is null.
+        Assert.IsNull(operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 2m, "g")));
+        Assert.AreEqual(false, operators.Equal(Ratio(1m, "cm", 2m, "cm"), Ratio(3m, "cm", 2m, "g")));
+
+        var nullNumerator = new CqlRatio(null, new CqlQuantity(2m, "cm"));
+        Assert.IsNull(operators.Equal(nullNumerator, new CqlRatio(null, new CqlQuantity(2m, "cm"))));
+        Assert.IsNull(operators.Equal(nullNumerator, nullNumerator));
+        Assert.AreEqual(false, operators.Equal(nullNumerator, Ratio(1m, "cm", 3m, "cm")));
+
+        Assert.IsNull(operators.Equal(null, Ratio(1m, "cm", 2m, "cm")));
+        Assert.IsNull(operators.Equal(Ratio(1m, "cm", 2m, "cm"), null));
+    }
+
+    /// <summary>
+    /// Ratios are equivalent when they represent the same ratio (CQL 1.5.3, Appendix B, Comparison
+    /// Operators, "Equivalent": "For ratios, equivalent means that the numerator and denominator
+    /// represent the same ratio (e.g. 1:100 ~ 10:1000)."), that is, when numerator divided by
+    /// denominator is an equivalent quantity on both sides.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equivalent_ComparesTheRepresentedRatio()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 2m, "cm")));
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "1", 100m, "1"), Ratio(10m, "1", 1000m, "1")));
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "1", 8m, "1"), Ratio(2m, "1", 16m, "1")));
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "mg", 2m, "mL"), Ratio(2m, "mg", 4m, "mL")));
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "g", 1m, "L"), Ratio(1m, "mg", 1m, "mL")));
+        Assert.AreEqual(true, operators.Equivalent(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "m", 2m, "m")));
+
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "cm", 2m, "cm"), Ratio(3m, "cm", 2m, "cm")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 3m, "cm")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "mg", 2m, "mL"), Ratio(2m, "mg", 3m, "mL")));
+    }
+
+    /// <summary>
+    /// Quotients of different dimensions are not equivalent: <c>mg/mL</c> is a concentration and
+    /// <c>cm/cm</c> is dimensionless, even where the numbers agree.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equivalent_IncommensurableQuotients_AreNotEquivalent()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "mg", 2m, "mL"), Ratio(1m, "cm", 2m, "cm")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "cm", 2m, "g"), Ratio(1m, "cm", 2m, "cm")));
+    }
+
+    /// <summary>
+    /// A ratio that cannot be divided represents no ratio, so it is equivalent to no ratio: a zero
+    /// denominator, a null part, or units the metric service cannot divide. Equivalence still returns
+    /// true or false, never null.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equivalent_IsFalseWhenARatioCannotBeDivided()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "1", 0m, "1"), Ratio(2m, "1", 0m, "1")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "1", 0m, "1"), Ratio(1m, "1", 0m, "1")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "1", 0m, "1"), Ratio(1m, "1", 2m, "1")));
+
+        Assert.AreEqual(false, operators.Equivalent(
+            new CqlRatio(null, new CqlQuantity(2m, "cm")),
+            new CqlRatio(null, new CqlQuantity(2m, "cm"))));
+        Assert.AreEqual(false, operators.Equivalent(
+            new CqlRatio(new CqlQuantity(null, "cm"), new CqlQuantity(2m, "cm")),
+            Ratio(1m, "cm", 2m, "cm")));
+
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "widgets", 2m, "m"), Ratio(1m, "widgets", 2m, "m")));
+
+        // A zero denominator does not stop equality, which compares the parts.
+        Assert.AreEqual(true, operators.Equal(Ratio(1m, "1", 0m, "1"), Ratio(1m, "1", 0m, "1")));
+    }
+
+    /// <summary>
+    /// Null ratios follow the null rules of the Equivalent operator: null ~ null is true, and null ~ a
+    /// ratio is false.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equivalent_NullOperands()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        Assert.AreEqual(true, operators.Equivalent((CqlRatio?)null, (CqlRatio?)null));
+        Assert.AreEqual(false, operators.Equivalent(null, Ratio(1m, "cm", 2m, "cm")));
+        Assert.AreEqual(false, operators.Equivalent(Ratio(1m, "cm", 2m, "cm"), null));
+    }
+
+    /// <summary>
+    /// The hash-based list operators deduplicate ratios by equality: equal ratios collapse, including
+    /// ratios whose parts are written in different units, while ratios that are only equivalent stay
+    /// apart.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_DistinctUnionExcept_DeduplicateByEquality()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var distinct = operators.Distinct<CqlRatio>(
+        [
+            Ratio(1m, "cm", 2m, "cm"),
+            Ratio(1m, "cm", 2m, "cm"),
+            Ratio(10m, "mm", 0.02m, "m"),
+            Ratio(2m, "cm", 4m, "cm"),
+        ])!.ToList();
+        Assert.AreEqual(2, distinct.Count);
+
+        var union = operators.Union<CqlRatio>([Ratio(1m, "cm", 2m, "cm")], [Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 3m, "cm")])!.ToList();
+        Assert.AreEqual(2, union.Count);
+
+        var except = operators.Except<CqlRatio>([Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 3m, "cm")], [Ratio(10m, "mm", 2m, "cm")])!.ToList();
+        Assert.AreEqual(1, except.Count);
+        Assert.AreEqual(3m, except[0].denominator!.value);
+    }
 }

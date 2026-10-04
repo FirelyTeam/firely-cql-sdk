@@ -52,6 +52,7 @@ namespace Hl7.Cql.Comparers
 
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this, metricService));
+            Comparers.TryAdd(typeof(CqlRatio), new CqlRatioCqlComparer(this, metricService));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
             Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.OrdinalIgnoreCase);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
