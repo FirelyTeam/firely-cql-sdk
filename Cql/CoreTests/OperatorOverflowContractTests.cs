@@ -10,7 +10,6 @@
 
 using System.Collections;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
@@ -30,14 +29,15 @@ namespace CoreTests
     public class OperatorOverflowContractTests
     {
         /// <summary>
-        /// Operator signatures that do not honour the contract yet; tracked by
-        /// https://github.com/FirelyTeam/firely-cql-sdk/issues/1783.
+        /// Operator signatures that violate the contract, by an overflow or by any other exception that is not a
+        /// <see cref="CqlException{TError}"/>; tracked by https://github.com/FirelyTeam/firely-cql-sdk/issues/1783.
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
             "Add(CqlDate, CqlQuantity)",
             "Add(CqlDateTime, CqlQuantity)",
             "Add(CqlQuantity, CqlQuantity)",
+            "Add(CqlTime, CqlQuantity)",
             "After(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
             "After(CqlInterval<CqlQuantity>, CqlQuantity, string)",
             "After(CqlQuantity, CqlInterval<CqlQuantity>, string)",
@@ -51,19 +51,19 @@ namespace CoreTests
             "ConvertQuantity(CqlQuantity, string)",
             "Date(int?, int?, int?)",
             "DateTime(int?, int?, int?, int?, int?, int?, int?, decimal?)",
-            "Divide(CqlQuantity, CqlQuantity)",
 #if NET8_0
             // On .NET 8 a double outside the Integer range converts to an unspecified Integer, and the remainder the
             // operator then adds to the first date is far outside the DateTime range; later runtimes saturate the
             // conversion and the remainder stays representable.
-            "DifferenceBetween(CqlDate, CqlDate, string)",
             "DifferenceBetween(CqlDateTime, CqlDateTime, string)",
 #endif
+            "Divide(CqlQuantity, CqlQuantity)",
             "Divide(decimal?, decimal?)",
             "Except(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
             "Exp(decimal?)",
             "Expand(CqlInterval<CqlDate>, CqlQuantity)",
             "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
+            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
             "Expand(CqlInterval<decimal?>, CqlQuantity)",
             "Expand(CqlInterval<int?>, CqlQuantity)",
             "Expand(CqlInterval<long?>, CqlQuantity)",
@@ -86,6 +86,7 @@ namespace CoreTests
             "Subtract(CqlDate, CqlQuantity)",
             "Subtract(CqlDateTime, CqlQuantity)",
             "Subtract(CqlQuantity, CqlQuantity)",
+            "Subtract(CqlTime, CqlQuantity)",
             "Time(int?, int?, int?, int?)",
             "Truncate(decimal?)",
             "TruncatedDivide(CqlQuantity, CqlQuantity)",
@@ -153,8 +154,11 @@ namespace CoreTests
         /// </summary>
         private static readonly decimal[] FractionalValues = [0.5m, -0.5m];
 
-        private static readonly string[] Precisions =
-            ["year", "month", "week", "day", "hour", "minute", "second", "millisecond"];
+        private static readonly string[] DatePrecisions = ["year", "month", "day"];
+
+        private static readonly string[] TimePrecisions = ["hour", "minute", "second", "millisecond"];
+
+        private static readonly string[] DateTimePrecisions = [.. DatePrecisions, .. TimePrecisions];
 
         private static readonly Type[] PointTypes =
         [
@@ -225,7 +229,7 @@ namespace CoreTests
                         continue;
                     }
 
-                    if (Invoke(operators, method, arguments) is not { } exception || IsAllowed(exception, arguments))
+                    if (Invoke(operators, method, arguments) is not { } exception || IsAllowed(exception))
                         continue;
 
                     var line = $"{method.Name}({string.Join(", ", arguments.Select(Format))}) threw {exception.GetType().Name}: {exception.Message}";
@@ -332,11 +336,9 @@ namespace CoreTests
         }
 
         /// <summary>
-        /// A <see cref="CqlException{TError}"/> is the error the specification mandates. A plain
-        /// <see cref="ArgumentException"/> naming a unit or precision string passed in is the programming-error contract
-        /// for a string the operator does not accept. Anything else is a violation.
+        /// A <see cref="CqlException{TError}"/> is the error the specification mandates. Anything else is a violation.
         /// </summary>
-        private static bool IsAllowed(Exception exception, object?[] arguments)
+        private static bool IsAllowed(Exception exception)
         {
             for (var type = exception.GetType(); type is not null; type = type.BaseType)
             {
@@ -344,30 +346,7 @@ namespace CoreTests
                     return true;
             }
 
-            return exception.GetType() == typeof(ArgumentException)
-                && StringsIn(arguments).Any(s => Regex.IsMatch(exception.Message, $@"(?<![\w']){Regex.Escape(s)}(?![\w'])")
-                    || exception.Message.Contains($"'{s}'", StringComparison.Ordinal));
-        }
-
-        private static IEnumerable<string> StringsIn(IEnumerable<object?> arguments)
-        {
-            foreach (var argument in arguments)
-            {
-                switch (argument)
-                {
-                    case string s when s.Length > 0:
-                        yield return s;
-                        break;
-                    case CqlQuantity { unit: { Length: > 0 } unit }:
-                        yield return unit;
-                        break;
-                    case ICqlInterval interval:
-                        var points = interval.ToCqlIntervalOfObject();
-                        foreach (var s in StringsIn([points.low, points.high]))
-                            yield return s;
-                        break;
-                }
-            }
+            return false;
         }
 
         private static IEnumerable<object?[]> CartesianProduct(IReadOnlyList<object?>[] sets)
@@ -462,13 +441,6 @@ namespace CoreTests
 
             private readonly Dictionary<(Type, bool Narrow), (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes)> _intervals = new();
 
-            private static readonly IReadOnlyList<object?> PrecisionDomain = [null, .. Precisions];
-
-            /// <summary>
-            /// A precision only qualifies temporal values, so an operator over other types gets null and one precision.
-            /// </summary>
-            private static readonly IReadOnlyList<object?> NonTemporalPrecisionDomain = [null, Precisions[0]];
-
             private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units.Union(ExtremeUnits)];
 
             /// <summary>
@@ -482,9 +454,7 @@ namespace CoreTests
             {
                 var type = parameter.ParameterType;
                 if (type == typeof(string))
-                    return parameter.Name == "unit" ? UnitDomain
-                        : method.GetParameters().Any(p => IsTemporal(p.ParameterType)) ? PrecisionDomain
-                        : NonTemporalPrecisionDomain;
+                    return parameter.Name == "unit" ? UnitDomain : PrecisionDomain(method);
 
                 if (_points.TryGetValue(type, out var points))
                     return extremesOnly ? points.Extremes : points.Full;
@@ -502,6 +472,36 @@ namespace CoreTests
 
             private static IEnumerable<object?> ExtremeQuantities(string unit) =>
                 [new CqlQuantity(decimal.MaxValue, unit), new CqlQuantity(decimal.MinValue, unit)];
+
+            /// <summary>
+            /// Null and the precisions <paramref name="method"/> accepts for its temporal point type. "For Date values,
+            /// precision must be one of: year, month, or day", for DateTime values year to millisecond, and for Time
+            /// values hour to millisecond (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, sections "Date and Time
+            /// Operators" and "Interval Operators"). Section "Difference" adds weeks for Date and DateTime values, as
+            /// does section "Duration", and section "CalculateAge" names year to second with week. A precision only
+            /// qualifies temporal values, so an operator over other types gets one precision.
+            /// </summary>
+            private static IReadOnlyList<object?> PrecisionDomain(MethodInfo method)
+            {
+                var pointType = method.GetParameters()
+                    .Select(p => p.ParameterType.IsGenericType ? p.ParameterType.GetGenericArguments()[0] : p.ParameterType)
+                    .FirstOrDefault(IsTemporal);
+                IEnumerable<string> precisions =
+                    pointType == typeof(CqlDate) ? DatePrecisions
+                    : pointType == typeof(CqlDateTime) ? DateTimePrecisions
+                    : pointType == typeof(CqlTime) ? TimePrecisions
+                    : [DatePrecisions[0]];
+
+                if (pointType == typeof(CqlDate) || pointType == typeof(CqlDateTime))
+                {
+                    if (method.Name is nameof(ICqlOperators.DifferenceBetween) or nameof(ICqlOperators.DurationBetween))
+                        precisions = precisions.Append("week");
+                    else if (method.Name is nameof(ICqlOperators.CalculateAge) or nameof(ICqlOperators.CalculateAgeAt))
+                        precisions = precisions.Append("week").Except(["millisecond"]);
+                }
+
+                return [null, .. precisions];
+            }
 
             private static bool IsTemporal(Type type) =>
                 type == typeof(CqlDate) || type == typeof(CqlDateTime) || type == typeof(CqlTime)
