@@ -36,6 +36,9 @@
 - `duration between` and `difference between` of DateTimes in minutes, seconds or milliseconds whose
   count exceeds the Integer range (for example `duration in milliseconds between` two DateTimes 25 days apart) are
   `null` instead of `2147483647` or a wrapped negative count.
+- `expand` of a Date, DateTime or Time interval, or a list of them, by a `per` below one unit of its precision (such as
+  `per 0.5 years`) is `null`, as for a `per` of zero, instead of never returning: adding the `per` drops its decimal
+  portion, so the partitions did not advance and the result grew without bound.
 - The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a year outside
   0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
   represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
