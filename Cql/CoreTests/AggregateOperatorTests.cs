@@ -342,6 +342,37 @@ public class AggregateOperatorTests
         CollectionAssert.AreEqual(new[] { "CqlOperators.AggregateFunctions.Avg" }, warnings);
     }
 
+    [TestMethod]
+    public void Avg_WithinRange_IsTheMeanOfTheValues()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { 1m, 2m }));
+
+        Assert.AreEqual(1.5m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// The mean of zeroes is a genuine zero, not a result too small to represent.
+    /// </summary>
+    [TestMethod]
+    public void Avg_OfZeroes_IsZeroWithoutWarning()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { 0m, 0m }));
+
+        Assert.AreEqual(0m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// A nonzero mean too small in magnitude to represent is null, as for <c>/</c>, rather than rounded to zero.
+    /// </summary>
+    [TestMethod]
+    public void Avg_NonzeroMeanTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Avg(new decimal?[] { 1e-28m, 0m }), "CqlOperators.AggregateFunctions.Avg");
+        AssertNullWithOneWarning(o => o.Avg(new decimal?[] { -1e-28m, null, 0m }), "CqlOperators.AggregateFunctions.Avg");
+    }
+
     #endregion
 
     #region Product
@@ -445,6 +476,36 @@ public class AggregateOperatorTests
         var (result, warnings) = WithWarnings(o => o.PopulationVariance(new decimal?[] { 0.3333333333333333333333333333m, 0.3333333333333333333333333334m }));
 
         Assert.AreEqual(0m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// The squared deviations of these values are representable, but their mean, the population variance, is nonzero
+    /// and too small in magnitude to represent.
+    /// </summary>
+    [TestMethod]
+    public void PopulationStdDevAndVariance_NonzeroVarianceTooSmallToRepresent_AreNullWithOneWarning()
+    {
+        decimal?[] values = [1e-14m, -1e-14m, 0m, 0m, 0m];
+        var quantities = values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg")).ToArray();
+
+        AssertNullWithOneWarning(o => o.PopulationVariance(values), "CqlOperators.AggregateFunctions.PopulationVariance");
+        AssertNullWithOneWarning(o => o.PopulationVariance(quantities), "CqlOperators.AggregateFunctions.PopulationVariance");
+        AssertNullWithOneWarning(o => o.PopulationStdDev(values), "CqlOperators.AggregateFunctions.PopulationStdDev");
+        AssertNullWithOneWarning(o => o.PopulationStdDev(quantities), "CqlOperators.AggregateFunctions.PopulationStdDev");
+    }
+
+    /// <summary>
+    /// The mean of these values is too small to represent and rounds to zero, which moves each deviation by less than
+    /// the smallest Decimal step; the variance itself is close to one and is representable.
+    /// </summary>
+    [TestMethod]
+    public void PopulationVariance_MeanTooSmallToRepresent_IsTheVarianceAroundZero()
+    {
+        var (result, warnings) = WithWarnings(o => o.PopulationVariance(new decimal?[] { 1m, -0.9999999999999999999999999999m }));
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(1m, result.Value, 1e-27m);
         Assert.AreEqual(0, warnings.Count);
     }
 

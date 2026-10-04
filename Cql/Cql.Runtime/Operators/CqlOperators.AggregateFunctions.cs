@@ -103,8 +103,13 @@ namespace Hl7.Cql.Operators
                     }
                 }
 
-                // The quotient of a total by a count of at least one is no larger than the total.
-                return count == 0 ? null : total / count;
+                if (count == 0)
+                    return null;
+
+                // The quotient of a total by a count of at least one is no larger than the total, so it cannot
+                // overflow; a nonzero quotient too small in magnitude to represent underflows.
+                return OverflowGuard.Divide(total, count)
+                    ?? Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.Avg", "type decimal average");
             }
         }
 
@@ -408,7 +413,7 @@ namespace Hl7.Cql.Operators
 
         /// <summary>
         /// The mean of the squared deviations of <paramref name="values"/> from their mean, or <see langword="null"/>
-        /// when their total, a deviation, its square or the sum of the squares cannot be represented.
+        /// when their total, a deviation, its square, the sum of the squares or their mean cannot be represented.
         /// </summary>
         private static decimal? PopulationVarianceOf(List<decimal> values)
         {
@@ -420,6 +425,8 @@ namespace Hl7.Cql.Operators
                 total = nextTotal;
             }
 
+            // A mean too small to represent rounds to zero, which moves each deviation by less than the smallest
+            // Decimal step, so it is not an underflow of the variance.
             var mean = total / values.Count;
             decimal summation = 0;
             foreach (var value in values)
@@ -431,7 +438,8 @@ namespace Hl7.Cql.Operators
                 summation = nextSummation;
             }
 
-            return summation / values.Count;
+            // The mean of the squares cannot overflow; a nonzero mean too small in magnitude to represent underflows.
+            return OverflowGuard.Divide(summation, values.Count);
         }
 
         /// <summary>
