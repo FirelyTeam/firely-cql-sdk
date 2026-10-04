@@ -10,7 +10,6 @@
 
 using System.Collections;
 using System.Diagnostics;
-using System.Text.RegularExpressions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
@@ -31,11 +30,24 @@ namespace CoreTests
     public class OperatorOverflowContractTests
     {
         /// <summary>
-        /// Operator signatures that do not honour the contract yet; tracked by
-        /// https://github.com/FirelyTeam/firely-cql-sdk/issues/1783.
+        /// Operator signatures that violate the contract, by an overflow or by any other exception that is not a
+        /// <see cref="CqlException{TError}"/>; tracked by https://github.com/FirelyTeam/firely-cql-sdk/issues/1783.
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
+            "Add(CqlDate, CqlQuantity)",
+            "Add(CqlDateTime, CqlQuantity)",
+            "Add(CqlTime, CqlQuantity)",
+            "ConvertQuantity(CqlQuantity, string)",
+            "Expand(CqlInterval<CqlDate>, CqlQuantity)",
+            "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
+            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlDate>>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlDateTime>>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlTime>>, CqlQuantity)",
+            "Subtract(CqlDate, CqlQuantity)",
+            "Subtract(CqlDateTime, CqlQuantity)",
+            "Subtract(CqlTime, CqlQuantity)",
         };
 
         /// <summary>
@@ -62,7 +74,7 @@ namespace CoreTests
         /// The same limit for a method taking only points, whose combinations are cheaper to invoke; it admits every
         /// pair of quantities.
         /// </summary>
-        private const int MaxPointCombinationsForFullDomain = 25_000;
+        private const int MaxPointCombinationsForFullDomain = 35_000;
 
         /// <summary>
         /// A returned sequence is enumerated up to this many items, so deferred work also runs.
@@ -77,12 +89,16 @@ namespace CoreTests
         ];
 
         /// <summary>
-        /// The units of the extreme quantities. A plural calendar word takes the same paths as its singular form.
+        /// The units of the extreme quantities. A plural calendar word takes the same paths as its singular form. The
+        /// units after the calendar words are not in <see cref="Units"/> and appear only with the extreme values: they
+        /// are scaled units of mass, length, volume and time, so a conversion between two units of one dimension
+        /// multiplies the value in one of its directions.
         /// </summary>
         private static readonly string[] ExtremeUnits =
         [
             "1", "mg", "mL", "cm", "a", "mo",
             "year", "month", "week", "day", "hour", "minute", "second", "millisecond",
+            "kg", "g", "ug", "km", "mm", "L", "wk", "d", "h", "min", "s", "ms",
         ];
 
         /// <summary>
@@ -90,8 +106,11 @@ namespace CoreTests
         /// </summary>
         private static readonly decimal[] FractionalValues = [0.5m, -0.5m];
 
-        private static readonly string[] Precisions =
-            ["year", "month", "week", "day", "hour", "minute", "second", "millisecond"];
+        private static readonly string[] DatePrecisions = ["year", "month", "day"];
+
+        private static readonly string[] TimePrecisions = ["hour", "minute", "second", "millisecond"];
+
+        private static readonly string[] DateTimePrecisions = [.. DatePrecisions, .. TimePrecisions];
 
         private static readonly Type[] PointTypes =
         [
@@ -166,6 +185,12 @@ namespace CoreTests
                     argumentSets = parameters
                         .Select(p => domains.For(p, method, extremesOnly: true))
                         .ToArray();
+                    if (argumentSets.Aggregate(1L, (product, set) => product * set.Count) > MaxPointCombinationsForFullDomain)
+                    {
+                        argumentSets = parameters
+                            .Select(p => domains.ForManyArguments(p, method))
+                            .ToArray();
+                    }
                 }
 
                 var watch = Stopwatch.StartNew();
@@ -179,7 +204,7 @@ namespace CoreTests
                         continue;
                     }
 
-                    if (Invoke(operators, method, arguments) is not { } exception || IsAllowed(exception, arguments))
+                    if (Invoke(operators, method, arguments) is not { } exception || IsAllowed(exception))
                         continue;
 
                     var line = $"{method.Name}({string.Join(", ", arguments.Select(Format))}) threw {exception.GetType().Name}: {exception.Message}";
@@ -318,11 +343,9 @@ namespace CoreTests
         }
 
         /// <summary>
-        /// A <see cref="CqlException{TError}"/> is the error the specification mandates. A plain
-        /// <see cref="ArgumentException"/> naming a unit or precision string passed in is the programming-error contract
-        /// for a string the operator does not accept. Anything else is a violation.
+        /// A <see cref="CqlException{TError}"/> is the error the specification mandates. Anything else is a violation.
         /// </summary>
-        private static bool IsAllowed(Exception exception, object?[] arguments)
+        private static bool IsAllowed(Exception exception)
         {
             for (var type = exception.GetType(); type is not null; type = type.BaseType)
             {
@@ -330,34 +353,7 @@ namespace CoreTests
                     return true;
             }
 
-            return exception.GetType() == typeof(ArgumentException)
-                && StringsIn(arguments).Any(s => Regex.IsMatch(exception.Message, $@"(?<![\w']){Regex.Escape(s)}(?![\w'])")
-                    || exception.Message.Contains($"'{s}'", StringComparison.Ordinal));
-        }
-
-        private static IEnumerable<string> StringsIn(IEnumerable<object?> arguments)
-        {
-            foreach (var argument in arguments)
-            {
-                switch (argument)
-                {
-                    case string s when s.Length > 0:
-                        yield return s;
-                        break;
-                    case CqlQuantity { unit: { Length: > 0 } unit }:
-                        yield return unit;
-                        break;
-                    case ICqlInterval interval:
-                        var points = interval.ToCqlIntervalOfObject();
-                        foreach (var s in StringsIn([points.low, points.high]))
-                            yield return s;
-                        break;
-                    case IEnumerable list:
-                        foreach (var s in StringsIn(list.Cast<object?>()))
-                            yield return s;
-                        break;
-                }
-            }
+            return false;
         }
 
         private static IEnumerable<object?[]> CartesianProduct(IReadOnlyList<object?>[] sets)
@@ -434,8 +430,12 @@ namespace CoreTests
                 [typeof(long?)] = Numbers(long.MinValue, long.MaxValue, 0L, 1L, -1L),
                 [typeof(decimal?)] = Numbers(decimal.MinValue, decimal.MaxValue, 0m, 1m, -1m, FractionalValues),
                 [typeof(CqlQuantity)] = (
-                    [.. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Concat(FractionalValues).Select(v => new CqlQuantity(v, u))), null],
-                    [.. ExtremeUnits.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue }.Select(v => new CqlQuantity(v, u))), null]),
+                    [
+                        .. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Concat(FractionalValues).Select(v => new CqlQuantity(v, u))),
+                        .. ExtremeUnits.Except(Units).SelectMany(ExtremeQuantities),
+                        null,
+                    ],
+                    [.. ExtremeUnits.SelectMany(ExtremeQuantities), null]),
                 [typeof(CqlDate)] = Temporal(
                     CqlDate.MinValue,
                     CqlDate.MaxValue,
@@ -457,22 +457,20 @@ namespace CoreTests
 
             private readonly Dictionary<(Type, bool Narrow), (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes)> _lists = new();
 
-            private static readonly IReadOnlyList<object?> PrecisionDomain = [null, .. Precisions];
+            private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units.Union(ExtremeUnits)];
 
             /// <summary>
-            /// A precision only qualifies temporal values, so an operator over other types gets null and one precision.
+            /// The quantities for a method whose extremes-only argument space is still larger than
+            /// <see cref="MaxPointCombinationsForFullDomain"/>: the largest value in each unit.
             /// </summary>
-            private static readonly IReadOnlyList<object?> NonTemporalPrecisionDomain = [null, Precisions[0]];
-
-            private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units];
+            private static readonly IReadOnlyList<object?> ManyArgumentQuantities =
+                [.. ExtremeUnits.Select(u => new CqlQuantity(decimal.MaxValue, u)), null];
 
             public IReadOnlyList<object?> For(ParameterInfo parameter, MethodInfo method, bool extremesOnly)
             {
                 var type = parameter.ParameterType;
                 if (type == typeof(string))
-                    return parameter.Name == "unit" ? UnitDomain
-                        : method.GetParameters().Any(p => IsTemporal(p.ParameterType)) ? PrecisionDomain
-                        : NonTemporalPrecisionDomain;
+                    return parameter.Name == "unit" ? UnitDomain : PrecisionDomain(method);
 
                 // Expansion enumerates every point of the interval, so it gets only intervals of a few points.
                 var narrow = method.Name == nameof(ICqlOperators.Expand);
@@ -570,6 +568,51 @@ namespace CoreTests
                 return list;
             }
 
+            public IReadOnlyList<object?> ForManyArguments(ParameterInfo parameter, MethodInfo method) =>
+                parameter.ParameterType == typeof(CqlQuantity) ? ManyArgumentQuantities : For(parameter, method, extremesOnly: true);
+
+            private static IEnumerable<object?> ExtremeQuantities(string unit) =>
+                [new CqlQuantity(decimal.MaxValue, unit), new CqlQuantity(decimal.MinValue, unit)];
+
+            /// <summary>
+            /// Null and the precisions <paramref name="method"/> accepts for its temporal point type. "For Date values,
+            /// precision must be one of: year, month, or day", for DateTime values year to millisecond, and for Time
+            /// values hour to millisecond (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, sections "Date and Time
+            /// Operators" and "Interval Operators"). Section "Difference" adds weeks for Date and DateTime values, as
+            /// does section "Duration", and section "CalculateAge" names year to second with week. A precision only
+            /// qualifies temporal values, so an operator over other types gets one precision.
+            /// </summary>
+            private static IReadOnlyList<object?> PrecisionDomain(MethodInfo method)
+            {
+                var pointType = method.GetParameters()
+                    .Select(p => PointTypeOf(p.ParameterType))
+                    .FirstOrDefault(IsTemporal);
+                IEnumerable<string> precisions =
+                    pointType == typeof(CqlDate) ? DatePrecisions
+                    : pointType == typeof(CqlDateTime) ? DateTimePrecisions
+                    : pointType == typeof(CqlTime) ? TimePrecisions
+                    : [DatePrecisions[0]];
+
+                if (pointType == typeof(CqlDate) || pointType == typeof(CqlDateTime))
+                {
+                    if (method.Name is nameof(ICqlOperators.DifferenceBetween) or nameof(ICqlOperators.DurationBetween))
+                        precisions = precisions.Append("week");
+                    else if (method.Name is nameof(ICqlOperators.CalculateAge) or nameof(ICqlOperators.CalculateAgeAt))
+                        precisions = precisions.Append("week").Except(["millisecond"]);
+                }
+
+                return [null, .. precisions];
+            }
+
+            /// <summary>
+            /// The type of the points <paramref name="type"/> holds: the point type of an interval, of a list or of a list
+            /// of intervals, or the type itself.
+            /// </summary>
+            private static Type PointTypeOf(Type type) =>
+                ListElementType(type) is { } element ? PointTypeOf(element)
+                : type.IsGenericType && type.GetGenericTypeDefinition() == typeof(CqlInterval<>) ? type.GetGenericArguments()[0]
+                : type;
+
             private static bool IsTemporal(Type type) =>
                 type == typeof(CqlDate) || type == typeof(CqlDateTime) || type == typeof(CqlTime)
                 || (type.IsGenericType && IsTemporal(type.GetGenericArguments()[0]));
@@ -582,7 +625,8 @@ namespace CoreTests
 
             /// <summary>
             /// Closed and open intervals at the extremes of the point type, and intervals with a null boundary. For a
-            /// quantity point type the intervals are built per unit from that unit's extreme quantities.
+            /// quantity point type the intervals are built per unit from that unit's quantities, and a unit that has
+            /// only extreme quantities gets only the intervals of the extremes-only variant.
             /// </summary>
             private static (IReadOnlyList<object?>, IReadOnlyList<object?>) Intervals(
                 Type intervalType,
@@ -598,6 +642,15 @@ namespace CoreTests
                     {
                         var q = points.Full.OfType<CqlQuantity>().Where(q => q.unit == unit).ToArray();
                         AddQuantityIntervals(full, ExtremeUnits.Contains(unit) ? extremes : null, intervalType, q[1], q[0], q[2], q[3], narrow);
+                    }
+
+                    foreach (var unit in ExtremeUnits.Except(Units))
+                    {
+                        var q = points.Full.OfType<CqlQuantity>().Where(q => q.unit == unit).ToArray();
+                        List<object?> shapes = narrow ? [] : [MakeInterval(intervalType, q[1], q[0], true, true)];
+                        shapes.Add(MakeInterval(intervalType, q[0], q[0], false, true));
+                        full.AddRange(shapes);
+                        extremes.AddRange(shapes);
                     }
                 }
                 else
