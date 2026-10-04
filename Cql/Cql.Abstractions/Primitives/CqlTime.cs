@@ -114,29 +114,21 @@ namespace Hl7.Cql.Primitives
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
-            var span = Value.TimeSpan;
-            try
+            var shifted = unit switch
             {
-                span = unit switch
-                {
-                    UCUMUnits.Minute or "minute" or "minutes" => span.Add(TimeSpan.FromMinutes(Math.Truncate((double)value))),
-                    UCUMUnits.Millisecond or "millisecond" or "milliseconds" => span.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)value))),
-                    UCUMUnits.Day or "day" or "days" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value))),
-                    UCUMUnits.Week or "week" or "weeks" => span.Add(TimeSpan.FromDays(Math.Truncate((double)value) * CqlDateTimeMath.DaysPerWeekDouble)),
-                    UCUMUnits.Hour or "hour" or "hours" => span.Add(TimeSpan.FromHours(Math.Truncate((double)value))),
-                    UCUMUnits.Second or "second" or "seconds" => span.Add(TimeSpan.FromSeconds(Math.Truncate((double)value))),
-                    _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
-                };
-            }
-            catch (OverflowException)
-            {
-                // A quantity too large for a TimeSpan lands outside the day just the same.
-                return null;
-            }
+                UCUMUnits.Minute or "minute" or "minutes" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromMinutes(Math.Truncate((double)v)))),
+                UCUMUnits.Millisecond or "millisecond" or "milliseconds" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromMilliseconds(Math.Truncate((double)v)))),
+                UCUMUnits.Day or "day" or "days" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromDays(Math.Truncate((double)v)))),
+                UCUMUnits.Week or "week" or "weeks" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromDays(Math.Truncate((double)v) * CqlDateTimeMath.DaysPerWeekDouble))),
+                UCUMUnits.Hour or "hour" or "hours" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromHours(Math.Truncate((double)v)))),
+                UCUMUnits.Second or "second" or "seconds" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromSeconds(Math.Truncate((double)v)))),
+                _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
 
             // A time-of-day outside 00:00:00.000 to 23:59:59.999 cannot be represented, so the
-            // result is null rather than a wrapped-around time.
-            if (span < TimeSpan.Zero || span >= TimeSpan.FromDays(1))
+            // result is null rather than a wrapped-around time; a quantity too large for a TimeSpan
+            // lands outside the day just the same.
+            if (shifted is not { } span || span < TimeSpan.Zero || span >= TimeSpan.FromDays(1))
                 return null;
 
             var newIsoTime = new TimeIso8601(span, Value.OffsetHour, Value.OffsetMinute, Value.Precision);
