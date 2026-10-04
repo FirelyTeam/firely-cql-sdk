@@ -48,6 +48,12 @@ partial class CqlComparers
         protected override bool DefaultEqualityImpliesEquality => false;
 
         /// <summary>
+        /// A ratio is not equivalent to itself when it represents no ratio, such as one with a zero
+        /// denominator or a null part.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
+
+        /// <summary>
         /// Compares the numerators, then the denominators, using quantity comparison; equality is derived
         /// from this comparison. A part that is known to differ decides the comparison even when the other
         /// part is unknown, so that the derived equality is false rather than unknown.
@@ -126,12 +132,13 @@ partial class CqlComparers
         }
 
         /// <summary>
-        /// Equal ratios have equal numerators and equal denominators, so the hash combines the quantity
-        /// hashes of the parts, which are taken over the canonical form of each quantity.
+        /// Every ratio has the same hash code. Equality compares the parts with quantity equality, which
+        /// treats the unit <c>'1'</c> as matching any unit and converts between units, so <c>1:2</c> and
+        /// <c>1 'cm':2 'cm'</c> are equal ratios. That leaves no value-dependent hash two equal ratios are
+        /// guaranteed to share, so all ratios hash to one bucket and the hash-based list operators
+        /// (Distinct, Union, Except) compare them pairwise.
         /// </summary>
         protected override int GetHashCodeValue(CqlRatio value) =>
-            HashCode.Combine(
-                QuantityComparer.GetHashCode(value.numerator),
-                QuantityComparer.GetHashCode(value.denominator));
+            typeof(CqlRatio).GetHashCode();
     }
 }

@@ -144,13 +144,21 @@ internal abstract class CqlComparer<T>(
             ? EquivalentValuesShared(tx, ty, precision)
             : false;
 
+    /// <summary>
+    /// Whether two values that the type's own equality considers equal are equivalent, without
+    /// consulting <see cref="CompareValues"/>, <see cref="EqualsValues"/> or <see cref="EquivalentValues"/>.
+    /// A comparer whose values can be equal in representation yet not equivalent in CQL, such as a
+    /// ratio that represents no ratio because its denominator is zero, turns this off.
+    /// </summary>
+    protected virtual bool DefaultEqualityImpliesEquivalence => true;
+
     private bool EquivalentValuesShared(
         T x,
         T y,
         string? precision)
     {
         // Do a quick check for equality
-        if (EqualityComparer<T>.Default.Equals(x, y))
+        if (DefaultEqualityImpliesEquivalence && EqualityComparer<T>.Default.Equals(x, y))
             return true;
 
         switch (EquivalentImplementation)

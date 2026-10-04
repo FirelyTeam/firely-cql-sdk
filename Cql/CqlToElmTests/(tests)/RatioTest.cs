@@ -90,5 +90,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var distinct = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Distinct>();
             Run<IEnumerable<CqlRatio>>(distinct, lib).Should().ContainSingle();
         }
+
+        [TestMethod]
+        public void Distinct_removes_ratios_equal_through_the_default_unit()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("distinct { 1:2, 1 'cm':2 'cm' }");
+            var distinct = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Distinct>();
+            Run<IEnumerable<CqlRatio>>(distinct, lib).Should().ContainSingle();
+        }
     }
 }
