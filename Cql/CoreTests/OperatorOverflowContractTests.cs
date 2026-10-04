@@ -52,6 +52,13 @@ namespace CoreTests
             "Date(int?, int?, int?)",
             "DateTime(int?, int?, int?, int?, int?, int?, int?, decimal?)",
             "Divide(CqlQuantity, CqlQuantity)",
+#if NET8_0
+            // On .NET 8 a double outside the Integer range converts to an unspecified Integer, and the remainder the
+            // operator then adds to the first date is far outside the DateTime range; later runtimes saturate the
+            // conversion and the remainder stays representable.
+            "DifferenceBetween(CqlDate, CqlDate, string)",
+            "DifferenceBetween(CqlDateTime, CqlDateTime, string)",
+#endif
             "Divide(decimal?, decimal?)",
             "Except(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
             "Exp(decimal?)",
