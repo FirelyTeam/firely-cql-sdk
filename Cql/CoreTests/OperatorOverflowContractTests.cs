@@ -52,6 +52,7 @@ namespace CoreTests
             "Date(int?, int?, int?)",
             "DateTime(int?, int?, int?, int?, int?, int?, int?, decimal?)",
             "Divide(CqlQuantity, CqlQuantity)",
+            "Divide(decimal?, decimal?)",
             "Except(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
             "Exp(decimal?)",
             "Expand(CqlInterval<CqlDate>, CqlQuantity)",
@@ -81,8 +82,21 @@ namespace CoreTests
             "Time(int?, int?, int?, int?)",
             "Truncate(decimal?)",
             "TruncatedDivide(CqlQuantity, CqlQuantity)",
+            "TruncatedDivide(decimal?, decimal?)",
             "TruncatedDivide(int?, int?)",
             "TruncatedDivide(long?, long?)",
+        };
+
+        /// <summary>
+        /// Operator signatures that do not return for a quantity argument whose value has a fractional part, and whose
+        /// invocations with such an argument are therefore not executed; tracked by
+        /// https://github.com/FirelyTeam/firely-cql-sdk/issues/1783.
+        /// </summary>
+        private static readonly HashSet<string> KnownNonTerminating = new(StringComparer.Ordinal)
+        {
+            "Expand(CqlInterval<CqlDate>, CqlQuantity)",
+            "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
+            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
         };
 
         /// <summary>
@@ -91,10 +105,16 @@ namespace CoreTests
         private const int MaxValueParametersForFullDomain = 2;
 
         /// <summary>
-        /// A method whose full argument space holds more combinations than this is invoked with the extreme values of
-        /// each type only.
+        /// A method taking an interval whose full argument space holds more combinations than this is invoked with the
+        /// extreme values of each type only.
         /// </summary>
         private const int MaxCombinationsForFullDomain = 15_000;
+
+        /// <summary>
+        /// The same limit for a method taking only points, whose combinations are cheaper to invoke; it admits every
+        /// pair of quantities.
+        /// </summary>
+        private const int MaxPointCombinationsForFullDomain = 25_000;
 
         /// <summary>
         /// A returned sequence is enumerated up to this many items, so deferred work also runs.
@@ -116,6 +136,11 @@ namespace CoreTests
             "1", "mg", "mL", "cm", "a", "mo",
             "year", "month", "week", "day", "hour", "minute", "second", "millisecond",
         ];
+
+        /// <summary>
+        /// Values below one in magnitude, which divide into a quotient larger than the dividend.
+        /// </summary>
+        private static readonly decimal[] FractionalValues = [0.5m, -0.5m];
 
         private static readonly string[] Precisions =
             ["year", "month", "week", "day", "hour", "minute", "second", "millisecond"];
@@ -154,6 +179,7 @@ namespace CoreTests
             var timings = new List<(string Signature, int Calls, TimeSpan Elapsed)>();
             var total = Stopwatch.StartNew();
             var invocations = 0;
+            var notExecuted = 0;
 
             foreach (var method in covered.OrderBy(Signature, StringComparer.Ordinal))
             {
@@ -163,7 +189,8 @@ namespace CoreTests
                     .Select(p => domains.For(p, method, extremesOnly: false))
                     .ToArray();
                 if (parameters.Count(p => p.ParameterType != typeof(string)) > MaxValueParametersForFullDomain
-                    || argumentSets.Aggregate(1L, (product, set) => product * set.Count) > MaxCombinationsForFullDomain)
+                    || argumentSets.Aggregate(1L, (product, set) => product * set.Count)
+                        > (parameters.Any(p => p.ParameterType.IsGenericType) ? MaxCombinationsForFullDomain : MaxPointCombinationsForFullDomain))
                 {
                     argumentSets = parameters
                         .Select(p => domains.For(p, method, extremesOnly: true))
@@ -175,6 +202,12 @@ namespace CoreTests
                 foreach (var arguments in CartesianProduct(argumentSets))
                 {
                     calls++;
+                    if (KnownNonTerminating.Contains(signature) && arguments.Any(IsFractionalQuantity))
+                    {
+                        notExecuted++;
+                        continue;
+                    }
+
                     if (Invoke(operators, method, arguments) is not { } exception || IsAllowed(exception, arguments))
                         continue;
 
@@ -194,10 +227,11 @@ namespace CoreTests
 
             total.Stop();
 
-            var unknownGaps = KnownGaps.Where(g => !covered.Any(m => Signature(m) == g)).ToList();
+            var unknownGaps = KnownGaps.Concat(KnownNonTerminating).Where(g => !covered.Any(m => Signature(m) == g)).ToList();
             var staleGaps = KnownGaps.Where(g => !violatingSignatures.Contains(g)).Except(unknownGaps).ToList();
 
             TestContext.WriteLine($"Covered {covered.Count} operators with {invocations} invocations in {total.Elapsed.TotalSeconds:F1} s.");
+            TestContext.WriteLine($"Not executed: {notExecuted} invocations of the {KnownNonTerminating.Count} known non-terminating operators.");
             TestContext.WriteLine($"Skipped {skipped.Count} members that are generic, parameterless or take a parameter outside the covered types:");
             foreach (var s in skipped.Distinct().OrderBy(s => s, StringComparer.Ordinal))
                 TestContext.WriteLine($"  {s}");
@@ -236,6 +270,9 @@ namespace CoreTests
             if (failures.Length > 0)
                 Assert.Fail(failures.ToString());
         }
+
+        private static bool IsFractionalQuantity(object? argument) =>
+            argument is CqlQuantity { value: { } value } && decimal.Truncate(value) != value;
 
         private static bool IsInScope(ParameterInfo parameter)
         {
@@ -381,9 +418,9 @@ namespace CoreTests
             {
                 [typeof(int?)] = Numbers(int.MinValue, int.MaxValue, 0, 1, -1),
                 [typeof(long?)] = Numbers(long.MinValue, long.MaxValue, 0L, 1L, -1L),
-                [typeof(decimal?)] = Numbers(decimal.MinValue, decimal.MaxValue, 0m, 1m, -1m),
+                [typeof(decimal?)] = Numbers(decimal.MinValue, decimal.MaxValue, 0m, 1m, -1m, FractionalValues),
                 [typeof(CqlQuantity)] = (
-                    [.. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Select(v => new CqlQuantity(v, u))), null],
+                    [.. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Concat(FractionalValues).Select(v => new CqlQuantity(v, u))), null],
                     [.. ExtremeUnits.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue }.Select(v => new CqlQuantity(v, u))), null]),
                 [typeof(CqlDate)] = Temporal(
                     CqlDate.MinValue,
@@ -436,8 +473,8 @@ namespace CoreTests
                 type == typeof(CqlDate) || type == typeof(CqlDateTime) || type == typeof(CqlTime)
                 || (type.IsGenericType && IsTemporal(type.GetGenericArguments()[0]));
 
-            private static (IReadOnlyList<object?>, IReadOnlyList<object?>) Numbers<T>(T min, T max, T zero, T one, T minusOne) where T : struct =>
-                ([min, max, zero, one, minusOne, null], [min, max, null]);
+            private static (IReadOnlyList<object?>, IReadOnlyList<object?>) Numbers<T>(T min, T max, T zero, T one, T minusOne, params T[] more) where T : struct =>
+                ([min, max, zero, one, minusOne, .. more.Cast<object?>(), null], [min, max, null]);
 
             private static (IReadOnlyList<object?>, IReadOnlyList<object?>) Temporal(object min, object max, object mid, object coarse) =>
                 ([min, max, mid, coarse, null], [min, max, null]);
