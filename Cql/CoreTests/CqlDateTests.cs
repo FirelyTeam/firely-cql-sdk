@@ -179,6 +179,26 @@ public class CqlDateTests
         Assert.IsNull(result, "Subtracting months from minimum date should return null to prevent overflow");
     }
 
+    [TestMethod]
+    public void Add_FinerUnitBeyondIntegerRangeAfterConversion_ReturnsNull()
+    {
+        // 100000000000 days convert to 3333333333 months for a month-precision value, more than Integer can hold.
+        var date = new CqlDate(2014, 6, null);
+        var quantity = new CqlQuantity(100000000000m, "days");
+        Assert.IsNull(date.Add(quantity), "Adding a quantity that overflows after conversion should return null");
+        Assert.IsNull(date.Subtract(quantity), "Subtracting a quantity that overflows after conversion should return null");
+    }
+
+    [TestMethod]
+    public void Add_FinerUnitBeyondDecimalRangeDuringConversion_ReturnsNull()
+    {
+        // Converting the largest decimal number of days to years overflows the decimal multiplication itself.
+        var date = new CqlDate(2014, null, null);
+        var quantity = new CqlQuantity(decimal.MaxValue, "days");
+        Assert.IsNull(date.Add(quantity), "Adding a quantity whose conversion overflows should return null");
+        Assert.IsNull(date.Subtract(quantity), "Subtracting a quantity whose conversion overflows should return null");
+    }
+
     [DataTestMethod]
     [DataRow("h")]
     [DataRow("hour")]

@@ -457,6 +457,26 @@ public class CqlDateTimeTests
     }
 
     [TestMethod]
+    public void Add_FinerUnitBeyondIntegerRangeAfterConversion_ReturnsNull()
+    {
+        // 51539607552 hours convert to 2147483648 days for a day-precision value, one more than Integer can hold.
+        var dateTime = new CqlDateTime(2014, 6, 10, null, null, null, null, null, null);
+        var quantity = new CqlQuantity(51539607552m, "hours");
+        Assert.IsNull(dateTime.Add(quantity), "Adding a quantity that overflows after conversion should return null");
+        Assert.IsNull(dateTime.Subtract(quantity), "Subtracting a quantity that overflows after conversion should return null");
+    }
+
+    [TestMethod]
+    public void Add_FinerUnitBeyondDecimalRangeDuringConversion_ReturnsNull()
+    {
+        // Converting the largest decimal number of hours to years overflows the decimal multiplication itself.
+        var dateTime = new CqlDateTime(2014, null, null, null, null, null, null, null, null);
+        var quantity = new CqlQuantity(decimal.MaxValue, "hours");
+        Assert.IsNull(dateTime.Add(quantity), "Adding a quantity whose conversion overflows should return null");
+        Assert.IsNull(dateTime.Subtract(quantity), "Subtracting a quantity whose conversion overflows should return null");
+    }
+
+    [TestMethod]
     [DataRow("2026-13-45T10:00:00.000Z", DisplayName = "month and day out of range")]
     [DataRow("2026-02-31T10:00:00.000Z", DisplayName = "day beyond the month")]
     public void TryParse_DateThatDoesNotExist_ReturnsFalse(string value)
