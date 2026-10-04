@@ -44,12 +44,19 @@ internal static class OverflowGuard
         }
     }
 
-    /// <summary>The product, or <see langword="null"/> when it is outside the range of <typeparamref name="T"/>.</summary>
+    /// <summary>
+    /// The product, or <see langword="null"/> when it is outside the range of <typeparamref name="T"/> or, for nonzero
+    /// operands, too small in magnitude to represent.
+    /// </summary>
     public static T? Multiply<T>(T left, T right) where T : struct, INumberBase<T>
     {
         try
         {
-            return checked(left * right);
+            var product = checked(left * right);
+
+            // A Decimal product too small to represent rounds to zero instead of throwing. An integer product of
+            // nonzero operands is never zero without overflowing, so this only detects Decimal underflow.
+            return T.IsZero(product) && !T.IsZero(left) && !T.IsZero(right) ? null : product;
         }
         catch (OverflowException)
         {
@@ -58,10 +65,31 @@ internal static class OverflowGuard
     }
 
     /// <summary>
-    /// The quotient, truncated for an integer type, or <see langword="null"/> when it is outside the range of
+    /// The quotient, or <see langword="null"/> when it is outside the range of <typeparamref name="T"/> or, for a
+    /// nonzero <paramref name="left"/>, too small in magnitude to represent. A zero <paramref name="right"/> is for the
+    /// caller to handle. Integer division truncates, so a zero quotient is no underflow there; it goes through
+    /// <see cref="TruncatedDivide{T}(T, T)"/>.
+    /// </summary>
+    public static T? Divide<T>(T left, T right) where T : struct, IFloatingPoint<T>
+    {
+        try
+        {
+            var quotient = checked(left / right);
+
+            // A Decimal quotient too small to represent rounds to zero instead of throwing.
+            return T.IsZero(quotient) && !T.IsZero(left) ? null : quotient;
+        }
+        catch (OverflowException)
+        {
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// The truncated quotient of two integers, or <see langword="null"/> when it is outside the range of
     /// <typeparamref name="T"/>. A zero <paramref name="right"/> is for the caller to handle.
     /// </summary>
-    public static T? Divide<T>(T left, T right) where T : struct, INumberBase<T>
+    public static T? TruncatedDivide<T>(T left, T right) where T : struct, IBinaryInteger<T>
     {
         try
         {
