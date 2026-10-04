@@ -121,7 +121,7 @@ namespace CoreTests
         /// The same limit for a method taking only points, whose combinations are cheaper to invoke; it admits every
         /// pair of quantities.
         /// </summary>
-        private const int MaxPointCombinationsForFullDomain = 25_000;
+        private const int MaxPointCombinationsForFullDomain = 35_000;
 
         /// <summary>
         /// A returned sequence is enumerated up to this many items, so deferred work also runs.
@@ -136,12 +136,16 @@ namespace CoreTests
         ];
 
         /// <summary>
-        /// The units of the extreme quantities. A plural calendar word takes the same paths as its singular form.
+        /// The units of the extreme quantities. A plural calendar word takes the same paths as its singular form. The
+        /// units after the calendar words are not in <see cref="Units"/> and appear only with the extreme values: they
+        /// are scaled units of mass, length, volume and time, so a conversion between two units of one dimension
+        /// multiplies the value in one of its directions.
         /// </summary>
         private static readonly string[] ExtremeUnits =
         [
             "1", "mg", "mL", "cm", "a", "mo",
             "year", "month", "week", "day", "hour", "minute", "second", "millisecond",
+            "kg", "g", "ug", "km", "mm", "L", "wk", "d", "h", "min", "s", "ms",
         ];
 
         /// <summary>
@@ -202,6 +206,12 @@ namespace CoreTests
                     argumentSets = parameters
                         .Select(p => domains.For(p, method, extremesOnly: true))
                         .ToArray();
+                    if (argumentSets.Aggregate(1L, (product, set) => product * set.Count) > MaxPointCombinationsForFullDomain)
+                    {
+                        argumentSets = parameters
+                            .Select(p => domains.ForManyArguments(p, method))
+                            .ToArray();
+                    }
                 }
 
                 var watch = Stopwatch.StartNew();
@@ -427,8 +437,12 @@ namespace CoreTests
                 [typeof(long?)] = Numbers(long.MinValue, long.MaxValue, 0L, 1L, -1L),
                 [typeof(decimal?)] = Numbers(decimal.MinValue, decimal.MaxValue, 0m, 1m, -1m, FractionalValues),
                 [typeof(CqlQuantity)] = (
-                    [.. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Concat(FractionalValues).Select(v => new CqlQuantity(v, u))), null],
-                    [.. ExtremeUnits.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue }.Select(v => new CqlQuantity(v, u))), null]),
+                    [
+                        .. Units.SelectMany(u => new decimal[] { decimal.MaxValue, decimal.MinValue, 0m, 1m, -1m }.Concat(FractionalValues).Select(v => new CqlQuantity(v, u))),
+                        .. ExtremeUnits.Except(Units).SelectMany(ExtremeQuantities),
+                        null,
+                    ],
+                    [.. ExtremeUnits.SelectMany(ExtremeQuantities), null]),
                 [typeof(CqlDate)] = Temporal(
                     CqlDate.MinValue,
                     CqlDate.MaxValue,
@@ -455,7 +469,14 @@ namespace CoreTests
             /// </summary>
             private static readonly IReadOnlyList<object?> NonTemporalPrecisionDomain = [null, Precisions[0]];
 
-            private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units];
+            private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units.Union(ExtremeUnits)];
+
+            /// <summary>
+            /// The quantities for a method whose extremes-only argument space is still larger than
+            /// <see cref="MaxPointCombinationsForFullDomain"/>: the largest value in each unit.
+            /// </summary>
+            private static readonly IReadOnlyList<object?> ManyArgumentQuantities =
+                [.. ExtremeUnits.Select(u => new CqlQuantity(decimal.MaxValue, u)), null];
 
             public IReadOnlyList<object?> For(ParameterInfo parameter, MethodInfo method, bool extremesOnly)
             {
@@ -476,6 +497,12 @@ namespace CoreTests
                 return extremesOnly ? intervals.Extremes : intervals.Full;
             }
 
+            public IReadOnlyList<object?> ForManyArguments(ParameterInfo parameter, MethodInfo method) =>
+                parameter.ParameterType == typeof(CqlQuantity) ? ManyArgumentQuantities : For(parameter, method, extremesOnly: true);
+
+            private static IEnumerable<object?> ExtremeQuantities(string unit) =>
+                [new CqlQuantity(decimal.MaxValue, unit), new CqlQuantity(decimal.MinValue, unit)];
+
             private static bool IsTemporal(Type type) =>
                 type == typeof(CqlDate) || type == typeof(CqlDateTime) || type == typeof(CqlTime)
                 || (type.IsGenericType && IsTemporal(type.GetGenericArguments()[0]));
@@ -488,7 +515,8 @@ namespace CoreTests
 
             /// <summary>
             /// Closed and open intervals at the extremes of the point type, and intervals with a null boundary. For a
-            /// quantity point type the intervals are built per unit from that unit's extreme quantities.
+            /// quantity point type the intervals are built per unit from that unit's quantities, and a unit that has
+            /// only extreme quantities gets only the intervals of the extremes-only variant.
             /// </summary>
             private static (IReadOnlyList<object?>, IReadOnlyList<object?>) Intervals(
                 Type intervalType,
@@ -504,6 +532,15 @@ namespace CoreTests
                     {
                         var q = points.Full.OfType<CqlQuantity>().Where(q => q.unit == unit).ToArray();
                         AddQuantityIntervals(full, ExtremeUnits.Contains(unit) ? extremes : null, intervalType, q[1], q[0], q[2], q[3], narrow);
+                    }
+
+                    foreach (var unit in ExtremeUnits.Except(Units))
+                    {
+                        var q = points.Full.OfType<CqlQuantity>().Where(q => q.unit == unit).ToArray();
+                        List<object?> shapes = narrow ? [] : [MakeInterval(intervalType, q[1], q[0], true, true)];
+                        shapes.Add(MakeInterval(intervalType, q[0], q[0], false, true));
+                        full.AddRange(shapes);
+                        extremes.AddRange(shapes);
                     }
                 }
                 else
