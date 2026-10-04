@@ -107,11 +107,17 @@ namespace Hl7.Cql.Operators
             try
             {
                 int? osHours = null, osMinutes = null;
-                if (offset.HasValue)
+                if (offset is { } hours)
                 {
-                    var ts = TimeSpan.FromHours((double)offset.Value);
-                    osHours = ts.Hours;
-                    osMinutes = ts.Minutes;
+                    // "Timezone Offset | Real | [-13.00, 14.00] | The timezone offset is represented as a real with two
+                    // digits of precision to account for timezones with partial hour differences" (CQL 1.5.3 Errata 2,
+                    // Language Semantics, section "Timing Calculations", Table 5-H). An offset outside that range, or one
+                    // that is not a whole number of minutes, has no representation as hours and minutes.
+                    if (hours is < -13m or > 14m || decimal.Truncate(hours * 60) != hours * 60)
+                        throw new CqlInvalidDateTimeComponentsError("DateTime", year, month, day, hour, minute, second, millisecond, offset).ToException();
+
+                    osHours = (int)decimal.Truncate(hours);
+                    osMinutes = (int)(hours * 60 % 60);
                 }
                 return new CqlDateTime(year.Value, month, day, hour, minute, second, millisecond, osHours, osMinutes);
             }

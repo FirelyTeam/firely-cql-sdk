@@ -789,6 +789,11 @@ namespace Hl7.Cql.Operators
                 if (OverflowGuard.Add(listItem, perValue) is not { } next)
                     break;
 
+                // Adding a per too small for the magnitude of the start rounds it away, so the partitions never advance
+                // and, as for a per of zero, no expansion can be computed.
+                if (next <= listItem)
+                    return null;
+
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 // Truncation expands at per's scale, so the interval ends one unit of that scale below the next start.
                 var high = needsTruncation ? decimal.Subtract(next, UnitAtScale(perScale)) : Predecessor(next);

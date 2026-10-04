@@ -39,6 +39,14 @@
 - `expand` of a Date, DateTime or Time interval, or a list of them, by a `per` below one unit of its precision (such as
   `per 0.5 years`) is `null`, as for a `per` of zero, instead of never returning: adding the `per` drops its decimal
   portion, so the partitions did not advance and the result grew without bound.
+- `expand` of a Decimal interval, or a list of them, by a `per` too small to change a boundary of that magnitude (such as
+  `per 0.5` on a boundary of 10^28) is `null`, as for a `per` of zero, instead of never returning.
+- `*` and `/` of two Decimals whose nonzero result is too small to represent (such as
+  `0.0000000000000000000000000001 * 0.1`), and the quantity and `GeometricMean` results built on them, are `null`
+  instead of `0`; `div` of such operands is still `0`.
+- The `DateTime` operator given a timezone offset outside `-13.00` to `14.00` hours, or one that is not a whole number
+  of minutes, throws `CqlException<CqlInvalidDateTimeComponentsError>` instead of returning a DateTime with another
+  offset (`24` became `+00:00`, and `0.001` was truncated to `+00:00`).
 - The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a year outside
   0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
   represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,

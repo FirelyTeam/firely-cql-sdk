@@ -939,19 +939,24 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null || right == 0)
                 return null;
             else
-                return OverflowGuard.Divide(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type integer division");
+                return OverflowGuard.TruncatedDivide(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type integer division");
         }
         public long? TruncatedDivide(long? left, long? right)
         {
             if (left == null || right == null || right == 0)
                 return null;
             else
-                return OverflowGuard.Divide(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type long division");
+                return OverflowGuard.TruncatedDivide(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type long division");
         }
         public decimal? TruncatedDivide(decimal? left, decimal? right)
         {
             if (left == null || right == null || right == 0m)
                 return null;
+            else if (Math.Abs(left.Value) < Math.Abs(right.Value))
+            {
+                // A quotient below one in magnitude truncates to zero, also when it is too small to represent.
+                return 0m;
+            }
             else
                 return OverflowGuard.Divide(left.Value, right.Value) is { } quotient
                     ? Math.Truncate(quotient)
