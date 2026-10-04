@@ -1084,11 +1084,65 @@ public class CqlComparersTests
         ])!.ToList();
         Assert.AreEqual(2, distinct.Count);
 
+        // Quantity equality treats the unit '1' as matching any unit, so these ratios are equal and
+        // must collapse even though their parts differ in unit.
+        var defaultUnit = operators.Distinct<CqlRatio>([Ratio(1m, "1", 2m, "1"), Ratio(1m, "cm", 2m, "cm")])!.ToList();
+        Assert.AreEqual(true, operators.Equal(Ratio(1m, "1", 2m, "1"), Ratio(1m, "cm", 2m, "cm")));
+        Assert.AreEqual(1, defaultUnit.Count);
+
         var union = operators.Union<CqlRatio>([Ratio(1m, "cm", 2m, "cm")], [Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 3m, "cm")])!.ToList();
         Assert.AreEqual(2, union.Count);
 
         var except = operators.Except<CqlRatio>([Ratio(1m, "cm", 2m, "cm"), Ratio(1m, "cm", 3m, "cm")], [Ratio(10m, "mm", 2m, "cm")])!.ToList();
         Assert.AreEqual(1, except.Count);
         Assert.AreEqual(3m, except[0].denominator!.value);
+    }
+
+    /// <summary>
+    /// A ratio that represents no ratio is not equivalent even to the same instance: the equivalence of
+    /// two references to one value is decided by the ratio comparer, not by reference equality.
+    /// </summary>
+    [TestMethod]
+    public void CqlRatio_Equivalent_SameInstance_IsDecidedByTheRatioComparer()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var zeroDenominator = Ratio(1m, "1", 0m, "1");
+        Assert.AreEqual(false, operators.Equivalent(zeroDenominator, zeroDenominator));
+
+        var zeroDenominatorWithUnit = Ratio(2m, "1", 0m, "mL");
+        Assert.AreEqual(false, operators.Equivalent(zeroDenominatorWithUnit, zeroDenominatorWithUnit));
+
+        var nullPart = new CqlRatio(null, new CqlQuantity(2m, "cm"));
+        Assert.AreEqual(false, operators.Equivalent(nullPart, nullPart));
+
+        var valid = Ratio(1m, "mg", 2m, "mL");
+        Assert.AreEqual(true, operators.Equivalent(valid, valid));
+    }
+
+    /// <summary>
+    /// Values of other types stay equivalent to the same instance once the dispatcher hands
+    /// same-instance equivalence to the registered comparer.
+    /// </summary>
+    [TestMethod]
+    public void Equivalent_SameInstance_OfOtherTypes_IsTrue()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+
+        var quantity = new CqlQuantity(1m, "cm");
+        Assert.AreEqual(true, operators.Equivalent(quantity, quantity));
+
+        var date = new CqlDate(2024, 1, 1);
+        Assert.AreEqual(true, operators.Equivalent(date, date));
+
+        var metadata = new CqlTupleMetadata([typeof(decimal?)], ["x"]);
+        object tuple = (metadata, (decimal?)1.5m);
+        Assert.AreEqual(true, operators.Equivalent(tuple, tuple));
+
+        var interval = new CqlInterval<int?>(1, 3, true, true);
+        Assert.AreEqual(true, operators.Equivalent(interval, interval));
+
+        object keyValuePair = new KeyValuePair<int, string>(1, "a");
+        Assert.AreEqual(true, operators.Equivalent(keyValuePair, keyValuePair));
     }
 }
