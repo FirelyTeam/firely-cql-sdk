@@ -35,7 +35,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
-            "ConvertQuantity(CqlQuantity, string)",
         };
 
         /// <summary>

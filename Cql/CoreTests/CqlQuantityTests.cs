@@ -556,6 +556,44 @@ public class CqlQuantityTests
 
     #endregion
 
+    #region ConvertQuantity
+
+    [TestMethod]
+    public void ConvertQuantity_CompatibleUnits_ReturnsEquivalentQuantity()
+    {
+        var ops = GetOperators();
+        var result = ops.ConvertQuantity(new CqlQuantity(5m, "mg"), "g");
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0.005m, result.value);
+        Assert.AreEqual("g", result.unit);
+    }
+
+    /// <summary>
+    /// "If the unit of the input quantity can be converted to the target unit, the result is an equivalent Quantity
+    /// with the target unit. Otherwise, the result is null." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section
+    /// "Type Operators", "ConvertQuantity").
+    /// </summary>
+    [TestMethod]
+    [DataRow("kg", "s")]
+    [DataRow("mg", "mL")]
+    [DataRow("a", "L")]
+    public void ConvertQuantity_IncompatibleUnits_ReturnsNullWithWarning(string fromUnit, string toUnit)
+    {
+        var ops = GetOperators();
+        var warnings = new List<string?>();
+        ops.MessageReceived += (_, e) =>
+        {
+            if (e.Severity == "Warning")
+                warnings.Add(e.Code);
+        };
+
+        Assert.IsNull(ops.ConvertQuantity(new CqlQuantity(1m, fromUnit), toUnit));
+        Assert.IsFalse(ops.CanConvertQuantity(new CqlQuantity(1m, fromUnit), toUnit));
+        CollectionAssert.AreEqual(new[] { "CqlOperators.TypeOperators.ConvertQuantity" }, warnings);
+    }
+
+    #endregion
+
     #region TruncatedDivide
 
     [TestMethod]

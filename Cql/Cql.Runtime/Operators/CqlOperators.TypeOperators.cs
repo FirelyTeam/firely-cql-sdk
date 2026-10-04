@@ -220,14 +220,7 @@ namespace Hl7.Cql.Operators
         public bool? CanConvertQuantity(CqlQuantity? argument, string? unit)
         {
             if (argument == null || argument.value == null || unit == null) return null;
-            try
-            {
-                return UnitConverter.ChangeUnits(argument, unit) is not null;
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+            return UnitConverter.ChangeUnits(argument, unit) is not null;
         }
 
         #endregion
@@ -239,8 +232,14 @@ namespace Hl7.Cql.Operators
             if (argument == null || argument.value == null || unit == null)
                 return null;
 
-            var newQuantity = UnitConverter.ChangeUnits(argument, unit);
-            return newQuantity;
+            // "If the unit of the input quantity can be converted to the target unit, the result is an equivalent
+            // Quantity with the target unit. Otherwise, the result is null." (CQL 1.5.3 Errata 2, Appendix B - CQL
+            // Reference, section "Type Operators", "ConvertQuantity").
+            if (UnitConverter.ChangeUnits(argument, unit) is { } converted)
+                return converted;
+
+            Message(new { argument, unit }, "CqlOperators.TypeOperators.ConvertQuantity", "Warning", $"Could not convert {argument} to unit '{unit}', returned null.");
+            return null;
         }
 
         #endregion
