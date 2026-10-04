@@ -15,6 +15,19 @@ namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
+        /// <summary>
+        /// Reports quantities whose units the aggregate does not bring to a common unit, and answers null: "a CQL
+        /// implementation must respect units and return null if it is not capable of normalizing the quantities
+        /// involved in a given expression to a common unit. Implementations should issue a run-time warning in these
+        /// cases as well" (CQL 1.5.3 Errata 2, Chapter 2 - Author's Guide, section "Clinical Operators", "Quantity
+        /// Operators").
+        /// </summary>
+        private CqlQuantity? InconsistentUnits(object source, string code, string operation)
+        {
+            Message(source, code, "Warning", $"Ignored inconsistent units errors from {operation}, returned null.");
+            return null;
+        }
+
         #region AllTrue
         public bool? AllTrue(IEnumerable<bool?> argument)
         {
@@ -83,11 +96,14 @@ namespace Hl7.Cql.Operators
                 {
                     if (value.HasValue)
                     {
-                        total += value.Value;
+                        if (OverflowGuard.Add(total, value.Value) is not { } next)
+                            return Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.Avg", "type decimal average");
+                        total = next;
                         count++;
                     }
                 }
 
+                // The quotient of a total by a count of at least one is no larger than the total.
                 return count == 0 ? null : total / count;
             }
         }
@@ -223,9 +239,16 @@ namespace Hl7.Cql.Operators
             var isEven = (sorted.Count & 1) == 0;
             // shift by 1 to divide by 2
             var middle = sorted.Count >> 1;
-            // can't shift decimals so use division
-            return isEven ? (sorted[middle] + sorted[middle - 1]) / 2m : sorted[middle];
+            return isEven ? Midpoint(sorted[middle - 1], sorted[middle]) : sorted[middle];
         }
+
+        /// <summary>
+        /// The midpoint of two decimals, <paramref name="low"/> not above <paramref name="high"/>. Two values whose sum
+        /// leaves the Decimal range have the same sign, so their difference fits, and the midpoint is taken from the lower
+        /// value instead; it lies between the two values and so is always representable.
+        /// </summary>
+        private static decimal Midpoint(decimal low, decimal high) =>
+            OverflowGuard.Add(low, high) is { } sum ? sum / 2m : low + (high - low) / 2m;
 
         public int? Median(IEnumerable<int?> source)
         {
@@ -469,65 +492,11 @@ namespace Hl7.Cql.Operators
 
         #region Product
 
-        public int? Product(IEnumerable<int?>? argument)
-        {
-            if (argument == null)
-                return null;
-            int product = 1;
+        public int? Product(IEnumerable<int?>? argument) => Multiplied(argument, "type integer product");
 
-            bool @null = true;
-            foreach (var v in argument)
-            {
-                if (v.HasValue)
-                {
-                    @null = false;
-                    product *= v.Value;
-                }
-            }
-            if (@null)
-                return null;
-            return product;
-        }
+        public long? Product(IEnumerable<long?>? argument) => Multiplied(argument, "type long product");
 
-        public long? Product(IEnumerable<long?>? argument)
-        {
-            if (argument == null)
-                return null;
-            long product = 1;
-
-            bool @null = true;
-            foreach (var v in argument)
-            {
-                if (v.HasValue)
-                {
-                    @null = false;
-                    product *= v.Value;
-                }
-            }
-            if (@null)
-                return null;
-            return product;
-        }
-
-        public decimal? Product(IEnumerable<decimal?>? argument)
-        {
-            if (argument == null)
-                return null;
-            decimal product = 1m;
-
-            bool @null = true;
-            foreach (var v in argument)
-            {
-                if (v.HasValue)
-                {
-                    @null = false;
-                    product *= v.Value;
-                }
-            }
-            if (@null)
-                return null;
-            return product;
-        }
+        public decimal? Product(IEnumerable<decimal?>? argument) => Multiplied(argument, "type decimal product");
 
         public CqlQuantity? Product(IEnumerable<CqlQuantity?>? argument)
         {
@@ -538,16 +507,42 @@ namespace Hl7.Cql.Operators
                 .ToArray();
             if (nonNull.Length == 0)
                 return null;
-            decimal? product = 1;
+            decimal product = 1;
             string? unit = null;
             foreach (var v in nonNull)
             {
-                unit ??= (v!.unit ?? "1");
-                if (unit != v!.unit)
-                    throw new NotSupportedException("Unlike units are not supported.");
-                product *= v.value!.Value;
+                var quantityUnit = v!.unit ?? "1";
+                unit ??= quantityUnit;
+                if (unit != quantityUnit)
+                    return InconsistentUnits(new { argument }, "CqlOperators.AggregateFunctions.Product", "type CqlQuantity product");
+                if (OverflowGuard.Multiply(product, v.value!.Value) is not { } next)
+                    return Overflowed<CqlQuantity>(new { argument }, "CqlOperators.AggregateFunctions.Product", "type CqlQuantity product");
+                product = next;
             }
             return new CqlQuantity(product, unit ?? "1");
+        }
+
+        /// <summary>
+        /// The product of the values that are not null, or <see langword="null"/> when there are none or when a partial
+        /// product cannot be represented.
+        /// </summary>
+        private T? Multiplied<T>(IEnumerable<T?>? values, string operation) where T : struct, INumberBase<T>
+        {
+            if (values == null)
+                return null;
+
+            T? product = null;
+            foreach (var value in values)
+            {
+                if (value is not { } factor)
+                    continue;
+
+                if (OverflowGuard.Multiply(product ?? T.One, factor) is not { } next)
+                    return Overflowed<T?>(new { values }, "CqlOperators.AggregateFunctions.Product", operation);
+                product = next;
+            }
+
+            return product;
         }
 
         #endregion
@@ -620,10 +615,7 @@ namespace Hl7.Cql.Operators
                 quantityUnit ??= "1"; // default unit if none specified
                 unit ??= quantityUnit; // set the unit once, if not already set
                 if (unit != quantityUnit)
-                {
-                    Message(new { values }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored inconsistent units errors from type CqlQuantity summation, returned null.");
-                    return null;
-                }
+                    return InconsistentUnits(new { values }, "CqlOperators.AggregateFunctions.Sum", "type CqlQuantity summation");
 
                 if (OverflowGuard.Add(sum ?? 0m, value) is not { } next)
                     return Overflowed<CqlQuantity>(new { values }, "CqlOperators.AggregateFunctions.Sum", "type CqlQuantity summation");

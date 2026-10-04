@@ -10,18 +10,46 @@
 
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 
 namespace CoreTests;
 
 /// <summary>
-/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>): the values they
-/// return per spec §9.B, and the fact that each of them reads its source exactly once.
+/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>, <c>Product</c>): the
+/// values they return per spec §9.B, null with a warning where a result cannot be represented, and the fact that the
+/// first three read their source exactly once.
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
 public class AggregateOperatorTests
 {
     private static ICqlOperators Operators() => FhirCqlContext.WithDataSource().Operators;
+
+    /// <summary>
+    /// Invokes an operator and returns its result together with the codes of the warnings it reported.
+    /// </summary>
+    private static (T Result, List<string?> Warnings) WithWarnings<T>(Func<ICqlOperators, T> invoke)
+    {
+        var operators = Operators();
+        var warnings = new List<string?>();
+        operators.MessageReceived += (_, e) =>
+        {
+            if (e.Severity == "Warning")
+                warnings.Add(e.Code);
+        };
+        return (invoke(operators), warnings);
+    }
+
+    private static void AssertNullWithOneWarning<T>(Func<ICqlOperators, T> invoke, string code)
+    {
+        var (result, warnings) = WithWarnings(invoke);
+
+        Assert.IsNull(result);
+        CollectionAssert.AreEqual(new[] { code }, warnings);
+    }
+
+    /// <summary>The midpoint of <see cref="decimal.MaxValue"/> and 1.</summary>
+    private const decimal MidpointOfMaxValueAndOne = 39614081257132168796771975168m;
 
     #region Median
 
@@ -127,6 +155,17 @@ public class AggregateOperatorTests
 
         Assert.AreEqual(long.MinValue, operators.Median(new long?[] { long.MinValue, long.MinValue }));
         Assert.AreEqual(-2L, operators.Median(new long?[] { -3L, -2L }));
+    }
+
+    /// <summary>
+    /// The sum of the two middle values leaves the Decimal range, but their midpoint lies between them and is returned.
+    /// </summary>
+    [TestMethod]
+    public void Median_Decimal_EvenCountOfLargeValues_IsTheirMidpoint()
+    {
+        Assert.AreEqual(decimal.MaxValue, Operators().Median(new decimal?[] { decimal.MaxValue, decimal.MaxValue }));
+        Assert.AreEqual(MidpointOfMaxValueAndOne, Operators().Median(new decimal?[] { decimal.MaxValue, 1m }));
+        Assert.AreEqual(-MidpointOfMaxValueAndOne, Operators().Median(new decimal?[] { decimal.MinValue, -1m }));
     }
 
     [TestMethod]
@@ -292,6 +331,52 @@ public class AggregateOperatorTests
     public void Avg_NullSource_IsNull()
     {
         Assert.IsNull(Operators().Avg(null));
+    }
+
+    [TestMethod]
+    public void Avg_TotalOutsideDecimalRange_IsNullWithOneWarning()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { decimal.MaxValue, null, decimal.MaxValue }));
+
+        Assert.IsNull(result);
+        CollectionAssert.AreEqual(new[] { "CqlOperators.AggregateFunctions.Avg" }, warnings);
+    }
+
+    #endregion
+
+    #region Product
+
+    [TestMethod]
+    public void Product_WithinRange_IsTheProductOfTheValuesThatAreNotNull()
+    {
+        Assert.AreEqual(6, Operators().Product(new int?[] { 2, null, 3 }));
+        Assert.AreEqual(6L, Operators().Product(new long?[] { 2L, null, 3L }));
+        Assert.AreEqual(7.5m, Operators().Product(new decimal?[] { 2.5m, null, 3m }));
+        var quantity = Operators().Product([new CqlQuantity(2.5m, "mg"), null, new CqlQuantity(3m, "mg")]);
+        Assert.AreEqual(7.5m, quantity?.value);
+        Assert.AreEqual("mg", quantity?.unit);
+    }
+
+    /// <summary>
+    /// An Integer or Long product outside the type's range is null, not the value it wraps around to.
+    /// </summary>
+    [TestMethod]
+    public void Product_OutsideRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Product(new int?[] { int.MaxValue, 2 }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(o => o.Product(new long?[] { long.MaxValue, 2L }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(o => o.Product(new decimal?[] { decimal.MaxValue, 2m }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(
+            o => o.Product([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(2m, "mg")]),
+            "CqlOperators.AggregateFunctions.Product");
+    }
+
+    [TestMethod]
+    public void Product_QuantitiesOfDifferentUnits_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(
+            o => o.Product([new CqlQuantity(2m, "mg"), new CqlQuantity(3m, "g")]),
+            "CqlOperators.AggregateFunctions.Product");
     }
 
     #endregion
