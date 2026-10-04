@@ -568,6 +568,11 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
+
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                 var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -632,6 +637,11 @@ namespace Hl7.Cql.Operators
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
+
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
 
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
@@ -702,6 +712,11 @@ namespace Hl7.Cql.Operators
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
+
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
 
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
