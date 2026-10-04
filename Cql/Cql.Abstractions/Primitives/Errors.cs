@@ -73,3 +73,50 @@ public readonly record struct CqlPointFromNonUnitIntervalError(
         "The point from operator requires a unit interval, but was given " +
         $"{(LowClosed ? "[" : "(")}{Low?.ToString() ?? "null"}, {High?.ToString() ?? "null"}{(HighClosed ? "]" : ")")}.";
 }
+
+/// <summary>
+/// An <see cref="ICqlError"/> raised when the Date, DateTime or Time operator is given components that do not form a
+/// value of that type.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, sections "Date", "DateTime" and "Time" under "Types"), "CQL
+/// supports date values in the range @0001-01-01 to @9999-12-31", DateTime values "in the range
+/// @0001-01-01T00:00:00.0 to @9999-12-31T23:59:59.999" and time values "in the range @T00:00:00.0 to @T23:59:59.999";
+/// the operators of the same names (section "Date and Time Operators") add that "no component may be specified at a
+/// precision below an unspecified precision". Components outside those bounds are invalid input, which signals an
+/// error to the calling environment rather than resulting in null.
+/// </remarks>
+/// <param name="Type">The CQL type being constructed: <c>Date</c>, <c>DateTime</c> or <c>Time</c>.</param>
+/// <param name="Year">The year component, or <see langword="null"/> when not given.</param>
+/// <param name="Month">The month component, or <see langword="null"/> when not given.</param>
+/// <param name="Day">The day component, or <see langword="null"/> when not given.</param>
+/// <param name="Hour">The hour component, or <see langword="null"/> when not given.</param>
+/// <param name="Minute">The minute component, or <see langword="null"/> when not given.</param>
+/// <param name="Second">The second component, or <see langword="null"/> when not given.</param>
+/// <param name="Millisecond">The millisecond component, or <see langword="null"/> when not given.</param>
+/// <param name="TimezoneOffset">The timezone offset in hours, or <see langword="null"/> when not given.</param>
+public readonly record struct CqlInvalidDateTimeComponentsError(
+    string Type,
+    int? Year,
+    int? Month,
+    int? Day,
+    int? Hour,
+    int? Minute,
+    int? Second,
+    int? Millisecond,
+    decimal? TimezoneOffset) : ICqlError
+{
+    /// <inheritdoc/>
+    public string GetMessage()
+    {
+        var components = new (string Name, object? Value)[]
+            {
+                ("year", Year), ("month", Month), ("day", Day), ("hour", Hour), ("minute", Minute),
+                ("second", Second), ("millisecond", Millisecond), ("timezone offset", TimezoneOffset),
+            }
+            .Where(c => c.Value is not null)
+            .Select(c => string.Create(CultureInfo.InvariantCulture, $"{c.Name} {c.Value}"));
+        return $"The components {string.Join(", ", components)} do not form a valid {Type}: each component must lie "
+            + "within the range of the type, and no component may be given below one that is not.";
+    }
+}

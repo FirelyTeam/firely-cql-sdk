@@ -770,7 +770,9 @@ namespace Hl7.Cql.Operators
 
             while (true)
             {
-                var next = decimal.Add(listItem, perValue);
+                // A next start beyond the range of Decimal lies beyond the upper boundary as well.
+                if (OverflowGuard.Add(listItem, perValue) is not { } next)
+                    break;
 
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 // Truncation expands at per's scale, so the interval ends one unit of that scale below the next start.
@@ -825,15 +827,14 @@ namespace Hl7.Cql.Operators
             if (decimal.Truncate(perValue) != perValue)
                 throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
 
-            var intQuantity = decimal.ToInt32(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (long)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
@@ -884,15 +885,14 @@ namespace Hl7.Cql.Operators
             if (decimal.Truncate(perValue) != perValue)
                 throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
 
-            var intQuantity = decimal.ToInt64(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (decimal)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);

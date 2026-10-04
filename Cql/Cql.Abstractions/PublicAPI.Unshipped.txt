@@ -1,1 +1,30 @@
 ﻿#nullable enable
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError() -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError(string! Type, int? Year, int? Month, int? Day, int? Hour, int? Minute, int? Second, int? Millisecond, decimal? TimezoneOffset) -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Day.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Day.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Deconstruct(out string! Type, out int? Year, out int? Month, out int? Day, out int? Hour, out int? Minute, out int? Second, out int? Millisecond, out decimal? TimezoneOffset) -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Equals(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError other) -> bool
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Hour.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Hour.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Millisecond.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Millisecond.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Minute.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Minute.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Month.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Month.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Second.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Second.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.TimezoneOffset.get -> decimal?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.TimezoneOffset.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Type.get -> string!
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Type.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Year.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Year.init -> void
+override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator !=(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError right) -> bool
+static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError right) -> bool
+~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.ToString() -> string

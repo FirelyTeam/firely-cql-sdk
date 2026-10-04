@@ -35,20 +35,34 @@ namespace Hl7.Cql.Operators
         private const int MaxDateTimeBoundaryPrecision = 17;
         private const int MaxTimeBoundaryPrecision = 9;
 
+        /// <summary>
+        /// The null result of an operation whose result cannot be represented, reported as a warning in the evaluation
+        /// log. <paramref name="operation"/> names what overflowed, as in "type integer addition".
+        /// </summary>
+        private T? Overflowed<T>(object source, string code, string operation)
+        {
+            Message(source, code, "Warning", $"Ignored overflow errors from {operation}, returned null.");
+            return default;
+        }
+
+        /// <summary>A quantity of <paramref name="value"/>, or <see langword="null"/> when the value could not be computed.</summary>
+        private static CqlQuantity? QuantityOrNull(decimal? value, string? unit) =>
+            value is null ? null : new CqlQuantity(value, unit);
+
         #region Abs
 
         public int? Abs(int? argument)
         {
             if (argument == null) return null;
             else if (argument > 0) return argument;
-            else return argument * -1;
+            else return OverflowGuard.Negate(argument.Value) ?? Overflowed<int?>(new { argument }, "CqlOperators.ArithmeticOperators.Abs", "type integer absolute value");
         }
 
         public long? Abs(long? argument)
         {
             if (argument == null) return null;
             else if (argument > 0) return argument;
-            else return argument * -1;
+            else return OverflowGuard.Negate(argument.Value) ?? Overflowed<long?>(new { argument }, "CqlOperators.ArithmeticOperators.Abs", "type long absolute value");
         }
 
         public decimal? Abs(decimal? argument)
@@ -75,42 +89,18 @@ namespace Hl7.Cql.Operators
         public int? Add(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left + right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type integer addition, returned null.");
-                return null;
-            }
+            return OverflowGuard.Add(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.Add", "type integer addition");
         }
 
         public long? Add(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left + right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type long addition, returned null.");
-                return null;
-            }
+            return OverflowGuard.Add(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.Add", "type long addition");
         }
         public decimal? Add(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left + right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Add", "Warning", "Ignored overflow errors from type decimal addition, returned null.");
-                return null;
-            }
+            return OverflowGuard.Add(left.Value, right.Value) ?? Overflowed<decimal?>(new { left, right }, "CqlOperators.ArithmeticOperators.Add", "type decimal addition");
         }
 
         public CqlQuantity? Add(CqlQuantity? left, CqlQuantity? right)
@@ -126,7 +116,7 @@ namespace Hl7.Cql.Operators
 
                 // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
-                    return new CqlQuantity(Add(left.value, right.value), left.unit);
+                    return QuantityOrNull(Add(left.value, right.value), left.unit);
 
                 return TryUcumBinaryOp(
                     left.value.Value,
@@ -138,7 +128,7 @@ namespace Hl7.Cql.Operators
                     preferMostGranularResultUnit: true);
             }
             else
-                return new CqlQuantity(Add(left.value, right.value), left.unit);
+                return QuantityOrNull(Add(left.value, right.value), left.unit);
         }
 
         #endregion
@@ -146,7 +136,7 @@ namespace Hl7.Cql.Operators
         #region Ceiling
 
         public int? Ceiling(decimal? argument) =>
-            argument == null ? null : (int?)Math.Ceiling(argument.Value);
+            argument == null ? null : OverflowGuard.ToInt32(Math.Ceiling(argument.Value)) ?? Overflowed<int?>(new { argument }, "CqlOperators.ArithmeticOperators.Ceiling", "type integer ceiling");
         public int? Ceiling(int? argument) => argument;
         public long? Ceiling(long? argument) => argument;
 
@@ -159,7 +149,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             if (right == 0m)
                 return null;
-            else return left.Value / right.Value;
+            else return OverflowGuard.Divide(left.Value, right.Value) ?? Overflowed<decimal?>(new { left, right }, "CqlOperators.ArithmeticOperators.Divide", "type decimal division");
         }
 
         public CqlQuantity? Divide(CqlQuantity? left, CqlQuantity? right)
@@ -169,9 +159,9 @@ namespace Hl7.Cql.Operators
             else if (right.value == 0m) return null;
             else if (left.unit == null || right.unit == null) return null;
             else if (left.unit == right.unit)
-                return new CqlQuantity(left.value.Value / right.value.Value, UCUMUnits.Default);
+                return QuantityOrNull(Divide(left.value, right.value), UCUMUnits.Default);
             else if (right.unit == UCUMUnits.Default)
-                return new CqlQuantity(left.value.Value / right.value.Value, left.unit);
+                return QuantityOrNull(Divide(left.value, right.value), left.unit);
             else
             {
                 return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryDivide, "Divide");
@@ -183,7 +173,7 @@ namespace Hl7.Cql.Operators
         #region Floor
 
         public int? Floor(decimal? argument) =>
-            argument == null ? null : (int?)Math.Floor(argument.Value);
+            argument == null ? null : OverflowGuard.ToInt32(Math.Floor(argument.Value)) ?? Overflowed<int?>(new { argument }, "CqlOperators.ArithmeticOperators.Floor", "type integer floor");
 
         public int? Floor(int? argument) => argument;
         public long? Floor(long? argument) => argument;
@@ -195,7 +185,7 @@ namespace Hl7.Cql.Operators
         public decimal? Exp(decimal? argument)
         {
             if (argument == null) return null;
-            else return (decimal?)Math.Exp((double)argument);
+            else return OverflowGuard.ToDecimal(Math.Exp((double)argument)) ?? Overflowed<decimal?>(new { argument }, "CqlOperators.ArithmeticOperators.Exp", "type decimal exponentiation");
         }
 
         #endregion
@@ -221,28 +211,20 @@ namespace Hl7.Cql.Operators
                 return null;
             var scale = (byte)requested;
 
-            try
-            {
-                var negative = value < 0;
-                var magnitude = Math.Abs(value);
-                var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
-                // Only the completion asked for is computed, so the other one cannot overflow on its behalf.
-                var completion = greatest != negative
-                    ? kept + (UnitAtScale(kept.Scale) - UnitAtScale(scale))
-                    : kept + ZeroAtScale(scale);
-                // Decimal keeps at most 28 to 29 significant digits. Where the completion needs more, the addition
-                // rounds and drops decimals instead of throwing, so a result that lost the requested scale is not
-                // the boundary; only values beyond the CQL Decimal range (whose whole part has at most 20 digits) get here.
-                if (completion.Scale != scale)
-                    return null;
-                return negative ? -completion : completion;
-            }
-            catch (OverflowException e)
-            {
-                // A completion of a value at the edge of the decimal range cannot be represented.
-                Message(new { input, precision, greatest, e }, "CqlOperators.ArithmeticOperators.DecimalBoundary", "Warning", "Ignored overflow errors from a decimal boundary, returned null.");
+            var negative = value < 0;
+            var magnitude = Math.Abs(value);
+            var kept = magnitude.Scale <= scale ? magnitude : decimal.Round(magnitude, scale, MidpointRounding.ToZero);
+            // Only the completion asked for is computed, so the other one cannot overflow on its behalf. A completion of
+            // a value at the edge of the decimal range cannot be represented.
+            var completed = OverflowGuard.Add(kept, greatest != negative ? UnitAtScale(kept.Scale) - UnitAtScale(scale) : ZeroAtScale(scale));
+            if (completed is not { } completion)
+                return Overflowed<decimal?>(new { input, precision, greatest }, "CqlOperators.ArithmeticOperators.DecimalBoundary", "a decimal boundary");
+            // Decimal keeps at most 28 to 29 significant digits. Where the completion needs more, the addition
+            // rounds and drops decimals instead of throwing, so a result that lost the requested scale is not
+            // the boundary; only values beyond the CQL Decimal range (whose whole part has at most 20 digits) get here.
+            if (completion.Scale != scale)
                 return null;
-            }
+            return negative ? -completion : completion;
         }
 
         /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
@@ -431,7 +413,7 @@ namespace Hl7.Cql.Operators
             if (argument < 0)
                 return null;
             else
-                return (decimal?)(Math.Log10((double)argument) / 0.4342944819);
+                return OverflowGuard.ToDecimal(Math.Log10((double)argument) / 0.4342944819) ?? Overflowed<decimal?>(new { argument }, "CqlOperators.ArithmeticOperators.Ln", "type decimal natural logarithm");
         }
 
         #endregion
@@ -484,10 +466,13 @@ namespace Hl7.Cql.Operators
 
         #region Modulo
 
+        // Every value is a whole multiple of -1, so the remainder is 0; the remainder instruction itself overflows
+        // for the minimum value, whose quotient by -1 cannot be represented.
         public int? Modulo(int? left, int? right)
         {
             if (left == null || right == null) return null;
             else if (right.Value == 0) return null;
+            else if (right.Value == -1) return 0;
             else return left.Value % right.Value;
         }
 
@@ -495,6 +480,7 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null) return null;
             else if (right.Value == 0) return null;
+            else if (right.Value == -1) return 0;
             else return left.Value % right.Value;
         }
 
@@ -537,18 +523,18 @@ namespace Hl7.Cql.Operators
         public int? Multiply(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            else return left.Value * right.Value;
+            else return OverflowGuard.Multiply(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.Multiply", "type integer multiplication");
         }
 
         public long? Multiply(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            else return left.Value * right.Value;
+            else return OverflowGuard.Multiply(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.Multiply", "type long multiplication");
         }
         public decimal? Multiply(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            else return left.Value * right.Value;
+            else return OverflowGuard.Multiply(left.Value, right.Value) ?? Overflowed<decimal?>(new { left, right }, "CqlOperators.ArithmeticOperators.Multiply", "type decimal multiplication");
         }
 
         public CqlQuantity? Multiply(CqlQuantity? left, CqlQuantity? right)
@@ -560,11 +546,11 @@ namespace Hl7.Cql.Operators
             else if (left.unit == null || right.unit == null)
                 return null;
             else if (left.unit == UCUMUnits.Default && right.unit == UCUMUnits.Default)
-                return new CqlQuantity(Multiply(left.value, right.value), UCUMUnits.Default);
+                return QuantityOrNull(Multiply(left.value, right.value), UCUMUnits.Default);
             else if (left.unit == UCUMUnits.Default)
-                return new CqlQuantity(Multiply(left.value, right.value), right.unit);
+                return QuantityOrNull(Multiply(left.value, right.value), right.unit);
             else if (right.unit == UCUMUnits.Default)
-                return new CqlQuantity(Multiply(left.value, right.value), left.unit);
+                return QuantityOrNull(Multiply(left.value, right.value), left.unit);
             else
                 return TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryMultiply, "Multiply");
         }
@@ -576,18 +562,14 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            else if (argument.Value == int.MinValue)
-                return null;
-            return argument.Value * -1;
+            return OverflowGuard.Negate(argument.Value) ?? Overflowed<int?>(new { argument }, "CqlOperators.ArithmeticOperators.Negate", "type integer negation");
         }
 
         public long? Negate(long? argument)
         {
             if (argument == null)
                 return null;
-            else if (argument == long.MinValue)
-                return null;
-            return argument.Value * -1;
+            return OverflowGuard.Negate(argument.Value) ?? Overflowed<long?>(new { argument }, "CqlOperators.ArithmeticOperators.Negate", "type long negation");
         }
         public decimal? Negate(decimal? argument)
         {
@@ -738,76 +720,38 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || exponent == null) return null;
             var result = Math.Pow((double)argument, (double)exponent);
-
-            if (double.IsNaN(result) || double.IsInfinity(result))
-            {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
-                return null;
-            }
-
-            try
-            {
-                return (decimal)result;
-            }
-            catch (OverflowException e)
-            {
-                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Ignored overflow errors from type integer power, returned null.");
-                return null;
-            }
+            return OverflowGuard.ToDecimal(result) ?? Overflowed<decimal?>(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "type integer power");
         }
 
         public decimal? Power(long? argument, long? exponent)
         {
             if (argument == null || exponent == null) return null;
             var result = Math.Pow((double)argument, (double)exponent);
-
-            if (double.IsNaN(result) || double.IsInfinity(result))
-            {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
-                return null;
-            }
-
-            try
-            {
-                return (decimal)result;
-            }
-            catch (OverflowException e)
-            {
-                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Ignored overflow errors from type long power, returned null.");
-                return null;
-            }
+            return OverflowGuard.ToDecimal(result) ?? Overflowed<decimal?>(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "type long power");
         }
 
         public decimal? Power(decimal? argument, decimal? exponent)
         {
             if (argument == null || exponent == null) return null;
             var result = Math.Pow((double)argument, (double)exponent);
-
-            if (double.IsNaN(result) || double.IsInfinity(result))
-            {
-                Message(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Power result cannot be represented as decimal; returning null.");
-                return null;
-            }
-
-            try
-            {
-                return (decimal)result;
-            }
-            catch (OverflowException e)
-            {
-                Message(new { argument, exponent, result, e }, "CqlOperators.ArithmeticOperators.Power", "Warning", "Decimal overflow in Power operation; returning null.");
-                return null;
-            }
+            return OverflowGuard.ToDecimal(result) ?? Overflowed<decimal?>(new { argument, exponent, result }, "CqlOperators.ArithmeticOperators.Power", "type decimal power");
         }
 
         #endregion
 
         #region Round
 
+        /// <summary>The most decimals a <see cref="decimal"/> holds; rounding to more leaves every value unchanged.</summary>
+        private const int MaxDecimalScale = 28;
+
         public decimal? Round(decimal? argument, int? precision)
         {
             if (argument == null) return null;
-            else return Math.Round(argument.Value, precision ?? 0, MidpointRounding.AwayFromZero);
+            var decimals = precision ?? 0;
+            // A negative number of decimals has no rounding defined for it, so the operation cannot be performed.
+            if (decimals < 0) return null;
+            if (decimals > MaxDecimalScale) return argument;
+            return Math.Round(argument.Value, decimals, MidpointRounding.AwayFromZero);
         }
 
         #endregion
@@ -817,42 +761,18 @@ namespace Hl7.Cql.Operators
         public int? Subtract(int? left, int? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left - right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type integer subtraction, returned null.");
-                return null;
-            }
+            return OverflowGuard.Subtract(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.Subtract", "type integer subtraction");
         }
 
         public long? Subtract(long? left, long? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left - right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type long subtraction, returned null.");
-                return null;
-            }
+            return OverflowGuard.Subtract(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.Subtract", "type long subtraction");
         }
         public decimal? Subtract(decimal? left, decimal? right)
         {
             if (left == null || right == null) return null;
-            try
-            {
-                return checked(left - right);
-            }
-            catch (OverflowException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.ArithmeticOperators.Subtract", "Warning", "Ignored overflow errors from type decimal subtraction, returned null.");
-                return null;
-            }
+            return OverflowGuard.Subtract(left.Value, right.Value) ?? Overflowed<decimal?>(new { left, right }, "CqlOperators.ArithmeticOperators.Subtract", "type decimal subtraction");
         }
 
         public CqlQuantity? Subtract(CqlQuantity? left, CqlQuantity? right)
@@ -868,7 +788,7 @@ namespace Hl7.Cql.Operators
 
                 // CQL treats singular/plural calendar duration units as equivalent (e.g. day/days)
                 if (UcumConversionExtensions.AreSameCqlCalendarUnit(leftUnit, rightUnit))
-                    return new CqlQuantity(Subtract(left.value, right.value), left.unit);
+                    return QuantityOrNull(Subtract(left.value, right.value), left.unit);
 
                 return TryUcumBinaryOp(
                     left.value.Value,
@@ -879,7 +799,7 @@ namespace Hl7.Cql.Operators
                     "Subtract",
                     preferMostGranularResultUnit: true);
             }
-            else return new CqlQuantity(Subtract(left.value, right.value), left.unit);
+            else return QuantityOrNull(Subtract(left.value, right.value), left.unit);
         }
 
         private delegate bool MetricBinaryOp(
@@ -915,6 +835,12 @@ namespace Hl7.Cql.Operators
             {
                 throw new NotSupportedException(
                     $"The configured IMetricService does not implement {opName} for units {leftUnit} and {rightUnit}. Inject a full IMetricService implementation to enable cross-unit arithmetic.");
+            }
+            catch (OverflowException)
+            {
+                // The metric service scales each value to its unit's base, which can leave the range of Decimal; the
+                // overflow happens inside the service, so it cannot be ruled out up front.
+                return Overflowed<CqlQuantity>(new { leftValue, leftUnit, rightValue, rightUnit }, $"CqlOperators.ArithmeticOperators.{opName}", "type quantity unit conversion");
             }
 
             return null;
@@ -1001,7 +927,7 @@ namespace Hl7.Cql.Operators
             if (argument == null)
                 return null;
             else
-                return (int?)Math.Truncate(argument.Value);
+                return OverflowGuard.ToInt32(argument.Value) ?? Overflowed<int?>(new { argument }, "CqlOperators.ArithmeticOperators.Truncate", "type integer truncation");
         }
 
         #endregion
@@ -1013,21 +939,23 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null || right == 0)
                 return null;
             else
-                return left / right;
+                return OverflowGuard.Divide(left.Value, right.Value) ?? Overflowed<int?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type integer division");
         }
         public long? TruncatedDivide(long? left, long? right)
         {
             if (left == null || right == null || right == 0)
                 return null;
             else
-                return left / right;
+                return OverflowGuard.Divide(left.Value, right.Value) ?? Overflowed<long?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type long division");
         }
         public decimal? TruncatedDivide(decimal? left, decimal? right)
         {
             if (left == null || right == null || right == 0m)
                 return null;
             else
-                return Math.Truncate(left.Value / right.Value);
+                return OverflowGuard.Divide(left.Value, right.Value) is { } quotient
+                    ? Math.Truncate(quotient)
+                    : Overflowed<decimal?>(new { left, right }, "CqlOperators.ArithmeticOperators.TruncatedDivide", "type decimal division");
         }
         public CqlQuantity? TruncatedDivide(CqlQuantity? left, CqlQuantity? right)
         {
@@ -1038,9 +966,9 @@ namespace Hl7.Cql.Operators
             else if (left.unit == null || right.unit == null)
                 return null;
             else if (left.unit == right.unit)
-                return new CqlQuantity(TruncatedDivide(left.value.Value, right.value.Value), UCUMUnits.Default);
+                return QuantityOrNull(TruncatedDivide(left.value.Value, right.value.Value), UCUMUnits.Default);
             else if (right.unit == UCUMUnits.Default)
-                return new CqlQuantity(TruncatedDivide(left.value.Value, right.value.Value), left.unit);
+                return QuantityOrNull(TruncatedDivide(left.value.Value, right.value.Value), left.unit);
             else
             {
                 var divided = TryUcumBinaryOp(left.value.Value, left.unit, right.value.Value, right.unit, MetricServiceExtensions.TryDivide, "TruncatedDivide");
