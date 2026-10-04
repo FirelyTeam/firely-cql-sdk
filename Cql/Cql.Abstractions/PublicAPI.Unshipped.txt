@@ -28,3 +28,20 @@ static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator !=(Hl7.Cql.
 static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError right) -> bool
 ~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
 ~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.ToString() -> string
+Hl7.Cql.Primitives.CqlExpandFractionalPerError
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.CqlExpandFractionalPerError() -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.CqlExpandFractionalPerError(decimal PerValue, string? PerUnit, string! PointType) -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.Deconstruct(out decimal PerValue, out string? PerUnit, out string! PointType) -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.Equals(Hl7.Cql.Primitives.CqlExpandFractionalPerError other) -> bool
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerUnit.get -> string?
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerUnit.init -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerValue.get -> decimal
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerValue.init -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PointType.get -> string!
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PointType.init -> void
+override Hl7.Cql.Primitives.CqlExpandFractionalPerError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator !=(Hl7.Cql.Primitives.CqlExpandFractionalPerError left, Hl7.Cql.Primitives.CqlExpandFractionalPerError right) -> bool
+static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator ==(Hl7.Cql.Primitives.CqlExpandFractionalPerError left, Hl7.Cql.Primitives.CqlExpandFractionalPerError right) -> bool
+~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.ToString() -> string

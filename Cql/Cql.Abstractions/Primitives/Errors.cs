@@ -120,3 +120,31 @@ public readonly record struct CqlInvalidDateTimeComponentsError(
             + "within the range of the type, and no component may be given below one that is not.";
     }
 }
+
+/// <summary>
+/// An <see cref="ICqlError"/> raised when an interval of Integer or Long, or a list of them, is expanded by a per whose
+/// value has a decimal portion.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, section "Interval Operators", "Expand"), "The expand operator
+/// returns the set of intervals of size per for all the intervals in the input, or the list of points covering the
+/// range of the given interval, if invoked on a single interval", and "For numeric intervals, adding the per to the
+/// lower boundary produces a more precise value for the output intervals". A per with a decimal portion therefore
+/// produces Decimal points, which the Integer and Long overloads cannot return, so the expansion signals an error to
+/// the calling environment.
+/// </remarks>
+/// <param name="PerValue">The value of the per quantity.</param>
+/// <param name="PerUnit">The unit of the per quantity, or <see langword="null"/> when it has none.</param>
+/// <param name="PointType">The CQL point type of the expanded interval: <c>Integer</c> or <c>Long</c>.</param>
+public readonly record struct CqlExpandFractionalPerError(
+    decimal PerValue,
+    string? PerUnit,
+    string PointType) : ICqlError
+{
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        string.Create(CultureInfo.InvariantCulture,
+            $"Expanding an interval of {PointType} per {PerValue} '{PerUnit ?? "1"}' would produce Decimal points, which the {PointType} overloads of expand do not support: ")
+        + "the specification defines the result as \"the list of points covering the range of the given interval\" in steps of size per, "
+        + "and \"for numeric intervals, adding the per to the lower boundary produces a more precise value\".";
+}

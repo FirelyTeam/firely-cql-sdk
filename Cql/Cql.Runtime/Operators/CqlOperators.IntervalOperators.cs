@@ -840,7 +840,7 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Integer overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Integer").ToException();
 
             var listItem = interval.low!.Value;
             while (true)
@@ -898,7 +898,7 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Long overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Long").ToException();
 
             var listItem = interval.low!.Value;
             while (true)
