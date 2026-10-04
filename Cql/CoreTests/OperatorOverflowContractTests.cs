@@ -36,25 +36,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
-            "Avg(IEnumerable<decimal?>)",
-            "Median(IEnumerable<decimal?>)",
-            "PopulationStdDev(IEnumerable<CqlQuantity>)",
-            "PopulationStdDev(IEnumerable<decimal?>)",
-            "PopulationVariance(IEnumerable<CqlQuantity>)",
-            "PopulationVariance(IEnumerable<decimal?>)",
-            "Product(IEnumerable<CqlQuantity>)",
-            "Product(IEnumerable<decimal?>)",
-            "SingletonFrom<CqlDate>(IEnumerable<CqlDate>)",
-            "SingletonFrom<CqlDateTime>(IEnumerable<CqlDateTime>)",
-            "SingletonFrom<CqlQuantity>(IEnumerable<CqlQuantity>)",
-            "SingletonFrom<CqlTime>(IEnumerable<CqlTime>)",
-            "SingletonFrom<decimal?>(IEnumerable<decimal?>)",
-            "SingletonFrom<int?>(IEnumerable<int?>)",
-            "SingletonFrom<long?>(IEnumerable<long?>)",
-            "StdDev(IEnumerable<CqlQuantity>)",
-            "StdDev(IEnumerable<decimal?>)",
-            "Variance(IEnumerable<CqlQuantity>)",
-            "Variance(IEnumerable<decimal?>)",
         };
 
         /// <summary>
