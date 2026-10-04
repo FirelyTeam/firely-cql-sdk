@@ -82,8 +82,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
+            var fluentCqlToolkit = CreateCqlToolkit();
             string[] expectedErrors = ["Expected an expression of type 'Boolean', but found an expression of type 'String'."];
-            var library = CreateCqlToolkit().MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
+            var library = fluentCqlToolkit.MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

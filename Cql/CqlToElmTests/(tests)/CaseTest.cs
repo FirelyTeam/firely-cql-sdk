@@ -97,7 +97,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 "case when 1 then 2 else 3 end",
                 ["Expected an expression of type 'Boolean', but found an expression of type 'Integer'."]);
 
-            library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
+            var @case = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
+            @case.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
         }
 
     }
