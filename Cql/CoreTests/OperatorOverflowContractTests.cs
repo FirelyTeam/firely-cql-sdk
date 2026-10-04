@@ -35,19 +35,7 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
-            "Add(CqlDate, CqlQuantity)",
-            "Add(CqlDateTime, CqlQuantity)",
-            "Add(CqlTime, CqlQuantity)",
             "ConvertQuantity(CqlQuantity, string)",
-            "Expand(CqlInterval<CqlDate>, CqlQuantity)",
-            "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
-            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
-            "Expand(IEnumerable<CqlInterval<CqlDate>>, CqlQuantity)",
-            "Expand(IEnumerable<CqlInterval<CqlDateTime>>, CqlQuantity)",
-            "Expand(IEnumerable<CqlInterval<CqlTime>>, CqlQuantity)",
-            "Subtract(CqlDate, CqlQuantity)",
-            "Subtract(CqlDateTime, CqlQuantity)",
-            "Subtract(CqlTime, CqlQuantity)",
         };
 
         /// <summary>

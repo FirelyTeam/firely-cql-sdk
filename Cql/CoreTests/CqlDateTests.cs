@@ -192,13 +192,14 @@ public class CqlDateTests
     [DataRow("ms")]
     [DataRow("millisecond")]
     [DataRow("milliseconds")]
-    public void Add_TimeBasedUnit_ThrowsArgumentException(string unit)
+    public void Add_TimeBasedUnit_ThrowsCqlUnsupportedTemporalUnitError(string unit)
     {
         var date = new CqlDate(2024, 1, 15);
         var quantity = new CqlQuantity(1, unit);
 
-        var exception = Assert.ThrowsException<ArgumentException>(() => date.Add(quantity));
+        var exception = Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => date.Add(quantity));
 
+        Assert.AreEqual(new CqlUnsupportedTemporalUnitError(unit, "Date"), exception.Error);
         StringAssert.Contains(exception.Message, "For Date values, the quantity unit must be one of: years, months, weeks, or days.");
     }
 
@@ -215,13 +216,14 @@ public class CqlDateTests
     [DataRow("ms")]
     [DataRow("millisecond")]
     [DataRow("milliseconds")]
-    public void Subtract_TimeBasedUnit_ThrowsArgumentException(string unit)
+    public void Subtract_TimeBasedUnit_ThrowsCqlUnsupportedTemporalUnitError(string unit)
     {
         var date = new CqlDate(2024, 1, 15);
         var quantity = new CqlQuantity(1, unit);
 
-        var exception = Assert.ThrowsException<ArgumentException>(() => date.Subtract(quantity));
+        var exception = Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => date.Subtract(quantity));
 
+        Assert.AreEqual(new CqlUnsupportedTemporalUnitError(unit, "Date"), exception.Error);
         StringAssert.Contains(exception.Message, "For Date values, the quantity unit must be one of: years, months, weeks, or days.");
     }
 

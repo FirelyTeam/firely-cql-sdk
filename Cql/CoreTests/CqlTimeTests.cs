@@ -7,6 +7,7 @@
  */
 
 #nullable enable
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 
@@ -59,6 +60,21 @@ public class CqlTimeTests
         Assert.IsNotNull(result);
         Assert.AreEqual(11, result.Value.Hour);
         Assert.AreEqual(0, result.Value.Minute);
+    }
+
+    [DataTestMethod]
+    [DataRow("year")]
+    [DataRow("month")]
+    [DataRow("1")]
+    [DataRow("cm")]
+    public void AddAndSubtract_NonTimeUnit_ThrowsCqlUnsupportedTemporalUnitError(string unit)
+    {
+        var time = new CqlTime(10, 15, 0, 0, null, null);
+        var quantity = new CqlQuantity(1, unit);
+        var expected = new CqlUnsupportedTemporalUnitError(unit, "Time");
+
+        Assert.AreEqual(expected, Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => time.Add(quantity)).Error);
+        Assert.AreEqual(expected, Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => time.Subtract(quantity)).Error);
     }
 
     [TestMethod]
