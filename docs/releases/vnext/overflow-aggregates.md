@@ -6,7 +6,8 @@
   - `Avg` of Decimals whose total leaves the Decimal range: `null` instead of `OverflowException`.
   - `Product` of Integers or Longs whose product leaves the type's range: `null` instead of the value it wrapped
     around to.
-  - `Product` of Decimals or quantities whose product leaves the Decimal range: `null` instead of `OverflowException`.
+  - `Product` of Decimals or quantities whose product leaves the Decimal range: `null` instead of `OverflowException`;
+    whose product of nonzero values is too small in magnitude to represent: `null`, as for `*`, instead of `0`.
   - `Product` of quantities whose units differ: `null`, with a warning as `Sum` gives, instead of
     `NotSupportedException`.
   - `Median` of Decimals whose two middle values sum beyond the Decimal range (such as `Median({ maximum Decimal,

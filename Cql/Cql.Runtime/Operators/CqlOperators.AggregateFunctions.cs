@@ -133,8 +133,8 @@ namespace Hl7.Cql.Operators
                 {
                     if (d != null)
                     {
-                        // A product outside Decimal's range means Product(X) cannot be represented and neither can
-                        // Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
+                        // A product outside Decimal's range, or a product of nonzero values too small in magnitude to
+                        // represent, means Product(X) cannot be represented and neither can Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
                         // null. The geometric mean of such a list can still be representable - the product is
                         // accumulated in Decimal - so the warning keeps the null visible in the evaluation log rather
                         // than letting it pass as an ordinary result.
@@ -425,7 +425,7 @@ namespace Hl7.Cql.Operators
             foreach (var value in values)
             {
                 if (OverflowGuard.Subtract(value, mean) is not { } deviation
-                    || OverflowGuard.Multiply(deviation, deviation) is not { } square
+                    || Square(deviation) is not { } square
                     || OverflowGuard.Add(summation, square) is not { } nextSummation)
                     return null;
                 summation = nextSummation;
@@ -433,6 +433,14 @@ namespace Hl7.Cql.Operators
 
             return summation / values.Count;
         }
+
+        /// <summary>
+        /// The square of a deviation, or <see langword="null"/> when it is outside the Decimal range. A deviation below
+        /// one in magnitude cannot overflow, and a square too small to represent adds nothing to the sum of squares, so
+        /// it counts as zero.
+        /// </summary>
+        private static decimal? Square(decimal deviation) =>
+            Math.Abs(deviation) < 1m ? deviation * deviation : OverflowGuard.Multiply(deviation, deviation);
 
         #endregion
 

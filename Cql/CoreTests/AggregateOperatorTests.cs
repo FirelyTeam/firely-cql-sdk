@@ -371,6 +371,15 @@ public class AggregateOperatorTests
             "CqlOperators.AggregateFunctions.Product");
     }
 
+    /// <summary>
+    /// A Decimal product of nonzero values too small in magnitude to represent is null, as for <c>*</c>.
+    /// </summary>
+    [TestMethod]
+    public void Product_DecimalTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Product(new decimal?[] { 1e-20m, 1e-20m }), "CqlOperators.AggregateFunctions.Product");
+    }
+
     [TestMethod]
     public void Product_QuantitiesOfDifferentUnits_IsNullWithOneWarning()
     {
@@ -424,6 +433,19 @@ public class AggregateOperatorTests
 
         AssertNullWithOneWarning(o => o.StdDev(quantities), "CqlOperators.AggregateFunctions.StdDev");
         AssertNullWithOneWarning(o => o.Variance(quantities), "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// A squared deviation too small to represent adds nothing to the sum of squares, so the variance of nearly equal
+    /// values is zero rather than null.
+    /// </summary>
+    [TestMethod]
+    public void PopulationVariance_SquaredDeviationTooSmallToRepresent_CountsAsZero()
+    {
+        var (result, warnings) = WithWarnings(o => o.PopulationVariance(new decimal?[] { 0.3333333333333333333333333333m, 0.3333333333333333333333333334m }));
+
+        Assert.AreEqual(0m, result);
+        Assert.AreEqual(0, warnings.Count);
     }
 
     /// <summary>
