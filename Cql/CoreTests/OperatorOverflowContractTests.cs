@@ -454,6 +454,10 @@ namespace CoreTests
                     Add(full, extremes, intervalType, p[0], p[1], p[2], temporal ? p[2] : p[3], narrow);
                     if (temporal)
                         full.Add(MakeInterval(intervalType, p[3], p[3], true, true));
+
+                    // Adding a fractional per to a Decimal this large rounds the per away, so expansion does not advance.
+                    if (narrow && p[0] is decimal)
+                        full.Add(MakeInterval(intervalType, decimal.MaxValue - 1, decimal.MaxValue - 1, true, true));
                 }
 
                 full.Add(null);
