@@ -43,6 +43,9 @@
   0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
   represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
   `ArgumentOutOfRangeException` or `OverflowException`.
+- `expand` of an Integer or Long interval, or a list of them, by a `per` with a decimal portion (such as
+  `expand { Interval[10, 10] } per 0.1`) signals a CQL error, `CqlException<CqlExpandFractionalPerError>`, instead of a
+  .NET `NotSupportedException`: the specification makes those points Decimal, which these overloads cannot return.
 
 This changes CQL evaluation results for the affected expressions, which per [versioning.md](../../versioning.md) forces
 a **MESO** bump. Generated C# and `GeneratorToolVersion` are unchanged.
