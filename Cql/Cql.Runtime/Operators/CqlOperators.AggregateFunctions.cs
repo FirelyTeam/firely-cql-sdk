@@ -726,7 +726,7 @@ namespace Hl7.Cql.Operators
 
         /// <summary>
         /// The square of a standard deviation taken to Decimal, or <see langword="null"/> when the standard deviation or
-        /// its square is outside the Decimal range.
+        /// its square is outside the Decimal range or is nonzero and too small in magnitude to represent.
         /// </summary>
         private static decimal? SquareOfStdDev(double stdDev) =>
             OverflowGuard.ToDecimal(stdDev) is { } value ? OverflowGuard.ToDecimal(Math.Pow((double)value, 2)) : null;

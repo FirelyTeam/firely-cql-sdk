@@ -123,7 +123,8 @@ internal static class OverflowGuard
         Math.Truncate(value) is var truncated and >= int.MinValue and <= int.MaxValue ? (int)truncated : null;
 
     /// <summary>
-    /// The value as a <see cref="decimal"/>, or <see langword="null"/> when it is outside its range or is not a number.
+    /// The value as a <see cref="decimal"/>, or <see langword="null"/> when it is outside its range, is not a number,
+    /// or is nonzero and too small in magnitude to represent.
     /// </summary>
     public static decimal? ToDecimal(double value)
     {
@@ -132,7 +133,10 @@ internal static class OverflowGuard
 
         try
         {
-            return (decimal)value;
+            var converted = (decimal)value;
+
+            // A double too small to represent as a Decimal converts to zero instead of throwing.
+            return converted == 0m && value != 0.0 ? null : converted;
         }
         catch (OverflowException)
         {

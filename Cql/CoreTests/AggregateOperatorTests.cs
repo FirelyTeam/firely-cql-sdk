@@ -457,6 +457,53 @@ public class AggregateOperatorTests
             "CqlOperators.AggregateFunctions.Variance");
     }
 
+    /// <summary>
+    /// The standard deviation of these values, computed in <see cref="double"/>, is nonzero and too small in magnitude
+    /// to represent as a Decimal, and so is the variance.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_NonzeroStdDevTooSmallToRepresent_AreNullWithOneWarning()
+    {
+        decimal?[] values = [0m, 0m, 0m, 0m, 1e-28m];
+        var quantities = values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg")).ToArray();
+
+        AssertNullWithOneWarning(o => o.StdDev(values), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.StdDev(quantities), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.Variance(values), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(o => o.Variance(quantities), "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// The standard deviation of these values is representable, its square is nonzero and too small in magnitude to
+    /// represent.
+    /// </summary>
+    [TestMethod]
+    public void Variance_NonzeroVarianceTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        var (stdDev, stdDevWarnings) = WithWarnings(o => o.StdDev(new decimal?[] { 0m, 1e-15m }));
+        Assert.IsTrue(stdDev > 0m);
+        Assert.AreEqual(0, stdDevWarnings.Count);
+
+        AssertNullWithOneWarning(o => o.Variance(new decimal?[] { 0m, 1e-15m }), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(
+            o => o.Variance([new CqlQuantity(0m, "mg"), new CqlQuantity(1e-15m, "mg")]),
+            "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// Equal values have a standard deviation and variance of exactly zero, which is no underflow.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_EqualValues_AreZeroWithoutWarning()
+    {
+        var (stdDev, stdDevWarnings) = WithWarnings(o => o.StdDev(new decimal?[] { 1e-28m, 1e-28m }));
+        var (variance, varianceWarnings) = WithWarnings(o => o.Variance(new decimal?[] { 1e-28m, 1e-28m }));
+
+        Assert.AreEqual(0m, stdDev);
+        Assert.AreEqual(0m, variance);
+        Assert.AreEqual(0, stdDevWarnings.Count + varianceWarnings.Count);
+    }
+
     [TestMethod]
     public void StdDevAndVariance_QuantitiesOfDifferentUnits_AreNullWithOneWarning()
     {

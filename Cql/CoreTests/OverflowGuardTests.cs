@@ -80,6 +80,53 @@ public class OverflowGuardTests
     }
 
     [TestMethod]
+    public void ToDecimal_NonzeroDoubleTooSmallToRepresent_ReturnsNull()
+    {
+        Assert.IsNull(OverflowGuard.ToDecimal(1e-30));
+        Assert.IsNull(OverflowGuard.ToDecimal(-1e-30));
+        Assert.IsNull(OverflowGuard.ToDecimal(double.Epsilon));
+    }
+
+    [TestMethod]
+    public void ToDecimal_Zero_ReturnsZero()
+    {
+        Assert.AreEqual(0m, OverflowGuard.ToDecimal(0.0));
+        Assert.AreEqual(0m, OverflowGuard.ToDecimal(-0.0));
+    }
+
+    [TestMethod]
+    public void ToDecimal_SmallestRepresentableMagnitude_ReturnsIt()
+    {
+        var result = OverflowGuard.ToDecimal(1e-28);
+
+        Assert.IsNotNull(result);
+        Assert.IsTrue(result > 0m);
+    }
+
+    /// <summary>
+    /// The operators computed in <see cref="double"/> answer null with a warning for a nonzero result too small to
+    /// represent as a Decimal.
+    /// </summary>
+    [TestMethod]
+    public void Operators_DoubleResultTooSmallToRepresent_ReturnNullWithWarning()
+    {
+        var operators = FhirCqlContext.WithDataSource().Operators;
+        var warnings = new List<string?>();
+        operators.MessageReceived += (_, e) =>
+        {
+            if (e.Severity == "Warning")
+                warnings.Add(e.Code);
+        };
+
+        Assert.IsNull(operators.Exp(-100m));
+        Assert.IsNull(operators.Power(2m, -100m));
+        Assert.IsNull(operators.Power(2, -100));
+        CollectionAssert.AreEqual(
+            new[] { "CqlOperators.ArithmeticOperators.Exp", "CqlOperators.ArithmeticOperators.Power", "CqlOperators.ArithmeticOperators.Power" },
+            warnings);
+    }
+
+    [TestMethod]
     public void Operators_DecimalMultiplyAndDivideUnderflow_ReturnNull()
     {
         var operators = FhirCqlContext.WithDataSource().Operators;

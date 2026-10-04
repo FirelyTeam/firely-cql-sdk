@@ -15,12 +15,16 @@
   - `Median` of Decimals whose two middle values sum beyond the Decimal range (such as `Median({ maximum Decimal,
     maximum Decimal })`): their midpoint instead of `OverflowException`.
   - `StdDev` and `Variance` whose result leaves the Decimal range: `null` instead of `OverflowException`.
+  - `StdDev` and `Variance` whose nonzero result is too small in magnitude to represent as a Decimal (such as the
+    `StdDev` of four zeroes and `0.0000000000000000000000000001`): `null` instead of `0`.
   - `StdDev` and `Variance` of a single value: `null`, as for any division by zero, instead of `OverflowException`.
   - `StdDev` and `Variance` of quantities whose units differ: `null`, with a warning, instead of
     `NotSupportedException`.
   - `PopulationStdDev` and `PopulationVariance` where the total of the values, a deviation from their mean or its
     square leaves the Decimal range: `null` instead of `OverflowException`; whose nonzero variance is too small in
     magnitude to represent: `null` instead of `0`.
+- `Exp` and `Power` whose nonzero result is too small in magnitude to represent as a Decimal (such as `Exp(-100)` or
+  `Power(2.0, -100)`) evaluate to `null`, with a warning, instead of `0`, as `*` and `/` do.
 - `singleton from` a list of more than one element signals a CQL error,
   `CqlException<CqlSingletonFromMultipleElementsError>`, instead of a .NET `InvalidOperationException`, as the
   specification mandates a run-time error for that case.
