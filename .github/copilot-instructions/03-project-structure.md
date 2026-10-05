@@ -45,11 +45,11 @@ Read this before searching the repository. Build `Cql-Sdk.slnf`; SDK and test pr
 
 ## 3.3. Test projects
 
-3.3.1 All test projects use MSTest and live under `Cql/`.
+3.3.1 `Cql-Sdk.slnf` builds two test projects, both MSTest, under `Cql/`: `CoreTests` and `CqlToElmTests`. Other suites live beside what they test (`tools/XsdToCSharpConverterTests`, `Demo/Test.Measures.Demo`).
 
 3.3.2 `CoreTests`: unit tests for runtime, compiler, primitives and FHIR binding, one file per concern (`CqlDateTests.cs`, `AggregateOperatorTests.cs`, …). `CSharp/*.g.cs` are golden files checked by `CSharpGenerationGoldenTests`; `Input/ELM/` holds the ELM they are generated from.
 
-3.3.3 `CqlToElmTests`: translator tests, one `(tests)/<Operator>Test.cs` per operator. `(tests)/XmlTest.cs` is the CQL conformance suite: it translates, evaluates and checks every case in `Input/DQIC/*.xml` (copies of cqframework/cql-tests, see the [README](../../Cql/CqlToElmTests/Input/DQIC/README.md) there). A case that does not hold for this SDK is listed with its reason in `(tests)/SkippedTests.cs` (`DoesNotCompile`, `DoesNotMatchExpectation`); the XML is never edited.
+3.3.3 `CqlToElmTests`: translator tests, one `(tests)/<Operator>Test.cs` per operator. `(tests)/XmlTest.cs` is the CQL conformance suite: it translates, evaluates and checks every case in `Input/DQIC/*.xml`. Those files are unmodified copies of cqframework/cql-tests and are never edited, except `CqlAgeTest.xml` and `FirelyAdditionsTest.xml`, which are Firely's own and where SDK-only cases go (see the [README](../../Cql/CqlToElmTests/Input/DQIC/README.md) there). A case that does not hold for this SDK is listed with its reason in `(tests)/SkippedTests.cs` (`DoesNotCompile`, `DoesNotMatchExpectation`).
 
 3.3.4 `Benchmarks`: BenchmarkDotNet micro-benchmarks.
 
