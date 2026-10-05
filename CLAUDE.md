@@ -6,6 +6,38 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 **Keep this in sync with the Copilot instructions.** When you add, remove, or change a rule here (or in a `.claude/skills/` file), check whether `.github/copilot-instructions.md` or one of its sub-documents states the same rule and needs the equivalent update, and vice versa. A universal convention or gotcha shouldn't exist in one file and not the other; a task-specific workflow should have exactly one canonical copy (here, in `.claude/skills/`), with the Copilot side linking to it rather than restating it.
 
+## Repository map
+
+Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net8.0;net10.0` (set in `cql-sdk.props`), so run tests on both.
+
+**Pipeline, in order, under `Cql/`** (assembly names in parentheses where they differ from the folder):
+
+| Project | Role | Start at |
+|---|---|---|
+| `Cql.Grammar` (`Hl7.Cql.CqlToElm.Grammar`) | ANTLR grammar `cql.g4` and its generated parser | `cqlParser.cs` |
+| `Cql.CqlToElm` | CQL text to ELM: visitors, overload resolution, system library, translation messages | `Visitors/ExpressionVisitor.cs`, `InvocationBuilder.cs`, `Builtin/SystemLibrary.cs`, `MessageProvider.cs` |
+| `Elm` | ELM object model (generated from the XSD) and its JSON/XML serialization | `Elm.g.cs`, `Library.cs` |
+| `Cql.Model` | Model info (FHIR and System types) and `ModelTypeResolver` | `Models/`, `ModelTypeResolver.cs` |
+| `Cql.Compiler` | ELM to a typed intermediate representation; binds each ELM node to an `ICqlOperators` method | `CodeBuilder.cs`, `CqlOperatorsBinder.*.cs`, `CodeModel/`, `Preprocessing/` |
+| `CodeGeneration.NET` | Prints the IR as C# and compiles it; holds `GeneratorToolVersion` | `LibrarySetCSharpCodeGenerator.*.cs`, `CSharpEmitter.*.cs`, `AssemblyCompiler.cs`, `_CODE GENERATOR VERSION_.cs` |
+| `Cql.Invocation` | Loads generated assemblies and invokes definitions; one `LibraryInvoker.<major>.<minor>.cs` per supported generator version | `Toolkit/InvocationToolkit.cs`, `Toolkit/LibrarySetInvoker.cs`, `Toolkit/Internal/` |
+| `Cql.Runtime` | Everything generated code calls at run time: `ICqlOperators` and its `CqlOperators` implementation, `CqlContext`, comparers, type and unit conversion, value sets | `Operators/`, `Runtime/CqlContext.cs`, `Comparers/`, `Conversion/`, `ValueSets/` |
+| `Cql.Abstractions` (`HL7.Cql.Abstractions`) | CQL primitive types, `CqlException<TError>` and the `ICqlError` structs, `ReflectionUtility`, definition attributes | `Primitives/`, `Exceptions/`, `Abstractions/Infrastructure/` (see [its CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md)) |
+| `Iso8601` | `DateIso8601`, `DateTimeIso8601`, `TimeIso8601` and `DateTimePrecision`, the values inside `CqlDate`, `CqlDateTime` and `CqlTime` | the three `*Iso8601.cs` files |
+| `Cql.Firely` (`Hl7.Cql.Fhir`) | FHIR bindings on the Firely .NET SDK: `FhirCqlContext`, `FhirTypeConverter`, `FhirTypeResolver`, `BundleDataSource` | the files of those names |
+| `Cql.Packaging`, `PackagerCLI` (`Hl7.Cql.Packager`) | Packaging CQL/ELM/assemblies into FHIR `Library` resources; the `dotnet` tool that drives it | `ResourcePackager.cs`; `PackagerCLI/Commands.*` |
+| `Cql` (`Hl7.Cql`) | Meta-package, no code | |
+
+**Where an operator lives.** `ICqlOperators` is one interface in `Cql/Cql.Runtime/Operators/ICqlOperators.cs`; its implementation is split over `CqlOperators.<Family>.cs` in that folder: `ArithmeticOperators`, `AggregateFunctions`, `ComparisonOperators`, `DateTimeOperators`, `EqualityAndEquivalence`, `IntervalOperators` plus `IntervalBoundaries`, `ListOperators`, `LogicalOperators`, `NullologicalOperators`, `StringOperators`, `TypeOperators` (conversions, `ConvertQuantity`), `ClinicalOperators2` (age, codes, value sets), `FusedOperators` and `CrossJoin` (query fusion). Date, time and quantity arithmetic itself is on the primitives (`CqlDate.Add`, `CqlQuantity`, in `Cql.Abstractions/Primitives/`); unit conversion is `UnitConverter` and `UcumConversionExtensions` in `Cql.Runtime/Conversion/`; overload resolution at translation time is `InvocationBuilder` in `Cql.CqlToElm`.
+
+**Tests** (MSTest, `Cql/`):
+
+- `CoreTests`: unit tests for runtime, compiler, primitives and FHIR binding, one file per concern (`CqlDateTests.cs`, `AggregateOperatorTests.cs`, …). `CSharp/*.g.cs` are golden files checked by `CSharpGenerationGoldenTests`; `Input/ELM/` holds the ELM they are generated from.
+- `CqlToElmTests`: translator tests, one `(tests)/<Operator>Test.cs` per operator. `(tests)/XmlTest.cs` is the CQL conformance suite: it translates, evaluates and checks every case in `Input/DQIC/*.xml` (copies of cqframework/cql-tests, see the README there). A case that does not hold for this SDK is listed with its reason in `(tests)/SkippedTests.cs` (`DoesNotCompile`, `DoesNotMatchExpectation`); the XML is never edited.
+- `Benchmarks`: BenchmarkDotNet micro-benchmarks.
+
+**Elsewhere:** `Demo/` is the measure pipeline (CQL to ELM to C# to FHIR), described in [docs/demo-projects.md](docs/demo-projects.md); `submodules/Firely.Cql.Sdk.Integration.Runner` is the private MADiE integration suite; `spec/` is the CQL and FHIR spec mirror (below); `tools/` holds the spec condenser, the XSD-to-C# converter and the Mermaid renderer; `build/` holds the Azure pipeline; `Examples/` holds the public samples (`CqlSdkExamples`, stable API) and preview samples (`CqlSdkExamplesPreview`, internal and experimental API); `docs/` holds the design documents, starting with [docs/cql-engine-architecture.md](docs/cql-engine-architecture.md).
+
 ## Working style
 
 - When asked for ideas, suggestions, or "what's the best way to..." — discuss 2-3 options with trade-offs and wait for the user to pick one before implementing. Don't jump straight to code for exploratory questions.
