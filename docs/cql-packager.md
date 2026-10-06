@@ -283,6 +283,10 @@ is no command-line flag):
 A library's `using` declaration only resolves when its model is selected here, so a set of libraries
 written against QICore 6.0.0 needs `QICore600`, and `USCore610` as well when the set also contains libraries that use US Core 6.1.0.
 
+Select at most one version of each model: `USCore311` and `USCore610` are two versions of the same model, as are
+`QICore411` and `QICore600`, and a configuration that selects both is refused before any library is translated.
+Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
+
 ## ELM Attachment Formatting
 
 Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. How that JSON is

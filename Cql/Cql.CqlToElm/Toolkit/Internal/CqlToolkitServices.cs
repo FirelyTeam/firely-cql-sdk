@@ -100,7 +100,24 @@ internal record CqlToolkitServices(
         {
             var modelInfos = AllMappedModelsInOrder
                              .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.GetModelInfo() : null)
-                             .Concat(config.ModelInfos);
+                             .Concat(config.ModelInfos)
+                             .ToList();
+
+            // A type is identified by its model's url and its name, without the model's version, so the
+            // translator can only resolve types when each model url is configured in a single version.
+            var multiVersionModel = modelInfos
+                                    .GroupBy(m => m.url)
+                                    .FirstOrDefault(g => g.Select(m => m.version).Distinct().Count() > 1);
+            if (multiVersionModel is not null)
+            {
+                var first = multiVersionModel.First();
+                var versions = string.Join(", ", multiVersionModel.Select(m => $"'{m.version}'").Distinct());
+                throw new ArgumentException(
+                    $"Model {first.name} ({multiVersionModel.Key}) is selected in more than one version ({versions}). " +
+                    "Select one version of each model per toolkit, and translate libraries using another version with a separate toolkit.",
+                    nameof(config));
+            }
+
             return modelProvider =>
             {
                 foreach (var modelInfo in modelInfos)

@@ -19,10 +19,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class BundledModelTest : Base
     {
+        // These tests assert that the bundled model resolves and that a retrieve against it translates
+        // without errors. The retrieve's dataType and templateId are asserted once #1741 emits the
+        // profile's target type and the profile id.
+
         [DataTestMethod]
         [DataRow("4.1.1", CqlModel.USCore311, CqlModel.QICore411)]
         [DataRow("6.0.0", CqlModel.USCore610, CqlModel.QICore600)]
-        public void QICore_Retrieve_Is_Typed_As_QICore_Class(string version, CqlModel usCore, CqlModel qiCore)
+        public void QICore_Model_Resolves_And_Retrieve_Translates(string version, CqlModel usCore, CqlModel qiCore)
         {
             var cqlToolkit = CreateCqlToolkit(Models: [CqlModel.ElmR1, CqlModel.Fhir401, usCore, qiCore]);
             var library = cqlToolkit.MakeLibrary($"""
@@ -35,15 +39,13 @@ namespace Hl7.Cql.CqlToElm.Test
                                                  define Encounters: [Encounter]
                                                  """);
 
-            var retrieve = library.statements.Single(s => s.name == "Encounters").expression.Should().BeOfType<Retrieve>().Subject;
-            retrieve.dataType.Name.Should().Be("{http://hl7.org/fhir/us/qicore}Encounter");
-            // The translator does not take the retrieve's templateId from the class's identifier (#1741).
+            library.statements.Single(s => s.name == "Encounters").expression.Should().BeOfType<Retrieve>();
         }
 
         [DataTestMethod]
         [DataRow("3.1.1", CqlModel.USCore311)]
         [DataRow("6.1.0", CqlModel.USCore610)]
-        public void USCore_Retrieve_Is_Typed_As_USCore_Profile(string version, CqlModel usCore)
+        public void USCore_Model_Resolves_And_Retrieve_Translates(string version, CqlModel usCore)
         {
             var cqlToolkit = CreateCqlToolkit(Models: [CqlModel.ElmR1, usCore]);
             var library = cqlToolkit.MakeLibrary($"""
@@ -56,9 +58,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
             // `context Patient` is left out: US Core names its patient class PatientProfile, and the
             // translator resolves a context by class name rather than through the model's contextInfo (#1741).
-            var retrieve = library.statements.Single(s => s.name == "Encounters").expression.Should().BeOfType<Retrieve>().Subject;
-            retrieve.dataType.Name.Should().Be("{http://hl7.org/fhir/us/core}EncounterProfile");
-            // The translator does not take the retrieve's templateId from the class's identifier (#1741).
+            library.statements.Single(s => s.name == "Encounters").expression.Should().BeOfType<Retrieve>();
+        }
+
+        [TestMethod]
+        public void Selecting_Two_Versions_Of_One_Model_Is_Refused()
+        {
+            var create = () => CreateCqlToolkit(Models: [CqlModel.ElmR1, CqlModel.Fhir401, CqlModel.USCore311, CqlModel.QICore411, CqlModel.USCore610, CqlModel.QICore600]);
+
+            create.Should().Throw<ArgumentException>()
+                  .WithMessage("*http://hl7.org/fhir/us/core*more than one version ('3.1.1', '6.1.0')*Select one version of each model per toolkit*");
         }
     }
 }

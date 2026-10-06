@@ -13,6 +13,12 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// <summary>
 /// Represents the model of CQL to use.
 /// </summary>
+/// <remarks>
+/// Select at most one version of each model: <see cref="USCore311"/> and <see cref="USCore610"/> share a url, as do
+/// <see cref="QICore411"/> and <see cref="QICore600"/>, and a <see cref="CqlToolkit"/> configured with two versions of
+/// the same model throws an <see cref="ArgumentException"/>. Translate libraries written against another version
+/// with a separate toolkit.
+/// </remarks>
 public enum CqlModel
 {
     /// <summary>
