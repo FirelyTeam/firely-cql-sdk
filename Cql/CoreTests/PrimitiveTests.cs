@@ -3737,6 +3737,30 @@ namespace CoreTests
         }
 
         /// <summary>
+        /// Ceiling and Floor of a Decimal yield an Integer; a result outside the Integer range cannot be
+        /// represented and is null, while a result at either end of the range is kept.
+        /// </summary>
+        [TestMethod]
+        public void CeilingAndFloorOfDecimalOutsideIntegerRangeAreNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Ceiling(-2147483649.2m));
+            Assert.IsNull(ops.Ceiling(2147483648.2m));
+            Assert.IsNull(ops.Ceiling(2147483647.2m));
+            Assert.IsNull(ops.Floor(-2147483649.2m));
+            Assert.IsNull(ops.Floor(2147483648.2m));
+            Assert.IsNull(ops.Floor(-2147483648.2m));
+            Assert.IsNull(ops.Ceiling(decimal.MaxValue));
+            Assert.IsNull(ops.Floor(decimal.MinValue));
+
+            Assert.AreEqual(int.MinValue, ops.Ceiling(-2147483648.2m));
+            Assert.AreEqual(int.MaxValue, ops.Floor(2147483647.2m));
+            Assert.AreEqual(int.MaxValue, ops.Ceiling(2147483647.0m));
+            Assert.AreEqual(int.MinValue, ops.Floor(-2147483648.0m));
+        }
+
+        /// <summary>
         /// Adding a quantity to a time yields null whenever the result cannot be represented as a
         /// time of day, whether it merely leaves the day or is too large for the arithmetic itself.
         /// </summary>
