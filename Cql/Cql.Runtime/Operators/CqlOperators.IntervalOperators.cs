@@ -28,8 +28,12 @@ namespace Hl7.Cql.Operators
 
         // Boundary exclusivity is preserved, not normalized with ToClosed() - see the CqlDateTime
         // overload for why.
-        public CqlInterval<CqlDate?>? Interval(CqlDate? low, CqlDate? high, bool? lowClosed, bool? highClosed) =>
-            new(low, high, lowClosed, highClosed);
+        public CqlInterval<CqlDate?>? Interval(CqlDate? low, CqlDate? high, bool? lowClosed, bool? highClosed)
+        {
+            if (low is null && high is null)
+                return null;
+            return new (low, high, lowClosed, highClosed);
+        }
 
         // Boundary exclusivity is deliberately preserved rather than normalized away with
         // ToClosed(): closing an exclusive date/time boundary shifts it by one unit of the
