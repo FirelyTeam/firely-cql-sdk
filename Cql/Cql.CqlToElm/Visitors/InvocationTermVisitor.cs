@@ -60,18 +60,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (term is IncludeRef ir)
                 return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(context.Locator());
-            else if (term is null)
-            {
-                var message = $"Type {context.expressionTerm().GetType()} is not implemented";
-                return new Message()
-                {
-                    source = new Null().WithResultType(SystemTypes.AnyType),
-                    message = ElmFactory.Literal(message),
-                }
-                .AddError(message)
-                .WithLocator(context.Locator())
-                .WithResultType(SystemTypes.AnyType);
-            }
             else return term;
         }
 
