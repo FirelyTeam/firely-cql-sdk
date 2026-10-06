@@ -132,10 +132,6 @@
     <value>Translation of {0} '{1}' is not implemented.</value>
     <comment>{0} = grammar rule name, {1} = source text</comment>
   </data>
-  <data name="CouldNotFindLibrary" xml:space="preserve">
-    <value>Could not find library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
-    <comment>{0} = library name, {1} = version</comment>
-  </data>
   <data name="CouldNotResolveContextName" xml:space="preserve">
     <value>Could not resolve context name {0} in model {1}.</value>
     <comment>{0} = name of context, {1} comma separated list of models declared, excluding System</comment>
@@ -175,10 +171,6 @@
   <data name="IdentifierAlreadyInUse" xml:space="preserve">
     <value>Identifier {0} is already in use in this library.</value>
     <comment>{0} = unquoted identifier</comment>
-  </data>
-  <data name="Latest" xml:space="preserve">
-    <value>latest</value>
-    <comment>The word "latest"</comment>
   </data>
   <data name="NamedTypeRequiredInContext" xml:space="preserve">
     <value>A named type is required in this context.</value>
