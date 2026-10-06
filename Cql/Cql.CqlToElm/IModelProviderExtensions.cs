@@ -48,12 +48,16 @@ namespace Hl7.Cql.CqlToElm
         }
 
         // Split the typename on the first '.'.  If there is no '.', return ("", typename).
-        private static (string modelPrefix, string typename) splitTypeName(string typename) => typename.Split('.', 2) switch
+        private static (string modelPrefix, string typename) splitTypeName(string typename)
         {
-            string[] parts when parts.Length == 2 => (parts[0], parts[1]),
-            string[] parts when parts.Length == 1 => ("", parts[0]),
-            _ => throw new ArgumentException($"Type name {typename} is not valid.")
-        };
+            ArgumentNullException.ThrowIfNull(typename);
+            return typename.Split('.', 2) switch
+            {
+                string[] parts when parts.Length == 2 => (parts[0], parts[1]),
+                string[] parts when parts.Length == 1 => ("", parts[0]),
+                _ => throw new ArgumentException($"Type name {typename} is not valid.")
+            };
+        }
         public static IEnumerable<TypeInfo> GetBaseTypes(this IModelProvider provider, TypeInfo type)
         {
             yield return type;

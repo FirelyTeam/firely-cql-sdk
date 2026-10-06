@@ -88,7 +88,7 @@ internal class ResourcePackager(
                 _cqlTypeToFhirTypeMapper,
                 elmLibrary,
                 null,
-                Encoding.Default.GetBytes(cqlString),
+                Encoding.UTF8.GetBytes(NormalizeNewLines(cqlString)),
                 assemblyBinary,
                 debugSymbols,
                 GetCSharpSourceCodeByName(),
@@ -109,4 +109,17 @@ internal class ResourcePackager(
             return (fhirLibrary, fhirMeasure);
         }
     }
+
+    /// <summary>
+    /// Rewrites CRLF to LF so a CQL attachment does not depend on the line endings the source file happened
+    /// to be checked out with.
+    /// </summary>
+    /// <remarks>
+    /// The attachment is base64, so git cannot normalize it the way it normalizes the <c>.cql</c> file
+    /// itself. Without this, the same CQL packaged on Windows and on Linux produces different bytes, and
+    /// any checked-in packaged resource becomes a record of the machine that built it. LF is what the
+    /// repository stores.
+    /// </remarks>
+    internal static string NormalizeNewLines(string text) =>
+        text.Contains('\r') ? text.Replace("\r\n", "\n").Replace("\r", "\n") : text;
 }

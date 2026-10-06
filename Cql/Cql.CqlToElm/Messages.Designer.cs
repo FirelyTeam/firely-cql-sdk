@@ -96,6 +96,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Translation of {0} &apos;{1}&apos; is not implemented..
+        /// </summary>
+        internal static string ConstructNotImplemented {
+            get {
+                return ResourceManager.GetString("ConstructNotImplemented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
         /// </summary>
         internal static string CouldNotFindLibrary {

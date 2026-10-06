@@ -16,8 +16,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "TruncatedDivide10d1ByNeg3D1Quantity", "Unit arithmetic is not supported." },
 
             { "TestCollapseNull", "Collapse over a list of Interval<Any> is ambiguous with every typed interval overload (#1627)." },
-            { "TestNullElement1", "This expression is ambiguous between the List and Interval overloads." },
-            { "In1Null", "This expression is ambiguous between the List and Interval overloads." },
 
 
             { "CodeToConcept1", "Requires ListPromotion to be enabled; without it translation reports an error because Code cannot be converted to the List<Code> type of Concept.codes." },
