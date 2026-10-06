@@ -2,14 +2,19 @@
 # Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.
 # Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
 AdultOutpatientEncountersFHIR4-2.2.000
+AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000
 DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004
 DevDays-2023.0.0
 FHIRHelpers-4.0.001
+HospiceFHIR4-2.3.000
 HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006
 MeasureExample-0.0.1
 NCQACQLBase-1.0.0
+NCQAEncounter-1.0.0
 NCQAFHIRBase-1.0.0
+NCQAHealthPlanEnrollment-1.0.0
 NCQAHospice-1.0.0
+NCQAPalliativeCare-1.0.0
 NCQAStatus-1.0.0
 NCQATerminology-1.0.0
 PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008

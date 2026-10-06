@@ -4,6 +4,7 @@
 ConceptDefTest-1.0.0
 CqlBooleanTest-1.0.000
 CqlNestedTupleTest-1.0.0
+FHIRConversionTest-2023.0.0
 FHIRHelpers-4.0.1
 FusedOperatorsTest-1.0.0
 ParameterNameTest-1.0.0

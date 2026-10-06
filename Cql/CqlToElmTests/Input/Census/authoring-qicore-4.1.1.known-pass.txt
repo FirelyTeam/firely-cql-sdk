@@ -2,8 +2,10 @@
 # with model infos qicore-modelinfo-4.1.1.xml, uscore-modelinfo-3.1.1.xml.
 # Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.
 # Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
+DocumentationofCurrentMedicationsFHIR-0.2.000
 FHIRHelpers-4.3.000
 MultipleResourcesExample-0.0.1
 ParametersExample-0.0.1
+QICoreCommon-2.0.000
 Status-1.6.000
 SupplementalDataElements-3.4.000
