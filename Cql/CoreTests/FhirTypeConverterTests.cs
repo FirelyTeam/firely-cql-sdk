@@ -1760,5 +1760,25 @@ namespace CoreTests
             var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
             Assert.IsNull(nullConverted);
         }
+
+        [TestMethod]
+        public void ConvertCodeOfEnum_NullableEnum_ReturnsEnumValue()
+        {
+            var code = new Code<AdministrativeGender>(AdministrativeGender.Female);
+
+            var converted = FhirTypeConverter.Convert<AdministrativeGender?>(code);
+
+            Assert.AreEqual(AdministrativeGender.Female, converted);
+        }
+
+        [TestMethod]
+        public void ConvertCodeOfEnum_NullableEnum_WithoutValue_ReturnsNull()
+        {
+            var code = new Code<AdministrativeGender>();
+
+            var converted = FhirTypeConverter.Convert<AdministrativeGender?>(code);
+
+            Assert.IsNull(converted);
+        }
     }
 }
