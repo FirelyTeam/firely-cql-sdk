@@ -341,12 +341,13 @@ public class CqlDateTests
     [DataTestMethod]
     [DataRow("2014")]
     [DataRow("2014-06")]
-    public void Add_TimeBasedUnitToPartialDate_ThrowsArgumentException(string date)
+    public void Add_TimeBasedUnitToPartialDate_ThrowsCqlUnsupportedTemporalUnitError(string date)
     {
         Assert.IsTrue(CqlDate.TryParse(date, out var cqlDate));
 
-        var exception = Assert.ThrowsException<ArgumentException>(() => cqlDate!.Add(new CqlQuantity(48m, "hours")));
+        var exception = Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => cqlDate!.Add(new CqlQuantity(48m, "hours")));
 
+        Assert.AreEqual(new CqlUnsupportedTemporalUnitError("hours", "Date"), exception.Error);
         StringAssert.Contains(exception.Message, "For Date values, the quantity unit must be one of: years, months, weeks, or days.");
     }
 
