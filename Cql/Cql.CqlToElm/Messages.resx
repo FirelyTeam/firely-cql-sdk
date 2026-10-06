@@ -184,8 +184,8 @@
     <comment>{0} = from type specifier, {1} = to type specifier</comment>
   </data>
   <data name="TypeFoundIsNotExpected" xml:space="preserve">
-    <value>Expected an expression of type '{0}', but found an expression of type '{1}'."</value>
-    <comment>{0} = from type specifier, {1} = to type specifier</comment>
+    <value>Expected an expression of type '{0}', but found an expression of type '{1}'.</value>
+    <comment>{0} = expected type specifier, {1} = found type specifier</comment>
   </data>
   <data name="UnableToResolveLibrary" xml:space="preserve">
     <value>Unable to resolve library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>

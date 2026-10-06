@@ -237,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     if (result.Success)
                         return result.Result;
                     else
-                        return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");
+                        return defaultExpr.AddError(MessagingProvider.TypeFoundIsNotExpected(defaultExpr.resultTypeSpecifier, type));
                 }
             }
 
