@@ -57,7 +57,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         var @caseItem = new CaseItem();
                         return @caseItem
-                            .AddError("Case item should have two expressions: one for the when clause, and one for the then clause.");
+                            .AddError("Case item should have two expressions: one for the when clause, and one for the then clause.")
+                            .WithLocator(item.Locator());
                     }
                     else
                     {
@@ -75,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                         return caseItem
                             .WithResultType(caseItem.then.resultTypeSpecifier)
-                            .WithLocator(context.Locator());
+                            .WithLocator(item.Locator());
                     }
                 })
                 .ToArray();

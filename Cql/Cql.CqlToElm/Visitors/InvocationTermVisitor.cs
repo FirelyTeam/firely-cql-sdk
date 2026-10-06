@@ -27,7 +27,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
+                 .WithLocator(qualifiers[0].Locator());
 
                 for(int i = 1; i < qualifiers.Length; i++)
                 {
@@ -46,7 +47,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
+                 .WithLocator(context.Locator());
             }
         }
 
