@@ -102,6 +102,12 @@ namespace Hl7.Cql.Primitives
 
             var dto = Value.DateTimeOffset;
 
+            // A quantity in a unit finer than the value's precision is applied at that precision; one whose conversion
+            // leaves the decimal range cannot be applied.
+            if (CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Day) is not { } converted)
+                return null;
+            (value, unit) = converted;
+
             var shifted = unit switch
             {
                 UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),

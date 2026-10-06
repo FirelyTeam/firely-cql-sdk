@@ -27,7 +27,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
+                 .WithLocator(qualifiers[0].Locator());
 
                 for(int i = 1; i < qualifiers.Length; i++)
                 {
@@ -46,7 +47,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else return new IdentifierRef
                 {
                     name = term,
-                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term));
+                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
+                 .WithLocator(context.Locator());
             }
         }
 
@@ -60,18 +62,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (term is IncludeRef ir)
                 return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(context.Locator());
-            else if (term is null)
-            {
-                var message = $"Type {context.expressionTerm().GetType()} is not implemented";
-                return new Message()
-                {
-                    source = new Null().WithResultType(SystemTypes.AnyType),
-                    message = ElmFactory.Literal(message),
-                }
-                .AddError(message)
-                .WithLocator(context.Locator())
-                .WithResultType(SystemTypes.AnyType);
-            }
             else return term;
         }
 
@@ -111,6 +101,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                             .AddError($"The named type '{classElement.type}' for element {elementName} could not be resolved to any model type.")
                                             .WithLocator(context.Locator())
                                             .WithResultType(type);
+                                }
+                                else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { elementTypeSpecifier: not null } nestedListTypeSpecifier)
+                                {
+                                    // The model declares the list's element type as a nested type specifier rather than by name.
+                                    elementType = nestedListTypeSpecifier.ToElm(ModelProvider);
                                 }
                                 else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
                                 {

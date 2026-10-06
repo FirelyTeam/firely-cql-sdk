@@ -35,6 +35,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private string NextId() => LibraryBuilder.NextId();
 
+        /// <summary>
+        /// A construct without a translation becomes a <see cref="Null"/> of type Any that carries an error
+        /// naming the construct, so translation continues and the gap is reported.
+        /// </summary>
+        protected override Expression UnhandledRule(Antlr4.Runtime.ParserRuleContext context) =>
+            new Null()
+                .AddError(MessagingProvider.ConstructNotImplemented(RuleName(context), SourceText(context)))
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.AnyType);
+
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
         // TODO: make a system function & validate it
@@ -121,30 +131,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType((typeSpecifier ?? SystemTypes.AnyType).ToListType());
             else
             {
-                var nonNullElements = elements
-                    .Except(elements
-                        .OfType<Null>()
-                        .Where(@null => @null.resultTypeSpecifier == SystemTypes.AnyType))
-                    .ToArray();
-                var distinctTypes = nonNullElements
-                    .Select(ele => ele.resultTypeSpecifier)
-                    .Distinct()
-                    .ToArray();
                 var typedElements = new Expression[elements.Length];
-                TypeSpecifier elementType = SystemTypes.AnyType;
-                if (distinctTypes.Length == 1)
+                // A declared element type governs; otherwise the elements are unified pairwise like the
+                // branches of a conditional, except that elements with no common type make a List<Any>
+                // rather than a list of a choice, as the reference translator does.
+                var elementType = typeSpecifier ?? SystemTypes.AnyType;
+                if (typeSpecifier is null)
                 {
-                    elementType = distinctTypes[0];
-                }
-                else
-                {
-                    var numericTypes = distinctTypes
-                        .OfType<NamedTypeSpecifier>()
-                        .Where(NumericTypeSpecifierComparer.IsNumeric)
-                        .ToArray();
-                    if (numericTypes.Length > 0 && numericTypes.Length == distinctTypes.Length)
+                    foreach (var candidate in elements.Select(ele => ele.resultTypeSpecifier).Distinct())
                     {
-                        elementType = numericTypes.Max(NumericTypeSpecifierComparer.Default)!;
+                        var common = CoercionProvider.FindCompatibleType(elementType, candidate);
+                        if (common is ChoiceTypeSpecifier && common != elementType && common != candidate)
+                        {
+                            elementType = SystemTypes.AnyType;
+                            break;
+                        }
+                        elementType = common;
                     }
                 }
 
@@ -156,7 +158,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         typedElements[i] = result.Result;
                     else
                     {
-                        typedElements[i] = ei.AddError($"Expected an expression of type '{elementType}', but found an expression of type '{ei.resultTypeSpecifier}'.");
+                        typedElements[i] = ei.AddError(MessagingProvider.TypeFoundIsNotExpected(ei.resultTypeSpecifier, elementType));
                     }
                 }
 
