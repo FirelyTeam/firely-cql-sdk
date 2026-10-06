@@ -155,7 +155,7 @@ public record SaveAssemblyBinariesToDirectoryOptions(
         var pdbDirectory = PdbDirectory;
         var dllDirectoryPreparationStrategy = DllDirectoryPreparationStrategy;
         var pdbDirectoryPreparationStrategy = PdbDirectoryPreparationStrategy;
-        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
+        var logger = elmToolkit.CreateLogger(typeof(ElmToolkitExtensions));
 
         var elmToAssemblyResults = elmToolkit.GetElmToAssemblyResults().ToList();
         if (elmToAssemblyResults.Count == 0)
@@ -267,7 +267,7 @@ public record SaveCSharpFilesToDirectoryOptions(
     {
         var directory = Directory;
         var directoryPreparationStrategy = DirectoryPreparationStrategy;
-        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
+        var logger = elmToolkit.CreateLogger(typeof(ElmToolkitExtensions));
         bool directoryPrepared = false;
 
         foreach (var (libraryIdentifier, _, csharpSourceCode) in elmToolkit.GetElmToCSharpResults())

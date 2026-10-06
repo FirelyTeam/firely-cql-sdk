@@ -29,7 +29,7 @@ partial class InvocationToolkitExtensions
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
+        var logger = invocationToolkit.CreateLogger();
         var files = directory.EnumerateFiles("Library-*.json", options ?? Defaults.EnumerationOptionsRecurseSubdirectories);
 
         if (filePredicate is not null)
@@ -90,7 +90,7 @@ partial class InvocationToolkitExtensions
         ResourceFileInfoResolver fhirFileResolver,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
+        var logger = invocationToolkit.CreateLogger();
         using var logScope = logger.BeginScope("Adding FHIR Library '{lib}' and Dependencies to InvocationToolkit", libraryIdentifier);
 
         var assemblyBinaries =
@@ -103,7 +103,7 @@ partial class InvocationToolkitExtensions
                                            s => s
                                                 .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
                                                 .AddLoggerExceptionHandler(
-                                                    invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions)),
+                                                    invocationToolkit.CreateLogger(),
                                                     (fhirLibrary, logMessage) =>
                                                         logMessage("Could not extract assembly binary from FHIR library resource: {id}",
                                                                    CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(
