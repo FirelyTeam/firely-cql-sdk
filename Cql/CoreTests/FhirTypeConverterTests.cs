@@ -1631,6 +1631,91 @@ namespace CoreTests
             Assert.AreEqual("widgets", converted!.Denominator.Unit);
         }
 
+        [TestMethod]
+        public void ConvertRatio_CqlRatio()
+        {
+            var ratio = new Ratio(new Quantity(5, "mg"), new Quantity(10, "mL"));
+
+            var converted = FhirTypeConverter.Convert<CqlRatio>(ratio);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(5m, converted!.numerator!.value);
+            Assert.AreEqual("mg", converted.numerator.unit);
+            Assert.AreEqual(10m, converted.denominator!.value);
+            Assert.AreEqual("mL", converted.denominator.unit);
+        }
+
+        [TestMethod]
+        public void ConvertParameters_Ratio()
+        {
+            var parameter = new ParameterComponent()
+            {
+                Name = "param1",
+                Value = new Ratio(new Quantity(1, "1"), new Quantity(128, "1")),
+            };
+
+            var converted = FhirTypeConverter.Convert<CqlRatio>(parameter);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(1m, converted!.numerator!.value);
+            Assert.AreEqual("1", converted.numerator.unit);
+            Assert.AreEqual(128m, converted.denominator!.value);
+            Assert.AreEqual("1", converted.denominator.unit);
+        }
+
+        /// <summary>
+        /// A System Ratio requires both parts (CQL 1.5.3, Appendix B - CQL Reference, Types, Ratio:
+        /// "The numerator and denominator elements must be present (i.e. can not be null)."), so a FHIR
+        /// Ratio missing either one has no System Ratio equivalent.
+        /// </summary>
+        [TestMethod]
+        [DataRow(false, true, DisplayName = "Numerator absent")]
+        [DataRow(true, false, DisplayName = "Denominator absent")]
+        [DataRow(false, false, DisplayName = "Both absent")]
+        public void ConvertRatio_MissingPart_ReturnsNull(bool hasNumerator, bool hasDenominator)
+        {
+            var ratio = new Ratio
+            {
+                Numerator = hasNumerator ? new Quantity(5, "mg") : null,
+                Denominator = hasDenominator ? new Quantity(10, "mL") : null,
+            };
+
+            Assert.IsNull(FhirTypeConverter.Convert<CqlRatio>(ratio));
+        }
+
+        /// <summary>
+        /// A FHIR Quantity without a value is no System Quantity (FHIRHelpers.ToQuantity maps it to
+        /// null), so a Ratio holding one is treated like a Ratio missing that part.
+        /// </summary>
+        [TestMethod]
+        [DataRow(false, true, DisplayName = "Numerator without value")]
+        [DataRow(true, false, DisplayName = "Denominator without value")]
+        public void ConvertRatio_PartWithoutValue_ReturnsNull(bool numeratorHasValue, bool denominatorHasValue)
+        {
+            var ratio = new Ratio
+            {
+                Numerator = numeratorHasValue ? new Quantity(5, "mg") : new Quantity { Unit = "mg" },
+                Denominator = denominatorHasValue ? new Quantity(10, "mL") : new Quantity { Unit = "mL" },
+            };
+
+            Assert.IsNull(FhirTypeConverter.Convert<CqlRatio>(ratio));
+        }
+
+        [TestMethod]
+        public void ConvertCqlRatio_RoundTrip_PreservesValuesAndUnits()
+        {
+            var original = new CqlRatio(new CqlQuantity(2.5m, "mg"), new CqlQuantity(1m, "mL"));
+
+            var fhirRatio = FhirTypeConverter.Convert<Ratio>(original);
+            var roundTripped = FhirTypeConverter.Convert<CqlRatio>(fhirRatio);
+
+            Assert.IsNotNull(roundTripped);
+            Assert.AreEqual(2.5m, roundTripped!.numerator!.value);
+            Assert.AreEqual("mg", roundTripped.numerator.unit);
+            Assert.AreEqual(1m, roundTripped.denominator!.value);
+            Assert.AreEqual("mL", roundTripped.denominator.unit);
+        }
+
 
         [TestMethod]
         public void ConvertCqlCode_Coding()
