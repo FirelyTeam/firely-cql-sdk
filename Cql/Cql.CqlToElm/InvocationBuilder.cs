@@ -53,9 +53,7 @@ namespace Hl7.Cql.CqlToElm
             var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
             {
-                return expression
-                    .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
-                    .WithResultType(SystemTypes.AnyType);
+                return Failed(expression, result, arguments);
             }
             else
             {
@@ -79,8 +77,10 @@ namespace Hl7.Cql.CqlToElm
                 .Select(cr => cr.Result)
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
+            // An ambiguous or failed match has no result type to offer: result.Function is only the first
+            // candidate, so typing the expression by it would make every later error about the wrong type.
             if (!result.Compatible)
-                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+                return Failed(expression, result, arguments);
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
             var newResultType = ReplaceGenericType(result.Function.ResultTypeSpecifier!, result.GenericInferences);
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(function, library, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+                return Failed(expression, result, arguments);
             // A system function reached by function syntax gets the same validators as one reached by its operator.
             if (function is SystemFunction sysFn)
                 expression = sysFn.Validate(expression);
@@ -127,13 +127,19 @@ namespace Hl7.Cql.CqlToElm
                     return Invoke(result.Function, library, args);
             }
             else
-            {
-                var expression = ElmFactory.CreateElmNode(result.Function, null, args);
-                if (!result.Compatible)
-                    expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, result.Arguments.Select(a => a.Result).ToArray()));
-                return expression;
-            }
+                return Failed(ElmFactory.CreateElmNode(result.Function, null, args), result, args);
         }
+
+        /// <summary>
+        /// Completes the node built for a match that is not compatible (no overload applies, the call is ambiguous,
+        /// or the argument count is wrong): it reports the match's error and is typed <c>Any</c>, so that
+        /// the diagnostics point at this call instead of cascading from a guessed result type.
+        /// The node is not validated, since its operands were never coerced to a signature that applies.
+        /// </summary>
+        private Expression Failed(Expression expression, SignatureMatchResult result, Expression[] arguments) =>
+            expression
+                .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
+                .WithResultType(SystemTypes.AnyType);
 
 
         #region Generic inference
