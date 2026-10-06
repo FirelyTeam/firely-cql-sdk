@@ -121,30 +121,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType((typeSpecifier ?? SystemTypes.AnyType).ToListType());
             else
             {
-                var nonNullElements = elements
-                    .Except(elements
-                        .OfType<Null>()
-                        .Where(@null => @null.resultTypeSpecifier == SystemTypes.AnyType))
-                    .ToArray();
-                var distinctTypes = nonNullElements
-                    .Select(ele => ele.resultTypeSpecifier)
-                    .Distinct()
-                    .ToArray();
                 var typedElements = new Expression[elements.Length];
-                TypeSpecifier elementType = SystemTypes.AnyType;
-                if (distinctTypes.Length == 1)
+                // A declared element type governs; otherwise the elements are unified pairwise like the
+                // branches of a conditional, except that elements with no common type make a List<Any>
+                // rather than a list of a choice, as the reference translator does.
+                var elementType = typeSpecifier ?? SystemTypes.AnyType;
+                if (typeSpecifier is null)
                 {
-                    elementType = distinctTypes[0];
-                }
-                else
-                {
-                    var numericTypes = distinctTypes
-                        .OfType<NamedTypeSpecifier>()
-                        .Where(NumericTypeSpecifierComparer.IsNumeric)
-                        .ToArray();
-                    if (numericTypes.Length > 0 && numericTypes.Length == distinctTypes.Length)
+                    foreach (var candidate in elements.Select(ele => ele.resultTypeSpecifier).Distinct())
                     {
-                        elementType = numericTypes.Max(NumericTypeSpecifierComparer.Default)!;
+                        var common = CoercionProvider.FindCompatibleType(elementType, candidate);
+                        if (common is ChoiceTypeSpecifier && common != elementType && common != candidate)
+                        {
+                            elementType = SystemTypes.AnyType;
+                            break;
+                        }
+                        elementType = common;
                     }
                 }
 

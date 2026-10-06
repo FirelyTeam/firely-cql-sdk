@@ -290,6 +290,62 @@ namespace Hl7.Cql.CqlToElm
                 return CoercionCost.Incompatible;
         }
 
+        /// <summary>
+        /// Finds the type that values of both <paramref name="first"/> and <paramref name="second"/> can be
+        /// coerced to without a run-time type test, as the reference translator does for the branches of a
+        /// conditional: the other type when one is <c>Any</c>; the wider type when one is a subtype of the
+        /// other, or an alternative of it; the target of an implicit conversion between the two (including
+        /// list and interval conversions through their element and point types, and the promotions and
+        /// demotions the options allow); and otherwise a choice of both, flattened.
+        /// </summary>
+        /// <remarks>
+        /// No conversion is attempted when either type is a choice, since converting a choice to one of
+        /// its alternatives discards the others, and none between two tuple types, which the reference
+        /// translator also leaves as a choice.
+        /// </remarks>
+        internal TypeSpecifier FindCompatibleType(TypeSpecifier first, TypeSpecifier second)
+        {
+            if (first == SystemTypes.AnyType)
+                return second;
+            if (second == SystemTypes.AnyType)
+                return first;
+            if (Covers(first, second))
+                return first;
+            if (Covers(second, first))
+                return second;
+            if (first is not ChoiceTypeSpecifier && second is not ChoiceTypeSpecifier
+                && !(first is TupleTypeSpecifier && second is TupleTypeSpecifier))
+            {
+                if (IsImplicitlyConvertible(second, first))
+                    return first;
+                if (IsImplicitlyConvertible(first, second))
+                    return second;
+            }
+            return new ChoiceTypeSpecifier(ElmFactory.FlattenChoice(first).Concat(ElmFactory.FlattenChoice(second)).Distinct());
+        }
+
+        /// <summary>
+        /// Folds <see cref="FindCompatibleType(TypeSpecifier, TypeSpecifier)"/> over <paramref name="types"/>;
+        /// <c>Any</c> when there are none.
+        /// </summary>
+        internal TypeSpecifier FindCompatibleType(IEnumerable<TypeSpecifier> types) =>
+            types.Aggregate((TypeSpecifier)SystemTypes.AnyType, FindCompatibleType);
+
+        /// <summary>
+        /// Whether a value of <paramref name="other"/> is already a value of <paramref name="type"/>: a
+        /// subtype of it, or of one of its alternatives when it is a choice.
+        /// </summary>
+        private bool Covers(TypeSpecifier type, TypeSpecifier other) =>
+            IsSubtype(other, type)
+            || (type is ChoiceTypeSpecifier choice && ElmFactory.FlattenChoice(choice).Any(alternative => IsSubtype(other, alternative)));
+
+        /// <summary>
+        /// Whether <paramref name="from"/> converts to <paramref name="to"/> by an implicit conversion, promotion
+        /// or demotion; a cast is a run-time type test, not a conversion.
+        /// </summary>
+        private bool IsImplicitlyConvertible(TypeSpecifier from, TypeSpecifier to) =>
+            GetCoercionCost(from, to) is not (CoercionCost.Incompatible or CoercionCost.Cast);
+
         // All types exactly match Any
         internal bool IsExactMatch(TypeSpecifier from, TypeSpecifier to) =>
             from == to;
