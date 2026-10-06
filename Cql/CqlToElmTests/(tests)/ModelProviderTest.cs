@@ -22,6 +22,16 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("urn:hl7-org:elm-types:r1", provider.GetModelFromName("System", "1.0.0").url);
         }
         [TestMethod]
+        public void LoadBundledQICoreAndUSCoreModels()
+        {
+            var provider = new BuiltinModelProvider(
+                Models.ElmR1, Models.USCore311, Models.QICore411, Models.USCore610, Models.QICore600);
+            Assert.AreEqual("http://hl7.org/fhir/us/core", provider.GetModelFromName("USCore", "3.1.1").url);
+            Assert.AreEqual("http://hl7.org/fhir/us/qicore", provider.GetModelFromName("QICore", "4.1.1").url);
+            Assert.AreEqual("http://hl7.org/fhir/us/core", provider.GetModelFromName("USCore", "6.1.0").url);
+            Assert.AreEqual("http://hl7.org/fhir/us/qicore", provider.GetModelFromName("QICore", "6.0.0").url);
+        }
+        [TestMethod]
         public void FHIRQuantityDerivedTypes()
         {
             var provider = new BuiltinModelProvider(Models.ElmR1, Models.Fhir401);

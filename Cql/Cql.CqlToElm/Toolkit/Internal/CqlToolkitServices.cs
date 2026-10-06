@@ -26,9 +26,14 @@ internal record CqlToolkitServices(
     IServiceScope ServiceScope,
     LibraryVisitor LibraryVisitor) : IDisposable
 {
-    private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
-        (CqlModel.ElmR1, Models.ElmR1),
-        (CqlModel.Fhir401, Models.Fhir401)];
+    // A model info is only deserialized when a configuration selects it.
+    private static readonly (CqlModel CqlModel, Func<ModelInfo> GetModelInfo)[] AllMappedModelsInOrder = [
+        (CqlModel.ElmR1, () => Models.ElmR1),
+        (CqlModel.Fhir401, () => Models.Fhir401),
+        (CqlModel.USCore311, () => Models.USCore311),
+        (CqlModel.QICore411, () => Models.QICore411),
+        (CqlModel.USCore610, () => Models.USCore610),
+        (CqlModel.QICore600, () => Models.QICore600)];
 
     /// <summary>
     /// Creates an instance of <see cref="CqlToolkitServices"/>.
@@ -94,7 +99,7 @@ internal record CqlToolkitServices(
         Action<IModelProvider> ConfigureModelProvider()
         {
             var modelInfos = AllMappedModelsInOrder
-                             .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                             .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.GetModelInfo() : null)
                              .Concat(config.ModelInfos);
             return modelProvider =>
             {
