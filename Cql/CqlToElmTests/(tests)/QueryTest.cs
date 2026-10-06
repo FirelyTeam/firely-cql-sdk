@@ -511,6 +511,30 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Aggregate_StartingQuantity()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Claims version '1.0.0'
+
+                define TotalDose:
+                  ({ 1 'mg', 2 'mg', 3 'mg' }) Dose
+                    aggregate Total starting 10 'mg': Total + Dose
+                """);
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            var starting = query.aggregate.starting.Should().BeOfType<Quantity>().Subject;
+            starting.value.Should().Be(10m);
+            starting.unit.Should().Be("mg");
+            query.aggregate.starting.Should().HaveType(SystemTypes.QuantityType);
+            query.aggregate.expression.Should().BeOfType<Add>();
+            query.aggregate.Should().HaveType(SystemTypes.QuantityType);
+            query.Should().HaveType(SystemTypes.QuantityType);
+            var result = Run<Hl7.Cql.Primitives.CqlQuantity>(query, lib);
+            result.Should().NotBeNull();
+            result!.value.Should().Be(16m);
+            result.unit.Should().Be("mg");
+        }
+
+        [TestMethod]
         public void AggregateListAccumulator()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""

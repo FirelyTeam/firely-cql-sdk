@@ -128,6 +128,10 @@
   <data name="CannotResolveCircularReference" xml:space="preserve">
     <value>Cannot resolve reference to expression or function a because it results in a circular reference.</value>
   </data>
+  <data name="ConstructNotImplemented" xml:space="preserve">
+    <value>Translation of {0} '{1}' is not implemented.</value>
+    <comment>{0} = grammar rule name, {1} = source text</comment>
+  </data>
   <data name="CouldNotFindLibrary" xml:space="preserve">
     <value>Could not find library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
     <comment>{0} = library name, {1} = version</comment>
@@ -184,8 +188,8 @@
     <comment>{0} = from type specifier, {1} = to type specifier</comment>
   </data>
   <data name="TypeFoundIsNotExpected" xml:space="preserve">
-    <value>Expected an expression of type '{0}', but found an expression of type '{1}'."</value>
-    <comment>{0} = from type specifier, {1} = to type specifier</comment>
+    <value>Expected an expression of type '{0}', but found an expression of type '{1}'.</value>
+    <comment>{0} = expected type specifier, {1} = found type specifier</comment>
   </data>
   <data name="UnableToResolveLibrary" xml:space="preserve">
     <value>Unable to resolve library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>

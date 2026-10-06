@@ -605,7 +605,7 @@ partial class CodeBuilderContext
         CodeExpression? result = null;
         if (_typeResolver.ShouldUseSourceObject(source.Type, path!))
         {
-            result = source;
+            result = AsModelledValue(source, source.Type, path!, _typeResolver.GetProperty(source.Type, path!));
         }
         else
         {
@@ -618,9 +618,9 @@ partial class CodeBuilderContext
             {
                 var isCheck = source.NewTypeIsExpression(pathMemberInfo.DeclaringType!);
                 var typeAs = source.NewTypeAsExpression(pathMemberInfo.DeclaringType!);
-                var pathAccess = new CodeProperty(typeAs, pathMemberInfo);
+                var pathAccess = AsModelledValue(new CodeProperty(typeAs, pathMemberInfo), pathMemberInfo.DeclaringType!, path!, pathMemberInfo);
                 CodeExpression? ifIs = pathAccess;
-                CodeExpression elseNull = new CodeConstant(null, pathMemberInfo.PropertyType);
+                CodeExpression elseNull = new CodeConstant(null, pathAccess.Type);
                 // some ops, like properties on alias refs, don't have type information on them.
                 // can't check against what we don't have.
                 if (expectedType != null)
@@ -640,7 +640,7 @@ partial class CodeBuilderContext
                 return condition;
             }
 
-            result = PropagateNull(source, pathMemberInfo);
+            result = AsModelledValue(PropagateNull(source, pathMemberInfo), source.Type, path!, pathMemberInfo);
         }
 
         if (expectedType != null && expectedType != result.Type)
@@ -650,6 +650,22 @@ partial class CodeBuilderContext
 
         return result;
     }
+
+    /// <summary>
+    /// <paramref name="read"/>, the element <paramref name="path"/> read off a value of
+    /// <paramref name="sourceType"/>, as the type the model declares for it. That differs from the
+    /// .NET member's type for a primitive's value (a dateTime's value is a System.DateTime, held as a
+    /// string), and the read must take it before any conversion to the type the expression
+    /// expects: a target the raw read is already assignable to, such as the object of a choice,
+    /// would otherwise leave it unconverted.
+    /// </summary>
+    private CodeExpression AsModelledValue(CodeExpression read, Type sourceType, string path, PropertyInfo? member) =>
+        member is not null
+        && ElementTypeOf(sourceType, path, member) is var modelled
+        && modelled != member.PropertyType
+        && modelled != read.Type
+            ? ChangeType(read, modelled, throwOnError: true)
+            : read;
 
     internal static PropertyInfo? GetProperty(
         Type type,

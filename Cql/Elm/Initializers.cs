@@ -65,6 +65,8 @@ namespace Hl7.Cql.Elm
         {
             t.WithId();
             t.locator = locator;
+            // Errors are often added to a node before its locator is known.
+            t.FillErrorPositions(locator);
 
             return t;
         }
