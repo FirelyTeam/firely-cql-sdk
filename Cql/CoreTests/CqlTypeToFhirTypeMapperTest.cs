@@ -9,7 +9,6 @@
 #nullable disable
 
 using Hl7.Cql.Fhir;
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;

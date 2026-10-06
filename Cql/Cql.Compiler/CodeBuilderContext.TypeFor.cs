@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
-using Hl7.Fhir.Model;
 using Element = Hl7.Cql.Elm.Element;
 
 namespace Hl7.Cql.Compiler;

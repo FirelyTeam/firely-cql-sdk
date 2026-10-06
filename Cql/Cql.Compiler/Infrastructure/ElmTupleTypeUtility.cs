@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 

@@ -8,9 +8,7 @@
 
 #nullable enable
 
-using System.Text.Json;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.Toolkit;

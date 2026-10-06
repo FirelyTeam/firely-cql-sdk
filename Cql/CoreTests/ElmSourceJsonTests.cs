@@ -8,7 +8,6 @@
 
 #nullable enable
 
-using System.Text.Json;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;
 

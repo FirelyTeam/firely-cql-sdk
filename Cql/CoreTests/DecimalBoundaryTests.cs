@@ -8,7 +8,6 @@
 
 #nullable enable
 
-using System.Globalization;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 

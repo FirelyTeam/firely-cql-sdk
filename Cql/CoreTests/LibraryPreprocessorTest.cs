@@ -17,7 +17,6 @@ using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging.Abstractions;
-using System.Reflection;
 
 namespace CoreTests
 {

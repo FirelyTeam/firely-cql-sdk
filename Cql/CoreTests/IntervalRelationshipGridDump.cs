@@ -9,7 +9,6 @@
 #nullable enable
 #pragma warning disable CS8620, CS8619, CS8604, CS8625
 
-using System.Globalization;
 using System.Text;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
