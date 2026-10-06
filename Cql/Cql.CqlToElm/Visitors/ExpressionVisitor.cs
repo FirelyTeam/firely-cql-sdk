@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         typedElements[i] = result.Result;
                     else
                     {
-                        typedElements[i] = ei.AddError($"Expected an expression of type '{elementType}', but found an expression of type '{ei.resultTypeSpecifier}'.");
+                        typedElements[i] = ei.AddError(MessagingProvider.TypeFoundIsNotExpected(ei.resultTypeSpecifier, elementType));
                     }
                 }
 
