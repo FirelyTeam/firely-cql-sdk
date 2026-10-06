@@ -12,9 +12,6 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         internal static Dictionary<string, string> DoesNotCompile = new()
         {
-            { "Multiply1CMBy2CM", "Unit arithmetic is not supported." },
-            { "TruncatedDivide10d1ByNeg3D1Quantity", "Unit arithmetic is not supported." },
-
             { "TestCollapseNull", "Collapse over a list of Interval<Any> is ambiguous with every typed interval overload (#1627)." },
 
 
