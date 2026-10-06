@@ -29,14 +29,6 @@ internal sealed class LibraryProcessingTracker
     public IEnumerable<CqlVersionedLibraryIdentifier> Libraries => _libraryStatuses.Keys;
 
     /// <summary>
-    /// Marks a stage as active for this processing run.
-    /// </summary>
-    public void MarkStageActive(LibraryProcessingStage stage)
-    {
-        _activeStages.Add(stage);
-    }
-
-    /// <summary>
     /// Records the status of a library at a specific stage.
     /// </summary>
     public void RecordStatus(

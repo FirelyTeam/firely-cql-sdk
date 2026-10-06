@@ -48,8 +48,6 @@ internal abstract class BaseElmTreeWalker
 
     private readonly List<(object node, string? path)> _parents = new();
 
-    protected (object node, string? path)[] GetContextStack() => _parents.ToArray();
-
     public string ContextStackString => string.Join(
         "\n->",
         _parents

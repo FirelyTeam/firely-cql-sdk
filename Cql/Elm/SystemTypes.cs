@@ -38,7 +38,6 @@ namespace Hl7.Cql.Elm
             name = SystemModelPrefix
         };
 
-        private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
         /// <summary>
         /// Create a new instance of a NamedType, given the name of a system type.
         /// </summary>
