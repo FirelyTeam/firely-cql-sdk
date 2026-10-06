@@ -42,5 +42,26 @@ namespace Hl7.Cql.CqlToElm.Test
                     "Concept { codes: Code { code: '8480-6' } }",
                     expectedErrors: ["The value for element codes of type 'Code' cannot be converted to the declared type 'List<Code>'."]);
         }
+
+        [TestMethod]
+        public void Instance_Element_With_Nested_List_Element_Type_Specifier()
+        {
+            // The FHIR model info declares ClaimResponse.adjudication as a list whose element type is a nested
+            // NamedTypeSpecifier rather than an elementType name; the instance element must resolve to that type.
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library NestedListElement version '1.0.0'
+                using FHIR version '4.0.1'
+
+                define function "WithAdjudication"(arg ClaimResponse):
+                  ClaimResponse { adjudication: arg.adjudication }
+                """);
+
+            var function = library.ShouldDefine<FunctionDef>("WithAdjudication");
+            var instance = function.expression.Should().BeOfType<Instance>().Subject;
+            instance.element.Should().ContainSingle();
+            instance.element[0].name.Should().Be("adjudication");
+            instance.element[0].value.resultTypeSpecifier.Should().Be(
+                new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}ClaimResponse.Item.Adjudication").ToNamedType().ToListType());
+        }
     }
 }

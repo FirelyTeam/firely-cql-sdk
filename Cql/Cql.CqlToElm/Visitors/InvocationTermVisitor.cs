@@ -112,6 +112,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                             .WithLocator(context.Locator())
                                             .WithResultType(type);
                                 }
+                                else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { elementTypeSpecifier: not null } nestedListTypeSpecifier)
+                                {
+                                    // The model declares the list's element type as a nested type specifier rather than by name.
+                                    elementType = nestedListTypeSpecifier.ToElm(ModelProvider);
+                                }
                                 else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
                                 {
                                     if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
