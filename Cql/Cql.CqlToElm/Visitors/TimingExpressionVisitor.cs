@@ -36,7 +36,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 cqlParser.StartsIntervalOperatorPhraseContext ctx         => HandleStarts(ctx, lhs, rhs),
                 cqlParser.EndsIntervalOperatorPhraseContext ctx           => HandleEnds(ctx, lhs, rhs),
 
-                _ => throw new NotImplementedException()
+                var phrase => new Null()
+                    .WithResultType(SystemTypes.AnyType)
+                    .AddError($"Interval operator phrase '{phrase?.GetText()}' is not supported.")
+                    .WithLocator(context.Locator()),
             };
         }
 
@@ -52,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "starts" => InvocationBuilder.Invoke(SystemLibrary.Start, lhs),
                 "ends"   => InvocationBuilder.Invoke(SystemLibrary.End, lhs),
-                "occurs" => throw new NotImplementedException("Occurs is not supported yet"),
+                // 'occurs' is optional and ignored: "X occurs within Q of Y" means "X within Q of Y".
                 _        => lhs
             };
             var (value, unit) = context.quantity().Parse();
@@ -62,6 +65,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var kwLast = context.children[^1].GetText();
 
             var rhsClosed = properly ? ElmFactory.Literal(false) : ElmFactory.Literal(true);
+
+            // A closed interval around a null point has null, inclusive boundaries, which membership
+            // treats as unbounded, so the spec requires "and B is not null" for a point B. An open
+            // boundary that is null is unknown, so the 'properly' form needs no guard.
+            Expression? notNullGuard = null;
 
             if (rhs.resultTypeSpecifier is IntervalTypeSpecifier)
             {
@@ -107,15 +115,35 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
+                if (!properly)
+                {
+                    notNullGuard = InvocationBuilder.Invoke(SystemLibrary.Not,
+                                                            InvocationBuilder.Invoke(SystemLibrary.IsNull, rhs)
+                                                                             .WithId()
+                                                                             .WithLocator(context.Locator()))
+                                                    .WithId()
+                                                    .WithLocator(context.Locator());
+                }
+
                 var intervalArgs = new[]
                 {
-                    rhs, rhs, ElmFactory.Literal(true), ElmFactory.Literal(true),
+                    InvocationBuilder.Invoke(SystemLibrary.Subtract, [rhs, quantity]),
+                    InvocationBuilder.Invoke(SystemLibrary.Add, [rhs, quantity]),
+                    rhsClosed,
+                    rhsClosed,
                 };
                 rhs = InvocationBuilder.Invoke(SystemLibrary.Interval, intervalArgs!);
             }
 
             var @in = (In)InvocationBuilder.Invoke(SystemLibrary.In, lhs, rhs);
-            return @in
+            @in = @in
+                .WithId()
+                .WithLocator(context.Locator());
+
+            if (notNullGuard is null)
+                return @in;
+
+            return InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullGuard)
                 .WithId()
                 .WithLocator(context.Locator());
         }

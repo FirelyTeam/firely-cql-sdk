@@ -521,8 +521,11 @@ partial class CodeBuilderContext
                 // cast the null to the expression type.
                 var starting = TranslateArg(queryAggregate.starting!);
                 var startingValue = ChangeType(starting, lambdaBody.Type, throwOnError: true);
+                // CQL 1.5.3, Language Semantics, Query Evaluation, Iteration, Aggregate Clause:
+                // "If distinct is specified, it is applied to the items in the query prior to aggregation."
+                // Distinct therefore takes the element type of the source, not the aggregate's result type.
                 if (queryAggregate.distinct)
-                    @return = _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.Distinct), [@return], [resultType]);
+                    @return = BindCqlOperator(nameof(ICqlOperators.Distinct), [@return]);
                 var lambda = new CodeLambda([resultParameter, sourceParameter], lambdaBody);
 
                 return BindCqlOperator(nameof(ICqlOperators.Aggregate), @return, lambda, startingValue);

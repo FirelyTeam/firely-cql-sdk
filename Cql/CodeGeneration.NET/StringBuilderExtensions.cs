@@ -12,17 +12,29 @@ internal static class StringBuilderExtensions
 {
     public const int SpacesPerIndentLevel = 4;
 
+    /// <summary>
+    /// The line ending generated C# is written with.
+    /// </summary>
+    /// <remarks>
+    /// Fixed rather than <see cref="Environment.NewLine"/> so the same inputs produce the same bytes on
+    /// every operating system. The generated C# is embedded verbatim as a base64 attachment on a packaged
+    /// FHIR Library, where git cannot normalize it the way it normalizes a file on disk, so a
+    /// platform-dependent newline would make those resources a record of the machine that built them.
+    /// LF is what the repository stores.
+    /// </remarks>
+    public const string NewLine = "\n";
+
     public static void AppendLine(
         this StringBuilder sb,
         int indent,
         string text)
     {
         if (text.Length == 0)
-            sb.AppendLine(); // Blank lines should not contain dangling whitespace
+            sb.Append(NewLine); // Blank lines should not contain dangling whitespace
         else
         {
             sb.Append(StringExtensions.IndentString(indent));
-            sb.AppendLine(text);
+            sb.Append(text).Append(NewLine);
         }
     }
 
@@ -50,7 +62,7 @@ internal static class StringBuilderExtensions
         return true;
     }
 
-    public static bool EndsWithNewLine(this StringBuilder sb) => sb.EndsWith(Environment.NewLine);
+    public static bool EndsWithNewLine(this StringBuilder sb) => sb.EndsWith(NewLine);
 
     public static bool AtBeginningOfLine(this StringBuilder sb) => sb.Length is 0 || sb.EndsWithNewLine();
 }

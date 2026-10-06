@@ -15,6 +15,8 @@ internal class IndentedStringBuilder
 {
     public static implicit operator string(IndentedStringBuilder isb) => isb.ToString();
 
+    private static readonly string[] _lineSeparators = ["\r\n", "\n"];
+
     private IndentScope _leafIndentScope;
 
     public IndentedStringBuilder(
@@ -50,7 +52,9 @@ internal class IndentedStringBuilder
         string multilineText,
         bool addNewLine = false)
     {
-        var lines = multilineText.Split(Environment.NewLine);
+        // Split on both styles: the text being appended may be a literal from this assembly, written with
+        // whatever newline the source file uses, or CQL carried through from an ELM annotation.
+        var lines = multilineText.Split(_lineSeparators, StringSplitOptions.None);
         var sb = StringBuilder;
 
         for (var index = 0; index < lines.Length; index++)
@@ -71,7 +75,7 @@ internal class IndentedStringBuilder
             }
 
             if (addNewLine || index < lines.Length - 1)
-                sb.AppendLine();
+                sb.Append(StringBuilderExtensions.NewLine);
         }
 
         return this;

@@ -306,10 +306,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     Expression starting;
                     if (startingCtx.simpleLiteral() is { } sl)
                         starting = Visit(sl);
+                    else if (startingCtx.quantity() is { } quantity)
+                    {
+                        var (value, unit) = quantity.Parse();
+                        starting = ElmFactory.Quantity(value, unit)
+                            .WithId()
+                            .WithLocator(quantity.Locator());
+                    }
                     else if (startingCtx.expression() is { } expr)
                         starting = Visit(expr);
                     else
-                        throw new InvalidOperationException("Starting clause must have a simple literal or expression");
+                        starting = new Null()
+                            .WithResultType(SystemTypes.AnyType)
+                            .AddError($"Starting clause '{startingCtx.GetText()}' must have a simple literal, a quantity or an expression.")
+                            .WithLocator(startingCtx.Locator());
 
                     aggregate.starting = starting;
                     let.expression = starting;
