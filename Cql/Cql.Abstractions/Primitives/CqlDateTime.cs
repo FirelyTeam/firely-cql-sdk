@@ -157,6 +157,7 @@ namespace Hl7.Cql.Primitives
             
             try
             {
+                (value, unit) = CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Millisecond);
                 dto = unit switch
                 {
                     UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
@@ -172,9 +173,9 @@ namespace Hl7.Cql.Primitives
                     _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
                 };
             }
-            catch (ArgumentOutOfRangeException)
+            catch (Exception e) when (e is ArgumentOutOfRangeException or OverflowException)
             {
-                // Return null when the operation would result in an overflow
+                // Return null when the conversion or the operation would result in an overflow
                 return null;
             }
 

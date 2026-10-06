@@ -52,13 +52,28 @@ public class ElmAttachmentFormattingTests
             elmAttachmentFormatting: formatting);
 
     [TestMethod]
-    public void Passthrough_EmbedsTheSourceJsonVerbatim()
+    public void Passthrough_EmbedsTheRetainedSourceJson()
     {
         var elmLibrary = Library.LoadFromJson(ElmFile);
 
         var attachment = ElmAttachmentOf(Package(elmLibrary, ElmAttachmentFormatting.Passthrough));
 
-        CollectionAssert.AreEqual(File.ReadAllBytes(ElmFile.FullName), attachment);
+        CollectionAssert.AreEqual(elmLibrary.SourceJsonUtf8, attachment);
+    }
+
+    [TestMethod]
+    public void NoFormattingValue_EmbedsCarriageReturns()
+    {
+        var elmLibrary = Library.LoadFromJson(ElmFile);
+
+        foreach (var formatting in Enum.GetValues<ElmAttachmentFormatting>())
+        {
+            var attachment = ElmAttachmentOf(Package(elmLibrary, formatting));
+
+            Assert.IsFalse(
+                attachment.Contains((byte)'\r'),
+                $"{formatting} embedded a CR, which makes the attachment depend on the build platform.");
+        }
     }
 
     [TestMethod]

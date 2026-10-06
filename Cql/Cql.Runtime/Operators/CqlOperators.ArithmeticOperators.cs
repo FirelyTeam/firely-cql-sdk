@@ -146,9 +146,29 @@ namespace Hl7.Cql.Operators
         #region Ceiling
 
         public int? Ceiling(decimal? argument) =>
-            argument == null ? null : (int?)Math.Ceiling(argument.Value);
+            argument == null ? null : WholeDecimalToInteger(argument.Value, Math.Ceiling(argument.Value), "Ceiling");
+
         public int? Ceiling(int? argument) => argument;
         public long? Ceiling(long? argument) => argument;
+
+        /// <summary>
+        /// Converts the whole-number <paramref name="result"/> of <paramref name="operatorName"/> on a Decimal
+        /// <paramref name="argument"/> to an Integer, or returns null when it lies outside the Integer range.
+        /// </summary>
+        /// <remarks>
+        /// CQL spec §9.B, section "Arithmetic Operators": "In general, operations that cause arithmetic overflow or
+        /// underflow, or otherwise cannot be performed (such as division by 0) will result in null, rather than a
+        /// run-time error."
+        /// </remarks>
+        private int? WholeDecimalToInteger(decimal argument, decimal result, string operatorName)
+        {
+            if (result is < int.MinValue or > int.MaxValue)
+            {
+                Message(new { argument, result }, $"CqlOperators.ArithmeticOperators.{operatorName}", "Warning", $"{operatorName} result cannot be represented as integer; returning null.");
+                return null;
+            }
+            return (int)result;
+        }
 
         #endregion
 
@@ -183,7 +203,7 @@ namespace Hl7.Cql.Operators
         #region Floor
 
         public int? Floor(decimal? argument) =>
-            argument == null ? null : (int?)Math.Floor(argument.Value);
+            argument == null ? null : WholeDecimalToInteger(argument.Value, Math.Floor(argument.Value), "Floor");
 
         public int? Floor(int? argument) => argument;
         public long? Floor(long? argument) => argument;

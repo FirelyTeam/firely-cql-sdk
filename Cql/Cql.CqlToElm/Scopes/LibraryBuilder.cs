@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm
             var statements = expressionDefs
                 .Concat(functionDefs)
                 .ToArray();
-            return new Library
+            var library = new Library
             {
                 identifier = Identifier,
                 schemaIdentifier = schemaIdentifier,
@@ -67,6 +67,10 @@ namespace Hl7.Cql.CqlToElm
                 statements = statements,
                 annotation = errors.ToArray()
             };
+
+            // An error on a node that never received a locator of its own takes the closest enclosing one.
+            library.FillMissingErrorPositions();
+            return library;
         }
 
         private readonly List<CqlToElmError> errors = new();
@@ -75,13 +79,20 @@ namespace Hl7.Cql.CqlToElm
 
         public ISymbolScope CurrentScope { get; private set; }
 
-        public void AddError(string message, ErrorType errorType) =>
-            errors.Add(new CqlToElmError()
+        /// <summary>
+        /// Adds an error that belongs to the library as a whole, positioned at <paramref name="locator"/>.
+        /// </summary>
+        public void AddError(string message, ErrorType errorType, string? locator)
+        {
+            var error = new CqlToElmError()
             {
                 message = message,
                 errorSeverity = ErrorSeverity.error,
                 errorType = errorType
-            });
+            };
+            error.TrySetPosition(locator);
+            errors.Add(error);
+        }
 
         /// <summary>
         /// Enters a scope that is directly descended from this Library's root scope.
