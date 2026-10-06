@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         /// <summary>
-        /// The operands are coerced to the bound operand type, so neither an unbound parameter nor a demotion to it remains.
+        /// The operands are coerced to the bound operand type, so neither an unbound parameter nor an interval or list demotion to it remains.
         /// </summary>
         private static void ShouldHaveNoUnboundParameters(Expression[] operands)
         {
@@ -58,10 +58,12 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 operand.resultTypeSpecifier.Should().NotBeOfType<ParameterTypeSpecifier>();
                 operand.Should().NotBeOfType<Start>();
+                operand.Should().NotBeOfType<SingletonFrom>();
                 if (operand is As @as)
                 {
                     @as.asTypeSpecifier.Should().NotBeOfType<ParameterTypeSpecifier>();
                     @as.operand.Should().NotBeOfType<Start>();
+                    @as.operand.Should().NotBeOfType<SingletonFrom>();
                 }
             }
         }
