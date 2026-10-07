@@ -155,33 +155,33 @@ namespace Hl7.Cql.Primitives
 
             var dto = Value.DateTimeOffset;
             
-            try
-            {
-                (value, unit) = CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Millisecond);
-                dto = unit switch
-                {
-                    UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
-                    "year" or "years"                       => dto.AddYears((int)value),
-                    UCUMUnits.Month                         => throw new CqlUcumMonthArithmeticError().ToException(),
-                    "month" or "months"                     => dto.AddMonths((int)value),
-                    "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
-                    "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                    "h" or "hour" or "hours"                => dto.AddHours(Math.Truncate((double)value)),
-                    "min" or "minute" or "minutes"          => dto.AddMinutes(Math.Truncate((double)value)),
-                    "s" or "second" or "seconds"            => dto.AddSeconds(Math.Truncate((double)value)),
-                    "ms" or "millisecond" or "milliseconds" => dto.AddMilliseconds(Math.Truncate((double)value)),
-                    _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
-                };
-            }
-            catch (Exception e) when (e is ArgumentOutOfRangeException or OverflowException)
-            {
-                // Return null when the conversion or the operation would result in an overflow
+            // A quantity in a unit finer than the value's precision is applied at that precision; one whose conversion
+            // leaves the decimal range cannot be applied.
+            if (CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Millisecond) is not { } converted)
                 return null;
-            }
+            (value, unit) = converted;
 
-            var newIsoDate = new DateTimeIso8601(dto, Value.Precision);
-            var result = new CqlDateTime(newIsoDate);
-            return result;
+            var shifted = unit switch
+            {
+                UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
+                "year" or "years"                       => OverflowGuard.Shift(dto, value, static (d, v) => d.AddYears(decimal.ToInt32(v))),
+                UCUMUnits.Month                         => throw new CqlUcumMonthArithmeticError().ToException(),
+                "month" or "months"                     => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMonths(decimal.ToInt32(v))),
+                "wk" or "week" or "weeks"               => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v * CqlDateTimeMath.DaysPerWeek))),
+                "d" or "day" or "days"                  => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v))),
+                "h" or "hour" or "hours"                => OverflowGuard.Shift(dto, value, static (d, v) => d.AddHours(Math.Truncate((double)v))),
+                "min" or "minute" or "minutes"          => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMinutes(Math.Truncate((double)v))),
+                "s" or "second" or "seconds"            => OverflowGuard.Shift(dto, value, static (d, v) => d.AddSeconds(Math.Truncate((double)v))),
+                "ms" or "millisecond" or "milliseconds" => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMilliseconds(Math.Truncate((double)v))),
+                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+            };
+
+            // A result outside the range of a date time cannot be represented.
+            if (shifted is not { } result)
+                return null;
+
+            var newIsoDate = new DateTimeIso8601(result, Value.Precision);
+            return new CqlDateTime(newIsoDate);
         }
 
         /// <summary>

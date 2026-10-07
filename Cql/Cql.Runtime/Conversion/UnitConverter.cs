@@ -93,7 +93,7 @@ namespace Hl7.Cql.Conversion
         /// </summary>
         /// <param name="source">The quantity to convert.</param>
         /// <param name="ucumUnits">The desired units.</param>
-        /// <returns>The converted quantity.</returns>
+        /// <returns>The converted quantity, or <see langword="null"/> when the source has no value or the converted value cannot be represented.</returns>
         /// <exception cref="ArgumentException">If this conversion has not yet been added to this converter via <see cref="UseConversion(string, string, Func{decimal, decimal})"/></exception>
         public CqlQuantity? ChangeUnits(CqlQuantity source, string ucumUnits)
         {
@@ -102,7 +102,18 @@ namespace Hl7.Cql.Conversion
 
             string fromUnit = source.unit ?? "1";
 
-            var newValue = ChangeUnits(source.value.Value, fromUnit, ucumUnits);
+            decimal newValue;
+            try
+            {
+                newValue = ChangeUnits(source.value.Value, fromUnit, ucumUnits);
+            }
+            catch (OverflowException)
+            {
+                // A conversion function scales the value by the ratio of the units, which can leave the range of
+                // Decimal; such a value cannot be represented.
+                return null;
+            }
+
             var newQuantity = new CqlQuantity(newValue, ucumUnits);
             return newQuantity;
         }

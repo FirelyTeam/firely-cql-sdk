@@ -1,1 +1,47 @@
 ﻿#nullable enable
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError() -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError(string! Type, int? Year, int? Month, int? Day, int? Hour, int? Minute, int? Second, int? Millisecond, decimal? TimezoneOffset) -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Day.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Day.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Deconstruct(out string! Type, out int? Year, out int? Month, out int? Day, out int? Hour, out int? Minute, out int? Second, out int? Millisecond, out decimal? TimezoneOffset) -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Equals(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError other) -> bool
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Hour.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Hour.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Millisecond.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Millisecond.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Minute.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Minute.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Month.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Month.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Second.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Second.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.TimezoneOffset.get -> decimal?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.TimezoneOffset.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Type.get -> string!
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Type.init -> void
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Year.get -> int?
+Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Year.init -> void
+override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator !=(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError right) -> bool
+static Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError right) -> bool
+~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.ToString() -> string
+Hl7.Cql.Primitives.CqlExpandFractionalPerError
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.CqlExpandFractionalPerError() -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.CqlExpandFractionalPerError(decimal PerValue, string? PerUnit, string! PointType) -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.Deconstruct(out decimal PerValue, out string? PerUnit, out string! PointType) -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.Equals(Hl7.Cql.Primitives.CqlExpandFractionalPerError other) -> bool
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerUnit.get -> string?
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerUnit.init -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerValue.get -> decimal
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PerValue.init -> void
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PointType.get -> string!
+Hl7.Cql.Primitives.CqlExpandFractionalPerError.PointType.init -> void
+override Hl7.Cql.Primitives.CqlExpandFractionalPerError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator !=(Hl7.Cql.Primitives.CqlExpandFractionalPerError left, Hl7.Cql.Primitives.CqlExpandFractionalPerError right) -> bool
+static Hl7.Cql.Primitives.CqlExpandFractionalPerError.operator ==(Hl7.Cql.Primitives.CqlExpandFractionalPerError left, Hl7.Cql.Primitives.CqlExpandFractionalPerError right) -> bool
+~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlExpandFractionalPerError.ToString() -> string
