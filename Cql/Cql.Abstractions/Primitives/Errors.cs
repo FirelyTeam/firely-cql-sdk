@@ -49,6 +49,35 @@ public readonly record struct CqlUcumMonthArithmeticError : ICqlArithmeticError
 }
 
 /// <summary>
+/// An <see cref="ICqlArithmeticError"/> raised when a Date, DateTime or Time value is shifted by a quantity whose unit is
+/// not a time-valued unit for that type.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, section "Date and Time Operators", "Add" and "Subtract"),
+/// "For Date values, the quantity unit must be one of: years, months, weeks, or days", "For DateTime values, the
+/// quantity unit must be one of: years, months, weeks, days, hours, minutes, seconds, or milliseconds" and "For Time
+/// values, the quantity unit must be one of: hours, minutes, seconds, or milliseconds"; section "Interval Operators",
+/// "Expand", requires for "Date-, DateTime-, and Time-valued intervals [...] a quantity with a temporal unit". Neither
+/// section defines a result for any other unit, so such a unit signals an error to the calling environment.
+/// </remarks>
+/// <param name="Unit">The unit of the quantity.</param>
+/// <param name="Type">The CQL type of the value being shifted: <c>Date</c>, <c>DateTime</c> or <c>Time</c>.</param>
+public readonly record struct CqlUnsupportedTemporalUnitError(
+    string Unit,
+    string Type) : ICqlArithmeticError
+{
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        $"The quantity unit '{Unit}' is not supported in {Type} arithmetic. " + Type switch
+        {
+            "Date" => "For Date values, the quantity unit must be one of: years, months, weeks, or days.",
+            "DateTime" => "For DateTime values, the quantity unit must be one of: years, months, weeks, days, hours, minutes, seconds, or milliseconds.",
+            "Time" => "For Time values, the quantity unit must be one of: hours, minutes, seconds, or milliseconds.",
+            _ => "The quantity unit must be a time-valued unit.",
+        };
+}
+
+/// <summary>
 /// An <see cref="ICqlError"/> raised when the <c>point from</c> operator is applied to an
 /// interval that is not a unit interval.
 /// </summary>

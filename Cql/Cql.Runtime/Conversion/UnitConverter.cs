@@ -65,36 +65,47 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
-        /// Performs the conversion using <see cref="ConversionFunctionFor(string, string)"/>.
+        /// Performs the conversion using <see cref="ConversionFunctionFor(string, string)"/>, falling back to the UCUM
+        /// metric service.
         /// </summary>
         /// <param name="value">The value to convert.</param>
         /// <param name="fromUnit">The source unit.</param>
         /// <param name="toUnit">The desired unit.</param>
-        /// <returns>The converted value.</returns>
-        /// <exception cref="ArgumentException">If this conversion has not yet been added to this converter via <see cref="UseConversion(string, string, Func{decimal, decimal})"/></exception>
-        public decimal ChangeUnits(decimal value, string fromUnit, string toUnit)
+        /// <param name="converted">The converted value.</param>
+        /// <returns>
+        /// <see langword="true"/> if a conversion from <paramref name="fromUnit"/> to <paramref name="toUnit"/> is
+        /// available, either added via <see cref="UseConversion(string, string, Func{decimal, decimal})"/> or provided by
+        /// the metric service; otherwise, <see langword="false"/>.
+        /// </returns>
+        private bool TryChangeUnits(decimal value, string fromUnit, string toUnit, out decimal converted)
         {
-            var function = ConversionFunctionFor(fromUnit, toUnit);
-            if (function != null)
-                return function(value);
-            else
+            if (ConversionFunctionFor(fromUnit, toUnit) is { } function)
             {
-                // Fast built-in method failed, call the slower UCUM library
-                var q = new CqlQuantity(value, fromUnit);
-                if (q.TryConvert(toUnit, MetricService, out var converted))
-                    return converted!.value!.Value;
-                else
-                    throw new ArgumentException($"Conversion for {fromUnit} to {toUnit} is not provided.  You can add your own using ${nameof(UseConversion)}");
+                converted = function(value);
+                return true;
             }
+
+            // Fast built-in method failed, call the slower UCUM library
+            if (new CqlQuantity(value, fromUnit).TryConvert(toUnit, MetricService, out var quantity))
+            {
+                converted = quantity!.value!.Value;
+                return true;
+            }
+
+            converted = default;
+            return false;
         }
 
         /// <summary>
-        /// Performs the conversion using <see cref="ConversionFunctionFor(string, string)"/>.
+        /// Performs the conversion using <see cref="ConversionFunctionFor(string, string)"/>, falling back to the UCUM
+        /// metric service.
         /// </summary>
         /// <param name="source">The quantity to convert.</param>
         /// <param name="ucumUnits">The desired units.</param>
-        /// <returns>The converted quantity, or <see langword="null"/> when the source has no value or the converted value cannot be represented.</returns>
-        /// <exception cref="ArgumentException">If this conversion has not yet been added to this converter via <see cref="UseConversion(string, string, Func{decimal, decimal})"/></exception>
+        /// <returns>
+        /// The converted quantity, or <see langword="null"/> when the source has no value, no conversion to
+        /// <paramref name="ucumUnits"/> is available or the converted value cannot be represented.
+        /// </returns>
         public CqlQuantity? ChangeUnits(CqlQuantity source, string ucumUnits)
         {
             if (source == null || source.value == null)
@@ -105,7 +116,8 @@ namespace Hl7.Cql.Conversion
             decimal newValue;
             try
             {
-                newValue = ChangeUnits(source.value.Value, fromUnit, ucumUnits);
+                if (!TryChangeUnits(source.value.Value, fromUnit, ucumUnits, out newValue))
+                    return null;
             }
             catch (OverflowException)
             {

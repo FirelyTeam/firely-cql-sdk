@@ -60,3 +60,18 @@ static Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.operator !=(Hl7.
 static Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError right) -> bool
 ~override Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
 ~override Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError.ToString() -> string
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.CqlUnsupportedTemporalUnitError() -> void
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.CqlUnsupportedTemporalUnitError(string! Unit, string! Type) -> void
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Deconstruct(out string! Unit, out string! Type) -> void
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Equals(Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError other) -> bool
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.GetMessage() -> string!
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Type.get -> string!
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Type.init -> void
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Unit.get -> string!
+Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Unit.init -> void
+override Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.GetHashCode() -> int
+static Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.operator !=(Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError right) -> bool
+static Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.operator ==(Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError right) -> bool
+~override Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.CqlUnsupportedTemporalUnitError.ToString() -> string

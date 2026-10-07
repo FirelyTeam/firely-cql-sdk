@@ -94,14 +94,13 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new date with <paramref name="quantity"/> added to it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDate? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
             var dto = Value.DateTimeOffset;
-            const string supportedUnitsMessage = "For Date values, the quantity unit must be one of: years, months, weeks, or days.";
 
             // A quantity in a unit finer than the value's precision is applied at that precision; one whose conversion
             // leaves the decimal range cannot be applied.
@@ -117,11 +116,7 @@ namespace Hl7.Cql.Primitives
                 "month" or "months"                     => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMonths(decimal.ToInt32(v))),
                 "wk" or "week" or "weeks"               => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v * CqlDateTimeMath.DaysPerWeek))),
                 "d" or "day" or "days"                  => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v))),
-                "h" or "hour" or "hours" or
-                "min" or "minute" or "minutes" or
-                "s" or "second" or "seconds" or
-                "ms" or "millisecond" or "milliseconds" => throw new ArgumentException($"Time-based unit '{unit}' is not supported for Date values. {supportedUnitsMessage}"),
-                _                                       => throw new ArgumentException($"Unknown date unit '{unit}' supplied. {supportedUnitsMessage}")
+                _                                       => throw new CqlUnsupportedTemporalUnitError(unit, "Date").ToException(),
             };
 
             // A result outside the range of a date cannot be represented.
@@ -137,7 +132,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new date with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDate? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>

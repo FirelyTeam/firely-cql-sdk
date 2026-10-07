@@ -456,6 +456,33 @@ public class CqlDateTimeTests
         Assert.IsNull(result, "Subtracting years from minimum datetime should return null to prevent overflow");
     }
 
+    [DataTestMethod]
+    [DataRow("1")]
+    [DataRow("cm")]
+    [DataRow("mg")]
+    public void AddAndSubtract_NonTemporalUnit_ThrowsCqlUnsupportedTemporalUnitError(string unit)
+    {
+        var dateTime = new CqlDateTime(2021, 1, 1, 0, 0, 0, 0, 0, 0);
+        var quantity = new CqlQuantity(1, unit);
+        var expected = new CqlUnsupportedTemporalUnitError(unit, "DateTime");
+
+        Assert.AreEqual(expected, Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => dateTime.Add(quantity)).Error);
+        Assert.AreEqual(expected, Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(() => dateTime.Subtract(quantity)).Error);
+    }
+
+    [TestMethod]
+    public void Expand_NonTemporalPer_ThrowsCqlUnsupportedTemporalUnitError()
+    {
+        var operators = GetNewContext().Operators;
+        var dateTime = new CqlDateTime(2021, 1, 1, 0, 0, 0, 0, 0, 0);
+        var interval = new CqlInterval<CqlDateTime>(dateTime, dateTime, true, true);
+
+        var exception = Assert.ThrowsException<CqlException<CqlUnsupportedTemporalUnitError>>(
+            () => operators.Expand(interval, new CqlQuantity(1, "cm")));
+
+        Assert.AreEqual(new CqlUnsupportedTemporalUnitError("cm", "DateTime"), exception.Error);
+    }
+
     [TestMethod]
     public void Add_FinerUnitBeyondIntegerRangeAfterConversion_ReturnsNull()
     {

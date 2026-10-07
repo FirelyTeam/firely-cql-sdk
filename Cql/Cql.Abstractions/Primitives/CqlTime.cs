@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Iso8601;
 
 namespace Hl7.Cql.Primitives
@@ -108,7 +109,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new time with <paramref name="quantity"/> added to it, or <see langword="null"/> if the result would fall outside the day.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
@@ -122,7 +123,7 @@ namespace Hl7.Cql.Primitives
                 UCUMUnits.Week or "week" or "weeks" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromDays(Math.Truncate((double)v) * CqlDateTimeMath.DaysPerWeekDouble))),
                 UCUMUnits.Hour or "hour" or "hours" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromHours(Math.Truncate((double)v)))),
                 UCUMUnits.Second or "second" or "seconds" => OverflowGuard.Shift(Value.TimeSpan, value, static (s, v) => s.Add(TimeSpan.FromSeconds(Math.Truncate((double)v)))),
-                _ => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                _ => throw new CqlUnsupportedTemporalUnitError(unit, "Time").ToException(),
             };
 
             // A time-of-day outside 00:00:00.000 to 23:59:59.999 cannot be represented, so the
@@ -141,7 +142,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new time with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the result would fall outside the day.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>

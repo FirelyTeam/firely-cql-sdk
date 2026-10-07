@@ -147,7 +147,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new date time with <paramref name="quantity"/> added to it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDateTime? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
@@ -173,7 +173,7 @@ namespace Hl7.Cql.Primitives
                 "min" or "minute" or "minutes"          => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMinutes(Math.Truncate((double)v))),
                 "s" or "second" or "seconds"            => OverflowGuard.Shift(dto, value, static (d, v) => d.AddSeconds(Math.Truncate((double)v))),
                 "ms" or "millisecond" or "milliseconds" => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMilliseconds(Math.Truncate((double)v))),
-                _                                       => throw new ArgumentException($"Unknown date unit {unit} supplied")
+                _                                       => throw new CqlUnsupportedTemporalUnitError(unit, "DateTime").ToException(),
             };
 
             // A result outside the range of a date time cannot be represented.
@@ -189,7 +189,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new date time with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDateTime? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>
