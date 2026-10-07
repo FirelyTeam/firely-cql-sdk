@@ -153,17 +153,16 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
+        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string precision)
         {
-            if (low is not {} firstDto || high is not {} secondDto  || precision == null)
+            if (low == null || high == null || precision == null)
                 return null;
 
             var calendar = new GregorianCalendar();
+            var firstDto = low.Value;
+            var secondDto = high.Value;
             switch (precision)
             {
-                // https://cql.hl7.org/09-b-cqlreference.html#difference
-                // UCUM units not supported here
-
                 case "year":
                     var yearDiff = secondDto.Year - firstDto.Year;
                     var firstDayInYear = firstDto.DayOfYear;
@@ -183,18 +182,14 @@ namespace Hl7.Cql.Primitives
                             if (secondDto.DayOfYear < 60)
                                 return yearDiff - 1;
 
-                            // equals or is after
+                            // equals or is after 
                             return yearDiff;
                         }
 
-                        // In a year without a leap day the anniversary of 29 February is 28 February, the year's 59th day,
-                        // which is also where adding a year to the leap day lands. On the anniversary date itself the
-                        // year is whole once the start's time of day has been reached.
                         // born 2-29-2020
                         // age as of 2-28-2025 = 5
+                        // 59th day is Feb 28 so don't count as birthday
                         if (secondDayInYear > 59)
-                            return yearDiff;
-                        if (secondDayInYear == 59 && (yearDiff < 0 || secondDto.TimeOfDay >= firstDto.TimeOfDay))
                             return yearDiff;
 
                         return yearDiff - 1;
@@ -234,7 +229,6 @@ namespace Hl7.Cql.Primitives
                     else if (yearDiff < 0 && firstDayInYear < secondDayInYear)
                         yearDiff += 1;
                     return yearDiff;
-
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
                     if (monthDiff > 0 && secondDto.Day < firstDto.Day)
@@ -242,17 +236,126 @@ namespace Hl7.Cql.Primitives
                     else if (monthDiff < 0 && firstDto.Day < secondDto.Day)
                         monthDiff += 1;
                     return monthDiff;
-
-                case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                case "week":
+                    return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
                 case "day":
-                                    return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
-                default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
+                    return (int)secondDto.Subtract(firstDto).TotalDays;
+                case "hour":
+                    return (int)secondDto.Subtract(firstDto).TotalHours;
+                case "minute":
+                    return (int)secondDto.Subtract(firstDto).TotalMinutes;
+                case "second":
+                    return (int)secondDto.Subtract(firstDto).TotalSeconds;
+                case "millisecond":
+                    return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                default:
+                    throw new ArgumentException($"Unit {precision} is not supported");
             }
+            ;
         }
+
+
+        /*
+                internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
+                {
+                    if (low is not {} firstDto || high is not {} secondDto  || precision == null)
+                        return null;
+
+                    var calendar = new GregorianCalendar();
+                    switch (precision)
+                    {
+                        // https://cql.hl7.org/09-b-cqlreference.html#difference
+                        // UCUM units not supported here
+
+                        case "year":
+                            var yearDiff = secondDto.Year - firstDto.Year;
+                            var firstDayInYear = firstDto.DayOfYear;
+                            var secondDayInYear = secondDto.DayOfYear;
+
+                            var firstIsLeapDay = calendar.IsLeapDay(firstDto.Year, firstDto.Month, firstDto.Day);
+                            var secondIsLeapDay = calendar.IsLeapDay(secondDto.Year, secondDto.Month, secondDto.Day);
+
+                            // born on leap day
+                            if (firstIsLeapDay)
+                            {
+                                if (DateTime.IsLeapYear(secondDto.Year))
+                                {
+                                    // born 2-29-2020
+                                    // age as of 2-28-2024 = 3
+                                    // day is before 2/29
+                                    if (secondDto.DayOfYear < 60)
+                                        return yearDiff - 1;
+
+                                    // equals or is after
+                                    return yearDiff;
+                                }
+
+                                // In a year without a leap day the anniversary of 29 February is 28 February, the year's 59th day,
+                                // which is also where adding a year to the leap day lands. On the anniversary date itself the
+                                // year is whole once the start's time of day has been reached.
+                                // born 2-29-2020
+                                // age as of 2-28-2025 = 5
+                                if (secondDayInYear > 59)
+                                    return yearDiff;
+                                if (secondDayInYear == 59 && (yearDiff < 0 || secondDto.TimeOfDay >= firstDto.TimeOfDay))
+                                    return yearDiff;
+
+                                return yearDiff - 1;
+                            }
+
+                            // born on 3/1/2015
+                            // as of 2/29/2024
+                            if (secondIsLeapDay)
+                            {
+                                if (DateTime.IsLeapYear(firstDto.Year))
+                                {
+                                    // first date is leap year (not leap day)
+                                    // first date is not leap day per the logic but if after leap day then year-1
+                                    if (firstDto.DayOfYear > 59)
+                                        return yearDiff - 1;
+
+                                    return yearDiff;
+                                }
+
+                                if (firstDayInYear < 60)
+                                    return yearDiff;
+
+                                return yearDiff - 1;
+                            }
+
+                            // In 2020 (leap year), 2-29 is day 60 and 3-1 is day 61.
+                            // In 2021 (non-leap )year, 3-1 is day 60.
+                            // Subtract 2-29 out of the equation for leap years
+                            // for leap years, this normalizes 3-1 from being day 61 back to day 60.
+                            if (DateTime.IsLeapYear(firstDto.Year) && firstDayInYear > 60)
+                                firstDayInYear -= 1;
+                            if (DateTime.IsLeapYear(secondDto.Year) && secondDayInYear > 60)
+                                secondDayInYear -= 1;
+
+                            if (yearDiff > 0 && secondDayInYear < firstDayInYear)
+                                yearDiff -= 1;
+                            else if (yearDiff < 0 && firstDayInYear < secondDayInYear)
+                                yearDiff += 1;
+                            return yearDiff;
+
+                        case "month":
+                            var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
+                            if (monthDiff > 0 && secondDto.Day < firstDto.Day)
+                                monthDiff -= 1;
+                            else if (monthDiff < 0 && firstDto.Day < secondDto.Day)
+                                monthDiff += 1;
+                            return monthDiff;
+
+                        case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                        case "day":
+                                            return (int)secondDto.Subtract(firstDto).TotalDays;
+                        case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
+                        case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
+                        case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
+                        case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                        default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
+                    }
+                }*/
 
         internal static readonly IDictionary<DateTimePrecision, CqlQuantity> UnitDateTimeQuantity = new Dictionary<DateTimePrecision, CqlQuantity>
         {
