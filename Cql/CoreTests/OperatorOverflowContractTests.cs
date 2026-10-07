@@ -22,7 +22,8 @@ namespace CoreTests
     /// 0) will result in null, rather than a run-time error" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section
     /// "Arithmetic Operators"). Errors the specification does mandate are signalled as <see cref="CqlException{TError}"/>.
     /// This test states that contract once for every <see cref="ICqlOperators"/> method over Integer, Long, Decimal,
-    /// Quantity, Date, DateTime, Time and intervals of those, by invoking each one with the extremes of its argument types.
+    /// Quantity, Date, DateTime, Time, intervals of those and lists of all these, by invoking each one with the extremes
+    /// of its argument types. A generic method taking a list is closed over each of the point types.
     /// </summary>
     [TestClass]
     [TestCategory("UnitTest")]
@@ -41,6 +42,9 @@ namespace CoreTests
             "Expand(CqlInterval<CqlDate>, CqlQuantity)",
             "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
             "Expand(CqlInterval<CqlTime>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlDate>>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlDateTime>>, CqlQuantity)",
+            "Expand(IEnumerable<CqlInterval<CqlTime>>, CqlQuantity)",
             "Subtract(CqlDate, CqlQuantity)",
             "Subtract(CqlDateTime, CqlQuantity)",
             "Subtract(CqlTime, CqlQuantity)",
@@ -114,6 +118,22 @@ namespace CoreTests
             typeof(CqlQuantity), typeof(CqlDate), typeof(CqlDateTime), typeof(CqlTime),
         ];
 
+        /// <summary>
+        /// The type arguments a generic method taking a list is closed over: the point types, and the underlying types
+        /// of the nullable ones for a type parameter constrained to a value type.
+        /// </summary>
+        private static readonly Type[] GenericArguments = [.. PointTypes, typeof(int), typeof(long), typeof(decimal)];
+
+        /// <summary>
+        /// The unit of the quantities in a list; one list holds quantities of two units.
+        /// </summary>
+        private const string ListUnit = "mg";
+
+        /// <summary>
+        /// The number of elements in the long list, enough for a running total of the maximum to overflow.
+        /// </summary>
+        private const int LongListLength = 50;
+
         public TestContext TestContext { get; set; } = null!;
 
         [TestMethod]
@@ -127,13 +147,19 @@ namespace CoreTests
             var skipped = new List<string>();
             foreach (var method in methods)
             {
-                if (method.IsGenericMethodDefinition
-                    || method.IsSpecialName
-                    || method.GetParameters() is not { Length: > 0 } parameters
-                    || !parameters.All(IsInScope))
+                if (method.IsSpecialName || method.GetParameters() is not { Length: > 0 } parameters)
                     skipped.Add(Signature(method));
-                else
+                else if (method.IsGenericMethodDefinition)
+                {
+                    var closed = CloseOverPointTypes(method).ToList();
+                    if (closed.Count == 0)
+                        skipped.Add(Signature(method));
+                    covered.AddRange(closed);
+                }
+                else if (parameters.All(IsInScope))
                     covered.Add(method);
+                else
+                    skipped.Add(Signature(method));
             }
 
             var violations = new List<string>();
@@ -152,6 +178,7 @@ namespace CoreTests
                     .Select(p => domains.For(p, method, extremesOnly: false))
                     .ToArray();
                 if (parameters.Count(p => p.ParameterType != typeof(string)) > MaxValueParametersForFullDomain
+                    || parameters.Count(p => ListElementType(p.ParameterType) is not null) > 1
                     || argumentSets.Aggregate(1L, (product, set) => product * set.Count)
                         > (parameters.Any(p => p.ParameterType.IsGenericType) ? MaxCombinationsForFullDomain : MaxPointCombinationsForFullDomain))
                 {
@@ -201,7 +228,7 @@ namespace CoreTests
 
             TestContext.WriteLine($"Covered {covered.Count} operators with {invocations} invocations in {total.Elapsed.TotalSeconds:F1} s.");
             TestContext.WriteLine($"Not executed: {notExecuted} invocations of the {KnownNonTerminating.Count} known non-terminating operators.");
-            TestContext.WriteLine($"Skipped {skipped.Count} members that are generic, parameterless or take a parameter outside the covered types:");
+            TestContext.WriteLine($"Skipped {skipped.Count} members that are generic without a list parameter, parameterless or take a parameter outside the covered types:");
             foreach (var s in skipped.Distinct().OrderBy(s => s, StringComparer.Ordinal))
                 TestContext.WriteLine($"  {s}");
             TestContext.WriteLine("Slowest operators:");
@@ -243,16 +270,48 @@ namespace CoreTests
         private static bool IsFractionalQuantity(object? argument) =>
             argument is CqlQuantity { value: { } value } && decimal.Truncate(value) != value;
 
-        private static bool IsInScope(ParameterInfo parameter)
-        {
-            var type = parameter.ParameterType;
-            if (type == typeof(string))
-                return parameter.Name is "precision" or "unit";
-            if (PointTypes.Contains(type))
-                return true;
-            return type.IsGenericType
+        private static bool IsInScope(ParameterInfo parameter) =>
+            parameter.ParameterType == typeof(string)
+                ? parameter.Name is "precision" or "unit"
+                : IsValueInScope(parameter.ParameterType)
+                    || (ListElementType(parameter.ParameterType) is { } element && IsValueInScope(element));
+
+        private static bool IsValueInScope(Type type) =>
+            PointTypes.Contains(type)
+            || (type.IsGenericType
                 && type.GetGenericTypeDefinition() == typeof(CqlInterval<>)
-                && PointTypes.Contains(type.GetGenericArguments()[0]);
+                && PointTypes.Contains(type.GetGenericArguments()[0]));
+
+        /// <summary>The element type of a list parameter, or <see langword="null"/> for any other type.</summary>
+        private static Type? ListElementType(Type type) =>
+            type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>) ? type.GetGenericArguments()[0] : null;
+
+        /// <summary>
+        /// The instances of a generic method with one type parameter and a list parameter whose parameters are all in
+        /// scope once the type parameter is one of <see cref="GenericArguments"/>.
+        /// </summary>
+        private static IEnumerable<MethodInfo> CloseOverPointTypes(MethodInfo definition)
+        {
+            if (definition.GetGenericArguments().Length != 1
+                || !definition.GetParameters().Any(p => ListElementType(p.ParameterType) is not null))
+                yield break;
+
+            foreach (var argument in GenericArguments)
+            {
+                MethodInfo closed;
+                try
+                {
+                    closed = definition.MakeGenericMethod(argument);
+                }
+                catch (ArgumentException)
+                {
+                    // The type argument violates a constraint of the type parameter.
+                    continue;
+                }
+
+                if (closed.GetParameters().All(IsInScope))
+                    yield return closed;
+            }
         }
 
         /// <summary>
@@ -320,7 +379,8 @@ namespace CoreTests
         }
 
         private static string Signature(MethodInfo method) =>
-            $"{method.Name}({string.Join(", ", method.GetParameters().Select(p => TypeName(p.ParameterType)))})";
+            $"{method.Name}{(method.IsConstructedGenericMethod ? $"<{string.Join(", ", method.GetGenericArguments().Select(TypeName))}>" : "")}"
+            + $"({string.Join(", ", method.GetParameters().Select(p => TypeName(p.ParameterType)))})";
 
         private static string TypeName(Type type)
         {
@@ -347,8 +407,14 @@ namespace CoreTests
             IFormattable f => f.ToString(null, CultureInfo.InvariantCulture),
             CqlQuantity q => $"{Format(q.value)} '{q.unit}'",
             ICqlInterval interval => FormatInterval(interval.ToCqlIntervalOfObject()),
+            IEnumerable list => FormatList(list.Cast<object?>().ToList()),
             _ => argument.ToString() ?? "",
         };
+
+        private static string FormatList(List<object?> items) =>
+            items.Count > 3 && items.All(i => ReferenceEquals(i, items[0]) || Equals(i, items[0]))
+                ? $"{{{items.Count} x {Format(items[0])}}}"
+                : $"{{{string.Join(", ", items.Select(Format))}}}";
 
         private static string FormatInterval(CqlInterval<object> interval) =>
             $"Interval{(interval.lowClosed == true ? "[" : "(")}{Format(interval.low)}, {Format(interval.high)}{(interval.highClosed == true ? "]" : ")")}";
@@ -389,6 +455,8 @@ namespace CoreTests
 
             private readonly Dictionary<(Type, bool Narrow), (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes)> _intervals = new();
 
+            private readonly Dictionary<(Type, bool Narrow), (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes)> _lists = new();
+
             private static readonly IReadOnlyList<object?> UnitDomain = [null, .. Units.Union(ExtremeUnits)];
 
             /// <summary>
@@ -404,15 +472,100 @@ namespace CoreTests
                 if (type == typeof(string))
                     return parameter.Name == "unit" ? UnitDomain : PrecisionDomain(method);
 
-                if (_points.TryGetValue(type, out var points))
-                    return extremesOnly ? points.Extremes : points.Full;
-
                 // Expansion enumerates every point of the interval, so it gets only intervals of a few points.
                 var narrow = method.Name == nameof(ICqlOperators.Expand);
+                var values = ListElementType(type) is { } element
+                    ? ListsOf(element, narrow)
+                    : ValuesOf(type, narrow);
+                return extremesOnly ? values.Extremes : values.Full;
+            }
+
+            private (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes) ValuesOf(Type type, bool narrow)
+            {
+                if (_points.TryGetValue(type, out var points))
+                    return points;
+
                 var key = (type.GetGenericArguments()[0], narrow);
                 if (!_intervals.TryGetValue(key, out var intervals))
                     _intervals[key] = intervals = Intervals(type, _points[key.Item1], narrow);
-                return extremesOnly ? intervals.Extremes : intervals.Full;
+                return intervals;
+            }
+
+            /// <summary>
+            /// Lists built from the values of the element type: the empty list, a list holding only null, a list per
+            /// value, pairs of the extremes and of an extreme with a small value, a list with a null between two
+            /// maximums and a list long enough for a running total of the maximum to overflow. The extremes-only
+            /// variant keeps the lists of the extremes.
+            /// </summary>
+            private (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes) ListsOf(Type elementType, bool narrow)
+            {
+                var key = (elementType, narrow);
+                if (_lists.TryGetValue(key, out var lists))
+                    return lists;
+
+                var (values, max, min, pairs) = ListElements(elementType, ValuesOf(elementType, narrow));
+                object List(params object?[] items) => MakeList(elementType, items);
+                var longList = List([.. Enumerable.Repeat(max, LongListLength)]);
+
+                IReadOnlyList<object?> full =
+                [
+                    null, List(), List([null]),
+                    .. values.Select(v => List(v)),
+                    .. pairs.Select(p => List(p.First, p.Second)),
+                    List(max, null, max),
+                    longList,
+                ];
+                IReadOnlyList<object?> extremes =
+                [
+                    null, List(), List([null]), List(max), List(min), List(max, max), List(max, min), longList,
+                ];
+                return _lists[key] = (full, extremes);
+            }
+
+            /// <summary>
+            /// The non-null values a list of <paramref name="elementType"/> is built from, its maximum and minimum, and the
+            /// pairs of values the two-element lists hold.
+            /// </summary>
+            private static (IReadOnlyList<object?> Values, object? Max, object? Min, IReadOnlyList<(object? First, object? Second)> Pairs) ListElements(
+                Type elementType,
+                (IReadOnlyList<object?> Full, IReadOnlyList<object?> Extremes) domain)
+            {
+                if (elementType == typeof(CqlQuantity))
+                {
+                    // Per unit: maximum, minimum, 0, 1, -1 and the fractional values.
+                    var q = domain.Full.OfType<CqlQuantity>().Where(q => q.unit == ListUnit).ToArray();
+                    return (q, q[0], q[1],
+                        [(q[0], q[0]), (q[1], q[1]), (q[0], q[1]), (q[0], q[3]), (q[1], q[4]), (q[0], new CqlQuantity(1m, "g"))]);
+                }
+
+                var values = domain.Full.Where(v => v is not null).ToArray();
+                if (PointTypes.Contains(elementType))
+                {
+                    // Numbers are minimum, maximum, 0, 1, -1 and more; dates and times are minimum, maximum, a mid value
+                    // and a coarse one.
+                    var (min, max) = (values[0], values[1]);
+                    var (small, negativeSmall) = values[2] is ValueType ? (values[3], values[4]) : (values[2], values[2]);
+                    return (values, max, min, [(max, max), (min, min), (max, min), (max, small), (min, negativeSmall)]);
+                }
+
+                // Intervals: every pair of the extreme intervals.
+                var e = domain.Extremes.Where(v => v is not null).ToArray();
+                var intervalPairs = new List<(object?, object?)>();
+                for (var i = 0; i < e.Length; i++)
+                {
+                    for (var j = i; j < e.Length; j++)
+                        intervalPairs.Add((e[i], e[j]));
+                }
+
+                return (values, e[0], e[1], intervalPairs);
+            }
+
+            private static object MakeList(Type elementType, IEnumerable<object?> items)
+            {
+                var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(elementType))!;
+                foreach (var item in items)
+                    list.Add(item);
+                return list;
             }
 
             public IReadOnlyList<object?> ForManyArguments(ParameterInfo parameter, MethodInfo method) =>
@@ -432,7 +585,7 @@ namespace CoreTests
             private static IReadOnlyList<object?> PrecisionDomain(MethodInfo method)
             {
                 var pointType = method.GetParameters()
-                    .Select(p => p.ParameterType.IsGenericType ? p.ParameterType.GetGenericArguments()[0] : p.ParameterType)
+                    .Select(p => PointTypeOf(p.ParameterType))
                     .FirstOrDefault(IsTemporal);
                 IEnumerable<string> precisions =
                     pointType == typeof(CqlDate) ? DatePrecisions
@@ -450,6 +603,15 @@ namespace CoreTests
 
                 return [null, .. precisions];
             }
+
+            /// <summary>
+            /// The type of the points <paramref name="type"/> holds: the point type of an interval, of a list or of a list
+            /// of intervals, or the type itself.
+            /// </summary>
+            private static Type PointTypeOf(Type type) =>
+                ListElementType(type) is { } element ? PointTypeOf(element)
+                : type.IsGenericType && type.GetGenericTypeDefinition() == typeof(CqlInterval<>) ? type.GetGenericArguments()[0]
+                : type;
 
             private static bool IsTemporal(Type type) =>
                 type == typeof(CqlDate) || type == typeof(CqlDateTime) || type == typeof(CqlTime)

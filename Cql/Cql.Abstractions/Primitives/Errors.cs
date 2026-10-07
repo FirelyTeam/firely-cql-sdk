@@ -148,3 +148,23 @@ public readonly record struct CqlExpandFractionalPerError(
         + "the specification defines the result as \"the list of points covering the range of the given interval\" in steps of size per, "
         + "and \"for numeric intervals, adding the per to the lower boundary produces a more precise value\".";
 }
+
+/// <summary>
+/// An <see cref="ICqlError"/> raised when the <c>singleton from</c> operator is applied to a list of more than one
+/// element.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, section "List Operators", "Singleton From"), "If the list
+/// contains more than one element, a run-time error is thrown."
+/// </remarks>
+/// <param name="First">The first element of the list.</param>
+/// <param name="Second">The second element of the list.</param>
+public readonly record struct CqlSingletonFromMultipleElementsError(
+    object? First,
+    object? Second) : ICqlError
+{
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        "The singleton from operator requires a list of at most one element, but was given a list starting with "
+        + $"{First?.ToString() ?? "null"} and {Second?.ToString() ?? "null"}.";
+}
