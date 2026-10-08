@@ -59,8 +59,6 @@ namespace Hl7.Cql.CqlToElm
             string.Format(Culture, Messages.CouldNotResolveInLibrary, identifier, library);
         public string CouldNotResolveInCurrent(string identifier) =>
             string.Format(Culture, Messages.CouldNotResolveInCurrent, identifier);
-        public string CouldNotResolveLibrary(string name, string? version) =>
-             string.Format(Culture, Messages.CouldNotFindLibrary, name, version ?? Messages.Latest);
         public string CouldNotResolveModel(string name) =>
              string.Format(Culture, Messages.CouldNotResolveModel, name);
         public string ExpressionCannotBeLibraryRef(string library) =>
