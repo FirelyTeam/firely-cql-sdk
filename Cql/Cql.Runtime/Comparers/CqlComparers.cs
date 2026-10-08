@@ -146,24 +146,6 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.AddOrUpdate(genericTypeDefinition, comparerFactory, (_, _) => comparerFactory);
             return this;
         }
-
-        /// <summary>
-        /// Unregisters the type's comparer or comparer factory.
-        /// </summary>
-        /// <param name="type">The type or generic type definition to unregister.</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentNullException">If <paramref name="type"/> is <see langword="null"/>.</exception>
-        public CqlComparers Unregister(Type type)
-        {
-            if (type is null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-
-            Comparers.TryRemove(type, out _);
-            ComparerFactories.TryRemove(type, out _);
-            return this;
-        }
     }
 }
 
