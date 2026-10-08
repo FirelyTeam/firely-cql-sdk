@@ -124,7 +124,7 @@ if ($EnableElmTooling) {
 
 # Execute build
 $slnf = "Cql-Sdk.slnf"
-$sln  = "Cql-Sdk-All.sln"
+$sln  = "Cql-Sdk-All.slnx"
 
 if ($EnableElmTooling) {
     # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.
@@ -151,7 +151,7 @@ if ($EnableElmTooling) {
     Write-Host "Phase 1 completed successfully." -ForegroundColor Green
     Write-Host ""
 
-    # Phase 2: build the full solution (Cql-Sdk-All.sln) with ElmToCSharp enabled,
+    # Phase 2: build the full solution (Cql-Sdk-All.slnx) with ElmToCSharp enabled,
     # serialised with -maxcpucount:1. PackagerCLI is already up-to-date so MSBuild
     # skips it — no DLL copies race with the running packager.
     # Only one GenerateCSharp fires at a time.
