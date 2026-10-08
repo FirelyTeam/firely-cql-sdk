@@ -39,7 +39,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "RatioNotEquivalentDiffNumerator", "Ratio is not supported: the expression builder throws NotSupportedException for a Ratio literal, and the runtime has no Ratio equality or equivalence (Appendix B, Equal: \"the numerator and denominator must be the same, using quantity equality semantics\"; Equivalent: \"the numerator and denominator represent the same ratio\")." },
             { "RatioNotEquivalentDiffDenominator", "Ratio is not supported: the expression builder throws NotSupportedException for a Ratio literal, and the runtime has no Ratio equality or equivalence (Appendix B, Equal: \"the numerator and denominator must be the same, using quantity equality semantics\"; Equivalent: \"the numerator and denominator represent the same ratio\")." },
 
-            { "MegaMultiDistinct", "`aggregate distinct` over a multi-source query binds Distinct with the aggregate's type instead of the source tuple type, and no overload matches." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
