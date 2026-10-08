@@ -14,7 +14,6 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
