@@ -133,7 +133,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public TimeIso8601(int hour, int? minute, int? second, int? ms, int? osHours, int? osMinutes, bool strict = false) :
             this(null,
-               hour, minute, second, ms, osHours, NormalizeOffsetMinute(osHours, osMinutes), strict)
+               hour, minute, second, ms, osHours, Iso8601Offset.NormalizeMinute(osHours, osMinutes), strict)
         {
             _stringPrecision = DateTimePrecision.Millisecond;
         }
@@ -149,7 +149,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public TimeIso8601(TimeSpan span, int? offsetHours, int? offsetMinutes, DateTimePrecision precision, bool strict = false) :
             this(null,
-                span.Hours, span.Minutes, span.Seconds, span.Milliseconds, offsetHours, NormalizeOffsetMinute(offsetHours, offsetMinutes), strict, precision)
+                span.Hours, span.Minutes, span.Seconds, span.Milliseconds, offsetHours, Iso8601Offset.NormalizeMinute(offsetHours, offsetMinutes), strict, precision)
         {
             _stringPrecision = precision;
         }
@@ -246,7 +246,7 @@ namespace Hl7.Cql.Iso8601
             // The sign of an offset applies to the whole offset, not just its hour component:
             // -05:30 is -(5h + 30m), not -5h + 30m. Store the minutes signed so that composing
             // the two components yields the right TimeSpan.
-            osMinute = NormalizeOffsetMinute(osHour, osMinute);
+            osMinute = Iso8601Offset.NormalizeMinute(osHour, osMinute);
             OffsetMinute = osMinute;
             Offset = new TimeSpan(OffsetHour ?? 0, OffsetMinute ?? 0, 0);
 
@@ -259,14 +259,6 @@ namespace Hl7.Cql.Iso8601
 
             _string = @string;
         }
-
-        private static int? NormalizeOffsetMinute(int? offsetHour, int? offsetMinute) =>
-            (offsetHour, offsetMinute) switch
-            {
-                (< 0, > 0) => -offsetMinute,
-                (> 0, < 0) => -offsetMinute,
-                _ => offsetMinute
-            };
 
         public override string ToString() => String;
         public override bool Equals(object? obj) => Equals(String, obj?.ToString());
