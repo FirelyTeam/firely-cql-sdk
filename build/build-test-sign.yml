@@ -95,6 +95,16 @@ stages:
             submodules: ${{ parameters.checkoutSubmodules }}
 
           # Install .NET SDKs
+          # .NET 11 is ready apart from Fhir.Metrics, whose UCUM arithmetic gives different results on
+          # .NET 11 than on .NET 10. Uncomment this task, and the net11.0 publish and test jobs below,
+          # once https://github.com/FirelyTeam/firely-cql-sdk/issues/1812 is resolved.
+          # - task: UseDotNet@2
+          #   displayName: "Install .NET 11 SDK"
+          #   inputs:
+          #     packageType: "sdk"
+          #     version: "11.0.x"
+          #     installationPath: $(Agent.ToolsDirectory)/dotnet
+
           - task: UseDotNet@2
             displayName: "Install .NET 10 SDK"
             inputs:
@@ -183,6 +193,14 @@ stages:
                 dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/net10.0
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
               }
+
+              # Publish for net11.0 once #1812 is resolved:
+              # foreach ($proj in $projects) {
+              #   $proj = $proj.Trim()
+              #   if (-not $proj) { continue }
+              #   dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net11.0 --property:PublishDir=$stagingRoot/net11.0
+              #   if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net11.0"; exit 1 }
+              # }
 
               # Summary
               foreach ($subdir in @('net10.0')) {
