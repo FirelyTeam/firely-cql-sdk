@@ -156,7 +156,7 @@ public record SaveFhirResourcesToDirectoriesOptions(
                     }
                 }
 
-                logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
+                logger ??= packagingToolkit.CreateLogger(typeof(PackagingToolkitExtensions));
                 var fullFilePath = Path.Combine(targetDirectory.FullName, resourceFileName.ToString());
                 logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
                 File.WriteAllText(fullFilePath, resourceJson);
