@@ -8,7 +8,7 @@ The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benef
 
 ### Target Framework Configuration
 
-- **Base configuration**: `cql-base.props` sets `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`
+- **Base configuration**: `cql-base.props` sets `<TargetFrameworks>net10.0</TargetFrameworks>`
 - **SDK projects**: All library projects (Hl7.Cql.*) target both frameworks
 - **Tool projects**: Executable projects like PackagerCLI target both frameworks
 - **Example projects**: May target a single framework for simplicity
@@ -148,7 +148,7 @@ dotnet build Cql-Sdk.slnf -c Debug --framework net10.0
 dotnet test Cql/CoreTests/CoreTests.csproj -c Debug
 
 # Run tests for specific framework
-dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net8.0
+dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
 dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
 ```
 

@@ -1,6 +1,6 @@
 {
   "solution": {
-    "path": "Cql-Sdk-All.sln",
+    "path": "Cql-Sdk-All.slnx",
     "projects": [
       "Cql\\CodeGeneration.NET\\CodeGeneration.NET.csproj",
       "Cql\\CoreTests\\CoreTests.csproj",

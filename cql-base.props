@@ -4,8 +4,12 @@
 		<!-- ## Compiler settings -->
 		<Nullable>enable</Nullable>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<TargetFrameworks>net8.0;net10.0</TargetFrameworks>
-		<LangVersion>latest</LangVersion>
+		<TargetFrameworks>net10.0;net11.0</TargetFrameworks>
+		<!-- Pinned rather than 'latest': 'latest' is compiler-wide, not per-target-framework, so it
+		     resolves to whatever the installed SDK supports and can differ between machines. Raise
+		     this together with the target framework. A multi-target matrix needs one Condition'd
+		     LangVersion per framework rather than a single value. -->
+		<LangVersion>14.0</LangVersion>
 	</PropertyGroup>
 
 	<PropertyGroup>

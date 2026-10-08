@@ -164,13 +164,13 @@ Before pushing changes, verify tests pass on both target frameworks:
 **Test specific projects on specific frameworks**:
 ```bash
 # Test CoreTests on .NET 8
-dotnet test Cql/CoreTests/CoreTests.csproj --framework net8.0
+dotnet test Cql/CoreTests/CoreTests.csproj --framework net10.0
 
 # Test CoreTests on .NET 10
 dotnet test Cql/CoreTests/CoreTests.csproj --framework net10.0
 
 # Test CqlToElmTests on both frameworks
-dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net8.0
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net10.0
 dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --framework net10.0
 
 # Test IntegrationRunner on .NET 10
@@ -186,7 +186,7 @@ dotnet test submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/H
 dotnet build Cql-Sdk.slnf --configuration Release
 
 # Test all projects on .NET 8
-dotnet test Cql-Sdk.slnf --configuration Release --framework net8.0 --no-build
+dotnet test Cql-Sdk.slnf --configuration Release --framework net10.0 --no-build
 
 # Test all projects on .NET 10
 dotnet test Cql-Sdk.slnf --configuration Release --framework net10.0 --no-build
@@ -200,7 +200,7 @@ The `build-test-sign.yml` template creates a two-stage pipeline optimized for ef
 - Installs .NET 8 and .NET 10 SDKs
 - Caches Java dependencies using `Cache@2` task with `Demo/Cql/Build/pom.xml` as cache key
 - Restores NuGet packages
-- Builds entire solution targeting both net8.0 and net10.0 (single build)
+- Builds entire solution targeting net10.0
 - Conditionally signs assemblies using Azure Trusted Signing (`shouldSign` parameter)
 - Packages NuGet packages with proper version suffix
 - Publishes two test artifacts (see below)
@@ -210,7 +210,7 @@ The `build-test-sign.yml` template creates a two-stage pipeline optimized for ef
 The build stage produces two separate artifacts for the test stage:
 
 **`TestPublishOutput`** (for CoreTests / CqlToElmTests):
-- Created via `dotnet publish --no-build` per framework, producing flat directories (`net8.0/`, `net10.0/`) with all DLLs and dependencies.
+- Created via `dotnet publish --no-build` per framework, producing a flat directory (`net10.0/`) with all DLLs and dependencies.
 - Test agents run `dotnet test` directly on the published `*Tests.dll` files — **no MSBuild or NuGet resolution needed at test time**. This avoids the risk of `dotnet test --no-build` on a `.csproj` silently producing no output when SDK targets can't resolve on the agent.
 
 **`BuildOutput`** (for IntegrationRunner):
@@ -355,7 +355,7 @@ All test jobs must succeed before deployment stages run. This ensures:
 **Issue**: Test results not showing for a framework
 - **Solution**: Check that the project file includes both target frameworks:
   ```xml
-  <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+  <TargetFrameworks>net10.0</TargetFrameworks>
   ```
 
 **Issue**: Signing fails with "dotnet sign: command not found"
@@ -383,7 +383,7 @@ All test jobs must succeed before deployment stages run. This ensures:
 
 This implementation follows Microsoft's recommendations for multi-targeting and CI/CD:
 
-1. **Multi-Targeting**: Uses `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>` to build for both frameworks
+1. **Target framework**: Uses `<TargetFrameworks>net10.0</TargetFrameworks>`
 2. **Explicit Framework Testing**: Tests run explicitly against each target framework using `--framework` parameter
 3. **Parallel Execution**: Leverages Azure Pipelines jobs to test frameworks simultaneously
 4. **Separate Results**: Framework-specific test results aid in debugging framework issues

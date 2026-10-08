@@ -1,6 +1,6 @@
 # Repo: FirelyTeam/Cql-sdk
 # File: build/build-test-sign.yml
-# Optimized multi-framework build, test, and sign template for .NET 8 and .NET 10
+# Optimized build, test, and sign template for .NET 10
 #
 # This template implements an optimized pipeline with separate stages:
 # 1. Build Stage - Builds, signs (if enabled), packages, and publishes artifacts
@@ -96,10 +96,11 @@ stages:
 
           # Install .NET SDKs
           - task: UseDotNet@2
-            displayName: "Install .NET 8 SDK"
+            displayName: "Install .NET 11 SDK (probe)"
             inputs:
               packageType: "sdk"
-              version: "8.0.x"
+              version: "11.0.x"
+              includePreviewVersions: true
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
           - task: UseDotNet@2
@@ -133,7 +134,7 @@ stages:
             displayName: "Restore solution"
             inputs:
               command: "restore"
-              projects: "Cql-Sdk-All.sln"
+              projects: "Cql-Sdk-All.slnx"
               feedsToUse: "config"
               nugetConfigPath: "NuGet.config"
 
@@ -141,7 +142,7 @@ stages:
             displayName: "Build solution"
             inputs:
               command: "build"
-              projects: "Cql-Sdk-All.sln"
+              projects: "Cql-Sdk-All.slnx"
               ${{ if eq(parameters.useVersionSuffix, true) }}:
                 arguments: "--configuration ${{ parameters.buildConfiguration }} --no-restore /p:VersionSuffix=$(Build.BuildNumber)"
               ${{ else }}:
@@ -177,7 +178,7 @@ stages:
           - pwsh: |
               $stagingRoot = "$(Build.ArtifactStagingDirectory)/TestPublishOutput"
 
-              # Publish multi-target test projects for net8.0
+              # Publish multi-target test projects for net10.0
               $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               foreach ($proj in $projects) {
                 $proj = $proj.Trim()
@@ -186,22 +187,22 @@ stages:
                   Write-Error "Benchmark project '$proj' is not allowed in multiTargetTestProjects."
                   exit 1
                 }
-                Write-Host "##[section]Publishing $proj for net8.0"
-                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net8.0 --property:PublishDir=$stagingRoot/net8.0
-                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net8.0"; exit 1 }
-              }
-
-              # Publish multi-target test projects for net10.0
-              foreach ($proj in $projects) {
-                $proj = $proj.Trim()
-                if (-not $proj) { continue }
                 Write-Host "##[section]Publishing $proj for net10.0"
                 dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/net10.0
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
               }
 
+              # Publish multi-target test projects for net11.0 (probe)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net11.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net11.0 --property:PublishDir=$stagingRoot/net11.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net11.0"; exit 1 }
+              }
+
               # Summary
-              foreach ($subdir in @('net8.0', 'net10.0')) {
+              foreach ($subdir in @('net10.0', 'net11.0')) {
                 $dir = Join-Path $stagingRoot $subdir
                 if (Test-Path $dir) {
                   $count = (Get-ChildItem -Path $dir -File | Measure-Object).Count
@@ -261,42 +262,6 @@ stages:
     displayName: "Test"
     dependsOn: Build
     jobs:
-      - job: TestNet8
-        displayName: "Test on .NET 8"
-        pool:
-          vmImage: "windows-latest"
-        steps:
-          # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
-          - checkout: self
-
-          - task: UseDotNet@2
-            displayName: "Install .NET 8 SDK"
-            inputs:
-              packageType: "sdk"
-              version: "8.0.x"
-              installationPath: $(Agent.ToolsDirectory)/dotnet
-
-          - task: DownloadPipelineArtifact@2
-            displayName: "Download Test Publish Output"
-            inputs:
-              buildType: "current"
-              artifactName: "TestPublishOutput"
-              targetPath: "$(Build.SourcesDirectory)/TestPublishOutput"
-
-          - task: DotNetCoreCLI@2
-            displayName: "Run tests on .NET 8"
-            inputs:
-              command: test
-              projects: "$(Build.SourcesDirectory)/TestPublishOutput/net8.0/*Tests.dll"
-              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
-              testRunTitle: "Tests on .NET 8"
-
-          - task: PublishCodeCoverageResults@2
-            displayName: "Publish .NET 8 code coverage"
-            condition: succeededOrFailed()
-            inputs:
-              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
-
       - job: TestNet10
         displayName: "Test on .NET 10"
         pool:
@@ -329,6 +294,43 @@ stages:
 
           - task: PublishCodeCoverageResults@2
             displayName: "Publish .NET 10 code coverage"
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
+      - job: TestNet11
+        displayName: "Test on .NET 11 (probe)"
+        pool:
+          vmImage: "windows-latest"
+        steps:
+          # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
+          - checkout: self
+
+          - task: UseDotNet@2
+            displayName: "Install .NET 11 SDK (probe)"
+            inputs:
+              packageType: "sdk"
+              version: "11.0.x"
+              includePreviewVersions: true
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download Test Publish Output"
+            inputs:
+              buildType: "current"
+              artifactName: "TestPublishOutput"
+              targetPath: "$(Build.SourcesDirectory)/TestPublishOutput"
+
+          - task: DotNetCoreCLI@2
+            displayName: "Run tests on .NET 11"
+            inputs:
+              command: test
+              projects: "$(Build.SourcesDirectory)/TestPublishOutput/net11.0/*Tests.dll"
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              testRunTitle: "Tests on .NET 11"
+
+          - task: PublishCodeCoverageResults@2
+            displayName: "Publish .NET 11 code coverage"
             condition: succeededOrFailed()
             inputs:
               summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
@@ -437,34 +439,33 @@ stages:
       - job: CompareTestResults
         displayName: "Compare Test Results Across Frameworks"
         dependsOn:
-          - TestNet8
           - TestNet10
+          - TestNet11
           - TestIntegrationNet10
           - TestHedisNet10
         condition: succeededOrFailed()
         pool:
           vmImage: "windows-latest"
         variables:
-          net8Status: $[ dependencies.TestNet8.result ]
           net10Status: $[ dependencies.TestNet10.result ]
+          net11Status: $[ dependencies.TestNet11.result ]
           integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
           hedisStatus: $[ dependencies.TestHedisNet10.result ]
         steps:
           - powershell: |
-              Write-Host "##[section]Multi-Framework Test Comparison Report"
+              Write-Host "##[section]Test Comparison Report"
               Write-Host ""
-              Write-Host "This pipeline built, tested, and signed the SDK against both .NET 8 (LTS) and .NET 10 (LTS)"
-              Write-Host "to verify identical behavior across frameworks."
+              Write-Host "This pipeline built, tested, and signed the SDK against .NET 10 (LTS)."
               Write-Host ""
 
-              $net8Status = "$(net8Status)"
               $net10Status = "$(net10Status)"
+              $net11Status = "$(net11Status)"
               $integrationStatus = "$(integrationStatus)"
               $hedisStatus = "$(hedisStatus)"
 
               Write-Host "Test Results:"
-              Write-Host "  .NET 8:  $net8Status"
               Write-Host "  .NET 10: $net10Status"
+              Write-Host "  .NET 11: $net11Status"
               Write-Host ""
               Write-Host "Integration Test Results:"
               Write-Host "  .NET 10: $integrationStatus"
@@ -473,12 +474,12 @@ stages:
               Write-Host "  .NET 10: $hedisStatus"
               Write-Host ""
 
-              if ($net8Status -eq "Succeeded" -and $net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
-                  Write-Host "##[section]✅ SUCCESS: All tests pass on both .NET 8 and .NET 10, including integration and HEDIS 2025 tests"
-                  Write-Host "The SDK exhibits identical behavior across both LTS frameworks."
-              } elseif ($net8Status -ne $net10Status) {
-                  Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 8 and .NET 10!"
-                  Write-Host "This may indicate a framework-specific issue that needs investigation."
+              if ($net10Status -eq "Succeeded" -and $net11Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on .NET 10 and .NET 11, including integration and HEDIS 2025 tests"
+              } elseif ($net10Status -ne $net11Status) {
+                  Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 10 and .NET 11!"
+              } elseif ($net10Status -ne "Succeeded") {
+                  Write-Host "##[warning]⚠️ WARNING: Tests failed on .NET 10"
               } elseif ($integrationStatus -ne "Succeeded") {
                   Write-Host "##[warning]⚠️ WARNING: Integration tests failed on .NET 10"
               } elseif ($hedisStatus -ne "Succeeded") {

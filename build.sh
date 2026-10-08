@@ -161,7 +161,7 @@ fi
 
 # Execute build
 SLNF="Cql-Sdk.slnf"
-SLN="Cql-Sdk-All.sln"
+SLN="Cql-Sdk-All.slnx"
 
 if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
     # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.
