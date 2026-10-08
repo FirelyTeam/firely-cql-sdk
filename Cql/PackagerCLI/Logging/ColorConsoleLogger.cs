@@ -56,12 +56,6 @@ public sealed partial class ColorConsoleLogger(
 
     private string GetFormatterMessage<TState>(LogEntry<TState> logEntry)
     {
-        // if (NoColor)
-        // {
-        //     var noColorMessage = logEntry.Formatter(logEntry.State, logEntry.Exception);
-        //     return noColorMessage;
-        // }
-
         var state = (IReadOnlyCollection<KeyValuePair<string, object?>>)logEntry.State!;
         var last = state.Last();
         Debug.Assert(last.Key == "{OriginalFormat}");
