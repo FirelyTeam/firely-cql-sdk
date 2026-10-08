@@ -78,14 +78,10 @@ internal static class Extensions
 
     public static TCommand SetHandler<TCommand>(
         this TCommand command,
-        Type type,
-        string methodName)
+        Delegate handler)
         where TCommand : Command
     {
-        var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-        methodInfo = methodInfo ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
-        var commandHandler = CommandHandler.Create(methodInfo);
-        command.Handler = commandHandler;
+        command.Handler = CommandHandler.Create(handler);
         return command;
     }
 }
