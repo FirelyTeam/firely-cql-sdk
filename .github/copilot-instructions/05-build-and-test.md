@@ -14,7 +14,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.1. General Build Requirements
 
-5.1.1 **Always use `Cql-Sdk.slnf` to build the solution** - This is because `Cql-Sdk-All.sln` contains submodules to which you do not have access to
+5.1.1 **Always use `Cql-Sdk.slnf` to build the solution** - This is because `Cql-Sdk-All.slnx` contains submodules to which you do not have access to
 
 5.1.2 Always run `dotnet build` to validate changes
 

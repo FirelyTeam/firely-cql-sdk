@@ -132,7 +132,7 @@ Unit tests validating generated ELM types:
 
 ### 5. Solution Integration
 
-- Added to `Cql-Sdk-All.sln` under "tools" solution folder
+- Added to `Cql-Sdk-All.slnx` under "tools" solution folder
 - **Not** included in `Cql-Sdk.slnf` (intentionally - it's a dev tool)
 - Launch profile "Generate Elm.g.cs" for development testing
 
