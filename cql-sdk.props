@@ -4,7 +4,7 @@
 
 	<PropertyGroup>
 		<!-- ## Compiler settings -->
-		<TargetFrameworks>net10.0</TargetFrameworks>
+		<TargetFrameworks>net10.0;net11.0</TargetFrameworks>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 		<NoWarn>$(NoWarn);RS0026</NoWarn>

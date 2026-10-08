@@ -96,6 +96,14 @@ stages:
 
           # Install .NET SDKs
           - task: UseDotNet@2
+            displayName: "Install .NET 11 SDK (probe)"
+            inputs:
+              packageType: "sdk"
+              version: "11.0.x"
+              includePreviewVersions: true
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          - task: UseDotNet@2
             displayName: "Install .NET 10 SDK"
             inputs:
               packageType: "sdk"
