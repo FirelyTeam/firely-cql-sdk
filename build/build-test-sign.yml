@@ -192,8 +192,17 @@ stages:
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
               }
 
+              # Publish multi-target test projects for net11.0 (probe)
+              foreach ($proj in $projects) {
+                $proj = $proj.Trim()
+                if (-not $proj) { continue }
+                Write-Host "##[section]Publishing $proj for net11.0"
+                dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net11.0 --property:PublishDir=$stagingRoot/net11.0
+                if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net11.0"; exit 1 }
+              }
+
               # Summary
-              foreach ($subdir in @('net10.0')) {
+              foreach ($subdir in @('net10.0', 'net11.0')) {
                 $dir = Join-Path $stagingRoot $subdir
                 if (Test-Path $dir) {
                   $count = (Get-ChildItem -Path $dir -File | Measure-Object).Count
@@ -285,6 +294,43 @@ stages:
 
           - task: PublishCodeCoverageResults@2
             displayName: "Publish .NET 10 code coverage"
+            condition: succeededOrFailed()
+            inputs:
+              summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
+
+      - job: TestNet11
+        displayName: "Test on .NET 11 (probe)"
+        pool:
+          vmImage: "windows-latest"
+        steps:
+          # Checkout for source tree access (LibrarySetsDirs uses FindParentDirectoryContaining)
+          - checkout: self
+
+          - task: UseDotNet@2
+            displayName: "Install .NET 11 SDK (probe)"
+            inputs:
+              packageType: "sdk"
+              version: "11.0.x"
+              includePreviewVersions: true
+              installationPath: $(Agent.ToolsDirectory)/dotnet
+
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download Test Publish Output"
+            inputs:
+              buildType: "current"
+              artifactName: "TestPublishOutput"
+              targetPath: "$(Build.SourcesDirectory)/TestPublishOutput"
+
+          - task: DotNetCoreCLI@2
+            displayName: "Run tests on .NET 11"
+            inputs:
+              command: test
+              projects: "$(Build.SourcesDirectory)/TestPublishOutput/net11.0/*Tests.dll"
+              arguments: '--logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
+              testRunTitle: "Tests on .NET 11"
+
+          - task: PublishCodeCoverageResults@2
+            displayName: "Publish .NET 11 code coverage"
             condition: succeededOrFailed()
             inputs:
               summaryFileLocation: "$(Agent.TempDirectory)/**/coverage.cobertura.xml"
@@ -394,6 +440,7 @@ stages:
         displayName: "Compare Test Results Across Frameworks"
         dependsOn:
           - TestNet10
+          - TestNet11
           - TestIntegrationNet10
           - TestHedisNet10
         condition: succeededOrFailed()
@@ -401,6 +448,7 @@ stages:
           vmImage: "windows-latest"
         variables:
           net10Status: $[ dependencies.TestNet10.result ]
+          net11Status: $[ dependencies.TestNet11.result ]
           integrationStatus: $[ dependencies.TestIntegrationNet10.result ]
           hedisStatus: $[ dependencies.TestHedisNet10.result ]
         steps:
@@ -411,11 +459,13 @@ stages:
               Write-Host ""
 
               $net10Status = "$(net10Status)"
+              $net11Status = "$(net11Status)"
               $integrationStatus = "$(integrationStatus)"
               $hedisStatus = "$(hedisStatus)"
 
               Write-Host "Test Results:"
               Write-Host "  .NET 10: $net10Status"
+              Write-Host "  .NET 11: $net11Status"
               Write-Host ""
               Write-Host "Integration Test Results:"
               Write-Host "  .NET 10: $integrationStatus"
@@ -424,8 +474,10 @@ stages:
               Write-Host "  .NET 10: $hedisStatus"
               Write-Host ""
 
-              if ($net10Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
-                  Write-Host "##[section]✅ SUCCESS: All tests pass on .NET 10, including integration and HEDIS 2025 tests"
+              if ($net10Status -eq "Succeeded" -and $net11Status -eq "Succeeded" -and $integrationStatus -eq "Succeeded" -and $hedisStatus -eq "Succeeded") {
+                  Write-Host "##[section]✅ SUCCESS: All tests pass on .NET 10 and .NET 11, including integration and HEDIS 2025 tests"
+              } elseif ($net10Status -ne $net11Status) {
+                  Write-Host "##[warning]⚠️ WARNING: Test results differ between .NET 10 and .NET 11!"
               } elseif ($net10Status -ne "Succeeded") {
                   Write-Host "##[warning]⚠️ WARNING: Tests failed on .NET 10"
               } elseif ($integrationStatus -ne "Succeeded") {
