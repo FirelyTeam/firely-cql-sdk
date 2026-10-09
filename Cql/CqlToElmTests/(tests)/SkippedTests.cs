@@ -32,7 +32,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "FloorIntegerLessThanMinInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
             { "FloorIntegerGreaterThanMaxInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
 
-            { "MegaMultiDistinct", "`aggregate distinct` over a multi-source query binds Distinct with the aggregate's type instead of the source tuple type, and no overload matches." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
