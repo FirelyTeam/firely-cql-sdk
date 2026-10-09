@@ -850,6 +850,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
             converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
             converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
+            converter.AddConversion<string, CqlRatio?>(s => ConvertStringToRatio(s));
             converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
             converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
             converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
@@ -881,6 +882,10 @@ namespace Hl7.Cql.Fhir
         private static CqlQuantity? ConvertStringToQuantity(string? s) =>
             s == null ? null :
             CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
+
+        private static CqlRatio? ConvertStringToRatio(string? s) =>
+            s == null ? null :
+            CqlRatio.TryParse(s, out CqlRatio? value) == true ? value : null;
 
         private static CqlDate? ConvertStringToDate(string? s) =>
             s == null ? null :
