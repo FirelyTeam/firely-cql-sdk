@@ -41,6 +41,9 @@
 		<None Include="..\CoreTests\Input\ELM\HL7\RR23.json" Link="Input\RR23.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Include="..\..\spec\cql\condensed\09-b-cqlreference.md" Link="SpecMirror\09-b-cqlreference.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>

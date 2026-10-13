@@ -97,5 +97,14 @@ namespace Hl7.Cql.CqlToElm.Test
                 messageProvider.CouldNotResolveFunction("Floor", (TypeSpecifier?)null),
                 messageProvider.ExpressionCannotBeLibraryRef("FH"));
         }
+
+        [TestMethod]
+        public void TypeFoundIsNotExpected_ProducesCorrectMessage()
+        {
+            var messageProvider = CreateCqlToolkit().GetMessageProvider();
+            var message = messageProvider.TypeFoundIsNotExpected(SystemTypes.IntegerType, SystemTypes.BooleanType);
+
+            message.Should().Be("Expected an expression of type 'Boolean', but found an expression of type 'Integer'.");
+        }
     }
 }

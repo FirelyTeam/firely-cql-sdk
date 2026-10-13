@@ -1,0 +1,646 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "type" : "CqlToElmInfo",
+         "translatorVersion" : "5.0.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "signatureLevel" : "All"
+      } ],
+      "identifier" : {
+         "id" : "FhirRatioTest",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1",
+            "annotation" : [ ]
+         }, {
+            "locator" : "10:1-10:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "12:1-12:54",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.1",
+            "annotation" : [ ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "14:1-14:15",
+            "name" : "Patient",
+            "annotation" : [ ]
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "14:1-14:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "SingletonFrom",
+               "annotation" : [ ],
+               "signature" : [ ],
+               "operand" : {
+                  "type" : "Retrieve",
+                  "locator" : "14:1-14:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "annotation" : [ ],
+                  "include" : [ ],
+                  "codeFilter" : [ ],
+                  "dateFilter" : [ ],
+                  "otherFilter" : [ ]
+               }
+            }
+         }, {
+            "locator" : "20:1-21:80",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "Observation Ratio",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "First",
+               "locator" : "21:5-21:80",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "source" : {
+                  "type" : "Query",
+                  "locator" : "21:11-21:79",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "21:11-21:25",
+                     "alias" : "O",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "Retrieve",
+                        "locator" : "21:11-21:23",
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "locator" : "21:27-21:79",
+                     "distinct" : false,
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "FunctionRef",
+                        "locator" : "21:38-21:79",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "name" : "ToRatio",
+                        "libraryName" : "FHIRHelpers",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{http://hl7.org/fhir}Ratio",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "type" : "As",
+                           "locator" : "21:58-21:78",
+                           "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                           "strict" : false,
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Property",
+                              "locator" : "21:58-21:64",
+                              "path" : "value",
+                              "scope" : "O",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ChoiceTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Quantity",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Ratio",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}SampledData",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}boolean",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}integer",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}string",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}time",
+                                    "annotation" : [ ]
+                                 } ]
+                              }
+                           },
+                           "asTypeSpecifier" : {
+                              "type" : "NamedTypeSpecifier",
+                              "locator" : "21:69-21:78",
+                              "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                              "name" : "{http://hl7.org/fhir}Ratio",
+                              "annotation" : [ ]
+                           }
+                        } ]
+                     }
+                  }
+               }
+            }
+         }, {
+            "locator" : "24:1-28:5",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "Dose Rate Ratio",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "First",
+               "locator" : "25:5-28:5",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "source" : {
+                  "type" : "Query",
+                  "locator" : "26:9-27:108",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "26:9-26:29",
+                     "alias" : "M",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "Retrieve",
+                        "locator" : "26:9-26:27",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "locator" : "27:13-27:108",
+                     "distinct" : false,
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "FunctionRef",
+                        "locator" : "27:24-27:108",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "name" : "ToRatio",
+                        "libraryName" : "FHIRHelpers",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{http://hl7.org/fhir}Ratio",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "type" : "As",
+                           "locator" : "27:44-27:107",
+                           "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                           "strict" : false,
+                           "annotation" : [ ],
+                           "signature" : [ ],
+                           "operand" : {
+                              "type" : "Property",
+                              "locator" : "27:44-27:93",
+                              "path" : "rate",
+                              "annotation" : [ ],
+                              "resultTypeSpecifier" : {
+                                 "type" : "ChoiceTypeSpecifier",
+                                 "annotation" : [ ],
+                                 "choice" : [ {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Range",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}Ratio",
+                                    "annotation" : [ ]
+                                 }, {
+                                    "type" : "NamedTypeSpecifier",
+                                    "name" : "{http://hl7.org/fhir}SimpleQuantity",
+                                    "annotation" : [ ]
+                                 } ]
+                              },
+                              "source" : {
+                                 "type" : "First",
+                                 "locator" : "27:44-27:88",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
+                                 "annotation" : [ ],
+                                 "signature" : [ {
+                                    "type" : "ListTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "elementType" : {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
+                                       "annotation" : [ ]
+                                    }
+                                 } ],
+                                 "source" : {
+                                    "type" : "Property",
+                                    "locator" : "27:50-27:87",
+                                    "path" : "doseAndRate",
+                                    "annotation" : [ ],
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "annotation" : [ ],
+                                       "elementType" : {
+                                          "type" : "NamedTypeSpecifier",
+                                          "name" : "{http://hl7.org/fhir}Dosage.DoseAndRate",
+                                          "annotation" : [ ]
+                                       }
+                                    },
+                                    "source" : {
+                                       "type" : "First",
+                                       "locator" : "27:50-27:75",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Dosage",
+                                       "annotation" : [ ],
+                                       "signature" : [ {
+                                          "type" : "ListTypeSpecifier",
+                                          "annotation" : [ ],
+                                          "elementType" : {
+                                             "type" : "NamedTypeSpecifier",
+                                             "name" : "{http://hl7.org/fhir}Dosage",
+                                             "annotation" : [ ]
+                                          }
+                                       } ],
+                                       "source" : {
+                                          "type" : "Property",
+                                          "locator" : "27:56-27:74",
+                                          "path" : "dosageInstruction",
+                                          "scope" : "M",
+                                          "annotation" : [ ],
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "annotation" : [ ],
+                                             "elementType" : {
+                                                "type" : "NamedTypeSpecifier",
+                                                "name" : "{http://hl7.org/fhir}Dosage",
+                                                "annotation" : [ ]
+                                             }
+                                          }
+                                       }
+                                    }
+                                 }
+                              }
+                           },
+                           "asTypeSpecifier" : {
+                              "type" : "NamedTypeSpecifier",
+                              "locator" : "27:98-27:107",
+                              "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                              "name" : "{http://hl7.org/fhir}Ratio",
+                              "annotation" : [ ]
+                           }
+                        } ]
+                     }
+                  }
+               }
+            }
+         }, {
+            "type" : "FunctionDef",
+            "locator" : "32:1-33:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "Ratio Of",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "OperandRef",
+               "locator" : "33:5-33:9",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+               "name" : "ratio",
+               "annotation" : [ ]
+            },
+            "operand" : [ {
+               "name" : "ratio",
+               "annotation" : [ ],
+               "operandTypeSpecifier" : {
+                  "type" : "NamedTypeSpecifier",
+                  "locator" : "32:34-32:45",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+                  "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                  "annotation" : [ ]
+               }
+            } ]
+         }, {
+            "locator" : "35:1-36:71",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+            "name" : "Observation Ratio Implicitly Converted",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ ],
+            "expression" : {
+               "type" : "First",
+               "locator" : "36:5-36:71",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+               "annotation" : [ ],
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "annotation" : [ ],
+                  "elementType" : {
+                     "type" : "NamedTypeSpecifier",
+                     "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                     "annotation" : [ ]
+                  }
+               } ],
+               "source" : {
+                  "type" : "Query",
+                  "locator" : "36:11-36:70",
+                  "annotation" : [ ],
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "annotation" : [ ],
+                     "elementType" : {
+                        "type" : "NamedTypeSpecifier",
+                        "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "annotation" : [ ]
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "36:11-36:25",
+                     "alias" : "O",
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "Retrieve",
+                        "locator" : "36:11-36:23",
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+                        "annotation" : [ ],
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "annotation" : [ ],
+                           "elementType" : {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "annotation" : [ ]
+                           }
+                        },
+                        "include" : [ ],
+                        "codeFilter" : [ ],
+                        "dateFilter" : [ ],
+                        "otherFilter" : [ ]
+                     }
+                  } ],
+                  "let" : [ ],
+                  "relationship" : [ ],
+                  "return" : {
+                     "locator" : "36:27-36:70",
+                     "distinct" : false,
+                     "annotation" : [ ],
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "annotation" : [ ],
+                        "elementType" : {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                           "annotation" : [ ]
+                        }
+                     },
+                     "expression" : {
+                        "type" : "FunctionRef",
+                        "locator" : "36:38-36:70",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Ratio",
+                        "name" : "Ratio Of",
+                        "annotation" : [ ],
+                        "signature" : [ {
+                           "type" : "NamedTypeSpecifier",
+                           "name" : "{urn:hl7-org:elm-types:r1}Ratio",
+                           "annotation" : [ ]
+                        } ],
+                        "operand" : [ {
+                           "type" : "FunctionRef",
+                           "name" : "ToRatio",
+                           "libraryName" : "FHIRHelpers",
+                           "annotation" : [ ],
+                           "signature" : [ {
+                              "type" : "NamedTypeSpecifier",
+                              "name" : "{http://hl7.org/fhir}Ratio",
+                              "annotation" : [ ]
+                           } ],
+                           "operand" : [ {
+                              "type" : "As",
+                              "locator" : "36:49-36:69",
+                              "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                              "strict" : false,
+                              "annotation" : [ ],
+                              "signature" : [ ],
+                              "operand" : {
+                                 "type" : "Property",
+                                 "locator" : "36:49-36:55",
+                                 "path" : "value",
+                                 "scope" : "O",
+                                 "annotation" : [ ],
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "annotation" : [ ],
+                                    "choice" : [ {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Quantity",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Range",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}Ratio",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}SampledData",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}boolean",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}integer",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "annotation" : [ ]
+                                    }, {
+                                       "type" : "NamedTypeSpecifier",
+                                       "name" : "{http://hl7.org/fhir}time",
+                                       "annotation" : [ ]
+                                    } ]
+                                 }
+                              },
+                              "asTypeSpecifier" : {
+                                 "type" : "NamedTypeSpecifier",
+                                 "locator" : "36:60-36:69",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Ratio",
+                                 "name" : "{http://hl7.org/fhir}Ratio",
+                                 "annotation" : [ ]
+                              }
+                           } ]
+                        } ]
+                     }
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+

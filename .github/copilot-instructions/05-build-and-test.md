@@ -60,10 +60,10 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.3. Code Generation Version Management
 
-5.3.1 **What counts as a code generation change**: Any change that alters the C# emitted for CQL libraries requires a `GeneratorToolVersion` update, regardless of which project the change lives in. This includes:
+5.3.1 **What counts as a code generation change**: `GeneratorToolVersion` marks the ELM-to-C# pipeline. The test is whether identical ELM now produces different C#. Changes in `Cql.CqlToElm` that alter the ELM for a given CQL do not bump this version, even if the resulting C# changes; this boundary was established in [#1595](https://github.com/FirelyTeam/firely-cql-sdk/pull/1595). Record translator changes that affect CQL evaluation results in a `docs/releases/vnext/` fragment under `## Potentially Breaking` or `## Fixes`; the golden generation tests over checked-in ELM verify that the ELM-to-C# pipeline remains stable. Pipeline changes that require a version update include:
 5.3.1.1 Changes in `CodeGeneration.NET` (the C# writer itself)
 
-5.3.1.2 Changes in `Cql.Compiler` that affect the expression trees being emitted — for example, `CqlOperatorsBinder` selecting a different `ICqlOperators` method or overload (e.g., binding `Coalesce<T>` instead of `CoalesceValueTypes<T>`), changed generic type arguments, or changed conversions
+5.3.1.2 Changes in `Cql.Compiler` that affect type resolution or the expression trees emitted for the same ELM — for example, `CqlOperatorsBinder` selecting a different `ICqlOperators` method or overload (e.g., binding `Coalesce<T>` instead of `CoalesceValueTypes<T>`), changed generic type arguments, or changed conversions
 
 5.3.1.3 Changes to `ICqlOperators` signatures or constraints that flow into generated call sites
 

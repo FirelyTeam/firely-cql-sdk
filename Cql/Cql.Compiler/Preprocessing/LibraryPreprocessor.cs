@@ -18,7 +18,6 @@ internal class LibraryPreprocessor(
     LibrarySet librarySet,
     ILoggerFactory loggerFactory)
 {
-    private readonly AmbiguousOverloadCorrector _ambiguousOverloadCorrector = new(loggerFactory.CreateLogger<AmbiguousOverloadCorrector>());
     private readonly ExpressionRefCorrector _expressionRefCorrector = new(loggerFactory.CreateLogger<ExpressionRefCorrector>(), librarySet);
     private readonly MissingResultTypeSpecifierCorrector _missingResultTypeSpecifierCorrector = new(loggerFactory.CreateLogger<MissingResultTypeSpecifierCorrector>());
     private readonly PowerResultTypeCorrector _powerResultTypeCorrector = new(loggerFactory.CreateLogger<PowerResultTypeCorrector>());
@@ -26,7 +25,6 @@ internal class LibraryPreprocessor(
 
     public void PreprocessLibrary(Library library)
     {
-        _ambiguousOverloadCorrector.Fix(library);
         _expressionRefCorrector.Fix(library);
         _missingResultTypeSpecifierCorrector.Fix(library);
         _powerResultTypeCorrector.Fix(library);

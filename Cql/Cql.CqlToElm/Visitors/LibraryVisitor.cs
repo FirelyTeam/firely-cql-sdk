@@ -237,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     if (result.Success)
                         return result.Result;
                     else
-                        return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");
+                        return defaultExpr.AddError(MessagingProvider.TypeFoundIsNotExpected(defaultExpr.resultTypeSpecifier, type));
                 }
             }
 
@@ -323,7 +323,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return ed;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic, edCtx.Locator());
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
@@ -342,7 +342,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return fd;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic, fdCtx.Locator());
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)
                     {
@@ -435,7 +435,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             private void add(IDefinitionElement s)
             {
                 if (!LibraryBuilder.CurrentScope.TryAdd(s))
-                    LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic);
+                    LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic, (s as Element)?.locator);
             }
 
             private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)

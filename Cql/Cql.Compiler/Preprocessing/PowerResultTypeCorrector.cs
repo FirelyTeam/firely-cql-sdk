@@ -11,8 +11,9 @@ using Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler.Preprocessing;
 
 /// <summary>
-/// Corrects legacy Java-generated ELM where Power is declared as Integer/Long.
-/// The CQL spec defines Power as returning Decimal.
+/// Aligns the declared result type of <see cref="Power"/> with the SDK runtime, whose Integer and Long
+/// overloads of Power return Decimal, where the ELM (following the CQL specification) declares
+/// Integer or Long.
 /// </summary>
 internal class PowerResultTypeCorrector(ILogger<PowerResultTypeCorrector> logger)
 {
