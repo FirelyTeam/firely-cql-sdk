@@ -151,7 +151,7 @@ internal partial class CodeBuilderContext
                 CodeExpression? expression = element switch
                 {
                     //@formatter:off
-                    Ratio e            => throw new NotSupportedException($"Operator {element.GetType().Name} is not supported yet."),
+                    Ratio e            => Ratio(e),
                     Flatten e          => BindCqlOperator(nameof(ICqlOperators.Flatten), e.operand),
                     Negate e           => Negate(e),
                     As e               => As(e),
@@ -448,6 +448,17 @@ internal partial class CodeBuilderContext
             new CodeConstant(null, typeof(object)),
             TranslateArg((object?)e.lowClosedExpression ?? e.lowClosed),
             TranslateArg((object?)e.highClosedExpression ?? e.highClosed));
+
+    /// <summary>
+    /// Builds the ratio denoted by a ratio selector. Its numerator and denominator are quantity
+    /// selectors, which the CQL specification requires to be present (Appendix B, Types, "Ratio":
+    /// "The numerator and denominator elements must be present (i.e. can not be null)").
+    /// </summary>
+    private CodeExpression Ratio(Ratio e) =>
+        new CodeNew(
+            ReflectionUtility.ConstructorOf(() => new CqlRatio(null, null)),
+            TranslateArg(e.numerator),
+            TranslateArg(e.denominator));
 
     /// <summary>
     /// Returns whether the type is one of the point types supported by the

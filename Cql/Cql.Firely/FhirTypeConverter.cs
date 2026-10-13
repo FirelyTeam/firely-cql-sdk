@@ -215,6 +215,12 @@ namespace Hl7.Cql.Fhir
             // Like the Quantity->int? conversion above, a fractional value is truncated towards zero
             // (the C# decimal->long conversion), and a value outside the range of long throws an OverflowException.
             add((M.Quantity f) => (long?)f.Value);
+            // CQL 1.5.3, Appendix B - CQL Reference, Types, Ratio: "The numerator and denominator elements
+            // must be present (i.e. can not be null)." A FHIR Ratio lacking either part, or holding a part
+            // without a value (which FHIRHelpers.ToQuantity maps to null), converts to null.
+            add((M.Ratio f) => f is { Numerator.Value: not null, Denominator.Value: not null }
+                ? new CqlRatio(converter.Convert<CqlQuantity>(f.Numerator), converter.Convert<CqlQuantity>(f.Denominator))
+                : null);
             add((M.Period f) => new CqlInterval<CqlDateTime>(converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Period f) => new CqlInterval<CqlDate>(converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
