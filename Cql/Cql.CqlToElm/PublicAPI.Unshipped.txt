@@ -1,1 +1,5 @@
 ﻿#nullable enable
+Hl7.Cql.CqlToElm.Toolkit.CqlModel.QICore411 = 4 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
+Hl7.Cql.CqlToElm.Toolkit.CqlModel.QICore600 = 6 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
+Hl7.Cql.CqlToElm.Toolkit.CqlModel.USCore311 = 3 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
+Hl7.Cql.CqlToElm.Toolkit.CqlModel.USCore610 = 5 -> Hl7.Cql.CqlToElm.Toolkit.CqlModel
