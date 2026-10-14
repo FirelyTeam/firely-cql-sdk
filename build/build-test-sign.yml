@@ -19,7 +19,7 @@ parameters:
   - name: dotNetCoreVersion
     type: string
     default: "10.0.x"
-  - name: multiTargetTestProjects
+  - name: unitTestProjects
     type: string
     default: ""
   - name: net10IntegrationTestProjects
@@ -95,6 +95,18 @@ stages:
             submodules: ${{ parameters.checkoutSubmodules }}
 
           # Install .NET SDKs
+          # The agents can install and build against .NET 11, but Fhir.Metrics gives different UCUM
+          # arithmetic results there than on .NET 10, so net11.0 is not a supported target. Adding it
+          # back needs https://github.com/FirelyTeam/firely-cql-sdk/issues/1812 resolved, net11.0 added
+          # to cql-base.props and the test projects, this task uncommented, the net11.0 publish step
+          # below uncommented, and a TestNet11 job added alongside TestNet10.
+          # - task: UseDotNet@2
+          #   displayName: "Install .NET 11 SDK"
+          #   inputs:
+          #     packageType: "sdk"
+          #     version: "11.0.x"
+          #     installationPath: $(Agent.ToolsDirectory)/dotnet
+
           - task: UseDotNet@2
             displayName: "Install .NET 10 SDK"
             inputs:
@@ -170,19 +182,27 @@ stages:
           - pwsh: |
               $stagingRoot = "$(Build.ArtifactStagingDirectory)/TestPublishOutput"
 
-              # Publish multi-target test projects for net10.0
-              $projects = "${{ parameters.multiTargetTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
+              # Publish the unit test projects for net10.0
+              $projects = "${{ parameters.unitTestProjects }}".Trim().Split([char[]]@("`r", "`n"), [System.StringSplitOptions]::RemoveEmptyEntries)
               foreach ($proj in $projects) {
                 $proj = $proj.Trim()
                 if (-not $proj) { continue }
                 if ($proj -match 'Benchmark') {
-                  Write-Error "Benchmark project '$proj' is not allowed in multiTargetTestProjects."
+                  Write-Error "Benchmark project '$proj' is not allowed in unitTestProjects."
                   exit 1
                 }
                 Write-Host "##[section]Publishing $proj for net10.0"
                 dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net10.0 --property:PublishDir=$stagingRoot/net10.0
                 if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net10.0"; exit 1 }
               }
+
+              # Publish for net11.0 once net11.0 is a supported target again (see the note above):
+              # foreach ($proj in $projects) {
+              #   $proj = $proj.Trim()
+              #   if (-not $proj) { continue }
+              #   dotnet publish $proj --configuration ${{ parameters.buildConfiguration }} --no-restore --no-build --framework net11.0 --property:PublishDir=$stagingRoot/net11.0
+              #   if ($LASTEXITCODE -ne 0) { Write-Error "Failed to publish $proj for net11.0"; exit 1 }
+              # }
 
               # Summary
               foreach ($subdir in @('net10.0')) {
