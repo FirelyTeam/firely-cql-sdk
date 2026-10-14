@@ -5,8 +5,8 @@
 #
 
 param(
-    [Parameter(HelpMessage="Target framework: net8.0 or net10.0")]
-    [ValidateSet("net8.0", "net10.0")]
+    [Parameter(HelpMessage="Target framework: net10.0")]
+    [ValidateSet("net10.0")]
     [string]$Framework,
     
     [Parameter(HelpMessage="Enable CQL tooling which converts CQL to ELM")]
@@ -27,36 +27,24 @@ Write-Host ""
 
 # Interactive prompts if parameters not provided
 if (-not $Framework -or -not $PSBoundParameters.ContainsKey('Configuration')) {
-    Write-Host "Select target framework and configuration:" -ForegroundColor Yellow
-    Write-Host "  1. .NET 8 / Debug"
-    Write-Host "  2. .NET 8 / Release"
-    Write-Host "  3. .NET 10 / Debug"
-    Write-Host "  4. .NET 10 / Release"
+    $Framework = "net10.0"
+    Write-Host "Select configuration:" -ForegroundColor Yellow
+    Write-Host "  1. Debug"
+    Write-Host "  2. Release"
     Write-Host ""
     Write-Host "  Press Ctrl+C to exit" -ForegroundColor DarkGray
     Write-Host ""
-    $choice = Read-Host "Enter choice (1-4)"
+    $choice = Read-Host "Enter choice (1-2)"
 
     switch ($choice) {
         "1" {
-            $Framework = "net8.0"
             $Configuration = "Debug"
         }
         "2" {
-            $Framework = "net8.0"
-            $Configuration = "Release"
-        }
-        "3" {
-            $Framework = "net10.0"
-            $Configuration = "Debug"
-        }
-        "4" {
-            $Framework = "net10.0"
             $Configuration = "Release"
         }
         default {
-            Write-Host "Invalid choice. Defaulting to .NET 8 / Debug" -ForegroundColor Red
-            $Framework = "net8.0"
+            Write-Host "Invalid choice. Defaulting to Debug" -ForegroundColor Red
             $Configuration = "Debug"
         }
     }

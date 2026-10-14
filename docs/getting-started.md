@@ -176,5 +176,5 @@ See the **[Demo Projects](demo-projects.md)** guide for the project structure, p
 * [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
 * [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
 * [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
-* [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
+* [Technical README](technical-readme.md) — target framework, code generation versioning, and CI/CD details (maintainers)
 * [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough

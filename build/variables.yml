@@ -13,8 +13,8 @@ variables:
   testConsoleLoggerVerbosity: 'normal'
 
   # Test Project Configuration
-  # Multi-target tests (run on both .NET 8 and .NET 10 in parallel)
-  multiTargetTestProjects: |
+  # Unit tests (published as flat DLLs and run on .NET 10)
+  unitTestProjects: |
     Cql/CoreTests/CoreTests.csproj
     Cql/CqlToElmTests/CqlToElmTests.csproj
 

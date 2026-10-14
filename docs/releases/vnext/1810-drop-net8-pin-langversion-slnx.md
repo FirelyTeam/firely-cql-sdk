@@ -11,6 +11,12 @@
   they point at, and continue to work as before. Anything referencing the solution by filename — scripts,
   pipelines, IDE configuration — needs to use the new name. (#1810)
 
+- **Build/tooling** — the `test-multiframework.ps1` and `test-multiframework.sh` scripts are removed.
+  They existed only to run the test suite against two target frameworks and compare the results, which
+  no longer applies. Run `dotnet test` on the test projects directly. `build.ps1` and `build.sh` no
+  longer accept `--framework net8.0`, and their interactive prompt now asks only for the build
+  configuration. (#1810)
+
 ## Fixes
 
 - **Build/tooling** — `LangVersion` is pinned to a specific C# version instead of `latest`. `latest`
