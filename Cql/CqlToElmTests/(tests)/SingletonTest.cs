@@ -7,7 +7,9 @@
  */
 
 using Hl7.Cql.Elm;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -137,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 var ctx = FhirCqlContext.ForBundle();
                 // The invoker does not wrap exceptions, so the runtime error surfaces directly.
-                Assert.ThrowsException<InvalidOperationException>(() => Run(singletonFrom, library, ctx));
+                Assert.ThrowsException<CqlException<CqlSingletonFromMultipleElementsError>>(() => Run(singletonFrom, library, ctx));
             }
         }
 
