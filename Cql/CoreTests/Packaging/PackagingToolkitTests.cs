@@ -11,6 +11,7 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Fhir.Model;
@@ -62,6 +63,37 @@ public class PackagingToolkitTests
     }
 
     [TestMethod]
+    public void PackageToFhirResources_WithAMissingIncludeInADependencyAvailableOnlyAsElm_SkipsTheIncludingLibraryWithOneWarning()
+    {
+        // Arrange - the ELM-only TestRetrieveInclude includes a library nobody supplies.
+        var include = ReadElm("TestRetrieveInclude.json");
+        include.includes = [new IncludeDef { localIdentifier = "Missing", path = "Missing", version = "1.0.0" }];
+        var elmToolkit = new ElmToolkit()
+            .AddElmLibraries([
+                ReadElm("TestRetrieve.json"),
+                include,
+                ReadElm("FHIRHelpers-4.0.1.json")]);
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries([CqlLibraryString.Parse("library TestRetrieve version '1.0.1'")]);
+        var warnings = new List<string>();
+        var loggerFactory = new CallbackLoggerFactory((logLevel, message) =>
+        {
+            if (logLevel == LogLevel.Warning)
+                warnings.Add(message);
+        });
+
+        // Act
+        var packagingToolkit = new PackagingToolkit(loggerFactory)
+            .AddPackagingInputs(cqlToolkit, elmToolkit)
+            .ConvertToFhirResources();
+
+        // Assert
+        CollectPackagedLibraries(packagingToolkit).Should().BeEmpty();
+        warnings.Should().ContainSingle(warning => warning.Contains("TestRetrieve-1.0.1"));
+        warnings.Should().NotContain(warning => warning.Contains("TestRetrieveInclude"));
+    }
+
+    [TestMethod]
     public void AddReferenceLibraries_WithTheIdentifierOfAPackagingInput_IgnoresTheReferenceLibrary()
     {
         // Arrange
@@ -99,4 +131,31 @@ public class PackagingToolkitTests
 
     private static Library ReadElm(string fileName) =>
         Library.ParseFromJson(File.ReadAllText(Path.Combine("Input", "ELM", "HL7", fileName)));
+
+    /// <summary>
+    /// An <see cref="ILoggerFactory"/> that reports every message logged with its level.
+    /// </summary>
+    private sealed class CallbackLoggerFactory(Action<LogLevel, string> onMessage) : ILoggerFactory
+    {
+        public ILogger CreateLogger(string categoryName) => new CallbackLogger(onMessage);
+
+        public void AddProvider(ILoggerProvider provider) { }
+
+        public void Dispose() { }
+
+        private sealed class CallbackLogger(Action<LogLevel, string> onMessage) : ILogger
+        {
+            public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+            public bool IsEnabled(LogLevel logLevel) => true;
+
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception? exception,
+                Func<TState, Exception?, string> formatter) =>
+                onMessage(logLevel, formatter(state, exception));
+        }
+    }
 }
