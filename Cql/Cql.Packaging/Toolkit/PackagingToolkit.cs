@@ -141,8 +141,13 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     internal PackagingToolkit AddReferenceLibraries(IEnumerable<ElmLibrary> elmLibraries)
     {
         var builder = _referenceLibrariesById.ToBuilder();
+        var logger = _services.Logger;
         foreach (var elmLibrary in elmLibraries)
-            builder.TryAdd(CqlVersionedLibraryIdentifier.Parse(elmLibrary.VersionedLibraryIdentifier), elmLibrary);
+        {
+            var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(elmLibrary.VersionedLibraryIdentifier);
+            if (builder.TryAdd(libraryIdentifier, elmLibrary))
+                logger.LogInformation("Adding ELM reference library to PackagingToolkit, which resolves includes but is not packaged: {lib}", libraryIdentifier);
+        }
 
         _referenceLibrariesById = builder.ToImmutable();
         return this;

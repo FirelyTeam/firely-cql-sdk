@@ -44,7 +44,7 @@ internal class ResourcePackager(
         // dependency graph (topological sort, root libraries) to be computed. That computation is
         // lazy and not thread-safe, so it must happen here rather than racing across the
         // Parallel.ForEach below the first time each library's dependencies are queried.
-        // The set also holds reference libraries, which resolve includes but are not packaged themselves.
+        // shouldPackage then leaves out the libraries that are in the set only to resolve includes.
         var libraries = librarySet.ToList().Where(shouldPackage ?? (_ => true)).ToList();
 
         // Package each library in parallel after materializing the dependency graph.

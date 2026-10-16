@@ -67,7 +67,7 @@ Reads pre-built ELM JSON files and converts them to one or more outputs.
 | Option | Required | Description |
 |--------|----------|-------------|
 | `--elm <dir>` | ✅ | Input directory containing `*.json` ELM files (searched recursively) |
-| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources |
+| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources. An ELM library without a matching CQL file is not packaged, but resolves the includes of the libraries that are |
 | `--cs <dir>` | | Output directory for generated `*.g.cs` C# source files |
 | `--dll <dir>` | | Output directory for compiled `*.dll` .NET assemblies |
 | `--pdb <dir>` | | Output directory for `*.pdb` portable debug symbol files (requires `--debug-symbols PortablePdb` and `--dll`) |
