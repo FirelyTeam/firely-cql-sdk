@@ -44,6 +44,24 @@ public class PackagingToolkitTests
     }
 
     [TestMethod]
+    public void PackageToFhirResources_WithRetrievesInADependencyAvailableOnlyAsElm_IncludesThemInTheDataRequirements()
+    {
+        // Arrange - TestRetrieveInclude, which retrieves Observation, is held as ELM alone as well.
+        var elmToolkit = CreateElmToolkit();
+        var cqlToolkit = new CqlToolkit()
+            .AddCqlLibraries([CqlLibraryString.Parse("library TestRetrieve version '1.0.1'")]);
+
+        // Act
+        var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit);
+
+        // Assert
+        var packagedLibraries = CollectPackagedLibraries(packagingToolkit);
+        packagedLibraries.Keys.Should().BeEquivalentTo(["TestRetrieve-1.0.1"]);
+        packagedLibraries["TestRetrieve-1.0.1"].DataRequirement.Select(dataRequirement => dataRequirement.Type).Should().BeEquivalentTo(
+            [FHIRAllTypes.Patient, FHIRAllTypes.ServiceRequest, FHIRAllTypes.Condition, FHIRAllTypes.Observation]);
+    }
+
+    [TestMethod]
     public void AddReferenceLibraries_WithTheIdentifierOfAPackagingInput_IgnoresTheReferenceLibrary()
     {
         // Arrange
