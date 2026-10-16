@@ -37,13 +37,15 @@ internal class ResourcePackager(
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null,
         string? measureGroupCodeSystem = null,
-        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough)
+        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough,
+        Func<ElmLibrary, bool>? shouldPackage = null)
     {
         // Materialized once, single-threaded: this is also what forces ElmLibrarySet's internal
         // dependency graph (topological sort, root libraries) to be computed. That computation is
         // lazy and not thread-safe, so it must happen here rather than racing across the
         // Parallel.ForEach below the first time each library's dependencies are queried.
-        var libraries = librarySet.ToList();
+        // The set also holds reference libraries, which resolve includes but are not packaged themselves.
+        var libraries = librarySet.ToList().Where(shouldPackage ?? (_ => true)).ToList();
 
         // Package each library in parallel after materializing the dependency graph.
         var results = new (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)?[libraries.Count];

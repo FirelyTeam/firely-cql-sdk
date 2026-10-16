@@ -40,6 +40,15 @@ public static partial class PackagingToolkitExtensions
                     r => r.libraryIdentifier,
                     (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbolsBinary));
 
-        return packagingToolkit.AddPackagingInputs(inputs);
+        // An ELM library without CQL cannot be packaged, but the libraries that include it still can.
+        var cqlLibraryIdentifiers = cqlLibraries.Select(cqlLibraryString => cqlLibraryString.LibraryIdentifier).ToHashSet();
+        var referenceLibraries =
+            inputArtifacts
+                .Where(r => !cqlLibraryIdentifiers.Contains(r.libraryIdentifier))
+                .Select(r => r.elmLibrary);
+
+        return packagingToolkit
+            .AddReferenceLibraries(referenceLibraries)
+            .AddPackagingInputs(inputs);
     }
 }
