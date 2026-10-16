@@ -42,7 +42,7 @@ while [[ $# -gt 0 ]]; do
             echo "Usage: $0 [options]"
             echo ""
             echo "Options:"
-            echo "  --framework <net8.0|net10.0>    Target framework"
+            echo "  --framework <net10.0>            Target framework"
             echo "  --configuration <Debug|Release>  Build configuration (default: Debug)"
             echo "  --enable-cql-tooling              Enable CQL tooling (CQL-to-ELM)"
             echo "  --enable-elm-tooling           Enable ELM tooling (ELM-to-C# and FHIR resources)"
@@ -64,36 +64,24 @@ echo ""
 
 # Interactive prompts if parameters not provided
 if [ -z "$FRAMEWORK" ]; then
-    echo -e "${YELLOW}Select target framework and configuration:${RESET}"
-    echo "  1. .NET 8 / Debug"
-    echo "  2. .NET 8 / Release"
-    echo "  3. .NET 10 / Debug"
-    echo "  4. .NET 10 / Release"
+    FRAMEWORK="net10.0"
+    echo -e "${YELLOW}Select configuration:${RESET}"
+    echo "  1. Debug"
+    echo "  2. Release"
     echo ""
     echo -e "  \033[90mPress Ctrl+C to exit\033[0m"
     echo ""
-    read -p "Enter choice (1-4): " choice
+    read -p "Enter choice (1-2): " choice
 
     case $choice in
         1)
-            FRAMEWORK="net8.0"
             CONFIGURATION="Debug"
             ;;
         2)
-            FRAMEWORK="net8.0"
-            CONFIGURATION="Release"
-            ;;
-        3)
-            FRAMEWORK="net10.0"
-            CONFIGURATION="Debug"
-            ;;
-        4)
-            FRAMEWORK="net10.0"
             CONFIGURATION="Release"
             ;;
         *)
-            echo -e "${RED}Invalid choice. Defaulting to .NET 8 / Debug${RESET}"
-            FRAMEWORK="net8.0"
+            echo -e "${RED}Invalid choice. Defaulting to Debug${RESET}"
             CONFIGURATION="Debug"
             ;;
     esac
@@ -161,7 +149,7 @@ fi
 
 # Execute build
 SLNF="Cql-Sdk.slnf"
-SLN="Cql-Sdk-All.sln"
+SLN="Cql-Sdk-All.slnx"
 
 if [ "$ENABLE_ELM_TO_CSHARP" = "true" ]; then
     # Phase 1: build the core SDK solution (Cql-Sdk.slnf) without ElmToCSharp.

@@ -13,15 +13,6 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 ```md
 ## Firely CQL SDK <VERSION>
 
-> [!WARNING]
-> **.NET 8 support ends on 10 November 2026.** Microsoft's .NET 8 reaches
-> [End of Support](https://devblogs.microsoft.com/dotnet/dotnet-8-9-end-of-support/) on that date, and
-> CQL SDK 2.x support for .NET 8 ends with it — see
-> [discussion #1426](https://github.com/FirelyTeam/firely-cql-sdk/discussions/1426) for the full
-> announcement. This release still ships `net8.0` alongside `net10.0`; plan your move to .NET 10
-> (Microsoft's current LTS) before that date. Progress on removing the target is tracked in
-> [#1427](https://github.com/FirelyTeam/firely-cql-sdk/issues/1427).
-
 ### tl;dr
 
 > **Upgrading?** Here is the short version:
@@ -102,8 +93,7 @@ Use this template when preparing a new Firely CQL SDK release note document or G
 
 ## Guidance
 
-- **The .NET 8 end-of-support warning comes first**, between the version heading and the `tl;dr`, for as long as the SDK still ships a `net8.0` target — consumers still on `net8.0` must meet it before anything else in the document. It is a forward-looking notice about a date, **not** a change being shipped: it must never appear in the `tl;dr`'s **Breaking changes** bullet and must never influence the version level, or a documentation addition manufactures a MESO. Source of truth for the wording and dates is [discussion #1426](https://github.com/FirelyTeam/firely-cql-sdk/discussions/1426). **Delete this slot, and the warning block above, in the release that actually drops `net8.0`** ([#1427](https://github.com/FirelyTeam/firely-cql-sdk/issues/1427)) — that release replaces the warning with the accomplished fact, recorded as a breaking change in the normal way.
-- The `tl;dr` section must be the first section after the version heading and the .NET 8 warning slot above (it is the very first section once that slot is gone). Always include exactly three bullet points: breaking changes, required migrations, and a single highlights line. If there are no breaking changes, required migrations, or highlights, say "None" for that bullet rather than omitting it.
+- The `tl;dr` section must be the first section after the version heading. Always include exactly three bullet points: breaking changes, required migrations, and a single highlights line. If there are no breaking changes, required migrations, or highlights, say "None" for that bullet rather than omitting it.
 - **The release notes do not discuss the version level at all.** The level and the trigger that forced it are recorded in the version-bump PR description; [versioning.md](../versioning.md) explains what the digits mean. Repeating either in every release document is verbose and drifts.
 - The `### Generated Code Compatibility` section is required **every release, even when nothing moved**. Consumers who check in `*.g.cs`, or who ship packaged FHIR `Library` resources with embedded assemblies, need to know which generator produced their artifacts and whether those artifacts are still inside the invoker's accepted range — and they cannot reconstruct it from earlier notes, since `2.10.0` and `2.12.0` never stated it at all. State the two facts in exactly this one place; the `Common Items To Check` list points here rather than repeating them.
 - Keep the document concise, but allow more detail for breaking changes and migration steps.
