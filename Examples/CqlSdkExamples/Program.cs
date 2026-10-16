@@ -24,6 +24,7 @@ internal partial class Program
             case "222": LoadElmFromDirWithCSharpNamespaceSaveCSharpToDir(); return;
             case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); return;
             case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); return;
+            case "241": PackageWithElmOnlyDependencySaveFhirResourcesToDir(); return;
             case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); return;
             case "251": PackageInclDebugSymbolsViaCqlToolkitsSaveFhirResourcesToDir(); return;
             case "310": InvokingCqlHelloWorld(); return;

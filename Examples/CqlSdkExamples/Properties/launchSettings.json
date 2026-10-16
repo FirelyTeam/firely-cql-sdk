@@ -28,6 +28,10 @@
       "commandName": "Project",
       "commandLineArgs": "240"
     },
+    "241 Package with a dependency available only as ELM, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "241"
+    },
     "250 Package via CQL Toolkit, Save FHIR Resources to dir": {
       "commandName": "Project",
       "commandLineArgs": "250"
