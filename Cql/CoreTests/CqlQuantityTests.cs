@@ -645,6 +645,6 @@ public class CqlQuantityTests
                 Assert.AreEqual(ucum!.value!.Value, forward(10m), 0.000001m, $"{from} -> {to} disagrees with UCUM.");
                 checkedPairs++;
             }
-        Assert.IsTrue(checkedPairs > 0);
+        Assert.AreEqual(22, checkedPairs, "Conversion-table coverage changed; update this count deliberately.");
     }
 }
