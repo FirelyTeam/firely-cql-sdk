@@ -427,6 +427,15 @@ stages:
               arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }} --collect:"XPlat Code Coverage"'
               testRunTitle: "HEDIS 2025 Golden Parity Tests on .NET 10"
 
+          # The multi-target test jobs check out no submodules, so the census row over the HEDIS corpus only runs here
+          - task: DotNetCoreCLI@2
+            displayName: "Run the translator census with the HEDIS corpus on .NET 10"
+            inputs:
+              command: test
+              projects: "Cql/CqlToElmTests/CqlToElmTests.csproj"
+              arguments: '--configuration ${{ parameters.buildConfiguration }} --no-build --framework net10.0 --filter "FullyQualifiedName~TranslatorCensus" --logger:console;verbosity=${{ parameters.testConsoleLoggerVerbosity }}'
+              testRunTitle: "Translator census over HEDIS 2025 on .NET 10"
+
           - task: PublishCodeCoverageResults@2
             displayName: "Publish HEDIS 2025 test code coverage"
             condition: succeededOrFailed()
