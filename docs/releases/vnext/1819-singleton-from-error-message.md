@@ -8,9 +8,9 @@
   filter the list so that at most one element remains." The error itself is unchanged: the specification requires it
   in §9.B, section "Singleton From" ("If the list contains more than one element, a run-time error is thrown."). A
   caller that catches `InvalidOperationException` around evaluation no longer catches this error; catch `CqlException`
-  instead. The `ICqlOperators` signatures, the generated C# and `GeneratorToolVersion` do not change.
+  instead. The `ICqlOperators` signatures, the generated C# and `GeneratorToolVersion` do not change. (#1819)
 
 ## New Public API
 
 - `Hl7.Cql.Primitives.CqlSingletonFromMultipleElementsError`, the `ICqlError` thrown by `singleton from` on a list
-  with more than one element, where an `InvalidOperationException` was thrown before.
+  with more than one element, where an `InvalidOperationException` was thrown before. (#1819)
