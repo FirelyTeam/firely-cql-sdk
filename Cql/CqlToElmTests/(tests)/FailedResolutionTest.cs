@@ -8,7 +8,6 @@
 
 #nullable enable
 
-using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Test
