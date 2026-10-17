@@ -94,6 +94,16 @@ public readonly record struct CqlSingletonFromMultipleElementsError(
         $"but was given a list of {ElementCount} {RenderElementTypeName(ElementType)} elements. " +
         "Use First or Last to take one element, or filter the list so that at most one element remains.";
 
+    private static readonly Type[] ListTypeDefinitions =
+    [
+        typeof(IEnumerable<>),
+        typeof(ICollection<>),
+        typeof(IList<>),
+        typeof(IReadOnlyCollection<>),
+        typeof(IReadOnlyList<>),
+        typeof(List<>),
+    ];
+
     private static string RenderElementTypeName(Type type)
     {
         var nonNullableType = Nullable.GetUnderlyingType(type) ?? type;
@@ -115,7 +125,9 @@ public readonly record struct CqlSingletonFromMultipleElementsError(
             return $"Interval<{RenderElementTypeName(pointType)}>";
         if (nonNullableType.IsCqlValueTuple() || nonNullableType.IsTupleBaseType())
             return "Tuple";
-        if (nonNullableType.IsGenericType && nonNullableType.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+        if (nonNullableType.IsArray)
+            return $"List<{RenderElementTypeName(nonNullableType.GetElementType()!)}>";
+        if (nonNullableType.IsGenericType && ListTypeDefinitions.Contains(nonNullableType.GetGenericTypeDefinition()))
             return $"List<{RenderElementTypeName(nonNullableType.GetGenericArguments()[0])}>";
         if (nonNullableType.GetCustomAttribute<CqlPrimitiveTypeAttribute>() is { } primitive)
             return primitive.Type.ToString();
