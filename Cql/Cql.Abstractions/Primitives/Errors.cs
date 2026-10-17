@@ -73,3 +73,78 @@ public readonly record struct CqlPointFromNonUnitIntervalError(
         "The point from operator requires a unit interval, but was given " +
         $"{(LowClosed ? "[" : "(")}{Low?.ToString() ?? "null"}, {High?.ToString() ?? "null"}{(HighClosed ? "]" : ")")}.";
 }
+
+/// <summary>
+/// An <see cref="ICqlError"/> raised when the Date, DateTime or Time operator is given components that do not form a
+/// value of that type.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, sections "Date", "DateTime" and "Time" under "Types"), "CQL
+/// supports date values in the range @0001-01-01 to @9999-12-31", DateTime values "in the range
+/// @0001-01-01T00:00:00.0 to @9999-12-31T23:59:59.999" and time values "in the range @T00:00:00.0 to @T23:59:59.999";
+/// the operators of the same names (section "Date and Time Operators") add that "no component may be specified at a
+/// precision below an unspecified precision". Components outside those bounds are invalid input, which signals an
+/// error to the calling environment rather than resulting in null.
+/// </remarks>
+/// <param name="Type">The CQL type being constructed: <c>Date</c>, <c>DateTime</c> or <c>Time</c>.</param>
+/// <param name="Year">The year component, or <see langword="null"/> when not given.</param>
+/// <param name="Month">The month component, or <see langword="null"/> when not given.</param>
+/// <param name="Day">The day component, or <see langword="null"/> when not given.</param>
+/// <param name="Hour">The hour component, or <see langword="null"/> when not given.</param>
+/// <param name="Minute">The minute component, or <see langword="null"/> when not given.</param>
+/// <param name="Second">The second component, or <see langword="null"/> when not given.</param>
+/// <param name="Millisecond">The millisecond component, or <see langword="null"/> when not given.</param>
+/// <param name="TimezoneOffset">The timezone offset in hours, or <see langword="null"/> when not given.</param>
+public readonly record struct CqlInvalidDateTimeComponentsError(
+    string Type,
+    int? Year,
+    int? Month,
+    int? Day,
+    int? Hour,
+    int? Minute,
+    int? Second,
+    int? Millisecond,
+    decimal? TimezoneOffset) : ICqlError
+{
+    /// <inheritdoc/>
+    public string GetMessage()
+    {
+        var components = new (string Name, object? Value)[]
+            {
+                ("year", Year), ("month", Month), ("day", Day), ("hour", Hour), ("minute", Minute),
+                ("second", Second), ("millisecond", Millisecond), ("timezone offset", TimezoneOffset),
+            }
+            .Where(c => c.Value is not null)
+            .Select(c => string.Create(CultureInfo.InvariantCulture, $"{c.Name} {c.Value}"));
+        return $"The components {string.Join(", ", components)} do not form a valid {Type}: each component must lie "
+            + "within the range of the type, and no component may be given below one that is not.";
+    }
+}
+
+/// <summary>
+/// An <see cref="ICqlError"/> raised when an interval of Integer or Long, or a list of them, is expanded by a per whose
+/// value has a decimal portion.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (Appendix B - CQL Reference, section "Interval Operators", "Expand"), "The expand operator
+/// returns the set of intervals of size per for all the intervals in the input, or the list of points covering the
+/// range of the given interval, if invoked on a single interval", and "For numeric intervals, adding the per to the
+/// lower boundary produces a more precise value for the output intervals". A per with a decimal portion therefore
+/// produces Decimal points, which the Integer and Long overloads cannot return, so the expansion signals an error to
+/// the calling environment.
+/// </remarks>
+/// <param name="PerValue">The value of the per quantity.</param>
+/// <param name="PerUnit">The unit of the per quantity, or <see langword="null"/> when it has none.</param>
+/// <param name="PointType">The CQL point type of the expanded interval: <c>Integer</c> or <c>Long</c>.</param>
+public readonly record struct CqlExpandFractionalPerError(
+    decimal PerValue,
+    string? PerUnit,
+    string PointType) : ICqlError
+{
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        string.Create(CultureInfo.InvariantCulture,
+            $"Expanding an interval of {PointType} per {PerValue} '{PerUnit ?? "1"}' would produce Decimal points, which the {PointType} overloads of expand do not support: ")
+        + "the specification defines the result as \"the list of points covering the range of the given interval\" in steps of size per, "
+        + "and \"for numeric intervals, adding the per to the lower boundary produces a more precise value\".";
+}

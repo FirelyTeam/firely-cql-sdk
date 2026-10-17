@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 
@@ -19,46 +20,25 @@ namespace Hl7.Cql.Operators
 
         public CqlDate? Add(CqlDate? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Add(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from date addition, returned null.");
-                return null;
-            }
+            return left.Add(right) ?? Overflowed<CqlDate>(new { left, right }, "CqlOperators.DateTimeOperators.Add", "date addition");
         }
         public CqlDateTime? Add(CqlDateTime? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Add(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from datetime addition, returned null.");
-                return null;
-            }
+            return left.Add(right) ?? Overflowed<CqlDateTime>(new { left, right }, "CqlOperators.DateTimeOperators.Add", "datetime addition");
         }
 
         public CqlTime? Add(CqlTime? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Add(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Add", "Warning", "Ignored overflow errors from time addition, returned null.");
-                return null;
-            }
+            return left.Add(right) ?? Overflowed<CqlTime>(new { left, right }, "CqlOperators.DateTimeOperators.Add", "time addition");
         }
 
         #endregion
@@ -107,7 +87,14 @@ namespace Hl7.Cql.Operators
         {
             if (year == null)
                 return null;
-            else return new CqlDate(year.Value, month, day);
+            try
+            {
+                return new CqlDate(year.Value, month, day);
+            }
+            catch (Exception e) when (e is ArgumentException or OverflowException)
+            {
+                throw new CqlInvalidDateTimeComponentsError("Date", year, month, day, null, null, null, null, null).ToException(e);
+            }
         }
 
         #endregion
@@ -117,16 +104,26 @@ namespace Hl7.Cql.Operators
         {
             if (year == null)
                 return null;
-            else
+            try
             {
                 int? osHours = null, osMinutes = null;
-                if (offset.HasValue)
+                if (offset is { } hours)
                 {
-                    var ts = TimeSpan.FromHours((double)offset.Value);
-                    osHours = ts.Hours;
-                    osMinutes = ts.Minutes;
+                    // "Timezone Offset | Real | [-13.00, 14.00] | The timezone offset is represented as a real with two
+                    // digits of precision to account for timezones with partial hour differences" (CQL 1.5.3 Errata 2,
+                    // Language Semantics, section "Timing Calculations", Table 5-H). An offset outside that range, or one
+                    // that is not a whole number of minutes, has no representation as hours and minutes.
+                    if (hours is < -13m or > 14m || decimal.Truncate(hours * 60) != hours * 60)
+                        throw new CqlInvalidDateTimeComponentsError("DateTime", year, month, day, hour, minute, second, millisecond, offset).ToException();
+
+                    osHours = (int)decimal.Truncate(hours);
+                    osMinutes = (int)(hours * 60 % 60);
                 }
                 return new CqlDateTime(year.Value, month, day, hour, minute, second, millisecond, osHours, osMinutes);
+            }
+            catch (Exception e) when (e is ArgumentException or OverflowException)
+            {
+                throw new CqlInvalidDateTimeComponentsError("DateTime", year, month, day, hour, minute, second, millisecond, offset).ToException(e);
             }
         }
 
@@ -353,47 +350,26 @@ namespace Hl7.Cql.Operators
         #region  Subtract
         public CqlDate? Subtract(CqlDate? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Subtract(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from date subtraction, returned null.");
-                return null;
-            }
+            return left.Subtract(right) ?? Overflowed<CqlDate>(new { left, right }, "CqlOperators.DateTimeOperators.Subtract", "date subtraction");
         }
 
         public CqlDateTime? Subtract(CqlDateTime? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Subtract(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from datetime subtraction, returned null.");
-                return null;
-            }
+            return left.Subtract(right) ?? Overflowed<CqlDateTime>(new { left, right }, "CqlOperators.DateTimeOperators.Subtract", "datetime subtraction");
         }
 
         public CqlTime? Subtract(CqlTime? left, CqlQuantity? right)
         {
-            if (left == null || right == null)
+            // A quantity without a value or unit gives null for that reason; any other null is a result that cannot be represented.
+            if (left == null || right is not { value: not null, unit: not null })
                 return null;
-            try
-            {
-                return left.Subtract(right);
-            }
-            catch (ArgumentOutOfRangeException e)
-            {
-                Message(new { left, right, e }, "CqlOperators.DateTimeOperators.Subtract", "Warning", "Ignored overflow errors from time subtraction, returned null.");
-                return null;
-            }
+            return left.Subtract(right) ?? Overflowed<CqlTime>(new { left, right }, "CqlOperators.DateTimeOperators.Subtract", "time subtraction");
         }
 
         #endregion
@@ -404,7 +380,14 @@ namespace Hl7.Cql.Operators
         {
             if (hour == null)
                 return null;
-            else return new CqlTime(hour.Value, minute, second, millisecond, null, null);
+            try
+            {
+                return new CqlTime(hour.Value, minute, second, millisecond, null, null);
+            }
+            catch (Exception e) when (e is ArgumentException or OverflowException)
+            {
+                throw new CqlInvalidDateTimeComponentsError("Time", null, null, null, hour, minute, second, millisecond, null).ToException(e);
+            }
         }
 
         #endregion

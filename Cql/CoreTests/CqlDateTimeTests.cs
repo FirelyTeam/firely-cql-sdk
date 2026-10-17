@@ -484,4 +484,47 @@ public class CqlDateTimeTests
         Assert.IsFalse(CqlDateTime.TryParse(value, out var dateTime));
         Assert.IsNull(dateTime);
     }
+
+    /// <summary>
+    /// "Timezone Offset | Real | [-13.00, 14.00] | The timezone offset is represented as a real with two digits of
+    /// precision" (CQL 1.5.3 Errata 2, Language Semantics, section "Timing Calculations", Table 5-H).
+    /// </summary>
+    [TestMethod]
+    [DataRow("24", DisplayName = "a whole day ahead")]
+    [DataRow("-24", DisplayName = "a whole day behind")]
+    [DataRow("14.5", DisplayName = "above the maximum")]
+    [DataRow("14.01", DisplayName = "just above the maximum")]
+    [DataRow("-13.5", DisplayName = "below the minimum")]
+    [DataRow("0.001", DisplayName = "a fraction of a minute")]
+    [DataRow("5.33", DisplayName = "a whole number of hundredths that is not a whole number of minutes")]
+    public void DateTimeOperator_OffsetOutsideRangeOrNotWholeMinutes_ThrowsInvalidComponents(string offset)
+    {
+        var operators = GetNewContext().Operators;
+        var value = decimal.Parse(offset, CultureInfo.InvariantCulture);
+
+        var exception = Assert.ThrowsException<CqlException<CqlInvalidDateTimeComponentsError>>(
+            () => operators.DateTime(2020, 6, 15, 12, 0, 0, 0, value));
+        Assert.AreEqual(value, exception.Error.TimezoneOffset);
+    }
+
+    [TestMethod]
+    [DataRow("14", 14, 0, DisplayName = "the maximum")]
+    [DataRow("-13", -13, 0, DisplayName = "the minimum")]
+    [DataRow("-13.00", -13, 0, DisplayName = "the minimum with two digits")]
+    [DataRow("0", 0, 0, DisplayName = "zero")]
+    [DataRow("5.75", 5, 45, DisplayName = "three quarters of an hour")]
+    [DataRow("-9.5", -9, -30, DisplayName = "a half hour behind")]
+    [DataRow("0.05", 0, 3, DisplayName = "three minutes")]
+    public void DateTimeOperator_OffsetWithinRange_KeepsOffset(string offset, int hours, int minutes)
+    {
+        var operators = GetNewContext().Operators;
+        var value = decimal.Parse(offset, CultureInfo.InvariantCulture);
+
+        var dateTime = operators.DateTime(2020, 6, 15, 12, 0, 0, 0, value);
+
+        Assert.IsNotNull(dateTime);
+        Assert.AreEqual(hours, dateTime.Value.OffsetHour);
+        Assert.AreEqual(minutes, dateTime.Value.OffsetMinute);
+        Assert.AreEqual(value, operators.TimezoneOffsetFrom(dateTime));
+    }
 }

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Elm;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -62,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // The spec (§9.B, expand) requires { Interval[10.0, 10.0], ..., Interval[10.9, 10.9] } here, i.e. intervals of
             // Decimal, which the Integer-typed overload cannot represent. The invoker does not wrap exceptions, so the
             // runtime error surfaces directly.
-            Assert.ThrowsException<NotSupportedException>(() => Run(expand, lib));
+            Assert.ThrowsException<CqlException<CqlExpandFractionalPerError>>(() => Run(expand, lib));
         }
 
         [TestMethod]

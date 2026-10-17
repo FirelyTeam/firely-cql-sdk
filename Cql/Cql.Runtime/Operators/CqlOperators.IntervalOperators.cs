@@ -568,6 +568,11 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
+
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                 var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -632,6 +637,11 @@ namespace Hl7.Cql.Operators
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
+
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
 
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
@@ -703,6 +713,11 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
+
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                 var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -770,7 +785,14 @@ namespace Hl7.Cql.Operators
 
             while (true)
             {
-                var next = decimal.Add(listItem, perValue);
+                // A next start beyond the range of Decimal lies beyond the upper boundary as well.
+                if (OverflowGuard.Add(listItem, perValue) is not { } next)
+                    break;
+
+                // Adding a per too small for the magnitude of the start rounds it away, so the partitions never advance
+                // and, as for a per of zero, no expansion can be computed.
+                if (next <= listItem)
+                    return null;
 
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 // Truncation expands at per's scale, so the interval ends one unit of that scale below the next start.
@@ -823,17 +845,16 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Integer overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Integer").ToException();
 
-            var intQuantity = decimal.ToInt32(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (long)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
@@ -882,17 +903,16 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Long overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Long").ToException();
 
-            var intQuantity = decimal.ToInt64(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (decimal)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);

@@ -349,6 +349,67 @@ namespace CoreTests
             Assert.IsTrue(expand.SequenceEqual(expected));
         }
 
+        /// <summary>
+        /// Boundaries at which adding 0.5 rounds back to the boundary itself, so a per of 0.5 does not advance.
+        /// </summary>
+        private static readonly decimal[] BoundariesThatAbsorbHalf = [1e28m, decimal.MaxValue - 1];
+
+        /// <summary>
+        /// expand Interval[1e28, 1e28] per 0.5, and the same at decimal.MaxValue - 1
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_Interval_Decimal_PerRoundedAwayByBoundary_ReturnsNull()
+        {
+            var fcq = GetNewContext().Operators;
+            foreach (var boundary in BoundariesThatAbsorbHalf)
+            {
+                Assert.AreEqual(boundary, boundary + 0.5m, "the per must be rounded away for this test to be meaningful");
+                var interval = new CqlInterval<decimal?>(boundary, boundary, true, true);
+
+                var expand = fcq.Expand(interval, new CqlQuantity(0.5m, "1"));
+
+                Assert.IsNull(expand, $"expand of Interval[{boundary}, {boundary}] per 0.5");
+            }
+        }
+
+        /// <summary>
+        /// expand { Interval[1e28, 1e28] } per 0.5, and the same at decimal.MaxValue - 1
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_ListOfIntervals_Decimal_PerRoundedAwayByBoundary_ReturnsNull()
+        {
+            var fcq = GetNewContext().Operators;
+            foreach (var boundary in BoundariesThatAbsorbHalf)
+            {
+                CqlInterval<decimal?>?[] intervals = [new CqlInterval<decimal?>(boundary, boundary, true, true)];
+
+                var expand = fcq.Expand(intervals, new CqlQuantity(0.5m, "1"));
+
+                Assert.IsNull(expand, $"expand {{ Interval[{boundary}, {boundary}] }} per 0.5");
+            }
+        }
+
+        /// <summary>
+        /// expand of an Integer or Long interval, and a list of them, ending at the type's maximum per 1 terminates
+        /// with the last partition.
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_IntegerAndLong_AtMaximum_Terminates()
+        {
+            var fcq = GetNewContext().Operators;
+            var one = new CqlQuantity(1m, "1");
+
+            CollectionAssert.AreEqual(new int?[] { int.MaxValue - 1, int.MaxValue },
+                fcq.Expand(new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true), one)!.ToArray());
+            CollectionAssert.AreEqual(new long?[] { long.MaxValue - 1, long.MaxValue },
+                fcq.Expand(new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true), one)!.ToArray());
+            Assert.AreEqual(2, fcq.Expand([new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true)], one)!.Count());
+            Assert.AreEqual(2, fcq.Expand([new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true)], one)!.Count());
+        }
+
         #endregion
 
         #region Expand Interval[Date, Date]
