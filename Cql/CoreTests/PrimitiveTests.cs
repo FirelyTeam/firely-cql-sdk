@@ -4877,6 +4877,21 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void SingletonFrom_MoreThanOneElementFromAnIterator_CountsEveryElement()
+        {
+            var ops = GetNewContext().Operators;
+            var exception = Assert.ThrowsExactly<CqlException<CqlSingletonFromMultipleElementsError>>(
+                () => ops.SingletonFrom(YieldIntegers(4)));
+            Assert.AreEqual(4, exception.Error.ElementCount);
+
+            static IEnumerable<int?> YieldIntegers(int count)
+            {
+                for (var i = 0; i < count; i++)
+                    yield return i;
+            }
+        }
+
+        [TestMethod]
         [DataRow(typeof(int?), "Integer")]
         [DataRow(typeof(long?), "Long")]
         [DataRow(typeof(decimal?), "Decimal")]
