@@ -103,7 +103,7 @@ internal record ReplaceLibraryAttachmentsCommand
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
-            .SetHandler(typeof(ReplaceLibraryAttachmentsProgram), nameof(ReplaceLibraryAttachmentsProgram.CommandHandler));
+            .SetHandler(ReplaceLibraryAttachmentsProgram.CommandHandler);
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
