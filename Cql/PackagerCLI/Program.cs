@@ -77,10 +77,8 @@ public class Program
                 {
                     Name = Process.GetCurrentProcess().ProcessName,
             }
-                //.AddOptions(ElmToFhirCommand.EnumerationOptions)
                 .AddGlobalOptions(LoggingCommand.Options)
                 .AddGlobalOptions(GlobalCommand.Options)
-                //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
             ;
 
         rootCommand.AddCommand(ElmToFhirCommand.CreateCommand());
