@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -71,5 +72,5 @@ public static partial class ElmToolkitExtensions
                   });
 
     private static ILogger CreateLogger(this ElmToolkit elmToolkit) =>
-        elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
+        elmToolkit.CreateLogger(typeof(ElmToolkitExtensions));
 }
