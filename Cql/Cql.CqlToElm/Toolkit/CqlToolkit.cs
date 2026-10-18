@@ -120,6 +120,34 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     }
 
     /// <summary>
+    /// Adds ELM libraries that the CQL libraries include, but that are not translated themselves.
+    /// </summary>
+    /// <remarks>
+    /// A reference library resolves the includes of the translated libraries, so that a library whose dependency is
+    /// available only as ELM translates without an error for that include. The translator reads the signatures of the
+    /// definitions from the ELM: their names, access levels and result types, and the operand types of the functions.
+    /// A statement whose ELM declares no result type cannot be referenced; ELM translated without result types has none.
+    /// A reference library with the identifier of a CQL library is ignored, and the first of several
+    /// reference libraries with the same identifier is kept.
+    /// </remarks>
+    /// <param name="elmLibraries">The ELM libraries to add.</param>
+    /// <returns>The current instance of <see cref="CqlToolkit"/>.</returns>
+    public CqlToolkit AddReferenceLibraries(IEnumerable<ElmLibrary> elmLibraries)
+    {
+        var provider = _services.LibraryBuilderProvider;
+        var builder = provider.ReferenceLibrariesById.ToBuilder();
+        foreach (var elmLibrary in elmLibraries)
+        {
+            var libraryIdentifier = elmLibrary.VersionedLibraryIdentifier;
+            if (!_artifactsById.ContainsKey(libraryIdentifier) && builder.TryAdd(libraryIdentifier, elmLibrary))
+                _services.Logger.LogInformation("Adding ELM reference library to CqlToolkit, which resolves includes but is not translated: {lib}", libraryIdentifier);
+        }
+
+        provider.ReferenceLibrariesById = builder.ToImmutable();
+        return this;
+    }
+
+    /// <summary>
     /// Translates the CQL libraries to ELM libraries.
     /// </summary>
     public CqlToolkit TranslateToElm()

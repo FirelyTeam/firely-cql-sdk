@@ -21,6 +21,82 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static LibraryBuilder CreateFromExisting(Library library) => throw new NotImplementedException();
 
+        /// <summary>
+        /// Creates a new instance that resolves references into an existing library.
+        /// </summary>
+        /// <remarks>
+        /// The builder only resolves references into <paramref name="library"/> and is never built: its symbol table holds
+        /// the signatures of the definitions, without their expressions. A statement whose ELM declares no result type
+        /// cannot be referenced with a type, so it is left out, and a reference to it does not resolve.
+        /// </remarks>
+        public static LibraryBuilder CreateReference(
+            Library library,
+            SystemLibrary systemLibrary,
+            LocalIdentifierProvider localIdentifierProvider)
+        {
+            var builder = new LibraryBuilder(library.identifier, systemLibrary, localIdentifierProvider);
+            var symbols = builder.SymbolTable;
+            foreach (var parameter in library.parameters ?? [])
+            {
+                if ((parameter.parameterTypeSpecifier ?? parameter.parameterType?.ToNamedType() ?? parameter.GetTypeSpecifier()) is { } parameterType)
+                    symbols.TryAdd(new ParameterDef { name = parameter.name, accessLevel = parameter.accessLevel, parameterTypeSpecifier = parameterType });
+            }
+
+            foreach (var codeSystem in library.codeSystems ?? [])
+                symbols.TryAdd(new CodeSystemDef { name = codeSystem.name, accessLevel = codeSystem.accessLevel, id = codeSystem.id, version = codeSystem.version });
+            foreach (var valueSet in library.valueSets ?? [])
+                symbols.TryAdd(new ValueSetDef { name = valueSet.name, accessLevel = valueSet.accessLevel, id = valueSet.id, version = valueSet.version });
+            foreach (var code in library.codes ?? [])
+                symbols.TryAdd(new CodeDef { name = code.name, accessLevel = code.accessLevel, id = code.id });
+            foreach (var concept in library.concepts ?? [])
+                symbols.TryAdd(new ConceptDef { name = concept.name, accessLevel = concept.accessLevel });
+
+            foreach (var statement in library.statements ?? [])
+            {
+                if (CreateReferenceDefinition(statement) is { } definition)
+                    symbols.TryAdd(definition);
+            }
+
+            return builder;
+        }
+
+        private static ExpressionDef? CreateReferenceDefinition(ExpressionDef statement)
+        {
+            if (statement.GetTypeSpecifier() is not { } resultType)
+                return null;
+
+            if (statement is not FunctionDef function)
+                return new ExpressionDef
+                {
+                    name = statement.name,
+                    accessLevel = statement.accessLevel,
+                    context = statement.context,
+                    resultTypeSpecifier = resultType,
+                };
+
+            var operands = new List<OperandDef>();
+            foreach (var operand in function.operand ?? [])
+            {
+                if (operand.GetTypeSpecifier() is not { } operandType)
+                    return null;
+                operands.Add(new OperandDef { name = operand.name, operandTypeSpecifier = operandType });
+            }
+
+            return new FunctionDef
+            {
+                name = function.name,
+                accessLevel = function.accessLevel,
+                context = function.context,
+                // ELM written by this translator sets the flags without marking them as specified.
+                fluent = function.fluent,
+                fluentSpecified = function.fluentSpecified || function.fluent,
+                external = function.external,
+                externalSpecified = function.externalSpecified || function.external,
+                operand = [.. operands],
+                resultTypeSpecifier = resultType,
+            };
+        }
+
         public LibraryBuilder(VersionedIdentifier identifier, SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
         {
             Identifier = identifier;

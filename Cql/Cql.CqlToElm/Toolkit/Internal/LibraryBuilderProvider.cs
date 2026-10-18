@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.Immutable;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
@@ -25,6 +26,14 @@ internal sealed class LibraryBuilderProvider(
 
     public CqlToolkitArtifactsById.Builder CqlToolkitArtifactsByIdBuilder { get; set; } = cqlToolkitArtifactsByIdBuilder;
 
+    /// <summary>
+    /// The ELM libraries that resolve an include when the toolkit holds no CQL for it.
+    /// </summary>
+    public ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmLibrary> ReferenceLibrariesById { get; set; } =
+        ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmLibrary>.Empty;
+
+    private readonly Dictionary<CqlVersionedLibraryIdentifier, LibraryBuilder> _referenceBuildersById = [];
+
     bool ILibraryProvider.TryResolveLibrary(
         string libraryName,
         string? version,
@@ -40,7 +49,7 @@ internal sealed class LibraryBuilderProvider(
         libraryBuilder = null;
 
         if (!CqlToolkitArtifactsByIdBuilder.TryGetValue(libVer, out var elmTranslation))
-            return false;
+            return TryResolveReferenceLibrary(libVer, out libraryBuilder, out error);
 
         if (elmTranslation.LibraryBuilder is { } lb)
         {
@@ -60,5 +69,34 @@ internal sealed class LibraryBuilderProvider(
 
 
         return false;
+    }
+
+    private bool TryResolveReferenceLibrary(
+        CqlVersionedLibraryIdentifier libVer,
+        [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
+        out string? error)
+    {
+        error = null;
+        if (_referenceBuildersById.TryGetValue(libVer, out libraryBuilder))
+            return true;
+
+        if (!ReferenceLibrariesById.TryGetValue(libVer, out var elmLibrary) || CqlToElmTranslatorServices is null)
+            return false;
+
+        var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
+        logger.LogInformation("Resolving {id} from its ELM", libVer);
+        try
+        {
+            libraryBuilder = CqlToElmTranslatorServices.LibraryVisitor.CreateReferenceBuilder(elmLibrary);
+        }
+        catch (ArgumentException e)
+        {
+            // Two functions of the ELM with the same name and operand types cannot be told apart.
+            error = $"Unable to resolve library: {libVer} from its ELM. {e.Message}";
+            return false;
+        }
+
+        _referenceBuildersById[libVer] = libraryBuilder;
+        return true;
     }
 }

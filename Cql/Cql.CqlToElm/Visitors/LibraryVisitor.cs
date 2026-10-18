@@ -39,6 +39,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 : null;
         }
 
+        /// <summary>
+        /// Creates a builder that resolves references into a library available only as ELM.
+        /// </summary>
+        internal LibraryBuilder CreateReferenceBuilder(ElmLibrary elmLibrary) =>
+            LibraryBuilder.CreateReference(elmLibrary, SystemLibrary, LocalIdentifierProvider);
+
         // libraryDefinition? definition* statement* EOF;
         // definition : usingDefinition | includeDefinition | codesystemDefinition  | valuesetDefinition  | codeDefinition
         //     | conceptDefinition | parameterDefinition ;
