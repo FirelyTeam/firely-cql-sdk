@@ -19,6 +19,13 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <param name="GeneratorToolVersion">
 /// The version of the code generator that wrote the library, from its <see cref="GeneratedCodeAttribute"/>.
 /// </param>
+/// <remarks>
+/// Two instances are equal when their <see cref="LibraryIdentifier"/>, <see cref="GeneratorToolVersion"/> and
+/// <see cref="Error"/> are. <see cref="Exception"/> compares by reference, so two instances that each have an
+/// <see cref="Error"/> are equal only when they share that very exception: two reads of the same misdeclared library
+/// give unequal instances. Compare <see cref="LibraryIdentifier"/> and <see cref="GeneratorToolVersion"/> to tell
+/// whether two instances describe the same library.
+/// </remarks>
 public sealed record CqlLibraryInfo(
     CqlVersionedLibraryIdentifier LibraryIdentifier,
     Version GeneratorToolVersion)
