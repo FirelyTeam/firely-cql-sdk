@@ -4,6 +4,7 @@
   assembly from its metadata, without loading it. It returns a `CqlAssemblyInfo` holding the assembly's name, the
   `AssemblyBinary` it was read from, and `Libraries`: one `CqlLibraryInfo` per library, keyed by the library's
   identifier, each with the version of the code generator that wrote it and whether the toolkit runs that version.
+  `CqlAssemblyInfo.IsSupported` is true when the assembly holds at least one CQL library and the toolkit runs them all.
   `TryReadCqlAssemblyInfo` does the same without throwing, for an assembly a host received from elsewhere, such as the
   `+dll` attachment of a FHIR Library. `InvocationToolkit.IsGeneratorToolVersionSupported(Version)` answers whether
   the toolkit runs code from a given generator version, and `CreateLibrarySetInvoker` applies the same rule. A host can

@@ -47,6 +47,7 @@ public sealed class CqlAssemblyInfo
         }
 
         Libraries = libraries.ToFrozenDictionary();
+        IsSupported = Libraries.Count > 0 && Libraries.Values.All(library => library.IsSupported);
     }
 
     /// <summary>
@@ -65,4 +66,16 @@ public sealed class CqlAssemblyInfo
     /// Empty when the assembly holds no library the code generator wrote.
     /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo> Libraries { get; }
+
+    /// <summary>
+    /// Gets whether <see cref="InvocationToolkit"/> runs every CQL library in the assembly: <see langword="true"/> when
+    /// the assembly holds at least one, and <see cref="CqlLibraryInfo.IsSupported"/> is <see langword="true"/> for each.
+    /// </summary>
+    /// <remarks>
+    /// <see langword="false"/> for an assembly that holds no CQL library, because the toolkit has nothing to run from it.
+    /// Check whether <see cref="Libraries"/> is empty to tell that apart from an assembly whose libraries the toolkit
+    /// does not run. A supported generator version is necessary for the toolkit to run a library, but not sufficient:
+    /// loading it can still fail for other reasons, such as a missing dependency.
+    /// </remarks>
+    public bool IsSupported { get; }
 }

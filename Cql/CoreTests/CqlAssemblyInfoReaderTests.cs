@@ -64,6 +64,7 @@ public class CqlAssemblyInfoReaderTests
                     .And.ContainKey(LibraryIdentifier)
                     .WhoseValue.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
         assemblyInfo.AssemblyName.Name.Should().NotBeNullOrEmpty();
+        assemblyInfo.IsSupported.Should().BeTrue();
     }
 
     [TestMethod]
@@ -88,6 +89,7 @@ public class CqlAssemblyInfoReaderTests
 
         assemblyInfo.AssemblyName.Name.Should().Be("TwoGeneratedLibraries");
         assemblyInfo.Libraries.Should().HaveCount(2);
+        assemblyInfo.IsSupported.Should().BeFalse("SecondLibrary was written by an unsupported generator version");
 
         assemblyInfo.Libraries.TryGetValue(Identifier("FirstLibrary", "1.0.0"), out var first).Should().BeTrue();
         first!.GeneratorToolVersion.Should().Be(new Version(6, 0, 0, 0));
@@ -114,6 +116,7 @@ public class CqlAssemblyInfoReaderTests
             "public class NotGenerated { }");
 
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).IsSupported.Should().BeFalse("the assembly holds no CQL library to run");
 
         InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var assemblyInfo).Should().BeTrue();
         assemblyInfo!.Libraries.Should().BeEmpty();
@@ -241,6 +244,7 @@ public class CqlAssemblyInfoReaderTests
         loaded.Should().Be(expectedLoaded);
         InvocationToolkit.IsGeneratorToolVersionSupported(Version.Parse(generatorVersion)).Should().Be(loaded);
         libraryInfo.IsSupported.Should().Be(loaded);
+        assemblyInfo.IsSupported.Should().Be(loaded);
     }
 
     [TestMethod]
@@ -264,6 +268,7 @@ public class CqlAssemblyInfoReaderTests
 
         libraryInfo.GeneratorToolVersion.Should().Be(Version.Parse(generatorVersion));
         libraryInfo.IsSupported.Should().Be(expectedLoaded);
+        assemblyInfo.IsSupported.Should().Be(expectedLoaded);
         invoker.LibraryInvokers.ContainsKey(LibraryIdentifier).Should().Be(expectedLoaded);
     }
 

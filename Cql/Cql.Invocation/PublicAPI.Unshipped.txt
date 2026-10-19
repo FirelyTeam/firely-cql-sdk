@@ -12,6 +12,7 @@ Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.LibraryIdentifier.init -> void
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.AssemblyBinary.get -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.AssemblyName.get -> System.Reflection.AssemblyName!
+Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.IsSupported.get -> bool
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.Libraries.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo!>!
 override Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.Equals(object? obj) -> bool
 override Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.GetHashCode() -> int
