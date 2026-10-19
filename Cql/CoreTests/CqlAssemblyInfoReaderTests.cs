@@ -63,7 +63,7 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.Libraries.Should().HaveCount(1)
                     .And.ContainKey(LibraryIdentifier)
                     .WhoseValue.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
-        cqlAssemblyInfo.AssemblyName.Name.Should().NotBeNullOrEmpty();
+        cqlAssemblyInfo.AssemblyName.FullName.Should().Be(LoadedAssemblyName(GeneratedLibrary.Value.assembly).FullName);
         cqlAssemblyInfo.IsSupported.Should().BeTrue();
     }
 
@@ -101,6 +101,11 @@ public class CqlAssemblyInfoReaderTests
 
         cqlAssemblyInfo.Libraries.TryGetValue(Identifier("ThirdLibrary", "1.0.0"), out var third).Should().BeFalse();
         third.Should().BeNull();
+
+        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var tryRead).Should().BeTrue();
+        tryRead!.AssemblyName.FullName.Should().Be(cqlAssemblyInfo.AssemblyName.FullName);
+        tryRead.Libraries.Should().Equal(cqlAssemblyInfo.Libraries);
+        tryRead.IsSupported.Should().Be(cqlAssemblyInfo.IsSupported);
     }
 
     [TestMethod]
@@ -346,6 +351,22 @@ public class CqlAssemblyInfoReaderTests
         [new byte[] { 0x4D, 0x5A }],
         ["This is not an assembly."u8.ToArray()],
     ];
+
+    /// <summary>
+    /// The name the runtime reports for <paramref name="assembly"/> once loaded, in a collectible context of its own.
+    /// </summary>
+    private static AssemblyName LoadedAssemblyName(AssemblyBinary assembly)
+    {
+        var loadContext = new AssemblyLoadContext(nameof(LoadedAssemblyName), isCollectible: true);
+        try
+        {
+            return loadContext.LoadFromStream(new MemoryStream(assembly.AssemblyBytes!)).GetName();
+        }
+        finally
+        {
+            loadContext.Unload();
+        }
+    }
 
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>
         CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(identifier, version);
