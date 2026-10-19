@@ -229,6 +229,29 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfALibraryTwoNestedTypesOfTheSameNameDeclare_ReportsTheErrorTheInvokerLogs()
+    {
+        var assembly = Compile(
+            "DuplicateNestedLibraries",
+            $"public class OuterA {{ {LibraryType("Library", "NestedLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion)} }}",
+            $"public class OuterB {{ {LibraryType("Library", "NestedLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion)} }}");
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
+        cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("NestedLibrary", "1.0.0"));
+        cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+                      .Which.Message.Should().ContainAll("'OuterA+Library'", "'OuterB+Library'");
+        cqlLibraryInfo.IsSupported.Should().BeFalse();
+        warnings.Should().Contain(warning => warning.Contains("'OuterA+Library'") && warning.Contains("'OuterB+Library'"));
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeDefinedInTheAssembly_AsTheInvokerDoes()
     {
         var assembly = Compile(

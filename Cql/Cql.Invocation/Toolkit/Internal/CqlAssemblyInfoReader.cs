@@ -195,12 +195,17 @@ internal static class CqlAssemblyInfoReader
     }
 
     /// <summary>
-    /// The type's name, qualified by its namespace when it has one.
+    /// The type's full name, as <see cref="Type.FullName"/> gives it: qualified by its namespace when it has one, and a
+    /// nested type by its declaring types, so that no two types of the assembly share it.
     /// </summary>
     private static string GetTypeName(MetadataReader metadata, TypeDefinition type)
     {
-        var typeNamespace = metadata.GetString(type.Namespace);
         var typeName = metadata.GetString(type.Name);
+        var declaringType = type.GetDeclaringType();
+        if (!declaringType.IsNil)
+            return $"{GetTypeName(metadata, metadata.GetTypeDefinition(declaringType))}+{typeName}";
+
+        var typeNamespace = metadata.GetString(type.Namespace);
         return typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
     }
 
