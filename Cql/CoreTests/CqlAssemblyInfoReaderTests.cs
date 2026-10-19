@@ -27,6 +27,29 @@ public class CqlAssemblyInfoReaderTests
 {
     private const string GeneratorToolName = LibrarySetCSharpCodeGenerator.GeneratorToolName;
 
+    /// <summary>
+    /// The version the code generator writes now, which the toolkit runs.
+    /// </summary>
+    private const string CurrentGeneratorVersion = LibrarySetCSharpCodeGenerator.GeneratorToolVersion;
+
+    /// <summary>
+    /// The last version that wrote <see cref="LibrarySetCSharpCodeGenerator.LegacyGeneratorToolName"/>: a fixed fact,
+    /// which no later version bump changes.
+    /// </summary>
+    private const string LastGeneratorVersionWithLegacyToolName = "6.0.3.0";
+
+    /// <summary>
+    /// A version older than any the toolkit runs, whatever its supported range.
+    /// </summary>
+    private static readonly string OlderUnsupportedGeneratorVersion =
+        new Version(InvocationToolkit.MinSupportedGeneratorToolVersion.Major - 1, 0, 0, 0).ToString();
+
+    /// <summary>
+    /// The first version newer than the toolkit runs.
+    /// </summary>
+    private static readonly string NewerUnsupportedGeneratorVersion =
+        InvocationToolkit.FirstUnsupportedGeneratorToolVersion.ToString();
+
     private const string LibraryCql = """
         library CqlLibraryInfoTest version '1.0.0'
 
@@ -82,8 +105,8 @@ public class CqlAssemblyInfoReaderTests
     {
         var assembly = Compile(
             "TwoGeneratedLibraries",
-            LibraryType("First", "FirstLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"),
-            LibraryType("Second", "SecondLibrary", "2.0.0", GeneratorToolName, "5.1.0.0"));
+            LibraryType("First", "FirstLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion),
+            LibraryType("Second", "SecondLibrary", "2.0.0", GeneratorToolName, OlderUnsupportedGeneratorVersion));
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
@@ -92,11 +115,11 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.IsSupported.Should().BeFalse("SecondLibrary was written by an unsupported generator version");
 
         cqlAssemblyInfo.Libraries.TryGetValue(Identifier("FirstLibrary", "1.0.0"), out var first).Should().BeTrue();
-        first!.GeneratorToolVersion.Should().Be(new Version(6, 0, 0, 0));
+        first!.GeneratorToolVersion.Should().Be(Version.Parse(CurrentGeneratorVersion));
         first.IsSupported.Should().BeTrue();
 
         cqlAssemblyInfo.Libraries.TryGetValue(Identifier("SecondLibrary", "2.0.0"), out var second).Should().BeTrue();
-        second!.GeneratorToolVersion.Should().Be(new Version(5, 1, 0, 0));
+        second!.GeneratorToolVersion.Should().Be(Version.Parse(OlderUnsupportedGeneratorVersion));
         second.IsSupported.Should().BeFalse();
 
         cqlAssemblyInfo.Libraries.TryGetValue(Identifier("ThirdLibrary", "1.0.0"), out var third).Should().BeFalse();
@@ -115,7 +138,7 @@ public class CqlAssemblyInfoReaderTests
             "NoGeneratedLibraries",
             LibraryType("FromAnotherTool", "OtherLibrary", "1.0.0", "xsd", "4.8.3928.0"),
             $$"""
-            [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "6.0.0.0")]
+            [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "{{CurrentGeneratorVersion}}")]
             public class GeneratedButNotALibrary { }
             """,
             "public class NotGenerated { }");
@@ -215,7 +238,7 @@ public class CqlAssemblyInfoReaderTests
         var assembly = Compile(
             "LookAlikeInTheAssembly",
             LookAlikeCqlLibraryAttribute,
-            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
 
         using var invoker = new InvocationToolkit()
                             .AddAssemblyBinaries([assembly])
@@ -236,7 +259,7 @@ public class CqlAssemblyInfoReaderTests
             "LookAlikeFromAnotherAssembly",
             OutputKind.DynamicallyLinkedLibrary,
             references,
-            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
 
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
     }
@@ -320,10 +343,7 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    [DataRow("5.0.0.0", false)]
-    [DataRow("6.0.0.0", true)]
-    [DataRow(LibrarySetCSharpCodeGenerator.GeneratorToolVersion, true)]
-    [DataRow("7.0.0.0", false)]
+    [DynamicData(nameof(GeneratorVersionsAroundTheSupportedRange))]
     public void IsGeneratorToolVersionSupported_AgreesWithWhetherTheInvokerLoadsTheLibrary(string generatorVersion, bool expectedLoaded)
     {
         var assembly = RecompileWithGeneratorVersion(generatorVersion, $"CqlLibraryInfoTest_{generatorVersion.Replace('.', '_')}");
@@ -344,9 +364,7 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    [DataRow("5.0.0.0", false)]
-    [DataRow("6.0.0.0", true)]
-    [DataRow("6.0.3.0", true)]
+    [DynamicData(nameof(GeneratorVersionsWithTheLegacyToolName))]
     public void ReadCqlAssemblyInfo_OfALibraryWithTheLegacyGeneratorToolName_RecognizesIt(string generatorVersion, bool expectedLoaded)
     {
         var assembly = RecompileWithGeneratorVersion(
@@ -374,7 +392,7 @@ public class CqlAssemblyInfoReaderTests
     public void CreateLibrarySetInvoker_KeepsTheSameLibraryInfoAsReadFromMetadata(string tool)
     {
         var assembly = RecompileWithGeneratorVersion(
-            "6.0.0.0",
+            CurrentGeneratorVersion,
             $"CqlLibraryInfoTest_SameInfo_{(tool == GeneratorToolName ? "Current" : "Legacy")}",
             tool);
         var readFromMetadata = InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries[LibraryIdentifier];
@@ -389,7 +407,7 @@ public class CqlAssemblyInfoReaderTests
     [TestMethod]
     public void CreateLibrarySetInvoker_SkippingAnUnsupportedLibrary_WarnsWithTheLibraryAndTheSupportedRange()
     {
-        var assembly = RecompileWithGeneratorVersion("5.0.0.0", "CqlLibraryInfoTest_Warning");
+        var assembly = RecompileWithGeneratorVersion(OlderUnsupportedGeneratorVersion, "CqlLibraryInfoTest_Warning");
         var warnings = new List<string>();
         using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
 
@@ -400,7 +418,7 @@ public class CqlAssemblyInfoReaderTests
         invoker.LibraryInvokers.Should().NotContainKey(LibraryIdentifier);
         warnings.Should().ContainSingle(warning =>
             warning.Contains(LibraryIdentifier.ToString())
-            && warning.Contains("5.0.0.0")
+            && warning.Contains(OlderUnsupportedGeneratorVersion)
             && warning.Contains(InvocationToolkit.MinSupportedGeneratorToolVersion.ToString())
             && warning.Contains(InvocationToolkit.FirstUnsupportedGeneratorToolVersion.ToString()));
     }
@@ -424,7 +442,7 @@ public class CqlAssemblyInfoReaderTests
     public void LegacyGeneratorToolName_IsStillWrittenByASupportedGeneratorVersion()
     {
         InvocationToolkit.MinSupportedGeneratorToolVersion.Should().BeLessThanOrEqualTo(
-            new Version(6, 0, 3, 0),
+            Version.Parse(LastGeneratorVersionWithLegacyToolName),
             "no supported generator version writes the legacy tool name any more, so remove "
             + "LibrarySetCSharpCodeGenerator.LegacyGeneratorToolName and its acceptance in CqlLibraryTypeRule");
     }
@@ -432,9 +450,36 @@ public class CqlAssemblyInfoReaderTests
     [TestMethod]
     public void IsGeneratorToolVersionSupported_WithComponentsLeftOut_CountsThemAsZero()
     {
-        InvocationToolkit.IsGeneratorToolVersionSupported(new Version(6, 0)).Should().BeTrue();
-        InvocationToolkit.IsGeneratorToolVersionSupported(new Version(7, 0)).Should().BeFalse();
+        var minSupported = InvocationToolkit.MinSupportedGeneratorToolVersion;
+        var firstUnsupported = InvocationToolkit.FirstUnsupportedGeneratorToolVersion;
+
+        InvocationToolkit.IsGeneratorToolVersionSupported(new Version(minSupported.Major, minSupported.Minor)).Should().BeTrue();
+        InvocationToolkit.IsGeneratorToolVersionSupported(new Version(firstUnsupported.Major, firstUnsupported.Minor)).Should().BeFalse();
     }
+
+    /// <summary>
+    /// A version older than the supported range, its lower bound, the current version, and its exclusive upper bound,
+    /// each with whether the toolkit runs it.
+    /// </summary>
+    public static IEnumerable<object[]> GeneratorVersionsAroundTheSupportedRange =>
+    [
+        [OlderUnsupportedGeneratorVersion, false],
+        [InvocationToolkit.MinSupportedGeneratorToolVersion.ToString(), true],
+        [CurrentGeneratorVersion, true],
+        [NewerUnsupportedGeneratorVersion, false],
+    ];
+
+    /// <summary>
+    /// Versions a library with the legacy tool name can carry, each with whether the toolkit runs it. The supported ones
+    /// stay supported for as long as the legacy name is, which
+    /// <see cref="LegacyGeneratorToolName_IsStillWrittenByASupportedGeneratorVersion"/> guards.
+    /// </summary>
+    public static IEnumerable<object[]> GeneratorVersionsWithTheLegacyToolName =>
+    [
+        [OlderUnsupportedGeneratorVersion, false],
+        [InvocationToolkit.MinSupportedGeneratorToolVersion.ToString(), true],
+        [LastGeneratorVersionWithLegacyToolName, true],
+    ];
 
     public static IEnumerable<object[]> BytesThatAreNotAnAssembly =>
     [
@@ -473,7 +518,7 @@ public class CqlAssemblyInfoReaderTests
     /// A type that carries two <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/>s, which the toolkit does not accept.
     /// </summary>
     private static readonly string TypeWithTwoCqlLibraryAttributes = $$"""
-        [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "6.0.0.0")]
+        [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "{{CurrentGeneratorVersion}}")]
         [Hl7.Cql.Abstractions.CqlLibrary("BrokenFirst", "1.0.0")]
         [Hl7.Cql.Abstractions.CqlLibrary("BrokenSecond", "1.0.0")]
         public class TwoCqlLibraryAttributes { }
@@ -495,14 +540,14 @@ public class CqlAssemblyInfoReaderTests
     private static AssemblyBinary AssemblyWithADuplicateLibrary() =>
         Compile(
             "DuplicateGeneratedLibraries",
-            LibraryType("First", "SameLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"),
-            LibraryType("Second", "SameLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+            LibraryType("First", "SameLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion),
+            LibraryType("Second", "SameLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
 
     private static AssemblyBinary ModuleWithoutAnAssemblyManifest() =>
         Compile(
             "GeneratedLibraryModule",
             OutputKind.NetModule,
-            LibraryType("InAModule", "ModuleLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+            LibraryType("InAModule", "ModuleLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
 
     /// <summary>
     /// Compiles the C# the code generator wrote for <see cref="LibraryCql"/> again, with its
