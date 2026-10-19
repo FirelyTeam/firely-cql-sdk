@@ -217,19 +217,19 @@ internal static class CqlAssemblyInfoReader
     /// <exception cref="BadImageFormatException">The declaring types form a cycle.</exception>
     private static string GetTypeName(MetadataReader metadata, TypeDefinition type)
     {
-        var typeName = metadata.GetString(type.Name);
-        var declaringTypeCount = 0;
+        Stack<string> typeNames = new();
+        typeNames.Push(metadata.GetString(type.Name));
+        HashSet<TypeDefinitionHandle> declaringTypes = [];
         for (var declaringType = type.GetDeclaringType(); !declaringType.IsNil; declaringType = type.GetDeclaringType())
         {
-            // A corrupt NestedClass table can make the declaring types a cycle. More declaring types than the assembly
-            // defines means it does, so stop there rather than walk it forever.
-            if (++declaringTypeCount > metadata.TypeDefinitions.Count)
-                throw new BadImageFormatException($"The declaring types of type '{typeName}' form a cycle.");
+            if (!declaringTypes.Add(declaringType))
+                throw new BadImageFormatException("The declaring types form a cycle.");
 
             type = metadata.GetTypeDefinition(declaringType);
-            typeName = $"{metadata.GetString(type.Name)}+{typeName}";
+            typeNames.Push(metadata.GetString(type.Name));
         }
 
+        var typeName = string.Join("+", typeNames);
         var typeNamespace = metadata.GetString(type.Namespace);
         return typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
     }
