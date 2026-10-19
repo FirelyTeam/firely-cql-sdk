@@ -60,9 +60,10 @@ public readonly record struct CqlModuleWithoutManifestError(string ModuleName) :
 }
 
 /// <summary>
-/// A type carries a <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> or <see cref="GeneratedCodeAttribute"/>
-/// whose value does not start with the prolog <c>0x0001</c>, so the assembly's metadata is corrupt. Reflection
-/// cannot read that attribute either, so the toolkit cannot load the assembly.
+/// A type that declares a CQL library carries a <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> or
+/// <see cref="GeneratedCodeAttribute"/> whose value is malformed, so the assembly's metadata is corrupt: the value does
+/// not start with the prolog <c>0x0001</c>, or it counts named arguments, which neither attribute has. Reflection cannot
+/// read that attribute either, so the toolkit cannot load the assembly.
 /// </summary>
 /// <param name="AssemblyName">The full name of the assembly.</param>
 /// <param name="TypeName">The full name of the type, as <see cref="Type.FullName"/> gives it.</param>
@@ -72,8 +73,8 @@ public readonly record struct CqlLibraryAttributeValueError(string AssemblyName,
 {
     /// <inheritdoc />
     public string GetMessage() =>
-        $"Type '{TypeName}' in assembly '{AssemblyName}' carries a {AttributeName} whose value does not start with "
-        + "the prolog 0x0001.";
+        $"Type '{TypeName}' in assembly '{AssemblyName}' carries a {AttributeName} whose value is malformed, so "
+        + "reflection cannot read it.";
 }
 
 /// <summary>

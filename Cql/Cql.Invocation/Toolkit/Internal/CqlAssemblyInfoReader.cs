@@ -237,11 +237,13 @@ internal static class CqlAssemblyInfoReader
     /// <summary>
     /// Reads the two arguments of an attribute whose constructor takes two strings, as both
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
-    /// prolog <c>0x0001</c> followed by the two arguments as serialized strings.
+    /// prolog <c>0x0001</c>, the two arguments as serialized strings, and the count of named arguments, which is 0
+    /// because neither attribute has a member that one could set.
     /// </summary>
     /// <exception cref="CqlException{TError}">
-    /// A <see cref="CqlLibraryAttributeValueError"/>: the value blob does not start with the prolog, which makes the
-    /// assembly's metadata corrupt. Reflection then fails to read the attribute, so the invoker cannot load the assembly.
+    /// A <see cref="CqlLibraryAttributeValueError"/>: the value blob does not start with the prolog, or does not end
+    /// with a count of no named arguments, which makes the assembly's metadata corrupt. Reflection then fails to read
+    /// the attribute, so the invoker cannot load the assembly.
     /// </exception>
     private static (string? First, string? Second) ReadTwoStringArguments(
         MetadataReader metadata,
@@ -254,6 +256,10 @@ internal static class CqlAssemblyInfoReader
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
             throw new CqlLibraryAttributeValueError(assemblyName, typeName, attributeName).ToException();
 
-        return (value.ReadSerializedString(), value.ReadSerializedString());
+        var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
+        if (value.RemainingBytes < 2 || value.ReadUInt16() != 0)
+            throw new CqlLibraryAttributeValueError(assemblyName, typeName, attributeName).ToException();
+
+        return arguments;
     }
 }

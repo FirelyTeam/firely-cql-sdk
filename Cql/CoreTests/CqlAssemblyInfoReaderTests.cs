@@ -358,6 +358,34 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfACqlLibraryAttributeThatCountsNamedArgumentsItLacks_ReportsAnErrorAsTheInvokerCannotLoadIt()
+    {
+        var original = Compile(
+            "MalformedNamedArgumentCount",
+            GeneratedLibrary.Value.cSharp,
+            LibraryType("NamedArgumentCount", "NamedArgumentCountLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
+        var assembly = WithAttributeValueChanged(
+            original,
+            AttributeValue("NamedArgumentCountLibrary", "1.0.0"),
+            value => value[^2] = 0x01);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var createLibrarySetInvoker = () =>
+        {
+            using var invoker = new InvocationToolkit().AddAssemblyBinaries([assembly]).CreateLibrarySetInvoker();
+            return invoker.LibraryInvokers.Count;
+        };
+
+        cqlAssemblyInfo.ReadError.Should().Be(
+            new CqlLibraryAttributeValueError(
+                InvocationToolkit.ReadCqlAssemblyInfo(original).AssemblyName!.FullName,
+                "NamedArgumentCount",
+                "CqlLibraryAttribute"));
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
+        createLibrarySetInvoker.Should().Throw<CustomAttributeFormatException>();
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_IgnoresAMalformedGeneratedCodeAttributeOnATypeThatDeclaresNoLibrary_AsTheInvokerDoes()
     {
         var assembly = WithAttributeValueChanged(
