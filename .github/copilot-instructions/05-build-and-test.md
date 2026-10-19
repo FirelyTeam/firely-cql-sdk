@@ -94,6 +94,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
       5.3.2.7.4 Binder emits a different `ICqlOperators` method for the same CQL (e.g., `CoalesceValueTypes<T>` → `Coalesce<T>`) → Patch version increment (5.1.0.0 → 5.1.1.0)
 
+5.3.3 **Drop the legacy generator tool name at the next version bump**: Generated library types carry `[GeneratedCode("Hl7.Cql.CodeGeneration.NET", …)]` (`LibrarySetCSharpCodeGenerator.GeneratorToolName`). Generator versions up to 6.0.3.0 wrote `.NET Code Generation` instead (`LegacyGeneratorToolName`), and the invocation toolkit (`CqlLibraryTypeRule`) and the golden-test normalization accept both names. At the next generator version bump, remove the legacy name: the constant, its acceptance in `CqlLibraryTypeRule`, its alternative in `CSharpGenerationGoldenTests.NormalizeGeneratedCodeAttribute`, and its tests in `CqlAssemblyInfoReaderTests`. Do so only if that bump raises `MinSupportedGeneratorToolVersion` above 6.0.3.0. While 6.0.x stays supported, keep the legacy name: without it the toolkit stops recognizing those libraries, and reports that only at Debug level. The test `LegacyGeneratorToolName_IsStillWrittenByASupportedGeneratorVersion` fails once the minimum passes 6.0.3.0
+
 ## 5.4. Generating ELM Files from CQL
 
 5.4.1 Follow the shared procedure in [generate-elm-from-cql](../../.claude/skills/generate-elm-from-cql/SKILL.md) to regenerate ELM JSON after adding or changing CQL input files (e.g. in `Cql/CoreTests/Input/ELM/HL7`).
