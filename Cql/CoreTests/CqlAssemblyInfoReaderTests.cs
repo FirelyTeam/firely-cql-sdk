@@ -358,6 +358,27 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_IgnoresAMalformedGeneratedCodeAttributeOnATypeThatDeclaresNoLibrary_AsTheInvokerDoes()
+    {
+        var assembly = WithAttributeValueChanged(
+            Compile(
+                "MalformedUnrelatedGeneratedCode",
+                GeneratedLibrary.Value.cSharp,
+                """[System.CodeDom.Compiler.GeneratedCode("UnrelatedTool", "1.2.3")] public class Unrelated { }"""),
+            AttributeValue("UnrelatedTool", "1.2.3"),
+            value => value[0] = 0x02);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        using var invoker = new InvocationToolkit()
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        cqlAssemblyInfo.Libraries[LibraryIdentifier].IsSupported.Should().BeTrue();
+        invoker.LibraryInvokers.Should().ContainKey(LibraryIdentifier);
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeDefinedInTheAssembly_AsTheInvokerDoes()
     {
         var assembly = Compile(
@@ -695,6 +716,36 @@ public class CqlAssemblyInfoReaderTests
         }
 
         protected override PEDirectoriesBuilder GetDirectories() => new();
+    }
+
+    /// <summary>
+    /// The value blob a compiler writes for an attribute whose constructor takes two strings: the prolog <c>0x0001</c>,
+    /// the two arguments as serialized strings, and a count of no named arguments.
+    /// </summary>
+    private static byte[] AttributeValue(string first, string second) =>
+        [0x01, 0x00, .. SerializedString(first), .. SerializedString(second), 0x00, 0x00];
+
+    private static byte[] SerializedString(string value)
+    {
+        var utf8 = System.Text.Encoding.UTF8.GetBytes(value);
+        utf8.Length.Should().BeLessThan(0x80, "a longer string has a longer length prefix");
+        return [(byte)utf8.Length, .. utf8];
+    }
+
+    /// <summary>
+    /// A copy of <paramref name="assembly"/> in which <paramref name="change"/> has edited the one attribute value
+    /// blob that equals <paramref name="value"/>, keeping its length.
+    /// </summary>
+    private static AssemblyBinary WithAttributeValueChanged(AssemblyBinary assembly, byte[] value, Action<byte[]> change)
+    {
+        byte[] assemblyBytes = [.. assembly.AssemblyBytes!];
+        var offset = assemblyBytes.AsSpan().IndexOf(value);
+        offset.Should().BeGreaterThanOrEqualTo(0).And.Be(assemblyBytes.AsSpan().LastIndexOf(value));
+
+        var changed = value.ToArray();
+        change(changed);
+        changed.CopyTo(assemblyBytes, offset);
+        return new AssemblyBinary(assemblyBytes);
     }
 
     /// <summary>

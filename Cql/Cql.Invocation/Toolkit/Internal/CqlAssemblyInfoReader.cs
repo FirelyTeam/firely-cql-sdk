@@ -107,7 +107,9 @@ internal static class CqlAssemblyInfoReader
     /// </summary>
     /// <remarks>
     /// Only the SDK's and the runtime's own attribute types count, never a type of the same name from another
-    /// assembly, as reflection only finds the attribute types themselves.
+    /// assembly, as reflection only finds the attribute types themselves. And as reflection does, it reads the
+    /// <see cref="GeneratedCodeAttribute"/>s only of a type that declares a CQL library, so a malformed one on any
+    /// other type goes unnoticed by both.
     /// </remarks>
     private static List<CqlLibraryInfo> ReadLibraryInfos(
         MetadataReader metadata,
@@ -116,7 +118,7 @@ internal static class CqlAssemblyInfoReader
         string typeName)
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
-        List<(string? Tool, string? Version)> generatedCodes = [];
+        List<CustomAttribute> generatedCodeAttributes = [];
 
         foreach (var attributeHandle in type.GetCustomAttributes())
         {
@@ -126,11 +128,18 @@ internal static class CqlAssemblyInfoReader
                 continue;
 
             if (attributeName == GeneratedCodeAttributeName && GeneratedCodeAttributeAssemblies.Contains(attributeAssembly))
-                generatedCodes.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, attributeName.Name));
+                generatedCodeAttributes.Add(attribute);
             else if (attributeName == CqlLibraryAttributeName
                      && string.Equals(attributeAssembly, CqlLibraryAttributeAssembly, StringComparison.OrdinalIgnoreCase))
                 cqlLibraries.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, attributeName.Name));
         }
+
+        if (cqlLibraries.Count == 0)
+            return [];
+
+        List<(string? Tool, string? Version)> generatedCodes = [];
+        foreach (var attribute in generatedCodeAttributes)
+            generatedCodes.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, GeneratedCodeAttributeName.Name));
 
         return CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes);
     }
