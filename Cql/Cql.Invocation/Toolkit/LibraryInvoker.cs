@@ -136,7 +136,7 @@ public abstract class LibraryInvoker
         libraryInvoker = null;
         var logger = librarySetInvoker.CreateLogger<LibraryInvoker>();
 
-        if (!CqlLibraryTypeRule.TryGetLibraryInfo(libraryType, out var libraryInfo))
+        if (!CqlLibraryTypeRule.TryGetLibraryInfo(libraryType, out var cqlLibraryInfo))
         {
             logger?.LogDebug(
                 "Skipping type {type} because it is not a CQL library the code generator wrote.",
@@ -144,14 +144,14 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        if (!libraryInfo.IsSupported)
+        if (!cqlLibraryInfo.IsSupported)
         {
             logger?.LogWarning(
                 "Skipping CQL library {lib} in type {type} because code generator version {ver} wrote it, "
                 + "while this toolkit runs versions {min} up to, but not including, {firstUnsupported}.",
-                libraryInfo.LibraryIdentifier,
+                cqlLibraryInfo.LibraryIdentifier,
                 libraryType.FullName,
-                libraryInfo.GeneratorToolVersion,
+                cqlLibraryInfo.GeneratorToolVersion,
                 LibrarySetInvoker.MinSupportedGeneratorToolVersion,
                 LibrarySetInvoker.FirstUnsupportedGeneratorToolVersion);
             return false;
@@ -160,12 +160,12 @@ public abstract class LibraryInvoker
         if (!LibraryInstanceInvoker_6_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
             return false;
 
-        libraryInvoker.LibraryInfo = libraryInfo;
+        libraryInvoker.LibraryInfo = cqlLibraryInfo;
         logger?.LogDebug(
             "Loaded CQL library {lib} from type {type}, which code generator version {ver} wrote.",
-            libraryInfo.LibraryIdentifier,
+            cqlLibraryInfo.LibraryIdentifier,
             libraryType.FullName,
-            libraryInfo.GeneratorToolVersion);
+            cqlLibraryInfo.GeneratorToolVersion);
         return true;
     }
 

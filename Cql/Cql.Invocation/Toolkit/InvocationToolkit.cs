@@ -116,7 +116,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// The assembly, such as one built from the <c>+dll</c> attachment of a FHIR Library. Its debug symbols are not
     /// read, only carried to the result.
     /// </param>
-    /// <param name="assemblyInfo">
+    /// <param name="cqlAssemblyInfo">
     /// The libraries the assembly holds, together with <paramref name="assemblyBinary"/> itself, when it can be read;
     /// otherwise, <see langword="null"/>.
     /// </param>
@@ -128,8 +128,8 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// </returns>
     public static bool TryReadCqlAssemblyInfo(
         AssemblyBinary? assemblyBinary,
-        [NotNullWhen(true)] out CqlAssemblyInfo? assemblyInfo) =>
-        CqlAssemblyInfoReader.TryRead(assemblyBinary, out assemblyInfo);
+        [NotNullWhen(true)] out CqlAssemblyInfo? cqlAssemblyInfo) =>
+        CqlAssemblyInfoReader.TryRead(assemblyBinary, out cqlAssemblyInfo);
 
     /// <inheritdoc />
     [EditorBrowsable(EditorBrowsableState.Advanced)]

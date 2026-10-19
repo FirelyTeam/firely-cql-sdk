@@ -33,22 +33,22 @@ public sealed class CqlAssemblyInfo
     internal CqlAssemblyInfo(
         AssemblyBinary assemblyBinary,
         AssemblyName assemblyName,
-        IEnumerable<CqlLibraryInfo> libraryInfos)
+        IEnumerable<CqlLibraryInfo> cqlLibraryInfos)
     {
         AssemblyBinary = assemblyBinary;
         AssemblyName = assemblyName;
 
         var libraries = new Dictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo>();
-        foreach (var libraryInfo in libraryInfos)
+        foreach (var cqlLibraryInfo in cqlLibraryInfos)
         {
-            if (!libraries.TryAdd(libraryInfo.LibraryIdentifier, libraryInfo))
+            if (!libraries.TryAdd(cqlLibraryInfo.LibraryIdentifier, cqlLibraryInfo))
                 throw new InvalidOperationException(
-                    $"Assembly '{assemblyName.Name}' holds more than one library type for CQL library '{libraryInfo.LibraryIdentifier}'.");
+                    $"Assembly '{assemblyName.Name}' holds more than one library type for CQL library '{cqlLibraryInfo.LibraryIdentifier}'.");
 
             // The first library decides it, each further one can only clear it, and without any it stays false.
             IsSupported = libraries.Count == 1
-                ? libraryInfo.IsSupported
-                : IsSupported && libraryInfo.IsSupported;
+                ? cqlLibraryInfo.IsSupported
+                : IsSupported && cqlLibraryInfo.IsSupported;
         }
 
         Libraries = libraries.ToFrozenDictionary();

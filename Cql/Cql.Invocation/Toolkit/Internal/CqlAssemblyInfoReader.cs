@@ -50,15 +50,15 @@ internal static class CqlAssemblyInfoReader
     /// </summary>
     public static bool TryRead(
         AssemblyBinary? assemblyBinary,
-        [NotNullWhen(true)] out CqlAssemblyInfo? assemblyInfo)
+        [NotNullWhen(true)] out CqlAssemblyInfo? cqlAssemblyInfo)
     {
-        assemblyInfo = null;
+        cqlAssemblyInfo = null;
         if (assemblyBinary?.AssemblyBytes is not { } assemblyBytes)
             return false;
 
         try
         {
-            assemblyInfo = ReadCore(assemblyBinary, assemblyBytes);
+            cqlAssemblyInfo = ReadCore(assemblyBinary, assemblyBytes);
             return true;
         }
         catch (Exception exception) when (exception is BadImageFormatException or InvalidOperationException)
@@ -70,7 +70,7 @@ internal static class CqlAssemblyInfoReader
     private static CqlAssemblyInfo ReadCore(AssemblyBinary assemblyBinary, byte[] assemblyBytes)
     {
         AssemblyName assemblyName;
-        List<CqlLibraryInfo> libraryInfos = [];
+        List<CqlLibraryInfo> cqlLibraryInfos = [];
 
         try
         {
@@ -86,8 +86,8 @@ internal static class CqlAssemblyInfoReader
 
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
-                if (ReadLibraryInfo(metadata, metadata.GetTypeDefinition(typeHandle)) is { } libraryInfo)
-                    libraryInfos.Add(libraryInfo);
+                if (ReadLibraryInfo(metadata, metadata.GetTypeDefinition(typeHandle)) is { } cqlLibraryInfo)
+                    cqlLibraryInfos.Add(cqlLibraryInfo);
             }
         }
         catch (Exception exception) when (exception is not (BadImageFormatException or OutOfMemoryException))
@@ -97,7 +97,7 @@ internal static class CqlAssemblyInfoReader
             throw new BadImageFormatException("The bytes are not a readable .NET assembly.", exception);
         }
 
-        return new CqlAssemblyInfo(assemblyBinary, assemblyName, libraryInfos);
+        return new CqlAssemblyInfo(assemblyBinary, assemblyName, cqlLibraryInfos);
     }
 
     /// <summary>
@@ -121,8 +121,8 @@ internal static class CqlAssemblyInfoReader
 
         return cqlLibrary is { } library
                && generatedCode is { } generator
-               && CqlLibraryTypeRule.TryCreateLibraryInfo(library.Identifier, library.Version, generator.Tool, generator.Version, out var libraryInfo)
-            ? libraryInfo
+               && CqlLibraryTypeRule.TryCreateLibraryInfo(library.Identifier, library.Version, generator.Tool, generator.Version, out var cqlLibraryInfo)
+            ? cqlLibraryInfo
             : null;
     }
 

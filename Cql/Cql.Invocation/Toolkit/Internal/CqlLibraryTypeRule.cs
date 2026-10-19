@@ -29,16 +29,16 @@ internal static class CqlLibraryTypeRule
     /// Reads the CQL library that a loaded type declares, through reflection.
     /// </summary>
     /// <param name="type">The type to read.</param>
-    /// <param name="libraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
+    /// <param name="cqlLibraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
     /// <returns><see langword="false"/> when the type is not a CQL library the code generator wrote.</returns>
     public static bool TryGetLibraryInfo(
         Type type,
-        [NotNullWhen(true)] out CqlLibraryInfo? libraryInfo)
+        [NotNullWhen(true)] out CqlLibraryInfo? cqlLibraryInfo)
     {
-        libraryInfo = null;
+        cqlLibraryInfo = null;
         return type.GetCustomAttribute<CqlLibraryAttribute>() is { } cqlLibrary
                && type.GetCustomAttribute<GeneratedCodeAttribute>() is { } generatedCode
-               && TryCreateLibraryInfo(cqlLibrary.Identifier, cqlLibrary.Version, generatedCode.Tool, generatedCode.Version, out libraryInfo);
+               && TryCreateLibraryInfo(cqlLibrary.Identifier, cqlLibrary.Version, generatedCode.Tool, generatedCode.Version, out cqlLibraryInfo);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ internal static class CqlLibraryTypeRule
     /// <param name="version">The library version the <see cref="CqlLibraryAttribute"/> names.</param>
     /// <param name="tool">The tool the <see cref="GeneratedCodeAttribute"/> names.</param>
     /// <param name="generatorVersion">The version the <see cref="GeneratedCodeAttribute"/> names.</param>
-    /// <param name="libraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
+    /// <param name="cqlLibraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
     /// <returns>
     /// <see langword="false"/> when another tool wrote the type, when the generator version does not parse, or when the
     /// identifier and version do not form a library identifier.
@@ -59,15 +59,15 @@ internal static class CqlLibraryTypeRule
         string? version,
         string? tool,
         string? generatorVersion,
-        [NotNullWhen(true)] out CqlLibraryInfo? libraryInfo)
+        [NotNullWhen(true)] out CqlLibraryInfo? cqlLibraryInfo)
     {
-        libraryInfo = null;
+        cqlLibraryInfo = null;
         if (!IsGeneratorToolName(tool)
             || !Version.TryParse(generatorVersion, out var generatorToolVersion)
             || !TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
             return false;
 
-        libraryInfo = new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion);
+        cqlLibraryInfo = new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion);
         return true;
     }
 

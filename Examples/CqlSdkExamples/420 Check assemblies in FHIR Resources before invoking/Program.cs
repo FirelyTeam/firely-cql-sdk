@@ -49,23 +49,23 @@ partial class Program
                 continue;
 
             // Reads the assembly's metadata without loading it, and never throws.
-            if (!InvocationToolkit.TryReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes), out var assemblyInfo))
+            if (!InvocationToolkit.TryReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes), out var cqlAssemblyInfo))
             {
                 Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment is not a readable .NET assembly.");
                 continue;
             }
 
-            foreach (var library in assemblyInfo.Libraries.Values)
+            foreach (var cqlLibraryInfo in cqlAssemblyInfo.Libraries.Values)
             {
                 Console.WriteLine(
-                    $"{library.LibraryIdentifier}: written by code generator {library.GeneratorToolVersion}, " +
-                    (library.IsSupported ? "supported." : "not supported: compile it from its ELM instead."));
+                    $"{cqlLibraryInfo.LibraryIdentifier}: written by code generator {cqlLibraryInfo.GeneratorToolVersion}, " +
+                    (cqlLibraryInfo.IsSupported ? "supported." : "not supported: compile it from its ELM instead."));
             }
 
             // Load only the assemblies whose libraries this toolkit runs. The result carries the assembly it was read
             // from, so the check and the load use the same bytes.
-            if (assemblyInfo.IsSupported)
-                supportedAssemblies.Add(assemblyInfo.AssemblyBinary);
+            if (cqlAssemblyInfo.IsSupported)
+                supportedAssemblies.Add(cqlAssemblyInfo.AssemblyBinary);
         }
 
         using var librarySetInvoker = new InvocationToolkit(loggerFactory)

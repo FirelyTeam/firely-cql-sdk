@@ -58,13 +58,13 @@ public class CqlAssemblyInfoReaderTests
     [TestMethod]
     public void ReadCqlAssemblyInfo_OfAnAssemblyTheElmToolkitCompiles_ReturnsItsLibraryWithTheCurrentGeneratorVersion()
     {
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(GeneratedLibrary.Value.assembly);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(GeneratedLibrary.Value.assembly);
 
-        assemblyInfo.Libraries.Should().HaveCount(1)
+        cqlAssemblyInfo.Libraries.Should().HaveCount(1)
                     .And.ContainKey(LibraryIdentifier)
                     .WhoseValue.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
-        assemblyInfo.AssemblyName.Name.Should().NotBeNullOrEmpty();
-        assemblyInfo.IsSupported.Should().BeTrue();
+        cqlAssemblyInfo.AssemblyName.Name.Should().NotBeNullOrEmpty();
+        cqlAssemblyInfo.IsSupported.Should().BeTrue();
     }
 
     [TestMethod]
@@ -72,9 +72,9 @@ public class CqlAssemblyInfoReaderTests
     {
         var assemblyBinary = new AssemblyBinary(GeneratedLibrary.Value.assembly.AssemblyBytes, [1, 2, 3]);
 
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assemblyBinary);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assemblyBinary);
 
-        assemblyInfo.AssemblyBinary.Should().BeSameAs(assemblyBinary);
+        cqlAssemblyInfo.AssemblyBinary.Should().BeSameAs(assemblyBinary);
     }
 
     [TestMethod]
@@ -85,21 +85,21 @@ public class CqlAssemblyInfoReaderTests
             LibraryType("First", "FirstLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"),
             LibraryType("Second", "SecondLibrary", "2.0.0", GeneratorToolName, "5.1.0.0"));
 
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        assemblyInfo.AssemblyName.Name.Should().Be("TwoGeneratedLibraries");
-        assemblyInfo.Libraries.Should().HaveCount(2);
-        assemblyInfo.IsSupported.Should().BeFalse("SecondLibrary was written by an unsupported generator version");
+        cqlAssemblyInfo.AssemblyName.Name.Should().Be("TwoGeneratedLibraries");
+        cqlAssemblyInfo.Libraries.Should().HaveCount(2);
+        cqlAssemblyInfo.IsSupported.Should().BeFalse("SecondLibrary was written by an unsupported generator version");
 
-        assemblyInfo.Libraries.TryGetValue(Identifier("FirstLibrary", "1.0.0"), out var first).Should().BeTrue();
+        cqlAssemblyInfo.Libraries.TryGetValue(Identifier("FirstLibrary", "1.0.0"), out var first).Should().BeTrue();
         first!.GeneratorToolVersion.Should().Be(new Version(6, 0, 0, 0));
         first.IsSupported.Should().BeTrue();
 
-        assemblyInfo.Libraries.TryGetValue(Identifier("SecondLibrary", "2.0.0"), out var second).Should().BeTrue();
+        cqlAssemblyInfo.Libraries.TryGetValue(Identifier("SecondLibrary", "2.0.0"), out var second).Should().BeTrue();
         second!.GeneratorToolVersion.Should().Be(new Version(5, 1, 0, 0));
         second.IsSupported.Should().BeFalse();
 
-        assemblyInfo.Libraries.TryGetValue(Identifier("ThirdLibrary", "1.0.0"), out var third).Should().BeFalse();
+        cqlAssemblyInfo.Libraries.TryGetValue(Identifier("ThirdLibrary", "1.0.0"), out var third).Should().BeFalse();
         third.Should().BeNull();
     }
 
@@ -118,8 +118,8 @@ public class CqlAssemblyInfoReaderTests
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).IsSupported.Should().BeFalse("the assembly holds no CQL library to run");
 
-        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var assemblyInfo).Should().BeTrue();
-        assemblyInfo!.Libraries.Should().BeEmpty();
+        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var cqlAssemblyInfo).Should().BeTrue();
+        cqlAssemblyInfo!.Libraries.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -128,9 +128,9 @@ public class CqlAssemblyInfoReaderTests
         const string assemblyName = "CqlLibraryInfoTest_NotLoaded";
         var assembly = RecompileWithGeneratorVersion(LibrarySetCSharpCodeGenerator.GeneratorToolVersion, assemblyName);
 
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        assemblyInfo.AssemblyName.Name.Should().Be(assemblyName);
+        cqlAssemblyInfo.AssemblyName.Name.Should().Be(assemblyName);
         AssemblyLoadContext.All
                            .SelectMany(context => context.Assemblies)
                            .Should().NotContain(loaded => loaded.GetName().Name == assemblyName);
@@ -175,11 +175,11 @@ public class CqlAssemblyInfoReaderTests
         var assembly = GeneratedLibrary.Value.assembly;
         var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var assemblyInfo).Should().BeTrue();
+        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var cqlAssemblyInfo).Should().BeTrue();
 
-        assemblyInfo!.AssemblyBinary.Should().BeSameAs(read.AssemblyBinary);
-        assemblyInfo.AssemblyName.FullName.Should().Be(read.AssemblyName.FullName);
-        assemblyInfo.Libraries.Should().Equal(read.Libraries);
+        cqlAssemblyInfo!.AssemblyBinary.Should().BeSameAs(read.AssemblyBinary);
+        cqlAssemblyInfo.AssemblyName.FullName.Should().Be(read.AssemblyName.FullName);
+        cqlAssemblyInfo.Libraries.Should().Equal(read.Libraries);
     }
 
     [TestMethod]
@@ -197,11 +197,11 @@ public class CqlAssemblyInfoReaderTests
 
         foreach (var (because, assembly) in cases)
         {
-            CqlAssemblyInfo? assemblyInfo = null;
-            var tryRead = () => InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out assemblyInfo);
+            CqlAssemblyInfo? cqlAssemblyInfo = null;
+            var tryRead = () => InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out cqlAssemblyInfo);
 
             tryRead.Should().NotThrow(because).Which.Should().BeFalse(because);
-            assemblyInfo.Should().BeNull(because);
+            cqlAssemblyInfo.Should().BeNull(because);
         }
     }
 
@@ -231,20 +231,20 @@ public class CqlAssemblyInfoReaderTests
     public void IsGeneratorToolVersionSupported_AgreesWithWhetherTheInvokerLoadsTheLibrary(string generatorVersion, bool expectedLoaded)
     {
         var assembly = RecompileWithGeneratorVersion(generatorVersion, $"CqlLibraryInfoTest_{generatorVersion.Replace('.', '_')}");
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        var libraryInfo = assemblyInfo.Libraries.Should().HaveCount(1)
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().HaveCount(1)
                                       .And.ContainKey(LibraryIdentifier)
                                       .WhoseValue;
 
         using var invoker = new InvocationToolkit()
-                            .AddAssemblyBinaries([assemblyInfo.AssemblyBinary])
+                            .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
                             .CreateLibrarySetInvoker();
         var loaded = invoker.LibraryInvokers.ContainsKey(LibraryIdentifier);
 
         loaded.Should().Be(expectedLoaded);
         InvocationToolkit.IsGeneratorToolVersionSupported(Version.Parse(generatorVersion)).Should().Be(loaded);
-        libraryInfo.IsSupported.Should().Be(loaded);
-        assemblyInfo.IsSupported.Should().Be(loaded);
+        cqlLibraryInfo.IsSupported.Should().Be(loaded);
+        cqlAssemblyInfo.IsSupported.Should().Be(loaded);
     }
 
     [TestMethod]
@@ -257,18 +257,18 @@ public class CqlAssemblyInfoReaderTests
             generatorVersion,
             $"CqlLibraryInfoTest_Legacy_{generatorVersion.Replace('.', '_')}",
             LibrarySetCSharpCodeGenerator.LegacyGeneratorToolName);
-        var assemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        var libraryInfo = assemblyInfo.Libraries.Should().HaveCount(1)
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().HaveCount(1)
                                       .And.ContainKey(LibraryIdentifier)
                                       .WhoseValue;
 
         using var invoker = new InvocationToolkit()
-                            .AddAssemblyBinaries([assemblyInfo.AssemblyBinary])
+                            .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
                             .CreateLibrarySetInvoker();
 
-        libraryInfo.GeneratorToolVersion.Should().Be(Version.Parse(generatorVersion));
-        libraryInfo.IsSupported.Should().Be(expectedLoaded);
-        assemblyInfo.IsSupported.Should().Be(expectedLoaded);
+        cqlLibraryInfo.GeneratorToolVersion.Should().Be(Version.Parse(generatorVersion));
+        cqlLibraryInfo.IsSupported.Should().Be(expectedLoaded);
+        cqlAssemblyInfo.IsSupported.Should().Be(expectedLoaded);
         invoker.LibraryInvokers.ContainsKey(LibraryIdentifier).Should().Be(expectedLoaded);
     }
 

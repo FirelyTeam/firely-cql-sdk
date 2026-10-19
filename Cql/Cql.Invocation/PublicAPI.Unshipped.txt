@@ -21,4 +21,4 @@ static Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.operator !=(Hl7.Cql.Invocation.
 static Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo? left, Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo? right) -> bool
 static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.IsGeneratorToolVersionSupported(System.Version! generatorToolVersion) -> bool
 static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.ReadCqlAssemblyInfo(Hl7.Cql.CodeGeneration.NET.AssemblyBinary! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo!
-static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.TryReadCqlAssemblyInfo(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? assemblyBinary, out Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo? assemblyInfo) -> bool
+static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.TryReadCqlAssemblyInfo(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? assemblyBinary, out Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo? cqlAssemblyInfo) -> bool
