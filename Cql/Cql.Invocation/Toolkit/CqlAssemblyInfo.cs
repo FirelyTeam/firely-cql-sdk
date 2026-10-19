@@ -13,7 +13,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 
 /// <summary>
 /// An assembly and the CQL libraries that the code generator wrote into it, as read from the assembly's metadata
-/// by <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/>.
+/// by <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/>, or why its bytes could not be read.
 /// </summary>
 /// <remarks>
 /// Holds the <see cref="Hl7.Cql.CodeGeneration.NET.AssemblyBinary"/> it was read from, so that a host can check
@@ -21,9 +21,23 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// the assembly in memory for as long as this instance is: to keep only the outcome of the check, keep the
 /// <see cref="CqlLibraryInfo"/> values of <see cref="Libraries"/> instead.
 /// </remarks>
-[DebuggerDisplay("{AssemblyName.Name,nq}: {Libraries.Count} CQL libraries")]
+[DebuggerDisplay("{AssemblyName?.Name ?? Error?.Message,nq}: {Libraries.Count} CQL libraries")]
 public sealed class CqlAssemblyInfo
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CqlAssemblyInfo"/> class for an assembly whose bytes could
+    /// not be read.
+    /// </summary>
+    /// <param name="assemblyBinary">The assembly that could not be read.</param>
+    /// <param name="error">Why its bytes could not be read.</param>
+    internal CqlAssemblyInfo(AssemblyBinary assemblyBinary, Exception error)
+    {
+        AssemblyBinary = assemblyBinary;
+        Error = error;
+        HasErrors = true;
+        Libraries = FrozenDictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo>.Empty;
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlAssemblyInfo"/> class.
     /// </summary>
@@ -61,12 +75,24 @@ public sealed class CqlAssemblyInfo
 
     /// <summary>
     /// Gets the identity of the assembly the libraries were read from, as its metadata states it.
+    /// <see langword="null"/> when its bytes could not be read: see <see cref="Error"/>.
     /// </summary>
-    public AssemblyName AssemblyName { get; }
+    public AssemblyName? AssemblyName { get; }
+
+    /// <summary>
+    /// Gets why the bytes of <see cref="AssemblyBinary"/> could not be read, or <see langword="null"/> when they were.
+    /// </summary>
+    /// <remarks>
+    /// A <see cref="BadImageFormatException"/> when the bytes are not a .NET assembly, are a module without an
+    /// assembly manifest, or hold metadata that cannot be read. <see cref="Libraries"/> is then empty, and the toolkit
+    /// cannot load the assembly. An error in one library is reported on that library instead, through
+    /// <see cref="CqlLibraryInfo.Error"/>.
+    /// </remarks>
+    public Exception? Error { get; }
 
     /// <summary>
     /// Gets the libraries the code generator wrote into the assembly, by their identifier and version.
-    /// Empty when the assembly holds no library the code generator wrote.
+    /// Empty when the assembly holds no library the code generator wrote, or when its bytes could not be read.
     /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo> Libraries { get; }
 
@@ -75,16 +101,19 @@ public sealed class CqlAssemblyInfo
     /// the assembly holds at least one, and <see cref="CqlLibraryInfo.IsSupported"/> is <see langword="true"/> for each.
     /// </summary>
     /// <remarks>
-    /// <see langword="false"/> for an assembly that holds no CQL library, because the toolkit has nothing to run from it.
-    /// Check whether <see cref="Libraries"/> is empty to tell that apart from an assembly whose libraries the toolkit
-    /// does not run. A supported generator version is necessary for the toolkit to run a library, but not sufficient:
-    /// loading it can still fail for other reasons, such as a missing dependency.
+    /// <see langword="false"/> for an assembly that holds no CQL library, because the toolkit has nothing to run from it,
+    /// and for one whose bytes could not be read. Check <see cref="Error"/> and whether <see cref="Libraries"/> is
+    /// empty to tell those apart from an assembly whose libraries the toolkit does not run. A supported generator
+    /// version is necessary for the toolkit to run a library, but not sufficient: loading it can still fail for other
+    /// reasons, such as a missing dependency.
     /// </remarks>
+    [MemberNotNullWhen(true, nameof(AssemblyName))]
     public bool IsSupported { get; }
 
     /// <summary>
-    /// Gets whether any library in the assembly has an <see cref="CqlLibraryInfo.Error"/>: the assembly declares it in
-    /// a way the toolkit does not accept, so the toolkit skips it while it loads the assembly's other libraries.
+    /// Gets whether the assembly has an <see cref="Error"/>, or any of its libraries has a
+    /// <see cref="CqlLibraryInfo.Error"/>: the assembly declares that library in a way the toolkit does not accept,
+    /// so the toolkit skips it while it loads the assembly's other libraries.
     /// </summary>
     public bool HasErrors { get; }
 }

@@ -1,7 +1,8 @@
 #nullable enable
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.AssemblyBinary.get -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
-Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.AssemblyName.get -> System.Reflection.AssemblyName!
+Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.AssemblyName.get -> System.Reflection.AssemblyName?
+Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.Error.get -> System.Exception?
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.HasErrors.get -> bool
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.IsSupported.get -> bool
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.Libraries.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo!>!
@@ -24,4 +25,3 @@ static Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.operator !=(Hl7.Cql.Invocation.
 static Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo? left, Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo? right) -> bool
 static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.IsGeneratorToolVersionSupported(System.Version! generatorToolVersion) -> bool
 static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.ReadCqlAssemblyInfo(Hl7.Cql.CodeGeneration.NET.AssemblyBinary! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo!
-static Hl7.Cql.Invocation.Toolkit.InvocationToolkit.TryReadCqlAssemblyInfo(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? assemblyBinary, out Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo? cqlAssemblyInfo) -> bool

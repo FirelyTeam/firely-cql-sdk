@@ -46,10 +46,12 @@ partial class Program
                 || fhirLibrary.Content.FirstOrDefault(IsAssemblyAttachment)?.Data is not { } assemblyBytes)
                 continue;
 
-            // Reads the assembly's metadata without loading it, and never throws.
-            if (!InvocationToolkit.TryReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes), out var cqlAssemblyInfo))
+            // Reads the assembly's metadata without loading it. Bytes that are not a readable .NET assembly give a
+            // result with an Error, rather than an exception.
+            var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes));
+            if (cqlAssemblyInfo.Error is { } error)
             {
-                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment is not a readable .NET assembly.");
+                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment cannot be read: {error.Message}");
                 continue;
             }
 
@@ -57,7 +59,9 @@ partial class Program
             {
                 Console.WriteLine(
                     $"{cqlLibraryInfo.LibraryIdentifier}: written by code generator {cqlLibraryInfo.GeneratorToolVersion}, " +
-                    (cqlLibraryInfo.IsSupported ? "supported." : "not supported: compile it from its ELM instead."));
+                    (cqlLibraryInfo.Error is { } libraryError ? $"cannot be used: {libraryError.Message}"
+                     : cqlLibraryInfo.IsSupported ? "supported."
+                     : "not supported: compile it from its ELM instead."));
             }
 
             // Load only the assemblies whose libraries this toolkit runs. The result carries the assembly it was read

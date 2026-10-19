@@ -84,7 +84,9 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.Libraries.Should().HaveCount(1)
                     .And.ContainKey(LibraryIdentifier)
                     .WhoseValue.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
-        cqlAssemblyInfo.AssemblyName.FullName.Should().Be(LoadedAssemblyName(GeneratedLibrary.Value.assembly).FullName);
+        cqlAssemblyInfo.AssemblyName!.FullName.Should().Be(LoadedAssemblyName(GeneratedLibrary.Value.assembly).FullName);
+        cqlAssemblyInfo.Error.Should().BeNull();
+        cqlAssemblyInfo.HasErrors.Should().BeFalse();
         cqlAssemblyInfo.IsSupported.Should().BeTrue();
     }
 
@@ -108,7 +110,7 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.AssemblyName.Name.Should().Be("TwoGeneratedLibraries");
+        cqlAssemblyInfo.AssemblyName!.Name.Should().Be("TwoGeneratedLibraries");
         cqlAssemblyInfo.Libraries.Should().HaveCount(2);
         cqlAssemblyInfo.IsSupported.Should().BeFalse("SecondLibrary was written by an unsupported generator version");
 
@@ -122,11 +124,6 @@ public class CqlAssemblyInfoReaderTests
 
         cqlAssemblyInfo.Libraries.TryGetValue(Identifier("ThirdLibrary", "1.0.0"), out var third).Should().BeFalse();
         third.Should().BeNull();
-
-        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var tryRead).Should().BeTrue();
-        tryRead!.AssemblyName.FullName.Should().Be(cqlAssemblyInfo.AssemblyName.FullName);
-        tryRead.Libraries.Should().Equal(cqlAssemblyInfo.Libraries);
-        tryRead.IsSupported.Should().Be(cqlAssemblyInfo.IsSupported);
     }
 
     [TestMethod]
@@ -141,11 +138,12 @@ public class CqlAssemblyInfoReaderTests
             """,
             "public class NotGenerated { }");
 
-        InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
-        InvocationToolkit.ReadCqlAssemblyInfo(assembly).IsSupported.Should().BeFalse("the assembly holds no CQL library to run");
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var cqlAssemblyInfo).Should().BeTrue();
-        cqlAssemblyInfo!.Libraries.Should().BeEmpty();
+        cqlAssemblyInfo.Libraries.Should().BeEmpty();
+        cqlAssemblyInfo.IsSupported.Should().BeFalse("the assembly holds no CQL library to run");
+        cqlAssemblyInfo.Error.Should().BeNull();
+        cqlAssemblyInfo.HasErrors.Should().BeFalse();
     }
 
     [TestMethod]
@@ -156,7 +154,7 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.AssemblyName.Name.Should().Be(assemblyName);
+        cqlAssemblyInfo.AssemblyName!.Name.Should().Be(assemblyName);
         AssemblyLoadContext.All
                            .SelectMany(context => context.Assemblies)
                            .Should().NotContain(loaded => loaded.GetName().Name == assemblyName);
@@ -263,20 +261,54 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    public void ReadCqlAssemblyInfo_OfAModuleWithoutAnAssemblyManifest_ThrowsBadImageFormatException()
+    public void ReadCqlAssemblyInfo_OfAModuleWithoutAnAssemblyManifest_ReportsABadImageFormatError()
     {
-        var read = () => InvocationToolkit.ReadCqlAssemblyInfo(ModuleWithoutAnAssemblyManifest());
+        var assembly = ModuleWithoutAnAssemblyManifest();
 
-        read.Should().Throw<BadImageFormatException>();
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>()
+                       .Which.Message.Should().Contain("without an assembly manifest");
+        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
     }
 
     [TestMethod]
     [DynamicData(nameof(BytesThatAreNotAnAssembly))]
-    public void ReadCqlAssemblyInfo_OfBytesThatAreNotAnAssembly_ThrowsBadImageFormatException(byte[] bytes)
+    public void ReadCqlAssemblyInfo_OfBytesThatAreNotAnAssembly_ReportsABadImageFormatError(byte[] bytes)
     {
-        var read = () => InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(bytes));
+        var assembly = new AssemblyBinary(bytes);
 
-        read.Should().Throw<BadImageFormatException>();
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>();
+        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfATruncatedAssembly_NeverThrows()
+    {
+        var assemblyBytes = GeneratedLibrary.Value.assembly.AssemblyBytes!;
+        var step = Math.Max(1, assemblyBytes.Length / 200);
+
+        for (var length = 0; length < assemblyBytes.Length; length += step)
+        {
+            var truncated = new AssemblyBinary(assemblyBytes[..length]);
+            var read = () => InvocationToolkit.ReadCqlAssemblyInfo(truncated);
+
+            read.Should().NotThrow($"for the first {length} of {assemblyBytes.Length} bytes");
+        }
+
+        // Cut inside the PE headers, the read fails.
+        InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes[..64]))
+                         .Error.Should().BeOfType<BadImageFormatException>();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfANullAssemblyBinary_ThrowsArgumentNullException()
+    {
+        var read = () => InvocationToolkit.ReadCqlAssemblyInfo(null!);
+
+        read.Should().Throw<ArgumentNullException>().WithParameterName("assemblyBinary");
     }
 
     [TestMethod]
@@ -285,59 +317,6 @@ public class CqlAssemblyInfoReaderTests
         var read = () => InvocationToolkit.ReadCqlAssemblyInfo(AssemblyBinary.Default);
 
         read.Should().Throw<ArgumentException>().WithParameterName("assemblyBinary");
-    }
-
-    [TestMethod]
-    public void TryReadCqlAssemblyInfo_OfAnAssemblyThatReads_ReturnsTheSameResultAsRead()
-    {
-        var assembly = GeneratedLibrary.Value.assembly;
-        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-
-        InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out var cqlAssemblyInfo).Should().BeTrue();
-
-        cqlAssemblyInfo!.AssemblyBinary.Should().BeSameAs(read.AssemblyBinary);
-        cqlAssemblyInfo.AssemblyName.FullName.Should().Be(read.AssemblyName.FullName);
-        cqlAssemblyInfo.Libraries.Should().Equal(read.Libraries);
-    }
-
-    [TestMethod]
-    public void TryReadCqlAssemblyInfo_WhereReadThrows_ReturnsFalseWithoutThrowing()
-    {
-        (string because, AssemblyBinary? assembly)[] cases =
-        [
-            ("a null assembly binary", null),
-            ("an assembly binary without assembly bytes", AssemblyBinary.Default),
-            ("an empty array", new AssemblyBinary(Array.Empty<byte>())),
-            ("bytes that are not an assembly", new AssemblyBinary("This is not an assembly."u8.ToArray())),
-            ("a module without an assembly manifest", ModuleWithoutAnAssemblyManifest()),
-        ];
-
-        foreach (var (because, assembly) in cases)
-        {
-            CqlAssemblyInfo? cqlAssemblyInfo = null;
-            var tryRead = () => InvocationToolkit.TryReadCqlAssemblyInfo(assembly, out cqlAssemblyInfo);
-
-            tryRead.Should().NotThrow(because).Which.Should().BeFalse(because);
-            cqlAssemblyInfo.Should().BeNull(because);
-        }
-    }
-
-    [TestMethod]
-    public void TryReadCqlAssemblyInfo_OfATruncatedAssembly_NeverThrows()
-    {
-        var assemblyBytes = GeneratedLibrary.Value.assembly.AssemblyBytes!;
-        var step = Math.Max(1, assemblyBytes.Length / 200);
-
-        for (var length = 0; length < assemblyBytes.Length; length += step)
-        {
-            var truncated = new AssemblyBinary(assemblyBytes[..length]);
-            var tryRead = () => InvocationToolkit.TryReadCqlAssemblyInfo(truncated, out _);
-
-            tryRead.Should().NotThrow($"for the first {length} of {assemblyBytes.Length} bytes");
-        }
-
-        // Cut inside the PE headers, the read fails.
-        InvocationToolkit.TryReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes[..64]), out _).Should().BeFalse();
     }
 
     [TestMethod]
@@ -500,6 +479,19 @@ public class CqlAssemblyInfoReaderTests
         {
             loadContext.Unload();
         }
+    }
+
+    /// <summary>
+    /// Asserts that a result for bytes that could not be read holds nothing besides its
+    /// <see cref="CqlAssemblyInfo.Error"/> and the assembly binary it was given.
+    /// </summary>
+    private static void ShouldHoldNothingButTheError(CqlAssemblyInfo cqlAssemblyInfo, AssemblyBinary assembly)
+    {
+        cqlAssemblyInfo.AssemblyBinary.Should().BeSameAs(assembly);
+        cqlAssemblyInfo.AssemblyName.Should().BeNull();
+        cqlAssemblyInfo.Libraries.Should().BeEmpty();
+        cqlAssemblyInfo.IsSupported.Should().BeFalse();
+        cqlAssemblyInfo.HasErrors.Should().BeTrue();
     }
 
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>

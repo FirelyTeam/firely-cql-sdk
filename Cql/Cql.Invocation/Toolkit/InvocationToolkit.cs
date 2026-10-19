@@ -84,7 +84,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// The libraries the assembly holds, each with the version of the code generator that wrote it, together with
     /// <paramref name="assemblyBinary"/> itself, ready to pass to <see cref="AddAssemblyBinaries"/>. Its
     /// <see cref="CqlAssemblyInfo.Libraries"/> are empty when the assembly holds no library the code
-    /// generator wrote.
+    /// generator wrote, and when its bytes could not be read, which <see cref="CqlAssemblyInfo.Error"/> then says.
     /// </returns>
     /// <remarks>
     /// <para>
@@ -93,9 +93,15 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <see cref="CreateLibrarySetInvoker(string)"/> applies to the types it loads.
     /// </para>
     /// <para>
+    /// The bytes themselves need not be readable. Bytes that are not a .NET assembly, are a module without an
+    /// assembly manifest, or hold metadata that cannot be read give a result whose
+    /// <see cref="CqlAssemblyInfo.Error"/> says so, rather than an exception, so that a host can check an assembly it
+    /// received from elsewhere without guarding the call.
+    /// </para>
+    /// <para>
     /// A library the assembly declares in a way this toolkit does not accept is still listed, with an
-    /// <see cref="CqlLibraryInfo.Error"/>, and the rest of the assembly is still read: see
-    /// <see cref="CqlAssemblyInfo.HasErrors"/>.
+    /// <see cref="CqlLibraryInfo.Error"/>, and the rest of the assembly is still read.
+    /// <see cref="CqlAssemblyInfo.HasErrors"/> says whether the assembly or any of its libraries has an error.
     /// </para>
     /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
@@ -104,36 +110,8 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="assemblyBinary"/> holds no assembly bytes.</exception>
-    /// <exception cref="BadImageFormatException">
-    /// The bytes are not a .NET assembly, are a module without an assembly manifest, or hold metadata that
-    /// cannot be read.
-    /// </exception>
-    /// <seealso cref="TryReadCqlAssemblyInfo"/>
     public static CqlAssemblyInfo ReadCqlAssemblyInfo(AssemblyBinary assemblyBinary) =>
         CqlAssemblyInfoReader.Read(assemblyBinary);
-
-    /// <summary>
-    /// Tries to read the CQL libraries that the code generator wrote into an assembly, from the assembly's
-    /// metadata, without loading the assembly and without throwing.
-    /// </summary>
-    /// <param name="assemblyBinary">
-    /// The assembly, such as one built from the <c>+dll</c> attachment of a FHIR Library. Its debug symbols are not
-    /// read, only carried to the result.
-    /// </param>
-    /// <param name="cqlAssemblyInfo">
-    /// The libraries the assembly holds, together with <paramref name="assemblyBinary"/> itself, when it can be read;
-    /// otherwise, <see langword="null"/>.
-    /// </param>
-    /// <returns>
-    /// <see langword="false"/> wherever <see cref="ReadCqlAssemblyInfo"/> throws, including for a null
-    /// <paramref name="assemblyBinary"/> or one that holds no assembly bytes; <see langword="true"/> otherwise,
-    /// including for an assembly that holds no library the code generator wrote. Call
-    /// <see cref="ReadCqlAssemblyInfo"/> to learn why a read failed.
-    /// </returns>
-    public static bool TryReadCqlAssemblyInfo(
-        AssemblyBinary? assemblyBinary,
-        [NotNullWhen(true)] out CqlAssemblyInfo? cqlAssemblyInfo) =>
-        CqlAssemblyInfoReader.TryRead(assemblyBinary, out cqlAssemblyInfo);
 
     /// <inheritdoc />
     [EditorBrowsable(EditorBrowsableState.Advanced)]

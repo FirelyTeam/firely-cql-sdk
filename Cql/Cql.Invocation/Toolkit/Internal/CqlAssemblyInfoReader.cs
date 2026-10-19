@@ -46,10 +46,10 @@ internal static class CqlAssemblyInfoReader
     /// </summary>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="assemblyBinary"/> holds no assembly bytes.</exception>
-    /// <exception cref="BadImageFormatException">The bytes are not a .NET assembly, or its metadata cannot be read.</exception>
     /// <remarks>
-    /// A library declared in a way the toolkit does not accept is reported through <see cref="CqlLibraryInfo.Error"/>,
-    /// and the rest of the assembly is still read.
+    /// Bytes that cannot be read are reported through <see cref="CqlAssemblyInfo.Error"/>, and a library declared in a
+    /// way the toolkit does not accept through <see cref="CqlLibraryInfo.Error"/>, while the rest of the assembly is
+    /// still read.
     /// </remarks>
     public static CqlAssemblyInfo Read(AssemblyBinary assemblyBinary)
     {
@@ -57,29 +57,13 @@ internal static class CqlAssemblyInfoReader
         if (assemblyBinary.AssemblyBytes is not { } assemblyBytes)
             throw new ArgumentException("The assembly binary holds no assembly bytes.", nameof(assemblyBinary));
 
-        return ReadCore(assemblyBinary, assemblyBytes);
-    }
-
-    /// <summary>
-    /// Reads the CQL libraries that the code generator wrote into an assembly, returning <see langword="false"/>
-    /// wherever <see cref="Read"/> throws.
-    /// </summary>
-    public static bool TryRead(
-        AssemblyBinary? assemblyBinary,
-        [NotNullWhen(true)] out CqlAssemblyInfo? cqlAssemblyInfo)
-    {
-        cqlAssemblyInfo = null;
-        if (assemblyBinary?.AssemblyBytes is not { } assemblyBytes)
-            return false;
-
         try
         {
-            cqlAssemblyInfo = ReadCore(assemblyBinary, assemblyBytes);
-            return true;
+            return ReadCore(assemblyBinary, assemblyBytes);
         }
-        catch (BadImageFormatException)
+        catch (BadImageFormatException exception)
         {
-            return false;
+            return new CqlAssemblyInfo(assemblyBinary, exception);
         }
     }
 

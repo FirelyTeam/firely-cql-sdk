@@ -5,11 +5,12 @@
   `AssemblyBinary` it was read from, and `Libraries`: one `CqlLibraryInfo` per library, keyed by the library's
   identifier, each with the version of the code generator that wrote it and whether the toolkit runs that version.
   `CqlAssemblyInfo.IsSupported` is true when the assembly holds at least one CQL library and the toolkit runs them all.
-  A library the assembly declares in a way the toolkit does not accept, such as a type that carries two
-  `CqlLibraryAttribute`s or a library two types declare, is listed with a `CqlLibraryInfo.Error` while the rest of the
-  assembly is still read, and `CqlAssemblyInfo.HasErrors` says whether there is any. `TryReadCqlAssemblyInfo` does the
-  same without throwing, for an assembly a host received from elsewhere, such as the `+dll` attachment of a FHIR
-  Library. `InvocationToolkit.IsGeneratorToolVersionSupported(Version)` answers whether the toolkit runs code from a
+  Bytes that cannot be read, such as an assembly a host received from elsewhere in the `+dll` attachment of a FHIR
+  Library, do not throw: the result's `CqlAssemblyInfo.Error` says why, and it lists no libraries. A library the
+  assembly declares in a way the toolkit does not accept, such as a type that carries two `CqlLibraryAttribute`s or a
+  library two types declare, is listed with a `CqlLibraryInfo.Error` while the rest of the assembly is still read.
+  `CqlAssemblyInfo.HasErrors` says whether the assembly or any of its libraries has an error.
+  `InvocationToolkit.IsGeneratorToolVersionSupported(Version)` answers whether the toolkit runs code from a
   given generator version, and `CreateLibrarySetInvoker` applies the same rules. A host can therefore check a library
   before loading it, reject it or compile it from its ELM instead, and pass `CqlAssemblyInfo.AssemblyBinary` to
   `AddAssemblyBinaries` when it is supported. (#1824)
