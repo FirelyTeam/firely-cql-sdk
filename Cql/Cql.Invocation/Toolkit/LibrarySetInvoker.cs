@@ -113,14 +113,14 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
             foreach (var cqlLibraryInfo in cqlLibraryInfos)
             {
                 // A type whose library has an error or an unsupported generator version is skipped anyway, so it
-                // does not stop another type that declares the same library from loading.
+                // does not stop another type that declares the same library from loading. A type declares a library
+                // it would load at most once, as declaring it twice is an error, so a type is never counted twice.
                 if (!cqlLibraryInfo.IsSupported)
                     continue;
 
                 if (!declaringTypesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var declaringTypes))
                     declaringTypesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, declaringTypes = []);
-                if (!declaringTypes.Contains(type))
-                    declaringTypes.Add(type);
+                declaringTypes.Add(type);
             }
         }
 

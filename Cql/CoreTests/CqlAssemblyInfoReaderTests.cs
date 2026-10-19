@@ -245,6 +245,30 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfManyTypesThatDeclareOneLibrary_NamesThemAllAsTheInvokerDoes()
+    {
+        const int typeCount = 20_000;
+        var builder = new MetadataAssembly("ManyTypesOneLibrary");
+        for (var index = 0; index < typeCount; index++)
+            builder.AddLibraryAttributes(builder.AddType($"Copy{index}"), "SharedLibrary");
+
+        var assembly = builder.Build();
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        cqlAssemblyInfo.Libraries.Should().ContainSingle()
+                       .Which.Value.ReadError.Should().BeOfType<CqlLibraryDeclaredByMoreThanOneTypeError>()
+                       .Which.TypeNames.Should().HaveCount(typeCount).And.StartWith("Copy0").And.EndWith($"Copy{typeCount - 1}");
+        invoker.LibraryInvokers.Should().BeEmpty();
+        warnings.Should().ContainSingle(warning => warning.Contains("'Copy0'") && warning.Contains($"'Copy{typeCount - 1}'"));
+    }
+
+    [TestMethod]
     [DataRow(false, DisplayName = "supported type first")]
     [DataRow(true, DisplayName = "unsupported type first")]
     public void ReadCqlAssemblyInfo_OfALibraryASupportedAndAnUnsupportedTypeDeclare_ReportsTheSupportedOneAsTheInvokerLoadsIt(bool unsupportedFirst)

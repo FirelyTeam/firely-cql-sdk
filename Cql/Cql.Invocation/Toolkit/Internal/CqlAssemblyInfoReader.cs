@@ -228,8 +228,10 @@ internal static class CqlAssemblyInfoReader
                 libraries.Add((cqlLibraryInfo, []));
             }
 
+            // A type declares a library it would load at most once, as declaring it twice is an error, so a type is
+            // never counted twice.
             var loadableTypes = libraries[index].LoadableTypes;
-            if (!cqlLibraryInfo.IsSupported || loadableTypes.Exists(type => type.TypeHandle == typeHandle))
+            if (!cqlLibraryInfo.IsSupported)
                 continue;
 
             if (loadableTypes.Count == 0)
