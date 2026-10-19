@@ -68,7 +68,7 @@ public readonly record struct CqlModuleWithoutManifestError(string ModuleName) :
 /// <param name="AssemblyName">The full name of the assembly.</param>
 /// <param name="TypeName">The full name of the type, as <see cref="Type.FullName"/> gives it.</param>
 /// <param name="AttributeName">The name of the attribute type.</param>
-public readonly record struct CqlLibraryAttributeValueError(string AssemblyName, string TypeName, string AttributeName)
+public readonly record struct CqlLibraryTypeWithMalformedAttributeError(string AssemblyName, string TypeName, string AttributeName)
     : ICqlAssemblyInfoError
 {
     /// <inheritdoc />

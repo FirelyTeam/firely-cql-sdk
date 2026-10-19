@@ -361,7 +361,7 @@ public class CqlAssemblyInfoReaderTests
         };
 
         cqlAssemblyInfo.ReadError.Should().Be(
-            new CqlLibraryAttributeValueError(
+            new CqlLibraryTypeWithMalformedAttributeError(
                 InvocationToolkit.ReadCqlAssemblyInfo(original).AssemblyName!.FullName,
                 "CorruptProlog",
                 "CqlLibraryAttribute"));
@@ -402,7 +402,7 @@ public class CqlAssemblyInfoReaderTests
         };
 
         cqlAssemblyInfo.ReadError.Should().Be(
-            new CqlLibraryAttributeValueError(
+            new CqlLibraryTypeWithMalformedAttributeError(
                 InvocationToolkit.ReadCqlAssemblyInfo(original).AssemblyName!.FullName,
                 "NamedArgumentCount",
                 "CqlLibraryAttribute"));

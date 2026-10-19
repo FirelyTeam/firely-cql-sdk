@@ -86,7 +86,7 @@ public sealed class CqlAssemblyInfo
     /// <remarks>
     /// One of the <see cref="ICqlAssemblyInfoError"/> values: <see cref="CqlAssemblyUnreadableError"/>,
     /// <see cref="CqlAssemblyWithoutMetadataError"/>, <see cref="CqlModuleWithoutManifestError"/> or
-    /// <see cref="CqlLibraryAttributeValueError"/>. <see cref="Libraries"/> is then empty, and the toolkit cannot load
+    /// <see cref="CqlLibraryTypeWithMalformedAttributeError"/>. <see cref="Libraries"/> is then empty, and the toolkit cannot load
     /// the assembly. An error in one library is reported on that library instead, through
     /// <see cref="CqlLibraryInfo.ReadError"/>.
     /// </remarks>

@@ -84,7 +84,7 @@ internal static class CqlAssemblyInfoReader
                     declarations.Add((typeHandle, typeName, cqlLibraryInfo));
             }
         }
-        catch (CqlException<CqlLibraryAttributeValueError> exception)
+        catch (CqlException<CqlLibraryTypeWithMalformedAttributeError> exception)
         {
             return new CqlAssemblyInfo(assemblyBinary, exception.Error);
         }
@@ -241,7 +241,7 @@ internal static class CqlAssemblyInfoReader
     /// because neither attribute has a member that one could set.
     /// </summary>
     /// <exception cref="CqlException{TError}">
-    /// A <see cref="CqlLibraryAttributeValueError"/>: the value blob does not start with the prolog, or does not end
+    /// A <see cref="CqlLibraryTypeWithMalformedAttributeError"/>: the value blob does not start with the prolog, or does not end
     /// with a count of no named arguments, which makes the assembly's metadata corrupt. Reflection then fails to read
     /// the attribute, so the invoker cannot load the assembly.
     /// </exception>
@@ -254,11 +254,11 @@ internal static class CqlAssemblyInfoReader
     {
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            throw new CqlLibraryAttributeValueError(assemblyName, typeName, attributeName).ToException();
+            throw new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
 
         var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
         if (value.RemainingBytes < 2 || value.ReadUInt16() != 0)
-            throw new CqlLibraryAttributeValueError(assemblyName, typeName, attributeName).ToException();
+            throw new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
 
         return arguments;
     }
