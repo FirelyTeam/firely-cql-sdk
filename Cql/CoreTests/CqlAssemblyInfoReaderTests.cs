@@ -268,6 +268,24 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    [DataRow(GeneratorToolName)]
+    [DataRow(LibrarySetCSharpCodeGenerator.LegacyGeneratorToolName)]
+    public void CreateLibrarySetInvoker_KeepsTheSameLibraryInfoAsReadFromMetadata(string tool)
+    {
+        var assembly = RecompileWithGeneratorVersion(
+            "6.0.0.0",
+            $"CqlLibraryInfoTest_SameInfo_{(tool == GeneratorToolName ? "Current" : "Legacy")}",
+            tool);
+        var readFromMetadata = InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries[LibraryIdentifier];
+
+        using var invoker = new InvocationToolkit()
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        invoker.LibraryInvokers[LibraryIdentifier].LibraryInfo.Should().Be(readFromMetadata);
+    }
+
+    [TestMethod]
     public void CreateLibrarySetInvoker_SkippingAnUnsupportedLibrary_WarnsWithTheLibraryAndTheSupportedRange()
     {
         var assembly = RecompileWithGeneratorVersion("5.0.0.0", "CqlLibraryInfoTest_Warning");

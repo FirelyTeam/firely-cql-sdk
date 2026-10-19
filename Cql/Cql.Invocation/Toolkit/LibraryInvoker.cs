@@ -33,6 +33,17 @@ public abstract class LibraryInvoker
     public LibrarySetInvoker LibrarySetInvoker { get; }
 
     /// <summary>
+    /// Gets the CQL library this invoker was created from, as its type's attributes declare it, with the version of the
+    /// code generator that wrote it.
+    /// </summary>
+    /// <remarks>
+    /// <see langword="null"/> for an invoker that <see cref="TryCreateFromType"/> did not create. For one it did, this
+    /// equals the entry <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> reads for the same type from the
+    /// assembly's metadata.
+    /// </remarks>
+    internal CqlLibraryInfo? LibraryInfo { get; private set; }
+
+    /// <summary>
     /// A convenience property to get the library set name.
     /// </summary>
     public string LibrarySetName => LibrarySetInvoker.LibrarySetName;
@@ -146,7 +157,16 @@ public abstract class LibraryInvoker
             return false;
         }
 
-        return LibraryInstanceInvoker_6_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker);
+        if (!LibraryInstanceInvoker_6_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
+            return false;
+
+        libraryInvoker.LibraryInfo = libraryInfo;
+        logger?.LogDebug(
+            "Loaded CQL library {lib} from type {type}, which code generator version {ver} wrote.",
+            libraryInfo.LibraryIdentifier,
+            libraryType.FullName,
+            libraryInfo.GeneratorToolVersion);
+        return true;
     }
 
 
