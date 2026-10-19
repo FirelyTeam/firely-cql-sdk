@@ -359,6 +359,98 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfACqlLibraryAttributeValueWithoutANamedArgumentCount_ReadsItAsReflectionDoes()
+    {
+        var builder = new MetadataAssembly("NoNamedArgumentCount");
+        var type = builder.AddType("Library");
+        builder.AddGeneratedCode(type);
+        builder.AddAttribute(
+            type,
+            typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute),
+            MetadataAssembly.TwoStringConstructorSignature,
+            AttributeValue("NoCountLibrary", "1.0.0")[..^2]);
+        var assembly = builder.Build();
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        read.ReadError.Should().BeNull();
+        read.Libraries.Values.Should().Equal(new CqlLibraryInfo(Identifier("NoCountLibrary", "1.0.0"), Version.Parse(CurrentGeneratorVersion)));
+        LibraryInfosByReflection(assembly).Should().Equal(read.Libraries.Values);
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfACqlLibraryAttributeValueWithBytesAfterItsNamedArgumentCount_ReportsAnErrorAsReflectionThrows()
+    {
+        var builder = new MetadataAssembly("BytesAfterNamedArgumentCount");
+        var type = builder.AddType("Library");
+        builder.AddGeneratedCode(type);
+        builder.AddAttribute(
+            type,
+            typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute),
+            MetadataAssembly.TwoStringConstructorSignature,
+            [.. AttributeValue("TrailingLibrary", "1.0.0"), 0x00]);
+        var assembly = builder.Build();
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var readByReflection = () => LibraryInfosByReflection(assembly);
+
+        read.ReadError.Should().BeOfType<CqlLibraryTypeWithMalformedAttributeError>()
+            .Which.TypeName.Should().Be("Library");
+        readByReflection.Should().Throw<CustomAttributeFormatException>();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfACqlLibraryAttributeWithAnotherConstructor_ReportsAnErrorAsReflectionThrows()
+    {
+        var builder = new MetadataAssembly("ThreeStringConstructor");
+        var type = builder.AddType("Library");
+        builder.AddGeneratedCode(type);
+        builder.AddAttribute(
+            type,
+            typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute),
+            [0x20, 0x03, 0x01, 0x0E, 0x0E, 0x0E],
+            [0x01, 0x00, .. SerializedString("ThreeLibrary"), .. SerializedString("1.0.0"), .. SerializedString(""), 0x00, 0x00]);
+        var assembly = builder.Build();
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var readByReflection = () => LibraryInfosByReflection(assembly);
+
+        read.ReadError.Should().BeOfType<CqlLibraryTypeWithMalformedAttributeError>()
+            .Which.AttributeName.Should().Be("CqlLibraryAttribute");
+        readByReflection.Should().Throw<MissingMethodException>();
+    }
+
+    [TestMethod]
+    [DataRow("System.Runtime")]
+    [DataRow("System")]
+    [DataRow("System.Diagnostics.Tools")]
+    [DataRow("netstandard")]
+    public void ReadCqlAssemblyInfo_OfAGeneratedCodeAttributeReferencedThroughAForwardingAssembly_ReadsItAsReflectionDoes(string generatedCodeAssembly)
+    {
+        var builder = new MetadataAssembly($"GeneratedCodeThrough{generatedCodeAssembly.Replace(".", "")}");
+        var type = builder.AddType("Library");
+        builder.AddGeneratedCode(type, generatedCodeAssembly);
+        builder.AddCqlLibrary(type, "ForwardedLibrary", "1.0.0");
+        var assembly = builder.Build();
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        read.Libraries.Values.Should().Equal(new CqlLibraryInfo(Identifier("ForwardedLibrary", "1.0.0"), Version.Parse(CurrentGeneratorVersion)));
+        LibraryInfosByReflection(assembly).Should().Equal(read.Libraries.Values);
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_IgnoresTheAttributesOfTheModuleType_AsReflectionDoes()
+    {
+        var builder = new MetadataAssembly("AttributesOnTheModuleType");
+        builder.AddLibraryAttributes(MetadataAssembly.ModuleType, "ModuleLibrary");
+        var assembly = builder.Build();
+
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
+        LibraryInfosByReflection(assembly).Should().BeEmpty();
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_OfAnAssemblyWithAMalformedPublicKey_ReportsAnUnreadableError()
     {
         var builder = new MetadataAssembly("MalformedPublicKey", AssemblyFlags.PublicKey, publicKey: [1, 2, 3]);
@@ -962,7 +1054,10 @@ public class CqlAssemblyInfoReaderTests
     /// </summary>
     private sealed class MetadataAssembly
     {
-        private static readonly byte[] TwoStringConstructorSignature = [0x20, 0x02, 0x01, 0x0E, 0x0E];
+        /// <summary>
+        /// The signature of a constructor that takes two strings.
+        /// </summary>
+        public static readonly byte[] TwoStringConstructorSignature = [0x20, 0x02, 0x01, 0x0E, 0x0E];
         private static readonly FieldDefinitionHandle NoFields = MetadataTokens.FieldDefinitionHandle(1);
         private static readonly MethodDefinitionHandle NoMethods = MetadataTokens.MethodDefinitionHandle(1);
 
@@ -1035,6 +1130,19 @@ public class CqlAssemblyInfoReaderTests
                     constructor = TwoStringConstructor(assemblyName, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute)));
 
             _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(AttributeValue(GeneratorToolName, CurrentGeneratorVersion)));
+        }
+
+        /// <summary>
+        /// Adds an attribute of <paramref name="attributeType"/> through a constructor of the given signature, with the
+        /// given value blob, whether or not either is one the attribute type has.
+        /// </summary>
+        public void AddAttribute(TypeDefinitionHandle type, Type attributeType, byte[] constructorSignature, byte[] value)
+        {
+            var constructor = _metadata.AddMemberReference(
+                TypeReference(attributeType.Assembly.GetName(), attributeType),
+                _metadata.GetOrAddString(".ctor"),
+                _metadata.GetOrAddBlob(constructorSignature));
+            _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(value));
         }
 
         /// <summary>

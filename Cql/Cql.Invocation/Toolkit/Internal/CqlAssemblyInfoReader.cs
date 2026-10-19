@@ -8,6 +8,7 @@
 
 using System.Buffers;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -32,13 +33,26 @@ internal static class CqlAssemblyInfoReader
         (typeof(CqlLibraryAttribute).Namespace!, typeof(CqlLibraryAttribute).Name);
 
     /// <summary>
-    /// The assemblies a reference to <see cref="GeneratedCodeAttribute"/> may resolve to: the runtime assembly that
+    /// The assemblies a reference to <see cref="GeneratedCodeAttribute"/> may name: the runtime assembly that
     /// defines it, which code compiled against the runtime's own assemblies references, and the reference and facade
-    /// assemblies that forward to it.
+    /// assemblies of the runtime that forward it there.
     /// </summary>
     private static readonly FrozenSet<string> GeneratedCodeAttributeAssemblies =
-        new[] { typeof(GeneratedCodeAttribute).Assembly.GetName().Name!, "System.Runtime", "netstandard", "mscorlib" }
-            .ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+        new[]
+        {
+            typeof(GeneratedCodeAttribute).Assembly.GetName().Name!,
+            "System.Runtime",
+            "System",
+            "System.Diagnostics.Tools",
+            "netstandard",
+        }.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// The signature of a constructor that takes two strings, as both <see cref="GeneratedCodeAttribute"/> and
+    /// <see cref="CqlLibraryAttribute"/> have: an instance method of two parameters that returns nothing.
+    /// </summary>
+    private static ReadOnlySpan<byte> TwoStringConstructorSignature =>
+        [(byte)SignatureAttributes.Instance, 2, (byte)SignatureTypeCode.Void, (byte)SignatureTypeCode.String, (byte)SignatureTypeCode.String];
 
     /// <summary>
     /// The assembly a reference to <see cref="CqlLibraryAttribute"/> resolves to.
@@ -86,6 +100,11 @@ internal static class CqlAssemblyInfoReader
             var typeNames = new TypeNames(metadata);
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
+                // The first type is the module's own <Module> type, which reflection never returns among the
+                // assembly's types.
+                if (MetadataTokens.GetRowNumber(typeHandle) == 1)
+                    continue;
+
                 foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, typeHandle, assemblyFullName, typeNames))
                     declarations.Add((typeHandle, typeNames.Get(typeHandle), cqlLibraryInfo));
             }
@@ -262,20 +281,26 @@ internal static class CqlAssemblyInfoReader
     /// because neither attribute has a member that one could set.
     /// </summary>
     /// <returns>
-    /// The two arguments, or <see langword="null"/> for a value that does not start with the prolog, or does not end
-    /// with a count of no named arguments, which makes the assembly's metadata corrupt.
+    /// The two arguments, or <see langword="null"/> where reflection cannot read the attribute either: its
+    /// constructor is not the one that takes two strings, its value does not start with the prolog, or what follows
+    /// the two arguments is neither nothing nor a count of no named arguments.
     /// </returns>
     private static (string? First, string? Second)? ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
     {
+        var constructor = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
+        if (!metadata.StringComparer.Equals(constructor.Name, ".ctor")
+            || !metadata.GetBlobContent(constructor.Signature).AsSpan().SequenceEqual(TwoStringConstructorSignature))
+            return null;
+
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
             return null;
 
         var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
-        if (value.RemainingBytes < 2 || value.ReadUInt16() != 0)
-            return null;
 
-        return arguments;
+        // Reflection reads a value that ends right after the arguments, or with a count of no named arguments and
+        // nothing after it, and rejects any other.
+        return value.RemainingBytes == 0 || (value.RemainingBytes == 2 && value.ReadUInt16() == 0) ? arguments : null;
     }
 
     /// <summary>
