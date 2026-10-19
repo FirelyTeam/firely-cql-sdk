@@ -13,9 +13,22 @@
 
 > **Upgrading?** Here is the short version:
 >
-> - **Breaking changes:** Generated library types carry `[GeneratedCode("Hl7.Cql.CodeGeneration.NET", …)]` instead of `".NET Code Generation"`, a name releases before 2.17.0 do not recognize; `CreateLibrarySetInvoker` skips a misdeclared library with a logged error instead of throwing; the CQL-to-ELM translator applies the quantity in `X within Q of Y` with a point `Y`, and writes 1-based, end-inclusive `locator` strings; packaging embeds the ELM JSON a library was read from as its `application/elm+json` attachment instead of re-serializing it; the compiler no longer merges duplicate definitions in hand-edited ELM.
-> - **Required migrations:** Re-verify measure output — a large number of fixes in this release move CQL evaluation results. Re-package to pick up the code generator fixes: `GeneratorToolVersion` moves `6.0.0.0` → `6.1.0.0`, inside the invoker's `[6.0.0.0, 7.0.0.0)`, so artifacts packaged with 2.16.0 keep loading, but artifacts packaged with 2.17.0 need a 2.17.0 runtime — upgrade runtime and generated content together. A host that compares the generator tool name itself must accept the new name, or call `InvocationToolkit.ReadCqlAssemblyInfo`. If you reference the Firely .NET SDK directly, move it to `6.8.0` in the same step.
-> - **Highlights:** Packaging is several times faster: the `dqm-content-qicore-2025` library set packages in about a fifth of the time, at about a third of the peak memory. `InvocationToolkit.ReadCqlAssemblyInfo` checks the CQL libraries in an assembly, and the generator that wrote them, without loading it. The QICore and US Core model infos now ship with the SDK.
+> - **Breaking changes:**
+>   - **Code generator** — generated library types carry `[GeneratedCode("Hl7.Cql.CodeGeneration.NET", …)]` instead of `".NET Code Generation"`. Releases before 2.17.0 do not recognize the new name.
+>   - **Invocation toolkit** — `CreateLibrarySetInvoker` skips a misdeclared library with a logged error instead of throwing.
+>   - **CQL-to-ELM translator** — `X within Q of Y` with a point `Y` applies the quantity, and `locator` strings are 1-based and end-inclusive.
+>   - **Packaging** — the `application/elm+json` attachment is the ELM JSON the library was read from, not a re-serialization.
+>   - **Compiler** — duplicate definitions in hand-edited ELM are no longer merged.
+> - **Required migrations:**
+>   1. Re-verify measure output: a large number of fixes in this release move CQL evaluation results.
+>   2. Re-package to pick up the code generator fixes (`GeneratorToolVersion` `6.0.0.0` → `6.1.0.0`), and upgrade runtime and generated content together: artifacts packaged with 2.16.0 still load on 2.17.0, but artifacts packaged with 2.17.0 need a 2.17.0 runtime.
+>   3. If your host compares the generator tool name itself, accept the new name or call `InvocationToolkit.ReadCqlAssemblyInfo`.
+>   4. If you reference the Firely .NET SDK directly, move it to `6.8.0` in the same step.
+> - **Highlights:**
+>   - Packaging is several times faster: the `dqm-content-qicore-2025` library set packages in about a fifth of the time, at about a third of the peak memory.
+>   - A library whose included libraries are available only as ELM, such as FHIRHelpers loaded from its published ELM, is packaged and gets its data requirements.
+>   - `InvocationToolkit.ReadCqlAssemblyInfo` checks the CQL libraries in an assembly, and the generator that wrote them, without loading it.
+>   - The QICore and US Core model infos ship with the SDK.
 
 ---
 
