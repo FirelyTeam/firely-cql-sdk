@@ -106,9 +106,15 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// </para>
     /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
-    /// it can still fail for other reasons, such as a missing dependency. Nor can this method see another assembly
-    /// added to the same toolkit that declares the same library, which makes <see cref="CreateLibrarySetInvoker(string)"/>
-    /// skip both copies: it reads one assembly at a time.
+    /// it can still fail for reasons that the assembly's metadata does not show. Those include a missing dependency,
+    /// a reference to a newer version of an SDK assembly than this host runs, an <c>ILibrary</c> that states another
+    /// library than its <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> declares, and another assembly added
+    /// to the same toolkit that declares the same library, which this method cannot see, as it reads one assembly at a
+    /// time.
+    /// </para>
+    /// <para>
+    /// For metadata that no compiler writes, this method still never throws, and reports what it detects, but it
+    /// cannot foresee everything that loading such an assembly would do.
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>

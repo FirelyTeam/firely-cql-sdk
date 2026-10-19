@@ -12,7 +12,8 @@
   `CqlAssemblyInfo.HasReadErrors` says whether the assembly or any of its libraries has an error. The errors are values
   in the new `Hl7.Cql.Invocation.Toolkit.Errors` namespace, one struct per kind of error carrying its details, such as
   the assembly name, the library and the types. They implement `ICqlAssemblyInfoError` or `ICqlLibraryInfoError`, both
-  `ICqlError`s, so `GetMessage()` describes any of them, and two reads of the same assembly give equal errors.
+  `ICqlError`s, so `GetMessage()` describes any of them. A library's errors compare by value, so two reads of the
+  same assembly give equal libraries.
   `InvocationToolkit.IsGeneratorToolVersionSupported(Version)` answers whether the toolkit runs code from a
   given generator version, and `CreateLibrarySetInvoker` applies the same rules. A host can therefore check a library
   before loading it, reject it or compile it from its ELM instead, and pass `CqlAssemblyInfo.AssemblyBinary` to
@@ -28,8 +29,17 @@
   instead. The generated C# otherwise does not change. (#1824)
 - **Invocation toolkit** — `CreateLibrarySetInvoker` now skips, with an error in the log, a library type that carries
   more than one `CqlLibraryAttribute` or `GeneratedCodeAttribute`, and every type of a library that more than one type
-  declares, and loads the other libraries. That includes one library in two assemblies added to the same toolkit,
-  such as `FHIRHelpers` compiled into the `+dll` of two FHIR Libraries: both copies are skipped.
-  `ReadCqlAssemblyInfo` reads one assembly at a time, so it reports each copy as supported, and a host that adds
-  several assemblies has to look for an identifier they share itself. Before, any of these made
-  `CreateLibrarySetInvoker` throw (`AmbiguousMatchException` or `ArgumentException`) and no library loaded. (#1824)
+  declares, counting only the types that would otherwise load, and loads the other libraries. Before, these made
+  `CreateLibrarySetInvoker` throw (`AmbiguousMatchException` or `ArgumentException`) and no library loaded. That
+  includes one library in two differently named assemblies added to the same toolkit: both copies are skipped, while
+  `ReadCqlAssemblyInfo`, which reads one assembly at a time, reports each as supported. Two assemblies of the same
+  name, as the SDK names the assembly it compiles for a library after that library, still make
+  `CreateLibrarySetInvoker` throw when it loads the second, as before. (#1824)
+- **Invocation toolkit** — Which types count as CQL libraries changes in a few edge cases, so that a host reading an
+  assembly's metadata and `CreateLibrarySetInvoker` agree:
+  - a generator version with fewer than four components compares as if padded with zeros, so `6.0` now loads and
+    `7.0` no longer does;
+  - only the SDK's own `CqlLibraryAttribute` counts, not an attribute type derived from it;
+  - a `CqlLibraryAttribute` with an empty identifier no longer declares a library;
+  - a type whose `ILibrary` states another library than its `CqlLibraryAttribute` declares is skipped, with an error
+    in the log. (#1824)

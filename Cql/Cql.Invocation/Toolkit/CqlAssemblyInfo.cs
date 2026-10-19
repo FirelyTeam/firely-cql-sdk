@@ -113,9 +113,9 @@ public sealed class CqlAssemblyInfo
     public bool IsSupported { get; }
 
     /// <summary>
-    /// Gets whether the assembly has a <see cref="ReadError"/>, or any of its libraries has a
-    /// <see cref="CqlLibraryInfo.ReadError"/>: the assembly declares that library in a way the toolkit does not accept,
-    /// so the toolkit skips it while it loads the assembly's other libraries.
+    /// Gets whether the assembly has a <see cref="ReadError"/>, which makes the toolkit unable to load it, or any of
+    /// its libraries has a <see cref="CqlLibraryInfo.ReadError"/>: the assembly declares that library in a way the
+    /// toolkit does not accept, so the toolkit skips it while it loads the assembly's other libraries.
     /// </summary>
     public bool HasReadErrors { get; }
 }
