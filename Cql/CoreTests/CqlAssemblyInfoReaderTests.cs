@@ -19,6 +19,7 @@ using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Errors;
+using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -407,6 +408,31 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_IgnoresAnAttributeDerivedFromCqlLibraryAttribute_AsTheInvokerDoes()
+    {
+        var assembly = Compile(
+            "DerivedCqlLibraryAttribute",
+            """
+            public sealed class LocalCqlLibraryAttribute : Hl7.Cql.Abstractions.CqlLibraryAttribute
+            {
+                public LocalCqlLibraryAttribute(string identifier, string version) : base(identifier, version) { }
+            }
+            """,
+            $$"""
+            [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "{{CurrentGeneratorVersion}}")]
+            [Hl7.Cql.Abstractions.CqlLibrary("DerivedAttributeLibrary", "1.0.0")]
+            [LocalCqlLibrary("OtherLibrary", "1.0.0")]
+            public class WithDerivedAttribute { }
+            """);
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Values;
+        var reflected = LibraryInfosByReflection(assembly, "WithDerivedAttribute");
+
+        read.Should().Equal(new CqlLibraryInfo(Identifier("DerivedAttributeLibrary", "1.0.0"), Version.Parse(CurrentGeneratorVersion)));
+        reflected.Should().Equal(read);
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeDefinedInTheAssembly_AsTheInvokerDoes()
     {
         var assembly = Compile(
@@ -686,6 +712,24 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.Libraries.Should().BeEmpty();
         cqlAssemblyInfo.IsSupported.Should().BeFalse();
         cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
+    }
+
+    /// <summary>
+    /// The libraries that <see cref="CqlLibraryTypeRule.GetLibraryInfos"/>, the invoker's read through reflection,
+    /// finds on a type of <paramref name="assembly"/>, loaded in a collectible context of its own.
+    /// </summary>
+    private static List<CqlLibraryInfo> LibraryInfosByReflection(AssemblyBinary assembly, string typeName)
+    {
+        var loadContext = new AssemblyLoadContext(nameof(LibraryInfosByReflection), isCollectible: true);
+        try
+        {
+            var type = loadContext.LoadFromStream(new MemoryStream(assembly.AssemblyBytes!)).GetType(typeName, throwOnError: true)!;
+            return CqlLibraryTypeRule.GetLibraryInfos(type);
+        }
+        finally
+        {
+            loadContext.Unload();
+        }
     }
 
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>

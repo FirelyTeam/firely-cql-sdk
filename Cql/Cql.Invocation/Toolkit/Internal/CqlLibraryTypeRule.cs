@@ -33,7 +33,12 @@ internal static class CqlLibraryTypeRule
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
         foreach (var cqlLibrary in type.GetCustomAttributes<CqlLibraryAttribute>(inherit: false))
-            cqlLibraries.Add((cqlLibrary.Identifier, cqlLibrary.Version));
+        {
+            // Only the SDK's attribute type itself counts, not one derived from it, as the metadata reader sees only
+            // that type. GeneratedCodeAttribute is sealed, so it needs no such check.
+            if (cqlLibrary.GetType() == typeof(CqlLibraryAttribute))
+                cqlLibraries.Add((cqlLibrary.Identifier, cqlLibrary.Version));
+        }
 
         if (cqlLibraries.Count == 0)
             return [];
