@@ -125,7 +125,7 @@ namespace Hl7.Cql.Conversion
             var year = new Dictionary<string, Func<decimal, decimal>>
             {
                 {  UCUMUnits.Day, (decimal value) => value * ConversionConstants.DaysPerYear },
-                {  UCUMUnits.Month, (decimal value) => value / 12m },
+                {  UCUMUnits.Month, (decimal value) => value * 12m },
                 {  UCUMUnits.Week, (decimal value) => (value* ConversionConstants.DaysPerYear) * 0.14285714285m /* 1/7 */ },
             };
             Conversions.Add(UCUMUnits.Year, year);
@@ -133,7 +133,7 @@ namespace Hl7.Cql.Conversion
             var month = new Dictionary<string, Func<decimal, decimal>>
             {
                 {  UCUMUnits.Day, (decimal value) => value * ConversionConstants.DaysPerMonth },
-                {  UCUMUnits.Year, (decimal value) => value * 12m },
+                {  UCUMUnits.Year, (decimal value) => value / 12m },
                 {  UCUMUnits.Week, (decimal value) => (value * ConversionConstants.DaysPerMonth) * 0.14285714285m /* 1/7 */ },
             };
             Conversions.Add(UCUMUnits.Month, month);
