@@ -17,6 +17,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Invocation.Toolkit.Internal;
@@ -491,6 +492,31 @@ public class CqlAssemblyInfoReaderTests
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
         LibraryInfosByReflection(assembly).Should().BeEmpty();
     }
+
+    [TestMethod]
+    public void ReadErrors_OfTheirDefaultValues_DescribeThemselvesWithoutThrowing()
+    {
+        ICqlError[] defaultErrors =
+        [
+            default(CqlAssemblyUnreadableError),
+            default(CqlAssemblyWithoutMetadataError),
+            default(CqlModuleWithoutManifestError),
+            default(CqlLibraryTypeWithMalformedAttributeError),
+            default(CqlLibraryTypeWithMoreThanOneAttributeError),
+            default(CqlLibraryDeclaredByMoreThanOneTypeError),
+        ];
+
+        foreach (var defaultError in defaultErrors)
+        {
+            var describe = () => (defaultError.GetMessage(), defaultError.ToString(), defaultError.GetHashCode());
+            describe.Should().NotThrow(defaultError.GetType().Name);
+        }
+    }
+
+    [TestMethod]
+    public void CqlLibraryDeclaredByMoreThanOneTypeError_ToString_ListsTheTypeNames() =>
+        new CqlLibraryDeclaredByMoreThanOneTypeError("SomeAssembly", Identifier("SomeLibrary", "1.0.0"), ["First", "Second"])
+            .ToString().Should().Contain("TypeNames = [First, Second]");
 
     [TestMethod]
     public void ReadCqlAssemblyInfo_OfAnAssemblyWithAMalformedPublicKey_ReportsAnUnreadableError()

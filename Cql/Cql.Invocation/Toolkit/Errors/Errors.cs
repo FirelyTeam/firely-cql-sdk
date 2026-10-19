@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Text;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Errors;
@@ -21,13 +22,17 @@ namespace Hl7.Cql.Invocation.Toolkit.Errors;
 /// <param name="Exception">
 /// What reading the bytes threw, mostly a <see cref="BadImageFormatException"/>, with its stack trace.
 /// </param>
+/// <remarks>
+/// Unlike the other errors, this one holds an <see cref="System.Exception"/>, which compares by reference, so two
+/// reads of the same bytes give unequal instances.
+/// </remarks>
 public readonly record struct CqlAssemblyUnreadableError(string? AssemblyName, Exception Exception) : ICqlAssemblyInfoError
 {
     /// <inheritdoc />
     public string GetMessage() =>
         AssemblyName is null
-            ? $"The bytes are not a readable .NET assembly: {Exception.Message}"
-            : $"The metadata of assembly '{AssemblyName}' cannot be read: {Exception.Message}";
+            ? $"The bytes are not a readable .NET assembly: {Exception?.Message}"
+            : $"The metadata of assembly '{AssemblyName}' cannot be read: {Exception?.Message}";
 }
 
 /// <summary>
@@ -137,5 +142,16 @@ public readonly record struct CqlLibraryDeclaredByMoreThanOneTypeError(
         foreach (var typeName in TypeNames.AsSpan())
             hashCode.Add(typeName);
         return hashCode.ToHashCode();
+    }
+
+    /// <summary>
+    /// Lists the type names in <see cref="ToString"/>, which would otherwise show only the type of the array.
+    /// </summary>
+    private bool PrintMembers(StringBuilder builder)
+    {
+        builder.Append("AssemblyName = ").Append(AssemblyName)
+               .Append(", LibraryIdentifier = ").Append(LibraryIdentifier)
+               .Append(", TypeNames = [").AppendJoin(", ", TypeNames.AsSpan().ToArray()).Append(']');
+        return true;
     }
 }
