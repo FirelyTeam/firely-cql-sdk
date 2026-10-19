@@ -39,15 +39,18 @@ public sealed class CqlAssemblyInfo
         AssemblyName = assemblyName;
 
         var libraries = new Dictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo>();
+        var allSupported = true;
         foreach (var libraryInfo in libraryInfos)
         {
             if (!libraries.TryAdd(libraryInfo.LibraryIdentifier, libraryInfo))
                 throw new InvalidOperationException(
                     $"Assembly '{assemblyName.Name}' holds more than one library type for CQL library '{libraryInfo.LibraryIdentifier}'.");
+
+            allSupported &= libraryInfo.IsSupported;
         }
 
         Libraries = libraries.ToFrozenDictionary();
-        IsSupported = Libraries.Count > 0 && Libraries.Values.All(library => library.IsSupported);
+        IsSupported = libraries.Count > 0 && allSupported;
     }
 
     /// <summary>
