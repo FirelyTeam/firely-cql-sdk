@@ -15,19 +15,29 @@ namespace Hl7.Cql.Invocation.Toolkit.Errors;
 /// The bytes are not a .NET assembly whose metadata can be read: they are not a PE file at all, or its metadata is
 /// corrupt.
 /// </summary>
-/// <param name="AssemblyName">
-/// The full name of the assembly, when its metadata could be read far enough to learn it; otherwise,
-/// <see langword="null"/>.
-/// </param>
-/// <param name="Exception">
-/// What reading the bytes threw, mostly a <see cref="BadImageFormatException"/>, with its stack trace.
-/// </param>
 /// <remarks>
 /// Unlike the other errors, this one holds an <see cref="System.Exception"/>, which compares by reference, so two
 /// reads of the same bytes give unequal instances.
 /// </remarks>
-public readonly record struct CqlAssemblyUnreadableError(string? AssemblyName, Exception Exception) : ICqlAssemblyInfoError
+public readonly record struct CqlAssemblyUnreadableError : ICqlAssemblyInfoError
 {
+    internal CqlAssemblyUnreadableError(string? assemblyName, Exception exception)
+    {
+        AssemblyName = assemblyName;
+        Exception = exception;
+    }
+
+    /// <summary>
+    /// Gets the full name of the assembly, when its metadata could be read far enough to learn it; otherwise,
+    /// <see langword="null"/>.
+    /// </summary>
+    public string? AssemblyName { get; }
+
+    /// <summary>
+    /// Gets what reading the bytes threw, mostly a <see cref="BadImageFormatException"/>, with its stack trace.
+    /// </summary>
+    public Exception Exception { get; }
+
     /// <inheritdoc />
     public string GetMessage() =>
         AssemblyName is null
@@ -52,9 +62,15 @@ public readonly record struct CqlAssemblyWithoutMetadataError : ICqlAssemblyInfo
 /// <summary>
 /// The bytes are a .NET module without an assembly manifest, which cannot be loaded on its own.
 /// </summary>
-/// <param name="ModuleName">The name of the module, as its metadata states it.</param>
-public readonly record struct CqlModuleWithoutManifestError(string ModuleName) : ICqlAssemblyInfoError
+public readonly record struct CqlModuleWithoutManifestError : ICqlAssemblyInfoError
 {
+    internal CqlModuleWithoutManifestError(string moduleName) => ModuleName = moduleName;
+
+    /// <summary>
+    /// Gets the name of the module, as its metadata states it.
+    /// </summary>
+    public string ModuleName { get; }
+
     /// <summary>
     /// Gets <see langword="null"/>: a module without an assembly manifest has no assembly name.
     /// </summary>
@@ -70,12 +86,30 @@ public readonly record struct CqlModuleWithoutManifestError(string ModuleName) :
 /// not start with the prolog <c>0x0001</c>, or it counts named arguments, which neither attribute has. Reflection cannot
 /// read that attribute either, so the toolkit cannot load the assembly.
 /// </summary>
-/// <param name="AssemblyName">The full name of the assembly.</param>
-/// <param name="TypeName">The full name of the type, as <see cref="Type.FullName"/> gives it.</param>
-/// <param name="AttributeName">The name of the attribute type.</param>
-public readonly record struct CqlLibraryTypeWithMalformedAttributeError(string AssemblyName, string TypeName, string AttributeName)
-    : ICqlAssemblyInfoError
+public readonly record struct CqlLibraryTypeWithMalformedAttributeError : ICqlAssemblyInfoError
 {
+    internal CqlLibraryTypeWithMalformedAttributeError(string assemblyName, string typeName, string attributeName)
+    {
+        AssemblyName = assemblyName;
+        TypeName = typeName;
+        AttributeName = attributeName;
+    }
+
+    /// <summary>
+    /// Gets the full name of the assembly.
+    /// </summary>
+    public string AssemblyName { get; }
+
+    /// <summary>
+    /// Gets the full name of the type, as <see cref="Type.FullName"/> gives it.
+    /// </summary>
+    public string TypeName { get; }
+
+    /// <summary>
+    /// Gets the name of the attribute type.
+    /// </summary>
+    public string AttributeName { get; }
+
     /// <inheritdoc />
     public string GetMessage() =>
         $"Type '{TypeName}' in assembly '{AssemblyName}' carries a {AttributeName} whose value is malformed, so "
@@ -86,16 +120,40 @@ public readonly record struct CqlLibraryTypeWithMalformedAttributeError(string A
 /// A type carries more than one <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> or
 /// <see cref="GeneratedCodeAttribute"/>, while a CQL library type carries exactly one of each.
 /// </summary>
-/// <param name="AssemblyName">The full name of the assembly that holds the type.</param>
-/// <param name="LibraryIdentifier">One of the libraries the type declares: each gets an error of its own.</param>
-/// <param name="TypeName">The full name of the type, as <see cref="Type.FullName"/> gives it.</param>
-/// <param name="AttributeName">The name of the attribute type it carries more than once.</param>
-public readonly record struct CqlLibraryTypeWithMoreThanOneAttributeError(
-    string AssemblyName,
-    CqlVersionedLibraryIdentifier LibraryIdentifier,
-    string TypeName,
-    string AttributeName) : ICqlLibraryInfoError
+public readonly record struct CqlLibraryTypeWithMoreThanOneAttributeError : ICqlLibraryInfoError
 {
+    internal CqlLibraryTypeWithMoreThanOneAttributeError(
+        string assemblyName,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        string typeName,
+        string attributeName)
+    {
+        AssemblyName = assemblyName;
+        LibraryIdentifier = libraryIdentifier;
+        TypeName = typeName;
+        AttributeName = attributeName;
+    }
+
+    /// <summary>
+    /// Gets the full name of the assembly that holds the type.
+    /// </summary>
+    public string AssemblyName { get; }
+
+    /// <summary>
+    /// Gets one of the libraries the type declares: each gets an error of its own.
+    /// </summary>
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
+
+    /// <summary>
+    /// Gets the full name of the type, as <see cref="Type.FullName"/> gives it.
+    /// </summary>
+    public string TypeName { get; }
+
+    /// <summary>
+    /// Gets the name of the attribute type it carries more than once.
+    /// </summary>
+    public string AttributeName { get; }
+
     /// <inheritdoc />
     public string GetMessage() =>
         $"Type '{TypeName}' in assembly '{AssemblyName}', which declares CQL library '{LibraryIdentifier}', carries "
@@ -105,22 +163,38 @@ public readonly record struct CqlLibraryTypeWithMoreThanOneAttributeError(
 /// <summary>
 /// More than one type declares the same CQL library, while a CQL library is declared by exactly one type.
 /// </summary>
-/// <param name="AssemblyName">
-/// The full name of the assembly that holds the types; <see langword="null"/> when they are in different assemblies.
-/// </param>
-/// <param name="LibraryIdentifier">The library that more than one type declares.</param>
-/// <param name="TypeNames">
-/// The full names of those types, as <see cref="Type.FullName"/> gives them. When they are in different assemblies,
-/// each is followed by the name of its assembly, as in <c>Namespace.Type, Assembly</c>.
-/// </param>
 /// <remarks>
 /// Two instances are equal when they name the same assembly, the same library and the same types in the same order.
 /// </remarks>
-public readonly record struct CqlLibraryDeclaredByMoreThanOneTypeError(
-    string? AssemblyName,
-    CqlVersionedLibraryIdentifier LibraryIdentifier,
-    ImmutableArray<string> TypeNames) : ICqlLibraryInfoError
+public readonly record struct CqlLibraryDeclaredByMoreThanOneTypeError : ICqlLibraryInfoError
 {
+    internal CqlLibraryDeclaredByMoreThanOneTypeError(
+        string? assemblyName,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        ImmutableArray<string> typeNames)
+    {
+        AssemblyName = assemblyName;
+        LibraryIdentifier = libraryIdentifier;
+        TypeNames = typeNames;
+    }
+
+    /// <summary>
+    /// Gets the full name of the assembly that holds the types; <see langword="null"/> when they are in different
+    /// assemblies.
+    /// </summary>
+    public string? AssemblyName { get; }
+
+    /// <summary>
+    /// Gets the library that more than one type declares.
+    /// </summary>
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
+
+    /// <summary>
+    /// Gets the full names of those types, as <see cref="Type.FullName"/> gives them. When they are in different
+    /// assemblies, each is followed by the name of its assembly, as in <c>Namespace.Type, Assembly</c>.
+    /// </summary>
+    public ImmutableArray<string> TypeNames { get; }
+
     /// <inheritdoc />
     public string GetMessage() =>
         $"CQL library '{LibraryIdentifier}' is declared by more than one type"

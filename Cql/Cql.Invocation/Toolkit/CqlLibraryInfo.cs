@@ -16,19 +16,29 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// A CQL library type that the code generator wrote, as read from an assembly's metadata by
 /// <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/>.
 /// </summary>
-/// <param name="LibraryIdentifier">The library's identifier and version, from its <see cref="CqlLibraryAttribute"/>.</param>
-/// <param name="GeneratorToolVersion">
-/// The version of the code generator that wrote the library, from its <see cref="GeneratedCodeAttribute"/>.
-/// </param>
 /// <remarks>
 /// Two instances are equal when their <see cref="LibraryIdentifier"/>, <see cref="GeneratorToolVersion"/> and
 /// <see cref="ReadError"/> are. The errors are values, so two reads of the same assembly give equal instances, and
 /// two equal instances agree on <see cref="IsSupported"/>.
 /// </remarks>
-public sealed record CqlLibraryInfo(
-    CqlVersionedLibraryIdentifier LibraryIdentifier,
-    Version GeneratorToolVersion)
+public sealed record CqlLibraryInfo
 {
+    internal CqlLibraryInfo(CqlVersionedLibraryIdentifier libraryIdentifier, Version generatorToolVersion)
+    {
+        LibraryIdentifier = libraryIdentifier;
+        GeneratorToolVersion = generatorToolVersion;
+    }
+
+    /// <summary>
+    /// Gets the library's identifier and version, from its <see cref="CqlLibraryAttribute"/>.
+    /// </summary>
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
+
+    /// <summary>
+    /// Gets the version of the code generator that wrote the library, from its <see cref="GeneratedCodeAttribute"/>.
+    /// </summary>
+    public Version GeneratorToolVersion { get; }
+
     /// <summary>
     /// Gets why this library cannot be used, when the assembly declares it in a way the toolkit does not accept;
     /// otherwise, <see langword="null"/>.
@@ -40,7 +50,7 @@ public sealed record CqlLibraryInfo(
     /// more than one type declares. The toolkit skips such a library, and logs this error, rather than failing to load
     /// the rest of the library set.
     /// </remarks>
-    public ICqlLibraryInfoError? ReadError { get; init; }
+    public ICqlLibraryInfoError? ReadError { get; internal init; }
 
     /// <summary>
     /// Gets whether <see cref="InvocationToolkit"/> runs this library: it has no <see cref="ReadError"/>, and

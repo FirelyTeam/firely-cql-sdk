@@ -8,25 +8,16 @@ Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.Libraries.get -> System.Collections.G
 Hl7.Cql.Invocation.Toolkit.CqlAssemblyInfo.ReadError.get -> Hl7.Cql.Invocation.Toolkit.Errors.ICqlAssemblyInfoError?
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.<Clone>$() -> Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo!
-Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.CqlLibraryInfo(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, System.Version! GeneratorToolVersion) -> void
-Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.Deconstruct(out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, out System.Version! GeneratorToolVersion) -> void
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.Equals(Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo? other) -> bool
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.GeneratorToolVersion.get -> System.Version!
-Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.GeneratorToolVersion.init -> void
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.IsSupported.get -> bool
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.LibraryIdentifier.init -> void
 Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.ReadError.get -> Hl7.Cql.Invocation.Toolkit.Errors.ICqlLibraryInfoError?
-Hl7.Cql.Invocation.Toolkit.CqlLibraryInfo.ReadError.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.AssemblyName.get -> string?
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.AssemblyName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.CqlAssemblyUnreadableError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.CqlAssemblyUnreadableError(string? AssemblyName, System.Exception! Exception) -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Deconstruct(out string? AssemblyName, out System.Exception! Exception) -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Exception.get -> System.Exception!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Exception.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.AssemblyName.get -> string?
@@ -35,51 +26,32 @@ Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.Equals(Hl7.Cql
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.AssemblyName.get -> string?
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.AssemblyName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.CqlLibraryDeclaredByMoreThanOneTypeError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.CqlLibraryDeclaredByMoreThanOneTypeError(string? AssemblyName, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, System.Collections.Immutable.ImmutableArray<string!> TypeNames) -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.Deconstruct(out string? AssemblyName, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, out System.Collections.Immutable.ImmutableArray<string!> TypeNames) -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.LibraryIdentifier.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.TypeNames.get -> System.Collections.Immutable.ImmutableArray<string!>
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.TypeNames.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.AssemblyName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.AssemblyName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.AttributeName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.AttributeName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.CqlLibraryTypeWithMalformedAttributeError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.CqlLibraryTypeWithMalformedAttributeError(string! AssemblyName, string! TypeName, string! AttributeName) -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.Deconstruct(out string! AssemblyName, out string! TypeName, out string! AttributeName) -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.TypeName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.TypeName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.AssemblyName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.AssemblyName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.AttributeName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.AttributeName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.CqlLibraryTypeWithMoreThanOneAttributeError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.CqlLibraryTypeWithMoreThanOneAttributeError(string! AssemblyName, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, string! TypeName, string! AttributeName) -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.Deconstruct(out string! AssemblyName, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, out string! TypeName, out string! AttributeName) -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.LibraryIdentifier.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.TypeName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMoreThanOneAttributeError.TypeName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.AssemblyName.get -> string?
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.CqlModuleWithoutManifestError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.CqlModuleWithoutManifestError(string! ModuleName) -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.Deconstruct(out string! ModuleName) -> void
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.GetMessage() -> string!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.ModuleName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlModuleWithoutManifestError.ModuleName.init -> void
 Hl7.Cql.Invocation.Toolkit.Errors.ICqlAssemblyInfoError
 Hl7.Cql.Invocation.Toolkit.Errors.ICqlAssemblyInfoError.AssemblyName.get -> string?
 Hl7.Cql.Invocation.Toolkit.Errors.ICqlLibraryInfoError
