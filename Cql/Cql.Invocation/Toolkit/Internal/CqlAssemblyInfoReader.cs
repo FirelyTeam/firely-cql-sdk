@@ -60,7 +60,7 @@ internal static class CqlAssemblyInfoReader
             throw new ArgumentException("The assembly binary holds no assembly bytes.", nameof(assemblyBinary));
 
         AssemblyName? assemblyName = null;
-        List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations = [];
+        List<(TypeDefinitionHandle TypeHandle, string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations = [];
 
         try
         {
@@ -81,7 +81,7 @@ internal static class CqlAssemblyInfoReader
                 var type = metadata.GetTypeDefinition(typeHandle);
                 var typeName = GetTypeName(metadata, type);
                 foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, type, assemblyName.FullName, typeName))
-                    declarations.Add((typeName, cqlLibraryInfo));
+                    declarations.Add((typeHandle, typeName, cqlLibraryInfo));
             }
         }
         catch (CqlException<CqlLibraryAttributeValueError> exception)
@@ -150,34 +150,34 @@ internal static class CqlAssemblyInfoReader
     /// </summary>
     private static List<CqlLibraryInfo> MergeLibrariesDeclaredMoreThanOnce(
         string assemblyName,
-        List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations)
+        List<(TypeDefinitionHandle TypeHandle, string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations)
     {
-        Dictionary<CqlVersionedLibraryIdentifier, List<string>> typeNamesByIdentifier = [];
+        Dictionary<CqlVersionedLibraryIdentifier, List<(TypeDefinitionHandle TypeHandle, string TypeName)>> typesByIdentifier = [];
         List<CqlLibraryInfo> cqlLibraryInfos = [];
-        foreach (var (typeName, cqlLibraryInfo) in declarations)
+        foreach (var (typeHandle, typeName, cqlLibraryInfo) in declarations)
         {
-            if (typeNamesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var typeNames))
+            if (typesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var types))
             {
-                if (!typeNames.Contains(typeName))
-                    typeNames.Add(typeName);
+                if (!types.Any(type => type.TypeHandle == typeHandle))
+                    types.Add((typeHandle, typeName));
                 continue;
             }
 
-            typeNamesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, [typeName]);
+            typesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, [(typeHandle, typeName)]);
             cqlLibraryInfos.Add(cqlLibraryInfo);
         }
 
         for (var index = 0; index < cqlLibraryInfos.Count; index++)
         {
             var cqlLibraryInfo = cqlLibraryInfos[index];
-            var typeNames = typeNamesByIdentifier[cqlLibraryInfo.LibraryIdentifier];
-            if (typeNames.Count > 1)
+            var types = typesByIdentifier[cqlLibraryInfo.LibraryIdentifier];
+            if (types.Count > 1)
                 cqlLibraryInfos[index] = cqlLibraryInfo with
                 {
                     ReadError = new CqlLibraryDeclaredByMoreThanOneTypeError(
                         assemblyName,
                         cqlLibraryInfo.LibraryIdentifier,
-                        [.. typeNames]),
+                        [.. types.Select(type => type.TypeName)]),
                 };
         }
 

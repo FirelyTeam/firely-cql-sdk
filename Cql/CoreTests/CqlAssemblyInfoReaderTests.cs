@@ -312,6 +312,30 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfDistinctTypesWithTheSameMetadataName_ReportsTheErrorTheInvokerLogs()
+    {
+        var assembly = AssemblyWithCollidingTypeNames();
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
+        cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("CollidingLibrary", "1.0.0"));
+        cqlLibraryInfo.ReadError.Should().Be(
+            new CqlLibraryDeclaredByMoreThanOneTypeError(
+                cqlAssemblyInfo.AssemblyName!.FullName,
+                Identifier("CollidingLibrary", "1.0.0"),
+                ["Outer+Library", "Outer+Library"]));
+        cqlLibraryInfo.IsSupported.Should().BeFalse();
+        invoker.LibraryInvokers.Should().NotContainKey(Identifier("CollidingLibrary", "1.0.0"));
+        warnings.Should().Contain(warning => warning.Contains("'Outer+Library'"));
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_OfACorruptAttributeNextToAHealthyLibrary_ReportsAnErrorAsTheInvokerCannotLoadIt()
     {
         const string corruptIdentifier = "CorruptPrologLibrary";
@@ -847,6 +871,99 @@ public class CqlAssemblyInfoReaderTests
         var image = new BlobBuilder();
         new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(metadata), new BlobBuilder()).Serialize(image);
         return new AssemblyBinary(image.ToArray());
+    }
+
+    private static AssemblyBinary AssemblyWithCollidingTypeNames()
+    {
+        var metadata = new MetadataBuilder();
+        const string assemblyName = "CollidingTypeNames";
+        metadata.AddModule(0, metadata.GetOrAddString($"{assemblyName}.dll"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+        metadata.AddAssembly(
+            metadata.GetOrAddString(assemblyName),
+            new Version(1, 0, 0, 0),
+            default,
+            default,
+            default,
+            System.Reflection.AssemblyHashAlgorithm.None);
+
+        var objectAssembly = AddAssemblyReference(metadata, typeof(object).Assembly);
+        var generatedCodeAssembly = AddAssemblyReference(metadata, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute).Assembly);
+        var cqlAbstractionsAssembly = AddAssemblyReference(metadata, typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Assembly);
+        var objectType = metadata.AddTypeReference(
+            objectAssembly,
+            metadata.GetOrAddString(typeof(object).Namespace!),
+            metadata.GetOrAddString(nameof(Object)));
+        var generatedCodeAttribute = metadata.AddTypeReference(
+            generatedCodeAssembly,
+            metadata.GetOrAddString(typeof(System.CodeDom.Compiler.GeneratedCodeAttribute).Namespace!),
+            metadata.GetOrAddString(nameof(System.CodeDom.Compiler.GeneratedCodeAttribute)));
+        var cqlLibraryAttribute = metadata.AddTypeReference(
+            cqlAbstractionsAssembly,
+            metadata.GetOrAddString(typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Namespace!),
+            metadata.GetOrAddString(nameof(Hl7.Cql.Abstractions.CqlLibraryAttribute)));
+        var constructorSignature = metadata.GetOrAddBlob(new byte[] { 0x20, 0x02, 0x01, 0x0e, 0x0e });
+        var generatedCodeConstructor = metadata.AddMemberReference(
+            generatedCodeAttribute,
+            metadata.GetOrAddString(".ctor"),
+            constructorSignature);
+        var cqlLibraryConstructor = metadata.AddMemberReference(
+            cqlLibraryAttribute,
+            metadata.GetOrAddString(".ctor"),
+            constructorSignature);
+
+        var noFields = MetadataTokens.FieldDefinitionHandle(1);
+        var noMethods = MetadataTokens.MethodDefinitionHandle(1);
+        metadata.AddTypeDefinition(default, default, metadata.GetOrAddString("<Module>"), default, noFields, noMethods);
+        var outer = metadata.AddTypeDefinition(
+            TypeAttributes.Public,
+            default,
+            metadata.GetOrAddString("Outer"),
+            objectType,
+            noFields,
+            noMethods);
+        var nestedLibrary = metadata.AddTypeDefinition(
+            TypeAttributes.NestedPublic,
+            default,
+            metadata.GetOrAddString("Library"),
+            objectType,
+            noFields,
+            noMethods);
+        var topLevelLibrary = metadata.AddTypeDefinition(
+            TypeAttributes.Public,
+            default,
+            metadata.GetOrAddString("Outer+Library"),
+            objectType,
+            noFields,
+            noMethods);
+        metadata.AddNestedType(nestedLibrary, outer);
+
+        foreach (var type in new[] { nestedLibrary, topLevelLibrary })
+        {
+            metadata.AddCustomAttribute(
+                type,
+                generatedCodeConstructor,
+                metadata.GetOrAddBlob(AttributeValue(GeneratorToolName, CurrentGeneratorVersion)));
+            metadata.AddCustomAttribute(
+                type,
+                cqlLibraryConstructor,
+                metadata.GetOrAddBlob(AttributeValue("CollidingLibrary", "1.0.0")));
+        }
+
+        var image = new BlobBuilder();
+        new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(metadata), new BlobBuilder()).Serialize(image);
+        return new AssemblyBinary(image.ToArray());
+    }
+
+    private static AssemblyReferenceHandle AddAssemblyReference(MetadataBuilder metadata, Assembly assembly)
+    {
+        var name = assembly.GetName();
+        return metadata.AddAssemblyReference(
+            metadata.GetOrAddString(name.Name!),
+            name.Version!,
+            name.CultureName is null ? default : metadata.GetOrAddString(name.CultureName),
+            metadata.GetOrAddBlob(name.GetPublicKeyToken() ?? []),
+            (AssemblyFlags)0,
+            default);
     }
 
     private static AssemblyBinary ModuleWithoutAnAssemblyManifest() =>
