@@ -21,9 +21,9 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </param>
 /// <remarks>
 /// Two instances are equal when their <see cref="LibraryIdentifier"/>, <see cref="GeneratorToolVersion"/> and
-/// <see cref="Error"/> are. <see cref="Exception"/> compares by reference, so two instances that each have an
-/// <see cref="Error"/> are equal only when they share that very exception: two reads of the same misdeclared library
-/// give unequal instances. Compare <see cref="LibraryIdentifier"/> and <see cref="GeneratorToolVersion"/> to tell
+/// <see cref="ReadError"/> are. <see cref="Exception"/> compares by reference, so two instances that each have a
+/// <see cref="ReadError"/> are equal only when they share that very exception: two reads of the same misdeclared
+/// library give unequal instances. Compare <see cref="LibraryIdentifier"/> and <see cref="GeneratorToolVersion"/> to tell
 /// whether two instances describe the same library.
 /// </remarks>
 public sealed record CqlLibraryInfo(
@@ -39,15 +39,15 @@ public sealed record CqlLibraryInfo(
     /// <see cref="GeneratedCodeAttribute"/>, nor a library that more than one type declares. It skips such a library,
     /// and logs this error, rather than failing to load the rest of the library set.
     /// </remarks>
-    public Exception? Error { get; init; }
+    public Exception? ReadError { get; init; }
 
     /// <summary>
-    /// Gets whether <see cref="InvocationToolkit"/> runs this library: it has no <see cref="Error"/>, and
+    /// Gets whether <see cref="InvocationToolkit"/> runs this library: it has no <see cref="ReadError"/>, and
     /// <see cref="InvocationToolkit.IsGeneratorToolVersionSupported"/> accepts its <see cref="GeneratorToolVersion"/>.
     /// </summary>
     /// <remarks>
     /// A supported version is necessary for the toolkit to run the library, but not sufficient: loading it
     /// can still fail for other reasons, such as a missing dependency.
     /// </remarks>
-    public bool IsSupported => Error is null && InvocationToolkit.IsGeneratorToolVersionSupported(GeneratorToolVersion);
+    public bool IsSupported => ReadError is null && InvocationToolkit.IsGeneratorToolVersionSupported(GeneratorToolVersion);
 }

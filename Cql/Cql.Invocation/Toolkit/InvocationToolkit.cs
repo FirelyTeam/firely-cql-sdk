@@ -74,7 +74,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
     /// <summary>
     /// Reads the CQL libraries that the code generator wrote into an assembly, from the assembly's metadata,
-    /// without loading the assembly, and reports bytes it cannot read through <see cref="CqlAssemblyInfo.Error"/>
+    /// without loading the assembly, and reports bytes it cannot read through <see cref="CqlAssemblyInfo.ReadError"/>
     /// rather than throwing.
     /// </summary>
     /// <param name="assemblyBinary">
@@ -85,7 +85,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// The libraries the assembly holds, each with the version of the code generator that wrote it, together with
     /// <paramref name="assemblyBinary"/> itself, ready to pass to <see cref="AddAssemblyBinaries"/>. Its
     /// <see cref="CqlAssemblyInfo.Libraries"/> are empty when the assembly holds no library the code
-    /// generator wrote, and when its bytes could not be read, which <see cref="CqlAssemblyInfo.Error"/> then says.
+    /// generator wrote, and when its bytes could not be read, which <see cref="CqlAssemblyInfo.ReadError"/> then says.
     /// </returns>
     /// <remarks>
     /// <para>
@@ -96,13 +96,13 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <para>
     /// The bytes themselves need not be readable. Bytes that are not a .NET assembly, are a module without an
     /// assembly manifest, or hold metadata that cannot be read give a result whose
-    /// <see cref="CqlAssemblyInfo.Error"/> says so, rather than an exception, so that a host can check an assembly it
+    /// <see cref="CqlAssemblyInfo.ReadError"/> says so, rather than an exception, so that a host can check an assembly it
     /// received from elsewhere without guarding the call.
     /// </para>
     /// <para>
     /// A library the assembly declares in a way this toolkit does not accept is still listed, with an
-    /// <see cref="CqlLibraryInfo.Error"/>, and the rest of the assembly is still read.
-    /// <see cref="CqlAssemblyInfo.HasErrors"/> says whether the assembly or any of its libraries has an error.
+    /// <see cref="CqlLibraryInfo.ReadError"/>, and the rest of the assembly is still read.
+    /// <see cref="CqlAssemblyInfo.HasReadErrors"/> says whether the assembly or any of its libraries has an error.
     /// </para>
     /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
@@ -179,7 +179,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// application domain.</returns>
     /// <remarks>
     /// A library declared in a way this toolkit does not accept, which <see cref="ReadCqlAssemblyInfo"/> reports through
-    /// <see cref="CqlLibraryInfo.Error"/>, is skipped with that error in the log, and the other libraries still load.
+    /// <see cref="CqlLibraryInfo.ReadError"/>, is skipped with that error in the log, and the other libraries still load.
     /// </remarks>
     public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "") =>
         CreateLibrarySetInvoker(librarySetName, isPoolOwned: false);

@@ -85,8 +85,8 @@ public class CqlAssemblyInfoReaderTests
                     .And.ContainKey(LibraryIdentifier)
                     .WhoseValue.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
         cqlAssemblyInfo.AssemblyName!.FullName.Should().Be(LoadedAssemblyName(GeneratedLibrary.Value.assembly).FullName);
-        cqlAssemblyInfo.Error.Should().BeNull();
-        cqlAssemblyInfo.HasErrors.Should().BeFalse();
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        cqlAssemblyInfo.HasReadErrors.Should().BeFalse();
         cqlAssemblyInfo.IsSupported.Should().BeTrue();
     }
 
@@ -142,8 +142,8 @@ public class CqlAssemblyInfoReaderTests
 
         cqlAssemblyInfo.Libraries.Should().BeEmpty();
         cqlAssemblyInfo.IsSupported.Should().BeFalse("the assembly holds no CQL library to run");
-        cqlAssemblyInfo.Error.Should().BeNull();
-        cqlAssemblyInfo.HasErrors.Should().BeFalse();
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        cqlAssemblyInfo.HasReadErrors.Should().BeFalse();
     }
 
     [TestMethod]
@@ -167,10 +167,10 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
         cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("SameLibrary", "1.0.0"));
-        cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+        cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
                       .Which.Message.Should().ContainAll("SameLibrary-1.0.0", "'First'", "'Second'", "more than one type");
         cqlLibraryInfo.IsSupported.Should().BeFalse();
-        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
         cqlAssemblyInfo.IsSupported.Should().BeFalse();
     }
 
@@ -182,12 +182,12 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.Libraries.Keys.Should().BeEquivalentTo([Identifier("BrokenFirst", "1.0.0"), Identifier("BrokenSecond", "1.0.0")]);
         foreach (var cqlLibraryInfo in cqlAssemblyInfo.Libraries.Values)
         {
-            cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+            cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
                           .Which.Message.Should().ContainAll("TwoCqlLibraryAttributes", "more than one CqlLibraryAttribute");
             cqlLibraryInfo.IsSupported.Should().BeFalse();
         }
 
-        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
     }
 
     [TestMethod]
@@ -202,7 +202,7 @@ public class CqlAssemblyInfoReaderTests
                             .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
                             .CreateLibrarySetInvoker();
 
-        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
         cqlAssemblyInfo.IsSupported.Should().BeFalse();
         cqlAssemblyInfo.Libraries[LibraryIdentifier].IsSupported.Should().BeTrue();
         invoker.LibraryInvokers.Keys.Should().BeEquivalentTo([LibraryIdentifier]);
@@ -223,7 +223,7 @@ public class CqlAssemblyInfoReaderTests
                             .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
                             .CreateLibrarySetInvoker();
 
-        cqlAssemblyInfo.Libraries[LibraryIdentifier].Error.Should().NotBeNull();
+        cqlAssemblyInfo.Libraries[LibraryIdentifier].ReadError.Should().NotBeNull();
         invoker.LibraryInvokers.Should().NotContainKey(LibraryIdentifier);
         warnings.Should().Contain(warning => warning.Contains(className) && warning.Contains(className + "_Copy"));
     }
@@ -245,7 +245,7 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
         cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("NestedLibrary", "1.0.0"));
-        cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+        cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
                       .Which.Message.Should().ContainAll("'OuterA+Library'", "'OuterB+Library'");
         cqlLibraryInfo.IsSupported.Should().BeFalse();
         warnings.Should().Contain(warning => warning.Contains("'OuterA+Library'") && warning.Contains("'OuterB+Library'"));
@@ -279,8 +279,8 @@ public class CqlAssemblyInfoReaderTests
             return invoker.LibraryInvokers.Count;
         };
 
-        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>();
-        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
+        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>();
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
         createLibrarySetInvoker.Should().Throw<CustomAttributeFormatException>();
     }
 
@@ -323,9 +323,9 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>()
+        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>()
                        .Which.Message.Should().Contain("without an assembly manifest");
-        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
     }
 
     [TestMethod]
@@ -336,8 +336,8 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>();
-        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
+        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>();
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
     }
 
     [TestMethod]
@@ -356,7 +356,7 @@ public class CqlAssemblyInfoReaderTests
 
         // Cut inside the PE headers, the read fails.
         InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes[..64]))
-                         .Error.Should().BeOfType<BadImageFormatException>();
+                         .ReadError.Should().BeOfType<BadImageFormatException>();
     }
 
     [TestMethod]
@@ -539,15 +539,15 @@ public class CqlAssemblyInfoReaderTests
 
     /// <summary>
     /// Asserts that a result for bytes that could not be read holds nothing besides its
-    /// <see cref="CqlAssemblyInfo.Error"/> and the assembly binary it was given.
+    /// <see cref="CqlAssemblyInfo.ReadError"/> and the assembly binary it was given.
     /// </summary>
-    private static void ShouldHoldNothingButTheError(CqlAssemblyInfo cqlAssemblyInfo, AssemblyBinary assembly)
+    private static void ShouldHoldNothingButTheReadError(CqlAssemblyInfo cqlAssemblyInfo, AssemblyBinary assembly)
     {
         cqlAssemblyInfo.AssemblyBinary.Should().BeSameAs(assembly);
         cqlAssemblyInfo.AssemblyName.Should().BeNull();
         cqlAssemblyInfo.Libraries.Should().BeEmpty();
         cqlAssemblyInfo.IsSupported.Should().BeFalse();
-        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
     }
 
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>

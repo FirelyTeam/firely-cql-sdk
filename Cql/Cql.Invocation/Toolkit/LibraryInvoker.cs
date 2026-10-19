@@ -150,7 +150,7 @@ public abstract class LibraryInvoker
 
         // A type that declares more than one library carries an error, on every entry, so the first stands for all.
         var cqlLibraryInfo = cqlLibraryInfos[0];
-        if (cqlLibraryInfo.Error is { } error)
+        if (cqlLibraryInfo.ReadError is { } error)
         {
             logger?.LogError("Skipping type {type}: {error}", libraryType.FullName, error.Message);
             return false;

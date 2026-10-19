@@ -55,7 +55,7 @@ internal static class CqlLibraryTypeRule
     /// One entry per library the type declares. There are none when the type carries no <see cref="CqlLibraryAttribute"/>,
     /// or no <see cref="GeneratedCodeAttribute"/> that names the code generator with a version that parses, and none for
     /// an identifier and version that do not form a library identifier. When the type carries more than one of either
-    /// attribute, every entry carries an <see cref="CqlLibraryInfo.Error"/> that says so.
+    /// attribute, every entry carries a <see cref="CqlLibraryInfo.ReadError"/> that says so.
     /// </returns>
     public static List<CqlLibraryInfo> CreateLibraryInfos(
         string typeName,
@@ -87,7 +87,7 @@ internal static class CqlLibraryTypeRule
         foreach (var (identifier, version) in cqlLibraries)
         {
             if (TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
-                cqlLibraryInfos.Add(new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion) { Error = error });
+                cqlLibraryInfos.Add(new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion) { ReadError = error });
         }
 
         return cqlLibraryInfos;

@@ -47,8 +47,8 @@ internal static class CqlAssemblyInfoReader
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="assemblyBinary"/> holds no assembly bytes.</exception>
     /// <remarks>
-    /// Bytes that cannot be read are reported through <see cref="CqlAssemblyInfo.Error"/>, and a library declared in a
-    /// way the toolkit does not accept through <see cref="CqlLibraryInfo.Error"/>, while the rest of the assembly is
+    /// Bytes that cannot be read are reported through <see cref="CqlAssemblyInfo.ReadError"/>, and a library declared in a
+    /// way the toolkit does not accept through <see cref="CqlLibraryInfo.ReadError"/>, while the rest of the assembly is
     /// still read.
     /// </remarks>
     public static CqlAssemblyInfo Read(AssemblyBinary assemblyBinary)
@@ -161,7 +161,7 @@ internal static class CqlAssemblyInfoReader
             if (typeNames.Count > 1)
                 cqlLibraryInfos[index] = cqlLibraryInfo with
                 {
-                    Error = CqlLibraryTypeRule.DeclaredByMoreThanOneType(cqlLibraryInfo.LibraryIdentifier, typeNames),
+                    ReadError = CqlLibraryTypeRule.DeclaredByMoreThanOneType(cqlLibraryInfo.LibraryIdentifier, typeNames),
                 };
         }
 
