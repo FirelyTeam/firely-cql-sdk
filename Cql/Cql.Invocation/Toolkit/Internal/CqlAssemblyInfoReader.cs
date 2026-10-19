@@ -209,40 +209,46 @@ internal static class CqlAssemblyInfoReader
         new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
 
     /// <summary>
-    /// Keeps one entry per library identifier. A library that more than one type declares becomes a single entry whose
-    /// error names those types, as the invoker skips every one of them.
+    /// Keeps one entry per library identifier, deciding as the invoker does. Of the types that declare a library, only
+    /// those it would otherwise load count, as it skips the others first. More than one of those makes a single entry
+    /// whose error names them, as the invoker skips them all. Exactly one makes that type's entry, which loads. None
+    /// keeps the first type's entry, with its error or its unsupported generator version.
     /// </summary>
     private static List<CqlLibraryInfo> MergeLibrariesDeclaredMoreThanOnce(
         string assemblyName,
         List<(TypeDefinitionHandle TypeHandle, string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations)
     {
-        Dictionary<CqlVersionedLibraryIdentifier, List<(TypeDefinitionHandle TypeHandle, string TypeName)>> typesByIdentifier = [];
-        List<CqlLibraryInfo> cqlLibraryInfos = [];
+        Dictionary<CqlVersionedLibraryIdentifier, int> indexByIdentifier = [];
+        List<(CqlLibraryInfo Entry, List<(TypeDefinitionHandle TypeHandle, string TypeName)> LoadableTypes)> libraries = [];
         foreach (var (typeHandle, typeName, cqlLibraryInfo) in declarations)
         {
-            if (typesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var types))
+            if (!indexByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var index))
             {
-                if (!types.Any(type => type.TypeHandle == typeHandle))
-                    types.Add((typeHandle, typeName));
-                continue;
+                indexByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, index = libraries.Count);
+                libraries.Add((cqlLibraryInfo, []));
             }
 
-            typesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, [(typeHandle, typeName)]);
-            cqlLibraryInfos.Add(cqlLibraryInfo);
+            var loadableTypes = libraries[index].LoadableTypes;
+            if (!cqlLibraryInfo.IsSupported || loadableTypes.Exists(type => type.TypeHandle == typeHandle))
+                continue;
+
+            if (loadableTypes.Count == 0)
+                libraries[index] = (cqlLibraryInfo, loadableTypes);
+            loadableTypes.Add((typeHandle, typeName));
         }
 
-        for (var index = 0; index < cqlLibraryInfos.Count; index++)
+        List<CqlLibraryInfo> cqlLibraryInfos = [];
+        foreach (var (entry, loadableTypes) in libraries)
         {
-            var cqlLibraryInfo = cqlLibraryInfos[index];
-            var types = typesByIdentifier[cqlLibraryInfo.LibraryIdentifier];
-            if (types.Count > 1)
-                cqlLibraryInfos[index] = cqlLibraryInfo with
+            cqlLibraryInfos.Add(loadableTypes.Count < 2
+                ? entry
+                : entry with
                 {
                     ReadError = new CqlLibraryDeclaredByMoreThanOneTypeError(
                         assemblyName,
-                        cqlLibraryInfo.LibraryIdentifier,
-                        [.. types.Select(type => type.TypeName)]),
-                };
+                        entry.LibraryIdentifier,
+                        [.. loadableTypes.Select(type => type.TypeName)]),
+                });
         }
 
         return cqlLibraryInfos;

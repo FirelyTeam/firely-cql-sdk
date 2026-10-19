@@ -172,6 +172,20 @@ public abstract class LibraryInvoker
         if (!LibraryInstanceInvoker_6_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
             return false;
 
+        // The library set looks a library up by the identifier its ILibrary states, which has to be the one its
+        // CqlLibraryAttribute declares, as that is what a host reading the assembly's metadata sees.
+        if (libraryInvoker.LibraryIdentifier != cqlLibraryInfo.LibraryIdentifier)
+        {
+            logger?.LogError(
+                "Skipping type {type} because its CqlLibraryAttribute declares CQL library {lib}, "
+                + "while its ILibrary states {libraryIdentifier}.",
+                libraryType.FullName,
+                cqlLibraryInfo.LibraryIdentifier,
+                libraryInvoker.LibraryIdentifier);
+            libraryInvoker = null;
+            return false;
+        }
+
         libraryInvoker.LibraryInfo = cqlLibraryInfo;
         logger?.LogDebug(
             "Loaded CQL library {lib} from type {type}, which code generator version {ver} wrote.",

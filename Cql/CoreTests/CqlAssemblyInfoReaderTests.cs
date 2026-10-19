@@ -244,6 +244,48 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    [DataRow(false, DisplayName = "supported type first")]
+    [DataRow(true, DisplayName = "unsupported type first")]
+    public void ReadCqlAssemblyInfo_OfALibraryASupportedAndAnUnsupportedTypeDeclare_ReportsTheSupportedOneAsTheInvokerLoadsIt(bool unsupportedFirst)
+    {
+        var unsupportedCopy = LibraryType("UnsupportedCopy", "CqlLibraryInfoTest", "1.0.0", GeneratorToolName, OlderUnsupportedGeneratorVersion);
+        var assembly = unsupportedFirst
+            ? Compile("UnsupportedCopyFirst", unsupportedCopy, GeneratedLibrary.Value.cSharp)
+            : Compile("SupportedCopyFirst", GeneratedLibrary.Value.cSharp, unsupportedCopy);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        using var invoker = new InvocationToolkit()
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        cqlAssemblyInfo.Libraries.Should().ContainSingle()
+                       .Which.Value.Should().Be(new CqlLibraryInfo(LibraryIdentifier, ElmToolkit.GeneratorToolVersion));
+        invoker.LibraryInvokers.Should().ContainKey(LibraryIdentifier);
+    }
+
+    [TestMethod]
+    public void CreateLibrarySetInvoker_OfATypeWhoseILibraryStatesAnotherLibrary_SkipsItWithAnError()
+    {
+        const string declaredByTheGenerator = """[CqlLibrary("CqlLibraryInfoTest", "1.0.0")]""";
+        GeneratedLibrary.Value.cSharp.Should().Contain(declaredByTheGenerator);
+        var assembly = Compile(
+            "ILibraryStatesAnotherLibrary",
+            GeneratedLibrary.Value.cSharp.Replace(declaredByTheGenerator, """[CqlLibrary("RenamedLibrary", "1.0.0")]"""));
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        // The reader sees only the attribute, so it reports the library as supported: a supported generator version
+        // is necessary for the invoker to load a library, not sufficient.
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().ContainKey(Identifier("RenamedLibrary", "1.0.0"));
+        invoker.LibraryInvokers.Should().BeEmpty();
+        warnings.Should().Contain(warning => warning.Contains("RenamedLibrary-1.0.0") && warning.Contains("CqlLibraryInfoTest-1.0.0"));
+    }
+
+    [TestMethod]
     public void CreateLibrarySetInvoker_WithALibraryTwoTypesDeclare_SkipsBothAsTheReaderSays()
     {
         var cSharp = GeneratedLibrary.Value.cSharp;

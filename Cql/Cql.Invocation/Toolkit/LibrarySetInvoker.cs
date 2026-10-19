@@ -98,7 +98,7 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     /// </summary>
     /// <remarks>
     /// Decides as <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> does: a library that more than one type
-    /// declares is skipped for every one of those types.
+    /// declares, counting only the types that would otherwise load, is skipped for every one of those types.
     /// </remarks>
     private ImmutableDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> CreateLibraryInvokers(AssemblyLoadContext alc)
     {
@@ -112,6 +112,11 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
         {
             foreach (var cqlLibraryInfo in cqlLibraryInfos)
             {
+                // A type whose library has an error or an unsupported generator version is skipped anyway, so it
+                // does not stop another type that declares the same library from loading.
+                if (!cqlLibraryInfo.IsSupported)
+                    continue;
+
                 if (!declaringTypesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var declaringTypes))
                     declaringTypesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, declaringTypes = []);
                 if (!declaringTypes.Contains(type))
