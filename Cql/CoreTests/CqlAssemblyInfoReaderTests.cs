@@ -789,6 +789,21 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAnAssemblyWithAnyOneByteInverted_NeverThrows()
+    {
+        var assemblyBytes = GeneratedLibrary.Value.assembly.AssemblyBytes!;
+
+        for (var offset = 0; offset < assemblyBytes.Length; offset++)
+        {
+            byte[] changed = [.. assemblyBytes];
+            changed[offset] ^= 0xFF;
+            var read = () => InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(changed));
+
+            read.Should().NotThrow($"for the byte at offset {offset} of {assemblyBytes.Length} inverted");
+        }
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_OfANullAssemblyBinary_ThrowsArgumentNullException()
     {
         var read = () => InvocationToolkit.ReadCqlAssemblyInfo(null!);
