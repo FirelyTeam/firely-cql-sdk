@@ -142,11 +142,103 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    public void ReadCqlAssemblyInfo_OfAnAssemblyWithADuplicateLibrary_ThrowsInvalidOperationException()
+    public void ReadCqlAssemblyInfo_OfALibraryTwoTypesDeclare_ReportsAnErrorNamingBothTypes()
     {
-        var read = () => InvocationToolkit.ReadCqlAssemblyInfo(AssemblyWithADuplicateLibrary());
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(AssemblyWithADuplicateLibrary());
 
-        read.Should().Throw<InvalidOperationException>().WithMessage("*SameLibrary-1.0.0*");
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
+        cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("SameLibrary", "1.0.0"));
+        cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+                      .Which.Message.Should().ContainAll("SameLibrary-1.0.0", "'First'", "'Second'", "more than one type");
+        cqlLibraryInfo.IsSupported.Should().BeFalse();
+        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.IsSupported.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfATypeWithTwoCqlLibraryAttributes_ReportsAnErrorOnBothLibraries()
+    {
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(Compile("TypeWithTwoCqlLibraryAttributes", TypeWithTwoCqlLibraryAttributes));
+
+        cqlAssemblyInfo.Libraries.Keys.Should().BeEquivalentTo([Identifier("BrokenFirst", "1.0.0"), Identifier("BrokenSecond", "1.0.0")]);
+        foreach (var cqlLibraryInfo in cqlAssemblyInfo.Libraries.Values)
+        {
+            cqlLibraryInfo.Error.Should().BeOfType<InvalidOperationException>()
+                          .Which.Message.Should().ContainAll("TwoCqlLibraryAttributes", "more than one CqlLibraryAttribute");
+            cqlLibraryInfo.IsSupported.Should().BeFalse();
+        }
+
+        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void CreateLibrarySetInvoker_WithABrokenLibraryNextToAHealthyOne_LoadsTheHealthyOneAsTheReaderSays()
+    {
+        var assembly = Compile("HealthyAndBroken", GeneratedLibrary.Value.cSharp, TypeWithTwoCqlLibraryAttributes);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
+                            .CreateLibrarySetInvoker();
+
+        cqlAssemblyInfo.HasErrors.Should().BeTrue();
+        cqlAssemblyInfo.IsSupported.Should().BeFalse();
+        cqlAssemblyInfo.Libraries[LibraryIdentifier].IsSupported.Should().BeTrue();
+        invoker.LibraryInvokers.Keys.Should().BeEquivalentTo([LibraryIdentifier]);
+        warnings.Should().Contain(warning => warning.Contains("TwoCqlLibraryAttributes") && warning.Contains("more than one CqlLibraryAttribute"));
+    }
+
+    [TestMethod]
+    public void CreateLibrarySetInvoker_WithALibraryTwoTypesDeclare_SkipsBothAsTheReaderSays()
+    {
+        var cSharp = GeneratedLibrary.Value.cSharp;
+        var className = System.Text.RegularExpressions.Regex.Match(cSharp, @"public partial class (\w+)").Groups[1].Value;
+        var assembly = Compile("DeclaredTwice", cSharp, cSharp.Replace(className, className + "_Copy"));
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([cqlAssemblyInfo.AssemblyBinary])
+                            .CreateLibrarySetInvoker();
+
+        cqlAssemblyInfo.Libraries[LibraryIdentifier].Error.Should().NotBeNull();
+        invoker.LibraryInvokers.Should().NotContainKey(LibraryIdentifier);
+        warnings.Should().Contain(warning => warning.Contains(className) && warning.Contains(className + "_Copy"));
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeDefinedInTheAssembly_AsTheInvokerDoes()
+    {
+        var assembly = Compile(
+            "LookAlikeInTheAssembly",
+            LookAlikeCqlLibraryAttribute,
+            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+
+        using var invoker = new InvocationToolkit()
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
+        invoker.LibraryInvokers.Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeFromAnotherAssembly()
+    {
+        var lookAlikes = Compile("LookAlikeAttributes", LookAlikeCqlLibraryAttribute);
+        var references = PlatformReferences.Value
+                                           .Where(reference => !Path.GetFileName(reference.Display ?? "").Equals("HL7.Cql.Abstractions.dll", StringComparison.OrdinalIgnoreCase))
+                                           .Append(MetadataReference.CreateFromImage(lookAlikes.AssemblyBytes!));
+        var assembly = Compile(
+            "LookAlikeFromAnotherAssembly",
+            OutputKind.DynamicallyLinkedLibrary,
+            references,
+            LibraryType("LookAlike", "LookAlikeLibrary", "1.0.0", GeneratorToolName, "6.0.0.0"));
+
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().BeEmpty();
     }
 
     [TestMethod]
@@ -197,7 +289,6 @@ public class CqlAssemblyInfoReaderTests
             ("an empty array", new AssemblyBinary(Array.Empty<byte>())),
             ("bytes that are not an assembly", new AssemblyBinary("This is not an assembly."u8.ToArray())),
             ("a module without an assembly manifest", ModuleWithoutAnAssemblyManifest()),
-            ("an assembly with a duplicate library", AssemblyWithADuplicateLibrary()),
         ];
 
         foreach (var (because, assembly) in cases)
@@ -378,6 +469,29 @@ public class CqlAssemblyInfoReaderTests
         public class {{typeName}} { }
         """;
 
+    /// <summary>
+    /// A type that carries two <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/>s, which the toolkit does not accept.
+    /// </summary>
+    private static readonly string TypeWithTwoCqlLibraryAttributes = $$"""
+        [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "6.0.0.0")]
+        [Hl7.Cql.Abstractions.CqlLibrary("BrokenFirst", "1.0.0")]
+        [Hl7.Cql.Abstractions.CqlLibrary("BrokenSecond", "1.0.0")]
+        public class TwoCqlLibraryAttributes { }
+        """;
+
+    /// <summary>
+    /// An attribute that looks like the SDK's <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> but is not it.
+    /// </summary>
+    private const string LookAlikeCqlLibraryAttribute = """
+        namespace Hl7.Cql.Abstractions
+        {
+            public sealed class CqlLibraryAttribute : System.Attribute
+            {
+                public CqlLibraryAttribute(string identifier, string version) { }
+            }
+        }
+        """;
+
     private static AssemblyBinary AssemblyWithADuplicateLibrary() =>
         Compile(
             "DuplicateGeneratedLibraries",
@@ -443,12 +557,19 @@ public class CqlAssemblyInfoReaderTests
     private static AssemblyBinary Compile(string assemblyName, params string[] sources) =>
         Compile(assemblyName, OutputKind.DynamicallyLinkedLibrary, sources);
 
-    private static AssemblyBinary Compile(string assemblyName, OutputKind outputKind, params string[] sources)
+    private static AssemblyBinary Compile(string assemblyName, OutputKind outputKind, params string[] sources) =>
+        Compile(assemblyName, outputKind, PlatformReferences.Value, sources);
+
+    private static AssemblyBinary Compile(
+        string assemblyName,
+        OutputKind outputKind,
+        IEnumerable<MetadataReference> references,
+        params string[] sources)
     {
         var compilation = CSharpCompilation.Create(
             assemblyName,
             sources.Select(source => CSharpSyntaxTree.ParseText(source)),
-            PlatformReferences.Value,
+            references,
             new CSharpCompilationOptions(outputKind, nullableContextOptions: NullableContextOptions.Enable));
 
         using var stream = new MemoryStream();

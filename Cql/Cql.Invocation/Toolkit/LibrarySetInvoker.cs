@@ -88,15 +88,57 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         LibrarySetName = librarySetName;
         // Reads the parameter rather than the field, so the field's nullability stays confined to Unload.
-        _libraryInvokers =
-            alc.Assemblies
-                .SelectMany(a => a.GetTypes())
-                .SelectWhereNotNull(libraryType =>
-                {
-                    _ = LibraryInvoker.TryCreateFromType(this, libraryType, out var libraryInvoker);
-                    return libraryInvoker;
-                })
-                .ToImmutableDictionary(o => o.LibraryIdentifier);
+        _libraryInvokers = CreateLibraryInvokers(alc);
+    }
+
+    /// <summary>
+    /// Creates an invoker for every CQL library the context's assemblies declare, skipping, with an error in the log,
+    /// each library declared in a way the toolkit does not accept, so that the rest still load.
+    /// </summary>
+    /// <remarks>
+    /// Decides as <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> does: a library that more than one type
+    /// declares is skipped for every one of those types.
+    /// </remarks>
+    private ImmutableDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> CreateLibraryInvokers(AssemblyLoadContext alc)
+    {
+        var logger = this.CreateLogger<LibrarySetInvoker>();
+        var cqlLibraryInfosByType = alc.Assemblies
+                                       .SelectMany(assembly => assembly.GetTypes())
+                                       .ToDictionary(type => type, CqlLibraryTypeRule.GetLibraryInfos);
+
+        Dictionary<CqlVersionedLibraryIdentifier, List<Type>> declaringTypesByIdentifier = [];
+        foreach (var (type, cqlLibraryInfos) in cqlLibraryInfosByType)
+        {
+            foreach (var cqlLibraryInfo in cqlLibraryInfos)
+            {
+                if (!declaringTypesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var declaringTypes))
+                    declaringTypesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, declaringTypes = []);
+                if (!declaringTypes.Contains(type))
+                    declaringTypes.Add(type);
+            }
+        }
+
+        HashSet<Type> typesToSkip = [];
+        foreach (var (libraryIdentifier, declaringTypes) in declaringTypesByIdentifier)
+        {
+            if (declaringTypes.Count < 2)
+                continue;
+
+            var error = CqlLibraryTypeRule.DeclaredByMoreThanOneType(
+                libraryIdentifier,
+                declaringTypes.Select(type => type.FullName ?? type.Name));
+            logger.LogError("Skipping CQL library {lib}: {error}", libraryIdentifier, error.Message);
+            typesToSkip.UnionWith(declaringTypes);
+        }
+
+        return cqlLibraryInfosByType
+               .Where(pair => !typesToSkip.Contains(pair.Key))
+               .SelectWhereNotNull(pair =>
+               {
+                   _ = LibraryInvoker.TryCreateFromType(this, pair.Key, pair.Value, out var libraryInvoker);
+                   return libraryInvoker;
+               })
+               .ToImmutableDictionary(o => o.LibraryIdentifier);
     }
 
     /// <summary>

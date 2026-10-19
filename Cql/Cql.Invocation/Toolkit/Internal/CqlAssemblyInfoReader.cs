@@ -13,6 +13,7 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
@@ -29,12 +30,29 @@ internal static class CqlAssemblyInfoReader
         (typeof(CqlLibraryAttribute).Namespace!, typeof(CqlLibraryAttribute).Name);
 
     /// <summary>
+    /// The assemblies a reference to <see cref="GeneratedCodeAttribute"/> may resolve to: the runtime assembly that
+    /// defines it, which code compiled against the runtime's own assemblies references, and the reference and facade
+    /// assemblies that forward to it.
+    /// </summary>
+    private static readonly FrozenSet<string> GeneratedCodeAttributeAssemblies =
+        new[] { typeof(GeneratedCodeAttribute).Assembly.GetName().Name!, "System.Runtime", "netstandard", "mscorlib" }
+            .ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+
+    /// <summary>
+    /// The assembly a reference to <see cref="CqlLibraryAttribute"/> resolves to.
+    /// </summary>
+    private static readonly string CqlLibraryAttributeAssembly = typeof(CqlLibraryAttribute).Assembly.GetName().Name!;
+
+    /// <summary>
     /// Reads the CQL libraries that the code generator wrote into an assembly.
     /// </summary>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="assemblyBinary"/> holds no assembly bytes.</exception>
     /// <exception cref="BadImageFormatException">The bytes are not a .NET assembly, or its metadata cannot be read.</exception>
-    /// <exception cref="InvalidOperationException">The assembly holds two library types with the same identifier.</exception>
+    /// <remarks>
+    /// A library declared in a way the toolkit does not accept is reported through <see cref="CqlLibraryInfo.Error"/>,
+    /// and the rest of the assembly is still read.
+    /// </remarks>
     public static CqlAssemblyInfo Read(AssemblyBinary assemblyBinary)
     {
         ArgumentNullException.ThrowIfNull(assemblyBinary);
@@ -61,7 +79,7 @@ internal static class CqlAssemblyInfoReader
             cqlAssemblyInfo = ReadCore(assemblyBinary, assemblyBytes);
             return true;
         }
-        catch (Exception exception) when (exception is BadImageFormatException or InvalidOperationException)
+        catch (BadImageFormatException)
         {
             return false;
         }
@@ -70,7 +88,7 @@ internal static class CqlAssemblyInfoReader
     private static CqlAssemblyInfo ReadCore(AssemblyBinary assemblyBinary, byte[] assemblyBytes)
     {
         AssemblyName assemblyName;
-        List<CqlLibraryInfo> cqlLibraryInfos = [];
+        List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations = [];
 
         try
         {
@@ -86,8 +104,10 @@ internal static class CqlAssemblyInfoReader
 
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
-                if (ReadLibraryInfo(metadata, metadata.GetTypeDefinition(typeHandle)) is { } cqlLibraryInfo)
-                    cqlLibraryInfos.Add(cqlLibraryInfo);
+                var type = metadata.GetTypeDefinition(typeHandle);
+                var typeName = GetTypeName(metadata, type);
+                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, type, typeName))
+                    declarations.Add((typeName, cqlLibraryInfo));
             }
         }
         catch (Exception exception) when (exception is not (BadImageFormatException or OutOfMemoryException))
@@ -97,59 +117,109 @@ internal static class CqlAssemblyInfoReader
             throw new BadImageFormatException("The bytes are not a readable .NET assembly.", exception);
         }
 
-        return new CqlAssemblyInfo(assemblyBinary, assemblyName, cqlLibraryInfos);
+        return new CqlAssemblyInfo(assemblyBinary, assemblyName, MergeLibrariesDeclaredMoreThanOnce(declarations));
     }
 
     /// <summary>
-    /// Reads the library a type declares, or <see langword="null"/> when the type is not a CQL library the
-    /// code generator wrote.
+    /// Reads the libraries a type declares, as <see cref="CqlLibraryTypeRule.CreateLibraryInfos"/> decides them from
+    /// the type's attributes, the same rule <see cref="CqlLibraryTypeRule.GetLibraryInfos"/> applies to a loaded type.
     /// </summary>
-    private static CqlLibraryInfo? ReadLibraryInfo(MetadataReader metadata, TypeDefinition type)
+    /// <remarks>
+    /// Only the SDK's and the runtime's own attribute types count, never a type of the same name from another
+    /// assembly, as reflection only finds the attribute types themselves.
+    /// </remarks>
+    private static List<CqlLibraryInfo> ReadLibraryInfos(MetadataReader metadata, TypeDefinition type, string typeName)
     {
-        (string? Tool, string? Version)? generatedCode = null;
-        (string? Identifier, string? Version)? cqlLibrary = null;
+        List<(string? Identifier, string? Version)> cqlLibraries = [];
+        List<(string? Tool, string? Version)> generatedCodes = [];
 
         foreach (var attributeHandle in type.GetCustomAttributes())
         {
             var attribute = metadata.GetCustomAttribute(attributeHandle);
-            var attributeName = GetAttributeTypeName(metadata, attribute);
-            if (attributeName == GeneratedCodeAttributeName)
-                generatedCode ??= ReadTwoStringArguments(metadata, attribute);
-            else if (attributeName == CqlLibraryAttributeName)
-                cqlLibrary ??= ReadTwoStringArguments(metadata, attribute);
+            var (attributeName, attributeAssembly) = GetAttributeType(metadata, attribute);
+            if (attributeAssembly is null)
+                continue;
+
+            if (attributeName == GeneratedCodeAttributeName && GeneratedCodeAttributeAssemblies.Contains(attributeAssembly))
+                generatedCodes.Add(ReadTwoStringArguments(metadata, attribute));
+            else if (attributeName == CqlLibraryAttributeName
+                     && string.Equals(attributeAssembly, CqlLibraryAttributeAssembly, StringComparison.OrdinalIgnoreCase))
+                cqlLibraries.Add(ReadTwoStringArguments(metadata, attribute));
         }
 
-        return cqlLibrary is { } library
-               && generatedCode is { } generator
-               && CqlLibraryTypeRule.TryCreateLibraryInfo(library.Identifier, library.Version, generator.Tool, generator.Version, out var cqlLibraryInfo)
-            ? cqlLibraryInfo
-            : null;
+        return CqlLibraryTypeRule.CreateLibraryInfos(typeName, cqlLibraries, generatedCodes);
     }
 
     /// <summary>
-    /// The namespace and name of the attribute's type, or empty strings when its constructor is not one this
-    /// reader can resolve.
+    /// Keeps one entry per library identifier. A library that more than one type declares becomes a single entry whose
+    /// error names those types, as the invoker skips every one of them.
     /// </summary>
-    private static (string Namespace, string Name) GetAttributeTypeName(MetadataReader metadata, CustomAttribute attribute)
+    private static List<CqlLibraryInfo> MergeLibrariesDeclaredMoreThanOnce(
+        List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations)
     {
-        switch (attribute.Constructor.Kind)
+        Dictionary<CqlVersionedLibraryIdentifier, List<string>> typeNamesByIdentifier = [];
+        List<CqlLibraryInfo> cqlLibraryInfos = [];
+        foreach (var (typeName, cqlLibraryInfo) in declarations)
         {
-            case HandleKind.MemberReference:
-                var memberReference = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
-                if (memberReference.Parent.Kind != HandleKind.TypeReference)
-                    return ("", "");
+            if (typeNamesByIdentifier.TryGetValue(cqlLibraryInfo.LibraryIdentifier, out var typeNames))
+            {
+                if (!typeNames.Contains(typeName))
+                    typeNames.Add(typeName);
+                continue;
+            }
 
-                var typeReference = metadata.GetTypeReference((TypeReferenceHandle)memberReference.Parent);
-                return (metadata.GetString(typeReference.Namespace), metadata.GetString(typeReference.Name));
-
-            case HandleKind.MethodDefinition:
-                var methodDefinition = metadata.GetMethodDefinition((MethodDefinitionHandle)attribute.Constructor);
-                var typeDefinition = metadata.GetTypeDefinition(methodDefinition.GetDeclaringType());
-                return (metadata.GetString(typeDefinition.Namespace), metadata.GetString(typeDefinition.Name));
-
-            default:
-                return ("", "");
+            typeNamesByIdentifier.Add(cqlLibraryInfo.LibraryIdentifier, [typeName]);
+            cqlLibraryInfos.Add(cqlLibraryInfo);
         }
+
+        for (var index = 0; index < cqlLibraryInfos.Count; index++)
+        {
+            var cqlLibraryInfo = cqlLibraryInfos[index];
+            var typeNames = typeNamesByIdentifier[cqlLibraryInfo.LibraryIdentifier];
+            if (typeNames.Count > 1)
+                cqlLibraryInfos[index] = cqlLibraryInfo with
+                {
+                    Error = CqlLibraryTypeRule.DeclaredByMoreThanOneType(cqlLibraryInfo.LibraryIdentifier, typeNames),
+                };
+        }
+
+        return cqlLibraryInfos;
+    }
+
+    /// <summary>
+    /// The namespace and name of the attribute's type, and the name of the assembly a reference to that type
+    /// resolves to.
+    /// </summary>
+    /// <remarks>
+    /// The assembly is <see langword="null"/> when the attribute type is defined in the assembly being read, which
+    /// makes it neither the SDK's nor the runtime's own, or when it is not referenced through an assembly at all.
+    /// </remarks>
+    private static ((string Namespace, string Name) Name, string? Assembly) GetAttributeType(
+        MetadataReader metadata,
+        CustomAttribute attribute)
+    {
+        if (attribute.Constructor.Kind != HandleKind.MemberReference)
+            return (("", ""), null);
+
+        var memberReference = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
+        if (memberReference.Parent.Kind != HandleKind.TypeReference)
+            return (("", ""), null);
+
+        var typeReference = metadata.GetTypeReference((TypeReferenceHandle)memberReference.Parent);
+        var assembly = typeReference.ResolutionScope.Kind == HandleKind.AssemblyReference
+            ? metadata.GetString(metadata.GetAssemblyReference((AssemblyReferenceHandle)typeReference.ResolutionScope).Name)
+            : null;
+        return ((metadata.GetString(typeReference.Namespace), metadata.GetString(typeReference.Name)), assembly);
+    }
+
+    /// <summary>
+    /// The type's name, qualified by its namespace when it has one.
+    /// </summary>
+    private static string GetTypeName(MetadataReader metadata, TypeDefinition type)
+    {
+        var typeNamespace = metadata.GetString(type.Namespace);
+        var typeName = metadata.GetString(type.Name);
+        return typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
     }
 
     /// <summary>
@@ -157,11 +227,11 @@ internal static class CqlAssemblyInfoReader
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c> followed by the two arguments as serialized strings.
     /// </summary>
-    private static (string? First, string? Second)? ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
+    private static (string? First, string? Second) ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
     {
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            return null;
+            return (null, null);
 
         return (value.ReadSerializedString(), value.ReadSerializedString());
     }

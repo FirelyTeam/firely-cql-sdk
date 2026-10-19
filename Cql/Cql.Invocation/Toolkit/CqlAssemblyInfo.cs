@@ -29,7 +29,9 @@ public sealed class CqlAssemblyInfo
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlAssemblyInfo"/> class.
     /// </summary>
-    /// <exception cref="InvalidOperationException">Two of the libraries have the same identifier.</exception>
+    /// <param name="assemblyBinary">The assembly the libraries were read from.</param>
+    /// <param name="assemblyName">The identity of the assembly.</param>
+    /// <param name="cqlLibraryInfos">The libraries, one per identifier.</param>
     internal CqlAssemblyInfo(
         AssemblyBinary assemblyBinary,
         AssemblyName assemblyName,
@@ -41,14 +43,13 @@ public sealed class CqlAssemblyInfo
         var libraries = new Dictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo>();
         foreach (var cqlLibraryInfo in cqlLibraryInfos)
         {
-            if (!libraries.TryAdd(cqlLibraryInfo.LibraryIdentifier, cqlLibraryInfo))
-                throw new InvalidOperationException(
-                    $"Assembly '{assemblyName.Name}' holds more than one library type for CQL library '{cqlLibraryInfo.LibraryIdentifier}'.");
+            libraries.Add(cqlLibraryInfo.LibraryIdentifier, cqlLibraryInfo);
 
             // The first library decides it, each further one can only clear it, and without any it stays false.
             IsSupported = libraries.Count == 1
                 ? cqlLibraryInfo.IsSupported
                 : IsSupported && cqlLibraryInfo.IsSupported;
+            HasErrors |= cqlLibraryInfo.Error is not null;
         }
 
         Libraries = libraries.ToFrozenDictionary();
@@ -82,4 +83,10 @@ public sealed class CqlAssemblyInfo
     /// loading it can still fail for other reasons, such as a missing dependency.
     /// </remarks>
     public bool IsSupported { get; }
+
+    /// <summary>
+    /// Gets whether any library in the assembly has an <see cref="CqlLibraryInfo.Error"/>: the assembly declares it in
+    /// a way the toolkit does not accept, so the toolkit skips it while it loads the assembly's other libraries.
+    /// </summary>
+    public bool HasErrors { get; }
 }

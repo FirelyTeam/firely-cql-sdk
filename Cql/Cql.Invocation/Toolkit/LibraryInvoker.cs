@@ -126,21 +126,33 @@ public abstract class LibraryInvoker
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker that created the <see cref="LibraryInvoker"/>.</param>
     /// <param name="libraryType">The type of the library.</param>
+    /// <param name="cqlLibraryInfos">
+    /// The CQL libraries the type declares, as <see cref="CqlLibraryTypeRule.GetLibraryInfos"/> reads them.
+    /// </param>
     /// <param name="libraryInvoker">When this method returns, contains the created <see cref="LibraryInvoker"/> instance, if the creation succeeded; otherwise, <see langword="null"/>.</param>
     /// <returns><see langword="true"/> if the creation succeeded; otherwise, <see langword="false"/>.</returns>
     internal static bool TryCreateFromType(
         LibrarySetInvoker librarySetInvoker,
         Type libraryType,
+        IReadOnlyList<CqlLibraryInfo> cqlLibraryInfos,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
         var logger = librarySetInvoker.CreateLogger<LibraryInvoker>();
 
-        if (!CqlLibraryTypeRule.TryGetLibraryInfo(libraryType, out var cqlLibraryInfo))
+        if (cqlLibraryInfos.Count == 0)
         {
             logger?.LogDebug(
                 "Skipping type {type} because it is not a CQL library the code generator wrote.",
                 libraryType.FullName);
+            return false;
+        }
+
+        // A type that declares more than one library carries an error, on every entry, so the first stands for all.
+        var cqlLibraryInfo = cqlLibraryInfos[0];
+        if (cqlLibraryInfo.Error is { } error)
+        {
+            logger?.LogError("Skipping type {type}: {error}", libraryType.FullName, error.Message);
             return false;
         }
 

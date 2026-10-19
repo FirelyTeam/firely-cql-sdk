@@ -93,6 +93,11 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <see cref="CreateLibrarySetInvoker(string)"/> applies to the types it loads.
     /// </para>
     /// <para>
+    /// A library the assembly declares in a way this toolkit does not accept is still listed, with an
+    /// <see cref="CqlLibraryInfo.Error"/>, and the rest of the assembly is still read: see
+    /// <see cref="CqlAssemblyInfo.HasErrors"/>.
+    /// </para>
+    /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
     /// it can still fail for other reasons, such as a missing dependency.
     /// </para>
@@ -103,7 +108,6 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// The bytes are not a .NET assembly, are a module without an assembly manifest, or hold metadata that
     /// cannot be read.
     /// </exception>
-    /// <exception cref="InvalidOperationException">The assembly holds two library types with the same identifier.</exception>
     /// <seealso cref="TryReadCqlAssemblyInfo"/>
     public static CqlAssemblyInfo ReadCqlAssemblyInfo(AssemblyBinary assemblyBinary) =>
         CqlAssemblyInfoReader.Read(assemblyBinary);
@@ -192,6 +196,10 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// which must be disposed when no longer in use,
     /// so that the loaded assemblies may unload from the
     /// application domain.</returns>
+    /// <remarks>
+    /// A library declared in a way this toolkit does not accept, which <see cref="ReadCqlAssemblyInfo"/> reports through
+    /// <see cref="CqlLibraryInfo.Error"/>, is skipped with that error in the log, and the other libraries still load.
+    /// </remarks>
     public LibrarySetInvoker CreateLibrarySetInvoker(string librarySetName = "") =>
         CreateLibrarySetInvoker(librarySetName, isPoolOwned: false);
 

@@ -18,58 +18,94 @@ namespace Hl7.Cql.Invocation.Toolkit.Internal;
 /// Decides whether a type is a CQL library the code generator wrote, and what it declares.
 /// </summary>
 /// <remarks>
-/// The rule is <see cref="TryCreateLibraryInfo"/>. <see cref="LibraryInvoker.TryCreateFromType"/> reads its input from
-/// a loaded type through <see cref="TryGetLibraryInfo"/>, and <see cref="CqlAssemblyInfoReader"/> reads it from an
-/// assembly's metadata. Both therefore produce the same <see cref="CqlLibraryInfo"/> for the same type, so a host that
+/// The rule is <see cref="CreateLibraryInfos"/>. <see cref="LibrarySetInvoker"/> reads its input from loaded types
+/// through <see cref="GetLibraryInfos"/>, and <see cref="CqlAssemblyInfoReader"/> reads it from an assembly's metadata.
+/// Both therefore produce the same <see cref="CqlLibraryInfo"/>s for the same type, errors included, so a host that
 /// checks an assembly before loading it and the invoker that loads it cannot disagree.
 /// </remarks>
 internal static class CqlLibraryTypeRule
 {
     /// <summary>
-    /// Reads the CQL library that a loaded type declares, through reflection.
+    /// Reads the CQL libraries that a loaded type declares, through reflection.
     /// </summary>
     /// <param name="type">The type to read.</param>
-    /// <param name="cqlLibraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
-    /// <returns><see langword="false"/> when the type is not a CQL library the code generator wrote.</returns>
-    public static bool TryGetLibraryInfo(
-        Type type,
-        [NotNullWhen(true)] out CqlLibraryInfo? cqlLibraryInfo)
+    /// <returns>The libraries the type declares, as <see cref="CreateLibraryInfos"/> decides them.</returns>
+    public static List<CqlLibraryInfo> GetLibraryInfos(Type type)
     {
-        cqlLibraryInfo = null;
-        return type.GetCustomAttribute<CqlLibraryAttribute>() is { } cqlLibrary
-               && type.GetCustomAttribute<GeneratedCodeAttribute>() is { } generatedCode
-               && TryCreateLibraryInfo(cqlLibrary.Identifier, cqlLibrary.Version, generatedCode.Tool, generatedCode.Version, out cqlLibraryInfo);
+        List<(string? Identifier, string? Version)> cqlLibraries = [];
+        foreach (var cqlLibrary in type.GetCustomAttributes<CqlLibraryAttribute>(inherit: false))
+            cqlLibraries.Add((cqlLibrary.Identifier, cqlLibrary.Version));
+
+        if (cqlLibraries.Count == 0)
+            return [];
+
+        List<(string? Tool, string? Version)> generatedCodes = [];
+        foreach (var generatedCode in type.GetCustomAttributes<GeneratedCodeAttribute>(inherit: false))
+            generatedCodes.Add((generatedCode.Tool, generatedCode.Version));
+
+        return CreateLibraryInfos(type.FullName ?? type.Name, cqlLibraries, generatedCodes);
     }
 
     /// <summary>
-    /// Decides, from the arguments of a type's <see cref="CqlLibraryAttribute"/> and <see cref="GeneratedCodeAttribute"/>,
-    /// whether the type is a CQL library the code generator wrote, and which.
+    /// Decides, from the arguments of every <see cref="CqlLibraryAttribute"/> and <see cref="GeneratedCodeAttribute"/>
+    /// a type carries, which CQL libraries the code generator wrote into it.
     /// </summary>
-    /// <param name="identifier">The identifier the <see cref="CqlLibraryAttribute"/> names.</param>
-    /// <param name="version">The library version the <see cref="CqlLibraryAttribute"/> names.</param>
-    /// <param name="tool">The tool the <see cref="GeneratedCodeAttribute"/> names.</param>
-    /// <param name="generatorVersion">The version the <see cref="GeneratedCodeAttribute"/> names.</param>
-    /// <param name="cqlLibraryInfo">The library the type declares, when it is a CQL library the code generator wrote.</param>
+    /// <param name="typeName">The name of the type, for an error message.</param>
+    /// <param name="cqlLibraries">The identifier and version of every <see cref="CqlLibraryAttribute"/> on the type.</param>
+    /// <param name="generatedCodes">The tool and version of every <see cref="GeneratedCodeAttribute"/> on the type.</param>
     /// <returns>
-    /// <see langword="false"/> when another tool wrote the type, when the generator version does not parse, or when the
-    /// identifier and version do not form a library identifier.
+    /// One entry per library the type declares. There are none when the type carries no <see cref="CqlLibraryAttribute"/>,
+    /// or no <see cref="GeneratedCodeAttribute"/> that names the code generator with a version that parses, and none for
+    /// an identifier and version that do not form a library identifier. When the type carries more than one of either
+    /// attribute, every entry carries an <see cref="CqlLibraryInfo.Error"/> that says so.
     /// </returns>
-    public static bool TryCreateLibraryInfo(
-        string? identifier,
-        string? version,
-        string? tool,
-        string? generatorVersion,
-        [NotNullWhen(true)] out CqlLibraryInfo? cqlLibraryInfo)
+    public static List<CqlLibraryInfo> CreateLibraryInfos(
+        string typeName,
+        IReadOnlyList<(string? Identifier, string? Version)> cqlLibraries,
+        IReadOnlyList<(string? Tool, string? Version)> generatedCodes)
     {
-        cqlLibraryInfo = null;
-        if (!IsGeneratorToolName(tool)
-            || !Version.TryParse(generatorVersion, out var generatorToolVersion)
-            || !TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
-            return false;
+        List<CqlLibraryInfo> cqlLibraryInfos = [];
+        if (cqlLibraries.Count == 0)
+            return cqlLibraryInfos;
 
-        cqlLibraryInfo = new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion);
-        return true;
+        Version? generatorToolVersion = null;
+        foreach (var (tool, version) in generatedCodes)
+        {
+            if (IsGeneratorToolName(tool) && Version.TryParse(version, out var parsedVersion))
+            {
+                generatorToolVersion = parsedVersion;
+                break;
+            }
+        }
+
+        if (generatorToolVersion is null)
+            return cqlLibraryInfos;
+
+        Exception? error =
+            cqlLibraries.Count > 1 ? MoreThanOneAttribute(typeName, nameof(CqlLibraryAttribute))
+            : generatedCodes.Count > 1 ? MoreThanOneAttribute(typeName, nameof(GeneratedCodeAttribute))
+            : null;
+
+        foreach (var (identifier, version) in cqlLibraries)
+        {
+            if (TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
+                cqlLibraryInfos.Add(new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion) { Error = error });
+        }
+
+        return cqlLibraryInfos;
     }
+
+    /// <summary>
+    /// The error for a CQL library that more than one type declares.
+    /// </summary>
+    public static InvalidOperationException DeclaredByMoreThanOneType(
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        IEnumerable<string> typeNames) =>
+        new($"CQL library '{libraryIdentifier}' is declared by more than one type: '{string.Join("', '", typeNames)}'. "
+            + "A CQL library is declared by exactly one type.");
+
+    private static InvalidOperationException MoreThanOneAttribute(string typeName, string attributeName) =>
+        new($"Type '{typeName}' carries more than one {attributeName}. A CQL library type carries exactly one.");
 
     /// <summary>
     /// Determines whether an invoker of this toolkit runs code written by the specified version of the
