@@ -113,8 +113,10 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// time.
     /// </para>
     /// <para>
-    /// For metadata that no compiler writes, this method still never throws, and reports what it detects, but it
-    /// cannot foresee everything that loading such an assembly would do.
+    /// This method is a quick check of an assembly that a host is about to load, so it guards against accidents: bytes
+    /// that are not an assembly, a truncated or corrupt file, an unsupported generator version, a misdeclared library.
+    /// It never throws for the bytes it is given. It is not a defense against metadata crafted to make reading slow,
+    /// as whoever can supply an assembly to load can already make the host run its code.
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>

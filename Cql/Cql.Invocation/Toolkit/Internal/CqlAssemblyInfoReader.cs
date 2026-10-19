@@ -100,8 +100,6 @@ internal static class CqlAssemblyInfoReader
             assemblyFullName = assemblyName.FullName;
 
             ThrowIfDeclaringTypesFormACycle(metadata);
-            var typeNames = new TypeNames(metadata);
-            var attributeArguments = new AttributeArguments(metadata);
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
                 // The first type is the module's own <Module> type, which reflection never returns among the
@@ -109,9 +107,9 @@ internal static class CqlAssemblyInfoReader
                 if (MetadataTokens.GetRowNumber(typeHandle) == 1)
                     continue;
 
-                var cqlLibraryInfos = ReadLibraryInfos(metadata, typeHandle, assemblyFullName, typeNames, attributeArguments);
+                var (typeName, cqlLibraryInfos) = ReadLibraryInfos(metadata, typeHandle, assemblyFullName);
                 foreach (var cqlLibraryInfo in cqlLibraryInfos)
-                    declarations.Add((typeHandle, typeNames.Get(typeHandle), cqlLibraryInfo));
+                    declarations.Add((typeHandle, typeName, cqlLibraryInfo));
             }
         }
         catch (CqlException<CqlLibraryTypeWithMalformedAttributeError> exception)
@@ -139,18 +137,19 @@ internal static class CqlAssemblyInfoReader
     /// Only the SDK's and the runtime's own attribute types count, never a type of the same name from another
     /// assembly, as reflection only finds the attribute types themselves. And as reflection does, it reads the
     /// <see cref="GeneratedCodeAttribute"/>s only of a type that declares a CQL library, so a malformed one on any
-    /// other type goes unnoticed by both. The type's name is built only when it declares a library or has an error.
+    /// other type goes unnoticed by both.
     /// </remarks>
+    /// <returns>
+    /// The type's name, built only when the type declares a library, and the libraries it declares.
+    /// </returns>
     /// <exception cref="CqlException{TError}">
     /// A <see cref="CqlLibraryTypeWithMalformedAttributeError"/> for an attribute value that reflection cannot read
     /// either, so the invoker cannot load the assembly.
     /// </exception>
-    private static List<CqlLibraryInfo> ReadLibraryInfos(
+    private static (string TypeName, List<CqlLibraryInfo> CqlLibraryInfos) ReadLibraryInfos(
         MetadataReader metadata,
         TypeDefinitionHandle typeHandle,
-        string assemblyName,
-        TypeNames typeNames,
-        AttributeArguments attributeArguments)
+        string assemblyName)
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
         List<CustomAttribute> generatedCodeAttributes = [];
@@ -165,28 +164,28 @@ internal static class CqlAssemblyInfoReader
                     break;
                 case LibraryAttribute.CqlLibrary:
                     cqlLibraries.Add(
-                        attributeArguments.Read(attribute)
-                        ?? throw Malformed(assemblyName, typeNames.Get(typeHandle), nameof(CqlLibraryAttribute)));
+                        ReadTwoStringArguments(metadata, attribute)
+                        ?? throw Malformed(assemblyName, GetTypeName(metadata, typeHandle), nameof(CqlLibraryAttribute)));
                     break;
             }
         }
 
         if (cqlLibraries.Count == 0)
-            return [];
+            return ("", []);
 
-        var typeName = typeNames.Get(typeHandle);
+        var typeName = GetTypeName(metadata, typeHandle);
         List<(string? Tool, string? Version)> generatedCodes = [];
         foreach (var attribute in generatedCodeAttributes)
             generatedCodes.Add(
-                attributeArguments.Read(attribute)
+                ReadTwoStringArguments(metadata, attribute)
                 ?? throw Malformed(assemblyName, typeName, nameof(GeneratedCodeAttribute)));
 
-        return CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes);
+        return (typeName, CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes));
     }
 
     /// <summary>
-    /// Throws when the declaring types of a type form a cycle, which reflection cannot load either. Each type is walked
-    /// past only once, so this costs no more than the number of types, however deeply they nest.
+    /// Throws when the declaring types of a type form a cycle, which reflection cannot load either, so that
+    /// <see cref="GetTypeName"/> can walk them to the end.
     /// </summary>
     /// <exception cref="BadImageFormatException">The declaring types of a type form a cycle.</exception>
     private static void ThrowIfDeclaringTypesFormACycle(MetadataReader metadata)
@@ -304,160 +303,75 @@ internal static class CqlAssemblyInfoReader
     }
 
     /// <summary>
-    /// Reads the two arguments of attributes whose constructor takes two strings, as both
+    /// Reads the two arguments of an attribute whose constructor takes two strings, as both
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c>, the two arguments as serialized strings, and the count of named arguments, which is 0
     /// because neither attribute has a member that one could set.
     /// </summary>
-    /// <remarks>
-    /// Decodes each value blob once, however many attributes share it, so that metadata cannot make reading decode the
-    /// same strings again and again, and so that the libraries read from it share the strings.
-    /// </remarks>
-    private sealed class AttributeArguments(MetadataReader metadata)
+    /// <returns>
+    /// The two arguments, or <see langword="null"/> where reflection cannot read the attribute either: its
+    /// constructor is not the one that takes two strings, its value does not start with the prolog, or what follows
+    /// the two arguments is neither nothing nor a count of no named arguments.
+    /// </returns>
+    private static (string? First, string? Second)? ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
     {
-        private readonly Dictionary<BlobHandle, (string? First, string? Second)?> _values = [];
+        var constructor = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
+        if (!metadata.StringComparer.Equals(constructor.Name, ".ctor")
+            || !metadata.GetBlobContent(constructor.Signature).AsSpan().SequenceEqual(TwoStringConstructorSignature))
+            return null;
 
-        /// <returns>
-        /// The two arguments, or <see langword="null"/> where reflection cannot read the attribute either: its
-        /// constructor is not the one that takes two strings, its value does not start with the prolog, or what follows
-        /// the two arguments is neither nothing nor a count of no named arguments.
-        /// </returns>
-        public (string? First, string? Second)? Read(CustomAttribute attribute)
-        {
-            var constructor = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
-            if (!metadata.StringComparer.Equals(constructor.Name, ".ctor")
-                || !IsTwoStringConstructorSignature(metadata.GetBlobReader(constructor.Signature)))
-                return null;
+        var value = metadata.GetBlobReader(attribute.Value);
+        if (value.Length < 2 || value.ReadUInt16() != 0x0001)
+            return null;
 
-            if (!_values.TryGetValue(attribute.Value, out var arguments))
-                _values.Add(attribute.Value, arguments = Decode(metadata.GetBlobReader(attribute.Value)));
-            return arguments;
-        }
+        var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
 
-        private static bool IsTwoStringConstructorSignature(BlobReader signature)
-        {
-            var expected = TwoStringConstructorSignature;
-            if (signature.Length != expected.Length)
-                return false;
-
-            foreach (var expectedByte in expected)
-            {
-                if (signature.ReadByte() != expectedByte)
-                    return false;
-            }
-
-            return true;
-        }
-
-        private static (string? First, string? Second)? Decode(BlobReader value)
-        {
-            if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-                return null;
-
-            var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
-
-            // Reflection reads a value that ends right after the arguments, or with a count of no named arguments and
-            // nothing after it, and rejects any other.
-            return value.RemainingBytes == 0 || (value.RemainingBytes == 2 && value.ReadUInt16() == 0) ? arguments : null;
-        }
+        // Reflection reads a value that ends right after the arguments, or with a count of no named arguments and
+        // nothing after it, and rejects any other.
+        return value.RemainingBytes == 0 || (value.RemainingBytes == 2 && value.ReadUInt16() == 0) ? arguments : null;
     }
 
     /// <summary>
-    /// The full names of an assembly's types, as <see cref="Type.FullName"/> gives them: a type's namespace and name
-    /// with the characters that full names reserve escaped, and a nested type's declaring types before it, each
-    /// followed by <c>+</c>.
+    /// The characters that <see cref="Type.FullName"/> escapes with a backslash.
+    /// </summary>
+    private static readonly SearchValues<char> ReservedCharacters = SearchValues.Create("\\+,[]&*");
+
+    /// <summary>
+    /// The type's full name, as <see cref="Type.FullName"/> gives it: its namespace and name with the characters
+    /// that full names reserve escaped, after its declaring types, each followed by <c>+</c>.
     /// </summary>
     /// <remarks>
-    /// Builds a type's name only when asked for it, and each name only once, from its declaring type's. Decodes and
-    /// escapes each namespace and name string only once, however many types share it. A name longer than
-    /// <see cref="MaxLength"/> is cut there, and a type nested in a type whose name is cut gets that same name, so that
-    /// metadata of deeply nested types, or of long names, cannot make reading slow. The reader tells types apart by
-    /// their handles, never by these names.
+    /// The reader tells types apart by their handles; the names only describe them. The declaring types form no
+    /// cycle, as <see cref="ThrowIfDeclaringTypesFormACycle"/> checks first.
     /// </remarks>
-    private sealed class TypeNames(MetadataReader metadata)
+    private static string GetTypeName(MetadataReader metadata, TypeDefinitionHandle typeHandle)
     {
-        /// <summary>
-        /// The length a name is cut at.
-        /// </summary>
-        private const int MaxLength = 512;
-
-        /// <summary>
-        /// The characters that <see cref="Type.FullName"/> escapes with a backslash.
-        /// </summary>
-        private static readonly SearchValues<char> ReservedCharacters = SearchValues.Create("\\+,[]&*");
-
-        private readonly Dictionary<TypeDefinitionHandle, string> _names = [];
-        private readonly Dictionary<StringHandle, string> _segments = [];
-
-        /// <summary>
-        /// The full name of the type, whose declaring types <see cref="ThrowIfDeclaringTypesFormACycle"/> has
-        /// found to form no cycle.
-        /// </summary>
-        public string Get(TypeDefinitionHandle typeHandle)
+        Stack<string> segments = new();
+        for (var current = typeHandle; !current.IsNil;)
         {
-            if (_names.TryGetValue(typeHandle, out var name))
-                return name;
-
-            // Collect the type and its declaring types, up to one that already has a name or is not nested.
-            Stack<TypeDefinitionHandle> unnamed = new();
-            string? declaringName = null;
-            for (var current = typeHandle;;)
-            {
-                unnamed.Push(current);
-                var declaringType = metadata.GetTypeDefinition(current).GetDeclaringType();
-                if (declaringType.IsNil || _names.TryGetValue(declaringType, out declaringName))
-                    break;
-
-                current = declaringType;
-            }
-
-            // Name them outermost first, each from its declaring type's name.
-            while (unnamed.TryPop(out var current))
-            {
-                if (declaringName is not { Length: > MaxLength })
-                {
-                    var type = metadata.GetTypeDefinition(current);
-                    var typeNamespace = Segment(type.Namespace);
-                    var typeName = Segment(type.Name);
-                    var qualifiedName = typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
-                    declaringName = Cut(declaringName is null ? qualifiedName : $"{declaringName}+{qualifiedName}");
-                }
-
-                _names.Add(current, declaringName);
-            }
-
-            return declaringName!;
+            var type = metadata.GetTypeDefinition(current);
+            var typeNamespace = Escape(metadata.GetString(type.Namespace));
+            var typeName = Escape(metadata.GetString(type.Name));
+            segments.Push(typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}");
+            current = type.GetDeclaringType();
         }
 
-        /// <summary>
-        /// A namespace or name string, escaped and cut, decoded only the first time.
-        /// </summary>
-        private string Segment(StringHandle handle)
-        {
-            if (handle.IsNil)
-                return "";
+        return string.Join("+", segments);
+    }
 
-            if (!_segments.TryGetValue(handle, out var segment))
-                _segments.Add(handle, segment = Cut(Escape(metadata.GetString(handle))));
-            return segment;
+    private static string Escape(string name)
+    {
+        if (name.AsSpan().IndexOfAny(ReservedCharacters) < 0)
+            return name;
+
+        var escaped = new StringBuilder(name.Length + 8);
+        foreach (var character in name)
+        {
+            if (ReservedCharacters.Contains(character))
+                escaped.Append('\\');
+            escaped.Append(character);
         }
 
-        private static string Cut(string name) => name.Length > MaxLength ? $"{name[..MaxLength]}…" : name;
-
-        private static string Escape(string name)
-        {
-            if (name.AsSpan().IndexOfAny(ReservedCharacters) < 0)
-                return name;
-
-            var escaped = new StringBuilder(name.Length + 8);
-            foreach (var character in name)
-            {
-                if (ReservedCharacters.Contains(character))
-                    escaped.Append('\\');
-                escaped.Append(character);
-            }
-
-            return escaped.ToString();
-        }
+        return escaped.ToString();
     }
 }

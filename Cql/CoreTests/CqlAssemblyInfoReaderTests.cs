@@ -245,30 +245,6 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    public void ReadCqlAssemblyInfo_OfManyTypesThatDeclareOneLibrary_NamesThemAllAsTheInvokerDoes()
-    {
-        const int typeCount = 20_000;
-        var builder = new MetadataAssembly("ManyTypesOneLibrary");
-        for (var index = 0; index < typeCount; index++)
-            builder.AddLibraryAttributes(builder.AddType($"Copy{index}"), "SharedLibrary");
-
-        var assembly = builder.Build();
-        var warnings = new List<string>();
-        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
-
-        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        using var invoker = new InvocationToolkit(loggerFactory)
-                            .AddAssemblyBinaries([assembly])
-                            .CreateLibrarySetInvoker();
-
-        cqlAssemblyInfo.Libraries.Should().ContainSingle()
-                       .Which.Value.ReadError.Should().BeOfType<CqlLibraryDeclaredByMoreThanOneTypeError>()
-                       .Which.TypeNames.Should().HaveCount(typeCount).And.StartWith("Copy0").And.EndWith($"Copy{typeCount - 1}");
-        invoker.LibraryInvokers.Should().BeEmpty();
-        warnings.Should().ContainSingle(warning => warning.Contains("'Copy0'") && warning.Contains($"'Copy{typeCount - 1}'"));
-    }
-
-    [TestMethod]
     [DataRow(false, DisplayName = "supported type first")]
     [DataRow(true, DisplayName = "unsupported type first")]
     public void ReadCqlAssemblyInfo_OfALibraryASupportedAndAnUnsupportedTypeDeclare_ReportsTheSupportedOneAsTheInvokerLoadsIt(bool unsupportedFirst)
@@ -308,6 +284,31 @@ public class CqlAssemblyInfoReaderTests
         InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Should().ContainKey(Identifier("RenamedLibrary", "1.0.0"));
         invoker.LibraryInvokers.Should().BeEmpty();
         warnings.Should().Contain(warning => warning.Contains("RenamedLibrary-1.0.0") && warning.Contains("CqlLibraryInfoTest-1.0.0"));
+    }
+
+    [TestMethod]
+    public void CreateLibrarySetInvoker_WithAHealthyTypeAndAMislabelledOneThatDeclareALibrary_SkipsBothAsTheReaderSays()
+    {
+        const string statedByTheGenerator = """public string Name => "CqlLibraryInfoTest";""";
+        var cSharp = GeneratedLibrary.Value.cSharp;
+        cSharp.Should().Contain(statedByTheGenerator);
+        var className = System.Text.RegularExpressions.Regex.Match(cSharp, @"public partial class (\w+)").Groups[1].Value;
+        var mislabelled = cSharp.Replace(className, className + "_Mislabelled")
+                                .Replace(statedByTheGenerator, """public string Name => "OtherLibrary";""");
+        var assembly = Compile("HealthyAndMislabelled", cSharp, mislabelled);
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        // Both types declare the library through their attribute, which is all the reader sees, so it reports the
+        // library as declared twice, and the invoker skips both rather than load one the reader reports as an error.
+        cqlAssemblyInfo.Libraries[LibraryIdentifier].ReadError.Should().BeOfType<CqlLibraryDeclaredByMoreThanOneTypeError>();
+        invoker.LibraryInvokers.Should().NotContainKey(LibraryIdentifier);
+        warnings.Should().Contain(warning => warning.Contains($"'{className}'") && warning.Contains($"'{className}_Mislabelled'"));
     }
 
     [TestMethod]
@@ -556,110 +557,6 @@ public class CqlAssemblyInfoReaderTests
         readError.AssemblyName.Should().BeNull();
         readError.Exception.Should().NotBeNull();
         ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfDeeplyNestedLibraryTypes_BuildsEachNameOnceAndCutsItShort()
-    {
-        const int depth = 2000;
-        var builder = new MetadataAssembly("DeeplyNestedLibraries");
-        var declaringType = default(TypeDefinitionHandle);
-        for (var level = 0; level < depth; level++)
-        {
-            // Two CqlLibraryAttributes give each library an error that names its type.
-            declaringType = builder.AddType(new string('N', 200), declaringType: declaringType);
-            builder.AddGeneratedCode(declaringType);
-            builder.AddCqlLibrary(declaringType, $"DeepFirst{level}", "1.0.0");
-            builder.AddCqlLibrary(declaringType, $"DeepSecond{level}", "1.0.0");
-        }
-
-        var assembly = builder.Build();
-
-        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
-        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
-
-        cqlAssemblyInfo.Libraries.Should().HaveCount(2 * depth);
-        cqlAssemblyInfo.Libraries.Values
-                       .Select(cqlLibraryInfo => cqlLibraryInfo.ReadError.Should().BeOfType<CqlLibraryTypeWithMoreThanOneAttributeError>().Which.TypeName.Length)
-                       .Max().Should().BeLessThanOrEqualTo(513, "a name is cut at 512 characters and marked with an ellipsis");
-        allocated.Should().BeLessThan(64 * 1024 * 1024, "each name is built once, from its declaring type's, and cut short");
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfManyTypesSharingOneLargeAttributeValue_DecodesItOnce()
-    {
-        var largeIdentifier = new string('L', 1_000_000);
-        var builder = new MetadataAssembly("SharedLargeAttributeValue");
-        for (var index = 0; index < 200; index++)
-            builder.AddLibraryAttributes(builder.AddType($"Copy{index}"), largeIdentifier);
-
-        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
-
-        cqlAssemblyInfo.Libraries.Should().ContainSingle()
-                       .Which.Value.ReadError.Should().BeOfType<CqlLibraryDeclaredByMoreThanOneTypeError>()
-                       .Which.TypeNames.Should().HaveCount(200);
-        allocated.Should().BeLessThan(LargeStringAllocationBound, "a value blob that many attributes share is decoded once");
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfManyLibraryTypesInOneLargeNamespace_DecodesItOnce()
-    {
-        var largeNamespace = new string('N', 1_000_000);
-        var builder = new MetadataAssembly("SharedLargeNamespace");
-        for (var index = 0; index < 200; index++)
-            builder.AddLibraryAttributes(builder.AddType($"Library{index}", largeNamespace), $"Library{index}");
-
-        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
-
-        cqlAssemblyInfo.Libraries.Should().HaveCount(200);
-        allocated.Should().BeLessThan(LargeStringAllocationBound, "a namespace that many types share is decoded once");
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfNestedLibraryTypesSharingOneLargeName_DecodesItOnce()
-    {
-        var largeName = new string('N', 1_000_000);
-        var builder = new MetadataAssembly("SharedLargeNestedName");
-        var declaringType = default(TypeDefinitionHandle);
-        for (var level = 0; level < 200; level++)
-        {
-            declaringType = builder.AddType(largeName, declaringType: declaringType);
-            builder.AddLibraryAttributes(declaringType, $"Nested{level}");
-        }
-
-        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
-
-        cqlAssemblyInfo.Libraries.Should().HaveCount(200);
-        allocated.Should().BeLessThan(LargeStringAllocationBound, "a name that many types share is decoded once, and a cut name is not extended");
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfManyAttributesOfALargelyNamedType_NeverDecodesTheName()
-    {
-        var largeName = new string('A', 1_000_000);
-        var builder = new MetadataAssembly("LargeAttributeTypeName");
-        for (var index = 0; index < 200; index++)
-            builder.AddAttributeOfType(builder.AddType($"Type{index}"), "Some.Namespace", largeName);
-
-        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
-
-        cqlAssemblyInfo.Libraries.Should().BeEmpty();
-        allocated.Should().BeLessThan(LargeStringAllocationBound, "attribute types are told apart without decoding their names");
-    }
-
-    [TestMethod]
-    public void ReadCqlAssemblyInfo_OfAShortCycleAmongManyTypes_ReportsAnUnreadableErrorCheaply()
-    {
-        var assembly = AssemblyWithCyclicNestedTypes(unrelatedTypeCount: 20_000);
-
-        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
-        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
-
-        cqlAssemblyInfo.ReadError.Should().BeOfType<CqlAssemblyUnreadableError>()
-                       .Which.Exception.Message.Should().Contain("form a cycle");
-        allocated.Should().BeLessThan(64 * 1024 * 1024, "each type's declaring types are walked past only once");
     }
 
     [TestMethod]
@@ -1099,22 +996,6 @@ public class CqlAssemblyInfoReaderTests
         }
     }
 
-    /// <summary>
-    /// What reading an assembly that shares one large string 200 times may allocate: far less than decoding the string
-    /// for each of its uses would.
-    /// </summary>
-    private const long LargeStringAllocationBound = 64 * 1024 * 1024;
-
-    /// <summary>
-    /// The bytes the current thread allocates while it reads <paramref name="assembly"/>.
-    /// </summary>
-    private static long AllocatedReading(AssemblyBinary assembly, out CqlAssemblyInfo cqlAssemblyInfo)
-    {
-        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
-        cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
-        return GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
-    }
-
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>
         CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(identifier, version);
 
@@ -1207,16 +1088,13 @@ public class CqlAssemblyInfoReaderTests
     /// Builds an assembly whose two types are each nested in the other, which no compiler writes: its NestedClass
     /// table makes their declaring types a cycle.
     /// </summary>
-    private static AssemblyBinary AssemblyWithCyclicNestedTypes(int unrelatedTypeCount = 0)
+    private static AssemblyBinary AssemblyWithCyclicNestedTypes()
     {
         var builder = new MetadataAssembly("CyclicNestedTypes");
         var first = builder.AddType("First", attributes: TypeAttributes.NestedPublic);
         var second = builder.AddType("Second", attributes: TypeAttributes.NestedPublic);
         builder.Nest(first, second);
         builder.Nest(second, first);
-        for (var index = 0; index < unrelatedTypeCount; index++)
-            builder.AddType($"Unrelated{index}");
-
         return builder.Build();
     }
 
@@ -1328,23 +1206,6 @@ public class CqlAssemblyInfoReaderTests
                 _metadata.GetOrAddString(".ctor"),
                 _metadata.GetOrAddBlob(constructorSignature));
             _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(value));
-        }
-
-        /// <summary>
-        /// Adds an attribute of a type that the runtime assembly is said to define, with the given namespace and name,
-        /// through a constructor that takes two strings.
-        /// </summary>
-        public void AddAttributeOfType(TypeDefinitionHandle type, string @namespace, string name)
-        {
-            var attributeType = _metadata.AddTypeReference(
-                AssemblyReference(typeof(object).Assembly.GetName()),
-                _metadata.GetOrAddString(@namespace),
-                _metadata.GetOrAddString(name));
-            var constructor = _metadata.AddMemberReference(
-                attributeType,
-                _metadata.GetOrAddString(".ctor"),
-                _metadata.GetOrAddBlob(TwoStringConstructorSignature));
-            _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(AttributeValue("First", "Second")));
         }
 
         /// <summary>
