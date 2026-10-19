@@ -74,7 +74,8 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
     /// <summary>
     /// Reads the CQL libraries that the code generator wrote into an assembly, from the assembly's metadata,
-    /// without loading the assembly.
+    /// without loading the assembly, and reports bytes it cannot read through <see cref="CqlAssemblyInfo.Error"/>
+    /// rather than throwing.
     /// </summary>
     /// <param name="assemblyBinary">
     /// The assembly, such as one built from the <c>+dll</c> attachment of a FHIR Library. Its debug symbols are not
