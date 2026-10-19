@@ -106,7 +106,9 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// </para>
     /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
-    /// it can still fail for other reasons, such as a missing dependency.
+    /// it can still fail for other reasons, such as a missing dependency. Nor can this method see another assembly
+    /// added to the same toolkit that declares the same library, which makes <see cref="CreateLibrarySetInvoker(string)"/>
+    /// skip both copies: it reads one assembly at a time.
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>

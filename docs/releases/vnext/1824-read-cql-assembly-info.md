@@ -25,5 +25,8 @@
   instead. The generated C# otherwise does not change. (#1824)
 - **Invocation toolkit** — `CreateLibrarySetInvoker` now skips, with an error in the log, a library type that carries
   more than one `CqlLibraryAttribute` or `GeneratedCodeAttribute`, and every type of a library that more than one type
-  declares, and loads the other libraries. Before, such an assembly made `CreateLibrarySetInvoker` throw
-  (`AmbiguousMatchException` or `ArgumentException`) and no library loaded. (#1824)
+  declares, and loads the other libraries. That includes one library in two assemblies added to the same toolkit,
+  such as `FHIRHelpers` compiled into the `+dll` of two FHIR Libraries: both copies are skipped.
+  `ReadCqlAssemblyInfo` reads one assembly at a time, so it reports each copy as supported, and a host that adds
+  several assemblies has to look for an identifier they share itself. Before, any of these made
+  `CreateLibrarySetInvoker` throw (`AmbiguousMatchException` or `ArgumentException`) and no library loaded. (#1824)
