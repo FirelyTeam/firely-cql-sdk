@@ -205,12 +205,21 @@ internal static class CqlAssemblyInfoReader
     /// The type's full name, as <see cref="Type.FullName"/> gives it: qualified by its namespace when it has one, and a
     /// nested type by its declaring types, so that no two types of the assembly share it.
     /// </summary>
+    /// <exception cref="BadImageFormatException">The declaring types form a cycle.</exception>
     private static string GetTypeName(MetadataReader metadata, TypeDefinition type)
     {
         var typeName = metadata.GetString(type.Name);
-        var declaringType = type.GetDeclaringType();
-        if (!declaringType.IsNil)
-            return $"{GetTypeName(metadata, metadata.GetTypeDefinition(declaringType))}+{typeName}";
+        var declaringTypeCount = 0;
+        for (var declaringType = type.GetDeclaringType(); !declaringType.IsNil; declaringType = type.GetDeclaringType())
+        {
+            // A corrupt NestedClass table can make the declaring types a cycle. More declaring types than the assembly
+            // defines means it does, so stop there rather than walk it forever.
+            if (++declaringTypeCount > metadata.TypeDefinitions.Count)
+                throw new BadImageFormatException($"The declaring types of type '{typeName}' form a cycle.");
+
+            type = metadata.GetTypeDefinition(declaringType);
+            typeName = $"{metadata.GetString(type.Name)}+{typeName}";
+        }
 
         var typeNamespace = metadata.GetString(type.Namespace);
         return typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";

@@ -8,6 +8,7 @@
 
 using System.Collections.Immutable;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.Loader;
 using Hl7.Cql.CodeGeneration.NET;
@@ -341,6 +342,19 @@ public class CqlAssemblyInfoReaderTests
                 "CqlLibraryAttribute"));
         ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
         createLibrarySetInvoker.Should().Throw<CustomAttributeFormatException>();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAnAssemblyWhoseNestedTypesFormACycle_ReportsAnUnreadableError()
+    {
+        var assembly = AssemblyWithCyclicNestedTypes();
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        var readError = cqlAssemblyInfo.ReadError.Should().BeOfType<CqlAssemblyUnreadableError>().Which;
+        readError.AssemblyName.Should().StartWith("CyclicNestedTypes,");
+        readError.Exception.Should().BeOfType<BadImageFormatException>().Which.Message.Should().Contain("form a cycle");
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
     }
 
     [TestMethod]
@@ -681,6 +695,35 @@ public class CqlAssemblyInfoReaderTests
         }
 
         protected override PEDirectoriesBuilder GetDirectories() => new();
+    }
+
+    /// <summary>
+    /// Builds an assembly whose two types are each nested in the other, which no compiler writes: its NestedClass
+    /// table makes their declaring types a cycle.
+    /// </summary>
+    private static AssemblyBinary AssemblyWithCyclicNestedTypes()
+    {
+        var metadata = new MetadataBuilder();
+        metadata.AddModule(0, metadata.GetOrAddString("CyclicNestedTypes.dll"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+        metadata.AddAssembly(
+            metadata.GetOrAddString("CyclicNestedTypes"),
+            new Version(1, 0, 0, 0),
+            default,
+            default,
+            default,
+            System.Reflection.AssemblyHashAlgorithm.None);
+
+        var noFields = MetadataTokens.FieldDefinitionHandle(1);
+        var noMethods = MetadataTokens.MethodDefinitionHandle(1);
+        metadata.AddTypeDefinition(default, default, metadata.GetOrAddString("<Module>"), default, noFields, noMethods);
+        var first = metadata.AddTypeDefinition(TypeAttributes.NestedPublic, default, metadata.GetOrAddString("First"), default, noFields, noMethods);
+        var second = metadata.AddTypeDefinition(TypeAttributes.NestedPublic, default, metadata.GetOrAddString("Second"), default, noFields, noMethods);
+        metadata.AddNestedType(first, second);
+        metadata.AddNestedType(second, first);
+
+        var image = new BlobBuilder();
+        new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(metadata), new BlobBuilder()).Serialize(image);
+        return new AssemblyBinary(image.ToArray());
     }
 
     private static AssemblyBinary ModuleWithoutAnAssemblyManifest() =>
