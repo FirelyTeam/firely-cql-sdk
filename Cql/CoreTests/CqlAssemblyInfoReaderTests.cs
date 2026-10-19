@@ -252,6 +252,39 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfACorruptAttributeNextToAHealthyLibrary_ReportsAnErrorAsTheInvokerCannotLoadIt()
+    {
+        const string corruptIdentifier = "CorruptPrologLibrary";
+        byte[] assemblyBytes =
+        [
+            .. Compile(
+                   "CorruptAttributeProlog",
+                   GeneratedLibrary.Value.cSharp,
+                   LibraryType("CorruptProlog", corruptIdentifier, "1.0.0", GeneratorToolName, CurrentGeneratorVersion))
+               .AssemblyBytes!,
+        ];
+
+        // The compiler writes the attribute's value blob as the prolog 0x0001 followed by its arguments as serialized
+        // strings, the identifier first: overwrite that prolog.
+        byte[] prologAndIdentifier = [0x01, 0x00, (byte)corruptIdentifier.Length, .. System.Text.Encoding.UTF8.GetBytes(corruptIdentifier)];
+        var prologOffset = assemblyBytes.AsSpan().IndexOf(prologAndIdentifier);
+        prologOffset.Should().BeGreaterThanOrEqualTo(0).And.Be(assemblyBytes.AsSpan().LastIndexOf(prologAndIdentifier));
+        assemblyBytes[prologOffset] = 0x02;
+        var assembly = new AssemblyBinary(assemblyBytes);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var createLibrarySetInvoker = () =>
+        {
+            using var invoker = new InvocationToolkit().AddAssemblyBinaries([assembly]).CreateLibrarySetInvoker();
+            return invoker.LibraryInvokers.Count;
+        };
+
+        cqlAssemblyInfo.Error.Should().BeOfType<BadImageFormatException>();
+        ShouldHoldNothingButTheError(cqlAssemblyInfo, assembly);
+        createLibrarySetInvoker.Should().Throw<CustomAttributeFormatException>();
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_IgnoresALookAlikeCqlLibraryAttributeDefinedInTheAssembly_AsTheInvokerDoes()
     {
         var assembly = Compile(

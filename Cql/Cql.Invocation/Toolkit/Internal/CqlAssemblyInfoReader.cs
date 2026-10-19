@@ -214,11 +214,15 @@ internal static class CqlAssemblyInfoReader
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c> followed by the two arguments as serialized strings.
     /// </summary>
+    /// <exception cref="BadImageFormatException">
+    /// The value blob does not start with the prolog, which makes the assembly's metadata corrupt: reflection then
+    /// fails to read the attribute, so the invoker cannot load the assembly.
+    /// </exception>
     private static (string? First, string? Second) ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
     {
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            return (null, null);
+            throw new BadImageFormatException("A custom attribute's value does not start with the prolog 0x0001.");
 
         return (value.ReadSerializedString(), value.ReadSerializedString());
     }
