@@ -6,9 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Buffers;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Exceptions;
@@ -59,7 +61,8 @@ internal static class CqlAssemblyInfoReader
         if (assemblyBinary.AssemblyBytes is not { } assemblyBytes)
             throw new ArgumentException("The assembly binary holds no assembly bytes.", nameof(assemblyBinary));
 
-        AssemblyName? assemblyName = null;
+        AssemblyName assemblyName;
+        string? assemblyFullName = null;
         List<(TypeDefinitionHandle TypeHandle, string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations = [];
 
         try
@@ -74,14 +77,17 @@ internal static class CqlAssemblyInfoReader
                     assemblyBinary,
                     new CqlModuleWithoutManifestError(metadata.GetString(metadata.GetModuleDefinition().Name)));
 
+            // The full name holds the public key token, which computing throws for a malformed public key. Compute it
+            // once, here, so that such an assembly reads as unreadable instead.
             assemblyName = metadata.GetAssemblyDefinition().GetAssemblyName();
+            assemblyFullName = assemblyName.FullName;
 
+            ThrowIfDeclaringTypesFormACycle(metadata);
+            var typeNames = new TypeNames(metadata);
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
-                var type = metadata.GetTypeDefinition(typeHandle);
-                var typeName = GetTypeName(metadata, type);
-                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, type, assemblyName.FullName, typeName))
-                    declarations.Add((typeHandle, typeName, cqlLibraryInfo));
+                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, typeHandle, assemblyFullName, typeNames))
+                    declarations.Add((typeHandle, typeNames.Get(typeHandle), cqlLibraryInfo));
             }
         }
         catch (CqlException<CqlLibraryTypeWithMalformedAttributeError> exception)
@@ -92,13 +98,13 @@ internal static class CqlAssemblyInfoReader
         {
             // System.Reflection.Metadata reads lazily, so corrupt metadata surfaces partway through the read,
             // mostly but not always as a BadImageFormatException. Report every such failure the same way.
-            return new CqlAssemblyInfo(assemblyBinary, new CqlAssemblyUnreadableError(assemblyName?.FullName, exception));
+            return new CqlAssemblyInfo(assemblyBinary, new CqlAssemblyUnreadableError(assemblyFullName, exception));
         }
 
         return new CqlAssemblyInfo(
             assemblyBinary,
             assemblyName,
-            MergeLibrariesDeclaredMoreThanOnce(assemblyName.FullName, declarations));
+            MergeLibrariesDeclaredMoreThanOnce(assemblyFullName, declarations));
     }
 
     /// <summary>
@@ -109,18 +115,22 @@ internal static class CqlAssemblyInfoReader
     /// Only the SDK's and the runtime's own attribute types count, never a type of the same name from another
     /// assembly, as reflection only finds the attribute types themselves. And as reflection does, it reads the
     /// <see cref="GeneratedCodeAttribute"/>s only of a type that declares a CQL library, so a malformed one on any
-    /// other type goes unnoticed by both.
+    /// other type goes unnoticed by both. The type's name is built only when it declares a library or has an error.
     /// </remarks>
+    /// <exception cref="CqlException{TError}">
+    /// A <see cref="CqlLibraryTypeWithMalformedAttributeError"/> for an attribute value that reflection cannot read
+    /// either, so the invoker cannot load the assembly.
+    /// </exception>
     private static List<CqlLibraryInfo> ReadLibraryInfos(
         MetadataReader metadata,
-        TypeDefinition type,
+        TypeDefinitionHandle typeHandle,
         string assemblyName,
-        string typeName)
+        TypeNames typeNames)
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
         List<CustomAttribute> generatedCodeAttributes = [];
 
-        foreach (var attributeHandle in type.GetCustomAttributes())
+        foreach (var attributeHandle in metadata.GetTypeDefinition(typeHandle).GetCustomAttributes())
         {
             var attribute = metadata.GetCustomAttribute(attributeHandle);
             var (attributeName, attributeAssembly) = GetAttributeType(metadata, attribute);
@@ -131,18 +141,53 @@ internal static class CqlAssemblyInfoReader
                 generatedCodeAttributes.Add(attribute);
             else if (attributeName == CqlLibraryAttributeName
                      && string.Equals(attributeAssembly, CqlLibraryAttributeAssembly, StringComparison.OrdinalIgnoreCase))
-                cqlLibraries.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, attributeName.Name));
+                cqlLibraries.Add(
+                    ReadTwoStringArguments(metadata, attribute)
+                    ?? throw Malformed(assemblyName, typeNames.Get(typeHandle), attributeName.Name));
         }
 
         if (cqlLibraries.Count == 0)
             return [];
 
+        var typeName = typeNames.Get(typeHandle);
         List<(string? Tool, string? Version)> generatedCodes = [];
         foreach (var attribute in generatedCodeAttributes)
-            generatedCodes.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, GeneratedCodeAttributeName.Name));
+            generatedCodes.Add(
+                ReadTwoStringArguments(metadata, attribute)
+                ?? throw Malformed(assemblyName, typeName, GeneratedCodeAttributeName.Name));
 
         return CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes);
     }
+
+    /// <summary>
+    /// Throws when the declaring types of a type form a cycle, which reflection cannot load either. Each type is walked
+    /// past only once, so this costs no more than the number of types, however deeply they nest.
+    /// </summary>
+    /// <exception cref="BadImageFormatException">The declaring types of a type form a cycle.</exception>
+    private static void ThrowIfDeclaringTypesFormACycle(MetadataReader metadata)
+    {
+        HashSet<TypeDefinitionHandle> acyclic = [];
+        HashSet<TypeDefinitionHandle> walked = [];
+        foreach (var typeHandle in metadata.TypeDefinitions)
+        {
+            walked.Clear();
+            for (var current = typeHandle;
+                 !current.IsNil && !acyclic.Contains(current);
+                 current = metadata.GetTypeDefinition(current).GetDeclaringType())
+            {
+                if (!walked.Add(current))
+                    throw new BadImageFormatException("The declaring types form a cycle.");
+            }
+
+            acyclic.UnionWith(walked);
+        }
+    }
+
+    private static CqlException<CqlLibraryTypeWithMalformedAttributeError> Malformed(
+        string assemblyName,
+        string typeName,
+        string attributeName) =>
+        new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
 
     /// <summary>
     /// Keeps one entry per library identifier. A library that more than one type declares becomes a single entry whose
@@ -211,55 +256,103 @@ internal static class CqlAssemblyInfoReader
     }
 
     /// <summary>
-    /// The type's full name, as <see cref="Type.FullName"/> gives it: qualified by its namespace when it has one, and a
-    /// nested type by its declaring types, so that no two types of the assembly share it.
-    /// </summary>
-    /// <exception cref="BadImageFormatException">The declaring types form a cycle.</exception>
-    private static string GetTypeName(MetadataReader metadata, TypeDefinition type)
-    {
-        Stack<string> typeNames = new();
-        typeNames.Push(metadata.GetString(type.Name));
-        HashSet<TypeDefinitionHandle> declaringTypes = [];
-        for (var declaringType = type.GetDeclaringType(); !declaringType.IsNil; declaringType = type.GetDeclaringType())
-        {
-            if (!declaringTypes.Add(declaringType))
-                throw new BadImageFormatException("The declaring types form a cycle.");
-
-            type = metadata.GetTypeDefinition(declaringType);
-            typeNames.Push(metadata.GetString(type.Name));
-        }
-
-        var typeName = string.Join("+", typeNames);
-        var typeNamespace = metadata.GetString(type.Namespace);
-        return typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
-    }
-
-    /// <summary>
     /// Reads the two arguments of an attribute whose constructor takes two strings, as both
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c>, the two arguments as serialized strings, and the count of named arguments, which is 0
     /// because neither attribute has a member that one could set.
     /// </summary>
-    /// <exception cref="CqlException{TError}">
-    /// A <see cref="CqlLibraryTypeWithMalformedAttributeError"/>: the value blob does not start with the prolog, or does not end
-    /// with a count of no named arguments, which makes the assembly's metadata corrupt. Reflection then fails to read
-    /// the attribute, so the invoker cannot load the assembly.
-    /// </exception>
-    private static (string? First, string? Second) ReadTwoStringArguments(
-        MetadataReader metadata,
-        CustomAttribute attribute,
-        string assemblyName,
-        string typeName,
-        string attributeName)
+    /// <returns>
+    /// The two arguments, or <see langword="null"/> for a value that does not start with the prolog, or does not end
+    /// with a count of no named arguments, which makes the assembly's metadata corrupt.
+    /// </returns>
+    private static (string? First, string? Second)? ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
     {
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            throw new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
+            return null;
 
         var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
         if (value.RemainingBytes < 2 || value.ReadUInt16() != 0)
-            throw new CqlLibraryTypeWithMalformedAttributeError(assemblyName, typeName, attributeName).ToException();
+            return null;
 
         return arguments;
+    }
+
+    /// <summary>
+    /// The full names of an assembly's types, as <see cref="Type.FullName"/> gives them: a type's namespace and name
+    /// with the characters that full names reserve escaped, and a nested type's declaring types before it, each
+    /// followed by <c>+</c>.
+    /// </summary>
+    /// <remarks>
+    /// Builds a type's name only when asked for it, and each name only once, from its declaring type's. A name longer
+    /// than <see cref="MaxLength"/> is cut there, so that metadata of deeply nested types with long names cannot make
+    /// reading slow. The reader tells types apart by their handles, never by these names.
+    /// </remarks>
+    private sealed class TypeNames(MetadataReader metadata)
+    {
+        /// <summary>
+        /// The length a name is cut at.
+        /// </summary>
+        private const int MaxLength = 512;
+
+        /// <summary>
+        /// The characters that <see cref="Type.FullName"/> escapes with a backslash.
+        /// </summary>
+        private static readonly SearchValues<char> ReservedCharacters = SearchValues.Create("\\+,[]&*");
+
+        private readonly Dictionary<TypeDefinitionHandle, string> _names = [];
+
+        /// <summary>
+        /// The full name of the type, whose declaring types <see cref="ThrowIfDeclaringTypesFormACycle"/> has
+        /// found to form no cycle.
+        /// </summary>
+        public string Get(TypeDefinitionHandle typeHandle)
+        {
+            if (_names.TryGetValue(typeHandle, out var name))
+                return name;
+
+            // Collect the type and its declaring types, up to one that already has a name or is not nested.
+            Stack<TypeDefinitionHandle> unnamed = new();
+            string? declaringName = null;
+            for (var current = typeHandle;;)
+            {
+                unnamed.Push(current);
+                var declaringType = metadata.GetTypeDefinition(current).GetDeclaringType();
+                if (declaringType.IsNil || _names.TryGetValue(declaringType, out declaringName))
+                    break;
+
+                current = declaringType;
+            }
+
+            // Name them outermost first, each from its declaring type's name.
+            while (unnamed.TryPop(out var current))
+            {
+                var type = metadata.GetTypeDefinition(current);
+                var typeNamespace = Escape(metadata.GetString(type.Namespace));
+                var typeName = Escape(metadata.GetString(type.Name));
+                var qualifiedName = typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
+                name = declaringName is null ? qualifiedName : $"{declaringName}+{qualifiedName}";
+                declaringName = name.Length > MaxLength ? $"{name[..MaxLength]}…" : name;
+                _names.Add(current, declaringName);
+            }
+
+            return declaringName!;
+        }
+
+        private static string Escape(string name)
+        {
+            if (name.AsSpan().IndexOfAny(ReservedCharacters) < 0)
+                return name;
+
+            var escaped = new StringBuilder(name.Length + 8);
+            foreach (var character in name)
+            {
+                if (ReservedCharacters.Contains(character))
+                    escaped.Append('\\');
+                escaped.Append(character);
+            }
+
+            return escaped.ToString();
+        }
     }
 }

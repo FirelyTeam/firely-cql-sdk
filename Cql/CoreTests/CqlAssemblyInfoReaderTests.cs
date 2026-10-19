@@ -329,10 +329,91 @@ public class CqlAssemblyInfoReaderTests
             new CqlLibraryDeclaredByMoreThanOneTypeError(
                 cqlAssemblyInfo.AssemblyName!.FullName,
                 Identifier("CollidingLibrary", "1.0.0"),
-                ["Outer+Library", "Outer+Library"]));
+                ["Outer+Library", @"Outer\+Library"]));
         cqlLibraryInfo.IsSupported.Should().BeFalse();
         invoker.LibraryInvokers.Should().NotContainKey(Identifier("CollidingLibrary", "1.0.0"));
-        warnings.Should().Contain(warning => warning.Contains("'Outer+Library'"));
+        warnings.Should().Contain(warning => warning.Contains("'Outer+Library'") && warning.Contains(@"'Outer\+Library'"));
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_NamesTypesAsTypeFullNameDoes_AsTheInvokerDoes()
+    {
+        var builder = new MetadataAssembly("ReservedCharacters");
+        var outer = builder.AddType("Outer", "N");
+        var nested = builder.AddType(@"A+B,C[D]&E*F\G", "X", declaringType: outer);
+        builder.AddGeneratedCode(nested);
+        builder.AddCqlLibrary(nested, "First", "1.0.0");
+        builder.AddCqlLibrary(nested, "Second", "1.0.0");
+        var assembly = builder.Build();
+
+        var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Values;
+
+        read.Should().HaveCount(2);
+        foreach (var cqlLibraryInfo in read)
+        {
+            cqlLibraryInfo.ReadError.Should().BeOfType<CqlLibraryTypeWithMoreThanOneAttributeError>()
+                          .Which.TypeName.Should().Be(@"N.Outer+X.A\+B\,C\[D\]\&E\*F\\G");
+        }
+
+        read.Should().BeEquivalentTo(LibraryInfosByReflection(assembly), options => options.ComparingByValue<CqlLibraryInfo>());
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAnAssemblyWithAMalformedPublicKey_ReportsAnUnreadableError()
+    {
+        var builder = new MetadataAssembly("MalformedPublicKey", AssemblyFlags.PublicKey, publicKey: [1, 2, 3]);
+        builder.AddLibraryAttributes(builder.AddType("Library"), "SignedLibrary");
+        var assembly = builder.Build();
+
+        var read = () => InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        var cqlAssemblyInfo = read.Should().NotThrow().Subject;
+        var readError = cqlAssemblyInfo.ReadError.Should().BeOfType<CqlAssemblyUnreadableError>().Which;
+        readError.AssemblyName.Should().BeNull();
+        readError.Exception.Should().NotBeNull();
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfDeeplyNestedLibraryTypes_BuildsEachNameOnceAndCutsItShort()
+    {
+        const int depth = 2000;
+        var builder = new MetadataAssembly("DeeplyNestedLibraries");
+        var declaringType = default(TypeDefinitionHandle);
+        for (var level = 0; level < depth; level++)
+        {
+            // Two CqlLibraryAttributes give each library an error that names its type.
+            declaringType = builder.AddType(new string('N', 200), declaringType: declaringType);
+            builder.AddGeneratedCode(declaringType);
+            builder.AddCqlLibrary(declaringType, $"DeepFirst{level}", "1.0.0");
+            builder.AddCqlLibrary(declaringType, $"DeepSecond{level}", "1.0.0");
+        }
+
+        var assembly = builder.Build();
+
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+        cqlAssemblyInfo.Libraries.Should().HaveCount(2 * depth);
+        cqlAssemblyInfo.Libraries.Values
+                       .Select(cqlLibraryInfo => cqlLibraryInfo.ReadError.Should().BeOfType<CqlLibraryTypeWithMoreThanOneAttributeError>().Which.TypeName.Length)
+                       .Max().Should().BeLessThanOrEqualTo(513, "a name is cut at 512 characters and marked with an ellipsis");
+        allocated.Should().BeLessThan(64 * 1024 * 1024, "each name is built once, from its declaring type's, and cut short");
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAShortCycleAmongManyTypes_ReportsAnUnreadableErrorCheaply()
+    {
+        var assembly = AssemblyWithCyclicNestedTypes(unrelatedTypeCount: 20_000);
+
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var allocated = GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+
+        cqlAssemblyInfo.ReadError.Should().BeOfType<CqlAssemblyUnreadableError>()
+                       .Which.Exception.Message.Should().Contain("form a cycle");
+        allocated.Should().BeLessThan(64 * 1024 * 1024, "each type's declaring types are walked past only once");
     }
 
     [TestMethod]
@@ -450,7 +531,7 @@ public class CqlAssemblyInfoReaderTests
             """);
 
         var read = InvocationToolkit.ReadCqlAssemblyInfo(assembly).Libraries.Values;
-        var reflected = LibraryInfosByReflection(assembly, "WithDerivedAttribute");
+        var reflected = LibraryInfosByReflection(assembly);
 
         read.Should().Equal(new CqlLibraryInfo(Identifier("DerivedAttributeLibrary", "1.0.0"), Version.Parse(CurrentGeneratorVersion)));
         reflected.Should().Equal(read);
@@ -740,15 +821,16 @@ public class CqlAssemblyInfoReaderTests
 
     /// <summary>
     /// The libraries that <see cref="CqlLibraryTypeRule.GetLibraryInfos"/>, the invoker's read through reflection,
-    /// finds on a type of <paramref name="assembly"/>, loaded in a collectible context of its own.
+    /// finds on the types of <paramref name="assembly"/>, loaded in a collectible context of its own.
     /// </summary>
-    private static List<CqlLibraryInfo> LibraryInfosByReflection(AssemblyBinary assembly, string typeName)
+    private static List<CqlLibraryInfo> LibraryInfosByReflection(AssemblyBinary assembly)
     {
         var loadContext = new AssemblyLoadContext(nameof(LibraryInfosByReflection), isCollectible: true);
         try
         {
-            var type = loadContext.LoadFromStream(new MemoryStream(assembly.AssemblyBytes!)).GetType(typeName, throwOnError: true)!;
-            return CqlLibraryTypeRule.GetLibraryInfos(type);
+            return [.. loadContext.LoadFromStream(new MemoryStream(assembly.AssemblyBytes!))
+                                  .GetTypes()
+                                  .SelectMany(CqlLibraryTypeRule.GetLibraryInfos)];
         }
         finally
         {
@@ -848,122 +930,158 @@ public class CqlAssemblyInfoReaderTests
     /// Builds an assembly whose two types are each nested in the other, which no compiler writes: its NestedClass
     /// table makes their declaring types a cycle.
     /// </summary>
-    private static AssemblyBinary AssemblyWithCyclicNestedTypes()
+    private static AssemblyBinary AssemblyWithCyclicNestedTypes(int unrelatedTypeCount = 0)
     {
-        var metadata = new MetadataBuilder();
-        metadata.AddModule(0, metadata.GetOrAddString("CyclicNestedTypes.dll"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
-        metadata.AddAssembly(
-            metadata.GetOrAddString("CyclicNestedTypes"),
-            new Version(1, 0, 0, 0),
-            default,
-            default,
-            default,
-            System.Reflection.AssemblyHashAlgorithm.None);
+        var builder = new MetadataAssembly("CyclicNestedTypes");
+        var first = builder.AddType("First", attributes: TypeAttributes.NestedPublic);
+        var second = builder.AddType("Second", attributes: TypeAttributes.NestedPublic);
+        builder.Nest(first, second);
+        builder.Nest(second, first);
+        for (var index = 0; index < unrelatedTypeCount; index++)
+            builder.AddType($"Unrelated{index}");
 
-        var noFields = MetadataTokens.FieldDefinitionHandle(1);
-        var noMethods = MetadataTokens.MethodDefinitionHandle(1);
-        metadata.AddTypeDefinition(default, default, metadata.GetOrAddString("<Module>"), default, noFields, noMethods);
-        var first = metadata.AddTypeDefinition(TypeAttributes.NestedPublic, default, metadata.GetOrAddString("First"), default, noFields, noMethods);
-        var second = metadata.AddTypeDefinition(TypeAttributes.NestedPublic, default, metadata.GetOrAddString("Second"), default, noFields, noMethods);
-        metadata.AddNestedType(first, second);
-        metadata.AddNestedType(second, first);
-
-        var image = new BlobBuilder();
-        new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(metadata), new BlobBuilder()).Serialize(image);
-        return new AssemblyBinary(image.ToArray());
+        return builder.Build();
     }
 
+    /// <summary>
+    /// Builds an assembly in which a type nested in <c>Outer</c> and a top-level type named <c>Outer+Library</c>
+    /// declare the same library, so that their names read alike when not escaped.
+    /// </summary>
     private static AssemblyBinary AssemblyWithCollidingTypeNames()
     {
-        var metadata = new MetadataBuilder();
-        const string assemblyName = "CollidingTypeNames";
-        metadata.AddModule(0, metadata.GetOrAddString($"{assemblyName}.dll"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
-        metadata.AddAssembly(
-            metadata.GetOrAddString(assemblyName),
-            new Version(1, 0, 0, 0),
-            default,
-            default,
-            default,
-            System.Reflection.AssemblyHashAlgorithm.None);
-
-        var objectAssembly = AddAssemblyReference(metadata, typeof(object).Assembly);
-        var generatedCodeAssembly = AddAssemblyReference(metadata, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute).Assembly);
-        var cqlAbstractionsAssembly = AddAssemblyReference(metadata, typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Assembly);
-        var objectType = metadata.AddTypeReference(
-            objectAssembly,
-            metadata.GetOrAddString(typeof(object).Namespace!),
-            metadata.GetOrAddString(nameof(Object)));
-        var generatedCodeAttribute = metadata.AddTypeReference(
-            generatedCodeAssembly,
-            metadata.GetOrAddString(typeof(System.CodeDom.Compiler.GeneratedCodeAttribute).Namespace!),
-            metadata.GetOrAddString(nameof(System.CodeDom.Compiler.GeneratedCodeAttribute)));
-        var cqlLibraryAttribute = metadata.AddTypeReference(
-            cqlAbstractionsAssembly,
-            metadata.GetOrAddString(typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Namespace!),
-            metadata.GetOrAddString(nameof(Hl7.Cql.Abstractions.CqlLibraryAttribute)));
-        var constructorSignature = metadata.GetOrAddBlob(new byte[] { 0x20, 0x02, 0x01, 0x0e, 0x0e });
-        var generatedCodeConstructor = metadata.AddMemberReference(
-            generatedCodeAttribute,
-            metadata.GetOrAddString(".ctor"),
-            constructorSignature);
-        var cqlLibraryConstructor = metadata.AddMemberReference(
-            cqlLibraryAttribute,
-            metadata.GetOrAddString(".ctor"),
-            constructorSignature);
-
-        var noFields = MetadataTokens.FieldDefinitionHandle(1);
-        var noMethods = MetadataTokens.MethodDefinitionHandle(1);
-        metadata.AddTypeDefinition(default, default, metadata.GetOrAddString("<Module>"), default, noFields, noMethods);
-        var outer = metadata.AddTypeDefinition(
-            TypeAttributes.Public,
-            default,
-            metadata.GetOrAddString("Outer"),
-            objectType,
-            noFields,
-            noMethods);
-        var nestedLibrary = metadata.AddTypeDefinition(
-            TypeAttributes.NestedPublic,
-            default,
-            metadata.GetOrAddString("Library"),
-            objectType,
-            noFields,
-            noMethods);
-        var topLevelLibrary = metadata.AddTypeDefinition(
-            TypeAttributes.Public,
-            default,
-            metadata.GetOrAddString("Outer+Library"),
-            objectType,
-            noFields,
-            noMethods);
-        metadata.AddNestedType(nestedLibrary, outer);
-
-        foreach (var type in new[] { nestedLibrary, topLevelLibrary })
-        {
-            metadata.AddCustomAttribute(
-                type,
-                generatedCodeConstructor,
-                metadata.GetOrAddBlob(AttributeValue(GeneratorToolName, CurrentGeneratorVersion)));
-            metadata.AddCustomAttribute(
-                type,
-                cqlLibraryConstructor,
-                metadata.GetOrAddBlob(AttributeValue("CollidingLibrary", "1.0.0")));
-        }
-
-        var image = new BlobBuilder();
-        new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(metadata), new BlobBuilder()).Serialize(image);
-        return new AssemblyBinary(image.ToArray());
+        var builder = new MetadataAssembly("CollidingTypeNames");
+        var outer = builder.AddType("Outer");
+        builder.AddLibraryAttributes(builder.AddType("Library", declaringType: outer), "CollidingLibrary");
+        builder.AddLibraryAttributes(builder.AddType("Outer+Library"), "CollidingLibrary");
+        return builder.Build();
     }
 
-    private static AssemblyReferenceHandle AddAssemblyReference(MetadataBuilder metadata, Assembly assembly)
+    /// <summary>
+    /// Builds an assembly from its metadata, for the shapes no compiler writes. Its types derive from
+    /// <see cref="object"/>, have no members, and can carry the attributes the code generator writes.
+    /// </summary>
+    private sealed class MetadataAssembly
     {
-        var name = assembly.GetName();
-        return metadata.AddAssemblyReference(
-            metadata.GetOrAddString(name.Name!),
-            name.Version!,
-            name.CultureName is null ? default : metadata.GetOrAddString(name.CultureName),
-            metadata.GetOrAddBlob(name.GetPublicKeyToken() ?? []),
-            (AssemblyFlags)0,
-            default);
+        private static readonly byte[] TwoStringConstructorSignature = [0x20, 0x02, 0x01, 0x0E, 0x0E];
+        private static readonly FieldDefinitionHandle NoFields = MetadataTokens.FieldDefinitionHandle(1);
+        private static readonly MethodDefinitionHandle NoMethods = MetadataTokens.MethodDefinitionHandle(1);
+
+        private readonly MetadataBuilder _metadata = new();
+        private readonly Dictionary<string, AssemblyReferenceHandle> _assemblyReferences = [];
+        private readonly Dictionary<string, MemberReferenceHandle> _generatedCodeConstructors = [];
+        private readonly List<(TypeDefinitionHandle Type, TypeDefinitionHandle DeclaringType)> _nestedTypes = [];
+        private readonly TypeReferenceHandle _objectType;
+        private readonly MemberReferenceHandle _cqlLibraryConstructor;
+
+        public MetadataAssembly(string name, AssemblyFlags flags = default, byte[]? publicKey = null)
+        {
+            _metadata.AddModule(0, _metadata.GetOrAddString($"{name}.dll"), _metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+            _metadata.AddAssembly(
+                _metadata.GetOrAddString(name),
+                new Version(1, 0, 0, 0),
+                default,
+                publicKey is null ? default : _metadata.GetOrAddBlob(publicKey),
+                flags,
+                System.Reflection.AssemblyHashAlgorithm.None);
+            _metadata.AddTypeDefinition(default, default, _metadata.GetOrAddString("<Module>"), default, NoFields, NoMethods);
+            _objectType = TypeReference(typeof(object).Assembly.GetName(), typeof(object));
+            _cqlLibraryConstructor = TwoStringConstructor(typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Assembly.GetName(), typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute));
+        }
+
+        /// <summary>
+        /// The module's own <c>&lt;Module&gt;</c> type, which the first row of the TypeDef table holds.
+        /// </summary>
+        public static TypeDefinitionHandle ModuleType => MetadataTokens.TypeDefinitionHandle(1);
+
+        public TypeDefinitionHandle AddType(
+            string name,
+            string @namespace = "",
+            TypeDefinitionHandle declaringType = default,
+            TypeAttributes? attributes = null)
+        {
+            var type = _metadata.AddTypeDefinition(
+                attributes ?? (declaringType.IsNil ? TypeAttributes.Public : TypeAttributes.NestedPublic),
+                _metadata.GetOrAddString(@namespace),
+                _metadata.GetOrAddString(name),
+                _objectType,
+                NoFields,
+                NoMethods);
+            if (!declaringType.IsNil)
+                Nest(type, declaringType);
+            return type;
+        }
+
+        /// <summary>
+        /// Nests <paramref name="type"/> in <paramref name="declaringType"/>, whichever of them was added first.
+        /// </summary>
+        public void Nest(TypeDefinitionHandle type, TypeDefinitionHandle declaringType) =>
+            _nestedTypes.Add((type, declaringType));
+
+        public void AddCqlLibrary(TypeDefinitionHandle type, string identifier, string version) =>
+            _metadata.AddCustomAttribute(type, _cqlLibraryConstructor, _metadata.GetOrAddBlob(AttributeValue(identifier, version)));
+
+        /// <summary>
+        /// Adds a <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute"/> that names the code generator, with its
+        /// type referenced through <paramref name="generatedCodeAssembly"/>, which can be one that forwards it.
+        /// </summary>
+        public void AddGeneratedCode(TypeDefinitionHandle type, string? generatedCodeAssembly = null)
+        {
+            var assemblyName = generatedCodeAssembly is null
+                ? typeof(System.CodeDom.Compiler.GeneratedCodeAttribute).Assembly.GetName()
+                : Assembly.Load(new AssemblyName(generatedCodeAssembly)).GetName();
+            if (!_generatedCodeConstructors.TryGetValue(assemblyName.Name!, out var constructor))
+                _generatedCodeConstructors.Add(
+                    assemblyName.Name!,
+                    constructor = TwoStringConstructor(assemblyName, typeof(System.CodeDom.Compiler.GeneratedCodeAttribute)));
+
+            _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(AttributeValue(GeneratorToolName, CurrentGeneratorVersion)));
+        }
+
+        /// <summary>
+        /// Adds the two attributes the code generator writes on a library type.
+        /// </summary>
+        public void AddLibraryAttributes(TypeDefinitionHandle type, string identifier, string version = "1.0.0")
+        {
+            AddGeneratedCode(type);
+            AddCqlLibrary(type, identifier, version);
+        }
+
+        public AssemblyBinary Build()
+        {
+            foreach (var (type, declaringType) in _nestedTypes.OrderBy(nested => MetadataTokens.GetRowNumber(nested.Type)))
+                _metadata.AddNestedType(type, declaringType);
+
+            var image = new BlobBuilder();
+            new ManagedPEBuilder(PEHeaderBuilder.CreateLibraryHeader(), new MetadataRootBuilder(_metadata), new BlobBuilder()).Serialize(image);
+            return new AssemblyBinary(image.ToArray());
+        }
+
+        private MemberReferenceHandle TwoStringConstructor(AssemblyName assembly, Type attributeType) =>
+            _metadata.AddMemberReference(
+                TypeReference(assembly, attributeType),
+                _metadata.GetOrAddString(".ctor"),
+                _metadata.GetOrAddBlob(TwoStringConstructorSignature));
+
+        private TypeReferenceHandle TypeReference(AssemblyName assembly, Type type) =>
+            _metadata.AddTypeReference(
+                AssemblyReference(assembly),
+                _metadata.GetOrAddString(type.Namespace!),
+                _metadata.GetOrAddString(type.Name));
+
+        private AssemblyReferenceHandle AssemblyReference(AssemblyName assembly)
+        {
+            if (!_assemblyReferences.TryGetValue(assembly.Name!, out var reference))
+                _assemblyReferences.Add(
+                    assembly.Name!,
+                    reference = _metadata.AddAssemblyReference(
+                        _metadata.GetOrAddString(assembly.Name!),
+                        assembly.Version!,
+                        assembly.CultureName is null or "" ? default : _metadata.GetOrAddString(assembly.CultureName),
+                        _metadata.GetOrAddBlob(assembly.GetPublicKeyToken() ?? []),
+                        default,
+                        default));
+            return reference;
+        }
     }
 
     private static AssemblyBinary ModuleWithoutAnAssemblyManifest() =>
