@@ -9,7 +9,10 @@
   Library, do not throw: the result's `CqlAssemblyInfo.ReadError` says why, and it lists no libraries. A library the
   assembly declares in a way the toolkit does not accept, such as a type that carries two `CqlLibraryAttribute`s or a
   library two types declare, is listed with a `CqlLibraryInfo.ReadError` while the rest of the assembly is still read.
-  `CqlAssemblyInfo.HasReadErrors` says whether the assembly or any of its libraries has an error.
+  `CqlAssemblyInfo.HasReadErrors` says whether the assembly or any of its libraries has an error. The errors are values
+  in the new `Hl7.Cql.Invocation.Toolkit.Errors` namespace, one struct per kind of error carrying its details, such as
+  the assembly name, the library and the types. They implement `ICqlAssemblyInfoError` or `ICqlLibraryInfoError`, both
+  `ICqlError`s, so `GetMessage()` describes any of them, and two reads of the same assembly give equal errors.
   `InvocationToolkit.IsGeneratorToolVersionSupported(Version)` answers whether the toolkit runs code from a
   given generator version, and `CreateLibrarySetInvoker` applies the same rules. A host can therefore check a library
   before loading it, reject it or compile it from its ELM instead, and pass `CqlAssemblyInfo.AssemblyBinary` to

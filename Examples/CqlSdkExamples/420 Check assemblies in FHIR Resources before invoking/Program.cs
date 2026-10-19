@@ -51,7 +51,7 @@ partial class Program
             var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes));
             if (cqlAssemblyInfo.ReadError is { } error)
             {
-                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment cannot be read: {error.Message}");
+                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment cannot be read: {error.GetMessage()}");
                 continue;
             }
 
@@ -59,7 +59,7 @@ partial class Program
             {
                 Console.WriteLine(
                     $"{cqlLibraryInfo.LibraryIdentifier}: written by code generator {cqlLibraryInfo.GeneratorToolVersion}, " +
-                    (cqlLibraryInfo.ReadError is { } libraryError ? $"cannot be used: {libraryError.Message}"
+                    (cqlLibraryInfo.ReadError is { } libraryError ? $"cannot be used: {libraryError.GetMessage()}"
                      : cqlLibraryInfo.IsSupported ? "supported."
                      : "not supported: compile it from its ELM instead."));
             }

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit;
@@ -21,10 +22,8 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </param>
 /// <remarks>
 /// Two instances are equal when their <see cref="LibraryIdentifier"/>, <see cref="GeneratorToolVersion"/> and
-/// <see cref="ReadError"/> are. <see cref="Exception"/> compares by reference, so two instances that each have a
-/// <see cref="ReadError"/> are equal only when they share that very exception: two reads of the same misdeclared
-/// library give unequal instances. Compare <see cref="LibraryIdentifier"/> and <see cref="GeneratorToolVersion"/> to tell
-/// whether two instances describe the same library.
+/// <see cref="ReadError"/> are. The errors are values, so two reads of the same assembly give equal instances, and
+/// two equal instances agree on <see cref="IsSupported"/>.
 /// </remarks>
 public sealed record CqlLibraryInfo(
     CqlVersionedLibraryIdentifier LibraryIdentifier,
@@ -35,11 +34,13 @@ public sealed record CqlLibraryInfo(
     /// otherwise, <see langword="null"/>.
     /// </summary>
     /// <remarks>
-    /// The toolkit does not accept a library type that carries more than one <see cref="CqlLibraryAttribute"/> or
-    /// <see cref="GeneratedCodeAttribute"/>, nor a library that more than one type declares. It skips such a library,
-    /// and logs this error, rather than failing to load the rest of the library set.
+    /// One of the <see cref="ICqlLibraryInfoError"/> values: <see cref="CqlLibraryTypeWithMoreThanOneAttributeError"/>
+    /// for a library type that carries more than one <see cref="CqlLibraryAttribute"/> or
+    /// <see cref="GeneratedCodeAttribute"/>, or <see cref="CqlLibraryDeclaredByMoreThanOneTypeError"/> for a library that
+    /// more than one type declares. The toolkit skips such a library, and logs this error, rather than failing to load
+    /// the rest of the library set.
     /// </remarks>
-    public Exception? ReadError { get; init; }
+    public ICqlLibraryInfoError? ReadError { get; init; }
 
     /// <summary>
     /// Gets whether <see cref="InvocationToolkit"/> runs this library: it has no <see cref="ReadError"/>, and

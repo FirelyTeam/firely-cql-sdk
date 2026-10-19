@@ -8,6 +8,7 @@
 
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -124,10 +125,18 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
             if (declaringTypes.Count < 2)
                 continue;
 
-            var error = CqlLibraryTypeRule.DeclaredByMoreThanOneType(
+            // Name the types as the reader does when they share an assembly, and each by its assembly when they do not.
+            var assemblyName = declaringTypes[0].Assembly.GetName();
+            var sameAssembly = declaringTypes.All(type => type.Assembly == declaringTypes[0].Assembly);
+            var readError = new CqlLibraryDeclaredByMoreThanOneTypeError(
+                sameAssembly ? assemblyName.FullName : null,
                 libraryIdentifier,
-                declaringTypes.Select(type => type.FullName ?? type.Name));
-            logger.LogError("Skipping CQL library {lib}: {error}", libraryIdentifier, error.Message);
+                [
+                    .. declaringTypes.Select(type => sameAssembly
+                        ? type.FullName ?? type.Name
+                        : $"{type.FullName ?? type.Name}, {type.Assembly.GetName().Name}"),
+                ]);
+            logger.LogError("Skipping CQL library {lib}: {error}", libraryIdentifier, readError.GetMessage());
             typesToSkip.UnionWith(declaringTypes);
         }
 

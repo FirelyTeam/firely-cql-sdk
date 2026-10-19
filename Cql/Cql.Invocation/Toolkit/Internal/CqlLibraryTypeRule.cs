@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
@@ -41,14 +42,15 @@ internal static class CqlLibraryTypeRule
         foreach (var generatedCode in type.GetCustomAttributes<GeneratedCodeAttribute>(inherit: false))
             generatedCodes.Add((generatedCode.Tool, generatedCode.Version));
 
-        return CreateLibraryInfos(type.FullName ?? type.Name, cqlLibraries, generatedCodes);
+        return CreateLibraryInfos(type.Assembly.GetName().FullName, type.FullName ?? type.Name, cqlLibraries, generatedCodes);
     }
 
     /// <summary>
     /// Decides, from the arguments of every <see cref="CqlLibraryAttribute"/> and <see cref="GeneratedCodeAttribute"/>
     /// a type carries, which CQL libraries the code generator wrote into it.
     /// </summary>
-    /// <param name="typeName">The name of the type, for an error message.</param>
+    /// <param name="assemblyName">The full name of the type's assembly, for an error.</param>
+    /// <param name="typeName">The full name of the type, for an error.</param>
     /// <param name="cqlLibraries">The identifier and version of every <see cref="CqlLibraryAttribute"/> on the type.</param>
     /// <param name="generatedCodes">The tool and version of every <see cref="GeneratedCodeAttribute"/> on the type.</param>
     /// <returns>
@@ -58,6 +60,7 @@ internal static class CqlLibraryTypeRule
     /// attribute, every entry carries a <see cref="CqlLibraryInfo.ReadError"/> that says so.
     /// </returns>
     public static List<CqlLibraryInfo> CreateLibraryInfos(
+        string assemblyName,
         string typeName,
         IReadOnlyList<(string? Identifier, string? Version)> cqlLibraries,
         IReadOnlyList<(string? Tool, string? Version)> generatedCodes)
@@ -79,31 +82,30 @@ internal static class CqlLibraryTypeRule
         if (generatorToolVersion is null)
             return cqlLibraryInfos;
 
-        Exception? error =
-            cqlLibraries.Count > 1 ? MoreThanOneAttribute(typeName, nameof(CqlLibraryAttribute))
-            : generatedCodes.Count > 1 ? MoreThanOneAttribute(typeName, nameof(GeneratedCodeAttribute))
+        var repeatedAttributeName =
+            cqlLibraries.Count > 1 ? nameof(CqlLibraryAttribute)
+            : generatedCodes.Count > 1 ? nameof(GeneratedCodeAttribute)
             : null;
 
         foreach (var (identifier, version) in cqlLibraries)
         {
-            if (TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
-                cqlLibraryInfos.Add(new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion) { ReadError = error });
+            if (!TryCreateLibraryIdentifier(identifier, version, out var libraryIdentifier))
+                continue;
+
+            cqlLibraryInfos.Add(new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion)
+            {
+                ReadError = repeatedAttributeName is null
+                    ? null
+                    : new CqlLibraryTypeWithMoreThanOneAttributeError(
+                        assemblyName,
+                        libraryIdentifier.Value,
+                        typeName,
+                        repeatedAttributeName),
+            });
         }
 
         return cqlLibraryInfos;
     }
-
-    /// <summary>
-    /// The error for a CQL library that more than one type declares.
-    /// </summary>
-    public static InvalidOperationException DeclaredByMoreThanOneType(
-        CqlVersionedLibraryIdentifier libraryIdentifier,
-        IEnumerable<string> typeNames) =>
-        new($"CQL library '{libraryIdentifier}' is declared by more than one type: '{string.Join("', '", typeNames)}'. "
-            + "A CQL library is declared by exactly one type.");
-
-    private static InvalidOperationException MoreThanOneAttribute(string typeName, string attributeName) =>
-        new($"Type '{typeName}' carries more than one {attributeName}. A CQL library type carries exactly one.");
 
     /// <summary>
     /// Determines whether an invoker of this toolkit runs code written by the specified version of the

@@ -6,6 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.Immutable;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using System.Runtime.Loader;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
@@ -14,6 +17,7 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -167,11 +171,34 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
         cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("SameLibrary", "1.0.0"));
-        cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
-                      .Which.Message.Should().ContainAll("SameLibrary-1.0.0", "'First'", "'Second'", "more than one type");
+        cqlLibraryInfo.ReadError.Should().Be(
+            new CqlLibraryDeclaredByMoreThanOneTypeError(
+                cqlAssemblyInfo.AssemblyName!.FullName,
+                Identifier("SameLibrary", "1.0.0"),
+                ["First", "Second"]));
+        cqlLibraryInfo.ReadError!.GetMessage().Should().ContainAll("SameLibrary-1.0.0", "'First'", "'Second'", "more than one type");
         cqlLibraryInfo.IsSupported.Should().BeFalse();
         cqlAssemblyInfo.HasReadErrors.Should().BeTrue();
         cqlAssemblyInfo.IsSupported.Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_ReadTwice_GivesEqualLibrariesWithEqualReadErrors()
+    {
+        AssemblyBinary[] assemblies =
+        [
+            AssemblyWithADuplicateLibrary(),
+            Compile("TypeWithTwoCqlLibraryAttributes", TypeWithTwoCqlLibraryAttributes),
+        ];
+
+        foreach (var assembly in assemblies)
+        {
+            var first = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+            var second = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+            first.Libraries.Values.Should().OnlyContain(cqlLibraryInfo => cqlLibraryInfo.ReadError != null);
+            first.Libraries.Should().Equal(second.Libraries);
+        }
     }
 
     [TestMethod]
@@ -182,8 +209,13 @@ public class CqlAssemblyInfoReaderTests
         cqlAssemblyInfo.Libraries.Keys.Should().BeEquivalentTo([Identifier("BrokenFirst", "1.0.0"), Identifier("BrokenSecond", "1.0.0")]);
         foreach (var cqlLibraryInfo in cqlAssemblyInfo.Libraries.Values)
         {
-            cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
-                          .Which.Message.Should().ContainAll("TwoCqlLibraryAttributes", "more than one CqlLibraryAttribute");
+            cqlLibraryInfo.ReadError.Should().Be(
+                new CqlLibraryTypeWithMoreThanOneAttributeError(
+                    cqlAssemblyInfo.AssemblyName!.FullName,
+                    cqlLibraryInfo.LibraryIdentifier,
+                    "TwoCqlLibraryAttributes",
+                    "CqlLibraryAttribute"));
+            cqlLibraryInfo.ReadError!.GetMessage().Should().ContainAll("TwoCqlLibraryAttributes", "more than one CqlLibraryAttribute");
             cqlLibraryInfo.IsSupported.Should().BeFalse();
         }
 
@@ -229,6 +261,29 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void CreateLibrarySetInvoker_WithOneLibraryInTwoAssemblies_SkipsBothAndNamesEachAssembly()
+    {
+        var firstCopy = Compile(
+            "FirstCopy",
+            LibraryType("Shared", "SharedLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
+        var secondCopy = Compile(
+            "SecondCopy",
+            LibraryType("Shared", "SharedLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([firstCopy, secondCopy])
+                            .CreateLibrarySetInvoker();
+
+        // Reading one assembly at a time, the reader cannot see the other copy.
+        InvocationToolkit.ReadCqlAssemblyInfo(firstCopy).HasReadErrors.Should().BeFalse();
+        InvocationToolkit.ReadCqlAssemblyInfo(secondCopy).HasReadErrors.Should().BeFalse();
+        invoker.LibraryInvokers.Should().NotContainKey(Identifier("SharedLibrary", "1.0.0"));
+        warnings.Should().Contain(warning => warning.Contains("'Shared, FirstCopy'") && warning.Contains("'Shared, SecondCopy'"));
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_OfALibraryTwoNestedTypesOfTheSameNameDeclare_ReportsTheErrorTheInvokerLogs()
     {
         var assembly = Compile(
@@ -245,8 +300,11 @@ public class CqlAssemblyInfoReaderTests
 
         var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
         cqlLibraryInfo.LibraryIdentifier.Should().Be(Identifier("NestedLibrary", "1.0.0"));
-        cqlLibraryInfo.ReadError.Should().BeOfType<InvalidOperationException>()
-                      .Which.Message.Should().ContainAll("'OuterA+Library'", "'OuterB+Library'");
+        cqlLibraryInfo.ReadError.Should().Be(
+            new CqlLibraryDeclaredByMoreThanOneTypeError(
+                cqlAssemblyInfo.AssemblyName!.FullName,
+                Identifier("NestedLibrary", "1.0.0"),
+                ["OuterA+Library", "OuterB+Library"]));
         cqlLibraryInfo.IsSupported.Should().BeFalse();
         warnings.Should().Contain(warning => warning.Contains("'OuterA+Library'") && warning.Contains("'OuterB+Library'"));
     }
@@ -255,14 +313,11 @@ public class CqlAssemblyInfoReaderTests
     public void ReadCqlAssemblyInfo_OfACorruptAttributeNextToAHealthyLibrary_ReportsAnErrorAsTheInvokerCannotLoadIt()
     {
         const string corruptIdentifier = "CorruptPrologLibrary";
-        byte[] assemblyBytes =
-        [
-            .. Compile(
-                   "CorruptAttributeProlog",
-                   GeneratedLibrary.Value.cSharp,
-                   LibraryType("CorruptProlog", corruptIdentifier, "1.0.0", GeneratorToolName, CurrentGeneratorVersion))
-               .AssemblyBytes!,
-        ];
+        var original = Compile(
+            "CorruptAttributeProlog",
+            GeneratedLibrary.Value.cSharp,
+            LibraryType("CorruptProlog", corruptIdentifier, "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
+        byte[] assemblyBytes = [.. original.AssemblyBytes!];
 
         // The compiler writes the attribute's value blob as the prolog 0x0001 followed by its arguments as serialized
         // strings, the identifier first: overwrite that prolog.
@@ -279,7 +334,11 @@ public class CqlAssemblyInfoReaderTests
             return invoker.LibraryInvokers.Count;
         };
 
-        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>();
+        cqlAssemblyInfo.ReadError.Should().Be(
+            new CqlLibraryAttributeValueError(
+                InvocationToolkit.ReadCqlAssemblyInfo(original).AssemblyName!.FullName,
+                "CorruptProlog",
+                "CqlLibraryAttribute"));
         ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
         createLibrarySetInvoker.Should().Throw<CustomAttributeFormatException>();
     }
@@ -317,26 +376,42 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
-    public void ReadCqlAssemblyInfo_OfAModuleWithoutAnAssemblyManifest_ReportsABadImageFormatError()
+    public void ReadCqlAssemblyInfo_OfAModuleWithoutAnAssemblyManifest_ReportsAModuleWithoutManifestError()
     {
         var assembly = ModuleWithoutAnAssemblyManifest();
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>()
-                       .Which.Message.Should().Contain("without an assembly manifest");
+        cqlAssemblyInfo.ReadError.Should().BeOfType<CqlModuleWithoutManifestError>()
+                       .Which.ModuleName.Should().StartWith("GeneratedLibraryModule");
+        cqlAssemblyInfo.ReadError!.AssemblyName.Should().BeNull();
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAPEFileWithoutMetadata_ReportsAWithoutMetadataError()
+    {
+        var peImage = new BlobBuilder();
+        new PEFileWithoutMetadataBuilder().Serialize(peImage);
+        var assembly = new AssemblyBinary(peImage.ToArray());
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.ReadError.Should().Be(new CqlAssemblyWithoutMetadataError());
         ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
     }
 
     [TestMethod]
     [DynamicData(nameof(BytesThatAreNotAnAssembly))]
-    public void ReadCqlAssemblyInfo_OfBytesThatAreNotAnAssembly_ReportsABadImageFormatError(byte[] bytes)
+    public void ReadCqlAssemblyInfo_OfBytesThatAreNotAnAssembly_ReportsAnUnreadableError(byte[] bytes)
     {
         var assembly = new AssemblyBinary(bytes);
 
         var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
 
-        cqlAssemblyInfo.ReadError.Should().BeOfType<BadImageFormatException>();
+        var readError = cqlAssemblyInfo.ReadError.Should().BeOfType<CqlAssemblyUnreadableError>().Which;
+        readError.Exception.Should().NotBeNull();
+        readError.AssemblyName.Should().BeNull();
         ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
     }
 
@@ -356,7 +431,7 @@ public class CqlAssemblyInfoReaderTests
 
         // Cut inside the PE headers, the read fails.
         InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes[..64]))
-                         .ReadError.Should().BeOfType<BadImageFormatException>();
+                         .ReadError.Should().BeOfType<CqlAssemblyUnreadableError>();
     }
 
     [TestMethod]
@@ -588,6 +663,25 @@ public class CqlAssemblyInfoReaderTests
             "DuplicateGeneratedLibraries",
             LibraryType("First", "SameLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion),
             LibraryType("Second", "SameLibrary", "1.0.0", GeneratorToolName, CurrentGeneratorVersion));
+
+    /// <summary>
+    /// Builds a PE file with a single empty section and no CLI header, so it holds no .NET metadata, as a native
+    /// library does.
+    /// </summary>
+    private sealed class PEFileWithoutMetadataBuilder() : PEBuilder(PEHeaderBuilder.CreateLibraryHeader(), deterministicIdProvider: null)
+    {
+        protected override ImmutableArray<Section> CreateSections() =>
+            [new Section(".text", SectionCharacteristics.ContainsCode | SectionCharacteristics.MemRead | SectionCharacteristics.MemExecute)];
+
+        protected override BlobBuilder SerializeSection(string name, SectionLocation location)
+        {
+            var section = new BlobBuilder();
+            section.WriteInt32(0);
+            return section;
+        }
+
+        protected override PEDirectoriesBuilder GetDirectories() => new();
+    }
 
     private static AssemblyBinary ModuleWithoutAnAssemblyManifest() =>
         Compile(

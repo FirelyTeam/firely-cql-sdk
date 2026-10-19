@@ -11,6 +11,8 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Exceptions;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
@@ -57,30 +59,20 @@ internal static class CqlAssemblyInfoReader
         if (assemblyBinary.AssemblyBytes is not { } assemblyBytes)
             throw new ArgumentException("The assembly binary holds no assembly bytes.", nameof(assemblyBinary));
 
-        try
-        {
-            return ReadCore(assemblyBinary, assemblyBytes);
-        }
-        catch (BadImageFormatException exception)
-        {
-            return new CqlAssemblyInfo(assemblyBinary, exception);
-        }
-    }
-
-    private static CqlAssemblyInfo ReadCore(AssemblyBinary assemblyBinary, byte[] assemblyBytes)
-    {
-        AssemblyName assemblyName;
+        AssemblyName? assemblyName = null;
         List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations = [];
 
         try
         {
             using var peReader = new PEReader(ImmutableCollectionsMarshal.AsImmutableArray(assemblyBytes));
             if (!peReader.HasMetadata)
-                throw new BadImageFormatException("The bytes hold no .NET metadata.");
+                return new CqlAssemblyInfo(assemblyBinary, new CqlAssemblyWithoutMetadataError());
 
             var metadata = peReader.GetMetadataReader();
             if (!metadata.IsAssembly)
-                throw new BadImageFormatException("The bytes hold a .NET module without an assembly manifest.");
+                return new CqlAssemblyInfo(
+                    assemblyBinary,
+                    new CqlModuleWithoutManifestError(metadata.GetString(metadata.GetModuleDefinition().Name)));
 
             assemblyName = metadata.GetAssemblyDefinition().GetAssemblyName();
 
@@ -88,18 +80,25 @@ internal static class CqlAssemblyInfoReader
             {
                 var type = metadata.GetTypeDefinition(typeHandle);
                 var typeName = GetTypeName(metadata, type);
-                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, type, typeName))
+                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, type, assemblyName.FullName, typeName))
                     declarations.Add((typeName, cqlLibraryInfo));
             }
         }
-        catch (Exception exception) when (exception is not (BadImageFormatException or OutOfMemoryException))
+        catch (CqlException<CqlLibraryAttributeValueError> exception)
+        {
+            return new CqlAssemblyInfo(assemblyBinary, exception.Error);
+        }
+        catch (Exception exception) when (exception is not OutOfMemoryException)
         {
             // System.Reflection.Metadata reads lazily, so corrupt metadata surfaces partway through the read,
             // mostly but not always as a BadImageFormatException. Report every such failure the same way.
-            throw new BadImageFormatException("The bytes are not a readable .NET assembly.", exception);
+            return new CqlAssemblyInfo(assemblyBinary, new CqlAssemblyUnreadableError(assemblyName?.FullName, exception));
         }
 
-        return new CqlAssemblyInfo(assemblyBinary, assemblyName, MergeLibrariesDeclaredMoreThanOnce(declarations));
+        return new CqlAssemblyInfo(
+            assemblyBinary,
+            assemblyName,
+            MergeLibrariesDeclaredMoreThanOnce(assemblyName.FullName, declarations));
     }
 
     /// <summary>
@@ -110,7 +109,11 @@ internal static class CqlAssemblyInfoReader
     /// Only the SDK's and the runtime's own attribute types count, never a type of the same name from another
     /// assembly, as reflection only finds the attribute types themselves.
     /// </remarks>
-    private static List<CqlLibraryInfo> ReadLibraryInfos(MetadataReader metadata, TypeDefinition type, string typeName)
+    private static List<CqlLibraryInfo> ReadLibraryInfos(
+        MetadataReader metadata,
+        TypeDefinition type,
+        string assemblyName,
+        string typeName)
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
         List<(string? Tool, string? Version)> generatedCodes = [];
@@ -123,13 +126,13 @@ internal static class CqlAssemblyInfoReader
                 continue;
 
             if (attributeName == GeneratedCodeAttributeName && GeneratedCodeAttributeAssemblies.Contains(attributeAssembly))
-                generatedCodes.Add(ReadTwoStringArguments(metadata, attribute));
+                generatedCodes.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, attributeName.Name));
             else if (attributeName == CqlLibraryAttributeName
                      && string.Equals(attributeAssembly, CqlLibraryAttributeAssembly, StringComparison.OrdinalIgnoreCase))
-                cqlLibraries.Add(ReadTwoStringArguments(metadata, attribute));
+                cqlLibraries.Add(ReadTwoStringArguments(metadata, attribute, assemblyName, typeName, attributeName.Name));
         }
 
-        return CqlLibraryTypeRule.CreateLibraryInfos(typeName, cqlLibraries, generatedCodes);
+        return CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes);
     }
 
     /// <summary>
@@ -137,6 +140,7 @@ internal static class CqlAssemblyInfoReader
     /// error names those types, as the invoker skips every one of them.
     /// </summary>
     private static List<CqlLibraryInfo> MergeLibrariesDeclaredMoreThanOnce(
+        string assemblyName,
         List<(string TypeName, CqlLibraryInfo CqlLibraryInfo)> declarations)
     {
         Dictionary<CqlVersionedLibraryIdentifier, List<string>> typeNamesByIdentifier = [];
@@ -161,7 +165,10 @@ internal static class CqlAssemblyInfoReader
             if (typeNames.Count > 1)
                 cqlLibraryInfos[index] = cqlLibraryInfo with
                 {
-                    ReadError = CqlLibraryTypeRule.DeclaredByMoreThanOneType(cqlLibraryInfo.LibraryIdentifier, typeNames),
+                    ReadError = new CqlLibraryDeclaredByMoreThanOneTypeError(
+                        assemblyName,
+                        cqlLibraryInfo.LibraryIdentifier,
+                        [.. typeNames]),
                 };
         }
 
@@ -214,15 +221,20 @@ internal static class CqlAssemblyInfoReader
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c> followed by the two arguments as serialized strings.
     /// </summary>
-    /// <exception cref="BadImageFormatException">
-    /// The value blob does not start with the prolog, which makes the assembly's metadata corrupt: reflection then
-    /// fails to read the attribute, so the invoker cannot load the assembly.
+    /// <exception cref="CqlException{TError}">
+    /// A <see cref="CqlLibraryAttributeValueError"/>: the value blob does not start with the prolog, which makes the
+    /// assembly's metadata corrupt. Reflection then fails to read the attribute, so the invoker cannot load the assembly.
     /// </exception>
-    private static (string? First, string? Second) ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
+    private static (string? First, string? Second) ReadTwoStringArguments(
+        MetadataReader metadata,
+        CustomAttribute attribute,
+        string assemblyName,
+        string typeName,
+        string attributeName)
     {
         var value = metadata.GetBlobReader(attribute.Value);
         if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            throw new BadImageFormatException("A custom attribute's value does not start with the prolog 0x0001.");
+            throw new CqlLibraryAttributeValueError(assemblyName, typeName, attributeName).ToException();
 
         return (value.ReadSerializedString(), value.ReadSerializedString());
     }

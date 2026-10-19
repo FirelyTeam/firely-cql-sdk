@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Invocation.Toolkit.Errors;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit;
@@ -21,7 +22,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// the assembly in memory for as long as this instance is: to keep only the outcome of the check, keep the
 /// <see cref="CqlLibraryInfo"/> values of <see cref="Libraries"/> instead.
 /// </remarks>
-[DebuggerDisplay("{AssemblyName?.Name ?? ReadError?.Message,nq}: {Libraries.Count} CQL libraries")]
+[DebuggerDisplay("{AssemblyName?.Name ?? ReadError?.GetMessage(),nq}: {Libraries.Count} CQL libraries")]
 public sealed class CqlAssemblyInfo
 {
     /// <summary>
@@ -29,11 +30,11 @@ public sealed class CqlAssemblyInfo
     /// not be read.
     /// </summary>
     /// <param name="assemblyBinary">The assembly that could not be read.</param>
-    /// <param name="error">Why its bytes could not be read.</param>
-    internal CqlAssemblyInfo(AssemblyBinary assemblyBinary, Exception error)
+    /// <param name="readError">Why its bytes could not be read.</param>
+    internal CqlAssemblyInfo(AssemblyBinary assemblyBinary, ICqlAssemblyInfoError readError)
     {
         AssemblyBinary = assemblyBinary;
-        ReadError = error;
+        ReadError = readError;
         HasReadErrors = true;
         Libraries = FrozenDictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo>.Empty;
     }
@@ -83,12 +84,13 @@ public sealed class CqlAssemblyInfo
     /// Gets why the bytes of <see cref="AssemblyBinary"/> could not be read, or <see langword="null"/> when they were.
     /// </summary>
     /// <remarks>
-    /// A <see cref="BadImageFormatException"/> when the bytes are not a .NET assembly, are a module without an
-    /// assembly manifest, or hold metadata that cannot be read. <see cref="Libraries"/> is then empty, and the toolkit
-    /// cannot load the assembly. An error in one library is reported on that library instead, through
+    /// One of the <see cref="ICqlAssemblyInfoError"/> values: <see cref="CqlAssemblyUnreadableError"/>,
+    /// <see cref="CqlAssemblyWithoutMetadataError"/>, <see cref="CqlModuleWithoutManifestError"/> or
+    /// <see cref="CqlLibraryAttributeValueError"/>. <see cref="Libraries"/> is then empty, and the toolkit cannot load
+    /// the assembly. An error in one library is reported on that library instead, through
     /// <see cref="CqlLibraryInfo.ReadError"/>.
     /// </remarks>
-    public Exception? ReadError { get; }
+    public ICqlAssemblyInfoError? ReadError { get; }
 
     /// <summary>
     /// Gets the libraries the code generator wrote into the assembly, by their identifier and version.
