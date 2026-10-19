@@ -26,26 +26,24 @@ namespace Hl7.Cql.Invocation.Toolkit.Internal;
 /// </summary>
 internal static class CqlAssemblyInfoReader
 {
-    private static readonly (string Namespace, string Name) GeneratedCodeAttributeName =
-        (typeof(GeneratedCodeAttribute).Namespace!, typeof(GeneratedCodeAttribute).Name);
-
-    private static readonly (string Namespace, string Name) CqlLibraryAttributeName =
-        (typeof(CqlLibraryAttribute).Namespace!, typeof(CqlLibraryAttribute).Name);
-
     /// <summary>
     /// The assemblies a reference to <see cref="GeneratedCodeAttribute"/> may name: the runtime assembly that
     /// defines it, which code compiled against the runtime's own assemblies references, and the reference and facade
     /// assemblies of the runtime that forward it there.
     /// </summary>
-    private static readonly FrozenSet<string> GeneratedCodeAttributeAssemblies =
-        new[]
-        {
-            typeof(GeneratedCodeAttribute).Assembly.GetName().Name!,
-            "System.Runtime",
-            "System",
-            "System.Diagnostics.Tools",
-            "netstandard",
-        }.ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+    private static readonly string[] GeneratedCodeAttributeAssemblies =
+    [
+        typeof(GeneratedCodeAttribute).Assembly.GetName().Name!,
+        "System.Runtime",
+        "System",
+        "System.Diagnostics.Tools",
+        "netstandard",
+    ];
+
+    /// <summary>
+    /// The assembly a reference to <see cref="CqlLibraryAttribute"/> resolves to.
+    /// </summary>
+    private static readonly string CqlLibraryAttributeAssembly = typeof(CqlLibraryAttribute).Assembly.GetName().Name!;
 
     /// <summary>
     /// The signature of a constructor that takes two strings, as both <see cref="GeneratedCodeAttribute"/> and
@@ -55,9 +53,14 @@ internal static class CqlAssemblyInfoReader
         [(byte)SignatureAttributes.Instance, 2, (byte)SignatureTypeCode.Void, (byte)SignatureTypeCode.String, (byte)SignatureTypeCode.String];
 
     /// <summary>
-    /// The assembly a reference to <see cref="CqlLibraryAttribute"/> resolves to.
+    /// Which of the two attributes the reader reads an attribute is.
     /// </summary>
-    private static readonly string CqlLibraryAttributeAssembly = typeof(CqlLibraryAttribute).Assembly.GetName().Name!;
+    private enum LibraryAttribute
+    {
+        None,
+        GeneratedCode,
+        CqlLibrary,
+    }
 
     /// <summary>
     /// Reads the CQL libraries that the code generator wrote into an assembly.
@@ -98,6 +101,7 @@ internal static class CqlAssemblyInfoReader
 
             ThrowIfDeclaringTypesFormACycle(metadata);
             var typeNames = new TypeNames(metadata);
+            var attributeArguments = new AttributeArguments(metadata);
             foreach (var typeHandle in metadata.TypeDefinitions)
             {
                 // The first type is the module's own <Module> type, which reflection never returns among the
@@ -105,7 +109,8 @@ internal static class CqlAssemblyInfoReader
                 if (MetadataTokens.GetRowNumber(typeHandle) == 1)
                     continue;
 
-                foreach (var cqlLibraryInfo in ReadLibraryInfos(metadata, typeHandle, assemblyFullName, typeNames))
+                var cqlLibraryInfos = ReadLibraryInfos(metadata, typeHandle, assemblyFullName, typeNames, attributeArguments);
+                foreach (var cqlLibraryInfo in cqlLibraryInfos)
                     declarations.Add((typeHandle, typeNames.Get(typeHandle), cqlLibraryInfo));
             }
         }
@@ -144,7 +149,8 @@ internal static class CqlAssemblyInfoReader
         MetadataReader metadata,
         TypeDefinitionHandle typeHandle,
         string assemblyName,
-        TypeNames typeNames)
+        TypeNames typeNames,
+        AttributeArguments attributeArguments)
     {
         List<(string? Identifier, string? Version)> cqlLibraries = [];
         List<CustomAttribute> generatedCodeAttributes = [];
@@ -152,17 +158,17 @@ internal static class CqlAssemblyInfoReader
         foreach (var attributeHandle in metadata.GetTypeDefinition(typeHandle).GetCustomAttributes())
         {
             var attribute = metadata.GetCustomAttribute(attributeHandle);
-            var (attributeName, attributeAssembly) = GetAttributeType(metadata, attribute);
-            if (attributeAssembly is null)
-                continue;
-
-            if (attributeName == GeneratedCodeAttributeName && GeneratedCodeAttributeAssemblies.Contains(attributeAssembly))
-                generatedCodeAttributes.Add(attribute);
-            else if (attributeName == CqlLibraryAttributeName
-                     && string.Equals(attributeAssembly, CqlLibraryAttributeAssembly, StringComparison.OrdinalIgnoreCase))
-                cqlLibraries.Add(
-                    ReadTwoStringArguments(metadata, attribute)
-                    ?? throw Malformed(assemblyName, typeNames.Get(typeHandle), attributeName.Name));
+            switch (GetLibraryAttribute(metadata, attribute))
+            {
+                case LibraryAttribute.GeneratedCode:
+                    generatedCodeAttributes.Add(attribute);
+                    break;
+                case LibraryAttribute.CqlLibrary:
+                    cqlLibraries.Add(
+                        attributeArguments.Read(attribute)
+                        ?? throw Malformed(assemblyName, typeNames.Get(typeHandle), nameof(CqlLibraryAttribute)));
+                    break;
+            }
         }
 
         if (cqlLibraries.Count == 0)
@@ -172,8 +178,8 @@ internal static class CqlAssemblyInfoReader
         List<(string? Tool, string? Version)> generatedCodes = [];
         foreach (var attribute in generatedCodeAttributes)
             generatedCodes.Add(
-                ReadTwoStringArguments(metadata, attribute)
-                ?? throw Malformed(assemblyName, typeName, GeneratedCodeAttributeName.Name));
+                attributeArguments.Read(attribute)
+                ?? throw Malformed(assemblyName, typeName, nameof(GeneratedCodeAttribute)));
 
         return CqlLibraryTypeRule.CreateLibraryInfos(assemblyName, typeName, cqlLibraries, generatedCodes);
     }
@@ -257,58 +263,103 @@ internal static class CqlAssemblyInfoReader
     }
 
     /// <summary>
-    /// The namespace and name of the attribute's type, and the name of the assembly a reference to that type
-    /// resolves to.
+    /// Which of the two attributes the reader reads an attribute is, told by the type its constructor's reference
+    /// names and the assembly that reference goes through. The strings are compared where they are, never decoded.
     /// </summary>
     /// <remarks>
-    /// The assembly is <see langword="null"/> when the attribute type is defined in the assembly being read, which
-    /// makes it neither the SDK's nor the runtime's own, or when it is not referenced through an assembly at all.
+    /// An attribute type defined in the assembly being read is neither, nor is one not referenced through an assembly.
     /// </remarks>
-    private static ((string Namespace, string Name) Name, string? Assembly) GetAttributeType(
-        MetadataReader metadata,
-        CustomAttribute attribute)
+    private static LibraryAttribute GetLibraryAttribute(MetadataReader metadata, CustomAttribute attribute)
     {
         if (attribute.Constructor.Kind != HandleKind.MemberReference)
-            return (("", ""), null);
+            return LibraryAttribute.None;
 
         var memberReference = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
         if (memberReference.Parent.Kind != HandleKind.TypeReference)
-            return (("", ""), null);
+            return LibraryAttribute.None;
 
         var typeReference = metadata.GetTypeReference((TypeReferenceHandle)memberReference.Parent);
-        var assembly = typeReference.ResolutionScope.Kind == HandleKind.AssemblyReference
-            ? metadata.GetString(metadata.GetAssemblyReference((AssemblyReferenceHandle)typeReference.ResolutionScope).Name)
-            : null;
-        return ((metadata.GetString(typeReference.Namespace), metadata.GetString(typeReference.Name)), assembly);
+        if (typeReference.ResolutionScope.Kind != HandleKind.AssemblyReference)
+            return LibraryAttribute.None;
+
+        var strings = metadata.StringComparer;
+        var assembly = metadata.GetAssemblyReference((AssemblyReferenceHandle)typeReference.ResolutionScope).Name;
+        if (strings.Equals(typeReference.Name, typeof(GeneratedCodeAttribute).Name)
+            && strings.Equals(typeReference.Namespace, typeof(GeneratedCodeAttribute).Namespace!))
+        {
+            foreach (var generatedCodeAttributeAssembly in GeneratedCodeAttributeAssemblies)
+            {
+                if (strings.Equals(assembly, generatedCodeAttributeAssembly, ignoreCase: true))
+                    return LibraryAttribute.GeneratedCode;
+            }
+
+            return LibraryAttribute.None;
+        }
+
+        return strings.Equals(typeReference.Name, typeof(CqlLibraryAttribute).Name)
+               && strings.Equals(typeReference.Namespace, typeof(CqlLibraryAttribute).Namespace!)
+               && strings.Equals(assembly, CqlLibraryAttributeAssembly, ignoreCase: true)
+            ? LibraryAttribute.CqlLibrary
+            : LibraryAttribute.None;
     }
 
     /// <summary>
-    /// Reads the two arguments of an attribute whose constructor takes two strings, as both
+    /// Reads the two arguments of attributes whose constructor takes two strings, as both
     /// <see cref="GeneratedCodeAttribute"/> and <see cref="CqlLibraryAttribute"/> do: the value blob is the
     /// prolog <c>0x0001</c>, the two arguments as serialized strings, and the count of named arguments, which is 0
     /// because neither attribute has a member that one could set.
     /// </summary>
-    /// <returns>
-    /// The two arguments, or <see langword="null"/> where reflection cannot read the attribute either: its
-    /// constructor is not the one that takes two strings, its value does not start with the prolog, or what follows
-    /// the two arguments is neither nothing nor a count of no named arguments.
-    /// </returns>
-    private static (string? First, string? Second)? ReadTwoStringArguments(MetadataReader metadata, CustomAttribute attribute)
+    /// <remarks>
+    /// Decodes each value blob once, however many attributes share it, so that metadata cannot make reading decode the
+    /// same strings again and again, and so that the libraries read from it share the strings.
+    /// </remarks>
+    private sealed class AttributeArguments(MetadataReader metadata)
     {
-        var constructor = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
-        if (!metadata.StringComparer.Equals(constructor.Name, ".ctor")
-            || !metadata.GetBlobContent(constructor.Signature).AsSpan().SequenceEqual(TwoStringConstructorSignature))
-            return null;
+        private readonly Dictionary<BlobHandle, (string? First, string? Second)?> _values = [];
 
-        var value = metadata.GetBlobReader(attribute.Value);
-        if (value.Length < 2 || value.ReadUInt16() != 0x0001)
-            return null;
+        /// <returns>
+        /// The two arguments, or <see langword="null"/> where reflection cannot read the attribute either: its
+        /// constructor is not the one that takes two strings, its value does not start with the prolog, or what follows
+        /// the two arguments is neither nothing nor a count of no named arguments.
+        /// </returns>
+        public (string? First, string? Second)? Read(CustomAttribute attribute)
+        {
+            var constructor = metadata.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
+            if (!metadata.StringComparer.Equals(constructor.Name, ".ctor")
+                || !IsTwoStringConstructorSignature(metadata.GetBlobReader(constructor.Signature)))
+                return null;
 
-        var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
+            if (!_values.TryGetValue(attribute.Value, out var arguments))
+                _values.Add(attribute.Value, arguments = Decode(metadata.GetBlobReader(attribute.Value)));
+            return arguments;
+        }
 
-        // Reflection reads a value that ends right after the arguments, or with a count of no named arguments and
-        // nothing after it, and rejects any other.
-        return value.RemainingBytes == 0 || (value.RemainingBytes == 2 && value.ReadUInt16() == 0) ? arguments : null;
+        private static bool IsTwoStringConstructorSignature(BlobReader signature)
+        {
+            var expected = TwoStringConstructorSignature;
+            if (signature.Length != expected.Length)
+                return false;
+
+            foreach (var expectedByte in expected)
+            {
+                if (signature.ReadByte() != expectedByte)
+                    return false;
+            }
+
+            return true;
+        }
+
+        private static (string? First, string? Second)? Decode(BlobReader value)
+        {
+            if (value.Length < 2 || value.ReadUInt16() != 0x0001)
+                return null;
+
+            var arguments = (value.ReadSerializedString(), value.ReadSerializedString());
+
+            // Reflection reads a value that ends right after the arguments, or with a count of no named arguments and
+            // nothing after it, and rejects any other.
+            return value.RemainingBytes == 0 || (value.RemainingBytes == 2 && value.ReadUInt16() == 0) ? arguments : null;
+        }
     }
 
     /// <summary>
@@ -317,9 +368,11 @@ internal static class CqlAssemblyInfoReader
     /// followed by <c>+</c>.
     /// </summary>
     /// <remarks>
-    /// Builds a type's name only when asked for it, and each name only once, from its declaring type's. A name longer
-    /// than <see cref="MaxLength"/> is cut there, so that metadata of deeply nested types with long names cannot make
-    /// reading slow. The reader tells types apart by their handles, never by these names.
+    /// Builds a type's name only when asked for it, and each name only once, from its declaring type's. Decodes and
+    /// escapes each namespace and name string only once, however many types share it. A name longer than
+    /// <see cref="MaxLength"/> is cut there, and a type nested in a type whose name is cut gets that same name, so that
+    /// metadata of deeply nested types, or of long names, cannot make reading slow. The reader tells types apart by
+    /// their handles, never by these names.
     /// </remarks>
     private sealed class TypeNames(MetadataReader metadata)
     {
@@ -334,6 +387,7 @@ internal static class CqlAssemblyInfoReader
         private static readonly SearchValues<char> ReservedCharacters = SearchValues.Create("\\+,[]&*");
 
         private readonly Dictionary<TypeDefinitionHandle, string> _names = [];
+        private readonly Dictionary<StringHandle, string> _segments = [];
 
         /// <summary>
         /// The full name of the type, whose declaring types <see cref="ThrowIfDeclaringTypesFormACycle"/> has
@@ -360,17 +414,35 @@ internal static class CqlAssemblyInfoReader
             // Name them outermost first, each from its declaring type's name.
             while (unnamed.TryPop(out var current))
             {
-                var type = metadata.GetTypeDefinition(current);
-                var typeNamespace = Escape(metadata.GetString(type.Namespace));
-                var typeName = Escape(metadata.GetString(type.Name));
-                var qualifiedName = typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
-                name = declaringName is null ? qualifiedName : $"{declaringName}+{qualifiedName}";
-                declaringName = name.Length > MaxLength ? $"{name[..MaxLength]}…" : name;
+                if (declaringName is not { Length: > MaxLength })
+                {
+                    var type = metadata.GetTypeDefinition(current);
+                    var typeNamespace = Segment(type.Namespace);
+                    var typeName = Segment(type.Name);
+                    var qualifiedName = typeNamespace.Length == 0 ? typeName : $"{typeNamespace}.{typeName}";
+                    declaringName = Cut(declaringName is null ? qualifiedName : $"{declaringName}+{qualifiedName}");
+                }
+
                 _names.Add(current, declaringName);
             }
 
             return declaringName!;
         }
+
+        /// <summary>
+        /// A namespace or name string, escaped and cut, decoded only the first time.
+        /// </summary>
+        private string Segment(StringHandle handle)
+        {
+            if (handle.IsNil)
+                return "";
+
+            if (!_segments.TryGetValue(handle, out var segment))
+                _segments.Add(handle, segment = Cut(Escape(metadata.GetString(handle))));
+            return segment;
+        }
+
+        private static string Cut(string name) => name.Length > MaxLength ? $"{name[..MaxLength]}…" : name;
 
         private static string Escape(string name)
         {

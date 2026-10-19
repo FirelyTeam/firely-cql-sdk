@@ -587,6 +587,68 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void ReadCqlAssemblyInfo_OfManyTypesSharingOneLargeAttributeValue_DecodesItOnce()
+    {
+        var largeIdentifier = new string('L', 1_000_000);
+        var builder = new MetadataAssembly("SharedLargeAttributeValue");
+        for (var index = 0; index < 200; index++)
+            builder.AddLibraryAttributes(builder.AddType($"Copy{index}"), largeIdentifier);
+
+        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
+
+        cqlAssemblyInfo.Libraries.Should().ContainSingle()
+                       .Which.Value.ReadError.Should().BeOfType<CqlLibraryDeclaredByMoreThanOneTypeError>()
+                       .Which.TypeNames.Should().HaveCount(200);
+        allocated.Should().BeLessThan(LargeStringAllocationBound, "a value blob that many attributes share is decoded once");
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfManyLibraryTypesInOneLargeNamespace_DecodesItOnce()
+    {
+        var largeNamespace = new string('N', 1_000_000);
+        var builder = new MetadataAssembly("SharedLargeNamespace");
+        for (var index = 0; index < 200; index++)
+            builder.AddLibraryAttributes(builder.AddType($"Library{index}", largeNamespace), $"Library{index}");
+
+        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
+
+        cqlAssemblyInfo.Libraries.Should().HaveCount(200);
+        allocated.Should().BeLessThan(LargeStringAllocationBound, "a namespace that many types share is decoded once");
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfNestedLibraryTypesSharingOneLargeName_DecodesItOnce()
+    {
+        var largeName = new string('N', 1_000_000);
+        var builder = new MetadataAssembly("SharedLargeNestedName");
+        var declaringType = default(TypeDefinitionHandle);
+        for (var level = 0; level < 200; level++)
+        {
+            declaringType = builder.AddType(largeName, declaringType: declaringType);
+            builder.AddLibraryAttributes(declaringType, $"Nested{level}");
+        }
+
+        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
+
+        cqlAssemblyInfo.Libraries.Should().HaveCount(200);
+        allocated.Should().BeLessThan(LargeStringAllocationBound, "a name that many types share is decoded once, and a cut name is not extended");
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfManyAttributesOfALargelyNamedType_NeverDecodesTheName()
+    {
+        var largeName = new string('A', 1_000_000);
+        var builder = new MetadataAssembly("LargeAttributeTypeName");
+        for (var index = 0; index < 200; index++)
+            builder.AddAttributeOfType(builder.AddType($"Type{index}"), "Some.Namespace", largeName);
+
+        var allocated = AllocatedReading(builder.Build(), out var cqlAssemblyInfo);
+
+        cqlAssemblyInfo.Libraries.Should().BeEmpty();
+        allocated.Should().BeLessThan(LargeStringAllocationBound, "attribute types are told apart without decoding their names");
+    }
+
+    [TestMethod]
     public void ReadCqlAssemblyInfo_OfAShortCycleAmongManyTypes_ReportsAnUnreadableErrorCheaply()
     {
         var assembly = AssemblyWithCyclicNestedTypes(unrelatedTypeCount: 20_000);
@@ -1037,6 +1099,22 @@ public class CqlAssemblyInfoReaderTests
         }
     }
 
+    /// <summary>
+    /// What reading an assembly that shares one large string 200 times may allocate: far less than decoding the string
+    /// for each of its uses would.
+    /// </summary>
+    private const long LargeStringAllocationBound = 64 * 1024 * 1024;
+
+    /// <summary>
+    /// The bytes the current thread allocates while it reads <paramref name="assembly"/>.
+    /// </summary>
+    private static long AllocatedReading(AssemblyBinary assembly, out CqlAssemblyInfo cqlAssemblyInfo)
+    {
+        var allocatedBefore = GC.GetAllocatedBytesForCurrentThread();
+        cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        return GC.GetAllocatedBytesForCurrentThread() - allocatedBefore;
+    }
+
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>
         CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(identifier, version);
 
@@ -1104,9 +1182,9 @@ public class CqlAssemblyInfoReaderTests
 
     private static byte[] SerializedString(string value)
     {
-        var utf8 = System.Text.Encoding.UTF8.GetBytes(value);
-        utf8.Length.Should().BeLessThan(0x80, "a longer string has a longer length prefix");
-        return [(byte)utf8.Length, .. utf8];
+        var serialized = new BlobBuilder();
+        serialized.WriteSerializedString(value);
+        return serialized.ToArray();
     }
 
     /// <summary>
@@ -1250,6 +1328,23 @@ public class CqlAssemblyInfoReaderTests
                 _metadata.GetOrAddString(".ctor"),
                 _metadata.GetOrAddBlob(constructorSignature));
             _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(value));
+        }
+
+        /// <summary>
+        /// Adds an attribute of a type that the runtime assembly is said to define, with the given namespace and name,
+        /// through a constructor that takes two strings.
+        /// </summary>
+        public void AddAttributeOfType(TypeDefinitionHandle type, string @namespace, string name)
+        {
+            var attributeType = _metadata.AddTypeReference(
+                AssemblyReference(typeof(object).Assembly.GetName()),
+                _metadata.GetOrAddString(@namespace),
+                _metadata.GetOrAddString(name));
+            var constructor = _metadata.AddMemberReference(
+                attributeType,
+                _metadata.GetOrAddString(".ctor"),
+                _metadata.GetOrAddBlob(TwoStringConstructorSignature));
+            _metadata.AddCustomAttribute(type, constructor, _metadata.GetOrAddBlob(AttributeValue("First", "Second")));
         }
 
         /// <summary>
