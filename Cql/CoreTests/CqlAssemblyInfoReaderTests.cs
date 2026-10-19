@@ -268,6 +268,25 @@ public class CqlAssemblyInfoReaderTests
     }
 
     [TestMethod]
+    public void CreateLibrarySetInvoker_SkippingAnUnsupportedLibrary_WarnsWithTheLibraryAndTheSupportedRange()
+    {
+        var assembly = RecompileWithGeneratorVersion("5.0.0.0", "CqlLibraryInfoTest_Warning");
+        var warnings = new List<string>();
+        using var loggerFactory = new WarningCollectingLoggerFactory(warnings);
+
+        using var invoker = new InvocationToolkit(loggerFactory)
+                            .AddAssemblyBinaries([assembly])
+                            .CreateLibrarySetInvoker();
+
+        invoker.LibraryInvokers.Should().NotContainKey(LibraryIdentifier);
+        warnings.Should().ContainSingle(warning =>
+            warning.Contains(LibraryIdentifier.ToString())
+            && warning.Contains("5.0.0.0")
+            && warning.Contains(InvocationToolkit.MinSupportedGeneratorToolVersion.ToString())
+            && warning.Contains(InvocationToolkit.FirstUnsupportedGeneratorToolVersion.ToString()));
+    }
+
+    [TestMethod]
     public void GeneratedCSharp_NamesTheGeneratorByItsCurrentName()
     {
         var cSharp = GeneratedLibrary.Value.cSharp;
@@ -342,6 +361,39 @@ public class CqlAssemblyInfoReaderTests
         cSharp.Should().Contain(generatedCode);
 
         return Compile(assemblyName, cSharp.Replace(generatedCode, $"GeneratedCode(\"{tool}\", \"{generatorVersion}\")"));
+    }
+
+    /// <summary>
+    /// An <see cref="ILoggerFactory"/> that collects every message logged at warning level or above.
+    /// </summary>
+    private sealed class WarningCollectingLoggerFactory(List<string> warnings) : ILoggerFactory
+    {
+        public ILogger CreateLogger(string categoryName) => new WarningCollectingLogger(warnings);
+
+        public void AddProvider(ILoggerProvider provider) { }
+
+        public void Dispose() { }
+
+        private sealed class WarningCollectingLogger(List<string> warnings) : ILogger
+        {
+            public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+            public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Warning;
+
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception? exception,
+                Func<TState, Exception?, string> formatter)
+            {
+                if (logLevel < LogLevel.Warning)
+                    return;
+
+                lock (warnings)
+                    warnings.Add(formatter(state, exception));
+            }
+        }
     }
 
     private static AssemblyBinary Compile(string assemblyName, params string[] sources) =>

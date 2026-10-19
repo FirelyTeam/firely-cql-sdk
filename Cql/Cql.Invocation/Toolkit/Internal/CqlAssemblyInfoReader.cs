@@ -13,7 +13,6 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
@@ -120,30 +119,11 @@ internal static class CqlAssemblyInfoReader
                 cqlLibrary ??= ReadTwoStringArguments(metadata, attribute);
         }
 
-        if (cqlLibrary is not { } library
-            || generatedCode is not { } generator
-            || !CqlLibraryTypeRule.TryGetGeneratorToolVersion(generator.Tool, generator.Version, out var generatorToolVersion)
-            || !TryCreateLibraryIdentifier(library.Identifier, library.Version, out var libraryIdentifier))
-            return null;
-
-        return new CqlLibraryInfo(libraryIdentifier.Value, generatorToolVersion);
-    }
-
-    private static bool TryCreateLibraryIdentifier(
-        string? identifier,
-        string? version,
-        [NotNullWhen(true)] out CqlVersionedLibraryIdentifier? libraryIdentifier)
-    {
-        libraryIdentifier = null;
-        if (!CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier))
-            return false;
-
-        CqlLibraryVersion? cqlLibraryVersion = null;
-        if (!string.IsNullOrEmpty(version) && !CqlLibraryVersion.TryParse(version, out cqlLibraryVersion))
-            return false;
-
-        libraryIdentifier = CqlVersionedLibraryIdentifier.FromIdentifierAndVersion(cqlLibraryIdentifier.Value, cqlLibraryVersion);
-        return true;
+        return cqlLibrary is { } library
+               && generatedCode is { } generator
+               && CqlLibraryTypeRule.TryCreateLibraryInfo(library.Identifier, library.Version, generator.Tool, generator.Version, out var libraryInfo)
+            ? libraryInfo
+            : null;
     }
 
     /// <summary>
