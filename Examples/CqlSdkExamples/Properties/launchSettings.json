@@ -68,6 +68,10 @@
       "commandName": "Project",
       "commandLineArgs": "410"
     },
+    "420 Check assemblies in FHIR Resources before invoking": {
+      "commandName": "Project",
+      "commandLineArgs": "420"
+    },
     "500 Extending Functionality - Log Statements per Library": {
       "commandName": "Project",
       "commandLineArgs": "500"
