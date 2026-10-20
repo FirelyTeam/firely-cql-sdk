@@ -49,10 +49,13 @@ namespace Hl7.Cql.CqlToElm
 
             foreach (var codeSystem in library.codeSystems ?? [])
                 symbols.TryAdd(new CodeSystemDef { name = codeSystem.name, accessLevel = codeSystem.accessLevel, id = codeSystem.id, version = codeSystem.version });
+
             foreach (var valueSet in library.valueSets ?? [])
                 symbols.TryAdd(new ValueSetDef { name = valueSet.name, accessLevel = valueSet.accessLevel, id = valueSet.id, version = valueSet.version });
+
             foreach (var code in library.codes ?? [])
                 symbols.TryAdd(new CodeDef { name = code.name, accessLevel = code.accessLevel, id = code.id });
+
             foreach (var concept in library.concepts ?? [])
                 symbols.TryAdd(new ConceptDef { name = concept.name, accessLevel = concept.accessLevel });
 
@@ -100,6 +103,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (operand.GetTypeSpecifier() is not { } operandType)
                     return null;
+
                 operands.Add(new OperandDef { name = operand.name, operandTypeSpecifier = operandType });
             }
 
