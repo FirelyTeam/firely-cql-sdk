@@ -163,6 +163,38 @@ public class CqlToolkitReferenceLibraryTests
     }
 
     [TestMethod]
+    public void TranslateToElm_WithReferencesToParametersAndTerminologyOfAReferenceLibrary_TranslatesWithoutErrors()
+    {
+        // Arrange
+        var helpers = CreateCqlToolkit(
+            """
+            library Helpers version '1.0.0'
+            codesystem "Snomed": 'http://snomed.info/sct'
+            valueset "Conditions": 'http://example.org/ValueSet/conditions'
+            code "Asthma": '195967001' from "Snomed"
+            concept "Respiratory": { "Asthma" }
+            parameter "Threshold" Integer default 3
+            """).TranslateToElm();
+        var helpersElm = Library.ParseFromJson(helpers.ArtifactsById.Values.Single().ResultElmLibrary!.SerializeToJson());
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Helpers version '1.0.0'
+            define "CodeSystem": Helpers."Snomed"
+            define "ValueSet": Helpers."Conditions"
+            define "Code": Helpers."Asthma"
+            define "Concept": Helpers."Respiratory"
+            define "Parameter": Helpers."Threshold" + 1
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([helpersElm]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().BeEmpty();
+    }
+
+    [TestMethod]
     public void TranslateToElm_WithTwoParametersOfTheSameNameInTheReferenceLibrary_ReportsTheIncludeAsAnError()
     {
         // Arrange
