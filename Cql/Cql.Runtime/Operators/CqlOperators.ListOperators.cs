@@ -713,12 +713,6 @@ namespace Hl7.Cql.Operators
             };
         }
 
-        /// <summary>
-        /// One unit at the given scale, e.g. a scale of 2 yields 0.01.
-        /// </summary>
-        private static decimal UnitAtScale(int scale) =>
-            new(1, 0, 0, false, (byte)scale);
-
         private static decimal TruncateToScale(decimal value, int scale) =>
             Math.Round(value, scale, MidpointRounding.ToZero);
 
@@ -952,18 +946,6 @@ namespace Hl7.Cql.Operators
             };
             return length;
         }
-
-        #endregion
-
-        #region Not Equal
-
-        // public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
-
-        #endregion
-
-        #region Not Equivalent
-
-        // public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
 
         #endregion
 

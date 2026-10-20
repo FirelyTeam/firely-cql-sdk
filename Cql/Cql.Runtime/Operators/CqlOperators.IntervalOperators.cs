@@ -1620,23 +1620,6 @@ namespace Hl7.Cql.Operators
             return null;
         }
 
-        private bool? RangeEqual<T>((T min, T max) x, (T min, T max) y, string? precision) =>
-            AndAllowingUnknown(RangeLessOrEqual(x, y, precision), RangeGreaterOrEqual(x, y, precision));
-
-        private bool? RangeGreaterThan<T>((T min, T max) x, (T min, T max) y, string? precision)
-        {
-            if (Comparer.Compare(x.min!, y.max!, precision) > 0) return true;
-            if (Comparer.Compare(x.max!, y.min!, precision) <= 0) return false;
-            return null;
-        }
-
-        private bool? RangeLessThan<T>((T min, T max) x, (T min, T max) y, string? precision)
-        {
-            if (Comparer.Compare(x.max!, y.min!, precision) < 0) return true;
-            if (Comparer.Compare(x.min!, y.max!, precision) >= 0) return false;
-            return null;
-        }
-
         #endregion
 
         #region Overlaps After
