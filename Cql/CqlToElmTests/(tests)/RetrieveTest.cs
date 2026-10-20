@@ -120,6 +120,35 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
         [TestMethod]
+        public void Retrieve_RelatedContext_ReferencesTheExpression()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                context Patient
+                define "Mother": singleton from ([RelatedPerson])
+                define "Mother Observations": ["Mother" -> Observation]
+                """);
+            var retrieve = (Retrieve)lib.statements.Single(s => s.name == "Mother Observations").expression;
+            var contextRef = retrieve.context.Should().BeOfType<ExpressionRef>().Subject;
+            contextRef.name.Should().Be("Mother");
+            contextRef.libraryName.Should().BeNull();
+            contextRef.resultTypeName.Should().Be(new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}RelatedPerson"));
+        }
+
+        [TestMethod]
+        public void Retrieve_RelatedContext_Unresolved_IsReported()
+        {
+            CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                context Patient
+                define "Observations": ["Unknown" -> Observation]
+                """,
+                "Could not resolve identifier Unknown in the current library.");
+        }
+
+        [TestMethod]
         public void Retrieve_FilteredByCode()
         {
             var cqlToolkit = CreateCqlToolkit();
