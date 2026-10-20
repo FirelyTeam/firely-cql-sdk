@@ -126,9 +126,12 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// A reference library resolves the includes of the translated libraries, so that a library whose dependency is
     /// available only as ELM translates without an error for that include. The translator reads the signatures of the
     /// definitions from the ELM: their names, access levels and result types, and the operand types of the functions.
-    /// A statement whose ELM declares no result type cannot be referenced; ELM translated without result types has none.
-    /// A reference library with the identifier of a CQL library is ignored, and the first of several
-    /// reference libraries with the same identifier is kept.
+    /// A statement whose ELM declares no result type, or a function with an operand whose ELM declares no type, cannot be
+    /// referenced; ELM translated without result types has none. A reference library whose ELM declares a name twice in a
+    /// way a reference cannot tell apart leaves its includes unresolved. A reference library with the identifier of a CQL
+    /// library is ignored, and the first of several reference libraries with the same identifier is kept. A library that
+    /// is already translated is not translated again, so reference libraries are added before
+    /// <see cref="TranslateToElm"/> is called.
     /// </remarks>
     /// <param name="elmLibraries">The ELM libraries to add.</param>
     /// <returns>The current instance of <see cref="CqlToolkit"/>.</returns>

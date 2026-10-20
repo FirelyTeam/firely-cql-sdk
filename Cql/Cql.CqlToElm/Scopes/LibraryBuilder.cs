@@ -26,14 +26,19 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         /// <remarks>
         /// The builder only resolves references into <paramref name="library"/> and is never built: its symbol table holds
-        /// the signatures of the definitions, without their expressions. A statement whose ELM declares no result type
-        /// cannot be referenced with a type, so it is left out, and a reference to it does not resolve.
+        /// the signatures of the definitions, without their expressions. A statement whose ELM declares no result type, or a
+        /// function with an operand whose ELM declares no type, cannot be referenced with a type, so it is left out, and a
+        /// reference to it does not resolve. The names of definitions that clash with a definition added before them, which
+        /// a reference could not tell apart, are returned in <paramref name="conflictingNames"/>.
         /// </remarks>
         public static LibraryBuilder CreateReference(
             Library library,
             SystemLibrary systemLibrary,
-            LocalIdentifierProvider localIdentifierProvider)
+            LocalIdentifierProvider localIdentifierProvider,
+            out IReadOnlyList<string> conflictingNames)
         {
+            var conflicts = new List<string>();
+            conflictingNames = conflicts;
             var builder = new LibraryBuilder(library.identifier, systemLibrary, localIdentifierProvider);
             var symbols = builder.SymbolTable;
             foreach (var parameter in library.parameters ?? [])
@@ -53,11 +58,27 @@ namespace Hl7.Cql.CqlToElm
 
             foreach (var statement in library.statements ?? [])
             {
-                if (CreateReferenceDefinition(statement) is { } definition)
-                    symbols.TryAdd(definition);
+                if (CreateReferenceDefinition(statement) is { } definition && !TryAddReferenceDefinition(symbols, definition))
+                    conflicts.Add(definition.name);
             }
 
             return builder;
+        }
+
+        // A function with the operand types of a function of the same name, or a definition with the name of another kind
+        // of definition, cannot be added.
+        private static bool TryAddReferenceDefinition(
+            SymbolTable symbols,
+            ExpressionDef definition)
+        {
+            try
+            {
+                return symbols.TryAdd(definition);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
 
         private static ExpressionDef? CreateReferenceDefinition(ExpressionDef statement)
@@ -87,11 +108,10 @@ namespace Hl7.Cql.CqlToElm
                 name = function.name,
                 accessLevel = function.accessLevel,
                 context = function.context,
-                // ELM written by this translator sets the flags without marking them as specified.
                 fluent = function.fluent,
-                fluentSpecified = function.fluentSpecified || function.fluent,
+                fluentSpecified = function.fluentSpecified,
                 external = function.external,
-                externalSpecified = function.externalSpecified || function.external,
+                externalSpecified = function.externalSpecified,
                 operand = [.. operands],
                 resultTypeSpecifier = resultType,
             };

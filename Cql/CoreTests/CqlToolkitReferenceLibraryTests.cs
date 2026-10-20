@@ -112,15 +112,15 @@ public class CqlToolkitReferenceLibraryTests
     }
 
     [TestMethod]
-    public void TranslateToElm_WithAFluentFunctionInElmThisTranslatorWrote_CallsItFluently()
+    public void TranslateToElm_WithAFluentFunctionInElmJsonThisTranslatorWrote_CallsItFluently()
     {
-        // Arrange
+        // Arrange - the ELM goes through JSON, as a host that stores it reads it back.
         var helpers = CreateCqlToolkit(
             """
             library Helpers version '1.0.0'
             define fluent function double(a Integer): a * 2
             """).TranslateToElm();
-        var helpersElm = helpers.ArtifactsById.Values.Single().ResultElmLibrary!;
+        var helpersElm = Library.ParseFromJson(helpers.ArtifactsById.Values.Single().ResultElmLibrary!.SerializeToJson());
         var cqlToolkit = CreateCqlToolkit(
             """
             library UsesHelpers version '1.0.0'
@@ -133,6 +133,9 @@ public class CqlToolkitReferenceLibraryTests
 
         // Assert
         TranslateErrors(cqlToolkit).Should().BeEmpty();
+        var doubled = cqlToolkit.ArtifactsById.Values.Single().ResultElmLibrary!.statements.Single(statement => statement.name == "Doubled");
+        doubled.expression.Should().BeOfType<FunctionRef>()
+            .Which.name.Should().Be("double");
     }
 
     [TestMethod]
@@ -156,7 +159,7 @@ public class CqlToolkitReferenceLibraryTests
 
         // Assert
         TranslateErrors(cqlToolkit).Should().ContainSingle()
-            .Which.Should().Contain("Helpers");
+            .Which.Should().Contain("Unable to resolve library: Helpers version '1.0.0'").And.Contain("'Twice'");
     }
 
     [TestMethod]

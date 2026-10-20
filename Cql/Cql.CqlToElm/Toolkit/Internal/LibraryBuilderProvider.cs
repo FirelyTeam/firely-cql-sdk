@@ -85,17 +85,15 @@ internal sealed class LibraryBuilderProvider(
 
         var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
         logger.LogInformation("Resolving {id} from its ELM", libVer);
-        try
+        var builder = CqlToElmTranslatorServices.LibraryVisitor.CreateReferenceBuilder(elmLibrary, out var conflictingNames);
+        if (conflictingNames.Count > 0)
         {
-            libraryBuilder = CqlToElmTranslatorServices.LibraryVisitor.CreateReferenceBuilder(elmLibrary);
-        }
-        catch (ArgumentException e)
-        {
-            // Two functions of the ELM with the same name and operand types cannot be told apart.
-            error = $"Unable to resolve library: {libVer} from its ELM. {e.Message}";
+            var names = string.Join(", ", conflictingNames.Distinct().Select(name => $"'{name}'"));
+            error = $"Unable to resolve library: {elmLibrary.identifier.id} version '{elmLibrary.identifier.version}'. Its ELM declares {names} more than once in a way a reference cannot tell apart.";
             return false;
         }
 
+        libraryBuilder = builder;
         _referenceBuildersById[libVer] = libraryBuilder;
         return true;
     }
