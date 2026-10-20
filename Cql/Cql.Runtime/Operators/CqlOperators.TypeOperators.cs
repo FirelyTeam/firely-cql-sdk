@@ -245,142 +245,142 @@ namespace Hl7.Cql.Operators
 
         #endregion
 
+        // Each ConvertsTo* operator is true when its argument already is of the target type, or when the matching To*
+        // operator returns a non-null result for it; false for any other argument; and null for null.
+
         #region ConvertsToBoolean
-        public bool? ConvertsToBoolean(object? o)
+
+        // ToBoolean converts an Integer, Long or Decimal only when it is 0 or 1.
+        public bool? ConvertsToBoolean(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.IntegerType
-                || type == TypeResolver.LongType
-                || type == TypeResolver.DecimalType
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            bool => true,
+            int i => i is 0 or 1,
+            long l => l is 0L or 1L,
+            decimal d => d is 0m or 1m,
+            string s => ConvertStringToBoolean(s) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToDate
 
-        public bool? ConvertsToDate(object? o)
+        public bool? ConvertsToDate(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == typeof(CqlDateTime)
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            CqlDate => true,
+            CqlDateTime dt => ConvertDateTimeToDate(dt) is not null,
+            string s => ConvertStringToDate(s) is not null,
+            _ => false,
+        };
+
         #endregion
 
         #region ConvertsToDateTime
-        public bool? ConvertsToDateTime(object? o)
+
+        public bool? ConvertsToDateTime(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == typeof(CqlDate)
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            CqlDateTime => true,
+            CqlDate d => ConvertDateToDateTime(d) is not null,
+            string s => ConvertStringToDateTime(s) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToDecimal
 
-        public bool? ConvertsToDecimal(object? o)
+        public bool? ConvertsToDecimal(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.BooleanType
-                || type == TypeResolver.IntegerType
-                || type == TypeResolver.LongType
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            decimal => true,
+            bool b => ConvertBooleanToDecimal(b) is not null,
+            int i => ConvertIntegerToDecimal(i) is not null,
+            long l => ConvertLongToDecimal(l) is not null,
+            string s => ConvertStringToDecimal(s) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToLong
-        public bool? ConvertsToLong(object? o)
+
+        public bool? ConvertsToLong(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.BooleanType
-                || type == TypeResolver.IntegerType
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            long => true,
+            bool b => ConvertBooleanToLong(b) is not null,
+            int i => ConvertIntegerToLong(i) is not null,
+            string s => ConvertStringToLong(s) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToInteger
-        public bool? ConvertsToInteger(object? o)
+
+        // ToInteger converts a Long only when it lies within the Integer range.
+        public bool? ConvertsToInteger(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.BooleanType
-                || type == TypeResolver.LongType
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            int => true,
+            bool b => ConvertBooleanToInteger(b) is not null,
+            long l => l is >= int.MinValue and <= int.MaxValue,
+            string s => ConvertStringToInteger(s) is not null,
+            _ => false,
+        };
+
         #endregion
 
         #region ConvertsToQuantity
-        public bool? ConvertsToQuantity(object? o)
+
+        // ToQuantity of a Ratio is the numerator divided by the denominator.
+        public bool? ConvertsToQuantity(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.IntegerType
-                || type == TypeResolver.DecimalType
-                || type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            CqlQuantity => true,
+            int i => ConvertIntegerToQuantity(i) is not null,
+            long l => ConvertLongToQuantity(l) is not null,
+            decimal d => ConvertDecimalToQuantity(d) is not null,
+            CqlRatio r => Divide(r.numerator, r.denominator) is not null,
+            string s => ConvertStringToQuantity(s) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToString
-        public bool? ConvertsToString(object? o)
+
+        public bool? ConvertsToString(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.BooleanType
-                || type == TypeResolver.IntegerType
-                || type == TypeResolver.LongType
-                || type == TypeResolver.DecimalType
-                || type == TypeResolver.QuantityType
-                || type == TypeResolver.RatioType
-                || type == TypeResolver.DateTimeType
-                || type == TypeResolver.DateType
-                || type == TypeResolver.TimeType)
-                return true;
-            else return false;
-        }
+            null => null,
+            string => true,
+            bool b => ConvertBooleanToString(b) is not null,
+            int i => ConvertIntegerToString(i) is not null,
+            long l => ConvertLongToString(l) is not null,
+            decimal d => ConvertDecimalToString(d) is not null,
+            CqlQuantity q => ConvertQuantityToString(q) is not null,
+            CqlRatio r => ConvertRatioToString(r) is not null,
+            CqlDate d => ConvertDateToString(d) is not null,
+            CqlDateTime dt => ConvertDateTimeToString(dt) is not null,
+            CqlTime t => ConvertTimeToString(t) is not null,
+            _ => false,
+        };
 
         #endregion
 
         #region ConvertsToTime
-        public bool? ConvertsToTime(object? o)
+
+        public bool? ConvertsToTime(object? o) => o switch
         {
-            if (o == null)
-                return null;
-            var type = o.GetType();
-            if (type == TypeResolver.StringType)
-                return true;
-            else return false;
-        }
+            null => null,
+            CqlTime => true,
+            string s => ConvertStringToTime(s) is not null,
+            _ => false,
+        };
+
         #endregion
 
         #region Quantity
