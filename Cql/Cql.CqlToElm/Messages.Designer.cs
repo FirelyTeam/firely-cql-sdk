@@ -249,6 +249,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Its ELM declares {2} more than once in a way a reference cannot tell apart..
+        /// </summary>
+        internal static string UnableToResolveReferenceLibrary {
+            get {
+                return ResourceManager.GetString("UnableToResolveReferenceLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A reference to a model library is unexpected at this point..
         /// </summary>
         internal static string UnexpectedLibraryReference {

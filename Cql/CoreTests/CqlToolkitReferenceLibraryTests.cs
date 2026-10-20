@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
@@ -83,7 +81,7 @@ public class CqlToolkitReferenceLibraryTests
         cqlToolkit.TranslateToElm();
 
         // Assert
-        TranslateErrors(cqlToolkit).Should().Contain(error => error.Contains("FHIRHelpers"));
+        TranslateErrors(cqlToolkit).Should().Contain(error => error.StartsWith("Unable to resolve library: FHIRHelpers version '4.0.1'"));
     }
 
     [TestMethod]
@@ -109,6 +107,52 @@ public class CqlToolkitReferenceLibraryTests
         // Assert
         TranslateErrors(cqlToolkit).Should().ContainSingle()
             .Which.Should().Contain("Untyped");
+    }
+
+    [TestMethod]
+    public void TranslateToElm_WithAFunctionWithAnUntypedOperand_ReportsACallToIt()
+    {
+        // Arrange
+        var untyped = CreateIntegerFunction("F");
+        untyped.operand = [new OperandDef { name = "a" }];
+        var reference = CreateLibrary("Helpers", "1.0.0", untyped, CreateIntegerFunction("G"));
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Helpers version '1.0.0'
+            define "FromTyped": Helpers.G(1)
+            define "FromUntyped": Helpers.F(1)
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([reference]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().ContainSingle()
+            .Which.Should().StartWith("Could not resolve call to").And.Contain("F");
+    }
+
+    [TestMethod]
+    public void TranslateToElm_WithAStatementWithoutANameInTheReferenceLibrary_ResolvesTheInclude()
+    {
+        // Arrange
+        var reference = CreateLibrary(
+            "Helpers",
+            "1.0.0",
+            new ExpressionDef { accessLevel = AccessModifier.Public, context = "Unfiltered", resultTypeSpecifier = SystemTypes.IntegerType },
+            new ExpressionDef { name = "Typed", accessLevel = AccessModifier.Public, context = "Unfiltered", resultTypeSpecifier = SystemTypes.IntegerType });
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Helpers version '1.0.0'
+            define "FromTyped": Helpers."Typed" + 1
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([reference]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -220,6 +264,27 @@ public class CqlToolkitReferenceLibraryTests
     }
 
     [TestMethod]
+    public void TranslateToElm_WithClashingDefinitionsInAQualifiedReferenceLibrary_NamesTheQualifiedLibrary()
+    {
+        // Arrange
+        var reference = CreateLibrary("Helpers", "1.0.0", CreateIntegerFunction("Twice"), CreateIntegerFunction("Twice"));
+        reference.identifier.system = "Acme";
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Acme.Helpers version '1.0.0' called Helpers
+            define "Value": 1
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([reference]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().ContainSingle()
+            .Which.Should().StartWith("Unable to resolve library: Acme.Helpers version '1.0.0'").And.Contain("'Twice'");
+    }
+
+    [TestMethod]
     public void TranslateToElm_WithAReferenceLibraryDeclaredWithAQualifiedName_ResolvesTheQualifiedInclude()
     {
         // Arrange - the translator writes the qualifier of the library name as the system of its identifier.
@@ -261,6 +326,33 @@ public class CqlToolkitReferenceLibraryTests
 
         // Act
         cqlToolkit.AddReferenceLibraries([CreateLibrary("Helpers", "1.0.0")]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void AddReferenceLibraries_BeforeACqlLibraryWithTheSameIdentifier_KeepsTheCqlLibrary()
+    {
+        // Arrange - the CQL of Helpers defines "Value", its ELM does not.
+        var cqlLibraries = new[]
+        {
+            """
+            library Helpers version '1.0.0'
+            define "Value": 1
+            """,
+            """
+            library UsesHelpers version '1.0.0'
+            include Helpers version '1.0.0'
+            define "Result": Helpers."Value"
+            """,
+        };
+
+        // Act
+        var cqlToolkit = new CqlToolkit()
+            .AddReferenceLibraries([CreateLibrary("Helpers", "1.0.0")])
+            .AddCqlLibraries(cqlLibraries.Select(CqlLibraryString.Parse))
+            .TranslateToElm();
 
         // Assert
         TranslateErrors(cqlToolkit).Should().BeEmpty();

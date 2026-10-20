@@ -88,8 +88,8 @@ internal sealed class LibraryBuilderProvider(
         var builder = CqlToElmTranslatorServices.LibraryVisitor.CreateReferenceBuilder(elmLibrary, out var conflictingNames);
         if (conflictingNames.Count > 0)
         {
-            var names = string.Join(", ", conflictingNames.Distinct().Select(name => $"'{name}'"));
-            error = $"Unable to resolve library: {elmLibrary.identifier.id} version '{elmLibrary.identifier.version}'. Its ELM declares {names} more than once in a way a reference cannot tell apart.";
+            var messaging = CqlToElmTranslatorServices.ServiceProvider.GetRequiredService<MessageProvider>();
+            error = messaging.UnableToResolveReferenceLibrary(libVer.Identifier.ToString(), libVer.Version?.ToString(), conflictingNames);
             return false;
         }
 

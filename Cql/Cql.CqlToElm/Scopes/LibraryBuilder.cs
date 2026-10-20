@@ -42,9 +42,31 @@ namespace Hl7.Cql.CqlToElm
             var builder = new LibraryBuilder(library.identifier, systemLibrary, localIdentifierProvider);
             var symbols = builder.SymbolTable;
 
+            // The symbol table combines the overloads of a function, so the overloads added so far are kept to tell
+            // whether a function can join them.
+            var overloadsByName = new Dictionary<string, List<IFunctionElement>>();
+
             void AddReferenceDefinition(IDefinitionElement definition)
             {
-                if (!TryAddReferenceSymbol(symbols, definition))
+                // Nothing can reference a definition without a name.
+                if (string.IsNullOrEmpty(definition.Name))
+                    return;
+
+                if (definition is IFunctionElement function)
+                {
+                    if (!overloadsByName.TryGetValue(function.Name, out var overloads))
+                        overloadsByName[function.Name] = overloads = [];
+
+                    if (!OverloadedFunctionDef.CanCombine([.. overloads, function]))
+                    {
+                        conflicts.Add(definition.Name);
+                        return;
+                    }
+
+                    overloads.Add(function);
+                }
+
+                if (!symbols.TryAdd(definition))
                     conflicts.Add(definition.Name);
             }
 
@@ -73,22 +95,6 @@ namespace Hl7.Cql.CqlToElm
             }
 
             return builder;
-        }
-
-        // A function with the operand types of a function of the same name, or a definition with the name of another
-        // definition that is not a function, cannot be added.
-        private static bool TryAddReferenceSymbol(
-            SymbolTable symbols,
-            IDefinitionElement definition)
-        {
-            try
-            {
-                return symbols.TryAdd(definition);
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
         }
 
         private static ExpressionDef? CreateReferenceDefinition(ExpressionDef statement)
