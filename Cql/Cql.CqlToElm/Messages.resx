@@ -195,6 +195,10 @@
     <value>Unable to resolve library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
     <comment>{0} = library name unquoted, {1} = version unquoted</comment>
   </data>
+  <data name="UnableToResolveReferenceLibrary" xml:space="preserve">
+    <value>Unable to resolve library: {0} version '{1}'. Its ELM declares {2} more than once in a way a reference cannot tell apart.</value>
+    <comment>{0} = library name unquoted, {1} = version unquoted, {2} = comma-separated quoted names of the clashing definitions</comment>
+  </data>
   <data name="UnexpectedLibraryReference" xml:space="preserve">
     <value>A reference to a model library is unexpected at this point.</value>
   </data>
