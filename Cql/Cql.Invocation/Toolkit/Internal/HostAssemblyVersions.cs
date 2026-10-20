@@ -15,16 +15,31 @@ namespace Hl7.Cql.Invocation.Toolkit.Internal;
 /// platform assemblies list, and only when that one is of at least the version referenced.
 /// </summary>
 /// <remarks>
-/// No assembly is loaded: the version of one the trusted platform assemblies list is read from its file's metadata. A
-/// version once found is kept, as the default load context neither unloads an assembly nor loads a second one of the
-/// same name, and the trusted platform assemblies are fixed for the life of the process.
+/// <para>
+/// A lookup costs dictionary lookups only, whether it finds a version or not. The versions of the assemblies the
+/// default load context has loaded are kept by name, from a snapshot taken on the first lookup and kept current by
+/// <see cref="AppDomain.AssemblyLoad"/>, so an assembly the host loads there later is found from then on. They stay
+/// valid, as that context neither unloads an assembly nor loads a second one of the same name.
+/// </para>
+/// <para>
+/// No assembly is loaded: the version of one the trusted platform assemblies list is read from its file's metadata,
+/// once, as that list is fixed for the life of the process. A name it does not hold is a miss without reading
+/// anything.
+/// </para>
 /// </remarks>
 internal static class HostAssemblyVersions
 {
-    private static readonly ConcurrentDictionary<string, Version> Versions = new(StringComparer.OrdinalIgnoreCase);
+    private static readonly Lazy<ConcurrentDictionary<string, Version>> LoadedVersions = new(TrackLoadedVersions);
 
     private static readonly Lazy<FrozenDictionary<string, string>> TrustedPlatformAssemblyPaths =
         new(ReadTrustedPlatformAssemblyPaths);
+
+    /// <summary>
+    /// The versions read so far of the trusted platform assemblies, by simple name; <see langword="null"/> for one
+    /// whose version cannot be read. Holds only names the list holds.
+    /// </summary>
+    private static readonly ConcurrentDictionary<string, Version?> TrustedPlatformAssemblyVersions =
+        new(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Finds the version of the host's assembly of the given simple name, which compares without regard to case, as
@@ -33,32 +48,18 @@ internal static class HostAssemblyVersions
     /// <returns>
     /// The version, or <see langword="null"/> when the host has no assembly of that name whose version can be read.
     /// </returns>
-    public static Version? Find(string assemblyName)
+    public static Version? Find(string assemblyName) =>
+        LoadedVersions.Value.TryGetValue(assemblyName, out var version)
+            ? version
+            : FindTrustedPlatformAssembly(assemblyName);
+
+    private static Version? FindTrustedPlatformAssembly(string assemblyName) =>
+        TrustedPlatformAssemblyPaths.Value.TryGetValue(assemblyName, out var path)
+            ? TrustedPlatformAssemblyVersions.GetOrAdd(assemblyName, static (_, path) => ReadVersion(path), path)
+            : null;
+
+    private static Version? ReadVersion(string path)
     {
-        if (Versions.TryGetValue(assemblyName, out var version))
-            return version;
-
-        version = FindLoaded(assemblyName) ?? FindTrustedPlatformAssembly(assemblyName);
-        return version is null ? null : Versions.GetOrAdd(assemblyName, version);
-    }
-
-    private static Version? FindLoaded(string assemblyName)
-    {
-        foreach (var assembly in AssemblyLoadContext.Default.Assemblies)
-        {
-            var name = assembly.GetName();
-            if (string.Equals(name.Name, assemblyName, StringComparison.OrdinalIgnoreCase))
-                return name.Version;
-        }
-
-        return null;
-    }
-
-    private static Version? FindTrustedPlatformAssembly(string assemblyName)
-    {
-        if (!TrustedPlatformAssemblyPaths.Value.TryGetValue(assemblyName, out var path))
-            return null;
-
         try
         {
             return AssemblyName.GetAssemblyName(path).Version;
@@ -67,6 +68,43 @@ internal static class HostAssemblyVersions
         {
             // A file that cannot be read is no assembly the default load context can bind a reference to either.
             return null;
+        }
+    }
+
+    /// <summary>
+    /// Keeps the versions of the assemblies the default load context has loaded, by simple name: those it holds now,
+    /// and each it loads from now on. Subscribes before it takes the snapshot, so that no load in between is missed.
+    /// </summary>
+    private static ConcurrentDictionary<string, Version> TrackLoadedVersions()
+    {
+        var versions = new ConcurrentDictionary<string, Version>(StringComparer.OrdinalIgnoreCase);
+        AppDomain.CurrentDomain.AssemblyLoad += (_, loaded) => AddIfInTheDefaultContext(versions, loaded.LoadedAssembly);
+        foreach (var assembly in AssemblyLoadContext.Default.Assemblies)
+            AddIfInTheDefaultContext(versions, assembly);
+
+        return versions;
+    }
+
+    /// <summary>
+    /// Keeps the version of an assembly the default load context has loaded, unless one of its name is kept already.
+    /// </summary>
+    /// <remarks>
+    /// Never throws, as it runs for every assembly the process loads, where an exception would fail that load.
+    /// </remarks>
+    private static void AddIfInTheDefaultContext(ConcurrentDictionary<string, Version> versions, Assembly assembly)
+    {
+        try
+        {
+            if (AssemblyLoadContext.GetLoadContext(assembly) != AssemblyLoadContext.Default)
+                return;
+
+            var name = assembly.GetName();
+            if (name.Name is { } simpleName && name.Version is { } version)
+                versions.TryAdd(simpleName, version);
+        }
+        catch (Exception exception) when (exception is not OutOfMemoryException)
+        {
+            // An assembly whose name cannot be read is no assembly a reference can name either.
         }
     }
 

@@ -883,6 +883,35 @@ public class CqlAssemblyInfoReaderTests
         bindReferencesAlongsideTheIncludedLibrary.Should().NotThrow();
     }
 
+    /// <summary>
+    /// Runs once per process, as the default load context never unloads the assembly it loads.
+    /// </summary>
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAReferenceToAnAssemblyTheHostLoadsAfterAnEarlierRead_ComparesItWithTheLoadedOne()
+    {
+        const string loadedLater = "CqlAssemblyInfoReaderTests_LoadedLater";
+        var hostAssembly = new MetadataAssembly(loadedLater).Build();
+
+        // A read first, so that the reader already follows the loads that come after it. The first of those is into a
+        // collectible context of its own, which is not the host's.
+        InvocationToolkit.ReadCqlAssemblyInfo(hostAssembly).ReadError.Should().BeNull();
+        var reference = LoadedAssemblyName(hostAssembly);
+        var hostVersion = reference.Version!;
+        reference.Version = Newer(hostVersion);
+        var builder = new MetadataAssembly("ReferencesAnAssemblyLoadedLater", references: [reference]);
+        builder.AddLibraryAttributes(builder.AddType("Library"), "LoadedLaterLibrary");
+        var assembly = builder.Build();
+
+        var beforeTheHostLoadsIt = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(hostAssembly.AssemblyBytes!));
+        var afterTheHostLoadsIt = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        beforeTheHostLoadsIt.ReadError.Should().BeNull();
+        beforeTheHostLoadsIt.IsSupported.Should().BeTrue();
+        afterTheHostLoadsIt.ReadError.Should().Be(
+            new CqlAssemblyWithNewerReferenceError(LoadedAssemblyName(assembly).FullName, loadedLater, reference.Version, hostVersion));
+    }
+
     [TestMethod]
     public void CreateLibrarySetInvoker_WithAnAssemblyReferencingANewerAssemblyThanTheHosts_FailsForTheWholeSetAsTheReaderSays()
     {
