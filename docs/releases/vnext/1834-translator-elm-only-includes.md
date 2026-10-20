@@ -8,3 +8,5 @@
   reference library is not translated itself, a CQL library with the same identifier takes precedence over it, and a
   statement whose ELM declares no result type cannot be referenced. Translation without reference libraries is
   unchanged.
+- **CQL to ELM translation** — the ELM JSON the translator writes carries `"fluent": true` on a fluent function, so a
+  library read back from that JSON keeps its fluent functions.
