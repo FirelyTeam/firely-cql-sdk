@@ -265,5 +265,14 @@ namespace Hl7.Cql.CqlToElm {
                 return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A reference to a type is unexpected at this point..
+        /// </summary>
+        internal static string UnexpectedTypeReference {
+            get {
+                return ResourceManager.GetString("UnexpectedTypeReference", resourceCulture);
+            }
+        }
     }
 }

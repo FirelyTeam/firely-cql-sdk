@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var expression = symbol.ToRef(null);
                 if (expression is UsingRef ur)
                     return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                        "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
+                        MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());
 
                 var members = qualifiers
                     .Skip(1)
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             if (term is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a model library is unexpected at this point.").WithLocator(locator);
+                    MessagingProvider.UnexpectedLibraryReference()).WithLocator(locator);
             else if (term is IncludeRef ir)
                 return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(locator);
@@ -210,7 +210,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var left = Visit(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
+                    MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());
 
             var invocation = context.GetChild(2) switch
             {
