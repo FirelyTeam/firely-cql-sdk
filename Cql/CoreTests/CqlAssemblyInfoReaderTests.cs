@@ -527,6 +527,7 @@ public class CqlAssemblyInfoReaderTests
             default(CqlAssemblyWithoutMetadataError),
             default(CqlModuleWithoutManifestError),
             default(CqlLibraryTypeWithMalformedAttributeError),
+            default(CqlAssemblyWithNewerReferenceError),
             default(CqlLibraryTypeWithMoreThanOneAttributeError),
             default(CqlLibraryDeclaredByMoreThanOneTypeError),
         ];
@@ -775,6 +776,7 @@ public class CqlAssemblyInfoReaderTests
     public void ReadCqlAssemblyInfo_OfAnAssemblyWithAnyOneByteInverted_NeverThrows()
     {
         var assemblyBytes = GeneratedLibrary.Value.assembly.AssemblyBytes!;
+        var newerReferences = 0;
 
         for (var offset = 0; offset < assemblyBytes.Length; offset++)
         {
@@ -782,8 +784,14 @@ public class CqlAssemblyInfoReaderTests
             changed[offset] ^= 0xFF;
             var read = () => InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(changed));
 
-            read.Should().NotThrow($"for the byte at offset {offset} of {assemblyBytes.Length} inverted");
+            if (read.Should().NotThrow($"for the byte at offset {offset} of {assemblyBytes.Length} inverted")
+                    .Subject.ReadError is CqlAssemblyWithNewerReferenceError)
+                newerReferences++;
         }
+
+        // Inverting a byte of a version the assembly references can make it newer than the host's, so comparing the
+        // references with the host's assemblies is among what the read does without throwing.
+        newerReferences.Should().BePositive();
     }
 
     [TestMethod]
@@ -800,6 +808,105 @@ public class CqlAssemblyInfoReaderTests
         var read = () => InvocationToolkit.ReadCqlAssemblyInfo(AssemblyBinary.Default);
 
         read.Should().Throw<ArgumentException>().WithParameterName("assemblyBinary");
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(HostAssemblies))]
+    public void ReadCqlAssemblyInfo_OfAReferenceNewerThanTheHostsAssembly_ReportsAnErrorNamingBothVersions(string hostAssembly)
+    {
+        var hostVersion = HostAssemblyName(hostAssembly).Version!;
+        var newer = Newer(hostVersion);
+        var assembly = LibraryAssemblyReferencing(hostAssembly, newer);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.ReadError.Should().Be(
+            new CqlAssemblyWithNewerReferenceError(LoadedAssemblyName(assembly).FullName, hostAssembly, newer, hostVersion));
+        cqlAssemblyInfo.ReadError!.GetMessage().Should().ContainAll($"'{hostAssembly}'", $"{newer}", $"{hostVersion}");
+        ShouldHoldNothingButTheReadError(cqlAssemblyInfo, assembly);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(HostAssembliesAtTheirOwnAndAnOlderVersion))]
+    public void ReadCqlAssemblyInfo_OfAReferenceNoNewerThanTheHostsAssembly_ReadsItAsSupported(string hostAssembly, bool older)
+    {
+        var hostVersion = HostAssemblyName(hostAssembly).Version!;
+        var assembly = LibraryAssemblyReferencing(hostAssembly, older ? Older(hostVersion) : hostVersion);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        cqlAssemblyInfo.Libraries.Values.Should().Equal(
+            new CqlLibraryInfo(Identifier("ReferencingLibrary", "1.0.0"), Version.Parse(CurrentGeneratorVersion)));
+        cqlAssemblyInfo.IsSupported.Should().BeTrue();
+    }
+
+    /// <summary>
+    /// The rule <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> applies to the references of an assembly, as the
+    /// default load context applies it. The assemblies of the SDK and of the Firely .NET SDK are left out: the test
+    /// platform resolves an assembly in the test's output directory itself, whatever version a reference names, as a
+    /// host's own resolver can.
+    /// </summary>
+    [TestMethod]
+    [DataRow("System.Runtime")]
+    [DataRow(AssemblyTheHostLoadedFromBytes)]
+    public void DefaultLoadContext_BindsAReferenceOnlyToAnAssemblyOfAtLeastItsVersion(string hostAssembly)
+    {
+        var hostVersion = HostAssemblyName(hostAssembly).Version!;
+
+        var bindNewer = () => BindReferences(LibraryAssemblyReferencing(hostAssembly, Newer(hostVersion)));
+        var bindSame = () => BindReferences(LibraryAssemblyReferencing(hostAssembly, hostVersion));
+        var bindOlder = () => BindReferences(LibraryAssemblyReferencing(hostAssembly, Older(hostVersion)));
+
+        bindNewer.Should().Throw<FileNotFoundException>().Which.Message.Should().Contain(hostAssembly);
+        bindSame.Should().NotThrow();
+        bindOlder.Should().NotThrow();
+    }
+
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfAReferenceToAnAssemblyTheHostDoesNotHave_LeavesItToTheLoad()
+    {
+        // Such as the assembly of a library that this assembly's library includes, which the host adds to the same
+        // toolkit, so that the toolkit binds the reference to it.
+        var includedLibrary = new MetadataAssembly("IncludedLibraryAssembly").Build();
+        var builder = new MetadataAssembly("IncludingLibraryAssembly", references: [LoadedAssemblyName(includedLibrary)]);
+        builder.AddLibraryAttributes(builder.AddType("Library"), "IncludingLibrary");
+        var assembly = builder.Build();
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+        var bindReferencesAlone = () => BindReferences(assembly);
+        var bindReferencesAlongsideTheIncludedLibrary = () => BindReferences(assembly, includedLibrary);
+
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        cqlAssemblyInfo.IsSupported.Should().BeTrue();
+        bindReferencesAlone.Should().Throw<FileNotFoundException>();
+        bindReferencesAlongsideTheIncludedLibrary.Should().NotThrow();
+    }
+
+    [TestMethod]
+    public void CreateLibrarySetInvoker_WithAnAssemblyReferencingANewerAssemblyThanTheHosts_FailsForTheWholeSetAsTheReaderSays()
+    {
+        // The library type derives from a type of the host's assembly, as a generated library type implements
+        // ILibrary of the SDK's, so loading the type binds the reference.
+        var hostAssembly = HostAssemblyName(AssemblyTheHostLoadedFromBytes);
+        hostAssembly.Version = Newer(hostAssembly.Version!);
+        var builder = new MetadataAssembly("DerivesFromANewerHostType", references: [hostAssembly]);
+        var library = builder.AddType("Library", baseType: builder.ReferenceType(hostAssembly, "", HostType));
+        builder.AddLibraryAttributes(library, "DerivingLibrary");
+        var assembly = builder.Build();
+        var createLibrarySetInvoker = () =>
+        {
+            using var invoker = new InvocationToolkit()
+                                .AddAssemblyBinaries([GeneratedLibrary.Value.assembly, assembly])
+                                .CreateLibrarySetInvoker();
+            return invoker.LibraryInvokers.Count;
+        };
+
+        InvocationToolkit.ReadCqlAssemblyInfo(GeneratedLibrary.Value.assembly).IsSupported.Should().BeTrue();
+        InvocationToolkit.ReadCqlAssemblyInfo(assembly).ReadError.Should().BeOfType<CqlAssemblyWithNewerReferenceError>()
+                         .Which.ReferencedAssemblyName.Should().Be(AssemblyTheHostLoadedFromBytes);
+        createLibrarySetInvoker.Should().Throw<ReflectionTypeLoadException>()
+                               .Which.LoaderExceptions.Should().ContainItemsAssignableTo<FileNotFoundException>();
     }
 
     [TestMethod]
@@ -947,6 +1054,107 @@ public class CqlAssemblyInfoReaderTests
         [new byte[] { 0x4D, 0x5A }],
         ["This is not an assembly."u8.ToArray()],
     ];
+
+    /// <summary>
+    /// Assemblies the host has, by simple name: the one of the SDK that a library's
+    /// <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> is referenced through, one of the Firely .NET SDK, one of
+    /// the .NET runtime, and <see cref="AssemblyTheHostLoadedFromBytes"/>, which the trusted platform assemblies do not
+    /// list.
+    /// </summary>
+    public static IEnumerable<object[]> HostAssemblies =>
+    [
+        [typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Assembly.GetName().Name!],
+        [typeof(Hl7.Fhir.Model.Base).Assembly.GetName().Name!],
+        ["System.Runtime"],
+        [AssemblyTheHostLoadedFromBytes],
+    ];
+
+    /// <summary>
+    /// Each of <see cref="HostAssemblies"/>, with whether to reference it at an older version than the host's instead of
+    /// at the host's own.
+    /// </summary>
+    public static IEnumerable<object[]> HostAssembliesAtTheirOwnAndAnOlderVersion =>
+        from hostAssembly in HostAssemblies
+        from older in new[] { false, true }
+        select new[] { hostAssembly[0], older };
+
+    /// <summary>
+    /// The simple name of an assembly that the host loads into its default load context from bytes, so that the trusted
+    /// platform assemblies do not list it, as a host does that loads the SDK from a directory of its own.
+    /// </summary>
+    private const string AssemblyTheHostLoadedFromBytes = "CqlAssemblyInfoReaderTests_LoadedByTheHost";
+
+    /// <summary>
+    /// The one type of <see cref="AssemblyTheHostLoadedFromBytes"/>.
+    /// </summary>
+    private const string HostType = "HostType";
+
+    /// <summary>
+    /// Loads <see cref="AssemblyTheHostLoadedFromBytes"/> into the default load context, once, as that context never
+    /// unloads it.
+    /// </summary>
+    private static readonly Lazy<Assembly> AssemblyTheHostLoaded = new(() =>
+    {
+        var builder = new MetadataAssembly(AssemblyTheHostLoadedFromBytes);
+        builder.AddType(HostType);
+        return AssemblyLoadContext.Default.LoadFromStream(new MemoryStream(builder.Build().AssemblyBytes!));
+    });
+
+    /// <summary>
+    /// A version a patch release later, by which the SDK's assembly version moves too.
+    /// </summary>
+    private static Version Newer(Version version) => new(version.Major, version.Minor, version.Build + 1, version.Revision);
+
+    private static Version Older(Version version) => new(version.Major - 1, version.Minor, version.Build, version.Revision);
+
+    /// <summary>
+    /// The name, with its version, of the host's assembly of the given simple name, as the default load context binds
+    /// a reference to it.
+    /// </summary>
+    private static AssemblyName HostAssemblyName(string assemblyName)
+    {
+        if (assemblyName == AssemblyTheHostLoadedFromBytes)
+            _ = AssemblyTheHostLoaded.Value;
+
+        return AssemblyLoadContext.Default.LoadFromAssemblyName(new AssemblyName(assemblyName)).GetName();
+    }
+
+    /// <summary>
+    /// Builds an assembly that holds a CQL library and references the host's assembly of the given simple name at the
+    /// given version. When that is the SDK's, its <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> is referenced
+    /// through it.
+    /// </summary>
+    private static AssemblyBinary LibraryAssemblyReferencing(string hostAssembly, Version version)
+    {
+        var reference = HostAssemblyName(hostAssembly);
+        reference.Version = version;
+        var builder = new MetadataAssembly($"References{hostAssembly.Replace(".", "")}", references: [reference]);
+        builder.AddLibraryAttributes(builder.AddType("Library"), "ReferencingLibrary");
+        return builder.Build();
+    }
+
+    /// <summary>
+    /// Binds each reference of <paramref name="assembly"/> as the runtime does once the assembly uses it, from a
+    /// collectible load context of its own that, as the toolkit's do, resolves no assembly itself, and that holds the
+    /// assemblies <paramref name="alongside"/> too.
+    /// </summary>
+    /// <exception cref="FileNotFoundException">A reference cannot be bound.</exception>
+    private static void BindReferences(AssemblyBinary assembly, params AssemblyBinary[] alongside)
+    {
+        var loadContext = new AssemblyLoadContext(nameof(BindReferences), isCollectible: true);
+        try
+        {
+            foreach (var other in alongside)
+                loadContext.LoadFromStream(new MemoryStream(other.AssemblyBytes!));
+
+            foreach (var reference in loadContext.LoadFromStream(new MemoryStream(assembly.AssemblyBytes!)).GetReferencedAssemblies())
+                loadContext.LoadFromAssemblyName(reference);
+        }
+        finally
+        {
+            loadContext.Unload();
+        }
+    }
 
     /// <summary>
     /// The name the runtime reports for <paramref name="assembly"/> once loaded, in a collectible context of its own.
@@ -1131,7 +1339,18 @@ public class CqlAssemblyInfoReaderTests
         private readonly TypeReferenceHandle _objectType;
         private readonly MemberReferenceHandle _cqlLibraryConstructor;
 
-        public MetadataAssembly(string name, AssemblyFlags flags = default, byte[]? publicKey = null)
+        /// <param name="name">The simple name of the assembly, whose version is 1.0.0.0.</param>
+        /// <param name="flags">The flags of the assembly.</param>
+        /// <param name="publicKey">The public key of the assembly, if any.</param>
+        /// <param name="references">
+        /// Assemblies to reference first, at the versions their names state, which every later reference to an assembly
+        /// of the same name reuses.
+        /// </param>
+        public MetadataAssembly(
+            string name,
+            AssemblyFlags flags = default,
+            byte[]? publicKey = null,
+            IEnumerable<AssemblyName>? references = null)
         {
             _metadata.AddModule(0, _metadata.GetOrAddString($"{name}.dll"), _metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
             _metadata.AddAssembly(
@@ -1142,6 +1361,8 @@ public class CqlAssemblyInfoReaderTests
                 flags,
                 System.Reflection.AssemblyHashAlgorithm.None);
             _metadata.AddTypeDefinition(default, default, _metadata.GetOrAddString("<Module>"), default, NoFields, NoMethods);
+            foreach (var reference in references ?? [])
+                AssemblyReference(reference);
             _objectType = TypeReference(typeof(object).Assembly.GetName(), typeof(object));
             _cqlLibraryConstructor = TwoStringConstructor(typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute).Assembly.GetName(), typeof(Hl7.Cql.Abstractions.CqlLibraryAttribute));
         }
@@ -1151,17 +1372,23 @@ public class CqlAssemblyInfoReaderTests
         /// </summary>
         public static TypeDefinitionHandle ModuleType => MetadataTokens.TypeDefinitionHandle(1);
 
+        /// <param name="name">The name of the type.</param>
+        /// <param name="namespace">The namespace of the type.</param>
+        /// <param name="declaringType">The type to nest it in, if any.</param>
+        /// <param name="attributes">Its attributes, by default those of a public or nested public type.</param>
+        /// <param name="baseType">The type it derives from, by default <see cref="object"/>.</param>
         public TypeDefinitionHandle AddType(
             string name,
             string @namespace = "",
             TypeDefinitionHandle declaringType = default,
-            TypeAttributes? attributes = null)
+            TypeAttributes? attributes = null,
+            TypeReferenceHandle baseType = default)
         {
             var type = _metadata.AddTypeDefinition(
                 attributes ?? (declaringType.IsNil ? TypeAttributes.Public : TypeAttributes.NestedPublic),
                 _metadata.GetOrAddString(@namespace),
                 _metadata.GetOrAddString(name),
-                _objectType,
+                baseType.IsNil ? _objectType : baseType,
                 NoFields,
                 NoMethods);
             if (!declaringType.IsNil)
@@ -1233,11 +1460,17 @@ public class CqlAssemblyInfoReaderTests
                 _metadata.GetOrAddString(".ctor"),
                 _metadata.GetOrAddBlob(TwoStringConstructorSignature));
 
-        private TypeReferenceHandle TypeReference(AssemblyName assembly, Type type) =>
+        /// <summary>
+        /// References a type of another assembly, through the one reference to an assembly of that name.
+        /// </summary>
+        public TypeReferenceHandle ReferenceType(AssemblyName assembly, string @namespace, string name) =>
             _metadata.AddTypeReference(
                 AssemblyReference(assembly),
-                _metadata.GetOrAddString(type.Namespace!),
-                _metadata.GetOrAddString(type.Name));
+                _metadata.GetOrAddString(@namespace),
+                _metadata.GetOrAddString(name));
+
+        private TypeReferenceHandle TypeReference(AssemblyName assembly, Type type) =>
+            ReferenceType(assembly, type.Namespace!, type.Name);
 
         private AssemblyReferenceHandle AssemblyReference(AssemblyName assembly)
         {

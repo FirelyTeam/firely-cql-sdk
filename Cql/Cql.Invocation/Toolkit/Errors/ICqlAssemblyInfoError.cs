@@ -11,8 +11,8 @@ using Hl7.Cql.Exceptions;
 namespace Hl7.Cql.Invocation.Toolkit.Errors;
 
 /// <summary>
-/// Why <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> could not read an assembly, as its
-/// <see cref="CqlAssemblyInfo.ReadError"/> reports it.
+/// Why <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/> could not read an assembly, or found that the toolkit
+/// cannot load it, as its <see cref="CqlAssemblyInfo.ReadError"/> reports it.
 /// </summary>
 /// <remarks>
 /// The toolkit cannot load such an assembly either. Each implementation is a value that carries the details of one
