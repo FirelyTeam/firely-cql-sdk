@@ -41,38 +41,45 @@ namespace Hl7.Cql.CqlToElm
             conflictingNames = conflicts;
             var builder = new LibraryBuilder(library.identifier, systemLibrary, localIdentifierProvider);
             var symbols = builder.SymbolTable;
+
+            void AddReferenceDefinition(IDefinitionElement definition)
+            {
+                if (!TryAddReferenceSymbol(symbols, definition))
+                    conflicts.Add(definition.Name);
+            }
+
             foreach (var parameter in library.parameters ?? [])
             {
                 if ((parameter.parameterTypeSpecifier ?? parameter.parameterType?.ToNamedType() ?? parameter.GetTypeSpecifier()) is { } parameterType)
-                    symbols.TryAdd(new ParameterDef { name = parameter.name, accessLevel = parameter.accessLevel, parameterTypeSpecifier = parameterType });
+                    AddReferenceDefinition(new ParameterDef { name = parameter.name, accessLevel = parameter.accessLevel, parameterTypeSpecifier = parameterType });
             }
 
             foreach (var codeSystem in library.codeSystems ?? [])
-                symbols.TryAdd(new CodeSystemDef { name = codeSystem.name, accessLevel = codeSystem.accessLevel, id = codeSystem.id, version = codeSystem.version });
+                AddReferenceDefinition(new CodeSystemDef { name = codeSystem.name, accessLevel = codeSystem.accessLevel, id = codeSystem.id, version = codeSystem.version });
 
             foreach (var valueSet in library.valueSets ?? [])
-                symbols.TryAdd(new ValueSetDef { name = valueSet.name, accessLevel = valueSet.accessLevel, id = valueSet.id, version = valueSet.version });
+                AddReferenceDefinition(new ValueSetDef { name = valueSet.name, accessLevel = valueSet.accessLevel, id = valueSet.id, version = valueSet.version });
 
             foreach (var code in library.codes ?? [])
-                symbols.TryAdd(new CodeDef { name = code.name, accessLevel = code.accessLevel, id = code.id });
+                AddReferenceDefinition(new CodeDef { name = code.name, accessLevel = code.accessLevel, id = code.id });
 
             foreach (var concept in library.concepts ?? [])
-                symbols.TryAdd(new ConceptDef { name = concept.name, accessLevel = concept.accessLevel });
+                AddReferenceDefinition(new ConceptDef { name = concept.name, accessLevel = concept.accessLevel });
 
             foreach (var statement in library.statements ?? [])
             {
-                if (CreateReferenceDefinition(statement) is { } definition && !TryAddReferenceDefinition(symbols, definition))
-                    conflicts.Add(definition.name);
+                if (CreateReferenceDefinition(statement) is { } definition)
+                    AddReferenceDefinition(definition);
             }
 
             return builder;
         }
 
-        // A function with the operand types of a function of the same name, or a definition with the name of another kind
-        // of definition, cannot be added.
-        private static bool TryAddReferenceDefinition(
+        // A function with the operand types of a function of the same name, or a definition with the name of another
+        // definition that is not a function, cannot be added.
+        private static bool TryAddReferenceSymbol(
             SymbolTable symbols,
-            ExpressionDef definition)
+            IDefinitionElement definition)
         {
             try
             {

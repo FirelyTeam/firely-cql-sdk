@@ -163,6 +163,56 @@ public class CqlToolkitReferenceLibraryTests
     }
 
     [TestMethod]
+    public void TranslateToElm_WithTwoParametersOfTheSameNameInTheReferenceLibrary_ReportsTheIncludeAsAnError()
+    {
+        // Arrange
+        var reference = CreateLibrary("Helpers", "1.0.0");
+        reference.parameters =
+        [
+            new ParameterDef { name = "P", accessLevel = AccessModifier.Public, parameterTypeSpecifier = SystemTypes.IntegerType },
+            new ParameterDef { name = "P", accessLevel = AccessModifier.Public, parameterTypeSpecifier = SystemTypes.StringType },
+        ];
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Helpers version '1.0.0'
+            define "Value": 1
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([reference]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().ContainSingle()
+            .Which.Should().Contain("Unable to resolve library: Helpers version '1.0.0'").And.Contain("'P'");
+    }
+
+    [TestMethod]
+    public void TranslateToElm_WithAReferenceLibraryDeclaredWithAQualifiedName_ResolvesTheQualifiedInclude()
+    {
+        // Arrange - the translator writes the qualifier of the library name as the system of its identifier.
+        var helpers = CreateCqlToolkit(
+            """
+            library Acme.Helpers version '1.0.0'
+            define "Value": 1
+            """).TranslateToElm();
+        var helpersElm = Library.ParseFromJson(helpers.ArtifactsById.Values.Single().ResultElmLibrary!.SerializeToJson());
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            include Acme.Helpers version '1.0.0' called Helpers
+            define "Value": Helpers."Value"
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([helpersElm]).TranslateToElm();
+
+        // Assert
+        helpersElm.identifier.system.Should().Be("Acme");
+        TranslateErrors(cqlToolkit).Should().BeEmpty();
+    }
+
+    [TestMethod]
     public void AddReferenceLibraries_WithTheIdentifierOfACqlLibrary_KeepsTheCqlLibrary()
     {
         // Arrange - the CQL of Helpers defines "Value", its ELM does not.
