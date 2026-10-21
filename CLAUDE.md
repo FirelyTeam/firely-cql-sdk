@@ -39,13 +39,13 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## CQL evaluation errors: use `ICqlError` + `CqlException<TError>`, not raw .NET exceptions
 
-For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlError` — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
+For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlEvaluationError` (an `ICqlError`) — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
 
 The struct holds raw metadata (unit name, value, etc.) as get-only properties, set by its constructor; `GetMessage()` builds the human-readable string lazily, on demand, rather than at the throw site. This keeps error handling strongly-typed (`catch (CqlException<CqlUcumYearArithmeticError> e)`) and avoids allocating message strings for errors that get caught without ever being displayed.
 
 ```csharp
 // correct — metadata in, message built lazily
-public readonly record struct CqlArithmeticError : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
     internal CqlArithmeticError(string unit, string calendarEquivalent)
     {
@@ -61,7 +61,7 @@ public readonly record struct CqlArithmeticError : ICqlError
 // wrong — don't pass a pre-built message string into the struct
 ```
 
-See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for where these structs live and how that project is organized.
+Put the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`; `Hl7.Cql.Exceptions` keeps only the exception machinery. The three errors in `Cql.Abstractions/Primitives/Errors.cs` are still in `Hl7.Cql.Primitives` and move in [#1844](https://github.com/FirelyTeam/firely-cql-sdk/issues/1844). A host tells an evaluation error from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`, and `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated, innermost first; `GetCqlEvaluationFrames()` reads the same from any other exception. See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for how that project is organized.
 
 ## FHIR `Library.Name` vs `Library.Id`
 

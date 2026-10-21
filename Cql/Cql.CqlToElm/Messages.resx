@@ -194,4 +194,7 @@
   <data name="UnexpectedLibraryReference" xml:space="preserve">
     <value>A reference to a model library is unexpected at this point.</value>
   </data>
+  <data name="UnexpectedTypeReference" xml:space="preserve">
+    <value>A reference to a type is unexpected at this point.</value>
+  </data>
 </root>
