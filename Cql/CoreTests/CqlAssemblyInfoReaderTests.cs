@@ -912,6 +912,52 @@ public class CqlAssemblyInfoReaderTests
             new CqlAssemblyWithNewerReferenceError(LoadedAssemblyName(assembly).FullName, loadedLater, reference.Version, hostVersion));
     }
 
+    /// <summary>
+    /// The host's version of an assembly that the trusted platform assemblies list but nothing has loaded comes from
+    /// its file. Its version is read here from the file too, as loading it would make the loaded assemblies answer
+    /// instead.
+    /// </summary>
+    [TestMethod]
+    [DataRow("newer")]
+    [DataRow("equal")]
+    [DataRow("older")]
+    public void ReadCqlAssemblyInfo_OfAReferenceToATrustedPlatformAssemblyNothingLoaded_ComparesItWithItsFile(string referencedVersion)
+    {
+        AssembliesLoadedAnywhere().Should().NotContain(
+            UnloadedTrustedPlatformAssembly,
+            "the test is of a trusted platform assembly that nothing has loaded");
+        var path = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+                   .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
+                   .Single(entry => Path.GetFileNameWithoutExtension(entry) == UnloadedTrustedPlatformAssembly);
+        var reference = AssemblyName.GetAssemblyName(path);
+        var hostVersion = reference.Version!;
+        reference.Version = referencedVersion switch
+        {
+            "newer" => Newer(hostVersion),
+            "older" => Older(hostVersion),
+            _ => hostVersion,
+        };
+        var builder = new MetadataAssembly($"ReferencesAnUnloadedTrustedPlatformAssembly_{referencedVersion}", references: [reference]);
+        builder.AddLibraryAttributes(builder.AddType("Library"), "TrustedPlatformLibrary");
+        var assembly = builder.Build();
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        var newer = referencedVersion == "newer";
+        cqlAssemblyInfo.ReadError.Should().Be(
+            newer
+                ? (ICqlAssemblyInfoError)new CqlAssemblyWithNewerReferenceError(
+                    LoadedAssemblyName(assembly).FullName,
+                    UnloadedTrustedPlatformAssembly,
+                    reference.Version,
+                    hostVersion)
+                : null);
+        cqlAssemblyInfo.IsSupported.Should().Be(!newer);
+        AssembliesLoadedAnywhere().Should().NotContain(
+            UnloadedTrustedPlatformAssembly,
+            "reading a reference never loads the assembly it names");
+    }
+
     [TestMethod]
     public void CreateLibrarySetInvoker_WithAnAssemblyReferencingANewerAssemblyThanTheHosts_FailsForTheWholeSetAsTheReaderSays()
     {
@@ -1117,6 +1163,18 @@ public class CqlAssemblyInfoReaderTests
     /// The one type of <see cref="AssemblyTheHostLoadedFromBytes"/>.
     /// </summary>
     private const string HostType = "HostType";
+
+    /// <summary>
+    /// The simple name of an assembly of the shared framework that the trusted platform assemblies list on every
+    /// platform, on every target framework of these tests, and that nothing in this test process loads.
+    /// </summary>
+    private const string UnloadedTrustedPlatformAssembly = "System.Net.Ping";
+
+    /// <summary>
+    /// The simple names of the assemblies loaded into any load context of the process.
+    /// </summary>
+    private static List<string?> AssembliesLoadedAnywhere() =>
+        [.. AssemblyLoadContext.All.SelectMany(context => context.Assemblies).Select(loaded => loaded.GetName().Name)];
 
     /// <summary>
     /// Loads <see cref="AssemblyTheHostLoadedFromBytes"/> into the default load context, once, as that context never
