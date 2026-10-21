@@ -1,4 +1,7 @@
 ﻿#nullable enable
+Hl7.Cql.Operators.ICqlOperators.ConvertRatioToQuantity(Hl7.Cql.Primitives.CqlRatio? r) -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Operators.ICqlOperators.ConvertsToRatio(object? o) -> bool?
+Hl7.Cql.Operators.ICqlOperators.ConvertStringToRatio(string? s) -> Hl7.Cql.Primitives.CqlRatio?
 Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError
 Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
 Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementCount.get -> int
