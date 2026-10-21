@@ -61,7 +61,7 @@ public readonly record struct CqlArithmeticError : ICqlEvaluationError
 // wrong — don't pass a pre-built message string into the struct
 ```
 
-Put the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors` (for example `Hl7.Cql.Operators.Errors`); `Hl7.Cql.Exceptions` keeps only the exception machinery. A host tells an evaluation error from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`, and `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated, innermost first. See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for how that project is organized.
+Put the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`; `Hl7.Cql.Exceptions` keeps only the exception machinery. The three errors in `Cql.Abstractions/Primitives/Errors.cs` are still in `Hl7.Cql.Primitives` and move in [#1844](https://github.com/FirelyTeam/firely-cql-sdk/issues/1844). A host tells an evaluation error from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`, and `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated, innermost first. See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for how that project is organized.
 
 ## FHIR `Library.Name` vs `Library.Id`
 

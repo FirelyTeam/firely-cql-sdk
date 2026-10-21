@@ -96,7 +96,7 @@ catch (CqlException ex) when (ex.Error is ICqlEvaluationError)
 ### File structure conventions
 
 - **Exception machinery** (`ICqlError`, `ICqlEvaluationError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`, `CqlEvaluationFrame`) lives in `Exceptions/`, namespace `Hl7.Cql.Exceptions`.
-- **Every public error value** lives in an `Errors/` folder of the area that throws or returns it, with namespace `<namespace of that area>.Errors`: in this project, errors the primitives throw go in `Primitives/Errors/`, namespace `Hl7.Cql.Primitives.Errors`; elsewhere, for example, `Hl7.Cql.Operators.Errors` and `Hl7.Cql.Invocation.Toolkit.Errors`. Internal errors, such as those in `Exceptions/Errors.cs`, may stay in the namespace of the code that uses them.
+- **Every public error value** lives in an `Errors/` folder of the area that throws or returns it, with namespace `<namespace of that area>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`. In this project, a new error the primitives throw goes in `Primitives/Errors/`, namespace `Hl7.Cql.Primitives.Errors`; the three errors in `Primitives/Errors.cs` are still in `Hl7.Cql.Primitives` and move in [#1844](https://github.com/FirelyTeam/firely-cql-sdk/issues/1844). Internal errors, such as those in `Exceptions/Errors.cs`, may stay in the namespace of the code that uses them.
 - All public error types must be registered in `PublicAPI.Unshipped.txt`.
 
 ## Further Reading
