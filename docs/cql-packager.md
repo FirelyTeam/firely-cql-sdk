@@ -67,7 +67,7 @@ Reads pre-built ELM JSON files and converts them to one or more outputs.
 | Option | Required | Description |
 |--------|----------|-------------|
 | `--elm <dir>` | ✅ | Input directory containing `*.json` ELM files (searched recursively) |
-| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources |
+| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources. An ELM library without a matching CQL file is not packaged itself, but it resolves the includes of the libraries that are packaged |
 | `--cs <dir>` | | Output directory for generated `*.g.cs` C# source files |
 | `--dll <dir>` | | Output directory for compiled `*.dll` .NET assemblies |
 | `--pdb <dir>` | | Output directory for `*.pdb` portable debug symbol files (requires `--debug-symbols PortablePdb` and `--dll`) |
@@ -259,6 +259,33 @@ All commands share the following logging options:
 | `--file-log-level <level>` | Minimum log level for file output |
 
 Log levels: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, `None`
+
+## CQL Models
+
+The models the `cql` command translates against are set in the `Cql` section of the settings file (there
+is no command-line flag):
+
+```jsonc
+"Cql": {
+  "Models": [ "ElmR1", "Fhir401" ]
+}
+```
+
+| Value | Model |
+|-------|-------|
+| `ElmR1` | System (ELM R1) — required by every other model |
+| `Fhir401` | FHIR 4.0.1 |
+| `USCore311` | US Core 3.1.1 |
+| `QICore411` | QICore 4.1.1 |
+| `USCore610` | US Core 6.1.0 |
+| `QICore600` | QICore 6.0.0 |
+
+A library's `using` declaration only resolves when its model is selected here, so a set of libraries
+written against QICore 6.0.0 needs `QICore600`, and `USCore610` as well when the set also contains libraries that use US Core 6.1.0.
+
+Select at most one version of each model: `USCore311` and `USCore610` are two versions of the same model, as are
+`QICore411` and `QICore600`, and a configuration that selects both is refused before any library is translated.
+Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
 
 ## ELM Attachment Formatting
 

@@ -39,12 +39,21 @@ The SDK uses an `ICqlError` struct as the _payload_ of a `CqlException<TError>` 
 
 ### Defining a new error type
 
-Place the struct in the `Errors.cs` of the folder that contains the throw site. The struct must accept the **metadata** (raw facts) as constructor parameters — `GetMessage()` constructs the human-readable string from that metadata on demand.
+Place the struct in the `Errors.cs` of the folder that contains the throw site. The struct must hold the **metadata** (raw facts) as get-only properties, set by its constructor — `GetMessage()` constructs the human-readable string from that metadata on demand.
 
 ```csharp
 // ✅ Correct — struct holds metadata; GetMessage() constructs the string lazily
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlArithmeticError
+public readonly record struct CqlArithmeticError : ICqlArithmeticError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() =>
         $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic " +
         $"calculation, the evaluation will end and signal an error to the calling environment. " +
@@ -52,8 +61,12 @@ public readonly record struct CqlArithmeticError(string Unit, string CalendarEqu
 }
 
 // ❌ Wrong — do NOT pass a pre-built message string as a constructor argument
-public readonly record struct CqlArithmeticError(string Message) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlError
 {
+    internal CqlArithmeticError(string message) => Message = message;
+
+    public string Message { get; }
+
     public string GetMessage() => Message;  // anti-pattern: message built at throw site
 }
 ```

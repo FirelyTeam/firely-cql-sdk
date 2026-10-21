@@ -15,6 +15,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.Collections.Immutable;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 
@@ -44,6 +45,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     }
 
     private PackagingToolkitArtifactsById _artifactsById;
+    private ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmLibrary> _referenceLibrariesById = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmLibrary>.Empty;
     private readonly PackagingToolkitServices _services;
 
     /// <inheritdoc />
@@ -126,6 +128,32 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     }
 
     /// <summary>
+    /// Adds ELM libraries that the packaged libraries include, but that are not packaged themselves.
+    /// </summary>
+    /// <remarks>
+    /// A reference library resolves the includes of the packaged libraries, so that a library whose dependency is
+    /// available only as ELM is still packaged, with the data requirements of the Retrieves in that dependency.
+    /// A reference library with the identifier of a packaging input is ignored, and the first of several reference
+    /// libraries with the same identifier is kept.
+    /// </remarks>
+    /// <param name="elmLibraries">The ELM libraries to add.</param>
+    /// <returns>The current instance of <see cref="PackagingToolkit"/>.</returns>
+    internal PackagingToolkit AddReferenceLibraries(IEnumerable<ElmLibrary> elmLibraries)
+    {
+        var builder = _referenceLibrariesById.ToBuilder();
+        var logger = _services.Logger;
+        foreach (var elmLibrary in elmLibraries)
+        {
+            var libraryIdentifier = elmLibrary.VersionedLibraryIdentifier;
+            if (builder.TryAdd(libraryIdentifier, elmLibrary))
+                logger.LogInformation("Adding ELM reference library to PackagingToolkit, which resolves includes but is not packaged: {lib}", libraryIdentifier);
+        }
+
+        _referenceLibrariesById = builder.ToImmutable();
+        return this;
+    }
+
+    /// <summary>
     /// Converts the added packaging inputs to FHIR resources.
     /// </summary>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
@@ -134,18 +162,23 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         var builder = _artifactsById.ToBuilder();
 
         var libraries = builder.Values.Select(conversionRecord => conversionRecord.Input.ElmLibrary);
+        var referenceLibraries =
+            _referenceLibrariesById
+                .Where(reference => !builder.ContainsKey(reference.Key))
+                .Select(reference => reference.Value);
 
-        var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
+        var nodes = libraries.Concat(referenceLibraries).ToLibraryDependencyNodesByVersionedIdentifiers();
 
         var logger = _services.Logger;
 
-        var librariesToPackage =
+        var resolvableLibraries =
             nodes.Values
                  .Where(n =>
                  {
                      if (n.HasMissingDependenciesRecursive)
                      {
-                         logger.LogWarning("Skipping packaging FHIR resources for library {lib} due to missing dependencies.", n.VersionedIdentifier);
+                         if (builder.ContainsKey(CqlVersionedLibraryIdentifier.Parse(n.VersionedIdentifier)))
+                             logger.LogWarning("Skipping packaging FHIR resources for library {lib} due to missing dependencies.", n.VersionedIdentifier);
                          return false;
                      }
 
@@ -153,7 +186,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                  })
                  .Select(n => n.Library!)
                  .ToArray();
-        ElmLibrarySet librarySet = new ElmLibrarySet("", librariesToPackage);
+        ElmLibrarySet librarySet = new ElmLibrarySet("", resolvableLibraries);
 
         var inputArtifactsById =
             builder.Values.ToDictionary(
@@ -164,6 +197,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
             _services.ResourcePackager
                      .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
+                         shouldPackage: library => inputArtifactsById.ContainsKey(library.VersionedLibraryIdentifier),
                          inputsById: id => inputArtifactsById[id],
                          overrideDate: Config.OverrideDate,
                          measureGroupCodeSystem: Config.MeasureGroupCodeSystem,
