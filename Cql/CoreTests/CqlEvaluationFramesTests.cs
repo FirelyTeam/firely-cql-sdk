@@ -36,12 +36,18 @@ public class CqlEvaluationFramesTests
                                  """
                                  library Inner version '1.0.0'
                                  define "Point": point from Interval[1, 5]
+                                 define "Middle": "Point"
                                  define function PointOf(low Integer): point from Interval[low, low + 4]
+                                 define function PointNow(): "Point"
+                                 define function PointAfter(offset Integer): "Point"
                                  """,
                                  """
                                  library Outer version '2.0.0'
                                  include Inner version '1.0.0'
                                  define "Outer": Inner."Point"
+                                 define "Deep": Inner."Middle"
+                                 define "ViaFunction": Inner.PointAfter(1)
+                                 define "ViaParameterlessFunction": Inner.PointNow()
                                  define "Fine": 1
                                  """,
                              }.Select(CqlLibraryString.Parse))
@@ -62,6 +68,51 @@ public class CqlEvaluationFramesTests
         exception.Message.Should().Be(
             "The point from operator requires a unit interval, but was given [1, 5]. "
             + "Thrown while evaluating definition 'Point' of library 'Inner' version '1.0.0'.");
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfAChainOfDefinitions_RecordsEveryDefinitionInnermostFirst()
+    {
+        // Outer."Deep" reads Inner."Middle", which reads Inner."Point" in its own library, which throws.
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "Deep");
+
+        var exception = invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>().Which;
+
+        exception.EvaluationFrames.Should().Equal(
+            new CqlEvaluationFrame("Inner", "1.0.0", "Point"),
+            new CqlEvaluationFrame("Inner", "1.0.0", "Middle"),
+            new CqlEvaluationFrame("Outer", "2.0.0", "Deep"));
+        exception.EvaluationFrames.Select(frame => frame.ToString()).Should().Equal(
+            "definition 'Point' of library 'Inner' version '1.0.0'",
+            "definition 'Middle' of library 'Inner' version '1.0.0'",
+            "definition 'Deep' of library 'Outer' version '2.0.0'");
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionCallingAFunctionWithOperands_ReportsTheFunctionAsItsCaller()
+    {
+        // Outer."ViaFunction" calls Inner.PointAfter(1), which reads Inner."Point", which throws. A function with
+        // operands is not cached, so it has no frame of its own and is reported as the definition that called it.
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "ViaFunction");
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.EvaluationFrames.Should().Equal(
+                  new CqlEvaluationFrame("Inner", "1.0.0", "Point"),
+                  new CqlEvaluationFrame("Outer", "2.0.0", "ViaFunction"));
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionCallingAParameterlessFunction_RecordsTheFunctionToo()
+    {
+        // Outer."ViaParameterlessFunction" calls Inner.PointNow(), which reads Inner."Point", which throws. A function
+        // without operands is cached like a definition, so it has a frame of its own.
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "ViaParameterlessFunction");
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.EvaluationFrames.Should().Equal(
+                  new CqlEvaluationFrame("Inner", "1.0.0", "Point"),
+                  new CqlEvaluationFrame("Inner", "1.0.0", "PointNow"),
+                  new CqlEvaluationFrame("Outer", "2.0.0", "ViaParameterlessFunction"));
     }
 
     [TestMethod]

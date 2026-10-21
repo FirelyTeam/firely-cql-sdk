@@ -12,8 +12,9 @@ namespace Hl7.Cql.Exceptions;
 /// A CQL definition that was being evaluated when an exception was thrown: its name and the library that declares it.
 /// </summary>
 /// <remarks>
-/// <see cref="CqlException.EvaluationFrames"/> lists these innermost first. A function shows up only when the host
-/// invoked it directly; a function called from a definition is reported as that definition.
+/// <see cref="CqlException.EvaluationFrames"/> lists these innermost first. A function without operands is computed
+/// like a definition and has a frame of its own. A function with operands has one only when the host invoked it
+/// directly; called from a definition, it is reported as that definition.
 /// </remarks>
 public sealed record CqlEvaluationFrame
 {

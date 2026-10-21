@@ -11,8 +11,9 @@
 ## Improvements
 
 - **Runtime** — The message of a `CqlException` thrown during evaluation ends with the definition it was thrown in, for
-  example "Thrown while evaluating definition 'Point' of library 'Inner' version '1.0.0'." A function called from a
-  definition is reported as that definition; a function the host invokes directly is reported as itself. Generated C#
+  example "Thrown while evaluating definition 'Point' of library 'Inner' version '1.0.0'." A function without
+  operands has a frame of its own, like a definition; a function with operands has one only when the host invokes it
+  directly, and is otherwise reported as the definition that called it. Generated C#
   and `GeneratorToolVersion` are unchanged. (#812, #1845)
 - **Runtime** — The remarks of `ICqlArithmeticError` gave a catch clause that never matches; they now give
   `catch (CqlException e) when (e.Error is ICqlArithmeticError)`. (#1845)
