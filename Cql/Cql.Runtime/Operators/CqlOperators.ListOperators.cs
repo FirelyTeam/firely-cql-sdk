@@ -9,6 +9,8 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Exceptions;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
@@ -990,8 +992,22 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return (T?)(object?)null;
-            else
-                return source.SingleOrDefault();
+
+            using var enumerator = source.GetEnumerator();
+            if (!enumerator.MoveNext())
+                return default;
+
+            var element = enumerator.Current;
+            if (!enumerator.MoveNext())
+                return element;
+
+            if (!source.TryGetNonEnumeratedCount(out var elementCount))
+            {
+                elementCount = 2;
+                while (enumerator.MoveNext())
+                    elementCount++;
+            }
+            throw new CqlException<CqlSingletonFromMultipleElementsError>(new(elementCount, typeof(T)));
         }
 
 
