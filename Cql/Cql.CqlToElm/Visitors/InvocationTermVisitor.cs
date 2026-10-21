@@ -25,14 +25,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (qualifiers.Length > 0)
             {
                 var term = qualifiers[0].referentialIdentifier().Parse();
-                if (!LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
+                if (!LibraryBuilder.CurrentScope.TryResolveSymbol(term, out _))
                     return new IdentifierRef
                     {
                         name = term,
                     }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
                      .WithLocator(qualifiers[0].Locator());
 
-                var expression = symbol.ToRef(null);
+                var expression = LibraryBuilder.CurrentScope.Ref(MessagingProvider, null, term);
                 if (expression is UsingRef ur)
                     return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                         MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());
@@ -48,8 +48,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 var term = context.referentialIdentifier().Parse();
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                    return rejectLibraryReference(symbol.ToRef(null), context.Locator());
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out _))
+                    return rejectLibraryReference(LibraryBuilder.CurrentScope.Ref(MessagingProvider, null, term), context.Locator());
                 else return new IdentifierRef
                 {
                     name = term,

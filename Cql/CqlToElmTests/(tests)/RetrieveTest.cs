@@ -149,6 +149,18 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Retrieve_RelatedContext_SelfReference_IsReported()
+        {
+            CreateCqlToolkit().MakeLibrary("""
+                library Test version '1.0.0'
+                using FHIR version '4.0.1'
+                context Patient
+                define "Obs": ["Obs" -> Observation]
+                """,
+                "Cannot resolve reference to expression or function a because it results in a circular reference.");
+        }
+
+        [TestMethod]
         public void Retrieve_FilteredByCode()
         {
             var cqlToolkit = CreateCqlToolkit();
