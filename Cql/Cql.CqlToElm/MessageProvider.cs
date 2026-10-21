@@ -59,8 +59,6 @@ namespace Hl7.Cql.CqlToElm
             string.Format(Culture, Messages.CouldNotResolveInLibrary, identifier, library);
         public string CouldNotResolveInCurrent(string identifier) =>
             string.Format(Culture, Messages.CouldNotResolveInCurrent, identifier);
-        public string CouldNotResolveLibrary(string name, string? version) =>
-             string.Format(Culture, Messages.CouldNotFindLibrary, name, version ?? Messages.Latest);
         public string CouldNotResolveModel(string name) =>
              string.Format(Culture, Messages.CouldNotResolveModel, name);
         public string ExpressionCannotBeLibraryRef(string library) =>
@@ -80,6 +78,8 @@ namespace Hl7.Cql.CqlToElm
             Messages.UnexpectedLibraryReference;
         public string UnableToResolveLibrary(string library, string? version = null) =>
           string.Format(Culture, Messages.UnableToResolveLibrary, library, version ?? "latest");
+        public string UnableToResolveReferenceLibrary(string library, string? version, IEnumerable<string> conflictingNames) =>
+          string.Format(Culture, Messages.UnableToResolveReferenceLibrary, library, version ?? "latest", string.Join(", ", conflictingNames.Distinct().Select(name => $"'{name}'")));
 
 
     }

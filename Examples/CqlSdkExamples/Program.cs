@@ -34,6 +34,7 @@ internal partial class Program
             case "350": PoolingLibrarySetInvokers(); return;
             case "400": InvokingFromAllFhirResourcesInDirectory(); return;
             case "410": InvokingFromFhirResourceAndDependenciesInDirectory(); return;
+            case "420": CheckAssembliesInFhirResourcesBeforeInvoking(); return;
             case "500": ExtendingFunctionalityLogLibraryStatements(); return;
         }
         // </codegen-switch>
