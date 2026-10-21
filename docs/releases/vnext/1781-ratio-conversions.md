@@ -14,5 +14,7 @@
 - `CqlRatio.TryParse` accepts the format the specification gives for `ToRatio`: each quantity is an
   optionally signed number with an optional quoted unit, and a colon inside a quoted unit does not
   split the ratio. Unquoted units are rejected and a quantity without a unit is accepted.
-- Generated C# for existing libraries is unchanged (no `GeneratorToolVersion` change) and so are
-  existing evaluation results: these conversions previously failed to translate, compile or run.
+- Generated C# for existing libraries is unchanged, and so are existing evaluation results: these
+  conversions previously failed to translate, compile or run. `GeneratorToolVersion` is `6.2.0.0`: C#
+  generated for `ToRatio` calls the new `ICqlOperators.ConvertStringToRatio`, which earlier runtimes
+  lack. `LibraryInstanceInvoker_6_0` already accepts the new version, so no new invoker is needed.
