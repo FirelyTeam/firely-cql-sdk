@@ -91,6 +91,12 @@ catch (CqlException ex) when (ex.Error is ICqlEvaluationError)
 {
     var frames = ex.EvaluationFrames;         // the CQL definitions being evaluated, innermost first
 }
+
+// Any other exception thrown during evaluation, such as one from a data source, carries the same frames:
+catch (Exception ex)
+{
+    var frames = ex.GetCqlEvaluationFrames();
+}
 ```
 
 ### File structure conventions

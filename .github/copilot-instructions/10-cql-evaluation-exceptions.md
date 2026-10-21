@@ -32,7 +32,7 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 - **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
 - **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-An evaluation error implements **`ICqlEvaluationError`** (`Hl7.Cql.Exceptions`), an `ICqlError`, so a host tells it from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`. `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated when it was thrown, innermost first.
+An evaluation error implements **`ICqlEvaluationError`** (`Hl7.Cql.Exceptions`), an `ICqlError`, so a host tells it from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`. `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated when it was thrown, innermost first, and `GetCqlEvaluationFrames()` reads the same from any other exception.
 
   10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlEvaluationError`, declared without a positional parameter list.
   **IMPORTANT**: The struct must hold the **metadata** (raw facts like a unit name or value) as get-only properties, set by its constructor, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:

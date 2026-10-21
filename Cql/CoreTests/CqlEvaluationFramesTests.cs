@@ -11,6 +11,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
@@ -27,7 +28,7 @@ public class CqlEvaluationFramesTests
 {
     private static readonly CqlVersionedLibraryIdentifier Inner = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Inner", "1.0.0");
     private static readonly CqlVersionedLibraryIdentifier Outer = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Outer", "2.0.0");
-    private static readonly CqlVersionedLibraryIdentifier Deferred = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Deferred", "1.0.0");
+    private static readonly CqlVersionedLibraryIdentifier Retrieves = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Retrieves", "1.0.0");
 
     private static readonly Lazy<LibrarySetInvoker> Invoker = new(() =>
     {
@@ -37,11 +38,13 @@ public class CqlEvaluationFramesTests
                              {
                                  """
                                  library Inner version '1.0.0'
+                                 parameter "PointParameter" default point from Interval[1, 5]
                                  define "Point": point from Interval[1, 5]
                                  define "Middle": "Point"
                                  define function PointOf(low Integer): point from Interval[low, low + 4]
                                  define function PointNow(): "Point"
                                  define function PointAfter(offset Integer): "Point"
+                                 define "ViaParameter": "PointParameter"
                                  """,
                                  """
                                  library Outer version '2.0.0'
@@ -53,7 +56,7 @@ public class CqlEvaluationFramesTests
                                  define "Fine": 1
                                  """,
                                  """
-                                 library Deferred version '1.0.0'
+                                 library Retrieves version '1.0.0'
                                  using FHIR version '4.0.1'
                                  define "Patients": [Patient]
                                  define "Counted": Count("Patients")
@@ -124,6 +127,17 @@ public class CqlEvaluationFramesTests
     }
 
     [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionReadingAFailingParameterDefault_RecordsTheParameterToo()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Inner, "ViaParameter");
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.EvaluationFrames.Should().Equal(
+                  new CqlEvaluationFrame("Inner", "1.0.0", "PointParameter"),
+                  new CqlEvaluationFrame("Inner", "1.0.0", "ViaParameter"));
+    }
+
+    [TestMethod]
     public void InvokeLibraryDefinition_OfAFailingDefinition_RecordsItOnce()
     {
         var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Inner, "Point");
@@ -153,16 +167,27 @@ public class CqlEvaluationFramesTests
     }
 
     [TestMethod]
+    public void InvokeLibraryDefinition_OfARetrieveFromAFailingDataSource_RecordsTheDefinitionOnTheDataSourcesException()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(
+            FhirCqlContext.WithDataSource(new FailingDataSource(failsWhenRead: false)), Retrieves, "Patients");
+
+        var exception = invoke.Should().Throw<InvalidOperationException>().WithMessage(FailingDataSource.Failure).Which;
+
+        exception.GetCqlEvaluationFrames().Should().Equal(new CqlEvaluationFrame("Retrieves", "1.0.0", "Patients"));
+    }
+
+    [TestMethod]
     public void InvokeLibraryDefinition_OfADefinitionReadingADeferredRetrieve_ReportsTheDefinitionReadingIt()
     {
-        // Deferred."Patients" returns the retrieve without reading it, so it has finished before the data source
-        // throws. The failure happens while Deferred."Counted" reads it, and that is the definition reported.
+        // Retrieves."Patients" returns the retrieve without reading it, so it has finished before the data source
+        // throws. The failure happens while Retrieves."Counted" reads it, and that is the definition reported.
         var invoke = () => Invoker.Value.InvokeLibraryDefinition(
-            FhirCqlContext.WithDataSource(new DeferredFailingDataSource()), Deferred, "Counted");
+            FhirCqlContext.WithDataSource(new FailingDataSource(failsWhenRead: true)), Retrieves, "Counted");
 
-        var exception = invoke.Should().Throw<InvalidOperationException>().WithMessage(DeferredFailingDataSource.Failure).Which;
+        var exception = invoke.Should().Throw<InvalidOperationException>().WithMessage(FailingDataSource.Failure).Which;
 
-        CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Deferred", "1.0.0", "Counted"));
+        exception.GetCqlEvaluationFrames().Should().Equal(new CqlEvaluationFrame("Retrieves", "1.0.0", "Counted"));
     }
 
     [TestMethod]
@@ -170,13 +195,13 @@ public class CqlEvaluationFramesTests
     {
         // No definition is being evaluated while the host reads the result, so the exception has no frames.
         var patients = (IEnumerable<object>)Invoker.Value.InvokeLibraryDefinition(
-            FhirCqlContext.WithDataSource(new DeferredFailingDataSource()), Deferred, "Patients")!;
+            FhirCqlContext.WithDataSource(new FailingDataSource(failsWhenRead: true)), Retrieves, "Patients")!;
 
         var read = () => patients.ToList();
 
-        var exception = read.Should().Throw<InvalidOperationException>().WithMessage(DeferredFailingDataSource.Failure).Which;
+        var exception = read.Should().Throw<InvalidOperationException>().WithMessage(FailingDataSource.Failure).Which;
 
-        CqlEvaluationFrames.Get(exception).Should().BeEmpty();
+        exception.GetCqlEvaluationFrames().Should().BeEmpty();
     }
 
     [TestMethod]
@@ -217,14 +242,38 @@ public class CqlEvaluationFramesTests
     }
 
     [TestMethod]
+    public void CqlException_WhoseErrorMessageLacksAFullStop_EndsThatSentenceBeforeNamingTheFrame()
+    {
+        var exception = new KeyNotFoundError("x").ToException();
+
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Def");
+
+        exception.Message.Should().Be(
+            "Object not found by key. Key: 'x'. Thrown while evaluating definition 'Def' of library 'Lib' version '1.0.0'.");
+    }
+
+    [TestMethod]
     public void Record_OnAnyException_KeepsTheFrameInItsData()
     {
         var exception = new InvalidOperationException("not a CQL error");
 
-        CqlEvaluationFrames.Record(exception, ComputeMethodOf(nameof(GeneratedLibrary.Some_Definition_Compute)))
+        CqlEvaluationFrames.Record(exception, SomeDefinitionCompute)
                            .Should().BeFalse("the exception filter must never catch the exception");
 
-        CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Generated", "3.0.0", "Some Definition"));
+        exception.GetCqlEvaluationFrames().Should().Equal(new CqlEvaluationFrame("Generated", "3.0.0", "Some Definition"));
+    }
+
+    [TestMethod]
+    public void Record_OfTheSameComputeMethodAgain_ReusesItsFrame()
+    {
+        var first = new InvalidOperationException();
+        var second = new InvalidOperationException();
+
+        CqlEvaluationFrames.Record(first, SomeDefinitionCompute);
+        CqlEvaluationFrames.Record(second, SomeDefinitionCompute);
+
+        second.GetCqlEvaluationFrames().Single().Should().BeSameAs(first.GetCqlEvaluationFrames().Single(),
+                                                                 "the frame of a compute method is read from its attributes once");
     }
 
     [TestMethod]
@@ -232,7 +281,7 @@ public class CqlEvaluationFramesTests
     {
         var exception = new InvalidOperationException();
 
-        CqlEvaluationFrames.Record(exception, ComputeMethodOf(nameof(GeneratedLibrary.Orphan_Compute)));
+        CqlEvaluationFrames.Record(exception, ReflectionUtility.MethodOf(() => new GeneratedLibrary().Orphan_Compute(null!)));
 
         CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Generated", "3.0.0", "Orphan"));
     }
@@ -242,7 +291,7 @@ public class CqlEvaluationFramesTests
     {
         var exception = new InvalidOperationException();
 
-        CqlEvaluationFrames.Record(exception, typeof(CqlEvaluationFramesTests).GetMethod(nameof(ComputeMethodOf), BindingFlags.NonPublic | BindingFlags.Static)!);
+        CqlEvaluationFrames.Record(exception, ReflectionUtility.MethodOf(() => NotInALibrary_Compute(null!)));
 
         CqlEvaluationFrames.Get(exception).Should().BeEmpty();
     }
@@ -262,11 +311,29 @@ public class CqlEvaluationFramesTests
     }
 
     [TestMethod]
+    public void Record_OnAnExceptionThrownAgainFromAnotherDefinition_AddsTheSecondPassAfterTheFirst()
+    {
+        var exception = new InvalidOperationException();
+
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Failing");
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Invoked");
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Failing");
+
+        exception.GetCqlEvaluationFrames().Should().Equal(
+            new CqlEvaluationFrame("Lib", "1.0.0", "Failing"),
+            new CqlEvaluationFrame("Lib", "1.0.0", "Invoked"),
+            new CqlEvaluationFrame("Lib", "1.0.0", "Failing"));
+    }
+
+    [TestMethod]
     public void CqlEvaluationFrame_WithoutAVersion_LeavesTheVersionOutOfItsDescription() =>
         new CqlEvaluationFrame("Lib", null, "Def").ToString().Should().Be("definition 'Def' of library 'Lib'");
 
-    private static MethodInfo ComputeMethodOf(string name) =>
-        typeof(GeneratedLibrary).GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!;
+    private static readonly MethodInfo SomeDefinitionCompute =
+        ReflectionUtility.MethodOf(() => new GeneratedLibrary().Some_Definition_Compute(null!));
+
+    // Shaped like a compute method, but declared outside a CQL library.
+    private static int NotInALibrary_Compute(object context) => 0;
 
     /// <summary>
     /// The shape the code generator gives a library: a public method per definition, attributed with its CQL name, that
@@ -284,13 +351,16 @@ public class CqlEvaluationFramesTests
     }
 
     /// <summary>
-    /// A data source whose retrieve returns at once and throws only when it is read.
+    /// A data source whose retrieve fails: at once, or, when <paramref name="failsWhenRead"/>, only once the sequence
+    /// it returned is read.
     /// </summary>
-    private sealed class DeferredFailingDataSource : IDataSource
+    private sealed class FailingDataSource(bool failsWhenRead) : IDataSource
     {
-        public const string Failure = "The data source failed while it was read.";
+        public const string Failure = "The data source failed.";
 
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
-            Enumerable.Range(0, 1).Select<int, T>(_ => throw new InvalidOperationException(Failure));
+            failsWhenRead
+                ? Enumerable.Range(0, 1).Select<int, T>(_ => throw new InvalidOperationException(Failure))
+                : throw new InvalidOperationException(Failure);
     }
 }

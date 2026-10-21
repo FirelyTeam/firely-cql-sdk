@@ -12,3 +12,4 @@ override Hl7.Cql.Exceptions.CqlEvaluationFrame.GetHashCode() -> int
 override Hl7.Cql.Exceptions.CqlEvaluationFrame.ToString() -> string!
 static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator !=(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
 static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator ==(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
+static Hl7.Cql.Exceptions.CqlErrorExtensions.GetCqlEvaluationFrames(this System.Exception! exception) -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!

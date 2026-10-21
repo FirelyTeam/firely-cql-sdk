@@ -34,18 +34,25 @@ public abstract class CqlException : Exception
     /// while a definition was being evaluated.
     /// </summary>
     /// <remarks>
-    /// A definition is in the list while it computes its value. A value can be a sequence that is only read later,
-    /// such as a retrieve from a data source that reads lazily. An exception thrown while that sequence is read names
-    /// the definition reading it, or has no frames when the host reads it.
+    /// The same list as <see cref="CqlErrorExtensions.GetCqlEvaluationFrames"/> returns, which describes when a
+    /// definition is in it.
     /// </remarks>
-    public IReadOnlyList<CqlEvaluationFrame> EvaluationFrames => CqlEvaluationFrames.Get(this);
+    public IReadOnlyList<CqlEvaluationFrame> EvaluationFrames => this.GetCqlEvaluationFrames();
 
     /// <inheritdoc/>
-    /// <remarks>The message names the innermost of the <see cref="EvaluationFrames"/>, when there are any.</remarks>
+    /// <remarks>
+    /// The message names the innermost of the <see cref="EvaluationFrames"/>, when there are any. That holds for every
+    /// <see cref="CqlException"/> thrown while a definition was being evaluated, not only one whose
+    /// <see cref="Error"/> is an <see cref="ICqlEvaluationError"/>.
+    /// </remarks>
     public override string Message =>
         EvaluationFrames is [var innermost, ..]
-            ? $"{Error.GetMessage()} Thrown while evaluating {innermost}."
+            ? $"{EndSentence(Error.GetMessage())} Thrown while evaluating {innermost}."
             : Error.GetMessage();
+
+    // Ends the error's message with a full stop before the frame is appended, unless it already ends a sentence.
+    private static string EndSentence(string message) =>
+        message is [.., '.' or '!' or '?'] ? message : message + ".";
 }
 
 /// <summary>

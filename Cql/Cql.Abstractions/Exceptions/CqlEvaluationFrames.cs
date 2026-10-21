@@ -18,11 +18,21 @@ namespace Hl7.Cql.Exceptions;
 /// exception propagates, before any stack unwinds, and never catches it, so the exception reaches the host unchanged.
 /// An exception thrown inside a filter is discarded by the runtime, and the filter then counts as
 /// <see langword="false"/>, so recording can never replace the exception being recorded on. The frames are kept in
-/// <see cref="Exception.Data"/>, so any exception carries them, not only a <see cref="CqlException"/>.
+/// <see cref="Exception.Data"/>, so any exception carries them, not only a <see cref="CqlException"/>, and
+/// <see cref="CqlErrorExtensions.GetCqlEvaluationFrames"/> reads them.
+/// <para>
+/// A frame is skipped only when it equals the last one recorded. An exception instance that is thrown again, such as
+/// a failure a host caches and rethrows from another definition, gets the frames of its second pass after those of
+/// its first. Like <see cref="Exception.Data"/> itself, the list is not safe for one instance that propagates on two
+/// threads at once.
+/// </para>
 /// </remarks>
 internal static class CqlEvaluationFrames
 {
     private const string DataKey = "Hl7.Cql.EvaluationFrames";
+
+    // Weakly keyed, so that a cached frame never keeps a library loaded in a collectible AssemblyLoadContext alive.
+    private static readonly ConditionalWeakTable<MethodInfo, CqlEvaluationFrame?> FramesByComputeMethod = new();
 
     /// <summary>
     /// The suffix of the private method a generated library computes a cached definition with: the public method
@@ -32,12 +42,12 @@ internal static class CqlEvaluationFrames
 
     /// <summary>
     /// Records the definition that <paramref name="computeMethod"/> computes, read from the attributes of the
-    /// generated library that declares it. A method that is not one of a CQL library records nothing.
+    /// generated library that declares it, once per method. A method that is not one of a CQL library records nothing.
     /// </summary>
     /// <returns><see langword="false"/>, so that the exception filter calling this never catches the exception.</returns>
     public static bool Record(Exception exception, MethodInfo computeMethod)
     {
-        if (FrameOf(computeMethod) is { } frame)
+        if (FramesByComputeMethod.GetValue(computeMethod, FrameOf) is { } frame)
             Add(exception, frame);
         return false;
     }
@@ -73,7 +83,7 @@ internal static class CqlEvaluationFrames
     private static CqlEvaluationFrame? FrameOf(MethodInfo computeMethod)
     {
         if (computeMethod.DeclaringType is not { } libraryType
-            || libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { } library)
+            || libraryType.GetCustomAttributes<CqlLibraryAttribute>().FirstOrDefault() is not { } library)
             return null;
 
         var methodName = computeMethod.Name;
