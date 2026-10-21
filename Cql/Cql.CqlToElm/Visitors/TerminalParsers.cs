@@ -7,6 +7,7 @@
  */
 
 using Antlr4.Runtime.Tree;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
@@ -75,8 +76,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var decimalValue))
                 throw new InvalidOperationException($"Value {value} is not a valid decimal.");
 
-            // This is either a unit, or a datetimeprecision (which we parse as text here)
-            var unitText = context.unit().STRING().ParseString() ?? context.unit().GetText();
+            // This is either a unit, or a datetimeprecision (which we parse as text here).
+            // A quantity in a ratio literal may omit its unit (1:128). CQL 1.5.3, Appendix B - CQL Reference,
+            // Types, "Quantity": "When a quantity value has no unit specified, operations are performed with
+            // the default UCUM unit ('1')."
+            var unitText = context.unit() is { } unit
+                ? unit.STRING().ParseString() ?? unit.GetText()
+                : UCUMUnits.Default;
 
             // We should actually validate the range of units here, but for now we just return it as-is.
             return (decimalValue, unitText!);

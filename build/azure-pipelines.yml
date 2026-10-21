@@ -25,6 +25,12 @@ trigger:
     - refs/tags/v*
     - spike*
 
+pr:
+  branches:
+    include:
+    - '*'
+  drafts: false
+
 stages:
 - template: check-skip-stage.yml@templates
   parameters:

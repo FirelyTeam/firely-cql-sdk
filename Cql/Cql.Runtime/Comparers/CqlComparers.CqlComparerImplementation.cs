@@ -31,6 +31,13 @@ partial class CqlComparers : CqlComparer<object>
     /// </summary>
     protected override bool DefaultEqualityImpliesEquality => false;
 
+    /// <summary>
+    /// Equivalence is decided by the comparer registered for the values' type, since a type's own
+    /// equality may consider two values equal that are not equivalent in CQL. A value of a type with
+    /// no registered comparer is still equivalent to a value its own equality considers equal.
+    /// </summary>
+    protected override bool DefaultEqualityImpliesEquivalence => false;
+
     protected override int? CompareValues(
         object x,
         object y,
@@ -142,6 +149,9 @@ partial class CqlComparers : CqlComparer<object>
 
         if (comparer != null)
             return comparer.Equivalent(x, y, precision);
+
+        if (EqualityComparer<object>.Default.Equals(x, y))
+            return true;
 
         throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
     }
