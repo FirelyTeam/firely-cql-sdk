@@ -227,8 +227,8 @@ namespace Hl7.Cql.Operators
             return negative ? -completion : completion;
         }
 
-        /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>).</summary>
-        private static decimal UnitAtScale(byte scale) => new(1, 0, 0, false, scale);
+        /// <summary>The value 1 at the given number of decimals (10 to the power of minus <paramref name="scale"/>), e.g. a scale of 2 yields 0.01.</summary>
+        private static decimal UnitAtScale(int scale) => new(1, 0, 0, false, (byte)scale);
 
         /// <summary>The value 0 at the given number of decimals; adding it sets a result's scale.</summary>
         private static decimal ZeroAtScale(byte scale) => new(0, 0, 0, false, scale);
