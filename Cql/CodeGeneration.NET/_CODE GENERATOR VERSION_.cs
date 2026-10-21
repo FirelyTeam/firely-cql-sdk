@@ -28,7 +28,7 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// Whoever raises the invocation toolkit's minimum supported version above 6.0.3.0 also removes
     /// <see cref="LegacyGeneratorToolName"/>.
     /// </remarks>
-    internal const string GeneratorToolVersion = "6.1.0.0";
+    internal const string GeneratorToolVersion = "6.2.0.0";
 
     /// <summary>
     /// Gets the name of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
