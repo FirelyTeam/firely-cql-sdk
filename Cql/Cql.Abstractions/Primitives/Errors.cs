@@ -82,12 +82,22 @@ public readonly record struct CqlPointFromNonUnitIntervalError(
 /// Per the CQL specification (§9.B, Singleton From), "If the list contains more than one element,
 /// a run-time error is thrown."
 /// </remarks>
-/// <param name="ElementCount">The number of elements in the list.</param>
-/// <param name="ElementType">The declared element type of the list.</param>
-public readonly record struct CqlSingletonFromMultipleElementsError(
-    int ElementCount,
-    Type ElementType) : ICqlError
+public readonly record struct CqlSingletonFromMultipleElementsError : ICqlError
 {
+    internal CqlSingletonFromMultipleElementsError(
+        int elementCount,
+        Type elementType)
+    {
+        ElementCount = elementCount;
+        ElementType = elementType;
+    }
+
+    /// <summary>The number of elements in the list.</summary>
+    public int ElementCount { get; }
+
+    /// <summary>The declared element type of the list.</summary>
+    public Type ElementType { get; }
+
     /// <inheritdoc/>
     public string GetMessage() =>
         "The singleton from operator requires a list with at most one element, " +
