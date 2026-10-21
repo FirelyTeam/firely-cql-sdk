@@ -11,6 +11,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -4860,6 +4861,46 @@ namespace CoreTests
         {
             var ops = GetNewContext().Operators;
             Assert.AreEqual(7, ops.SingletonFrom<int?>([7]));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_IsCaughtAsAnEvaluationError()
+        {
+            var ops = GetNewContext().Operators;
+            ICqlError? caught = null;
+            try
+            {
+                ops.SingletonFrom<int?>([1, 2]);
+            }
+            catch (CqlException e) when (e.Error is ICqlEvaluationError)
+            {
+                caught = e.Error;
+            }
+
+            Assert.IsInstanceOfType<CqlSingletonFromMultipleElementsError>(caught);
+        }
+
+        [TestMethod]
+        [DataRow(typeof(CqlUcumYearArithmeticError))]
+        [DataRow(typeof(CqlUcumMonthArithmeticError))]
+        [DataRow(typeof(CqlPointFromNonUnitIntervalError))]
+        [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
+        public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
+            Assert.IsTrue(typeof(ICqlEvaluationError).IsAssignableFrom(errorType), errorType.Name);
+
+        [TestMethod]
+        public void PublicErrorsOfPrimitivesAndOperators_AllImplementICqlEvaluationError()
+        {
+            var errorTypes = new[] { typeof(CqlPointFromNonUnitIntervalError).Assembly, typeof(CqlSingletonFromMultipleElementsError).Assembly }
+                .SelectMany(assembly => assembly.GetExportedTypes())
+                .Where(type => type is { IsValueType: true, Namespace: "Hl7.Cql.Primitives" or "Hl7.Cql.Operators" })
+                .Where(typeof(ICqlError).IsAssignableFrom)
+                .ToList();
+
+            Assert.IsTrue(errorTypes.Count >= 4, $"Found only {errorTypes.Count} public errors.");
+            CollectionAssert.AreEqual(
+                Array.Empty<Type>(),
+                errorTypes.Where(type => !typeof(ICqlEvaluationError).IsAssignableFrom(type)).ToArray());
         }
 
         [TestMethod]
