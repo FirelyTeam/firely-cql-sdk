@@ -29,3 +29,14 @@ static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator !=(Hl
 static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError right) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementCount.get -> int
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementType.get -> System.Type!
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError other) -> bool
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetMessage() -> string!
+override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator !=(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ToString() -> string
