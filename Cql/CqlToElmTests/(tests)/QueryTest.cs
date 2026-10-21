@@ -488,6 +488,83 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void AggregateDistinct_MultiSourceQuery_AggregatesEachDistinctTupleOnce()
+        {
+            // The cross join yields 8 tuples, of which only { X: 1, Y: 1 } and { X: 2, Y: 1 } are distinct.
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "from ({1, 2, 2, 1}) X, ({1, 1}) Y aggregate distinct Agg starting 0: Agg + X + Y");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.source.Should().HaveCount(2);
+            query.aggregate.distinct.Should().BeTrue();
+            query.Should().HaveType(SystemTypes.IntegerType);
+            Run<int?>(query, lib).Should().Be((1 + 1) + (2 + 1));
+        }
+
+        [TestMethod]
+        public void Aggregate_MultiSourceQuery_WithoutDistinct_AggregatesEveryTuple()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "from ({1, 2, 2, 1}) X, ({1, 1}) Y aggregate Agg starting 0: Agg + X + Y");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.aggregate.distinct.Should().BeFalse();
+            Run<int?>(query, lib).Should().Be(2 * (1 + 2 + 2 + 1) + 4 * (1 + 1));
+        }
+
+        [TestMethod]
+        public void AggregateDistinct_MultiSourceQueryOfMixedTypes_CountsDistinctTuples()
+        {
+            // Tuples { S: 'a', N: 1 } and { S: 'b', N: 1 } each occur several times in the cross join.
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "from ({'a', 'b', 'a'}) S, ({1, 1}) N aggregate distinct Count starting 0: Count + 1");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.source.Should().HaveCount(2);
+            query.Should().HaveType(SystemTypes.IntegerType);
+            Run<int?>(query, lib).Should().Be(2);
+        }
+
+        [TestMethod]
+        public void AggregateDistinct_ResultTypeDiffersFromElementType_CountsDistinctItems()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "({'a', 'b', 'a', 'c', 'b'}) S aggregate distinct Count starting 0: Count + 1");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.aggregate.distinct.Should().BeTrue();
+            query.Should().HaveType(SystemTypes.IntegerType);
+            Run<int?>(query, lib).Should().Be(3);
+        }
+
+        [TestMethod]
+        public void AggregateDistinct_DecimalResultOverIntegerItems_SumsDistinctItems()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "({1, 1, 2, 3, 3}) N aggregate distinct R starting 0.5: R + N");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.Should().HaveType(SystemTypes.DecimalType);
+            Run<decimal?>(query, lib).Should().Be(6.5m);
+        }
+
+        [TestMethod]
+        public void AggregateDistinct_ListAccumulator_RemovesDuplicateItemsBeforeAggregating()
+        {
+            // Each item is appended twice. Distinct items before aggregation give { 1, 1, 2, 2 };
+            // a distinct over the aggregated result would instead give { 1, 2 }.
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "({1, 2, 1}) N aggregate distinct R starting (List<Integer>{}): Flatten({ R, { N, N } })");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 1, 2, 2);
+        }
+
+        [TestMethod]
+        public void Aggregate_ListAccumulator_WithoutDistinct_AggregatesEveryItem()
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                "({1, 2, 1}) N aggregate R starting (List<Integer>{}): Flatten({ R, { N, N } })");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(1, 1, 2, 2, 1, 1);
+        }
+
+        [TestMethod]
         public void Aggregate_FactorialNoStarting()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""

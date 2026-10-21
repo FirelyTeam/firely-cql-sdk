@@ -78,6 +78,8 @@ namespace Hl7.Cql.CqlToElm
             Messages.UnexpectedLibraryReference;
         public string UnableToResolveLibrary(string library, string? version = null) =>
           string.Format(Culture, Messages.UnableToResolveLibrary, library, version ?? "latest");
+        public string UnableToResolveReferenceLibrary(string library, string? version, IEnumerable<string> conflictingNames) =>
+          string.Format(Culture, Messages.UnableToResolveReferenceLibrary, library, version ?? "latest", string.Join(", ", conflictingNames.Distinct().Select(name => $"'{name}'")));
 
 
     }

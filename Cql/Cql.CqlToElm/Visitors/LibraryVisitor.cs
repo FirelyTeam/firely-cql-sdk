@@ -39,6 +39,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 : null;
         }
 
+        /// <summary>
+        /// Creates a builder that resolves references into a library available only as ELM.
+        /// </summary>
+        internal LibraryBuilder CreateReferenceBuilder(
+            ElmLibrary elmLibrary,
+            out IReadOnlyList<string> conflictingNames) =>
+            LibraryBuilder.CreateReference(elmLibrary, SystemLibrary, LocalIdentifierProvider, out conflictingNames);
+
         // libraryDefinition? definition* statement* EOF;
         // definition : usingDefinition | includeDefinition | codesystemDefinition  | valuesetDefinition  | codeDefinition
         //     | conceptDefinition | parameterDefinition ;
@@ -380,6 +388,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         accessLevel = access,
                         name = name,
                         fluent = fluent,
+                        fluentSpecified = fluent,
                         operand = signature,
                     }.WithLocator(context.Locator());
 
