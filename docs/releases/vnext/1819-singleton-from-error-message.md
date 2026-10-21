@@ -3,7 +3,8 @@
 - **`singleton from` on a list with more than one element throws a `CqlException`.** It threw the
   `InvalidOperationException` of LINQ's `SingleOrDefault`, and throws a
   `CqlException<CqlSingletonFromMultipleElementsError>` instead. A caller that catches `InvalidOperationException`
-  around evaluation no longer catches this error; catch `CqlException` instead. The error itself is unchanged: the
+  around evaluation no longer catches this error; catch `CqlException` instead. The error is an
+  `ICqlEvaluationError`, so `catch (CqlException e) when (e.Error is ICqlEvaluationError)` recognizes it. The error itself is unchanged: the
   specification requires it in §9.B, section "Singleton From" ("If the list contains more than one element, a run-time
   error is thrown."). The `ICqlOperators` signatures, the generated C# and `GeneratorToolVersion` do not change.
   (#1819)
@@ -18,5 +19,5 @@
 
 ## New Public API
 
-- `Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError`, the `ICqlError` thrown by `singleton from` on a list
+- `Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError`, the `ICqlEvaluationError` thrown by `singleton from` on a list
   with more than one element, where an `InvalidOperationException` was thrown before. (#1819)

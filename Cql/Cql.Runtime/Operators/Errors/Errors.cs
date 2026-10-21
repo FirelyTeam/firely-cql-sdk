@@ -12,14 +12,14 @@ using Hl7.Cql.Primitives;
 namespace Hl7.Cql.Operators.Errors;
 
 /// <summary>
-/// An <see cref="ICqlError"/> raised when the <c>singleton from</c> operator is applied to a
+/// An <see cref="ICqlEvaluationError"/> raised when the <c>singleton from</c> operator is applied to a
 /// list with more than one element.
 /// </summary>
 /// <remarks>
 /// Per the CQL specification (§9.B, Singleton From), "If the list contains more than one element,
 /// a run-time error is thrown."
 /// </remarks>
-public readonly record struct CqlSingletonFromMultipleElementsError : ICqlError
+public readonly record struct CqlSingletonFromMultipleElementsError : ICqlEvaluationError
 {
     internal CqlSingletonFromMultipleElementsError(
         int elementCount,

@@ -18,6 +18,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
@@ -229,6 +230,7 @@ public class CqlEvaluationFramesTests
     [DataRow(typeof(CqlUcumYearArithmeticError))]
     [DataRow(typeof(CqlUcumMonthArithmeticError))]
     [DataRow(typeof(ICqlArithmeticError))]
+    [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
     public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
         errorType.Should().BeAssignableTo<ICqlEvaluationError>();
 

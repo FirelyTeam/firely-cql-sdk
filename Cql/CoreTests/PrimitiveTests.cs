@@ -4878,6 +4878,23 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_IsCaughtByTheHostPatternForEvaluationErrors()
+        {
+            var ops = GetNewContext().Operators;
+            ICqlError? caught = null;
+            try
+            {
+                ops.SingletonFrom<int?>([1, 2]);
+            }
+            catch (CqlException e) when (e.Error is ICqlEvaluationError)
+            {
+                caught = e.Error;
+            }
+
+            Assert.AreEqual(new CqlSingletonFromMultipleElementsError(2, typeof(int?)), caught);
+        }
+
+        [TestMethod]
         public void SingletonFrom_MoreThanOneElementFromAnIterator_CountsEveryElement()
         {
             var ops = GetNewContext().Operators;
