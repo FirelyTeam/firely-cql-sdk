@@ -11,6 +11,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -4900,6 +4901,97 @@ namespace CoreTests
         {
             var ops = GetNewContext().Operators;
             Assert.ThrowsException<CqlException<CqlPointFromNonUnitIntervalError>>(() => ops.PointFrom(MaxInterval));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_NullList_ReturnsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.SingletonFrom<int?>(null));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_EmptyList_ReturnsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.SingletonFrom<int?>([]));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_OneElement_ReturnsTheElement()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(7, ops.SingletonFrom<int?>([7]));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_SignalsAnErrorNamingTheCountAndType()
+        {
+            var ops = GetNewContext().Operators;
+            var exception = Assert.ThrowsExactly<CqlException<CqlSingletonFromMultipleElementsError>>(
+                () => ops.SingletonFrom<CqlCode>([new("1", "s"), new("2", "s"), new("3", "s")]));
+            Assert.AreEqual(new CqlSingletonFromMultipleElementsError(3, typeof(CqlCode)), exception.Error);
+            Assert.AreEqual(
+                "The singleton from operator requires a list with at most one element, " +
+                "but was given a list of 3 Code elements. " +
+                "Use First or Last to take one element, or filter the list so that at most one element remains.",
+                exception.Message);
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_IsCaughtByTheHostPatternForEvaluationErrors()
+        {
+            var ops = GetNewContext().Operators;
+            ICqlError? caught = null;
+            try
+            {
+                ops.SingletonFrom<int?>([1, 2]);
+            }
+            catch (CqlException e) when (e.Error is ICqlEvaluationError)
+            {
+                caught = e.Error;
+            }
+
+            Assert.AreEqual(new CqlSingletonFromMultipleElementsError(2, typeof(int?)), caught);
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElementFromAnIterator_CountsEveryElement()
+        {
+            var ops = GetNewContext().Operators;
+            var exception = Assert.ThrowsExactly<CqlException<CqlSingletonFromMultipleElementsError>>(
+                () => ops.SingletonFrom(YieldIntegers(4)));
+            Assert.AreEqual(4, exception.Error.ElementCount);
+
+            static IEnumerable<int?> YieldIntegers(int count)
+            {
+                for (var i = 0; i < count; i++)
+                    yield return i;
+            }
+        }
+
+        [TestMethod]
+        [DataRow(typeof(int?), "Integer")]
+        [DataRow(typeof(long?), "Long")]
+        [DataRow(typeof(decimal?), "Decimal")]
+        [DataRow(typeof(bool?), "Boolean")]
+        [DataRow(typeof(string), "String")]
+        [DataRow(typeof(object), "Any")]
+        [DataRow(typeof(CqlConcept), "Concept")]
+        [DataRow(typeof(CqlDateTime), "DateTime")]
+        [DataRow(typeof(CqlInterval<CqlDateTime>), "Interval<DateTime>")]
+        [DataRow(typeof(IEnumerable<int?>), "List<Integer>")]
+        [DataRow(typeof(List<CqlCode>), "List<Code>")]
+        [DataRow(typeof(IReadOnlyList<CqlCode>), "List<Code>")]
+        [DataRow(typeof(int?[]), "List<Integer>")]
+        [DataRow(typeof(ValueTuple<CqlTupleMetadata, int?>), "Tuple")]
+        [DataRow(typeof(Hl7.Fhir.Model.Condition), "Condition")]
+        [DataRow(typeof(Hl7.Fhir.Model.Observation.ComponentComponent), "Observation.ComponentComponent")]
+        [DataRow(typeof(Hl7.Fhir.Model.ObservationStatus?), "ObservationStatus")]
+        public void SingletonFromMultipleElementsError_GetMessage_NamesTheCqlElementType(Type elementType, string expectedName)
+        {
+            var message = new CqlSingletonFromMultipleElementsError(2, elementType).GetMessage();
+            StringAssert.Contains(message, $"a list of 2 {expectedName} elements.");
         }
 
         [TestMethod]
