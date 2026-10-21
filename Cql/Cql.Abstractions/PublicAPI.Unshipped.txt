@@ -13,3 +13,9 @@ override Hl7.Cql.Exceptions.CqlEvaluationFrame.ToString() -> string!
 static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator !=(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
 static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator ==(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
 static Hl7.Cql.Exceptions.CqlErrorExtensions.GetCqlEvaluationFrames(this System.Exception! exception) -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!
+*REMOVED*Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string! Version) -> void
+*REMOVED*Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string!
+*REMOVED*Hl7.Cql.Abstractions.ILibrary.Version.get -> string!
+Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string? Version) -> void
+Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string?
+Hl7.Cql.Abstractions.ILibrary.Version.get -> string?

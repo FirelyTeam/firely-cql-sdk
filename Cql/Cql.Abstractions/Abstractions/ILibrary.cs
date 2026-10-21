@@ -19,9 +19,9 @@ public interface ILibrary
     string Name { get; }
 
     /// <summary>
-    /// Gets the version of the library.
+    /// Gets the version of the library, or <see langword="null"/> for a library without one.
     /// </summary>
-    string Version { get; }
+    string? Version { get; }
 
     /// <summary>
     /// Gets the dependencies of the library.

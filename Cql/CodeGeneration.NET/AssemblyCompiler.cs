@@ -420,13 +420,19 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static string CreateAssemblyInfoSourceString(ElmLibrary library)
         {
             var (name, version) = library.VersionedLibraryIdentifier;
+            var versionText = version?.ToString();
 
-            var text = $"""
-                        [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
-                        [assembly: System.Reflection.AssemblyVersion("{version}")]
-                        """;
+            var text = $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({name.ToString().QuoteString()}, {versionText.QuoteOrNullString()})]";
+            if (IsAssemblyVersion(versionText))
+                text += $"{Environment.NewLine}[assembly: System.Reflection.AssemblyVersion({versionText!.QuoteString()})]";
             return text;
         }
+
+        // AssemblyVersion takes only major[.minor[.build[.revision]]], each part below 65535. A library's version can
+        // be any string, or none.
+        private static bool IsAssemblyVersion(string? version) =>
+            Version.TryParse(version, out var parsed)
+            && parsed is { Major: < ushort.MaxValue, Minor: < ushort.MaxValue, Build: < ushort.MaxValue, Revision: < ushort.MaxValue };
 
         private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {

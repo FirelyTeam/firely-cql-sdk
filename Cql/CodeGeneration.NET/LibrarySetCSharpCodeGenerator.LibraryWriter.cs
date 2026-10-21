@@ -107,7 +107,7 @@ partial class LibrarySetCSharpCodeGenerator
                  #region ILibrary Implementation
 
                  public string Name => {LibraryName!.Identifier.ToString().QuoteString()};
-                 public string Version => {LibraryName!.Version?.ToString().QuoteOrNullString()};
+                 public string Version => {(LibraryName!.Version?.ToString()).QuoteOrNullString()};
                  """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
@@ -227,9 +227,7 @@ partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             ISB.AppendLine(
-                LibraryName!.Version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
-                    : $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()})]");
+                $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {(LibraryName!.Version?.ToString()).QuoteOrNullString()})]");
 
             ISB.AppendLine(
                 $$"""
