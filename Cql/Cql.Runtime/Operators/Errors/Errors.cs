@@ -9,7 +9,7 @@
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Operators;
+namespace Hl7.Cql.Operators.Errors;
 
 /// <summary>
 /// An <see cref="ICqlError"/> raised when the <c>singleton from</c> operator is applied to a

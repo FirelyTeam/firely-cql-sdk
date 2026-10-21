@@ -1,12 +1,12 @@
 ﻿#nullable enable
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.ElementCount.get -> int
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.ElementType.get -> System.Type!
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.Equals(Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError other) -> bool
-Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.GetMessage() -> string!
-override Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.GetHashCode() -> int
-static Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.operator !=(Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError right) -> bool
-static Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError right) -> bool
-~override Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
-~override Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementCount.get -> int
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementType.get -> System.Type!
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError other) -> bool
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetMessage() -> string!
+override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator !=(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ToString() -> string

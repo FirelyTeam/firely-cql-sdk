@@ -9,7 +9,7 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Operators;
+using Hl7.Cql.Operators.Errors;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

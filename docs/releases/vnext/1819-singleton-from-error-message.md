@@ -18,5 +18,5 @@
 
 ## New Public API
 
-- `Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError`, the `ICqlError` thrown by `singleton from` on a list
+- `Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError`, the `ICqlError` thrown by `singleton from` on a list
   with more than one element, where an `InvalidOperationException` was thrown before. (#1819)
