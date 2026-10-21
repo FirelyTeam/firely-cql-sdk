@@ -10,6 +10,7 @@
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Primitives.Errors;
 
 namespace CoreTests;
 

@@ -49,35 +49,6 @@ public readonly record struct CqlUcumMonthArithmeticError : ICqlArithmeticError
 }
 
 /// <summary>
-/// An <see cref="ICqlArithmeticError"/> raised when a Date, DateTime or Time value is shifted by a quantity whose unit is
-/// not a time-valued unit for that type.
-/// </summary>
-/// <remarks>
-/// Per the CQL specification (Appendix B - CQL Reference, section "Date and Time Operators", "Add" and "Subtract"),
-/// "For Date values, the quantity unit must be one of: years, months, weeks, or days", "For DateTime values, the
-/// quantity unit must be one of: years, months, weeks, days, hours, minutes, seconds, or milliseconds" and "For Time
-/// values, the quantity unit must be one of: hours, minutes, seconds, or milliseconds"; section "Interval Operators",
-/// "Expand", requires for "Date-, DateTime-, and Time-valued intervals [...] a quantity with a temporal unit". Neither
-/// section defines a result for any other unit, so such a unit signals an error to the calling environment.
-/// </remarks>
-/// <param name="Unit">The unit of the quantity.</param>
-/// <param name="Type">The CQL type of the value being shifted: <c>Date</c>, <c>DateTime</c> or <c>Time</c>.</param>
-public readonly record struct CqlUnsupportedTemporalUnitError(
-    string Unit,
-    string Type) : ICqlArithmeticError
-{
-    /// <inheritdoc/>
-    public string GetMessage() =>
-        $"The quantity unit '{Unit}' is not supported in {Type} arithmetic. " + Type switch
-        {
-            "Date" => "For Date values, the quantity unit must be one of: years, months, weeks, or days.",
-            "DateTime" => "For DateTime values, the quantity unit must be one of: years, months, weeks, days, hours, minutes, seconds, or milliseconds.",
-            "Time" => "For Time values, the quantity unit must be one of: hours, minutes, seconds, or milliseconds.",
-            _ => "The quantity unit must be a time-valued unit.",
-        };
-}
-
-/// <summary>
 /// An <see cref="ICqlError"/> raised when the <c>point from</c> operator is applied to an
 /// interval that is not a unit interval.
 /// </summary>
@@ -176,24 +147,4 @@ public readonly record struct CqlExpandFractionalPerError(
             $"Expanding an interval of {PointType} per {PerValue} '{PerUnit ?? "1"}' would produce Decimal points, which the {PointType} overloads of expand do not support: ")
         + "the specification defines the result as \"the list of points covering the range of the given interval\" in steps of size per, "
         + "and \"for numeric intervals, adding the per to the lower boundary produces a more precise value\".";
-}
-
-/// <summary>
-/// An <see cref="ICqlError"/> raised when the <c>singleton from</c> operator is applied to a list of more than one
-/// element.
-/// </summary>
-/// <remarks>
-/// Per the CQL specification (Appendix B - CQL Reference, section "List Operators", "Singleton From"), "If the list
-/// contains more than one element, a run-time error is thrown."
-/// </remarks>
-/// <param name="First">The first element of the list.</param>
-/// <param name="Second">The second element of the list.</param>
-public readonly record struct CqlSingletonFromMultipleElementsError(
-    object? First,
-    object? Second) : ICqlError
-{
-    /// <inheritdoc/>
-    public string GetMessage() =>
-        "The singleton from operator requires a list of at most one element, but was given a list starting with "
-        + $"{First?.ToString() ?? "null"} and {Second?.ToString() ?? "null"}.";
 }
