@@ -9,6 +9,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Exceptions;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators

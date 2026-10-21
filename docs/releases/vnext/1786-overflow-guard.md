@@ -1,3 +1,27 @@
+## Potentially Breaking
+
+- The `DateTime` operator given a timezone offset outside `-13.00` to `14.00` hours, or one that is not a whole number
+  of minutes, throws `CqlException<CqlInvalidDateTimeComponentsError>` instead of returning a DateTime with another
+  offset (`24` became `+00:00`, and `0.001` was truncated to `+00:00`).
+- The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a year outside
+  0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
+  represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
+  `ArgumentOutOfRangeException` or `OverflowException`.
+- `expand` of an Integer or Long interval, or a list of them, by a `per` with a decimal portion (such as
+  `expand { Interval[10, 10] } per 0.1`) signals a CQL error, `CqlException<CqlExpandFractionalPerError>`, instead of a
+  .NET `NotSupportedException`: the specification makes those points Decimal, which these overloads cannot return.
+
+A host that catches `ArgumentException`, `ArgumentOutOfRangeException`, `OverflowException` or `NotSupportedException`
+around evaluation no longer catches these errors. Catch `CqlException` instead, or
+`catch (CqlException e) when (e.Error is ICqlEvaluationError)` for every error the specification signals to the
+calling environment.
+
+## New Public API
+
+- `Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError` and `Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError`,
+  the `ICqlEvaluationError` values carried by the exceptions above. The first holds the `Type` and the components it was
+  given; the second the `PerValue`, `PerUnit` and `PointType`.
+
 ## Fixes
 
 - Operations whose result cannot be represented evaluate to `null` instead of ending evaluation with a .NET exception, as
@@ -44,16 +68,5 @@
 - `*` and `/` of two Decimals whose nonzero result is too small to represent (such as
   `0.0000000000000000000000000001 * 0.1`), and the quantity and `GeometricMean` results built on them, are `null`
   instead of `0`; `div` of such operands is still `0`.
-- The `DateTime` operator given a timezone offset outside `-13.00` to `14.00` hours, or one that is not a whole number
-  of minutes, throws `CqlException<CqlInvalidDateTimeComponentsError>` instead of returning a DateTime with another
-  offset (`24` became `+00:00`, and `0.001` was truncated to `+00:00`).
-- The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a year outside
-  0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
-  represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
-  `ArgumentOutOfRangeException` or `OverflowException`.
-- `expand` of an Integer or Long interval, or a list of them, by a `per` with a decimal portion (such as
-  `expand { Interval[10, 10] } per 0.1`) signals a CQL error, `CqlException<CqlExpandFractionalPerError>`, instead of a
-  .NET `NotSupportedException`: the specification makes those points Decimal, which these overloads cannot return.
 
-This changes CQL evaluation results for the affected expressions, which per [versioning.md](../../versioning.md) forces
-a **MESO** bump. Generated C# and `GeneratorToolVersion` are unchanged.
+This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
