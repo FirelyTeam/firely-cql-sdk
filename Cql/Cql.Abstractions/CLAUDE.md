@@ -2,13 +2,10 @@
 
 See the root [CLAUDE.md](../../CLAUDE.md) for when to use `CqlException<TError>` vs plain .NET exceptions.
 
-`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, and `CqlErrorExtensions` live under `Exceptions/`, namespace `Hl7.Cql.Exceptions`.
+Error types follow one rule across the repository:
 
-This project uses **one `Errors.cs` file per direct folder**, holding every `ICqlError` struct thrown by code in that folder. The namespace matches the folder's namespace:
+- **`Hl7.Cql.Exceptions`** (`Exceptions/`) keeps the exception machinery: `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`, `CqlEvaluationFrame`, and `ICqlError` with the interfaces that derive from it (`ICqlEvaluationError`, `ICqlArithmeticError`).
+- **Every public `ICqlError` value** lives in an `Errors/` folder of the area that throws or returns it, with namespace `<namespace of that area>.Errors`. In this project, errors the primitives throw go in `Primitives/Errors/`, namespace `Hl7.Cql.Primitives.Errors`. Elsewhere, for example, `Cql.Runtime/Operators/Errors/` → `Hl7.Cql.Operators.Errors` and `Cql.Invocation/Toolkit/Errors/` → `Hl7.Cql.Invocation.Toolkit.Errors`. This holds whether the error is thrown inside a `CqlException` or returned as a value. Internal errors, such as those in `Exceptions/Errors.cs`, may stay in the namespace of the code that uses them.
+- **An error the CQL specification requires to be signalled to the calling environment during evaluation** implements `ICqlEvaluationError`, directly or through an interface derived from it such as `ICqlArithmeticError`. That is how a host tells it from a failure inside the SDK: `catch (CqlException e) when (e.Error is ICqlEvaluationError)`.
 
-- `Exceptions/Errors.cs` → `Hl7.Cql.Exceptions` (internal infrastructure errors)
-- `Primitives/Errors.cs` → `Hl7.Cql.Primitives` (errors thrown by `CqlDate`, `CqlDateTime`, etc.)
-
-When adding a new folder that needs its own errors, add a `FolderName/Errors.cs` matching that pattern rather than putting the struct in an existing folder's file or a shared catch-all.
-
-New `ICqlError` structs go in the `Errors.cs` of the folder containing their throw site. If the struct is part of the public API (not `internal`, like the existing structs in `Exceptions/Errors.cs`), it must also be registered in `PublicAPI.Unshipped.txt`.
+A public error struct must also be registered in `PublicAPI.Unshipped.txt`.
