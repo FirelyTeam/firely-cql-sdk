@@ -239,6 +239,45 @@ public class CqlToolkitReferenceLibraryTests
     }
 
     [TestMethod]
+    public void TranslateToElm_WithLibraryQualifiedIdentifiersOfAReferenceLibrary_ReferencesItsDefinitions()
+    {
+        // Arrange
+        var helpers = CreateCqlToolkit(
+            """
+            library Helpers version '1.0.0'
+            using FHIR version '4.0.1'
+            valueset "Conditions": 'http://example.org/ValueSet/conditions'
+            context Patient
+            define "Encounters": [Encounter]
+            define "Mother": singleton from ([RelatedPerson])
+            """).TranslateToElm();
+        var helpersElm = Library.ParseFromJson(helpers.ArtifactsById.Values.Single().ResultElmLibrary!.SerializeToJson());
+        var cqlToolkit = CreateCqlToolkit(
+            """
+            library UsesHelpers version '1.0.0'
+            using FHIR version '4.0.1'
+            include Helpers version '1.0.0'
+            context Patient
+            define "Source": Helpers."Encounters" E return E.id
+            define "Terminology": [Condition: Helpers."Conditions"]
+            define "Context": [Helpers."Mother" -> Observation]
+            """);
+
+        // Act
+        cqlToolkit.AddReferenceLibraries([helpersElm]).TranslateToElm();
+
+        // Assert
+        TranslateErrors(cqlToolkit).Should().BeEmpty();
+        var statements = cqlToolkit.ArtifactsById.Values.Single().ResultElmLibrary!.statements.ToDictionary(statement => statement.name, statement => statement.expression);
+        var source = statements["Source"].Should().BeOfType<Query>().Which.source.Should().ContainSingle().Which.expression;
+        source.Should().BeOfType<ExpressionRef>().Which.Should().BeEquivalentTo(new { name = "Encounters", libraryName = "Helpers" });
+        statements["Terminology"].Should().BeOfType<Retrieve>().Which.codes
+            .Should().BeOfType<ValueSetRef>().Which.Should().BeEquivalentTo(new { name = "Conditions", libraryName = "Helpers" });
+        statements["Context"].Should().BeOfType<Retrieve>().Which.context
+            .Should().BeOfType<ExpressionRef>().Which.Should().BeEquivalentTo(new { name = "Mother", libraryName = "Helpers" });
+    }
+
+    [TestMethod]
     public void TranslateToElm_WithTwoParametersOfTheSameNameInTheReferenceLibrary_ReportsTheIncludeAsAnError()
     {
         // Arrange

@@ -422,6 +422,28 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void ModelAsQuerySource()
+        {
+            _ = CreateCqlToolkit().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
+
+                define error: FHIR P return P
+                """, "A reference to a model library is unexpected at this point.");
+        }
+
+        [TestMethod]
+        public void QualifiedTypeAsQuerySource()
+        {
+            _ = CreateCqlToolkit().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
+
+                define error: FHIR.Patient P return P
+                """, "A reference to a type is unexpected at this point.");
+        }
+
+        [TestMethod]
         public void InvokeNoMembers()
         {
             _ = CreateCqlToolkit().MakeLibrary($"""
