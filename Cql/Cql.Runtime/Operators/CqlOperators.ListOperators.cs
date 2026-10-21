@@ -1016,15 +1016,8 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return (T?)(object?)null;
-
-            using var elements = source.GetEnumerator();
-            if (!elements.MoveNext())
-                return default;
-
-            var single = elements.Current;
-            if (elements.MoveNext())
-                throw new CqlSingletonFromMultipleElementsError(single, elements.Current).ToException();
-            return single;
+            else
+                return source.SingleOrDefault();
         }
 
 

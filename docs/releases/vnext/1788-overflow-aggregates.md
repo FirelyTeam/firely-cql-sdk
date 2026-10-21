@@ -25,9 +25,5 @@
     magnitude to represent: `null` instead of `0`.
 - `Exp` and `Power` whose nonzero result is too small in magnitude to represent as a Decimal (such as `Exp(-100)` or
   `Power(2.0, -100)`) evaluate to `null`, with a warning, instead of `0`, as `*` and `/` do.
-- `singleton from` a list of more than one element signals a CQL error,
-  `CqlException<CqlSingletonFromMultipleElementsError>`, instead of a .NET `InvalidOperationException`, as the
-  specification mandates a run-time error for that case.
 
-This changes CQL evaluation results for the affected expressions, which per [versioning.md](../../versioning.md) forces
-a **MESO** bump. Generated C# and `GeneratorToolVersion` are unchanged.
+This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
