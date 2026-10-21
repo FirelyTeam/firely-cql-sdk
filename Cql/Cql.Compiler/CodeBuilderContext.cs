@@ -75,8 +75,6 @@ internal partial class CodeBuilderContext
         _impliedAliasAndScopesStack =
             ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (CodeExpression expr, Element element)>? scopes)>.Empty;
 
-    private static CodeExpression[] NoArgs { get; } = [];
-
     private static Type[] NoTypes { get; } = [];
 
     private CodeExpression BindCqlOperator<TArg>(

@@ -32,13 +32,22 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 - **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
 - **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-  10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`.
-  **IMPORTANT**: The struct must accept the **metadata** (raw facts like a unit name or value) as constructor parameters, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
+  10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`, declared without a positional parameter list.
+  **IMPORTANT**: The struct must hold the **metadata** (raw facts like a unit name or value) as get-only properties, set by its constructor, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
 
 ```csharp
 // ✅ CORRECT — struct holds metadata, GetMessage() constructs the message
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() =>
         $"If a definite-duration time-valued unit above days (or weeks) appears in a date/time arithmetic " +
         $"calculation, the evaluation will end and signal an error to the calling environment. " +
@@ -46,8 +55,12 @@ public readonly record struct CqlArithmeticError(string Unit, string CalendarEqu
 }
 
 // ❌ WRONG — do NOT pass a pre-built message string
-public readonly record struct CqlArithmeticError(string Message) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlError
 {
+    internal CqlArithmeticError(string message) => Message = message;
+
+    public string Message { get; }
+
     public string GetMessage() => Message;  // anti-pattern
 }
 
