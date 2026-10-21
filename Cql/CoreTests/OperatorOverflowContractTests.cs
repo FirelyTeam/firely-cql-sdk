@@ -35,13 +35,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownGaps = new(StringComparer.Ordinal)
         {
-            "SingletonFrom<CqlDate>(IEnumerable<CqlDate>)",
-            "SingletonFrom<CqlDateTime>(IEnumerable<CqlDateTime>)",
-            "SingletonFrom<CqlQuantity>(IEnumerable<CqlQuantity>)",
-            "SingletonFrom<CqlTime>(IEnumerable<CqlTime>)",
-            "SingletonFrom<decimal?>(IEnumerable<decimal?>)",
-            "SingletonFrom<int?>(IEnumerable<int?>)",
-            "SingletonFrom<long?>(IEnumerable<long?>)",
         };
 
         /// <summary>
