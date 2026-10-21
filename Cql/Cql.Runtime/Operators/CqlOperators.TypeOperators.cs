@@ -84,6 +84,10 @@ namespace Hl7.Cql.Operators
 
         public string? ConvertRatioToString(CqlRatio? r) => r?.ToString();
 
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToQuantity: "For the Ratio overload, the operator
+        // is equivalent to dividing the numerator of the ratio by the denominator."
+        public CqlQuantity? ConvertRatioToQuantity(CqlRatio? r) => r is null ? null : Divide(r.numerator, r.denominator);
+
         public bool? ConvertStringToBoolean(string? s) => ConvertStringToBooleanImpl(s);
 
         internal static bool? ConvertStringToBooleanImpl(string? s)
@@ -161,6 +165,14 @@ namespace Hl7.Cql.Operators
             if (s == null)
                 return null;
             else if (CqlQuantity.TryParse(s, out CqlQuantity? value))
+                return value;
+            else return null;
+        }
+        public CqlRatio? ConvertStringToRatio(string? s)
+        {
+            if (s == null)
+                return null;
+            else if (CqlRatio.TryParse(s, out CqlRatio? value) == true)
                 return value;
             else return null;
         }
@@ -347,6 +359,22 @@ namespace Hl7.Cql.Operators
                 return true;
             else return false;
         }
+
+        #endregion
+
+        #region ConvertsToRatio
+
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ConvertsToRatio: "The ConvertsToRatio operator
+        // returns true if its argument is or can be converted to a Ratio value. [...] If the input string is not
+        // formatted correctly, or cannot be interpreted as a valid Ratio value, the result is false."
+        public bool? ConvertsToRatio(object? o) =>
+            o switch
+            {
+                null       => null,
+                CqlRatio   => true,
+                string s   => CqlRatio.TryParse(s, out _) == true,
+                _          => false,
+            };
 
         #endregion
 
