@@ -1,1 +1,31 @@
 ﻿#nullable enable
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.CqlExpandFractionalPerError() -> void
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.Equals(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError other) -> bool
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PerUnit.get -> string?
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PerValue.get -> decimal
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PointType.get -> string!
+override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.operator !=(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError left, Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.operator ==(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError left, Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError() -> void
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Equals(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError other) -> bool
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Day.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Hour.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Millisecond.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Minute.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Month.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Second.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.TimezoneOffset.get -> decimal?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Type.get -> string!
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Year.get -> int?
+override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator !=(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.ToString() -> string
