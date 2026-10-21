@@ -1,8 +1,8 @@
 ## Fixes
 
-- Aggregate operators whose result cannot be represented evaluate to `null` instead of ending evaluation with a .NET
-  exception or a wrapped value, and report the overflow as a warning through the message event. The following results
-  change:
+- **Runtime** — Aggregate operators whose result cannot be represented evaluate to `null` instead of ending evaluation
+  with a .NET exception or a wrapped value, and report the overflow as a warning through the message event. The
+  following results change:
   - `Avg` of Decimals whose total leaves the Decimal range: `null` instead of `OverflowException`; whose nonzero mean is
     too small in magnitude to represent (such as `Avg({ 0.0000000000000000000000000001, 0.0 })`): `null`, as for `/`,
     instead of `0`.
@@ -23,7 +23,7 @@
   - `PopulationStdDev` and `PopulationVariance` where the total of the values, a deviation from their mean or its
     square leaves the Decimal range: `null` instead of `OverflowException`; whose nonzero variance is too small in
     magnitude to represent: `null` instead of `0`.
-- `Exp` and `Power` whose nonzero result is too small in magnitude to represent as a Decimal (such as `Exp(-100)` or
-  `Power(2.0, -100)`) evaluate to `null`, with a warning, instead of `0`, as `*` and `/` do.
+- **Runtime** — `Exp` and `Power` whose nonzero result is too small in magnitude to represent as a Decimal (such as
+  `Exp(-100)` or `Power(2.0, -100)`) evaluate to `null`, with a warning, instead of `0`, as `*` and `/` do.
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
