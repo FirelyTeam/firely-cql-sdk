@@ -218,8 +218,7 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     [MethodImpl(MethodImplOptions.NoInlining)]
     internal AssemblyLoadContext? Unload()
     {
-        // Unloading twice was an access violation before .NET 8.0.0 (dotnet/runtime#91283), and is
-        // pointless afterwards, so only the first caller gets through.
+        // Unloading twice is pointless, so only the first caller gets through.
         if (Interlocked.Exchange(ref _unloadInitiated, 1) != 0)
             return null;
 

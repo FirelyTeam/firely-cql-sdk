@@ -10,7 +10,7 @@ Before building the Demo projects you need:
 
 | Tool | Minimum version | Notes |
 |------|-----------------|-------|
-| .NET SDK | 8.0 or 10.0 | SDK is multi-targeted |
+| .NET SDK | 10.0 | The SDK targets `net10.0` |
 | JDK | 21+ | Required only when `CqlToolingEnabled=true` |
 | [Apache Maven](https://maven.apache.org/install.html) | 3.9+ | Downloads CQL-to-ELM CLI JARs from Maven Central |
 | PowerShell Core (`pwsh`) | 7+ | Required on Windows; Bash equivalents cover Linux/macOS |

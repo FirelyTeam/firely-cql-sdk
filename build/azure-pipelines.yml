@@ -48,7 +48,7 @@ stages:
     buildStageDependsOn: checkSkipStage
     buildStageCondition: and(succeeded(), ne(dependencies.checkSkipStage.outputs['checkChanges.evaluateIgnorePatterns.skip'], 'true'))
     dotNetCoreVersion: $(DOTNET_CORE_SDK)
-    multiTargetTestProjects: $(multiTargetTestProjects)
+    unitTestProjects: $(unitTestProjects)
     net10IntegrationTestProjects: $(net10IntegrationTestProjects)
     hedisIntegrationTestProjects: $(hedisIntegrationTestProjects)
     buildConfiguration: $(buildConfiguration)
