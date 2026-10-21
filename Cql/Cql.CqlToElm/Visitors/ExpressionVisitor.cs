@@ -232,18 +232,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
 
-        protected Expression ErrorMessage(string message, string locator)
-        {
-            return new Message()
-            {
-                message = ElmFactory.Literal(message),
-                source = new Null().WithResultType(SystemTypes.AnyType)
-            }
-            .AddError(message)
-            .WithLocator(locator)
-            .WithResultType(SystemTypes.AnyType);
-        }
-
         private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
             Antlr4.Runtime.ParserRuleContext context,
             cqlParser.PluralDateTimePrecisionContext precisionContext,
@@ -308,15 +296,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     return null;
                 else return ElmFactory.Literal(name);
             }
-        }
-
-        private enum ListElementPromotion
-        {
-            None,
-            Integer,
-            Long,
-            Decimal,
-            Quantity
         }
     }
 }

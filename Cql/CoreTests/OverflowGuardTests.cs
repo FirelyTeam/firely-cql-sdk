@@ -17,6 +17,13 @@ namespace CoreTests;
 /// "Operations that cause arithmetic overflow or underflow, or otherwise cannot be performed (such as division by 0)
 /// will result in null, rather than a run-time error" (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section
 /// "Arithmetic Operators").
+/// <para>
+/// The guard returns null only for a result that cannot be represented. A zero that is the correct result (a zero
+/// operand, a truncated quotient below one) is asserted as zero here, so the guard is shown not to mistake it for an
+/// underflow. Conditions the specification defines as errors rather than overflow (invalid date, time or offset
+/// components; an Integer or Long expand by a fractional per) are not the guard's business and keep throwing the
+/// repo's <c>CqlException</c> types; their tests live beside the operators they belong to.
+/// </para>
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
