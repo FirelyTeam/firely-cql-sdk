@@ -28,8 +28,19 @@ public abstract class CqlException : Exception
     /// <summary>Returns the structured error payload.</summary>
     protected abstract ICqlError GetError();
 
+    /// <summary>
+    /// The CQL definitions that were being evaluated when this exception was thrown, innermost first: the definition
+    /// it was thrown in comes first, and the definition the host invoked comes last. Empty when it was not thrown
+    /// while a definition was being evaluated.
+    /// </summary>
+    public IReadOnlyList<CqlEvaluationFrame> EvaluationFrames => CqlEvaluationFrames.Get(this);
+
     /// <inheritdoc/>
-    public override string Message => Error.GetMessage();
+    /// <remarks>The message names the innermost of the <see cref="EvaluationFrames"/>, when there are any.</remarks>
+    public override string Message =>
+        EvaluationFrames is [var innermost, ..]
+            ? $"{Error.GetMessage()} Thrown while evaluating {innermost}."
+            : Error.GetMessage();
 }
 
 /// <summary>

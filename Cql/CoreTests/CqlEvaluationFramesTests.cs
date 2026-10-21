@@ -1,0 +1,199 @@
+/*
+ * Copyright (c) 2026, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Exceptions;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+
+namespace CoreTests;
+
+[TestClass]
+public class CqlEvaluationFramesTests
+{
+    private static readonly CqlVersionedLibraryIdentifier Inner = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Inner", "1.0.0");
+    private static readonly CqlVersionedLibraryIdentifier Outer = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Outer", "2.0.0");
+
+    private static readonly Lazy<LibrarySetInvoker> Invoker = new(() =>
+    {
+        var cqlToolkit = new CqlToolkit()
+                         .AddCqlLibraries(
+                             new[]
+                             {
+                                 """
+                                 library Inner version '1.0.0'
+                                 define "Point": point from Interval[1, 5]
+                                 define function PointOf(low Integer): point from Interval[low, low + 4]
+                                 """,
+                                 """
+                                 library Outer version '2.0.0'
+                                 include Inner version '1.0.0'
+                                 define "Outer": Inner."Point"
+                                 define "Fine": 1
+                                 """,
+                             }.Select(CqlLibraryString.Parse))
+                         .TranslateToElm();
+        return new ElmToolkit().AddElmFromCqlToolkit(cqlToolkit).CreateLibrarySetInvoker();
+    });
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionThatEvaluatesAFailingDefinition_RecordsBothInnermostFirst()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "Outer");
+
+        var exception = invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>().Which;
+
+        exception.EvaluationFrames.Should().Equal(
+            new CqlEvaluationFrame("Inner", "1.0.0", "Point"),
+            new CqlEvaluationFrame("Outer", "2.0.0", "Outer"));
+        exception.Message.Should().Be(
+            "The point from operator requires a unit interval, but was given [1, 5]. "
+            + "Thrown while evaluating definition 'Point' of library 'Inner' version '1.0.0'.");
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfAFailingDefinition_RecordsItOnce()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Inner, "Point");
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.EvaluationFrames.Should().Equal(new CqlEvaluationFrame("Inner", "1.0.0", "Point"));
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfAFailingFunction_RecordsTheFunction()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(
+            FhirCqlContext.ForBundle(), Inner, new DefinitionSignature("PointOf", typeof(int?)), 1);
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.EvaluationFrames.Should().Equal(new CqlEvaluationFrame("Inner", "1.0.0", "PointOf"));
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfAFailingDefinition_ThrowsTheOriginalExceptionFromWhereItWasThrown()
+    {
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Inner, "Point");
+
+        invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
+              .Which.StackTrace.Should().Contain(nameof(Hl7.Cql.Operators.CqlOperators.PointFrom),
+                                                 "recording a frame never catches and rethrows the exception");
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionThatSucceeds_ReturnsItsValue() =>
+        Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "Fine").Should().Be(1);
+
+    [TestMethod]
+    public void EvaluationError_IsCaughtByTheHostPatternForEvaluationErrors()
+    {
+        ICqlError? caught = null;
+        try
+        {
+            Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Outer, "Outer");
+        }
+        catch (CqlException e) when (e.Error is ICqlEvaluationError)
+        {
+            caught = e.Error;
+        }
+
+        caught.Should().BeOfType<CqlPointFromNonUnitIntervalError>();
+    }
+
+    [TestMethod]
+    [DataRow(typeof(CqlPointFromNonUnitIntervalError))]
+    [DataRow(typeof(CqlUcumYearArithmeticError))]
+    [DataRow(typeof(CqlUcumMonthArithmeticError))]
+    [DataRow(typeof(ICqlArithmeticError))]
+    public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
+        errorType.Should().BeAssignableTo<ICqlEvaluationError>();
+
+    [TestMethod]
+    public void CqlException_ThrownOutsideAnyDefinition_HasNoFramesAndItsPlainMessage()
+    {
+        var exception = new CqlException<CqlPointFromNonUnitIntervalError>(new(1, 5, true, true));
+
+        exception.EvaluationFrames.Should().BeEmpty();
+        exception.Message.Should().Be("The point from operator requires a unit interval, but was given [1, 5].");
+    }
+
+    [TestMethod]
+    public void Record_OnAnyException_KeepsTheFrameInItsData()
+    {
+        var exception = new InvalidOperationException("not a CQL error");
+
+        CqlEvaluationFrames.Record(exception, ComputeMethodOf(nameof(GeneratedLibrary.Some_Definition_Compute)))
+                           .Should().BeFalse("the exception filter must never catch the exception");
+
+        CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Generated", "3.0.0", "Some Definition"));
+    }
+
+    [TestMethod]
+    public void Record_OfAComputeMethodWithoutItsDefinitionMethod_FallsBackToTheMethodName()
+    {
+        var exception = new InvalidOperationException();
+
+        CqlEvaluationFrames.Record(exception, ComputeMethodOf(nameof(GeneratedLibrary.Orphan_Compute)));
+
+        CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Generated", "3.0.0", "Orphan"));
+    }
+
+    [TestMethod]
+    public void Record_OfAMethodOutsideACqlLibrary_RecordsNothing()
+    {
+        var exception = new InvalidOperationException();
+
+        CqlEvaluationFrames.Record(exception, typeof(CqlEvaluationFramesTests).GetMethod(nameof(ComputeMethodOf), BindingFlags.NonPublic | BindingFlags.Static)!);
+
+        CqlEvaluationFrames.Get(exception).Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void Record_OfTheSameFrameTwiceInARow_KeepsOne()
+    {
+        var exception = new InvalidOperationException();
+
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Def");
+        CqlEvaluationFrames.Record(exception, "Lib", "1.0.0", "Def");
+        CqlEvaluationFrames.Record(exception, "Lib", null, "Other");
+
+        CqlEvaluationFrames.Get(exception).Should().Equal(
+            new CqlEvaluationFrame("Lib", "1.0.0", "Def"),
+            new CqlEvaluationFrame("Lib", null, "Other"));
+    }
+
+    [TestMethod]
+    public void CqlEvaluationFrame_WithoutAVersion_LeavesTheVersionOutOfItsDescription() =>
+        new CqlEvaluationFrame("Lib", null, "Def").ToString().Should().Be("definition 'Def' of library 'Lib'");
+
+    private static MethodInfo ComputeMethodOf(string name) =>
+        typeof(GeneratedLibrary).GetMethod(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!;
+
+    /// <summary>
+    /// The shape the code generator gives a library: a public method per definition, attributed with its CQL name, that
+    /// computes its value with a private method of the same name and the suffix <c>_Compute</c>.
+    /// </summary>
+    [CqlLibrary("Generated", "3.0.0")]
+    private sealed class GeneratedLibrary
+    {
+        [CqlExpressionDefinition("Some Definition")]
+        public int Some_Definition(object context) => Some_Definition_Compute(context);
+
+        public int Some_Definition_Compute(object context) => 0;
+
+        public int Orphan_Compute(object context) => 0;
+    }
+}
