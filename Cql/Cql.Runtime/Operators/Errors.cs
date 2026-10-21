@@ -19,7 +19,7 @@ namespace Hl7.Cql.Operators;
 /// Per the CQL specification (§9.B, Singleton From), "If the list contains more than one element,
 /// a run-time error is thrown."
 /// </remarks>
-public readonly record struct CqlSingletonFromMultipleElementsError : ICqlEvaluationError
+public readonly record struct CqlSingletonFromMultipleElementsError : ICqlError
 {
     internal CqlSingletonFromMultipleElementsError(
         int elementCount,

@@ -66,7 +66,7 @@ public readonly record struct CqlPointFromNonUnitIntervalError(
     object? Low,
     object? High,
     bool LowClosed,
-    bool HighClosed) : ICqlEvaluationError
+    bool HighClosed) : ICqlError
 {
     /// <inheritdoc/>
     public string GetMessage() =>

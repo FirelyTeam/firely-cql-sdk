@@ -20,10 +20,3 @@
 
 - `Hl7.Cql.Operators.CqlSingletonFromMultipleElementsError`, the `ICqlError` thrown by `singleton from` on a list
   with more than one element, where an `InvalidOperationException` was thrown before. (#1819)
-- `Hl7.Cql.Exceptions.ICqlEvaluationError`, a marker interface for the errors the CQL specification requires to be
-  signalled to the calling environment during evaluation, as opposed to failures inside the SDK. The arithmetic
-  errors, `CqlPointFromNonUnitIntervalError` and `CqlSingletonFromMultipleElementsError` implement it, and
-  `ICqlArithmeticError` derives from it. Errors are thrown as `CqlException<TError>` of their concrete type, so a host
-  recognizes any of them with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`. The same form applies to
-  `ICqlArithmeticError`: `catch (CqlException<ICqlArithmeticError>)`, which its documentation suggested, never
-  matches. (#1819)
