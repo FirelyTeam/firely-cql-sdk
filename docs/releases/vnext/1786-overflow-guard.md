@@ -1,15 +1,15 @@
 ## Potentially Breaking
 
-- The `DateTime` operator given a timezone offset outside `-13.00` to `14.00` hours, or one that is not a whole number
-  of minutes, throws `CqlException<CqlInvalidDateTimeComponentsError>` instead of returning a DateTime with another
-  offset (`24` became `+00:00`, and `0.001` was truncated to `+00:00`).
-- The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a year outside
-  0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that cannot be
-  represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
+- **Runtime** — The `DateTime` operator given a timezone offset outside `-13.00` to `14.00` hours, or one that is not
+  a whole number of minutes, throws `CqlException<CqlInvalidDateTimeComponentsError>` instead of returning a DateTime
+  with another offset (`24` became `+00:00`, and `0.001` was truncated to `+00:00`).
+- **Runtime** — The `Date`, `DateTime` and `Time` operators given components that do not form a value of the type (a
+  year outside 0001 to 9999, a month outside 1 to 12, a component given below one that is not, a timezone offset that
+  cannot be represented) throw `CqlException<CqlInvalidDateTimeComponentsError>` instead of `ArgumentException`,
   `ArgumentOutOfRangeException` or `OverflowException`.
-- `expand` of an Integer or Long interval, or a list of them, by a `per` with a decimal portion (such as
-  `expand { Interval[10, 10] } per 0.1`) signals a CQL error, `CqlException<CqlExpandFractionalPerError>`, instead of a
-  .NET `NotSupportedException`: the specification makes those points Decimal, which these overloads cannot return.
+- **Runtime** — `expand` of an Integer or Long interval, or a list of them, by a `per` with a decimal portion (such as
+  `expand { Interval[10, 10] } per 0.1`) signals a CQL error, `CqlException<CqlExpandFractionalPerError>`, instead of
+  a .NET `NotSupportedException`: the specification makes those points Decimal, which these overloads cannot return.
 
 A host that catches `ArgumentException`, `ArgumentOutOfRangeException`, `OverflowException` or `NotSupportedException`
 around evaluation no longer catches these errors. Catch `CqlException` instead, or
@@ -18,17 +18,18 @@ calling environment.
 
 ## New Public API
 
-- `Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError` and `Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError`,
-  the `ICqlEvaluationError` values carried by the exceptions above. The first holds the `Type` and the components it was
-  given; the second the `PerValue`, `PerUnit` and `PointType`.
+- **Runtime** — `Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError` and
+  `Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError`, the `ICqlEvaluationError` values carried by the exceptions
+  above. The first holds the `Type` and the components it was given; the second the `PerValue`, `PerUnit` and
+  `PointType`.
 
 ## Fixes
 
-- Operations whose result cannot be represented evaluate to `null` instead of ending evaluation with a .NET exception, as
-  the specification's arithmetic rule requires ("operations that cause arithmetic overflow or underflow, or otherwise
-  cannot be performed (such as division by 0) will result in null, rather than a run-time error"). One set of guarded
-  arithmetic and conversion helpers replaces the per-operator overflow handling, and each overflow is reported as a
-  warning through the message event. The following results change:
+- **Runtime** — Operations whose result cannot be represented evaluate to `null` instead of ending evaluation with a
+  .NET exception, as the specification's arithmetic rule requires ("operations that cause arithmetic overflow or
+  underflow, or otherwise cannot be performed (such as division by 0) will result in null, rather than a run-time
+  error"). One set of guarded arithmetic and conversion helpers replaces the per-operator overflow handling, and each
+  overflow is reported as a warning through the message event. The following results change:
   - `+` and `-` of a Date or DateTime and a calendar quantity (`year`, `month`, `week`, `day`) whose value is outside the
     Integer range, or whose number of weeks in days is outside the Decimal range: `null` instead of `OverflowException`.
   - `+` and `-` of two quantities whose units differ, where converting a value to the other unit leaves the Decimal
@@ -55,17 +56,17 @@ calling environment.
     `OverflowException`.
   - `expand` of an Integer, Long or Decimal interval by a `per` beyond the type's range, and of a Date or DateTime
     interval by a `per` of weeks beyond the Decimal range in days: the partitions that fit instead of `OverflowException`.
-- Integer and Long results that wrapped around silently are `null` instead: `*` of two Integers or two Longs whose
-  product leaves the range, and `Abs` of the minimum Integer or Long.
-- `duration between` and `difference between` of DateTimes in minutes, seconds or milliseconds whose
+- **Runtime** — Integer and Long results that wrapped around silently are `null` instead: `*` of two Integers or two
+  Longs whose product leaves the range, and `Abs` of the minimum Integer or Long.
+- **Runtime** — `duration between` and `difference between` of DateTimes in minutes, seconds or milliseconds whose
   count exceeds the Integer range (for example `duration in milliseconds between` two DateTimes 25 days apart) are
   `null` instead of `2147483647` or a wrapped negative count.
-- `expand` of a Date, DateTime or Time interval, or a list of them, by a `per` below one unit of its precision (such as
-  `per 0.5 years`) is `null`, as for a `per` of zero, instead of never returning: adding the `per` drops its decimal
-  portion, so the partitions did not advance and the result grew without bound.
-- `expand` of a Decimal interval, or a list of them, by a `per` too small to change a boundary of that magnitude (such as
-  `per 0.5` on a boundary of 10^28) is `null`, as for a `per` of zero, instead of never returning.
-- `*` and `/` of two Decimals whose nonzero result is too small to represent (such as
+- **Runtime** — `expand` of a Date, DateTime or Time interval, or a list of them, by a `per` below one unit of its
+  precision (such as `per 0.5 years`) is `null`, as for a `per` of zero, instead of never returning: adding the `per`
+  drops its decimal portion, so the partitions did not advance and the result grew without bound.
+- **Runtime** — `expand` of a Decimal interval, or a list of them, by a `per` too small to change a boundary of that
+  magnitude (such as `per 0.5` on a boundary of 10^28) is `null`, as for a `per` of zero, instead of never returning.
+- **Runtime** — `*` and `/` of two Decimals whose nonzero result is too small to represent (such as
   `0.0000000000000000000000000001 * 0.1`), and the quantity and `GeometricMean` results built on them, are `null`
   instead of `0`; `div` of such operands is still `0`.
 
