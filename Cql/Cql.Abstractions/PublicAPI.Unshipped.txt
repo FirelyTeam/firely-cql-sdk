@@ -1,4 +1,18 @@
 ﻿#nullable enable
+Hl7.Cql.Exceptions.CqlEvaluationFrame
+Hl7.Cql.Exceptions.CqlEvaluationFrame.<Clone>$() -> Hl7.Cql.Exceptions.CqlEvaluationFrame!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.DefinitionName.get -> string!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.Equals(Hl7.Cql.Exceptions.CqlEvaluationFrame? other) -> bool
+Hl7.Cql.Exceptions.CqlEvaluationFrame.LibraryName.get -> string!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.LibraryVersion.get -> string?
+Hl7.Cql.Exceptions.CqlException.EvaluationFrames.get -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!
+Hl7.Cql.Exceptions.ICqlEvaluationError
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.Equals(object? obj) -> bool
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.GetHashCode() -> int
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.ToString() -> string!
+static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator !=(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
+static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator ==(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
+static Hl7.Cql.Exceptions.CqlErrorExtensions.GetCqlEvaluationFrames(this System.Exception! exception) -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!
 Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError
 Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError() -> void
 Hl7.Cql.Primitives.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError(string! Type, int? Year, int? Month, int? Day, int? Hour, int? Minute, int? Second, int? Millisecond, decimal? TimezoneOffset) -> void
