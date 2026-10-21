@@ -1,6 +1,8 @@
 ﻿// We consider the content here as internal thus it won't be documented in the public API docs.
 #pragma warning disable RS0016 // Symbol 'x' is not part of the declared public API
 
+using Hl7.Cql.Exceptions;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
@@ -109,10 +111,10 @@ partial class CqlContext : ICqlContextInternals
         {
             // Caching disabled
             Interlocked.Increment(ref _cacheFactoryInvocations);
-            return factory(this);
+            return Compute(factory);
         }
 
-        // Fast path: cache hit — zero allocation.
+        // Fast path: cache hit — zero allocation, and no exception handling.
         if (cache.TryGetValue(cacheKey, out var existing))
             return (T)existing!;
 
@@ -120,10 +122,30 @@ partial class CqlContext : ICqlContextInternals
         // Two threads may both miss TryGetValue and both call the factory; the value
         // that loses the GetOrAdd race is discarded. This is safe because CQL
         // expression bodies are pure and side-effect free.
-        var value = (object?)factory(this);
+        var value = (object?)Compute(factory);
         var cached = cache.GetOrAdd(cacheKey, value)!;
         if (ReferenceEquals(cached, value))
             Interlocked.Increment(ref _cacheFactoryInvocations);
         return (T)cached;
+    }
+
+    /// <summary>
+    /// Computes a definition with <paramref name="factory"/>, recording the definition on any exception that passes
+    /// through, without catching it: see <see cref="CqlEvaluationFrames"/>.
+    /// </summary>
+    /// <remarks>
+    /// Kept out of <see cref="GetOrCompute{T}"/> so that its cache-hit path, which is inlined, has no exception handling.
+    /// </remarks>
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private T Compute<T>(Func<CqlContext, T> factory)
+    {
+        try
+        {
+            return factory(this);
+        }
+        catch (Exception exception) when (CqlEvaluationFrames.Record(exception, factory.Method))
+        {
+            throw; // never reached: Record always returns false
+        }
     }
 }
