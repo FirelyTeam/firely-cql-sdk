@@ -64,8 +64,8 @@ namespace Hl7.Cql.Primitives
         /// </para>
         /// <para>
         /// A quantity without a unit designator has the default unit <c>'1'</c>. Whitespace around each quantity is
-        /// ignored, and a colon inside a unit designator does not separate the quantities. The unit is not checked
-        /// against UCUM.
+        /// ignored, and a colon inside a unit designator does not separate the quantities. The unit is not yet checked
+        /// against UCUM or the calendar duration keywords, which the specification requires (#1782).
         /// </para>
         /// </remarks>
         /// <see href="https://cql.hl7.org/09-b-cqlreference.html#toratio"/>
