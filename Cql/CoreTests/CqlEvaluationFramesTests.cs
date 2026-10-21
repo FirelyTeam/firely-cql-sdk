@@ -16,6 +16,7 @@ using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
@@ -26,6 +27,7 @@ public class CqlEvaluationFramesTests
 {
     private static readonly CqlVersionedLibraryIdentifier Inner = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Inner", "1.0.0");
     private static readonly CqlVersionedLibraryIdentifier Outer = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Outer", "2.0.0");
+    private static readonly CqlVersionedLibraryIdentifier Deferred = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Deferred", "1.0.0");
 
     private static readonly Lazy<LibrarySetInvoker> Invoker = new(() =>
     {
@@ -49,6 +51,12 @@ public class CqlEvaluationFramesTests
                                  define "ViaFunction": Inner.PointAfter(1)
                                  define "ViaParameterlessFunction": Inner.PointNow()
                                  define "Fine": 1
+                                 """,
+                                 """
+                                 library Deferred version '1.0.0'
+                                 using FHIR version '4.0.1'
+                                 define "Patients": [Patient]
+                                 define "Counted": Count("Patients")
                                  """,
                              }.Select(CqlLibraryString.Parse))
                          .TranslateToElm();
@@ -140,8 +148,35 @@ public class CqlEvaluationFramesTests
         var invoke = () => Invoker.Value.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), Inner, "Point");
 
         invoke.Should().Throw<CqlException<CqlPointFromNonUnitIntervalError>>()
-              .Which.StackTrace.Should().Contain(nameof(Hl7.Cql.Operators.CqlOperators.PointFrom),
+              .Which.StackTrace.Should().Contain(nameof(CqlOperators.PointFrom),
                                                  "recording a frame never catches and rethrows the exception");
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADefinitionReadingADeferredRetrieve_ReportsTheDefinitionReadingIt()
+    {
+        // Deferred."Patients" returns the retrieve without reading it, so it has finished before the data source
+        // throws. The failure happens while Deferred."Counted" reads it, and that is the definition reported.
+        var invoke = () => Invoker.Value.InvokeLibraryDefinition(
+            FhirCqlContext.WithDataSource(new DeferredFailingDataSource()), Deferred, "Counted");
+
+        var exception = invoke.Should().Throw<InvalidOperationException>().WithMessage(DeferredFailingDataSource.Failure).Which;
+
+        CqlEvaluationFrames.Get(exception).Should().Equal(new CqlEvaluationFrame("Deferred", "1.0.0", "Counted"));
+    }
+
+    [TestMethod]
+    public void InvokeLibraryDefinition_OfADeferredRetrieve_HasNoFramesWhenTheHostReadsIt()
+    {
+        // No definition is being evaluated while the host reads the result, so the exception has no frames.
+        var patients = (IEnumerable<object>)Invoker.Value.InvokeLibraryDefinition(
+            FhirCqlContext.WithDataSource(new DeferredFailingDataSource()), Deferred, "Patients")!;
+
+        var read = () => patients.ToList();
+
+        var exception = read.Should().Throw<InvalidOperationException>().WithMessage(DeferredFailingDataSource.Failure).Which;
+
+        CqlEvaluationFrames.Get(exception).Should().BeEmpty();
     }
 
     [TestMethod]
@@ -246,5 +281,16 @@ public class CqlEvaluationFramesTests
         public int Some_Definition_Compute(object context) => 0;
 
         public int Orphan_Compute(object context) => 0;
+    }
+
+    /// <summary>
+    /// A data source whose retrieve returns at once and throws only when it is read.
+    /// </summary>
+    private sealed class DeferredFailingDataSource : IDataSource
+    {
+        public const string Failure = "The data source failed while it was read.";
+
+        public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
+            Enumerable.Range(0, 1).Select<int, T>(_ => throw new InvalidOperationException(Failure));
     }
 }

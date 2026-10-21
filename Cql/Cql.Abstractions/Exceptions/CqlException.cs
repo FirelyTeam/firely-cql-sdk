@@ -33,6 +33,11 @@ public abstract class CqlException : Exception
     /// it was thrown in comes first, and the definition the host invoked comes last. Empty when it was not thrown
     /// while a definition was being evaluated.
     /// </summary>
+    /// <remarks>
+    /// A definition is in the list while it computes its value. A value can be a sequence that is only read later,
+    /// such as a retrieve from a data source that reads lazily. An exception thrown while that sequence is read names
+    /// the definition reading it, or has no frames when the host reads it.
+    /// </remarks>
     public IReadOnlyList<CqlEvaluationFrame> EvaluationFrames => CqlEvaluationFrames.Get(this);
 
     /// <inheritdoc/>
