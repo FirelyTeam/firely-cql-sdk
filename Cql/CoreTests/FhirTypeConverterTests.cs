@@ -1107,6 +1107,58 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCqlDateTimeInterval_Period_ExclusiveBoundariesKeepTheDefaultTimezoneOffset()
+        {
+            // An exclusive boundary is stepped inward by one unit of its precision. The stepped value is
+            // still offset-less, so it takes the default exactly like a closed boundary does.
+            var partial = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2014, 2, 1, 10, null, null, null, null, null),
+                new CqlDateTime(2014, 2, 1, 12, 30, null, null, null, null),
+                lowClosed: false, highClosed: false);
+            var millisecond = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(2014, 2, 1, 10, 30, 15, 123, null, null),
+                new CqlDateTime(2014, 2, 1, 12, 30, 15, 0, null, null),
+                lowClosed: false, highClosed: false);
+
+            var convertedPartial = ConverterWithPlusTwo.Convert<Period>(partial)!;
+            var convertedMillisecond = ConverterWithMinusFiveThirty.Convert<Period>(millisecond)!;
+
+            foreach (var v in new[] { convertedPartial.Start, convertedPartial.End, convertedMillisecond.Start, convertedMillisecond.End })
+                AssertIsValidFhirDateTime(v);
+            Assert.AreEqual("2014-02-01T11:00:00+02:00", convertedPartial.Start);
+            Assert.AreEqual("h", GetTimePrecisionCode(convertedPartial.StartElement));
+            Assert.AreEqual("2014-02-01T12:29:00+02:00", convertedPartial.End);
+            Assert.AreEqual("min", GetTimePrecisionCode(convertedPartial.EndElement));
+            Assert.AreEqual("2014-02-01T10:30:15.124-05:30", convertedMillisecond.Start);
+            Assert.AreEqual("2014-02-01T12:30:14.999-05:30", convertedMillisecond.End);
+        }
+
+        [TestMethod]
+        public void ConvertCqlDateTimeInterval_Period_ExclusiveBoundaryNearTheStartOfTheRange_IsJudgedAfterTheStep()
+        {
+            // On 0001-01-01 a time of day below +02:00 cannot carry that offset. The stepped boundary is
+            // what gets judged: 01:59:59's successor 02:00:00 can carry it, 01:00:00's predecessor cannot.
+            var lowStepsIntoRange = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(1, 1, 1, 1, 59, 59, null, null, null),
+                new CqlDateTime(1, 1, 1, 3, 0, 0, null, null, null),
+                lowClosed: false, highClosed: true);
+            var highStaysBelowRange = new CqlInterval<CqlDateTime>(
+                new CqlDateTime(1, 1, 1, 0, 0, 0, null, null, null),
+                new CqlDateTime(1, 1, 1, 1, 0, 0, null, null, null),
+                lowClosed: true, highClosed: false);
+
+            var intoRange = ConverterWithPlusTwo.Convert<Period>(lowStepsIntoRange)!;
+            var belowRange = ConverterWithPlusTwo.Convert<Period>(highStaysBelowRange)!;
+
+            foreach (var v in new[] { intoRange.Start, intoRange.End, belowRange.Start, belowRange.End })
+                AssertIsValidFhirDateTime(v);
+            Assert.AreEqual("0001-01-01T02:00:00+02:00", intoRange.Start);
+            Assert.AreEqual("0001-01-01T03:00:00+02:00", intoRange.End);
+            Assert.AreEqual("0001-01-01T00:00:00Z", belowRange.Start);
+            Assert.AreEqual("0001-01-01T00:59:59Z", belowRange.End);
+        }
+
+        [TestMethod]
         public void ConvertCqlTimeInterval_Period_AnchorsOffsetLessBoundariesInUtcUnderADefaultTimezoneOffset()
         {
             // A Time has no timezone to default, and the 0001-01-01 anchor leaves no room below it, so

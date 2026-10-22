@@ -770,7 +770,16 @@ namespace Hl7.Cql.Fhir
                 return boundary;
 
             CqlDateTime? stepped = isLow ? boundary.Successor() : boundary.Predecessor();
-            return stepped ?? boundary;
+            if (stepped is null)
+                return boundary;
+
+            // Stepping goes through DateTimeOffset arithmetic, which gives an offset-less value an explicit
+            // UTC offset. An offset-less boundary stays offset-less once stepped, so that it takes the
+            // default timezone offset, as the closed boundary of the same interval does.
+            var v = stepped.Value;
+            return boundary.Value is { OffsetHour: null, OffsetMinute: null }
+                ? new CqlDateTime(v.Year, v.Month, v.Day, v.Hour, v.Minute, v.Second, v.Millisecond, null, null)
+                : stepped;
         }
 
         /// <inheritdoc cref="PeriodBoundary(CqlDateTime, bool?, bool)"/>
