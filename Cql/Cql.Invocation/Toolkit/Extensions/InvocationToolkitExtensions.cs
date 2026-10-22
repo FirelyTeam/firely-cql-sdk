@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Toolkit;
+
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
 /// <summary>
@@ -34,8 +36,6 @@ public static partial class InvocationToolkitExtensions
         useLibrarySetInvoker(librarySetInvoker);
     }
 
-    private static ILogger CreateLogger(this InvocationToolkit invocationToolkit)
-    {
-        return invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
-    }
+    private static ILogger CreateLogger(this InvocationToolkit invocationToolkit) =>
+        invocationToolkit.CreateLogger(typeof(InvocationToolkitExtensions));
 }
