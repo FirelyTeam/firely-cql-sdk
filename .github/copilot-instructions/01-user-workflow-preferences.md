@@ -109,7 +109,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 1.10. PR Review Boundaries and `@copilot` Dispatch
 
-1.10.1 While reviewing someone else's PR, do not commit to that PR branch. Findings go to the author (or `@copilot`) to apply.
+1.10.1 While reviewing someone else's PR, do not commit to that PR branch, including by merging the base branch into it. Findings go to the author (or `@copilot`) to apply.
 
 1.10.2 The consequence is not only procedural: if a reviewer commits to the branch being reviewed, that reviewer has now contributed code to the PR, so their review is no longer eligible as approval and a second reviewer is required.
 
@@ -123,4 +123,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.10.7 Any `since` filter used for follow-up verification must use the exact timestamp of the triggering event, never a rounded or approximate time.
 
-1.10.8 When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on.
+1.10.8 When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether the base should be merged into it before reviewing. If the branch is 0 behind, say so and carry on. If the base should be merged in, ask the PR's author (their agent picks up a PR comment addressed to them) or `@copilot` (a tagged PR comment with the complete ask) to do it. The reviewer never performs the merge, neither by push nor with GitHub's 'Update branch' button.
