@@ -20,6 +20,7 @@
     `Library` attachments it cannot run. Through the default load context the toolkit could not load these assemblies
     anyway: `CreateLibrarySetInvoker` failed for the whole library set they were added to. A host whose own resolver
     binds older copies of the referenced assemblies could load them, though, and now sees them reported as not
-    supported.
-  - **What to do:** treat `CqlAssemblyWithNewerReferenceError` like any other `ReadError`, or skip the check for
-    assemblies whose references the host resolves itself.
+    supported, with no libraries listed.
+  - **What to do:** treat `CqlAssemblyWithNewerReferenceError` like any other `ReadError`. A host whose own resolver
+    binds those references can still add the assembly with `AddAssemblyBinaries` and load it; the reader no longer
+    lists its libraries, though.
