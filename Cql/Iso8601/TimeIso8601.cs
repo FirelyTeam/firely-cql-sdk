@@ -351,9 +351,26 @@ namespace Hl7.Cql.Iso8601
                 return false;
             }
 
+            if (!IsRepresentable(hour, minute, second, osHour, osMinute))
+            {
+                timeValue = null;
+                return false;
+            }
+
             timeValue = new TimeIso8601(hour, minute, second, ms, osHour, osMinute);
             return true;
         }
+
+        /// <summary>
+        /// Whether an hour, minute and second name a time of day, and an offset hour and minute an offset that a
+        /// <see cref="System.DateTimeOffset"/> can hold: at most 14 hours from UTC.
+        /// </summary>
+        internal static bool IsRepresentable(int? hour, int? minute, int? second, int? offsetHour, int? offsetMinute) =>
+            hour is null or (>= 0 and <= 23)
+            && minute is null or (>= 0 and <= 59)
+            && second is null or (>= 0 and <= 59)
+            && offsetMinute is null or (>= -59 and <= 59)
+            && Math.Abs((offsetHour ?? 0) * 60 + (offsetMinute ?? 0)) <= 14 * 60;
 
         private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
         {

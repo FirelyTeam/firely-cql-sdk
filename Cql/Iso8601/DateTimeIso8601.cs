@@ -437,7 +437,9 @@ namespace Hl7.Cql.Iso8601
                 }
             }
 
-            if (!DateIso8601.IsRepresentable(year!.Value, month, day))
+            if (!DateIso8601.IsRepresentable(year!.Value, month, day)
+                || !TimeIso8601.IsRepresentable(hour, minute, second, osHour, osMinute)
+                || !IsWithinUtcRange(year!.Value, month, day, hour, minute, second, ms, osHour, osMinute))
             {
                 dateTimeValue = null;
                 return false;
@@ -445,6 +447,20 @@ namespace Hl7.Cql.Iso8601
 
             dateTimeValue = new DateTimeIso8601(stringValue, year!.Value, month, day, hour, minute, second, ms, osHour, osMinute);
             return true;
+        }
+
+        /// <summary>
+        /// Whether the instant that in-range components name lies within the range of <see cref="DateTime"/> once
+        /// its offset is applied. As in the constructor, the offset applies only when an hour is given.
+        /// </summary>
+        private static bool IsWithinUtcRange(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? offsetHour, int? offsetMinute)
+        {
+            if (hour is null)
+                return true;
+
+            var local = new DateTime(year, month ?? 1, day ?? 1, hour.Value, minute ?? 0, second ?? 0, ms ?? 0);
+            var utcTicks = local.Ticks - new TimeSpan(offsetHour ?? 0, offsetMinute ?? 0, 0).Ticks;
+            return utcTicks >= DateTime.MinValue.Ticks && utcTicks <= DateTime.MaxValue.Ticks;
         }
 
         private static string Format(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)

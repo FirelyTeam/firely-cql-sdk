@@ -116,6 +116,9 @@ public class ConvertsToOperatorTests
         ["String '2014-01-01'", "2014-01-01", true],
         ["String 'abc'", "abc", false],
         ["String '2014-02-30'", "2014-02-30", false],
+        ["String '2014-01-01T25:00:00Z'", "2014-01-01T25:00:00Z", false],
+        ["String '2014-01-01T10:61:00'", "2014-01-01T10:61:00", false],
+        ["String '2014-01-01T10:00:00+15:00'", "2014-01-01T10:00:00+15:00", false],
         ["Time", SampleTime, false],
         ["null", null, null],
     ];
@@ -278,6 +281,8 @@ public class ConvertsToOperatorTests
         ["String '14:30:00.0'", "14:30:00.0", true],
         ["String 'abc'", "abc", false],
         ["String '2:30 PM'", "2:30 PM", false],
+        ["String '25:00:00'", "25:00:00", false],
+        ["String '10:61'", "10:61", false],
         ["DateTime", SampleDateTime, false],
         ["null", null, null],
     ];
