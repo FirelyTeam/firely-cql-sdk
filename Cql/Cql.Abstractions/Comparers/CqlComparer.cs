@@ -24,7 +24,7 @@ internal enum CqlComparerEqualsImplementation
 internal abstract class CqlComparer<T>(
     CqlComparerEqualsImplementation equalsImplementation = CqlComparerEqualsImplementation.Equals,
     CqlComparerEquivalentImplementation equivalentImplementation = CqlComparerEquivalentImplementation.Equivalent)
-    : ICqlComparer<T>, ICqlComparer
+    : ICqlComparer<T>, ICqlComparer, ITypedCqlComparer
 {
     public CqlComparerEqualsImplementation EqualsImplementation { get; } = equalsImplementation;
 
@@ -205,6 +205,8 @@ internal abstract class CqlComparer<T>(
         string? precision) =>
         throw new NotImplementedException();
 
+    // A value that is not a T has no order against the values this comparer compares, so a
+    // comparison involving one gives null whichever side it is on.
     int? ICqlComparer.Compare(
         object? x,
         object? y,
@@ -217,7 +219,7 @@ internal abstract class CqlComparer<T>(
                 ? -1
                 : x is T tx && y is T ty
                     ? Compare(tx, ty, precision)
-                    : 1;
+                    : null;
 
     int? ICqlComparer.CompareValues(
         object x,
@@ -225,7 +227,12 @@ internal abstract class CqlComparer<T>(
         string? precision) =>
         x is T tx && y is T ty
             ? CompareValuesShared(tx, ty, precision)
-            : 1;
+            : null;
+
+    bool ITypedCqlComparer.CanCompare(
+        object x,
+        object y) =>
+        x is T && y is T;
 
     private int? CompareValuesShared(
         T x,
