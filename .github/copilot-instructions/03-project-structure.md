@@ -22,7 +22,7 @@ Read this before searching the repository. Build `Cql-Sdk.slnf`; SDK and test pr
 | `Cql.Grammar` (`Hl7.Cql.CqlToElm.Grammar`) | ANTLR grammar `cql.g4` and its generated parser | `cqlParser.cs` |
 | `Cql.CqlToElm` | CQL text to ELM: visitors, overload resolution, system library, translation messages | `Visitors/ExpressionVisitor.cs`, `InvocationBuilder.cs`, `Builtin/SystemLibrary.cs`, `MessageProvider.cs` |
 | `Elm` | ELM object model (generated from the XSD) and its JSON/XML serialization | `Elm.g.cs`, `Library.cs` |
-| `Cql.Model` | Model info (FHIR and System types) and `ModelTypeResolver` | `Models/`, `ModelTypeResolver.cs` |
+| `Cql.Model` | Model info (FHIR and System types) | `Models/`, `Models.cs` |
 | `Cql.Compiler` | ELM to a typed intermediate representation; binds each ELM node to an `ICqlOperators` method | `CodeBuilder.cs`, `CqlOperatorsBinder.*.cs`, `CodeModel/`, `Preprocessing/` |
 | `CodeGeneration.NET` | Prints the IR as C# and compiles it; holds `GeneratorToolVersion` | `LibrarySetCSharpCodeGenerator.*.cs`, `CSharpEmitter.*.cs`, `AssemblyCompiler.cs`, `_CODE GENERATOR VERSION_.cs` |
 | `Cql.Invocation` | Loads generated assemblies and invokes definitions; one `LibraryInvoker.<major>.<minor>.cs` per supported generator version | `Toolkit/InvocationToolkit.cs`, `Toolkit/LibrarySetInvoker.cs`, `Toolkit/Internal/` |
