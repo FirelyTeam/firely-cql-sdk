@@ -68,9 +68,9 @@ internal static class CqlAssemblyInfoReader
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>
     /// <exception cref="ArgumentException"><paramref name="assemblyBinary"/> holds no assembly bytes.</exception>
     /// <remarks>
-    /// Bytes that cannot be read are reported through <see cref="CqlAssemblyInfo.ReadError"/>, and a library declared in a
-    /// way the toolkit does not accept through <see cref="CqlLibraryInfo.ReadError"/>, while the rest of the assembly is
-    /// still read.
+    /// Bytes that cannot be read, and an assembly that references a newer version of an assembly than the host has, are
+    /// reported through <see cref="CqlAssemblyInfo.ReadError"/>, and a library declared in a way the toolkit does not
+    /// accept through <see cref="CqlLibraryInfo.ReadError"/>, while the rest of the assembly is still read.
     /// </remarks>
     public static CqlAssemblyInfo Read(AssemblyBinary assemblyBinary)
     {
@@ -98,6 +98,11 @@ internal static class CqlAssemblyInfoReader
             // once, here, so that such an assembly reads as unreadable instead.
             assemblyName = metadata.GetAssemblyDefinition().GetAssemblyName();
             assemblyFullName = assemblyName.FullName;
+
+            // The toolkit cannot load such an assembly at all, so this comes before what its types declare, which a
+            // later release of the SDK may declare in a way this one does not read.
+            if (FindNewerReference(metadata, assemblyFullName) is { } newerReference)
+                return new CqlAssemblyInfo(assemblyBinary, newerReference);
 
             ThrowIfDeclaringTypesFormACycle(metadata);
             foreach (var typeHandle in metadata.TypeDefinitions)
@@ -127,6 +132,38 @@ internal static class CqlAssemblyInfoReader
             assemblyBinary,
             assemblyName,
             MergeLibrariesDeclaredMoreThanOnce(assemblyFullName, declarations));
+    }
+
+    /// <summary>
+    /// Finds the first of the assembly's references that names a newer version than the host's assembly of that name,
+    /// which the toolkit therefore cannot bind it to, as <see cref="HostAssemblyVersions"/> describes.
+    /// </summary>
+    /// <remarks>
+    /// <para>
+    /// A reference to an assembly the host does not have is left to the load, which can bind it to another assembly
+    /// added to the same toolkit, such as the one of a library that this assembly's libraries include.
+    /// </para>
+    /// <para>
+    /// A name the host has is compared even when another assembly added to the same toolkit would satisfy the reference
+    /// first, as a toolkit's load context consults its own assemblies before the default one. This reader sees one
+    /// assembly at a time, so it reports such a reference although the load would succeed; with the names generated
+    /// libraries have, that does not happen in practice.
+    /// </para>
+    /// <para>
+    /// The reference's culture and public key token are not compared. The binder ignores the token too.
+    /// </para>
+    /// </remarks>
+    private static CqlAssemblyWithNewerReferenceError? FindNewerReference(MetadataReader metadata, string assemblyName)
+    {
+        foreach (var referenceHandle in metadata.AssemblyReferences)
+        {
+            var reference = metadata.GetAssemblyReference(referenceHandle);
+            var referencedAssemblyName = metadata.GetString(reference.Name);
+            if (HostAssemblyVersions.Find(referencedAssemblyName) is { } hostVersion && reference.Version > hostVersion)
+                return new CqlAssemblyWithNewerReferenceError(assemblyName, referencedAssemblyName, reference.Version, hostVersion);
+        }
+
+        return null;
     }
 
     /// <summary>

@@ -85,7 +85,8 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// The libraries the assembly holds, each with the version of the code generator that wrote it, together with
     /// <paramref name="assemblyBinary"/> itself, ready to pass to <see cref="AddAssemblyBinaries"/>. Its
     /// <see cref="CqlAssemblyInfo.Libraries"/> are empty when the assembly holds no library the code
-    /// generator wrote, and when its bytes could not be read, which <see cref="CqlAssemblyInfo.ReadError"/> then says.
+    /// generator wrote, and when its bytes could not be read or the toolkit cannot load it, which
+    /// <see cref="CqlAssemblyInfo.ReadError"/> then says.
     /// </returns>
     /// <remarks>
     /// <para>
@@ -105,18 +106,34 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <see cref="CqlAssemblyInfo.HasReadErrors"/> says whether the assembly or any of its libraries has an error.
     /// </para>
     /// <para>
+    /// The assembly's references are compared with the host's assemblies of the same names: the assembly of that name
+    /// the default load context has loaded, or else the one its trusted platform assemblies list, such as those of this
+    /// SDK, of the Firely .NET SDK and of the .NET runtime. An assembly the host loaded into another load context, or
+    /// a trusted platform assembly whose file cannot be read, as in a single-file bundle, is not compared. The default
+    /// load context, which this toolkit binds those references through, binds a reference only to an assembly of at
+    /// least the version referenced, so a reference to a newer version than the host's, such as one an assembly built
+    /// by a later release of this SDK holds, gives a result whose <see cref="CqlAssemblyInfo.ReadError"/> is a
+    /// <see cref="Errors.CqlAssemblyWithNewerReferenceError"/> naming it. A reference to an assembly the host does not
+    /// have is left to the load, which can find it among the other assemblies added to the same toolkit.
+    /// </para>
+    /// <para>
+    /// To find the host's assemblies, the first call subscribes to <see cref="AppDomain.AssemblyLoad"/> for the life of
+    /// the process, so a host that loaded this SDK into a collectible
+    /// <see cref="System.Runtime.Loader.AssemblyLoadContext"/> can no longer unload it from then on.
+    /// </para>
+    /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
     /// it can still fail for reasons that the assembly's metadata does not show. Those include a missing dependency,
-    /// a reference to a newer version of an SDK assembly than this host runs, an <c>ILibrary</c> that states another
-    /// library than its <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> declares, and another assembly added
-    /// to the same toolkit that declares the same library, which this method cannot see, as it reads one assembly at a
-    /// time.
+    /// an <c>ILibrary</c> that states another library than its
+    /// <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> declares, and another assembly added to the same toolkit
+    /// that declares the same library, which this method cannot see, as it reads one assembly at a time.
     /// </para>
     /// <para>
     /// This method is a quick check of an assembly that a host is about to load, so it guards against accidents: bytes
-    /// that are not an assembly, a truncated or corrupt file, an unsupported generator version, a misdeclared library.
-    /// It never throws for the bytes it is given. It is not a defense against metadata crafted to make reading slow,
-    /// as whoever can supply an assembly to load can already make the host run its code.
+    /// that are not an assembly, a truncated or corrupt file, an assembly built against newer assemblies than the host
+    /// has, an unsupported generator version, a misdeclared library. It never throws for the bytes it is given. It is
+    /// not a defense against metadata crafted to make reading slow, as whoever can supply an assembly to load can
+    /// already make the host run its code.
     /// </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException"><paramref name="assemblyBinary"/> is null.</exception>

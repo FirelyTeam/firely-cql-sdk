@@ -84,6 +84,22 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void Add_Same_Signature_Twice()
+        {
+            const string name = "f";
+            var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
+            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
+            var f2 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.IntegerType, name);
+            st.TryAdd(f1).Should().BeTrue();
+
+            // Same name and operand types: not an overload, so it is refused rather than added or thrown on.
+            st.TryAdd(f2).Should().BeFalse();
+            st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
+            var fd = resolved.Should().BeOfType<OverloadedFunctionDef>().Subject;
+            fd.Functions.Should().ContainSingle().Which.Should().BeSameAs(f1);
+        }
+
+        [TestMethod]
         public void Add_Function_To_Expression()
         {
             const string name = "simple expression";

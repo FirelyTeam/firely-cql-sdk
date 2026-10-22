@@ -14,7 +14,8 @@ namespace Hl7.Cql.Invocation.Toolkit;
 
 /// <summary>
 /// An assembly and the CQL libraries that the code generator wrote into it, as read from the assembly's metadata
-/// by <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/>, or why its bytes could not be read.
+/// by <see cref="InvocationToolkit.ReadCqlAssemblyInfo"/>, or why its bytes could not be read or the toolkit cannot
+/// load it.
 /// </summary>
 /// <remarks>
 /// Holds the <see cref="Hl7.Cql.CodeGeneration.NET.AssemblyBinary"/> it was read from, so that a host can check
@@ -27,10 +28,10 @@ public sealed class CqlAssemblyInfo
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlAssemblyInfo"/> class for an assembly whose bytes could
-    /// not be read.
+    /// not be read, or that the toolkit cannot load.
     /// </summary>
-    /// <param name="assemblyBinary">The assembly that could not be read.</param>
-    /// <param name="readError">Why its bytes could not be read.</param>
+    /// <param name="assemblyBinary">The assembly.</param>
+    /// <param name="readError">Why its bytes could not be read, or why the toolkit cannot load it.</param>
     internal CqlAssemblyInfo(AssemblyBinary assemblyBinary, ICqlAssemblyInfoError readError)
     {
         AssemblyBinary = assemblyBinary;
@@ -76,25 +77,26 @@ public sealed class CqlAssemblyInfo
 
     /// <summary>
     /// Gets the identity of the assembly the libraries were read from, as its metadata states it.
-    /// <see langword="null"/> when its bytes could not be read: see <see cref="ReadError"/>.
+    /// <see langword="null"/> when there is a <see cref="ReadError"/>.
     /// </summary>
     public AssemblyName? AssemblyName { get; }
 
     /// <summary>
-    /// Gets why the bytes of <see cref="AssemblyBinary"/> could not be read, or <see langword="null"/> when they were.
+    /// Gets why the bytes of <see cref="AssemblyBinary"/> could not be read, or why the toolkit cannot load the assembly
+    /// they hold; otherwise, <see langword="null"/>.
     /// </summary>
     /// <remarks>
     /// One of the <see cref="ICqlAssemblyInfoError"/> values: <see cref="CqlAssemblyUnreadableError"/>,
-    /// <see cref="CqlAssemblyWithoutMetadataError"/>, <see cref="CqlModuleWithoutManifestError"/> or
-    /// <see cref="CqlLibraryTypeWithMalformedAttributeError"/>. <see cref="Libraries"/> is then empty, and the toolkit cannot load
-    /// the assembly. An error in one library is reported on that library instead, through
-    /// <see cref="CqlLibraryInfo.ReadError"/>.
+    /// <see cref="CqlAssemblyWithoutMetadataError"/>, <see cref="CqlModuleWithoutManifestError"/>,
+    /// <see cref="CqlLibraryTypeWithMalformedAttributeError"/> or <see cref="CqlAssemblyWithNewerReferenceError"/>.
+    /// <see cref="Libraries"/> is then empty, and the toolkit cannot load the assembly. An error in one library is
+    /// reported on that library instead, through <see cref="CqlLibraryInfo.ReadError"/>.
     /// </remarks>
     public ICqlAssemblyInfoError? ReadError { get; }
 
     /// <summary>
     /// Gets the libraries the code generator wrote into the assembly, by their identifier and version.
-    /// Empty when the assembly holds no library the code generator wrote, or when its bytes could not be read.
+    /// Empty when the assembly holds no library the code generator wrote, or when there is a <see cref="ReadError"/>.
     /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlLibraryInfo> Libraries { get; }
 
@@ -104,7 +106,7 @@ public sealed class CqlAssemblyInfo
     /// </summary>
     /// <remarks>
     /// <see langword="false"/> for an assembly that holds no CQL library, because the toolkit has nothing to run from it,
-    /// and for one whose bytes could not be read. Check <see cref="ReadError"/> and whether <see cref="Libraries"/> is
+    /// and for one with a <see cref="ReadError"/>. Check <see cref="ReadError"/> and whether <see cref="Libraries"/> is
     /// empty to tell those apart from an assembly whose libraries the toolkit does not run. A supported generator
     /// version is necessary for the toolkit to run a library, but not sufficient: loading it can still fail for other
     /// reasons, such as a missing dependency.
