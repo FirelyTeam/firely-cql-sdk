@@ -350,7 +350,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return fd;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic, fdCtx.Locator());
+                        {
+                            // The name is taken either by a function with the same operand types or by a non-function.
+                            var message = table.TryResolveSymbol(dd.Name, out var existing) && existing is IFunctionElement
+                                ? MessagingProvider.FunctionRedefined(dd.Name)
+                                : MessagingProvider.IdentifierAlreadyInUse(dd.Name);
+                            LibraryBuilder.AddError(message, ErrorType.semantic, fdCtx.Locator());
+                        }
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)
                     {
