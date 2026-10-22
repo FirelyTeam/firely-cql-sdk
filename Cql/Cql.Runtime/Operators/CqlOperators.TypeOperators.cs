@@ -84,6 +84,10 @@ namespace Hl7.Cql.Operators
 
         public string? ConvertRatioToString(CqlRatio? r) => r?.ToString();
 
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToQuantity: "For the Ratio overload, the operator
+        // is equivalent to dividing the numerator of the ratio by the denominator."
+        public CqlQuantity? ConvertRatioToQuantity(CqlRatio? r) => r is null ? null : Divide(r.numerator, r.denominator);
+
         public bool? ConvertStringToBoolean(string? s) => ConvertStringToBooleanImpl(s);
 
         internal static bool? ConvertStringToBooleanImpl(string? s)
@@ -164,6 +168,14 @@ namespace Hl7.Cql.Operators
                 return value;
             else return null;
         }
+        public CqlRatio? ConvertStringToRatio(string? s)
+        {
+            if (s == null)
+                return null;
+            else if (CqlRatio.TryParse(s, out CqlRatio? value) == true)
+                return value;
+            else return null;
+        }
         public CqlDate? ConvertStringToDate(string? s)
         {
             if (s == null)
@@ -220,14 +232,7 @@ namespace Hl7.Cql.Operators
         public bool? CanConvertQuantity(CqlQuantity? argument, string? unit)
         {
             if (argument == null || argument.value == null || unit == null) return null;
-            try
-            {
-                return UnitConverter.ChangeUnits(argument, unit) is not null;
-            }
-            catch (ArgumentException)
-            {
-                return false;
-            }
+            return UnitConverter.ChangeUnits(argument, unit) is not null;
         }
 
         #endregion
@@ -239,8 +244,14 @@ namespace Hl7.Cql.Operators
             if (argument == null || argument.value == null || unit == null)
                 return null;
 
-            var newQuantity = UnitConverter.ChangeUnits(argument, unit);
-            return newQuantity;
+            // "If the unit of the input quantity can be converted to the target unit, the result is an equivalent
+            // Quantity with the target unit. Otherwise, the result is null." (CQL 1.5.3 Errata 2, Appendix B - CQL
+            // Reference, section "Type Operators", "ConvertQuantity").
+            if (UnitConverter.ChangeUnits(argument, unit) is { } converted)
+                return converted;
+
+            Message(new { argument, unit }, "CqlOperators.TypeOperators.ConvertQuantity", "Warning", $"Could not convert {argument} to unit '{unit}', returned null.");
+            return null;
         }
 
         #endregion
@@ -348,6 +359,22 @@ namespace Hl7.Cql.Operators
             string s => ConvertStringToQuantity(s) is not null,
             _ => false,
         };
+
+        #endregion
+
+        #region ConvertsToRatio
+
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ConvertsToRatio: "The ConvertsToRatio operator
+        // returns true if its argument is or can be converted to a Ratio value. [...] If the input string is not
+        // formatted correctly, or cannot be interpreted as a valid Ratio value, the result is false."
+        public bool? ConvertsToRatio(object? o) =>
+            o switch
+            {
+                null       => null,
+                CqlRatio   => true,
+                string s   => CqlRatio.TryParse(s, out _) == true,
+                _          => false,
+            };
 
         #endregion
 

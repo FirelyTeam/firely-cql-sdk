@@ -105,15 +105,6 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
-        /// </summary>
-        internal static string CouldNotFindLibrary {
-            get {
-                return ResourceManager.GetString("CouldNotFindLibrary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Could not resolve context name {0} in model {1}..
         /// </summary>
         internal static string CouldNotResolveContextName {
@@ -204,15 +195,6 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to latest.
-        /// </summary>
-        internal static string Latest {
-            get {
-                return ResourceManager.GetString("Latest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A named type is required in this context..
         /// </summary>
         internal static string NamedTypeRequiredInContext {
@@ -263,6 +245,15 @@ namespace Hl7.Cql.CqlToElm {
         internal static string UnexpectedLibraryReference {
             get {
                 return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A reference to a type is unexpected at this point..
+        /// </summary>
+        internal static string UnexpectedTypeReference {
+            get {
+                return ResourceManager.GetString("UnexpectedTypeReference", resourceCulture);
             }
         }
     }

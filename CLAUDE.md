@@ -24,7 +24,8 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - **Copyright headers** (`*.cs`, not `*.g.cs`): For new files, use the standard header shown in [.github/copilot-instructions/04-development-guidelines.md](.github/copilot-instructions/04-development-guidelines.md). **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 - **`InternalsVisibleTo`** goes in the `.csproj` (`<InternalsVisibleTo Include="ProjectName" Key="$(LibraryPKHash)" />`), never in `AssemblyInfo.cs`.
 - New internal-only utility types/files should stay `internal`, not `public` — only expose what's meant for external consumption.
-- Every new `.cs` file needs its own `#nullable enable` directive after the header, even though nullable is enabled globally in props — this repo wants it explicit per file.
+- A public type that wants value semantics is a `record` or a `readonly record struct` declared without a positional parameter list. It has get-only properties and an `internal` constructor. Keep the constructor `public` only when code outside the SDK's assemblies, such as generated C#, has to create instances, and even then don't make the record positional. Use an `internal init` only where the SDK itself needs a `with` expression. Internal and private types may stay positional. Existing public positional records stay as they are until a release that may break compiled consumers, because changing them is itself a breaking change.
+- A new `.cs` file needs its own `#nullable enable` directive after the header only when its project does not enable nullable. Where the project sets `<Nullable>enable</Nullable>`, as `cql-base.props` does for every SDK project, leave it out.
 - Check `GlobalUsings.cs` before adding a `using` — don't duplicate what's already global.
 - **Reflection goes through [`ReflectionUtility`](Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs)**, not string-based lookups. Use `MethodOf(() => x.Method(…))`, `PropertyOf(() => x.Prop)`, `ConstructorOf(() => new T(…))` and `GenericMethodDefinitionOf(() => x.Generic<T>(…))` instead of `typeof(X).GetMethod("Name")` / `GetProperty("Name")`. The expression form is checked by the compiler, follows renames, and returns a non-null result or throws with the offending expression in the message — so it also removes the `!` and the null-guard that string lookups drag along. The class is `internal` to `HL7.Cql.Abstractions`, which grants `InternalsVisibleTo` to every SDK assembly (`Hl7.Cql.Runtime`, `Hl7.Cql.Fhir`, `Hl7.Cql.Compiler`, …) plus `CoreTests`, so it is available essentially everywhere. `nameof` in a `GetMethod`/`GetProperty` call is not a substitute: it survives renames but still resolves by string at run time and still cannot see an overload change.
 - **The only place backstory goes is the PR description.** Why a thing was once done, which PR or issue caused it, what used to be pinned, broken or worked around, what a rule is a reaction to — none of it belongs in source, project or config files, **and none of it belongs in instruction or documentation files either**, this one included. State the rule or the constraint as it is *now* ("raise this property rather than pinning one package") and stop; the reader does not need to know what it replaced. Release notes are the one exception, being a record of what each release shipped.
@@ -38,20 +39,29 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## CQL evaluation errors: use `ICqlError` + `CqlException<TError>`, not raw .NET exceptions
 
-For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlError` — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
+For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlEvaluationError` (an `ICqlError`) — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
 
-The struct holds raw metadata (unit name, value, etc.) as constructor parameters; `GetMessage()` builds the human-readable string lazily, on demand, rather than at the throw site. This keeps error handling strongly-typed (`catch (CqlException<CqlUcumYearArithmeticError> e)`) and avoids allocating message strings for errors that get caught without ever being displayed.
+The struct holds raw metadata (unit name, value, etc.) as get-only properties, set by its constructor; `GetMessage()` builds the human-readable string lazily, on demand, rather than at the throw site. This keeps error handling strongly-typed (`catch (CqlException<CqlUcumYearArithmeticError> e)`) and avoids allocating message strings for errors that get caught without ever being displayed.
 
 ```csharp
 // correct — metadata in, message built lazily
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() => $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
 }
 // wrong — don't pass a pre-built message string into the struct
 ```
 
-See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for where these structs live and how that project is organized.
+Put the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`; `Hl7.Cql.Exceptions` keeps only the exception machinery. The three errors in `Cql.Abstractions/Primitives/Errors.cs` are still in `Hl7.Cql.Primitives` and move in [#1844](https://github.com/FirelyTeam/firely-cql-sdk/issues/1844). A host tells an evaluation error from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`, and `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated, innermost first; `GetCqlEvaluationFrames()` reads the same from any other exception. See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for how that project is organized.
 
 ## FHIR `Library.Name` vs `Library.Id`
 

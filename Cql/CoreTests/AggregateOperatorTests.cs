@@ -10,18 +10,46 @@
 
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 
 namespace CoreTests;
 
 /// <summary>
-/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>): the values they
-/// return per spec §9.B, and the fact that each of them reads its source exactly once.
+/// Regression tests for the aggregate operators (<c>Avg</c>, <c>Median</c>, <c>GeometricMean</c>, <c>Product</c>,
+/// <c>StdDev</c>, <c>Variance</c> and their population forms): the values they return per spec §9.B, null with a
+/// warning where a result cannot be represented, and the fact that the first three read their source exactly once.
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
 public class AggregateOperatorTests
 {
     private static ICqlOperators Operators() => FhirCqlContext.WithDataSource().Operators;
+
+    /// <summary>
+    /// Invokes an operator and returns its result together with the codes of the warnings it reported.
+    /// </summary>
+    private static (T Result, List<string?> Warnings) WithWarnings<T>(Func<ICqlOperators, T> invoke)
+    {
+        var operators = Operators();
+        var warnings = new List<string?>();
+        operators.MessageReceived += (_, e) =>
+        {
+            if (e.Severity == "Warning")
+                warnings.Add(e.Code);
+        };
+        return (invoke(operators), warnings);
+    }
+
+    private static void AssertNullWithOneWarning<T>(Func<ICqlOperators, T> invoke, string code)
+    {
+        var (result, warnings) = WithWarnings(invoke);
+
+        Assert.IsNull(result);
+        CollectionAssert.AreEqual(new[] { code }, warnings);
+    }
+
+    /// <summary>The midpoint of <see cref="decimal.MaxValue"/> and 1.</summary>
+    private const decimal MidpointOfMaxValueAndOne = 39614081257132168796771975168m;
 
     #region Median
 
@@ -127,6 +155,17 @@ public class AggregateOperatorTests
 
         Assert.AreEqual(long.MinValue, operators.Median(new long?[] { long.MinValue, long.MinValue }));
         Assert.AreEqual(-2L, operators.Median(new long?[] { -3L, -2L }));
+    }
+
+    /// <summary>
+    /// The sum of the two middle values leaves the Decimal range, but their midpoint lies between them and is returned.
+    /// </summary>
+    [TestMethod]
+    public void Median_Decimal_EvenCountOfLargeValues_IsTheirMidpoint()
+    {
+        Assert.AreEqual(decimal.MaxValue, Operators().Median(new decimal?[] { decimal.MaxValue, decimal.MaxValue }));
+        Assert.AreEqual(MidpointOfMaxValueAndOne, Operators().Median(new decimal?[] { decimal.MaxValue, 1m }));
+        Assert.AreEqual(-MidpointOfMaxValueAndOne, Operators().Median(new decimal?[] { decimal.MinValue, -1m }));
     }
 
     [TestMethod]
@@ -292,6 +331,249 @@ public class AggregateOperatorTests
     public void Avg_NullSource_IsNull()
     {
         Assert.IsNull(Operators().Avg(null));
+    }
+
+    [TestMethod]
+    public void Avg_TotalOutsideDecimalRange_IsNullWithOneWarning()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { decimal.MaxValue, null, decimal.MaxValue }));
+
+        Assert.IsNull(result);
+        CollectionAssert.AreEqual(new[] { "CqlOperators.AggregateFunctions.Avg" }, warnings);
+    }
+
+    [TestMethod]
+    public void Avg_WithinRange_IsTheMeanOfTheValues()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { 1m, 2m }));
+
+        Assert.AreEqual(1.5m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// The mean of zeroes is a genuine zero, not a result too small to represent.
+    /// </summary>
+    [TestMethod]
+    public void Avg_OfZeroes_IsZeroWithoutWarning()
+    {
+        var (result, warnings) = WithWarnings(o => o.Avg(new decimal?[] { 0m, 0m }));
+
+        Assert.AreEqual(0m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// A nonzero mean too small in magnitude to represent is null, as for <c>/</c>, rather than rounded to zero.
+    /// </summary>
+    [TestMethod]
+    public void Avg_NonzeroMeanTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Avg(new decimal?[] { 1e-28m, 0m }), "CqlOperators.AggregateFunctions.Avg");
+        AssertNullWithOneWarning(o => o.Avg(new decimal?[] { -1e-28m, null, 0m }), "CqlOperators.AggregateFunctions.Avg");
+    }
+
+    #endregion
+
+    #region Product
+
+    [TestMethod]
+    public void Product_WithinRange_IsTheProductOfTheValuesThatAreNotNull()
+    {
+        Assert.AreEqual(6, Operators().Product(new int?[] { 2, null, 3 }));
+        Assert.AreEqual(6L, Operators().Product(new long?[] { 2L, null, 3L }));
+        Assert.AreEqual(7.5m, Operators().Product(new decimal?[] { 2.5m, null, 3m }));
+        var quantity = Operators().Product([new CqlQuantity(2.5m, "mg"), null, new CqlQuantity(3m, "mg")]);
+        Assert.AreEqual(7.5m, quantity?.value);
+        Assert.AreEqual("mg", quantity?.unit);
+    }
+
+    /// <summary>
+    /// An Integer or Long product outside the type's range is null, not the value it wraps around to.
+    /// </summary>
+    [TestMethod]
+    public void Product_OutsideRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Product(new int?[] { int.MaxValue, 2 }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(o => o.Product(new long?[] { long.MaxValue, 2L }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(o => o.Product(new decimal?[] { decimal.MaxValue, 2m }), "CqlOperators.AggregateFunctions.Product");
+        AssertNullWithOneWarning(
+            o => o.Product([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(2m, "mg")]),
+            "CqlOperators.AggregateFunctions.Product");
+    }
+
+    /// <summary>
+    /// A Decimal product of nonzero values too small in magnitude to represent is null, as for <c>*</c>.
+    /// </summary>
+    [TestMethod]
+    public void Product_DecimalTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Product(new decimal?[] { 1e-20m, 1e-20m }), "CqlOperators.AggregateFunctions.Product");
+    }
+
+    [TestMethod]
+    public void Product_QuantitiesOfDifferentUnits_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(
+            o => o.Product([new CqlQuantity(2m, "mg"), new CqlQuantity(3m, "g")]),
+            "CqlOperators.AggregateFunctions.Product");
+    }
+
+    #endregion
+
+    #region StdDev, Variance, PopulationStdDev, PopulationVariance
+
+    /// <summary>
+    /// The sample standard deviation and variance divide by one less than the number of values, which is zero for a
+    /// single value; division by zero results in null.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_SingleValue_AreNull()
+    {
+        Assert.IsNull(Operators().StdDev(new decimal?[] { 1m, null }));
+        Assert.IsNull(Operators().Variance(new decimal?[] { 1m, null }));
+        Assert.IsNull(Operators().StdDev([new CqlQuantity(1m, "mg")]));
+        Assert.IsNull(Operators().Variance([new CqlQuantity(1m, "mg")]));
+    }
+
+    [TestMethod]
+    public void StdDev_OutsideDecimalRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.StdDev(new decimal?[] { decimal.MaxValue, decimal.MinValue }), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(
+            o => o.StdDev([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(decimal.MinValue, "mg")]),
+            "CqlOperators.AggregateFunctions.StdDev");
+    }
+
+    /// <summary>
+    /// The standard deviation of these values is representable, its square is not.
+    /// </summary>
+    [TestMethod]
+    public void Variance_OutsideDecimalRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(o => o.Variance(new decimal?[] { 1e15m, -1e15m }), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(
+            o => o.Variance([new CqlQuantity(1e15m, "mg"), new CqlQuantity(-1e15m, "mg")]),
+            "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// The standard deviation of these values, computed in <see cref="double"/>, is nonzero and too small in magnitude
+    /// to represent as a Decimal, and so is the variance.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_NonzeroStdDevTooSmallToRepresent_AreNullWithOneWarning()
+    {
+        decimal?[] values = [0m, 0m, 0m, 0m, 1e-28m];
+        var quantities = values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg")).ToArray();
+
+        AssertNullWithOneWarning(o => o.StdDev(values), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.StdDev(quantities), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.Variance(values), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(o => o.Variance(quantities), "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// The standard deviation of these values is representable, its square is nonzero and too small in magnitude to
+    /// represent.
+    /// </summary>
+    [TestMethod]
+    public void Variance_NonzeroVarianceTooSmallToRepresent_IsNullWithOneWarning()
+    {
+        var (stdDev, stdDevWarnings) = WithWarnings(o => o.StdDev(new decimal?[] { 0m, 1e-15m }));
+        Assert.IsTrue(stdDev > 0m);
+        Assert.AreEqual(0, stdDevWarnings.Count);
+
+        AssertNullWithOneWarning(o => o.Variance(new decimal?[] { 0m, 1e-15m }), "CqlOperators.AggregateFunctions.Variance");
+        AssertNullWithOneWarning(
+            o => o.Variance([new CqlQuantity(0m, "mg"), new CqlQuantity(1e-15m, "mg")]),
+            "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// Equal values have a standard deviation and variance of exactly zero, which is no underflow.
+    /// </summary>
+    [TestMethod]
+    public void StdDevAndVariance_EqualValues_AreZeroWithoutWarning()
+    {
+        var (stdDev, stdDevWarnings) = WithWarnings(o => o.StdDev(new decimal?[] { 1e-28m, 1e-28m }));
+        var (variance, varianceWarnings) = WithWarnings(o => o.Variance(new decimal?[] { 1e-28m, 1e-28m }));
+
+        Assert.AreEqual(0m, stdDev);
+        Assert.AreEqual(0m, variance);
+        Assert.AreEqual(0, stdDevWarnings.Count + varianceWarnings.Count);
+    }
+
+    [TestMethod]
+    public void StdDevAndVariance_QuantitiesOfDifferentUnits_AreNullWithOneWarning()
+    {
+        CqlQuantity?[] quantities = [new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "g")];
+
+        AssertNullWithOneWarning(o => o.StdDev(quantities), "CqlOperators.AggregateFunctions.StdDev");
+        AssertNullWithOneWarning(o => o.Variance(quantities), "CqlOperators.AggregateFunctions.Variance");
+    }
+
+    /// <summary>
+    /// A squared deviation too small to represent adds nothing to the sum of squares, so the variance of nearly equal
+    /// values is zero rather than null.
+    /// </summary>
+    [TestMethod]
+    public void PopulationVariance_SquaredDeviationTooSmallToRepresent_CountsAsZero()
+    {
+        var (result, warnings) = WithWarnings(o => o.PopulationVariance(new decimal?[] { 0.3333333333333333333333333333m, 0.3333333333333333333333333334m }));
+
+        Assert.AreEqual(0m, result);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// The squared deviations of these values are representable, but their mean, the population variance, is nonzero
+    /// and too small in magnitude to represent.
+    /// </summary>
+    [TestMethod]
+    public void PopulationStdDevAndVariance_NonzeroVarianceTooSmallToRepresent_AreNullWithOneWarning()
+    {
+        decimal?[] values = [1e-14m, -1e-14m, 0m, 0m, 0m];
+        var quantities = values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg")).ToArray();
+
+        AssertNullWithOneWarning(o => o.PopulationVariance(values), "CqlOperators.AggregateFunctions.PopulationVariance");
+        AssertNullWithOneWarning(o => o.PopulationVariance(quantities), "CqlOperators.AggregateFunctions.PopulationVariance");
+        AssertNullWithOneWarning(o => o.PopulationStdDev(values), "CqlOperators.AggregateFunctions.PopulationStdDev");
+        AssertNullWithOneWarning(o => o.PopulationStdDev(quantities), "CqlOperators.AggregateFunctions.PopulationStdDev");
+    }
+
+    /// <summary>
+    /// The mean of these values is too small to represent and rounds to zero, which moves each deviation by less than
+    /// the smallest Decimal step; the variance itself is close to one and is representable.
+    /// </summary>
+    [TestMethod]
+    public void PopulationVariance_MeanTooSmallToRepresent_IsTheVarianceAroundZero()
+    {
+        var (result, warnings) = WithWarnings(o => o.PopulationVariance(new decimal?[] { 1m, -0.9999999999999999999999999999m }));
+
+        Assert.IsNotNull(result);
+        Assert.AreEqual(1m, result.Value, 1e-27m);
+        Assert.AreEqual(0, warnings.Count);
+    }
+
+    /// <summary>
+    /// The total of the values, a deviation from their mean or its square leaves the Decimal range.
+    /// </summary>
+    [TestMethod]
+    public void PopulationStdDevAndVariance_OutsideDecimalRange_AreNullWithOneWarning()
+    {
+        foreach (var values in new[] { new decimal?[] { decimal.MaxValue, decimal.MaxValue }, [decimal.MaxValue, decimal.MinValue], [1e15m, -1e15m] })
+        {
+            AssertNullWithOneWarning(o => o.PopulationVariance(values), "CqlOperators.AggregateFunctions.PopulationVariance");
+            AssertNullWithOneWarning(
+                o => o.PopulationVariance(values.Select(v => (CqlQuantity?)new CqlQuantity(v, "mg"))),
+                "CqlOperators.AggregateFunctions.PopulationVariance");
+        }
+
+        AssertNullWithOneWarning(o => o.PopulationStdDev(new decimal?[] { decimal.MaxValue, decimal.MinValue }), "CqlOperators.AggregateFunctions.PopulationStdDev");
+        AssertNullWithOneWarning(
+            o => o.PopulationStdDev([new CqlQuantity(decimal.MaxValue, "mg"), new CqlQuantity(decimal.MinValue, "mg")]),
+            "CqlOperators.AggregateFunctions.PopulationStdDev");
     }
 
     #endregion
