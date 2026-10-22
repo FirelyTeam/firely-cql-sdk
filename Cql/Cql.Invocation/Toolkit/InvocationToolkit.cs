@@ -115,6 +115,11 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// have is left to the load, which can find it among the other assemblies added to the same toolkit.
     /// </para>
     /// <para>
+    /// To find the host's assemblies, the first call subscribes to <see cref="AppDomain.AssemblyLoad"/> for the life of
+    /// the process, so a host that loaded this SDK into a collectible
+    /// <see cref="System.Runtime.Loader.AssemblyLoadContext"/> can no longer unload it from then on.
+    /// </para>
+    /// <para>
     /// A supported generator version is necessary for this toolkit to run a library, but not sufficient: loading
     /// it can still fail for reasons that the assembly's metadata does not show. Those include a missing dependency,
     /// an <c>ILibrary</c> that states another library than its

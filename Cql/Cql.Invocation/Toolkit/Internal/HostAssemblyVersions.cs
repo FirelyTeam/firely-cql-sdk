@@ -22,6 +22,11 @@ namespace Hl7.Cql.Invocation.Toolkit.Internal;
 /// valid, as that context neither unloads an assembly nor loads a second one of the same name.
 /// </para>
 /// <para>
+/// The subscription to <see cref="AppDomain.AssemblyLoad"/> is made on the first lookup and never removed, and its
+/// handler holds the versions, so from then on it keeps this assembly alive for the life of the process: a host that
+/// loaded the SDK into a collectible <see cref="AssemblyLoadContext"/> can no longer unload it.
+/// </para>
+/// <para>
 /// No assembly is loaded: the version of one the trusted platform assemblies list is read from its file's metadata,
 /// once, as that list is fixed for the life of the process. A name it does not hold is a miss without reading
 /// anything.
