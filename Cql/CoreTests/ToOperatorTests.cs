@@ -26,6 +26,46 @@ public class ToOperatorTests
 {
     private static ICqlOperators Operators() => FhirCqlContext.WithDataSource().Operators;
 
+    #region ToBoolean
+
+    /// <summary>
+    /// "If the input is an Integer or Long, the result is true if the integer is 1, false if the integer is 0. If the
+    /// input is a Decimal, the result is true if the decimal is 1.0, false if the decimal is 0.0." Any other number
+    /// "cannot be interpreted as a valid Boolean value", so the result is null.
+    /// </summary>
+    private static IEnumerable<object?[]> ToBooleanOfANumberCases =>
+    [
+        ["Integer 1", 1, true],
+        ["Integer 0", 0, false],
+        ["Long 1", 1L, true],
+        ["Long 0", 0L, false],
+        ["Decimal 1.0", 1.0m, true],
+        ["Decimal 0.0", 0.0m, false],
+        ["Integer 2", 2, null],
+        ["Integer -1", -1, null],
+        ["Long 2", 2L, null],
+        ["Decimal 0.5", 0.5m, null],
+        ["Decimal 2.0", 2.0m, null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToBooleanOfANumberCases))]
+    public void ToBoolean_OfANumber_IsTrueForOneFalseForZeroAndNullOtherwise(string argumentDescription, object argument, bool? expected)
+    {
+        var operators = Operators();
+        var actual = argument switch
+        {
+            int i => operators.ConvertIntegerToBoolean(i),
+            long l => operators.ConvertLongToBoolean(l),
+            decimal d => operators.ConvertDecimalToBoolean(d),
+            _ => throw new ArgumentException($"Not a number: {argument}", nameof(argument)),
+        };
+
+        Assert.AreEqual(expected, actual, argumentDescription);
+    }
+
+    #endregion
+
     #region ToDateTime
 
     /// <summary>
@@ -67,6 +107,126 @@ public class ToOperatorTests
         dateTime?.Value is { } v
             ? (v.Year, v.Month, v.Day, v.Hour, v.Minute, v.Second, v.Millisecond, v.OffsetHour, v.OffsetMinute)
             : null;
+
+    #endregion
+
+    #region ToDecimal
+
+    /// <summary>
+    /// "The operator accepts strings using the following format: (+|-)?#0(.0#)? Meaning an optional polarity
+    /// indicator, followed by any number of digits (including none), followed by at least one digit, followed
+    /// optionally by a decimal point, at least one digit, and any number of additional digits (including none)."
+    /// </summary>
+    private static IEnumerable<object?[]> ToDecimalCases =>
+    [
+        ["'-0.1'", "-0.1", -0.1m],
+        ["'+25.5'", "+25.5", 25.5m],
+        ["'1'", "1", 1m],
+        ["'007.50'", "007.50", 7.5m],
+        ["Integer part only, many digits", "12345678901234567890", 12345678901234567890m],
+        ["Surrounding spaces ' 1 '", " 1 ", null],
+        ["Leading space ' 1'", " 1", null],
+        ["Trailing space '1 '", "1 ", null],
+        ["Thousands separator '1,000'", "1,000", null],
+        ["Trailing sign '1-'", "1-", null],
+        ["No digit before the point '.5'", ".5", null],
+        ["No digit after the point '1.'", "1.", null],
+        ["Two polarity indicators '+-0.1'", "+-0.1", null],
+        ["Exponent '1e3'", "1e3", null],
+        ["Two points '1.5.3'", "1.5.3", null],
+        ["Sign only '-'", "-", null],
+        ["Empty string", "", null],
+        ["'abc'", "abc", null],
+        ["Outside the Decimal range", "99999999999999999999999999999999", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToDecimalCases))]
+    public void ToDecimal_OfAString_AcceptsOnlyTheSpecificationsFormat(string argumentDescription, string argument, decimal? expected) =>
+        Assert.AreEqual(expected, Operators().ConvertStringToDecimal(argument), argumentDescription);
+
+    #endregion
+
+    #region ToInteger
+
+    /// <summary>
+    /// "The operator accepts strings using the following format: (+|-)?#0 Meaning an optional polarity indicator,
+    /// followed by any number of digits (including none), followed by at least one digit. [...] the integer value
+    /// returned by this operator must be a valid value in the range representable for Integer values in CQL."
+    /// </summary>
+    private static IEnumerable<object?[]> ToIntegerOfAStringCases =>
+    [
+        ["'-25'", "-25", -25],
+        ["'+25'", "+25", 25],
+        ["'0'", "0", 0],
+        ["'007'", "007", 7],
+        ["Integer maximum", "2147483647", int.MaxValue],
+        ["Integer minimum", "-2147483648", int.MinValue],
+        ["Surrounding spaces ' 1 '", " 1 ", null],
+        ["Leading tab '\\t1'", "\t1", null],
+        ["Thousands separator '1,000'", "1,000", null],
+        ["Trailing sign '1-'", "1-", null],
+        ["Decimal '1.0'", "1.0", null],
+        ["Two polarity indicators '+-1'", "+-1", null],
+        ["Sign only '+'", "+", null],
+        ["Empty string", "", null],
+        ["'one'", "one", null],
+        ["Above the Integer maximum", "2147483648", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToIntegerOfAStringCases))]
+    public void ToInteger_OfAString_AcceptsOnlyTheSpecificationsFormat(string argumentDescription, string argument, int? expected) =>
+        Assert.AreEqual(expected, Operators().ConvertStringToInteger(argument), argumentDescription);
+
+    /// <summary>
+    /// "If the input is a Long value that can be represented within the range of Integer values, the result is the
+    /// Integer value; otherwise, the result is null."
+    /// </summary>
+    private static IEnumerable<object?[]> ToIntegerOfALongCases =>
+    [
+        ["5", 5L, 5],
+        ["-5", -5L, -5],
+        ["Integer maximum", (long)int.MaxValue, int.MaxValue],
+        ["Integer minimum", (long)int.MinValue, int.MinValue],
+        ["3000000000", 3000000000L, null],
+        ["Integer maximum + 1", (long)int.MaxValue + 1, null],
+        ["Integer minimum - 1", (long)int.MinValue - 1, null],
+        ["Long maximum", long.MaxValue, null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToIntegerOfALongCases))]
+    public void ToInteger_OfALong_IsNullOutsideTheIntegerRange(string argumentDescription, long argument, int? expected) =>
+        Assert.AreEqual(expected, Operators().ConvertLongToInteger(argument), argumentDescription);
+
+    #endregion
+
+    #region ToLong
+
+    /// <summary>
+    /// "The operator accepts strings using the following format: (+|-)?#0 [...] Note that the long value returned by
+    /// this operator must be a valid value in the range representable for Long values in CQL."
+    /// </summary>
+    private static IEnumerable<object?[]> ToLongCases =>
+    [
+        ["'-1'", "-1", -1L],
+        ["'+1'", "+1", 1L],
+        ["Long maximum", "9223372036854775807", long.MaxValue],
+        ["Long minimum", "-9223372036854775808", long.MinValue],
+        ["Surrounding spaces ' 1 '", " 1 ", null],
+        ["Thousands separator '1,000'", "1,000", null],
+        ["Trailing sign '1-'", "1-", null],
+        ["Decimal '1.0'", "1.0", null],
+        ["Empty string", "", null],
+        ["'one'", "one", null],
+        ["Above the Long maximum", "9223372036854775808", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToLongCases))]
+    public void ToLong_OfAString_AcceptsOnlyTheSpecificationsFormat(string argumentDescription, string argument, long? expected) =>
+        Assert.AreEqual(expected, Operators().ConvertStringToLong(argument), argumentDescription);
 
     #endregion
 

@@ -64,19 +64,26 @@ namespace Hl7.Cql.Operators
         public string? ConvertBooleanToString(bool? b) => b?.ToString()?.ToLower(CultureInfo.InvariantCulture);
 
 
-        public bool? ConvertIntegerToBoolean(int? i) => i == null ? null : (i.Value == 1 ? true : false);
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToBoolean: "If the input is an Integer or Long, the
+        // result is true if the integer is 1, false if the integer is 0. If the input is a Decimal, the result is true if
+        // the decimal is 1.0, false if the decimal is 0.0." Any other number "cannot be interpreted as a valid Boolean
+        // value", so the result is null.
+        public bool? ConvertIntegerToBoolean(int? i) => i switch { 1 => true, 0 => false, _ => null };
         public long? ConvertIntegerToLong(int? i) => i;
         public decimal? ConvertIntegerToDecimal(int? i) => i;
         public CqlQuantity? ConvertIntegerToQuantity(int? i) => i == null ? null : new CqlQuantity(i, "1");
         public string? ConvertIntegerToString(int? i) => i?.ToString(CultureInfo.InvariantCulture);
 
-        public bool? ConvertLongToBoolean(long? i) => i == null ? null : (i.Value == 1 ? true : false);
-        public int? ConvertLongToInteger(long? i) => (int?)i;
+        public bool? ConvertLongToBoolean(long? i) => i switch { 1L => true, 0L => false, _ => null };
+
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToInteger: "If the input is a Long value that can be
+        // represented within the range of Integer values, the result is the Integer value; otherwise, the result is null."
+        public int? ConvertLongToInteger(long? i) => i is >= int.MinValue and <= int.MaxValue ? (int)i.Value : null;
         public decimal? ConvertLongToDecimal(long? i) => i;
         public CqlQuantity? ConvertLongToQuantity(long? i) => i == null ? null : new CqlQuantity(i, "1");
         public string? ConvertLongToString(long? i) => i?.ToString(CultureInfo.InvariantCulture);
 
-        public bool? ConvertDecimalToBoolean(decimal? d) => d == null ? null : (d.Value == 1m ? true : false);
+        public bool? ConvertDecimalToBoolean(decimal? d) => d switch { 1m => true, 0m => false, _ => null };
         public CqlQuantity? ConvertDecimalToQuantity(decimal? d) => d == null ? null : new CqlQuantity(d, "1");
         public string? ConvertDecimalToString(decimal? d) => d?.ToString(CultureInfo.InvariantCulture);
 
@@ -136,30 +143,18 @@ namespace Hl7.Cql.Operators
             }
         }
 
-        public int? ConvertStringToInteger(string? s)
-        {
-            if (s == null)
-                return null;
-            else if (int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
-                return value;
-            else return null;
-        }
-        public long? ConvertStringToLong(string? s)
-        {
-            if (s == null)
-                return null;
-            else if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value))
-                return value;
-            else return null;
-        }
-        public decimal? ConvertStringToDecimal(string? s)
-        {
-            if (s == null)
-                return null;
-            else if (decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value))
-                return value;
-            else return null;
-        }
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators: ToInteger and ToLong accept "(+|-)?#0", ToDecimal
+        // "(+|-)?#0(.0#)?"; "If the input string is not formatted correctly, or cannot be interpreted as a valid [...]
+        // value, the result is null."
+        public int? ConvertStringToInteger(string? s) =>
+            s is not null && CqlNumberFormat.TryParseInteger(s, out var value) ? value : null;
+
+        public long? ConvertStringToLong(string? s) =>
+            s is not null && CqlNumberFormat.TryParseLong(s, out var value) ? value : null;
+
+        public decimal? ConvertStringToDecimal(string? s) =>
+            s is not null && CqlNumberFormat.TryParseDecimal(s, out var value) ? value : null;
+
         public CqlQuantity? ConvertStringToQuantity(string? s)
         {
             if (s == null)
@@ -261,14 +256,13 @@ namespace Hl7.Cql.Operators
 
         #region ConvertsToBoolean
 
-        // ToBoolean converts an Integer, Long or Decimal only when it is 0 or 1.
         public bool? ConvertsToBoolean(object? o) => o switch
         {
             null => null,
             bool => true,
-            int i => i is 0 or 1,
-            long l => l is 0L or 1L,
-            decimal d => d is 0m or 1m,
+            int i => ConvertIntegerToBoolean(i) is not null,
+            long l => ConvertLongToBoolean(l) is not null,
+            decimal d => ConvertDecimalToBoolean(d) is not null,
             string s => ConvertStringToBoolean(s) is not null,
             _ => false,
         };
@@ -332,13 +326,12 @@ namespace Hl7.Cql.Operators
 
         #region ConvertsToInteger
 
-        // ToInteger converts a Long only when it lies within the Integer range.
         public bool? ConvertsToInteger(object? o) => o switch
         {
             null => null,
             int => true,
             bool b => ConvertBooleanToInteger(b) is not null,
-            long l => l is >= int.MinValue and <= int.MaxValue,
+            long l => ConvertLongToInteger(l) is not null,
             string s => ConvertStringToInteger(s) is not null,
             _ => false,
         };
