@@ -928,7 +928,10 @@ public class CqlAssemblyInfoReaderTests
             "the test is of a trusted platform assembly that nothing has loaded");
         var path = ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
                    .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
-                   .Single(entry => Path.GetFileNameWithoutExtension(entry) == UnloadedTrustedPlatformAssembly);
+                   .Should().ContainSingle(
+                       entry => Path.GetFileNameWithoutExtension(entry) == UnloadedTrustedPlatformAssembly,
+                       "the test reads the version of that assembly from its one entry in the trusted platform assemblies list")
+                   .Which;
         var reference = AssemblyName.GetAssemblyName(path);
         var hostVersion = reference.Version!;
         reference.Version = referencedVersion switch
