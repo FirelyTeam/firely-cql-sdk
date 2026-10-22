@@ -25,6 +25,8 @@ public class LibraryVersionCompilationTests
     [DataRow("library NoVersion", "NoVersion", null, DisplayName = "no version")]
     [DataRow("library Draft version '1.0.0-draft'", "Draft", "1.0.0-draft", DisplayName = "a version that is not numeric")]
     [DataRow("library Wide version '1.0.70000'", "Wide", "1.0.70000", DisplayName = "a numeric version too wide for an assembly version")]
+    [DataRow("library Signed version '1.+0'", "Signed", "1.+0", DisplayName = "a version with a signed part")]
+    [DataRow("library Spaced version ' 1.0 '", "Spaced", " 1.0 ", DisplayName = "a numeric version with spaces around it")]
     [DataRow("library Plain version '1.0.0'", "Plain", "1.0.0", DisplayName = "a numeric version")]
     public void CreateLibrarySetInvoker_OfALibraryWithAnyVersionOrNone_CompilesItAndInvokesItsDefinitions(
         string header,
