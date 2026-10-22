@@ -19,19 +19,9 @@ internal readonly record struct LibraryMissingIncludeDefPathError(Library Librar
     public string GetMessage() => $"Library has an include definition with a missing path. Library Identifier: '{Library}', IncludeDef: '{IncludeDef}'";
 }
 
-internal readonly record struct MissingNameError(IGetVersionedIdentifier Source) : ICqlError
-{
-    public string GetMessage() => $"{Source.GetType().Name} did not have a valid name.";
-}
-
 internal readonly record struct MissingIdentifierError(IGetVersionedIdentifier Source) : ICqlError
 {
     public string GetMessage() => $"{Source.GetType().Name} did not have an identifier.";
-}
-
-internal readonly record struct MissingAliasError(IGetLibraryName Source) : ICqlError
-{
-    public string GetMessage() => $"{Source.GetType().Name} did not have an alias. Source: {Source}";
 }
 
 internal readonly record struct UntypedOperandInFunctionError(IFunctionElement Func, OperandDef Element) : ICqlError

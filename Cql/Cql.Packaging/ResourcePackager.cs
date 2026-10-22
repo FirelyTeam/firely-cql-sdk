@@ -124,15 +124,4 @@ internal class ResourcePackager(
     /// </remarks>
     internal static string NormalizeNewLines(string text) =>
         text.Contains('\r') ? text.Replace("\r\n", "\n").Replace("\r", "\n") : text;
-
-    internal static string BuildResourceUrl(
-        string resourceCanonicalRootUrl,
-        string resourceType,
-        string name,
-        string? version = null)
-    {
-        string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
-        string includeIdMaybeVersion = $"{resourceCanonicalRootUrl}{resourceType}/{name}{includeVersionString}";
-        return includeIdMaybeVersion;
-    }
 }
