@@ -15,6 +15,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Errors;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
@@ -233,6 +234,7 @@ public class CqlEvaluationFramesTests
     [DataRow(typeof(CqlInvalidDateTimeComponentsError))]
     [DataRow(typeof(CqlExpandFractionalPerError))]
     [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
+    [DataRow(typeof(CqlUnresolvedValueSetError))]
     public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
         errorType.Should().BeAssignableTo<ICqlEvaluationError>();
 
