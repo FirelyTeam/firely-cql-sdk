@@ -347,7 +347,6 @@ namespace Hl7.Cql.Operators
 
         #region ConvertsToQuantity
 
-        // ToQuantity of a Ratio is the numerator divided by the denominator.
         public bool? ConvertsToQuantity(object? o) => o switch
         {
             null => null,
@@ -355,7 +354,7 @@ namespace Hl7.Cql.Operators
             int i => ConvertIntegerToQuantity(i) is not null,
             long l => ConvertLongToQuantity(l) is not null,
             decimal d => ConvertDecimalToQuantity(d) is not null,
-            CqlRatio r => Divide(r.numerator, r.denominator) is not null,
+            CqlRatio r => ConvertRatioToQuantity(r) is not null,
             string s => ConvertStringToQuantity(s) is not null,
             _ => false,
         };
