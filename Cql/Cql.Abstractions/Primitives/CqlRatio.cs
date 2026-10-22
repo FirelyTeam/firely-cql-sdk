@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
@@ -119,48 +117,7 @@ namespace Hl7.Cql.Primitives
         /// Parses one quantity of a ratio string in the format <c>(+|-)?#0(.0#)?('&lt;unit&gt;')?</c>,
         /// with optional whitespace around it and between the value and the unit designator.
         /// </summary>
-        private static bool TryParseQuantity(ReadOnlySpan<char> s, [NotNullWhen(true)] out CqlQuantity? quantity)
-        {
-            quantity = null;
-            s = s.Trim();
-
-            var i = 0;
-            if (i < s.Length && (s[i] == '+' || s[i] == '-'))
-                i++;
-            var integerDigits = CountDigits(s, i);
-            if (integerDigits == 0)
-                return false;
-            i += integerDigits;
-            if (i < s.Length && s[i] == '.')
-            {
-                var fractionDigits = CountDigits(s, i + 1);
-                if (fractionDigits == 0)
-                    return false;
-                i += 1 + fractionDigits;
-            }
-
-            if (!decimal.TryParse(s[..i], NumberStyles.AllowLeadingSign | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var number))
-                return false;
-
-            var rest = s[i..].TrimStart();
-            string unit;
-            if (rest.IsEmpty)
-                unit = UCUMUnits.Default;
-            else if (rest.Length > 2 && rest[0] == '\'' && rest[^1] == '\'' && rest[1..^1].IndexOf('\'') < 0)
-                unit = rest[1..^1].ToString();
-            else
-                return false;
-
-            quantity = new CqlQuantity(number, unit);
-            return true;
-        }
-
-        private static int CountDigits(ReadOnlySpan<char> s, int start)
-        {
-            var count = 0;
-            while (start + count < s.Length && char.IsAsciiDigit(s[start + count]))
-                count++;
-            return count;
-        }
+        private static bool TryParseQuantity(ReadOnlySpan<char> s, [NotNullWhen(true)] out CqlQuantity? quantity) =>
+            CqlQuantity.TryParse(s.Trim(), out quantity);
     }
 }

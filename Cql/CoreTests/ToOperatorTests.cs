@@ -230,6 +230,59 @@ public class ToOperatorTests
 
     #endregion
 
+    #region ToQuantity
+
+    /// <summary>
+    /// "the operator accepts strings using the following format: (+|-)?#0(.0#)?('&lt;unit&gt;')? Meaning an optional
+    /// polarity indicator, followed by any number of digits (including none) followed by at least one digit,
+    /// optionally followed by a decimal point, at least one digit, and any number of additional digits, all optionally
+    /// followed by a unit designator as a string literal [...]. Spaces are allowed between the quantity value and the
+    /// unit designator." A quantity without a unit designator has the default unit '1'.
+    /// </summary>
+    private static IEnumerable<object?[]> ToQuantityCases =>
+    [
+        ["\"5.5 'cm'\"", "5.5 'cm'", new CqlQuantity(5.5m, "cm")],
+        ["\"-0.1 'mg'\"", "-0.1 'mg'", new CqlQuantity(-0.1m, "mg")],
+        ["\"+2 'mg'\"", "+2 'mg'", new CqlQuantity(2m, "mg")],
+        ["No unit '5'", "5", new CqlQuantity(5m, "1")],
+        ["No space before the unit \"5'mg'\"", "5'mg'", new CqlQuantity(5m, "mg")],
+        ["Several spaces before the unit \"5   'mg'\"", "5   'mg'", new CqlQuantity(5m, "mg")],
+        ["Calendar duration \"3 'months'\"", "3 'months'", new CqlQuantity(3m, "months")],
+        ["Unit with a colon \"5 '{beats:min}'\"", "5 '{beats:min}'", new CqlQuantity(5m, "{beats:min}")],
+        ["Unclosed quote \"444 'cm\"", "444 'cm", null],
+        ["Unopened quote \"444 cm'\"", "444 cm'", null],
+        ["Unquoted unit '5 mg'", "5 mg", null],
+        ["Empty unit \"5 ''\"", "5 ''", null],
+        ["Quote inside the unit \"5 'm'g'\"", "5 'm'g'", null],
+        ["Text after the unit \"5 'mg' x\"", "5 'mg' x", null],
+        ["Leading space \" 5 'mg'\"", " 5 'mg'", null],
+        ["Trailing space \"5 'mg' \"", "5 'mg' ", null],
+        ["Trailing space without a unit '5 '", "5 ", null],
+        ["No digit before the point \".5 'mg'\"", ".5 'mg'", null],
+        ["Thousands separator \"1,000 'mg'\"", "1,000 'mg'", null],
+        ["Unit only \"'mg'\"", "'mg'", null],
+        ["Empty string", "", null],
+        ["'abc'", "abc", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToQuantityCases))]
+    public void ToQuantity_OfAString_AcceptsOnlyTheSpecificationsFormat(string argumentDescription, string argument, CqlQuantity? expected) =>
+        Assert.AreEqual(Components(expected), Components(Operators().ConvertStringToQuantity(argument)), argumentDescription);
+
+    private static (decimal?, string?)? Components(CqlQuantity? quantity) =>
+        quantity is null ? null : (quantity.value, quantity.unit);
+
+    /// <summary>
+    /// The unit designator must specify "a valid, case-sensitive UCUM unit of measure or calendar duration keyword".
+    /// </summary>
+    [TestMethod]
+    [Ignore("The unit designator is not yet checked against UCUM or the calendar duration keywords (#1782).")]
+    public void ToQuantity_OfAStringWithAUnitThatIsNotUcum_IsNull() =>
+        Operators().ConvertStringToQuantity("5 'foo'").Should().BeNull();
+
+    #endregion
+
     #region ToTime
 
     /// <summary>

@@ -223,7 +223,7 @@ public class ConvertsToOperatorTests
 
     /// <summary>
     /// ToQuantity accepts an Integer, a Long and a Decimal, each with the unit '1'; a Ratio, which it divides; and a
-    /// String holding a number followed by a unit. A Ratio whose denominator is 0 cannot be divided.
+    /// String holding a number optionally followed by a quoted unit. A Ratio whose denominator is 0 cannot be divided.
     /// </summary>
     private static IEnumerable<object?[]> ConvertsToQuantityCases =>
     [
@@ -234,6 +234,9 @@ public class ConvertsToOperatorTests
         ["Ratio 1 'mg' : 2 'mg'", SampleRatio, true],
         ["Ratio 1 'mg' : 0 'mg'", new CqlRatio(new CqlQuantity(1m, "mg"), new CqlQuantity(0m, "mg")), false],
         ["String \"-0.1 'mg'\"", "-0.1 'mg'", true],
+        ["String '5'", "5", true],
+        ["String \"5'mg'\"", "5'mg'", true],
+        ["String \"444 'cm\"", "444 'cm", false],
         ["String 'abc'", "abc", false],
         ["Boolean true", true, false],
         ["null", null, null],
