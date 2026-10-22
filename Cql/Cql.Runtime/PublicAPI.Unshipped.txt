@@ -43,3 +43,16 @@ static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator !
 static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError() -> void
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Equals(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError other) -> bool
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.High.get -> object?
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.HighClosed.get -> bool
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Low.get -> object?
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.LowClosed.get -> bool
+override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator !=(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator ==(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.ToString() -> string
