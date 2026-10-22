@@ -26,10 +26,17 @@ to collide, e.g. `add-benchmark-skill.md`; rename it to `<PR-number>-<slug>.md` 
 Each fragment file uses the same section headings as the versioned release notes, scoped to only the section(s) this PR
 needs:
 
+Each bullet opens with the affected SDK component in bold, followed by an em dash and the change. Use `Runtime`, `Code
+generator`, `CQL to ELM translation`, or `Invocation toolkit`; use `Packager CLI` or `Build tooling` for changes in
+those parts. Add the package in parentheses when the change is in a package other than the component name suggests, for
+example **Runtime (`Hl7.Cql.Fhir`)**. For changes spanning components, name them together, for example
+`**CQL to ELM translation, code generation and runtime**`. The component tells readers whether they need to regenerate
+ELM, regenerate C#, or nothing.
+
 ```md
 ## Fixes
 
-- `Expand` no longer emits a trailing interval that overshoots the upper
+- **Runtime** — `Expand` no longer emits a trailing interval that overshoots the upper
   boundary when `per` does not divide the interval width. ... (#1413)
 ```
 
