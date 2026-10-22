@@ -66,6 +66,35 @@ public class ToOperatorTests
 
     #endregion
 
+    #region ToDate
+
+    /// <summary>
+    /// "The operator expects the string to be formatted using the ISO-8601 date representation: YYYY-MM-DD [...] Note
+    /// that the operator can take datetime formatted strings and will ignore the time portions." A string that is not
+    /// a valid date, nor a valid DateTime, gives null.
+    /// </summary>
+    private static IEnumerable<object?[]> ToDateCases =>
+    [
+        ["Year precision '2014'", "2014", "2014"],
+        ["Month precision '2014-01'", "2014-01", "2014-01"],
+        ["Day precision '2014-01-01'", "2014-01-01", "2014-01-01"],
+        ["DateTime '2014-01-01T12:30:00'", "2014-01-01T12:30:00", "2014-01-01"],
+        ["DateTime '2014-01-01T12:30:00.000Z'", "2014-01-01T12:30:00.000Z", "2014-01-01"],
+        ["DateTime '2014-01-01T23:30:00-05:00', whose date in UTC is the next day", "2014-01-01T23:30:00-05:00", "2014-01-01"],
+        ["Month 13 '2014-13-01'", "2014-13-01", null],
+        ["February 30 '2014-02-30'", "2014-02-30", null],
+        ["Slashes '2014/01/01'", "2014/01/01", null],
+        ["DateTime with hour 25 '2014-01-01T25:00:00'", "2014-01-01T25:00:00", null],
+        ["'abc'", "abc", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ToDateCases))]
+    public void ToDate_OfAString_GivesTheDateOfADateOrDateTimeStringAndNullOtherwise(string argumentDescription, string argument, string? expected) =>
+        Assert.AreEqual(expected, Operators().ConvertStringToDate(argument)?.ToString(), argumentDescription);
+
+    #endregion
+
     #region ToDateTime
 
     /// <summary>

@@ -171,12 +171,17 @@ namespace Hl7.Cql.Operators
                 return value;
             else return null;
         }
+
+        // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToDate: "Note that the operator can take datetime
+        // formatted strings and will ignore the time portions." The string must still be a valid DateTime.
         public CqlDate? ConvertStringToDate(string? s)
         {
             if (s == null)
                 return null;
             else if (CqlDate.TryParse(s, out CqlDate? value))
                 return value;
+            else if (CqlDateTime.TryParse(s, out CqlDateTime? dateTime))
+                return ConvertDateTimeToDate(dateTime);
             else return null;
         }
         public CqlDateTime? ConvertStringToDateTime(string? s)
