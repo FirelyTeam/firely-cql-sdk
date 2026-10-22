@@ -996,6 +996,27 @@ public class CqlAssemblyInfoReaderTests
         }
     }
 
+    [TestMethod]
+    public void ReadCqlAssemblyInfo_OfALibraryDeclaredWithoutAVersion_ReadsItsIdentifierWithoutOne()
+    {
+        // The code generator writes a null version for a library without one.
+        var assembly = Compile(
+            "LibraryWithoutAVersion",
+            $$"""
+            [System.CodeDom.Compiler.GeneratedCode("{{GeneratorToolName}}", "{{CurrentGeneratorVersion}}")]
+            [Hl7.Cql.Abstractions.CqlLibrary("Unversioned", null)]
+            public class Library { }
+            """);
+
+        var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(assembly);
+
+        cqlAssemblyInfo.ReadError.Should().BeNull();
+        var cqlLibraryInfo = cqlAssemblyInfo.Libraries.Should().ContainSingle().Which.Value;
+        cqlLibraryInfo.LibraryIdentifier.Should().Be(CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("Unversioned"));
+        cqlLibraryInfo.ReadError.Should().BeNull();
+        cqlLibraryInfo.IsSupported.Should().BeTrue();
+    }
+
     private static CqlVersionedLibraryIdentifier Identifier(string identifier, string version) =>
         CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(identifier, version);
 
