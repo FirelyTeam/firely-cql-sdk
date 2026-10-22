@@ -202,3 +202,45 @@ public readonly record struct CqlExpandFractionalPerError : ICqlEvaluationError
         + "the specification defines the result as \"the list of points covering the range of the given interval\" in steps of size per, "
         + "and \"for numeric intervals, adding the per to the lower boundary produces a more precise value\".";
 }
+
+/// <summary>
+/// An <see cref="ICqlEvaluationError"/> raised when the <c>point from</c> operator is applied to an
+/// interval that is not a unit interval.
+/// </summary>
+/// <remarks>
+/// Per the CQL specification (§9.B, Point From), extracting a point from an interval that is not
+/// a unit interval signals an error to the calling environment. A null closed boundary is
+/// the minimum or maximum value of the point type, so an interval with two of them spans the
+/// whole domain.
+/// </remarks>
+public readonly record struct CqlPointFromNonUnitIntervalError : ICqlEvaluationError
+{
+    internal CqlPointFromNonUnitIntervalError(
+        object? low,
+        object? high,
+        bool lowClosed,
+        bool highClosed)
+    {
+        Low = low;
+        High = high;
+        LowClosed = lowClosed;
+        HighClosed = highClosed;
+    }
+
+    /// <summary>The interval's low boundary value.</summary>
+    public object? Low { get; }
+
+    /// <summary>The interval's high boundary value.</summary>
+    public object? High { get; }
+
+    /// <summary>Whether the interval's low boundary is closed.</summary>
+    public bool LowClosed { get; }
+
+    /// <summary>Whether the interval's high boundary is closed.</summary>
+    public bool HighClosed { get; }
+
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        "The point from operator requires a unit interval, but was given " +
+        $"{(LowClosed ? "[" : "(")}{Low?.ToString() ?? "null"}, {High?.ToString() ?? "null"}{(HighClosed ? "]" : ")")}.";
+}

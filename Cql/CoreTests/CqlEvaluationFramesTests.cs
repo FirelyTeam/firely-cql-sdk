@@ -19,7 +19,7 @@ using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Operators.Errors;
-using Hl7.Cql.Primitives;
+using Hl7.Cql.Primitives.Errors;
 using Hl7.Cql.Runtime;
 
 namespace CoreTests;
