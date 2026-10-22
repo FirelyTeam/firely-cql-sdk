@@ -220,6 +220,37 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        // https://cql.hl7.org/15-h-timeintervalcalculations.html#calculating-duration-in-years
+        // On the anniversary date the year or month is whole only once the start's time of day has been reached.
+        [TestMethod]
+        [DataRow("years between @2012-03-10T22:05:09 and @2013-03-10T19:10:03", 0)]
+        [DataRow("years between @2012-03-10T22:05:09 and @2013-03-10T22:05:09", 1)]
+        [DataRow("years between @2013-03-10T19:10:03 and @2012-03-10T22:05:09", 0)]
+        [DataRow("years between @2013-03-10T22:05:09 and @2012-03-10T22:05:09", -1)]
+        [DataRow("years between @2012-03-10T10:20:00 and @2013-03-10T09:20:00", 0)]
+        [DataRow("years between (date from @2012-03-10T10:20:00) and (date from @2013-03-10T09:20:00)", 1)]
+        [DataRow("months between @2012-03-10T22:05:09 and @2012-04-10T19:10:03", 0)]
+        [DataRow("months between @2012-03-10T22:05:09 and @2012-04-10T22:05:09", 1)]
+        [DataRow("months between @2012-04-10T19:10:03 and @2012-03-10T22:05:09", 0)]
+        [DataRow("years between @2012-02-29T12:34:56 and @2014-02-28T12:34:55", 1)]
+        [DataRow("years between @2012-02-29T12:34:56 and DateTime(2014, 2, 28)", 2)]
+        [DataRow("CalculateAgeInYearsAt(@2012-03-10T22:05:09, @2013-03-10T19:10:03)", 0)]
+        [DataRow("CalculateAgeInMonthsAt(@2012-03-10T22:05:09, @2012-04-10T19:10:03)", 0)]
+        public void Duration_Between_DateTimes_OnTheAnniversaryDate_TheTimeOfDayDecides(string expression, int expected)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                library DurationTest version '1.0.0'
+
+                define private Whole_Periods: {expression}
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+
+            var result = Run(library.statements[0].expression, library);
+            Assert.IsInstanceOfType(result, typeof(int?));
+            Assert.AreEqual(expected, result);
+        }
+
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
             CreateCqlToolkit().MakeLibrary("""

@@ -225,7 +225,12 @@ namespace Hl7.Cql.Primitives
         /// <param name="high">The high date time bound against which to calculate.</param>
         /// <param name="precision">The calendar precision to count.</param>
         /// <returns>The number of <paramref name="precision"/> whole calendar periods between this date time and <paramref name="high"/>.</returns>
-        public int? WholeCalendarPeriodsBetween(CqlDateTime high, string precision) => CqlDateTimeMath.WholeCalendarPeriodsBetween(Value.DateTimeOffset, high?.Value?.DateTimeOffset, precision);
+        public int? WholeCalendarPeriodsBetween(CqlDateTime high, string precision) =>
+            CqlDateTimeMath.WholeCalendarPeriodsBetween(
+                Value.DateTimeOffset,
+                high?.Value?.DateTimeOffset,
+                precision,
+                high is null ? DateTimePrecision.Unknown : (DateTimePrecision)Math.Min((byte)Precision, (byte)high.Precision));
 
         /// <summary>
         /// Gets the immediate predecessor of this value in its precision.

@@ -163,7 +163,22 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
+        /// <summary>
+        /// Returns the number of whole calendar periods for the specified precision between the arguments.
+        /// If <paramref name="low"/> is after <paramref name="high"/>, the result is negative.
+        /// </summary>
+        /// <remarks>
+        /// A year or a month that ends on the anniversary date is whole once the time of day of the start has been
+        /// reached (CQL Appendix H – Time Interval Calculations, "Calculating Duration in Years" and "Calculating
+        /// Duration in Months"). The times of day are compared to <paramref name="timeOfDayPrecision"/>, the finest
+        /// precision both arguments specify; at day precision or coarser they are not compared.
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#duration"/>
+        internal static int? WholeCalendarPeriodsBetween(
+            DateTimeOffset? low,
+            DateTimeOffset? high,
+            string? precision,
+            DateTimePrecision timeOfDayPrecision = DateTimePrecision.Unknown)
         {
             if (low is not {} firstDto || high is not {} secondDto  || precision == null)
                 return null;
@@ -178,6 +193,7 @@ namespace Hl7.Cql.Primitives
                     var yearDiff = secondDto.Year - firstDto.Year;
                     var firstDayInYear = firstDto.DayOfYear;
                     var secondDayInYear = secondDto.DayOfYear;
+                    var timeOfDayOrder = CompareTimeOfDay(secondDto, firstDto, timeOfDayPrecision);
 
                     var firstIsLeapDay = calendar.IsLeapDay(firstDto.Year, firstDto.Month, firstDto.Day);
                     var secondIsLeapDay = calendar.IsLeapDay(secondDto.Year, secondDto.Month, secondDto.Day);
@@ -193,6 +209,12 @@ namespace Hl7.Cql.Primitives
                             if (secondDto.DayOfYear < 60)
                                 return yearDiff - 1;
 
+                            // On 29 February, the anniversary date itself, the time of day decides.
+                            if (secondDto.DayOfYear == 60 && yearDiff > 0 && timeOfDayOrder < 0)
+                                return yearDiff - 1;
+                            if (secondDto.DayOfYear == 60 && yearDiff < 0 && timeOfDayOrder > 0)
+                                return yearDiff + 1;
+
                             // equals or is after
                             return yearDiff;
                         }
@@ -204,7 +226,7 @@ namespace Hl7.Cql.Primitives
                         // age as of 2-28-2025 = 5
                         if (secondDayInYear > 59)
                             return yearDiff;
-                        if (secondDayInYear == 59 && (yearDiff < 0 || secondDto.TimeOfDay >= firstDto.TimeOfDay))
+                        if (secondDayInYear == 59 && (yearDiff < 0 || timeOfDayOrder >= 0))
                             return yearDiff;
 
                         return yearDiff - 1;
@@ -224,6 +246,10 @@ namespace Hl7.Cql.Primitives
                             return yearDiff;
                         }
 
+                        // Back from 28 February of a year without a leap day, the year from 29 February is whole once
+                        // the time of day of 29 February has been reached.
+                        if (firstDayInYear == 59 && yearDiff < 0 && timeOfDayOrder > 0)
+                            return yearDiff + 1;
                         if (firstDayInYear < 60)
                             return yearDiff;
 
@@ -239,17 +265,25 @@ namespace Hl7.Cql.Primitives
                     if (DateTime.IsLeapYear(secondDto.Year) && secondDayInYear > 60)
                         secondDayInYear -= 1;
 
-                    if (yearDiff > 0 && secondDayInYear < firstDayInYear)
+                    // On the anniversary date the time of day decides.
+                    var dayInYearOrder = secondDayInYear.CompareTo(firstDayInYear);
+                    if (dayInYearOrder == 0)
+                        dayInYearOrder = timeOfDayOrder;
+                    if (yearDiff > 0 && dayInYearOrder < 0)
                         yearDiff -= 1;
-                    else if (yearDiff < 0 && firstDayInYear < secondDayInYear)
+                    else if (yearDiff < 0 && dayInYearOrder > 0)
                         yearDiff += 1;
                     return yearDiff;
 
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
-                    if (monthDiff > 0 && secondDto.Day < firstDto.Day)
+                    // On the anniversary date the time of day decides.
+                    var dayInMonthOrder = secondDto.Day.CompareTo(firstDto.Day);
+                    if (dayInMonthOrder == 0)
+                        dayInMonthOrder = CompareTimeOfDay(secondDto, firstDto, timeOfDayPrecision);
+                    if (monthDiff > 0 && dayInMonthOrder < 0)
                         monthDiff -= 1;
-                    else if (monthDiff < 0 && firstDto.Day < secondDto.Day)
+                    else if (monthDiff < 0 && dayInMonthOrder > 0)
                         monthDiff += 1;
                     return monthDiff;
 
@@ -264,6 +298,28 @@ namespace Hl7.Cql.Primitives
                 default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
+
+        /// <summary>
+        /// Compares the times of day of <paramref name="x"/> and <paramref name="y"/>, each in its own timezone offset,
+        /// to <paramref name="precision"/>.
+        /// </summary>
+        /// <remarks>
+        /// At day precision or coarser a value specifies no time of day, so the result is 0. Seconds and milliseconds
+        /// compare as one precision: the "Duration" section of "Date and Time Operators" (CQL Appendix B – Reference)
+        /// states "when calculating duration, just like date and time comparison calculations, seconds and
+        /// milliseconds are considered a single precision with decimal semantics."
+        /// </remarks>
+        /// <returns>Less than zero if the time of day of <paramref name="x"/> is earlier, zero if it is the same,
+        /// and greater than zero if it is later.</returns>
+        private static int CompareTimeOfDay(DateTimeOffset x, DateTimeOffset y, DateTimePrecision precision) =>
+            precision switch
+            {
+                DateTimePrecision.Hour   => x.Hour.CompareTo(y.Hour),
+                DateTimePrecision.Minute => (x.Hour, x.Minute).CompareTo((y.Hour, y.Minute)),
+                DateTimePrecision.Second
+                    or DateTimePrecision.Millisecond => x.TimeOfDay.CompareTo(y.TimeOfDay),
+                _                        => 0,
+            };
 
         internal static readonly IDictionary<DateTimePrecision, CqlQuantity> UnitDateTimeQuantity = new Dictionary<DateTimePrecision, CqlQuantity>
         {
