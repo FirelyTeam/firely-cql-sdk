@@ -11,6 +11,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -347,6 +348,67 @@ namespace CoreTests
             var expand = fcq.Expand(interval, quantity);
             Assert.IsNotNull(expand);
             Assert.IsTrue(expand.SequenceEqual(expected));
+        }
+
+        /// <summary>
+        /// Boundaries at which adding 0.5 rounds back to the boundary itself, so a per of 0.5 does not advance.
+        /// </summary>
+        private static readonly decimal[] BoundariesThatAbsorbHalf = [1e28m, decimal.MaxValue - 1];
+
+        /// <summary>
+        /// expand Interval[1e28, 1e28] per 0.5, and the same at decimal.MaxValue - 1
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_Interval_Decimal_PerRoundedAwayByBoundary_ReturnsNull()
+        {
+            var fcq = GetNewContext().Operators;
+            foreach (var boundary in BoundariesThatAbsorbHalf)
+            {
+                Assert.AreEqual(boundary, boundary + 0.5m, "the per must be rounded away for this test to be meaningful");
+                var interval = new CqlInterval<decimal?>(boundary, boundary, true, true);
+
+                var expand = fcq.Expand(interval, new CqlQuantity(0.5m, "1"));
+
+                Assert.IsNull(expand, $"expand of Interval[{boundary}, {boundary}] per 0.5");
+            }
+        }
+
+        /// <summary>
+        /// expand { Interval[1e28, 1e28] } per 0.5, and the same at decimal.MaxValue - 1
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_ListOfIntervals_Decimal_PerRoundedAwayByBoundary_ReturnsNull()
+        {
+            var fcq = GetNewContext().Operators;
+            foreach (var boundary in BoundariesThatAbsorbHalf)
+            {
+                CqlInterval<decimal?>?[] intervals = [new CqlInterval<decimal?>(boundary, boundary, true, true)];
+
+                var expand = fcq.Expand(intervals, new CqlQuantity(0.5m, "1"));
+
+                Assert.IsNull(expand, $"expand {{ Interval[{boundary}, {boundary}] }} per 0.5");
+            }
+        }
+
+        /// <summary>
+        /// expand of an Integer or Long interval, and a list of them, ending at the type's maximum per 1 terminates
+        /// with the last partition.
+        /// </summary>
+        [TestMethod]
+        [Timeout(10_000)]
+        public void Expand_IntegerAndLong_AtMaximum_Terminates()
+        {
+            var fcq = GetNewContext().Operators;
+            var one = new CqlQuantity(1m, "1");
+
+            CollectionAssert.AreEqual(new int?[] { int.MaxValue - 1, int.MaxValue },
+                fcq.Expand(new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true), one)!.ToArray());
+            CollectionAssert.AreEqual(new long?[] { long.MaxValue - 1, long.MaxValue },
+                fcq.Expand(new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true), one)!.ToArray());
+            Assert.AreEqual(2, fcq.Expand([new CqlInterval<int?>(int.MaxValue - 1, int.MaxValue, true, true)], one)!.Count());
+            Assert.AreEqual(2, fcq.Expand([new CqlInterval<long?>(long.MaxValue - 1, long.MaxValue, true, true)], one)!.Count());
         }
 
         #endregion
@@ -3737,6 +3799,30 @@ namespace CoreTests
         }
 
         /// <summary>
+        /// Ceiling and Floor of a Decimal yield an Integer; a result outside the Integer range cannot be
+        /// represented and is null, while a result at either end of the range is kept.
+        /// </summary>
+        [TestMethod]
+        public void CeilingAndFloorOfDecimalOutsideIntegerRangeAreNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            Assert.IsNull(ops.Ceiling(-2147483649.2m));
+            Assert.IsNull(ops.Ceiling(2147483648.2m));
+            Assert.IsNull(ops.Ceiling(2147483647.2m));
+            Assert.IsNull(ops.Floor(-2147483649.2m));
+            Assert.IsNull(ops.Floor(2147483648.2m));
+            Assert.IsNull(ops.Floor(-2147483648.2m));
+            Assert.IsNull(ops.Ceiling(decimal.MaxValue));
+            Assert.IsNull(ops.Floor(decimal.MinValue));
+
+            Assert.AreEqual(int.MinValue, ops.Ceiling(-2147483648.2m));
+            Assert.AreEqual(int.MaxValue, ops.Floor(2147483647.2m));
+            Assert.AreEqual(int.MaxValue, ops.Ceiling(2147483647.0m));
+            Assert.AreEqual(int.MinValue, ops.Floor(-2147483648.0m));
+        }
+
+        /// <summary>
         /// Adding a quantity to a time yields null whenever the result cannot be represented as a
         /// time of day, whether it merely leaves the day or is too large for the arithmetic itself.
         /// </summary>
@@ -4815,6 +4901,97 @@ namespace CoreTests
         {
             var ops = GetNewContext().Operators;
             Assert.ThrowsException<CqlException<CqlPointFromNonUnitIntervalError>>(() => ops.PointFrom(MaxInterval));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_NullList_ReturnsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.SingletonFrom<int?>(null));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_EmptyList_ReturnsNull()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.IsNull(ops.SingletonFrom<int?>([]));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_OneElement_ReturnsTheElement()
+        {
+            var ops = GetNewContext().Operators;
+            Assert.AreEqual(7, ops.SingletonFrom<int?>([7]));
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_SignalsAnErrorNamingTheCountAndType()
+        {
+            var ops = GetNewContext().Operators;
+            var exception = Assert.ThrowsExactly<CqlException<CqlSingletonFromMultipleElementsError>>(
+                () => ops.SingletonFrom<CqlCode>([new("1", "s"), new("2", "s"), new("3", "s")]));
+            Assert.AreEqual(new CqlSingletonFromMultipleElementsError(3, typeof(CqlCode)), exception.Error);
+            Assert.AreEqual(
+                "The singleton from operator requires a list with at most one element, " +
+                "but was given a list of 3 Code elements. " +
+                "Use First or Last to take one element, or filter the list so that at most one element remains.",
+                exception.Message);
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElement_IsCaughtByTheHostPatternForEvaluationErrors()
+        {
+            var ops = GetNewContext().Operators;
+            ICqlError? caught = null;
+            try
+            {
+                ops.SingletonFrom<int?>([1, 2]);
+            }
+            catch (CqlException e) when (e.Error is ICqlEvaluationError)
+            {
+                caught = e.Error;
+            }
+
+            Assert.AreEqual(new CqlSingletonFromMultipleElementsError(2, typeof(int?)), caught);
+        }
+
+        [TestMethod]
+        public void SingletonFrom_MoreThanOneElementFromAnIterator_CountsEveryElement()
+        {
+            var ops = GetNewContext().Operators;
+            var exception = Assert.ThrowsExactly<CqlException<CqlSingletonFromMultipleElementsError>>(
+                () => ops.SingletonFrom(YieldIntegers(4)));
+            Assert.AreEqual(4, exception.Error.ElementCount);
+
+            static IEnumerable<int?> YieldIntegers(int count)
+            {
+                for (var i = 0; i < count; i++)
+                    yield return i;
+            }
+        }
+
+        [TestMethod]
+        [DataRow(typeof(int?), "Integer")]
+        [DataRow(typeof(long?), "Long")]
+        [DataRow(typeof(decimal?), "Decimal")]
+        [DataRow(typeof(bool?), "Boolean")]
+        [DataRow(typeof(string), "String")]
+        [DataRow(typeof(object), "Any")]
+        [DataRow(typeof(CqlConcept), "Concept")]
+        [DataRow(typeof(CqlDateTime), "DateTime")]
+        [DataRow(typeof(CqlInterval<CqlDateTime>), "Interval<DateTime>")]
+        [DataRow(typeof(IEnumerable<int?>), "List<Integer>")]
+        [DataRow(typeof(List<CqlCode>), "List<Code>")]
+        [DataRow(typeof(IReadOnlyList<CqlCode>), "List<Code>")]
+        [DataRow(typeof(int?[]), "List<Integer>")]
+        [DataRow(typeof(ValueTuple<CqlTupleMetadata, int?>), "Tuple")]
+        [DataRow(typeof(Hl7.Fhir.Model.Condition), "Condition")]
+        [DataRow(typeof(Hl7.Fhir.Model.Observation.ComponentComponent), "Observation.ComponentComponent")]
+        [DataRow(typeof(Hl7.Fhir.Model.ObservationStatus?), "ObservationStatus")]
+        public void SingletonFromMultipleElementsError_GetMessage_NamesTheCqlElementType(Type elementType, string expectedName)
+        {
+            var message = new CqlSingletonFromMultipleElementsError(2, elementType).GetMessage();
+            StringAssert.Contains(message, $"a list of 2 {expectedName} elements.");
         }
 
         [TestMethod]

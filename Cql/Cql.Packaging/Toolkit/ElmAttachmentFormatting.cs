@@ -31,8 +31,9 @@ namespace Hl7.Cql.Packaging.Toolkit;
 public enum ElmAttachmentFormatting
 {
     /// <summary>
-    /// Embed the ELM JSON exactly as it was read, without reformatting it at all. This is the cheapest
-    /// option and makes the attachment byte-identical to the source file.
+    /// Embed the ELM JSON as it was read, without reformatting it. This is the cheapest option. Line
+    /// endings are normalized to LF so the attachment does not depend on how the file was checked out;
+    /// nothing else about the text is touched.
     /// </summary>
     Passthrough,
 

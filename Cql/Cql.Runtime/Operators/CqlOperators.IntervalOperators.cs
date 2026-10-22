@@ -9,6 +9,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Exceptions;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -568,6 +569,11 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
+
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                 var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -632,6 +638,11 @@ namespace Hl7.Cql.Operators
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
+
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
 
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
@@ -703,6 +714,11 @@ namespace Hl7.Cql.Operators
                 var onePrior = new CqlQuantity(1, cqlunits);
                 var next = listItem.Add(per);
 
+                // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                // partitions never advance and, as for a per of zero, no expansion can be computed.
+                if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                    return null;
+
                 // The partition ends one step before the next start. When that start cannot be represented, the end is
                 // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                 var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -770,7 +786,14 @@ namespace Hl7.Cql.Operators
 
             while (true)
             {
-                var next = decimal.Add(listItem, perValue);
+                // A next start beyond the range of Decimal lies beyond the upper boundary as well.
+                if (OverflowGuard.Add(listItem, perValue) is not { } next)
+                    break;
+
+                // Adding a per too small for the magnitude of the start rounds it away, so the partitions never advance
+                // and, as for a per of zero, no expansion can be computed.
+                if (next <= listItem)
+                    return null;
 
                 // The starting point is only returned for intervals of size per that end on or before the upper boundary.
                 // Truncation expands at per's scale, so the interval ends one unit of that scale below the next start.
@@ -823,17 +846,16 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Integer overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Integer").ToException();
 
-            var intQuantity = decimal.ToInt32(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (long)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
@@ -882,17 +904,16 @@ namespace Hl7.Cql.Operators
 
             // A fractional per makes the spec produce Decimal points, which this Long overload cannot represent.
             if (decimal.Truncate(perValue) != perValue)
-                throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of Decimal.");
+                throw new CqlExpandFractionalPerError(perValue, per.unit, "Long").ToException();
 
-            var intQuantity = decimal.ToInt64(perValue);
             var listItem = interval.low!.Value;
             while (true)
             {
                 // The starting point is only returned for a partition of size per that ends on or before the
                 // upper boundary. The end is computed in a wider type so a partition reaching the type's
-                // maximum is still emitted, after which there is no next start.
-                var end = (decimal)listItem + intQuantity - 1;
-                if (end > interval.high!.Value)
+                // maximum is still emitted, after which there is no next start; an end beyond even that type
+                // lies beyond the upper boundary.
+                if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                     break;
 
                 expanded.Add(listItem);
@@ -1620,23 +1641,6 @@ namespace Hl7.Cql.Operators
             return null;
         }
 
-        private bool? RangeEqual<T>((T min, T max) x, (T min, T max) y, string? precision) =>
-            AndAllowingUnknown(RangeLessOrEqual(x, y, precision), RangeGreaterOrEqual(x, y, precision));
-
-        private bool? RangeGreaterThan<T>((T min, T max) x, (T min, T max) y, string? precision)
-        {
-            if (Comparer.Compare(x.min!, y.max!, precision) > 0) return true;
-            if (Comparer.Compare(x.max!, y.min!, precision) <= 0) return false;
-            return null;
-        }
-
-        private bool? RangeLessThan<T>((T min, T max) x, (T min, T max) y, string? precision)
-        {
-            if (Comparer.Compare(x.max!, y.min!, precision) < 0) return true;
-            if (Comparer.Compare(x.min!, y.max!, precision) >= 0) return false;
-            return null;
-        }
-
         #endregion
 
         #region Overlaps After
@@ -1665,13 +1669,11 @@ namespace Hl7.Cql.Operators
             left = toClosed(left!)!;
             right = toClosed(right!)!;
 
-            // A null closed low boundary is the minimum value and a null closed high boundary
-            // the maximum (see #1356: these substitutions used to be inverted, so intervals
-            // with an unbounded end never overlapped after anything).
-            var startsBeforeEnd = IsAtOrBefore(Boundary<T?>.LowOf(left), Boundary<T?>.HighOf(right), precision);
-            var endsAfterEnd = IsAfter(Boundary<T?>.HighOf(left), Boundary<T?>.HighOf(right), precision);
-
-            return AndAllowingUnknown(startsBeforeEnd, endsAfterEnd);
+            // "the first interval overlaps the second and ends after it" (CQL 1.5.3 Errata 2, Appendix B - CQL
+            // Reference, section "Overlaps"): the first starts at or before the second's end and ends after it. Both
+            // comparisons involve the second interval's end, so an unknown end is decided over the values it can take.
+            return OverCompletions(left, right, precision, (lowLeft, highLeft, _, highRight, p) =>
+                AndAllowingUnknown(IsAtOrBefore(lowLeft, highRight, p), IsAfter(highLeft, highRight, p)));
         }
 
         #endregion
@@ -1700,10 +1702,11 @@ namespace Hl7.Cql.Operators
             left = toClosed(left);
             right = toClosed(right);
 
-            var endsAfterStart = IsAtOrAfter(Boundary<T?>.HighOf(left!), Boundary<T?>.LowOf(right!), precision);
-            var startsBeforeStart = IsBefore(Boundary<T?>.LowOf(left!), Boundary<T?>.LowOf(right!), precision);
-
-            return AndAllowingUnknown(endsAfterStart, startsBeforeStart);
+            // "the first interval overlaps the second and starts before it" (CQL 1.5.3 Errata 2, Appendix B - CQL
+            // Reference, section "Overlaps"): the first ends at or after the second's start and starts before it. Both
+            // comparisons involve the second interval's start, so an unknown start is decided over the values it can take.
+            return OverCompletions(left!, right!, precision, (lowLeft, highLeft, lowRight, _, p) =>
+                AndAllowingUnknown(IsAtOrAfter(highLeft, lowRight, p), IsBefore(lowLeft, lowRight, p)));
         }
 
         #endregion
@@ -1766,20 +1769,15 @@ namespace Hl7.Cql.Operators
             left = ToClosedBoundaries(left)!;
             right = ToClosedBoundaries(right)!;
 
-            var lowIncluded = IsAtOrBefore(Boundary<T>.LowOf(right), Boundary<T>.LowOf(left), precision);
-            var highIncluded = IsAtOrAfter(Boundary<T>.HighOf(right), Boundary<T>.HighOf(left), precision);
-
-            // Complete inclusion is only proper inclusion when the two are not the same interval.
-            return AndAllowingUnknown(lowIncluded, highIncluded) switch
-            {
-                true => SameInterval(left, right, precision) switch
+            // Complete inclusion is only proper inclusion when the two are not the same interval. Inclusion and
+            // sameness compare the same boundaries, so an unknown boundary is decided over the values it can take:
+            // Interval[0, 0] includes Interval(null, null) only when the latter is Interval[0, 0] itself.
+            return OverCompletions(left, right, precision, (lowLeft, highLeft, lowRight, highRight, p) =>
+                AndAllowingUnknown(IsAtOrBefore(lowRight, lowLeft, p), IsAtOrAfter(highRight, highLeft, p)) switch
                 {
-                    true  => false,
-                    false => true,
-                    null  => null,
-                },
-                var included => included,
-            };
+                    true          => !AndAllowingUnknown(IsSame(lowLeft, lowRight, p), IsSame(highLeft, highRight, p)),
+                    var included  => included,
+                });
         }
 
         public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string? precision) =>

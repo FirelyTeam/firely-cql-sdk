@@ -215,6 +215,12 @@ namespace Hl7.Cql.Fhir
             // Like the Quantity->int? conversion above, a fractional value is truncated towards zero
             // (the C# decimal->long conversion), and a value outside the range of long throws an OverflowException.
             add((M.Quantity f) => (long?)f.Value);
+            // CQL 1.5.3, Appendix B - CQL Reference, Types, Ratio: "The numerator and denominator elements
+            // must be present (i.e. can not be null)." A FHIR Ratio lacking either part, or holding a part
+            // without a value (which FHIRHelpers.ToQuantity maps to null), converts to null.
+            add((M.Ratio f) => f is { Numerator.Value: not null, Denominator.Value: not null }
+                ? new CqlRatio(converter.Convert<CqlQuantity>(f.Numerator), converter.Convert<CqlQuantity>(f.Denominator))
+                : null);
             add((M.Period f) => new CqlInterval<CqlDateTime>(converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Period f) => new CqlInterval<CqlDate>(converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
@@ -844,6 +850,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
             converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
             converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
+            converter.AddConversion<string, CqlRatio?>(s => ConvertStringToRatio(s));
             converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
             converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
             converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
@@ -875,6 +882,10 @@ namespace Hl7.Cql.Fhir
         private static CqlQuantity? ConvertStringToQuantity(string? s) =>
             s == null ? null :
             CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
+
+        private static CqlRatio? ConvertStringToRatio(string? s) =>
+            s == null ? null :
+            CqlRatio.TryParse(s, out CqlRatio? value) == true ? value : null;
 
         private static CqlDate? ConvertStringToDate(string? s) =>
             s == null ? null :

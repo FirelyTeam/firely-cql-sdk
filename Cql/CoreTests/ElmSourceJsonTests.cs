@@ -21,15 +21,53 @@ namespace CoreTests;
 [TestClass]
 public class ElmSourceJsonTests
 {
+    private const string Lf = "\n";
+    private const string CrLf = "\r\n";
+
     private static FileInfo ElmFile => new(Path.Combine("Input", "ELM", "HL7", "CqlBooleanTest.json"));
 
     [TestMethod]
-    public void LoadFromJson_FromFile_RetainsSourceBytesVerbatim()
+    public void LoadFromJson_FromFile_RetainsTheSourceBytesWithNormalizedNewLines()
     {
         var library = Library.LoadFromJson(ElmFile);
 
         Assert.IsNotNull(library.SourceJsonUtf8);
-        CollectionAssert.AreEqual(File.ReadAllBytes(ElmFile.FullName), library.SourceJsonUtf8);
+        Assert.IsFalse(
+            library.SourceJsonUtf8!.Contains((byte)'\r'),
+            "Retained source bytes should carry no CR, whatever the file was checked out with.");
+        CollectionAssert.AreEqual(
+            ToLf(File.ReadAllBytes(ElmFile.FullName)),
+            library.SourceJsonUtf8);
+    }
+
+    /// <summary>
+    /// A source file is checked out with whatever line endings the platform uses, and these bytes are
+    /// embedded verbatim as a base64 attachment that git cannot normalize. Without normalizing them the
+    /// same library packaged on Windows and on Unix yields different attachments.
+    /// </summary>
+    [TestMethod]
+    public void SourceJson_IsTheSameWhicheverNewLineTheFileUses()
+    {
+        var lfBytes = ToLf(File.ReadAllBytes(ElmFile.FullName));
+        var lfFile = WriteTempCopy(lfBytes, toCrLf: false);
+        var crlfFile = WriteTempCopy(lfBytes, toCrLf: true);
+
+        try
+        {
+            Assert.IsTrue(
+                new FileInfo(crlfFile).Length > new FileInfo(lfFile).Length,
+                "The CRLF copy should be the larger file, or this test exercises nothing.");
+
+            var fromLf = Library.LoadFromJson(new FileInfo(lfFile));
+            var fromCrLf = Library.LoadFromJson(new FileInfo(crlfFile));
+
+            CollectionAssert.AreEqual(fromLf.SourceJsonUtf8, fromCrLf.SourceJsonUtf8);
+        }
+        finally
+        {
+            File.Delete(lfFile);
+            File.Delete(crlfFile);
+        }
     }
 
     [TestMethod]
@@ -126,6 +164,54 @@ public class ElmSourceJsonTests
         AssertSameJsonContent(source, indented);
         AssertSameJsonContent(source, compact);
         Assert.IsTrue(indented.Length > compact.Length);
+    }
+
+    [TestMethod]
+    public void NormalizeNewLinesUtf8_LeavesTextWithoutCarriageReturnsAlone()
+    {
+        var utf8 = Encoding.UTF8.GetBytes($"{{{Lf}  \"a\": 1{Lf}}}");
+
+        Assert.AreSame(utf8, LibraryJsonSerializer.NormalizeNewLinesUtf8(utf8));
+    }
+
+    [TestMethod]
+    public void NormalizeNewLinesUtf8_RewritesCrLfAndALoneCr()
+    {
+        var utf8 = Encoding.UTF8.GetBytes($"a{CrLf}b\rc{Lf}d");
+
+        var normalized = Encoding.UTF8.GetString(LibraryJsonSerializer.NormalizeNewLinesUtf8(utf8));
+
+        Assert.AreEqual($"a{Lf}b{Lf}c{Lf}d", normalized);
+    }
+
+    /// <summary>
+    /// A CR inside a JSON string is escaped rather than literal, so normalizing the bytes cannot corrupt
+    /// a value that genuinely contains one.
+    /// </summary>
+    [TestMethod]
+    public void NormalizeNewLinesUtf8_DoesNotTouchAnEscapedCarriageReturn()
+    {
+        var json = "{\"a\":\"x\\r\\ny\"}";
+        var utf8 = Encoding.UTF8.GetBytes(json.Replace("\"}", $"\"}}{CrLf}"));
+
+        var normalized = Encoding.UTF8.GetString(LibraryJsonSerializer.NormalizeNewLinesUtf8(utf8));
+
+        StringAssert.Contains(normalized, "x\\r\\ny");
+        Assert.AreEqual($"{json}{Lf}", normalized);
+    }
+
+    private static byte[] ToLf(byte[] utf8) =>
+        Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(utf8).Replace(CrLf, Lf).Replace("\r", Lf));
+
+    private static string WriteTempCopy(byte[] lfBytes, bool toCrLf)
+    {
+        var text = Encoding.UTF8.GetString(lfBytes);
+        if (toCrLf)
+            text = text.Replace(Lf, CrLf);
+
+        var path = Path.Combine(Path.GetTempPath(), $"elm-{Guid.NewGuid():N}.json");
+        File.WriteAllBytes(path, Encoding.UTF8.GetBytes(text));
+        return path;
     }
 
     /// <summary>

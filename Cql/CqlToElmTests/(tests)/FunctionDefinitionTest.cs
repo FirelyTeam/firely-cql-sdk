@@ -63,6 +63,43 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
         [TestMethod]
+        public void RedefinitionWithTheSameSignatureIsAnError()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define function Twice(x Integer): x * 2
+                                                     define function Twice(x Integer): x + x
+                                                     """,
+                                                     "A function named Twice with the same type of arguments is already defined in this library.");
+
+            // The first definition stands; the second is not added.
+            library.statements.OfType<FunctionDef>().Where(f => f.name == "Twice").Should().ContainSingle();
+        }
+
+        [TestMethod]
+        public void OverloadWithADifferentSignatureIsAllowed()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define function Twice(x Integer): x * 2
+                                                     define function Twice(x Decimal): x * 2.0
+                                                     """);
+
+            library.statements.OfType<FunctionDef>().Where(f => f.name == "Twice").Should().HaveCount(2);
+        }
+
+        [TestMethod]
+        public void FunctionNamedLikeAnExpressionIsAnError()
+        {
+            _ = CreateCqlToolkit().MakeLibrary("""
+                                           library FuncTest version '1.0.0'
+                                           define Twice: 2
+                                           define function Twice(x Integer): x * 2
+                                           """,
+                                           "Identifier Twice is already in use in this library.");
+        }
+
+        [TestMethod]
         public void OptionalReturnTypesMayBeTheSame()
         {
             var library = CreateCqlToolkit().MakeLibrary("""

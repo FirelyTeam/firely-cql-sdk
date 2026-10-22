@@ -128,9 +128,9 @@
   <data name="CannotResolveCircularReference" xml:space="preserve">
     <value>Cannot resolve reference to expression or function a because it results in a circular reference.</value>
   </data>
-  <data name="CouldNotFindLibrary" xml:space="preserve">
-    <value>Could not find library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
-    <comment>{0} = library name, {1} = version</comment>
+  <data name="ConstructNotImplemented" xml:space="preserve">
+    <value>Translation of {0} '{1}' is not implemented.</value>
+    <comment>{0} = grammar rule name, {1} = source text</comment>
   </data>
   <data name="CouldNotResolveContextName" xml:space="preserve">
     <value>Could not resolve context name {0} in model {1}.</value>
@@ -172,10 +172,6 @@
     <value>Identifier {0} is already in use in this library.</value>
     <comment>{0} = unquoted identifier</comment>
   </data>
-  <data name="Latest" xml:space="preserve">
-    <value>latest</value>
-    <comment>The word "latest"</comment>
-  </data>
   <data name="NamedTypeRequiredInContext" xml:space="preserve">
     <value>A named type is required in this context.</value>
   </data>
@@ -191,7 +187,14 @@
     <value>Unable to resolve library: {0} version '{1}'. Are you sure this library version exists and that you have access?</value>
     <comment>{0} = library name unquoted, {1} = version unquoted</comment>
   </data>
+  <data name="UnableToResolveReferenceLibrary" xml:space="preserve">
+    <value>Unable to resolve library: {0} version '{1}'. Its ELM declares {2} more than once in a way a reference cannot tell apart.</value>
+    <comment>{0} = library name unquoted, {1} = version unquoted, {2} = comma-separated quoted names of the clashing definitions</comment>
+  </data>
   <data name="UnexpectedLibraryReference" xml:space="preserve">
     <value>A reference to a model library is unexpected at this point.</value>
+  </data>
+  <data name="UnexpectedTypeReference" xml:space="preserve">
+    <value>A reference to a type is unexpected at this point.</value>
   </data>
 </root>

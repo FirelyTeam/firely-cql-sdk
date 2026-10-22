@@ -166,12 +166,6 @@ namespace Hl7.Cql.Operators
 
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
             DataSource.Retrieve<T>(parameters);
-
-        // public int? Compare(object? x, object? y, string? precision) =>
-        //     Comparer.Compare(x, y, precision);
-        //
-        // public int GetHashCode(object? x) =>
-        //     Comparer.GetHashCode(x);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

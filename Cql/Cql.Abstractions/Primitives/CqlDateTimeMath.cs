@@ -16,6 +16,34 @@ namespace Hl7.Cql.Primitives
         public const int DaysPerWeek = 7;
         public const double DaysPerWeekDouble = 7.0d;
 
+        // The conversions below are the ones the "Equivalent" section of "Comparison Operators"
+        // (CQL Appendix B – Reference) lists after: "calendar-time duration unit conversions shall be
+        // performed according to calendar duration semantics:", each quoted on its constant.
+
+        /// <summary>The number of months in a calendar year: "1 year ~ 12 months".</summary>
+        public const int MonthsPerYear = 12;
+
+        /// <summary>The number of days in a calendar year: "1 year ~ 365 days".</summary>
+        public const int DaysPerYear = 365;
+
+        /// <summary>The number of days in a calendar month: "1 month ~ 30 days".</summary>
+        public const int DaysPerMonth = 30;
+
+        /// <summary>The number of hours in a day: "1 day = 24 hours".</summary>
+        public const int HoursPerDay = 24;
+
+        /// <summary>The number of minutes in an hour: "1 hour = 60 minutes".</summary>
+        public const int MinutesPerHour = 60;
+
+        /// <summary>The number of seconds in a minute: "1 minute = 60 seconds".</summary>
+        public const int SecondsPerMinute = 60;
+
+        /// <summary>The number of milliseconds in a second: "1 second = 1000 milliseconds".</summary>
+        public const int MillisecondsPerSecond = 1000;
+
+        private const long MillisecondsPerMinute = (long)SecondsPerMinute * MillisecondsPerSecond;
+        private const long MillisecondsPerHour = MinutesPerHour * MillisecondsPerMinute;
+        private const long MillisecondsPerDay = HoursPerDay * MillisecondsPerHour;
 
         /// <summary>
         /// Returns the number of boundaries crossed for the specified precision between this and the argument.
@@ -59,12 +87,14 @@ namespace Hl7.Cql.Primitives
                 case "day":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalDays;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalDays) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalDays - asInt;
                         var possiblyNextDay = firstDto.AddDays(decimalPortion);
                         if (possiblyNextDay.Day != firstDto.Day)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -72,12 +102,14 @@ namespace Hl7.Cql.Primitives
                 case "hour":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalHours;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalHours) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalHours - asInt;
                         var possiblyNextHour = firstDto.AddHours(decimalPortion);
                         if (possiblyNextHour.Hour != firstDto.Hour)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -85,12 +117,14 @@ namespace Hl7.Cql.Primitives
                 case "minute":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMinutes;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMinutes) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMinutes - asInt;
                         var possiblyNextMinute = firstDto.AddMinutes(decimalPortion);
                         if (possiblyNextMinute.Minute != firstDto.Minute)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -98,12 +132,14 @@ namespace Hl7.Cql.Primitives
                 case "second":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalSeconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalSeconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalSeconds - asInt;
                         var possiblyNextSecond = firstDto.AddSeconds(decimalPortion);
                         if (possiblyNextSecond.Second != firstDto.Second)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -111,12 +147,14 @@ namespace Hl7.Cql.Primitives
                 case "millisecond":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMilliseconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMilliseconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMilliseconds - asInt;
                         var possiblyNextSecond = firstDto.AddMilliseconds(decimalPortion);
                         if (possiblyNextSecond.Millisecond != firstDto.Millisecond)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -215,13 +253,14 @@ namespace Hl7.Cql.Primitives
                         monthDiff += 1;
                     return monthDiff;
 
-                case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                // A count outside the range of Integer cannot be represented.
+                case "week":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
                 case "day":
-                                    return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                                    return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays);
+                case "hour":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalHours);
+                case "minute":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMinutes);
+                case "second":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalSeconds);
+                case "millisecond": return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMilliseconds);
                 default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
@@ -237,67 +276,70 @@ namespace Hl7.Cql.Primitives
             { DateTimePrecision.Year, new CqlQuantity(1m, "year") },
         };
 
-        // /// <summary>
-        // /// For datetime addition and subtraction, when quantity is more precise than the datetime,
-        // /// the quantity has to be normalized to the lesser precision and truncated.
-        // /// </summary>
-        // /// <see href="https://cql.hl7.org/09-b-cqlreference.html#add-1" />
-        // internal static CqlQuantity NormalizeTo(this CqlQuantity quantity, DateTimePrecision target)
-        // {
-        //     // using the table found here:
-        //     // https://cql.hl7.org/09-b-cqlreference.html#equivalent
-        //     return (quantity.unit, target) switch
-        //     {
-        //         (null, _) => quantity,
-        //         ("mo", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 12)!, UCUMUnits.Year),
-        //
-        //         ("d", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 365)!, UCUMUnits.Year),
-        //         ("d", DateTimePrecision.Month) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 30)!, UCUMUnits.Month),
-        //
-        //         ("h", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 365)!, UCUMUnits.Year),
-        //         ("h", DateTimePrecision.Month) =>
-        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 24) / 30)!, UCUMUnits.Month),
-        //         ("h", DateTimePrecision.Day) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 24)!, UCUMUnits.Day),
-        //
-        //         ("mi", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 365)!, UCUMUnits.Year),
-        //         ("mi", DateTimePrecision.Month) =>
-        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 24) / 30)!, UCUMUnits.Month),
-        //         ("mi", DateTimePrecision.Day) =>
-        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 24)!, UCUMUnits.Day),
-        //         ("mi", DateTimePrecision.Hour) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Hour),
-        //
-        //         ("s", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
-        //         ("s", DateTimePrecision.Month) =>
-        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
-        //         ("s", DateTimePrecision.Day) =>
-        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 60) / 60) / 24)!, UCUMUnits.Day),
-        //         ("s", DateTimePrecision.Hour) =>
-        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 60) / 60)!, UCUMUnits.Hour),
-        //         ("s", DateTimePrecision.Minute) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 60)!, UCUMUnits.Minute),
-        //
-        //         ("ms", DateTimePrecision.Year) =>
-        //             new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 365)!, UCUMUnits.Year),
-        //         ("ms", DateTimePrecision.Month) =>
-        //             new CqlQuantity(Math.Truncate((((((quantity.value ?? 0) / 1000) / 60) / 60) / 24) / 30)!, UCUMUnits.Month),
-        //         ("ms", DateTimePrecision.Day) =>
-        //             new CqlQuantity(Math.Truncate(((((quantity.value ?? 0) / 1000) / 60) / 60) / 24)!, UCUMUnits.Day),
-        //         ("ms", DateTimePrecision.Hour) =>
-        //             new CqlQuantity(Math.Truncate((((quantity.value ?? 0) / 1000) / 60) / 60)!, UCUMUnits.Hour),
-        //         ("ms", DateTimePrecision.Minute) =>
-        //             new CqlQuantity(Math.Truncate(((quantity.value ?? 0) / 1000) / 60)!, UCUMUnits.Minute),
-        //         ("ms", DateTimePrecision.Second) =>
-        //             new CqlQuantity(Math.Truncate((quantity.value ?? 0) / 1000)!, UCUMUnits.Second),
-        //         (_,_) => quantity
-        //     };
-        // }
+        /// <summary>
+        /// Converts a time-valued quantity that is more precise than <paramref name="precision"/> to the unit of
+        /// <paramref name="precision"/>, truncating any resulting decimal portion toward zero.
+        /// A quantity at or above <paramref name="precision"/> is returned unchanged.
+        /// </summary>
+        /// <remarks>
+        /// The "Add" section of "Date and Time Operators" (CQL Appendix B – Reference) states:
+        /// "For partial date/time values where the time-valued quantity is more precise than the partial date/time,
+        /// the operation is performed by converting the time-based quantity to the most precise value specified in
+        /// first argument (truncating any resulting decimal portion) and then adding it to the first argument."
+        /// The "Subtract" section of the same chapter states the same rule for subtraction.
+        /// <para>
+        /// A conversion through more than one unit composes the calendar duration conversions: months convert to
+        /// years by <see cref="MonthsPerYear"/>; weeks and finer units convert through days, and from days to years
+        /// and months by <see cref="DaysPerYear"/> and <see cref="DaysPerMonth"/>.
+        /// </para>
+        /// </remarks>
+        /// <param name="value">The quantity value.</param>
+        /// <param name="unit">The quantity unit.</param>
+        /// <param name="precision">The precision of the date or date time the quantity is applied to.</param>
+        /// <param name="finestSupportedUnit">
+        /// The finest unit the caller supports. A quantity in a finer unit, or in a unit that is not a calendar
+        /// duration finer than a year, is returned unchanged so that the caller can reject it.
+        /// </param>
+        /// <returns>The value and unit to apply, or <see langword="null"/> when the conversion leaves the decimal range.</returns>
+        internal static (decimal Value, string Unit)? ConvertToPrecision(
+            decimal value,
+            string unit,
+            DateTimePrecision precision,
+            DateTimePrecision finestSupportedUnit)
+        {
+            // A week is coarser than a day but finer than a month, so it compares as a day here.
+            var (unitPrecision, unitMilliseconds) = unit switch
+            {
+                "month" or "months"                     => (DateTimePrecision.Month, 0L),
+                "wk" or "week" or "weeks"               => (DateTimePrecision.Day, DaysPerWeek * MillisecondsPerDay),
+                "d" or "day" or "days"                  => (DateTimePrecision.Day, MillisecondsPerDay),
+                "h" or "hour" or "hours"                => (DateTimePrecision.Hour, MillisecondsPerHour),
+                "min" or "minute" or "minutes"          => (DateTimePrecision.Minute, MillisecondsPerMinute),
+                "s" or "second" or "seconds"            => (DateTimePrecision.Second, (long)MillisecondsPerSecond),
+                "ms" or "millisecond" or "milliseconds" => (DateTimePrecision.Millisecond, 1L),
+                _                                       => (DateTimePrecision.Unknown, 0L),
+            };
+
+            if (precision == DateTimePrecision.Unknown || unitPrecision <= precision || unitPrecision > finestSupportedUnit)
+                return (value, unit);
+
+            // Here precision is coarser than unitPrecision, which is at most Millisecond, so precision is at most Second.
+            var (precisionUnit, precisionMilliseconds) = precision switch
+            {
+                DateTimePrecision.Year   => ("years", DaysPerYear * MillisecondsPerDay),
+                DateTimePrecision.Month  => ("months", DaysPerMonth * MillisecondsPerDay),
+                DateTimePrecision.Day    => ("days", MillisecondsPerDay),
+                DateTimePrecision.Hour   => ("hours", MillisecondsPerHour),
+                DateTimePrecision.Minute => ("minutes", MillisecondsPerMinute),
+                _                        => ("seconds", (long)MillisecondsPerSecond),
+            };
+
+            // Months are only more precise than years. The division cannot overflow, so only the multiplication is guarded.
+            decimal? converted = unitPrecision == DateTimePrecision.Month
+                ? value / MonthsPerYear
+                : OverflowGuard.Multiply(value, (decimal)unitMilliseconds) / precisionMilliseconds;
+
+            return converted is { } whole ? (decimal.Truncate(whole), precisionUnit) : null;
+        }
     }
 }

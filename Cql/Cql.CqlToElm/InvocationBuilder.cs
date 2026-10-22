@@ -53,9 +53,7 @@ namespace Hl7.Cql.CqlToElm
             var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
             {
-                return expression
-                    .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
-                    .WithResultType(SystemTypes.AnyType);
+                return Failed(expression, result, arguments);
             }
             else
             {
@@ -79,8 +77,10 @@ namespace Hl7.Cql.CqlToElm
                 .Select(cr => cr.Result)
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
+            // An ambiguous or failed match has no result type to offer: result.Function is only the first
+            // candidate, so typing the expression by it would make every later error about the wrong type.
             if (!result.Compatible)
-                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+                return Failed(expression, result, arguments);
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
             var newResultType = ReplaceGenericType(result.Function.ResultTypeSpecifier!, result.GenericInferences);
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm
                 .ToArray();
             var expression = ElmFactory.CreateElmNode(function, library, newArguments);
             if (!result.Compatible)
-                expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments));
+                return Failed(expression, result, arguments);
             // A system function reached by function syntax gets the same validators as one reached by its operator.
             if (function is SystemFunction sysFn)
                 expression = sysFn.Validate(expression);
@@ -127,13 +127,19 @@ namespace Hl7.Cql.CqlToElm
                     return Invoke(result.Function, library, args);
             }
             else
-            {
-                var expression = ElmFactory.CreateElmNode(result.Function, null, args);
-                if (!result.Compatible)
-                    expression.AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, result.Arguments.Select(a => a.Result).ToArray()));
-                return expression;
-            }
+                return Failed(ElmFactory.CreateElmNode(result.Function, null, args), result, args);
         }
+
+        /// <summary>
+        /// Completes the node built for a match that is not compatible (no overload applies, the call is ambiguous,
+        /// or the argument count is wrong): it reports the match's error and is typed <c>Any</c>, so that
+        /// the diagnostics point at this call instead of cascading from a guessed result type.
+        /// The node is not validated, since its operands were never coerced to a signature that applies.
+        /// </summary>
+        private Expression Failed(Expression expression, SignatureMatchResult result, Expression[] arguments) =>
+            expression
+                .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
+                .WithResultType(SystemTypes.AnyType);
 
 
         #region Generic inference
@@ -235,11 +241,51 @@ namespace Hl7.Cql.CqlToElm
                 {
                     newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
                 }
+
+                // An argument that is Any, or a list or interval of Any, is compatible with a generic operand
+                // without binding its parameter (e.g. Interval<Any> demotes to T through Any). Nothing more
+                // specific is known about such a parameter, so it is bound to Any, and the arguments are coerced
+                // again against the bound operand types so that no unbound parameter reaches the ELM.
+                if (newOperands.All(op => op.Cost != CoercionCost.Incompatible)
+                    && arguments.Any(arg => MentionsAny(arg.resultTypeSpecifier)))
+                {
+                    var unbound = operandTypes
+                        .Take(arguments.Length)
+                        .SelectMany(GenericParameterNames)
+                        .Distinct()
+                        .ToDictionary(name => name, _ => (TypeSpecifier)SystemTypes.AnyType);
+                    if (unbound.Count > 0)
+                    {
+                        newOperands = ReplaceGenericArguments(operandTypes, arguments, unbound);
+                        return new SignatureMatchResult(candidate, newOperands, unbound, flags, () => null);
+                    }
+                }
                 string? error = null;
 
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, ()=>error);
             }
         }
+
+        /// <summary>
+        /// Whether <paramref name="type"/> is <c>Any</c>, or a list or interval of it, at any depth.
+        /// </summary>
+        private static bool MentionsAny(TypeSpecifier? type) => type switch
+        {
+            ListTypeSpecifier list => MentionsAny(list.elementType),
+            IntervalTypeSpecifier interval => MentionsAny(interval.pointType),
+            _ => type == SystemTypes.AnyType,
+        };
+
+        /// <summary>
+        /// The names of the generic parameters that occur in <paramref name="type"/>.
+        /// </summary>
+        private static IEnumerable<string> GenericParameterNames(TypeSpecifier type) => type switch
+        {
+            ParameterTypeSpecifier generic => [generic.parameterName],
+            ListTypeSpecifier list => GenericParameterNames(list.elementType),
+            IntervalTypeSpecifier interval => GenericParameterNames(interval.pointType),
+            _ => [],
+        };
 
         // At present we are not going to consider generics with mulitple type arguments, as those do not exist in any system functions.
         // We'll leave the type as Dictionary for now for future proofing

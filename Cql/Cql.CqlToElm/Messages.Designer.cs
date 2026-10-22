@@ -96,11 +96,11 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not find library: {0} version &apos;{1}&apos;. Are you sure this library version exists and that you have access?.
+        ///   Looks up a localized string similar to Translation of {0} &apos;{1}&apos; is not implemented..
         /// </summary>
-        internal static string CouldNotFindLibrary {
+        internal static string ConstructNotImplemented {
             get {
-                return ResourceManager.GetString("CouldNotFindLibrary", resourceCulture);
+                return ResourceManager.GetString("ConstructNotImplemented", resourceCulture);
             }
         }
         
@@ -195,15 +195,6 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to latest.
-        /// </summary>
-        internal static string Latest {
-            get {
-                return ResourceManager.GetString("Latest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A named type is required in this context..
         /// </summary>
         internal static string NamedTypeRequiredInContext {
@@ -240,11 +231,29 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Its ELM declares {2} more than once in a way a reference cannot tell apart..
+        /// </summary>
+        internal static string UnableToResolveReferenceLibrary {
+            get {
+                return ResourceManager.GetString("UnableToResolveReferenceLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A reference to a model library is unexpected at this point..
         /// </summary>
         internal static string UnexpectedLibraryReference {
             get {
                 return ResourceManager.GetString("UnexpectedLibraryReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A reference to a type is unexpected at this point..
+        /// </summary>
+        internal static string UnexpectedTypeReference {
+            get {
+                return ResourceManager.GetString("UnexpectedTypeReference", resourceCulture);
             }
         }
     }

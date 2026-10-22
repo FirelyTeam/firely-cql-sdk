@@ -151,7 +151,47 @@ internal static class LibraryJsonSerializer
             document.RootElement.WriteTo(writer);
         }
 
-        return buffer.ToArray();
+        // Indented output is broken across lines with Environment.NewLine, so it needs normalizing like
+        // any other text this assembly produces.
+        return NormalizeNewLinesUtf8(buffer.ToArray());
+    }
+
+    /// <summary>
+    /// Rewrites CRLF and lone CR to LF in UTF-8 JSON, returning <paramref name="utf8Json"/> itself when it
+    /// contains no carriage return.
+    /// </summary>
+    /// <remarks>
+    /// Line endings are insignificant between JSON tokens, but a file is checked out with whatever endings
+    /// the platform uses, and these bytes are embedded verbatim as a base64 attachment where git cannot
+    /// normalize them. Without this the same library packaged on Windows and on Unix produces different
+    /// attachments. CR inside a JSON string literal is escaped as <c>\r</c> and so is not affected.
+    /// </remarks>
+    internal static byte[] NormalizeNewLinesUtf8(byte[] utf8Json)
+    {
+        const byte cr = (byte)'\r';
+        const byte lf = (byte)'\n';
+
+        if (Array.IndexOf(utf8Json, cr) < 0)
+            return utf8Json;
+
+        var normalized = new byte[utf8Json.Length];
+        var length = 0;
+
+        for (var i = 0; i < utf8Json.Length; i++)
+        {
+            var b = utf8Json[i];
+            if (b == cr)
+            {
+                // CRLF and a lone CR both collapse to a single LF.
+                if (i + 1 < utf8Json.Length && utf8Json[i + 1] == lf)
+                    i++;
+                b = lf;
+            }
+
+            normalized[length++] = b;
+        }
+
+        return normalized[..length];
     }
 
     /// <summary>

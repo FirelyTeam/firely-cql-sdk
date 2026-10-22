@@ -53,9 +53,17 @@ public partial class Library
     /// rebuilds it from the object graph at considerable cost.
     /// </summary>
     /// <remarks>
-    /// This is the JSON exactly as it was on disk, which is not identical to what <see cref="SerializeToJson"/>
-    /// produces: serialization omits empty collections, writes defaulted properties such as
-    /// <c>accessLevel</c> explicitly, and carries the legacy-construct corrections applied while reading.
+    /// <para>
+    /// This is the JSON as it was on disk apart from its line endings, which are normalized to LF so the
+    /// same file produces the same bytes however it was checked out. Line endings between JSON tokens are
+    /// insignificant, and a CR inside a string literal is escaped rather than literal, so the content is
+    /// unchanged.
+    /// </para>
+    /// <para>
+    /// It is not identical to what <see cref="SerializeToJson"/> produces: serialization omits empty
+    /// collections, writes defaulted properties such as <c>accessLevel</c> explicitly, and carries the
+    /// legacy-construct corrections applied while reading.
+    /// </para>
     /// </remarks>
     internal byte[]? SourceJsonUtf8 { get; set; }
 }
