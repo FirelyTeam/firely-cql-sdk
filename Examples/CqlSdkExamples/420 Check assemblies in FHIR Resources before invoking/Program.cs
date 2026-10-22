@@ -46,12 +46,13 @@ partial class Program
                 || fhirLibrary.Content.FirstOrDefault(IsAssemblyAttachment)?.Data is not { } assemblyBytes)
                 continue;
 
-            // Reads the assembly's metadata without loading it. Bytes that are not a readable .NET assembly give a
-            // result with a ReadError, rather than an exception.
+            // Reads the assembly's metadata without loading it. Bytes that are not a readable .NET assembly, and an
+            // assembly built against newer assemblies than this host has, give a result with a ReadError, rather than
+            // an exception.
             var cqlAssemblyInfo = InvocationToolkit.ReadCqlAssemblyInfo(new AssemblyBinary(assemblyBytes));
             if (cqlAssemblyInfo.ReadError is { } error)
             {
-                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment cannot be read: {error.GetMessage()}");
+                Console.WriteLine($"{fhirLibrary.Name}: the +dll attachment cannot be loaded: {error.GetMessage()}");
                 continue;
             }
 

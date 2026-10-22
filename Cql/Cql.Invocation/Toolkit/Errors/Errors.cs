@@ -117,6 +117,57 @@ public readonly record struct CqlLibraryTypeWithMalformedAttributeError : ICqlAs
 }
 
 /// <summary>
+/// The assembly references an assembly at a newer version than the host has, so the toolkit cannot load it: the default
+/// load context, which the toolkit binds such a reference through, binds it only to an assembly of at least the version
+/// referenced, and an older one can lack what the assembly uses. An assembly built by a later release of the SDK
+/// references that release's assemblies, and those of the Firely .NET SDK and the .NET runtime it builds against.
+/// </summary>
+/// <remarks>
+/// The host's assembly of a name is the one the default load context binds a reference to: the assembly of that name it
+/// has loaded, or else the one its trusted platform assemblies list. Of the references newer than the host's assemblies,
+/// this names the first.
+/// </remarks>
+public readonly record struct CqlAssemblyWithNewerReferenceError : ICqlAssemblyInfoError
+{
+    internal CqlAssemblyWithNewerReferenceError(
+        string assemblyName,
+        string referencedAssemblyName,
+        Version referencedVersion,
+        Version hostVersion)
+    {
+        AssemblyName = assemblyName;
+        ReferencedAssemblyName = referencedAssemblyName;
+        ReferencedVersion = referencedVersion;
+        HostVersion = hostVersion;
+    }
+
+    /// <summary>
+    /// Gets the full name of the assembly.
+    /// </summary>
+    public string AssemblyName { get; }
+
+    /// <summary>
+    /// Gets the simple name of the assembly it references, as the reference states it.
+    /// </summary>
+    public string ReferencedAssemblyName { get; }
+
+    /// <summary>
+    /// Gets the version of that assembly that the reference names.
+    /// </summary>
+    public Version ReferencedVersion { get; }
+
+    /// <summary>
+    /// Gets the version of the host's assembly of that name, which is older than <see cref="ReferencedVersion"/>.
+    /// </summary>
+    public Version HostVersion { get; }
+
+    /// <inheritdoc />
+    public string GetMessage() =>
+        $"Assembly '{AssemblyName}' references version {ReferencedVersion} of assembly '{ReferencedAssemblyName}', "
+        + $"which is newer than the version {HostVersion} this host has.";
+}
+
+/// <summary>
 /// A type carries more than one <see cref="Hl7.Cql.Abstractions.CqlLibraryAttribute"/> or
 /// <see cref="GeneratedCodeAttribute"/>, while a CQL library type carries exactly one of each.
 /// </summary>
