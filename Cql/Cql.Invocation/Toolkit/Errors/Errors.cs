@@ -164,7 +164,7 @@ public readonly record struct CqlAssemblyWithNewerReferenceError : ICqlAssemblyI
     /// <inheritdoc />
     public string GetMessage() =>
         $"Assembly '{AssemblyName}' references version {ReferencedVersion} of assembly '{ReferencedAssemblyName}', "
-        + $"which is newer than the version {HostVersion} this host has, so the host cannot load it.";
+        + $"which is newer than the version {HostVersion} this host has.";
 }
 
 /// <summary>
