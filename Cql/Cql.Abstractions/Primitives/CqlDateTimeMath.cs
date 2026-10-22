@@ -87,12 +87,14 @@ namespace Hl7.Cql.Primitives
                 case "day":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalDays;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalDays) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalDays - asInt;
                         var possiblyNextDay = firstDto.AddDays(decimalPortion);
                         if (possiblyNextDay.Day != firstDto.Day)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -100,12 +102,14 @@ namespace Hl7.Cql.Primitives
                 case "hour":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalHours;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalHours) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalHours - asInt;
                         var possiblyNextHour = firstDto.AddHours(decimalPortion);
                         if (possiblyNextHour.Hour != firstDto.Hour)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -113,12 +117,14 @@ namespace Hl7.Cql.Primitives
                 case "minute":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMinutes;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMinutes) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMinutes - asInt;
                         var possiblyNextMinute = firstDto.AddMinutes(decimalPortion);
                         if (possiblyNextMinute.Minute != firstDto.Minute)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -126,12 +132,14 @@ namespace Hl7.Cql.Primitives
                 case "second":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalSeconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalSeconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalSeconds - asInt;
                         var possiblyNextSecond = firstDto.AddSeconds(decimalPortion);
                         if (possiblyNextSecond.Second != firstDto.Second)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -139,12 +147,14 @@ namespace Hl7.Cql.Primitives
                 case "millisecond":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMilliseconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMilliseconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMilliseconds - asInt;
                         var possiblyNextSecond = firstDto.AddMilliseconds(decimalPortion);
                         if (possiblyNextSecond.Millisecond != firstDto.Millisecond)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -243,13 +253,14 @@ namespace Hl7.Cql.Primitives
                         monthDiff += 1;
                     return monthDiff;
 
-                case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                // A count outside the range of Integer cannot be represented.
+                case "week":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
                 case "day":
-                                    return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                                    return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays);
+                case "hour":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalHours);
+                case "minute":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMinutes);
+                case "second":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalSeconds);
+                case "millisecond": return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMilliseconds);
                 default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
@@ -289,8 +300,8 @@ namespace Hl7.Cql.Primitives
         /// The finest unit the caller supports. A quantity in a finer unit, or in a unit that is not a calendar
         /// duration finer than a year, is returned unchanged so that the caller can reject it.
         /// </param>
-        /// <returns>The value and unit to apply.</returns>
-        internal static (decimal Value, string Unit) ConvertToPrecision(
+        /// <returns>The value and unit to apply, or <see langword="null"/> when the conversion leaves the decimal range.</returns>
+        internal static (decimal Value, string Unit)? ConvertToPrecision(
             decimal value,
             string unit,
             DateTimePrecision precision,
@@ -323,12 +334,12 @@ namespace Hl7.Cql.Primitives
                 _                        => ("seconds", (long)MillisecondsPerSecond),
             };
 
-            // Months are only more precise than years.
-            var converted = unitPrecision == DateTimePrecision.Month
+            // Months are only more precise than years. The division cannot overflow, so only the multiplication is guarded.
+            decimal? converted = unitPrecision == DateTimePrecision.Month
                 ? value / MonthsPerYear
-                : value * unitMilliseconds / precisionMilliseconds;
+                : OverflowGuard.Multiply(value, (decimal)unitMilliseconds) / precisionMilliseconds;
 
-            return (decimal.Truncate(converted), precisionUnit);
+            return converted is { } whole ? (decimal.Truncate(whole), precisionUnit) : null;
         }
     }
 }

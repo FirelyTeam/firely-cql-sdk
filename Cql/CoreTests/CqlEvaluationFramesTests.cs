@@ -230,6 +230,8 @@ public class CqlEvaluationFramesTests
     [DataRow(typeof(CqlUcumYearArithmeticError))]
     [DataRow(typeof(CqlUcumMonthArithmeticError))]
     [DataRow(typeof(ICqlArithmeticError))]
+    [DataRow(typeof(CqlInvalidDateTimeComponentsError))]
+    [DataRow(typeof(CqlExpandFractionalPerError))]
     [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
     public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
         errorType.Should().BeAssignableTo<ICqlEvaluationError>();

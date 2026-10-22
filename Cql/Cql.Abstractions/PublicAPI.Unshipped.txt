@@ -19,3 +19,14 @@ static Hl7.Cql.Exceptions.CqlErrorExtensions.GetCqlEvaluationFrames(this System.
 Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string? Version) -> void
 Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string?
 Hl7.Cql.Abstractions.ILibrary.Version.get -> string?
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.CqlUnsupportedTemporalUnitError() -> void
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Equals(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError other) -> bool
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.GetMessage() -> string!
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Type.get -> string!
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Unit.get -> string!
+override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.GetHashCode() -> int
+static Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.operator !=(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.operator ==(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError right) -> bool
+~override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.ToString() -> string
