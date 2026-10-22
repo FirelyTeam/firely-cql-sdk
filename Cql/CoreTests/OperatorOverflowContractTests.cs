@@ -36,61 +36,14 @@ namespace CoreTests
         {
             "Add(CqlDate, CqlQuantity)",
             "Add(CqlDateTime, CqlQuantity)",
-            "Add(CqlQuantity, CqlQuantity)",
             "Add(CqlTime, CqlQuantity)",
-            "After(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
-            "After(CqlInterval<CqlQuantity>, CqlQuantity, string)",
-            "After(CqlQuantity, CqlInterval<CqlQuantity>, string)",
-            "Before(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
-            "Before(CqlInterval<CqlQuantity>, CqlQuantity, string)",
-            "Before(CqlQuantity, CqlInterval<CqlQuantity>, string)",
-            "Between(CqlQuantity, CqlQuantity, CqlQuantity)",
-            "CanConvertQuantity(CqlQuantity, string)",
-            "Contains(CqlInterval<CqlQuantity>, CqlQuantity, string)",
             "ConvertQuantity(CqlQuantity, string)",
-            "Date(int?, int?, int?)",
-            "DateTime(int?, int?, int?, int?, int?, int?, int?, decimal?)",
-#if NET8_0
-            // On .NET 8 a double outside the Integer range converts to an unspecified Integer, and the remainder the
-            // operator then adds to the first date is far outside the DateTime range; later runtimes saturate the
-            // conversion and the remainder stays representable.
-            "DifferenceBetween(CqlDateTime, CqlDateTime, string)",
-#endif
-            "Divide(CqlQuantity, CqlQuantity)",
-            "Divide(decimal?, decimal?)",
-            "Except(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
-            "Exp(decimal?)",
             "Expand(CqlInterval<CqlDate>, CqlQuantity)",
             "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
             "Expand(CqlInterval<CqlTime>, CqlQuantity)",
-            "Expand(CqlInterval<decimal?>, CqlQuantity)",
-            "Expand(CqlInterval<int?>, CqlQuantity)",
-            "Expand(CqlInterval<long?>, CqlQuantity)",
-            "Ln(decimal?)",
-            "Meets(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
-            "MeetsAfter(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
-            "MeetsBefore(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>, string)",
-            "Modulo(CqlQuantity, CqlQuantity)",
-            "Modulo(int?, int?)",
-            "Modulo(long?, long?)",
-            "Multiply(CqlQuantity, CqlQuantity)",
-            "Multiply(decimal?, decimal?)",
-            "Overlaps(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
-            "OverlapsAfter(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
-            "OverlapsBefore(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
-            "Round(decimal?, int?)",
-            "SameOrAfter(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
-            "SameOrBefore(CqlInterval<CqlQuantity>, CqlInterval<CqlQuantity>)",
             "Subtract(CqlDate, CqlQuantity)",
             "Subtract(CqlDateTime, CqlQuantity)",
-            "Subtract(CqlQuantity, CqlQuantity)",
             "Subtract(CqlTime, CqlQuantity)",
-            "Time(int?, int?, int?, int?)",
-            "Truncate(decimal?)",
-            "TruncatedDivide(CqlQuantity, CqlQuantity)",
-            "TruncatedDivide(decimal?, decimal?)",
-            "TruncatedDivide(int?, int?)",
-            "TruncatedDivide(long?, long?)",
         };
 
         /// <summary>
@@ -100,9 +53,6 @@ namespace CoreTests
         /// </summary>
         private static readonly HashSet<string> KnownNonTerminating = new(StringComparer.Ordinal)
         {
-            "Expand(CqlInterval<CqlDate>, CqlQuantity)",
-            "Expand(CqlInterval<CqlDateTime>, CqlQuantity)",
-            "Expand(CqlInterval<CqlTime>, CqlQuantity)",
         };
 
         /// <summary>
@@ -549,6 +499,10 @@ namespace CoreTests
                     Add(full, extremes, intervalType, p[0], p[1], p[2], temporal ? p[2] : p[3], narrow);
                     if (temporal)
                         full.Add(MakeInterval(intervalType, p[3], p[3], true, true));
+
+                    // Adding a fractional per to a Decimal this large rounds the per away, so expansion does not advance.
+                    if (narrow && p[0] is decimal)
+                        full.Add(MakeInterval(intervalType, decimal.MaxValue - 1, decimal.MaxValue - 1, true, true));
                 }
 
                 full.Add(null);

@@ -113,26 +113,20 @@ namespace Hl7.Cql.Operators
                 // list containing a zero got a non-zero geometric mean.
                 decimal product = 1m;
                 var nonNullCount = 0;
-                try
+                foreach (decimal? d in argument)
                 {
-                    foreach (decimal? d in argument)
+                    if (d != null)
                     {
-                        if (d != null)
-                        {
-                            product *= d.Value;
-                            nonNullCount++;
-                        }
+                        // A product outside Decimal's range means Product(X) cannot be represented and neither can
+                        // Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
+                        // null. The geometric mean of such a list can still be representable - the product is
+                        // accumulated in Decimal - so the warning keeps the null visible in the evaluation log rather
+                        // than letting it pass as an ordinary result.
+                        if (OverflowGuard.Multiply(product, d.Value) is not { } next)
+                            return Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.GeometricMean", "decimal geometric mean product");
+                        product = next;
+                        nonNullCount++;
                     }
-                }
-                catch (OverflowException e)
-                {
-                    // The product itself is outside Decimal's range, so Product(X) cannot be represented and neither
-                    // can Power of it. Per the spec (§9.B) Power: if the result cannot be represented, the result is
-                    // null. The geometric mean of such a list can still be representable - the product is
-                    // accumulated in Decimal - so the message keeps the null visible in the evaluation log rather
-                    // than letting it pass as an ordinary result.
-                    Message(new { argument, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Ignored overflow errors from decimal geometric mean product, returned null.");
-                    return null;
                 }
                 if (nonNullCount == 0) return null;
                 else
@@ -146,20 +140,8 @@ namespace Hl7.Cql.Operators
                     // product under a fractional root has no real value (Math.Pow gives NaN), and a result outside
                     // Decimal's range is not representable either; both are null rather than an OverflowException
                     // out of the cast.
-                    if (double.IsNaN(result) || double.IsInfinity(result))
-                    {
-                        Message(new { argument, product, result }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Geometric mean result cannot be represented as decimal; returning null.");
-                        return null;
-                    }
-                    try
-                    {
-                        return (decimal)result;
-                    }
-                    catch (OverflowException e)
-                    {
-                        Message(new { argument, product, result, e }, "CqlOperators.AggregateFunctions.GeometricMean", "Warning", "Decimal overflow in geometric mean result; returning null.");
-                        return null;
-                    }
+                    return OverflowGuard.ToDecimal(result)
+                        ?? Overflowed<decimal?>(new { argument, product, result }, "CqlOperators.AggregateFunctions.GeometricMean", "decimal geometric mean result");
                 }
             }
         }
@@ -617,93 +599,61 @@ namespace Hl7.Cql.Operators
 
         #region Sum
 
-        public int? Sum(IEnumerable<int?>? values)
-        {
-            try
-            {
-                return values.CqlSum();
-            }
-            catch (OverflowException e)
-            {
-                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type integer summation, returned null.");
-                return null;
-            }
-        }
+        public int? Sum(IEnumerable<int?>? values) => Total(values, "type integer summation");
 
-        public long? Sum(IEnumerable<long?>? values)
-        {
-            try
-            {
-                return values.CqlSum();
-            }
-            catch (OverflowException e)
-            {
-                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type long summation, returned null.");
-                return null;
-            }
-        }
+        public long? Sum(IEnumerable<long?>? values) => Total(values, "type long summation");
 
-        public decimal? Sum(IEnumerable<decimal?>? values)
-        {
-            try
-            {
-                return values.CqlSum();
-            }
-            catch (OverflowException e)
-            {
-                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type decimal summation, returned null.");
-                return null;
-            }
-        }
+        public decimal? Sum(IEnumerable<decimal?>? values) => Total(values, "type decimal summation");
 
         public CqlQuantity? Sum(IEnumerable<CqlQuantity?>? values)
         {
+            if (values == null)
+                return null;
+
             string? unit = null;
-
-            (bool hasValue, decimal value) GetValueAndCheckUnit(CqlQuantity? quantity)
+            decimal? sum = null;
+            foreach (var quantity in values)
             {
-                switch (quantity)
+                if (quantity is not { value: { } value, unit: var quantityUnit })
+                    continue;
+
+                quantityUnit ??= "1"; // default unit if none specified
+                unit ??= quantityUnit; // set the unit once, if not already set
+                if (unit != quantityUnit)
                 {
-                    case { value: { } v, unit: var u }:
-                        u ??= "1"; // default unit if none specified
-                        unit ??= u; // set the unit once, if not already set
-                        if (unit != u)
-                            throw new NotSupportedException("Inconsistent units are not supported.");
-
-                        return (true, value: v);
-
-                    default:
-                        return default;
+                    Message(new { values }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored inconsistent units errors from type CqlQuantity summation, returned null.");
+                    return null;
                 }
+
+                if (OverflowGuard.Add(sum ?? 0m, value) is not { } next)
+                    return Overflowed<CqlQuantity>(new { values }, "CqlOperators.AggregateFunctions.Sum", "type CqlQuantity summation");
+                sum = next;
             }
 
-            decimal? Aggregate(decimal? quantityAcc, decimal quantityValue)
+            return sum is { } total ? new CqlQuantity(total, unit ?? "1") : null;
+        }
+
+        /// <summary>
+        /// The sum of the values that are not null, or <see langword="null"/> when there are none or when a partial sum
+        /// cannot be represented.
+        /// </summary>
+        private T? Total<T>(IEnumerable<T?>? values, string operation) where T : struct, INumberBase<T>
+        {
+            if (values == null)
+                return null;
+
+            T? sum = null;
+            foreach (var value in values)
             {
-                checked
-                {
-                    return (quantityAcc ?? 0m) + quantityValue;
-                }
+                if (value is not { } addend)
+                    continue;
+
+                if (OverflowGuard.Add(sum ?? T.Zero, addend) is not { } next)
+                    return Overflowed<T?>(new { values }, "CqlOperators.AggregateFunctions.Sum", operation);
+                sum = next;
             }
 
-            try
-            {
-                decimal? initialAccumulate = null;
-                return values.CqlAggregate(GetValueAndCheckUnit, Aggregate, initialAccumulate) switch
-                {
-                    null    => null,
-                    { } sum => new CqlQuantity(sum, unit ?? "1")
-                };
-            }
-            catch (NotSupportedException e)
-            {
-                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored inconsistent units errors from type CqlQuantity summation, returned null.");
-                return null;
-            }
-            catch (OverflowException e)
-            {
-                Message(new { values, e }, "CqlOperators.AggregateFunctions.Sum", "Warning", "Ignored overflow errors from type CqlQuantity summation, returned null.");
-                return null;
-            }
+            return sum;
         }
 
         #endregion
@@ -728,44 +678,6 @@ namespace Hl7.Cql.Operators
         }
 
         #endregion
-    }
-}
-
-
-file static class CqlMath
-{
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TNumber? CqlSum<TNumber>(
-        this IEnumerable<TNumber?>? values)
-        where TNumber : struct, INumberBase<TNumber> =>
-        CqlAggregate<TNumber?, TNumber, TNumber?>(
-            values,
-            v => v.HasValue ? (true, v.Value) : default,
-            (acc, value) => checked((acc ?? TNumber.Zero) + value));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static TAccumulate? CqlAggregate<TSource, TValue, TAccumulate>(
-        this IEnumerable<TSource?>? values,
-        Func<TSource?, (bool hasValue, TValue value)> hasValue,
-        Func<TAccumulate?, TValue, TAccumulate> aggregator,
-        TAccumulate? initialAccumulate = default)
-    {
-        if (values == null)
-            return default;
-
-        bool any = false;
-        TAccumulate? acc = initialAccumulate;
-
-        foreach (var v in values)
-        {
-            if (hasValue(v) is (true, var value))
-            {
-                any = true;
-                acc = aggregator(acc, value);
-            }
-        }
-
-        return any ? acc : default;
     }
 }
 
