@@ -10,7 +10,8 @@
 
 - **Invocation toolkit — `InvocationToolkit.ReadCqlAssemblyInfo` reports an assembly that references a newer version
   of an assembly than the host has as not supported.** It compares each assembly the read assembly references with the
-  host's assembly of the same name: the SDK's, the Firely .NET SDK's, the .NET runtime's, or any other the host has.
+  host's assembly of the same name: the one the default load context has loaded, or else the one its trusted platform
+  assemblies list, such as the SDK's, the Firely .NET SDK's and the .NET runtime's.
   Such an assembly read as supported before. It now reads with `IsSupported` false and `HasReadErrors` true, a
   `CqlAssemblyWithNewerReferenceError` as its `ReadError`, and no libraries listed. That covers a `+dll` packaged by a
   later release of the SDK, which references that release's assemblies, and one compiled on a newer .NET than the

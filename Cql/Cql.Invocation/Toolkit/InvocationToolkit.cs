@@ -106,11 +106,13 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// <see cref="CqlAssemblyInfo.HasReadErrors"/> says whether the assembly or any of its libraries has an error.
     /// </para>
     /// <para>
-    /// The assembly's references are compared with the host's assemblies of the same names: those of this SDK, of the
-    /// Firely .NET SDK, of the .NET runtime, and any other the host has. The default load context, which this toolkit
-    /// binds those references through, binds a reference only to an assembly of at least the version referenced, so a
-    /// reference to a newer version than the host's, such as one an assembly built by a later release of this SDK
-    /// holds, gives a result whose <see cref="CqlAssemblyInfo.ReadError"/> is a
+    /// The assembly's references are compared with the host's assemblies of the same names: the assembly of that name
+    /// the default load context has loaded, or else the one its trusted platform assemblies list, such as those of this
+    /// SDK, of the Firely .NET SDK and of the .NET runtime. An assembly the host loaded into another load context, or
+    /// a trusted platform assembly whose file cannot be read, as in a single-file bundle, is not compared. The default
+    /// load context, which this toolkit binds those references through, binds a reference only to an assembly of at
+    /// least the version referenced, so a reference to a newer version than the host's, such as one an assembly built
+    /// by a later release of this SDK holds, gives a result whose <see cref="CqlAssemblyInfo.ReadError"/> is a
     /// <see cref="Errors.CqlAssemblyWithNewerReferenceError"/> naming it. A reference to an assembly the host does not
     /// have is left to the load, which can find it among the other assemblies added to the same toolkit.
     /// </para>
