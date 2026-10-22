@@ -15,6 +15,8 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CoreTests;
 
@@ -48,8 +50,36 @@ public class LibraryVersionCompilationTests
         using var invoker = CompileLibrary("library NoVersion\ndefine \"One\": 1", out var cSharp);
 
         cSharp.Should().Contain("""[CqlLibrary("NoVersion", null)]""")
-              .And.Contain("public string Version => null;");
+              .And.Contain("public string? Version => null;");
     }
+
+    [TestMethod]
+    [DataRow(NullableContextOptions.Enable, DisplayName = "nullable on")]
+    [DataRow(NullableContextOptions.Disable, DisplayName = "nullable off")]
+    public void GeneratedCSharp_OfALibraryWithoutAVersion_CompilesWithoutWarningsAsACheckedInFile(NullableContextOptions nullable)
+    {
+        using var invoker = CompileLibrary("library NoVersion\ndefine \"One\": 1", out var cSharp);
+
+        // A checked-in *.g.cs file is built with warnings as errors, in a project with nullable on or off.
+        var compilation = CSharpCompilation.Create(
+            "NoVersionLibrary",
+            [CSharpSyntaxTree.ParseText(cSharp)],
+            TrustedPlatformAssemblies.Value,
+            new CSharpCompilationOptions(
+                OutputKind.DynamicallyLinkedLibrary,
+                nullableContextOptions: nullable,
+                generalDiagnosticOption: ReportDiagnostic.Error));
+
+        compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity >= DiagnosticSeverity.Warning)
+                   .Select(diagnostic => diagnostic.ToString())
+                   .Should().BeEmpty();
+    }
+
+    private static readonly Lazy<MetadataReference[]> TrustedPlatformAssemblies = new(() =>
+        ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+            .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
+            .Select(path => (MetadataReference)MetadataReference.CreateFromFile(path))
+            .ToArray());
 
     private static LibrarySetInvoker CompileLibrary(string cql, out string cSharp)
     {
