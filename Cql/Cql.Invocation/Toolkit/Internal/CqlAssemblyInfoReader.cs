@@ -139,8 +139,19 @@ internal static class CqlAssemblyInfoReader
     /// which the toolkit therefore cannot bind it to, as <see cref="HostAssemblyVersions"/> describes.
     /// </summary>
     /// <remarks>
+    /// <para>
     /// A reference to an assembly the host does not have is left to the load, which can bind it to another assembly
     /// added to the same toolkit, such as the one of a library that this assembly's libraries include.
+    /// </para>
+    /// <para>
+    /// A name the host has is compared even when another assembly added to the same toolkit would satisfy the reference
+    /// first, as a toolkit's load context consults its own assemblies before the default one. This reader sees one
+    /// assembly at a time, so it reports such a reference although the load would succeed; with the names generated
+    /// libraries have, that does not happen in practice.
+    /// </para>
+    /// <para>
+    /// The reference's culture and public key token are not compared. The binder ignores the token too.
+    /// </para>
     /// </remarks>
     private static CqlAssemblyWithNewerReferenceError? FindNewerReference(MetadataReader metadata, string assemblyName)
     {
