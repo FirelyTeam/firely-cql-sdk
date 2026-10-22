@@ -91,7 +91,10 @@ public partial class Library
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         var library = LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, originalFilePath: file.FullName);
-        library.SourceJsonUtf8 = utf8Json;
+
+        // Normalized at the point of capture, so every consumer of these bytes gets the same result
+        // whatever line endings the file was checked out with.
+        library.SourceJsonUtf8 = LibraryJsonSerializer.NormalizeNewLinesUtf8(utf8Json);
         return library;
     }
 
@@ -133,7 +136,8 @@ public partial class Library
     internal byte[] ToJsonUtf8(bool writeIndented) =>
         SourceJsonUtf8 is { } sourceJson
             ? LibraryJsonSerializer.ReformatUtf8Json(sourceJson, writeIndented)
-            : Encoding.UTF8.GetBytes(SerializeToJson(writeIndented));
+            // Indented serialization breaks lines with Environment.NewLine, so normalize here too.
+            : LibraryJsonSerializer.NormalizeNewLinesUtf8(Encoding.UTF8.GetBytes(SerializeToJson(writeIndented)));
 
     /// <summary>
     /// Writes this library in JSON format to <paramref name="stream"/>.

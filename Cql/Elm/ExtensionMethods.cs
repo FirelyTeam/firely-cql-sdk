@@ -102,8 +102,15 @@ namespace Hl7.Cql.Elm
         /// <summary>
         /// Adds an error to the given node.
         /// </summary>
+        /// <remarks>
+        /// An error without a source position takes the position of <paramref name="node"/>'s locator. When the node
+        /// has no locator yet, the error takes the position once one is set (see <c>Initializers.WithLocator</c>).
+        /// </remarks>
         public static T AddError<T>(this T node, CqlToElmError error) where T : Element
         {
+            if (!error.HasPosition())
+                error.TrySetPosition(node.locator);
+
             node.annotation = node.annotation is { } annotations
                 ? annotations.Append(error).ToArray()
                 : new[] { error };

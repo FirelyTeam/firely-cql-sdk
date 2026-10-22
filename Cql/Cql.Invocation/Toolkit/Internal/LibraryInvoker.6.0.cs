@@ -10,6 +10,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
@@ -117,8 +118,23 @@ file sealed class DefinitionInvoker_6_0(
         return (true, definitionInvoker);
     }
 
-    public override object? Invoke(CqlContext cqlContext, params object?[] args) =>
-        _compiledInvoker(cqlContext, args);
+    // Records the invoked definition on any exception that passes through, without catching it. For a definition, the
+    // cache has recorded the same frame already; for a function the host invoked directly, this is its only frame.
+    public override object? Invoke(CqlContext cqlContext, params object?[] args)
+    {
+        try
+        {
+            return _compiledInvoker(cqlContext, args);
+        }
+        catch (Exception exception) when (CqlEvaluationFrames.Record(
+                                              exception,
+                                              LibraryIdentifier.Identifier,
+                                              LibraryIdentifier.Version?.ToString(),
+                                              DefinitionName))
+        {
+            throw; // never reached: Record always returns false
+        }
+    }
 
     /// <summary>
     /// Creates a delegate that directly calls the definition method on the library instance,

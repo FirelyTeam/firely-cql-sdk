@@ -67,7 +67,7 @@ Reads pre-built ELM JSON files and converts them to one or more outputs.
 | Option | Required | Description |
 |--------|----------|-------------|
 | `--elm <dir>` | ✅ | Input directory containing `*.json` ELM files (searched recursively) |
-| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources |
+| `--cql <dir>` | ✅ with `--fhir` | CQL source directory; files are matched by versioned identifier and embedded in FHIR Library resources. An ELM library without a matching CQL file is not packaged itself, but it resolves the includes of the libraries that are packaged |
 | `--cs <dir>` | | Output directory for generated `*.g.cs` C# source files |
 | `--dll <dir>` | | Output directory for compiled `*.dll` .NET assemblies |
 | `--pdb <dir>` | | Output directory for `*.pdb` portable debug symbol files (requires `--debug-symbols PortablePdb` and `--dll`) |
@@ -260,6 +260,33 @@ All commands share the following logging options:
 
 Log levels: `Trace`, `Debug`, `Information`, `Warning`, `Error`, `Critical`, `None`
 
+## CQL Models
+
+The models the `cql` command translates against are set in the `Cql` section of the settings file (there
+is no command-line flag):
+
+```jsonc
+"Cql": {
+  "Models": [ "ElmR1", "Fhir401" ]
+}
+```
+
+| Value | Model |
+|-------|-------|
+| `ElmR1` | System (ELM R1) — required by every other model |
+| `Fhir401` | FHIR 4.0.1 |
+| `USCore311` | US Core 3.1.1 |
+| `QICore411` | QICore 4.1.1 |
+| `USCore610` | US Core 6.1.0 |
+| `QICore600` | QICore 6.0.0 |
+
+A library's `using` declaration only resolves when its model is selected here, so a set of libraries
+written against QICore 6.0.0 needs `QICore600`, and `USCore610` as well when the set also contains libraries that use US Core 6.1.0.
+
+Select at most one version of each model: `USCore311` and `USCore610` are two versions of the same model, as are
+`QICore411` and `QICore600`, and a configuration that selects both is refused before any library is translated.
+Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
+
 ## ELM Attachment Formatting
 
 Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. How that JSON is
@@ -273,7 +300,7 @@ formatted is set in the `Packaging` section of the settings file (there is no co
 
 | Value | Effect |
 |-------|--------|
-| `Passthrough` (default) | Embed the ELM exactly as it was read, without reformatting it |
+| `Passthrough` (default) | Embed the ELM as it was read, without reformatting it |
 | `Indented` | Format the ELM JSON with indentation and line breaks |
 | `Compact` | Format the ELM JSON without indentation, for a smaller attachment |
 
@@ -282,8 +309,9 @@ rewritten only where that is needed — so none of them rebuilds the ELM from th
 walks every ELM node through the polymorphic type resolver and dominated packaging time on large library
 sets. A library built in memory has no source JSON and is serialized with the requested indentation.
 
-Only `Passthrough` reproduces the source file byte for byte. `Indented` and `Compact` rewrite the text, so
-besides whitespace their string escaping may differ from the source.
+All three normalize line endings to LF, so the attachment does not depend on how the ELM file was checked
+out. Beyond that, only `Passthrough` leaves the text alone; `Indented` and `Compact` rewrite it, so their
+whitespace and string escaping may differ from the source.
 
 Reused JSON is not identical to what serializing the graph produces: it keeps empty collections such as
 `annotation` and `signature` that serialization omits, and it lacks what serialization adds —

@@ -10,6 +10,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Primitives.Errors;
 
 namespace Hl7.Cql.Primitives
 {
@@ -94,41 +95,37 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new date with <paramref name="quantity"/> added to it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDate? Add(CqlQuantity? quantity)
         {
             if (quantity is not { value: { } value, unit: { } unit })
                 return null;
 
             var dto = Value.DateTimeOffset;
-            const string supportedUnitsMessage = "For Date values, the quantity unit must be one of: years, months, weeks, or days.";
 
-            try
-            {
-                dto = unit switch
-                {
-                    UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
-                    "year" or "years"                       => dto.AddYears((int)value),
-                    UCUMUnits.Month                         => throw new CqlUcumMonthArithmeticError().ToException(),
-                    "month" or "months"                     => dto.AddMonths((int)value),
-                    "wk" or "week" or "weeks"               => dto.AddDays((int)(value! * CqlDateTimeMath.DaysPerWeek)),
-                    "d" or "day" or "days"                  => dto.AddDays((int)value!),
-                    "h" or "hour" or "hours" or
-                    "min" or "minute" or "minutes" or
-                    "s" or "second" or "seconds" or
-                    "ms" or "millisecond" or "milliseconds" => throw new ArgumentException($"Time-based unit '{unit}' is not supported for Date values. {supportedUnitsMessage}"),
-                    _                                       => throw new ArgumentException($"Unknown date unit '{unit}' supplied. {supportedUnitsMessage}")
-                };
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                // Return null when the operation would result in an overflow
+            // A quantity in a unit finer than the value's precision is applied at that precision; one whose conversion
+            // leaves the decimal range cannot be applied.
+            if (CqlDateTimeMath.ConvertToPrecision(value, unit, Value.Precision, DateTimePrecision.Day) is not { } converted)
                 return null;
-            }
+            (value, unit) = converted;
 
-            var newIsoDate = new DateIso8601(dto, Value.Precision);
-            var result = new CqlDate(newIsoDate);
-            return result;
+            var shifted = unit switch
+            {
+                UCUMUnits.Year                          => throw new CqlUcumYearArithmeticError().ToException(),
+                "year" or "years"                       => OverflowGuard.Shift(dto, value, static (d, v) => d.AddYears(decimal.ToInt32(v))),
+                UCUMUnits.Month                         => throw new CqlUcumMonthArithmeticError().ToException(),
+                "month" or "months"                     => OverflowGuard.Shift(dto, value, static (d, v) => d.AddMonths(decimal.ToInt32(v))),
+                "wk" or "week" or "weeks"               => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v * CqlDateTimeMath.DaysPerWeek))),
+                "d" or "day" or "days"                  => OverflowGuard.Shift(dto, value, static (d, v) => d.AddDays(decimal.ToInt32(v))),
+                _                                       => throw new CqlUnsupportedTemporalUnitError(unit, "Date").ToException(),
+            };
+
+            // A result outside the range of a date cannot be represented.
+            if (shifted is not { } result)
+                return null;
+
+            var newIsoDate = new DateIso8601(result, Value.Precision);
+            return new CqlDate(newIsoDate);
         }
 
         /// <summary>
@@ -136,7 +133,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new date with <paramref name="quantity"/> subtracted from it, or <see langword="null"/> if the operation would result in an overflow.</returns>
-        /// <exception cref="ArgumentException">If the quantity is not expressed in supported units.</exception>
+        /// <exception cref="CqlException{TError}">If the quantity is not expressed in supported units.</exception>
         public CqlDate? Subtract(CqlQuantity? quantity) => Add(-quantity);
 
         /// <summary>

@@ -107,8 +107,17 @@ partial class LibrarySetCSharpCodeGenerator
                  #region ILibrary Implementation
 
                  public string Name => {LibraryName!.Identifier.ToString().QuoteString()};
-                 public string Version => {LibraryName!.Version?.ToString().QuoteOrNullString()};
                  """);
+            // ILibrary.Version is nullable. A library without a version declares it so in an annotations context of its
+            // own, which compiles without a warning whether the project the file is built in has nullable on or off.
+            ISB.AppendLine(
+                LibraryName!.Version is { } version
+                    ? $"public string Version => {version.ToString().QuoteString()};"
+                    : """
+                      #nullable enable annotations
+                      public string? Version => null;
+                      #nullable restore
+                      """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
@@ -227,9 +236,7 @@ partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             ISB.AppendLine(
-                LibraryName!.Version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
-                    : $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()})]");
+                $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {(LibraryName!.Version?.ToString()).QuoteOrNullString()})]");
 
             ISB.AppendLine(
                 $$"""

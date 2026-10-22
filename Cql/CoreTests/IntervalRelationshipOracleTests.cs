@@ -213,18 +213,6 @@ namespace CoreTests
             ["properlyIncludesElement"] = (p, b) => Ops.IntervalProperlyIncludesElement(b, p),
         };
 
-        /// <summary>
-        /// The operators that combine two comparisons against the same unknown boundary. Where every value of that
-        /// boundary satisfies one comparison or the other but none satisfies both (Interval[1, 1] overlaps after
-        /// Interval[0, null) needs an end at or after 1 and below 1), the oracle answers false and the operator, which
-        /// decides each comparison over the whole range, answers null. Such a case is reported but does not fail the
-        /// test; the operator must never contradict the oracle. Tracked in #1704.
-        /// </summary>
-        private static readonly HashSet<string> CombineComparisonsOnOneBoundary = new() { "overlapsBefore", "overlapsAfter", "properlyIncludes", "properlyIncludedIn" };
-
-        private static bool HasUnknownBoundary(CqlInterval<int?> interval) =>
-            (interval.low is null && !(interval.lowClosed ?? false)) || (interval.high is null && !(interval.highClosed ?? false));
-
         private static string Show(CqlInterval<int?> i) =>
             $"Interval{((i.lowClosed ?? false) ? "[" : "(")}{Show(i.low)}, {Show(i.high)}{((i.highClosed ?? false) ? "]" : ")")}";
 
@@ -236,7 +224,6 @@ namespace CoreTests
         public void IntervalIntervalOperators_AgreeWithTheEnumerationOracle()
         {
             var failures = new List<string>();
-            var undecided = 0;
             var checkedCases = 0;
             var intervals = Intervals().ToList();
             foreach (var a in intervals)
@@ -250,18 +237,12 @@ namespace CoreTests
                         var expected = Decide(from x in ca from y in cb select relation(x, y));
                         var actual = Operators[name](a, b);
                         checkedCases++;
-                        if (expected == actual)
-                            continue;
-                        if (actual is null && CombineComparisonsOnOneBoundary.Contains(name) && (HasUnknownBoundary(a) || HasUnknownBoundary(b)))
-                        {
-                            undecided++;
-                            continue;
-                        }
-                        failures.Add($"{Show(a)} {name} {Show(b)}: expected {Show(expected)}, got {Show(actual)}");
+                        if (expected != actual)
+                            failures.Add($"{Show(a)} {name} {Show(b)}: expected {Show(expected)}, got {Show(actual)}");
                     }
                 }
 
-            Assert.AreEqual(0, failures.Count, string.Join(Environment.NewLine, failures.Take(40).Prepend($"{failures.Count} of {checkedCases} cases disagree with the oracle ({undecided} undecided where the oracle decides):")));
+            Assert.AreEqual(0, failures.Count, string.Join(Environment.NewLine, failures.Take(40).Prepend($"{failures.Count} of {checkedCases} cases disagree with the oracle:")));
         }
 
         [TestMethod]

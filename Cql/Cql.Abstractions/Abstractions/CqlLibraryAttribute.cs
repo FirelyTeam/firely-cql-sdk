@@ -18,8 +18,8 @@ namespace Hl7.Cql.Abstractions
         /// Creates an instance.
         /// </summary>
         /// <param name="Identifier">The library's identifier.</param>
-        /// <param name="Version">The library's version.</param>
-        public CqlLibraryAttribute(string Identifier, string Version)
+        /// <param name="Version">The library's version, or <see langword="null"/> for a library without one.</param>
+        public CqlLibraryAttribute(string Identifier, string? Version)
         {
             this.Identifier = Identifier;
             this.Version = Version;
@@ -30,8 +30,8 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         public string Identifier { get; }
         /// <summary>
-        /// The library's version.
+        /// The library's version, or <see langword="null"/> for a library without one.
         /// </summary>
-        public string Version { get; }
+        public string? Version { get; }
     }
 }

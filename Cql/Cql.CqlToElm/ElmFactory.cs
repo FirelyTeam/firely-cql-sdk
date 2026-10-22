@@ -130,173 +130,31 @@ namespace Hl7.Cql.CqlToElm
                 condition = convertCondition.Result;
             else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
-            var compatible = true;
-            // An Any-typed branch - a literal null, an unresolved-external call under
-            // AllowUnresolvedExternals, a Message(null, ...) source, or any other expression the
-            // translator could not resolve to a more specific type - has no static type of its own
-            // to reconcile against, so the other branch's type governs instead. This is symmetric on
-            // purpose, matching two things this translator already does elsewhere:
-            //
-            //  - The Java reference translator (cql-to-elm-cli) is symmetric here:
-            //    LibraryBuilder.findCompatibleType returns the other side's type whenever either
-            //    side is Any, for both `if true then true else Error(...)` and
-            //    `if true then Error(...) else true`.
-            //  - Case in this translator is already symmetric: VisitCaseExpressionTerm drops Any
-            //    from the set of branch result types regardless of which branch(es) it came from,
-            //    so a case with an Any-typed then item behaves identically to one with an Any-typed
-            //    else. #1595 pinned "if behaves the way case already did" as an explicit invariant;
-            //    special-casing only one side of if would make it disagree with case about Any.
-            //
-            // Before this generalization, only a literal Null node was special-cased, so a non-null
-            // Any-typed branch on either side fell through to the cost-based reconciliation below,
-            // which could pick coercing the *other*, meaningfully-typed branch down to Any as the
-            // "cheaper" direction - see #1601 (else-side) and its exact mirror on the then-side,
-            // verified to still reproduce without this generalization covering both directions.
-            if (then.resultTypeSpecifier == SystemTypes.AnyType)
-            {
-                if (@else.resultTypeSpecifier != SystemTypes.AnyType)
-                {
-                    var thenResult = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
-                    then = thenResult.Result;
-                }
-            }
-            else if (@else.resultTypeSpecifier == SystemTypes.AnyType)
-            {
-                var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-                @else = elseResult.Result;
-            }
-            else
-            {
-                var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
-                var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-
-                // Reconciling the branches must not *narrow* one of them. Casting a branch typed
-                // Choice<X|Y> down to X is a run-time type test that fails for every value the
-                // other branch produced - silently, with no diagnostic - so a conditional typed
-                // that way returns null for all but one branch (see #1594). Both directions are
-                // merely a Cast here, so cost alone cannot choose between them; the narrowing one
-                // is excluded outright and the choice-widening path below takes over.
-                var thenToElseNarrows = NarrowsChoice(then.resultTypeSpecifier, @else.resultTypeSpecifier, convertThenToElse.Cost);
-                var elseToThenNarrows = NarrowsChoice(@else.resultTypeSpecifier, then.resultTypeSpecifier, convertElseToThen.Cost);
-
-                if (thenToElseNarrows && elseToThenNarrows)
-                {
-                    // Neither direction reconciles without loss; the choice built below covers both.
-                    compatible = false;
-                }
-                else
-                {
-                    // Excluding one direction forces the other. With both available, take the
-                    // cheaper one - and on a tie prefer widening into a branch that is already a
-                    // choice over adding another, falling back to coercing the else branch, which
-                    // is what this reconciliation has always done when the costs are equal.
-                    var coerceThen =
-                        elseToThenNarrows
-                        || (!thenToElseNarrows
-                            && (convertThenToElse.Cost < convertElseToThen.Cost
-                                || (convertThenToElse.Cost == convertElseToThen.Cost
-                                    && @else.resultTypeSpecifier is ChoiceTypeSpecifier
-                                    && then.resultTypeSpecifier is not ChoiceTypeSpecifier)));
-
-                    var chosen = coerceThen ? convertThenToElse : convertElseToThen;
-                    if (chosen.Cost == CoercionCost.Incompatible)
-                        compatible = false;
-                    else if (coerceThen)
-                        then = chosen.Result;
-                    else
-                        @else = chosen.Result;
-                }
-            }
-            if (!compatible)
-            {
-                var choiceType = ChoiceOf(then.resultTypeSpecifier, @else.resultTypeSpecifier);
-                then = CoercionProvider.Coerce(then, choiceType).Result; // it will succeed
-                @else = CoercionProvider.Coerce(@else, choiceType).Result; // it will succeed
-            }
+            // Both branches are coerced to the one type they have in common, so the conditional has a
+            // single static type: an implicit conversion where one exists, otherwise a choice of both.
+            var resultType = CoercionProvider.FindCompatibleType(then.resultTypeSpecifier, @else.resultTypeSpecifier);
+            then = CoerceBranch(@if, then, resultType);
+            @else = CoerceBranch(@if, @else, resultType);
 
             @if.condition = condition;
             @if.then = then;
             @if.@else = @else;
             return @if
-                .WithResultType(then.resultTypeSpecifier);
+                .WithResultType(resultType);
         }
 
         /// <summary>
-        /// True when coercing <paramref name="from"/> to <paramref name="to"/> would cast a choice
-        /// type to a target that cannot hold all of its alternatives: a run-time type test that
-        /// yields null for every alternative the target does not cover.
+        /// Coerces a branch of a conditional to the conditional's result type, reporting on
+        /// <paramref name="conditional"/> when that is not possible.
         /// </summary>
-        /// <remarks>
-        /// <para>
-        /// Only a <see cref="CoercionCost.Cast"/> qualifies. A genuine conversion - through a
-        /// model's helper functions, say - produces a value for the alternatives it accepts and is
-        /// not the failure this guards against.
-        /// </para>
-        /// <para>
-        /// Coverage, rather than "is the target a choice too", is what decides it.
-        /// <see cref="CoercionProvider.CanBeCast"/> is satisfied by a <em>single</em> alternative
-        /// matching, so <c>Choice&lt;Integer|String&gt;</c> to <c>Choice&lt;Integer|Decimal&gt;</c>
-        /// is also a cast that drops an alternative, and treating every choice-to-choice cast as
-        /// harmless would let that one through. The same test subsumes the two cases that would
-        /// otherwise be special: a non-choice target covers a choice only when every alternative
-        /// converts to it, and <c>Any</c> covers everything because every type exactly matches it.
-        /// </para>
-        /// <para>
-        /// The walk into list and interval element types mirrors
-        /// <see cref="CoercionProvider.GetCoercionCost"/>, which recurses the same way: a
-        /// <c>List&lt;Choice&lt;X|Y&gt;&gt;</c> to <c>List&lt;X&gt;</c> coercion is costed from its
-        /// element types, so inspecting only the outer types would report no narrowing for a cast
-        /// that does narrow. No CQL is known to reach that shape today - a mixed list literal widens
-        /// to <c>List&lt;Any&gt;</c> rather than forming a choice - but the guard has to agree with
-        /// the cost it is judging.
-        /// </para>
-        /// </remarks>
-        private bool NarrowsChoice(TypeSpecifier from, TypeSpecifier to, CoercionCost cost) =>
-            cost == CoercionCost.Cast && Narrows(from, to);
-
-        private bool Narrows(TypeSpecifier? from, TypeSpecifier? to) => (from, to) switch
+        internal Expression CoerceBranch(Element conditional, Expression branch, TypeSpecifier resultType)
         {
-            (null, _) or (_, null) => false,
-            (ListTypeSpecifier f, ListTypeSpecifier t) => Narrows(f.elementType, t.elementType),
-            (IntervalTypeSpecifier f, IntervalTypeSpecifier t) => Narrows(f.pointType, t.pointType),
-            (ChoiceTypeSpecifier f, _) => !CoversEveryAlternative(f, to),
-            _ => false,
-        };
-
-        /// <summary>
-        /// True when every alternative of <paramref name="from"/> survives the cast to
-        /// <paramref name="to"/> - for a choice target, into some alternative of it; for anything
-        /// else, into the target itself.
-        /// </summary>
-        private bool CoversEveryAlternative(ChoiceTypeSpecifier from, TypeSpecifier to) =>
-            (from.choice ?? []).All(
-                alternative => to is ChoiceTypeSpecifier target
-                    ? (target.choice ?? []).Any(t => SurvivesCast(alternative, t))
-                    : SurvivesCast(alternative, to));
-
-        /// <summary>
-        /// True when a value of <paramref name="from"/> is still there after a cast to
-        /// <paramref name="to"/>: only an exact match or a widening to a supertype.
-        /// </summary>
-        /// <remarks>
-        /// An implicit conversion does not count, even though it makes the two types coercible. The
-        /// coercion being judged here has been costed <see cref="CoercionCost.Cast"/>, and
-        /// <see cref="CoercionProvider.Coerce"/> answers that with a single <c>As</c> over the whole
-        /// choice - a type test. It never performs a per-alternative conversion, so counting
-        /// <c>Integer</c> as covered by <c>Choice&lt;Decimal|String&gt;</c> because
-        /// <c>Integer</c> converts to <c>Decimal</c> would be wrong twice over: the conversion does
-        /// not happen, and the type test fails, so the alternative is dropped exactly as it would
-        /// have been without the guard.
-        /// </remarks>
-        private bool SurvivesCast(TypeSpecifier from, TypeSpecifier to) =>
-            CoercionProvider.GetCoercionCost(from, to) is CoercionCost.ExactMatch or CoercionCost.Subtype;
-
-        /// <summary>
-        /// The choice of two types, flattened so that a choice built from a branch that is itself a
-        /// choice stays one level deep and lists each alternative once.
-        /// </summary>
-        private static ChoiceTypeSpecifier ChoiceOf(TypeSpecifier a, TypeSpecifier b) =>
-            new(FlattenChoice(a).Concat(FlattenChoice(b)).Distinct());
+            var result = CoercionProvider.Coerce(branch, resultType);
+            if (result.Success)
+                return result.Result;
+            conditional.AddError(Messaging.TypeFoundIsNotExpected(branch.resultTypeSpecifier, resultType));
+            return branch;
+        }
 
         /// <summary>
         /// The alternatives of <paramref name="type"/>, with nested choices flattened; a type that

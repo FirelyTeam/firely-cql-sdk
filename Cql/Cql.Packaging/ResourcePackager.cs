@@ -37,13 +37,15 @@ internal class ResourcePackager(
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null,
         string? measureGroupCodeSystem = null,
-        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough)
+        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough,
+        Func<ElmLibrary, bool>? shouldPackage = null)
     {
         // Materialized once, single-threaded: this is also what forces ElmLibrarySet's internal
         // dependency graph (topological sort, root libraries) to be computed. That computation is
         // lazy and not thread-safe, so it must happen here rather than racing across the
         // Parallel.ForEach below the first time each library's dependencies are queried.
-        var libraries = librarySet.ToList();
+        // shouldPackage then leaves out the libraries that are in the set only to resolve includes.
+        var libraries = librarySet.Where(shouldPackage ?? (_ => true)).ToList();
 
         // Package each library in parallel after materializing the dependency graph.
         var results = new (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)?[libraries.Count];
@@ -88,7 +90,7 @@ internal class ResourcePackager(
                 _cqlTypeToFhirTypeMapper,
                 elmLibrary,
                 null,
-                Encoding.Default.GetBytes(cqlString),
+                Encoding.UTF8.GetBytes(NormalizeNewLines(cqlString)),
                 assemblyBinary,
                 debugSymbols,
                 GetCSharpSourceCodeByName(),
@@ -109,6 +111,19 @@ internal class ResourcePackager(
             return (fhirLibrary, fhirMeasure);
         }
     }
+
+    /// <summary>
+    /// Rewrites CRLF to LF so a CQL attachment does not depend on the line endings the source file happened
+    /// to be checked out with.
+    /// </summary>
+    /// <remarks>
+    /// The attachment is base64, so git cannot normalize it the way it normalizes the <c>.cql</c> file
+    /// itself. Without this, the same CQL packaged on Windows and on Linux produces different bytes, and
+    /// any checked-in packaged resource becomes a record of the machine that built it. LF is what the
+    /// repository stores.
+    /// </remarks>
+    internal static string NormalizeNewLines(string text) =>
+        text.Contains('\r') ? text.Replace("\r\n", "\n").Replace("\r", "\n") : text;
 
     internal static string BuildResourceUrl(
         string resourceCanonicalRootUrl,

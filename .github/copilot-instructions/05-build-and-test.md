@@ -60,10 +60,10 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 5.3. Code Generation Version Management
 
-5.3.1 **What counts as a code generation change**: Any change that alters the C# emitted for CQL libraries requires a `GeneratorToolVersion` update, regardless of which project the change lives in. This includes:
+5.3.1 **What counts as a code generation change**: `GeneratorToolVersion` marks the ELM-to-C# pipeline. The test is whether identical ELM now produces different C#. Changes in `Cql.CqlToElm` that alter the ELM for a given CQL do not bump this version, even if the resulting C# changes; this boundary was established in [#1595](https://github.com/FirelyTeam/firely-cql-sdk/pull/1595). Record translator changes that affect CQL evaluation results in a `docs/releases/vnext/` fragment under `## Potentially Breaking` or `## Fixes`; the golden generation tests over checked-in ELM verify that the ELM-to-C# pipeline remains stable. Pipeline changes that require a version update include:
 5.3.1.1 Changes in `CodeGeneration.NET` (the C# writer itself)
 
-5.3.1.2 Changes in `Cql.Compiler` that affect the expression trees being emitted — for example, `CqlOperatorsBinder` selecting a different `ICqlOperators` method or overload (e.g., binding `Coalesce<T>` instead of `CoalesceValueTypes<T>`), changed generic type arguments, or changed conversions
+5.3.1.2 Changes in `Cql.Compiler` that affect type resolution or the expression trees emitted for the same ELM — for example, `CqlOperatorsBinder` selecting a different `ICqlOperators` method or overload (e.g., binding `Coalesce<T>` instead of `CoalesceValueTypes<T>`), changed generic type arguments, or changed conversions
 
 5.3.1.3 Changes to `ICqlOperators` signatures or constraints that flow into generated call sites
 
@@ -93,6 +93,8 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
       5.3.2.7.3 Fixing identifier normalization → Patch version increment (3.0.0.0 → 3.0.1.0)
 
       5.3.2.7.4 Binder emits a different `ICqlOperators` method for the same CQL (e.g., `CoalesceValueTypes<T>` → `Coalesce<T>`) → Patch version increment (5.1.0.0 → 5.1.1.0)
+
+5.3.3 **Drop the legacy generator tool name at the next version bump**: Generated library types carry `[GeneratedCode("Hl7.Cql.CodeGeneration.NET", …)]` (`LibrarySetCSharpCodeGenerator.GeneratorToolName`). Generator versions up to 6.0.3.0 wrote `.NET Code Generation` instead (`LegacyGeneratorToolName`), and the invocation toolkit (`CqlLibraryTypeRule`) and the golden-test normalization accept both names. At the first generator version bump that raises `MinSupportedGeneratorToolVersion` above 6.0.3.0, remove the legacy name: the constant, its acceptance in `CqlLibraryTypeRule`, its alternative in `CSharpGenerationGoldenTests.NormalizeGeneratedCodeAttribute`, and its tests in `CqlAssemblyInfoReaderTests`. While 6.0.x stays supported, keep the legacy name: without it the toolkit stops recognizing those libraries, and reports that only at Debug level. The test `LegacyGeneratorToolName_IsStillWrittenByASupportedGeneratorVersion` fails once the minimum passes 6.0.3.0.
 
 ## 5.4. Generating ELM Files from CQL
 

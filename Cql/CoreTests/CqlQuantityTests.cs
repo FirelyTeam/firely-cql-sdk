@@ -9,6 +9,7 @@
 #nullable enable
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -556,6 +557,44 @@ public class CqlQuantityTests
 
     #endregion
 
+    #region ConvertQuantity
+
+    [TestMethod]
+    public void ConvertQuantity_CompatibleUnits_ReturnsEquivalentQuantity()
+    {
+        var ops = GetOperators();
+        var result = ops.ConvertQuantity(new CqlQuantity(5m, "mg"), "g");
+        Assert.IsNotNull(result);
+        Assert.AreEqual(0.005m, result.value);
+        Assert.AreEqual("g", result.unit);
+    }
+
+    /// <summary>
+    /// "If the unit of the input quantity can be converted to the target unit, the result is an equivalent Quantity
+    /// with the target unit. Otherwise, the result is null." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section
+    /// "Type Operators", "ConvertQuantity").
+    /// </summary>
+    [TestMethod]
+    [DataRow("kg", "s")]
+    [DataRow("mg", "mL")]
+    [DataRow("a", "L")]
+    public void ConvertQuantity_IncompatibleUnits_ReturnsNullWithWarning(string fromUnit, string toUnit)
+    {
+        var ops = GetOperators();
+        var warnings = new List<string?>();
+        ops.MessageReceived += (_, e) =>
+        {
+            if (e.Severity == "Warning")
+                warnings.Add(e.Code);
+        };
+
+        Assert.IsNull(ops.ConvertQuantity(new CqlQuantity(1m, fromUnit), toUnit));
+        Assert.IsFalse(ops.CanConvertQuantity(new CqlQuantity(1m, fromUnit), toUnit));
+        CollectionAssert.AreEqual(new[] { "CqlOperators.TypeOperators.ConvertQuantity" }, warnings);
+    }
+
+    #endregion
+
     #region TruncatedDivide
 
     [TestMethod]
@@ -603,4 +642,47 @@ public class CqlQuantityTests
     }
 
     #endregion
+
+    [TestMethod]
+    [DataRow(1, "a", "mo", 12)]
+    [DataRow(12, "mo", "a", 1)]
+    public void ConvertQuantity_YearsAndMonths_ConvertsCorrectly(int value, string fromUnit, string toUnit, int expected)
+    {
+        var operators = GetOperators();
+        var source = new CqlQuantity(value, fromUnit);
+
+        Assert.AreEqual(true, operators.CanConvertQuantity(source, toUnit));
+        var converted = operators.ConvertQuantity(source, toUnit);
+
+        Assert.IsNotNull(converted);
+        Assert.AreEqual((decimal)expected, converted.value);
+        Assert.AreEqual(toUnit, converted.unit);
+
+        Assert.IsTrue(source.TryConvert(toUnit, UcumConversionExtensions.Default, out var ucum));
+        Assert.AreEqual(ucum!.value!.Value, converted.value!.Value, 0.000000001m);
+    }
+
+    [TestMethod]
+    public void UnitConverter_BuiltInTable_EveryEntryRoundTripsAndAgreesWithUcum()
+    {
+        var converter = new UnitConverter();
+        string[] units = ["a", "mo", "wk", "d", "[in_i]", "[ft_i]", "[yd_i]", "cm", "m"];
+        var checkedPairs = 0;
+        foreach (var from in units)
+            foreach (var to in units)
+            {
+                if (from == to) continue;
+                var forward = converter.ConversionFunctionFor(from, to);
+                var inverse = converter.ConversionFunctionFor(to, from);
+                if (forward is null || inverse is null) continue;
+                var roundTripped = inverse(forward(10m));
+                Assert.AreEqual(10m, roundTripped, 0.000001m, $"{from} -> {to} -> {from} did not round-trip.");
+
+                // A swapped pair still round-trips, so also pin each entry to the UCUM service.
+                Assert.IsTrue(new CqlQuantity(10m, from).TryConvert(to, UcumConversionExtensions.Default, out var ucum));
+                Assert.AreEqual(ucum!.value!.Value, forward(10m), 0.000001m, $"{from} -> {to} disagrees with UCUM.");
+                checkedPairs++;
+            }
+        Assert.AreEqual(22, checkedPairs, "Conversion-table coverage changed; update this count deliberately.");
+    }
 }

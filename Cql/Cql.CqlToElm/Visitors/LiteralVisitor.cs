@@ -16,6 +16,41 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         private readonly Regex DecimalExpression = new Regex(@"^-?\d*(\.\d+)$", RegexOptions.Compiled);
 
+        /// <summary>
+        /// The locator of the <paramref name="length"/> characters starting at <paramref name="index"/> in the text of
+        /// the single token that makes up <paramref name="context"/>.
+        /// </summary>
+        private static string TokenSpanLocator(Antlr4.Runtime.ParserRuleContext context, int index, int length)
+        {
+            var token = context.Start;
+            return Hl7.Cql.CqlToElm.Extensions.FormatLocator(
+                token.Line, token.Column + 1 + index,
+                token.Line, token.Column + index + length);
+        }
+
+        /// <summary>
+        /// The locator of the fractional seconds in a date/time or time token, which follow the first '.' after the
+        /// 'T' at <paramref name="timeStart"/> and run for as many digits as there are.
+        /// </summary>
+        private static string FractionLocator(Antlr4.Runtime.ParserRuleContext context, string tokenText, int timeStart)
+        {
+            var start = tokenText.IndexOf('.', timeStart) + 1;
+            var end = start;
+            while (end < tokenText.Length && char.IsAsciiDigit(tokenText[end]))
+                end++;
+            return TokenSpanLocator(context, start, end - start);
+        }
+
+        /// <summary>
+        /// The locator of the timezone offset in a date/time token, which is the 'Z', or the sign and everything after
+        /// it, following the 'T' at <paramref name="timeStart"/>.
+        /// </summary>
+        private static string TimezoneOffsetLocator(Antlr4.Runtime.ParserRuleContext context, string tokenText, int timeStart)
+        {
+            var start = tokenText.IndexOfAny(['Z', '+', '-'], timeStart);
+            return TokenSpanLocator(context, start, tokenText.Length - start);
+        }
+
         public override Expression VisitBooleanLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.BooleanLiteralContext context)
         {
             var value = context.GetText();
@@ -41,22 +76,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (DateIso8601.TryParse(dateText, out var date) && date is not null)
             {
-                var startLine = context.Start.Line;
-                int startCol = context.Start.Column;
-
+                // Token text: @YYYY-MM-DD
                 dateLiteral.year = ElmFactory.Literal(date!.Year)
-                                             .WithLocator(FormatLocator(startLine, startCol, startLine, startCol + 4));
+                                             .WithLocator(TokenSpanLocator(context, 1, 4));
 
                 if (date.Precision > Iso8601.DateTimePrecision.Year && date.Month is not null)
                 {
                     dateLiteral.month = ElmFactory.Literal(date.Month.Value)
-                                                  .WithLocator(FormatLocator(startLine + 5, startCol, startLine, startCol + 7));
+                                                  .WithLocator(TokenSpanLocator(context, 6, 2));
                 }
 
                 if (date.Precision > Iso8601.DateTimePrecision.Month && date.Day is not null)
                 {
                     dateLiteral.day = ElmFactory.Literal(date.Day.Value)
-                                                .WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10));
+                                                .WithLocator(TokenSpanLocator(context, 9, 2));
                 }
                 return dateLiteral;
             }
@@ -79,13 +112,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (DateTimeIso8601.TryParse(dateText, out var dateTime) && dateTime is not null)
             {
                 var integerType = SystemTypes.IntegerType;
-                var startLine = context.Start.Line;
-                int startCol = context.Start.Column;
+                // Token text: @YYYY-MM-DDThh:mm:ss.fff(Z|+hh:mm|-hh:mm), with the time components counted from the 'T'.
+                var tokenText = context.GetText();
+                var timeStart = tokenText.IndexOf('T');
                 dateTimeLiteral.year = new Literal
                 {
                     value = dateTime!.Year.ToString(CultureInfo.InvariantCulture),
                     localId = NextId(),
-                    locator = FormatLocator(startLine, startCol, startLine, startCol + 4),
+                    locator = TokenSpanLocator(context, 1, 4),
                     resultTypeName = integerType.name,
                     valueType = integerType.name,
                     resultTypeSpecifier = integerType,
@@ -95,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Month.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 5, startCol, startLine, startCol + 7),
+                        locator = TokenSpanLocator(context, 6, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -105,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Day.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 8, startCol, startLine, startCol + 10),
+                        locator = TokenSpanLocator(context, 9, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -115,7 +149,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Hour.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 11, startCol, startLine, startCol + 13),
+                        locator = TokenSpanLocator(context, timeStart + 1, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -125,7 +159,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Minute.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 14, startCol, startLine, startCol + 16),
+                        locator = TokenSpanLocator(context, timeStart + 4, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -135,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Second.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
+                        locator = TokenSpanLocator(context, timeStart + 7, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -145,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.Millisecond.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
+                        locator = FractionLocator(context, tokenText, timeStart),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -157,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = dateTime.RationalOffset.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 21, startCol, startLine, context.Stop.Column),
+                        locator = TimezoneOffsetLocator(context, tokenText, timeStart),
                         resultTypeName = decimalType.name,
                         valueType = decimalType.name,
                         resultTypeSpecifier = decimalType,
@@ -426,13 +460,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (TimeIso8601.TryParse(literalText, out var time))
             {
                 var integerType = SystemTypes.IntegerType;
-                var startLine = context.Start.Line;
-                int startCol = context.Start.Column;
+                // Token text: @Thh:mm:ss.fff, with the time components counted from the 'T'.
+                var tokenText = context.GetText();
+                const int timeStart = 1;
                 timeLiteral.hour = new Literal
                 {
                     value = time!.Hour.ToString(CultureInfo.InvariantCulture),
                     localId = NextId(),
-                    locator = FormatLocator(startLine + 11, startCol, startLine, startCol + 13),
+                    locator = TokenSpanLocator(context, timeStart + 1, 2),
                     resultTypeName = integerType.name,
                     valueType = integerType.name,
                     resultTypeSpecifier = integerType,
@@ -442,7 +477,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = time.Minute.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 14, startCol, startLine, startCol + 16),
+                        locator = TokenSpanLocator(context, timeStart + 4, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -452,7 +487,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = time.Second.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
+                        locator = TokenSpanLocator(context, timeStart + 7, 2),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
@@ -462,7 +497,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         value = time.Millisecond.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
-                        locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
+                        locator = FractionLocator(context, tokenText, timeStart),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,

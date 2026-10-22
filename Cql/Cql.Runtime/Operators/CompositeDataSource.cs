@@ -17,7 +17,7 @@ namespace Hl7.Cql.Operators
         /// Creates an instance.
         /// </summary>
         /// <param name="sources">The data sources to combine.
-        /// If none are provided, <see cref="Enumerable.Empty{TResult}"/> will be returned by the retrieve methods.</param>
+        /// If none are provided, the retrieve methods return an empty list.</param>
         /// <exception cref="ArgumentNullException">If <paramref name="sources"/> is <see langword="null"/></exception>
         public CompositeDataSource(params IDataSource[] sources)
         {
@@ -44,7 +44,12 @@ namespace Hl7.Cql.Operators
         public IDataSource[] DataSources { get; }
 
         /// <inheritdoc/>
+        /// <remarks>
+        /// The result is fully evaluated before it is returned: each source's retrieve is called once, and a source that
+        /// reads lazily is read in full. Callers walk a retrieve repeatedly — a cached definition read from several
+        /// expressions, the inner source of a cross join — and a lazy result would call every source again each time.
+        /// </remarks>
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
-            DataSources.SelectMany(r => r.Retrieve<T>(parameters));
+            DataSources.SelectMany(r => r.Retrieve<T>(parameters)).ToList();
     }
 }

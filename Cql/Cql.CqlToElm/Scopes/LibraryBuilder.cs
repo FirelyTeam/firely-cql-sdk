@@ -21,6 +21,119 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static LibraryBuilder CreateFromExisting(Library library) => throw new NotImplementedException();
 
+        /// <summary>
+        /// Creates a new instance that resolves references into an existing library.
+        /// </summary>
+        /// <remarks>
+        /// The builder only resolves references into <paramref name="library"/> and is never built: its symbol table holds
+        /// the signatures of the definitions, without their expressions. A statement whose ELM declares no result type, or a
+        /// function with an operand whose ELM declares no type, cannot be referenced with a type, so it is left out, and a
+        /// reference to it does not resolve. The names of definitions that clash with a definition added before them, which
+        /// a reference could not tell apart, are returned in <paramref name="conflictingNames"/>.
+        /// </remarks>
+        public static LibraryBuilder CreateReference(
+            Library library,
+            SystemLibrary systemLibrary,
+            LocalIdentifierProvider localIdentifierProvider,
+            out IReadOnlyList<string> conflictingNames)
+        {
+            var conflicts = new List<string>();
+            conflictingNames = conflicts;
+            var builder = new LibraryBuilder(library.identifier, systemLibrary, localIdentifierProvider);
+            var symbols = builder.SymbolTable;
+
+            // The symbol table combines the overloads of a function, so the overloads added so far are kept to tell
+            // whether a function can join them.
+            var overloadsByName = new Dictionary<string, List<IFunctionElement>>();
+
+            void AddReferenceDefinition(IDefinitionElement definition)
+            {
+                // Nothing can reference a definition without a name.
+                if (string.IsNullOrEmpty(definition.Name))
+                    return;
+
+                if (definition is IFunctionElement function)
+                {
+                    if (!overloadsByName.TryGetValue(function.Name, out var overloads))
+                        overloadsByName[function.Name] = overloads = [];
+
+                    if (!OverloadedFunctionDef.CanCombine([.. overloads, function]))
+                    {
+                        conflicts.Add(definition.Name);
+                        return;
+                    }
+
+                    overloads.Add(function);
+                }
+
+                if (!symbols.TryAdd(definition))
+                    conflicts.Add(definition.Name);
+            }
+
+            foreach (var parameter in library.parameters ?? [])
+            {
+                if ((parameter.parameterTypeSpecifier ?? parameter.parameterType?.ToNamedType() ?? parameter.GetTypeSpecifier()) is { } parameterType)
+                    AddReferenceDefinition(new ParameterDef { name = parameter.name, accessLevel = parameter.accessLevel, parameterTypeSpecifier = parameterType });
+            }
+
+            foreach (var codeSystem in library.codeSystems ?? [])
+                AddReferenceDefinition(new CodeSystemDef { name = codeSystem.name, accessLevel = codeSystem.accessLevel, id = codeSystem.id, version = codeSystem.version });
+
+            foreach (var valueSet in library.valueSets ?? [])
+                AddReferenceDefinition(new ValueSetDef { name = valueSet.name, accessLevel = valueSet.accessLevel, id = valueSet.id, version = valueSet.version });
+
+            foreach (var code in library.codes ?? [])
+                AddReferenceDefinition(new CodeDef { name = code.name, accessLevel = code.accessLevel, id = code.id });
+
+            foreach (var concept in library.concepts ?? [])
+                AddReferenceDefinition(new ConceptDef { name = concept.name, accessLevel = concept.accessLevel });
+
+            foreach (var statement in library.statements ?? [])
+            {
+                if (CreateReferenceDefinition(statement) is { } definition)
+                    AddReferenceDefinition(definition);
+            }
+
+            return builder;
+        }
+
+        private static ExpressionDef? CreateReferenceDefinition(ExpressionDef statement)
+        {
+            if (statement.GetTypeSpecifier() is not { } resultType)
+                return null;
+
+            if (statement is not FunctionDef function)
+                return new ExpressionDef
+                {
+                    name = statement.name,
+                    accessLevel = statement.accessLevel,
+                    context = statement.context,
+                    resultTypeSpecifier = resultType,
+                };
+
+            var operands = new List<OperandDef>();
+            foreach (var operand in function.operand ?? [])
+            {
+                if (operand.GetTypeSpecifier() is not { } operandType)
+                    return null;
+
+                operands.Add(new OperandDef { name = operand.name, operandTypeSpecifier = operandType });
+            }
+
+            return new FunctionDef
+            {
+                name = function.name,
+                accessLevel = function.accessLevel,
+                context = function.context,
+                fluent = function.fluent,
+                fluentSpecified = function.fluentSpecified,
+                external = function.external,
+                externalSpecified = function.externalSpecified,
+                operand = [.. operands],
+                resultTypeSpecifier = resultType,
+            };
+        }
+
         public LibraryBuilder(VersionedIdentifier identifier, SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
         {
             Identifier = identifier;
@@ -52,7 +165,7 @@ namespace Hl7.Cql.CqlToElm
             var statements = expressionDefs
                 .Concat(functionDefs)
                 .ToArray();
-            return new Library
+            var library = new Library
             {
                 identifier = Identifier,
                 schemaIdentifier = schemaIdentifier,
@@ -67,6 +180,10 @@ namespace Hl7.Cql.CqlToElm
                 statements = statements,
                 annotation = errors.ToArray()
             };
+
+            // An error on a node that never received a locator of its own takes the closest enclosing one.
+            library.FillMissingErrorPositions();
+            return library;
         }
 
         private readonly List<CqlToElmError> errors = new();
@@ -75,13 +192,20 @@ namespace Hl7.Cql.CqlToElm
 
         public ISymbolScope CurrentScope { get; private set; }
 
-        public void AddError(string message, ErrorType errorType) =>
-            errors.Add(new CqlToElmError()
+        /// <summary>
+        /// Adds an error that belongs to the library as a whole, positioned at <paramref name="locator"/>.
+        /// </summary>
+        public void AddError(string message, ErrorType errorType, string? locator)
+        {
+            var error = new CqlToElmError()
             {
                 message = message,
                 errorSeverity = ErrorSeverity.error,
                 errorType = errorType
-            });
+            };
+            error.TrySetPosition(locator);
+            errors.Add(error);
+        }
 
         /// <summary>
         /// Enters a scope that is directly descended from this Library's root scope.

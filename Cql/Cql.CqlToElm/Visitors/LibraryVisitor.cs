@@ -39,6 +39,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 : null;
         }
 
+        /// <summary>
+        /// Creates a builder that resolves references into a library available only as ELM.
+        /// </summary>
+        internal LibraryBuilder CreateReferenceBuilder(
+            ElmLibrary elmLibrary,
+            out IReadOnlyList<string> conflictingNames) =>
+            LibraryBuilder.CreateReference(elmLibrary, SystemLibrary, LocalIdentifierProvider, out conflictingNames);
+
         // libraryDefinition? definition* statement* EOF;
         // definition : usingDefinition | includeDefinition | codesystemDefinition  | valuesetDefinition  | codeDefinition
         //     | conceptDefinition | parameterDefinition ;
@@ -323,7 +331,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return ed;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic, edCtx.Locator());
                     }
                     else if (statementContext.functionDefinition() is { } fdCtx)
                     {
@@ -342,7 +350,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 return fd;
                             });
                         if (!table.TryAdd(dd))
-                            LibraryBuilder.AddError(MessagingProvider.IdentifierAlreadyInUse(dd.Name), ErrorType.semantic);
+                        {
+                            // The name is taken either by a function with the same operand types or by a non-function.
+                            var message = table.TryResolveSymbol(dd.Name, out var existing) && existing is IFunctionElement
+                                ? MessagingProvider.FunctionRedefined(dd.Name)
+                                : MessagingProvider.IdentifierAlreadyInUse(dd.Name);
+                            LibraryBuilder.AddError(message, ErrorType.semantic, fdCtx.Locator());
+                        }
                     }
                     else if (statementContext.contextDefinition() is { } cdCtx)
                     {
@@ -380,6 +394,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         accessLevel = access,
                         name = name,
                         fluent = fluent,
+                        fluentSpecified = fluent,
                         operand = signature,
                     }.WithLocator(context.Locator());
 
@@ -435,7 +450,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             private void add(IDefinitionElement s)
             {
                 if (!LibraryBuilder.CurrentScope.TryAdd(s))
-                    LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic);
+                    LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic, (s as Element)?.locator);
             }
 
             private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)
