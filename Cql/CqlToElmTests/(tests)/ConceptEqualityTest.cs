@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -107,6 +108,66 @@ namespace Hl7.Cql.CqlToElm.Test
                 "\"Without codes\" ~ \"Without codes\"");
 
             results.Should().Equal(true, false);
+        }
+
+        #endregion
+
+        #region Operations that use equality
+
+        /// <summary>
+        /// Spec §9.B, List Operators, Distinct: "The operator uses equality comparison semantics as defined in the Equal
+        /// operator", so concepts that differ in their display only are both kept, and so are concepts without codes
+        /// whose displays differ.
+        /// </summary>
+        [TestMethod]
+        public void Distinct_Concepts()
+        {
+            var results = Evaluate(
+                "distinct { Concept { codes: { \"C\" }, display: 'a' }, Concept { codes: { \"C\" }, display: 'b' }, Concept { codes: { \"C\" }, display: 'a' } }",
+                "distinct { Concept { display: 'x' }, Concept { display: 'y' }, Concept { display: 'x' } }",
+                "distinct { Concept { codes: { \"C\", \"D\" } }, Concept { codes: { \"D\", \"C\" } } }");
+
+            results.Select(result => ((IEnumerable<CqlConcept>)result!).Select(concept => concept.display))
+                .Should().SatisfyRespectively(
+                    displays => displays.Should().Equal("a", "b"),
+                    displays => displays.Should().Equal("x", "y"),
+                    displays => displays.Should().Equal(null, null));
+        }
+
+        /// <summary>
+        /// Spec §9.B, List Operators: In, Union and Except use equality semantics, so a concept that differs from another
+        /// in its display only is not the same element.
+        /// </summary>
+        [TestMethod]
+        public void In_Union_And_Except_Concepts()
+        {
+            var results = Evaluate(
+                "Concept { codes: { \"C\" }, display: 'b' } in { Concept { codes: { \"C\" }, display: 'a' } }",
+                "Concept { codes: { \"C\" }, display: 'a' } in { Concept { codes: { \"C\" }, display: 'a' } }",
+                "Concept { display: 'x' } in { Concept { display: 'y' } }",
+                "Concept { display: 'x' } in { Concept { display: 'x' } }",
+                "{ Concept { codes: { \"C\" }, display: 'a' } } union { Concept { codes: { \"C\" }, display: 'b' } }",
+                "{ Concept { codes: { \"C\" }, display: 'a' } } except { Concept { codes: { \"C\" }, display: 'b' } }");
+
+            results[..4].Should().Equal(false, true, false, true);
+            ((IEnumerable<CqlConcept>)results[4]!).Select(concept => concept.display).Should().Equal("a", "b");
+            ((IEnumerable<CqlConcept>)results[5]!).Select(concept => concept.display).Should().Equal("a");
+        }
+
+        /// <summary>
+        /// Spec §9.B, Comparison Operators: tuples are equal when their elements are equal, and equivalent when their
+        /// elements are equivalent, so a concept element is compared as a concept.
+        /// </summary>
+        [TestMethod]
+        public void Tuples_WithConceptElements()
+        {
+            var results = Evaluate(
+                "Tuple { c: Concept { codes: { \"C\" }, display: 'a' } } = Tuple { c: Concept { codes: { \"C\" }, display: 'b' } }",
+                "Tuple { c: Concept { display: 'x' } } = Tuple { c: Concept { display: 'x' } }",
+                "Tuple { c: Concept { codes: { \"C\" }, display: 'a' } } ~ Tuple { c: Concept { codes: { \"C\" }, display: 'b' } }",
+                "Tuple { c: Concept { display: 'x' } } ~ Tuple { c: Concept { display: 'x' } }");
+
+            results.Should().Equal(false, true, true, false);
         }
 
         #endregion

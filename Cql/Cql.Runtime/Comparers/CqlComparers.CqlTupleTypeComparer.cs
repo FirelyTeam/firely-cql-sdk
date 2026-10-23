@@ -18,6 +18,12 @@ partial class CqlComparers
     {
         private CqlComparers MemberComparer { get; } = memberComparer ?? throw new ArgumentNullException(nameof(memberComparer));
 
+        /// <summary>
+        /// Equivalence is decided by the elements' comparers, since an element can equal another in representation yet
+        /// not be equivalent to it, such as a concept without codes.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
+
         protected override int? CompareValues(
             ITuple x,
             ITuple y,

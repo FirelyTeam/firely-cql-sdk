@@ -178,4 +178,107 @@ public class ConceptEqualityTests
     }
 
     #endregion
+
+    #region Operations that use equality
+
+    // The list operations use equality semantics (spec §9.B, List Operators): a concept is a duplicate of another, or
+    // found in a list, only when the two are equal, never when their equality is unknown.
+
+    private static string?[] Displays(IEnumerable<CqlConcept>? concepts) => concepts!.Select(c => c.display).ToArray();
+
+    [TestMethod]
+    public void Distinct_KeepsConceptsThatAreNotEqual()
+    {
+        var operators = Operators();
+
+        Displays(operators.Distinct([Concept([C], "a"), Concept([C], "b"), Concept([C], "a")]))
+            .Should().Equal("a", "b");
+        Displays(operators.Distinct([Concept(display: "x"), Concept(display: "y"), Concept(display: "x")]))
+            .Should().Equal("x", "y");
+        operators.Distinct([Concept([C, D], "x"), Concept([D, C], "x")]).Should().HaveCount(2);
+        operators.Distinct([Concept([C], "x"), Concept([C])]).Should().HaveCount(2);
+        operators.Distinct([Concept(), Concept()]).Should().HaveCount(1);
+        operators.SelectDistinct<string, CqlConcept>(["a", "b", "a"], display => Concept([C], display))
+            .Should().HaveCount(2);
+    }
+
+    [TestMethod]
+    public void UnionExceptAndIntersect_MatchOnlyEqualConcepts()
+    {
+        var operators = Operators();
+        CqlConcept[] displayA = [Concept([C], "a"), Concept(display: "x")];
+        CqlConcept[] displayB = [Concept([C], "b"), Concept(display: "y")];
+        CqlConcept[] displayAAgain = [Concept([C], "a"), Concept(display: "x")];
+
+        Displays(operators.Union(displayA, displayB)).Should().Equal("a", "x", "b", "y");
+        Displays(operators.Except(displayA, displayB)).Should().Equal("a", "x");
+        operators.Intersect(displayA, displayB).Should().BeEmpty();
+
+        Displays(operators.Union(displayA, displayAAgain)).Should().Equal("a", "x");
+        operators.Except(displayA, displayAAgain).Should().BeEmpty();
+        Displays(operators.Intersect(displayA, displayAAgain)).Should().Equal("a", "x");
+    }
+
+    [TestMethod]
+    public void InContainsAndIndexOf_FindOnlyAnEqualConcept()
+    {
+        var operators = Operators();
+        CqlConcept?[] list = [Concept([C], "a"), Concept(display: "x")];
+
+        operators.In(Concept([C], "b"), list).Should().BeFalse();
+        operators.In(Concept([C]), list).Should().BeFalse();
+        operators.In(Concept(display: "y"), list).Should().BeFalse();
+        operators.In(Concept([C], "a"), list).Should().BeTrue();
+        operators.In(Concept(display: "x"), list).Should().BeTrue();
+
+        operators.Contains(list, Concept([C], "b")).Should().BeFalse();
+        operators.Contains(list, Concept(display: "x")).Should().BeTrue();
+
+        operators.IndexOf(list, Concept([C], "b")).Should().Be(-1);
+        operators.IndexOf(list, Concept(display: "x")).Should().Be(1);
+
+        operators.ListIncludesList(list, [Concept(display: "y")]).Should().BeFalse();
+        operators.ListIncludesList(list, [Concept(display: "x")]).Should().BeTrue();
+    }
+
+    [TestMethod]
+    public void ListEqualAndListEquivalent_CompareTheConceptsInTheLists()
+    {
+        var operators = Operators();
+
+        operators.ListEqual([Concept([C], "a")], [Concept([C], "b")]).Should().BeFalse();
+        operators.ListEqual([Concept(display: "x")], [Concept(display: "y")]).Should().BeFalse();
+        operators.ListEqual([Concept([C], "a")], [Concept([C])]).Should().BeNull();
+        operators.ListEqual([Concept([C], "a")], [Concept([C], "a")]).Should().BeTrue();
+
+        operators.Equivalent<CqlConcept>([Concept([C], "a")], [Concept([C], "b")]).Should().BeTrue();
+        operators.Equivalent<CqlConcept>([Concept(display: "x")], [Concept(display: "x")]).Should().BeFalse();
+    }
+
+    [TestMethod]
+    public void Mode_CountsOnlyEqualConceptsTogether()
+    {
+        var operators = Operators();
+
+        operators.Mode([Concept([C], "b"), Concept([C], "b"), Concept([C], "a")]).display.Should().Be("b");
+        operators.Mode([Concept(display: "y"), Concept(display: "y"), Concept(display: "x")]).display.Should().Be("y");
+    }
+
+    [TestMethod]
+    public void Tuple_WithAConceptElement_ComparesTheConceptByConceptEqualityAndEquivalence()
+    {
+        var operators = Operators();
+        var metadata = new CqlTupleMetadata([typeof(CqlConcept)], ["concept"]);
+        (CqlTupleMetadata, CqlConcept) TupleOf(CqlConcept concept) => (metadata, concept);
+
+        operators.Equal(TupleOf(Concept([C], "a")), TupleOf(Concept([C], "b"))).Should().BeFalse();
+        operators.Equal(TupleOf(Concept(display: "x")), TupleOf(Concept(display: "x"))).Should().BeTrue();
+        operators.Equal(TupleOf(Concept([C], "a")), TupleOf(Concept([C]))).Should().BeNull();
+        operators.Equivalent(TupleOf(Concept([C], "a")), TupleOf(Concept([C], "b"))).Should().BeTrue();
+        operators.Equivalent(TupleOf(Concept(display: "x")), TupleOf(Concept(display: "x"))).Should().BeFalse();
+        operators.Distinct<object>([TupleOf(Concept([C], "a")), TupleOf(Concept([C], "b")), TupleOf(Concept([C], "a"))])
+            .Should().HaveCount(2);
+    }
+
+    #endregion
 }
