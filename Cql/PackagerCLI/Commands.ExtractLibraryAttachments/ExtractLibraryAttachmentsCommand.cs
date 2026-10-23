@@ -86,7 +86,7 @@ internal record ExtractLibraryAttachmentsCommand
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
-            .SetHandler(typeof(ExtractLibraryAttachmentsProgram), nameof(ExtractLibraryAttachmentsProgram.CommandHandler));
+            .SetHandler(ExtractLibraryAttachmentsProgram.CommandHandler);
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [

@@ -30,7 +30,4 @@ public readonly record struct ElmToolkitResultArtifacts(
         this is { AssemblyBinary:null, DebugSymbolsBinary:null }
         ? NET.AssemblyBinary.Default
         : new(AssemblyBinary, DebugSymbolsBinary);
-
-    internal AssemblyBinary GetAssemblyBinaryWithSourceCode() =>
-        new AssemblyBinaryWithSourceCode(AssemblyBinary, null, CSharpSourceCode, DebugSymbolsBinary);
 }

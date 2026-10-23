@@ -8,8 +8,10 @@
 
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
+using Hl7.Cql.ValueSets.Errors;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using Hl7.Fhir.Specification.Source;
@@ -434,6 +436,10 @@ public class ValueSetSource : IValueSetDictionary
     // lives in its own method, which keeps the resolved path allocation-free.
 
     /// <inheritdoc />
+    /// <exception cref="CqlException{TError}">
+    /// The value set cannot be resolved and no terminology service is attached; the error is a
+    /// <see cref="CqlUnresolvedValueSetError"/>.
+    /// </exception>
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
         _valueSets.TryGetValue(valueSetUri, out var cached)
             ? cached.IsCodeInValueSet(code)
@@ -445,17 +451,33 @@ public class ValueSetSource : IValueSetDictionary
             pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version }));
 
     /// <inheritdoc />
+    /// <remarks>
+    /// A value set this source holds or resolves has its codes here, so a test against one that holds codes from more
+    /// than one code system signals the error below. A value set that only the attached terminology service knows is
+    /// left to the service: this source does not have its codes, so it cannot tell whether the test is ambiguous.
+    /// </remarks>
+    /// <exception cref="CqlException{TError}">
+    /// The value set cannot be resolved and no terminology service is attached, and the error is a
+    /// <see cref="CqlUnresolvedValueSetError"/>; or the value set holds codes from more than one code system, and the
+    /// error is a <see cref="CqlAmbiguousStringInValueSetError"/>.
+    /// </exception>
     public bool IsCodeInValueSet(string valueSetUri, string code) =>
         _valueSets.TryGetValue(valueSetUri, out var cached)
-            ? cached.IsCodeInValueSet(code)
+            ? cached.IsStringInValueSet(valueSetUri, code)
             : ResolveThenCheck(valueSetUri, code);
 
     private bool ResolveThenCheck(string valueSetUri, string code) =>
         CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code),
+                                   vs => vs is InMemoryValueSet inMemory
+                                       ? inMemory.IsStringInValueSet(valueSetUri, code)
+                                       : vs.IsCodeInValueSet(code),
                                    pb => pb.WithCode(code));
 
     /// <inheritdoc />
+    /// <exception cref="CqlException{TError}">
+    /// The value set cannot be resolved and no terminology service is attached; the error is a
+    /// <see cref="CqlUnresolvedValueSetError"/>.
+    /// </exception>
     public bool IsCodeInValueSet(string valueSetUri, string code, string? system) =>
         _valueSets.TryGetValue(valueSetUri, out var cached)
             ? cached.IsCodeInValueSet(code, system)
@@ -481,8 +503,11 @@ public class ValueSetSource : IValueSetDictionary
         if (resolved is not null)
             return @internal(resolved);
 
-        // Only an *unknown* value set is worth a terminology round-trip.
-        if (_termService is null) return false;
+        // Only an *unknown* value set is worth a terminology round-trip. Without a terminology service
+        // nothing can answer for it: 'false' would claim the code is not in it, so this signals the
+        // run-time error the specification requires for a value set reference that cannot be resolved.
+        if (_termService is null)
+            throw new CqlUnresolvedValueSetError(valueSetUri).ToException();
 
         var parameters = new ValidateCodeParameters()
             .WithValueSet(valueSetUri);

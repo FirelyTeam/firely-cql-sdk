@@ -234,7 +234,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     continue;           // both null → equal for this element
                 }
 
-                var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
+                var compare = memberComparer.CompareMembers(prop.XValue, prop.YValue, precision);
                 if (compare is null)
                     hasNull = true;
                 else if (compare is not 0)

@@ -19,8 +19,9 @@ using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Operators.Errors;
-using Hl7.Cql.Primitives;
+using Hl7.Cql.Primitives.Errors;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace CoreTests;
 
@@ -233,6 +234,8 @@ public class CqlEvaluationFramesTests
     [DataRow(typeof(CqlInvalidDateTimeComponentsError))]
     [DataRow(typeof(CqlExpandFractionalPerError))]
     [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
+    [DataRow(typeof(CqlUnresolvedValueSetError))]
+    [DataRow(typeof(CqlAmbiguousStringInValueSetError))]
     public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
         errorType.Should().BeAssignableTo<ICqlEvaluationError>();
 
