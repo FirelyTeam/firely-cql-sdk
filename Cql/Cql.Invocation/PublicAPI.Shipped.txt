@@ -43,6 +43,14 @@ Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.CqlAssemblyUnreadab
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError other) -> bool
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Exception.get -> System.Exception!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.GetMessage() -> string!
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.AssemblyName.get -> string!
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.CqlAssemblyWithNewerReferenceError() -> void
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError other) -> bool
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.GetMessage() -> string!
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.HostVersion.get -> System.Version!
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ReferencedAssemblyName.get -> string!
+Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ReferencedVersion.get -> System.Version!
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.AssemblyName.get -> string?
 Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.CqlAssemblyWithoutMetadataError() -> void
@@ -136,6 +144,7 @@ override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.GetHashCode() -> int
+override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryTypeWithMalformedAttributeError.GetHashCode() -> int
@@ -154,6 +163,8 @@ static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator !=(Hl7.Cql.Invocatio
 static Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.operator ==(Hl7.Cql.Invocation.Toolkit.CqlParameterInfo left, Hl7.Cql.Invocation.Toolkit.CqlParameterInfo right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.operator !=(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.operator ==(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError right) -> bool
+static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.operator !=(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError right) -> bool
+static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.operator ==(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.operator !=(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.operator ==(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError right) -> bool
 static Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.operator !=(Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError right) -> bool
@@ -204,6 +215,8 @@ virtual Hl7.Cql.Invocation.Toolkit.Extensions.SelectResultsOptions.PrintMembers(
 ~override Hl7.Cql.Invocation.Toolkit.CqlParameterInfo.Equals(object obj) -> bool
 ~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.Equals(object obj) -> bool
 ~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyUnreadableError.ToString() -> string
+~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.Equals(object obj) -> bool
+~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ToString() -> string
 ~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.Equals(object obj) -> bool
 ~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithoutMetadataError.ToString() -> string
 ~override Hl7.Cql.Invocation.Toolkit.Errors.CqlLibraryDeclaredByMoreThanOneTypeError.Equals(object obj) -> bool

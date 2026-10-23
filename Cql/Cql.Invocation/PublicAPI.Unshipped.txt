@@ -1,14 +1,1 @@
 #nullable enable
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.AssemblyName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.CqlAssemblyWithNewerReferenceError() -> void
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.Equals(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError other) -> bool
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.GetMessage() -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.HostVersion.get -> System.Version!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ReferencedAssemblyName.get -> string!
-Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ReferencedVersion.get -> System.Version!
-override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.GetHashCode() -> int
-static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.operator !=(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError right) -> bool
-static Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.operator ==(Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError left, Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError right) -> bool
-~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.Equals(object obj) -> bool
-~override Hl7.Cql.Invocation.Toolkit.Errors.CqlAssemblyWithNewerReferenceError.ToString() -> string

@@ -22,9 +22,9 @@ Hl7.Cql.Abstractions.CqlFunctionParameterAttribute
 Hl7.Cql.Abstractions.CqlFunctionParameterAttribute.CqlFunctionParameterAttribute(string! cqlParameterName) -> void
 Hl7.Cql.Abstractions.CqlFunctionParameterAttribute.CqlParameterName.get -> string!
 Hl7.Cql.Abstractions.CqlLibraryAttribute
-Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string! Version) -> void
+Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string? Version) -> void
 Hl7.Cql.Abstractions.CqlLibraryAttribute.Identifier.get -> string!
-Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string!
+Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string?
 Hl7.Cql.Abstractions.CqlParameterDefinitionAttribute
 Hl7.Cql.Abstractions.CqlParameterDefinitionAttribute.CqlParameterDefinitionAttribute(string! name) -> void
 Hl7.Cql.Abstractions.CqlTagAttribute
@@ -38,7 +38,7 @@ Hl7.Cql.Abstractions.CqlValueSetDefinitionAttribute.ValueSetVersion.get -> strin
 Hl7.Cql.Abstractions.ILibrary
 Hl7.Cql.Abstractions.ILibrary.Dependencies.get -> Hl7.Cql.Abstractions.ILibrary![]!
 Hl7.Cql.Abstractions.ILibrary.Name.get -> string!
-Hl7.Cql.Abstractions.ILibrary.Version.get -> string!
+Hl7.Cql.Abstractions.ILibrary.Version.get -> string?
 Hl7.Cql.Abstractions.ISingleton<TSelf>
 Hl7.Cql.Abstractions.ISingleton<TSelf>.Instance.get -> TSelf
 Hl7.Cql.Abstractions.Mutator<T>
@@ -68,15 +68,23 @@ Hl7.Cql.Comparers.IEquivalenceComparer<T>.Equivalent(T? x, T? y, string? precisi
 Hl7.Cql.Comparers.IEquivalentable<T>
 Hl7.Cql.Comparers.IEquivalentable<T>.EquivalentToValue(T! other, string? precision) -> bool
 Hl7.Cql.Exceptions.CqlErrorExtensions
+Hl7.Cql.Exceptions.CqlEvaluationFrame
+Hl7.Cql.Exceptions.CqlEvaluationFrame.<Clone>$() -> Hl7.Cql.Exceptions.CqlEvaluationFrame!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.DefinitionName.get -> string!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.Equals(Hl7.Cql.Exceptions.CqlEvaluationFrame? other) -> bool
+Hl7.Cql.Exceptions.CqlEvaluationFrame.LibraryName.get -> string!
+Hl7.Cql.Exceptions.CqlEvaluationFrame.LibraryVersion.get -> string?
 Hl7.Cql.Exceptions.CqlException
 Hl7.Cql.Exceptions.CqlException.CqlException(System.Exception? innerException = null) -> void
 Hl7.Cql.Exceptions.CqlException.Error.get -> Hl7.Cql.Exceptions.ICqlError!
+Hl7.Cql.Exceptions.CqlException.EvaluationFrames.get -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!
 Hl7.Cql.Exceptions.CqlException<TError>
 Hl7.Cql.Exceptions.CqlException<TError>.CqlException(TError error, System.Exception? innerException = null) -> void
 Hl7.Cql.Exceptions.CqlException<TError>.Error.get -> TError
 Hl7.Cql.Exceptions.ICqlArithmeticError
 Hl7.Cql.Exceptions.ICqlError
 Hl7.Cql.Exceptions.ICqlError.GetMessage() -> string!
+Hl7.Cql.Exceptions.ICqlEvaluationError
 Hl7.Cql.Primitives.CqlCode
 Hl7.Cql.Primitives.CqlCode.CqlCode(Hl7.Cql.Primitives.CqlCode! original) -> void
 Hl7.Cql.Primitives.CqlCode.CqlCode(string? code = null, string? system = null, string? version = null, string? display = null) -> void
@@ -97,8 +105,8 @@ Hl7.Cql.Primitives.CqlCodeSystem.codes.get -> System.Collections.Generic.IReadOn
 Hl7.Cql.Primitives.CqlCodeSystem.codes.init -> void
 Hl7.Cql.Primitives.CqlConcept
 Hl7.Cql.Primitives.CqlConcept.CqlConcept(Hl7.Cql.Primitives.CqlConcept! original) -> void
-Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes, string? display) -> void
-Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes, string? display) -> void
+Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes, string? display = null) -> void
+Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes = null, string? display = null) -> void
 Hl7.Cql.Primitives.CqlConcept.Deconstruct(out System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes, out string? display) -> void
 Hl7.Cql.Primitives.CqlConcept.codes.get -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>!
 Hl7.Cql.Primitives.CqlConcept.codes.init -> void
@@ -145,20 +153,6 @@ Hl7.Cql.Primitives.CqlInterval<T>.high.get -> T
 Hl7.Cql.Primitives.CqlInterval<T>.highClosed.get -> bool?
 Hl7.Cql.Primitives.CqlInterval<T>.low.get -> T
 Hl7.Cql.Primitives.CqlInterval<T>.lowClosed.get -> bool?
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError() -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError(object? Low, object? High, bool LowClosed, bool HighClosed) -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Deconstruct(out object? Low, out object? High, out bool LowClosed, out bool HighClosed) -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Equals(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError other) -> bool
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.GetMessage() -> string!
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.High.get -> object?
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.High.init -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.HighClosed.get -> bool
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.HighClosed.init -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Low.get -> object?
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Low.init -> void
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.LowClosed.get -> bool
-Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.LowClosed.init -> void
 Hl7.Cql.Primitives.CqlPrimitiveType
 Hl7.Cql.Primitives.CqlPrimitiveType.Any = 0 -> Hl7.Cql.Primitives.CqlPrimitiveType
 Hl7.Cql.Primitives.CqlPrimitiveType.Boolean = 1 -> Hl7.Cql.Primitives.CqlPrimitiveType
@@ -216,14 +210,6 @@ Hl7.Cql.Primitives.CqlTupleMetadata
 Hl7.Cql.Primitives.CqlTupleMetadata.CqlTupleMetadata(System.Type![]? itemTypes = null, string![]? itemNames = null) -> void
 Hl7.Cql.Primitives.CqlTupleMetadata.ItemNames.get -> System.Collections.Generic.IReadOnlyList<string!>!
 Hl7.Cql.Primitives.CqlTupleMetadata.ItemTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
-Hl7.Cql.Primitives.CqlUcumMonthArithmeticError
-Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.CqlUcumMonthArithmeticError() -> void
-Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError other) -> bool
-Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetMessage() -> string!
-Hl7.Cql.Primitives.CqlUcumYearArithmeticError
-Hl7.Cql.Primitives.CqlUcumYearArithmeticError.CqlUcumYearArithmeticError() -> void
-Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(Hl7.Cql.Primitives.CqlUcumYearArithmeticError other) -> bool
-Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetMessage() -> string!
 Hl7.Cql.Primitives.CqlValueSet
 Hl7.Cql.Primitives.CqlValueSet.CqlValueSet(Hl7.Cql.Primitives.CqlValueSet! original) -> void
 Hl7.Cql.Primitives.CqlValueSet.CqlValueSet(string! id, string? version = null) -> void
@@ -236,6 +222,20 @@ Hl7.Cql.Primitives.CqlVocabulary.id.get -> string!
 Hl7.Cql.Primitives.CqlVocabulary.id.init -> void
 Hl7.Cql.Primitives.CqlVocabulary.version.get -> string?
 Hl7.Cql.Primitives.CqlVocabulary.version.init -> void
+Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError
+Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.CqlUcumMonthArithmeticError() -> void
+Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.Equals(Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError other) -> bool
+Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.GetMessage() -> string!
+Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError
+Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.CqlUcumYearArithmeticError() -> void
+Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.Equals(Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError other) -> bool
+Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.GetMessage() -> string!
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.CqlUnsupportedTemporalUnitError() -> void
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Equals(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError other) -> bool
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.GetMessage() -> string!
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Type.get -> string!
+Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Unit.get -> string!
 Hl7.Cql.Primitives.TupleBaseType
 Hl7.Cql.Primitives.TupleBaseType.TupleBaseType() -> void
 Hl7.Cql.Primitives.TypeExtensions
@@ -260,6 +260,9 @@ const Hl7.Cql.Abstractions.UCUMUnits.Unary = "1" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Week = "wk" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Yard = "[yd_i]" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Year = "a" -> string!
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.Equals(object? obj) -> bool
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.GetHashCode() -> int
+override Hl7.Cql.Exceptions.CqlEvaluationFrame.ToString() -> string!
 override Hl7.Cql.Exceptions.CqlException.Message.get -> string!
 override Hl7.Cql.Exceptions.CqlException<TError>.GetError() -> Hl7.Cql.Exceptions.ICqlError!
 override Hl7.Cql.Primitives.CqlCode.Equals(object? obj) -> bool
@@ -283,7 +286,6 @@ override Hl7.Cql.Primitives.CqlDateTime.ToString() -> string!
 override Hl7.Cql.Primitives.CqlInterval<T>.Equals(object? obj) -> bool
 override Hl7.Cql.Primitives.CqlInterval<T>.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlInterval<T>.ToString() -> string?
-override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlQuantity.ToString() -> string?
 override Hl7.Cql.Primitives.CqlRatio.ToString() -> string!
 override Hl7.Cql.Primitives.CqlTime.Equals(object? obj) -> bool
@@ -292,8 +294,6 @@ override Hl7.Cql.Primitives.CqlTime.ToString() -> string!
 override Hl7.Cql.Primitives.CqlTupleMetadata.Equals(object? obj) -> bool
 override Hl7.Cql.Primitives.CqlTupleMetadata.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlTupleMetadata.ToString() -> string!
-override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.GetHashCode() -> int
-override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlValueSet.<Clone>$() -> Hl7.Cql.Primitives.CqlValueSet!
 override Hl7.Cql.Primitives.CqlValueSet.EqualityContract.get -> System.Type!
 override Hl7.Cql.Primitives.CqlValueSet.Equals(object? obj) -> bool
@@ -303,10 +303,16 @@ override Hl7.Cql.Primitives.CqlValueSet.ToString() -> string!
 override Hl7.Cql.Primitives.CqlVocabulary.Equals(object? obj) -> bool
 override Hl7.Cql.Primitives.CqlVocabulary.GetHashCode() -> int
 override Hl7.Cql.Primitives.CqlVocabulary.ToString() -> string!
+override Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.GetHashCode() -> int
+override Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.GetHashCode() -> int
+override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.GetHashCode() -> int
 override sealed Hl7.Cql.Primitives.CqlCodeSystem.Equals(Hl7.Cql.Primitives.CqlVocabulary? other) -> bool
 override sealed Hl7.Cql.Primitives.CqlValueSet.Equals(Hl7.Cql.Primitives.CqlVocabulary? other) -> bool
 static Hl7.Cql.Comparers.CqlComparerExtensions.ToEqualityComparer<T>(this Hl7.Cql.Comparers.ICqlComparer<T>! comparer, string? precision = null, bool useEquivalence = false) -> System.Collections.Generic.IEqualityComparer<T>!
+static Hl7.Cql.Exceptions.CqlErrorExtensions.GetCqlEvaluationFrames(this System.Exception! exception) -> System.Collections.Generic.IReadOnlyList<Hl7.Cql.Exceptions.CqlEvaluationFrame!>!
 static Hl7.Cql.Exceptions.CqlErrorExtensions.ToException<TError>(this TError cqlError, System.Exception? innerException = null) -> Hl7.Cql.Exceptions.CqlException<TError>!
+static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator !=(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
+static Hl7.Cql.Exceptions.CqlEvaluationFrame.operator ==(Hl7.Cql.Exceptions.CqlEvaluationFrame? left, Hl7.Cql.Exceptions.CqlEvaluationFrame? right) -> bool
 static Hl7.Cql.Primitives.CqlCode.operator !=(Hl7.Cql.Primitives.CqlCode? left, Hl7.Cql.Primitives.CqlCode? right) -> bool
 static Hl7.Cql.Primitives.CqlCode.operator ==(Hl7.Cql.Primitives.CqlCode? left, Hl7.Cql.Primitives.CqlCode? right) -> bool
 static Hl7.Cql.Primitives.CqlCodeSystem.operator !=(Hl7.Cql.Primitives.CqlCodeSystem? left, Hl7.Cql.Primitives.CqlCodeSystem? right) -> bool
@@ -321,8 +327,6 @@ static Hl7.Cql.Primitives.CqlDateTime.implicit operator Hl7.Cql.Iso8601.DateTime
 static Hl7.Cql.Primitives.CqlDateTime.implicit operator Hl7.Cql.Primitives.CqlDateTime!(Hl7.Cql.Iso8601.DateTimeIso8601! dateTime) -> Hl7.Cql.Primitives.CqlDateTime!
 static Hl7.Cql.Primitives.CqlDateTime.operator +(Hl7.Cql.Primitives.CqlDateTime? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlDateTime?
 static Hl7.Cql.Primitives.CqlDateTime.operator -(Hl7.Cql.Primitives.CqlDateTime? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlDateTime?
-static Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.operator !=(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError right) -> bool
-static Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.operator ==(Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError right) -> bool
 static Hl7.Cql.Primitives.CqlQuantity.Negate(Hl7.Cql.Primitives.CqlQuantity? cqlQuantity) -> Hl7.Cql.Primitives.CqlQuantity?
 static Hl7.Cql.Primitives.CqlQuantity.TryParse(string! s, out Hl7.Cql.Primitives.CqlQuantity? q) -> bool
 static Hl7.Cql.Primitives.CqlQuantity.operator -(Hl7.Cql.Primitives.CqlQuantity? value) -> Hl7.Cql.Primitives.CqlQuantity?
@@ -332,14 +336,16 @@ static Hl7.Cql.Primitives.CqlTime.operator +(Hl7.Cql.Primitives.CqlTime? left, H
 static Hl7.Cql.Primitives.CqlTime.operator -(Hl7.Cql.Primitives.CqlTime? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlTime?
 static Hl7.Cql.Primitives.CqlTupleMetadata.operator !=(Hl7.Cql.Primitives.CqlTupleMetadata? left, Hl7.Cql.Primitives.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Primitives.CqlTupleMetadata.operator ==(Hl7.Cql.Primitives.CqlTupleMetadata? left, Hl7.Cql.Primitives.CqlTupleMetadata? right) -> bool
-static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool
-static Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.CqlUcumMonthArithmeticError right) -> bool
-static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator !=(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
-static Hl7.Cql.Primitives.CqlUcumYearArithmeticError.operator ==(Hl7.Cql.Primitives.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.CqlUcumYearArithmeticError right) -> bool
 static Hl7.Cql.Primitives.CqlValueSet.operator !=(Hl7.Cql.Primitives.CqlValueSet? left, Hl7.Cql.Primitives.CqlValueSet? right) -> bool
 static Hl7.Cql.Primitives.CqlValueSet.operator ==(Hl7.Cql.Primitives.CqlValueSet? left, Hl7.Cql.Primitives.CqlValueSet? right) -> bool
 static Hl7.Cql.Primitives.CqlVocabulary.operator !=(Hl7.Cql.Primitives.CqlVocabulary? left, Hl7.Cql.Primitives.CqlVocabulary? right) -> bool
 static Hl7.Cql.Primitives.CqlVocabulary.operator ==(Hl7.Cql.Primitives.CqlVocabulary? left, Hl7.Cql.Primitives.CqlVocabulary? right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.operator !=(Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.operator ==(Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError left, Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.operator !=(Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.operator ==(Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError left, Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.operator !=(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError right) -> bool
+static Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.operator ==(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError left, Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError right) -> bool
 static Hl7.Cql.Primitives.TypeExtensions.IsCqlInterval(this System.Type! type, out System.Type? elementType) -> bool
 static Hl7.Cql.Primitives.TypeExtensions.IsCqlValueTuple(this System.Type! type) -> bool
 static readonly Hl7.Cql.Abstractions.Units.DatePrecisionToCqlUnits -> System.Collections.Generic.IDictionary<string!, string!>!
@@ -364,9 +370,9 @@ virtual Hl7.Cql.Primitives.CqlValueSet.Equals(Hl7.Cql.Primitives.CqlValueSet? ot
 virtual Hl7.Cql.Primitives.CqlVocabulary.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.Primitives.CqlVocabulary.Equals(Hl7.Cql.Primitives.CqlVocabulary? other) -> bool
 virtual Hl7.Cql.Primitives.CqlVocabulary.PrintMembers(System.Text.StringBuilder! builder) -> bool
-~override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.Equals(object obj) -> bool
-~override Hl7.Cql.Primitives.CqlPointFromNonUnitIntervalError.ToString() -> string
-~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.Equals(object obj) -> bool
-~override Hl7.Cql.Primitives.CqlUcumMonthArithmeticError.ToString() -> string
-~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.Equals(object obj) -> bool
-~override Hl7.Cql.Primitives.CqlUcumYearArithmeticError.ToString() -> string
+~override Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.Errors.CqlUcumMonthArithmeticError.ToString() -> string
+~override Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.Errors.CqlUcumYearArithmeticError.ToString() -> string
+~override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Equals(object obj) -> bool
+~override Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.ToString() -> string
