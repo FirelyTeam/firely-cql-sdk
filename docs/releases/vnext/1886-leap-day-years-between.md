@@ -8,6 +8,6 @@
   `-3` instead of `-4`, and `years between @2012-02-29 and @2012-02-28` is `0` instead of `-1`. This holds for Dates
   and DateTimes, and for `CalculateAgeInYearsAt` at a date before a birth on 29 February:
   `CalculateAgeInYearsAt(@2012-02-29, @2012-01-15)` is `0` instead of `-1`. Counting forwards, as an age at or after
-  birth does, and `months between` are unchanged. (#1867)
+  birth does, and `months between` are unchanged. (#1867, #1886)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
