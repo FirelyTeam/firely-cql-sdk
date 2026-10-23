@@ -8,6 +8,6 @@
   elements differ in type are still unequal. ELM translated by this SDK does not hand these operators values of
   different types: the translator converts a Date compared with a DateTime with `ToDateTime` and an Integer compared
   with a Decimal with `ToDecimal`, and casts a value of a choice type to the operator's type. The change reaches ELM
-  from another translator that leaves such a pair unconverted, and code that calls `ICqlOperators` directly. (#1649)
+  from another translator that leaves such a pair unconverted, and code that calls `ICqlOperators` directly. (#1649, #1861)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
