@@ -273,6 +273,92 @@ public class MismatchedTypeComparisonTests
 
     #endregion
 
+    #region Members of lists, tuples and key-value pairs nested in each other
+
+    private const int NestingDepth = 16;
+
+    private static readonly CqlTupleMetadata NestingMetadata = new([typeof(object)], ["x"]);
+
+    /// <summary>
+    /// <paramref name="member"/> as the only member of <see cref="NestingDepth"/> lists, tuples or
+    /// key-value pairs nested in each other, each allocated anew.
+    /// </summary>
+    private static object Nest(string nesting, object member)
+    {
+        for (var level = 0; level < NestingDepth; level++)
+        {
+            member = nesting switch
+            {
+                "lists"           => new List<object> { member },
+                "tuples"          => (NestingMetadata, (object?)member),
+                "key-value pairs" => new KeyValuePair<object, object>("key", member),
+                _                 => throw new ArgumentOutOfRangeException(nameof(nesting), nesting, null),
+            };
+        }
+
+        return member;
+    }
+
+    /// <summary>
+    /// A value whose comparison with another is unknown, as it is for two DateTimes of different
+    /// precisions.
+    /// </summary>
+    private sealed class Uncertain;
+
+    private sealed class CountingUncertainComparer : CqlComparer<Uncertain>
+    {
+        public int Comparisons { get; private set; }
+
+        protected override int? CompareValues(Uncertain x, Uncertain y, string? precision)
+        {
+            Comparisons++;
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Whether two members are of different types comes from the dispatch that compares them, so
+    /// values nested in each other compare the members whose comparison is unknown once, not once
+    /// for every level they are nested in (2^16 times at this depth).
+    /// </summary>
+    [TestMethod]
+    [DataRow("lists")]
+    [DataRow("tuples")]
+    [DataRow("key-value pairs")]
+    public void NestedMembers_WhoseComparisonIsUnknown_AreComparedOnce(string nesting)
+    {
+        var uncertainComparer = new CountingUncertainComparer();
+        ICqlComparer comparers = new CqlComparers().Register(typeof(Uncertain), uncertainComparer);
+        var x = Nest(nesting, new Uncertain());
+        var y = Nest(nesting, new Uncertain());
+
+        Assert.IsNull(comparers.Compare(x, y, null), $"{nesting}: Compare");
+        Assert.AreEqual(1, uncertainComparer.Comparisons, $"{nesting}: comparisons by Compare");
+
+        Assert.IsNull(comparers.Equals(x, y, null), $"{nesting}: Equals");
+        Assert.AreEqual(2, uncertainComparer.Comparisons, $"{nesting}: comparisons by Compare and Equals");
+    }
+
+    /// <summary>
+    /// Members of different types make the values they are nested in unequal at any depth, in both
+    /// orders.
+    /// </summary>
+    [TestMethod]
+    [DataRow("lists")]
+    [DataRow("tuples")]
+    [DataRow("key-value pairs")]
+    public void NestedMembers_OfDifferentTypes_AreUnequal(string nesting)
+    {
+        var operators = Operators;
+        var integers = Nest(nesting, 1);
+        var strings = Nest(nesting, "1");
+
+        Assert.AreEqual(false, operators.Equal(integers, strings), $"{nesting}: integers = strings");
+        Assert.AreEqual(false, operators.Equal(strings, integers), $"{nesting}: strings = integers");
+    }
+
+    #endregion
+
     #region Controls: comparisons that are not between mismatched types are unchanged
 
     [TestMethod]
