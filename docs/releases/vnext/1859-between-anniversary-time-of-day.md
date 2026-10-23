@@ -12,16 +12,12 @@
   time of day such as `ToDateTime(Patient.birthDate)`, give the same results as before, so `AgeInYears`,
   `AgeInYearsAt`, `AgeInMonths` and `AgeInMonthsAt` are unchanged. One such case does change: from a 29 February
   DateTime with a time of day to 28 February without one, `years between @2012-02-29T12:34:56 and DateTime(2014, 2, 28)`
-  is `2` instead of `1`, the count it already gave on any other anniversary date; the specification makes it an
-  uncertainty, as the next item describes. (#1702, #1859)
-- **Runtime** — When one DateTime specifies the time of day further than the other, `years between` and
-  `months between` return the count at the coarser precision, not the uncertainty interval the CQL specification
-  defines whenever the components only one of them specifies can change the count (Language Semantics, "Determining
-  Difference and Duration"). The count is one end of that interval:
-  `years between @2012-03-10T22:30 and @2013-03-10T22` is `1` where the specification gives `[0, 1]`, and
-  `years between @2012-02-29T12:34:56 and DateTime(2014, 2, 28)` is `2` where it gives `[1, 2]`. This includes
-  `AgeInYearsAt` and `AgeInMonthsAt` given a DateTime on the birthday, because `ToDateTime(Patient.birthDate)` has no
-  time of day: they count the year or the month as whole from the first moment of the birthday. Support for
-  uncertainty is tracked in #132. (#1702, #1859)
+  is `2` instead of `1`, the count it already gave on any other anniversary date. When one value specifies the time of
+  day further than the other, as there, the count is taken at the coarser precision, which is one end of the
+  uncertainty interval the specification defines for it (Language Semantics, "Determining Difference and Duration"):
+  that case gives `[1, 2]`, and `years between @2012-03-10T22:30 and @2013-03-10T22` is `1` where the specification
+  gives `[0, 1]`. The same goes for `AgeInYearsAt` and `AgeInMonthsAt` given a DateTime on the birthday, which count
+  the year or the month as whole from the first moment of the birthday. Support for uncertainty is tracked in #132.
+  (#1702, #1859)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
