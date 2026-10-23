@@ -451,18 +451,26 @@ public class ValueSetSource : IValueSetDictionary
             pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version }));
 
     /// <inheritdoc />
+    /// <remarks>
+    /// A value set this source holds or resolves has its codes here, so a test against one that holds codes from more
+    /// than one code system signals the error below. A value set that only the attached terminology service knows is
+    /// left to the service: this source does not have its codes, so it cannot tell whether the test is ambiguous.
+    /// </remarks>
     /// <exception cref="CqlException{TError}">
-    /// The value set cannot be resolved and no terminology service is attached; the error is a
-    /// <see cref="CqlUnresolvedValueSetError"/>.
+    /// The value set cannot be resolved and no terminology service is attached, and the error is a
+    /// <see cref="CqlUnresolvedValueSetError"/>; or the value set holds codes from more than one code system, and the
+    /// error is a <see cref="CqlAmbiguousStringInValueSetError"/>.
     /// </exception>
     public bool IsCodeInValueSet(string valueSetUri, string code) =>
         _valueSets.TryGetValue(valueSetUri, out var cached)
-            ? cached.IsCodeInValueSet(code)
+            ? cached.IsStringInValueSet(valueSetUri, code)
             : ResolveThenCheck(valueSetUri, code);
 
     private bool ResolveThenCheck(string valueSetUri, string code) =>
         CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code),
+                                   vs => vs is InMemoryValueSet inMemory
+                                       ? inMemory.IsStringInValueSet(valueSetUri, code)
+                                       : vs.IsCodeInValueSet(code),
                                    pb => pb.WithCode(code));
 
     /// <inheritdoc />

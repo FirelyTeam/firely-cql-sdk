@@ -6,7 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -21,6 +23,12 @@ namespace Hl7.Cql.ValueSets
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set, regardless of system.
         /// </summary>
+        /// <remarks>
+        /// The CQL specification (Appendix B - CQL Reference, section "In (Valueset)") makes this test a run-time error
+        /// when the value set holds codes from more than one code system, since the code does not say which system it
+        /// is from. <see cref="InMemoryValueSet"/> signals it with a <see cref="CqlException{TError}"/> whose error is a
+        /// <see cref="CqlAmbiguousStringInValueSetError"/>.
+        /// </remarks>
         /// <param name="code">The code to check.</param>
         /// <returns><see langword="true"/> if the code is in this value set.</returns>
         bool IsCodeInValueSet(string code);
