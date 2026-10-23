@@ -206,6 +206,13 @@ namespace Hl7.Cql.Primitives
                     var firstIsLeapDay = calendar.IsLeapDay(firstDto.Year, firstDto.Month, firstDto.Day);
                     var secondIsLeapDay = calendar.IsLeapDay(secondDto.Year, secondDto.Month, secondDto.Day);
 
+                    // Counted back from or to 29 February, the whole years are the negative of those counted forwards from
+                    // the earlier date to the later one, so 28 February is the anniversary of 29 February in a year
+                    // without one in both directions. The calendar dates are compared each in its own offset, as the
+                    // count reads them, and the leap-day cases below only count forwards.
+                    if ((firstIsLeapDay || secondIsLeapDay) && secondDto.Date < firstDto.Date)
+                        return -WholeCalendarPeriodsBetween(secondDto, firstDto, precision, timeOfDayPrecision);
+
                     // born on leap day
                     if (firstIsLeapDay)
                     {
@@ -220,8 +227,6 @@ namespace Hl7.Cql.Primitives
                             // On 29 February, the anniversary date itself, the time of day decides.
                             if (secondDto.DayOfYear == 60 && yearDiff > 0 && timeOfDayOrder < 0)
                                 return yearDiff - 1;
-                            if (secondDto.DayOfYear == 60 && yearDiff < 0 && timeOfDayOrder > 0)
-                                return yearDiff + 1;
 
                             // equals or is after
                             return yearDiff;
@@ -234,7 +239,7 @@ namespace Hl7.Cql.Primitives
                         // age as of 2-28-2025 = 5
                         if (secondDayInYear > 59)
                             return yearDiff;
-                        if (secondDayInYear == 59 && (yearDiff < 0 || timeOfDayOrder >= 0))
+                        if (secondDayInYear == 59 && timeOfDayOrder >= 0)
                             return yearDiff;
 
                         return yearDiff - 1;
@@ -254,10 +259,6 @@ namespace Hl7.Cql.Primitives
                             return yearDiff;
                         }
 
-                        // Back from 28 February of a year without a leap day, the year from 29 February is whole once
-                        // the time of day of 29 February has been reached.
-                        if (firstDayInYear == 59 && yearDiff < 0 && timeOfDayOrder > 0)
-                            return yearDiff + 1;
                         if (firstDayInYear < 60)
                             return yearDiff;
 

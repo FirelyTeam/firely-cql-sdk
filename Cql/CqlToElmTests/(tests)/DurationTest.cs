@@ -281,6 +281,36 @@ namespace Hl7.Cql.CqlToElm.Test
                 $"{count} is not an end of the uncertainty [{uncertaintyLow}, {uncertaintyHigh}].");
         }
 
+        // https://cql.hl7.org/15-h-timeintervalcalculations.html#calculating-duration-in-years
+        // Counted back from or to 29 February, the whole years are the negative of those counted forwards, with
+        // 28 February as the anniversary of 29 February in a year without one (the note on Example 4.b).
+        [TestMethod]
+        [DataRow("years between @2012-02-29 and @2012-01-15", 0)]
+        [DataRow("years between @2016-02-29 and @2012-03-01", -3)]
+        [DataRow("years between @2016-02-29 and @2012-01-15", -4)]
+        [DataRow("years between @2012-02-29 and @2011-01-15", -1)]
+        [DataRow("years between @2015-03-01 and @2012-02-29", -3)]
+        [DataRow("years between @2012-03-01 and @2012-02-29", 0)]
+        [DataRow("years between @2013-01-15 and @2012-02-29", 0)]
+        [DataRow("years between @2012-03-01 and @2016-02-29", 3)]
+        [DataRow("years between @2016-02-29T12:34:56 and @2012-03-01T12:34:56", -3)]
+        [DataRow("years between @2013-02-28T12:34:55 and @2012-02-29T12:34:56", 0)]
+        [DataRow("CalculateAgeInYearsAt(@2012-02-29, @2012-01-15)", 0)]
+        public void Duration_Between_BackFromOrTo29February_IsTheNegativeOfForwards(string expression, int expected)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                library DurationTest version '1.0.0'
+
+                define private Whole_Years: {expression}
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+
+            var result = Run(library.statements[0].expression, library);
+            Assert.IsInstanceOfType(result, typeof(int?));
+            Assert.AreEqual(expected, result);
+        }
+
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
             CreateCqlToolkit().MakeLibrary("""
