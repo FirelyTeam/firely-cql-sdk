@@ -22,7 +22,8 @@ namespace CoreTests;
 /// <summary>
 /// Spec §9.B, Concept: the structured type <c>Concept { codes List&lt;Code&gt;, display String }</c>. Spec §2,
 /// Structured Values (Tuples): an element of the type that the selector leaves out is null, so a <c>Concept</c> selector
-/// without a <c>display</c> is a concept with those codes and a null display.
+/// without a <c>display</c> is a concept with those codes and a null display, and one without <c>codes</c> is a concept
+/// with null codes.
 /// </summary>
 [TestClass]
 public class ConceptInstanceSelectorTests
@@ -57,6 +58,31 @@ public class ConceptInstanceSelectorTests
 
         var concept = result.Should().BeOfType<CqlConcept>(caseDescription).Subject;
         concept.codes.Should().Equal(expectedCodes, caseDescription);
+        concept.display.Should().Be(expectedDisplay, caseDescription);
+    }
+
+    /// <summary>
+    /// Spec Appendix A, <c>instanceSelector</c>: <c>Concept { : }</c> is the selector without any element.
+    /// </summary>
+    private static IEnumerable<object?[]> ConceptSelectorWithoutCodesCases =>
+    [
+        ["a display without codes", "Concept { display: 'Blood pressure' }", "Blood pressure"],
+        ["neither codes nor a display", "Concept { : }", null],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(ConceptSelectorWithoutCodesCases))]
+    public void ConceptInstanceSelectorWithoutCodes_CompilesAndEvaluatesToAConceptWithNullCodes(
+        string caseDescription,
+        string selector,
+        string? expectedDisplay)
+    {
+        using var invoker = CompileLibrary($"define \"Concept\": {selector}");
+
+        var result = invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), LibraryIdentifier, "Concept");
+
+        var concept = result.Should().BeOfType<CqlConcept>(caseDescription).Subject;
+        concept.codes.Should().BeNull(caseDescription);
         concept.display.Should().Be(expectedDisplay, caseDescription);
     }
 
