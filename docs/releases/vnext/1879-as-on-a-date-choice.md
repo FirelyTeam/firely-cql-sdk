@@ -6,4 +6,4 @@
   `>=` and `<=`, failed C# compilation with CS0039 ("Cannot convert type 'CqlDate' to 'CqlDateTime'"), so the whole
   library could not be evaluated; the comparison is now null. Other casts of that shape compile the same way, such as
   `(true as Any) as Decimal` and `('a' as Choice<String, Integer>) as Integer`. C# generated for libraries that
-  compiled before is unchanged, and so is `GeneratorToolVersion`. (#1869)
+  compiled before is unchanged, and so is `GeneratorToolVersion`. (#1869, #1879)
