@@ -99,13 +99,20 @@ partial class CqlComparers
         /// non-empty intersection of the codes in each Concept using Code equivalence to determine the intersection. The
         /// display element is ignored for the purposes of determining Concept equivalence."
         /// </summary>
+        /// <remarks>
+        /// A concept without codes shares no code with any concept, so it is equivalent to none, itself included.
+        /// </remarks>
         protected override bool EquivalentValues(
             CqlConcept x,
             CqlConcept y,
             string? precision)
         {
-            if (x.codes is not { } xCodes || y.codes is not { } yCodes)
+            if (x.codes is not { Count: > 0 } xCodes || y.codes is not { Count: > 0 } yCodes)
                 return false;
+
+            // Every code is equivalent to itself, so a list of codes intersects itself.
+            if (ReferenceEquals(xCodes, yCodes))
+                return true;
 
             var codeEquivalenceComparer = precision switch
             {
@@ -120,6 +127,12 @@ partial class CqlComparers
                     : (new HashSet<CqlCode>(yCodes, codeEquivalenceComparer), xCodes);
             return codesSet.Overlaps(compareSet);
         }
+
+        /// <summary>
+        /// Two concepts that are equal as records need not be equivalent: a concept without codes is equivalent to no
+        /// concept.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
 
         /// <summary>
         /// Hashes the codes, in order, and the display, each by <c>memberComparer</c>, so that concepts

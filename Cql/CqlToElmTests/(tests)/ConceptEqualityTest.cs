@@ -16,7 +16,8 @@ namespace Hl7.Cql.CqlToElm.Test
     /// </summary>
     /// <remarks>
     /// <c>"C"</c> and <c>"D"</c> are LOINC codes. <c>"C without system"</c> has the code of <c>"C"</c> but no system, so
-    /// whether it equals <c>"C"</c> is unknown. <c>"Code1"</c> is the code of the specification's examples.
+    /// whether it equals <c>"C"</c> is unknown. <c>"Code1"</c> is the code of the specification's examples, and
+    /// <c>"Concept2"</c> the concept with a null code of its Equivalent examples.
     /// </remarks>
     [TestClass]
     public class ConceptEqualityTest : Base
@@ -59,6 +60,57 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #endregion
 
+        #region Equivalent
+
+        /// <summary>
+        /// Spec §9.B, Clinical Operators, Equivalent: "For Concept values, equivalence is defined as a non-empty
+        /// intersection of the codes in each Concept using Code equivalence to determine the intersection. The display
+        /// element is ignored for the purposes of determining Concept equivalence. Note that this operator will always
+        /// return true or false, even if either or both of its arguments are null, or contain null components."
+        /// </summary>
+        private static IEnumerable<object?[]> EquivalentCases =>
+        [
+            ["Concept { codes: { \"Code1\" }, display: 'Concepts' }", "Concept { codes: { \"Code1\" }, display: 'More Concepts' }", true],
+            ["Concept { codes: { \"C\", \"D\" } }", "Concept { codes: { \"D\" }, display: 'x' }", true],
+            ["Concept { codes: { \"C\" }, display: 'x' }", "Concept { codes: { \"D\" }, display: 'x' }", false],
+            ["Concept { display: 'x' }", "Concept { display: 'y' }", false],
+            ["Concept { display: 'x' }", "Concept { display: 'x' }", false],
+            ["Concept { : }", "Concept { : }", false],
+            ["Concept { display: 'x' }", "Concept { codes: { \"C\" }, display: 'x' }", false],
+            ["Concept { display: 'x' }", "(null as Concept)", false],
+            ["Concept { codes: { \"C\" } }", "(null as Concept)", false],
+            ["(null as Concept)", "(null as Concept)", true],
+            // The specification's EquivalentIsFalse: Concept1 ~ Concept2.
+            ["Concept { codes: { \"Code1\" }, display: 'Concepts' }", "Concept { codes: { null as Code }, display: 'More Concepts' }", false],
+            // As the specification's EquivalentIsAlsoTrue (Concept2 ~ Concept2), with two instances.
+            ["Concept { codes: { null as Code }, display: 'More Concepts' }", "Concept { codes: { null as Code }, display: 'More Concepts' }", true],
+        ];
+
+        [TestMethod]
+        [DynamicData(nameof(EquivalentCases))]
+        public void Concept_Equivalent_Concept(string left, string right, bool expected)
+        {
+            var results = Evaluate($"{left} ~ {right}", $"{right} ~ {left}", $"{left} !~ {right}");
+
+            results.Should().Equal(expected, expected, !expected);
+        }
+
+        /// <summary>
+        /// The specification's EquivalentIsAlsoTrue, <c>Concept2 ~ Concept2</c>, and a concept without codes against
+        /// itself, which shares no code with itself.
+        /// </summary>
+        [TestMethod]
+        public void Concept_Equivalent_Itself()
+        {
+            var results = Evaluate(
+                "\"Concept2\" ~ \"Concept2\"",
+                "\"Without codes\" ~ \"Without codes\"");
+
+            results.Should().Equal(true, false);
+        }
+
+        #endregion
+
         /// <summary>
         /// Translates a library that defines each of <paramref name="expressions"/>, compiles it, and evaluates them in
         /// order.
@@ -79,6 +131,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define "C without system": Code { code: '8480-6' }
                 define "Code1": Code { system: 'http://loinc.org', code: '8480-6', version: '1.0', display: 'Systolic blood pressure' }
+                define "Concept2": Concept { codes: { null as Code }, display: 'More Concepts' }
+                define "Without codes": Concept { display: 'x' }
 
                 {{definitions}}
                 """);

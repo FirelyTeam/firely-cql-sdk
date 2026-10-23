@@ -117,4 +117,65 @@ public class ConceptEqualityTests
     }
 
     #endregion
+
+    #region Equivalent
+
+    private static readonly CqlConcept WithoutCodes = Concept(display: "x");
+
+    /// <summary>The specification's Concept2 in the Equivalent examples: <c>Concept { codes: { null } }</c>.</summary>
+    private static readonly CqlConcept WithANullCode = Concept([null], "More Concepts");
+
+    private static IEnumerable<object?[]> EquivalentCases =>
+    [
+        ["same codes, different displays", Concept([C], "Concepts"), Concept([C], "More Concepts"), true],
+        ["overlapping codes", Concept([C, D], "x"), Concept([D]), true],
+        ["same codes in a different order", Concept([C, D]), Concept([D, C]), true],
+        ["disjoint codes, same display", Concept([C], "x"), Concept([D], "x"), false],
+        ["no codes, different displays", Concept(display: "x"), Concept(display: "y"), false],
+        ["no codes, same display", Concept(display: "x"), Concept(display: "x"), false],
+        ["the same concept without codes", WithoutCodes, WithoutCodes, false],
+        ["neither codes nor a display", Concept(), Concept(), false],
+        ["empty codes", Concept([], "x"), Concept([], "x"), false],
+        ["codes on one side only", Concept(display: "x"), Concept([C], "x"), false],
+        ["empty codes on one side", Concept([], "x"), Concept([C], "x"), false],
+        // The specification's EquivalentIsAlsoTrue (Concept2 ~ Concept2) and EquivalentIsFalse (Concept1 ~ Concept2).
+        ["the same concept with a null code", WithANullCode, WithANullCode, true],
+        ["concepts with a null code each", Concept([null], "x"), Concept([null], "y"), true],
+        ["a code against a null code", Concept([C], "Concepts"), WithANullCode, false],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(EquivalentCases))]
+    public void Concept_Equivalent_IsANonEmptyIntersectionOfTheCodes(string caseDescription, CqlConcept left, CqlConcept right, bool expected)
+    {
+        var comparers = new CqlComparers();
+        var operators = Operators();
+
+        comparers.Equivalent(left, right, null).Should().Be(expected, caseDescription);
+        comparers.Equivalent(right, left, null).Should().Be(expected, caseDescription);
+        operators.Equivalent(left, right).Should().Be(expected, caseDescription);
+        operators.Equivalent(right, left).Should().Be(expected, caseDescription);
+        operators.NotEquivalent(left, right).Should().Be(!expected, caseDescription);
+    }
+
+    [TestMethod]
+    public void Concept_EquivalentToNull_IsFalse_AndNullIsEquivalentToNull()
+    {
+        var comparers = new CqlComparers();
+        var operators = Operators();
+        CqlConcept[] concepts = [Concept([C], "x"), Concept(display: "x"), Concept()];
+
+        foreach (var concept in concepts)
+        {
+            comparers.Equivalent(concept, null, null).Should().BeFalse();
+            comparers.Equivalent(null, concept, null).Should().BeFalse();
+            operators.Equivalent(concept, null).Should().BeFalse();
+            operators.Equivalent(null, concept).Should().BeFalse();
+        }
+
+        comparers.Equivalent(null, null, null).Should().BeTrue();
+        operators.Equivalent(null, null).Should().BeTrue();
+    }
+
+    #endregion
 }
