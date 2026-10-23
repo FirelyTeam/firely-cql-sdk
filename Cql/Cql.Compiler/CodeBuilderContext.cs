@@ -75,8 +75,6 @@ internal partial class CodeBuilderContext
         _impliedAliasAndScopesStack =
             ImmutableStack<(object? id, string? impliedAlias, IReadOnlyDictionary<string, (CodeExpression expr, Element element)>? scopes)>.Empty;
 
-    private static CodeExpression[] NoArgs { get; } = [];
-
     private static Type[] NoTypes { get; } = [];
 
     private CodeExpression BindCqlOperator<TArg>(
@@ -167,6 +165,7 @@ internal partial class CodeBuilderContext
                     ToDateTime e       => ChangeType(e.operand!, _typeResolver.DateTimeType),
                     ToLong e           => ChangeType(e.operand!, typeof(long?)),
                     ToQuantity e       => ChangeType(e.operand!, _typeResolver.QuantityType),
+                    ToRatio e          => ChangeType(e.operand!, _typeResolver.RatioType),
                     Coalesce e         => Coalesce(e),
                     Equivalent e       => Equivalent(e),
                     AliasRef e         => ResolveScope(e.name!).Value,

@@ -39,12 +39,21 @@ The SDK uses an `ICqlError` struct as the _payload_ of a `CqlException<TError>` 
 
 ### Defining a new error type
 
-Place the struct in the `Errors.cs` of the folder that contains the throw site. The struct must accept the **metadata** (raw facts) as constructor parameters — `GetMessage()` constructs the human-readable string from that metadata on demand.
+Place the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors`, and make it implement `ICqlEvaluationError` when the CQL specification requires the error to be signalled to the calling environment. The struct must hold the **metadata** (raw facts) as get-only properties, set by its constructor — `GetMessage()` constructs the human-readable string from that metadata on demand.
 
 ```csharp
 // ✅ Correct — struct holds metadata; GetMessage() constructs the string lazily
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlArithmeticError
+public readonly record struct CqlArithmeticError : ICqlArithmeticError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() =>
         $"If a definite-quantity duration above days (or weeks) appears in a date/time arithmetic " +
         $"calculation, the evaluation will end and signal an error to the calling environment. " +
@@ -52,8 +61,12 @@ public readonly record struct CqlArithmeticError(string Unit, string CalendarEqu
 }
 
 // ❌ Wrong — do NOT pass a pre-built message string as a constructor argument
-public readonly record struct CqlArithmeticError(string Message) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
+    internal CqlArithmeticError(string message) => Message = message;
+
+    public string Message { get; }
+
     public string GetMessage() => Message;  // anti-pattern: message built at throw site
 }
 ```
@@ -73,17 +86,23 @@ catch (CqlException<CqlArithmeticError> ex)
     string msg  = ex.Error.GetMessage();      // human-readable string, built on demand
 }
 
-// Catching any CQL evaluation error:
-catch (CqlException ex) { ... }
+// Catching any CQL evaluation error, but not a failure inside the SDK:
+catch (CqlException ex) when (ex.Error is ICqlEvaluationError)
+{
+    var frames = ex.EvaluationFrames;         // the CQL definitions being evaluated, innermost first
+}
+
+// Any other exception thrown during evaluation, such as one from a data source, carries the same frames:
+catch (Exception ex)
+{
+    var frames = ex.GetCqlEvaluationFrames();
+}
 ```
 
 ### File structure conventions
 
-- **Exception infrastructure** (`ICqlError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`, `ICqlArithmeticError`) lives in `Exceptions/`, namespace `Hl7.Cql.Exceptions`.
-- **`Cql.Abstractions` is special**: each direct sub-folder has its own `Errors.cs` containing all `ICqlError` structs used by code in that folder. The namespace of each `Errors.cs` matches the folder's namespace:
-  - `Exceptions/Errors.cs` → `namespace Hl7.Cql.Exceptions` (internal infrastructure errors)
-  - `Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types such as `CqlDate`, `CqlDateTime`)
-- Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder.
+- **Exception machinery** (`ICqlError`, `ICqlEvaluationError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`, `CqlEvaluationFrame`) lives in `Exceptions/`, namespace `Hl7.Cql.Exceptions`.
+- **Every public error value** lives in an `Errors/` folder of the area that throws or returns it, with namespace `<namespace of that area>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`. In this project, an error the primitives throw goes in `Primitives/Errors/`, namespace `Hl7.Cql.Primitives.Errors`. Internal errors, such as those in `Exceptions/Errors.cs`, may stay in the namespace of the code that uses them.
 - All public error types must be registered in `PublicAPI.Unshipped.txt`.
 
 ## Further Reading

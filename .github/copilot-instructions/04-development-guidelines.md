@@ -78,7 +78,9 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 4.2.10 **Local functions must use camelCase naming** - Local functions (functions defined inside methods) should start with a lowercase letter (e.g., `processItem()`, not `ProcessItem()`)
 
-4.2.11 **Always enable nullable on all new code** — Every new `.cs` file must have `#nullable enable` at the top (after any copyright header). If the project already enables nullable globally (via `<Nullable>enable</Nullable>` in props), the directive is still required in each new file for explicitness.
+4.2.11 A public type that wants value semantics is a `record` or a `readonly record struct` declared without a positional parameter list. It has get-only properties and an `internal` constructor. Keep the constructor `public` only when code outside the SDK's assemblies, such as generated C#, has to create instances, and even then don't make the record positional. Use an `internal init` only where the SDK itself needs a `with` expression. Internal and private types may stay positional. Existing public positional records stay as they are until a release that may break compiled consumers, because changing them is itself a breaking change.
+
+4.2.12 **Enable nullable only when the project does not** — A new `.cs` file needs its own `#nullable enable` directive after the header only when its project does not enable nullable. Where the project sets `<Nullable>enable</Nullable>`, as `cql-base.props` does for every SDK project, leave it out.
 
 ## 4.3. Project References
 
@@ -192,7 +194,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 4.6. Release Notes
 
-4.6.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](../../docs/releases/vnext/README.md) (one file per PR — see that folder's README for the naming/format convention) rather than editing `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs ([#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
+4.6.1 **Any breaking change** (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](../../docs/releases/vnext/README.md#format) (one file per PR — see that folder's README for the naming/format convention) rather than editing `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs ([#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)).
 
 4.6.2 For the full procedure to turn that accumulated content into a versioned release note (template, README version sync, consolidating and clearing the `docs/releases/vnext/` fragment files), follow [cut-release-notes](../../.claude/skills/cut-release-notes/SKILL.md).
 

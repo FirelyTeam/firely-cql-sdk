@@ -17,6 +17,10 @@
 	<ItemGroup>
 		<None Remove="Models\elm-modelinfo-r1.xml" />
 		<None Remove="Models\fhir-modelinfo-4.0.1.xml" />
+		<None Remove="Models\uscore-modelinfo-3.1.1.xml" />
+		<None Remove="Models\qicore-modelinfo-4.1.1.xml" />
+		<None Remove="Models\uscore-modelinfo-6.1.0.xml" />
+		<None Remove="Models\qicore-modelinfo-6.0.0.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -25,6 +29,18 @@
 		</EmbeddedResource>
 		<EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
 			<LogicalName>Fhir401</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Models\uscore-modelinfo-3.1.1.xml">
+			<LogicalName>USCore311</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Models\qicore-modelinfo-4.1.1.xml">
+			<LogicalName>QICore411</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Models\uscore-modelinfo-6.1.0.xml">
+			<LogicalName>USCore610</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Models\qicore-modelinfo-6.0.0.xml">
+			<LogicalName>QICore600</LogicalName>
 		</EmbeddedResource>
 	</ItemGroup>
 

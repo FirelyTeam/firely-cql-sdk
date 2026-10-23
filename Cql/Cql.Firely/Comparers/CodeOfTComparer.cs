@@ -55,4 +55,18 @@ internal class CodeOfTComparer(ICqlComparer inner) :
                 return inner.CompareValues(x, y, precision);
         }
     }
+
+    /// <summary>
+    /// A <c>Code&lt;T&gt;</c> compares with a string and with a <see cref="CqlCode"/> by its code, and
+    /// with any other value as far as the comparer it falls back on compares the two: with a
+    /// <c>Code&lt;T&gt;</c> of the same <c>T</c>.
+    /// </summary>
+    protected override bool CanCompare(
+        object x,
+        object y) =>
+        (x, y) switch
+        {
+            (CodeOfT, string) or (CodeOfT, CqlCode) => true,
+            _                                       => inner is not ITypedCqlComparer typedInner || typedInner.CanCompare(x, y),
+        };
 }

@@ -87,12 +87,14 @@ namespace Hl7.Cql.Primitives
                 case "day":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalDays;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalDays) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalDays - asInt;
                         var possiblyNextDay = firstDto.AddDays(decimalPortion);
                         if (possiblyNextDay.Day != firstDto.Day)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -100,12 +102,14 @@ namespace Hl7.Cql.Primitives
                 case "hour":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalHours;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalHours) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalHours - asInt;
                         var possiblyNextHour = firstDto.AddHours(decimalPortion);
                         if (possiblyNextHour.Hour != firstDto.Hour)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -113,12 +117,14 @@ namespace Hl7.Cql.Primitives
                 case "minute":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMinutes;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMinutes) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMinutes - asInt;
                         var possiblyNextMinute = firstDto.AddMinutes(decimalPortion);
                         if (possiblyNextMinute.Minute != firstDto.Minute)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -126,12 +132,14 @@ namespace Hl7.Cql.Primitives
                 case "second":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalSeconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalSeconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalSeconds - asInt;
                         var possiblyNextSecond = firstDto.AddSeconds(decimalPortion);
                         if (possiblyNextSecond.Second != firstDto.Second)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -139,12 +147,14 @@ namespace Hl7.Cql.Primitives
                 case "millisecond":
                     {
                         var span = secondDto.Subtract(firstDto);
-                        var asInt = (int)span.TotalMilliseconds;
+                        // A count outside the range of Integer cannot be represented.
+                        if (OverflowGuard.ToInt32(span.TotalMilliseconds) is not { } asInt)
+                            return null;
                         var decimalPortion = span.TotalMilliseconds - asInt;
                         var possiblyNextSecond = firstDto.AddMilliseconds(decimalPortion);
                         if (possiblyNextSecond.Millisecond != firstDto.Millisecond)
                         {
-                            return asInt + 1;
+                            return OverflowGuard.Add(asInt, 1);
                         }
                         else return asInt;
                     }
@@ -153,7 +163,30 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string? precision)
+        /// <summary>
+        /// Returns the number of whole calendar periods for the specified precision between the arguments.
+        /// If <paramref name="low"/> is after <paramref name="high"/>, the result is negative.
+        /// </summary>
+        /// <remarks>
+        /// A year or a month that ends on the anniversary date is whole once the time of day of the start has been
+        /// reached (CQL Appendix H – Time Interval Calculations, "Calculating Duration in Years" and "Calculating
+        /// Duration in Months"). The times of day are compared to <paramref name="timeOfDayPrecision"/>, the finest
+        /// precision both arguments specify; at day precision or coarser they are not compared.
+        /// <para>
+        /// For years and months, when one argument specifies the time of day further than the other, the result is
+        /// therefore the count at the coarser precision: times of day that agree as far as both go count as the same.
+        /// The specification defines such a duration as an uncertainty interval wherever the components only one
+        /// argument specifies can change the count (CQL Language Semantics, "Determining Difference and Duration").
+        /// This count is one end of that interval, and the result cannot represent the interval. Uncertainty is tracked in
+        /// <see href="https://github.com/FirelyTeam/firely-cql-sdk/issues/132">issue #132</see>.
+        /// </para>
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#duration"/>
+        internal static int? WholeCalendarPeriodsBetween(
+            DateTimeOffset? low,
+            DateTimeOffset? high,
+            string? precision,
+            DateTimePrecision timeOfDayPrecision = DateTimePrecision.Unknown)
         {
             if (low is not {} firstDto || high is not {} secondDto  || precision == null)
                 return null;
@@ -168,6 +201,7 @@ namespace Hl7.Cql.Primitives
                     var yearDiff = secondDto.Year - firstDto.Year;
                     var firstDayInYear = firstDto.DayOfYear;
                     var secondDayInYear = secondDto.DayOfYear;
+                    var timeOfDayOrder = CompareTimeOfDay(secondDto, firstDto, timeOfDayPrecision);
 
                     var firstIsLeapDay = calendar.IsLeapDay(firstDto.Year, firstDto.Month, firstDto.Day);
                     var secondIsLeapDay = calendar.IsLeapDay(secondDto.Year, secondDto.Month, secondDto.Day);
@@ -183,6 +217,12 @@ namespace Hl7.Cql.Primitives
                             if (secondDto.DayOfYear < 60)
                                 return yearDiff - 1;
 
+                            // On 29 February, the anniversary date itself, the time of day decides.
+                            if (secondDto.DayOfYear == 60 && yearDiff > 0 && timeOfDayOrder < 0)
+                                return yearDiff - 1;
+                            if (secondDto.DayOfYear == 60 && yearDiff < 0 && timeOfDayOrder > 0)
+                                return yearDiff + 1;
+
                             // equals or is after
                             return yearDiff;
                         }
@@ -194,7 +234,7 @@ namespace Hl7.Cql.Primitives
                         // age as of 2-28-2025 = 5
                         if (secondDayInYear > 59)
                             return yearDiff;
-                        if (secondDayInYear == 59 && (yearDiff < 0 || secondDto.TimeOfDay >= firstDto.TimeOfDay))
+                        if (secondDayInYear == 59 && (yearDiff < 0 || timeOfDayOrder >= 0))
                             return yearDiff;
 
                         return yearDiff - 1;
@@ -214,6 +254,10 @@ namespace Hl7.Cql.Primitives
                             return yearDiff;
                         }
 
+                        // Back from 28 February of a year without a leap day, the year from 29 February is whole once
+                        // the time of day of 29 February has been reached.
+                        if (firstDayInYear == 59 && yearDiff < 0 && timeOfDayOrder > 0)
+                            return yearDiff + 1;
                         if (firstDayInYear < 60)
                             return yearDiff;
 
@@ -229,30 +273,69 @@ namespace Hl7.Cql.Primitives
                     if (DateTime.IsLeapYear(secondDto.Year) && secondDayInYear > 60)
                         secondDayInYear -= 1;
 
-                    if (yearDiff > 0 && secondDayInYear < firstDayInYear)
+                    // On the anniversary date the time of day decides.
+                    var dayInYearOrder = secondDayInYear.CompareTo(firstDayInYear);
+                    if (dayInYearOrder == 0)
+                        dayInYearOrder = timeOfDayOrder;
+                    if (yearDiff > 0 && dayInYearOrder < 0)
                         yearDiff -= 1;
-                    else if (yearDiff < 0 && firstDayInYear < secondDayInYear)
+                    else if (yearDiff < 0 && dayInYearOrder > 0)
                         yearDiff += 1;
                     return yearDiff;
 
                 case "month":
                     var monthDiff = (12 * (secondDto.Year - firstDto.Year) + secondDto.Month - firstDto.Month);
-                    if (monthDiff > 0 && secondDto.Day < firstDto.Day)
+                    // On the anniversary date the time of day decides.
+                    var dayInMonthOrder = secondDto.Day.CompareTo(firstDto.Day);
+                    if (dayInMonthOrder == 0)
+                        dayInMonthOrder = CompareTimeOfDay(secondDto, firstDto, timeOfDayPrecision);
+                    if (monthDiff > 0 && dayInMonthOrder < 0)
                         monthDiff -= 1;
-                    else if (monthDiff < 0 && firstDto.Day < secondDto.Day)
+                    else if (monthDiff < 0 && dayInMonthOrder > 0)
                         monthDiff += 1;
                     return monthDiff;
 
-                case "week":        return (int)(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
+                // A count outside the range of Integer cannot be represented.
+                case "week":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays / DaysPerWeekDouble);
                 case "day":
-                                    return (int)secondDto.Subtract(firstDto).TotalDays;
-                case "hour":        return (int)secondDto.Subtract(firstDto).TotalHours;
-                case "minute":      return (int)secondDto.Subtract(firstDto).TotalMinutes;
-                case "second":      return (int)secondDto.Subtract(firstDto).TotalSeconds;
-                case "millisecond": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
+                                    return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalDays);
+                case "hour":        return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalHours);
+                case "minute":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMinutes);
+                case "second":      return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalSeconds);
+                case "millisecond": return OverflowGuard.ToInt32(secondDto.Subtract(firstDto).TotalMilliseconds);
                 default:            throw new ArgumentException($"Unit '{precision}' is not supported.");
             }
         }
+
+        /// <summary>
+        /// Compares the times of day of <paramref name="x"/> and <paramref name="y"/>, each in its own timezone offset,
+        /// to <paramref name="precision"/>.
+        /// </summary>
+        /// <remarks>
+        /// At day precision or coarser a value specifies no time of day, so the result is 0. Seconds and milliseconds
+        /// compare as one precision: the "Duration" section of "Date and Time Operators" (CQL Appendix B – Reference)
+        /// states "when calculating duration, just like date and time comparison calculations, seconds and
+        /// milliseconds are considered a single precision with decimal semantics."
+        /// <para>
+        /// Each time of day is read in its own timezone offset, because this comparison decides a count of years or
+        /// months, and the same section says to normalize offsets "only when the comparison precision is hours,
+        /// minutes, seconds, or milliseconds." So <c>years between @2012-03-10T22:05:09+00:00 and
+        /// @2013-03-10T22:05:09+01:00</c> is 1, although <c>@2013-03-10T22:05:09+01:00 = @2013-03-10T22:05:09+00:00</c>,
+        /// which compares at second precision and so normalizes, is false: in UTC that end falls an hour short of the
+        /// start's time of day.
+        /// </para>
+        /// </remarks>
+        /// <returns>Less than zero if the time of day of <paramref name="x"/> is earlier, zero if it is the same,
+        /// and greater than zero if it is later.</returns>
+        private static int CompareTimeOfDay(DateTimeOffset x, DateTimeOffset y, DateTimePrecision precision) =>
+            precision switch
+            {
+                DateTimePrecision.Hour   => x.Hour.CompareTo(y.Hour),
+                DateTimePrecision.Minute => (x.Hour, x.Minute).CompareTo((y.Hour, y.Minute)),
+                DateTimePrecision.Second
+                    or DateTimePrecision.Millisecond => x.TimeOfDay.CompareTo(y.TimeOfDay),
+                _                        => 0,
+            };
 
         internal static readonly IDictionary<DateTimePrecision, CqlQuantity> UnitDateTimeQuantity = new Dictionary<DateTimePrecision, CqlQuantity>
         {
@@ -289,8 +372,8 @@ namespace Hl7.Cql.Primitives
         /// The finest unit the caller supports. A quantity in a finer unit, or in a unit that is not a calendar
         /// duration finer than a year, is returned unchanged so that the caller can reject it.
         /// </param>
-        /// <returns>The value and unit to apply.</returns>
-        internal static (decimal Value, string Unit) ConvertToPrecision(
+        /// <returns>The value and unit to apply, or <see langword="null"/> when the conversion leaves the decimal range.</returns>
+        internal static (decimal Value, string Unit)? ConvertToPrecision(
             decimal value,
             string unit,
             DateTimePrecision precision,
@@ -323,12 +406,12 @@ namespace Hl7.Cql.Primitives
                 _                        => ("seconds", (long)MillisecondsPerSecond),
             };
 
-            // Months are only more precise than years.
-            var converted = unitPrecision == DateTimePrecision.Month
+            // Months are only more precise than years. The division cannot overflow, so only the multiplication is guarded.
+            decimal? converted = unitPrecision == DateTimePrecision.Month
                 ? value / MonthsPerYear
-                : value * unitMilliseconds / precisionMilliseconds;
+                : OverflowGuard.Multiply(value, (decimal)unitMilliseconds) / precisionMilliseconds;
 
-            return (decimal.Truncate(converted), precisionUnit);
+            return converted is { } whole ? (decimal.Truncate(whole), precisionUnit) : null;
         }
     }
 }

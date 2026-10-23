@@ -37,13 +37,15 @@ internal class ResourcePackager(
         BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null,
         string? measureGroupCodeSystem = null,
-        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough)
+        ElmAttachmentFormatting elmAttachmentFormatting = ElmAttachmentFormatting.Passthrough,
+        Func<ElmLibrary, bool>? shouldPackage = null)
     {
         // Materialized once, single-threaded: this is also what forces ElmLibrarySet's internal
         // dependency graph (topological sort, root libraries) to be computed. That computation is
         // lazy and not thread-safe, so it must happen here rather than racing across the
         // Parallel.ForEach below the first time each library's dependencies are queried.
-        var libraries = librarySet.ToList();
+        // shouldPackage then leaves out the libraries that are in the set only to resolve includes.
+        var libraries = librarySet.Where(shouldPackage ?? (_ => true)).ToList();
 
         // Package each library in parallel after materializing the dependency graph.
         var results = new (FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)?[libraries.Count];
@@ -122,15 +124,4 @@ internal class ResourcePackager(
     /// </remarks>
     internal static string NormalizeNewLines(string text) =>
         text.Contains('\r') ? text.Replace("\r\n", "\n").Replace("\r", "\n") : text;
-
-    internal static string BuildResourceUrl(
-        string resourceCanonicalRootUrl,
-        string resourceType,
-        string name,
-        string? version = null)
-    {
-        string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
-        string includeIdMaybeVersion = $"{resourceCanonicalRootUrl}{resourceType}/{name}{includeVersionString}";
-        return includeIdMaybeVersion;
-    }
 }

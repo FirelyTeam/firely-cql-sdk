@@ -46,14 +46,6 @@ namespace Hl7.Cql.Elm
         }
 
         /// <summary>
-        /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
-        /// </summary>
-        internal static bool IsVisible(this IDefinitionElement symbol, AccessModifier access)
-        {
-            return access >= symbol.Access;
-        }
-
-        /// <summary>
         /// Retrieves all error nodes in the ELM tree rooted in <paramref name="root"/>.
         /// </summary>
         public static CqlToElmError[] GetErrors(this Element root)

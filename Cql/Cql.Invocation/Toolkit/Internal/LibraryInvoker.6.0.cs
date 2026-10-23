@@ -9,6 +9,8 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
@@ -116,8 +118,23 @@ file sealed class DefinitionInvoker_6_0(
         return (true, definitionInvoker);
     }
 
-    public override object? Invoke(CqlContext cqlContext, params object?[] args) =>
-        _compiledInvoker(cqlContext, args);
+    // Records the invoked definition on any exception that passes through, without catching it. For a definition, the
+    // cache has recorded the same frame already; for a function the host invoked directly, this is its only frame.
+    public override object? Invoke(CqlContext cqlContext, params object?[] args)
+    {
+        try
+        {
+            return _compiledInvoker(cqlContext, args);
+        }
+        catch (Exception exception) when (CqlEvaluationFrames.Record(
+                                              exception,
+                                              LibraryIdentifier.Identifier,
+                                              LibraryIdentifier.Version?.ToString(),
+                                              DefinitionName))
+        {
+            throw; // never reached: Record always returns false
+        }
+    }
 
     /// <summary>
     /// Creates a delegate that directly calls the definition method on the library instance,
@@ -135,18 +152,8 @@ file sealed class DefinitionInvoker_6_0(
             && parameters.Length is >= 1 and <= 5
             && parameters[0].ParameterType == typeof(CqlContext))
         {
-            var wrapperName = parameters.Length switch
-            {
-                1 => nameof(WrapArity0),
-                2 => nameof(WrapArity1),
-                3 => nameof(WrapArity2),
-                4 => nameof(WrapArity3),
-                _ => nameof(WrapArity4),
-            };
             Type[] typeArguments = [.. parameters.Skip(1).Select(p => p.ParameterType), methodInfo.ReturnType];
-            var wrapper = typeof(DefinitionInvoker_6_0)
-                          .GetMethod(wrapperName, BindingFlags.NonPublic | BindingFlags.Static)!
-                          .MakeGenericMethod(typeArguments);
+            var wrapper = WrapArityDefinitions[parameters.Length - 1].MakeGenericMethod(typeArguments);
             return (Func<CqlContext, object?[], object?>)wrapper.Invoke(
                 null,
                 BindingFlags.DoNotWrapExceptions,
@@ -157,6 +164,19 @@ file sealed class DefinitionInvoker_6_0(
 
         return CompileInvoker(library, methodInfo);
     }
+
+    /// <summary>
+    /// The <c>WrapArityN</c> generic method definitions, indexed by the number of parameters the definition
+    /// takes after its <see cref="CqlContext"/>.
+    /// </summary>
+    private static readonly MethodInfo[] WrapArityDefinitions =
+    [
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapArity0<object>(default!, default!)),
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapArity1<object, object>(default!, default!)),
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapArity2<object, object, object>(default!, default!)),
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapArity3<object, object, object, object>(default!, default!)),
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapArity4<object, object, object, object, object>(default!, default!)),
+    ];
 
     private static Func<CqlContext, object?[], object?> WrapArity0<TResult>(ILibrary library, MethodInfo methodInfo)
     {

@@ -24,7 +24,6 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public static bool operator !=(TypeSpecifier? a, TypeSpecifier? b) => !(a == b);
 
-        internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => EmptyIfNull(a).SequenceEqual(EmptyIfNull(b));
         internal static bool SetEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b)
         {
             // tried using HashSet<>.SetEquals and it does not work even though all hashcodes are equal

@@ -175,18 +175,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
         public override Expression VisitRetrieve([Antlr4.Runtime.Misc.NotNull] cqlParser.RetrieveContext context)
         {
-            var contextName = context.contextIdentifier()?.GetText();
+            var contextExpression = context.contextIdentifier() is { } contextIdentifier
+                ? Visit(contextIdentifier.qualifiedIdentifierExpression())
+                : null;
             var codePath = context.codePath()?.GetText();
             var codeComparator = context.codeComparator()?.GetText();
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
             var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-
-            var contextExpressionRef = contextName switch
-            {
-                { } => new ExpressionRef { name = contextName },
-                _ => null
-            };
 
             if (terminology is not null)
             {
@@ -213,7 +209,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 dataType = type.name,
                 templateId = ModelProvider.GetDefaultProfileUriForType(type),
-                context = contextExpressionRef,
+                context = contextExpression,
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
@@ -231,18 +227,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return Visit(qie);
         }
 
-
-        protected Expression ErrorMessage(string message, string locator)
-        {
-            return new Message()
-            {
-                message = ElmFactory.Literal(message),
-                source = new Null().WithResultType(SystemTypes.AnyType)
-            }
-            .AddError(message)
-            .WithLocator(locator)
-            .WithResultType(SystemTypes.AnyType);
-        }
 
         private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
             Antlr4.Runtime.ParserRuleContext context,
@@ -308,15 +292,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     return null;
                 else return ElmFactory.Literal(name);
             }
-        }
-
-        private enum ListElementPromotion
-        {
-            None,
-            Integer,
-            Long,
-            Decimal,
-            Quantity
         }
     }
 }

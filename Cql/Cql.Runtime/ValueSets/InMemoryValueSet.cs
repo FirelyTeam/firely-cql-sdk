@@ -7,7 +7,9 @@
  */
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -25,6 +27,8 @@ namespace Hl7.Cql.ValueSets
         private readonly Lazy<IReadOnlySet<CqlCode>> _lazyContents;
 
         private readonly Lazy<IReadOnlySet<CqlCode>> _lazyContentsByCode;
+
+        private readonly Lazy<bool> _lazyHoldsCodesFromSeveralSystems;
 
         private IReadOnlySet<CqlCode> Contents => _lazyContents.Value;
 
@@ -53,6 +57,7 @@ namespace Hl7.Cql.ValueSets
                 // Since the InMemoryValueSet is immutable, we can simply re-use its contents.
                 _lazyContents = imvs._lazyContents;
                 _lazyContentsByCode = imvs._lazyContentsByCode;
+                _lazyHoldsCodesFromSeveralSystems = imvs._lazyHoldsCodesFromSeveralSystems;
             }
             else
             {
@@ -63,7 +68,28 @@ namespace Hl7.Cql.ValueSets
                 _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(() => new HashSet<CqlCode>(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
 
                 IEnumerable<CqlCode> makeContentsWithNullSystem() => contents.Select(c => new CqlCode(c.code, NullCodeSystem));
+
+                _lazyHoldsCodesFromSeveralSystems = new Lazy<bool>(() => HoldsCodesFromSeveralSystems(Contents));
             }
+        }
+
+        // Code systems are told apart ignoring case, as the default comparer compares them. A code without a system
+        // names no system, so it does not add one, and an entry without a code is no code at all.
+        private static bool HoldsCodesFromSeveralSystems(IEnumerable<CqlCode> codes)
+        {
+            string? firstSystem = null;
+            foreach (var code in codes)
+            {
+                if (code.code is null || code.system is null)
+                    continue;
+
+                if (firstSystem is null)
+                    firstSystem = code.system;
+                else if (!StringComparer.OrdinalIgnoreCase.Equals(firstSystem, code.system))
+                    return true;
+            }
+
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)Contents).GetEnumerator();
@@ -71,7 +97,34 @@ namespace Hl7.Cql.ValueSets
         IEnumerator<CqlCode> IEnumerable<CqlCode>.GetEnumerator() => Contents.GetEnumerator();
 
         /// <inheritdoc/>
-        public bool IsCodeInValueSet(string code) => ContentsByCode.Contains(new CqlCode(code, NullCodeSystem));
+        /// <exception cref="CqlException{TError}">
+        /// This value set holds codes from more than one code system; the error is a
+        /// <see cref="CqlAmbiguousStringInValueSetError"/>. Tested on its own, this value set does not know its
+        /// canonical URI, so the error's <see cref="CqlAmbiguousStringInValueSetError.ValueSetUri"/> is
+        /// <see langword="null"/>; a dictionary that holds it names the value set.
+        /// </exception>
+        public bool IsCodeInValueSet(string code) => IsStringInValueSet(valueSetUri: null, code);
+
+        /// <summary>
+        /// The membership test of a code without a system, as <see cref="IsCodeInValueSet(string)"/> makes it, for an
+        /// <see cref="IValueSetDictionary"/> that holds this value set as <paramref name="valueSetUri"/> and names it in
+        /// the error.
+        /// </summary>
+        /// <remarks>
+        /// A <see langword="null"/> code is not in the value set, whatever code systems the value set holds.
+        /// </remarks>
+        internal bool IsStringInValueSet(string? valueSetUri, string? code)
+        {
+            if (code is null)
+                return false;
+
+            // CQL 9.B, In (Valueset): the code cannot say which code system it is from, so a value set of several
+            // systems makes the test ambiguous, which is a run-time error.
+            if (_lazyHoldsCodesFromSeveralSystems.Value)
+                throw new CqlAmbiguousStringInValueSetError(valueSetUri, code).ToException();
+
+            return ContentsByCode.Contains(new CqlCode(code, NullCodeSystem));
+        }
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(string code, string? system) => ContentsByCode.Contains(new CqlCode(code, system));

@@ -13,6 +13,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Fhir.Model;
 using M = Hl7.Fhir.Model;
 
@@ -850,6 +851,7 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
             converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
             converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
+            converter.AddConversion<string, CqlRatio?>(s => ConvertStringToRatio(s));
             converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
             converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
             converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
@@ -881,6 +883,10 @@ namespace Hl7.Cql.Fhir
         private static CqlQuantity? ConvertStringToQuantity(string? s) =>
             s == null ? null :
             CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
+
+        private static CqlRatio? ConvertStringToRatio(string? s) =>
+            s == null ? null :
+            CqlRatio.TryParse(s, out CqlRatio? value) == true ? value : null;
 
         private static CqlDate? ConvertStringToDate(string? s) =>
             s == null ? null :
@@ -920,7 +926,8 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
-                converter.AddConversion(codeOfEnumType, nullableEnumType, code => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+                converter.AddConversion(codeOfEnumType, nullableEnumType,
+                    CodeEnumValueDefinition.MakeGenericMethod(enumType).CreateDelegate<Func<object, object>>());
                 converter.AddConversion(codeOfEnumType, typeof(string), code =>
                 {
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
@@ -934,6 +941,16 @@ namespace Hl7.Cql.Fhir
             }
             return converter;
         }
+
+        private static readonly MethodInfo CodeEnumValueDefinition =
+            ReflectionUtility.GenericMethodDefinitionOf(() => CodeEnumValue<M.AdministrativeGender>(default!));
+
+        /// <summary>
+        /// Reads the enum value of a <see cref="M.Code{T}"/>, boxed as <typeparamref name="TEnum"/>, or <see langword="null"/>
+        /// when the code has no value.
+        /// </summary>
+        private static object CodeEnumValue<TEnum>(object code) where TEnum : struct, Enum =>
+            ((M.Code<TEnum>)code).Value!;
 
         /// <summary>
         /// Adds conversions for types which the ELM model defines a type relationship that does not exist in the POCOs

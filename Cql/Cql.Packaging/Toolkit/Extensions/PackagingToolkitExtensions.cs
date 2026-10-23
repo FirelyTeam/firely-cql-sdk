@@ -24,6 +24,10 @@ public static partial class PackagingToolkitExtensions
     /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> containing CQL libraries.</param>
     /// <param name="elmToolkit">The <see cref="ElmToolkit"/> containing ELM compilations.</param>
     /// <returns>The <see cref="PackagingToolkit"/> with added inputs.</returns>
+    /// <remarks>
+    /// An ELM library without a matching CQL library is not packaged. It resolves the includes of the packaged
+    /// libraries, and its Retrieves count towards their data requirements.
+    /// </remarks>
     public static PackagingToolkit AddPackagingInputs(
         this PackagingToolkit packagingToolkit,
         CqlToolkit cqlToolkit,
@@ -31,7 +35,7 @@ public static partial class PackagingToolkitExtensions
     {
         elmToolkit.CompileToAssemblies();
         var cqlLibraries = cqlToolkit.ArtifactsById.Values.Select(o => o.SourceCqlLibrary);
-        var inputArtifacts = elmToolkit.GetElmToAssemblyResults();
+        var inputArtifacts = elmToolkit.GetElmToAssemblyResults().ToList();
         var inputs =
             cqlLibraries
                 .Join(
@@ -40,6 +44,15 @@ public static partial class PackagingToolkitExtensions
                     r => r.libraryIdentifier,
                     (cqlLibraryString, r) => new PackagingToolkitInputArtifacts(cqlLibraryString, r.elmLibrary, r.cSharp, r.assemblyBinary, r.debugSymbolsBinary));
 
-        return packagingToolkit.AddPackagingInputs(inputs);
+        // An ELM library without CQL cannot be packaged, but the libraries that include it still can.
+        var cqlLibraryIdentifiers = cqlLibraries.Select(cqlLibraryString => cqlLibraryString.LibraryIdentifier).ToHashSet();
+        var referenceLibraries =
+            elmToolkit.ArtifactsById.Values
+                .Where(artifacts => !cqlLibraryIdentifiers.Contains(artifacts.LibraryIdentifier))
+                .Select(artifacts => artifacts.InputElmLibrary);
+
+        return packagingToolkit
+            .AddReferenceLibraries(referenceLibraries)
+            .AddPackagingInputs(inputs);
     }
 }

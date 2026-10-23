@@ -1,1 +1,79 @@
 ﻿#nullable enable
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.CqlExpandFractionalPerError() -> void
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.Equals(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError other) -> bool
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PerUnit.get -> string?
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PerValue.get -> decimal
+Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.PointType.get -> string!
+override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.operator !=(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError left, Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.operator ==(Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError left, Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlExpandFractionalPerError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.CqlInvalidDateTimeComponentsError() -> void
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Equals(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError other) -> bool
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Day.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Hour.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Millisecond.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Minute.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Month.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Second.get -> int?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.TimezoneOffset.get -> decimal?
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Type.get -> string!
+Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Year.get -> int?
+override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator !=(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.operator ==(Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError left, Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlInvalidDateTimeComponentsError.ToString() -> string
+Hl7.Cql.Operators.ICqlOperators.ConvertRatioToQuantity(Hl7.Cql.Primitives.CqlRatio? r) -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Operators.ICqlOperators.ConvertsToRatio(object? o) -> bool?
+Hl7.Cql.Operators.ICqlOperators.ConvertStringToRatio(string? s) -> Hl7.Cql.Primitives.CqlRatio?
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.CqlSingletonFromMultipleElementsError() -> void
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementCount.get -> int
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ElementType.get -> System.Type!
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError other) -> bool
+Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetMessage() -> string!
+override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator !=(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.operator ==(Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError left, Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlSingletonFromMultipleElementsError.ToString() -> string
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.CqlPointFromNonUnitIntervalError() -> void
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Equals(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError other) -> bool
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.GetMessage() -> string!
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.High.get -> object?
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.HighClosed.get -> bool
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Low.get -> object?
+Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.LowClosed.get -> bool
+override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.GetHashCode() -> int
+static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator !=(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError right) -> bool
+static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator ==(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError right) -> bool
+~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Equals(object obj) -> bool
+~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.ToString() -> string
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.CqlUnresolvedValueSetError() -> void
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.Equals(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError other) -> bool
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.GetMessage() -> string!
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.ValueSetUri.get -> string!
+override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.GetHashCode() -> int
+static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator !=(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError right) -> bool
+static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator ==(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError right) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.Equals(object obj) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.ToString() -> string
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Code.get -> string!
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.CqlAmbiguousStringInValueSetError() -> void
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Equals(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError other) -> bool
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.GetMessage() -> string!
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.ValueSetUri.get -> string?
+override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.GetHashCode() -> int
+static Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.operator !=(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError left, Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError right) -> bool
+static Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.operator ==(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError left, Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError right) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Equals(object obj) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.ToString() -> string
