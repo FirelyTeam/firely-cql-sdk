@@ -27,9 +27,8 @@ public class CqlComparersTests
 
     private sealed class BaseThingComparer : CqlComparer<BaseThing>
     {
-        // CqlComparers (the top-level dispatcher under test) is configured with
-        // equalsImplementation: Compare, so its Equals always delegates to CompareValues on the
-        // resolved comparer, never EqualsValues -- override CompareValues here to match.
+        // CqlComparers (the top-level dispatcher under test) decides equality from Compare on the
+        // resolved comparer, never its EqualsValues -- override CompareValues here to match.
         protected override int? CompareValues(BaseThing x, BaseThing y, string? precision) =>
             x.Value.CompareTo(y.Value);
 

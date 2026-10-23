@@ -37,7 +37,7 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var compare = elementComparer.Compare(lv, rv, null);
+                    var compare = elementComparer.CompareMembers(lv, rv, null);
                     if (compare != 0)
                         return compare;
                 }

@@ -24,7 +24,7 @@ internal enum CqlComparerEqualsImplementation
 internal abstract class CqlComparer<T>(
     CqlComparerEqualsImplementation equalsImplementation = CqlComparerEqualsImplementation.Equals,
     CqlComparerEquivalentImplementation equivalentImplementation = CqlComparerEquivalentImplementation.Equivalent)
-    : ICqlComparer<T>, ICqlComparer
+    : ICqlComparer<T>, ICqlComparer, ITypedCqlComparer
 {
     public CqlComparerEqualsImplementation EqualsImplementation { get; } = equalsImplementation;
 
@@ -205,6 +205,8 @@ internal abstract class CqlComparer<T>(
         string? precision) =>
         throw new NotImplementedException();
 
+    // A value that is not a T has no order against the values this comparer compares, so a
+    // comparison involving one gives null whichever side it is on.
     int? ICqlComparer.Compare(
         object? x,
         object? y,
@@ -217,7 +219,7 @@ internal abstract class CqlComparer<T>(
                 ? -1
                 : x is T tx && y is T ty
                     ? Compare(tx, ty, precision)
-                    : 1;
+                    : null;
 
     int? ICqlComparer.CompareValues(
         object x,
@@ -225,7 +227,25 @@ internal abstract class CqlComparer<T>(
         string? precision) =>
         x is T tx && y is T ty
             ? CompareValuesShared(tx, ty, precision)
-            : 1;
+            : null;
+
+    /// <summary>
+    /// Whether this comparer compares <paramref name="x"/> with <paramref name="y"/>: whether both
+    /// are a <typeparamref name="T"/>. A comparer of <see cref="object"/> values that compares only
+    /// some pairs of them narrows this to those pairs.
+    /// </summary>
+    /// <remarks>
+    /// A pair this comparer does not compare has no order, and its two values are not equal.
+    /// </remarks>
+    protected virtual bool CanCompare(
+        object x,
+        object y) =>
+        x is T && y is T;
+
+    bool ITypedCqlComparer.CanCompare(
+        object x,
+        object y) =>
+        CanCompare(x, y);
 
     private int? CompareValuesShared(
         T x,
