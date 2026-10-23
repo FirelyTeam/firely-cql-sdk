@@ -7,7 +7,9 @@
  */
 
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -59,16 +61,33 @@ namespace Hl7.Cql.ValueSets
         }
 
         /// <inheritdoc/>
+        /// <exception cref="CqlException{TError}">
+        /// The value set was not added to this dictionary; the error is a <see cref="CqlUnresolvedValueSetError"/>.
+        /// </exception>
         public bool IsCodeInValueSet(string valueSetUri, string code) =>
-             _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
+            GetAddedValueSet(valueSetUri).IsCodeInValueSet(code);
 
         /// <inheritdoc/>
+        /// <exception cref="CqlException{TError}">
+        /// The value set was not added to this dictionary; the error is a <see cref="CqlUnresolvedValueSetError"/>.
+        /// </exception>
         public bool IsCodeInValueSet(string valueSetUri, string code, string? systemUriOrOid) =>
-            _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code, systemUriOrOid);
+            GetAddedValueSet(valueSetUri).IsCodeInValueSet(code, systemUriOrOid);
 
         /// <inheritdoc/>
+        /// <exception cref="CqlException{TError}">
+        /// The value set was not added to this dictionary; the error is a <see cref="CqlUnresolvedValueSetError"/>.
+        /// </exception>
         public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
-            _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
+            GetAddedValueSet(valueSetUri).IsCodeInValueSet(code);
+
+        // A value set this dictionary does not hold cannot answer a membership test: 'false' would claim the code
+        // is not in it, so this signals the run-time error the specification requires for a value set reference
+        // that cannot be resolved.
+        private IValueSetFacade GetAddedValueSet(string valueSetUri) =>
+            _codesInValueSet.TryGetValue(valueSetUri, out var vs)
+                ? vs
+                : throw new CqlUnresolvedValueSetError(valueSetUri).ToException();
 
         /// <summary>
         /// Tries to get the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.
@@ -76,6 +95,10 @@ namespace Hl7.Cql.ValueSets
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="codes">The <see langword="out"/> parameter for the value set's codes, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the given value set is defined; otherwise, <see langword="false"/>.</returns>
+        /// <remarks>
+        /// A value set that was not added gives <see langword="false"/> rather than an error, unlike the
+        /// <c>IsCodeInValueSet</c> overloads, so expanding it to its codes yields no codes.
+        /// </remarks>
         public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes)
         {
             if (_codesInValueSet.TryGetValue(valueSetUri, out var codeSet))

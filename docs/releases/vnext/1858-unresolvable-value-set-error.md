@@ -18,7 +18,8 @@
 
 ## New Public API
 
-- **Runtime (`Hl7.Cql.Fhir`)** — `Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError`, the `ICqlEvaluationError` carried
-  by the exception above, with the canonical of the value set that could not be resolved in `ValueSetUri`. (#1521)
+- **Runtime** — `Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError`, in `Hl7.Cql.Runtime`, the
+  `ICqlEvaluationError` carried by the exception above, with the canonical of the value set that could not be resolved
+  in `ValueSetUri`. (#1521)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.

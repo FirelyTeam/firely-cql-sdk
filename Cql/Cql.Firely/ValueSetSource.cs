@@ -9,9 +9,9 @@
 using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Exceptions;
-using Hl7.Cql.Fhir.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
+using Hl7.Cql.ValueSets.Errors;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Rest;
 using Hl7.Fhir.Specification.Source;

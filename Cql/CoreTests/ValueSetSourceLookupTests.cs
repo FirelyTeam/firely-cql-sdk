@@ -10,9 +10,9 @@
 
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Errors;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets.Errors;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Specification.Source;
 using Hl7.Fhir.Specification.Terminology;
