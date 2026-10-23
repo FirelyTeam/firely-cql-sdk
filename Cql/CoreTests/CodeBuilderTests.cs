@@ -1412,7 +1412,23 @@ namespace CoreTests
             // [Condition] R return R.nonexistent
             var elmLibrary = QueryLibrary("UnboundOnType", RetrieveOf("Condition"), new Hl7.Cql.Elm.Property { scope = "R", path = "nonexistent" });
 
-            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+            var message = AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element.");
+            Assert.IsFalse(message.Contains("explicit 'as'"), "A concrete type has no subtype that has the element to cast to:\n" + message);
+        }
+
+        [TestMethod]
+        public void Property_ThatAnAbstractSourceTypeDoesNotHave_FailsTheBuildSuggestingACast()
+        {
+            // ([Condition] as List<FHIR.Resource>) R return R.code: a Resource may be a Condition, which has the element.
+            var resources = AsType(
+                RetrieveOf("Condition"),
+                new Hl7.Cql.Elm.ListTypeSpecifier { elementType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Resource") });
+            var elmLibrary = QueryLibrary("UnboundOnAbstractType", resources, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
+
+            AssertUnboundProperty(
+                elmLibrary,
+                "code",
+                "Resource has no such element. Cast its source with an explicit 'as' to the type that has the element.");
         }
 
         [TestMethod]
@@ -1422,7 +1438,7 @@ namespace CoreTests
             var values = ListOf(Hl7.Cql.Elm.SystemTypes.AnyType, AsType(IntegerLiteral("5"), Hl7.Cql.Elm.SystemTypes.AnyType));
             var elmLibrary = QueryLibrary("UnboundOnAny", values, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
 
-            AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known");
+            AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known. Cast its source with an explicit 'as' to the type that has the element.");
         }
 
         [TestMethod]
@@ -1459,18 +1475,21 @@ namespace CoreTests
                 },
             });
 
-            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+            var message = AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element.");
+            Assert.IsFalse(message.Contains("explicit 'as'"), "A concrete type has no subtype that has the element to cast to:\n" + message);
         }
 
         /// <summary>
         /// Asserts that compiling <paramref name="elmLibrary"/> fails because <paramref name="property"/>
-        /// cannot be bound at compile time, for a reason that starts with <paramref name="reason"/>.
+        /// cannot be bound at compile time, for a reason that starts with <paramref name="reason"/>, and
+        /// returns the message of the build error.
         /// </summary>
-        private static void AssertUnboundProperty(Library elmLibrary, string property, string reason)
+        private static string AssertUnboundProperty(Library elmLibrary, string property, string reason)
         {
             var exception = Assert.ThrowsException<Hl7.Cql.Exceptions.CqlException<Hl7.Cql.Compiler.ExpressionBuildingError>>(
                 () => CompileLibrary(elmLibrary, "Values"));
             StringAssert.Contains(exception.Message, $"Property {property} cannot be bound at compile time: {reason}");
+            return exception.Message;
         }
 
         /// <summary>
