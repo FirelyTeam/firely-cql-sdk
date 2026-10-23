@@ -22,7 +22,7 @@ Hl7.Cql.Abstractions.ILibrary.Version.get -> string?
 *REMOVED*Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes, string? display) -> void
 *REMOVED*Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes, string? display) -> void
 Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes, string? display = null) -> void
-Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes, string? display = null) -> void
+Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IReadOnlyList<Hl7.Cql.Primitives.CqlCode!>? codes = null, string? display = null) -> void
 Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError
 Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.CqlUnsupportedTemporalUnitError() -> void
 Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError.Equals(Hl7.Cql.Primitives.Errors.CqlUnsupportedTemporalUnitError other) -> bool

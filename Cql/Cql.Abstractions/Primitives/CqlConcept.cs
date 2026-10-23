@@ -18,7 +18,7 @@ namespace Hl7.Cql.Primitives
     /// <param name="display">The display name of the concept, providing a human-readable description.</param>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#concept-1"/>
     [CqlPrimitiveType(CqlPrimitiveType.Concept)]
-    public record CqlConcept(IReadOnlyList<CqlCode>? codes, string? display = null)
+    public record CqlConcept(IReadOnlyList<CqlCode>? codes = null, string? display = null)
     {
         /// <summary>
         /// Represents a CQL Concept, which is a collection of codes with an optional display name.
