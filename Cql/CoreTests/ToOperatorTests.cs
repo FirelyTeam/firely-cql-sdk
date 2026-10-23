@@ -77,7 +77,7 @@ public class ToOperatorTests
     /// so it is given even when the instant the date time names, once its offset is applied, falls outside
     /// <c>0001-01-01</c> to <c>9999-12-31</c>.
     /// </summary>
-    private static IEnumerable<object?[]> ToDateCases =>
+    internal static IEnumerable<object?[]> ToDateCases =>
     [
         ["Year precision '2014'", "2014", "2014"],
         ["Month precision '2014-01'", "2014-01", "2014-01"],
@@ -188,7 +188,7 @@ public class ToOperatorTests
     /// indicator, followed by any number of digits (including none), followed by at least one digit, followed
     /// optionally by a decimal point, at least one digit, and any number of additional digits (including none)."
     /// </summary>
-    private static IEnumerable<object?[]> ToDecimalCases =>
+    internal static IEnumerable<object?[]> ToDecimalCases =>
     [
         ["'-0.1'", "-0.1", -0.1m],
         ["'+25.5'", "+25.5", 25.5m],
@@ -225,7 +225,7 @@ public class ToOperatorTests
     /// followed by any number of digits (including none), followed by at least one digit. [...] the integer value
     /// returned by this operator must be a valid value in the range representable for Integer values in CQL."
     /// </summary>
-    private static IEnumerable<object?[]> ToIntegerOfAStringCases =>
+    internal static IEnumerable<object?[]> ToIntegerOfAStringCases =>
     [
         ["'-25'", "-25", -25],
         ["'+25'", "+25", 25],
@@ -279,7 +279,7 @@ public class ToOperatorTests
     /// "The operator accepts strings using the following format: (+|-)?#0 [...] Note that the long value returned by
     /// this operator must be a valid value in the range representable for Long values in CQL."
     /// </summary>
-    private static IEnumerable<object?[]> ToLongCases =>
+    internal static IEnumerable<object?[]> ToLongCases =>
     [
         ["'-1'", "-1", -1L],
         ["'+1'", "+1", 1L],

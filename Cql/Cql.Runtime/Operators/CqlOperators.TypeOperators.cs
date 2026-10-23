@@ -147,13 +147,19 @@ namespace Hl7.Cql.Operators
         // CQL 1.5.3, Appendix B - CQL Reference, Type Operators: ToInteger and ToLong accept "(+|-)?#0", ToDecimal
         // "(+|-)?#0(.0#)?"; "If the input string is not formatted correctly, or cannot be interpreted as a valid [...]
         // value, the result is null."
-        public int? ConvertStringToInteger(string? s) =>
+        public int? ConvertStringToInteger(string? s) => ConvertStringToIntegerImpl(s);
+
+        internal static int? ConvertStringToIntegerImpl(string? s) =>
             s is not null && CqlNumberFormat.TryParseInteger(s, out var value) ? value : null;
 
-        public long? ConvertStringToLong(string? s) =>
+        public long? ConvertStringToLong(string? s) => ConvertStringToLongImpl(s);
+
+        internal static long? ConvertStringToLongImpl(string? s) =>
             s is not null && CqlNumberFormat.TryParseLong(s, out var value) ? value : null;
 
-        public decimal? ConvertStringToDecimal(string? s) =>
+        public decimal? ConvertStringToDecimal(string? s) => ConvertStringToDecimalImpl(s);
+
+        internal static decimal? ConvertStringToDecimalImpl(string? s) =>
             s is not null && CqlNumberFormat.TryParseDecimal(s, out var value) ? value : null;
 
         public CqlQuantity? ConvertStringToQuantity(string? s)
@@ -176,7 +182,9 @@ namespace Hl7.Cql.Operators
         // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToDate: "Note that the operator can take datetime
         // formatted strings and will ignore the time portions." Each component of the time portion must still be in
         // range, but the instant it names need not be: the result is the date as written, whatever the offset.
-        public CqlDate? ConvertStringToDate(string? s)
+        public CqlDate? ConvertStringToDate(string? s) => ConvertStringToDateImpl(s);
+
+        internal static CqlDate? ConvertStringToDateImpl(string? s)
         {
             if (s == null)
                 return null;

@@ -845,7 +845,9 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             
             // TODO: this is a performance problem
-            // CQL string conversions - return null on invalid input
+            // The CQL To* conversions of a string, which give null for a string outside the format the matching To*
+            // operator accepts. Only a .NET string reaches them: a FHIR primitive converts through its own conversion
+            // in ConvertFhirToCqlPrimitives, from the value it holds rather than from its text.
             converter.AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
             converter.AddConversion<string, int?>(s => ConvertStringToInteger(s));
             converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
@@ -869,16 +871,13 @@ namespace Hl7.Cql.Fhir
             CqlOperators.ConvertStringToBooleanImpl(s);
 
         private static int? ConvertStringToInteger(string? s) =>
-            s == null ? null :
-            int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value) ? value : null;
+            CqlOperators.ConvertStringToIntegerImpl(s);
 
         private static long? ConvertStringToLong(string? s) =>
-            s == null ? null :
-            long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value) ? value : null;
+            CqlOperators.ConvertStringToLongImpl(s);
 
         private static decimal? ConvertStringToDecimal(string? s) =>
-            s == null ? null :
-            decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value) ? value : null;
+            CqlOperators.ConvertStringToDecimalImpl(s);
 
         private static CqlQuantity? ConvertStringToQuantity(string? s) =>
             s == null ? null :
@@ -889,8 +888,7 @@ namespace Hl7.Cql.Fhir
             CqlRatio.TryParse(s, out CqlRatio? value) == true ? value : null;
 
         private static CqlDate? ConvertStringToDate(string? s) =>
-            s == null ? null :
-            CqlDate.TryParse(s, out CqlDate? value) ? value : null;
+            CqlOperators.ConvertStringToDateImpl(s);
 
         private static CqlDateTime? ConvertStringToDateTime(string? s) =>
             s == null ? null :
