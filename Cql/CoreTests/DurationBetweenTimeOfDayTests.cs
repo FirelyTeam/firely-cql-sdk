@@ -22,11 +22,14 @@ namespace CoreTests;
 /// defines a month the same way, and the negative examples (Scenarios 5 to 8 for years, 3 and 4 for months) mirror
 /// the rule.
 /// <para>
-/// The time of day counts only as far as both values specify it. A Date has none, and neither has the DateTime that
-/// <c>ToDateTime</c> makes of one: "the result will be a DateTime with the time components unspecified" (Appendix B,
-/// "ToDateTime"). Seconds and milliseconds compare as one precision: "when calculating duration, just like date and
-/// time comparison calculations, seconds and milliseconds are considered a single precision with decimal semantics"
-/// (Appendix B, "Duration").
+/// When one value specifies the time of day further than the other, the components only one of them specifies may
+/// change the count, and then "the between operator does not return a strict integer, it returns an uncertainty"
+/// (Language Semantics, "Determining Difference and Duration"). A Date specifies no time of day, and neither does the
+/// DateTime that <c>ToDateTime</c> makes of one: "the result will be a DateTime with the time components unspecified"
+/// (Appendix B, "ToDateTime"). Seconds and milliseconds are one precision: "when calculating duration, just like date
+/// and time comparison calculations, seconds and milliseconds are considered a single precision with decimal
+/// semantics" (Appendix B, "Duration"). The SDK returns a single count for such an uncertainty; the tests that pin that
+/// count are kept apart from those that assert the specification's answer, at the end of this class.
 /// </para>
 /// </summary>
 [TestClass]
@@ -136,28 +139,24 @@ public class DurationBetweenTimeOfDayTests
     }
 
     /// <summary>
-    /// A value that does not specify a time of day leaves the date to decide, so a DateTime made from a Date counts
-    /// the whole anniversary date, and Dates are unaffected.
+    /// Times of day of different precisions that already differ at the coarser of the two decide the count: every value
+    /// the components only one of them specifies can take gives the same count.
     /// </summary>
     [TestMethod]
-    [DataRow("2012-03-10T22:05:09", "2013-03-10", 1, DisplayName = "an end without a time of day on the anniversary")]
-    [DataRow("2012-03-10", "2013-03-10T00:00:00", 1, DisplayName = "a start without a time of day, at midnight on the anniversary")]
-    [DataRow("2013-03-10", "2012-03-10T22:05:09", -1, DisplayName = "back from a value without a time of day")]
-    [DataRow("2013-03-10T19:10:03", "2012-03-10", -1, DisplayName = "back to a value without a time of day")]
-    [DataRow("2012-02-29T12:34:56", "2014-02-28", 2, DisplayName = "from a leap day to an end without a time of day on 28 February")]
-    public void YearsBetween_WithoutATimeOfDayOnOneSide_TheDateDecides(string low, string high, int expected) =>
+    [DataRow("2012-03-10T22", "2013-03-10T21:59:59", 0, DisplayName = "the hour before the start's hour")]
+    [DataRow("2012-03-10T22", "2013-03-10T23:00:00", 1, DisplayName = "the hour after the start's hour")]
+    [DataRow("2012-03-10T22:05", "2013-03-10T22:04:59.999", 0, DisplayName = "the minute before the start's minute")]
+    public void YearsBetween_WithTimesOfDayOfDifferentPrecisions_ThatDifferAtTheCoarserOne_TheTimeOfDayDecides(string low, string high, int expected) =>
         Assert.AreEqual(expected, Years(low, high));
 
+    /// <summary>
+    /// A value to the second and one to the millisecond specify the time of day equally far, because seconds and
+    /// milliseconds are one precision with decimal semantics (Appendix B, "Duration"), so the count is determinate.
+    /// </summary>
     [TestMethod]
-    [DataRow("2012-03-10T22", "2013-03-10T22:59:59", 1, DisplayName = "the start's hour")]
-    [DataRow("2012-03-10T22", "2013-03-10T21:59:59", 0, DisplayName = "the hour before the start's hour")]
-    [DataRow("2012-03-10T22:30", "2013-03-10T22", 1, DisplayName = "an end to the hour in the start's hour")]
-    [DataRow("2012-03-10T22:05", "2013-03-10T22:05:00", 1, DisplayName = "the start's minute")]
-    [DataRow("2012-03-10T22:05", "2013-03-10T22:04:59.999", 0, DisplayName = "the minute before the start's minute")]
-    [DataRow("2012-03-10T22:05:30", "2013-03-10T22:05", 1, DisplayName = "an end to the minute in the start's minute")]
     [DataRow("2012-03-10T22:05:09.500", "2013-03-10T22:05:09", 0, DisplayName = "seconds against milliseconds, half a second early")]
     [DataRow("2012-03-10T22:05:09", "2013-03-10T22:05:09.001", 1, DisplayName = "milliseconds against seconds, a millisecond late")]
-    public void YearsBetween_WithTimesOfDayOfDifferentPrecisions_ComparesThemToTheCoarserOne(string low, string high, int expected) =>
+    public void YearsBetween_SecondsAgainstMilliseconds_CompareAsOnePrecision(string low, string high, int expected) =>
         Assert.AreEqual(expected, Years(low, high));
 
     [TestMethod]
@@ -182,16 +181,63 @@ public class DurationBetweenTimeOfDayTests
         Assert.AreEqual(expected, Context.Operators.CalculateAgeAt(Dt("2012-03-10T22:05:09"), Dt(asOf), precision));
 
     /// <summary>
-    /// <c>AgeInYearsAt</c> and <c>AgeInMonthsAt</c> given a DateTime pass <c>ToDateTime(Patient.birthDate)</c>, a
-    /// DateTime without a time of day, so the patient is a year (or month) older from the first moment of the birthday.
+    /// Pins the single count the SDK returns today for durations that the specification defines as an uncertainty
+    /// interval, so that a change to it is noticed. These counts are not the specification's answer. When a value does
+    /// not specify the time of day as far as the other, "the between operator does not return a strict integer, it
+    /// returns an uncertainty": <c>days between @2017-08-07T17:00 and @2017-08-14T</c> is <c>[6, 7]</c> (Language
+    /// Semantics, "Determining Difference and Duration"). Each row gives that interval, from the count between the
+    /// latest start and the earliest end the values allow to the count between the earliest start and the latest end.
+    /// The SDK returns the count with the times of day compared at the coarser precision, one end of the interval.
+    /// Uncertainty is tracked in https://github.com/FirelyTeam/firely-cql-sdk/issues/132.
     /// </summary>
     [TestMethod]
-    [DataRow("year", 1)]
-    [DataRow("month", 12)]
-    public void CalculateAgeAt_ABirthDateAsADateTime_AtMidnightOnTheBirthday_HasHadTheBirthday(string precision, int expected)
+    [DataRow("2012-03-10T22:05:09", "2013-03-10", 1, 0, 1, DisplayName = "an end without a time of day on the anniversary")]
+    [DataRow("2012-03-10", "2013-03-10T00:00:00", 1, 0, 1, DisplayName = "a start without a time of day, at midnight on the anniversary")]
+    [DataRow("2013-03-10", "2012-03-10T22:05:09", -1, -1, 0, DisplayName = "back from a value without a time of day")]
+    [DataRow("2013-03-10T19:10:03", "2012-03-10", -1, -1, 0, DisplayName = "back to a value without a time of day")]
+    [DataRow("2012-02-29T12:34:56", "2014-02-28", 2, 1, 2, DisplayName = "from a leap day to an end without a time of day on 28 February")]
+    [DataRow("2012-03-10T22", "2013-03-10T22:59:59", 1, 0, 1, DisplayName = "an end to the second in the start's hour")]
+    [DataRow("2012-03-10T22:30", "2013-03-10T22", 1, 0, 1, DisplayName = "an end to the hour in the start's hour")]
+    [DataRow("2012-03-10T22:05", "2013-03-10T22:05:00", 1, 0, 1, DisplayName = "an end to the second in the start's minute")]
+    [DataRow("2012-03-10T22:05:30", "2013-03-10T22:05", 1, 0, 1, DisplayName = "an end to the minute in the start's minute")]
+    public void YearsBetween_WhereTheSpecificationGivesAnUncertainty_PinsTheCurrentSingleCount(
+        string low, string high, int current, int uncertaintyLow, int uncertaintyHigh) =>
+        AssertPinnedCountOfAnUncertainty(Years(low, high), current, uncertaintyLow, uncertaintyHigh);
+
+    /// <summary>
+    /// Pins the single count the SDK returns today for <c>AgeInYearsAt</c> and <c>AgeInMonthsAt</c> given a DateTime
+    /// on the birthday, which the specification defines as an uncertainty interval, so that a change to it is noticed.
+    /// This count is not the specification's answer. Both pass <c>ToDateTime(Patient.birthDate)</c>, whose time
+    /// components are unspecified (Appendix B, "ToDateTime"), so the birth may be at any time of that day: at midnight
+    /// on the first birthday the age is <c>[0, 1]</c> years and <c>[11, 12]</c> months. The SDK counts the year or
+    /// month as whole from the first moment of the birthday, the high end of the interval. Uncertainty is tracked in
+    /// https://github.com/FirelyTeam/firely-cql-sdk/issues/132.
+    /// </summary>
+    [TestMethod]
+    [DataRow("year", 1, 0, 1)]
+    [DataRow("month", 12, 11, 12)]
+    public void CalculateAgeAt_ABirthDateAsADateTime_OnTheBirthday_WhereTheSpecificationGivesAnUncertainty_PinsTheCurrentSingleCount(
+        string precision, int current, int uncertaintyLow, int uncertaintyHigh)
     {
         var birthDate = Context.Operators.ConvertDateToDateTime(new CqlDate(2012, 3, 10));
 
-        Assert.AreEqual(expected, Context.Operators.CalculateAgeAt(birthDate, Dt("2013-03-10T00:00:00.000"), precision));
+        AssertPinnedCountOfAnUncertainty(
+            Context.Operators.CalculateAgeAt(birthDate, Dt("2013-03-10T00:00:00.000"), precision),
+            current,
+            uncertaintyLow,
+            uncertaintyHigh);
+    }
+
+    /// <summary>
+    /// Asserts that <paramref name="count"/> is still <paramref name="current"/>, and that it is an end of the
+    /// uncertainty interval from <paramref name="uncertaintyLow"/> to <paramref name="uncertaintyHigh"/> that the
+    /// specification defines.
+    /// </summary>
+    private static void AssertPinnedCountOfAnUncertainty(int? count, int current, int uncertaintyLow, int uncertaintyHigh)
+    {
+        Assert.AreEqual(current, count);
+        Assert.IsTrue(
+            count == uncertaintyLow || count == uncertaintyHigh,
+            $"{count} is not an end of the uncertainty [{uncertaintyLow}, {uncertaintyHigh}].");
     }
 }

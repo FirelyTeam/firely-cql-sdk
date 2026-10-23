@@ -225,6 +225,14 @@ namespace Hl7.Cql.Primitives
         /// <param name="high">The high date time bound against which to calculate.</param>
         /// <param name="precision">The calendar precision to count.</param>
         /// <returns>The number of <paramref name="precision"/> whole calendar periods between this date time and <paramref name="high"/>.</returns>
+        /// <remarks>
+        /// For years and months, the times of day on the anniversary date are compared only as far as both values
+        /// specify them, so when one value specifies the time of day further than the other, the result is the count at
+        /// the coarser precision. The specification defines such a duration as an uncertainty interval wherever the
+        /// components only one value specifies can change the count (CQL Language Semantics, "Determining Difference and
+        /// Duration"). This count is one end of that interval, and the result cannot represent the interval. Uncertainty
+        /// is tracked in <see href="https://github.com/FirelyTeam/firely-cql-sdk/issues/132">issue #132</see>.
+        /// </remarks>
         public int? WholeCalendarPeriodsBetween(CqlDateTime high, string precision) =>
             CqlDateTimeMath.WholeCalendarPeriodsBetween(
                 Value.DateTimeOffset,

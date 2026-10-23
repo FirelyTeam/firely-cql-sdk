@@ -172,6 +172,14 @@ namespace Hl7.Cql.Primitives
         /// reached (CQL Appendix H – Time Interval Calculations, "Calculating Duration in Years" and "Calculating
         /// Duration in Months"). The times of day are compared to <paramref name="timeOfDayPrecision"/>, the finest
         /// precision both arguments specify; at day precision or coarser they are not compared.
+        /// <para>
+        /// For years and months, when one argument specifies the time of day further than the other, the result is
+        /// therefore the count at the coarser precision: times of day that agree as far as both go count as the same.
+        /// The specification defines such a duration as an uncertainty interval wherever the components only one
+        /// argument specifies can change the count (CQL Language Semantics, "Determining Difference and Duration").
+        /// This count is one end of that interval, and the result cannot represent the interval. Uncertainty is tracked in
+        /// <see href="https://github.com/FirelyTeam/firely-cql-sdk/issues/132">issue #132</see>.
+        /// </para>
         /// </remarks>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#duration"/>
         internal static int? WholeCalendarPeriodsBetween(
