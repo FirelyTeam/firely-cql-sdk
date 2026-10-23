@@ -126,7 +126,7 @@ public class FhirTypeConverterStringConversionTests
         Converter.Convert<int?>(new Quantity(25m, "1")).Should().Be(25);
         Converter.Convert<long?>(new Quantity(3000000000m, "1")).Should().Be(3000000000L);
         Converter.Convert<int?>(new Parameters.ParameterComponent { Name = "count", Value = new Integer(7) }).Should().Be(7);
-        Converter.Convert<CqlDate>(new Date("2014-01-01"))?.ToString().Should().Be("2014-01-01");
+        (Converter.Convert<CqlDate>(new Date("2014-01-01"))?.ToString()).Should().Be("2014-01-01");
     }
 
     /// <summary>
