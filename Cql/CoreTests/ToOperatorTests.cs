@@ -111,7 +111,7 @@ public class ToOperatorTests
     /// result is null." Table 5-H bounds the hour to [0, 23], the minute and second to [0, 59], and the timezone
     /// offset to [-13.00, 14.00].
     /// </summary>
-    private static IEnumerable<object?[]> ToDateTimeCases =>
+    internal static IEnumerable<object?[]> ToDateTimeCases =>
     [
         ["Day precision '2014-01-01'", "2014-01-01", new CqlDateTime(2014, 1, 1, null, null, null, null, null, null)],
         ["UTC '2014-01-01T14:30:00.0Z'", "2014-01-01T14:30:00.0Z", new CqlDateTime(2014, 1, 1, 14, 30, 0, 0, 0, 0)],
@@ -144,7 +144,7 @@ public class ToOperatorTests
     public void ToDateTime_OfAString_GivesTheDateTimeOfAValidStringAndNullOtherwise(string argumentDescription, string argument, CqlDateTime? expected) =>
         Assert.AreEqual(Components(expected), Components(Operators().ConvertStringToDateTime(argument)), argumentDescription);
 
-    private static (int, int?, int?, int?, int?, int?, int?, int?, int?)? Components(CqlDateTime? dateTime) =>
+    internal static (int, int?, int?, int?, int?, int?, int?, int?, int?)? Components(CqlDateTime? dateTime) =>
         dateTime?.Value is { } v
             ? (v.Year, v.Month, v.Day, v.Hour, v.Minute, v.Second, v.Millisecond, v.OffsetHour, v.OffsetMinute)
             : null;
@@ -310,7 +310,7 @@ public class ToOperatorTests
     /// followed by a unit designator as a string literal [...]. Spaces are allowed between the quantity value and the
     /// unit designator." A quantity without a unit designator has the default unit '1'.
     /// </summary>
-    private static IEnumerable<object?[]> ToQuantityCases =>
+    internal static IEnumerable<object?[]> ToQuantityCases =>
     [
         ["\"5.5 'cm'\"", "5.5 'cm'", new CqlQuantity(5.5m, "cm")],
         ["\"-0.1 'mg'\"", "-0.1 'mg'", new CqlQuantity(-0.1m, "mg")],
@@ -341,7 +341,7 @@ public class ToOperatorTests
     public void ToQuantity_OfAString_AcceptsOnlyTheSpecificationsFormat(string argumentDescription, string argument, CqlQuantity? expected) =>
         Assert.AreEqual(Components(expected), Components(Operators().ConvertStringToQuantity(argument)), argumentDescription);
 
-    private static (decimal?, string?)? Components(CqlQuantity? quantity) =>
+    internal static (decimal?, string?)? Components(CqlQuantity? quantity) =>
         quantity is null ? null : (quantity.value, quantity.unit);
 
     /// <summary>
@@ -362,7 +362,7 @@ public class ToOperatorTests
     /// formatted correctly, or does not represent a valid time-of-day value, the result is null." Table 5-H bounds the
     /// hour to [0, 23], the minute and second to [0, 59], and the timezone offset to [-13.00, 14.00].
     /// </summary>
-    private static IEnumerable<object?[]> ToTimeCases =>
+    internal static IEnumerable<object?[]> ToTimeCases =>
     [
         ["'14:30:00.0'", "14:30:00.0", new CqlTime(14, 30, 0, 0, null, null)],
         ["'T14:30:00.0'", "T14:30:00.0", new CqlTime(14, 30, 0, 0, null, null)],
@@ -389,7 +389,7 @@ public class ToOperatorTests
     public void ToTime_OfAString_GivesTheTimeOfAValidStringAndNullOtherwise(string argumentDescription, string argument, CqlTime? expected) =>
         Assert.AreEqual(Components(expected), Components(Operators().ConvertStringToTime(argument)), argumentDescription);
 
-    private static (int, int?, int?, int?, int?, int?)? Components(CqlTime? time) =>
+    internal static (int, int?, int?, int?, int?, int?)? Components(CqlTime? time) =>
         time?.Value is { } v
             ? (v.Hour, v.Minute, v.Second, v.Millisecond, v.OffsetHour, v.OffsetMinute)
             : null;

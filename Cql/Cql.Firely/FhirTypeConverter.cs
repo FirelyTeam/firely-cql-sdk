@@ -846,17 +846,18 @@ namespace Hl7.Cql.Fhir
             
             // TODO: this is a performance problem
             // The CQL To* conversions of a string, which give null for a string outside the format the matching To*
-            // operator accepts. Only a .NET string reaches them: a FHIR primitive converts through its own conversion
-            // in ConvertFhirToCqlPrimitives, from the value it holds rather than from its text.
-            converter.AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
-            converter.AddConversion<string, int?>(s => ConvertStringToInteger(s));
-            converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
-            converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
-            converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
-            converter.AddConversion<string, CqlRatio?>(s => ConvertStringToRatio(s));
-            converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
-            converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
-            converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
+            // operator accepts. Each calls the operator's own implementation, so a string converts alike whether a host
+            // converts it or a CQL expression does. Only a .NET string reaches them: a FHIR primitive converts through
+            // its own conversion in ConvertFhirToCqlPrimitives, from the value it holds rather than from its text.
+            converter.AddConversion<string, bool?>(s => CqlOperators.ConvertStringToBooleanImpl(s));
+            converter.AddConversion<string, int?>(s => CqlOperators.ConvertStringToIntegerImpl(s));
+            converter.AddConversion<string, long?>(s => CqlOperators.ConvertStringToLongImpl(s));
+            converter.AddConversion<string, decimal?>(s => CqlOperators.ConvertStringToDecimalImpl(s));
+            converter.AddConversion<string, CqlQuantity?>(s => CqlOperators.ConvertStringToQuantityImpl(s));
+            converter.AddConversion<string, CqlRatio?>(s => CqlOperators.ConvertStringToRatioImpl(s));
+            converter.AddConversion<string, CqlDate?>(s => CqlOperators.ConvertStringToDateImpl(s));
+            converter.AddConversion<string, CqlDateTime?>(s => CqlOperators.ConvertStringToDateTimeImpl(s));
+            converter.AddConversion<string, CqlTime?>(s => CqlOperators.ConvertStringToTimeImpl(s));
             
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
             converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
@@ -865,38 +866,6 @@ namespace Hl7.Cql.Fhir
 
             return converter;
         }
-
-        // CQL conversion helper methods that return null on invalid input
-        private static bool? ConvertStringToBoolean(string? s) =>
-            CqlOperators.ConvertStringToBooleanImpl(s);
-
-        private static int? ConvertStringToInteger(string? s) =>
-            CqlOperators.ConvertStringToIntegerImpl(s);
-
-        private static long? ConvertStringToLong(string? s) =>
-            CqlOperators.ConvertStringToLongImpl(s);
-
-        private static decimal? ConvertStringToDecimal(string? s) =>
-            CqlOperators.ConvertStringToDecimalImpl(s);
-
-        private static CqlQuantity? ConvertStringToQuantity(string? s) =>
-            s == null ? null :
-            CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
-
-        private static CqlRatio? ConvertStringToRatio(string? s) =>
-            s == null ? null :
-            CqlRatio.TryParse(s, out CqlRatio? value) == true ? value : null;
-
-        private static CqlDate? ConvertStringToDate(string? s) =>
-            CqlOperators.ConvertStringToDateImpl(s);
-
-        private static CqlDateTime? ConvertStringToDateTime(string? s) =>
-            s == null ? null :
-            CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
-
-        private static CqlTime? ConvertStringToTime(string? s) =>
-            s == null ? null :
-            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {

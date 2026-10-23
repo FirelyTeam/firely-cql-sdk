@@ -17,9 +17,9 @@ namespace CoreTests;
 using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 /// <summary>
-/// The string conversions of <see cref="FhirTypeConverter"/> to Integer, Long, Decimal and Date give what the matching
-/// To* operator gives (spec §9.B, Type Operators), so a string converts alike whether a host converts it or a CQL
-/// expression does. A FHIR primitive does not go through them: it converts from the value it holds.
+/// The string conversions of <see cref="FhirTypeConverter"/> give what the matching To* operator gives (spec §9.B, Type
+/// Operators), so a string converts alike whether a host converts it or a CQL expression does. A FHIR primitive does
+/// not go through them: it converts from the value it holds.
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
@@ -50,6 +50,31 @@ public class FhirTypeConverterStringConversionTests
     [DynamicData(nameof(ToOperatorTests.ToDateCases), typeof(ToOperatorTests))]
     public void ConvertString_ToDate_GivesWhatToDateGives(string argumentDescription, string argument, string? expected) =>
         Assert.AreEqual(expected, Converter.Convert<CqlDate>(argument)?.ToString(), argumentDescription);
+
+    [TestMethod]
+    [DynamicData(nameof(ToOperatorTests.ToDateTimeCases), typeof(ToOperatorTests))]
+    public void ConvertString_ToDateTime_GivesWhatToDateTimeGives(string argumentDescription, string argument, CqlDateTime? expected) =>
+        Assert.AreEqual(ToOperatorTests.Components(expected), ToOperatorTests.Components(Converter.Convert<CqlDateTime>(argument)), argumentDescription);
+
+    [TestMethod]
+    [DynamicData(nameof(ToOperatorTests.ToTimeCases), typeof(ToOperatorTests))]
+    public void ConvertString_ToTime_GivesWhatToTimeGives(string argumentDescription, string argument, CqlTime? expected) =>
+        Assert.AreEqual(ToOperatorTests.Components(expected), ToOperatorTests.Components(Converter.Convert<CqlTime>(argument)), argumentDescription);
+
+    [TestMethod]
+    [DynamicData(nameof(ToOperatorTests.ToQuantityCases), typeof(ToOperatorTests))]
+    public void ConvertString_ToQuantity_GivesWhatToQuantityGives(string argumentDescription, string argument, CqlQuantity? expected) =>
+        Assert.AreEqual(ToOperatorTests.Components(expected), ToOperatorTests.Components(Converter.Convert<CqlQuantity>(argument)), argumentDescription);
+
+    [TestMethod]
+    [DataRow("1.0 'mg':2.0 'mg'", DisplayName = "Spec example")]
+    [DataRow("-1.5 'mg':+2.25 'mL'", DisplayName = "Polarity indicators")]
+    [DataRow("1:128", DisplayName = "Without units")]
+    [DataRow("1.0 'mg';2.0 'mg'", DisplayName = "Semicolon instead of colon")]
+    [DataRow("1,000:2", DisplayName = "Thousands separator")]
+    [DataRow(" 5 : 2 ", DisplayName = "Spaces around the quantities")]
+    public void ConvertString_ToRatio_GivesWhatToRatioGives(string argument) =>
+        Converter.Convert<CqlRatio>(argument).Should().BeEquivalentTo(Operators().ConvertStringToRatio(argument));
 
     #endregion
 

@@ -162,7 +162,9 @@ namespace Hl7.Cql.Operators
         internal static decimal? ConvertStringToDecimalImpl(string? s) =>
             s is not null && CqlNumberFormat.TryParseDecimal(s, out var value) ? value : null;
 
-        public CqlQuantity? ConvertStringToQuantity(string? s)
+        public CqlQuantity? ConvertStringToQuantity(string? s) => ConvertStringToQuantityImpl(s);
+
+        internal static CqlQuantity? ConvertStringToQuantityImpl(string? s)
         {
             if (s == null)
                 return null;
@@ -170,7 +172,10 @@ namespace Hl7.Cql.Operators
                 return value;
             else return null;
         }
-        public CqlRatio? ConvertStringToRatio(string? s)
+
+        public CqlRatio? ConvertStringToRatio(string? s) => ConvertStringToRatioImpl(s);
+
+        internal static CqlRatio? ConvertStringToRatioImpl(string? s)
         {
             if (s == null)
                 return null;
@@ -194,7 +199,10 @@ namespace Hl7.Cql.Operators
                 return new CqlDate(date);
             else return null;
         }
-        public CqlDateTime? ConvertStringToDateTime(string? s)
+
+        public CqlDateTime? ConvertStringToDateTime(string? s) => ConvertStringToDateTimeImpl(s);
+
+        internal static CqlDateTime? ConvertStringToDateTimeImpl(string? s)
         {
             if (s == null)
                 return null;
@@ -202,7 +210,10 @@ namespace Hl7.Cql.Operators
                 return value;
             else return null;
         }
-        public CqlTime? ConvertStringToTime(string? s)
+
+        public CqlTime? ConvertStringToTime(string? s) => ConvertStringToTimeImpl(s);
+
+        internal static CqlTime? ConvertStringToTimeImpl(string? s)
         {
             if (s == null)
                 return null;
