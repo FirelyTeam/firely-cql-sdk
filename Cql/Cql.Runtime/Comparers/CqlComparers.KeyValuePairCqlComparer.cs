@@ -13,6 +13,12 @@ partial class CqlComparers
     private class KeyValuePairCqlComparer<TKey, TValue>(CqlComparers keyValueComparer) :
         CqlComparer<KeyValuePair<TKey, TValue>>
     {
+        /// <summary>
+        /// Equivalence is decided by the key's and the value's comparers, since a value can equal another in
+        /// representation yet not be equivalent to it, such as a concept without codes.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
+
         /// <inheritdoc />
         protected override int? CompareValues(
             KeyValuePair<TKey, TValue> x,
