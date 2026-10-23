@@ -196,6 +196,49 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        [DataRow("after")]
+        [DataRow("before")]
+        [DataRow(">")]
+        [DataRow("<")]
+        [DataRow(">=")]
+        [DataRow("<=")]
+        public void DateInChoice_ComparedWithDateTime_IsNull(string comparison)
+        {
+            // Spec (ELM §As): "If the argument is not of the specified type, and the strict
+            // attribute is false (the default), the result is null." Comparing the choice with a
+            // DateTime casts it to DateTime, which a Date is not, so the comparison is null.
+            var expression = CreateCqlToolkit().Expression(
+                $"((@2024-01-01) as Choice<Date, DateTime>) {comparison} @2030-01-01T00:00");
+
+            AssertNullResult(expression);
+        }
+
+        [TestMethod]
+        [DataRow("after", false)]
+        [DataRow("before", true)]
+        [DataRow(">", false)]
+        [DataRow("<", true)]
+        [DataRow(">=", false)]
+        [DataRow("<=", true)]
+        public void DateTimeInChoice_ComparedWithDateTime_Compares(string comparison, bool expected)
+        {
+            var expression = CreateCqlToolkit().Expression(
+                $"((@2024-01-01T00:00) as Choice<Date, DateTime>) {comparison} @2030-01-01T00:00");
+
+            AssertResult<bool?>(expression, expected);
+        }
+
+        [TestMethod]
+        [DataRow("(@2024-01-01 as Choice<Date, DateTime>) as DateTime")]
+        [DataRow("(@2024-01-01 as Any) as DateTime")]
+        [DataRow("(true as Any) as Decimal")]
+        [DataRow("('a' as Choice<String, Integer>) as Integer")]
+        public void ValueOfAnotherType_AsTheTarget_IsNull(string cql)
+        {
+            AssertNullResult(CreateCqlToolkit().Expression(cql));
+        }
+
+        [TestMethod]
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"

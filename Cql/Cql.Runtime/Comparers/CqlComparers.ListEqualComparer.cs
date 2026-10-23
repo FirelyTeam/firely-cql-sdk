@@ -13,6 +13,12 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
+        /// <summary>
+        /// Equivalence is decided by the elements' comparers, even for one list against itself, since an element need
+        /// not be equivalent to itself, such as a concept without codes.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
+
         protected override int? CompareValues(
             IEnumerable x,
             IEnumerable y,
