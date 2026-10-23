@@ -244,6 +244,7 @@ Many of the entries below **change CQL evaluation results**. See the Upgrade Che
 - The integration runner's vendored library resources are regenerated with generator `6.2.1.0` ([FirelyTeam/Firely.Cql.Sdk.Integration.Runner#121](https://github.com/FirelyTeam/Firely.Cql.Sdk.Integration.Runner/pull/121)) (#1849) and `6.2.2.0` ([FirelyTeam/Firely.Cql.Sdk.Integration.Runner#122](https://github.com/FirelyTeam/Firely.Cql.Sdk.Integration.Runner/pull/122)) (#1879).
 - Unused internal types and members and commented-out code are removed, reflection lookups go through the compiler-checked `ReflectionUtility`, toolkit loggers are created through one helper, the ISO 8601 offset-minute normalizer is shared, and unnecessary `using` directives are removed. None of it changes public API or behavior. (#1792, #1793, #1794, #1795, #1796, #1797, #1799, #1800, #1802, #1803, #1840, #1841, #1842)
 - CI no longer builds draft pull requests. (#1832)
+- A translator census in `CqlToElmTests` translates every CQL corpus in the repository and fails when a library listed as translating cleanly no longer does. CI's HEDIS job also runs it over the HEDIS corpus, where only counts are recorded. (#1722, #1747)
 - Contributor guidance: a repository map in the instruction files (#1790), record and nullable conventions (#1828), reviewers merging a PR's base branch (#1851), issue-filing rules (#1864), the component labels of release-note fragments (#1873), and how a release promotes a `*REMOVED*` PublicAPI entry (#1887).
 
 ---
@@ -333,3 +334,4 @@ Many of the entries below **change CQL evaluation results**. See the Upgrade Che
 | [#1788](https://github.com/FirelyTeam/firely-cql-sdk/pull/1788) | Guard overflow in the list and aggregate operators |
 | [#1786](https://github.com/FirelyTeam/firely-cql-sdk/pull/1786) | Guard overflow once instead of per operator |
 | [#1781](https://github.com/FirelyTeam/firely-cql-sdk/pull/1781) | Add ToRatio, ConvertsToRatio and ToQuantity(Ratio) |
+| [#1747](https://github.com/FirelyTeam/firely-cql-sdk/pull/1747) | Add a translator census with a known-pass ratchet |
