@@ -235,6 +235,7 @@ public class CqlEvaluationFramesTests
     [DataRow(typeof(CqlExpandFractionalPerError))]
     [DataRow(typeof(CqlSingletonFromMultipleElementsError))]
     [DataRow(typeof(CqlUnresolvedValueSetError))]
+    [DataRow(typeof(CqlAmbiguousStringInValueSetError))]
     public void EvaluationErrors_ImplementICqlEvaluationError(Type errorType) =>
         errorType.Should().BeAssignableTo<ICqlEvaluationError>();
 

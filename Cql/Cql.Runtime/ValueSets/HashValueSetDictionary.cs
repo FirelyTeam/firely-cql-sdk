@@ -62,10 +62,12 @@ namespace Hl7.Cql.ValueSets
 
         /// <inheritdoc/>
         /// <exception cref="CqlException{TError}">
-        /// The value set was not added to this dictionary; the error is a <see cref="CqlUnresolvedValueSetError"/>.
+        /// The value set was not added to this dictionary, and the error is a <see cref="CqlUnresolvedValueSetError"/>;
+        /// or the value set holds codes from more than one code system, and the error is a
+        /// <see cref="CqlAmbiguousStringInValueSetError"/>.
         /// </exception>
         public bool IsCodeInValueSet(string valueSetUri, string code) =>
-            GetAddedValueSet(valueSetUri).IsCodeInValueSet(code);
+            GetAddedValueSet(valueSetUri).IsStringInValueSet(valueSetUri, code);
 
         /// <inheritdoc/>
         /// <exception cref="CqlException{TError}">
@@ -84,7 +86,7 @@ namespace Hl7.Cql.ValueSets
         // A value set this dictionary does not hold cannot answer a membership test: 'false' would claim the code
         // is not in it, so this signals the run-time error the specification requires for a value set reference
         // that cannot be resolved.
-        private IValueSetFacade GetAddedValueSet(string valueSetUri) =>
+        private InMemoryValueSet GetAddedValueSet(string valueSetUri) =>
             _codesInValueSet.TryGetValue(valueSetUri, out var vs)
                 ? vs
                 : throw new CqlUnresolvedValueSetError(valueSetUri).ToException();
@@ -110,7 +112,7 @@ namespace Hl7.Cql.ValueSets
             return false;
         }
 
-        private readonly Dictionary<string, IValueSetFacade> _codesInValueSet = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, InMemoryValueSet> _codesInValueSet = new(StringComparer.OrdinalIgnoreCase);
         private readonly ICqlComparer<CqlCode> _comparer;
     }
 }

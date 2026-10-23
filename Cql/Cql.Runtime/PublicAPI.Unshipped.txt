@@ -66,3 +66,14 @@ static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator !=(Hl7.Cql.V
 static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator ==(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError right) -> bool
 ~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.Equals(object obj) -> bool
 ~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.ToString() -> string
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Code.get -> string!
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.CqlAmbiguousStringInValueSetError() -> void
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Equals(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError other) -> bool
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.GetMessage() -> string!
+Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.ValueSetUri.get -> string?
+override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.GetHashCode() -> int
+static Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.operator !=(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError left, Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError right) -> bool
+static Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.operator ==(Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError left, Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError right) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.Equals(object obj) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlAmbiguousStringInValueSetError.ToString() -> string
