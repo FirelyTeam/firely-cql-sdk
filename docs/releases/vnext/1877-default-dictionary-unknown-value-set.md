@@ -10,7 +10,7 @@
   concept or list of them, and a retrieve filtered by a value set, such as `[Condition: "Diabetes"]`, as soon as a
   resource with a code is tested against it. A value set the dictionary holds answers as before. Expanding a value set
   to its codes, as `ExpandValueSet` or a value set used as a `List<Code>` does, still gives no codes for a value set the
-  dictionary does not hold, since the specification does not make that an error. (#1865)
+  dictionary does not hold, since the specification does not make that an error. (#1865, #1877)
   - **Who sees a difference:** a host that evaluates CQL referencing a value set without giving the context a value
     set dictionary, or giving it a `HashValueSetDictionary` that lacks the value set. A membership test against such a
     value set was `false`; the evaluation now ends with the error.
