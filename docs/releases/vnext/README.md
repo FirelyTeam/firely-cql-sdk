@@ -29,9 +29,16 @@ needs:
 ```md
 ## Fixes
 
-- `Expand` no longer emits a trailing interval that overshoots the upper
+- **Runtime** — `Expand` no longer emits a trailing interval that overshoots the upper
   boundary when `per` does not divide the interval width. ... (#1413)
 ```
+
+Each bullet opens with the affected SDK component in bold, followed by an em dash and the change. Use `Runtime`,
+`Code generator`, `CQL to ELM translation` or `Invocation toolkit`; use `Packager CLI` or `Build tooling` for changes in
+those parts. Add the package in parentheses when the change is in a package other than the component name suggests,
+for example ``**Runtime (`Hl7.Cql.Fhir`)**``. For a change spanning components, name them together, for example
+`**CQL to ELM translation, code generation and runtime**`. The component tells readers whether they need to regenerate
+ELM, regenerate C#, or nothing.
 
 A PR with both a breaking change and a fix writes both `##` sections in its one fragment file. No
 frontmatter or other metadata — the category comes from the `##` heading, same as today.
