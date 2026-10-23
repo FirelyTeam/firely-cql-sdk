@@ -61,9 +61,10 @@ namespace Hl7.Cql.Primitives
         /// the quantity value and the unit designator."
         /// </para>
         /// <para>
-        /// A quantity without a unit designator has the default unit <c>'1'</c>. Whitespace around each quantity is
-        /// ignored, and a colon inside a unit designator does not separate the quantities. The unit is not yet checked
-        /// against UCUM or the calendar duration keywords, which the specification requires (#1782).
+        /// A quantity without a unit designator has the default unit <c>'1'</c>, and a colon inside a unit designator
+        /// does not separate the quantities. As in <c>ToQuantity</c>, whitespace is allowed only between a value and its
+        /// unit designator, so none may surround a quantity or the colon. The unit is not yet checked against UCUM or
+        /// the calendar duration keywords, which the specification requires (#1782).
         /// </para>
         /// </remarks>
         /// <see href="https://cql.hl7.org/09-b-cqlreference.html#toratio"/>
@@ -80,8 +81,8 @@ namespace Hl7.Cql.Primitives
             if (separator < 0)
                 return false;
 
-            if (!TryParseQuantity(s.AsSpan(0, separator), out var numerator)
-                || !TryParseQuantity(s.AsSpan(separator + 1), out var denominator))
+            if (!CqlQuantity.TryParse(s.AsSpan(0, separator), out var numerator)
+                || !CqlQuantity.TryParse(s.AsSpan(separator + 1), out var denominator))
                 return false;
 
             value = new CqlRatio(numerator, denominator);
@@ -112,12 +113,5 @@ namespace Hl7.Cql.Primitives
             }
             return inUnit ? -1 : separator;
         }
-
-        /// <summary>
-        /// Parses one quantity of a ratio string in the format <c>(+|-)?#0(.0#)?('&lt;unit&gt;')?</c>,
-        /// with optional whitespace around it and between the value and the unit designator.
-        /// </summary>
-        private static bool TryParseQuantity(ReadOnlySpan<char> s, [NotNullWhen(true)] out CqlQuantity? quantity) =>
-            CqlQuantity.TryParse(s.Trim(), out quantity);
     }
 }

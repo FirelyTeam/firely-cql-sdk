@@ -26,6 +26,9 @@
     quoted at both ends (`ToQuantity('444 \'cm')` was `444 'cm'`, `ToQuantity('5 mg')` was `5 'mg'`) or is empty, a
     value with a group separator or a leading decimal point, and a space before the value or after the unit give null.
     The unit is not yet checked against UCUM (#1782).
+  - `ToRatio` of a string takes each quantity in exactly the format of `ToQuantity`, as the specification defines
+    it, so whitespace around a quantity or the colon gives null: `ToRatio(' 5 : 2 ')` is null, as `ToQuantity(' 5')`
+    is.
   - `ToDecimal`, `ToInteger` and `ToLong` of a string accept only `(+|-)?#0(.0#)?` and `(+|-)?#0`. Surrounding
     whitespace (`ToInteger(' 1 ')`), a group separator (`ToDecimal('1,000')`), a trailing sign (`ToDecimal('1-')`) and
     a leading decimal point (`ToDecimal('.5')`) give null instead of a number.
@@ -35,7 +38,8 @@
     `-1294967296`.
 - **Runtime** — `CqlQuantity.TryParse` accepts the format of `ToQuantity` described above, which `CqlRatio.TryParse`
   already used for each quantity: a quantity without a unit gets the unit `'1'`, and an unquoted, unterminated or empty
-  unit is rejected. `CqlDateTime.TryParse`, `CqlTime.TryParse`, `DateTimeIso8601.TryParse` and `TimeIso8601.TryParse`
+  unit is rejected. `CqlRatio.TryParse` takes each quantity as `CqlQuantity.TryParse` does, so it returns false for
+  whitespace around a quantity or the colon. `CqlDateTime.TryParse`, `CqlTime.TryParse`, `DateTimeIso8601.TryParse` and `TimeIso8601.TryParse`
   return false for an hour, minute, second or offset out of range, the offset's range being `-13:00` to `+14:00`,
   instead of throwing `ArgumentOutOfRangeException` or accepting the value. The string conversions of
   `ICqlOperators.Convert<T>` to `CqlQuantity`,
