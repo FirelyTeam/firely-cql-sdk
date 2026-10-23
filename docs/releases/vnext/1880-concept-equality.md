@@ -13,8 +13,11 @@
 - **Runtime** — The operations that match list elements by equality follow `=` on Concepts: `distinct`, `union`,
   `except`, `intersect`, `in`, `contains`, `IndexOf`, `includes`, `Mode` and `=` on lists of Concepts no longer treat
   concepts as the same when they differ in their display or in the order of their codes, or when they have no codes and
-  different displays. A Concept element of a tuple compares as a Concept, and a tuple is no longer equivalent to another
-  merely because their elements are equal as .NET values: a tuple with a Concept element without codes, or with a
-  ratio element whose denominator is zero, is not equivalent to an equal tuple, as the element itself is not. (#1876, #1880)
+  different displays. A Concept element of a tuple compares as a Concept. A tuple, and a list inside a tuple or a list,
+  is equivalent to another only when their elements are: no longer merely because the elements are equal as .NET
+  values, or because both sides hold the same list. A tuple or list that holds a Concept without codes, or a ratio
+  whose denominator is zero, is therefore not equivalent to an equal one, even when both sides hold one shared list,
+  such as the result of one definition or of two identical list selectors, which the generated C# evaluates once.
+  (#1876, #1880)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
