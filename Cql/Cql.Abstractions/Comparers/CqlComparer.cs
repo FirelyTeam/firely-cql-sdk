@@ -229,10 +229,23 @@ internal abstract class CqlComparer<T>(
             ? CompareValuesShared(tx, ty, precision)
             : null;
 
-    bool ITypedCqlComparer.CanCompare(
+    /// <summary>
+    /// Whether this comparer compares <paramref name="x"/> with <paramref name="y"/>: whether both
+    /// are a <typeparamref name="T"/>. A comparer of <see cref="object"/> values that compares only
+    /// some pairs of them narrows this to those pairs.
+    /// </summary>
+    /// <remarks>
+    /// A pair this comparer does not compare has no order, and its two values are not equal.
+    /// </remarks>
+    protected virtual bool CanCompare(
         object x,
         object y) =>
         x is T && y is T;
+
+    bool ITypedCqlComparer.CanCompare(
+        object x,
+        object y) =>
+        CanCompare(x, y);
 
     private int? CompareValuesShared(
         T x,

@@ -10,7 +10,11 @@ using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using AdministrativeGender = Hl7.Fhir.Model.AdministrativeGender;
+using EncounterStatus = Hl7.Fhir.Model.Encounter.EncounterStatus;
+using EncounterStatusCode = Hl7.Fhir.Model.Code<Hl7.Fhir.Model.Encounter.EncounterStatus>;
 using FhirString = Hl7.Fhir.Model.FhirString;
+using GenderCode = Hl7.Fhir.Model.Code<Hl7.Fhir.Model.AdministrativeGender>;
 
 namespace CoreTests;
 
@@ -355,6 +359,83 @@ public class MismatchedTypeComparisonTests
 
         Assert.AreEqual(false, operators.Equal(integers, strings), $"{nesting}: integers = strings");
         Assert.AreEqual(false, operators.Equal(strings, integers), $"{nesting}: strings = integers");
+    }
+
+    #endregion
+
+    #region A FHIR code and a value its comparer does not compare
+
+    private static readonly GenderCode Male = new(AdministrativeGender.Male);
+
+    /// <summary>
+    /// The comparer for a FHIR <c>Code&lt;T&gt;</c> compares it with a string, a CQL code and a
+    /// <c>Code&lt;T&gt;</c> of the same <c>T</c>, and with nothing else.
+    /// </summary>
+    private static IEnumerable<object[]> FhirCodeMismatchedPairs =>
+    [
+        ["Code<AdministrativeGender> and Integer", Male, 1],
+        ["Code<AdministrativeGender> and Code<EncounterStatus>", Male, new EncounterStatusCode(EncounterStatus.Finished)],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(FhirCodeMismatchedPairs))]
+    public void FhirCode_AndAValueItsComparerDoesNotCompare_HaveNoOrderAndAreUnequal(string pair, object a, object b)
+    {
+        var operators = Operators;
+
+        Assert.IsNull(operators.Greater(a, b), $"{pair}: a > b");
+        Assert.IsNull(operators.Greater(b, a), $"{pair}: b > a");
+        Assert.IsNull(operators.Less(a, b), $"{pair}: a < b");
+        Assert.IsNull(operators.Less(b, a), $"{pair}: b < a");
+        Assert.AreEqual(false, operators.Equal(a, b), $"{pair}: a = b");
+        Assert.AreEqual(false, operators.Equal(b, a), $"{pair}: b = a");
+        Assert.AreEqual(true, operators.NotEqual(a, b), $"{pair}: a != b");
+        Assert.AreEqual(true, operators.NotEqual(b, a), $"{pair}: b != a");
+        Assert.AreEqual(false, operators.Equivalent(a, b), $"{pair}: a ~ b");
+        Assert.AreEqual(false, operators.Equivalent(b, a), $"{pair}: b ~ a");
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(FhirCodeMismatchedPairs))]
+    public void Containers_OfAFhirCodeAndAValueItsComparerDoesNotCompare_AreUnequal(string pair, object a, object b)
+    {
+        var operators = Operators;
+
+        foreach (var nesting in new[] { "lists", "tuples", "key-value pairs" })
+        {
+            var nestedA = Nest(nesting, a);
+            var nestedB = Nest(nesting, b);
+
+            Assert.AreEqual(false, operators.Equal(nestedA, nestedB), $"{pair} in {nesting}: a = b");
+            Assert.AreEqual(false, operators.Equal(nestedB, nestedA), $"{pair} in {nesting}: b = a");
+            Assert.AreEqual(true, operators.NotEqual(nestedA, nestedB), $"{pair} in {nesting}: a != b");
+            Assert.AreEqual(true, operators.NotEqual(nestedB, nestedA), $"{pair} in {nesting}: b != a");
+        }
+    }
+
+    /// <summary>
+    /// The comparer compares a FHIR code with a string and with a CQL code on purpose, by its code,
+    /// in either order.
+    /// </summary>
+    [TestMethod]
+    public void FhirCode_AndAStringOrACqlCode_StillCompare()
+    {
+        var operators = Operators;
+        var maleCqlCode = new CqlCode("male", null, null, null);
+        var femaleCqlCode = new CqlCode("female", null, null, null);
+
+        Assert.AreEqual(true, operators.Equal(Male, "male"));
+        Assert.AreEqual(true, operators.Equal("male", Male));
+        Assert.AreEqual(false, operators.Equal(Male, "female"));
+        Assert.AreEqual(true, operators.Greater(Male, "female"));
+        Assert.AreEqual(true, operators.Less("female", Male));
+        Assert.AreEqual(true, operators.Equal(Male, maleCqlCode));
+        Assert.AreEqual(true, operators.Equal(maleCqlCode, Male));
+        Assert.AreEqual(false, operators.Equal(Male, femaleCqlCode));
+        Assert.AreEqual(true, operators.Equivalent(femaleCqlCode, new GenderCode(AdministrativeGender.Female)));
+        Assert.AreEqual(true, operators.Equal(Male, new GenderCode(AdministrativeGender.Male)));
+        Assert.AreEqual(false, operators.Equal(Male, new GenderCode(AdministrativeGender.Female)));
+        Assert.AreEqual(true, operators.Equal(Nest("lists", Male), Nest("lists", "male")));
     }
 
     #endregion

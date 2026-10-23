@@ -9,13 +9,14 @@
 namespace Hl7.Cql.Comparers;
 
 /// <summary>
-/// A comparer that compares the values of one type.
+/// A comparer that compares the values of one type, or some pairs of values of different types.
 /// </summary>
 internal interface ITypedCqlComparer
 {
     /// <summary>
-    /// Whether <paramref name="x"/> and <paramref name="y"/> are both of the type this comparer
-    /// compares. A pair that is not has no order, and its two values are not equal.
+    /// Whether this comparer compares <paramref name="x"/> with <paramref name="y"/>: whether both are
+    /// of the type it compares, or they are a pair of types it compares with each other. A pair it
+    /// does not compare has no order, and its two values are not equal.
     /// </summary>
     bool CanCompare(object x, object y);
 }
