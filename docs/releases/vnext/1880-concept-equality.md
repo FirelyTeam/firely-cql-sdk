@@ -1,4 +1,4 @@
-## Fixes
+## Potentially Breaking
 
 - **Runtime** — `=` on Concepts compares the display as well as the codes, by the tuple equality semantics the
   specification gives it: its `EqualIsFalse` example, two concepts with the same codes and the displays `'Concepts'`
@@ -19,5 +19,11 @@
   whose denominator is zero, is therefore not equivalent to an equal one, even when both sides hold one shared list,
   such as the result of one definition or of two identical list selectors, which the generated C# evaluates once.
   (#1876, #1880)
+  - **Who sees a difference:** a library that compares Concepts, or deduplicates or matches lists of them, notably
+    FHIR `CodeableConcept` values. FHIR gives the order of a concept's codings no meaning, but CQL's list equality
+    does, so two such concepts with the same codings in a different order are no longer equal, and `distinct`,
+    `union` and the other operations above can now keep both.
+  - **What to do:** to compare FHIR concepts regardless of the order of their codings, or of their display, use `~`,
+    which asks only for a shared equivalent code.
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.
