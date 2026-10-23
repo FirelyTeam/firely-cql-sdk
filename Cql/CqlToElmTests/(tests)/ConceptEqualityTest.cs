@@ -170,6 +170,37 @@ namespace Hl7.Cql.CqlToElm.Test
             results.Should().Equal(false, true, true, false);
         }
 
+        /// <summary>
+        /// Spec §9.B, Comparison Operators, Equivalent: lists are equivalent when their elements are, in order, and tuples
+        /// when their elements are, so a list of a concept without codes is equivalent to no list, whether the two sides
+        /// hold one shared list or two lists with the same contents.
+        /// </summary>
+        [TestMethod]
+        public void Tuples_And_Nested_Lists_WithAListOfConceptsWithoutCodes()
+        {
+            var results = Evaluate(
+                // Two tuples, or two lists, holding one shared list: a definition's result, a let's, or that of two
+                // identical selectors, which the generated C# evaluates once.
+                "Tuple { l: \"Concepts without codes\" } ~ Tuple { l: \"Concepts without codes\" }",
+                "({ 1 }) X let L: { Concept { display: 'x' } } return Tuple { l: L } ~ Tuple { l: L }",
+                "Tuple { l: { Concept { display: 'x' } } } ~ Tuple { l: { Concept { display: 'x' } } }",
+                "{ \"Concepts without codes\" } ~ { \"Concepts without codes\" }",
+                "({ 1 }) X let L: { Concept { display: 'x' } } return { L } ~ { L }",
+                "{ { Concept { display: 'x' } } } ~ { { Concept { display: 'x' } } }",
+                // Two tuples, or two lists, holding separately built lists with the same contents, in both orders.
+                "Tuple { l: { Concept { display: 'x' } } } ~ Tuple { l: { Concept { display: 'x' + '' } } }",
+                "Tuple { l: { Concept { display: 'x' + '' } } } ~ Tuple { l: { Concept { display: 'x' } } }",
+                "{ { Concept { display: 'x' } } } ~ { { Concept { display: 'x' + '' } } }",
+                "{ { Concept { display: 'x' + '' } } } ~ { { Concept { display: 'x' } } }",
+                // A shared list of a concept with a code.
+                "Tuple { l: \"Concepts with a code\" } ~ Tuple { l: \"Concepts with a code\" }",
+                "{ \"Concepts with a code\" } ~ { \"Concepts with a code\" }");
+
+            // A query returns a list with one result.
+            results.Select(result => result is IEnumerable<bool?> list ? list.Single() : (bool?)result)
+                .Should().Equal(false, false, false, false, false, false, false, false, false, false, true, true);
+        }
+
         #endregion
 
         /// <summary>
@@ -194,6 +225,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 define "Code1": Code { system: 'http://loinc.org', code: '8480-6', version: '1.0', display: 'Systolic blood pressure' }
                 define "Concept2": Concept { codes: { null as Code }, display: 'More Concepts' }
                 define "Without codes": Concept { display: 'x' }
+                define "Concepts without codes": { Concept { display: 'x' } }
+                define "Concepts with a code": { Concept { codes: { "C" }, display: 'x' } }
 
                 {{definitions}}
                 """);

@@ -281,4 +281,79 @@ public class ConceptEqualityTests
     }
 
     #endregion
+
+    #region Concepts inside lists, tuples and key-value pairs
+
+    // Lists and tuples are equivalent when their elements are (spec §9.B, Comparison Operators, Equivalent), so whether
+    // the two sides hold the same instance does not matter: a concept without codes is equivalent to no concept,
+    // wherever it sits.
+
+    private static void AssertEquivalent(object left, object right, bool expected, string because)
+    {
+        var comparers = new CqlComparers();
+        var operators = Operators();
+
+        comparers.Equivalent(left, right, null).Should().Be(expected, because);
+        comparers.Equivalent(right, left, null).Should().Be(expected, because);
+        operators.Equivalent(left, right).Should().Be(expected, because);
+        operators.Equivalent(right, left).Should().Be(expected, because);
+    }
+
+    [TestMethod]
+    public void Tuple_WithAListOfConcepts_IsEquivalentByTheConcepts_WhetherTheListIsSharedOrNot()
+    {
+        var metadata = new CqlTupleMetadata([typeof(IEnumerable<CqlConcept>)], ["concepts"]);
+        (CqlTupleMetadata, IEnumerable<CqlConcept>) TupleOf(IEnumerable<CqlConcept> concepts) => (metadata, concepts);
+
+        CqlConcept[] shared = [Concept(display: "x")];
+        AssertEquivalent(TupleOf(shared), TupleOf(shared), false, "two tuples share a list of a concept without codes");
+        AssertEquivalent(
+            TupleOf(new[] { Concept(display: "x") }),
+            TupleOf(new[] { Concept(display: "x") }),
+            false,
+            "two tuples hold separately allocated lists of a concept without codes");
+
+        CqlConcept[] sharedWithACode = [Concept([C], "x")];
+        AssertEquivalent(TupleOf(sharedWithACode), TupleOf(sharedWithACode), true, "two tuples share a list of a concept with a code");
+    }
+
+    [TestMethod]
+    public void NestedList_OfConcepts_IsEquivalentByTheConcepts_WhetherTheInnerListIsSharedOrNot()
+    {
+        var operators = Operators();
+        CqlConcept[] shared = [Concept(display: "x")];
+        IEnumerable<CqlConcept>[] outer = [shared];
+        IEnumerable<CqlConcept>[] otherOuter = [shared];
+
+        AssertEquivalent(outer, otherOuter, false, "two lists hold one shared list of a concept without codes");
+        AssertEquivalent(shared, shared, false, "a list of a concept without codes against itself");
+        AssertEquivalent(
+            new IEnumerable<CqlConcept>[] { new[] { Concept(display: "x") } },
+            new IEnumerable<CqlConcept>[] { new[] { Concept(display: "x") } },
+            false,
+            "two lists hold separately allocated lists of a concept without codes");
+
+        operators.Equivalent<IEnumerable<CqlConcept>>(outer, otherOuter).Should().BeFalse();
+        operators.Equivalent<IEnumerable<CqlConcept>>(otherOuter, outer).Should().BeFalse();
+
+        IEnumerable<CqlConcept>[] outerWithACode = [new[] { Concept([C], "x") }];
+        AssertEquivalent(outerWithACode, outerWithACode, true, "a nested list of a concept with a code against itself");
+    }
+
+    [TestMethod]
+    public void KeyValuePair_WithAConceptValue_IsEquivalentByTheConcept()
+    {
+        var withoutCodes = new KeyValuePair<string, CqlConcept>("k", Concept(display: "x"));
+        var withoutCodesAgain = new KeyValuePair<string, CqlConcept>("k", Concept(display: "x"));
+
+        AssertEquivalent(withoutCodes, withoutCodesAgain, false, "the values are equal concepts without codes");
+        AssertEquivalent(withoutCodes, withoutCodes, false, "a pair whose value is a concept without codes against itself");
+        AssertEquivalent(
+            new KeyValuePair<string, CqlConcept>("k", Concept([C], "a")),
+            new KeyValuePair<string, CqlConcept>("k", Concept([C], "b")),
+            true,
+            "the values share a code");
+    }
+
+    #endregion
 }
