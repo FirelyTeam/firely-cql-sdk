@@ -6,10 +6,14 @@
   - `ToDateTime` of a string whose hour, minute, second or timezone offset is out of range
     (`ToDateTime('2014-01-01T25:00:00Z')`, `'2014-01-01T10:61:00'`, `'2014-01-01T10:00:00+15:00'`), or whose instant
     in UTC falls outside `0001-01-01` to `9999-12-31` (`'0001-01-01T00:00:00+01:00'`): null instead of
-    `ArgumentOutOfRangeException`. `ConvertsToDateTime` of such a string is false instead of throwing.
+    `ArgumentOutOfRangeException`. `ConvertsToDateTime` of such a string is false instead of throwing. The range of
+    the offset is the one Table 5-H gives, `-13:00` to `+14:00`, which the `DateTime` operator already enforces, so an
+    offset more than 13 hours behind UTC (`ToDateTime('2014-01-01T10:00:00-13:30')`, `'2014-01-01T10:00:00-14:00'`)
+    also gives null, instead of a DateTime that `DateTime(2014, 1, 1, 10, 0, 0, 0, -13.5)` refuses.
   - `ToTime` of a string whose hour, minute or second is out of range (`ToTime('25:00:00')`, `ToTime('10:61')`): null
-    instead of a Time holding that component. With an offset more than 14 hours from UTC (`'10:00:00+15:00'`): null
-    instead of `ArgumentOutOfRangeException`.
+    instead of a Time holding that component. With an offset outside `-13:00` to `+14:00`: null instead of
+    `ArgumentOutOfRangeException` when it is more than 14 hours from UTC (`'10:00:00+15:00'`), and instead of a Time
+    when it is 13 to 14 hours behind (`'10:00:00-13:30'`).
   - `ToDate` of a string that is a valid DateTime: its date, ignoring the time portion, instead of null.
     `ToDate('2014-01-01T12:30:00')` is `@2014-01-01`.
   - `ToQuantity` of a string accepts the format `(+|-)?#0(.0#)?('<unit>')?`, with spaces allowed only between the
@@ -28,12 +32,14 @@
 - **Runtime** — `CqlQuantity.TryParse` accepts the format of `ToQuantity` described above, which `CqlRatio.TryParse`
   already used for each quantity: a quantity without a unit gets the unit `'1'`, and an unquoted, unterminated or empty
   unit is rejected. `CqlDateTime.TryParse`, `CqlTime.TryParse`, `DateTimeIso8601.TryParse` and `TimeIso8601.TryParse`
-  return false for an hour, minute, second or offset out of range, instead of throwing `ArgumentOutOfRangeException`
-  or, for a Time, accepting the value. The string conversions of `ICqlOperators.Convert<T>` to `CqlQuantity`,
+  return false for an hour, minute, second or offset out of range, the offset's range being `-13:00` to `+14:00`,
+  instead of throwing `ArgumentOutOfRangeException` or accepting the value. The string conversions of
+  `ICqlOperators.Convert<T>` to `CqlQuantity`,
   `CqlDateTime` and `CqlTime` use these parsers and change with them. (#1839)
 - **CQL to ELM translation** — A DateTime literal with an hour, minute, second or offset out of range
   (`@2014-01-01T25:00:00Z`) reports "Unparseable date/time literal" instead of failing translation with
-  `ArgumentOutOfRangeException`. A Time literal with an hour, minute or second out of range (`@T24:59:59.999`)
+  `ArgumentOutOfRangeException`; for an offset 13 to 14 hours behind UTC (`@2014-01-01T10:00:00-13:30`), instead of
+  translating to a DateTime with that offset. A Time literal with an hour, minute or second out of range (`@T24:59:59.999`)
   reports "Unparseable time literal" instead of translating to a Time holding that component. (#1839)
 
 This changes CQL evaluation results for the affected expressions. Generated C# and `GeneratorToolVersion` are unchanged.

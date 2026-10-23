@@ -1717,19 +1717,31 @@ namespace Hl7.Cql.CqlToElm.Test
                 """, "Unparseable date/time literal '2026-13-45T10:00:00.000Z'.");
         }
 
-        // Table 5-H bounds the hour to [0, 23] and the minute and second to [0, 59]; an offset must be one a
-        // DateTimeOffset can hold, at most 14 hours from UTC.
+        // Table 5-H bounds the hour to [0, 23], the minute and second to [0, 59], and the timezone offset to
+        // [-13.00, 14.00].
         [TestMethod]
         [DataRow("2026-01-01T25:00:00.000Z", DisplayName = "Hour 25")]
         [DataRow("2026-01-01T10:61:00.000Z", DisplayName = "Minute 61")]
         [DataRow("2026-01-01T10:00:60.000Z", DisplayName = "Second 60")]
         [DataRow("2026-01-01T10:00:00.000+15:00", DisplayName = "Offset +15:00")]
+        [DataRow("2026-01-01T10:00:00.000+14:30", DisplayName = "Offset +14:30")]
+        [DataRow("2026-01-01T10:00:00.000-13:30", DisplayName = "Offset -13:30")]
         public void DateTimeErrors_OutOfRangeTime(string literal) =>
             CreateCqlToolkit().MakeLibrary($"""
                 library DateTimeErrors version '1.0.0'
 
                 define private DateTime_Literal: @{literal}
                 """, $"Unparseable date/time literal '{literal}'.");
+
+        [TestMethod]
+        [DataRow("2026-01-01T10:00:00.000+14:00", DisplayName = "Offset +14:00")]
+        [DataRow("2026-01-01T10:00:00.000-13:00", DisplayName = "Offset -13:00")]
+        public void DateTime_Literal_OffsetAtTheBoundOfItsRange(string literal) =>
+            CreateCqlToolkit().MakeLibrary($"""
+                library DateTimeOffsets version '1.0.0'
+
+                define private DateTime_Literal: @{literal}
+                """);
 
         // The conformance suite's TimeUpperBoundHours, TimeUpperBoundMinutes and TimeUpperBoundSeconds cases.
         [TestMethod]
