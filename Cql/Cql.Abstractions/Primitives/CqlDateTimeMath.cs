@@ -316,6 +316,14 @@ namespace Hl7.Cql.Primitives
         /// compare as one precision: the "Duration" section of "Date and Time Operators" (CQL Appendix B – Reference)
         /// states "when calculating duration, just like date and time comparison calculations, seconds and
         /// milliseconds are considered a single precision with decimal semantics."
+        /// <para>
+        /// Each time of day is read in its own timezone offset, because this comparison decides a count of years or
+        /// months, and the same section says to normalize offsets "only when the comparison precision is hours,
+        /// minutes, seconds, or milliseconds." So <c>years between @2012-03-10T22:05:09+00:00 and
+        /// @2013-03-10T22:05:09+01:00</c> is 1, although <c>@2013-03-10T22:05:09+01:00 = @2013-03-10T22:05:09+00:00</c>,
+        /// which compares at second precision and so normalizes, is false: in UTC that end falls an hour short of the
+        /// start's time of day.
+        /// </para>
         /// </remarks>
         /// <returns>Less than zero if the time of day of <paramref name="x"/> is earlier, zero if it is the same,
         /// and greater than zero if it is later.</returns>
