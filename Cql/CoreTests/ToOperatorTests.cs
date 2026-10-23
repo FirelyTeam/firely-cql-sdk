@@ -73,7 +73,9 @@ public class ToOperatorTests
     /// <summary>
     /// "The operator expects the string to be formatted using the ISO-8601 date representation: YYYY-MM-DD [...] Note
     /// that the operator can take datetime formatted strings and will ignore the time portions." A string that is not
-    /// a valid date, nor a valid DateTime, gives null.
+    /// a valid date, nor a date time whose components are each in range, gives null. The date is the one written,
+    /// so it is given even when the instant the date time names, once its offset is applied, falls outside
+    /// <c>0001-01-01</c> to <c>9999-12-31</c>.
     /// </summary>
     private static IEnumerable<object?[]> ToDateCases =>
     [
@@ -83,10 +85,13 @@ public class ToOperatorTests
         ["DateTime '2014-01-01T12:30:00'", "2014-01-01T12:30:00", "2014-01-01"],
         ["DateTime '2014-01-01T12:30:00.000Z'", "2014-01-01T12:30:00.000Z", "2014-01-01"],
         ["DateTime '2014-01-01T23:30:00-05:00', whose date in UTC is the next day", "2014-01-01T23:30:00-05:00", "2014-01-01"],
+        ["DateTime '0001-01-01T00:00:00+01:00', before the minimum in UTC", "0001-01-01T00:00:00+01:00", "0001-01-01"],
+        ["DateTime '9999-12-31T23:59:59.999-13:00', after the maximum in UTC", "9999-12-31T23:59:59.999-13:00", "9999-12-31"],
         ["Month 13 '2014-13-01'", "2014-13-01", null],
         ["February 30 '2014-02-30'", "2014-02-30", null],
         ["Slashes '2014/01/01'", "2014/01/01", null],
         ["DateTime with hour 25 '2014-01-01T25:00:00'", "2014-01-01T25:00:00", null],
+        ["DateTime with offset -13:30 '2014-01-01T10:00:00-13:30'", "2014-01-01T10:00:00-13:30", null],
         ["'abc'", "abc", null],
     ];
 
@@ -128,6 +133,7 @@ public class ToOperatorTests
         ["Offset minute 60 '2014-01-01T10:00:00+05:60'", "2014-01-01T10:00:00+05:60", null],
         ["Before the minimum in UTC '0001-01-01T00:00:00+01:00'", "0001-01-01T00:00:00+01:00", null],
         ["After the maximum in UTC '9999-12-31T23:00:00-05:00'", "9999-12-31T23:00:00-05:00", null],
+        ["After the maximum in UTC '9999-12-31T23:59:59.999-13:00'", "9999-12-31T23:59:59.999-13:00", null],
         ["February 30 '2014-02-30T10:00:00'", "2014-02-30T10:00:00", null],
         ["Slashes '2014/01/01T12:05:05.955Z'", "2014/01/01T12:05:05.955Z", null],
         ["'abc'", "abc", null],

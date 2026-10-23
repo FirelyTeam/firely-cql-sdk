@@ -80,8 +80,8 @@ public class ConvertsToOperatorTests
     #region ConvertsToDate
 
     /// <summary>
-    /// ToDate accepts a DateTime, and a String in the ISO-8601 date or datetime format that represents a valid date or
-    /// DateTime, to any precision.
+    /// ToDate accepts a DateTime, and a String in the ISO-8601 date or datetime format that represents a valid date, or
+    /// a datetime whose components are each in range, to any precision.
     /// </summary>
     private static IEnumerable<object?[]> ConvertsToDateCases =>
     [
@@ -90,8 +90,10 @@ public class ConvertsToOperatorTests
         ["String '2014-01-01'", "2014-01-01", true],
         ["String '2014-01'", "2014-01", true],
         ["String '2014-01-01T12:30:00'", "2014-01-01T12:30:00", true],
+        ["String '0001-01-01T00:00:00+01:00'", "0001-01-01T00:00:00+01:00", true],
         ["String 'abc'", "abc", false],
         ["String '2014-13-01'", "2014-13-01", false],
+        ["String '2014-01-01T25:00:00'", "2014-01-01T25:00:00", false],
         ["Time", SampleTime, false],
         ["null", null, null],
     ];

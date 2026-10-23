@@ -347,13 +347,45 @@ namespace Hl7.Cql.Iso8601
 
         public static bool TryParse(string stringValue, out DateTimeIso8601? dateTimeValue)
         {
-            var parts = Expression.Match(stringValue);
-            if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
+            if (ParseComponents(stringValue) is not { } c || !IsWithinUtcRange(c))
             {
                 dateTimeValue = null;
                 return false;
             }
 
+            dateTimeValue = new DateTimeIso8601(stringValue, c.Year, c.Month, c.Day, c.Hour, c.Minute, c.Second, c.Millisecond, c.OffsetHour, c.OffsetMinute);
+            return true;
+        }
+
+        /// <summary>
+        /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 date time and gives its date: the year, month
+        /// and day as written, to the precision given. Unlike <see cref="TryParse"/>, it accepts a date time whose
+        /// instant lies outside the range of <see cref="DateTime"/> once its offset is applied, since the date it gives
+        /// does not depend on the offset.
+        /// </summary>
+        internal static bool TryParseDate(string stringValue, [NotNullWhen(true)] out DateIso8601? dateValue)
+        {
+            if (ParseComponents(stringValue) is not { } c)
+            {
+                dateValue = null;
+                return false;
+            }
+
+            dateValue = new DateIso8601(c.Year, c.Month, c.Day);
+            return true;
+        }
+
+        private readonly record struct Components(int Year, int? Month, int? Day, int? Hour, int? Minute, int? Second, int? Millisecond, int? OffsetHour, int? OffsetMinute);
+
+        /// <summary>
+        /// The components of <paramref name="stringValue"/> when it is an ISO 8601 date time whose components are each
+        /// in range; otherwise <see langword="null"/>.
+        /// </summary>
+        private static Components? ParseComponents(string stringValue)
+        {
+            var parts = Expression.Match(stringValue);
+            if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
+                return null;
 
             int? year, month = null, day = null, hour = null, minute = null, second = null, ms = null, osMinute = null;
             int? osHour = null;
@@ -407,10 +439,7 @@ namespace Hl7.Cql.Iso8601
                 }
             }
             else
-            {
-                dateTimeValue = null;
-                return false;
-            }
+                return null;
 
             var hourGroup = parts.Groups["hour"];
             var minuteGroup = parts.Groups["minute"];
@@ -438,28 +467,23 @@ namespace Hl7.Cql.Iso8601
             }
 
             if (!DateIso8601.IsRepresentable(year!.Value, month, day)
-                || !TimeIso8601.IsRepresentable(hour, minute, second, osHour, osMinute)
-                || !IsWithinUtcRange(year!.Value, month, day, hour, minute, second, ms, osHour, osMinute))
-            {
-                dateTimeValue = null;
-                return false;
-            }
+                || !TimeIso8601.IsRepresentable(hour, minute, second, osHour, osMinute))
+                return null;
 
-            dateTimeValue = new DateTimeIso8601(stringValue, year!.Value, month, day, hour, minute, second, ms, osHour, osMinute);
-            return true;
+            return new Components(year!.Value, month, day, hour, minute, second, ms, osHour, osMinute);
         }
 
         /// <summary>
         /// Whether the instant that in-range components name lies within the range of <see cref="DateTime"/> once
         /// its offset is applied. As in the constructor, the offset applies only when an hour is given.
         /// </summary>
-        private static bool IsWithinUtcRange(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? offsetHour, int? offsetMinute)
+        private static bool IsWithinUtcRange(Components c)
         {
-            if (hour is null)
+            if (c.Hour is not { } hour)
                 return true;
 
-            var local = new DateTime(year, month ?? 1, day ?? 1, hour.Value, minute ?? 0, second ?? 0, ms ?? 0);
-            var utcTicks = local.Ticks - new TimeSpan(offsetHour ?? 0, offsetMinute ?? 0, 0).Ticks;
+            var local = new DateTime(c.Year, c.Month ?? 1, c.Day ?? 1, hour, c.Minute ?? 0, c.Second ?? 0, c.Millisecond ?? 0);
+            var utcTicks = local.Ticks - new TimeSpan(c.OffsetHour ?? 0, c.OffsetMinute ?? 0, 0).Ticks;
             return utcTicks >= DateTime.MinValue.Ticks && utcTicks <= DateTime.MaxValue.Ticks;
         }
 

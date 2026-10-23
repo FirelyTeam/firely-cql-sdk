@@ -14,8 +14,12 @@
     instead of a Time holding that component. With an offset outside `-13:00` to `+14:00`: null instead of
     `ArgumentOutOfRangeException` when it is more than 14 hours from UTC (`'10:00:00+15:00'`), and instead of a Time
     when it is 13 to 14 hours behind (`'10:00:00-13:30'`).
-  - `ToDate` of a string that is a valid DateTime: its date, ignoring the time portion, instead of null.
-    `ToDate('2014-01-01T12:30:00')` is `@2014-01-01`.
+  - `ToDate` of a date-time string whose components are each in range: its date as written, ignoring the time portion,
+    instead of null. `ToDate('2014-01-01T12:30:00')` is `@2014-01-01`. Since the date does not depend on the offset,
+    the instant the string names in UTC need not fall within `0001-01-01` to `9999-12-31`:
+    `ToDate('0001-01-01T00:00:00+01:00')` is `@0001-01-01` and `ToDate('9999-12-31T23:59:59.999-13:00')` is
+    `@9999-12-31`, while `ToDateTime` of either string is null. A time portion with a component out of range
+    (`ToDate('2014-01-01T25:00:00')`) still gives null.
   - `ToQuantity` of a string accepts the format `(+|-)?#0(.0#)?('<unit>')?`, with spaces allowed only between the
     value and the unit. A value without a unit gets the unit `'1'` (`ToQuantity('5')` is `5 '1'` instead of null), and
     the unit may follow the value directly (`ToQuantity('5\'mg\'')` is `5 'mg'` instead of null). A unit that is not

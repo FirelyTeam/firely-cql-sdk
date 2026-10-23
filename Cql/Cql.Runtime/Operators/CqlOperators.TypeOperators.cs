@@ -8,6 +8,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -173,15 +174,16 @@ namespace Hl7.Cql.Operators
         }
 
         // CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToDate: "Note that the operator can take datetime
-        // formatted strings and will ignore the time portions." The string must still be a valid DateTime.
+        // formatted strings and will ignore the time portions." Each component of the time portion must still be in
+        // range, but the instant it names need not be: the result is the date as written, whatever the offset.
         public CqlDate? ConvertStringToDate(string? s)
         {
             if (s == null)
                 return null;
             else if (CqlDate.TryParse(s, out CqlDate? value))
                 return value;
-            else if (CqlDateTime.TryParse(s, out CqlDateTime? dateTime))
-                return ConvertDateTimeToDate(dateTime);
+            else if (DateTimeIso8601.TryParseDate(s, out DateIso8601? date))
+                return new CqlDate(date);
             else return null;
         }
         public CqlDateTime? ConvertStringToDateTime(string? s)
