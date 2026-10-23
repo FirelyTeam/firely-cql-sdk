@@ -28,7 +28,6 @@ public class RatioConversionTests
     [DataRow("1 'mg':128", 1.0, "mg", 128.0, "1", DisplayName = "Unit on the numerator only")]
     [DataRow("1'mg':2'mL'", 1.0, "mg", 2.0, "mL", DisplayName = "No space before the unit")]
     [DataRow("1   'mg':2\t'mL'", 1.0, "mg", 2.0, "mL", DisplayName = "Several spaces or a tab before the unit")]
-    [DataRow(" 1 'mg' : 2 'mL' ", 1.0, "mg", 2.0, "mL", DisplayName = "Spaces around the colon and the string")]
     [DataRow("-1.5 'mg':+2.25 'mL'", -1.5, "mg", 2.25, "mL", DisplayName = "Polarity indicators")]
     [DataRow("0.001 'g':1 'kg'", 0.001, "g", 1.0, "kg", DisplayName = "Fractional value")]
     [DataRow("5 '{beats:min}':1 'min'", 5.0, "{beats:min}", 1.0, "min", DisplayName = "Colon inside a unit")]
@@ -67,6 +66,8 @@ public class RatioConversionTests
     [DataRow("1e3:2", DisplayName = "Exponent")]
     [DataRow("--1:2", DisplayName = "Two polarity indicators")]
     [DataRow("99999999999999999999999999999999:1", DisplayName = "Value out of the Decimal range")]
+    [DataRow(" 5 : 2 ", DisplayName = "Spaces around the quantities")]
+    [DataRow(" 1 'mg' : 2 'mL' ", DisplayName = "Spaces around the colon and the string")]
     public void ConvertStringToRatio_MalformedString_ReturnsNull(string input)
     {
         GetOperators().ConvertStringToRatio(input).Should().BeNull();

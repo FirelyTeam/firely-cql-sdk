@@ -343,9 +343,26 @@ namespace Hl7.Cql.Iso8601
                 return false;
             }
 
+            if (!IsRepresentable(hour, minute, second, osHour, osMinute))
+            {
+                timeValue = null;
+                return false;
+            }
+
             timeValue = new TimeIso8601(hour, minute, second, ms, osHour, osMinute);
             return true;
         }
+
+        /// <summary>
+        /// Whether an hour, minute and second name a time of day, and an offset hour and minute an offset in the range
+        /// Table 5-H of the CQL specification gives the timezone offset: from 13 hours behind UTC to 14 hours ahead.
+        /// </summary>
+        internal static bool IsRepresentable(int? hour, int? minute, int? second, int? offsetHour, int? offsetMinute) =>
+            hour is null or (>= 0 and <= 23)
+            && minute is null or (>= 0 and <= 59)
+            && second is null or (>= 0 and <= 59)
+            && offsetMinute is null or (>= -59 and <= 59)
+            && (offsetHour ?? 0) * 60 + (offsetMinute ?? 0) is >= -13 * 60 and <= 14 * 60;
 
         private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
         {
