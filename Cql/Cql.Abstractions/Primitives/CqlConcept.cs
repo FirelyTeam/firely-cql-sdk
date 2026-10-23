@@ -18,7 +18,7 @@ namespace Hl7.Cql.Primitives
     /// <param name="display">The display name of the concept, providing a human-readable description.</param>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#concept-1"/>
     [CqlPrimitiveType(CqlPrimitiveType.Concept)]
-    public record CqlConcept(IReadOnlyList<CqlCode>? codes, string? display)
+    public record CqlConcept(IReadOnlyList<CqlCode>? codes, string? display = null)
     {
         /// <summary>
         /// Represents a CQL Concept, which is a collection of codes with an optional display name.
@@ -29,7 +29,7 @@ namespace Hl7.Cql.Primitives
         /// <see href="https://cql.hl7.org/09-b-cqlreference.html#concept-1"/>
         /// <param name="codes">The collection of <see cref="CqlCode"/> instances that define the concept.</param>
         /// <param name="display">The display name of the concept, providing a human-readable description.</param>
-        public CqlConcept(IEnumerable<CqlCode>? codes, string? display) : this(codes?.ToArray(), display) {}
+        public CqlConcept(IEnumerable<CqlCode>? codes, string? display = null) : this(codes?.ToArray(), display) {}
 
         /// <summary>The collection of <see cref="CqlCode"/> instances that define the concept.</summary>
         public IReadOnlyList<CqlCode> codes { get; init; } = codes;

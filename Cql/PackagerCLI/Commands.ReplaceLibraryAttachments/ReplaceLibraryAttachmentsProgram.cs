@@ -10,7 +10,6 @@ using Hl7.Cql.Packager.Commands.Global;
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Packager.Commands.ReplaceLibraryAttachments;
 

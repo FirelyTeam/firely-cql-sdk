@@ -19,25 +19,6 @@ partial class LibrarySetCSharpCodeGenerator
 
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
-        private readonly Dictionary<string, int> _cacheFieldNameCount = new();
-
-        public string GetUniqueCacheFieldName(string baseName)
-        {
-            if (string.IsNullOrEmpty(baseName))
-                throw new ArgumentException("Base name cannot be null or empty.", nameof(baseName));
-
-            var count = _cacheFieldNameCount.GetValueOrDefault(baseName, 0);
-            string fieldName;
-            do
-            {
-                fieldName = count == 0 ? baseName : $"{baseName}_{count}";
-                count++;
-            } while (_cacheFieldNameCount.ContainsKey(fieldName));
-
-            _cacheFieldNameCount[baseName] = count;
-            _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
-            return fieldName;
-        }
 
         public void AppendLibraryFile(ElmLibrary library, IndentedStringBuilder isb)
         {

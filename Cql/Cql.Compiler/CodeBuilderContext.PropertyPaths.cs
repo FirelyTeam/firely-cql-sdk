@@ -651,23 +651,28 @@ partial class CodeBuilderContext
 
     /// <summary>
     /// The build error for element <paramref name="segment"/> of a value it cannot be bound on at
-    /// compile time, for <paramref name="reason"/>. An explicit <c>as</c> of the source to the type
-    /// that has the element makes the read bindable.
+    /// compile time, for <paramref name="reason"/>. Where <paramref name="suggestsCast"/>, the error
+    /// adds that an explicit <c>as</c> of the source to the type that has the element makes the read bindable.
     /// </summary>
-    private CqlException UnboundElement(string segment, string reason, Element? element) =>
+    private CqlException UnboundElement(string segment, string reason, Element? element, bool suggestsCast = true) =>
         this.NewExpressionBuildingException(FormatMessage(
-            $"Property {segment} cannot be bound at compile time: {reason}. Cast its source with an explicit 'as' to the type that has the element.",
+            suggestsCast
+                ? $"Property {segment} cannot be bound at compile time: {reason}. Cast its source with an explicit 'as' to the type that has the element."
+                : $"Property {segment} cannot be bound at compile time: {reason}.",
             element));
 
     /// <summary>
     /// The build error for element <paramref name="segment"/> of a value of <paramref name="sourceType"/>,
-    /// which neither has the element nor is a choice with known alternatives.
+    /// which neither has the element nor is a choice with known alternatives. A value whose type is not
+    /// known, or is abstract or an interface, may be of a type that has the element, so its error suggests
+    /// a cast; a concrete type that lacks the element has no subtype to cast to, so its error does not.
     /// </summary>
     private CqlException UnboundElement(string segment, Type sourceType, Element? element) =>
-        UnboundElement(
-            segment,
-            sourceType == typeof(object)
-                ? "the type of its source is not known"
-                : $"{sourceType.ToCSharpString(MessageTypeFormat)} has no such element",
-            element);
+        sourceType == typeof(object)
+            ? UnboundElement(segment, "the type of its source is not known", element)
+            : UnboundElement(
+                segment,
+                $"{sourceType.ToCSharpString(MessageTypeFormat)} has no such element",
+                element,
+                suggestsCast: sourceType.IsAbstract || sourceType.IsInterface);
 }

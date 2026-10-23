@@ -169,7 +169,7 @@ internal record ElmToFhirCommand
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
-            .SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler));
+            .SetHandler(ElmToFhirProgram.CommandHandler);
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [

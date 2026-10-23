@@ -404,12 +404,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             return emitOptions;
         }
 
-        private static string CreateMD5HashStringDirectory(string text)
-        {
-            text = System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
-            return text.Replace('/', '-');
-        }
-
         private static SyntaxTree ParseSyntaxTree(string text, string path)
         {
             var sourceText = SourceText.From(text, Encoding.UTF8);
