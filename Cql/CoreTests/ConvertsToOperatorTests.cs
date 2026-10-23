@@ -80,8 +80,8 @@ public class ConvertsToOperatorTests
     #region ConvertsToDate
 
     /// <summary>
-    /// ToDate accepts a DateTime and a String in the ISO-8601 date format that represents a valid date, to any
-    /// precision.
+    /// ToDate accepts a DateTime, and a String in the ISO-8601 date or datetime format that represents a valid date, or
+    /// a datetime whose components are each in range, to any precision.
     /// </summary>
     private static IEnumerable<object?[]> ConvertsToDateCases =>
     [
@@ -89,8 +89,11 @@ public class ConvertsToOperatorTests
         ["DateTime", SampleDateTime, true],
         ["String '2014-01-01'", "2014-01-01", true],
         ["String '2014-01'", "2014-01", true],
+        ["String '2014-01-01T12:30:00'", "2014-01-01T12:30:00", true],
+        ["String '0001-01-01T00:00:00+01:00'", "0001-01-01T00:00:00+01:00", true],
         ["String 'abc'", "abc", false],
         ["String '2014-13-01'", "2014-13-01", false],
+        ["String '2014-01-01T25:00:00'", "2014-01-01T25:00:00", false],
         ["Time", SampleTime, false],
         ["null", null, null],
     ];
@@ -116,6 +119,9 @@ public class ConvertsToOperatorTests
         ["String '2014-01-01'", "2014-01-01", true],
         ["String 'abc'", "abc", false],
         ["String '2014-02-30'", "2014-02-30", false],
+        ["String '2014-01-01T25:00:00Z'", "2014-01-01T25:00:00Z", false],
+        ["String '2014-01-01T10:61:00'", "2014-01-01T10:61:00", false],
+        ["String '2014-01-01T10:00:00+15:00'", "2014-01-01T10:00:00+15:00", false],
         ["Time", SampleTime, false],
         ["null", null, null],
     ];
@@ -141,6 +147,10 @@ public class ConvertsToOperatorTests
         ["Long 5", 5L, true],
         ["String '-0.1'", "-0.1", true],
         ["String '+-0.1'", "+-0.1", false],
+        ["String ' 1 '", " 1 ", false],
+        ["String '1,000'", "1,000", false],
+        ["String '1-'", "1-", false],
+        ["String '.5'", ".5", false],
         ["String 'abc'", "abc", false],
         ["Quantity", SampleQuantity, false],
         ["null", null, null],
@@ -172,6 +182,7 @@ public class ConvertsToOperatorTests
         ["String '-1'", "-1", true],
         ["String 'abc'", "abc", false],
         ["String '1.5'", "1.5", false],
+        ["String ' 1 '", " 1 ", false],
         ["String above the Integer maximum", "2147483648", false],
         ["Decimal 1.0", 1.0m, false],
         ["null", null, null],
@@ -198,6 +209,7 @@ public class ConvertsToOperatorTests
         ["String '-1'", "-1", true],
         ["String Long maximum", "9223372036854775807", true],
         ["String 'one'", "one", false],
+        ["String ' 1 '", " 1 ", false],
         ["String above the Long maximum", "9223372036854775808", false],
         ["Decimal 5.0", 5.0m, false],
         ["null", null, null],
@@ -214,7 +226,7 @@ public class ConvertsToOperatorTests
 
     /// <summary>
     /// ToQuantity accepts an Integer, a Long and a Decimal, each with the unit '1'; a Ratio, which it divides; and a
-    /// String holding a number followed by a unit. A Ratio whose denominator is 0 cannot be divided.
+    /// String holding a number optionally followed by a quoted unit. A Ratio whose denominator is 0 cannot be divided.
     /// </summary>
     private static IEnumerable<object?[]> ConvertsToQuantityCases =>
     [
@@ -225,6 +237,9 @@ public class ConvertsToOperatorTests
         ["Ratio 1 'mg' : 2 'mg'", SampleRatio, true],
         ["Ratio 1 'mg' : 0 'mg'", new CqlRatio(new CqlQuantity(1m, "mg"), new CqlQuantity(0m, "mg")), false],
         ["String \"-0.1 'mg'\"", "-0.1 'mg'", true],
+        ["String '5'", "5", true],
+        ["String \"5'mg'\"", "5'mg'", true],
+        ["String \"444 'cm\"", "444 'cm", false],
         ["String 'abc'", "abc", false],
         ["Boolean true", true, false],
         ["null", null, null],
@@ -278,6 +293,8 @@ public class ConvertsToOperatorTests
         ["String '14:30:00.0'", "14:30:00.0", true],
         ["String 'abc'", "abc", false],
         ["String '2:30 PM'", "2:30 PM", false],
+        ["String '25:00:00'", "25:00:00", false],
+        ["String '10:61'", "10:61", false],
         ["DateTime", SampleDateTime, false],
         ["null", null, null],
     ];

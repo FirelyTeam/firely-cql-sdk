@@ -8,12 +8,14 @@
 
 using Hl7.Cql.Exceptions;
 
-namespace Hl7.Cql.Fhir.Errors;
+namespace Hl7.Cql.ValueSets.Errors;
 
 /// <summary>
-/// An <see cref="ICqlEvaluationError"/> raised when a value set membership test refers to a value set that
-/// <see cref="ValueSetSource"/> cannot resolve: it was not added to the source, the source's resource resolver does
-/// not find it, and no terminology service is attached to ask.
+/// An <see cref="ICqlEvaluationError"/> raised when a value set membership test refers to a value set that the
+/// <see cref="IValueSetDictionary"/> of the evaluation cannot resolve. <see cref="HashValueSetDictionary"/> raises it
+/// for a value set that was not added to it, which includes every value set when a context is created without value
+/// sets. <c>ValueSetSource</c> in <c>Hl7.Cql.Fhir</c> raises it for a value set that was not added to it, that its
+/// resource resolver does not find, while no terminology service is attached to ask.
 /// </summary>
 /// <remarks>
 /// Per the CQL specification (Appendix B - CQL Reference, section "Clinical Operators", "In (Valueset)"), "If the
@@ -30,6 +32,7 @@ public readonly record struct CqlUnresolvedValueSetError : ICqlEvaluationError
     /// <inheritdoc/>
     public string GetMessage() =>
         $"The value set '{ValueSetUri}' cannot be resolved, so whether a code is in it cannot be determined. " +
-        "Add the value set to the value set source, make it available to the source's resource resolver, " +
-        "or attach a terminology service that knows it.";
+        "Give the evaluation a value set dictionary that holds it: add it to the dictionary or, for a " +
+        "ValueSetSource, make it available to the source's resource resolver or attach a terminology service " +
+        "that knows it.";
 }

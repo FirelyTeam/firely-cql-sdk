@@ -56,3 +56,13 @@ static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator !=(Hl7
 static Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.operator ==(Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError left, Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError right) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.Equals(object obj) -> bool
 ~override Hl7.Cql.Operators.Errors.CqlPointFromNonUnitIntervalError.ToString() -> string
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.CqlUnresolvedValueSetError() -> void
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.Equals(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError other) -> bool
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.GetMessage() -> string!
+Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.ValueSetUri.get -> string!
+override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.GetHashCode() -> int
+static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator !=(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError right) -> bool
+static Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.operator ==(Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError right) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.Equals(object obj) -> bool
+~override Hl7.Cql.ValueSets.Errors.CqlUnresolvedValueSetError.ToString() -> string

@@ -42,7 +42,8 @@ namespace Hl7.Cql.Comparers
         /// If the value is less than zero, <paramref name="x"/> is less than <paramref name="y"/>.
         /// If the value is zero, <paramref name="x"/> is equal to <paramref name="y"/>.
         /// If the value is greater than zero, <paramref name="x"/> is greater than <paramref name="y"/>.
-        /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
+        /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>,
+        /// or the objects have no order, such as two objects of different types.
         /// </returns>
         int? Compare(object? x, object? y, string? precision);
 
@@ -57,7 +58,8 @@ namespace Hl7.Cql.Comparers
         /// If the value is less than zero, <paramref name="x"/> is less than <paramref name="y"/>.
         /// If the value is zero, <paramref name="x"/> is equal to <paramref name="y"/>.
         /// If the value is greater than zero, <paramref name="x"/> is greater than <paramref name="y"/>.
-        /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
+        /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>,
+        /// or the objects have no order, such as two objects of different types.
         /// </returns>
         int? CompareValues(object x, object y, string? precision);
 

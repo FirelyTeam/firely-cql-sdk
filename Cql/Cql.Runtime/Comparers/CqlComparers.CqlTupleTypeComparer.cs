@@ -37,7 +37,7 @@ partial class CqlComparers
             // and the values for all elements that have values, by name, are equal,
             // defined as a conjunction of equality comparisons.
             // In three-valued logic: false AND null = false, null AND true = null.
-            // Handle null elements explicitly because memberComparer.Compare uses ordering
+            // Handle null elements explicitly because MemberComparer.CompareMembers uses ordering
             // semantics (null < non-null = -1) whereas equality requires null propagation.
             // NOTE: This logic is also duplicated in LegacyTupleBaseTypeComparer
             // (CqlToElmTests/XmlTest.cs) for testing purposes.
@@ -51,7 +51,7 @@ partial class CqlComparers
                     continue;           // both null → equal for this element
                 }
 
-                var compare = MemberComparer.Compare(x[i], y[i], precision);
+                var compare = MemberComparer.CompareMembers(x[i], y[i], precision);
                 if (compare is null)
                     hasNull = true;
                 else if (compare is not 0)

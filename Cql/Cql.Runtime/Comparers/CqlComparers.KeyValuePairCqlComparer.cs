@@ -18,9 +18,9 @@ partial class CqlComparers
             KeyValuePair<TKey, TValue> x,
             KeyValuePair<TKey, TValue> y,
             string? precision) =>
-            keyValueComparer.Compare(x.Key, y.Key, precision) switch
+            keyValueComparer.CompareMembers(x.Key, y.Key, precision) switch
             {
-                0     => keyValueComparer.Compare(x.Value, y.Value, precision),
+                0     => keyValueComparer.CompareMembers(x.Value, y.Value, precision),
                 var i => i
             };
 

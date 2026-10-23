@@ -1,11 +1,1 @@
 #nullable enable
-Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError
-Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.CqlUnresolvedValueSetError() -> void
-Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.Equals(Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError other) -> bool
-Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.GetMessage() -> string!
-Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.ValueSetUri.get -> string!
-override Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.GetHashCode() -> int
-static Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.operator !=(Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError right) -> bool
-static Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.operator ==(Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError left, Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError right) -> bool
-~override Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.Equals(object obj) -> bool
-~override Hl7.Cql.Fhir.Errors.CqlUnresolvedValueSetError.ToString() -> string

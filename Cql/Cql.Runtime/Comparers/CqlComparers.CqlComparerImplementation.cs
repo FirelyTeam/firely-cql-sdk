@@ -41,7 +41,51 @@ partial class CqlComparers : CqlComparer<object>
     protected override int? CompareValues(
         object x,
         object y,
+        string? precision) =>
+        CompareWithComparerForTypes(x, y, precision, out _);
+
+    /// <summary>
+    /// Compares two members of values that are made up of other values -- the elements of two lists
+    /// or tuples, the keys or values of two key-value pairs -- for the comparers of those values,
+    /// whose comparison decides their equality.
+    /// </summary>
+    /// <remarks>
+    /// Two members that are known to be unequal but have no order, values of different types, make
+    /// the values they belong to unequal. <see cref="ICqlComparer.Compare"/> gives such a pair null,
+    /// which would leave the equality of those values unknown instead, so here the pair compares as
+    /// 1, as two lists of different lengths do: an inequality, not an order, since CQL orders
+    /// neither lists nor tuples. That the pair is of different types comes from the dispatch that
+    /// compares it, so each member is compared once, however deeply the values nest.
+    /// </remarks>
+    internal int? CompareMembers(
+        object? x,
+        object? y,
         string? precision)
+    {
+        if (x is null || y is null)
+            return Compare(x, y, precision);
+
+        var order = CompareWithComparerForTypes(x, y, precision, out var comparable);
+        return comparable ? order : 1;
+    }
+
+    /// <summary>
+    /// Compares two values with the comparer for their types, after <see cref="ShouldSwapTypes"/>
+    /// has chosen which of the two types goes on the left.
+    /// </summary>
+    /// <param name="x">The first value.</param>
+    /// <param name="y">The second value.</param>
+    /// <param name="precision">The precision to compare the values to.</param>
+    /// <param name="comparable">
+    /// Whether that comparer compares the two values. A pair it does not compare, of which a value is
+    /// of another type, has no order, and its values are known to be unequal.
+    /// </param>
+    /// <returns>The comparison of <paramref name="x"/> with <paramref name="y"/>.</returns>
+    private int? CompareWithComparerForTypes(
+        object x,
+        object y,
+        string? precision,
+        out bool comparable)
     {
         bool xySwapped = false;
         var xType = GetKeyTypeForComparers(x);
@@ -58,16 +102,15 @@ partial class CqlComparers : CqlComparer<object>
             }
         }
 
-        var comparer = SelectComparer(x, xType);
+        var comparer = SelectComparer(x, xType)
+                       ?? throw new ArgumentException($"Cannot compare type {xType.Name}");
 
-        if (comparer != null)
-        {
-            var result = comparer.Compare(x, y, precision);
-            if (xySwapped) result = -result;
-            return result;
-        }
+        comparable = comparer is not ITypedCqlComparer typedComparer || typedComparer.CanCompare(x, y);
+        if (!comparable)
+            return null;
 
-        throw new ArgumentException($"Cannot compare type {xType.Name}");
+        var result = comparer.Compare(x, y, precision);
+        return xySwapped ? -result : result;
     }
 
     private ICqlComparer? SelectComparer(object x, Type xType)
@@ -156,41 +199,18 @@ partial class CqlComparers : CqlComparer<object>
         throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
     }
 
+    /// <summary>
+    /// Two values are equal when the comparer that <see cref="CompareValues"/> uses compares them as
+    /// 0. A pair that comparer does not compare, of which a value is of another type, has no order,
+    /// but its values are known to be unequal.
+    /// </summary>
     protected override bool? EqualsValues(
         object x,
         object y,
         string? precision)
     {
-        var xType = GetKeyTypeForComparers(x);
-        {
-            var yType = GetKeyTypeForComparers(y);
-            if (xType != yType)
-            {
-                if (ShouldSwapTypes(xType, yType))
-                {
-                    (x, y) = (y, x);
-                    xType = yType; // yType won't be used again
-                }
-            }
-        }
-
-        if (Comparers.TryGetValue(xType, out var comparer))
-        {
-            return comparer.Equals(x, y, precision);
-        }
-
-        if (xType.IsGenericType)
-        {
-            var gtd = xType.GetGenericTypeDefinition();
-            if (ComparerFactories.TryGetValue(gtd, out var factory))
-            {
-                var gc = factory(xType, this);
-                Comparers.TryAdd(xType, gc);
-                return gc.Equals(x, y, precision);
-            }
-        }
-
-        throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
+        var order = CompareWithComparerForTypes(x, y, precision, out var comparable);
+        return comparable ? CqlComparisonToEquals(order) : false;
     }
 
     protected override int GetHashCodeValue(object value)

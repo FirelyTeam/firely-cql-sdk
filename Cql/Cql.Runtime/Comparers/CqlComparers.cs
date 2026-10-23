@@ -24,7 +24,7 @@ namespace Hl7.Cql.Comparers
         /// The <see cref="IMetricService"/> to use for quantity unit conversions, or <see langword="null"/> to use the default service.
         /// </param>
         public CqlComparers(IMetricService? metricService = null) : base(
-            equalsImplementation: CqlComparerEqualsImplementation.Compare
+            equalsImplementation: CqlComparerEqualsImplementation.Equals
             )
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though

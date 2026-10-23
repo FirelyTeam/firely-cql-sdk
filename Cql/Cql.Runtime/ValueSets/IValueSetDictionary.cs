@@ -6,13 +6,21 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace Hl7.Cql.ValueSets
 {
     /// <summary>
     /// Defines a dictionary of value sets and their codes.
     /// </summary>
+    /// <remarks>
+    /// The CQL specification (Appendix B - CQL Reference, section "In (Valueset)") requires a run-time error for a
+    /// membership test against a value set that cannot be resolved. The <c>IsCodeInValueSet</c> overloads of the
+    /// SDK's implementations signal it with a <see cref="CqlException{TError}"/> whose error is a
+    /// <see cref="CqlUnresolvedValueSetError"/>, rather than answering <see langword="false"/>.
+    /// </remarks>
     public interface IValueSetDictionary
     {
         /// <summary>

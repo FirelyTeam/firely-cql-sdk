@@ -15,13 +15,13 @@ using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Errors;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives.Errors;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets.Errors;
 
 namespace CoreTests;
 
