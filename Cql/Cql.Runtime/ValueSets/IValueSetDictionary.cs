@@ -36,6 +36,12 @@ namespace Hl7.Cql.ValueSets
         /// Returns <see langword="true"/> if the given code is present in the given value set.
         /// This method ignores the code system of the codes present in <paramref name="valueSetUri"/>.
         /// </summary>
+        /// <remarks>
+        /// The CQL specification (Appendix B - CQL Reference, section "In (Valueset)") makes this test a run-time error
+        /// when the value set holds codes from more than one code system, since the code does not say which system it
+        /// is from. The SDK's implementations signal it with a <see cref="CqlException{TError}"/> whose error is a
+        /// <see cref="CqlAmbiguousStringInValueSetError"/>.
+        /// </remarks>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to check.</param>
         /// <returns><see langword="true"/> if the given code is present in the given value set.</returns>

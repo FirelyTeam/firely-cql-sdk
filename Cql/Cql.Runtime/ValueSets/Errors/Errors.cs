@@ -36,3 +36,44 @@ public readonly record struct CqlUnresolvedValueSetError : ICqlEvaluationError
         "ValueSetSource, make it available to the source's resource resolver or attach a terminology service " +
         "that knows it.";
 }
+
+/// <summary>
+/// An <see cref="ICqlEvaluationError"/> raised when a code without a code system, such as a string, is tested for
+/// membership in a value set that holds codes from more than one code system: nothing says which system the code is
+/// from, so it could match a code of a system it was never meant for.
+/// </summary>
+/// <remarks>
+/// <para>
+/// Per the CQL specification (Appendix B - CQL Reference, section "Clinical Operators", "In (Valueset)"), for the
+/// String overload, "if the resolved value set contains codes from multiple code systems, a run-time error is thrown
+/// because the operation is ambiguous." The runtime tests a <c>Code</c> without a system the same way as a string, so it
+/// raises this error as well.
+/// </para>
+/// <para>
+/// Code systems are told apart ignoring case, and a code of the value set that has no system does not count as a code
+/// system of its own.
+/// </para>
+/// </remarks>
+public readonly record struct CqlAmbiguousStringInValueSetError : ICqlEvaluationError
+{
+    internal CqlAmbiguousStringInValueSetError(string? valueSetUri, string code)
+    {
+        ValueSetUri = valueSetUri;
+        Code = code;
+    }
+
+    /// <summary>
+    /// The canonical URI of the value set, or <see langword="null"/> when an <see cref="InMemoryValueSet"/> was tested
+    /// on its own rather than through an <see cref="IValueSetDictionary"/>.
+    /// </summary>
+    public string? ValueSetUri { get; }
+
+    /// <summary>The code that was tested.</summary>
+    public string Code { get; }
+
+    /// <inheritdoc/>
+    public string GetMessage() =>
+        $"Whether '{Code}' is in the value set{(ValueSetUri is null ? "" : $" '{ValueSetUri}'")} is ambiguous: the " +
+        "value set holds codes from more than one code system, and the code tested does not say which system it is " +
+        "from. Test a Code that names its system instead.";
+}
