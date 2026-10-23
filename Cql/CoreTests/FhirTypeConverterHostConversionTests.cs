@@ -748,6 +748,38 @@ namespace CoreTests
         }
 
         [TestMethod]
+        [DataRow(0, "Z", DisplayName = "UTC evaluation request")]
+        [DataRow(2, "+02:00", DisplayName = "+02:00 evaluation request")]
+        public void CreateOperators_OffsetLessMeasurementPeriod_EmitsEveryBoundaryAtTheEvaluationRequestOffset(
+            int requestOffsetHours, string expectedOffset)
+        {
+            // Interval[@2024-01-01T00:00:00.000, @2025-01-01T00:00:00.000) and @2024-01-01T00, built the
+            // way generated C# builds them, so each value is offset-less.
+            var now = new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(requestOffsetHours));
+            var operators = FhirCqlContext.WithDataSource(now: now).Operators;
+            var low = operators.DateTime(2024, 1, 1, 0, 0, 0, 0, offset: null);
+            var high = operators.DateTime(2025, 1, 1, 0, 0, 0, 0, offset: null);
+            var hour = operators.DateTime(2024, 1, 1, 0, null, null, null, offset: null);
+
+            var period = operators.Convert<Period>(operators.Interval(low, high, true, false))!;
+            var lowValue = operators.Convert<FhirDateTime>(low)!.Value;
+            var hourValue = operators.Convert<FhirDateTime>(hour)!.Value;
+
+            foreach (var v in new[] { period.Start, period.End, lowValue, hourValue })
+                Assert.IsTrue(M.FhirDateTime.IsValidValue(v!), $"Not a valid FHIR dateTime: {v}");
+            Assert.AreEqual("2024-01-01T00:00:00.000" + expectedOffset, period.Start);
+            Assert.AreEqual("2024-12-31T23:59:59.999" + expectedOffset, period.End);
+            Assert.AreEqual(period.Start, lowValue);
+            Assert.AreEqual("2024-01-01T00:00:00" + expectedOffset, hourValue);
+
+            // Half an hour after the measurement period ends, in the evaluation request's timezone, is
+            // outside the period, so it has to be after the emitted Period's end as well.
+            var justAfterTheEnd = new DateTimeOffset(2025, 1, 1, 0, 30, 0, now.Offset);
+            var emittedEnd = DateTimeOffset.Parse(period.End!, System.Globalization.CultureInfo.InvariantCulture);
+            Assert.IsTrue(emittedEnd < justAfterTheEnd, $"The emitted Period ends at {period.End}, after {justAfterTheEnd:O}");
+        }
+
+        [TestMethod]
         public void OverrideConverterTimezoneOffset_SubMinuteOrOutOfRange_ThrowsAtOptionsConstruction()
         {
             var tooWide = Assert.ThrowsExactly<ArgumentOutOfRangeException>(
