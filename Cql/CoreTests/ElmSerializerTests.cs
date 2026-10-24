@@ -33,7 +33,7 @@ namespace CoreTests
                 }
                 """;
 
-            var options = Library.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
+            var options = LibraryJsonSerializer.BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
             var ts = JsonSerializer.Deserialize<ChoiceTypeSpecifier>(json, options);
             var cts = ts.Should().BeOfType<ChoiceTypeSpecifier>().Subject;
             cts.choice.Should().HaveCount(1);

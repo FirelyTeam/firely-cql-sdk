@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2024, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -31,11 +31,6 @@ internal class ExpressionSignatureComparer : IEqualityComparer<IDefinitionElemen
 
         if (x is not IHasSignature left || y is not IHasSignature right)
             return false;
-
-        // This might not be relevant for equality, at least it is not in the
-        // OverloadedFunctionDefinition.Combine().
-        // if (left.Fluent != right.Fluent)
-        //     return false;
 
         var leftSig = left.BuildSignatureFromOperands();
         var rightSig = right.BuildSignatureFromOperands();
