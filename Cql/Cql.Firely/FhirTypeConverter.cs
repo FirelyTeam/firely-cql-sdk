@@ -13,7 +13,6 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Fhir.Model;
 using M = Hl7.Fhir.Model;
 
