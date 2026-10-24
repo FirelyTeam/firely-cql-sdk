@@ -165,6 +165,10 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
             _artifactsById
                 .Values
                 .Where(conversion => conversion.ResultElmLibrary is null)
+                // The libraries are translated in the order of their identifiers. Translating a library resolves its
+                // includes, so the order decides where a cycle of includes is met, and so which include records the error.
+                .OrderBy(conversion => conversion.LibraryIdentifier.Identifier)
+                .ThenBy(conversion => conversion.LibraryIdentifier.Version)
                 .TryForEach(
                     r =>
                     {

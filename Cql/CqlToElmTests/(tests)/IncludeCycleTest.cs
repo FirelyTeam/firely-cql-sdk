@@ -130,6 +130,73 @@ namespace Hl7.Cql.CqlToElm.Test
                 "RingA version '1.0.0', which includes RingB version '1.0.0', which includes RingC version '1.0.0', which includes RingA version '1.0.0'.");
         }
 
+        private const string ShareAIncludesBAndC = """
+            library ShareA version '1.0.0'
+            include ShareB version '1.0.0' called B
+            include ShareC version '1.0.0' called C
+            define X: 1
+            """;
+
+        private const string ShareBIncludesA = """
+            library ShareB version '1.0.0'
+            include ShareA version '1.0.0' called A
+            define Y: 2
+            """;
+
+        private const string ShareCIncludesB = """
+            library ShareC version '1.0.0'
+            include ShareB version '1.0.0' called B
+            define Z: 3
+            """;
+
+        [DataTestMethod]
+        [DataRow(ShareAIncludesBAndC, ShareBIncludesA, ShareCIncludesB, DisplayName = "ShareA added first")]
+        [DataRow(ShareBIncludesA, ShareCIncludesB, ShareAIncludesBAndC, DisplayName = "ShareB added first")]
+        [DataRow(ShareCIncludesB, ShareBIncludesA, ShareAIncludesBAndC, DisplayName = "ShareC added first")]
+        public void TwoCyclesThatShareALibrary_AddedInAnyOrder_ReportTheSameCycleOnTheSameInclude(string first, string second, string third)
+        {
+            // The includes form two cycles, ShareA to ShareB to ShareA and ShareA to ShareC to ShareB to ShareA, and which
+            // includes close one depends on the library the translation starts from. The libraries are translated in the order
+            // of their identifiers, so the translation starts from ShareA whatever order they are added in, and only ShareB's
+            // include of ShareA closes a cycle: ShareC includes ShareB, which is translated by then.
+            var libraries = Translate(first, second, third);
+
+            ShouldReportOneCycle(
+                libraries,
+                "Unable to resolve library: ShareA version '1.0.0'. Its includes form a cycle, which CQL does not allow: " +
+                "ShareA version '1.0.0', which includes ShareB version '1.0.0', which includes ShareA version '1.0.0'.");
+            libraries.Single(library => library.identifier.id == "ShareB").GetErrors().Should().ContainSingle();
+        }
+
+        [TestMethod]
+        public void TwoLibrariesWhoseNamesFormatAlike_ReportTheCycleFromTheLibraryThatSortsFirstByIdentifierAndVersion()
+        {
+            // Alike version '1.0.0' and the versionless library "Alike-1.0.0" both format as Alike-1.0.0, and they are told apart
+            // by identifier and then by version. The translation starts from AAEntry, which sorts before both, so the cycle is
+            // met from "Alike-1.0.0", and the report still starts from Alike version '1.0.0'.
+            var libraries = Translate(
+                """
+                library AAEntry version '1.0.0'
+                include "Alike-1.0.0" called Alike
+                define X: 1
+                """,
+                """
+                library "Alike-1.0.0"
+                include Alike version '1.0.0' called Versioned
+                define Y: 2
+                """,
+                """
+                library Alike version '1.0.0'
+                include "Alike-1.0.0" called Versionless
+                define Z: 3
+                """);
+
+            ShouldReportOneCycle(
+                libraries,
+                "Unable to resolve library: Alike version '1.0.0'. Its includes form a cycle, which CQL does not allow: " +
+                "Alike version '1.0.0', which includes Alike-1.0.0, which includes Alike version '1.0.0'.");
+        }
+
         [TestMethod]
         public void ALibraryThatIncludesItself_ReportsTheCycle()
         {

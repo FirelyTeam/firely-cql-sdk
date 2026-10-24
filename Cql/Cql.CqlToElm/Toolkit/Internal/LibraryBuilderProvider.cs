@@ -93,12 +93,18 @@ internal sealed class LibraryBuilderProvider(
         return true;
     }
 
-    // The error for a cycle of includes, which names each library along it, the first repeated at the end. Which library
-    // is resolved first, and so where the cycle is met, depends on the order the libraries are translated in, so the cycle
-    // is reported from the library that sorts first, and the error reads the same whatever the order.
+    // The error for a cycle of includes, which names each library along it, the first repeated at the end. Where the cycle
+    // is met depends on the library the translation starts from, so the cycle is reported from the library that sorts
+    // first, and the error reads the same wherever it is met. The libraries are sorted by identifier and then by version,
+    // not by their formatted name, which can be the same for two libraries: "A-1.0.0" without a version, and A version '1.0.0'.
     private string DescribeIncludeCycle(IReadOnlyList<CqlVersionedLibraryIdentifier> cycle)
     {
-        var start = cycle.Select((library, index) => (Name: library.ToString(), Index: index)).MinBy(entry => entry.Name, StringComparer.Ordinal).Index;
+        var start = cycle
+            .Select((library, index) => (Library: library, Index: index))
+            .OrderBy(entry => entry.Library.Identifier)
+            .ThenBy(entry => entry.Library.Version)
+            .First()
+            .Index;
         var fromStart = cycle.Skip(start).Concat(cycle.Take(start)).ToList();
         var messaging = CqlToElmTranslatorServices!.ServiceProvider.GetRequiredService<MessageProvider>();
         return messaging.UnableToResolveLibraryOnIncludeCycle(
