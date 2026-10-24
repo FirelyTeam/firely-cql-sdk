@@ -34,6 +34,12 @@ internal sealed class LibraryBuilderProvider(
 
     private readonly Dictionary<CqlVersionedLibraryIdentifier, LibraryBuilder> _referenceBuildersById = [];
 
+    /// <summary>
+    /// The libraries whose CQL is being parsed, outermost first. Parsing a library resolves its includes, so a library on
+    /// this chain that is resolved again is included by itself or by a library it includes, which CQL does not allow.
+    /// </summary>
+    private readonly List<CqlVersionedLibraryIdentifier> _librariesBeingParsed = [];
+
     bool ILibraryProvider.TryResolveLibrary(
         string libraryName,
         string? version,
@@ -58,18 +64,58 @@ internal sealed class LibraryBuilderProvider(
         }
 
         Debug.Assert(CqlToElmTranslatorServices is not null);
-        if (CqlToElmTranslatorServices is not null)
+        if (CqlToElmTranslatorServices is null)
+            return false;
+
+        // The builder of a library is stored once its CQL is parsed, and parsing it resolves its includes. A library
+        // resolved while its own CQL is being parsed is on a cycle of includes, which CQL does not allow, and parsing it
+        // again would resolve the same includes again, without end.
+        var cycleStart = _librariesBeingParsed.IndexOf(libVer);
+        if (cycleStart >= 0)
         {
-            var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
-            logger.LogInformation("Parsing CQL for {id}", libVer);
-            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.SourceCqlLibrary.Cql);
-            CqlToolkitArtifactsByIdBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
-            return true;
+            error = DescribeIncludeCycle(_librariesBeingParsed.Skip(cycleStart).ToList());
+            return false;
         }
 
+        var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
+        logger.LogInformation("Parsing CQL for {id}", libVer);
+        _librariesBeingParsed.Add(libVer);
+        try
+        {
+            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.SourceCqlLibrary.Cql);
+        }
+        finally
+        {
+            _librariesBeingParsed.RemoveAt(_librariesBeingParsed.Count - 1);
+        }
 
-        return false;
+        CqlToolkitArtifactsByIdBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
+        return true;
     }
+
+    // The error for a cycle of includes, which names each library along it, the first repeated at the end. Where the cycle
+    // is met depends on the library the translation starts from, so the cycle is reported from the library that sorts
+    // first, and the error reads the same wherever it is met. The libraries are sorted by identifier and then by version,
+    // not by their formatted name, which can be the same for two libraries: "A-1.0.0" without a version, and A version '1.0.0'.
+    private string DescribeIncludeCycle(IReadOnlyList<CqlVersionedLibraryIdentifier> cycle)
+    {
+        var start = cycle
+            .Select((library, index) => (Library: library, Index: index))
+            .OrderBy(entry => entry.Library.Identifier)
+            .ThenBy(entry => entry.Library.Version)
+            .First()
+            .Index;
+        var fromStart = cycle.Skip(start).Concat(cycle.Take(start)).ToList();
+        var messaging = CqlToElmTranslatorServices!.ServiceProvider.GetRequiredService<MessageProvider>();
+        return messaging.UnableToResolveLibraryOnIncludeCycle(
+            fromStart[0].Identifier.ToString(),
+            fromStart[0].Version?.ToString(),
+            fromStart.Append(fromStart[0]).Select(DescribeLibrary));
+    }
+
+    // A library as the messages name one: "A version '1.0.0'", or "A" when it declares no version.
+    private static string DescribeLibrary(CqlVersionedLibraryIdentifier libVer) =>
+        libVer.Version is { } version ? $"{libVer.Identifier} version '{version}'" : libVer.Identifier.ToString();
 
     private bool TryResolveReferenceLibrary(
         CqlVersionedLibraryIdentifier libVer,

@@ -231,6 +231,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Its includes form a cycle, which CQL does not allow: {2}..
+        /// </summary>
+        internal static string UnableToResolveLibraryOnIncludeCycle {
+            get {
+                return ResourceManager.GetString("UnableToResolveLibraryOnIncludeCycle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Its ELM declares {2} more than once in a way a reference cannot tell apart..
         /// </summary>
         internal static string UnableToResolveReferenceLibrary {

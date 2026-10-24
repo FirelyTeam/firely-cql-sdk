@@ -82,6 +82,8 @@ namespace Hl7.Cql.CqlToElm
             Messages.UnexpectedTypeReference;
         public string UnableToResolveLibrary(string library, string? version = null) =>
           string.Format(Culture, Messages.UnableToResolveLibrary, library, version ?? "latest");
+        public string UnableToResolveLibraryOnIncludeCycle(string library, string? version, IEnumerable<string> librariesOnCycle) =>
+          string.Format(Culture, Messages.UnableToResolveLibraryOnIncludeCycle, library, version ?? "latest", string.Join(", which includes ", librariesOnCycle));
         public string UnableToResolveReferenceLibrary(string library, string? version, IEnumerable<string> conflictingNames) =>
           string.Format(Culture, Messages.UnableToResolveReferenceLibrary, library, version ?? "latest", string.Join(", ", conflictingNames.Distinct().Select(name => $"'{name}'")));
 
