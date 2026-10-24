@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -40,7 +40,6 @@ public sealed partial class ColorConsoleLogger(
 
         var logEntry = new LogEntry<TState>(logLevel, _categoryName, eventId, state, exception, formatter);
         var message = GetFormatterMessage(logEntry);
-        //string message = formatter(state, exception);
         if (string.IsNullOrEmpty(message))
             return;
 

@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -409,12 +409,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     // If the offset or comparison is inclusive, add a null check for B to ensure correct interpretation
                     if (isOffsetInclusive || isInclusive)
                     {
-                        // Replaced this (I think more correct) code below with the original before
-                        // the rewrite, so the unit test keep working.
-                        // var nullTest = InvocationBuilder.Invoke(SystemLibrary.IsNull, right);
-                        // var notNullTest = InvocationBuilder.Invoke(SystemLibrary.Not, nullTest);
-                        // var and = InvocationBuilder.Invoke(SystemLibrary.And, @in, notNullTest);
-
                         var not = new Not
                         {
                             operand = new IsNull

@@ -191,5 +191,19 @@ namespace Hl7.Cql.CqlToElm.Test
             y.Equals(x).Should().BeFalse();
             Equals(y, x).Should().BeFalse();
         }
+
+        [TestMethod]
+        // Version specifiers are arbitrary CQL string literals, not guaranteed to be
+        // dot-separated integers (e.g. "R4", "2021-05-01") - comparing them must degrade
+        // gracefully to ordinal ordering instead of throwing.
+        public void VersionedIdentifier_NonNumericVersions_DoesNotThrow()
+        {
+            vi("foo", "R4").CompareTo(vi("foo", "STU3")).Should().NotBe(0);
+            vi("foo", "1.0").CompareTo(vi("foo", "R4")).Should().NotBe(0);
+            vi("foo", "2021-05-01").CompareTo(vi("foo", "2021-06-01")).Should().NotBe(0);
+            vi("foo", "1..0").CompareTo(vi("foo", "1.0")).Should().NotBe(0);
+            vi("foo", "99999999999.0").CompareTo(vi("foo", "1.0")).Should().NotBe(0);
+            vi("foo", "R4").CompareTo(vi("foo", "R4")).Should().Be(0);
+        }
     }
 }
