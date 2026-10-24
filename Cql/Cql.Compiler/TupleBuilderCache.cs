@@ -7,7 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;

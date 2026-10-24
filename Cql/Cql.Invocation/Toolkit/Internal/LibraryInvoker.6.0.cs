@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;

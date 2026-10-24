@@ -10,7 +10,6 @@
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Infrastructure;
 
 namespace CoreTests.Abstractions;
 

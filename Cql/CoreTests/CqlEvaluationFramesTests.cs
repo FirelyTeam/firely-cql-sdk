@@ -7,11 +7,11 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
