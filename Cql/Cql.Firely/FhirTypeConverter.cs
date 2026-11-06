@@ -935,6 +935,8 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
             converter.AddConversion<M.Code, M.FhirString>(code => new M.FhirString(code.Value));
+            // canonical is a uri in the ELM model (e.g. FHIRCommon 2.0.0 calls FHIRHelpers.ToString(uri) with a canonical)
+            converter.AddConversion<M.Canonical, M.FhirUri>(canonical => new M.FhirUri(canonical.Value));
             return converter;
         }
     }
