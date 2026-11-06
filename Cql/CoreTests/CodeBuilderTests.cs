@@ -87,6 +87,54 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void FunctionRef_WithAnArgumentOfASubtypeTheNetModelFlattens_ConvertsTheArgumentToTheParameterType()
+        {
+            // The model info declares FHIR.canonical as a subtype of FHIR.uri, so the translator resolves
+            // FHIRHelpers.ToString(canonical) to ToString(value uri) without a conversion node. The .NET model
+            // holds Canonical and FhirUri as siblings, so the compiler has to convert the argument itself.
+            var fhirHelpers = Library.ParseFromJson(File.ReadAllText(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json")));
+            var cqlToolkit = new CqlToolkit()
+                .AddCqlLibraries([CqlLibraryString.Parse("""
+                    library CanonicalArguments version '1.0.0'
+
+                    using FHIR version '4.0.1'
+
+                    include FHIRHelpers version '4.0.1'
+
+                    context Patient
+
+                    define "Instantiated Urls":
+                      [CarePlan] C return FHIRHelpers.ToString(First(C.instantiatesCanonical))
+                    """)])
+                .AddReferenceLibraries([fhirHelpers])
+                .TranslateToElm();
+            var elmLibrary = cqlToolkit.GetCqlToolkitResults().Single().elmLibrary;
+            var errors = Hl7.Cql.Elm.ExtensionMethods.GetErrors(elmLibrary).Where(e => e.errorSeverity == Hl7.Cql.Elm.ErrorSeverity.error).ToList();
+            Assert.AreEqual(0, errors.Count, string.Join("\n", errors.Select(e => e.message)));
+
+            var elmToolkit = new ElmToolkit()
+                .AddElmLibraries(fhirHelpers, elmLibrary)
+                .CompileToAssemblies();
+            var cSharp = elmToolkit.GetElmToCSharpResults().Single(r => r.cSharp.Contains("class CanonicalArguments")).cSharp;
+            StringAssert.Contains(cSharp, "FhirUri", "the canonical argument is converted to the uri parameter type:\n" + cSharp);
+
+            using var invoker = elmToolkit.CreateLibrarySetInvoker();
+            var bundle = BundleOf(
+                new CarePlan
+                {
+                    Id = "cp-1",
+                    Subject = new ResourceReference("Patient/1"),
+                    InstantiatesCanonical = ["http://example.org/PlanDefinition/Diabetes|1.0.0"],
+                });
+            var urls = ((System.Collections.IEnumerable)invoker.InvokeLibraryDefinition(
+                FhirCqlContext.ForBundle(bundle: bundle),
+                Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("CanonicalArguments", "1.0.0"),
+                "Instantiated Urls")).Cast<object>().ToList();
+
+            CollectionAssert.AreEqual(new[] { "http://example.org/PlanDefinition/Diabetes|1.0.0" }, urls);
+        }
+
+        [TestMethod]
         public void ObservationStatus_Test()
         {
             // Arrange
