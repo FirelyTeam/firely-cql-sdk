@@ -8,7 +8,7 @@
 
 #nullable disable
 
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;
 using Hl7.Fhir.Model;
