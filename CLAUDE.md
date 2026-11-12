@@ -8,7 +8,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## Repository map
 
-Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net8.0;net10.0` (set in `cql-sdk.props`), so run tests on both.
+Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net10.0` (set in `cql-sdk.props`).
 
 **Pipeline, in order, under `Cql/`** (assembly names in parentheses where they differ from the folder):
 

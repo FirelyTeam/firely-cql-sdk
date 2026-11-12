@@ -77,5 +77,4 @@ The following projects target .NET 10 only:
 
 - **Submodules**: The complete solution includes git submodules that may require separate access
 - **Build Command**: Always use `dotnet build Cql-Sdk.slnf` for SDK-only builds
-- **Multi-targeting**: Projects targeting both frameworks allow the SDK to be used in both .NET 8 and .NET 10 applications
-- **Demo Projects**: Demo projects are .NET 10-only to showcase the latest features
+- **Target framework**: every project targets `net10.0`
