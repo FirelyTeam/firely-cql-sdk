@@ -165,6 +165,10 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
             _artifactsById
                 .Values
                 .Where(conversion => conversion.ResultElmLibrary is null)
+                // The libraries are translated in the order of their identifiers. Translating a library resolves its
+                // includes, so the order decides where a cycle of includes is met, and so which include records the error.
+                .OrderBy(conversion => conversion.LibraryIdentifier.Identifier)
+                .ThenBy(conversion => conversion.LibraryIdentifier.Version)
                 .TryForEach(
                     r =>
                     {
@@ -172,8 +176,9 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
                             throw new InvalidOperationException($"Could not resolve CQL library: {r.LibraryIdentifier} with error {error}.");
 
                         var elmLibrary = libraryBuilder.Build();
-                        var newConversionRecord = r with { ResultElmLibrary = elmLibrary };
-                        builder[r.LibraryIdentifier] = newConversionRecord;
+                        // Resolving the library stored its builder in the record the builder holds, so the ELM is added
+                        // to that record, which keeps the builder for the includes of libraries translated later.
+                        builder[r.LibraryIdentifier] = builder[r.LibraryIdentifier] with { ResultElmLibrary = elmLibrary };
                     },
                     errorStrategy => errorStrategy
                                      .SetContinuation(BatchProcessExceptionContinuation)
