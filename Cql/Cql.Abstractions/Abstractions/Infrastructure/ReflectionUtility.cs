@@ -94,7 +94,7 @@ internal static class ReflectionUtility
     public static MethodInfo GenericMethodDefinitionOf(
         Expression<Action> fnToMethodCall,
         [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
-        (MethodOf(fnToMethodCall, expression)
-            ?.GetGenericMethodDefinition())
-            ?? throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
+        MethodOf(fnToMethodCall, expression) is { IsGenericMethod: true } method
+            ? method.GetGenericMethodDefinition()
+            : throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
 }

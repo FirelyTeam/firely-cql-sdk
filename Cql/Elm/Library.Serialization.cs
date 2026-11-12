@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (c) 2026, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -147,14 +147,5 @@ public partial class Library
     public void WriteJson(Stream stream, bool writeIndented = true)
     {
         LibraryJsonSerializer.SerializeToStream(this, stream, writeIndented);
-    }
-
-    /// <summary>
-    /// Builds JSON serializer options for ELM serialization.
-    /// This method is exposed for testing purposes.
-    /// </summary>
-    internal static JsonSerializerOptions BuildSerializerOptions(bool allowOldStyleTypeDiscriminators = false)
-    {
-        return LibraryJsonSerializer.BuildSerializerOptions(allowOldStyleTypeDiscriminators);
     }
 }

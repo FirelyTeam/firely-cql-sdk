@@ -9,6 +9,7 @@
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Serialization;
 using ElmExpression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -169,7 +170,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static JsonNode WithoutIdsAndLocators(ElmExpression expression)
         {
-            var node = JsonSerializer.SerializeToNode<ElmExpression>(expression, Library.BuildSerializerOptions())!;
+            var node = JsonSerializer.SerializeToNode<ElmExpression>(expression, LibraryJsonSerializer.BuildSerializerOptions())!;
             strip(node);
             return node;
 

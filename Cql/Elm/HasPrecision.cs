@@ -14,10 +14,6 @@ namespace Hl7.Cql.Elm
         DateTimePrecision precision { get; set; }
         bool precisionSpecified { get; set; }
     }
-    internal interface IHasPrecisionExpression
-    {
-        Expression precision { get; set; }
-    }
     internal interface UnaryWithPrecision : IHasPrecision, IGetPrecision
     {
         Expression operand { get; }
@@ -52,7 +48,6 @@ namespace Hl7.Cql.Elm
     partial class SameOrBefore : NaryWithPrecision { }
     partial class SameOrAfter : NaryWithPrecision { }
     partial class Starts : NaryWithPrecision { }
-    partial class  Round: IHasPrecisionExpression {}
 
 
 

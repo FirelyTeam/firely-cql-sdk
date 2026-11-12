@@ -8,7 +8,6 @@
 
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Runtime.Hosting;
 
@@ -52,7 +51,6 @@ internal static class CqlToElmServiceCollectionExtensions
             .AddSingleton<CoercionProvider>()
             .AddSingleton<ElmFactory>()
             .AddSingleton<SystemLibrary>()
-            .AddSingleton<StreamInspector>()
             .AddSingleton<InvocationBuilder>()
             .AddTransient<LocalIdentifierProvider>()
             .AddScoped<LibraryVisitor>()
