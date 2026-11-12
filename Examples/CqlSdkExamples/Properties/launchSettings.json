@@ -28,6 +28,10 @@
       "commandName": "Project",
       "commandLineArgs": "240"
     },
+    "241 Package with a dependency available only as ELM, Save FHIR Resources to dir": {
+      "commandName": "Project",
+      "commandLineArgs": "241"
+    },
     "250 Package via CQL Toolkit, Save FHIR Resources to dir": {
       "commandName": "Project",
       "commandLineArgs": "250"
@@ -63,6 +67,10 @@
     "410 Invoke from all FHIR Resource and Dependencies in Directory": {
       "commandName": "Project",
       "commandLineArgs": "410"
+    },
+    "420 Check assemblies in FHIR Resources before invoking": {
+      "commandName": "Project",
+      "commandLineArgs": "420"
     },
     "500 Extending Functionality - Log Statements per Library": {
       "commandName": "Project",

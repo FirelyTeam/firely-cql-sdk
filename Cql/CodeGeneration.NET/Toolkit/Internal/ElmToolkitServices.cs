@@ -8,10 +8,8 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime.Hosting;
 using Hl7.Cql.Runtime.Logging;
 using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;

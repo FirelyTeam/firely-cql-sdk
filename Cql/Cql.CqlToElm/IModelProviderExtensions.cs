@@ -98,27 +98,6 @@ namespace Hl7.Cql.CqlToElm
         }
  
         private static readonly Regex UriPrefixedTypeName = new Regex("{(?'uri'\\S+)}(?'name'\\S+)", RegexOptions.Compiled);
-        /// <summary>
-        /// Gets the model from a qualified name, e.g. {http://hl7.org/fhir}Period
-        /// </summary>
-        /// <param name="provider">This model provider</param>
-        /// <param name="namedType">The named type whose model to derive.</param>
-        /// <param name="model">The located model.</param>
-        /// <returns>True if found; false otherwise.</returns>
-        public static bool TryGetModelFromNamedType(this IModelProvider provider, 
-            Elm.NamedTypeSpecifier namedType,
-            out ModelInfo? model)
-        {
-            var match = UriPrefixedTypeName.Match(namedType.name.Name);
-            if (match.Success)
-            {
-                var uri = match.Groups["uri"].Value;
-                return provider.TryGetModelFromUri(uri, out model);
-            }
-            model = null;
-            return false;
-        }
-
         public static bool TryMakeQualifiedNameFromType(this IModelProvider provider,
             Elm.NamedTypeSpecifier namedType,
             out string? qualifiedName)

@@ -9,6 +9,8 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Exceptions;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
@@ -232,6 +234,11 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
+                        // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                        // partitions never advance and, as for a per of zero, no expansion can be computed.
+                        if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                            return null;
+
                         // The partition ends one step before the next start. When that start cannot be represented, the end is
                         // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                         var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -303,6 +310,11 @@ namespace Hl7.Cql.Operators
                         // high is one less than next grouping using the smallest precision of the interval
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
+
+                        // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                        // partitions never advance and, as for a per of zero, no expansion can be computed.
+                        if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                            return null;
 
                         // The partition ends one step before the next start. When that start cannot be represented, the end is
                         // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
@@ -382,6 +394,11 @@ namespace Hl7.Cql.Operators
                         var onePrior = new CqlQuantity(1, cqlunits);
                         var next = listItem.Add(per);
 
+                        // Adding a per drops its decimal portion, so a per below one unit of its precision adds nothing: the
+                        // partitions never advance and, as for a per of zero, no expansion can be computed.
+                        if (next is not null && Comparer.Compare(next, listItem, null) <= 0)
+                            return null;
+
                         // The partition ends one step before the next start. When that start cannot be represented, the end is
                         // reached directly as start + (per - one step), so a partition ending at the type's maximum is still found.
                         var high = next is not null ? next.Subtract(onePrior) : listItem.Add(PerLessOneStep(per, cqlunits));
@@ -457,7 +474,15 @@ namespace Hl7.Cql.Operators
 
                     while (true)
                     {
-                        var next = decimal.Add(listItem, perValue);
+                        // A next start beyond the range of Decimal lies beyond the upper boundary as well.
+                        if (OverflowGuard.Add(listItem, perValue) is not { } next)
+                            break;
+
+                        // Adding a per too small for the magnitude of the start rounds it away, so the partitions never advance
+                        // and, as for a per of zero, no expansion can be computed.
+                        if (next <= listItem)
+                            return null;
+
                         // Truncation expands at per's scale, so the interval ends one unit of that scale below the next
                         // start (N -> N-1 for an integer per), not at the decimal epsilon predecessor.
                         var high = needsTruncation ? decimal.Subtract(next, UnitAtScale(perScale)) : Predecessor(next);
@@ -517,17 +542,15 @@ namespace Hl7.Cql.Operators
 
                     // A fractional per makes the spec produce intervals of Decimal, which this Integer overload cannot represent.
                     if (decimal.Truncate(perValue) != perValue)
-                        throw new NotSupportedException($"Expand of an interval of Integer with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of intervals of Decimal.");
+                        throw new CqlExpandFractionalPerError(perValue, per.unit, "Integer").ToException();
 
-                    var intQuantity = decimal.ToInt32(perValue);
                     var listItem = interval.low!.Value;
                     while (true)
                     {
                         // Only a partition of size per that ends on or before the upper boundary is contributed. The end
                         // is computed in a wider type so a partition reaching the type's maximum is still emitted,
-                        // after which there is no next start.
-                        var end = (long)listItem + intQuantity - 1;
-                        if (end > interval.high!.Value)
+                        // after which there is no next start; an end beyond even that type lies beyond the upper boundary.
+                        if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                             break;
 
                         var listInterval = new CqlInterval<int?>(listItem, (int)end, true, true);
@@ -583,17 +606,15 @@ namespace Hl7.Cql.Operators
 
                     // A fractional per makes the spec produce intervals of Decimal, which this Long overload cannot represent.
                     if (decimal.Truncate(perValue) != perValue)
-                        throw new NotSupportedException($"Expand of an interval of Long with the fractional per '{perValue}' is not supported: the CQL specification requires the result to be a list of intervals of Decimal.");
+                        throw new CqlExpandFractionalPerError(perValue, per.unit, "Long").ToException();
 
-                    var intQuantity = decimal.ToInt64(perValue);
                     var listItem = interval.low!.Value;
                     while (true)
                     {
                         // Only a partition of size per that ends on or before the upper boundary is contributed. The end
                         // is computed in a wider type so a partition reaching the type's maximum is still emitted,
-                        // after which there is no next start.
-                        var end = (decimal)listItem + intQuantity - 1;
-                        if (end > interval.high!.Value)
+                        // after which there is no next start; an end beyond even that type lies beyond the upper boundary.
+                        if (OverflowGuard.Add((decimal)listItem, perValue - 1) is not { } end || end > interval.high!.Value)
                             break;
 
                         var listInterval = new CqlInterval<long?>(listItem, (long)end, true, true);
@@ -625,11 +646,17 @@ namespace Hl7.Cql.Operators
         /// The per quantity shortened by one step of the boundary unit and expressed in that unit. A weekly per is
         /// the only case where per and the boundary step differ in unit, since weeks align to day precision.
         /// </summary>
-        private static CqlQuantity PerLessOneStep(CqlQuantity per, string? stepUnit)
+        private static CqlQuantity? PerLessOneStep(CqlQuantity per, string? stepUnit)
         {
             var value = per.value ?? 1;
             if (per.unit is "week" or "weeks" or UCUMUnits.Week)
-                value *= CqlDateTimeMath.DaysPerWeek;
+            {
+                // A per whose number of days lies beyond the range of Decimal cannot be represented, and neither can
+                // the end of a partition that long.
+                if (OverflowGuard.Multiply(value, CqlDateTimeMath.DaysPerWeek) is not { } days)
+                    return null;
+                value = days;
+            }
             return new CqlQuantity(value - 1, stepUnit);
         }
 
@@ -712,12 +739,6 @@ namespace Hl7.Cql.Operators
                     new CqlTime(time.Hour, time.Minute, time.Second, null, time.OffsetHour, time.OffsetMinute)
             };
         }
-
-        /// <summary>
-        /// One unit at the given scale, e.g. a scale of 2 yields 0.01.
-        /// </summary>
-        private static decimal UnitAtScale(int scale) =>
-            new(1, 0, 0, false, (byte)scale);
 
         private static decimal TruncateToScale(decimal value, int scale) =>
             Math.Round(value, scale, MidpointRounding.ToZero);
@@ -955,18 +976,6 @@ namespace Hl7.Cql.Operators
 
         #endregion
 
-        #region Not Equal
-
-        // public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
-
-        #endregion
-
-        #region Not Equivalent
-
-        // public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) moved to CqlOperators.ListOperators.cs
-
-        #endregion
-
         #region Properly Includes
 
         /// <summary>
@@ -1008,8 +1017,22 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return (T?)(object?)null;
-            else
-                return source.SingleOrDefault();
+
+            using var enumerator = source.GetEnumerator();
+            if (!enumerator.MoveNext())
+                return default;
+
+            var element = enumerator.Current;
+            if (!enumerator.MoveNext())
+                return element;
+
+            if (!source.TryGetNonEnumeratedCount(out var elementCount))
+            {
+                elementCount = 2;
+                while (enumerator.MoveNext())
+                    elementCount++;
+            }
+            throw new CqlException<CqlSingletonFromMultipleElementsError>(new(elementCount, typeof(T)));
         }
 
 

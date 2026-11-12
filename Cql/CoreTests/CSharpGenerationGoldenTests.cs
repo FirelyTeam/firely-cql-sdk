@@ -155,11 +155,19 @@ public class CSharpGenerationGoldenTests
     }
 
     private static string NormalizeLineEndings(string text) =>
-        NormalizeGeneratedCodeVersion(text.Replace("\r\n", "\n")).TrimEnd('\n');
+        NormalizeGeneratedCodeAttribute(text.Replace("\r\n", "\n")).TrimEnd('\n');
 
-    private static string NormalizeGeneratedCodeVersion(string text) =>
+    /// <summary>
+    /// Replaces the tool and version of the generator's <c>GeneratedCode</c> attribute, under either of the
+    /// generator's names, so that a golden file whose only difference is that attribute still matches.
+    /// </summary>
+    private static string NormalizeGeneratedCodeAttribute(string text) =>
         System.Text.RegularExpressions.Regex.Replace(
             text,
-            "\\[System\\.CodeDom\\.Compiler\\.GeneratedCode\\(\"\\.NET Code Generation\", \"[^\"]+\"\\)\\]",
-            "[System.CodeDom.Compiler.GeneratedCode(\".NET Code Generation\", \"<normalized>\")]");
+            "\\[System\\.CodeDom\\.Compiler\\.GeneratedCode\\(\"(?:"
+            + System.Text.RegularExpressions.Regex.Escape(Hl7.Cql.CodeGeneration.NET.LibrarySetCSharpCodeGenerator.GeneratorToolName)
+            + "|"
+            + System.Text.RegularExpressions.Regex.Escape(Hl7.Cql.CodeGeneration.NET.LibrarySetCSharpCodeGenerator.LegacyGeneratorToolName)
+            + ")\", \"[^\"]+\"\\)\\]",
+            "[System.CodeDom.Compiler.GeneratedCode(\"<normalized>\", \"<normalized>\")]");
 }

@@ -95,6 +95,10 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.6.2 When an issue is too stale to act on — the code or symbols it names no longer exist — close it and file a fresh superseding issue, cross-referenced in both directions, instead of keeping the stale one open with a "needs rewriting" note. The procedure is in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md).
 
+1.6.3 When closing an issue or pull request, remove its status labels (`Blocked: …`, `Help Wanted`). The procedure is in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md#closing-an-issue).
+
+1.6.4 Give an issue its kind through its Issue Type (Bug, Enhancement or Task), not through a label. The procedure is in [file-github-issue](../../.claude/skills/file-github-issue/SKILL.md).
+
 ## 1.7. Ticket Pickup Workflow
 
 1.7.1 Follow the shared procedure in [pickup-github-ticket](../../.claude/skills/pickup-github-ticket/SKILL.md) for resolving a ticket number/URL to a branch and picking up the work.
@@ -109,7 +113,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 ## 1.10. PR Review Boundaries and `@copilot` Dispatch
 
-1.10.1 While reviewing someone else's PR, do not commit to that PR branch. Findings go to the author (or `@copilot`) to apply.
+1.10.1 While reviewing someone else's PR, do not commit to that PR branch. Findings go to the author (or `@copilot`) to apply. Merging the base branch into the PR without conflicts is the one exception: it adds no code of the reviewer's own, so the reviewer may do it, and their approval still counts. Resolving a conflict is writing code, so a base merge with conflicts goes to the author (or `@copilot`) like any other change.
 
 1.10.2 The consequence is not only procedural: if a reviewer commits to the branch being reviewed, that reviewer has now contributed code to the PR, so their review is no longer eligible as approval and a second reviewer is required.
 
@@ -123,4 +127,4 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 
 1.10.7 Any `since` filter used for follow-up verification must use the exact timestamp of the triggering event, never a rounded or approximate time.
 
-1.10.8 When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on.
+1.10.8 When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on. When the user agrees, the reviewer may merge it in, by a merge commit or GitHub's 'Update branch' button, as long as there are no conflicts.

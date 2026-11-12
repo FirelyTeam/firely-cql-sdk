@@ -32,13 +32,24 @@ The Firely CQL SDK uses a struct-based error pattern (`ICqlError` + `CqlExceptio
 - **`CqlException`** (`Hl7.Cql.Exceptions`) — public abstract base exception; message is derived from an `ICqlError` payload
 - **`CqlException<TError>`** (`Hl7.Cql.Exceptions`) — generic concrete exception wrapping a strongly-typed `ICqlError` struct payload
 
-  10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlError`.
-  **IMPORTANT**: The struct must accept the **metadata** (raw facts like a unit name or value) as constructor parameters, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
+An evaluation error implements **`ICqlEvaluationError`** (`Hl7.Cql.Exceptions`), an `ICqlError`, so a host tells it from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`. `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated when it was thrown, innermost first, and `GetCqlEvaluationFrames()` reads the same from any other exception.
+
+  10.1.2 To define a new CQL evaluation error, create a `public readonly record struct` implementing `ICqlEvaluationError`, declared without a positional parameter list.
+  **IMPORTANT**: The struct must hold the **metadata** (raw facts like a unit name or value) as get-only properties, set by its constructor, NOT a pre-built message string. `GetMessage()` is responsible for constructing the human-readable message from that metadata:
 
 ```csharp
 // ✅ CORRECT — struct holds metadata, GetMessage() constructs the message
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() =>
         $"If a definite-duration time-valued unit above days (or weeks) appears in a date/time arithmetic " +
         $"calculation, the evaluation will end and signal an error to the calling environment. " +
@@ -46,8 +57,12 @@ public readonly record struct CqlArithmeticError(string Unit, string CalendarEqu
 }
 
 // ❌ WRONG — do NOT pass a pre-built message string
-public readonly record struct CqlArithmeticError(string Message) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
+    internal CqlArithmeticError(string message) => Message = message;
+
+    public string Message { get; }
+
     public string GetMessage() => Message;  // anti-pattern
 }
 
@@ -59,7 +74,7 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 
 ## 10.2. When to Use CqlException
 
-10.2.1 **ALWAYS** create a specific `ICqlError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
+10.2.1 **ALWAYS** create a specific `ICqlEvaluationError` struct and throw it as `CqlException<TError>` for any exception that should be raised during the evaluation of a CQL expression, instead of using general .NET exceptions like `InvalidOperationException` or `ArgumentException`.
 
 10.2.2 Examples of when to use `CqlException<TError>`:
 
@@ -72,12 +87,8 @@ catch (CqlException<CqlArithmeticError> e) { ... }
 
 ## 10.3. Key Points
 
-10.3.1 Exception infrastructure (`ICqlError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
+10.3.1 Exception infrastructure (`ICqlError`, `ICqlEvaluationError`, `ICqlArithmeticError`, `CqlException`, `CqlException<TError>`, `CqlErrorExtensions`, `CqlEvaluationFrame`) lives in `Cql/Cql.Abstractions/Exceptions/`, namespace `Hl7.Cql.Exceptions`.
 
-10.3.2 **`Cql.Abstractions` is a special project**: it uses one `Errors.cs` file **per direct folder**, containing all `ICqlError` structs used within that folder's code. The namespace of each `Errors.cs` matches the folder's namespace:
+10.3.2 Every public `ICqlError` value lives in an `Errors/` folder of the area that throws or returns it, with namespace `<namespace of that area>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`. An error the primitives throw goes in `Cql.Abstractions/Primitives/Errors/`, namespace `Hl7.Cql.Primitives.Errors`. This holds whether the error is thrown inside a `CqlException` or returned as a value. `Hl7.Cql.Exceptions` keeps only the exception machinery (10.3.1). Internal errors may stay in the namespace of the code that uses them.
 
-- `Cql.Abstractions/Exceptions/Errors.cs` → `namespace Hl7.Cql.Exceptions` (internal infrastructure errors)
-- `Cql.Abstractions/Primitives/Errors.cs` → `namespace Hl7.Cql.Primitives` (errors thrown by primitive types like `CqlDate`, `CqlDateTime`)
-- Add a new `FolderName/Errors.cs` when adding errors used by types in a new folder
-
-  10.3.3 New `ICqlError` structs should be placed in the `Errors.cs` of the folder that contains the throw site. If the struct is part of the public API (not `internal`, like the existing structs in `Exceptions/Errors.cs`), it must also be registered in `Cql/Cql.Abstractions/PublicAPI.Unshipped.txt`.
+10.3.3 A public error struct must also be registered in the `PublicAPI.Unshipped.txt` of its project.

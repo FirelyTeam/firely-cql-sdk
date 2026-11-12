@@ -129,17 +129,4 @@ internal static class CqlParserExtensions
 
         return true;
     }
-
-    internal static bool EnsureNoSyntaxErrors(
-        this cqlParser p,
-        CqlParseErrorHandler onError)
-    {
-        if (p.NumberOfSyntaxErrors != 0)
-        {
-            onError(CqlParseErrors.SyntaxErrorFound);
-            return false;
-        }
-
-        return true;
-    }
 }

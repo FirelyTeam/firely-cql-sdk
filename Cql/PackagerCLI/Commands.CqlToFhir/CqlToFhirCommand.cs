@@ -56,7 +56,7 @@ internal record CqlToFhirCommand
     public static Command CreateCommand() =>
         new Command(Name, Description)
             .AddOptions(Options)
-            .SetHandler(typeof(CqlToFhirProgram), nameof(CqlToFhirProgram.CommandHandler));
+            .SetHandler(CqlToFhirProgram.CommandHandler);
 
     public static readonly Option[] Options =
     [

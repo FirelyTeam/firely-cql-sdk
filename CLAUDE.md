@@ -6,6 +6,38 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 **Keep this in sync with the Copilot instructions.** When you add, remove, or change a rule here (or in a `.claude/skills/` file), check whether `.github/copilot-instructions.md` or one of its sub-documents states the same rule and needs the equivalent update, and vice versa. A universal convention or gotcha shouldn't exist in one file and not the other; a task-specific workflow should have exactly one canonical copy (here, in `.claude/skills/`), with the Copilot side linking to it rather than restating it.
 
+## Repository map
+
+Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net8.0;net10.0` (set in `cql-sdk.props`), so run tests on both.
+
+**Pipeline, in order, under `Cql/`** (assembly names in parentheses where they differ from the folder):
+
+| Project | Role | Start at |
+|---|---|---|
+| `Cql.Grammar` (`Hl7.Cql.CqlToElm.Grammar`) | ANTLR grammar `cql.g4` and its generated parser | `cqlParser.cs` |
+| `Cql.CqlToElm` | CQL text to ELM: visitors, overload resolution, system library, translation messages | `Visitors/ExpressionVisitor.cs`, `InvocationBuilder.cs`, `Builtin/SystemLibrary.cs`, `MessageProvider.cs` |
+| `Elm` | ELM object model (generated from the XSD) and its JSON/XML serialization | `Elm.g.cs`, `Library.cs` |
+| `Cql.Model` | Model info (FHIR and System types) | `Models/`, `Models.cs` |
+| `Cql.Compiler` | ELM to a typed intermediate representation; binds each ELM node to an `ICqlOperators` method | `CodeBuilder.cs`, `CqlOperatorsBinder.*.cs`, `CodeModel/`, `Preprocessing/` |
+| `CodeGeneration.NET` | Prints the IR as C# and compiles it; holds `GeneratorToolVersion` | `LibrarySetCSharpCodeGenerator.*.cs`, `CSharpEmitter.*.cs`, `AssemblyCompiler.cs`, `_CODE GENERATOR VERSION_.cs` |
+| `Cql.Invocation` | Loads generated assemblies and invokes definitions; one `LibraryInvoker.<major>.<minor>.cs` per supported generator version | `Toolkit/InvocationToolkit.cs`, `Toolkit/LibrarySetInvoker.cs`, `Toolkit/Internal/` |
+| `Cql.Runtime` | Everything generated code calls at run time: `ICqlOperators` and its `CqlOperators` implementation, `CqlContext`, comparers, type and unit conversion, value sets | `Operators/`, `Runtime/CqlContext.cs`, `Comparers/`, `Conversion/`, `ValueSets/` |
+| `Cql.Abstractions` (`HL7.Cql.Abstractions`) | CQL primitive types, `CqlException<TError>` and the `ICqlError` structs, `ReflectionUtility`, definition attributes | `Primitives/`, `Exceptions/`, `Abstractions/Infrastructure/` (see [its CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md)) |
+| `Iso8601` | `DateIso8601`, `DateTimeIso8601`, `TimeIso8601` and `DateTimePrecision`, the values inside `CqlDate`, `CqlDateTime` and `CqlTime` | the three `*Iso8601.cs` files |
+| `Cql.Firely` (`Hl7.Cql.Fhir`) | FHIR bindings on the Firely .NET SDK: `FhirCqlContext`, `FhirTypeConverter`, `FhirTypeResolver`, `BundleDataSource` | the files of those names |
+| `Cql.Packaging`, `PackagerCLI` (`Hl7.Cql.Packager`) | Packaging CQL/ELM/assemblies into FHIR `Library` resources; the `dotnet` tool that drives it | `ResourcePackager.cs`; `PackagerCLI/Commands.*` |
+| `Cql` (`Hl7.Cql`) | Meta-package, no code | |
+
+**Where an operator lives.** `ICqlOperators` is one interface in `Cql/Cql.Runtime/Operators/ICqlOperators.cs`; its implementation is split over `CqlOperators.<Family>.cs` in that folder: `ArithmeticOperators`, `AggregateFunctions`, `ComparisonOperators`, `DateTimeOperators`, `EqualityAndEquivalence`, `IntervalOperators` plus `IntervalBoundaries`, `ListOperators`, `LogicalOperators`, `NullologicalOperators`, `StringOperators`, `TypeOperators` (conversions, `ConvertQuantity`), `ClinicalOperators2` (age, codes, value sets), `FusedOperators` and `CrossJoin` (query fusion). Date, time and quantity arithmetic itself is on the primitives (`CqlDate.Add`, `CqlQuantity`, in `Cql.Abstractions/Primitives/`); unit conversion is `UnitConverter` and `UcumConversionExtensions` in `Cql.Runtime/Conversion/`; overload resolution at translation time is `InvocationBuilder` in `Cql.CqlToElm`.
+
+**Tests.** `Cql-Sdk.slnf` builds two test projects, both MSTest, under `Cql/`; other suites live beside what they test (`tools/XsdToCSharpConverterTests`, `Demo/Test.Measures.Demo`).
+
+- `CoreTests`: unit tests for runtime, compiler, primitives and FHIR binding, one file per concern (`CqlDateTests.cs`, `AggregateOperatorTests.cs`, …). `CSharp/*.g.cs` are golden files checked by `CSharpGenerationGoldenTests`; `Input/ELM/` holds the ELM they are generated from.
+- `CqlToElmTests`: translator tests, one `(tests)/<Operator>Test.cs` per operator. `(tests)/XmlTest.cs` is the CQL conformance suite: it translates, evaluates and checks every case in `Input/DQIC/*.xml`. Those files are unmodified copies of cqframework/cql-tests and are never edited, except `CqlAgeTest.xml` and `FirelyAdditionsTest.xml`, which are Firely's own and where SDK-only cases go (see the README there). A case that does not hold for this SDK is listed with its reason in `(tests)/SkippedTests.cs` (`DoesNotCompile`, `DoesNotMatchExpectation`).
+- `Benchmarks`: BenchmarkDotNet micro-benchmarks.
+
+**Elsewhere:** `Demo/` is the measure pipeline (CQL to ELM to C# to FHIR), described in [docs/demo-projects.md](docs/demo-projects.md); `submodules/Firely.Cql.Sdk.Integration.Runner` is the private MADiE integration suite; `spec/` is the CQL and FHIR spec mirror (below); `tools/` holds the spec condenser, the XSD-to-C# converter and the Mermaid renderer; `build/` holds the Azure pipeline; `Examples/` holds the public samples (`CqlSdkExamples`, stable API) and preview samples (`CqlSdkExamplesPreview`, internal and experimental API); `docs/` holds the design documents, starting with [docs/cql-engine-architecture.md](docs/cql-engine-architecture.md).
+
 ## Working style
 
 - When asked for ideas, suggestions, or "what's the best way to..." — discuss 2-3 options with trade-offs and wait for the user to pick one before implementing. Don't jump straight to code for exploratory questions.
@@ -13,10 +45,10 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - Prefer the GitHub CLI (`gh`) over raw HTTP/browser steps for issue/PR lookup and edits. If it's missing, install and authenticate it first.
 - Tick off acceptance-criteria checkboxes in a PR's linked issue (and the PR body) automatically, whenever their truth may have changed: after pushing work, after a follow-up commit that addresses review comments, and when reviewing a PR — including someone else's. Do it before reporting the review or the task done — see the `sync-acceptance-criteria` skill.
 - After fixing a review comment and pushing the fix, mark that conversation resolved (it doesn't happen automatically) — see the `resolve-pr-review-comments` skill.
-- While reviewing someone else's PR, never commit to that PR branch. Send findings to the author (or `@copilot`) to apply instead; if a reviewer pushes code, that reviewer has now contributed to the branch and the review is no longer eligible as approval, so a second reviewer becomes required.
+- While reviewing someone else's PR, never commit to that PR branch. Send findings to the author (or `@copilot`) to apply instead; if a reviewer pushes code, that reviewer has now contributed to the branch and the review is no longer eligible as approval, so a second reviewer becomes required. Merging the base branch into the PR without conflicts is the one exception: it adds no code of the reviewer's own, so the reviewer may do it, and their approval still counts. Resolving a conflict is writing code, so a base merge with conflicts goes to the author (or `@copilot`) like any other change.
 - When requesting `@copilot` to apply PR changes, post a PR comment (not only a review body mention) that includes the complete ask in that comment: exact file path, concrete before/after change, and rationale. Do not post pointer-only asks like "apply item 11."
 - When checking whether `@copilot` work landed, check all channels: issue comments, PR reviews, inline PR comments, and timeline events (`copilot_work_started`/`copilot_work_finished`). If a session finished and head SHA did not change, nothing was applied. Any `since` filter must use the real source event timestamp, not an approximate rounded time.
-- When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on.
+- When picking up a PR for review, report ahead/behind counts from `git rev-list --left-right --count <branch>...origin/<base>` (first count is ahead, second is behind), and report PR mergeability (`mergeable`, plus `mergeStateStatus` when available), then ask whether to merge the base into it before reviewing — do not decide unilaterally. Reviewing a stale branch means reviewing against a world that has moved, but a base merge re-triggers CI and can surface conflicts mid-review, so the call is the user's. If the branch is 0 behind, say so and carry on. When the user agrees, the reviewer may merge it in, by a merge commit or GitHub's 'Update branch' button, as long as there are no conflicts.
 - When a convention change is needed in `CLAUDE.md` or `.github/copilot-instructions/`, file an issue and have `@copilot` apply it on a branch instead of editing instruction files ad hoc in a local working copy.
 
 ## Code conventions (non-obvious ones)
@@ -24,7 +56,8 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 - **Copyright headers** (`*.cs`, not `*.g.cs`): For new files, use the standard header shown in [.github/copilot-instructions/04-development-guidelines.md](.github/copilot-instructions/04-development-guidelines.md). **Never modify an existing file's header** — if Firely isn't already listed as a contributor there, leave it as-is.
 - **`InternalsVisibleTo`** goes in the `.csproj` (`<InternalsVisibleTo Include="ProjectName" Key="$(LibraryPKHash)" />`), never in `AssemblyInfo.cs`.
 - New internal-only utility types/files should stay `internal`, not `public` — only expose what's meant for external consumption.
-- Every new `.cs` file needs its own `#nullable enable` directive after the header, even though nullable is enabled globally in props — this repo wants it explicit per file.
+- A public type that wants value semantics is a `record` or a `readonly record struct` declared without a positional parameter list. It has get-only properties and an `internal` constructor. Keep the constructor `public` only when code outside the SDK's assemblies, such as generated C#, has to create instances, and even then don't make the record positional. Use an `internal init` only where the SDK itself needs a `with` expression. Internal and private types may stay positional. Existing public positional records stay as they are until a release that may break compiled consumers, because changing them is itself a breaking change.
+- A new `.cs` file needs its own `#nullable enable` directive after the header only when its project does not enable nullable. Where the project sets `<Nullable>enable</Nullable>`, as `cql-base.props` does for every SDK project, leave it out.
 - Check `GlobalUsings.cs` before adding a `using` — don't duplicate what's already global.
 - **Reflection goes through [`ReflectionUtility`](Cql/Cql.Abstractions/Abstractions/Infrastructure/ReflectionUtility.cs)**, not string-based lookups. Use `MethodOf(() => x.Method(…))`, `PropertyOf(() => x.Prop)`, `ConstructorOf(() => new T(…))` and `GenericMethodDefinitionOf(() => x.Generic<T>(…))` instead of `typeof(X).GetMethod("Name")` / `GetProperty("Name")`. The expression form is checked by the compiler, follows renames, and returns a non-null result or throws with the offending expression in the message — so it also removes the `!` and the null-guard that string lookups drag along. The class is `internal` to `HL7.Cql.Abstractions`, which grants `InternalsVisibleTo` to every SDK assembly (`Hl7.Cql.Runtime`, `Hl7.Cql.Fhir`, `Hl7.Cql.Compiler`, …) plus `CoreTests`, so it is available essentially everywhere. `nameof` in a `GetMethod`/`GetProperty` call is not a substitute: it survives renames but still resolves by string at run time and still cannot see an overload change.
 - **The only place backstory goes is the PR description.** Why a thing was once done, which PR or issue caused it, what used to be pinned, broken or worked around, what a rule is a reaction to — none of it belongs in source, project or config files, **and none of it belongs in instruction or documentation files either**, this one included. State the rule or the constraint as it is *now* ("raise this property rather than pinning one package") and stop; the reader does not need to know what it replaced. Release notes are the one exception, being a record of what each release shipped.
@@ -38,20 +71,29 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## CQL evaluation errors: use `ICqlError` + `CqlException<TError>`, not raw .NET exceptions
 
-For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlError` — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
+For any error the CQL spec says should "signal an error to the calling environment" during expression evaluation (arithmetic failures, type mismatches, spec-mandated date/time errors, etc.), throw a `CqlException<TError>` wrapping a `public readonly record struct` implementing `ICqlEvaluationError` (an `ICqlError`) — not `InvalidOperationException`/`ArgumentException` (those stay reserved for actual programming errors, e.g. bad method arguments).
 
-The struct holds raw metadata (unit name, value, etc.) as constructor parameters; `GetMessage()` builds the human-readable string lazily, on demand, rather than at the throw site. This keeps error handling strongly-typed (`catch (CqlException<CqlUcumYearArithmeticError> e)`) and avoids allocating message strings for errors that get caught without ever being displayed.
+The struct holds raw metadata (unit name, value, etc.) as get-only properties, set by its constructor; `GetMessage()` builds the human-readable string lazily, on demand, rather than at the throw site. This keeps error handling strongly-typed (`catch (CqlException<CqlUcumYearArithmeticError> e)`) and avoids allocating message strings for errors that get caught without ever being displayed.
 
 ```csharp
 // correct — metadata in, message built lazily
-public readonly record struct CqlArithmeticError(string Unit, string CalendarEquivalent) : ICqlError
+public readonly record struct CqlArithmeticError : ICqlEvaluationError
 {
+    internal CqlArithmeticError(string unit, string calendarEquivalent)
+    {
+        Unit = unit;
+        CalendarEquivalent = calendarEquivalent;
+    }
+
+    public string Unit { get; }
+    public string CalendarEquivalent { get; }
+
     public string GetMessage() => $"Use '{CalendarEquivalent}' instead of UCUM unit '{Unit}'.";
 }
 // wrong — don't pass a pre-built message string into the struct
 ```
 
-See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for where these structs live and how that project is organized.
+Put the struct in the `Errors/` folder of the area that throws it, with namespace `<that area's namespace>.Errors`, as `Cql.Invocation/Toolkit/Errors/` does with `Hl7.Cql.Invocation.Toolkit.Errors`; `Hl7.Cql.Exceptions` keeps only the exception machinery. A host tells an evaluation error from a failure inside the SDK with `catch (CqlException e) when (e.Error is ICqlEvaluationError)`, and `CqlException.EvaluationFrames` names the CQL definitions that were being evaluated, innermost first; `GetCqlEvaluationFrames()` reads the same from any other exception. See [Cql/Cql.Abstractions/CLAUDE.md](Cql/Cql.Abstractions/CLAUDE.md) for how that project is organized.
 
 ## FHIR `Library.Name` vs `Library.Id`
 
@@ -95,9 +137,11 @@ Use semver on the 4-part version: major for changes needing new `LibraryInstance
 
 The `*.g.cs` files are not the only generated artifact carrying that version. `Demo/Measures.dqm-content-qicore-2025` also vendors library resources into the `Firely.Cql.Sdk.Integration.Runner` submodule (`IntegrationRunner/Resources/libraries/*.json`), and those JSONs embed the **compiled assembly the integration runner actually executes** — so a bump that skips them leaves the MADiE run exercising the old generator, and the submodule's `passed.jsonl` describing behavior no longer in `develop`. Regenerate them in the same PR with `dotnet build Demo/Measures.dqm-content-qicore-2025/Measures.dqm-content-qicore-2025.csproj -c Release /p:ElmToolingEnabled=true` (build `Cql/PackagerCLI` in the same configuration first — the `GenerateCSharp` target silently skips when the packager exe is missing), then re-run the integration suite, refresh `passed.jsonl` only when the run is complete and has no unexplained regressions, and bump the submodule pointer here and link the runner PR from this PR's description; follow [write-pr-description](.claude/skills/write-pr-description/SKILL.md) for details. If a complete trustworthy run is blocked, preserve the existing `passed.jsonl` baseline and track the blocker in an issue instead of normalizing coverage loss by replacing the baseline. Unlike the `*.g.cs` header churn, these resources are committed wholesale — the embedded assembly changes in every one of them.
 
+**The generator's tool name has a legacy alias.** Generated library types carry `[GeneratedCode("Hl7.Cql.CodeGeneration.NET", …)]` (`LibrarySetCSharpCodeGenerator.GeneratorToolName`). Generator versions up to 6.0.3.0 wrote `.NET Code Generation` instead (`LegacyGeneratorToolName`), and the invocation toolkit (`CqlLibraryTypeRule`) and the golden-test normalization accept both names. At the first generator version bump that raises `MinSupportedGeneratorToolVersion` above 6.0.3.0, remove the legacy name: the constant, its acceptance in `CqlLibraryTypeRule`, its alternative in `CSharpGenerationGoldenTests.NormalizeGeneratedCodeAttribute`, and its tests in `CqlAssemblyInfoReaderTests`. While 6.0.x stays supported, keep the legacy name: without it the toolkit stops recognizing those libraries, and reports that only at Debug level. The test `LegacyGeneratorToolName_IsStillWrittenByASupportedGeneratorVersion` fails once the minimum passes 6.0.3.0.
+
 ## Release notes
 
-Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). When cutting a release, fragment files under `docs/releases/vnext/` are the sole source — fold them into the versioned release notes, then delete them. See the `cut-release-notes` skill for the full procedure.
+Any breaking change (public API, generated C# output, Packager CLI behavior, build/tooling behavior) must be recorded in the same PR that introduces it — not deferred to release time. Add a new fragment file under [docs/releases/vnext/](docs/releases/vnext/README.md#format) (one file per PR, see that folder's README for the naming/format convention) rather than editing the shared `vnext-release-notes.md` (now a static pointer doc — not directly editable), which causes merge conflicts between parallel PRs (see [#1432](https://github.com/FirelyTeam/firely-cql-sdk/issues/1432)). When cutting a release, fragment files under `docs/releases/vnext/` are the sole source — fold them into the versioned release notes, then delete them. See the `cut-release-notes` skill for the full procedure.
 
 ## Versioning
 

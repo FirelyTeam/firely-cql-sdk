@@ -51,11 +51,18 @@ namespace Hl7.Cql.Conversion
             if (CalendarDurationMapping.TryGetValue(quantityUnit, out var ucumUnit))
                 quantityUnit = ucumUnit;
 
-            // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
-            if (M.MetricServiceExtensions.TryCanonicalize(service, (quantityValue, quantityUnit, UcumSystemUrl), out var canonical))
+            try
             {
-                canonicalizedQuantity = new(canonical!.Value.Item1, canonical.Value.Item2);
-                return true;
+                // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
+                if (M.MetricServiceExtensions.TryCanonicalize(service, (quantityValue, quantityUnit, UcumSystemUrl), out var canonical))
+                {
+                    canonicalizedQuantity = new(canonical!.Value.Item1, canonical.Value.Item2);
+                    return true;
+                }
+            }
+            catch (OverflowException)
+            {
+                // A canonical value outside the range of Decimal cannot be represented, so the quantity has no canonical form.
             }
 
             canonicalizedQuantity = null;
@@ -91,11 +98,18 @@ namespace Hl7.Cql.Conversion
                 return true;
             }
 
-            // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
-            if (M.MetricServiceExtensions.TryConvertTo(service, (quantityValue, quantityUnit, UcumSystemUrl), unit, out var converted))
+            try
             {
-                convertedQuantity = new(converted!.Value.Item1, converted.Value.Item2);
-                return true;
+                // Call the decimal overload from MetricServiceExtensions explicitly to avoid extension method resolution ambiguity.
+                if (M.MetricServiceExtensions.TryConvertTo(service, (quantityValue, quantityUnit, UcumSystemUrl), unit, out var converted))
+                {
+                    convertedQuantity = new(converted!.Value.Item1, converted.Value.Item2);
+                    return true;
+                }
+            }
+            catch (OverflowException)
+            {
+                // A converted value outside the range of Decimal cannot be represented, so the conversion fails.
             }
 
             convertedQuantity = null;

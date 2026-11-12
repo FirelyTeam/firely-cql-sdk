@@ -404,12 +404,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             return emitOptions;
         }
 
-        private static string CreateMD5HashStringDirectory(string text)
-        {
-            text = System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
-            return text.Replace('/', '-');
-        }
-
         private static SyntaxTree ParseSyntaxTree(string text, string path)
         {
             var sourceText = SourceText.From(text, Encoding.UTF8);
@@ -420,13 +414,22 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static string CreateAssemblyInfoSourceString(ElmLibrary library)
         {
             var (name, version) = library.VersionedLibraryIdentifier;
+            var versionText = version?.ToString();
 
-            var text = $"""
-                        [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
-                        [assembly: System.Reflection.AssemblyVersion("{version}")]
-                        """;
+            var text = $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({name.ToString().QuoteString()}, {versionText.QuoteOrNullString()})]";
+            if (IsAssemblyVersion(versionText))
+                text += $"{Environment.NewLine}[assembly: System.Reflection.AssemblyVersion({versionText!.QuoteString()})]";
             return text;
         }
+
+        // AssemblyVersion takes only major[.minor[.build[.revision]]]: unsigned decimal parts, each below 65535, with
+        // nothing around them. Version.TryParse also accepts signs and surrounding whitespace, so the characters are
+        // checked first. A library's version can be any string, or none.
+        private static bool IsAssemblyVersion(string? version) =>
+            version is { Length: > 0 }
+            && version.All(c => char.IsAsciiDigit(c) || c == '.')
+            && Version.TryParse(version, out var parsed)
+            && parsed is { Major: < ushort.MaxValue, Minor: < ushort.MaxValue, Build: < ushort.MaxValue, Revision: < ushort.MaxValue };
 
         private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {

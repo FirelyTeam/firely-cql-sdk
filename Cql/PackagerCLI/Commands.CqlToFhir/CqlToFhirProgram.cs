@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -17,7 +16,6 @@ using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packager.Reporting;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 

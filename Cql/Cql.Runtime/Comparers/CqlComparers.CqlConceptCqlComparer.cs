@@ -13,9 +13,16 @@ namespace Hl7.Cql.Comparers;
 partial class CqlComparers
 {
     /// <summary>
-    /// Compares the code and system using the specified comparers.
+    /// Compares <see cref="CqlConcept"/> values by the semantics of the clinical operators (spec §9.B, Clinical
+    /// Operators): equality is tuple equality over <see cref="CqlConcept.codes"/> and <see cref="CqlConcept.display"/>,
+    /// and equivalence is a non-empty intersection of the codes.
     /// </summary>
-    private class CqlConceptCqlComparer(CqlComparers codeComparer) :
+    /// <remarks>
+    /// A concept is null only when the reference is null: a concept without codes, or without a display, is still a
+    /// concept. <c>memberComparer</c> compares the codes and the display, so each element is equal, and
+    /// hashes, by its own type's semantics.
+    /// </remarks>
+    private class CqlConceptCqlComparer(CqlComparers memberComparer) :
         CqlComparer<CqlConcept>(CqlComparerEqualsImplementation.Compare)
     {
         private static IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(
@@ -25,86 +32,123 @@ partial class CqlComparers
                 (a, b) => codeComparer.Equivalent(a, b, precision),
                 c => codeComparer.GetHashCodeValue(c));
 
-        private readonly IEqualityComparer<CqlCode> _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(codeComparer, null);
+        private readonly IEqualityComparer<CqlCode> _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(memberComparer, null);
 
         /// <summary>
-        /// Caches the codes of a <see cref="CqlConcept"/>, sorted by <see cref="CqlCode.code"/>, keyed by
-        /// reference identity. <see cref="CqlConcept.codes"/> is <c>init</c>-only, so a given instance's
-        /// codes never change after construction -- the sorted array is safe to compute once and reuse
-        /// across every subsequent Compare/Equals call involving that instance (e.g. every hash-collision
-        /// check inside a hash-based Distinct/Union/Except over a list of concepts).
+        /// Equality by tuple semantics, spec §9.B, Clinical Operators, Equal: "the operator will return true if and only
+        /// if the values for each element by name are equal. If either argument is null, or has different components
+        /// specified, the result is null."
         /// </summary>
-        private static readonly ConditionalWeakTable<CqlConcept, CqlCode[]> _sortedCodesCache = new();
-
-        private static CqlCode[] GetSortedCodes(CqlConcept concept) =>
-            _sortedCodesCache.GetValue(concept, static c => c.codes!.OrderBy(code => code.code).ToArray());
-
-        protected override bool IsNull([NotNullWhen(false)] CqlConcept? value)
-        {
-            return value?.codes is null;
-        }
-
+        /// <remarks>
+        /// An element that neither concept specifies takes no part, as for any tuple (§9.B, Comparison Operators, Equal),
+        /// so two concepts without codes are equal exactly when their displays are. Of the elements both specify, one
+        /// known to differ makes the concepts unequal; otherwise one whose equality is unknown makes the result null.
+        /// </remarks>
         protected override int? CompareValues(
             CqlConcept x,
             CqlConcept y,
             string? precision)
         {
-            var xCodes = GetSortedCodes(x);
-            var yCodes = GetSortedCodes(y);
+            if ((x.codes is null) != (y.codes is null) || (x.display is null) != (y.display is null))
+                return null;
 
-            if (xCodes.Length != yCodes.Length)
-                return xCodes.Length - yCodes.Length;
+            int? codes = (x.codes, y.codes) is ({ } xCodes, { } yCodes) ? CompareCodes(xCodes, yCodes, precision) : 0;
+            if (codes is not (null or 0))
+                return codes;
 
-            for (int i = 0; i < xCodes.Length; i++)
-            {
-                var xCode = xCodes[i];
-                var yCode = yCodes[i];
-                var compare = codeComparer.Compare(xCode, yCode, precision);
-                if (compare != 0)
-                    return compare;
-            }
-            return 0;
+            int? display = (x.display, y.display) is ({ } xDisplay, { } yDisplay)
+                ? memberComparer.Compare(xDisplay, yDisplay, precision)
+                : 0;
+            if (display is not (null or 0))
+                return display;
+
+            return codes is null || display is null ? null : 0;
         }
 
+        /// <summary>
+        /// List equality over the codes, spec §9.B, List Operators, Equal: the same codes by value, in the same order,
+        /// with two null codes equal. A code known to differ makes the lists unequal; otherwise a code whose equality is
+        /// unknown makes the result null.
+        /// </summary>
+        private int? CompareCodes(
+            IReadOnlyList<CqlCode> x,
+            IReadOnlyList<CqlCode> y,
+            string? precision)
+        {
+            if (x.Count != y.Count)
+                return x.Count - y.Count;
+
+            var unknown = false;
+            for (int i = 0; i < x.Count; i++)
+            {
+                if (x[i] is null && y[i] is null)
+                    continue;
+
+                var compare = memberComparer.Compare(x[i], y[i], precision);
+                if (compare is null)
+                    unknown = true;
+                else if (compare != 0)
+                    return compare;
+            }
+
+            return unknown ? null : 0;
+        }
+
+        /// <summary>
+        /// Equivalence, spec §9.B, Clinical Operators, Equivalent: "For Concept values, equivalence is defined as a
+        /// non-empty intersection of the codes in each Concept using Code equivalence to determine the intersection. The
+        /// display element is ignored for the purposes of determining Concept equivalence."
+        /// </summary>
+        /// <remarks>
+        /// A concept without codes shares no code with any concept, so it is equivalent to none, itself included.
+        /// </remarks>
         protected override bool EquivalentValues(
             CqlConcept x,
             CqlConcept y,
             string? precision)
         {
-            // Rule:
-            // * "For Concept values, equivalence means the values have at least one equivalent code."
-            //   See: https://cql.hl7.org/02-authorsguide.html#comparison-operators:~:text=For%20Concept%20values%2C%20equivalence%20means%20the%20values%20have%20at%20least%20one%20equivalent%20code.
-            // * "For Concept values, equivalence is defined as a non-empty intersection of the codes in each Concept."
-            //   See: https://cql.hl7.org/09-b-cqlreference.html#equivalent:~:text=determining%20Code%20equivalence.-,For%20Concept%20values%2C%20equivalence%20is%20defined%20as%20a%20non%2Dempty%20intersection%20of%20the%20codes%20in%20each%20Concept.,-Note%20that%20this
+            if (x.codes is not { Count: > 0 } xCodes || y.codes is not { Count: > 0 } yCodes)
+                return false;
 
-            // Rule:
-            // * "Note that this operator will always return true or false, even if either or both of its arguments are null, or contain null components."
-            //   See: https://cql.hl7.org/09-b-cqlreference.html#equivalent:~:text=each%20Concept.-,Note%20that%20this%20operator%20will%20always%20return%20true%20or%20false%2C%20even%20if%20either%20or%20both%20of%20its%20arguments%20are%20null%2C%20or%20contain%20null%20components.,-The%20following%20examples
+            // Every code is equivalent to itself, so a list of codes intersects itself.
+            if (ReferenceEquals(xCodes, yCodes))
+                return true;
 
             var codeEquivalenceComparer = precision switch
             {
                 null => _codeEquivalenceComparerNoPrecision,
-                _    => NewCodeEquivalenceComparer(codeComparer, precision)
+                _    => NewCodeEquivalenceComparer(memberComparer, precision)
             };
 
-            // More performance to have the hashset with the smallest set
+            // Build the hash set from the shorter list.
             var (codesSet, compareSet) =
-                x.codes.Count < y.codes.Count
-                    ? (new HashSet<CqlCode>(x.codes, codeEquivalenceComparer), y.codes)
-                    : (new HashSet<CqlCode>(y.codes, codeEquivalenceComparer), x.codes);
-            bool isEquivalent = codesSet.Overlaps(compareSet);
-            return isEquivalent;
+                xCodes.Count < yCodes.Count
+                    ? (new HashSet<CqlCode>(xCodes, codeEquivalenceComparer), yCodes)
+                    : (new HashSet<CqlCode>(yCodes, codeEquivalenceComparer), xCodes);
+            return codesSet.Overlaps(compareSet);
         }
 
+        /// <summary>
+        /// Two concepts that are equal as records need not be equivalent: a concept without codes is equivalent to no
+        /// concept.
+        /// </summary>
+        protected override bool DefaultEqualityImpliesEquivalence => false;
+
+        /// <summary>
+        /// Hashes the codes, in order, and the display, each by <c>memberComparer</c>, so that concepts
+        /// that are equal hash alike.
+        /// </summary>
         protected override int GetHashCodeValue(CqlConcept value)
         {
-            int baseCode = GetHashCodeForNull();
-            foreach (var code in value.codes!)
+            var hash = new HashCode();
+            if (value.codes is { } codes)
             {
-                var codeHashCode = codeComparer.GetHashCode(code);
-                baseCode ^= codeHashCode;
+                foreach (var code in codes)
+                    hash.Add(memberComparer.GetHashCode(code));
             }
-            return baseCode;
+
+            hash.Add(memberComparer.GetHashCode(value.display));
+            return hash.ToHashCode();
         }
     }
 }

@@ -13,6 +13,7 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Fhir.Model;
 using M = Hl7.Fhir.Model;
 
@@ -770,7 +771,16 @@ namespace Hl7.Cql.Fhir
                 return boundary;
 
             CqlDateTime? stepped = isLow ? boundary.Successor() : boundary.Predecessor();
-            return stepped ?? boundary;
+            if (stepped is null)
+                return boundary;
+
+            // Stepping goes through DateTimeOffset arithmetic, which gives an offset-less value an explicit
+            // UTC offset. An offset-less boundary stays offset-less once stepped, so that it takes the
+            // default timezone offset, as the closed boundary of the same interval does.
+            var v = stepped.Value;
+            return boundary.Value is { OffsetHour: null, OffsetMinute: null }
+                ? new CqlDateTime(v.Year, v.Month, v.Day, v.Hour, v.Minute, v.Second, v.Millisecond, null, null)
+                : stepped;
         }
 
         /// <inheritdoc cref="PeriodBoundary(CqlDateTime, bool?, bool)"/>
@@ -844,15 +854,19 @@ namespace Hl7.Cql.Fhir
             converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             
             // TODO: this is a performance problem
-            // CQL string conversions - return null on invalid input
-            converter.AddConversion<string, bool?>(s => ConvertStringToBoolean(s));
-            converter.AddConversion<string, int?>(s => ConvertStringToInteger(s));
-            converter.AddConversion<string, long?>(s => ConvertStringToLong(s));
-            converter.AddConversion<string, decimal?>(s => ConvertStringToDecimal(s));
-            converter.AddConversion<string, CqlQuantity?>(s => ConvertStringToQuantity(s));
-            converter.AddConversion<string, CqlDate?>(s => ConvertStringToDate(s));
-            converter.AddConversion<string, CqlDateTime?>(s => ConvertStringToDateTime(s));
-            converter.AddConversion<string, CqlTime?>(s => ConvertStringToTime(s));
+            // The CQL To* conversions of a string, which give null for a string outside the format the matching To*
+            // operator accepts. Each calls the operator's own implementation, so a string converts alike whether a host
+            // converts it or a CQL expression does. Only a .NET string reaches them: a FHIR primitive converts through
+            // its own conversion in ConvertFhirToCqlPrimitives, from the value it holds rather than from its text.
+            converter.AddConversion<string, bool?>(s => CqlOperators.ConvertStringToBooleanImpl(s));
+            converter.AddConversion<string, int?>(s => CqlOperators.ConvertStringToIntegerImpl(s));
+            converter.AddConversion<string, long?>(s => CqlOperators.ConvertStringToLongImpl(s));
+            converter.AddConversion<string, decimal?>(s => CqlOperators.ConvertStringToDecimalImpl(s));
+            converter.AddConversion<string, CqlQuantity?>(s => CqlOperators.ConvertStringToQuantityImpl(s));
+            converter.AddConversion<string, CqlRatio?>(s => CqlOperators.ConvertStringToRatioImpl(s));
+            converter.AddConversion<string, CqlDate?>(s => CqlOperators.ConvertStringToDateImpl(s));
+            converter.AddConversion<string, CqlDateTime?>(s => CqlOperators.ConvertStringToDateTimeImpl(s));
+            converter.AddConversion<string, CqlTime?>(s => CqlOperators.ConvertStringToTimeImpl(s));
             
             converter.AddConversion<string, M.FhirUri>(str => new M.FhirUri(str));
             converter.AddConversion<string, M.FhirString>(str => new M.FhirString(str));
@@ -861,38 +875,6 @@ namespace Hl7.Cql.Fhir
 
             return converter;
         }
-
-        // CQL conversion helper methods that return null on invalid input
-        private static bool? ConvertStringToBoolean(string? s) =>
-            CqlOperators.ConvertStringToBooleanImpl(s);
-
-        private static int? ConvertStringToInteger(string? s) =>
-            s == null ? null :
-            int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value) ? value : null;
-
-        private static long? ConvertStringToLong(string? s) =>
-            s == null ? null :
-            long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value) ? value : null;
-
-        private static decimal? ConvertStringToDecimal(string? s) =>
-            s == null ? null :
-            decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value) ? value : null;
-
-        private static CqlQuantity? ConvertStringToQuantity(string? s) =>
-            s == null ? null :
-            CqlQuantity.TryParse(s, out CqlQuantity? value) ? value : null;
-
-        private static CqlDate? ConvertStringToDate(string? s) =>
-            s == null ? null :
-            CqlDate.TryParse(s, out CqlDate? value) ? value : null;
-
-        private static CqlDateTime? ConvertStringToDateTime(string? s) =>
-            s == null ? null :
-            CqlDateTime.TryParse(s, out CqlDateTime? value) ? value : null;
-
-        private static CqlTime? ConvertStringToTime(string? s) =>
-            s == null ? null :
-            CqlTime.TryParse(s, out CqlTime? value) ? value : null;
 
         internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {
@@ -920,7 +902,8 @@ namespace Hl7.Cql.Fhir
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
                     return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
-                converter.AddConversion(codeOfEnumType, nullableEnumType, code => code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+                converter.AddConversion(codeOfEnumType, nullableEnumType,
+                    CodeEnumValueDefinition.MakeGenericMethod(enumType).CreateDelegate<Func<object, object>>());
                 converter.AddConversion(codeOfEnumType, typeof(string), code =>
                 {
                     var systemAndCode = ((ICoded)code).ToCodings().Single();
@@ -935,6 +918,16 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
+        private static readonly MethodInfo CodeEnumValueDefinition =
+            ReflectionUtility.GenericMethodDefinitionOf(() => CodeEnumValue<M.AdministrativeGender>(default!));
+
+        /// <summary>
+        /// Reads the enum value of a <see cref="M.Code{T}"/>, boxed as <typeparamref name="TEnum"/>, or <see langword="null"/>
+        /// when the code has no value.
+        /// </summary>
+        private static object CodeEnumValue<TEnum>(object code) where TEnum : struct, Enum =>
+            ((M.Code<TEnum>)code).Value!;
+
         /// <summary>
         /// Adds conversions for types which the ELM model defines a type relationship that does not exist in the POCOs
         /// </summary>
@@ -942,6 +935,8 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
             converter.AddConversion<M.Code, M.FhirString>(code => new M.FhirString(code.Value));
+            // The model info declares canonical as a subtype of uri; the .NET model does not.
+            converter.AddConversion<M.Canonical, M.FhirUri>(canonical => new M.FhirUri(canonical.Value));
             return converter;
         }
     }

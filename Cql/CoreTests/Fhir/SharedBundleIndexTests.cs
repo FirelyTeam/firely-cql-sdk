@@ -144,14 +144,14 @@ namespace CoreTests.Fhir
         [TestMethod]
         public void RetrieveByValueSet_OnSourcesSharingAnIndex_ConsultsTheValueSetsOfTheSourceRetrievedFrom()
         {
-            var source = BuildDataSource();
+            var source = new BundleDataSource(BuildBundle(), new StubValueSets());
             var knowsX = source.WithValueSets(new StubValueSets("x"));
             var knowsY = source.WithValueSets(new StubValueSets("y"));
 
             knowsX.Retrieve<Observation>(ByValueSet()).Select(o => o.Id).Should().Equal("obs-x");
             knowsY.Retrieve<Observation>(ByValueSet()).Select(o => o.Id).Should().Equal("obs-y");
 
-            // The source they were created from keeps its own (empty) value sets.
+            // The source they were created from keeps its own value sets, which hold neither code.
             source.Retrieve<Observation>(ByValueSet()).Should().BeEmpty();
         }
 

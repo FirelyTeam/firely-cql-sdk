@@ -14,13 +14,6 @@ namespace Hl7.Cql.Compiler
 
     internal static class TypeConverterExtensions
     {
-        public static TypeConverter AddElmConversions(this TypeConverter converter)
-        {
-            converter.AddConversion<DateTimePrecision, string?>(dtp => Enum.GetName(dtp));
-            converter.AddConversion<string, DateTimePrecision>(Enum.Parse<DateTimePrecision>);
-            return converter;
-        }
-
         public static ListSortDirection ListSortOrder(this SortDirection direction) => direction switch
         {
             SortDirection.asc => ListSortDirection.Ascending,

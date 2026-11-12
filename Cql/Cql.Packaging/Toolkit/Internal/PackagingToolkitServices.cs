@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Logging;
-using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.Toolkit.Internal;

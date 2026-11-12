@@ -45,7 +45,7 @@ public class PackagerCliCommandBindingTests
             var command =
                 new Command("cql")
                     .AddOptions(CqlToFhirCommand.Options)
-                    .SetHandler(typeof(PackagerCliCommandBindingTests), nameof(CaptureCqlCommand));
+                    .SetHandler(CaptureCqlCommand);
 
             var exitCode = command.Invoke(["--cql", cqlInputDirPath, "--cs-namespace", namespaceValue]);
 
@@ -77,7 +77,7 @@ public class PackagerCliCommandBindingTests
             var command =
                 new Command("elm")
                     .AddOptions(ElmToFhirCommand.Options)
-                    .SetHandler(typeof(PackagerCliCommandBindingTests), nameof(CaptureElmCommand));
+                    .SetHandler(CaptureElmCommand);
 
             var exitCode = command.Invoke(["--elm", elmInputDirPath, "--cs-namespace", namespaceValue]);
 

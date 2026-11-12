@@ -19,25 +19,6 @@ partial class LibrarySetCSharpCodeGenerator
 
         internal CqlVersionedLibraryIdentifier LibraryName => _library?.VersionedLibraryIdentifier ?? throw new InvalidOperationException("Library not initialized.");
         private string _className = string.Empty;
-        private readonly Dictionary<string, int> _cacheFieldNameCount = new();
-
-        public string GetUniqueCacheFieldName(string baseName)
-        {
-            if (string.IsNullOrEmpty(baseName))
-                throw new ArgumentException("Base name cannot be null or empty.", nameof(baseName));
-
-            var count = _cacheFieldNameCount.GetValueOrDefault(baseName, 0);
-            string fieldName;
-            do
-            {
-                fieldName = count == 0 ? baseName : $"{baseName}_{count}";
-                count++;
-            } while (_cacheFieldNameCount.ContainsKey(fieldName));
-
-            _cacheFieldNameCount[baseName] = count;
-            _cacheFieldNameCount[fieldName] = 0; // Mark this specific name as used
-            return fieldName;
-        }
 
         public void AppendLibraryFile(ElmLibrary library, IndentedStringBuilder isb)
         {
@@ -107,8 +88,17 @@ partial class LibrarySetCSharpCodeGenerator
                  #region ILibrary Implementation
 
                  public string Name => {LibraryName!.Identifier.ToString().QuoteString()};
-                 public string Version => {LibraryName!.Version?.ToString().QuoteOrNullString()};
                  """);
+            // ILibrary.Version is nullable. A library without a version declares it so in an annotations context of its
+            // own, which compiles without a warning whether the project the file is built in has nullable on or off.
+            ISB.AppendLine(
+                LibraryName!.Version is { } version
+                    ? $"public string Version => {version.ToString().QuoteString()};"
+                    : """
+                      #nullable enable annotations
+                      public string? Version => null;
+                      #nullable restore
+                      """);
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
@@ -227,9 +217,7 @@ partial class LibrarySetCSharpCodeGenerator
                 $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             ISB.AppendLine(
-                LibraryName!.Version is { } version && Version.TryParse(version, out _)
-                    ? $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {version.ToString().QuoteString()})]"
-                    : $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()})]");
+                $"[CqlLibrary({LibraryName!.Identifier.ToString().QuoteString()}, {(LibraryName!.Version?.ToString()).QuoteOrNullString()})]");
 
             ISB.AppendLine(
                 $$"""

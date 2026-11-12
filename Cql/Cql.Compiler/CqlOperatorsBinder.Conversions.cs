@@ -9,10 +9,8 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Exceptions;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
-using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Compiler;
 

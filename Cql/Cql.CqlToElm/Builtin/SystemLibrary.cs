@@ -173,6 +173,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
+        public static SystemFunction<ConvertsToRatio> ConvertsToRatio = unary<ConvertsToRatio>(AnyType, BooleanType);
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
         public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);
@@ -319,6 +320,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef ToInteger = unary<ToInteger>(T, IntegerType).For(T, BooleanType, StringType, LongType);
         public static SystemFunction<Today> Today = nullary<Today>(DateType);
         public static OverloadedFunctionDef ToQuantity = unary<ToQuantity>(T, QuantityType).For(T, DecimalType, IntegerType, RatioType, StringType);
+        public static SystemFunction<ToRatio> ToRatio = unary<ToRatio>(StringType, RatioType);
         public static OverloadedFunctionDef ToStringFunction = unary<ToString>(T, StringType).For(T, BooleanType, IntegerType, LongType, DecimalType, QuantityType, RatioType, DateType, DateTimeType, TimeType);
         public static SystemFunction<ToTime> ToTime = unary<ToTime>(StringType, TimeType);
         public static SystemFunction<Truncate> Truncate = unary<Truncate>(DecimalType, IntegerType);

@@ -14,7 +14,6 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -85,6 +84,54 @@ namespace CoreTests
             var definitions = librarySetCodeBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
+        }
+
+        [TestMethod]
+        public void FunctionRef_WithAnArgumentOfASubtypeTheNetModelFlattens_ConvertsTheArgumentToTheParameterType()
+        {
+            // The model info declares FHIR.canonical as a subtype of FHIR.uri, so the translator resolves
+            // FHIRHelpers.ToString(canonical) to ToString(value uri) without a conversion node. The .NET model
+            // holds Canonical and FhirUri as siblings, so the compiler has to convert the argument itself.
+            var fhirHelpers = Library.ParseFromJson(File.ReadAllText(Path.Combine("Input", "ELM", "HL7", "FHIRHelpers-4.0.1.json")));
+            var cqlToolkit = new CqlToolkit()
+                .AddCqlLibraries([CqlLibraryString.Parse("""
+                    library CanonicalArguments version '1.0.0'
+
+                    using FHIR version '4.0.1'
+
+                    include FHIRHelpers version '4.0.1'
+
+                    context Patient
+
+                    define "Instantiated Urls":
+                      [CarePlan] C return FHIRHelpers.ToString(First(C.instantiatesCanonical))
+                    """)])
+                .AddReferenceLibraries([fhirHelpers])
+                .TranslateToElm();
+            var elmLibrary = cqlToolkit.GetCqlToolkitResults().Single().elmLibrary;
+            var errors = Hl7.Cql.Elm.ExtensionMethods.GetErrors(elmLibrary).Where(e => e.errorSeverity == Hl7.Cql.Elm.ErrorSeverity.error).ToList();
+            Assert.AreEqual(0, errors.Count, string.Join("\n", errors.Select(e => e.message)));
+
+            var elmToolkit = new ElmToolkit()
+                .AddElmLibraries(fhirHelpers, elmLibrary)
+                .CompileToAssemblies();
+            var cSharp = elmToolkit.GetElmToCSharpResults().Single(r => r.cSharp.Contains("class CanonicalArguments")).cSharp;
+            StringAssert.Contains(cSharp, "FhirUri", "the canonical argument is converted to the uri parameter type:\n" + cSharp);
+
+            using var invoker = elmToolkit.CreateLibrarySetInvoker();
+            var bundle = BundleOf(
+                new CarePlan
+                {
+                    Id = "cp-1",
+                    Subject = new ResourceReference("Patient/1"),
+                    InstantiatesCanonical = ["http://example.org/PlanDefinition/Diabetes|1.0.0"],
+                });
+            var urls = ((System.Collections.IEnumerable)invoker.InvokeLibraryDefinition(
+                FhirCqlContext.ForBundle(bundle: bundle),
+                Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion("CanonicalArguments", "1.0.0"),
+                "Instantiated Urls")).Cast<object>().ToList();
+
+            CollectionAssert.AreEqual(new[] { "http://example.org/PlanDefinition/Diabetes|1.0.0" }, urls);
         }
 
         [TestMethod]
@@ -1413,7 +1460,23 @@ namespace CoreTests
             // [Condition] R return R.nonexistent
             var elmLibrary = QueryLibrary("UnboundOnType", RetrieveOf("Condition"), new Hl7.Cql.Elm.Property { scope = "R", path = "nonexistent" });
 
-            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+            var message = AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element.");
+            Assert.IsFalse(message.Contains("explicit 'as'"), "A concrete type has no subtype that has the element to cast to:\n" + message);
+        }
+
+        [TestMethod]
+        public void Property_ThatAnAbstractSourceTypeDoesNotHave_FailsTheBuildSuggestingACast()
+        {
+            // ([Condition] as List<FHIR.Resource>) R return R.code: a Resource may be a Condition, which has the element.
+            var resources = AsType(
+                RetrieveOf("Condition"),
+                new Hl7.Cql.Elm.ListTypeSpecifier { elementType = new Hl7.Cql.Elm.NamedTypeSpecifier("http://hl7.org/fhir", "Resource") });
+            var elmLibrary = QueryLibrary("UnboundOnAbstractType", resources, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
+
+            AssertUnboundProperty(
+                elmLibrary,
+                "code",
+                "Resource has no such element. Cast its source with an explicit 'as' to the type that has the element.");
         }
 
         [TestMethod]
@@ -1423,7 +1486,7 @@ namespace CoreTests
             var values = ListOf(Hl7.Cql.Elm.SystemTypes.AnyType, AsType(IntegerLiteral("5"), Hl7.Cql.Elm.SystemTypes.AnyType));
             var elmLibrary = QueryLibrary("UnboundOnAny", values, new Hl7.Cql.Elm.Property { scope = "R", path = "code" });
 
-            AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known");
+            AssertUnboundProperty(elmLibrary, "code", "the type of its source is not known. Cast its source with an explicit 'as' to the type that has the element.");
         }
 
         [TestMethod]
@@ -1460,18 +1523,21 @@ namespace CoreTests
                 },
             });
 
-            AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element");
+            var message = AssertUnboundProperty(elmLibrary, "nonexistent", "Condition has no such element.");
+            Assert.IsFalse(message.Contains("explicit 'as'"), "A concrete type has no subtype that has the element to cast to:\n" + message);
         }
 
         /// <summary>
         /// Asserts that compiling <paramref name="elmLibrary"/> fails because <paramref name="property"/>
-        /// cannot be bound at compile time, for a reason that starts with <paramref name="reason"/>.
+        /// cannot be bound at compile time, for a reason that starts with <paramref name="reason"/>, and
+        /// returns the message of the build error.
         /// </summary>
-        private static void AssertUnboundProperty(Library elmLibrary, string property, string reason)
+        private static string AssertUnboundProperty(Library elmLibrary, string property, string reason)
         {
             var exception = Assert.ThrowsException<Hl7.Cql.Exceptions.CqlException<Hl7.Cql.Compiler.ExpressionBuildingError>>(
                 () => CompileLibrary(elmLibrary, "Values"));
             StringAssert.Contains(exception.Message, $"Property {property} cannot be bound at compile time: {reason}");
+            return exception.Message;
         }
 
         /// <summary>

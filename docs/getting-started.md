@@ -134,7 +134,7 @@ var results = invoker
 See the **[Examples project](../Examples/CqlSdkExamples/)** for complete, runnable samples:
 - **210–251**: Packaging CQL/ELM into FHIR Library resources
 - **310–350**: Invoking CQL definitions, parameters, functions, caching, and pooling library sets
-- **400–410**: Loading and invoking from FHIR resource directories
+- **400–420**: Loading and invoking from FHIR resource directories, and checking assemblies before loading them
 - **500**: Extending SDK functionality
 
 If you are running the same CQL repeatedly — evaluating a measure over a population, for instance — read

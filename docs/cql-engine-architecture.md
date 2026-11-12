@@ -80,7 +80,8 @@ This approach has a number of key advantages over engines which simultaneously i
 - `BaseTypeResolver` (in `Hl7.Cql.Runtime`) provides mappings for CQL system types; `FhirTypeResolver` (in `Hl7.Cql.Firely`) extends it for FHIR R4 model types
 
 #### IValueSetDictionary Interface
-- Exposes the two methods used by CQL value set filtering in Retrieve statements
+- Tests membership of a code, or of a string with or without a code system, in a value set (`IsCodeInValueSet`), and gives a value set's codes (`TryGetCodesInValueSet`)
+- A membership test against a value set the dictionary does not hold is an error, as CQL §9.B "In (Valueset)" requires
 - Value set URIs, code system URIs, and codes are case-insensitive
 - The default implementation uses hashing for O(1) membership checks
 
@@ -156,11 +157,15 @@ Implement `IValueSetDictionary` and pass it to the `CqlContext` factory:
 public class MyValueSetDictionary : IValueSetDictionary
 {
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) => ...;
-    public IEnumerable<CqlCode> CodesInValueSet(string valueSetUri) => ...;
+    public bool IsCodeInValueSet(string valueSetUri, string code) => ...;
+    public bool IsCodeInValueSet(string valueSetUri, string code, string? system) => ...;
+    public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes) => ...;
 }
 
 var ctx = FhirCqlContext.ForBundle(bundle, valueSets: new MyValueSetDictionary());
 ```
+
+For a value set it does not hold, `IsCodeInValueSet` should signal an error rather than answer `false`: the SDK's own dictionaries throw `CqlException<CqlUnresolvedValueSetError>`. `TryGetCodesInValueSet` returns `false` for such a value set.
 
 > **Performance Note**: `IsCodeInValueSet` is called millions of times in a typical CQL evaluation. Pre-load all codes before evaluation begins, and make membership checks O(1).
 

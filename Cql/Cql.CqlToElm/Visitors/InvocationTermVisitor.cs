@@ -15,35 +15,41 @@ namespace Hl7.Cql.CqlToElm.Visitors
     internal partial class ExpressionVisitor
     {
         // (qualifierExpression '.')* referentialIdentifier
+        // Used where the grammar takes an identifier rather than an expression: a query source, the
+        // terminology of a retrieve and the context of a retrieve. It resolves like the same identifier
+        // in an expression, so a first qualifier that names an included library selects a definition
+        // of that library.
         public override Expression VisitQualifiedIdentifierExpression([NotNull] cqlParser.QualifiedIdentifierExpressionContext context)
         {
             var qualifiers = context.qualifierExpression();
-            Expression? expression = null;
             if (qualifiers.Length > 0)
             {
                 var term = qualifiers[0].referentialIdentifier().Parse();
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                    expression = symbol.ToRef(null);
-                else return new IdentifierRef
-                {
-                    name = term,
-                }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
-                 .WithLocator(qualifiers[0].Locator());
+                if (!LibraryBuilder.CurrentScope.TryResolveSymbol(term, out _))
+                    return new IdentifierRef
+                    {
+                        name = term,
+                    }.AddError(MessagingProvider.CouldNotResolveInCurrent(term))
+                     .WithLocator(qualifiers[0].Locator());
 
-                for(int i = 1; i < qualifiers.Length; i++)
-                {
-                    term = qualifiers[i].referentialIdentifier().Parse();
-                    expression = navigateIntoType(expression, term);
-                }
-                var refId = context.referentialIdentifier().Parse();
-                expression = navigateIntoType(expression, refId);
+                var expression = LibraryBuilder.CurrentScope.Ref(MessagingProvider, null, term);
+                if (expression is UsingRef ur)
+                    return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
+                        MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());
+
+                var members = qualifiers
+                    .Skip(1)
+                    .Select(qualifier => qualifier.referentialIdentifier())
+                    .Append(context.referentialIdentifier());
+                foreach (var member in members)
+                    expression = accessMember(expression, member.Parse());
                 return expression;
             }
             else
             {
                 var term = context.referentialIdentifier().Parse();
-                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                    return symbol.ToRef(null);
+                if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out _))
+                    return rejectLibraryReference(LibraryBuilder.CurrentScope.Ref(MessagingProvider, null, term), context.Locator());
                 else return new IdentifierRef
                 {
                     name = term,
@@ -52,18 +58,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
         }
 
-        public override Expression VisitTermExpression([NotNull] cqlParser.TermExpressionContext context)
-        {
-            var term = base.VisitTermExpression(context);
+        public override Expression VisitTermExpression([NotNull] cqlParser.TermExpressionContext context) =>
+            rejectLibraryReference(base.VisitTermExpression(context), context.Locator());
 
+        // A model or an included library is not a value: it can only qualify the name of one of its members.
+        private Expression rejectLibraryReference(Expression term, string locator)
+        {
             if (term is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
+                    MessagingProvider.UnexpectedLibraryReference()).WithLocator(locator);
             else if (term is IncludeRef ir)
                 return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
-                    .WithLocator(context.Locator());
+                    .WithLocator(locator);
             else return term;
         }
+
+        // A member of an included library is one of its definitions; a member of any other value is one of its properties.
+        private Expression accessMember(Expression source, string memberName) =>
+            source is IncludeRef ir
+                ? LibraryBuilder.CurrentScope.Ref(MessagingProvider, ir.IncludeDef.localIdentifier, memberName)
+                : navigateIntoType(source, memberName);
 
         public override Expression VisitInstanceSelector([NotNull] cqlParser.InstanceSelectorContext context)
         {
@@ -196,7 +210,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var left = Visit(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
+                    MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());
 
             var invocation = context.GetChild(2) switch
             {
@@ -206,22 +220,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             return invocation;
 
-            Expression memberInvocation(cqlParser.QualifiedMemberInvocationContext memberCtx)
-            {
-                var memberName = memberCtx.referentialIdentifier().Parse();
-                if (left is IncludeRef ir)
-                {
-                    var libraryName = ir.IncludeDef.localIdentifier;
-                    return LibraryBuilder.CurrentScope
-                                         .Ref(MessagingProvider, libraryName, memberName)
-                                         .WithLocator(context.Locator());
-                }
-                else
-                {
-                    return navigateIntoType(left, memberName)
-                        .WithLocator(context.Locator());
-                }
-            }
+            Expression memberInvocation(cqlParser.QualifiedMemberInvocationContext memberCtx) =>
+                accessMember(left, memberCtx.referentialIdentifier().Parse())
+                    .WithLocator(context.Locator());
             Expression functionInvocation(cqlParser.QualifiedFunctionContext functionCtx)
             {
                 var locator = functionCtx.Locator();

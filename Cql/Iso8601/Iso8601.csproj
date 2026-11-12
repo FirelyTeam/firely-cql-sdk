@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

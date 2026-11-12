@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
@@ -54,8 +56,22 @@ namespace Hl7.Cql.Primitives
         }
 
         /// <summary>
-        /// Tries to parse a quantity from this string, e.g. <code>1.0m 'a'</code>.
+        /// Tries to parse a quantity from a string in the format the CQL <c>ToQuantity</c> operator accepts, e.g.
+        /// <c>1.0 'mg'</c>, <c>1.0'mg'</c> or <c>1.0</c>.
         /// </summary>
+        /// <remarks>
+        /// CQL 1.5.3, Appendix B - CQL Reference, Type Operators, ToQuantity: "<c>(+|-)?#0(.0#)?('&lt;unit&gt;')?</c>
+        /// Meaning an optional polarity indicator, followed by any number of digits (including none) followed by at
+        /// least one digit, optionally followed by a decimal point, at least one digit, and any number of additional
+        /// digits, all optionally followed by a unit designator as a string literal [...]. Spaces are allowed between
+        /// the quantity value and the unit designator."
+        /// <para>
+        /// A quantity without a unit designator has the default unit <c>'1'</c>. Whitespace is allowed only between
+        /// the value and the unit designator. The unit is not yet checked against UCUM or the calendar duration
+        /// keywords, which the specification requires (#1782).
+        /// </para>
+        /// </remarks>
+        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#toquantity"/>
         /// <param name="s">The string to parse</param>
         /// <param name="q">The resulting quantity.</param>
         /// <returns><see langword="true"/> if successfully parsed; otherwise, <see langword="false"/>.</returns>
@@ -66,34 +82,30 @@ namespace Hl7.Cql.Primitives
                 q = null;
                 return false;
             }
-            var parts = s.Split(' ');
-            if (parts.Length == 2)
-            {
-                if (decimal.TryParse(parts[0], NumberStyles.Number, CultureInfo.InvariantCulture, out var value) && !string.IsNullOrWhiteSpace(parts[1]))
-                {
-                    var units = Dequote(parts[1])!;
-                    q = new CqlQuantity(value, units);
-                    return true;
-                }
-            }
-            q = null;
-            return false;
+            return TryParse(s.AsSpan(), out q);
         }
 
-        private static string? Dequote(string? v)
+        /// <inheritdoc cref="TryParse(string, out CqlQuantity?)"/>
+        internal static bool TryParse(ReadOnlySpan<char> s, [NotNullWhen(true)] out CqlQuantity? q)
         {
-            if (v == null)
-                return null;
-            v = v.Trim();
-            if (v[0] == '\'')
-            {
-                if (v[v.Length - 1] == '\'')
-                    return v.Substring(1, v.Length - 2);
-                else return v.Substring(1);
-            }
-            else if (v[v.Length - 1] == '\'')
-                return v.Substring(0, v.Length - 2);
-            else return v;
+            q = null;
+
+            var numberLength = CqlNumberFormat.NumberLength(s, allowFraction: true);
+            if (numberLength == 0 || !CqlNumberFormat.TryParseDecimal(s[..numberLength], out var value))
+                return false;
+
+            var rest = s[numberLength..];
+            var designator = rest.TrimStart();
+            string unit;
+            if (rest.IsEmpty)
+                unit = UCUMUnits.Default;
+            else if (designator.Length > 2 && designator[0] == '\'' && designator[^1] == '\'' && designator[1..^1].IndexOf('\'') < 0)
+                unit = designator[1..^1].ToString();
+            else
+                return false;
+
+            q = new CqlQuantity(value, unit);
+            return true;
         }
 
         /// <summary>

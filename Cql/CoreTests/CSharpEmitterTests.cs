@@ -12,6 +12,8 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace CoreTests;
 
@@ -40,6 +42,18 @@ internal sealed class CSharpEmitterTestTuple : TupleBaseType
     public int? A { get; set; }
 
     public string B { get; set; } = null!;
+}
+
+/// <summary>
+/// <see cref="CSharpEmitterTestTuple"/> with its elements renamed: a different CQL tuple type,
+/// whose C# value tuple differs from that of <see cref="CSharpEmitterTestTuple"/> only in its
+/// element names.
+/// </summary>
+internal sealed class CSharpEmitterTestTupleRenamed : TupleBaseType
+{
+    public int? C { get; set; }
+
+    public string D { get; set; } = null!;
 }
 
 /// <summary>Helper invoked by the local-function test so an <see cref="CodeLambda"/> has a real
@@ -684,6 +698,68 @@ public class CSharpEmitterTests
         Assert.AreEqual(
             "{\n    return (decimal?)((object)true);\n}",
             EmitBody(lambda));
+    }
+
+    [TestMethod]
+    [DataRow(typeof(CqlDate), typeof(CqlDateTime), "((object)x) as CqlDateTime", DisplayName = "unrelated classes")]
+    [DataRow(typeof(bool), typeof(decimal?), "((object)x) as decimal?", DisplayName = "bool to a number")]
+    [DataRow(typeof(string), typeof(int?), "((object)x) as int?", DisplayName = "string to a number")]
+    [DataRow(typeof(string), typeof(Hl7.Fhir.Model.Canonical), "((object)x) as Canonical", DisplayName = "user-defined conversion")]
+    [DataRow(typeof(CqlDateTime), typeof(CqlDateTime), "x as CqlDateTime", DisplayName = "identity")]
+    [DataRow(typeof(int?), typeof(decimal?), "x as decimal?", DisplayName = "nullable numeric conversion")]
+    [DataRow(typeof(IEnumerable<CqlDate>), typeof(CqlDateTime), "x as CqlDateTime", DisplayName = "interface to a class that is not sealed")]
+    [DataRow(typeof(CqlDate), typeof(IDisposable), "x as IDisposable", DisplayName = "class that is not sealed to an interface")]
+    [DataRow(typeof(object[]), typeof(IList<string>), "x as IList<string>", DisplayName = "array to a collection interface")]
+    [DataRow(typeof(Func<IDisposable>), typeof(Func<CqlDateTime>), "x as Func<CqlDateTime>", DisplayName = "delegate variance")]
+    [DataRow(typeof(CSharpEmitterTestTuple), typeof(CSharpEmitterTestTupleRenamed), "x as (CqlTupleMetadata, int? C, string D)?", DisplayName = "tuple names")]
+    public void Cast_AsOfAValueUpcastToObject_GoesThroughObjectWhereCSharpRequiresIt(Type valueType, Type targetType, string expected)
+    {
+        // A value upcast to object, as one cast to a choice is, prints as itself, so the 'as'
+        // that follows applies to the value's own type. Where C# has no conversion for 'as' from
+        // that type (CS0039), the emitter routes the value through object, and only there.
+        var x = new CodeLocal(valueType, "x");
+        var cast = new CodeCast(new CodeCast(x, typeof(object), CodeCastKind.As), targetType, CodeCastKind.As);
+
+        EmitBody(new CodeLambda([x], cast)).Should().Be($"{{\n    return {expected};\n}}");
+
+        var parameterType = new TypeToCSharpConverter().ToCSharp(valueType);
+        var direct = $"x as {new TypeToCSharpConverter().ToCSharp(targetType)}";
+        AsCastCompileErrors(parameterType, expected).Should().BeEmpty();
+        AsCastCompileErrors(parameterType, direct).Select(error => error.Split(':')[0])
+            .Should().Equal(expected == direct ? [] : new[] { "CS0039" });
+    }
+
+    private static readonly Lazy<MetadataReference[]> TrustedPlatformAssemblies = new(() =>
+        ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")!)
+            .Split(Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries)
+            .Select(path => (MetadataReference)MetadataReference.CreateFromFile(path))
+            .ToArray());
+
+    /// <summary>The errors C# reports for <paramref name="expression"/> over a parameter
+    /// <c>x</c> of type <paramref name="parameterType"/>, each as its id and message.</summary>
+    private static IEnumerable<string> AsCastCompileErrors(string parameterType, string expression)
+    {
+        var source = $$"""
+            using System;
+            using System.Collections.Generic;
+            using Hl7.Cql.Primitives;
+            using Canonical = Hl7.Fhir.Model.Canonical;
+
+            public static class AsCast
+            {
+                public static object? Evaluate({{parameterType}} x) => {{expression}};
+            }
+            """;
+        var compilation = CSharpCompilation.Create(
+            "AsCast",
+            [CSharpSyntaxTree.ParseText(source)],
+            TrustedPlatformAssemblies.Value,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, nullableContextOptions: NullableContextOptions.Enable));
+
+        return compilation.GetDiagnostics()
+                          .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+                          .Select(diagnostic => $"{diagnostic.Id}: {diagnostic.GetMessage()}")
+                          .ToList();
     }
 
     [TestMethod]

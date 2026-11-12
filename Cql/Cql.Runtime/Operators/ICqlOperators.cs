@@ -198,6 +198,7 @@ namespace Hl7.Cql.Operators
         string?                                  ConvertLongToString(long? i);
         CqlQuantity?                             ConvertQuantity(CqlQuantity? argument, string? unit);
         string?                                  ConvertQuantityToString(CqlQuantity? q);
+        CqlQuantity?                             ConvertRatioToQuantity(CqlRatio? r);
         string?                                  ConvertRatioToString(CqlRatio? r);
         bool?                                    ConvertsToBoolean(object? o);
         bool?                                    ConvertsToDate(object? o);
@@ -206,6 +207,7 @@ namespace Hl7.Cql.Operators
         bool?                                    ConvertsToInteger(object? o);
         bool?                                    ConvertsToLong(object? o);
         bool?                                    ConvertsToQuantity(object? o);
+        bool?                                    ConvertsToRatio(object? o);
         bool?                                    ConvertsToString(object? o);
         bool?                                    ConvertsToTime(object? o);
         bool?                                    ConvertStringToBoolean(string? s);
@@ -215,6 +217,7 @@ namespace Hl7.Cql.Operators
         int?                                     ConvertStringToInteger(string? s);
         long?                                    ConvertStringToLong(string? s);
         CqlQuantity?                             ConvertStringToQuantity(string? s);
+        CqlRatio?                                ConvertStringToRatio(string? s);
         CqlTime?                                 ConvertStringToTime(string? s);
         string?                                  ConvertTimeToString(CqlTime? t);
         int?                                     Count<T>(IEnumerable<T>? source);

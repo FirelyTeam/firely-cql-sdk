@@ -17,7 +17,7 @@ Applications running on a later .NET version can consume that asset as usual; ap
 
 ## Release Notes
 
-This is release version 2.16.0 of the engine.
+This is release version 2.18.0 of the engine.
 
 The release notes at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version document changes and known issues.
 

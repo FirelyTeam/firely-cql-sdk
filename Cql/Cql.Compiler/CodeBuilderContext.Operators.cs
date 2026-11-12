@@ -201,10 +201,8 @@ partial class CodeBuilderContext
 
         if (_typeResolver.IsListType(left.Type))
         {
-            // var leftElementType = _typeResolver.GetListElementType(left.Type);
             if (_typeResolver.IsListType(right.Type))
             {
-                // var rightElementType = _typeResolver.GetListElementType(right.Type);
                 return BindCqlOperator(nameof(ICqlOperators.ListProperlyIncludesList), left, right);
             }
 
@@ -355,8 +353,6 @@ partial class CodeBuilderContext
 
         var compare = new CodeBinary(CodeBinaryOp.Equal, operand, new CodeConstant(null, operand.Type));
         return compare;
-        //var asNullableBool = compare.NewAssignToTypeExpression<bool?>();
-        //return asNullableBool;
     }
 
     #endregion
@@ -678,9 +674,6 @@ partial class CodeBuilderContext
 
 
         var (value, convertedType) = ConvertLiteral(lit, type);
-
-        // var result = _operatorBinding.ConvertToType(Expression.Constant(value), convertedType);
-        // return result;
 
         if (type.IsNullableValueType(out _))
         {

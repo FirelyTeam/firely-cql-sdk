@@ -8,10 +8,12 @@
 
 #nullable enable
 
+using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
+using Hl7.Cql.ValueSets.Errors;
 using Hl7.Fhir.Model;
 
 namespace CoreTests.Fhir
@@ -271,11 +273,25 @@ namespace CoreTests.Fhir
         public void BehaviorLock_RetrieveByACodeThatMatchesNothing_ReturnsEmpty()
         {
             var fixture = new Fixture();
-            var dr = DataSource(fixture);
+            var valueSets = ValueSets();
+            valueSets.Add("http://example.org/fhir/ValueSet/empty", []);
+            var dr = DataSource(fixture, valueSets);
 
             dr.Retrieve<Observation>(ByCodes(null, new CqlCode("nope", NuSystem))).Should().BeEmpty();
             dr.Retrieve<Observation>(ByCodes(Prop("Observation", "code"), new CqlCode("nope", NuSystem))).Should().BeEmpty();
-            dr.Retrieve<Observation>(ByValueSet(null, "http://example.org/fhir/ValueSet/unknown")).Should().BeEmpty();
+            dr.Retrieve<Observation>(ByValueSet(null, "http://example.org/fhir/ValueSet/empty")).Should().BeEmpty();
+        }
+
+        [TestMethod]
+        public void BehaviorLock_RetrieveByAValueSetTheDictionaryDoesNotHold_SignalsAnError()
+        {
+            var fixture = new Fixture();
+            var dr = DataSource(fixture);
+
+            var retrieve = () => dr.Retrieve<Observation>(ByValueSet(null, "http://example.org/fhir/ValueSet/unknown")).ToList();
+
+            retrieve.Should().Throw<CqlException<CqlUnresolvedValueSetError>>()
+                    .Which.Error.ValueSetUri.Should().Be("http://example.org/fhir/ValueSet/unknown");
         }
 
         [TestMethod]

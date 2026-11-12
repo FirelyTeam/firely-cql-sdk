@@ -29,6 +29,10 @@ Hl7.Cql.Packaging.ResourceFileName.Identifier.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.ResourceFileName() -> void
 Hl7.Cql.Packaging.ResourceFileName.Type.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.Version.get -> string?
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Compact = 2 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Indented = 1 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting.Passthrough = 0 -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
 Hl7.Cql.Packaging.Toolkit.Extensions.CqlToolkitPackagingExtensions
 Hl7.Cql.Packaging.Toolkit.Extensions.ElmToolkitPackagingExtensions
 Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions
@@ -57,6 +61,8 @@ Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.CanonicalRootUrl.get -> string!
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.CanonicalRootUrl.init -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Deconstruct(out string! CanonicalRootUrl, out System.DateTime? OverrideDate, out System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlLibraryIdentifier, string!>? FixedLibraryCanonicals) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ElmAttachmentFormatting.get -> Hl7.Cql.Packaging.Toolkit.ElmAttachmentFormatting
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ElmAttachmentFormatting.init -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.FixedLibraryCanonicals.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlLibraryIdentifier, string!>!
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.FixedLibraryCanonicals.init -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.OverrideDate.get -> System.DateTime?

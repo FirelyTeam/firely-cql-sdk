@@ -30,12 +30,6 @@ partial class CodeBuilderContext
     {
         CodeExpression[] operands = TranslateArgs(op.operand);
 
-        // NOTE: Breaks
-        //var resultType = op.resultTypeSpecifier ?? op.resultTypeName?.ToNamedType() ??
-        //                 throw new InvalidOperationException($"FunctionRef {op.libraryName + "." + op.name} has no result type specifier or result type name.");
-        //var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, operands, resultType);
-
-        //var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, op.libraryName!, op.signature, operands, op.resultTypeSpecifier);
         var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, op.signature, operands, op.resultTypeSpecifier);
         return invoke;
     }

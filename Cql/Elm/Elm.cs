@@ -10,7 +10,6 @@
 
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Runtime;
-using System.Text.Json.Serialization;
 
 // ReSharper disable InconsistentNaming
 

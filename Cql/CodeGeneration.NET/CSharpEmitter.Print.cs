@@ -331,7 +331,17 @@ internal partial class CSharpEmitter
         var typeName = _typeToCSharpConverter.ToCSharp(cast.Type);
 
         if (cast.Kind == CodeCastKind.As)
+        {
+            // The printed operand can be narrower than its IR type: a value cast to a choice is
+            // upcast to object, which prints as the value itself, so a Date prints as a CqlDate.
+            // When C# has no conversion for 'as' from that type to the target (CS0039), route
+            // the operand through object; the cast then gives null at run time, as ELM's
+            // non-strict As does for a value of another type.
+            if (!MayCastWithAs(GetPrintedType(atom.Node), cast.Type))
+                operand = $"((object){operand})";
+
             return $"{operand} as {typeName}";
+        }
 
         // When no direct C# conversion exists from the printed operand's type to the target
         // type (e.g. a bool constant typed as object printing as its literal), route the cast
@@ -726,4 +736,39 @@ internal partial class CSharpEmitter
                 => value.GetType(),
             _ => node.Type,
         };
+
+    /// <summary>
+    /// Whether C# may accept <c>x as T</c> for an <c>x</c> of static type <paramref name="from"/>
+    /// and a T of <paramref name="to"/>. <c>as</c> takes an identity, reference, boxing, unboxing
+    /// or nullable conversion, never a user-defined one (CS0039). The test never rejects a pair
+    /// C# accepts, so <see cref="PrintCast"/> routes an operand through object only where C#
+    /// requires it. Where C#'s rules look past the two types themselves it accepts the pair: an
+    /// interface with a value type, an array with an array or interface, two delegates, and a
+    /// type that contains a CQL tuple type, which prints as a C# value tuple.
+    /// </summary>
+    private bool MayCastWithAs(Type from, Type to)
+    {
+        from = Nullable.GetUnderlyingType(from) ?? from;
+        to = Nullable.GetUnderlyingType(to) ?? to;
+
+        static bool IsSealedClass(Type type) => type is { IsClass: true, IsSealed: true, IsArray: false };
+        static bool IsDelegate(Type type) => typeof(Delegate).IsAssignableFrom(type);
+        static bool IsNumericOrEnum(Type type) => Type.GetTypeCode(type) is >= TypeCode.Char and <= TypeCode.Decimal;
+
+        return from == to
+               || to.IsAssignableFrom(from) // implicit reference and boxing conversions
+               || from.IsAssignableFrom(to) // explicit reference and unboxing conversions
+               || from.IsInterface && !IsSealedClass(to)
+               || to.IsInterface && !from.IsSealed
+               || from.IsArray && (to.IsArray || to.IsInterface)
+               || IsDelegate(from) && IsDelegate(to)
+               || IsNumericOrEnum(from) && IsNumericOrEnum(to) // nullable conversions, always null
+               || ContainsTupleType(from)
+               || ContainsTupleType(to);
+    }
+
+    private bool ContainsTupleType(Type type) =>
+        _typeToCSharpConverter.ShouldUseTupleType(type)
+        || type.HasElementType && ContainsTupleType(type.GetElementType()!)
+        || type.IsGenericType && type.GetGenericArguments().Any(ContainsTupleType);
 }

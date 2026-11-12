@@ -31,12 +31,6 @@ namespace Hl7.Cql.Primitives
         }
 
         /// <summary>
-        /// Returns a null point interval of this type.
-        /// This instance is provided as a convenience for test cases, but should not be used otherwise.
-        /// </summary>
-        internal static readonly CqlInterval<T> PointNull = new();
-
-        /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="low">The low value.</param>

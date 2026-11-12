@@ -10,6 +10,7 @@
 
 using Hl7.Cql.Exceptions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators.Errors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 

@@ -15,10 +15,10 @@ namespace Hl7.Cql.Exceptions;
 /// during CQL expression evaluation.
 /// </summary>
 /// <remarks>
-/// Callers that need to handle any arithmetic error without knowing the concrete
-/// error type can catch <c>CqlException&lt;ICqlArithmeticError&gt;</c> or inspect
-/// <c>exception.Error is ICqlArithmeticError</c>.
+/// Errors are thrown as a <see cref="CqlException{TError}"/> of their concrete type, so callers that need to handle
+/// any arithmetic error without knowing that type use
+/// <c>catch (CqlException e) when (e.Error is ICqlArithmeticError)</c>.
 /// </remarks>
-public interface ICqlArithmeticError : ICqlError
+public interface ICqlArithmeticError : ICqlEvaluationError
 {
 }

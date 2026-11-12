@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.CodeModel;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -36,12 +35,6 @@ internal partial class LibrarySetCSharpCodeGenerator
         _aliasedUsings = typeResolver.Aliases.ToList();
     }
 
-    /// <summary>
-    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
-    /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
-    /// </summary>
-    private static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
-
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>
@@ -57,14 +50,6 @@ internal partial class LibrarySetCSharpCodeGenerator
     /// </code>
     /// </summary>
     private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
-
-    private static string GetGeneratorToolNameFromAssemblyProductName() =>
-        typeof(LibrarySetCSharpCodeGenerator)
-            .Assembly
-            .GetCustomAttributes(false)
-            .OfType<AssemblyProductAttribute>()
-            .SingleOrDefault()?
-            .Product ?? "ELM-to-CSharp";
 
     private static HashSet<string> BuildUsings(TypeResolver typeResolver)
     {

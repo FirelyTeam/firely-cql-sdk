@@ -39,6 +39,10 @@ namespace Hl7.Cql.CqlToElm.Scopes
                 {
                     if (existing is IFunctionElement existingFunction)
                     {
+                        // A function with the same operand types is a redefinition, not an overload.
+                        if (!OverloadedFunctionDef.CanCombine(existingFunction, function))
+                            return false;
+
                         // replace existing symbol with new overload.
                         LocalSymbols[symbol.Name] = OverloadedFunctionDef.Create(existingFunction, function);
                         return true;

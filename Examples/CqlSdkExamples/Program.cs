@@ -24,6 +24,7 @@ internal partial class Program
             case "222": LoadElmFromDirWithCSharpNamespaceSaveCSharpToDir(); return;
             case "230": PackageCqlElmCSharpAndDllFromDirsSaveFhirResourcesToDir(); return;
             case "240": PackageViaCqlAndElmToolkitsSaveFhirResourcesToDir(); return;
+            case "241": PackageWithElmOnlyDependencySaveFhirResourcesToDir(); return;
             case "250": PackageViaCqlToolkitsSaveFhirResourcesToDir(); return;
             case "251": PackageInclDebugSymbolsViaCqlToolkitsSaveFhirResourcesToDir(); return;
             case "310": InvokingCqlHelloWorld(); return;
@@ -33,6 +34,7 @@ internal partial class Program
             case "350": PoolingLibrarySetInvokers(); return;
             case "400": InvokingFromAllFhirResourcesInDirectory(); return;
             case "410": InvokingFromFhirResourceAndDependenciesInDirectory(); return;
+            case "420": CheckAssembliesInFhirResourcesBeforeInvoking(); return;
             case "500": ExtendingFunctionalityLogLibraryStatements(); return;
         }
         // </codegen-switch>

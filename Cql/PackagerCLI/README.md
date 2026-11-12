@@ -237,6 +237,7 @@ cql-package elm --elm input/elm --cql input/cql --fhir output/fhir --cs output/c
 
 - Packages ELM JSON files from the directory `input/elm` into FHIR Library resources saving them to `output/fhir`.
 - The CQL files in `input/cql` are included in the FHIR Library resources, if they match the ELM files by file name.
+- An ELM file without a matching CQL file produces no FHIR Library resource, but resolves the includes of the libraries that are packaged.
 - The generated C# source code is saved to directory `output/csharp`.
 - **Subdirectories are preserved**: If `input/elm` contains `measures/MyMeasure.json`, the output will be `output/fhir/measures/Library-MyMeasure.json`.
 

@@ -8,7 +8,6 @@
 
 #nullable enable
 
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Element = Hl7.Cql.Elm.Element;
 using Expression = Hl7.Cql.Elm.Expression;
