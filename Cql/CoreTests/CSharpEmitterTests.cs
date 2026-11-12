@@ -8,9 +8,9 @@
 
 #nullable enable
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler.CodeModel;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Primitives;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;

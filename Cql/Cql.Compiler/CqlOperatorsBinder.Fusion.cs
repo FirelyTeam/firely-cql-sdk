@@ -8,7 +8,7 @@
 
 #nullable enable
 
-using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 
 namespace Hl7.Cql.Compiler;
