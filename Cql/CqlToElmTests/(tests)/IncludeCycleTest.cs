@@ -214,6 +214,22 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void ALibraryWithoutAVersionThatIncludesItself_ReportsTheCycleWithoutAVersion()
+        {
+            var libraries = Translate(
+                """
+                library Unversioned
+                include Unversioned called Me
+                define X: 1
+                """);
+
+            ShouldReportOneCycle(
+                libraries,
+                "Unable to resolve library: Unversioned. Its includes form a cycle, which CQL does not allow: " +
+                "Unversioned, which includes Unversioned.");
+        }
+
+        [TestMethod]
         public void ALibraryIncludedByTwoLibraries_IsNoCycle()
         {
             var libraries = Translate(

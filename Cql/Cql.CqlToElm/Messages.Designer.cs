@@ -231,7 +231,7 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unable to resolve library: {0} version &apos;{1}&apos;. Its includes form a cycle, which CQL does not allow: {2}..
+        ///   Looks up a localized string similar to Unable to resolve library: {0}. Its includes form a cycle, which CQL does not allow: {1}..
         /// </summary>
         internal static string UnableToResolveLibraryOnIncludeCycle {
             get {

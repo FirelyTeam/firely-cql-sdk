@@ -105,12 +105,9 @@ internal sealed class LibraryBuilderProvider(
             .ThenBy(entry => entry.Library.Version)
             .First()
             .Index;
-        var fromStart = cycle.Skip(start).Concat(cycle.Take(start)).ToList();
+        var fromStart = cycle.Skip(start).Concat(cycle.Take(start)).Select(DescribeLibrary).ToList();
         var messaging = CqlToElmTranslatorServices!.ServiceProvider.GetRequiredService<MessageProvider>();
-        return messaging.UnableToResolveLibraryOnIncludeCycle(
-            fromStart[0].Identifier.ToString(),
-            fromStart[0].Version?.ToString(),
-            fromStart.Append(fromStart[0]).Select(DescribeLibrary));
+        return messaging.UnableToResolveLibraryOnIncludeCycle(fromStart[0], fromStart.Append(fromStart[0]));
     }
 
     // A library as the messages name one: "A version '1.0.0'", or "A" when it declares no version.
