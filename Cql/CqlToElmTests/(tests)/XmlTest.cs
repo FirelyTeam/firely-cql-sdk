@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
+        [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName), UnfoldingStrategy = TestDataSourceUnfoldingStrategy.Unfold)]
         [TestMethod]
         public void Run(TestCase testCase)
         {
@@ -187,6 +187,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(names.Contains("HighBoundaryNull"));
         }
 
+        [Serializable]
         public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);
     }
 

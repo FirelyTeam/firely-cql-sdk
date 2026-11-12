@@ -418,8 +418,9 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 #remove resources generated measures projects
 /Demo/**/Resources/*.*
 
-#remove global.json for testing dotnet sdk updates
+#remove global.json files made for testing dotnet sdk updates; the root one pins the SDK and is tracked
 global.json
+!/global.json
 
 # remove compressed files
 *.zip

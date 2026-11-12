@@ -123,6 +123,18 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertCanonical_FhirUri_KeepsTheValue()
+        {
+            // The model info declares canonical as a subtype of uri; the .NET model holds them as siblings.
+            var canonical = new Canonical("http://example.org/Library/Common|2.0.0");
+
+            var converted = FhirTypeConverter.Convert<FhirUri>(canonical);
+
+            Assert.IsNotNull(converted);
+            Assert.AreEqual(canonical.Value, converted.Value);
+        }
+
+        [TestMethod]
         public void ConvertParameters_String()
         {
             var parameter = new ParameterComponent()

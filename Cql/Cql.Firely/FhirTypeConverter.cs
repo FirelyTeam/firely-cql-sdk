@@ -934,6 +934,8 @@ namespace Hl7.Cql.Fhir
         {
             converter.AddConversion<M.Id, M.FhirString>(id => new M.FhirString(id.Value));
             converter.AddConversion<M.Code, M.FhirString>(code => new M.FhirString(code.Value));
+            // The model info declares canonical as a subtype of uri; the .NET model does not.
+            converter.AddConversion<M.Canonical, M.FhirUri>(canonical => new M.FhirUri(canonical.Value));
             return converter;
         }
     }

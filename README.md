@@ -11,7 +11,9 @@ so it is likely at this early stage that there will be deviations from other eng
 
 ## Target Frameworks
 
-The SDK targets **.NET 8 (LTS)** and **.NET 10 (LTS)** to provide optimal performance from .NET 10's enhancements (especially in LINQ which CQL heavily relies upon) while maintaining long-term support. All SDK packages (Hl7.Cql.\*) are multi-targeted and will run on either framework with identical behavior.
+The SDK targets **.NET 10 (LTS)**, for the performance of its runtime and BCL (especially in LINQ, which CQL relies on heavily). All SDK packages (Hl7.Cql.\*) ship a single `net10.0` asset.
+
+Applications running on a later .NET version can consume that asset as usual; applications on .NET 8 or earlier cannot, and must upgrade.
 
 ## Release Notes
 
@@ -44,7 +46,7 @@ Full rules, including where this deviates from EffVer as published: [docs/versio
 - There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 - The [CQL Engine Architecture](docs/cql-engine-architecture.md) document with background on the design.
 - The [Toolkit Services Dependency Diagrams](docs/dependency-diagrams.md) showing the internal dependencies of the CQL SDK toolkit services.
-- The [Technical README](docs/technical-readme.md) for maintainers contains implementation details, conditional compilation, and multi-targeting information.
+- The [Technical README](docs/technical-readme.md) for maintainers contains implementation details and target-framework information.
 - The [Demo Projects and CQL Build Pipeline](docs/demo-projects.md) guide covering the build scripts, Java CQL-to-ELM tooling, and PackagerCLI MSBuild targets used by the Demo projects.
 
 ### Quick Start: Invoking CQL
@@ -137,40 +139,27 @@ Further information can be found in [docs/getting-started.md](docs/getting-start
 
 ## Testing
 
-### Multi-Framework Testing
-
-The SDK includes comprehensive tools for testing against both .NET 8 and .NET 10 to verify identical behavior across both LTS frameworks.
+### Running the tests
 
 **Test Categories:**
 
-- **Multi-Target Tests**: CoreTests and CqlToElmTests run on both .NET 8 and .NET 10
-- **.NET 10 Only**: IntegrationRunner and Test.Measures.Demo run only on .NET 10
-- **Excluded**: XsdToCSharpConverterTests
-
-**Local Testing Scripts:**
-
-```powershell
-# Windows - Test all multi-target projects against both frameworks
-.\test-multiframework.ps1
-
-# Windows - Test specific project against both frameworks
-.\test-multiframework.ps1 -TestProject CoreTests
-```
+- **Unit tests**: `CoreTests` and `CqlToElmTests`
+- **Integration tests**: `IntegrationRunner` and `Hedis2025.GoldenTests` (both in the `Firely.Cql.Sdk.Integration.Runner` submodule)
+- **Excluded**: `XsdToCSharpConverterTests` (internal tooling)
 
 ```bash
-# Linux/macOS - Test all multi-target projects against both frameworks
-./test-multiframework.sh
-
-# Linux/macOS - Test specific project against both frameworks
-./test-multiframework.sh CoreTests
+# Unit tests
+dotnet test Cql/CoreTests/CoreTests.csproj -c Debug
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj -c Debug
 ```
 
 **CI/CD Testing:**
-Multi-framework testing is fully integrated into the Azure Pipelines CI/CD workflow. The `multiFrameworkTests` stage runs after the main build and tests in parallel:
+Testing is fully integrated into the Azure Pipelines CI/CD workflow. A single Build stage compiles the
+solution once, then the Test stage runs three jobs in parallel against the build artifacts:
 
-- Job 1: Tests CoreTests and CqlToElmTests on .NET 8
-- Job 2: Tests CoreTests, CqlToElmTests, IntegrationRunner, and Test.Measures.Demo on .NET 10
-- Job 3: Compares results and reports any framework-specific differences
+- `TestNet10`: `CoreTests` and `CqlToElmTests`
+- `TestIntegrationNet10`: `IntegrationRunner`
+- `TestHedisNet10`: `Hedis2025.GoldenTests`
 
 See [build/README.md](build/README.md) for complete CI/CD testing documentation and configuration details.
 

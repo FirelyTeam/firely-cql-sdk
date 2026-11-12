@@ -11,7 +11,7 @@ Parent document: [../copilot-instructions.md](../copilot-instructions.md)
 - [3.3. Test projects](#33-test-projects)
 - [3.4. Everything else](#34-everything-else)
 
-Read this before searching the repository. Build `Cql-Sdk.slnf`; SDK and test projects target `net8.0;net10.0` (set in `cql-sdk.props`), so run tests on both.
+Read this before searching the repository. Build `Cql-Sdk.slnf`; SDK and test projects target `net10.0` (set in `cql-sdk.props`).
 
 ## 3.1. SDK Projects
 
