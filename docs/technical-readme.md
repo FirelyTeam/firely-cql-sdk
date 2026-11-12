@@ -2,16 +2,21 @@
 
 This document contains technical details, assumptions, and implementation details for maintaining the Firely CQL SDK.
 
-## Multi-Targeting: .NET 8 and .NET 10
+## Target Framework: .NET 10
 
-The SDK targets both .NET 8 (LTS) and .NET 10 (LTS) to provide performance benefits from .NET 10 while maintaining compatibility with .NET 8.
+The SDK targets .NET 10 (LTS) only.
 
 ### Target Framework Configuration
 
-- **Base configuration**: `cql-base.props` sets `<TargetFrameworks>net8.0;net10.0</TargetFrameworks>`
-- **SDK projects**: All library projects (Hl7.Cql.*) target both frameworks
-- **Tool projects**: Executable projects like PackagerCLI target both frameworks
-- **Example projects**: May target a single framework for simplicity
+- **Base configuration**: `cql-base.props` sets `<TargetFrameworks>net10.0</TargetFrameworks>` and pins `<LangVersion>`
+- **SDK projects**: All library projects (Hl7.Cql.*) inherit it
+- **Tool projects**: Executable projects like PackagerCLI inherit it
+- **Example projects**: Set `<TargetFramework>net10.0</TargetFramework>` directly
+
+`LangVersion` is pinned rather than set to `latest`, because `latest` is compiler-wide rather than
+per-target-framework: it resolves to whatever the installed SDK supports and so can differ between
+machines. Raise it together with the target framework. Should the repo ever multi-target again, that
+needs one Condition'd `LangVersion` per framework rather than a single value.
 
 ### System.Text.Json Type Discriminator Conflict (.NET 10 Breaking Change)
 
@@ -43,7 +48,6 @@ public TypeSpecifier[] type { get; set; }
 - ✅ No manual modifications to generated code needed
 - ✅ No conditional compilation required
 - ✅ No runtime preprocessing or postprocessing
-- ✅ Works identically on both .NET 8 and .NET 10
 - ✅ Better performance (no JSON tree manipulation)
 - ✅ Type-safe at compile time
 
@@ -82,15 +86,12 @@ The `LibraryJsonSerializer` includes preprocessing logic (`CorrectLegacyConstruc
    - Configures polymorphism options with "type" as discriminator
 
 #### Framework-Agnostic Behavior
-Both .NET 8 and .NET 10 now exhibit **identical behavior**:
-- Same "type" discriminator used for polymorphism
-- Same JSON format for serialization/deserialization
-- No conditional compilation needed in serialization code
-- Test results are identical across frameworks
+The serialization layer carries no framework-conditional code: one "type" discriminator for
+polymorphism, one JSON format, and no conditional compilation.
 
 ### Custom Build Targets
 
-Custom MSBuild targets (e.g., `ElmTooling.Targets.xml`, `CqlTooling.Targets.xml`) that generate code or artifacts are configured to **run only once** when multi-targeting:
+Custom MSBuild targets (e.g., `ElmTooling.Targets.xml`, `CqlTooling.Targets.xml`) that generate code or artifacts are gated on `ToolTargetFramework`, so they still **run only once** should the repo multi-target again:
 
 ```xml
 <!-- Use ToolTargetFramework property to specify the latest framework -->
@@ -104,14 +105,13 @@ Custom MSBuild targets (e.g., `ElmTooling.Targets.xml`, `CqlTooling.Targets.xml`
         BeforeTargets="PreBuildEvent">
 ```
 
-This prevents generating the same artifacts multiple times and ensures tools use the latest framework.
+This prevents generating the same artifacts once per framework, and ensures tools use the latest framework.
 
 ### Package References
 
 **System.Text.Json**:
-- .NET 8: Requires explicit PackageReference
-- .NET 10: Included in the framework, explicit reference causes NU1510 error
-- **Solution**: Removed explicit PackageReference as it's transitively included from dependencies
+- Included in the .NET 10 framework; an explicit `PackageReference` causes an NU1510 error
+- There is therefore no explicit reference — it comes in transitively from dependencies
 
 **Microsoft.CodeAnalysis.CSharp**:
 - Used for runtime C# compilation in CodeGeneration.NET
@@ -136,66 +136,36 @@ When modifying C# code generation logic in `CodeGeneration.NET`, always update `
 # Build all SDK projects (recommended - excludes submodules)
 dotnet build Cql-Sdk.slnf -c Debug
 
-# Build for specific framework
-dotnet build Cql-Sdk.slnf -c Debug --framework net10.0
 ```
 
 ### Testing
 
 #### Local Testing
 ```bash
-# Run tests for both frameworks
 dotnet test Cql/CoreTests/CoreTests.csproj -c Debug
-
-# Run tests for specific framework
-dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net8.0
-dotnet test Cql/CoreTests/CoreTests.csproj -c Debug --framework net10.0
+dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj -c Debug
 ```
 
-#### CI/CD Multi-Framework Testing
-The repository includes `build/build-test-sign.yml`, a dedicated Azure Pipelines template that builds, tests, and signs assemblies for both .NET 8 and .NET 10 in parallel. This template implements three parallel jobs to maximize efficiency while following Microsoft's best practices for multi-targeting validation.
+#### CI/CD Testing
+The repository includes `build/build-test-sign.yml`, a dedicated Azure Pipelines template that builds, signs and packages once, then runs the test jobs in parallel against those artifacts.
 
 **Configuration:**
-The multi-framework testing is **fully integrated** and runs automatically on every build in a dedicated stage after the main build stage.
+Testing is **fully integrated** and runs automatically on every build, in a dedicated stage after the main build stage.
 
 **Test Categories:**
-1. **Multi-Target Tests** (tested on both .NET 8 and .NET 10):
+1. **Unit Tests** (`unitTestProjects`):
    - `Cql/CoreTests/CoreTests.csproj` - Core SDK tests
    - `Cql/CqlToElmTests/CqlToElmTests.csproj` - CQL to ELM conversion tests
 
-2. **.NET 10 Only Tests**:
+2. **Integration Tests**:
    - `submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj`
-   - `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj`
+   - `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025.GoldenTests/Hedis2025.GoldenTests.csproj`
 
 3. **Excluded Tests**:
    - `tools/XsdToCSharpConverterTests/XsdToCSharpConverterTests.csproj` - Internal tool tests
-   - `submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj` - Commented out
-   - `submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj` - Commented out
-
-**Benefits:**
-- ✅ Tests run against both frameworks simultaneously (parallel execution)
-- ✅ Framework-specific test results and code coverage
-- ✅ Automatic comparison report to identify framework-specific issues
-- ✅ Early detection of framework behavioral differences
+   - `Demo/Test.Measures.Demo/Test.Measures.Demo.csproj` - needs the Demo project to generate resources
 
 **Usage:** See [build/README.md](../build/README.md) for complete documentation and configuration details.
-
-**Local Testing:** Use the provided scripts for local validation:
-```powershell
-# Windows - Test all multi-target projects
-.\test-multiframework.ps1
-
-# Windows - Test specific project
-.\test-multiframework.ps1 -TestProject CoreTests
-```
-
-```bash
-# Linux/macOS - Test all multi-target projects
-./test-multiframework.sh
-
-# Linux/macOS - Test specific project
-./test-multiframework.sh CoreTests
-```
 
 ### Cross-Platform Considerations
 - **Always maintain both PowerShell (.ps1) and Bash (.sh) script variants**
@@ -206,32 +176,23 @@ The multi-framework testing is **fully integrated** and runs automatically on ev
 
 ## Conditional Compilation Symbols
 
-The SDK minimizes the use of conditional compilation. Standard .NET conditional compilation symbols are available if needed:
-- `NET8_0`: Code specific to .NET 8
-- `NET10_0`: Code specific to .NET 10
-- `NET10_0_OR_GREATER`: Code for .NET 10 and later
+The SDK uses no framework-conditional compilation, and with a single target framework there is
+nothing for it to switch on. The standard symbols (`NET10_0`, `NET10_0_OR_GREATER`, ...) are
+available if a future multi-targeting change needs them.
 
-Example (rarely needed with current architecture):
-```csharp
-#if NET10_0_OR_GREATER
-    // .NET 10+ specific code
-#else
-    // .NET 8 specific code
-#endif
-```
-
-**Note**: The current serialization architecture avoids conditional compilation entirely by using automatic `[JsonIgnore]` attribute generation and framework-agnostic custom converters.
+**Note**: The serialization architecture avoids conditional compilation entirely, by using automatic `[JsonIgnore]` attribute generation and framework-agnostic custom converters.
 
 ## Future .NET Versions
 
-When adding support for future .NET versions (e.g., .NET 12 LTS):
-1. Update `cql-base.props` with new target framework
+When moving to or adding a future .NET version:
+1. Update `cql-base.props` with the new target framework, and raise `LangVersion` with it
 2. Test System.Text.Json behavior - the `[JsonIgnore]` solution should continue to work
-3. Review if any new conditional compilation is needed (should be minimal/none)
+3. Review whether any conditional compilation is needed (should be none)
 4. Update this documentation
 5. Update main README.md
-6. Test all custom build targets run only once
-7. Update CI/CD pipelines (build variables, SDK versions)
+6. Check all custom build targets still run only once
+7. Update CI/CD pipelines (`build/variables.yml` SDK version, and the SDK install tasks in `build/build-test-sign.yml`)
+8. Record the change in a `docs/releases/vnext/` fragment — adding or dropping a target framework is breaking
 
 ## Common Issues and Solutions
 
@@ -241,12 +202,14 @@ When adding support for future .NET versions (e.g., .NET 12 LTS):
 ### Issue: System.Text.Json serialization fails with "type" property conflicts
 **Solution**: Regenerate `Elm.g.cs` using the updated `XsdCodeGenerator` which automatically adds `[JsonIgnore]` attributes to conflicting properties.
 
-### Issue: Tests fail on one framework but pass on another
-**Solution**: Verify both frameworks use identical serialization logic. With current architecture, test results should be identical across frameworks. If not, investigate custom converters or legacy format handling.
+### Issue: Tests pass locally but fail on a newer runtime
+**Solution**: The runtime, not just the target framework, can change behavior — a .NET 11 run of the
+same binaries fails UCUM quantity arithmetic because `double`-to-`decimal` conversion is now
+correctly rounded. Check the breaking-change list for the runtime in question before assuming the
+test is at fault.
 
 ## Additional Resources
 
 - [.NET 10 Breaking Changes](https://learn.microsoft.com/en-us/dotnet/core/compatibility/10.0)
 - [System.Text.Json Polymorphism](https://learn.microsoft.com/en-us/dotnet/standard/serialization/system-text-json/polymorphism)
-- [Multi-Targeting in .NET](https://learn.microsoft.com/en-us/dotnet/standard/frameworks)
 - [ELM JSON Serialization Architecture](../Cql/Elm/Serialization/README.md) - Complete technical documentation of the serialization system

@@ -58,7 +58,7 @@ firely-cql-sdk/
 External submodule repositories:
 * `submodules/Firely.Cql.Sdk.Integration.Runner/` — integration test runner for CMS measures. A
   **private** repository: `git submodule update` only succeeds if you have access, and the
-  `Cql-Sdk-All.sln` solution needs it, which is why `Cql-Sdk.slnf` is the recommended build.
+  `Cql-Sdk-All.slnx` solution needs it, which is why `Cql-Sdk.slnf` is the recommended build.
 
 ## Building the SDK
 
@@ -68,7 +68,7 @@ Build the core SDK using the `Cql-Sdk.slnf` solution filter (recommended):
 dotnet build Cql-Sdk.slnf
 ```
 
-To also build demos and examples, use `Cql-Sdk-Demos-Examples.slnf`. The `Cql-Sdk-All.sln` solution includes submodule projects and requires them to be initialized first (`git submodule update`).
+To also build demos and examples, use `Cql-Sdk-Demos-Examples.slnf`. The `Cql-Sdk-All.slnx` solution includes submodule projects and requires them to be initialized first (`git submodule update`).
 
 ## Invoking CQL — The Recommended Approach
 
@@ -176,5 +176,5 @@ See the **[Demo Projects](demo-projects.md)** guide for the project structure, p
 * [Demo Projects](demo-projects.md) — project structure and how to configure a measure project
 * [CQL Build Pipeline](build-pipeline.md) — build scripts, Java CQL-to-ELM tooling, PackagerCLI, and MSBuild targets
 * [CQL Packager Reference](cql-packager.md) — all `cql-package` commands, options, and examples
-* [Technical README](technical-readme.md) — multi-targeting, code generation versioning, and CI/CD details (maintainers)
+* [Technical README](technical-readme.md) — target framework, code generation versioning, and CI/CD details (maintainers)
 * [DevDays 2023 presentation](https://youtu.be/CkTbgfbttJc) — introductory walkthrough

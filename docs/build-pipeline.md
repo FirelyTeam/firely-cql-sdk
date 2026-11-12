@@ -16,14 +16,14 @@ Two cross-platform build scripts at the repository root drive the multi-stage bu
 **`build.ps1`** (PowerShell):
 
 ```powershell
-.\build.ps1 [-Framework <net8.0|net10.0>] [-Configuration <Debug|Release>]
+.\build.ps1 [-Configuration <Debug|Release>]
             [-EnableCqlTooling] [-EnableElmTooling]
 ```
 
 **`build.sh`** (Bash):
 
 ```bash
-./build.sh [--framework <net8.0|net10.0>] [--configuration <Debug|Release>]
+./build.sh [--configuration <Debug|Release>]
            [--enable-cql-tooling] [--enable-elm-tooling]
 ```
 
@@ -51,7 +51,7 @@ When `--enable-elm-tooling` (or `-EnableElmTooling`) is specified, the script pe
 
 1. **Phase 1** — Build `Cql-Sdk.slnf` (core SDK only, without `ElmToolingEnabled`). This ensures `PackagerCLI` and all its dependencies are fully compiled and on disk before any measure project tries to launch the packager executable.
 
-2. **Phase 2** — Build `Cql-Sdk-All.sln` with `ElmToolingEnabled=true` and `-maxcpucount:1` (serialised). Because PackagerCLI is already up-to-date from Phase 1, MSBuild skips recompiling it. The `-maxcpucount:1` flag ensures only one `GenerateCSharp` target fires at a time, preventing file-write races when multiple measure projects run the packager simultaneously.
+2. **Phase 2** — Build `Cql-Sdk-All.slnx` with `ElmToolingEnabled=true` and `-maxcpucount:1` (serialised). Because PackagerCLI is already up-to-date from Phase 1, MSBuild skips recompiling it. The `-maxcpucount:1` flag ensures only one `GenerateCSharp` target fires at a time, preventing file-write races when multiple measure projects run the packager simultaneously.
 
 ## MSBuild Props and Targets Files
 

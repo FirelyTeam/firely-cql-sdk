@@ -10,7 +10,7 @@ REM better tooling support and prepares for future enhancements.
 REM ============================================================================
 
 SET out_file=Elm.g.cs
-SET tool_path=..\..\tools\XsdToCSharpConverter\bin\Debug\net8.0\xsd2cs.dll
+SET tool_path=..\..\tools\XsdToCSharpConverter\bin\Debug\net10.0\xsd2cs.dll
 
 ECHO Checking for XSD to C# converter tool...
 IF NOT EXIST "%tool_path%" (
