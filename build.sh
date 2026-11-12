@@ -14,8 +14,8 @@ RED='\033[0;31m'
 RESET='\033[0m'
 
 # Default values
-FRAMEWORK=""
-CONFIGURATION="Debug"
+FRAMEWORK="net10.0"
+CONFIGURATION=""
 ENABLE_CQL_TO_ELM=""
 ENABLE_ELM_TO_CSHARP=""
 
@@ -63,8 +63,7 @@ echo -e "=======================================================================
 echo ""
 
 # Interactive prompts if parameters not provided
-if [ -z "$FRAMEWORK" ]; then
-    FRAMEWORK="net10.0"
+if [ -z "$CONFIGURATION" ]; then
     echo -e "${YELLOW}Select configuration:${RESET}"
     echo "  1. Debug"
     echo "  2. Release"
