@@ -7,7 +7,7 @@
 param(
     [Parameter(HelpMessage="Target framework: net10.0")]
     [ValidateSet("net10.0")]
-    [string]$Framework,
+    [string]$Framework = "net10.0",
     
     [Parameter(HelpMessage="Enable CQL tooling which converts CQL to ELM")]
     [switch]$EnableCqlTooling,
@@ -26,8 +26,7 @@ Write-Host "====================================================================
 Write-Host ""
 
 # Interactive prompts if parameters not provided
-if (-not $Framework -or -not $PSBoundParameters.ContainsKey('Configuration')) {
-    $Framework = "net10.0"
+if (-not $PSBoundParameters.ContainsKey('Configuration')) {
     Write-Host "Select configuration:" -ForegroundColor Yellow
     Write-Host "  1. Debug"
     Write-Host "  2. Release"
