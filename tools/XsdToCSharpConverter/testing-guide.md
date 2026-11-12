@@ -19,7 +19,7 @@ dotnet build
 
 **Expected output:**
 - Build succeeds with no errors
-- Output: `XsdToCSharpConverter -> .../bin/Debug/net8.0/xsd2cs.dll`
+- Output: `XsdToCSharpConverter -> .../bin/Debug/net10.0/xsd2cs.dll`
 
 ### 2. Run Unit Tests
 
@@ -76,7 +76,7 @@ dotnet build
 
 **Test basic help:**
 ```bash
-dotnet tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll
+dotnet tools/XsdToCSharpConverter/bin/Debug/net10.0/xsd2cs.dll
 ```
 
 **Expected**: Usage information displayed
@@ -84,7 +84,7 @@ dotnet tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll
 **Test with schema files:**
 ```bash
 cd Cql/Elm/Schema
-dotnet ../../../tools/XsdToCSharpConverter/bin/Debug/net8.0/xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm /out:TestElm.g.cs library.xsd expression.xsd clinicalexpression.xsd cqlannotations.xsd
+dotnet ../../../tools/XsdToCSharpConverter/bin/Debug/net10.0/xsd2cs.dll /c /o:.. /n:Hl7.Cql.Elm /out:TestElm.g.cs library.xsd expression.xsd clinicalexpression.xsd cqlannotations.xsd
 ```
 
 **Success criteria:**

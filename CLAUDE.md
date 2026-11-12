@@ -8,7 +8,7 @@ If the user gives a memory-style instruction ("remember...", "never...", "always
 
 ## Repository map
 
-Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net8.0;net10.0` (set in `cql-sdk.props`), so run tests on both.
+Read this before searching. Build `Cql-Sdk.slnf`; SDK and test projects target `net10.0` (set in `cql-sdk.props`).
 
 **Pipeline, in order, under `Cql/`** (assembly names in parentheses where they differ from the folder):
 
@@ -115,7 +115,7 @@ For FHIR primitives that checker is `Hl7.Fhir.Model.<Type>.IsValidValue(value)` 
 
 ## Build
 
-- Build `Cql-Sdk.slnf`, not `Cql-Sdk-All.sln` — the `.sln` includes submodules you likely don't have access to.
+- Build `Cql-Sdk.slnf`, not `Cql-Sdk-All.slnx` — the full solution includes submodules you likely don't have access to.
 - Any change to build scripts/project files must keep working on both Windows and Unix (Linux/macOS/WSL): maintain matching `.ps1`/`.sh` script pairs, use `Condition="'$(OS)' == 'Windows_NT'"` (or `!=`) rather than assuming an OS, and match directory-name case exactly — Unix filesystems are case-sensitive even though this repo is usually edited on Windows. Avoid platform-specific tools like `flock` (no default on macOS); prefer a portable mechanism like directory-based locking.
 - CI skips the full build when every changed file matches an `ignorePatterns` entry in `build/azure-pipelines.yml` (currently `docs/`, any `*.md` file, and `.claude/`). If a PR touching only those also needs CI to actually run (e.g. testing a skill's shell commands), touch a non-ignored file too.
 
