@@ -2,9 +2,9 @@
 
 - **Runtime (`Hl7.Cql.Elm`)** — Parsing and writing ELM JSON (`Library.ParseFromJson`, `Library.LoadFromJson`,
   `Library.SerializeToJson`, `Library.WriteJson`) now uses System.Text.Json's native polymorphism instead of a
-  converter that built serializer options for every node. Parsing CMS133 drops from 786 ms to 14.4 ms and
-  FHIRHelpers-4.0.1 from 480 ms to 3.2 ms; serializing CMS133 drops from 480 ms to 1.9 ms and FHIRHelpers-4.0.1 from
-  206 ms to 1.1 ms. Parsing FHIRHelpers-4.0.1 allocates about 3 MB instead of about 417 MB.
+  converter that built serializer options for every node. Parsing CMS133 drops from 786 ms to 10.9 ms and
+  FHIRHelpers-4.0.1 from 480 ms to 3.3 ms; serializing CMS133 drops from 480 ms to 1.9 ms and FHIRHelpers-4.0.1 from
+  206 ms to 1.0 ms. Parsing FHIRHelpers-4.0.1 allocates about 3 MB instead of about 417 MB.
 
 ## Fixes
 
