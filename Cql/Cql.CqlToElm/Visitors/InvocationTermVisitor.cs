@@ -68,8 +68,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     MessagingProvider.UnexpectedLibraryReference()).WithLocator(locator);
             else if (term is IncludeRef ir)
-                return ir.AddError(MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
-                    .WithLocator(locator);
+                return SymbolScopeExtensions.MakeErrorReference(null, ir.IncludeDef.localIdentifier,
+                    MessagingProvider.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier)).WithLocator(locator);
             else return term;
         }
 
