@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitTermExpression([NotNull] cqlParser.TermExpressionContext context) =>
             rejectLibraryReference(base.VisitTermExpression(context), context.Locator());
 
+        public override Expression VisitTermExpressionTerm([NotNull] cqlParser.TermExpressionTermContext context) =>
+            rejectLibraryReference(base.VisitTermExpressionTerm(context), context.Locator());
+
+        // The left side of a '.' is the one place a model or an included library may stand: it qualifies a member.
+        private Expression visitQualifier(cqlParser.ExpressionTermContext context) =>
+            context is cqlParser.TermExpressionTermContext term
+                ? base.VisitTermExpressionTerm(term)
+                : Visit(context);
+
         // A model or an included library is not a value: it can only qualify the name of one of its members.
         private Expression rejectLibraryReference(Expression term, string locator)
         {
@@ -207,7 +216,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
 
             }
-            var left = Visit(context.expressionTerm());
+            var left = visitQualifier(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
                     MessagingProvider.UnexpectedTypeReference()).WithLocator(context.Locator());

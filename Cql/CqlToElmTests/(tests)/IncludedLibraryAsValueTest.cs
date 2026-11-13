@@ -59,6 +59,37 @@ public class IncludedLibraryAsValueTest : Base
     }
 
     [TestMethod]
+    [DataRow("FH + 1")]
+    [DataRow("FH[0]")]
+    [DataRow("-FH")]
+    [DataRow("start of FH")]
+    [DataRow("FHIR + 1")]
+    [DataRow("FHIR[0]")]
+    public void LibraryAsOperandOfAnExpressionTerm_IsNotLeftInTheElm_AndSerializes(string expression)
+    {
+        var cql = $"""
+            library LibraryAsOperand version '1.0.0'
+
+            using FHIR version '4.0.1'
+
+            include FHIRHelpers version '4.0.1' called FH
+
+            define private "actual": {expression}
+            """;
+        var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
+        var cqlLibraryString = CqlLibraryString.Parse(cql);
+
+        var library = cqlToolkit
+                      .AddCqlLibraries(cqlLibraryString)
+                      .TranslateToElm()
+                      .ArtifactsById[cqlLibraryString]
+                      .ResultElmLibrary!;
+
+        var json = library.SerializeToJson();
+        json.Should().NotContain("IncludeRef").And.NotContain("UsingRef");
+    }
+
+    [TestMethod]
     public void UsingIncludeAndFunction_SerializesAndParsesBack()
     {
         var library = CreateCqlToolkit().AddFHIRHelpers().MakeLibrary("""
