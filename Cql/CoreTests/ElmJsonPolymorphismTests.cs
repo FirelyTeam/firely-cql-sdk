@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using Hl7.Cql.Elm;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -368,8 +366,9 @@ public class ElmJsonPolymorphismTests
 
     // ---- Depth ----
 
-    // Reading and writing recurse once per nesting level, so the stack they need grows with the depth. The test
-    // runs on a thread with a stack of its own, so it does not depend on the stack size of the test host.
+    // Reading and writing recurse once per nesting level, so the stack they need grows with the depth. Nesting this
+    // deep does not fit on the stack of an ordinary thread, so this test runs on a thread with a large stack of its
+    // own. What an ordinary thread does with such depth is pinned by the tests below.
     private const int DeepStackBytes = 64 * 1024 * 1024;
 
     [TestMethod]
@@ -385,6 +384,55 @@ public class ElmJsonPolymorphismTests
         thread.Join();
 
         failure.Should().BeNull();
+    }
+
+    private const int ExceedsOrdinaryStackDepth = 4000;
+    private const int OneMegabyteStackBytes = 1024 * 1024;
+
+    private static string NestedNotsJson(int depth)
+    {
+        var expressionJson = new StringBuilder();
+        for (var i = 0; i < depth; i++)
+            expressionJson.Append("""{"type":"Not","operand":""");
+        expressionJson.Append("""{"type":"Literal","value":"true","valueType":"{urn:hl7-org:elm-types:r1}Boolean"}""");
+        expressionJson.Append('}', depth);
+        return LibraryJson(StatementWith(expressionJson.ToString()));
+    }
+
+    private static Exception? CaptureOnThread(Action action, int maxStackSize)
+    {
+        Exception? failure = null;
+        var thread = new Thread(() =>
+        {
+            try { action(); }
+            catch (Exception e) { failure = e; }
+        }, maxStackSize);
+        thread.Start();
+        thread.Join();
+        return failure;
+    }
+
+    [TestMethod]
+    public void Depth_ParsingExpressionTooDeepForTheStack_ThrowsJsonException()
+    {
+        var json = NestedNotsJson(ExceedsOrdinaryStackDepth);
+
+        var failure = CaptureOnThread(() => Library.ParseFromJson(json, validate: false), OneMegabyteStackBytes);
+
+        failure.Should().BeOfType<JsonException>();
+    }
+
+    [TestMethod]
+    public void Depth_SerializingExpressionTooDeepForTheStack_ThrowsJsonException()
+    {
+        Expression expression = IntegerLiteral();
+        for (var i = 0; i < ExceedsOrdinaryStackDepth; i++)
+            expression = new Not { operand = expression };
+        var library = LibraryWith(DefWith(expression));
+
+        var failure = CaptureOnThread(() => library.SerializeToJson(writeIndented: false), OneMegabyteStackBytes);
+
+        failure.Should().BeOfType<JsonException>();
     }
 
     private static void ParseSerializeAndValidateNestedNots(int depth)

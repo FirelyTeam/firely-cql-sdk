@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using Hl7.Cql.Elm;

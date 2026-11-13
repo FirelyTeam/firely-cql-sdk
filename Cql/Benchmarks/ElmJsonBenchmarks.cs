@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using System.IO;
 using System.Text.Json;
 using BenchmarkDotNet.Attributes;

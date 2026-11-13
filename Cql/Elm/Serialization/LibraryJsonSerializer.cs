@@ -31,6 +31,11 @@ internal static class LibraryJsonSerializer
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
+    // A node without options of its own asks its parent for them, and a root with none gives nothing to cache, so
+    // every lookup on a deeply nested node would walk the whole chain up to the root. Giving the root options ends
+    // that walk at the root.
+    private static readonly JsonNodeOptions _jsonNodeOptions = new() { PropertyNameCaseInsensitive = false };
+
     /// <summary>
     /// Parses the specified JSON string and returns a corresponding JsonNode representation.
     /// </summary>
@@ -39,7 +44,7 @@ internal static class LibraryJsonSerializer
     /// <exception cref="InvalidOperationException">Thrown if the JSON string cannot be parsed into a JsonNode.</exception>
     internal static JsonNode ParseToJsonNode(string json)
     {
-        return JsonNode.Parse(json, documentOptions: _jsonDocumentOptions) ??
+        return JsonNode.Parse(json, _jsonNodeOptions, _jsonDocumentOptions) ??
                throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
     }
 
@@ -200,6 +205,11 @@ internal static class LibraryJsonSerializer
     internal static JsonDocumentOptions GetJsonDocumentOptions() => _jsonDocumentOptions;
 
     /// <summary>
+    /// Gets the JSON node options used for parsing.
+    /// </summary>
+    internal static JsonNodeOptions GetJsonNodeOptions() => _jsonNodeOptions;
+
+    /// <summary>
     /// Builds JSON serializer options for ELM serialization.
     /// </summary>
     /// <param name="allowOldStyleTypeDiscriminators">Whether to allow old-style type discriminators.</param>
@@ -220,7 +230,8 @@ internal static class LibraryJsonSerializer
                       .WithAddedModifier(ModifyNarrative)
                       .WithAddedModifier(DoNotSerializeDefaultValues)
                       .WithAddedModifier(HandleSpecifiedProperties)
-                      .WithAddedModifier(RespectXmlIgnoreAttribute);
+                      .WithAddedModifier(RespectXmlIgnoreAttribute)
+                      .WithAddedModifier(GuardNestingDepth);
 
         options.TypeInfoResolver = resolver;
 
@@ -230,8 +241,34 @@ internal static class LibraryJsonSerializer
     private static JsonDocumentOptions BuildJsonDocumentOptions() =>
         new() { MaxDepth = MaxDepth };
 
+    /// <summary>
+    /// Throws a <see cref="JsonException"/> when the stack cannot take another level of nesting, so that
+    /// ELM nested deeper than the thread's stack allows fails with a catchable exception, not a stack overflow.
+    /// </summary>
+    private static void EnsureStackForNesting()
+    {
+        if (!RuntimeHelpers.TryEnsureSufficientExecutionStack())
+            throw new JsonException("The ELM is nested too deeply for the available stack.");
+    }
+
+    private static void GuardNestingDepth(JsonTypeInfo ti)
+    {
+        if (ti.Kind != JsonTypeInfoKind.Object) return;
+
+        var onDeserializing = ti.OnDeserializing;
+        ti.OnDeserializing = onDeserializing is null
+            ? _ => EnsureStackForNesting()
+            : o => { EnsureStackForNesting(); onDeserializing(o); };
+
+        var onSerializing = ti.OnSerializing;
+        ti.OnSerializing = onSerializing is null
+            ? _ => EnsureStackForNesting()
+            : o => { EnsureStackForNesting(); onSerializing(o); };
+    }
+
     private static void CorrectLegacyConstructs(JsonNode a)
     {
+        EnsureStackForNesting();
             switch (a)
             {
                 case JsonObject jo:
