@@ -212,17 +212,6 @@ internal static class LibraryJsonSerializer
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         };
 
-        // Register custom converters for polymorphic types to work around System.Text.Json limitation
-        // with "type" property name conflicts
-        options.Converters.Add(new PolymorphicObjectJsonConverter<CqlToElmBase>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<ExpressionDef>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<Expression>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<TypeSpecifier>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<Element>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<RelationshipClause>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<AliasedQuerySource>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<SortByItem>(allowOldStyleTypeDiscriminators));
-
         options.Converters.Add(new TopLevelDefinitionConverterFactory(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
@@ -233,41 +222,9 @@ internal static class LibraryJsonSerializer
                       .WithAddedModifier(HandleSpecifiedProperties)
                       .WithAddedModifier(RespectXmlIgnoreAttribute);
 
-        if (allowOldStyleTypeDiscriminators)
-            resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
-
         options.TypeInfoResolver = resolver;
 
         return options;
-    }
-
-    /// <summary>
-    /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative, RespectXmlIgnoreAttribute)
-    /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
-    /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
-    /// </summary>
-    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolver()
-    {
-        return new DefaultJsonTypeInfoResolver()
-            .WithAddedModifier(ModifyNarrative)
-            .WithAddedModifier(DoNotSerializeDefaultValues)
-            .WithAddedModifier(HandleSpecifiedProperties)
-            .WithAddedModifier(RespectXmlIgnoreAttribute);
-    }
-
-    /// <summary>
-    /// Builds a type resolver with modifiers including AllowOldStyleTypeDiscriminators.
-    /// This is used when deserializing legacy ELM files that include "type" discriminators
-    /// on concrete types outside the polymorphic hierarchies.
-    /// </summary>
-    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
-    {
-        return new DefaultJsonTypeInfoResolver()
-            .WithAddedModifier(ModifyNarrative)
-            .WithAddedModifier(DoNotSerializeDefaultValues)
-            .WithAddedModifier(HandleSpecifiedProperties)
-            .WithAddedModifier(RespectXmlIgnoreAttribute)
-            .WithAddedModifier(AllowOldStyleTypeDiscriminators);
     }
 
     private static JsonDocumentOptions BuildJsonDocumentOptions() =>
@@ -454,34 +411,6 @@ internal static class LibraryJsonSerializer
 
         if (valueProp is not null)
             valueProp.Name = "value";
-    }
-
-    private static void AllowOldStyleTypeDiscriminators(JsonTypeInfo ti)
-    {
-        bool isElmNodeOutsideInheritanceStructure =
-            ti.PolymorphismOptions is null &&
-            ti.Kind == JsonTypeInfoKind.Object &&
-            ti.Type.GetCustomAttributes(typeof(XmlTypeAttribute), false).Length != 0;
-
-        if (isElmNodeOutsideInheritanceStructure)
-            addTypeProperty(ti, ti.Type.Name);
-
-        static void addTypeProperty(JsonTypeInfo ti, string expected)
-        {
-            // Don't add a "type" property if one already exists (even if ignored)
-            if (ti.Properties.Any(p => p.Name == "type"))
-                return;
-
-            // For types outside the inheritance structure, we need to handle the "type" property
-            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
-            typeProp.ShouldSerialize = (_, _) => false;
-            typeProp.Set = (_, value) =>
-            {
-                if ((string?)value != expected)
-                    throw new JsonException($"type property should be '{expected}' but was '{value}'.");
-            };
-            ti.Properties.Add(typeProp);
-        }
     }
 
     private record PropAndSpecified(JsonPropertyInfo ValueProp, JsonPropertyInfo ValuePropSpecified);
