@@ -87,7 +87,7 @@ public partial class Library
 
         var utf8Json = File.ReadAllBytes(file.FullName);
 
-        var node = JsonNode.Parse(utf8Json, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
+        var node = JsonNode.Parse(utf8Json, LibraryJsonSerializer.GetJsonNodeOptions(), LibraryJsonSerializer.GetJsonDocumentOptions()) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         var library = LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, originalFilePath: file.FullName);
@@ -103,7 +103,7 @@ public partial class Library
     /// </summary>
     public static Library LoadFromJson(Stream stream, bool validate = true, string? originalFilePath = null)
     {
-        var node = JsonNode.Parse(stream, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
+        var node = JsonNode.Parse(stream, LibraryJsonSerializer.GetJsonNodeOptions(), LibraryJsonSerializer.GetJsonDocumentOptions()) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         originalFilePath ??= stream switch

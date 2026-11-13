@@ -9,13 +9,16 @@
 namespace Hl7.Cql.Elm.Serialization;
 
 /// <summary>
-/// A JsonTypeInfoResolver that adds polymorphic type handling based on XmlInclude attributes.
+/// A JsonTypeInfoResolver that configures System.Text.Json's native polymorphism, with "type" as the
+/// discriminator, from the XmlInclude attributes of the ELM model.
 /// </summary>
 /// <param name="emitConcreteBaseTypeDiscriminator">
-/// In newer serializations of ELM, if the declared type of an element is a concrete type,
+/// Set to true for reading. In newer serializations of ELM, if the declared type of an element is a concrete type,
 /// and the runtime type is the same as the declared type, the type discriminator is not emitted.
-/// Set emitConcreteBaseTypeDiscriminator to true to override this behaviour and emit the type discriminator
-/// for concrete types as well.
+/// Older serializations do emit it. When true, every concrete ELM type (one with an XmlInclude or XmlType attribute)
+/// also accepts its own name as discriminator, and rejects any other name.
+/// Leave it false for writing: it would make types such as IncludeDef polymorphic, and writing an
+/// instance of a subclass outside the ELM model, such as the translator's ReferencedLibrary, would then fail.
 /// </param>
 internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = false) : DefaultJsonTypeInfoResolver
 {
@@ -23,26 +26,13 @@ internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = 
     {
         JsonTypeInfo jsonTypeInfo = base.GetTypeInfo(type, options);
 
-        // Don't apply polymorphism if a custom converter is registered (JsonTypeInfoKind will be None)
-        if (jsonTypeInfo.Kind == JsonTypeInfoKind.None)
+        // Polymorphism applies to objects only. Types with a custom converter, collections and primitives are left alone.
+        if (jsonTypeInfo.Kind != JsonTypeInfoKind.Object)
             return jsonTypeInfo;
 
-        // Don't apply polymorphism to CqlToElmBase and its hierarchy - they have transitive conflicts
-        // through properties containing types with "type" properties. Custom converter handles these.
-        if (type.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
-            type.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase" ||
-            (type.BaseType?.BaseType?.FullName == "Hl7.Cql.Elm.CqlToElmBase"))
-            return jsonTypeInfo;
+        var derivedTypes = BuildDerivedTypes(type).DistinctBy(dt => dt.DerivedType).ToList();
 
-        // Don't apply polymorphism to types with custom converters: Element, Expression, TypeSpecifier, ExpressionDef.
-        // These hierarchies have transitive conflicts through properties with "type" names.
-        // Arrays of these types are handled by PolymorphicArrayJsonConverter.
-        if (type.FullName is "Hl7.Cql.Elm.Element" or "Hl7.Cql.Elm.Expression" or "Hl7.Cql.Elm.TypeSpecifier" or "Hl7.Cql.Elm.OperatorExpression" or "Hl7.Cql.Elm.AggregateExpression" or "Hl7.Cql.Elm.ExpressionDef" or "Hl7.Cql.Elm.FunctionDef")
-            return jsonTypeInfo;
-
-        var derivedTypes = BuildDerivedTypes(type).ToList();
-
-        if (!derivedTypes.Any()) return jsonTypeInfo;
+        if (derivedTypes.Count == 0) return jsonTypeInfo;
 
         jsonTypeInfo.PolymorphismOptions = new JsonPolymorphismOptions
         {
@@ -51,10 +41,15 @@ internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = 
             UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization,
         };
 
-        // Use a Distinct() here, since the attributes contain superfluous information,
-        // and will mention the same derived type multiple times.
-        foreach(var derivedType in derivedTypes.DistinctBy(dt => dt.DerivedType))
+        foreach (var derivedType in derivedTypes)
             jsonTypeInfo.PolymorphismOptions.DerivedTypes.Add(derivedType);
+
+        if (type.IsAbstract)
+        {
+            // Without a discriminator an abstract type cannot be created. Report that as a JsonException.
+            jsonTypeInfo.CreateObject = () =>
+                throw new JsonException($"Cannot deserialize abstract type '{type.Name}' without a 'type' discriminator property.");
+        }
 
         return jsonTypeInfo;
     }
@@ -63,7 +58,8 @@ internal class PolymorphicTypeResolver(bool emitConcreteBaseTypeDiscriminator = 
     {
         var xmlHierarchyAttributes = baseType.GetCustomAttributes<XmlIncludeAttribute>(false).ToList();
 
-        if(emitConcreteBaseTypeDiscriminator && baseType.IsAbstract == false && xmlHierarchyAttributes.Any())
+        if (emitConcreteBaseTypeDiscriminator && !baseType.IsAbstract &&
+            (xmlHierarchyAttributes.Count > 0 || baseType.IsDefined(typeof(XmlTypeAttribute), false)))
             yield return new JsonDerivedType(baseType, baseType.Name);
 
         foreach (var type in xmlHierarchyAttributes.Select(a => a.Type).Where(t => t != null))

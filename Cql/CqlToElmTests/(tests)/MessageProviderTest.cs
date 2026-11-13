@@ -79,10 +79,10 @@ namespace Hl7.Cql.CqlToElm.Test
                    .And.Contain(MissingTypeName);
         }
 
-        // A library alias used as an expression: the node carries the error and no result type,
-        // and operator resolution then fails on it, which is the message that used to throw.
+        // A library alias used as an expression becomes an error reference, so the call
+        // around it reports only the alias error and nothing is thrown.
         [TestMethod]
-        public void LibraryAliasAsArgument_ReportsBothErrorsInsteadOfThrowing()
+        public void LibraryAliasAsArgument_ReportsTheAliasErrorInsteadOfThrowing()
         {
             var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
             var messageProvider = cqlToolkit.GetMessageProvider();
@@ -94,7 +94,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private "actual": Floor(FH)
                 """,
-                messageProvider.CouldNotResolveFunction("Floor", (TypeSpecifier?)null),
                 messageProvider.ExpressionCannotBeLibraryRef("FH"));
         }
 
