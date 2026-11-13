@@ -25,6 +25,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+    <ProjectReference Include="..\Elm\Elm.csproj" />
     <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\CoreTests\Input\ELM\Libs\FHIRHelpers-4.0.1.json" Link="ElmJson\FHIRHelpers-4.0.1.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\CoreTests\Input\ELM\Libs\CMS133FHIRCataracts2040BCVA90Days.json" Link="ElmJson\CMS133FHIRCataracts2040BCVA90Days.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>
