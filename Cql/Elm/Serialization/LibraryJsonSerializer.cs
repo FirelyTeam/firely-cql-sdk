@@ -280,8 +280,11 @@ internal static class LibraryJsonSerializer
             {
                 if (!o.TryGetPropertyValue("type", out var typeProp)) return;
 
+                if (typeProp is null)
+                    throw new JsonException("The 'type' property must be a string, but was null.", o.GetPath() + ".type", null, null);
+
                 // If "type" is an object (not a discriminator string), remove it
-                if (typeProp!.GetValueKind() == JsonValueKind.Object)
+                if (typeProp.GetValueKind() == JsonValueKind.Object)
                 {
                     o.Remove("type");
                     return;
