@@ -29,8 +29,9 @@ during generation, so `Elm.g.cs` needs no manual edits and XML serialization sti
 
 Polymorphism is System.Text.Json's native one, configured once per type by `PolymorphicTypeResolver` from the
 `[XmlInclude]` attributes. Old-style discriminators on concrete types (`"type": "IncludeDef"` on an `IncludeDef`) are
-accepted by registering concrete types as their own derived type in the read options only; the write options do not,
-so they emit no such discriminator. `LibraryJsonSerializer.CorrectLegacyConstructs` corrects legacy JSON before it is
+accepted by registering concrete types as their own derived type in the read options only. The write options do not,
+so an instance of the declared concrete type is written without a discriminator; an instance of one of its
+descendants still gets one. `LibraryJsonSerializer.CorrectLegacyConstructs` corrects legacy JSON before it is
 deserialized.
 
 See [Cql/Elm/Serialization/README.md](../Cql/Elm/Serialization/README.md) for the architecture.

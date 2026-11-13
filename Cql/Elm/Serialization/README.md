@@ -139,20 +139,24 @@ available to XML serialization only. Consequently `"type"` always means the disc
 ### 1.4.2. Read and write options differ
 
 Whether a concrete type is registered as its own derived type is the one difference, set by the
-`emitConcreteBaseTypeDiscriminator` argument of `PolymorphicTypeResolver`:
+`emitConcreteBaseTypeDiscriminator` argument of `PolymorphicTypeResolver`: the read options pass `true`
+(`allowOldStyleTypeDiscriminators`), the write options `false`. What that means for `"type"` depends on the
+declared type of the slot:
 
-| | Read options | Write options |
+| Declared type of the slot | Read options | Write options |
 |---|---|---|
-| `allowOldStyleTypeDiscriminators` / `emitConcreteBaseTypeDiscriminator` | `true` | `false` |
-| Concrete ELM type registered as its own derived type | Yes | No |
-| `"type"` on a concrete type | Accepted, and must name that type | Not written |
-| `CorrectLegacyConstructs` | Yes | No |
+| Abstract, such as `Expression` | `"type"` required; it names a concrete descendant | `"type"` always written |
+| Concrete with descendants in the ELM model, such as `ExpressionDef` or `Locator` | `"type"` optional; it names the type itself or one of its descendants | `"type"` written only when the instance is a descendant, such as a `FunctionDef` in an `ExpressionDef` slot or a `CqlToElmError` in a `Locator` slot |
+| Concrete without descendants, such as `IncludeDef` or `VersionedIdentifier` | `"type"` optional; it must name the type itself | Not polymorphic; `"type"` never written |
+
+`CorrectLegacyConstructs` runs only when reading.
 
 With the read options, every concrete ELM type (a non-abstract type that has an `[XmlInclude]` or an `[XmlType]`
 attribute) is also registered as a derived type of itself, under its own name. An old-style `"type": "IncludeDef"`
-on an `IncludeDef` is therefore accepted, and any other value there is a `JsonException` that includes the JSON
-path. The write options leave this out, so concrete types are not polymorphic and no discriminator is emitted for
-them.
+on an `IncludeDef` is therefore accepted, and a name that is neither the type itself nor one of its descendants is
+a `JsonException` that includes the JSON path. The write options leave out only this self-registration: a concrete
+type without descendants is not polymorphic, and a concrete type with descendants stays polymorphic over them, so a
+discriminator is written only when the instance is one of those descendants.
 
 ### 1.4.3. Writing an instance outside the ELM model
 
