@@ -15,7 +15,7 @@ namespace Hl7.Cql.Elm.Serialization;
 /// <param name="emitConcreteBaseTypeDiscriminator">
 /// Set to true for reading. In newer serializations of ELM, if the declared type of an element is a concrete type,
 /// and the runtime type is the same as the declared type, the type discriminator is not emitted.
-/// Older serializations do emit it. When true, every concrete ELM type (one with an XmlType attribute)
+/// Older serializations do emit it. When true, every concrete ELM type (one with an XmlInclude or XmlType attribute)
 /// also accepts its own name as discriminator, and rejects any other name.
 /// Leave it false for writing: it would make types such as IncludeDef polymorphic, and writing an
 /// instance of a subclass outside the ELM model, such as the translator's ReferencedLibrary, would then fail.
