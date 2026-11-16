@@ -37,10 +37,11 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
                           v
                 LibraryJsonSerializer
                           |
-        builds two JsonSerializerOptions, once
+        builds the option sets, once
           |                                  |
    read options                       write options
-   (old-style discriminators)         (no old-style discriminators)
+   (old-style discriminators)         (no old-style discriminators;
+                                       a second, indented instance)
           |                                  |
           +--------------+-------------------+
                          |
@@ -56,8 +57,8 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
 
 [LibraryJsonSerializer](LibraryJsonSerializer.cs) is the internal coordinator.
 
-- It builds the two option sets once, in static fields, with `BuildSerializerOptions`. A call to serialize copies
-  the write options to set `WriteIndented`; nothing is rebuilt per node.
+- It builds the read options and the write options once, in static fields, with `BuildSerializerOptions`, plus an
+  indented copy of the write options. A serialize call picks one of the two write instances and never creates options.
 - `DeserializeFromJsonNode` runs `CorrectLegacyConstructs` on the parsed `JsonNode`, deserializes a `LibraryContainer`
   (the `{ "library": ... }` wrapper) with the read options, and validates the library when asked to.
 - `SerializeToJson` and `SerializeToStream` serialize a `LibraryContainer` with the write options.
