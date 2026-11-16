@@ -267,16 +267,21 @@ internal static class LibraryJsonSerializer
                 case JsonObject jo:
                     reorder(jo);
                     fixType(jo);
-                    foreach (var (key, value) in jo.ToList())
+                    for (int i = 0; i < jo.Count;)
                     {
-                        if (value is null) continue;
-
-                        CorrectLegacyConstructs(value);
-
-                        if (isEmptyObjectOrArray(value))
+                        var value = jo.GetAt(i).Value;
+                        if (value is not null)
                         {
-                            jo.Remove(key);
+                            CorrectLegacyConstructs(value);
+
+                            if (isEmptyObjectOrArray(value))
+                            {
+                                jo.RemoveAt(i);
+                                continue;
+                            }
                         }
+
+                        i++;
                     }
                     break;
                 case JsonArray ja:
@@ -297,13 +302,12 @@ internal static class LibraryJsonSerializer
 
             static void reorder(JsonObject o)
             {
-                if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+                var index = o.IndexOf("type");
+                if (index <= 0) return;
 
-                var children = o.ToList();
-                o.Clear();
-
-                o.Add("type", typeProp);
-                foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+                var typeProp = o.GetAt(index).Value;
+                o.RemoveAt(index);
+                o.Insert(0, "type", typeProp);
             }
 
             static void fixType(JsonObject o)
