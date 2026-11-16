@@ -392,23 +392,21 @@ internal static class LibraryJsonSerializer
     {
         foreach (var prop in ti.Properties)
         {
-            prop.ShouldSerialize = shouldSerialize;
-
-            bool shouldSerialize(object parent, object? value)
+            if (prop.PropertyType.IsEnum || ti.Type == typeof(Interval))
             {
-                if (value is null) return false;
-                if (prop.PropertyType.IsEnum) return true;
-
-                if (ti.Type == typeof(Interval)) return true;
-
-                var defaultAttr = prop.AttributeProvider?
-                    .GetCustomAttributes(typeof(DefaultValueAttribute), false)
-                    .FirstOrDefault() as DefaultValueAttribute;
-
-                var defaultValue = defaultAttr?.Value ?? GetDefaultValue(prop.PropertyType);
-
-                return !Equals(value, defaultValue);
+                prop.ShouldSerialize = static (_, value) => value is not null;
+                continue;
             }
+
+            var defaultAttr = prop.AttributeProvider?
+                .GetCustomAttributes(typeof(DefaultValueAttribute), false)
+                .FirstOrDefault() as DefaultValueAttribute;
+
+            var defaultValue = defaultAttr?.Value ?? GetDefaultValue(prop.PropertyType);
+
+            prop.ShouldSerialize = defaultValue is null
+                ? static (_, value) => value is not null
+                : (_, value) => value is not null && !Equals(value, defaultValue);
         }
     }
 
