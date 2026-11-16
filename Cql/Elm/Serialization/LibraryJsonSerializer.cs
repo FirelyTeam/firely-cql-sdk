@@ -28,6 +28,7 @@ internal static class LibraryJsonSerializer
 
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
     private static readonly JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
+    private static readonly JsonSerializerOptions _jsonSerializerOptionsIndented = new(_jsonSerializerOptions) { WriteIndented = true };
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
@@ -91,12 +92,7 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        // The cost here is the walk over the ELM graph through PolymorphicTypeResolver and its modifiers,
-        // not the construction of these options.
-        var options = new JsonSerializerOptions(_jsonSerializerOptions)
-        {
-            WriteIndented = writeIndented
-        };
+        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
 
         var container = new LibraryContainer(library);
         return JsonSerializer.Serialize(container, options);
@@ -110,10 +106,7 @@ internal static class LibraryJsonSerializer
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     internal static void SerializeToStream(Library library, Stream stream, bool writeIndented = true)
     {
-        var options = new JsonSerializerOptions(_jsonSerializerOptions)
-        {
-            WriteIndented = writeIndented
-        };
+        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
 
         var container = new LibraryContainer(library);
         JsonSerializer.Serialize(stream, container, options);
