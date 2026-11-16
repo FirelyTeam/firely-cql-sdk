@@ -485,6 +485,11 @@ public class ElmJsonPolymorphismTests
         var library = Library.ParseFromJson(File.ReadAllText(FhirHelpersPath));
         _ = library.SerializeToJson(writeIndented: false);
 
+        // The serializer's metadata must survive a collection: it is rebuilt when the options do not stay alive.
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        GC.Collect();
+
         var before = GC.GetAllocatedBytesForCurrentThread();
         var json = library.SerializeToJson(writeIndented: false);
         var allocated = GC.GetAllocatedBytesForCurrentThread() - before;
