@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="ValueLiteralsAndSelectors" reference="https://cql.hl7.org/03-developersguide.html#literals" version="1.0">
 	<capability code="literals"/>
 	<!-- CQL spec section 3.1.3 Literals:
@@ -380,7 +380,17 @@
 	<group name="String" version="1.0">
 		<capability code="literals"/>
 		<!-- Note: See also Translator test files such as EscapeSequenceTests.cql -->
-		<!-- TODO: Add tests here. -->
+		<test name="StringSimple" version="1.0">
+			<capability code="literals"/>
+			<expression>'Hello, World!'</expression>
+			<output>'Hello, World!'</output>
+		</test>
+		<test name="StringEmpty" version="1.0">
+			<capability code="literals"/>
+			<!-- The empty string is a valid String literal: https://cql.hl7.org/03-developersguide.html#string -->
+			<expression>''</expression>
+			<output>''</output>
+		</test>
 	</group>
 	<!-- CQL spec section 3.1.3 Literals:
 	DateTime - The at-symbol (@) followed by an ISO-8601 compliant representation of a date/time -->
@@ -389,7 +399,22 @@
 	<group name="DateTime" version="1.0">
 		<capability code="literals"/>
 		<!-- Note: See also Translator test files such as DateTimeLiteralTest.cql -->
-		<!-- TODO: Add tests here. -->
+		<test name="DateTimeDatePrecision" version="1.0">
+			<capability code="literals"/>
+			<!-- A DateTime literal may be specified to day precision, indicated by the trailing 'T': https://cql.hl7.org/03-developersguide.html#datetime -->
+			<expression>@2015-02-04T</expression>
+			<output>@2015-02-04T</output>
+		</test>
+		<test name="DateTimeMinutePrecision" version="1.0">
+			<capability code="literals"/>
+			<expression>@2015-02-04T14:30</expression>
+			<output>@2015-02-04T14:30</output>
+		</test>
+		<test name="DateTimeMillisecondPrecision" version="1.0">
+			<capability code="literals"/>
+			<expression>@2015-02-04T14:30:25.900</expression>
+			<output>@2015-02-04T14:30:25.900</output>
+		</test>
 	</group>
 	<!-- CQL spec section 3.1.3 Literals:
 	Time - The at-symbol (@) followed by an ISO-8601 compliant representation of a time -->
@@ -398,15 +423,48 @@
 	<group name="Time" version="1.0">
 		<capability code="literals"/>
 		<!-- Note: See also Translator test files such as DateTimeLiteralTest.cql -->
-		<!-- TODO: Add tests here. -->
+		<test name="TimeMinutePrecision" version="1.0">
+			<capability code="literals"/>
+			<expression>@T14:30</expression>
+			<output>@T14:30</output>
+		</test>
+		<test name="TimeMillisecondPrecision" version="1.0">
+			<capability code="literals"/>
+			<expression>@T14:30:25.900</expression>
+			<output>@T14:30:25.900</output>
+		</test>
 	</group>
 	<group name="List" version="1.0">
 		<capability code="literals"/>
-		<!-- TODO: Add tests here. -->
+		<test name="ListInteger" version="1.0">
+			<capability code="literals"/>
+			<expression>{4, 5, 6}</expression>
+			<output>{4, 5, 6}</output>
+		</test>
+		<test name="ListString" version="1.0">
+			<capability code="literals"/>
+			<expression>{'a', 'b', 'c'}</expression>
+			<output>{'a', 'b', 'c'}</output>
+		</test>
+		<test name="ListWithNull" version="1.0">
+			<capability code="literals"/>
+			<!-- A list may contain null elements: https://cql.hl7.org/03-developersguide.html#list-values -->
+			<expression>{1, null, 3}</expression>
+			<output>{1, null, 3}</output>
+		</test>
 	</group>
 	<group name="Interval" version="1.0">
 		<capability code="literals"/>
-		<!-- TODO: Add tests here. -->
+		<test name="IntervalInteger" version="1.0">
+			<capability code="literals"/>
+			<expression>Interval[1, 10]</expression>
+			<output>Interval[1, 10]</output>
+		</test>
+		<test name="IntervalDecimal" version="1.0">
+			<capability code="literals"/>
+			<expression>Interval[1.0, 10.0]</expression>
+			<output>Interval[1.0, 10.0]</output>
+		</test>
 	</group>
 	<group name="Tuple" version="1.0">
 		<capability code="literals"/>
