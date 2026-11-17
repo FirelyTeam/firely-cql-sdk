@@ -3517,6 +3517,20 @@ namespace CoreTests
             withNull.Should().BeEquivalentTo(withEmpty);
         }
 
+        /// <summary>
+        /// Spec §9.B, Except (lists): "If the first argument is null, the result is null." That holds when the second
+        /// argument is null as well, which would otherwise be treated as an empty list.
+        /// </summary>
+        [TestMethod]
+        public void ExceptList_BothNull_IsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            var result = ops.Except<int?>(null, null);
+
+            result.Should().BeNull();
+        }
+
         [TestMethod]
         public void IntersectList_QuantityWithConvertibleUnits_ReturnsMatchingElement()
         {
