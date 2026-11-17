@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlConditionalOperatorsTest" reference="https://cql.hl7.org/03-developersguide.html#conditional-expressions" version="1.0">
 	<capability code="logical-operators"/>
 	<capability code="comparison-operators"/>
@@ -28,6 +28,15 @@
 			<capability code="arithmetic-operators"/>
 			<expression>if 10 = null then 5 else 10</expression>
 			<output>10</output>
+		</test>
+		<test name="IfNullCondition" version="1.0">
+			<!-- null condition is interpreted as false, so the else branch is taken -->
+			<expression>if null as Boolean then 5 else 10</expression>
+			<output>10</output>
+		</test>
+		<test name="IfNested" version="1.0">
+			<expression>if true then (if false then 1 else 2) else 3</expression>
+			<output>2</output>
 		</test>
 	</group>
 	<group name="standard case" version="1.0">
@@ -73,6 +82,11 @@
 			</expression>
 			<output>15</output>
 		</test>
+		<test name="StandardCaseNullCondition" version="1.0">
+			<!-- a when condition that evaluates to null is interpreted as false -->
+			<expression>case when null as Boolean then 1 else 2 end</expression>
+			<output>2</output>
+		</test>
 	</group>
 	<group name="selected case" version="1.0">
 		<capability code="logical-operators"/>
@@ -116,6 +130,16 @@
 				end
 			</expression>
 			<output>5</output>
+		</test>
+		<test name="SelectedCaseNullComparand" version="1.0">
+			<!-- a null comparand compares equal to nothing, so the else result is returned -->
+			<expression>case (null as Integer) when 5 then 12 when 10 then 15 else 0 end</expression>
+			<output>0</output>
+		</test>
+		<test name="SelectedCaseNullWhen" version="1.0">
+			<!-- a null case item does not compare equal to the comparand -->
+			<expression>case 5 when (null as Integer) then 12 when 5 then 99 else 0 end</expression>
+			<output>99</output>
 		</test>
 	</group>
 </tests>
