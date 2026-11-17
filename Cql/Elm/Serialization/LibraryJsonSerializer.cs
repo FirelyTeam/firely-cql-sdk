@@ -168,8 +168,10 @@ internal static class LibraryJsonSerializer
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     /// <returns>The same JSON content, differing only in insignificant JSON formatting, with LF line breaks.</returns>
     /// <remarks>
-    /// This parses the text into a <see cref="JsonDocument"/> and writes it straight back out, so it does
-    /// not walk the ELM nodes through <see cref="PolymorphicTypeResolver"/> and its modifiers. Once the
+    /// This copies the tokens of the text from a <see cref="Utf8JsonReader"/> to a <see cref="Utf8JsonWriter"/>
+    /// one at a time, so it builds no document and does not walk the ELM nodes through
+    /// <see cref="PolymorphicTypeResolver"/> and its modifiers. Empty or malformed JSON, and nesting deeper than
+    /// the maximum depth of 4,096, throw a <see cref="JsonException"/>. Once the
     /// serializer's metadata is built, serializing costs less than this; a process that serializes nothing
     /// else saves building that metadata by re-formatting instead. The reason to keep this route is
     /// fidelity: unlike <see cref="SerializeToJson"/> it neither drops empty collections nor applies the
@@ -180,8 +182,6 @@ internal static class LibraryJsonSerializer
     /// </remarks>
     internal static byte[] ReformatUtf8Json(byte[] utf8Json, bool writeIndented)
     {
-        using var document = JsonDocument.Parse(utf8Json, _jsonDocumentOptions);
-
         // Indented output is larger than its input, so size for growth.
         using var buffer = new PooledByteBufferWriter(writeIndented ? utf8Json.Length * 2 : utf8Json.Length);
         var writerOptions = CreateWriterOptions(writeIndented);
@@ -192,12 +192,54 @@ internal static class LibraryJsonSerializer
         // never interpolated into HTML.
         writerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
+        var reader = new Utf8JsonReader(utf8Json, new JsonReaderOptions { MaxDepth = MaxDepth });
+        var any = false;
         using (var writer = new Utf8JsonWriter(buffer, writerOptions))
         {
-            document.RootElement.WriteTo(writer);
+            while (reader.Read())
+            {
+                any = true;
+                CopyToken(ref reader, writer);
+            }
         }
 
+        if (!any)
+            throw new JsonException("The JSON is empty.");
+
         return buffer.WrittenSpan.ToArray();
+    }
+
+    private static void CopyToken(ref Utf8JsonReader reader, Utf8JsonWriter writer)
+    {
+        switch (reader.TokenType)
+        {
+            case JsonTokenType.StartObject: writer.WriteStartObject(); break;
+            case JsonTokenType.EndObject: writer.WriteEndObject(); break;
+            case JsonTokenType.StartArray: writer.WriteStartArray(); break;
+            case JsonTokenType.EndArray: writer.WriteEndArray(); break;
+            case JsonTokenType.PropertyName:
+            case JsonTokenType.String:
+            {
+                var isName = reader.TokenType == JsonTokenType.PropertyName;
+                if (!reader.ValueIsEscaped)
+                {
+                    if (isName) writer.WritePropertyName(reader.ValueSpan); else writer.WriteStringValue(reader.ValueSpan);
+                    break;
+                }
+
+                var max = reader.ValueSpan.Length;
+                byte[]? rented = null;
+                Span<byte> scratch = max <= 256 ? stackalloc byte[256] : (rented = System.Buffers.ArrayPool<byte>.Shared.Rent(max));
+                var length = reader.CopyString(scratch);
+                if (isName) writer.WritePropertyName(scratch[..length]); else writer.WriteStringValue(scratch[..length]);
+                if (rented is not null) System.Buffers.ArrayPool<byte>.Shared.Return(rented);
+                break;
+            }
+            case JsonTokenType.Number: writer.WriteRawValue(reader.ValueSpan, skipInputValidation: true); break;
+            case JsonTokenType.True: writer.WriteBooleanValue(true); break;
+            case JsonTokenType.False: writer.WriteBooleanValue(false); break;
+            case JsonTokenType.Null: writer.WriteNullValue(); break;
+        }
     }
 
     /// <summary>

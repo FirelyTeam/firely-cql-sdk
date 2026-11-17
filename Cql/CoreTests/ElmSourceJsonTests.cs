@@ -166,6 +166,80 @@ public class ElmSourceJsonTests
     }
 
     [TestMethod]
+    public void ReformatUtf8Json_KeepsEscapedStringsAndNamesAsTheirCharacters()
+    {
+        var source = Encoding.UTF8.GetBytes("""{"a\u0041\n":"q\"uote \\ \/ \t \u00e9 \ud83d\ude00 \u0001"}""");
+
+        var compact = Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false));
+
+        // Names and values are the same characters, re-escaped by the writer's relaxed encoder.
+        Assert.AreEqual("""{"aA\n":"q\"uote \\ / \t é \uD83D\uDE00 \u0001"}""", compact);
+        using var document = JsonDocument.Parse(compact);
+        Assert.AreEqual("aA\n", document.RootElement.EnumerateObject().Single().Name);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_KeepsEveryFormOfNumberAsWritten()
+    {
+        const string numbers = "[0,-0,7,-12,1.5,-0.25,1e10,1E+2,1.0e-5,12345678901234567890,0.10000000000000000001]";
+
+        var compact = Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(Encoding.UTF8.GetBytes(numbers), writeIndented: false));
+
+        Assert.AreEqual(numbers, compact);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_KeepsLiteralsAndScalarRoots()
+    {
+        Assert.AreEqual("[true,false,null]", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json("[ true , false ,null ]"u8.ToArray(), writeIndented: false)));
+        Assert.AreEqual("\"x\"", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(" \"x\" "u8.ToArray(), writeIndented: false)));
+        Assert.AreEqual("42", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json("42"u8.ToArray(), writeIndented: false)));
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_ReformatsNestingOfAThousandLevels()
+    {
+        const int depth = 1000;
+        var source = Encoding.UTF8.GetBytes(new string('[', depth) + new string(']', depth));
+
+        var compact = LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false);
+        var indented = LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: true);
+
+        CollectionAssert.AreEqual(source, compact);
+        // The indented text differs from the compact text only by whitespace.
+        Assert.AreEqual(Encoding.UTF8.GetString(compact), System.Text.RegularExpressions.Regex.Replace(Encoding.UTF8.GetString(indented), @"\s+", ""));
+    }
+
+    [TestMethod]
+    [DataRow("")]
+    [DataRow("  \n ")]
+    [DataRow("{")]
+    [DataRow("""{"a":""")]
+    [DataRow("""{"a" 1}""")]
+    [DataRow("[1,]")]
+    [DataRow("{} {}")]
+    [DataRow("[1] x")]
+    [DataRow("\"unterminated")]
+    [DataRow("[01]")]
+    [DataRow("// c\n{}")]
+    public void ReformatUtf8Json_OfEmptyOrMalformedJson_ThrowsJsonException(string text)
+    {
+        var source = Encoding.UTF8.GetBytes(text);
+
+        foreach (var writeIndented in new[] { false, true })
+            Assert.Throws<JsonException>(() => LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented), text);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_OfNestingDeeperThanTheMaximumDepth_ThrowsJsonException()
+    {
+        const int depth = 4097;
+        var source = Encoding.UTF8.GetBytes(new string('[', depth) + new string(']', depth));
+
+        Assert.Throws<JsonException>(() => LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false));
+    }
+
+    [TestMethod]
     public void NormalizeNewLinesUtf8_LeavesTextWithoutCarriageReturnsAlone()
     {
         var utf8 = Encoding.UTF8.GetBytes($"{{{Lf}  \"a\": 1{Lf}}}");
