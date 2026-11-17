@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlDateTimeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#datetime-operators-2" version="1.4">
 	<capability code="date-time-arithmetic"/>
 	<capability code="precision-based-timing"/>
@@ -608,6 +608,12 @@
 			<expression>millisecond from @T23:20:15.555</expression>
 			<output>555</output>
 		</test>
+		<test name="DateTimeComponentFromMonthIsNull" version="1.4">
+			<capability code="component-extraction"/>
+			<!-- argument not specified to month precision; result is null -->
+			<expression>month from DateTime(2012)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Difference" version="1.4">
 		<capability code="difference-in"/>
@@ -690,6 +696,12 @@
 		  	<capability code="difference-in"/>
 			<expression>difference in milliseconds between @T20:20:15.555 and @T20:20:15.550</expression>
 			<output>-5</output>
+		</test>
+		<test name="DateTimeDifferenceYearBoundary" version="1.4">
+			<capability code="difference-in"/>
+			<!-- one year boundary is crossed though the dates are a day apart; contrast with Duration (years between) which is 0 -->
+			<expression>difference in years between @2011-12-31 and @2012-01-01</expression>
+			<output>1</output>
 		</test>
 	</group>
 	<group name="From Github issue #29" version="1.4">
@@ -840,6 +852,12 @@
 		  	<capability code="duration-between"/>
 			<expression>days between DateTime(2010, 10, 12, 12, 5) and DateTime(2008, 8, 15, 8, 8)</expression>
 			<output>-788</output>
+		</test>
+		<test name="DateTimeDurationBetweenYearBoundary" version="1.4">
+			<capability code="duration-between"/>
+			<!-- zero whole years between dates a day apart; contrast with Difference (difference in years) which is 1 -->
+			<expression>years between @2011-12-31 and @2012-01-01</expression>
+			<output>0</output>
 		</test>
 	</group>
 	<group name="Uncertainty tests" version="1.4">
@@ -1624,8 +1642,8 @@
 			<expression>DateTime(2024, 3, 1) - 52 weeks = DateTime(2023, 3, 3)</expression>
 			<output>true</output>
 			<!-- EXPECT: The resultant day of the week to match the original day of the week. -->
-			<!-- 2024-03-01 is a Thursday -->
-			<!-- 2023-03-03 is a Thursday -->
+			<!-- 2024-03-01 is a Friday -->
+			<!-- 2023-03-03 is a Friday -->
 		</test>
 		<test name="DateTimeSubtract5Days" version="1.4">
 		  	<capability code="date-time-arithmetic"/>
