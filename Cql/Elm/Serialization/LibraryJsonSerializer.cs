@@ -415,9 +415,7 @@ internal static class LibraryJsonSerializer
             prop.ValueProp.ShouldSerialize = (obj, value) =>
             {
                 var shouldSerialize = (bool?)prop.ValuePropSpecified.Get?.Invoke(obj) == true;
-                if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
-                    Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
-                               $"the '{prop.ValuePropSpecified.Name}' is false.");
+                AssertSpecifiedWhenNotDefault(prop, value, shouldSerialize);
 
                 // If the specified flag is false, don't serialize
                 if (!shouldSerialize) return false;
@@ -438,6 +436,15 @@ internal static class LibraryJsonSerializer
                 yield return new PropAndSpecified(valueProp, prop);
             }
         }
+    }
+
+    // Conditional on DEBUG: a Release build drops the call, so it neither reads EnableDebugAssertions nor boxes a default value.
+    [Conditional("DEBUG")]
+    private static void AssertSpecifiedWhenNotDefault(PropAndSpecified prop, object? value, bool shouldSerialize)
+    {
+        if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
+            Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
+                       $"the '{prop.ValuePropSpecified.Name}' is false.");
     }
 
     private static void DoNotSerializeDefaultValues(JsonTypeInfo ti)

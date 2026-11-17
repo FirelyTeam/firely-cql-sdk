@@ -293,8 +293,9 @@ types are accepted through the read options (see [1.4.2](#142-read-and-write-opt
 ## 1.10. Debug assertions
 
 `LibraryJsonSerializer.EnableDebugAssertions` (default `true`) makes `HandleSpecifiedProperties` call `Debug.Fail`
-when a property has a non-default value but its `xxxSpecified` flag is false. The CQL toolkit turns it off to avoid
-interrupting bulk processing.
+when a property has a non-default value but its `xxxSpecified` flag is false. The check is a `[Conditional("DEBUG")]`
+method, so it runs in Debug builds only: a Release build neither reads the flag nor evaluates the check. The CQL
+toolkit turns the flag off to avoid interrupting bulk processing.
 
 ## 1.11. File structure
 

@@ -125,6 +125,36 @@ public class ElmJsonWriteOptionsTests
         }
     }
 
+#if !DEBUG
+    /// <summary>
+    /// The debug check in the serializer is compiled out of a Release build, so switching it on or off changes nothing.
+    /// A Debug build runs it, boxing a default value for every property that is not marked specified.
+    /// </summary>
+    [TestMethod]
+    public void EnableDebugAssertions_InAReleaseBuild_DoesNotChangeTheAllocation()
+    {
+        var path = Path.Combine("Input", "ELM", "Libs", "FHIRHelpers-4.0.1.json");
+        var library = Library.ParseFromJson(File.ReadAllText(path), validate: true);
+        var original = LibraryJsonSerializer.EnableDebugAssertions;
+        try
+        {
+            library.SerializeToJson(writeIndented: false); // warm: builds the serializer metadata
+
+            LibraryJsonSerializer.EnableDebugAssertions = true;
+            var on = Allocated(() => library.SerializeToJson(writeIndented: false));
+
+            LibraryJsonSerializer.EnableDebugAssertions = false;
+            var off = Allocated(() => library.SerializeToJson(writeIndented: false));
+
+            Math.Abs(on - off).Should().BeLessThan(1024);
+        }
+        finally
+        {
+            LibraryJsonSerializer.EnableDebugAssertions = original;
+        }
+    }
+#endif
+
     [TestMethod]
     [DataRow(false)]
     [DataRow(true)]
