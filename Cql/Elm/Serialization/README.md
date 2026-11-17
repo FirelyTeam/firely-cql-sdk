@@ -64,7 +64,9 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
   (the `{ "library": ... }` wrapper) with the read options, and validates the library when asked to.
 - `SerializeToJson` and `SerializeToStream` serialize a `LibraryContainer` with the write options through a
   `Utf8JsonWriter` that has the indentation set on it, the maximum depth of 4,096 and `Environment.NewLine` as its
-  new line. `SerializeToJson` writes into a buffer rented from `ArrayPool<byte>.Shared` ([PooledByteBufferWriter](PooledByteBufferWriter.cs)).
+  new line. They write into a buffer rented from `ArrayPool<byte>.Shared` ([PooledByteBufferWriter](PooledByteBufferWriter.cs)).
+  `SerializeToStream` writes the finished bytes to the stream in one call, so a serialization that fails writes
+  nothing, and a file save is a single write of one pooled buffer.
 - `SerializeToUtf8` and `ReformatUtf8Json` write UTF-8 straight into a pooled buffer through a `Utf8JsonWriter` with
   `"\n"` as its new line and the maximum depth of 4,096, and copy the result out once. They build no UTF-16 string and
   need no newline pass. `ReformatUtf8Json` re-indents already serialized JSON without going through the object model,

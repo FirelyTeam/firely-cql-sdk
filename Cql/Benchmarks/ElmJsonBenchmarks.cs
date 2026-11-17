@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Json;
 using BenchmarkDotNet.Attributes;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Serialization;
 
 namespace Benchmarks;
 
@@ -75,16 +76,22 @@ public class ElmJsonBenchmarks
     [Benchmark]
     public string SerializeToJsonIndented() => _library.SerializeToJson(writeIndented: true);
 
-    // The next two rows do what SaveElmFilesToDirectoryOptions.Save does for one library: serialize it and write
-    // the text to a file named after the library.
+    // The next two rows do what SaveElmFilesToDirectoryOptions.Save does for one library: serialize it into a pooled
+    // buffer, then write the file named after the library in one call.
 
     [Benchmark]
-    public void SaveCompact() =>
-        File.WriteAllText(Path.Combine(_saveDirectory, FileName), _library.SerializeToJson(writeIndented: false));
+    public void SaveCompact() => Save(writeIndented: false);
 
     [Benchmark]
-    public void SaveIndented() =>
-        File.WriteAllText(Path.Combine(_saveDirectory, FileName), _library.SerializeToJson(writeIndented: true));
+    public void SaveIndented() => Save(writeIndented: true);
+
+    private void Save(bool writeIndented)
+    {
+        var fileName = Path.Combine(_saveDirectory, FileName);
+        using var buffer = LibraryJsonSerializer.SerializeToPooledBuffer(_library, writeIndented);
+        using var stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+        stream.Write(buffer.WrittenSpan);
+    }
 
     [Benchmark]
     public byte[] ToJsonUtf8CompactSourceKept() => _libraryWithSource.ToJsonUtf8(false);

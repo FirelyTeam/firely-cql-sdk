@@ -7,6 +7,7 @@
  */
 
 using System.Runtime.Loader;
+using System.Threading;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Elm.Serialization;
 using Library = Hl7.Cql.Elm.Library;
@@ -122,6 +123,31 @@ public class ElmJsonWriteOptionsTests
         {
             context.Unload();
         }
+    }
+
+    [TestMethod]
+    [DataRow(false)]
+    [DataRow(true)]
+    public void WriteJson_WhenSerializationThrows_WritesNothingToTheStream(bool writeIndented)
+    {
+        var library = Library.ParseFromJson(ReadFile("Cql/CoreTests/Input/ELM/HL7/FHIRHelpers-4.0.1.json"));
+        Expression expression = new Literal { value = "true", valueType = new System.Xml.XmlQualifiedName("Boolean", "urn:hl7-org:elm-types:r1") };
+        for (var i = 0; i < 5000; i++)
+            expression = new Not { operand = expression };
+        library.statements[0].expression = expression;
+
+        var stream = new MemoryStream();
+        Exception? failure = null;
+        var thread = new Thread(() =>
+        {
+            try { library.WriteJson(stream, writeIndented); }
+            catch (Exception e) { failure = e; }
+        }, DeepStackBytes);
+        thread.Start();
+        thread.Join();
+
+        failure.Should().NotBeNull();
+        stream.Length.Should().Be(0);
     }
 
     private static long Allocated(Action action)

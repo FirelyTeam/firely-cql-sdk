@@ -92,12 +92,7 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        using var buffer = new PooledByteBufferWriter(InitialBufferSize);
-        using (var writer = new Utf8JsonWriter(buffer, CreateWriterOptions(writeIndented)))
-        {
-            JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
-        }
-
+        using var buffer = SerializeToPooledBuffer(library, writeIndented);
         return Encoding.UTF8.GetString(buffer.WrittenSpan);
     }
 
@@ -107,10 +102,35 @@ internal static class LibraryJsonSerializer
     /// <param name="library">The library to serialize.</param>
     /// <param name="stream">The stream to write to.</param>
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    /// <remarks>The library is serialized in full before the stream is touched, so a serialization that fails writes nothing.</remarks>
     internal static void SerializeToStream(Library library, Stream stream, bool writeIndented = true)
     {
-        using var writer = new Utf8JsonWriter(stream, CreateWriterOptions(writeIndented));
-        JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
+        using var buffer = SerializeToPooledBuffer(library, writeIndented);
+        stream.Write(buffer.WrittenSpan);
+        stream.Flush();
+    }
+
+    /// <summary>
+    /// Serializes a Library to UTF-8 JSON with <see cref="Environment.NewLine"/> as its line break, into a pooled buffer
+    /// the caller reads through <see cref="PooledByteBufferWriter.WrittenSpan"/> and disposes.
+    /// </summary>
+    /// <param name="library">The library to serialize.</param>
+    /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    internal static PooledByteBufferWriter SerializeToPooledBuffer(Library library, bool writeIndented)
+    {
+        var buffer = new PooledByteBufferWriter(InitialBufferSize);
+        try
+        {
+            using var writer = new Utf8JsonWriter(buffer, CreateWriterOptions(writeIndented));
+            JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
+        }
+        catch
+        {
+            buffer.Dispose();
+            throw;
+        }
+
+        return buffer;
     }
 
     // The one write instance serves both formats: the indentation belongs to the writer, which ignores the
