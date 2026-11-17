@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlAggregateTest" reference="http://build.fhir.org/ig/HL7/cql/03-developersguide.html#aggregate-queries" version="1.5">
 	<capability code="aggregate-clause-query"/>
 	<group name="AggregateTests" version="1.5">
@@ -102,6 +102,26 @@
 			</expression>
 			<output>37</output>
 			<!-- 1 + (1+1+1)+(1+1+2)+(1+2+1)+(1+2+2)+(2+1+1)+(2+1+2)+(2+2+1)+(2+2+2) -->
+		</test>
+		<test name="AggregateEmptySourceWithStart" version="1.5">
+			<capability code="single-source-query"/>
+			<capability code="aggregate-clause-query"/>
+			<!-- empty source: no iterations, so the accumulator keeps its starting value -->
+			<expression>({ } as List&lt;Integer&gt;) Num aggregate Result starting 5: Result + Num</expression>
+			<output>5</output>
+		</test>
+		<test name="AggregateEmptySourceNoStart" version="1.5">
+			<capability code="single-source-query"/>
+			<capability code="aggregate-clause-query"/>
+			<!-- empty source with no starting clause: accumulator stays at its initial null -->
+			<expression>({ } as List&lt;Integer&gt;) Num aggregate Result: Coalesce(Result, 0) + Num</expression>
+			<output>null</output>
+		</test>
+		<test name="AggregateDecimal" version="1.5">
+			<capability code="single-source-query"/>
+			<capability code="aggregate-clause-query"/>
+			<expression>({ 1.0, 2.0, 3.0 }) Num aggregate Result starting 0.0: Result + Num</expression>
+			<output>6.0</output>
 		</test>
 	</group>
 </tests>
