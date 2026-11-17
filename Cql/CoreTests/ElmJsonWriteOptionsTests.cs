@@ -27,14 +27,18 @@ public class ElmJsonWriteOptionsTests
         File.ReadAllText(Path.Combine(ElmJsonRoundTripTests.RepositoryRoot.FullName, relativePath));
 
     // The configuration that this change removed: a second option instance that asks for indentation itself.
-    private static JsonSerializerOptions OptionsWithWriteIndented(bool writeIndented)
-    {
-        var options = new JsonSerializerOptions(LibraryJsonSerializer.BuildSerializerOptions(allowOldStyleTypeDiscriminators: false))
+    // Built once: each instance builds the ELM metadata on first use, which is the cost to pay only once per configuration.
+    private static readonly JsonSerializerOptions CompactReferenceOptions = BuildReferenceOptions(writeIndented: false);
+    private static readonly JsonSerializerOptions IndentedReferenceOptions = BuildReferenceOptions(writeIndented: true);
+
+    private static JsonSerializerOptions BuildReferenceOptions(bool writeIndented) =>
+        new(LibraryJsonSerializer.BuildSerializerOptions(allowOldStyleTypeDiscriminators: false))
         {
             WriteIndented = writeIndented,
         };
-        return options;
-    }
+
+    private static JsonSerializerOptions OptionsWithWriteIndented(bool writeIndented) =>
+        writeIndented ? IndentedReferenceOptions : CompactReferenceOptions;
 
     private static string SerializeWithOptions(Library library, bool writeIndented) =>
         JsonSerializer.Serialize(new LibraryContainer(library), OptionsWithWriteIndented(writeIndented));
