@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd" name="CqlQueryTest" reference="https://cql.hl7.org/02-authorsguide.html#queries" version="1.0">
+    xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd" name="CqlQueryTest" reference="https://cql.hl7.org/02-authorsguide.html#queries" version="1.0">
     <capability code="queries" />
     <group name="SimpleQueries" version="1.0">
         <capability code="queries" />
@@ -18,6 +18,69 @@
             <capability code="queries" />
             <expression>from ({2, 3}) A, ({5, 6}) B</expression>
             <output>{{ A: 2, B: 5 }, { A: 2, B: 6 }, { A: 3, B: 5 }, { A: 3, B: 6 }}</output>
+        </test>
+    </group>
+    <group name="Where" version="1.0">
+        <capability code="queries" />
+        <test name="WhereFilter" version="1.0">
+            <capability code="queries" />
+            <!-- where filters the source to elements for which the condition is true; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3, 4, 5}) N where N &gt; 3</expression>
+            <output>{4, 5}</output>
+        </test>
+        <test name="WhereNoMatch" version="1.0">
+            <capability code="queries" />
+            <!-- no element satisfies the condition => empty list; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3}) N where N &gt; 10</expression>
+            <output>{}</output>
+        </test>
+    </group>
+    <group name="Let" version="1.0">
+        <capability code="queries" />
+        <test name="LetClause" version="1.0">
+            <capability code="queries" />
+            <!-- let introduces a query-scoped definition usable in later clauses; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3}) N let Y: N + 1 return Y</expression>
+            <output>{2, 3, 4}</output>
+        </test>
+    </group>
+    <group name="Return" version="1.0">
+        <capability code="queries" />
+        <test name="ReturnExpression" version="1.0">
+            <capability code="queries" />
+            <!-- return reshapes each element via an expression; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3}) N return N * 2</expression>
+            <output>{2, 4, 6}</output>
+        </test>
+        <test name="ReturnDistinctDefault" version="1.0">
+            <capability code="queries" />
+            <!-- the default for return clauses is distinct, so duplicates are eliminated; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries): "the default for return clauses is distinct, as opposed to all" -->
+            <expression>({1, 1, 2, 2, 3}) N return N</expression>
+            <output>{1, 2, 3}</output>
+        </test>
+        <test name="ReturnAll" version="1.0">
+            <capability code="queries" />
+            <!-- return all keeps duplicates; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries): "the default for return clauses is distinct, as opposed to all" -->
+            <expression>({1, 1, 2, 2, 3}) N return all N</expression>
+            <output>{1, 1, 2, 2, 3}</output>
+        </test>
+    </group>
+    <group name="With" version="1.0">
+        <capability code="queries" />
+        <test name="WithSuchThat" version="1.0">
+            <capability code="queries" />
+            <!-- with keeps primary-source elements that have at least one related element satisfying the condition; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3}) A with ({2, 3, 4}) B such that A = B</expression>
+            <output>{2, 3}</output>
+        </test>
+    </group>
+    <group name="Without" version="1.0">
+        <capability code="queries" />
+        <test name="WithoutSuchThat" version="1.0">
+            <capability code="queries" />
+            <!-- without keeps primary-source elements that have no related element satisfying the condition; per CQL Author's Guide "Queries" (https://cql.hl7.org/02-authorsguide.html#queries) -->
+            <expression>({1, 2, 3}) A without ({2, 3, 4}) B such that A = B</expression>
+            <output>{1}</output>
         </test>
     </group>
     <group name="Sort" version="1.0">
