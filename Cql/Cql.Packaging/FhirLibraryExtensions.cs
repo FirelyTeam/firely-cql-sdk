@@ -80,7 +80,8 @@ internal static class FhirLibraryExtensions
                 case (null, null):
                     throw new ArgumentException("Either elmLibrary or elmBytes must be provided.", nameof(elmLibrary));
                 case (null, not null):
-                    elmLibrary = ElmLibrary.ParseFromJson(Encoding.UTF8.GetString(elmBytes));
+                    using (var elmStream = new MemoryStream(elmBytes, writable: false))
+                        elmLibrary = ElmLibrary.LoadFromJson(elmStream);
                     break;
                 case (not null, null):
                     // Rebuilding the JSON from the object graph walks every ELM node through the
