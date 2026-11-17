@@ -27,8 +27,8 @@ internal static class LibraryJsonSerializer
     internal static bool EnableDebugAssertions = true;
 
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
+    private const int InitialBufferSize = 64 * 1024;
     private static readonly JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
-    private static readonly JsonSerializerOptions _jsonSerializerOptionsIndented = new(_jsonSerializerOptions) { WriteIndented = true };
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
@@ -92,10 +92,13 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
+        using var buffer = new PooledByteBufferWriter(InitialBufferSize);
+        using (var writer = new Utf8JsonWriter(buffer, CreateWriterOptions(writeIndented)))
+        {
+            JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
+        }
 
-        var container = new LibraryContainer(library);
-        return JsonSerializer.Serialize(container, options);
+        return Encoding.UTF8.GetString(buffer.WrittenSpan);
     }
 
     /// <summary>
@@ -106,11 +109,19 @@ internal static class LibraryJsonSerializer
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     internal static void SerializeToStream(Library library, Stream stream, bool writeIndented = true)
     {
-        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
-
-        var container = new LibraryContainer(library);
-        JsonSerializer.Serialize(stream, container, options);
+        using var writer = new Utf8JsonWriter(stream, CreateWriterOptions(writeIndented));
+        JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
     }
+
+    // The one write instance serves both formats: the indentation belongs to the writer, which ignores the
+    // options' WriteIndented, so no second set of serializer metadata is built for indented output.
+    private static JsonWriterOptions CreateWriterOptions(bool writeIndented) =>
+        new()
+        {
+            Indented = writeIndented,
+            MaxDepth = MaxDepth,
+            SkipValidation = true,
+        };
 
     /// <summary>
     /// Re-indents already-serialized ELM JSON without going through the object model.

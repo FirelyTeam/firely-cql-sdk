@@ -27,7 +27,7 @@ public partial class ElmJsonRoundTripTests
     /// <summary>
     /// The path, relative to the repository root, of each distinct ELM library file in the searched folders.
     /// </summary>
-    private static IEnumerable<object[]> ElmFiles => FindElmFiles().Select(path => new object[] { path });
+    internal static IEnumerable<object[]> ElmFiles => FindElmFiles().Select(path => new object[] { path });
 
     [TestMethod]
     [DynamicData(nameof(ElmFiles))]
@@ -48,7 +48,7 @@ public partial class ElmJsonRoundTripTests
         ElmFiles.Should().NotBeEmpty();
     }
 
-    private static DirectoryInfo RepositoryRoot { get; } = FindRepositoryRoot();
+    internal static DirectoryInfo RepositoryRoot { get; } = FindRepositoryRoot();
 
     private static DirectoryInfo FindRepositoryRoot()
     {
