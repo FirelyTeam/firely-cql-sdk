@@ -3472,6 +3472,51 @@ namespace CoreTests
             Assert.AreEqual(false, result.highClosed);
         }
 
+        /// <summary>
+        /// Spec §9.B, Except (lists): "If the first argument is null, the result is null."
+        /// </summary>
+        [TestMethod]
+        public void ExceptList_NullLeft_IsNull()
+        {
+            var ops = GetNewContext().Operators;
+
+            var result = ops.Except<int?>(null, [1, 3, 5]);
+
+            result.Should().BeNull();
+        }
+
+        /// <summary>
+        /// Spec §9.B, Except (lists): "If the second argument is null, the operation is performed as though the
+        /// second argument was an empty list."
+        /// </summary>
+        [TestMethod]
+        public void ExceptList_NullRight_ActsAsEmptyList()
+        {
+            var ops = GetNewContext().Operators;
+
+            var result = ops.Except<int?>([1, 4], null);
+
+            result.Should().Equal(1, 4);
+        }
+
+        /// <summary>
+        /// Spec §9.B, Except (lists): the operator "is defined with set semantics, meaning that each element will
+        /// appear in the result at most once", and null elements are considered equal. That holds when the second
+        /// argument is null, just as when it is empty.
+        /// </summary>
+        [TestMethod]
+        public void ExceptList_NullRight_RemovesDuplicatesLikeEmptyRight()
+        {
+            var ops = GetNewContext().Operators;
+            int?[] left = [1, 1, null, null, 2];
+
+            var withNull = ops.Except<int?>(left, null);
+            var withEmpty = ops.Except<int?>(left, []);
+
+            withNull.Should().BeEquivalentTo(new int?[] { 1, null, 2 });
+            withNull.Should().BeEquivalentTo(withEmpty);
+        }
+
         [TestMethod]
         public void IntersectList_QuantityWithConvertibleUnits_ReturnsMatchingElement()
         {
