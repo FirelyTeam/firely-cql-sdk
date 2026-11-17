@@ -199,6 +199,89 @@ public class ElmSourceJsonTests
         Assert.AreEqual($"{json}{Lf}", normalized);
     }
 
+    [TestMethod]
+    [DynamicData(nameof(CorpusFiles))]
+    public void NormalizeNewLinesUtf8_MatchesTheByteLoop_OnEveryElmFile(string relativePath)
+    {
+        var lfBytes = ToLf(File.ReadAllBytes(Path.Combine(ElmJsonRoundTripTests.RepositoryRoot.FullName, relativePath)));
+        var crlfBytes = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(lfBytes).Replace(Lf, CrLf));
+
+        CollectionAssert.AreEqual(ByteLoop(lfBytes), LibraryJsonSerializer.NormalizeNewLinesUtf8(lfBytes), relativePath);
+        CollectionAssert.AreEqual(ByteLoop(crlfBytes), LibraryJsonSerializer.NormalizeNewLinesUtf8(crlfBytes), relativePath);
+        Assert.AreSame(lfBytes, LibraryJsonSerializer.NormalizeNewLinesUtf8(lfBytes));
+    }
+
+    private static IEnumerable<object[]> CorpusFiles => ElmJsonRoundTripTests.ElmFiles;
+
+    [TestMethod]
+    public void NormalizeNewLinesUtf8_MatchesTheByteLoop_OnEdgeCases()
+    {
+        byte[][] cases =
+        [
+            [],
+            "abc"u8.ToArray(),
+            "\r"u8.ToArray(),
+            "ab\r"u8.ToArray(),
+            "ab\r\n"u8.ToArray(),
+            "a\r\r\nb"u8.ToArray(),
+            "\r\n\r\n"u8.ToArray(),
+            "\n\r"u8.ToArray(),
+        ];
+
+        foreach (var input in cases)
+            AssertMatchesByteLoop(input);
+
+        // A CRLF and a lone CR at every position of buffers up to 130 bytes, which crosses the 16-, 32-
+        // and 64-byte vector boundaries.
+        for (var length = 1; length <= 130; length++)
+        {
+            for (var position = 0; position < length; position++)
+            {
+                var filler = new byte[length];
+                Array.Fill(filler, (byte)'x');
+
+                var lone = (byte[])filler.Clone();
+                lone[position] = (byte)'\r';
+                AssertMatchesByteLoop(lone);
+
+                if (position + 1 < length)
+                {
+                    var pair = (byte[])filler.Clone();
+                    pair[position] = (byte)'\r';
+                    pair[position + 1] = (byte)'\n';
+                    AssertMatchesByteLoop(pair);
+                }
+            }
+        }
+    }
+
+    private static void AssertMatchesByteLoop(byte[] input) =>
+        CollectionAssert.AreEqual(
+            ByteLoop(input),
+            LibraryJsonSerializer.NormalizeNewLinesUtf8((byte[])input.Clone()),
+            $"Input: {System.Convert.ToHexString(input)}");
+
+    private static byte[] ByteLoop(byte[] utf8Json)
+    {
+        var normalized = new byte[utf8Json.Length];
+        var length = 0;
+
+        for (var i = 0; i < utf8Json.Length; i++)
+        {
+            var b = utf8Json[i];
+            if (b == (byte)'\r')
+            {
+                if (i + 1 < utf8Json.Length && utf8Json[i + 1] == (byte)'\n')
+                    i++;
+                b = (byte)'\n';
+            }
+
+            normalized[length++] = b;
+        }
+
+        return normalized[..length];
+    }
+
     private static byte[] ToLf(byte[] utf8) =>
         Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(utf8).Replace(CrLf, Lf).Replace("\r", Lf));
 

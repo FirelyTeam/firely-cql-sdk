@@ -215,27 +215,29 @@ internal static class LibraryJsonSerializer
         const byte cr = (byte)'\r';
         const byte lf = (byte)'\n';
 
-        if (Array.IndexOf(utf8Json, cr) < 0)
+        var source = utf8Json.AsSpan();
+        var next = source.IndexOf(cr);
+        if (next < 0)
             return utf8Json;
 
-        var normalized = new byte[utf8Json.Length];
-        var length = 0;
+        // Every CRLF collapses to one byte, and a lone CR is replaced in place.
+        var normalized = new byte[source.Length - source.Count("\r\n"u8)];
+        var destination = normalized.AsSpan();
 
-        for (var i = 0; i < utf8Json.Length; i++)
+        while (next >= 0)
         {
-            var b = utf8Json[i];
-            if (b == cr)
-            {
-                // CRLF and a lone CR both collapse to a single LF.
-                if (i + 1 < utf8Json.Length && utf8Json[i + 1] == lf)
-                    i++;
-                b = lf;
-            }
+            source[..next].CopyTo(destination);
+            destination[next] = lf;
+            destination = destination[(next + 1)..];
 
-            normalized[length++] = b;
+            // CRLF and a lone CR both collapse to a single LF.
+            var skip = next + 1 < source.Length && source[next + 1] == lf ? next + 2 : next + 1;
+            source = source[skip..];
+            next = source.IndexOf(cr);
         }
 
-        return normalized[..length];
+        source.CopyTo(destination);
+        return normalized;
     }
 
     /// <summary>
