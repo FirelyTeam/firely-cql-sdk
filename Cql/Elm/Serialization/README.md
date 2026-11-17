@@ -65,7 +65,12 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
 - `SerializeToJson` and `SerializeToStream` serialize a `LibraryContainer` with the write options through a
   `Utf8JsonWriter` that has the indentation set on it, the maximum depth of 4,096 and `Environment.NewLine` as its
   new line. `SerializeToJson` writes into a buffer rented from `ArrayPool<byte>.Shared` ([PooledByteBufferWriter](PooledByteBufferWriter.cs)).
-- `ReformatUtf8Json` re-indents already serialized JSON without going through the object model.
+- `SerializeToUtf8` and `ReformatUtf8Json` write UTF-8 straight into a pooled buffer through a `Utf8JsonWriter` with
+  `"\n"` as its new line and the maximum depth of 4,096, and copy the result out once. They build no UTF-16 string and
+  need no newline pass. `ReformatUtf8Json` re-indents already serialized JSON without going through the object model,
+  with `JavaScriptEncoder.UnsafeRelaxedJsonEscaping`. Serializing costs less once the serializer's metadata is built.
+  A process that serializes nothing else saves building that metadata by re-formatting, and the re-formatted source
+  keeps its content, which serializing does not reproduce.
 
 ### 1.3.2. PolymorphicTypeResolver
 
