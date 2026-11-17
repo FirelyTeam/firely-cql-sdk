@@ -179,6 +179,22 @@ public class ElmSourceJsonTests
     }
 
     [TestMethod]
+    public void ReformatUtf8Json_InvalidUtf8InALongEscapedString_ThrowsAsForAShortOne()
+    {
+        // The scratch buffer for an escaped token over 256 bytes is rented, so the long form takes the path
+        // that must give the rental back when copying throws. Reading accepts an invalid byte in an escaped
+        // string; the copy is what rejects it. (An unpaired surrogate escape does not throw: it becomes
+        // U+FFFD.) The pool's state is not observable: ArrayPool<byte>.Shared exposes no count of its rentals.
+        static byte[] Source(int padding) =>
+            [.. "{\"a\":\"\\n"u8, 0xFF, .. Encoding.UTF8.GetBytes(new string('x', padding)), .. "\"}"u8];
+
+        var shortFailure = Assert.ThrowsException<InvalidOperationException>(() => LibraryJsonSerializer.ReformatUtf8Json(Source(10), writeIndented: false));
+        var longFailure = Assert.ThrowsException<InvalidOperationException>(() => LibraryJsonSerializer.ReformatUtf8Json(Source(400), writeIndented: false));
+
+        Assert.AreEqual(shortFailure.Message, longFailure.Message);
+    }
+
+    [TestMethod]
     public void ReformatUtf8Json_KeepsEveryFormOfNumberAsWritten()
     {
         const string numbers = "[0,-0,7,-12,1.5,-0.25,1e10,1E+2,1.0e-5,12345678901234567890,0.10000000000000000001]";

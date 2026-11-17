@@ -230,9 +230,16 @@ internal static class LibraryJsonSerializer
                 var max = reader.ValueSpan.Length;
                 byte[]? rented = null;
                 Span<byte> scratch = max <= 256 ? stackalloc byte[256] : (rented = System.Buffers.ArrayPool<byte>.Shared.Rent(max));
-                var length = reader.CopyString(scratch);
-                if (isName) writer.WritePropertyName(scratch[..length]); else writer.WriteStringValue(scratch[..length]);
-                if (rented is not null) System.Buffers.ArrayPool<byte>.Shared.Return(rented);
+                try
+                {
+                    var length = reader.CopyString(scratch);
+                    if (isName) writer.WritePropertyName(scratch[..length]); else writer.WriteStringValue(scratch[..length]);
+                }
+                finally
+                {
+                    if (rented is not null) System.Buffers.ArrayPool<byte>.Shared.Return(rented);
+                }
+
                 break;
             }
             case JsonTokenType.Number: writer.WriteRawValue(reader.ValueSpan, skipInputValidation: true); break;
