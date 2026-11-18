@@ -11,9 +11,23 @@
   Every pair of values of one type that was equal stays equal, with one exception: a value constructed with a
   component after a missing one, such as `new DateIso8601(2024, null, 15)`, no longer equals the value without that
   component. Its text never showed the component. The offset is still part of the value:
-  `2024-03-15T10:00:00+01:00` and `2024-03-15T09:00:00Z` name the same instant and are different. `CqlDate`,
-  `CqlDateTime` and `CqlTime` take `Equals` and `GetHashCode` from these types, so the same holds for them, and for a
-  set or dictionary keyed on them. `GetHashCode` gives other numbers than before.
+  `2024-03-15T10:00:00+01:00` and `2024-03-15T09:00:00Z` name the same instant and are different. `GetHashCode` gives
+  other numbers than before. A class derived from one of these types equals only an instance of the same class.
+
+- **Runtime** — `CqlDate`, `CqlDateTime` and `CqlTime` implement `IEquatable<T>` and take `Equals` and `GetHashCode`
+  from the types above, so the two results there hold for them as well. This moves CQL evaluation results in two
+  places:
+  - **`distinct`, `union`, `intersect` and `except`** treat two values with the same components as one value, however
+    they were written. A list with `ToDateTime('2024-03-15T10:00:00Z')` and
+    `ToDateTime('2024-03-15T10:00:00+00:00')` kept both under `distinct` and keeps one. `=` and `~` already called
+    them equal.
+  - **`=`, `~` and ordering** take the result "equal" from .NET equality before they compare by CQL rules, so they
+    take it for more pairs than before:
+    - A comparison at a precision that neither value has, such as `before` at `millisecond` for two values of second
+      precision, gave `null` for `...T10:00:00Z` against `...T10:00:00+00:00` and gives `false`. It already gave
+      `false` for two values written the same way.
+    - `Date(2024, null, 15) = Date(2024)`, which is invalid CQL, was `true` and is `null`; `~` was `true` and is
+      `false`.
 
 ## Performance
 

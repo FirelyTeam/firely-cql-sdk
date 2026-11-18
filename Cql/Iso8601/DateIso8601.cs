@@ -168,6 +168,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="other">The date to compare with.</param>
         public bool Equals(DateIso8601? other) =>
             other is not null
+            && other.GetType() == GetType()
             && Year == other.Year
             && Month == other.Month
             && Day == other.Day;

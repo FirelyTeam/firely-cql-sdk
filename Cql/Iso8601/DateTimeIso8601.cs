@@ -316,6 +316,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="other">The date time to compare with.</param>
         public bool Equals(DateTimeIso8601? other) =>
             other is not null
+            && other.GetType() == GetType()
             && Year == other.Year
             && Month == other.Month
             && Day == other.Day

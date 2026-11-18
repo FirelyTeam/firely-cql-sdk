@@ -261,6 +261,7 @@ namespace Hl7.Cql.Iso8601
         /// <param name="other">The time to compare with.</param>
         public bool Equals(TimeIso8601? other) =>
             other is not null
+            && other.GetType() == GetType()
             && Hour == other.Hour
             && Minute == other.Minute
             && Second == other.Second
