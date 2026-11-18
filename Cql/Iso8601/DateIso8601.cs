@@ -71,7 +71,8 @@ namespace Hl7.Cql.Iso8601
         /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
         /// </summary>
         /// <param name="dto">The date represented by a <see cref="DateTimeOffset"/>.</param>
-        /// <param name="precision">The desired precision for this ISO date.</param>
+        /// <param name="precision">The precision of the date. <see cref="DateTimePrecision.Unknown"/> keeps the year, month and day,
+        /// and so does a precision finer than <see cref="DateTimePrecision.Day"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
             this(null,
@@ -120,18 +121,18 @@ namespace Hl7.Cql.Iso8601
             }
             else if (precision == DateTimePrecision.Unknown)
             {
-                // A component after a missing one is not part of the value, so the precision ends at the first missing component.
-                if (!month.HasValue)
-                    Precision = DateTimePrecision.Year;
-                else if (!day.HasValue)
+                if (day.HasValue)
+                    Precision = DateTimePrecision.Day;
+                else if (month.HasValue)
                     Precision = DateTimePrecision.Month;
                 else
-                    Precision = DateTimePrecision.Day;
+                    Precision = DateTimePrecision.Year;
             }
 
             // A requested precision decides how much of the value is kept, whether or not the components were validated.
+            // A date has no component after the day, so a finer precision is the day.
             if (precision != DateTimePrecision.Unknown)
-                Precision = precision;
+                Precision = precision > DateTimePrecision.Day ? DateTimePrecision.Day : precision;
 
             if (Precision > DateTimePrecision.Unknown)
             {

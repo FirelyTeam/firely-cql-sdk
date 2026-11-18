@@ -19,7 +19,7 @@ namespace CoreTests;
 /// <remarks>
 /// The text shows the components the instance holds. A requested precision cuts the value off at that precision,
 /// with and without <c>strict</c>, and <see cref="DateTimePrecision.Unknown"/> keeps every component given.
-/// <see cref="Iso8601PrecisionTests"/> checks that the text and the <c>Precision</c> property agree.
+/// <see cref="Iso8601PrecisionTests"/> checks the <c>Precision</c> property against the text for those constructors.
 /// The two <c>DS</c> rows for February with <c>strict</c> pin a defect, not a contract: a strict February date
 /// throws. Issue #1936 tracks it.
 /// </remarks>

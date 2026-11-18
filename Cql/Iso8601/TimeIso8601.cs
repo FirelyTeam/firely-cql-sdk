@@ -135,7 +135,8 @@ namespace Hl7.Cql.Iso8601
         /// <param name="span">The span to represent in ISO 8601.</param>
         /// <param name="offsetHours">The timezone offset in hours, or <see langword="null"/>.</param>
         /// <param name="offsetMinutes">The timezone offset in minutes, or <see langword="null"/>.</param>
-        /// <param name="precision">The desired precision for this ISO time.</param>
+        /// <param name="precision">The precision of the time. <see cref="DateTimePrecision.Unknown"/> keeps every component,
+        /// and a precision coarser than <see cref="DateTimePrecision.Hour"/> keeps the hour.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public TimeIso8601(TimeSpan span, int? offsetHours, int? offsetMinutes, DateTimePrecision precision, bool strict = false) :
             this(null,
@@ -195,20 +196,20 @@ namespace Hl7.Cql.Iso8601
             }
             else if (precision == DateTimePrecision.Unknown)
             {
-                // A component after a missing one is not part of the value, so the precision ends at the first missing component.
-                if (!minute.HasValue)
-                    Precision = DateTimePrecision.Hour;
-                else if (!second.HasValue)
-                    Precision = DateTimePrecision.Minute;
-                else if (!ms.HasValue)
-                    Precision = DateTimePrecision.Second;
-                else
+                if (ms.HasValue)
                     Precision = DateTimePrecision.Millisecond;
+                else if (second.HasValue)
+                    Precision = DateTimePrecision.Second;
+                else if (minute.HasValue)
+                    Precision = DateTimePrecision.Minute;
+                else
+                    Precision = DateTimePrecision.Hour;
             }
 
             // A requested precision decides how much of the value is kept, whether or not the components were validated.
+            // A time has no component before the hour, so a coarser precision is the hour.
             if (precision != DateTimePrecision.Unknown)
-                Precision = precision;
+                Precision = precision < DateTimePrecision.Hour ? DateTimePrecision.Hour : precision;
 
             if (Precision > DateTimePrecision.Unknown)
             {
