@@ -49,7 +49,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ConvertsToQuantity", "Missing (#1737)." },
             { "ConvertsToString", "Missing (#1737)." },
             { "ConvertsToTime", "Missing (#1737)." },
-            { "ToDate", "Missing (#1737); only built as an implicit conversion in CoercionProvider." },
             { "SplitOnMatches", "Missing (#1737)." },
             { "GeometricMean", "Missing (#1737)." },
             { "Size", "Missing (#1737)." },
@@ -58,8 +57,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandValueSet", "Missing as a callable (#1737); only built as an implicit conversion in CoercionProvider." },
 
             // Declared with a narrower or different signature set.
-            { "ToLong(Boolean) Long", "Only the Integer overload is declared (#1738)." },
-            { "ToLong(String) Long", "Only the Integer overload is declared (#1738)." },
             { "ToQuantity(Long) Quantity", "Long overload missing (#1738)." },
             { "Power(Integer, Integer) Integer", "Declared to return Decimal (#1738)." },
             { "Power(Long, Long) Long", "Declared to return Decimal (#1738)." },
