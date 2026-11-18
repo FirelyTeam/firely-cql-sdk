@@ -12,7 +12,7 @@ namespace Hl7.Cql.Iso8601
     /// <summary>
     /// Represents a time according to ISO 8601, with components isolated and with supplied precision level retained.
     /// </summary>
-    public class TimeIso8601
+    public class TimeIso8601 : IEquatable<TimeIso8601>
     {
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
@@ -252,8 +252,26 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
-        public override int GetHashCode() => String.GetHashCode();
+
+        /// <summary>
+        /// Whether <paramref name="other"/> has the same components at the same precision, the offset included:
+        /// two times that name the same instant with different offsets are different.
+        /// </summary>
+        /// <param name="other">The time to compare with.</param>
+        public bool Equals(TimeIso8601? other) =>
+            other is not null
+            && Hour == other.Hour
+            && Minute == other.Minute
+            && Second == other.Second
+            && Millisecond == other.Millisecond
+            && OffsetHour == other.OffsetHour
+            && (OffsetMinute ?? 0) == (other.OffsetMinute ?? 0);
+
+        /// <inheritdoc/>
+        public override bool Equals(object? obj) => Equals(obj as TimeIso8601);
+
+        /// <inheritdoc/>
+        public override int GetHashCode() => HashCode.Combine(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute ?? 0);
 
         /// <summary>
         /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 time.

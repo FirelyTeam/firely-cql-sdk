@@ -12,7 +12,7 @@ namespace Hl7.Cql.Iso8601
     /// <summary>
     /// Represents an instant in time according to ISO 8601, with components isolated and with supplied precision level retained.
     /// </summary>
-    public class DateTimeIso8601
+    public class DateTimeIso8601 : IEquatable<DateTimeIso8601>
     {
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
@@ -309,8 +309,42 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
-        public override int GetHashCode() => String.GetHashCode();
+
+        /// <summary>
+        /// Whether <paramref name="other"/> has the same components at the same precision, the offset included:
+        /// two date times that name the same instant with different offsets are different.
+        /// </summary>
+        /// <param name="other">The date time to compare with.</param>
+        public bool Equals(DateTimeIso8601? other) =>
+            other is not null
+            && Year == other.Year
+            && Month == other.Month
+            && Day == other.Day
+            && Hour == other.Hour
+            && Minute == other.Minute
+            && Second == other.Second
+            && Millisecond == other.Millisecond
+            && OffsetHour == other.OffsetHour
+            && (OffsetMinute ?? 0) == (other.OffsetMinute ?? 0);
+
+        /// <inheritdoc/>
+        public override bool Equals(object? obj) => Equals(obj as DateTimeIso8601);
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            var hash = new HashCode();
+            hash.Add(Year);
+            hash.Add(Month);
+            hash.Add(Day);
+            hash.Add(Hour);
+            hash.Add(Minute);
+            hash.Add(Second);
+            hash.Add(Millisecond);
+            hash.Add(OffsetHour);
+            hash.Add(OffsetMinute ?? 0);
+            return hash.ToHashCode();
+        }
 
         internal static DateTimeIso8601 Parse(string stringValue)
         {
