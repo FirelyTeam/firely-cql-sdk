@@ -120,6 +120,15 @@ namespace Hl7.Cql.Operators
                     osHours = (int)decimal.Truncate(hours);
                     osMinutes = (int)(hours * 60 % 60);
                 }
+                else if (hour.HasValue)
+                {
+                    // "If no timezone offset is specified, the timezone offset of the evaluation request timestamp is
+                    // used" (CQL 1.5.3 Errata 2, Author's Guide, "Date, DateTime, and Time Values"). The offset only takes
+                    // part in normalization at hour precision or finer, so it is defaulted only when an hour is present;
+                    // TimezoneOffsetFrom applies the same default to coarser values.
+                    osHours = NowValue.Value.OffsetHour ?? 0;
+                    osMinutes = NowValue.Value.OffsetMinute ?? 0;
+                }
                 return new CqlDateTime(year.Value, month, day, hour, minute, second, millisecond, osHours, osMinutes);
             }
             catch (Exception e) when (e is ArgumentException or OverflowException)
@@ -156,7 +165,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
-            return argument.Value.RationalOffset;
+            return argument.Value.RationalOffset ?? NowValue.Value.RationalOffset ?? 0m;
         }
 
         public CqlDate? DateFrom(CqlDateTime? argument)
@@ -170,6 +179,14 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null)
                 return null;
+            // Extracting Time from a DateTime normalizes to the timezone offset of the evaluation request.
+            var value = argument.Value;
+            if (value.Precision > DateTimePrecision.Day && value.RationalOffset is { } offset
+                && offset != (NowValue.Value.RationalOffset ?? 0m))
+            {
+                var requestOffset = new TimeSpan(NowValue.Value.OffsetHour ?? 0, NowValue.Value.OffsetMinute ?? 0, 0);
+                return new CqlDateTime(value.DateTimeOffsetUtc.ToOffset(requestOffset), value.Precision).TimeOnly;
+            }
             return argument.TimeOnly;
         }
 

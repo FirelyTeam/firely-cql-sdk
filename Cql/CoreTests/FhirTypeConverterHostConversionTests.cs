@@ -779,6 +779,53 @@ namespace CoreTests
             Assert.IsTrue(emittedEnd < justAfterTheEnd, $"The emitted Period ends at {period.End}, after {justAfterTheEnd:O}");
         }
 
+        private static Hl7.Cql.Operators.ICqlOperators OperatorsAtPlusTwo() =>
+            FhirCqlContext.WithDataSource(now: new DateTimeOffset(2024, 6, 1, 9, 0, 0, TimeSpan.FromHours(2))).Operators;
+
+        [TestMethod]
+        public void DateTime_WithoutOffset_CarriesTheEvaluationRequestOffset()
+        {
+            var operators = OperatorsAtPlusTwo();
+            var value = operators.DateTime(2014, 2, 1, 10, 30, 0, null, offset: null)!;
+
+            Assert.AreEqual(2m, operators.TimezoneOffsetFrom(value));
+            Assert.AreEqual(2m, operators.TimezoneOffsetFrom(operators.DateTime(2014, 2, 1, null, null, null, null, offset: null)));
+            Assert.AreEqual(-5m, operators.TimezoneOffsetFrom(operators.DateTime(2014, 2, 1, 10, null, null, null, offset: -5m)));
+
+            var emitted = operators.Convert<FhirDateTime>(value)!.Value;
+            Assert.AreEqual("2014-02-01T10:30:00+02:00", emitted);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(emitted!));
+        }
+
+        [TestMethod]
+        public void DateTime_WithoutOffset_NearMeasurementPeriodStart_ComparesAtTheEvaluationRequestOffset()
+        {
+            // 01:00 at +02:00 is 23:00Z on the previous day, so the value lies before a measurement period
+            // that starts at 2025-01-01T00:00Z; taken as UTC it would fall inside it.
+            var operators = OperatorsAtPlusTwo();
+            var value = operators.DateTime(2025, 1, 1, 1, 0, 0, 0, offset: null);
+            var periodStart = operators.DateTime(2025, 1, 1, 0, 0, 0, 0, offset: 0m);
+            var periodEnd = operators.DateTime(2026, 1, 1, 0, 0, 0, 0, offset: 0m);
+            var period = operators.Interval(periodStart, periodEnd, true, false);
+
+            Assert.IsFalse(operators.In(value, period, null));
+            Assert.IsFalse(operators.SameOrAfter(value, periodStart, "hour"));
+            Assert.AreEqual(1, operators.DurationBetween(value, periodStart, "hour"));
+            Assert.AreEqual("2025-01-01T01:00:00.000+02:00", operators.Convert<FhirDateTime>(value)!.Value);
+        }
+
+        [TestMethod]
+        public void TimeComponent_NormalizesToTheEvaluationRequestOffset()
+        {
+            var operators = OperatorsAtPlusTwo();
+            var utc = operators.DateTime(2014, 2, 1, 10, 30, 0, 0, offset: 0m);
+            var local = operators.DateTime(2014, 2, 1, 10, 30, 0, 0, offset: null);
+
+            Assert.AreEqual(12, operators.TimeComponent(utc)!.Value.Hour);
+            Assert.AreEqual(30, operators.TimeComponent(utc)!.Value.Minute);
+            Assert.AreEqual(10, operators.TimeComponent(local)!.Value.Hour);
+        }
+
         [TestMethod]
         public void OverrideConverterTimezoneOffset_SubMinuteOrOutOfRange_ThrowsAtOptionsConstruction()
         {
