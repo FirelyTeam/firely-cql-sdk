@@ -266,13 +266,16 @@ namespace Hl7.Cql.Iso8601
             && Second == other.Second
             && Millisecond == other.Millisecond
             && OffsetHour == other.OffsetHour
-            && (OffsetMinute ?? 0) == (other.OffsetMinute ?? 0);
+            && OffsetMinuteOfValue == other.OffsetMinuteOfValue;
+
+        // The minutes of the offset count only together with its hours, and an offset without minutes has zero of them.
+        private int OffsetMinuteOfValue => OffsetHour is null ? 0 : OffsetMinute ?? 0;
 
         /// <inheritdoc/>
         public override bool Equals(object? obj) => Equals(obj as TimeIso8601);
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute ?? 0);
+        public override int GetHashCode() => HashCode.Combine(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinuteOfValue);
 
         /// <summary>
         /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 time.

@@ -166,6 +166,35 @@ public class Iso8601EqualityTests
     }
 
     [TestMethod]
+    public void DateTimeIso8601_OffsetMinutesWithoutOffsetHours_AreNotPartOfTheValue()
+    {
+        var withMinutes = new DateTimeIso8601(2024, 3, 15, 10, 30, null, null, null, 30);
+        var withoutOffset = new DateTimeIso8601(2024, 3, 15, 10, 30, null, null, null, null);
+
+        Assert.AreEqual(withoutOffset.ToString(), withMinutes.ToString());
+        AssertEqualValues(withMinutes, withoutOffset);
+    }
+
+    [TestMethod]
+    public void TimeIso8601_OffsetMinutesWithoutOffsetHours_AreNotPartOfTheValue()
+    {
+        var withMinutes = new TimeIso8601(10, 30, null, null, null, 30);
+        var withoutOffset = new TimeIso8601(10, 30, null, null, null, null);
+
+        Assert.AreEqual(withoutOffset.ToString(), withMinutes.ToString());
+        AssertEqualValues(withMinutes, withoutOffset);
+    }
+
+    [TestMethod]
+    public void TimeIso8601_NegativeOffsetWithMinutesOfEitherSign_IsEqual()
+    {
+        var unsignedMinutes = new TimeIso8601(10, 0, 0, null, -5, 30);
+        var signedMinutes = new TimeIso8601(10, 0, 0, null, -5, -30);
+
+        AssertEqualValues(unsignedMinutes, signedMinutes);
+    }
+
+    [TestMethod]
     public void Iso8601Value_IsNotEqualToItsText()
     {
         var date = new DateIso8601(2024, 3, 15);

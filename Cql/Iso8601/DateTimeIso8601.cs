@@ -324,7 +324,10 @@ namespace Hl7.Cql.Iso8601
             && Second == other.Second
             && Millisecond == other.Millisecond
             && OffsetHour == other.OffsetHour
-            && (OffsetMinute ?? 0) == (other.OffsetMinute ?? 0);
+            && OffsetMinuteOfValue == other.OffsetMinuteOfValue;
+
+        // The minutes of the offset count only together with its hours, and an offset without minutes has zero of them.
+        private int OffsetMinuteOfValue => OffsetHour is null ? 0 : OffsetMinute ?? 0;
 
         /// <inheritdoc/>
         public override bool Equals(object? obj) => Equals(obj as DateTimeIso8601);
@@ -341,7 +344,7 @@ namespace Hl7.Cql.Iso8601
             hash.Add(Second);
             hash.Add(Millisecond);
             hash.Add(OffsetHour);
-            hash.Add(OffsetMinute ?? 0);
+            hash.Add(OffsetMinuteOfValue);
             return hash.ToHashCode();
         }
 
