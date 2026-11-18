@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(concatenate.operand);
                 Assert.AreEqual(2, concatenate.operand.Length);
                 {
-                    var lhs = concatenate.operand[0] as Literal;
+                    var lhs = CoalescedOperand(concatenate.operand[0]) as Literal;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}String", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("hello", lhs.value);
                 }
                 {
-                    var rhs = concatenate.operand[1] as Literal;
+                    var rhs = CoalescedOperand(concatenate.operand[1]) as Literal;
                     Assert.IsNotNull(rhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}String", rhs!.resultTypeName.Name);
                     Assert.IsNotNull(rhs.resultTypeSpecifier);
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(concatenate.operand);
                 Assert.AreEqual(2, concatenate.operand.Length);
                 {
-                    var lhs = concatenate.operand[0] as Literal;
+                    var lhs = CoalescedOperand(concatenate.operand[0]) as Literal;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}String", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}String", lhsnts.name.Name);
                 }
                 {
-                    var rhs = concatenate.operand[1] as Concatenate;
+                    var rhs = CoalescedOperand(concatenate.operand[1]) as Concatenate;
                     Assert.IsNotNull(rhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}String", rhs!.resultTypeName.Name);
                     Assert.IsNotNull(rhs.resultTypeSpecifier);
@@ -129,6 +129,62 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
 
+        }
+
+        /// <summary>
+        /// Spec §9.B, Concatenate: "When using &amp;, null arguments are treated as an empty string ('')."
+        /// </summary>
+        [TestMethod]
+        [DataRow("'a' & null", "a")]
+        [DataRow("null & 'a'", "a")]
+        [DataRow("'John' & null & ' Doe'", "John Doe")]
+        [DataRow("(null as String) & (null as String)", "")]
+        public void AmpersandTreatsNullAsEmptyString(string expression, string expected)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                library AmpersandTreatsNullAsEmptyString version '1.0.0'
+
+                define private Result: {expression}
+                """);
+            var concatenate = (Concatenate)library.statements[0].expression;
+            Assert.AreEqual(2, concatenate.operand.Length);
+
+            var result = Run(concatenate, library, FhirCqlContext.ForBundle());
+
+            Assert.AreEqual(expected, result);
+        }
+
+        /// <summary>
+        /// Spec §9.B, Concatenate: "When using +, if either argument is null, the result is null."
+        /// </summary>
+        [TestMethod]
+        public void PlusWithNullIsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library PlusWithNullIsNull version '1.0.0'
+
+                define private Result: 'a' + null
+                """);
+            var concatenate = (Concatenate)library.statements[0].expression;
+            Assert.IsNotInstanceOfType(concatenate.operand[1], typeof(Coalesce));
+
+            var result = Run(concatenate, library, FhirCqlContext.ForBundle());
+
+            Assert.IsNull(result);
+        }
+
+        /// <summary>
+        /// Spec §6 Translation Semantics: for &amp;, "a Coalesce(X, '') is applied to each operand" of the Concatenate.
+        /// Returns the operand inside that Coalesce.
+        /// </summary>
+        private static Expression CoalescedOperand(Expression operand)
+        {
+            Assert.IsInstanceOfType(operand, typeof(Coalesce));
+            var coalesce = (Coalesce)operand;
+            Assert.AreEqual(2, coalesce.operand.Length);
+            Assert.IsInstanceOfType(coalesce.operand[1], typeof(Literal));
+            Assert.AreEqual(string.Empty, ((Literal)coalesce.operand[1]).value);
+            return coalesce.operand[0];
         }
 
     }

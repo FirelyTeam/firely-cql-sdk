@@ -43,6 +43,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _   => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
             };
 
+            // & treats a null operand as the empty string: each operand of the Concatenate is wrapped in Coalesce(X, '').
+            if (@operator == "&" && invocation is Concatenate { operand: { } operands })
+            {
+                for (var i = 0; i < operands.Length; i++)
+                    operands[i] = InvocationBuilder.Invoke(SystemLibrary.Coalesce, operands[i], ElmFactory.Literal(string.Empty))
+                        .WithId()
+                        .WithLocator(context.Locator());
+            }
+
             if (@operator == "+" && IsDateWithTimeUnitQuantity(lhs, rhs))
                 invocation.AddError(
                     "Adding a time-based quantity to a Date value is not allowed by the CQL specification. " +
