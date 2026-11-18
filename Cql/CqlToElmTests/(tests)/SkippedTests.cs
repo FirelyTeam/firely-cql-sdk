@@ -29,9 +29,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing). The Expand signature yields List<T> with T the integer point type; the suite extrapolates the Decimal result from the list overload's example." },
 
-            { "FloorIntegerLessThanMinInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-            { "FloorIntegerGreaterThanMaxInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()

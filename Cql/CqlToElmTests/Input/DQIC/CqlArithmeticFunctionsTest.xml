@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlArithmeticFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4" version="1.0">
 	<capability code="arithmetic-operators"/>
 	<capability code="decimal-precision-and-scale" value="28,8"/>
+	<!--
+		These operator tests
+		#exp
+		#ln
+		#minimum
+		#maximum
+		#predecessor
+		#successor
+		now have <output> set to null per https://cql.hl7.org/09-b-cqlreference.html.
+   -->
 	<group name="Abs" version="1.0">
 		<capability code="arithmetic-operators"/>
 		<test name="AbsNull" version="1.0">
@@ -34,6 +44,16 @@
 			<capability code="system.long"/>
 			<expression>Abs(-1L)</expression>
 			<output>1L</output>
+		</test>
+		<test name="AbsMinIntegerOverflow" version="1.0">
+			<!-- Abs(minimum Integer) cannot be represented; result is null per https://cql.hl7.org/09-b-cqlreference.html#abs -->
+			<expression>Abs(minimum Integer)</expression>
+			<output>null</output>
+		</test>
+		<test name="AbsMinLongOverflow" version="1.5">
+			<capability code="system.long"/>
+			<expression>Abs(minimum Long)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Add" version="1.0">
@@ -68,6 +88,21 @@
 			<capability code="system.long"/>
 			<expression>1L + 1L</expression>
 			<output>2L</output>
+		</test>
+		<test name="AddIntegerOverflow" version="1.0">
+			<!-- arithmetic overflow yields null per https://cql.hl7.org/09-b-cqlreference.html#add -->
+			<expression>(maximum Integer) + 1</expression>
+			<output>null</output>
+		</test>
+		<test name="AddLongAndInteger" version="1.5">
+			<capability code="system.long"/>
+			<expression>25L + 5</expression>
+			<output>30L</output>
+		</test>
+		<test name="AddQuantityInvalidDimension" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
+			<expression>5.5'cm' + 2'cm2'</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Ceiling" version="1.0">
@@ -113,8 +148,10 @@
 			<output>null</output>
 		</test>
 		<test name="CeilingIntegerGreaterThanMaxInteger" version="1.0">
-			<expression invalid="syntax">Ceiling(2147483648)</expression>
-			<output>null</output>
+			<!-- 2147483648 exceeds maximum Integer (2^31-1); an out-of-range Integer literal is a translation (semantic) error.
+			"CQL supports integer values in the range -2^31 to 2^31-1 with a step size of 1."
+			See https://cql.hl7.org/09-b-cqlreference.html#integer-1 -->
+			<expression invalid="semantic">Ceiling(2147483648)</expression>
 		</test>
 		<test name="CeilingDecimalGreaterThanMaxInteger" version="1.0">
 			<expression>Ceiling(2147483648.2)</expression>
@@ -133,8 +170,10 @@
 			<output>-2147483648</output>
 		</test>
 		<test name="CeilingIntegerLessThanMinInteger" version="1.0">
-			<expression invalid="syntax">Ceiling(-2147483649)</expression>
-			<output>null</output>
+			<!-- -2147483649 is below minimum Integer (-2^31); an out-of-range Integer literal is a translation (semantic) error.
+			"CQL supports integer values in the range -2^31 to 2^31-1 with a step size of 1."
+			See https://cql.hl7.org/09-b-cqlreference.html#integer-1 -->
+			<expression invalid="semantic">Ceiling(-2147483649)</expression>
 		</test>
 		<test name="CeilingDecimalLessThanMinInteger" version="1.0">
 			<expression>Ceiling(-2147483649.2)</expression>
@@ -207,6 +246,12 @@
 			<expression>10.0 'g' / 5</expression>
 			<output>2.0'g'</output>
 		</test>
+		<test name="DivideQuantityByZero" version="1.0">
+			<!-- right argument 0 yields null per https://cql.hl7.org/09-b-cqlreference.html#divide -->
+			<capability code="ucum-unit-conversion-support"/>
+			<expression>5.0 'g' / 0</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Floor" version="1.0">
 		<capability code="precision-operators-for-decimal-and-date-time-types"/>
@@ -255,8 +300,10 @@
 			<output>2147483647</output>
 		</test>
 		<test name="FloorIntegerGreaterThanMaxInteger" version="1.0">
-			<expression>Floor(2147483648)</expression>
-			<output>null</output>
+			<!-- 2147483648 exceeds maximum Integer (2^31-1); an out-of-range Integer literal is a translation (semantic) error.
+			"CQL supports integer values in the range -2^31 to 2^31-1 with a step size of 1."
+			See https://cql.hl7.org/09-b-cqlreference.html#integer-1 -->
+			<expression invalid="semantic">Floor(2147483648)</expression>
 		</test>
 		<test name="FloorDecimalGreaterThanMaxInteger" version="1.0">
 			<expression>Floor(2147483648.2)</expression>
@@ -275,8 +322,10 @@
 			<output>null</output>
 		</test>
 		<test name="FloorIntegerLessThanMinInteger" version="1.0">
-			<expression>Floor(-2147483649)</expression>
-			<output>null</output>
+			<!-- -2147483649 is below minimum Integer (-2^31); an out-of-range Integer literal is a translation (semantic) error.
+			"CQL supports integer values in the range -2^31 to 2^31-1 with a step size of 1."
+			See https://cql.hl7.org/09-b-cqlreference.html#integer-1 -->
+			<expression invalid="semantic">Floor(-2147483649)</expression>
 		</test>
 		<test name="FloorDecimalLessThanMinInteger" version="1.0">
 			<expression>Floor(-2147483649.2)</expression>
@@ -314,12 +363,13 @@
 			<output>0.36787944</output>
 		</test>
 		<test name="Exp1000" version="1.0">
-			<expression invalid="true">Exp(1000)</expression>
-			<!-- EXPECT: Results in positive infinity -->
+			<!-- Result cannot be represented (overflow); result is null per https://cql.hl7.org/09-b-cqlreference.html#exp -->
+			<expression>Exp(1000)</expression>
+			<output>null</output>
 		</test>
 		<test name="Exp1000D" version="1.0">
-			<expression invalid="true">Exp(1000.0)</expression>
-			<!-- EXPECT: Results in positive infinity -->
+			<expression>Exp(1000.0)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="HighBoundary" version="1.0">
@@ -425,12 +475,13 @@
 			<output>null</output>
 		</test>
 		<test name="Ln0" version="1.4">
-			<expression invalid="true">Ln(0)</expression>
-			<!-- EXPECT: Results in negative infinity -->
+			<!-- Result cannot be represented (overflow); result is null per https://cql.hl7.org/09-b-cqlreference.html#ln -->
+			<expression>Ln(0)</expression>
+			<output>null</output>
 		</test>
 		<test name="LnNeg0" version="1.4">
-			<expression invalid="true">Ln(-0)</expression>
-			<!-- EXPECT: Results in negative infinity -->
+			<expression>Ln(-0)</expression>
+			<output>null</output>
 		</test>
 		<test name="Ln1" version="1.4">
 			<expression>Ln(1)</expression>
@@ -621,6 +672,11 @@
 			<output>2.0'cm2'</output>
 			<!-- TODO: make the units multiply -->
 		</test>
+		<test name="MultiplyIntegerOverflow" version="1.0">
+			<!-- arithmetic overflow yields null per https://cql.hl7.org/09-b-cqlreference.html#multiply -->
+			<expression>(maximum Integer) * 2</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Negate" version="1.0">
 		<capability code="arithmetic-operators"/>
@@ -680,6 +736,16 @@
 			<expression>-(1'cm')</expression>
 			<output>-1.0'cm'</output>
 		</test>
+		<test name="NegateMinIntegerOverflow" version="1.0">
+			<!-- -(minimum Integer) cannot be represented; result is null per https://cql.hl7.org/09-b-cqlreference.html#negate -->
+			<expression>-(minimum Integer)</expression>
+			<output>null</output>
+		</test>
+		<test name="NegateMinLongOverflow" version="1.5">
+			<capability code="system.long"/>
+			<expression>-(minimum Long)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Precision" version="1.4">
 		<capability code="precision-operators-for-decimal-and-date-time-types"/>
@@ -703,6 +769,10 @@
 		<test name="PrecisionTimeMilliseconds" version="1.4">
 			<expression>Precision(@T10:30:00.000)</expression>
 			<output>9</output>
+		</test>
+		<test name="PrecisionNull" version="1.4">
+			<expression>Precision(null as Decimal)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Predecessor" version="1.0">
@@ -760,12 +830,13 @@
 			<output>@T11:59:59.999</output>
 		</test>
 		<test name="PredecessorUnderflowDt" version="1.0">
-			<expression invalid="true">predecessor of DateTime(0001, 1, 1, 0, 0, 0, 0)</expression>
-			<!-- EXPECT: The result of the predecessor operation precedes the minimum value allowed for the type -->
+			<!-- Underflow yields null per https://cql.hl7.org/09-b-cqlreference.html#predecessor -->
+			<expression>predecessor of DateTime(0001, 1, 1, 0, 0, 0, 0)</expression>
+			<output>null</output>
 		</test>
 		<test name="PredecessorUnderflowT" version="1.0">
-			<expression invalid="true">predecessor of @T00:00:00.000</expression>
-			<!-- EXPECT: The result of the predecessor operation precedes the minimum value allowed for the type -->
+			<expression>predecessor of @T00:00:00.000</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Power" version="1.0">
@@ -879,6 +950,16 @@
 			<expression>Round(-1.6)</expression>
 			<output>-2.0</output>
 		</test>
+		<test name="RoundPos2D5" version="1.0">
+			<!-- traditional rounding: 2.5 rounds away from zero to 3, not banker's 2 -->
+			<expression>Round(2.5)</expression>
+			<output>3.0</output>
+		</test>
+		<test name="RoundNullPrecision" version="1.0">
+			<!-- null precision is treated as 0 per https://cql.hl7.org/09-b-cqlreference.html#round -->
+			<expression>Round(3.14159, null)</expression>
+			<output>3.0</output>
+		</test>
 	</group>
 	<group name="Subtract" version="1.0">
 		<capability code="arithmetic-operators"/>
@@ -907,6 +988,16 @@
 		<test name="Subtract2And11D" version="1.0">
 			<expression>2 - 1.1</expression>
 			<output>0.9</output>
+		</test>
+		<test name="SubtractIntegerOverflow" version="1.0">
+			<!-- arithmetic overflow yields null per https://cql.hl7.org/09-b-cqlreference.html#subtract -->
+			<expression>(minimum Integer) - 1</expression>
+			<output>null</output>
+		</test>
+		<test name="SubtractQuantityInvalidDimension" version="1.0">
+			<capability code="ucum-unit-conversion-support"/>
+			<expression>3.14 'cm' - 3.12 'cm2'</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Successor" version="1.0">
@@ -954,12 +1045,13 @@
 			<output>@T12:00:00.001</output>
 		</test>
 		<test name="SuccessorOverflowDt" version="1.0">
-			<expression invalid="true">successor of DateTime(9999, 12, 31, 23, 59, 59, 999)</expression>
-			<!-- EXPECT: The result of the successor operation exceeds the maximum value allowed for the type -->
+			<!-- Overflow yields null per https://cql.hl7.org/09-b-cqlreference.html#successor -->
+			<expression>successor of DateTime(9999, 12, 31, 23, 59, 59, 999)</expression>
+			<output>null</output>
 		</test>
 		<test name="SuccessorOverflowT" version="1.0">
-			<expression invalid="true">successor of @T23:59:59.999</expression>
-			<!-- EXPECT: The result of the successor operation exceeds the maximum value allowed for the type -->
+			<expression>successor of @T23:59:59.999</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Truncate" version="1.0">
