@@ -104,17 +104,8 @@ namespace Hl7.Cql.Iso8601
         // compute the same string.
         private string? _string;
 
-        // The precision the eager implementation passed to Format(...) from whichever constructor ran.
-        // This is deliberately NOT the same thing as Precision: under strict validation, or with an
-        // explicit DateTimePrecision.Unknown, the eager code formatted at the precision *argument* while
-        // Precision was derived from which components have values. Reproducing the argument exactly is
-        // what keeps ToString()/Equals/GetHashCode byte-identical to the eager implementation. Whether that
-        // divergence is the intended contract is tracked separately, in issue #1524. The parse
-        // path leaves this at its default: it stores the original literal in _string, so Format never runs.
-        private readonly DateTimePrecision _stringPrecision;
-
         private string String => _string ??=
-            Format(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute, _stringPrecision);
+            Format(Hour, Minute, Second, Millisecond, OffsetHour, OffsetMinute);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 date times.
@@ -135,7 +126,6 @@ namespace Hl7.Cql.Iso8601
             this(null,
                hour, minute, second, ms, osHours, Iso8601Offset.NormalizeMinute(osHours, osMinutes), strict)
         {
-            _stringPrecision = DateTimePrecision.Millisecond;
         }
 
         /// <summary>
@@ -151,7 +141,6 @@ namespace Hl7.Cql.Iso8601
             this(null,
                 span.Hours, span.Minutes, span.Seconds, span.Milliseconds, offsetHours, Iso8601Offset.NormalizeMinute(offsetHours, offsetMinutes), strict, precision)
         {
-            _stringPrecision = precision;
         }
 
         internal TimeIso8601(string? @string, int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute,
@@ -206,19 +195,21 @@ namespace Hl7.Cql.Iso8601
             }
             else if (precision == DateTimePrecision.Unknown)
             {
-                if (ms.HasValue)
-                    Precision = DateTimePrecision.Millisecond;
-                else if (second.HasValue)
-                    Precision = DateTimePrecision.Second;
-                else if (minute.HasValue)
-                    Precision = DateTimePrecision.Minute;
-                else
+                // A component after a missing one is not part of the value, so the precision ends at the first missing component.
+                if (!minute.HasValue)
                     Precision = DateTimePrecision.Hour;
+                else if (!second.HasValue)
+                    Precision = DateTimePrecision.Minute;
+                else if (!ms.HasValue)
+                    Precision = DateTimePrecision.Second;
+                else
+                    Precision = DateTimePrecision.Millisecond;
             }
-            else
-            {
+
+            // A requested precision decides how much of the value is kept, whether or not the components were validated.
+            if (precision != DateTimePrecision.Unknown)
                 Precision = precision;
-            }
+
             if (Precision > DateTimePrecision.Unknown)
             {
                 Hour = hour;
@@ -364,19 +355,19 @@ namespace Hl7.Cql.Iso8601
             && offsetMinute is null or (>= -59 and <= 59)
             && (offsetHour ?? 0) * 60 + (offsetMinute ?? 0) is >= -13 * 60 and <= 14 * 60;
 
-        private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
+        private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute)
         {
             var sb = new StringBuilder();
             sb.Append(hour.ToString("D2", CultureInfo.InvariantCulture));
-            if (minute.HasValue && precision > DateTimePrecision.Hour)
+            if (minute.HasValue)
             {
                 sb.Append(':');
                 sb.Append(minute.Value.ToString("D2", CultureInfo.InvariantCulture));
-                if (second.HasValue && precision > DateTimePrecision.Minute)
+                if (second.HasValue)
                 {
                     sb.Append(':');
                     sb.Append(second.Value.ToString("D2", CultureInfo.InvariantCulture));
-                    if (ms.HasValue && precision > DateTimePrecision.Second)
+                    if (ms.HasValue)
                     {
                         sb.Append('.');
                         sb.Append(ms.Value.ToString("D3", CultureInfo.InvariantCulture));

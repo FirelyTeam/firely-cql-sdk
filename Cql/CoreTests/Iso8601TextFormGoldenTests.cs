@@ -13,28 +13,24 @@ using Hl7.Cql.Iso8601;
 namespace CoreTests;
 
 /// <summary>
-/// Golden expectations for the ISO 8601 types' text form, captured by running a generator against the
-/// eager-formatting implementation before <c>String</c> became lazily computed - never hand-computed.
-/// Laziness may only change when the string is built, never what it says, so every row here must pass
-/// against develop's implementation and against the lazy one alike.
+/// Golden expectations for the text form of the ISO 8601 types, one row per constructor call.
+/// A row pins the exact text, or the type of the exception the constructor throws.
 /// </summary>
 /// <remarks>
-/// The corpus deliberately includes the cases where the eager code formatted at a precision that does
-/// not match the instance's own <c>Precision</c> property - <c>strict: true</c> combined with an explicit
-/// precision argument, and an explicit <see cref="DateTimePrecision.Unknown"/> - because those are exactly
-/// the rows that a naive lazy rewrite gets wrong. Some of the expectations below are therefore internally
-/// inconsistent (a Day-precision instance rendering as just the year, say). That is intentional: this file
-/// pins what the eager implementation DID, not what it arguably should have done. Changing that behaviour
-/// is a separate, deliberate decision.
+/// The text shows the components the instance holds. A requested precision cuts the value off at that precision,
+/// with and without <c>strict</c>, and <see cref="DateTimePrecision.Unknown"/> keeps every component given.
+/// <see cref="Iso8601PrecisionTests"/> checks that the text and the <c>Precision</c> property agree.
+/// The two <c>DS</c> rows for February with <c>strict</c> pin a defect, not a contract: a strict February date
+/// throws. Issue #1936 tracks it.
 /// </remarks>
 [TestClass]
 [TestCategory("UnitTest")]
-public class Iso8601LazyFormattingGoldenTests
+public class Iso8601TextFormGoldenTests
 {
     private const int ExpectedRowCount = 426;
 
     [TestMethod]
-    public void TextFormMatchesTheEagerImplementationsGoldens()
+    public void TextFormMatchesTheGoldens()
     {
         var failures = new List<string>();
         var rows = 0;
@@ -328,16 +324,16 @@ DTS|2024|3|15|10|30|45||||False|2024-03-15T10:30:45
 DTS|2024|3|15|10|30|45||||True|2024-03-15T10:30:45
 DTS|2024|3|15|10|30|45|123|||False|2024-03-15T10:30:45.123
 DTS|2024|3|15|10|30|45|123|||True|2024-03-15T10:30:45.123
-DTO2|Unknown|False|1|0|2024
-DTO2|Unknown|False|0|0|2024
-DTO2|Unknown|False|-5|0|2024
-DTO2|Unknown|False|-5|-30|2024
-DTO2|Unknown|False|0|30|2024
-DTO2|Unknown|True|1|0|2024
-DTO2|Unknown|True|0|0|2024
-DTO2|Unknown|True|-5|0|2024
-DTO2|Unknown|True|-5|-30|2024
-DTO2|Unknown|True|0|30|2024
+DTO2|Unknown|False|1|0|2024-03-15T10:30:45.123+01:00
+DTO2|Unknown|False|0|0|2024-03-15T10:30:45.123Z
+DTO2|Unknown|False|-5|0|2024-03-15T10:30:45.123-05:00
+DTO2|Unknown|False|-5|-30|2024-03-15T10:30:45.123-05:30
+DTO2|Unknown|False|0|30|2024-03-15T10:30:45.123+00:30
+DTO2|Unknown|True|1|0|2024-03-15T10:30:45.123+01:00
+DTO2|Unknown|True|0|0|2024-03-15T10:30:45.123Z
+DTO2|Unknown|True|-5|0|2024-03-15T10:30:45.123-05:00
+DTO2|Unknown|True|-5|-30|2024-03-15T10:30:45.123-05:30
+DTO2|Unknown|True|0|30|2024-03-15T10:30:45.123+00:30
 DTO2|Year|False|1|0|2024
 DTO2|Year|False|0|0|2024
 DTO2|Year|False|-5|0|2024
@@ -426,8 +422,8 @@ DS|2024|2|29|False|2024-02-29
 DS|2024|2|29|True|THROW:ArgumentException
 DS|2023|2|28|False|2023-02-28
 DS|2023|2|28|True|THROW:ArgumentException
-DDTO|Unknown|False|2024
-DDTO|Unknown|True|2024
+DDTO|Unknown|False|2024-03-15
+DDTO|Unknown|True|2024-03-15
 DDTO|Year|False|2024
 DDTO|Year|True|2024
 DDTO|Month|False|2024-03
@@ -498,8 +494,8 @@ TS|10|30|45|123|-5|30|False|10:30:45.123-05:30
 TS|10|30|45|123|-5|30|True|10:30:45.123-05:30
 TS|10|30|45|123|0|30|False|10:30:45.123+00:30
 TS|10|30|45|123|0|30|True|10:30:45.123+00:30
-TSPAN|10|30|45|123|||Unknown|False|10
-TSPAN|10|30|45|123|||Unknown|True|10
+TSPAN|10|30|45|123|||Unknown|False|10:30:45.123
+TSPAN|10|30|45|123|||Unknown|True|10:30:45.123
 TSPAN|10|30|45|123|||Year|False|10
 TSPAN|10|30|45|123|||Year|True|10
 TSPAN|10|30|45|123|||Month|False|10
@@ -514,8 +510,8 @@ TSPAN|10|30|45|123|||Second|False|10:30:45
 TSPAN|10|30|45|123|||Second|True|10:30:45
 TSPAN|10|30|45|123|||Millisecond|False|10:30:45.123
 TSPAN|10|30|45|123|||Millisecond|True|10:30:45.123
-TSPAN|10|30|45|123|0|0|Unknown|False|10Z
-TSPAN|10|30|45|123|0|0|Unknown|True|10Z
+TSPAN|10|30|45|123|0|0|Unknown|False|10:30:45.123Z
+TSPAN|10|30|45|123|0|0|Unknown|True|10:30:45.123Z
 TSPAN|10|30|45|123|0|0|Year|False|10Z
 TSPAN|10|30|45|123|0|0|Year|True|10Z
 TSPAN|10|30|45|123|0|0|Month|False|10Z
@@ -530,8 +526,8 @@ TSPAN|10|30|45|123|0|0|Second|False|10:30:45Z
 TSPAN|10|30|45|123|0|0|Second|True|10:30:45Z
 TSPAN|10|30|45|123|0|0|Millisecond|False|10:30:45.123Z
 TSPAN|10|30|45|123|0|0|Millisecond|True|10:30:45.123Z
-TSPAN|10|30|45|123|-5|30|Unknown|False|10-05:30
-TSPAN|10|30|45|123|-5|30|Unknown|True|10-05:30
+TSPAN|10|30|45|123|-5|30|Unknown|False|10:30:45.123-05:30
+TSPAN|10|30|45|123|-5|30|Unknown|True|10:30:45.123-05:30
 TSPAN|10|30|45|123|-5|30|Year|False|10-05:30
 TSPAN|10|30|45|123|-5|30|Year|True|10-05:30
 TSPAN|10|30|45|123|-5|30|Month|False|10-05:30
