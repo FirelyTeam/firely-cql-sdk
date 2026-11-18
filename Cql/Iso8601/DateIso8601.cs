@@ -12,7 +12,7 @@ namespace Hl7.Cql.Iso8601
     /// <summary>
     /// Represents a date in time according to ISO 8601, with year, month and day components isolated and with supplied precision level retained.
     /// </summary>
-    public class DateIso8601
+    public class DateIso8601 : IEquatable<DateIso8601>
     {
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
@@ -160,8 +160,24 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
-        public override int GetHashCode() => String.GetHashCode();
+
+        /// <summary>
+        /// Whether <paramref name="other"/> is the same date at the same precision: the same year, month and day,
+        /// where a component that one of the two leaves out makes them different.
+        /// </summary>
+        /// <param name="other">The date to compare with.</param>
+        public bool Equals(DateIso8601? other) =>
+            other is not null
+            && other.GetType() == GetType()
+            && Year == other.Year
+            && Month == other.Month
+            && Day == other.Day;
+
+        /// <inheritdoc/>
+        public override bool Equals(object? obj) => Equals(obj as DateIso8601);
+
+        /// <inheritdoc/>
+        public override int GetHashCode() => HashCode.Combine(Year, Month, Day);
 
         /// <summary>
         /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 date.

@@ -1,1 +1,4 @@
 ﻿#nullable enable
+Hl7.Cql.Primitives.CqlDate.Equals(Hl7.Cql.Primitives.CqlDate? other) -> bool
+Hl7.Cql.Primitives.CqlDateTime.Equals(Hl7.Cql.Primitives.CqlDateTime? other) -> bool
+Hl7.Cql.Primitives.CqlTime.Equals(Hl7.Cql.Primitives.CqlTime? other) -> bool
