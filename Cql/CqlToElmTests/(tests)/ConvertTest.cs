@@ -33,6 +33,52 @@ namespace Hl7.Cql.CqlToElm.Test
             dt.Value.DateTimeOffset.Offset.Should().Be(TimeSpan.FromMinutes(-75));
         }
 
+        /// <summary>
+        /// Spec §9.B, ToDate: ToDate(argument DateTime) Date and ToDate(argument String) Date.
+        /// </summary>
+        [TestMethod]
+        [DataRow("ToDate('2014-01-01')", "2014-01-01")]
+        [DataRow("ToDate('2014-01')", "2014-01")]
+        [DataRow("ToDate(@2014-01-01T12:05:05.955)", "2014-01-01")]
+        public void ToDate_ReturnsDate(string expression, string expected)
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(expression);
+            var toDate = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToDate>();
+            var result = Run(toDate, library);
+            result.Should().BeOfType<CqlDate>().Which.ToString().Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void ToDate_MalformedString_ReturnsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("ToDate('2014/01/01')");
+            var toDate = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToDate>();
+            Run(toDate, library).Should().BeNull();
+        }
+
+        /// <summary>
+        /// Spec §9.B, ToLong: ToLong(argument Boolean) Long, ToLong(argument Integer) Long and ToLong(argument String) Long.
+        /// </summary>
+        [TestMethod]
+        [DataRow("ToLong('-1')", -1L)]
+        [DataRow("ToLong('+42')", 42L)]
+        [DataRow("ToLong(true)", 1L)]
+        [DataRow("ToLong(5)", 5L)]
+        public void ToLong_ReturnsLong(string expression, long expected)
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(expression);
+            var toLong = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToLong>();
+            Run(toLong, library).Should().Be(expected);
+        }
+
+        [TestMethod]
+        public void ToLong_InvalidString_ReturnsNull()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("ToLong('one')");
+            var toLong = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToLong>();
+            Run(toLong, library).Should().BeNull();
+        }
+
         [TestMethod]
         public void Convert_Code_To_Concept()
         {
