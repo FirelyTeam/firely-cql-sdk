@@ -21,13 +21,16 @@
     they were written. A list with `ToDateTime('2024-03-15T10:00:00Z')` and
     `ToDateTime('2024-03-15T10:00:00+00:00')` kept both under `distinct` and keeps one. `=` and `~` already called
     them equal.
-  - **`=`, `~` and ordering** take the result "equal" from .NET equality before they compare by CQL rules, so they
-    take it for more pairs than before:
-    - A comparison at a precision that neither value has, such as `before` at `millisecond` for two values of second
-      precision, gave `null` for `...T10:00:00Z` against `...T10:00:00+00:00` and gives `false`. It already gave
-      `false` for two values written the same way.
-    - `Date(2024, null, 15) = Date(2024)`, which is invalid CQL, was `true` and is `null`; `~` was `true` and is
-      `false`.
+  - **`=` and `~`** take the result "equal" from .NET equality before they compare by CQL rules. For valid input the
+    result is the same as before. `Date(2024, null, 15) = Date(2024)`, which is invalid CQL, was `true` and is `null`;
+    `~` was `true` and is `false`.
+
+## Fixes
+
+- **Runtime** — `before` and `after` to a precision that neither value has give `null` when the two values are
+  equal, as CQL §9.B asks. `@2024-03-15T10:00:00Z before @2024-03-15T10:00:00Z` at `millisecond` gave `false`, and so
+  did `after`. `same as`, `same or before` and `same or after` already gave `null`, and two different values were
+  already compared by their components. This changes CQL evaluation results.
 
 ## Performance
 

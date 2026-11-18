@@ -158,4 +158,47 @@ public class CqlTemporalEqualityTests
         Assert.IsEmpty(operators.Intersect(onlyLeft, onlyRight)!.ToList());
         Assert.HasCount(1, operators.Except(onlyLeft, onlyRight)!.ToList());
     }
+
+    private static IEnumerable<object[]> EqualDateTimesOfSecondPrecision =>
+    [
+        [DateTime("2024-03-15T10:00:00Z"), DateTime("2024-03-15T10:00:00Z")],
+        [DateTime("2024-03-15T10:00:00Z"), DateTime("2024-03-15T10:00:00+00:00")],
+    ];
+
+    [TestMethod]
+    [DynamicData(nameof(EqualDateTimesOfSecondPrecision))]
+    public void ComparisonToAPrecision_EqualValuesThatLackIt_IsNull(CqlDateTime left, CqlDateTime right)
+    {
+        var operators = Operators();
+
+        Assert.IsNull(operators.SameAs(left, right, "millisecond"));
+        Assert.IsNull(operators.SameOrBefore(left, right, "millisecond"));
+        Assert.IsNull(operators.SameOrAfter(left, right, "millisecond"));
+        Assert.IsNull(operators.Before(left, right, "millisecond"));
+        Assert.IsNull(operators.After(left, right, "millisecond"));
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(EqualDateTimesOfSecondPrecision))]
+    public void ComparisonToAPrecision_EqualValuesThatHaveIt_IsKnown(CqlDateTime left, CqlDateTime right)
+    {
+        var operators = Operators();
+
+        Assert.IsTrue(operators.SameAs(left, right, "second"));
+        Assert.IsTrue(operators.SameOrBefore(left, right, "second"));
+        Assert.IsTrue(operators.SameOrAfter(left, right, "second"));
+        Assert.IsFalse(operators.Before(left, right, "second"));
+        Assert.IsFalse(operators.After(left, right, "second"));
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(EqualDateTimesOfSecondPrecision))]
+    public void ComparisonWithoutAPrecision_EqualValues_IsKnown(CqlDateTime left, CqlDateTime right)
+    {
+        var operators = Operators();
+
+        Assert.IsTrue(operators.SameAs(left, right, null));
+        Assert.IsFalse(operators.Before(left, right, null));
+        Assert.IsFalse(operators.After(left, right, null));
+    }
 }
