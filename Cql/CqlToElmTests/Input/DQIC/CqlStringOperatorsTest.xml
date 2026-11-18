@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlStringOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#string-operators-3" version="1.0">
 	<capability code="string-operators" />
 	<group name="Combine" version="1.0">
@@ -23,6 +23,18 @@
 			<capability code="string-operators" />
 			<expression>Combine({'a', 'b', 'c'}, '-')</expression>
 			<output>'a-b-c'</output>
+		</test>
+		<test name="CombineWithNulls" version="1.0">
+			<capability code="string-operators" />
+			<!-- null elements in the input list are ignored; per CQL spec "Combine" (https://cql.hl7.org/09-b-cqlreference.html#combine) -->
+			<expression>Combine({'a', 'b', 'c', null})</expression>
+			<output>'abc'</output>
+		</test>
+		<test name="CombineNullSeparator" version="1.0">
+			<capability code="string-operators" />
+			<!-- a null separator is ignored; per CQL spec "Combine" (https://cql.hl7.org/09-b-cqlreference.html#combine) -->
+			<expression>Combine({'a', 'b', 'c'}, null)</expression>
+			<output>'abc'</output>
 		</test>
 	</group>
 	<group name="Concatenate" version="1.0">
@@ -52,6 +64,24 @@
 			<expression>'a' + 'b'</expression>
 			<output>'ab'</output>
 		</test>
+		<test name="ConcatenatePlusNull" version="1.0">
+			<capability code="string-operators" />
+			<!-- when using +, if either argument is null the result is null; per CQL spec "Concatenate" (https://cql.hl7.org/09-b-cqlreference.html#concatenate) -->
+			<expression>'a' + null</expression>
+			<output>null</output>
+		</test>
+		<test name="ConcatenateAndNull" version="1.0">
+			<capability code="string-operators" />
+			<!-- when using &amp;, null arguments are treated as an empty string; per CQL spec "Concatenate" (https://cql.hl7.org/09-b-cqlreference.html#concatenate) -->
+			<expression>'a' &amp; null</expression>
+			<output>'a'</output>
+		</test>
+		<test name="ConcatenateAndWithNull" version="1.0">
+			<capability code="string-operators" />
+			<!-- &amp; treats nulls as empty string; per CQL spec "Concatenate" (https://cql.hl7.org/09-b-cqlreference.html#concatenate) -->
+			<expression>'John' &amp; null &amp; ' Doe'</expression>
+			<output>'John Doe'</output>
+		</test>
 	</group>
 	<group name="EndsWith" version="1.0">
 		<capability code="string-operators" />
@@ -69,6 +99,12 @@
 			<capability code="string-operators" />
 			<expression>EndsWith('Chris Schuler is the man!!', 'n!')</expression>
 			<output>false</output>
+		</test>
+		<test name="EndsWithEmpty" version="1.0">
+			<capability code="string-operators" />
+			<!-- if the suffix is the empty string, the result is true; per CQL spec "EndsWith" (https://cql.hl7.org/09-b-cqlreference.html#endswith) -->
+			<expression>EndsWith('ABC', '')</expression>
+			<output>true</output>
 		</test>
 	</group>
 	<group name="Indexer" version="1.0">
@@ -137,6 +173,11 @@
 			<capability code="string-operators" />
 			<expression>LastPositionOf('hi', 'Say hi to Ohio!')</expression>
 			<output>11</output>
+		</test>
+		<test name="LastPositionOfEmptyIsStringLength15" version="1.0">
+			<capability code="string-operators" />
+			<expression>LastPositionOf('', 'Say hi to Ohio!')</expression>
+			<output>15</output>
 		</test>
 	</group>
 	<group name="Length" version="1.0">
@@ -234,6 +275,28 @@
 			<output>true</output>
 		</test>
 	</group>
+	<group name="MatchesFull" version="2.0" reference="https://cql.hl7.org/09-b-cqlreference.html#matchesfull">
+		<!-- MatchesFull was introduced in CQL 2.0 with trial-use status -->
+		<capability code="string-operators" />
+		<test name="MatchesFullTrue" version="2.0">
+			<capability code="string-operators" />
+			<!-- full match: N followed by exactly 10 digits; per CQL spec "MatchesFull" (https://cql.hl7.org/09-b-cqlreference.html#matchesfull) -->
+			<expression>MatchesFull('N8000123123', 'N[0-9]{10}')</expression>
+			<output>true</output>
+		</test>
+		<test name="MatchesFullFalse" version="2.0">
+			<capability code="string-operators" />
+			<!-- not a full match: string has 10 digits but pattern requires exactly 8; per CQL spec "MatchesFull" (https://cql.hl7.org/09-b-cqlreference.html#matchesfull) -->
+			<expression>MatchesFull('N8000123123', 'N[0-9]{8}')</expression>
+			<output>false</output>
+		</test>
+		<test name="MatchesFullNull" version="2.0">
+			<capability code="string-operators" />
+			<!-- if either argument is null, the result is null; per CQL spec "MatchesFull" (https://cql.hl7.org/09-b-cqlreference.html#matchesfull) -->
+			<expression>MatchesFull('ABC', null)</expression>
+			<output>null</output>
+		</test>
+	</group>
 	<group name="PositionOf" version="1.0">
 		<capability code="string-operators" />
 		<test name="PositionOfNullNull" version="1.0">
@@ -265,6 +328,11 @@
 			<capability code="string-operators" />
 			<expression>PositionOf('c', 'ab')</expression>
 			<output>-1</output>
+		</test>
+		<test name="PositionOfEmptyIs0" version="1.0">
+			<capability code="string-operators" />
+			<expression>PositionOf('', 'Say hi to Ohio!')</expression>
+			<output>0</output>
 		</test>
 	</group>
 	<group name="ReplaceMatches" version="1.0">
@@ -318,6 +386,33 @@
 			<output>{'a','b'}</output>
 		</test>
 	</group>
+	<group name="SplitOnMatches" version="1.0" reference="https://cql.hl7.org/09-b-cqlreference.html#splitonmatches">
+		<capability code="string-operators" />
+		<test name="SplitOnMatchesNull" version="1.0">
+			<capability code="string-operators" />
+			<!-- if the stringToSplit argument is null, the result is null; per CQL spec "SplitOnMatches" (https://cql.hl7.org/09-b-cqlreference.html#splitonmatches) -->
+			<expression>SplitOnMatches(null, ',')</expression>
+			<output>null</output>
+		</test>
+		<test name="SplitOnMatchesComma" version="1.0">
+			<capability code="string-operators" />
+			<!-- separatorPattern is a regular expression; per CQL spec "SplitOnMatches" (https://cql.hl7.org/09-b-cqlreference.html#splitonmatches) -->
+			<expression>SplitOnMatches('A,B,C', ',')</expression>
+			<output>{'A', 'B', 'C'}</output>
+		</test>
+		<test name="SplitOnMatchesRegex" version="1.0">
+			<capability code="string-operators" />
+			<!-- split using a regular-expression separator (any digit); per CQL spec "SplitOnMatches" (https://cql.hl7.org/09-b-cqlreference.html#splitonmatches) -->
+			<expression>SplitOnMatches('A1B2C', '[0-9]')</expression>
+			<output>{'A', 'B', 'C'}</output>
+		</test>
+		<test name="SplitOnMatchesNotFound" version="1.0">
+			<capability code="string-operators" />
+			<!-- no match for the separatorPattern => single-element list containing the input; per CQL spec "SplitOnMatches" (https://cql.hl7.org/09-b-cqlreference.html#splitonmatches) -->
+			<expression>SplitOnMatches('ABC', ',')</expression>
+			<output>{'ABC'}</output>
+		</test>
+	</group>
 	<group name="StartsWith" version="1.0">
 		<capability code="string-operators" />
 		<test name="StartsWithNull" version="1.0">
@@ -344,6 +439,12 @@
 			<capability code="string-operators" />
 			<expression>StartsWith('Breathe deep the gathering gloom', 'bre')</expression>
 			<output>false</output>
+		</test>
+		<test name="StartsWithEmpty" version="1.0">
+			<capability code="string-operators" />
+			<!-- if the prefix is the empty string, the result is true; per CQL spec "StartsWith" (https://cql.hl7.org/09-b-cqlreference.html#startswith) -->
+			<expression>StartsWith('ABCDE', '')</expression>
+			<output>true</output>
 		</test>
 	</group>
 	<group name="Substring" version="1.0">
