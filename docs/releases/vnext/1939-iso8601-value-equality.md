@@ -8,7 +8,9 @@
   - **Two parsed values with the same components are equal, however they were written.** `2024-03-15T10:00:00Z` and
     `2024-03-15T10:00:00+00:00` were different and are equal; so are `+01` and `+01:00`.
 
-  Every pair of values of one type that was equal stays equal. The offset is still part of the value:
+  Every pair of values of one type that was equal stays equal, with one exception: a value constructed with a
+  component after a missing one, such as `new DateIso8601(2024, null, 15)`, no longer equals the value without that
+  component. Its text never showed the component. The offset is still part of the value:
   `2024-03-15T10:00:00+01:00` and `2024-03-15T09:00:00Z` name the same instant and are different. `CqlDate`,
   `CqlDateTime` and `CqlTime` take `Equals` and `GetHashCode` from these types, so the same holds for them, and for a
   set or dictionary keyed on them. `GetHashCode` gives other numbers than before.
