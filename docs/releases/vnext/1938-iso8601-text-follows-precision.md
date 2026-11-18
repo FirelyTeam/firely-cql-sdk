@@ -12,13 +12,15 @@
     stay filled, with `Precision` at the finest component, while `ToString()` showed the requested precision.
     `ToString()` is unchanged on this path. For `DateTimeIso8601`, `DateTimeOffset` and `DateTimeOffsetUtc` follow the
     components, so they are cut off as well.
-  - **A component given after a missing one**, without `strict`, is no longer kept. `new DateIso8601(2024, null, 15)`
-    has `Precision` `Year` and no `Day`; it used to report `Day` and keep the day, while `ToString()` gave `2024`. The
-    same holds for `DateTimeIso8601` and `TimeIso8601`, for example an hour and a second without a minute.
-    `ToString()` is unchanged on this path. With `strict`, such a call throws, as before.
+  - **A precision outside the range of the type** gives the nearest one inside it: a `DateIso8601` constructed with
+    `Hour` to `Millisecond` has `Precision` `Day`, and a `TimeIso8601` constructed with `Year` to `Day` has `Precision`
+    `Hour`. `Precision` used to repeat the argument. `ToString()` is unchanged on this path.
 
   `Equals` and `GetHashCode` of these types compare the text, so they move with `ToString()` on the first path: two
   values with different components no longer compare equal there. Values that are parsed, or constructed from
   components without a precision argument, are unchanged. CQL evaluation results are unchanged: the SDK itself passes
-  neither `DateTimePrecision.Unknown` nor `strict` together with a precision. Code of your own that calls
-  `new CqlDateTime(dto, DateTimePrecision.Unknown)` reaches the first path. (#1524)
+  neither `DateTimePrecision.Unknown`, nor `strict` together with a precision, nor a precision outside the range of
+  the type. Code of your own that calls `new CqlDateTime(dto, DateTimePrecision.Unknown)` reaches the first path.
+
+  One call that threw now succeeds: `new DateIso8601(dto, precision, strict: true)` for a `DateTimeOffset` in
+  February, with a precision other than `Unknown`. (#1524)

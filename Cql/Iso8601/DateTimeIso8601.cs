@@ -122,7 +122,7 @@ namespace Hl7.Cql.Iso8601
         /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
         /// </summary>
         /// <param name="dto">The date time represented by a <see cref="DateTimeOffset"/>.</param>
-        /// <param name="precision">The desired precision for this ISO date time.</param>
+        /// <param name="precision">The precision of the date time. <see cref="DateTimePrecision.Unknown"/> keeps every component.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
             this(null,
@@ -237,21 +237,20 @@ namespace Hl7.Cql.Iso8601
             }
             else if (precision == DateTimePrecision.Unknown)
             {
-                // A component after a missing one is not part of the value, so the precision ends at the first missing component.
-                if (!month.HasValue)
-                    Precision = DateTimePrecision.Year;
-                else if (!day.HasValue)
-                    Precision = DateTimePrecision.Month;
-                else if (!hour.HasValue)
-                    Precision = DateTimePrecision.Day;
-                else if (!minute.HasValue)
-                    Precision = DateTimePrecision.Hour;
-                else if (!second.HasValue)
-                    Precision = DateTimePrecision.Minute;
-                else if (!ms.HasValue)
-                    Precision = DateTimePrecision.Second;
-                else
+                if (ms.HasValue)
                     Precision = DateTimePrecision.Millisecond;
+                else if (second.HasValue)
+                    Precision = DateTimePrecision.Second;
+                else if (minute.HasValue)
+                    Precision = DateTimePrecision.Minute;
+                else if (hour.HasValue)
+                    Precision = DateTimePrecision.Hour;
+                else if (day.HasValue)
+                    Precision = DateTimePrecision.Day;
+                else if (month.HasValue)
+                    Precision = DateTimePrecision.Month;
+                else
+                    Precision = DateTimePrecision.Year;
             }
 
             // A requested precision decides how much of the value is kept, whether or not the components were validated.
