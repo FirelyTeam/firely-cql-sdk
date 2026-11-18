@@ -154,6 +154,25 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(expected, result);
         }
 
+        [TestMethod]
+        public void AmpersandCoalesce_HasTheLocatorOfItsOperand()
+        {
+            var library = CreateCqlToolkit().MakeLibrary("""
+                library AmpersandCoalesceLocator version '1.0.0'
+
+                define private Result: 'a' & 'bc'
+                """);
+            var concatenate = (Concatenate)library.statements[0].expression;
+
+            foreach (var operand in concatenate.operand)
+            {
+                var coalesce = (Coalesce)operand;
+                Assert.IsNotNull(coalesce.operand[0].locator);
+                Assert.AreEqual(coalesce.operand[0].locator, coalesce.locator);
+                Assert.AreNotEqual(concatenate.locator, coalesce.locator);
+            }
+        }
+
         /// <summary>
         /// Spec §9.B, Concatenate: "When using +, if either argument is null, the result is null."
         /// </summary>

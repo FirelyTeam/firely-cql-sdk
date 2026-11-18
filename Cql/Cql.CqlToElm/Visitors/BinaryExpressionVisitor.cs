@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (var i = 0; i < operands.Length; i++)
                     operands[i] = InvocationBuilder.Invoke(SystemLibrary.Coalesce, operands[i], ElmFactory.Literal(string.Empty))
                         .WithId()
-                        .WithLocator(context.Locator());
+                        .WithLocator(operands[i].locator);
             }
 
             if (@operator == "+" && IsDateWithTimeUnitQuantity(lhs, rhs))
