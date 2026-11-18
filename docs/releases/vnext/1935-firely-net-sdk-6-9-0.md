@@ -10,5 +10,7 @@
     5,000 codes, so a nested expansion over the cap fails with `ValueSetExpansionTooBigException` instead of being
     accepted. An include that intersects value sets, or a code system with value sets, now keeps the nested codes it
     used to drop, so such a value set can have more members. A value set that arrives with its expansion is unchanged.
-  - A FHIR `date`, `dateTime`, `instant` or `time` value followed by a line break no longer converts to a CQL value; it
-    becomes `null`. A time without seconds still converts as before. (#1934)
+  - A FHIR `date`, `dateTime` or `time` value followed by a line break no longer converts to a CQL value; it becomes
+    `null`. An `instant` followed by a line break makes the conversion throw the Firely .NET SDK's
+    `CodedValidationException`, since reading `Instant.Value` throws for an invalid literal. A time without seconds still
+    converts as before. (#1934)
