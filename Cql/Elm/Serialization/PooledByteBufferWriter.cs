@@ -26,7 +26,13 @@ internal sealed class PooledByteBufferWriter : IBufferWriter<byte>, IDisposable
 
     internal ReadOnlySpan<byte> WrittenSpan => _buffer.AsSpan(0, _written);
 
-    public void Advance(int count) => _written += count;
+    public void Advance(int count)
+    {
+        if ((uint)count > (uint)(_buffer.Length - _written))
+            throw new ArgumentOutOfRangeException(nameof(count), count, "Cannot advance past the end of the buffer, or by a negative count.");
+
+        _written += count;
+    }
 
     public Memory<byte> GetMemory(int sizeHint = 0)
     {
@@ -55,7 +61,12 @@ internal sealed class PooledByteBufferWriter : IBufferWriter<byte>, IDisposable
         if (_buffer.Length - _written >= needed)
             return;
 
-        var larger = ArrayPool<byte>.Shared.Rent(Math.Max(_buffer.Length * 2, _written + needed));
+        // Computed in long so neither the doubling nor the sum overflows; Array.MaxLength caps the result.
+        var required = (long)_written + needed;
+        if (required > Array.MaxLength)
+            throw new OutOfMemoryException($"The buffer cannot grow to {required} bytes, past the maximum array length of {Array.MaxLength}.");
+
+        var larger = ArrayPool<byte>.Shared.Rent((int)Math.Max(required, Math.Min((long)_buffer.Length * 2, Array.MaxLength)));
         _buffer.AsSpan(0, _written).CopyTo(larger);
         ArrayPool<byte>.Shared.Return(_buffer);
         _buffer = larger;
