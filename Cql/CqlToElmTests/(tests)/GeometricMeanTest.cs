@@ -20,6 +20,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         [DataRow("GeometricMean({ 2.0, 8.0 })", 4.0)]
         [DataRow("GeometricMean({ 2.0, null, 8.0 })", 4.0)]
+        [DataRow("GeometricMean({ 2, 8 })", 4.0)]
+        [DataRow("GeometricMean({ 2L, 8L })", 4.0)]
         public void GeometricMean_IsTheRootOfTheProduct(string cql, double expected)
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression(cql);
@@ -31,6 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         [DataRow("GeometricMean({ null as Decimal, null as Decimal })")]
         [DataRow("GeometricMean(null as List<Decimal>)")]
+        [DataRow("GeometricMean({ null, null, null })")]
         public void GeometricMean_WithoutNonNullElements_IsNull(string cql)
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression(cql);

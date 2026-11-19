@@ -424,7 +424,7 @@ public class AggregateOperatorTests
     #region Count
 
     /// <summary>
-    /// "If the list is null, the result is 0" (§9.B Count): unlike the other aggregates, Count of a null source is
+    /// "If the list is null, the result is 0" (§9.B Count): unlike the numeric aggregates, Count of a null source is
     /// 0, not null.
     /// </summary>
     [TestMethod]
@@ -437,7 +437,7 @@ public class AggregateOperatorTests
         Assert.AreEqual(0, Operators().Count<int?>([null, null, null]));
 
     [TestMethod]
-    public void Count_CountsTheNonNullElements() =>
+    public void Count_SourceWithNullElements_CountsOnlyTheNonNullElements() =>
         Assert.AreEqual(2, Operators().Count<int?>([1, null, 3]));
 
     #endregion
