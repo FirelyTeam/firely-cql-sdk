@@ -192,19 +192,14 @@ internal static class LibraryJsonSerializer
         // never interpolated into HTML.
         writerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
+        // A reader over the whole input throws a JsonException for empty or whitespace-only input, so the loop
+        // never ends without having read a token.
         var reader = new Utf8JsonReader(utf8Json, new JsonReaderOptions { MaxDepth = MaxDepth });
-        var any = false;
         using (var writer = new Utf8JsonWriter(buffer, writerOptions))
         {
             while (reader.Read())
-            {
-                any = true;
                 CopyToken(ref reader, writer);
-            }
         }
-
-        if (!any)
-            throw new JsonException("The JSON is empty.");
 
         return buffer.WrittenSpan.ToArray();
     }
@@ -248,6 +243,18 @@ internal static class LibraryJsonSerializer
             case JsonTokenType.Null: writer.WriteNullValue(); break;
         }
     }
+
+    /// <summary>
+    /// Returns UTF-8 JSON without a leading UTF-8 byte order mark: the input itself when it has none, otherwise a copy
+    /// without it.
+    /// </summary>
+    /// <remarks>
+    /// JSON text must not begin with a byte order mark (RFC 8259, section 8.1), and readers that take UTF-8 as bytes or a
+    /// span, such as <see cref="Utf8JsonReader"/> and <see cref="JsonDocument.Parse(ReadOnlyMemory{byte}, JsonDocumentOptions)"/>,
+    /// reject one. ELM bytes read from a file go through this before they are parsed or embedded.
+    /// </remarks>
+    internal static byte[] WithoutUtf8Bom(byte[] utf8Json) =>
+        utf8Json.AsSpan().StartsWith("﻿"u8) ? utf8Json[3..] : utf8Json;
 
     /// <summary>
     /// Rewrites CRLF and lone CR to LF in UTF-8 JSON, returning <paramref name="utf8Json"/> itself when it
