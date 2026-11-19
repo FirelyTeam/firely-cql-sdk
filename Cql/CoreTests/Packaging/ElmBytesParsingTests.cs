@@ -142,14 +142,13 @@ public class ElmBytesParsingTests
     }
 
     [TestMethod]
-    public void ReplaceLibraryAttachments_WithAnElmFileThatStartsWithABom_WritesTheCqlOptionsAndKeepsTheBytes()
+    public void ReplaceLibraryAttachments_WithAnElmFileThatStartsWithABom_WritesTheCqlOptionsAndDropsTheBom()
     {
-        var elmBytes = WithBom(ElmBytes);
-
-        var replaced = RunReplaceLibraryAttachments(elmBytes);
+        var replaced = RunReplaceLibraryAttachments(WithBom(ElmBytes));
 
         AssertCqlOptionsWritten(replaced.Library);
-        CollectionAssert.AreEqual(elmBytes, replaced.ElmAttachment, "the attachment keeps the BOM");
+        CollectionAssert.AreEqual(ElmBytes, replaced.ElmAttachment, "the attachment holds the file's bytes without the BOM");
+        AssertParsesAsBytes(replaced.ElmAttachment);
         replaced.Log.Entries.Should().NotContain(e => e.Level >= LogLevel.Warning);
     }
 
@@ -166,14 +165,41 @@ public class ElmBytesParsingTests
     }
 
     [TestMethod]
-    public void Create_WithElmBytesThatStartWithABom_PackagesThemAndKeepsTheBytes()
+    public void Create_WithElmBytesThatStartWithABom_PackagesThemWithoutTheBom()
     {
-        var elmBytes = WithBom(ElmBytes);
-
-        var fhirLibrary = Package(elmBytes);
+        var fhirLibrary = Package(WithBom(ElmBytes));
 
         AssertCqlOptionsWritten(fhirLibrary);
-        CollectionAssert.AreEqual(elmBytes, ElmAttachmentOf(fhirLibrary), "the attachment keeps the BOM");
+        CollectionAssert.AreEqual(ElmBytes, ElmAttachmentOf(fhirLibrary), "the attachment holds the bytes without the BOM");
+        AssertParsesAsBytes(ElmAttachmentOf(fhirLibrary));
+    }
+
+    [TestMethod]
+    public void LoadFromJson_OfAFileThatStartsWithABom_ReadsItAndKeepsItsSourceWithoutTheBom()
+    {
+        var file = new FileInfo(Path.GetTempFileName());
+        try
+        {
+            File.WriteAllBytes(file.FullName, WithBom(ElmBytes));
+
+            var library = Library.LoadFromJson(file);
+
+            library.identifier!.id.Should().Be("CqlBooleanTest");
+            var source = library.SourceJsonUtf8!;
+            source.AsSpan().StartsWith(Utf8Bom).Should().BeFalse("the kept source JSON has no BOM");
+            AssertParsesAsBytes(source);
+        }
+        finally
+        {
+            file.Delete();
+        }
+    }
+
+    /// <summary>A reader that takes UTF-8 as bytes, as a consumer of the attachment would, rejects a leading BOM.</summary>
+    private static void AssertParsesAsBytes(byte[] utf8Json)
+    {
+        using var document = JsonDocument.Parse(utf8Json);
+        document.RootElement.ValueKind.Should().Be(JsonValueKind.Object);
     }
 
     [TestMethod]

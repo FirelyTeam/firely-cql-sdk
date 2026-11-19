@@ -85,7 +85,7 @@ public partial class Library
         if (!file.Exists)
             throw new FileNotFoundException($"File {file.FullName} does not exist.");
 
-        var utf8Json = File.ReadAllBytes(file.FullName);
+        var utf8Json = LibraryJsonSerializer.WithoutUtf8Bom(File.ReadAllBytes(file.FullName));
 
         var node = JsonNode.Parse(utf8Json, LibraryJsonSerializer.GetJsonNodeOptions(), LibraryJsonSerializer.GetJsonDocumentOptions()) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");

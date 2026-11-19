@@ -1,5 +1,6 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.Toolkit;
@@ -254,6 +255,8 @@ internal static class FhirLibraryExtensions
             byte[] data)
         {
             var attachmentId = $"{libraryIdentifier}{elementIdSuffix}";
+            if (elementIdSuffix == Constants.ElementIdSuffixes.Elm)
+                data = LibraryJsonSerializer.WithoutUtf8Bom(data);
             var contentType = GetContentTypeForSuffix(elementIdSuffix);
 
             // Ensure Content collection is initialized
@@ -516,7 +519,8 @@ internal static class FhirLibraryExtensions
         {
             ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Elm}",
             ContentType = ElmLibrary.JsonMimeType,
-            Data = elmBytes,
+            // A JSON reader that takes the attachment as bytes rejects a leading byte order mark.
+            Data = LibraryJsonSerializer.WithoutUtf8Bom(elmBytes),
         };
 
     /// <summary>

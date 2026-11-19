@@ -25,6 +25,9 @@
   `ElmAttachmentFormatting.Indented` or `ElmAttachmentFormatting.Compact` no longer fails while writing its ELM
   attachment. The attachment writer now takes the serializer's maximum depth of 4,096.
 - **Packager CLI** — `replace-library-attachments` updates the CQL options parameter and extension from an ELM file that
-  starts with a UTF-8 byte order mark, where it used to log a warning and leave them unchanged. The ELM attachment keeps
-  the file's bytes, byte order mark included. Packaging ELM bytes on their own, without a parsed library, accepts such
-  a file instead of throwing `JsonException`.
+  starts with a UTF-8 byte order mark, where it used to log a warning and leave them unchanged. Packaging ELM bytes on
+  their own, without a parsed library, accepts such a file instead of throwing `JsonException`.
+- **Packaging** — An ELM attachment no longer starts with a byte order mark when the ELM file had one. JSON must not begin
+  with one, and a consumer that parses the attachment as UTF-8 bytes rejected it.
+- **Runtime (`Hl7.Cql.Elm`)** — `Library.LoadFromJson(FileInfo)` reads an ELM file that starts with a UTF-8 byte order
+  mark instead of throwing `JsonException`, as `Library.LoadFromJson(Stream)` already did.
