@@ -36,10 +36,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "SplitOnMatchesComma", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
             { "SplitOnMatchesRegex", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
             { "SplitOnMatchesNotFound", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-
-            { "FloorIntegerLessThanMinInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-            { "FloorIntegerGreaterThanMaxInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
