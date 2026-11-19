@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlNullologicalOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#nullological-operators-3" version="1.0">
 	<capability code="nullological-operators" />
 	<group name="Coalesce" version="1.0">
@@ -59,6 +59,35 @@
 			<expression>Coalesce({ null, null, @T05:15:33.556 })</expression>
 			<output>@T05:15:33.556</output>
 		</test>
+		<test name="Coalesce15" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- returns the first non-null result; per CQL spec "Coalesce" (https://cql.hl7.org/09-b-cqlreference.html#coalesce) -->
+			<expression>Coalesce(null, 15, null)</expression>
+			<output>15</output>
+		</test>
+		<test name="CoalesceFourArgs" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- 4-argument overload; per CQL spec "Coalesce" (https://cql.hl7.org/09-b-cqlreference.html#coalesce) -->
+			<expression>Coalesce(null, null, null, 'd')</expression>
+			<output>'d'</output>
+		</test>
+		<test name="CoalesceFiveArgs" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- 5-argument overload; per CQL spec "Coalesce" (https://cql.hl7.org/09-b-cqlreference.html#coalesce) -->
+			<expression>Coalesce(null, null, null, null, 'e')</expression>
+			<output>'e'</output>
+		</test>
+		<test name="CoalesceAllNullList" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- all arguments null => null; per CQL spec "Coalesce" (https://cql.hl7.org/09-b-cqlreference.html#coalesce) -->
+			<expression>Coalesce({ null, null, null })</expression>
+			<output>null</output>
+		</test>
+		<test name="CoalesceMoreThanFiveArgs" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- invalid: more than 5 inputs must be represented as a list, so there is no matching overload; per CQL spec "Coalesce" (https://cql.hl7.org/09-b-cqlreference.html#coalesce): "more than 5 inputs must be represented as list" -->
+			<expression invalid="semantic">Coalesce(null, 15, null, null, null, null)</expression>
+		</test>
 	</group>
 	<group name="IsNull" version="1.0">
 		<capability code="nullological-operators" />
@@ -87,6 +116,18 @@
 			<expression>IsNull(0)</expression>
 			<output>false</output>
 		</test>
+		<test name="IsNullOperatorTrue" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsNull" (https://cql.hl7.org/09-b-cqlreference.html#isnull) -->
+			<expression>null is null</expression>
+			<output>true</output>
+		</test>
+		<test name="IsNullOperatorFalse" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsNull" (https://cql.hl7.org/09-b-cqlreference.html#isnull) -->
+			<expression>'abc' is null</expression>
+			<output>false</output>
+		</test>
 	</group>
 	<group name="IsFalse" version="1.0">
 		<capability code="nullological-operators" />
@@ -105,6 +146,24 @@
 			<expression>IsFalse(null)</expression>
 			<output>false</output>
 		</test>
+		<test name="IsFalseOperatorTrue" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsFalse" (https://cql.hl7.org/09-b-cqlreference.html#isfalse) -->
+			<expression>false is false</expression>
+			<output>true</output>
+		</test>
+		<test name="IsFalseOperatorFalse" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsFalse" (https://cql.hl7.org/09-b-cqlreference.html#isfalse) -->
+			<expression>true is false</expression>
+			<output>false</output>
+		</test>
+		<test name="IsFalseOperatorNull" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- null is not false => false; per CQL spec "IsFalse" (https://cql.hl7.org/09-b-cqlreference.html#isfalse) -->
+			<expression>null is false</expression>
+			<output>false</output>
+		</test>
 	</group>
 	<group name="IsTrue" version="1.0">
 		<capability code="nullological-operators" />
@@ -121,6 +180,24 @@
 		<test name="IsTrueNull" version="1.0">
 			<capability code="nullological-operators" />
 			<expression>IsTrue(null)</expression>
+			<output>false</output>
+		</test>
+		<test name="IsTrueOperatorTrue" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsTrue" (https://cql.hl7.org/09-b-cqlreference.html#istrue) -->
+			<expression>true is true</expression>
+			<output>true</output>
+		</test>
+		<test name="IsTrueOperatorFalse" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- operator syntax (spec canonical form); per CQL spec "IsTrue" (https://cql.hl7.org/09-b-cqlreference.html#istrue) -->
+			<expression>false is true</expression>
+			<output>false</output>
+		</test>
+		<test name="IsTrueOperatorNull" version="1.0">
+			<capability code="nullological-operators" />
+			<!-- null is not true => false; per CQL spec "IsTrue" (https://cql.hl7.org/09-b-cqlreference.html#istrue) -->
+			<expression>null is true</expression>
 			<output>false</output>
 		</test>
 	</group>
