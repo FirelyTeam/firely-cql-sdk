@@ -147,6 +147,21 @@ public class CqlQuantityTests
         Assert.IsNull(ops.Add(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s")));
     }
 
+    /// <summary>
+    /// Spec §9.B, Add: "the dimensions of each quantity must be the same, but not necessarily the unit. For example,
+    /// units of 'cm' and 'm' can be added, but units of 'cm2' and 'cm' cannot. [...] Attempting to operate on
+    /// quantities with invalid units will result in a null."
+    /// </summary>
+    [TestMethod]
+    [DataRow("cm", "cm2")]
+    [DataRow("cm2", "cm")]
+    [DataRow("m", "m3")]
+    public void Add_SameBaseUnitDifferentDimension_ReturnsNull(string leftUnit, string rightUnit)
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Add(new CqlQuantity(5.5m, leftUnit), new CqlQuantity(2m, rightUnit)));
+    }
+
     [TestMethod]
     public void Add_NullLeft_ReturnsNull()
     {
@@ -239,6 +254,21 @@ public class CqlQuantityTests
     {
         var ops = GetOperators();
         Assert.IsNull(ops.Subtract(new CqlQuantity(1m, "kg"), new CqlQuantity(1m, "s")));
+    }
+
+    /// <summary>
+    /// Spec §9.B, Subtract: "the dimensions of each quantity must be the same, but not necessarily the unit. For
+    /// example, units of 'cm' and 'm' can be subtracted, but units of 'cm2' and 'cm' cannot. [...] Attempting to
+    /// operate on quantities with invalid units will result in a null."
+    /// </summary>
+    [TestMethod]
+    [DataRow("cm", "cm2")]
+    [DataRow("cm2", "cm")]
+    [DataRow("m", "m3")]
+    public void Subtract_SameBaseUnitDifferentDimension_ReturnsNull(string leftUnit, string rightUnit)
+    {
+        var ops = GetOperators();
+        Assert.IsNull(ops.Subtract(new CqlQuantity(3.14m, leftUnit), new CqlQuantity(3.12m, rightUnit)));
     }
 
     #endregion
