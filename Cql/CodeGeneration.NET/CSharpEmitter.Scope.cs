@@ -270,11 +270,13 @@ internal partial class CSharpEmitter
         {
             // A "simple" conditional (IfFalse is not itself a conditional, and neither branch
             // would hoist anything) prints as one inline ternary — its entire subtree, the
-            // test included (however complex). Everything else flattens the else-chain into
-            // native if/else statement form.
+            // test included (however complex), unless the subtree holds a node that only
+            // prints as statements. Everything else flattens the else-chain into native
+            // if/else statement form.
             if (conditional.IfFalse is not CodeConditional
                 && IsInlineOnly(conditional.IfTrue)
-                && IsInlineOnly(conditional.IfFalse))
+                && IsInlineOnly(conditional.IfFalse)
+                && _emitter.CanPrintFullyInline(conditional))
             {
                 return new Atom(_emitter.PrintInlineConditional(conditional, _emitter.PrintFullyInline), conditional);
             }
@@ -396,7 +398,7 @@ internal partial class CSharpEmitter
         /// budget of an inline condition (see <see cref="ConditionPrintsInline"/>), and not
         /// itself a conditional or switch, which would nest one expression form in another.
         /// </summary>
-        private static bool ArmPrintsInline(CodeExpression value) =>
+        private bool ArmPrintsInline(CodeExpression value) =>
             value is not (CodeConditional or CodeIfChain or CodeTypeSwitch) && ConditionPrintsInline(value);
 
         /// <summary>Renders a type switch in statement form, deferred like
@@ -517,10 +519,11 @@ internal partial class CSharpEmitter
         /// Whether a condition prints fully inline in its <c>if</c>/<c>else if</c> — the old
         /// isSimpleWhen rule: at most one hoist-worth of complexity (a single call, type
         /// test or null-conditional access, plus pass-through wrappers). Conditions above
-        /// the budget get statement form instead.
+        /// the budget get statement form instead, and so does a condition that holds a node
+        /// that only prints as statements: the budget does not look inside a conditional.
         /// </summary>
-        private static bool ConditionPrintsInline(CodeExpression when) =>
-            CountSpineNodes(when) <= 1;
+        private bool ConditionPrintsInline(CodeExpression when) =>
+            CountSpineNodes(when) <= 1 && _emitter.CanPrintFullyInline(when);
 
         /// <summary>The number of statements linearizing <paramref name="node"/> would hoist —
         /// the IR equivalent of the old trial visit's assignment count.</summary>

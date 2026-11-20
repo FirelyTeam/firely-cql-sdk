@@ -205,6 +205,53 @@ internal partial class CSharpEmitter
     }
 
     /// <summary>
+    /// Whether <see cref="PrintFullyInline"/> can print <paramref name="node"/>: no node it would
+    /// visit is an if-chain or a type switch, which print as statements or bind pattern variables.
+    /// </summary>
+    /// <remarks>
+    /// Visits what <see cref="PrintFullyInline"/> visits: it folds a constant test first, and
+    /// <see cref="PrintShallow"/> names the children a compound node prints.
+    /// </remarks>
+    internal bool CanPrintFullyInline(CodeExpression node)
+    {
+        node = FoldConstantTest(node);
+        if (_canPrintFullyInline.TryGetValue(node, out var known))
+            return known;
+
+        bool result;
+        switch (node)
+        {
+            case CodeConstant or CodeDefault or CodeContextParameter or CodeLocal:
+                return true;
+
+            case CodeIfChain or CodeTypeSwitch:
+                return false;
+
+            case CodeConditional conditional:
+                result = CanPrintFullyInline(conditional.Test)
+                         && CanPrintFullyInline(conditional.IfTrue)
+                         && CanPrintFullyInline(conditional.IfFalse);
+                break;
+
+            case CodeLambda lambda:
+                result = CanPrintFullyInline(lambda.Body);
+                break;
+
+            default:
+                result = true;
+                // The printed text is discarded: the print only reports which children it asks for.
+                PrintShallow(node, child =>
+                {
+                    result = result && CanPrintFullyInline(child);
+                    return new Atom("_", child);
+                });
+                break;
+        }
+
+        return _canPrintFullyInline[node] = result;
+    }
+
+    /// <summary>
     /// The old writer's ternary format (BuildConditionalExpression): open paren, test on its
     /// own line, indented <c>? ifTrue</c> / <c>: ifFalse)</c> lines.
     /// </summary>

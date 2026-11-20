@@ -39,6 +39,9 @@ internal partial class CSharpEmitter
 
     private readonly Dictionary<CodeLocal, string> _assignedNames = new(ReferenceEqualityComparer.Instance);
 
+    // What CanPrintFullyInline found for a node, so that a subtree is examined once per emission.
+    private readonly Dictionary<CodeExpression, bool> _canPrintFullyInline = new(ReferenceEqualityComparer.Instance);
+
     /// <param name="typeToCSharpConverter">Renders .NET types as C# type syntax.</param>
     /// <param name="namingConventions">The generated-class naming conventions the printed
     /// bodies must agree with (see <see cref="ICSharpNamingConventions"/>); provided by the
@@ -61,6 +64,7 @@ internal partial class CSharpEmitter
         // Naming is scoped to one definition body: each emission starts fresh, so earlier
         // emissions can neither cause collisions nor grow the maps without bound.
         _assignedNames.Clear();
+        _canPrintFullyInline.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(lambda.Body, tailPosition: true);
@@ -94,6 +98,7 @@ internal partial class CSharpEmitter
     public string? TryEmitExpressionBody(CodeLambda lambda)
     {
         _assignedNames.Clear();
+        _canPrintFullyInline.Clear();
 
         var scope = Scope.CreateRoot(this, lambda.Parameters);
         var result = scope.Linearize(lambda.Body, tailPosition: true);
