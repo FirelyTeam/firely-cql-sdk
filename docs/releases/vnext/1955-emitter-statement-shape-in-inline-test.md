@@ -6,4 +6,4 @@
   variables and cannot print as an inline expression"), for example for
   `if (case when A then 1 else 2 end) = 1 then 'x' else 'y'`, and the library and every library that includes it produced
   no assembly. Such a conditional now prints as `if`/`else` statements. The C# of every library that generated before is
-  unchanged, so `GeneratorToolVersion` stays as it is and nothing needs regenerating. (#1954)
+  unchanged, so `GeneratorToolVersion` stays as it is and nothing needs regenerating. (#1955)
