@@ -118,7 +118,7 @@ namespace Hl7.Cql.Operators
         #region Count
 
         public int? Count<T>(IEnumerable<T>? source) =>
-            source == null ? null : source.Where(t => t != null).Count();
+            source == null ? 0 : source.Where(t => t != null).Count();
 
         #endregion
 
