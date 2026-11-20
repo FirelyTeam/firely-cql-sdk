@@ -63,6 +63,10 @@ internal static class CSharpEmitterTestHelpers
     public static int? ApplyFunc(Func<int, int?> f, int x) => f(x);
 
     public static bool? IdentityBool(bool? value) => value;
+
+    public static bool IsPositive(int value) => value > 0;
+
+    public static bool Holds(Func<int, bool> predicate, int x) => predicate(x);
 }
 
 /// <summary>
@@ -400,6 +404,292 @@ public class CSharpEmitterTests
             "    }\n" +
             "}";
         Assert.AreEqual(expected, EmitBody(lambda));
+    }
+
+    // The tests below build a conditional that prints as an inline ternary by its branches
+    // alone, and put a node that only prints as statements (an if-chain or a type switch) where
+    // an inline print would reach it. The emitter prints such a conditional in statement form.
+
+    private static readonly MethodInfo IsPositive =
+        ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.IsPositive(default));
+
+    private static readonly MethodInfo Holds =
+        ReflectionUtility.MethodOf(() => CSharpEmitterTestHelpers.Holds(default!, default));
+
+    /// <summary><c>if (w) 1 else 2</c> as an if-chain, the node an ELM <c>Case</c> becomes.</summary>
+    private static CodeIfChain OneOrTwo(CodeLocal w) =>
+        new([(w, new CodeConstant(1, typeof(int)))], new CodeConstant(2, typeof(int)), typeof(int));
+
+    /// <summary><c>test ? 10 : 20</c>: both branches are constants.</summary>
+    private static CodeConditional TenOrTwenty(CodeExpression test) =>
+        new(test, new CodeConstant(10, typeof(int)), new CodeConstant(20, typeof(int)), typeof(int));
+
+    [TestMethod]
+    public void Conditional_IfChainInTest_PrintsStatementForm()
+    {
+        var w = new CodeLocal(typeof(bool), "w");
+        var conditional = TenOrTwenty(new CodeInvoke(null, IsPositive, OneOrTwo(w)));
+
+        var expected =
+            "{\n" +
+            "    int a_;\n" +
+            "    if (w)\n" +
+            "    {\n" +
+            "        a_ = 1;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        a_ = 2;\n" +
+            "    }\n" +
+            "    bool b_ = CSharpEmitterTestHelpers.IsPositive(a_);\n" +
+            "    if (b_)\n" +
+            "    {\n" +
+            "        return 10;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 20;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([w], conditional));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int", "bool w");
+    }
+
+    [TestMethod]
+    public void Conditional_IfChainInLambdaInTest_PrintsLocalFunction()
+    {
+        // An inline print of the test would print the lambda as a lambda expression, and its
+        // body with it.
+        var w = new CodeLocal(typeof(bool), "w");
+        var n = new CodeLocal(typeof(int), "n");
+        var chain = new CodeIfChain(
+            [(w, new CodeInvoke(null, IsPositive, n))],
+            new CodeConstant(false, typeof(bool)),
+            typeof(bool));
+        var test = new CodeInvoke(null, Holds, new CodeLambda([n], chain), new CodeConstant(1, typeof(int)));
+
+        var expected =
+            "{\n" +
+            "\n" +
+            "    bool a_(int n) {\n" +
+            "        if (w)\n" +
+            "        {\n" +
+            "            bool c_ = CSharpEmitterTestHelpers.IsPositive(n);\n" +
+            "            return c_;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return false;\n" +
+            "        }\n" +
+            "    }\n" +
+            "\n" +
+            "    bool b_ = CSharpEmitterTestHelpers.Holds(a_, 1);\n" +
+            "    if (b_)\n" +
+            "    {\n" +
+            "        return 10;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 20;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([w], TenOrTwenty(test)));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int", "bool w");
+    }
+
+    [TestMethod]
+    public void Conditional_TypeSwitchInTest_PrintsStatementForm()
+    {
+        var o = new CodeLocal(typeof(object), "o");
+        var asString = new CodeLocal(typeof(string), isNotNull: true);
+        var typeSwitch = new CodeTypeSwitch(
+            o,
+            [new CodeTypeSwitchArm(asString, new CodeProperty(asString, StringLength))],
+            new CodeConstant(0, typeof(int)),
+            typeof(int));
+
+        var expected =
+            "{\n" +
+            "    int b_ = o is string a_ ? a_.Length : 0;\n" +
+            "    bool c_ = CSharpEmitterTestHelpers.IsPositive(b_);\n" +
+            "    if (c_)\n" +
+            "    {\n" +
+            "        return 10;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 20;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([o], TenOrTwenty(new CodeInvoke(null, IsPositive, typeSwitch))));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int", "object o");
+    }
+
+    [TestMethod]
+    public void Conditional_BranchIsAConditionalWithAnIfChainInItsTest_PrintsStatementForm()
+    {
+        // The true branch is itself a conditional with constant branches, so by its branches
+        // the outer conditional prints inline too.
+        var c = new CodeLocal(typeof(bool), "c");
+        var w = new CodeLocal(typeof(bool), "w");
+        var nested = TenOrTwenty(new CodeInvoke(null, IsPositive, OneOrTwo(w)));
+        var conditional = new CodeConditional(c, nested, new CodeConstant(30, typeof(int)), typeof(int));
+
+        var expected =
+            "{\n" +
+            "    if (c)\n" +
+            "    {\n" +
+            "        int a_;\n" +
+            "        if (w)\n" +
+            "        {\n" +
+            "            a_ = 1;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            a_ = 2;\n" +
+            "        }\n" +
+            "        bool b_ = CSharpEmitterTestHelpers.IsPositive(a_);\n" +
+            "        if (b_)\n" +
+            "        {\n" +
+            "            return 10;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            return 20;\n" +
+            "        }\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 30;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([c, w], conditional));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int", "bool c, bool w");
+    }
+
+    [TestMethod]
+    public void IfChain_ConditionIsAConditionalWithAnIfChainBranch_PrintsConditionAsStatements()
+    {
+        // A conditional counts as one hoist in the budget of an inline condition (see
+        // Conditional_NonSimpleConditionalWhen_PrintsInlineTernary), whatever its branches hold.
+        var c = new CodeLocal(typeof(bool), "c");
+        var w = new CodeLocal(typeof(bool), "w");
+        var chain = new CodeIfChain(
+            [(w, new CodeConstant(true, typeof(bool)))],
+            new CodeConstant(false, typeof(bool)),
+            typeof(bool));
+        var when = new CodeConditional(c, chain, new CodeConstant(false, typeof(bool)), typeof(bool));
+        var ifTrue = new CodeInvoke(null, MathAbsInt, new CodeConstant(-5, typeof(int))); // forces statement form
+        var conditional = new CodeConditional(when, ifTrue, new CodeConstant(2, typeof(int)), typeof(int));
+
+        var expected =
+            "{\n" +
+            "    bool a_;\n" +
+            "    if (c)\n" +
+            "    {\n" +
+            "        bool b_;\n" +
+            "        if (w)\n" +
+            "        {\n" +
+            "            b_ = true;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            b_ = false;\n" +
+            "        }\n" +
+            "        a_ = b_;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        a_ = false;\n" +
+            "    }\n" +
+            "    if (a_)\n" +
+            "    {\n" +
+            "        int c_ = Math.Abs(-5);\n" +
+            "        return c_;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return 2;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([c, w], conditional));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "int", "bool c, bool w");
+    }
+
+    [TestMethod]
+    public void TypeSwitch_ArmHoldsAConditionalWithAnIfChainBranch_PrintsIfChainOverDeclarationPatterns()
+    {
+        // The arm's value is a cast, not a conditional, and stays within the budget of an inline
+        // condition, so by that rule alone the switch prints as one expression.
+        var o = new CodeLocal(typeof(object), "o");
+        var c = new CodeLocal(typeof(bool), "c");
+        var w = new CodeLocal(typeof(bool), "w");
+        var asString = new CodeLocal(typeof(string), isNotNull: true);
+        var armValue = new CodeCast(
+            new CodeConditional(c, OneOrTwo(w), new CodeConstant(0, typeof(int)), typeof(int)),
+            typeof(object),
+            CodeCastKind.Cast);
+        var typeSwitch = new CodeTypeSwitch(
+            o,
+            [new CodeTypeSwitchArm(asString, armValue)],
+            new CodeConstant(null, typeof(object)),
+            typeof(object));
+
+        var expected =
+            "{\n" +
+            "    if (o is string a_)\n" +
+            "    {\n" +
+            "        int b_;\n" +
+            "        if (c)\n" +
+            "        {\n" +
+            "            int c_;\n" +
+            "            if (w)\n" +
+            "            {\n" +
+            "                c_ = 1;\n" +
+            "            }\n" +
+            "            else\n" +
+            "            {\n" +
+            "                c_ = 2;\n" +
+            "            }\n" +
+            "            b_ = c_;\n" +
+            "        }\n" +
+            "        else\n" +
+            "        {\n" +
+            "            b_ = 0;\n" +
+            "        }\n" +
+            "        return b_;\n" +
+            "    }\n" +
+            "    else\n" +
+            "    {\n" +
+            "        return null;\n" +
+            "    }\n" +
+            "}";
+        var body = EmitBody(new CodeLambda([o, c, w], typeSwitch));
+        Assert.AreEqual(expected, body);
+        AssertParsesAsMethodBody(body, "object", "object o, bool c, bool w");
+    }
+
+    [TestMethod]
+    public void Conditional_IfChainBehindAConstantTest_PrintsInlineTernary()
+    {
+        // The emitter drops the branch a constant test rules out before it prints, so a node in
+        // that branch does not decide the form.
+        var w = new CodeLocal(typeof(bool), "w");
+        var behindConstantTest = new CodeConditional(
+            new CodeConstant(true, typeof(bool)),
+            w,
+            new CodeInvoke(null, IsPositive, OneOrTwo(w)),
+            typeof(bool));
+
+        var body = EmitBody(new CodeLambda([w], TenOrTwenty(behindConstantTest)));
+
+        Assert.AreEqual("{\n    return (w\n        ? 10\n        : 20);\n}", body);
+        AssertParsesAsMethodBody(body, "int", "bool w");
     }
 
     [TestMethod]
