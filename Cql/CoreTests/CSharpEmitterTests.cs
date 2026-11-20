@@ -858,6 +858,84 @@ public class CSharpEmitterTests
             EmitBody(new CodeLambda([s], notEqualNull)));
     }
 
+    /// <summary>
+    /// <c>Coalesce(x, 15, y)</c>: C# types <c>x ?? 15</c> as <c>int</c>, so printing the remaining <c>?? y</c> would
+    /// not compile (CS0019). The chain can never be null past the literal, so the emitter stops there, however many
+    /// operands follow.
+    /// </summary>
+    [TestMethod]
+    public void Coalesce_ChainPastAValueTypeLiteral_StopsAtTheLiteral()
+    {
+        var x = new CodeLocal(typeof(int?), "x");
+        var y = new CodeLocal(typeof(int?), "y");
+        var z = new CodeLocal(typeof(int?), "z");
+        var fifteen = new CodeConstant(15, typeof(int?));
+
+        var threeOperands = new CodeBinary(CodeBinaryOp.Coalesce, new CodeBinary(CodeBinaryOp.Coalesce, x, fifteen), y);
+        var fourOperands = new CodeBinary(CodeBinaryOp.Coalesce, threeOperands, z);
+
+        foreach (var coalesce in new[] { threeOperands, fourOperands })
+        {
+            var emitted = EmitBody(new CodeLambda([x, y, z], coalesce));
+            Assert.AreEqual("{\n    return x ?? 15;\n}", emitted);
+            AssertCompiles(emitted, "int? x, int? y, int? z", "int?");
+        }
+    }
+
+    /// <summary>
+    /// <c>IsNull(Coalesce(x, 15))</c> is always false; printing <c>(x ?? 15) is null</c> would not compile (CS0037),
+    /// because C# types the coalesce as <c>int</c>.
+    /// </summary>
+    [TestMethod]
+    public void IsNull_OfACoalesceEndingInAValueTypeLiteral_IsFalse()
+    {
+        var x = new CodeLocal(typeof(int?), "x");
+        var coalesce = new CodeBinary(CodeBinaryOp.Coalesce, x, new CodeConstant(15, typeof(int?)));
+        var isNull = new CodeBinary(CodeBinaryOp.Equal, coalesce, new CodeConstant(null, typeof(int?)));
+
+        var emitted = EmitBody(new CodeLambda([x], isNull));
+
+        Assert.AreEqual("{\n    return false;\n}", emitted);
+        AssertCompiles(emitted, "int? x", "bool");
+    }
+
+    /// <summary>
+    /// <c>IsNull(if false then y else 5)</c>, as <c>Message(5, false, …)</c> compiles: the conditional folds to the
+    /// literal <c>5</c>, so the null check is false, not the uncompilable <c>5 is null</c> (CS0037). A conditional
+    /// that folds to a null literal is null.
+    /// </summary>
+    [TestMethod]
+    [DataRow(5, "false")]
+    [DataRow(null, "true")]
+    public void IsNull_OfAConditionalWithAConstantTest_ChecksTheBranchItFoldsTo(int? folded, string expected)
+    {
+        var y = new CodeLocal(typeof(int?), "y");
+        var conditional = new CodeConditional(
+            new CodeConstant(false, typeof(bool)), y, new CodeConstant(folded, typeof(int?)), typeof(int?));
+        var isNull = new CodeBinary(CodeBinaryOp.Equal, conditional, new CodeConstant(null, typeof(int?)));
+
+        var emitted = EmitBody(new CodeLambda([y], isNull));
+
+        Assert.AreEqual($"{{\n    return {expected};\n}}", emitted);
+        AssertCompiles(emitted, "int? y", "bool");
+    }
+
+    /// <summary>Compiles an emitted body as a method, so a test checks the C# is valid as well as its text.</summary>
+    private static void AssertCompiles(string body, string parameters, string returnType)
+    {
+        var source = $"public static class EmittedBody {{ public static {returnType} Evaluate({parameters}) {body} }}";
+        var compilation = CSharpCompilation.Create(
+            "EmittedBody",
+            [CSharpSyntaxTree.ParseText(source)],
+            TrustedPlatformAssemblies.Value,
+            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
+        compilation.GetDiagnostics()
+                   .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+                   .Select(diagnostic => $"{diagnostic.Id}: {diagnostic.GetMessage()}")
+                   .Should().BeEmpty();
+    }
+
     [TestMethod]
     public void Binary_RightOperandNeverParenthesized()
     {
