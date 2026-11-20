@@ -28,8 +28,14 @@ internal static class LibraryJsonSerializer
 
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
     private static readonly JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
+    private static readonly JsonSerializerOptions _jsonSerializerOptionsIndented = new(_jsonSerializerOptions) { WriteIndented = true };
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
+
+    // A node without options of its own asks its parent for them, and a root with none gives nothing to cache, so
+    // every lookup on a deeply nested node would walk the whole chain up to the root. Giving the root options ends
+    // that walk at the root.
+    private static readonly JsonNodeOptions _jsonNodeOptions = new() { PropertyNameCaseInsensitive = false };
 
     /// <summary>
     /// Parses the specified JSON string and returns a corresponding JsonNode representation.
@@ -39,7 +45,7 @@ internal static class LibraryJsonSerializer
     /// <exception cref="InvalidOperationException">Thrown if the JSON string cannot be parsed into a JsonNode.</exception>
     internal static JsonNode ParseToJsonNode(string json)
     {
-        return JsonNode.Parse(json, documentOptions: _jsonDocumentOptions) ??
+        return JsonNode.Parse(json, _jsonNodeOptions, _jsonDocumentOptions) ??
                throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
     }
 
@@ -86,12 +92,7 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        // The cost here is the walk over the ELM graph through PolymorphicTypeResolver and its modifiers,
-        // not the construction of these options.
-        var options = new JsonSerializerOptions(_jsonSerializerOptions)
-        {
-            WriteIndented = writeIndented
-        };
+        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
 
         var container = new LibraryContainer(library);
         return JsonSerializer.Serialize(container, options);
@@ -105,10 +106,7 @@ internal static class LibraryJsonSerializer
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     internal static void SerializeToStream(Library library, Stream stream, bool writeIndented = true)
     {
-        var options = new JsonSerializerOptions(_jsonSerializerOptions)
-        {
-            WriteIndented = writeIndented
-        };
+        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
 
         var container = new LibraryContainer(library);
         JsonSerializer.Serialize(stream, container, options);
@@ -200,6 +198,11 @@ internal static class LibraryJsonSerializer
     internal static JsonDocumentOptions GetJsonDocumentOptions() => _jsonDocumentOptions;
 
     /// <summary>
+    /// Gets the JSON node options used for parsing.
+    /// </summary>
+    internal static JsonNodeOptions GetJsonNodeOptions() => _jsonNodeOptions;
+
+    /// <summary>
     /// Builds JSON serializer options for ELM serialization.
     /// </summary>
     /// <param name="allowOldStyleTypeDiscriminators">Whether to allow old-style type discriminators.</param>
@@ -212,17 +215,6 @@ internal static class LibraryJsonSerializer
             UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
         };
 
-        // Register custom converters for polymorphic types to work around System.Text.Json limitation
-        // with "type" property name conflicts
-        options.Converters.Add(new PolymorphicObjectJsonConverter<CqlToElmBase>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<ExpressionDef>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<Expression>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<TypeSpecifier>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<Element>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<RelationshipClause>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<AliasedQuerySource>(allowOldStyleTypeDiscriminators));
-        options.Converters.Add(new PolymorphicObjectJsonConverter<SortByItem>(allowOldStyleTypeDiscriminators));
-
         options.Converters.Add(new TopLevelDefinitionConverterFactory(allowOldStyleTypeDiscriminators));
         options.Converters.Add(new XmlQualifiedNameConverter());
         options.Converters.Add(new JsonStringEnumConverter());
@@ -231,65 +223,65 @@ internal static class LibraryJsonSerializer
                       .WithAddedModifier(ModifyNarrative)
                       .WithAddedModifier(DoNotSerializeDefaultValues)
                       .WithAddedModifier(HandleSpecifiedProperties)
-                      .WithAddedModifier(RespectXmlIgnoreAttribute);
-
-        if (allowOldStyleTypeDiscriminators)
-            resolver = resolver.WithAddedModifier(AllowOldStyleTypeDiscriminators);
+                      .WithAddedModifier(RespectXmlIgnoreAttribute)
+                      .WithAddedModifier(GuardNestingDepth);
 
         options.TypeInfoResolver = resolver;
 
         return options;
     }
 
-    /// <summary>
-    /// Builds a type resolver with only the modifiers (DoNotSerializeDefaultValues, HandleSpecifiedProperties, ModifyNarrative, RespectXmlIgnoreAttribute)
-    /// but without polymorphism configuration. This is used by PolymorphicObjectJsonConverter when deserializing
-    /// derived types to avoid "type" property conflicts while still applying the necessary serialization modifiers.
-    /// </summary>
-    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolver()
-    {
-        return new DefaultJsonTypeInfoResolver()
-            .WithAddedModifier(ModifyNarrative)
-            .WithAddedModifier(DoNotSerializeDefaultValues)
-            .WithAddedModifier(HandleSpecifiedProperties)
-            .WithAddedModifier(RespectXmlIgnoreAttribute);
-    }
-
-    /// <summary>
-    /// Builds a type resolver with modifiers including AllowOldStyleTypeDiscriminators.
-    /// This is used when deserializing legacy ELM files that include "type" discriminators
-    /// on concrete types outside the polymorphic hierarchies.
-    /// </summary>
-    internal static IJsonTypeInfoResolver BuildModifiersOnlyResolverWithOldStyleTypeDiscriminators()
-    {
-        return new DefaultJsonTypeInfoResolver()
-            .WithAddedModifier(ModifyNarrative)
-            .WithAddedModifier(DoNotSerializeDefaultValues)
-            .WithAddedModifier(HandleSpecifiedProperties)
-            .WithAddedModifier(RespectXmlIgnoreAttribute)
-            .WithAddedModifier(AllowOldStyleTypeDiscriminators);
-    }
-
     private static JsonDocumentOptions BuildJsonDocumentOptions() =>
         new() { MaxDepth = MaxDepth };
 
+    /// <summary>
+    /// Throws a <see cref="JsonException"/> when the stack cannot take another level of nesting, so that
+    /// ELM nested deeper than the thread's stack allows fails with a catchable exception, not a stack overflow.
+    /// </summary>
+    private static void EnsureStackForNesting()
+    {
+        if (!RuntimeHelpers.TryEnsureSufficientExecutionStack())
+            throw new JsonException("The ELM is nested too deeply for the available stack.");
+    }
+
+    private static void GuardNestingDepth(JsonTypeInfo ti)
+    {
+        if (ti.Kind != JsonTypeInfoKind.Object) return;
+
+        var onDeserializing = ti.OnDeserializing;
+        ti.OnDeserializing = onDeserializing is null
+            ? _ => EnsureStackForNesting()
+            : o => { EnsureStackForNesting(); onDeserializing(o); };
+
+        var onSerializing = ti.OnSerializing;
+        ti.OnSerializing = onSerializing is null
+            ? _ => EnsureStackForNesting()
+            : o => { EnsureStackForNesting(); onSerializing(o); };
+    }
+
     private static void CorrectLegacyConstructs(JsonNode a)
     {
+        EnsureStackForNesting();
             switch (a)
             {
                 case JsonObject jo:
                     reorder(jo);
                     fixType(jo);
-                    foreach (var (key, value) in jo.ToList())
+                    for (int i = 0; i < jo.Count;)
                     {
-                        if (value is null) continue;
-
-                        CorrectLegacyConstructs(value);
-
-                        if (isEmptyObjectOrArray(value))
+                        var value = jo.GetAt(i).Value;
+                        if (value is not null)
                         {
-                            jo.Remove(key);
+                            CorrectLegacyConstructs(value);
+
+                            if (isEmptyObjectOrArray(value))
+                            {
+                                jo.RemoveAt(i);
+                                continue;
+                            }
                         }
+
+                        i++;
                     }
                     break;
                 case JsonArray ja:
@@ -310,21 +302,23 @@ internal static class LibraryJsonSerializer
 
             static void reorder(JsonObject o)
             {
-                if (!o.TryGetPropertyValue("type", out var typeProp) || o.First().Value == typeProp) return;
+                var index = o.IndexOf("type");
+                if (index <= 0) return;
 
-                var children = o.ToList();
-                o.Clear();
-
-                o.Add("type", typeProp);
-                foreach (var nonType in children.Where(o => o.Key != "type")) o.Add(nonType);
+                var typeProp = o.GetAt(index).Value;
+                o.RemoveAt(index);
+                o.Insert(0, "type", typeProp);
             }
 
             static void fixType(JsonObject o)
             {
                 if (!o.TryGetPropertyValue("type", out var typeProp)) return;
 
+                if (typeProp is null)
+                    throw new JsonException("The 'type' property must be a string, but was null.", o.GetPath() + ".type", null, null);
+
                 // If "type" is an object (not a discriminator string), remove it
-                if (typeProp!.GetValueKind() == JsonValueKind.Object)
+                if (typeProp.GetValueKind() == JsonValueKind.Object)
                 {
                     o.Remove("type");
                     return;
@@ -402,23 +396,21 @@ internal static class LibraryJsonSerializer
     {
         foreach (var prop in ti.Properties)
         {
-            prop.ShouldSerialize = shouldSerialize;
-
-            bool shouldSerialize(object parent, object? value)
+            if (prop.PropertyType.IsEnum || ti.Type == typeof(Interval))
             {
-                if (value is null) return false;
-                if (prop.PropertyType.IsEnum) return true;
-
-                if (ti.Type == typeof(Interval)) return true;
-
-                var defaultAttr = prop.AttributeProvider?
-                    .GetCustomAttributes(typeof(DefaultValueAttribute), false)
-                    .FirstOrDefault() as DefaultValueAttribute;
-
-                var defaultValue = defaultAttr?.Value ?? GetDefaultValue(prop.PropertyType);
-
-                return !Equals(value, defaultValue);
+                prop.ShouldSerialize = static (_, value) => value is not null;
+                continue;
             }
+
+            var defaultAttr = prop.AttributeProvider?
+                .GetCustomAttributes(typeof(DefaultValueAttribute), false)
+                .FirstOrDefault() as DefaultValueAttribute;
+
+            var defaultValue = defaultAttr?.Value ?? GetDefaultValue(prop.PropertyType);
+
+            prop.ShouldSerialize = defaultValue is null
+                ? static (_, value) => value is not null
+                : (_, value) => value is not null && !Equals(value, defaultValue);
         }
     }
 
@@ -454,34 +446,6 @@ internal static class LibraryJsonSerializer
 
         if (valueProp is not null)
             valueProp.Name = "value";
-    }
-
-    private static void AllowOldStyleTypeDiscriminators(JsonTypeInfo ti)
-    {
-        bool isElmNodeOutsideInheritanceStructure =
-            ti.PolymorphismOptions is null &&
-            ti.Kind == JsonTypeInfoKind.Object &&
-            ti.Type.GetCustomAttributes(typeof(XmlTypeAttribute), false).Length != 0;
-
-        if (isElmNodeOutsideInheritanceStructure)
-            addTypeProperty(ti, ti.Type.Name);
-
-        static void addTypeProperty(JsonTypeInfo ti, string expected)
-        {
-            // Don't add a "type" property if one already exists (even if ignored)
-            if (ti.Properties.Any(p => p.Name == "type"))
-                return;
-
-            // For types outside the inheritance structure, we need to handle the "type" property
-            var typeProp = ti.CreateJsonPropertyInfo(typeof(string), "type");
-            typeProp.ShouldSerialize = (_, _) => false;
-            typeProp.Set = (_, value) =>
-            {
-                if ((string?)value != expected)
-                    throw new JsonException($"type property should be '{expected}' but was '{value}'.");
-            };
-            ti.Properties.Add(typeProp);
-        }
     }
 
     private record PropAndSpecified(JsonPropertyInfo ValueProp, JsonPropertyInfo ValuePropSpecified);
