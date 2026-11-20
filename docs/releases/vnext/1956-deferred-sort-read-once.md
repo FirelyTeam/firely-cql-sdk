@@ -7,4 +7,4 @@
   key eight times per element and sorted twice; each now happens once. CQL results are unchanged. Two things a host can
   observe: `ListSort` sorted the elements that are not null when it was called and does so on the first enumeration, as
   `SortBy` already did, so an error in a comparison surfaces there; and a change made to the source list after the first
-  enumeration does not show in later ones. (#1893)
+  enumeration does not show in later ones. (#1956)
