@@ -131,18 +131,16 @@ namespace Hl7.Cql.Operators
         public IEnumerable<T>? Except<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
             if (left == null)
-                return right;
-            else if (right == null)
-                return left;
-            else
-            {
-                var except = left
-                    .Cast<object>()
-                    .Except(right.Cast<object>(), EqualityComparer)
-                    .Cast<T>()
-                    .ToList();
-                return except;
-            }
+                return null;
+
+            // A null second list is treated as an empty one; Except still removes duplicates from the first.
+            right ??= [];
+            var except = left
+                .Cast<object>()
+                .Except(right.Cast<object>(), EqualityComparer)
+                .Cast<T>()
+                .ToList();
+            return except;
         }
 
         #endregion
