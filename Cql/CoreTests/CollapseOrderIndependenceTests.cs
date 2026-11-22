@@ -95,16 +95,16 @@ public class CollapseOrderIndependenceTests
     [TestMethod]
     public void Collapse_DateTimeBoundaryWrittenOpenAndClosed_GivesTheClosedFormInEveryOrder()
     {
-        static CqlDateTime At(int hour, int minute = 0, int second = 0, int millisecond = 0) =>
+        static CqlDateTime at(int hour, int minute = 0, int second = 0, int millisecond = 0) =>
             new(2026, 1, 1, hour, minute, second, millisecond, 0, 0);
 
         // The first interval includes the second. Its high boundary is written open; the second has the same
         // point closed, so the result takes that form.
         AssertEveryOrderGives<CqlDateTime?>(
-            new CqlInterval<CqlDateTime?>(At(1), At(4, 59, 59, 999), true, true).ToString()!,
+            new CqlInterval<CqlDateTime?>(at(1), at(4, 59, 59, 999), true, true).ToString()!,
             order => Sut().Collapse(order, null),
-            new CqlInterval<CqlDateTime?>(At(1), At(5), true, false),
-            new CqlInterval<CqlDateTime?>(At(2), At(4, 59, 59, 999), true, true));
+            new CqlInterval<CqlDateTime?>(at(1), at(5), true, false),
+            new CqlInterval<CqlDateTime?>(at(2), at(4, 59, 59, 999), true, true));
     }
 
     [TestMethod]
@@ -178,7 +178,7 @@ public class CollapseOrderIndependenceTests
                             pool.Add(new(low, high, lowClosed, highClosed));
                     }
 
-        static IEnumerable<int> Points(CqlInterval<int?> i) =>
+        static IEnumerable<int> points(CqlInterval<int?> i) =>
             Enumerable.Range(i.low!.Value + (i.lowClosed == true ? 0 : 1),
                 i.high!.Value - i.low!.Value + 1 - (i.lowClosed == true ? 0 : 1) - (i.highClosed == true ? 0 : 1));
 
@@ -200,8 +200,8 @@ public class CollapseOrderIndependenceTests
                     }
 
                     // The points covered are those of the input, and no two result intervals overlap or meet.
-                    var expectedPoints = list.SelectMany(i => Points(i!)).Distinct().Order().ToList();
-                    var actualPoints = results[0].SelectMany(i => Points(i!)).ToList();
+                    var expectedPoints = list.SelectMany(i => points(i!)).Distinct().Order().ToList();
+                    var actualPoints = results[0].SelectMany(i => points(i!)).ToList();
                     var runs = expectedPoints.Count(p => !expectedPoints.Contains(p - 1));
                     if (!expectedPoints.SequenceEqual(actualPoints) || results[0].Count != runs)
                         failures.Add($"{{ {Show(list)} }} gives {Show(results[0])}, which does not cover its points in {runs} interval(s)");
