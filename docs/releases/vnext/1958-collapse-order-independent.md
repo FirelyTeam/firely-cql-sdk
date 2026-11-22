@@ -6,5 +6,5 @@
   `{ Interval(1, 7] }` and `collapse { Interval[2, 7], Interval(1, 7] }` gave `{ Interval[2, 7] }`; both
   now give `{ Interval[2, 7] }`. This changes CQL evaluation results for such lists: the points covered
   are the same, but `low`, `high`, `lowClosed` and `highClosed` of a result can differ. Lists with a `per`
-  argument, with boundaries of mixed precision or with boundaries without a value can still give a result
-  that depends on their order. Generated C# is unchanged.
+  argument, with boundaries of mixed precision, with Quantity boundaries in different units or with
+  boundaries without a value can still give a result that depends on their order. Generated C# is unchanged.

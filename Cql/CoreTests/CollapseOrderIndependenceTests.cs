@@ -125,6 +125,23 @@ public class CollapseOrderIndependenceTests
             new CqlInterval<CqlQuantity?>(new CqlQuantity(1.00000001m, "g"), new CqlQuantity(5.0m, "g"), true, true));
 
     [TestMethod]
+    public void Collapse_QuantityBoundaryAtTheSamePointInAnotherUnit_StaysAsWritten()
+    {
+        // 999.99999 'mg' is the point before 1.0 'g' in steps of 10^-8 'g', so the first two intervals end at
+        // the same point. The step of a Quantity is in the unit of the boundary: written in 'mg', that point no
+        // longer meets the interval starting at 0.001 'kg'. The boundary of the including interval is kept, and
+        // the three intervals collapse into one in every order.
+        static CqlQuantity q(decimal value, string unit) => new(value, unit);
+
+        AssertEveryOrderGives<CqlQuantity?>(
+            new CqlInterval<CqlQuantity?>(q(0.0m, "g"), q(0.002m, "kg"), true, true).ToString()!,
+            order => Sut().Collapse(order, null),
+            new CqlInterval<CqlQuantity?>(q(0.0m, "g"), q(1.0m, "g"), true, false),
+            new CqlInterval<CqlQuantity?>(q(0.5m, "g"), q(999.99999m, "mg"), true, true),
+            new CqlInterval<CqlQuantity?>(q(0.001m, "kg"), q(0.002m, "kg"), true, true));
+    }
+
+    [TestMethod]
     public void Collapse_IntegerBoundaryNextToTheTypeExtremes_GivesTheClosedFormInEveryOrder()
     {
         AssertEveryOrderGives<int?>($"[1, {int.MaxValue - 1}]", order => Sut().Collapse(order, null),

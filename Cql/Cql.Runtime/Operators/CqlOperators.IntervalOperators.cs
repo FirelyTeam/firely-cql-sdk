@@ -277,11 +277,13 @@ namespace Hl7.Cql.Operators
                     // intervals comes first in the list does not decide it. Two boundaries are the same
                     // point here when their values compare as equal at their full precision; two values of
                     // different precision do not.
+                    // The step of a Quantity is in the unit of the boundary, so the same point written in
+                    // another unit can meet other intervals; a boundary is only replaced by one in its own unit.
                     // The effective boundaries are only needed, and only computed, when one of the two
                     // intervals has the boundary open and the other has it closed.
                     var (otherHigh, otherHighClosed) = highFromX ? (y.high, y.highClosed) : (x.high, x.highClosed);
-                    var lowMayTie = lowClosed != true && y.lowClosed == true;
-                    var highMayTie = highClosed != true && otherHighClosed == true;
+                    var lowMayTie = lowClosed != true && y.lowClosed == true && HaveTheSameUnit(low, y.low);
+                    var highMayTie = highClosed != true && otherHighClosed == true && HaveTheSameUnit(high, otherHigh);
                     var lowFromX = true;
                     if (lowMayTie || highMayTie)
                     {
@@ -304,6 +306,9 @@ namespace Hl7.Cql.Operators
                 }
                 else return null;
             };
+
+            static bool HaveTheSameUnit(T? left, T? right) =>
+                left is not CqlQuantity leftQuantity || right is not CqlQuantity rightQuantity || leftQuantity.unit == rightQuantity.unit;
 
             // Walk the sorted intervals front to back, merging into the interval most recently added to the
             // result. Taking them off the front of the list instead shifts every remaining element down one slot
