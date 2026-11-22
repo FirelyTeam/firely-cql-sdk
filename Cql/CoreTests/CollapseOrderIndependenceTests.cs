@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -15,12 +13,13 @@ using Hl7.Cql.Primitives;
 namespace CoreTests;
 
 /// <summary>
-/// The result of <c>collapse</c> does not depend on the order of its input: "The collapse operator returns the
-/// unique set of intervals that completely covers the ranges present in the given list of intervals. In other
-/// words, adjacent intervals within a sorted list are merged if they either overlap or meet." (CQL 1.5.3
-/// Errata 2, Appendix B - CQL Reference, section "Collapse"). Which ranges are present does not depend on the
-/// order of the list, so neither does the result, including how each boundary is written: where two intervals
-/// have a boundary at the same point, one open and one closed, the result has the closed form.
+/// Two intervals can have a boundary at the same point, one written open and one closed, as Interval(1, 7] and
+/// Interval[2, 7] do. Which of them comes first in the list does not decide how <c>collapse</c> writes that
+/// boundary: "The collapse operator returns the unique set of intervals that completely covers the ranges
+/// present in the given list of intervals. In other words, adjacent intervals within a sorted list are merged
+/// if they either overlap or meet." (CQL 1.5.3 Errata 2, Appendix B - CQL Reference, section "Collapse").
+/// The specification does not say which form the result has; this SDK gives the closed one. The tests cover
+/// lists without a per argument whose boundaries have values of one precision.
 /// </summary>
 [TestClass]
 [TestCategory("UnitTest")]
@@ -96,25 +95,44 @@ public class CollapseOrderIndependenceTests
     [TestMethod]
     public void Collapse_DateTimeBoundaryWrittenOpenAndClosed_GivesTheClosedFormInEveryOrder()
     {
-        static CqlDateTime At(int hour, int millisecond = 0) => new(2026, 1, 1, hour, 0, 0, millisecond, 0, 0);
-
-        var result = Sut().Collapse([
-            new CqlInterval<CqlDateTime?>(At(1), At(5), true, false),
-            new CqlInterval<CqlDateTime?>(At(2), new CqlDateTime(2026, 1, 1, 4, 59, 59, 999, 0, 0), true, true),
-        ], null)!.ToList();
-        var reversed = Sut().Collapse([
-            new CqlInterval<CqlDateTime?>(At(2), new CqlDateTime(2026, 1, 1, 4, 59, 59, 999, 0, 0), true, true),
-            new CqlInterval<CqlDateTime?>(At(1), At(5), true, false),
-        ], null)!.ToList();
+        static CqlDateTime At(int hour, int minute = 0, int second = 0, int millisecond = 0) =>
+            new(2026, 1, 1, hour, minute, second, millisecond, 0, 0);
 
         // The first interval includes the second. Its high boundary is written open; the second has the same
-        // point closed, so the result takes that form in both orders.
-        Assert.AreEqual(1, result.Count);
-        Assert.AreEqual(Show(result), Show(reversed));
-        Assert.AreEqual(At(1), result[0]!.low);
-        Assert.AreEqual(new CqlDateTime(2026, 1, 1, 4, 59, 59, 999, 0, 0), result[0]!.high);
-        Assert.IsTrue(result[0]!.lowClosed);
-        Assert.IsTrue(result[0]!.highClosed);
+        // point closed, so the result takes that form.
+        AssertEveryOrderGives<CqlDateTime?>(
+            new CqlInterval<CqlDateTime?>(At(1), At(4, 59, 59, 999), true, true).ToString()!,
+            order => Sut().Collapse(order, null),
+            new CqlInterval<CqlDateTime?>(At(1), At(5), true, false),
+            new CqlInterval<CqlDateTime?>(At(2), At(4, 59, 59, 999), true, true));
+    }
+
+    [TestMethod]
+    public void Collapse_TimeBoundaryWrittenOpenAndClosed_GivesTheClosedFormInEveryOrder() =>
+        AssertEveryOrderGives<CqlTime?>(
+            new CqlInterval<CqlTime?>(new CqlTime(1, 0, 0, 1, null, null), new CqlTime(5, 0, 0, 0, null, null), true, true).ToString()!,
+            order => Sut().Collapse(order, null),
+            new CqlInterval<CqlTime?>(new CqlTime(1, 0, 0, 0, null, null), new CqlTime(5, 0, 0, 0, null, null), false, true),
+            new CqlInterval<CqlTime?>(new CqlTime(1, 0, 0, 1, null, null), new CqlTime(3, 0, 0, 0, null, null), true, true));
+
+    [TestMethod]
+    public void Collapse_QuantityBoundaryWrittenOpenAndClosed_GivesTheClosedFormInEveryOrder() =>
+        // The Quantity step is that of Decimal, 10^-8, in the unit of the boundary.
+        AssertEveryOrderGives<CqlQuantity?>(
+            new CqlInterval<CqlQuantity?>(new CqlQuantity(1.00000001m, "g"), new CqlQuantity(7.0m, "g"), true, true).ToString()!,
+            order => Sut().Collapse(order, null),
+            new CqlInterval<CqlQuantity?>(new CqlQuantity(1.0m, "g"), new CqlQuantity(7.0m, "g"), false, true),
+            new CqlInterval<CqlQuantity?>(new CqlQuantity(1.00000001m, "g"), new CqlQuantity(5.0m, "g"), true, true));
+
+    [TestMethod]
+    public void Collapse_IntegerBoundaryNextToTheTypeExtremes_GivesTheClosedFormInEveryOrder()
+    {
+        AssertEveryOrderGives<int?>($"[1, {int.MaxValue - 1}]", order => Sut().Collapse(order, null),
+            new CqlInterval<int?>(1, int.MaxValue, true, false),
+            new CqlInterval<int?>(1, int.MaxValue - 1, true, true));
+        AssertEveryOrderGives<int?>($"[{int.MinValue + 1}, 5]", order => Sut().Collapse(order, null),
+            new CqlInterval<int?>(int.MinValue, 5, false, true),
+            new CqlInterval<int?>(int.MinValue + 1, 5, true, true));
     }
 
     #endregion
@@ -143,7 +161,7 @@ public class CollapseOrderIndependenceTests
     /// <summary>
     /// Collapses every list of two or three intervals taken from all Integer intervals with boundaries from 1 to
     /// 6 and every combination of open and closed boundaries, in every order of the list, and requires one
-    /// result per list. The result must also cover exactly the points the list covers, in the fewest intervals.
+    /// result per list, written the same way in every order. The result must also cover exactly the points the list covers, in the fewest intervals.
     /// </summary>
     [TestMethod]
     public void Collapse_EveryOrderOfEverySmallIntegerList_GivesTheSameResult()
