@@ -900,6 +900,25 @@ public class CSharpEmitterTests
     }
 
     /// <summary>
+    /// <c>IsNull(Coalesce(s?.Length, 15))</c>: the coalesce reads more than locals and literals, so it is evaluated
+    /// and no local is left unused. The cast makes the null check legal, because C# types the coalesce as
+    /// <c>int</c>.
+    /// </summary>
+    [TestMethod]
+    public void IsNull_OfACoalesceOverAHoistedOperand_EvaluatesTheCoalesce()
+    {
+        var s = new CodeLocal(typeof(string), "s");
+        var length = new CodeProperty(s, ReflectionUtility.PropertyOf(() => default(string)!.Length), nullConditional: true);
+        var coalesce = new CodeBinary(CodeBinaryOp.Coalesce, length, new CodeConstant(15, typeof(int?)));
+        var isNull = new CodeBinary(CodeBinaryOp.Equal, coalesce, new CodeConstant(null, typeof(int?)));
+
+        var emitted = EmitBody(new CodeLambda([s], isNull));
+
+        Assert.AreEqual("{\n    int? a_ = s?.Length;\n    return ((int?)(a_ ?? 15)) is null;\n}", emitted);
+        AssertCompiles(emitted, "string s", "bool");
+    }
+
+    /// <summary>
     /// <c>IsNull(if false then y else 5)</c>, as <c>Message(5, false, …)</c> compiles: the conditional folds to the
     /// literal <c>5</c>, so the null check is false, not the uncompilable <c>5 is null</c> (CS0037). A conditional
     /// that folds to a null literal is null.

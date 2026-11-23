@@ -518,7 +518,12 @@ internal partial class CSharpEmitter
             // never a boxing-cast-wrapped constant here.
             CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is CodeConstant { Value: ValueType } => "false",
             CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is CodeConstant { Value: null } => "true",
-            CodeBinaryOp.Equal when right is "null" or "default" && EndsInValueTypeLiteral(FoldConstantTest(binary.Left)) => "false",
+            // A coalesce that reaches a value-type literal is never null. The check prints as
+            // "false" only when the coalesce reads nothing but locals and literals; a call in it
+            // may raise an error, so that coalesce is evaluated and NullPatternOperand keeps the
+            // check legal.
+            CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is var operand
+                && EndsInValueTypeLiteral(operand) && ReadsOnlyLocalsAndLiterals(operand) => "false",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
@@ -539,6 +544,19 @@ internal partial class CSharpEmitter
     private static bool EndsInValueTypeLiteral(CodeExpression expression) =>
         expression is CodeBinary { Op: CodeBinaryOp.Coalesce } coalesce
         && (coalesce.Right is CodeConstant { Value: ValueType } || EndsInValueTypeLiteral(coalesce.Left));
+
+    /// <summary>
+    /// Whether <paramref name="expression"/> is a local, a literal, or a coalesce of those, so that evaluating it
+    /// cannot raise an error.
+    /// </summary>
+    private static bool ReadsOnlyLocalsAndLiterals(CodeExpression expression) =>
+        expression switch
+        {
+            CodeLocal or CodeConstant or CodeDefault => true,
+            CodeBinary { Op: CodeBinaryOp.Coalesce } coalesce =>
+                ReadsOnlyLocalsAndLiterals(coalesce.Left) && ReadsOnlyLocalsAndLiterals(coalesce.Right),
+            _ => false,
+        };
 
     private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
     {
@@ -602,6 +620,7 @@ internal partial class CSharpEmitter
     /// </summary>
     private string NullPatternOperand(Atom leftAtom, string left) =>
         leftAtom.Node is CodeConditional conditional && TernaryPrintsWithoutNaturalNullableType(conditional)
+        || EndsInValueTypeLiteral(FoldConstantTest(leftAtom.Node))
             ? $"(({_typeToCSharpConverter.ToCSharp(leftAtom.Type)}){left})"
             : left;
 
