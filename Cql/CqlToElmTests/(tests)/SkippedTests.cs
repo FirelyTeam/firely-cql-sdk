@@ -40,6 +40,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
+            { "TestMeetsAfterNull", "Expects null, the SDK gives false. Appendix B Start and End say an open null boundary is null, but the 1.5.3 logical specification (Interval) and the Author's Guide treat it as an uncertainty, and CQL 2.0 settles it that way, so the relationship is false. cqframework/cql-tests#188 changes the expectation to false." },
+
             { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },
