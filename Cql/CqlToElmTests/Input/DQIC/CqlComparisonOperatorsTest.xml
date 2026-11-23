@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlComparisonOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#comparison-operators-4" version="1.0">
 	<capability code="comparison-operators"/>
 	<group name="Between" version="1.0">
@@ -7,6 +7,46 @@
 		<test name="BetweenIntTrue" version="1.0">
 			<expression>4 between 2 and 6</expression>
 			<output>true</output>
+		</test>
+		<test name="BetweenIntFalse" version="1.0">
+			<expression>1 between 2 and 6</expression>
+			<output>false</output>
+		</test>
+		<test name="BetweenIntLowBoundary" version="1.0">
+			<expression>2 between 2 and 6</expression>
+			<output>true</output>
+		</test>
+		<test name="BetweenIntHighBoundary" version="1.0">
+			<expression>6 between 2 and 6</expression>
+			<output>true</output>
+		</test>
+		<test name="BetweenNull" version="1.0">
+			<!-- any null argument yields null per https://cql.hl7.org/09-b-cqlreference.html#between -->
+			<expression>null between 2 and 6</expression>
+			<output>null</output>
+		</test>
+		<test name="BetweenLongTrue" version="1.5">
+			<capability code="system.long"/>
+			<expression>4L between 2L and 6L</expression>
+			<output>true</output>
+		</test>
+		<test name="BetweenDecimalFalse" version="1.0">
+			<expression>3.5 between 3.6 and 4.8</expression>
+			<output>false</output>
+		</test>
+		<test name="BetweenQuantityDimensionMismatchNull" version="1.0">
+			<!-- mismatched dimensions (cm2 vs cm) yield null -->
+			<expression>3.5 'cm2' between 3.0 'cm' and 4.8 'cm'</expression>
+			<output>null</output>
+		</test>
+		<test name="BetweenStringTrue" version="1.0">
+			<expression>'b' between 'a' and 'c'</expression>
+			<output>true</output>
+		</test>
+		<test name="BetweenDateTimeImprecisionNull" version="1.0">
+			<!-- argument lacks hour precision that the bounds specify; comparison is uncertain -> null -->
+			<expression>DateTime(2012, 1, 1) between DateTime(2012, 1, 1, 12) and DateTime(2012, 1, 2, 12)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Equal" version="1.0">
@@ -131,8 +171,9 @@
 		</test>
 		<test name="TupleEqDifferentNamesWithOneNullId" version="1.5">
 			<capability code="tuple"/>
+			<!-- Name is known unequal (John != James); false dominates the null Id comparison per three-valued conjunction -->
 			<expression>Tuple { Id : null, Name : 'John' } = Tuple { Id : 1, Name : 'James' }</expression>
-			<output>null</output>
+			<output>false</output>
 		</test>
 		<test name="TupleEqJohn1John1WithBothNamesNull" version="1.5">
 			<capability code="tuple"/>
@@ -217,6 +258,11 @@
 		<test name="TimeEq10A10P" version="1.0">
 			<expression>@T10:00:00.000 = @T22:00:00.000</expression>
 			<output>false</output>
+		</test>
+		<test name="DateTimeEqUncertain" version="1.0">
+			<!-- one input specified to hour, the other to day; comparison stops at hour with result null -->
+			<expression>DateTime(2012, 1, 1) = DateTime(2012, 1, 1, 12)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Greater" version="1.0">
@@ -829,6 +875,16 @@
 			<expression>@T10:00:00.000 ~ @T22:00:00.000</expression>
 			<output>false</output>
 		</test>
+		<test name="EquivIntNull" version="1.0">
+			<!-- ~ never returns null: non-null ~ null is false (contrast with = which returns null) -->
+			<expression>1 ~ null</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivQuantityDimensionMismatch" version="1.0">
+			<!-- mismatched dimensions are not equivalent -->
+			<expression>1'cm2' ~ 1'cm'</expression>
+			<output>false</output>
+		</test>
 	</group>
 	<group name="Not Equal" version="1.0">
 		<capability code="comparison-operators"/>
@@ -928,8 +984,9 @@
 		</test>
 		<test name="TupleNotEqDifferingNamesWithOneNullId" version="1.5">
 			<capability code="tuple"/>
+			<!-- Equal is false (Name known unequal); not(false) = true -->
 			<expression>Tuple{ Id : null, Name : 'John' } != Tuple{ Id : 1, Name : 'Joe' }</expression>
-			<output>null</output>
+			<output>true</output>
 		</test>
 		<test name="TupleNotEqJohn1John1WithBothNamesNull" version="1.5">
 			<capability code="tuple"/>
@@ -961,6 +1018,44 @@
 		<test name="TimeNotEq10A10P" version="1.0">
 			<expression>@T10:00:00.000 != @T22:00:00.000</expression>
 			<output>true</output>
+		</test>
+		<test name="DateTimeNotEqUncertain" version="1.0">
+			<!-- not(null) = null when precision comparison is uncertain -->
+			<expression>DateTime(2012, 1, 1) != DateTime(2012, 1, 1, 12)</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="NotEquivalent" version="1.0">
+		<capability code="comparison-operators"/>
+		<test name="IntegerNotEquivalentIsFalse" version="1.0">
+			<expression>4 !~ (2 + 2)</expression>
+			<output>false</output>
+		</test>
+		<test name="LongNotEquivalentIsFalse" version="1.5">
+			<capability code="system.long"/>
+			<expression>4L !~ (2L + 2L)</expression>
+			<output>false</output>
+		</test>
+		<test name="DecimalNotEquivalentIsTrue" version="1.0">
+			<expression>3.5 !~ (3.5 - 0.1)</expression>
+			<output>true</output>
+		</test>
+		<test name="StringNotEquivalentIgnoreCaseIsFalse" version="1.0">
+			<!-- equivalence ignores case, so these are equivalent and !~ is false -->
+			<expression>'John Doe' !~ 'john doe'</expression>
+			<output>false</output>
+		</test>
+		<test name="QuantityNotEquivalentDimensionMismatchIsTrue" version="1.0">
+			<expression>3.5 'cm2' !~ 3.5 'cm'</expression>
+			<output>true</output>
+		</test>
+		<test name="NotEquivalentTrueNull" version="1.0">
+			<!-- !~ always returns true/false, never null: true is not equivalent to null -->
+			<expression>true !~ null</expression>
+			<output>true</output>
+		</test>
+		<test name="NotEquivalentNullNull" version="1.0">
+			<expression invalid="semantic">null !~ null</expression>
 		</test>
 	</group>
 	<group name="Unit Comparison" version="1.0">

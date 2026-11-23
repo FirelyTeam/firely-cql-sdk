@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlTypesTest" reference="https://cql.hl7.org/09-b-cqlreference.html#types-2" version="1.0">
 	<!-- TODO: Go through this file and flesh out or correct
 	all the bounds checking against the CQL spec. -->
@@ -63,6 +63,37 @@
 			<output>false</output>
 		</test>
 		-->
+	</group>
+	<group name="Date" version="1.0">
+		<capability code="types" />
+		<test name="DateProper" version="1.0">
+			<capability code="types" />
+			<expression>@2016-07-07</expression>
+			<output>@2016-07-07</output>
+		</test>
+		<test name="DateYearMonth" version="1.0">
+			<capability code="types" />
+			<!-- CQL supports partial date values: https://cql.hl7.org/09-b-cqlreference.html#date -->
+			<expression>@2014-02</expression>
+			<output>@2014-02</output>
+		</test>
+		<test name="DateYear" version="1.0">
+			<capability code="types" />
+			<!-- The date @2014 represents some day in the year 2014: https://cql.hl7.org/09-b-cqlreference.html#date -->
+			<expression>@2014</expression>
+			<output>@2014</output>
+		</test>
+		<test name="DateMin" version="1.0">
+			<capability code="types" />
+			<!-- CQL supports date values in the range @0001-01-01 to @9999-12-31: https://cql.hl7.org/09-b-cqlreference.html#date -->
+			<expression>@0001-01-01</expression>
+			<output>@0001-01-01</output>
+		</test>
+		<test name="DateMax" version="1.0">
+			<capability code="types" />
+			<expression>@9999-12-31</expression>
+			<output>@9999-12-31</output>
+		</test>
 	</group>
 	<group name="DateTime" version="1.0">
 		<capability code="types" />
@@ -154,6 +185,30 @@
 	</group>
 	<group name="Interval" version="1.0">
 		<capability code="types" />
+	</group>
+	<group name="Long" version="1.5">
+		<capability code="types" />
+		<capability code="system.long" />
+		<test name="LongProper" version="1.5">
+			<capability code="types" />
+			<capability code="system.long" />
+			<!-- A Long literal is written with an 'L' suffix and may exceed the Integer range: https://cql.hl7.org/09-b-cqlreference.html#long -->
+			<expression>3000000000L</expression>
+			<output>3000000000L</output>
+		</test>
+		<test name="LongMax" version="1.5">
+			<capability code="types" />
+			<capability code="system.long" />
+			<!-- CQL supports long values in the range -2^63 to 2^63-1: https://cql.hl7.org/09-b-cqlreference.html#long -->
+			<expression>9223372036854775807L</expression>
+			<output>9223372036854775807L</output>
+		</test>
+		<test name="LongUpperBoundExcept" version="1.5">
+			<capability code="types" />
+			<capability code="system.long" />
+			<!-- 2^63 falls above the accepted upper bound of 2^63-1 for Long: https://cql.hl7.org/09-b-cqlreference.html#long -->
+			<expression invalid="true">9223372036854775808L</expression>
+		</test>
 	</group>
 	<group name="Quantity" version="1.0">
 		<capability code="types" />

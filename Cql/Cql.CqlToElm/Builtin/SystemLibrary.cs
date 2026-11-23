@@ -205,6 +205,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
             invoker: Invokers.Flatten);
         public static SystemFunction<Floor> Floor = unary<Floor>(DecimalType, IntegerType);
+        public static SystemFunction<GeometricMean> GeometricMean = aggregate<GeometricMean>(DecimalType, DecimalType);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
@@ -218,7 +219,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             binaryWithPrecision<Includes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<Indexer> Indexer = binary<Indexer>(StringType, IntegerType, StringType);
         public static SystemFunction<IndexOf> IndexOf = binary<IndexOf>(T.ToListType(), T, IntegerType);
-        public static SystemFunction<ToLong> IntegerToLong = unary<ToLong>(IntegerType, LongType);
+        public static OverloadedFunctionDef ToLong = unary<ToLong>(T, LongType).For(T, BooleanType, IntegerType, StringType);
         public static OverloadedFunctionDef Intersect = binary<Intersect>(T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType()).For(T, IntervalPointTypes.ToArray())
             .Combine(binary<Intersect>(T.ToListType(), T.ToListType(), T.ToListType()));
         [OperatorOnly]
@@ -315,6 +316,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<TimeOfDay> TimeOfDay = nullary<TimeOfDay>(TimeType);
         public static OverloadedFunctionDef ToBoolean = unary<ToBoolean>(T, BooleanType).For(T, IntegerType, LongType, DecimalType, StringType);
         public static OverloadedFunctionDef ToConcept = unary<ToConcept>(T, ConceptType).For(T, CodeType, CodeType.ToListType());
+        public static OverloadedFunctionDef ToDate = unary<ToDate>(T, DateType).For(T, DateTimeType, StringType);
         public static OverloadedFunctionDef ToDateTime = unary<ToDateTime>(T, DateTimeType).For(T, DateType, StringType);
         public static OverloadedFunctionDef ToDecimal = unary<ToDecimal>(T, DecimalType).For(T,BooleanType, StringType);
         public static OverloadedFunctionDef ToInteger = unary<ToInteger>(T, IntegerType).For(T, BooleanType, StringType, LongType);
