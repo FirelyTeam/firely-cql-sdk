@@ -1,5 +1,6 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Fhir.Serialization.Extensions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.Toolkit;
@@ -80,7 +81,8 @@ internal static class FhirLibraryExtensions
                 case (null, null):
                     throw new ArgumentException("Either elmLibrary or elmBytes must be provided.", nameof(elmLibrary));
                 case (null, not null):
-                    elmLibrary = ElmLibrary.ParseFromJson(Encoding.UTF8.GetString(elmBytes));
+                    using (var elmStream = new MemoryStream(elmBytes, writable: false))
+                        elmLibrary = ElmLibrary.LoadFromJson(elmStream);
                     break;
                 case (not null, null):
                     // Rebuilding the JSON from the object graph walks every ELM node through the
@@ -253,6 +255,8 @@ internal static class FhirLibraryExtensions
             byte[] data)
         {
             var attachmentId = $"{libraryIdentifier}{elementIdSuffix}";
+            if (elementIdSuffix == Constants.ElementIdSuffixes.Elm)
+                data = LibraryJsonSerializer.WithoutUtf8Bom(data);
             var contentType = GetContentTypeForSuffix(elementIdSuffix);
 
             // Ensure Content collection is initialized
@@ -515,7 +519,8 @@ internal static class FhirLibraryExtensions
         {
             ElementId = $"{libraryIdentifier}{Constants.ElementIdSuffixes.Elm}",
             ContentType = ElmLibrary.JsonMimeType,
-            Data = elmBytes,
+            // A JSON reader that takes the attachment as bytes rejects a leading byte order mark.
+            Data = LibraryJsonSerializer.WithoutUtf8Bom(elmBytes),
         };
 
     /// <summary>

@@ -166,6 +166,96 @@ public class ElmSourceJsonTests
     }
 
     [TestMethod]
+    public void ReformatUtf8Json_KeepsEscapedStringsAndNamesAsTheirCharacters()
+    {
+        var source = Encoding.UTF8.GetBytes("""{"a\u0041\n":"q\"uote \\ \/ \t \u00e9 \ud83d\ude00 \u0001"}""");
+
+        var compact = Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false));
+
+        // Names and values are the same characters, re-escaped by the writer's relaxed encoder.
+        Assert.AreEqual("""{"aA\n":"q\"uote \\ / \t é \uD83D\uDE00 \u0001"}""", compact);
+        using var document = JsonDocument.Parse(compact);
+        Assert.AreEqual("aA\n", document.RootElement.EnumerateObject().Single().Name);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_InvalidUtf8InALongEscapedString_ThrowsAsForAShortOne()
+    {
+        // The scratch buffer for an escaped token over 256 bytes is rented, so the long form takes the path
+        // that must give the rental back when copying throws. Reading accepts an invalid byte in an escaped
+        // string; the copy is what rejects it. (An unpaired surrogate escape does not throw: it becomes
+        // U+FFFD.) The pool's state is not observable: ArrayPool<byte>.Shared exposes no count of its rentals.
+        static byte[] Source(int padding) =>
+            [.. "{\"a\":\"\\n"u8, 0xFF, .. Encoding.UTF8.GetBytes(new string('x', padding)), .. "\"}"u8];
+
+        var shortFailure = Assert.ThrowsException<InvalidOperationException>(() => LibraryJsonSerializer.ReformatUtf8Json(Source(10), writeIndented: false));
+        var longFailure = Assert.ThrowsException<InvalidOperationException>(() => LibraryJsonSerializer.ReformatUtf8Json(Source(400), writeIndented: false));
+
+        Assert.AreEqual(shortFailure.Message, longFailure.Message);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_KeepsEveryFormOfNumberAsWritten()
+    {
+        const string numbers = "[0,-0,7,-12,1.5,-0.25,1e10,1E+2,1.0e-5,12345678901234567890,0.10000000000000000001]";
+
+        var compact = Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(Encoding.UTF8.GetBytes(numbers), writeIndented: false));
+
+        Assert.AreEqual(numbers, compact);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_KeepsLiteralsAndScalarRoots()
+    {
+        Assert.AreEqual("[true,false,null]", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json("[ true , false ,null ]"u8.ToArray(), writeIndented: false)));
+        Assert.AreEqual("\"x\"", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json(" \"x\" "u8.ToArray(), writeIndented: false)));
+        Assert.AreEqual("42", Encoding.UTF8.GetString(LibraryJsonSerializer.ReformatUtf8Json("42"u8.ToArray(), writeIndented: false)));
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_ReformatsNestingOfAThousandLevels()
+    {
+        const int depth = 1000;
+        var source = Encoding.UTF8.GetBytes(new string('[', depth) + new string(']', depth));
+
+        var compact = LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false);
+        var indented = LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: true);
+
+        CollectionAssert.AreEqual(source, compact);
+        // The indented text differs from the compact text only by whitespace.
+        Assert.AreEqual(Encoding.UTF8.GetString(compact), System.Text.RegularExpressions.Regex.Replace(Encoding.UTF8.GetString(indented), @"\s+", ""));
+    }
+
+    [TestMethod]
+    [DataRow("")]
+    [DataRow("  \n ")]
+    [DataRow("{")]
+    [DataRow("""{"a":""")]
+    [DataRow("""{"a" 1}""")]
+    [DataRow("[1,]")]
+    [DataRow("{} {}")]
+    [DataRow("[1] x")]
+    [DataRow("\"unterminated")]
+    [DataRow("[01]")]
+    [DataRow("// c\n{}")]
+    public void ReformatUtf8Json_OfEmptyOrMalformedJson_ThrowsJsonException(string text)
+    {
+        var source = Encoding.UTF8.GetBytes(text);
+
+        foreach (var writeIndented in new[] { false, true })
+            Assert.Throws<JsonException>(() => LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented), text);
+    }
+
+    [TestMethod]
+    public void ReformatUtf8Json_OfNestingDeeperThanTheMaximumDepth_ThrowsJsonException()
+    {
+        const int depth = 4097;
+        var source = Encoding.UTF8.GetBytes(new string('[', depth) + new string(']', depth));
+
+        Assert.Throws<JsonException>(() => LibraryJsonSerializer.ReformatUtf8Json(source, writeIndented: false));
+    }
+
+    [TestMethod]
     public void NormalizeNewLinesUtf8_LeavesTextWithoutCarriageReturnsAlone()
     {
         var utf8 = Encoding.UTF8.GetBytes($"{{{Lf}  \"a\": 1{Lf}}}");
@@ -197,6 +287,89 @@ public class ElmSourceJsonTests
 
         StringAssert.Contains(normalized, "x\\r\\ny");
         Assert.AreEqual($"{json}{Lf}", normalized);
+    }
+
+    [TestMethod]
+    [DynamicData(nameof(CorpusFiles))]
+    public void NormalizeNewLinesUtf8_MatchesTheByteLoop_OnEveryElmFile(string relativePath)
+    {
+        var lfBytes = ToLf(File.ReadAllBytes(Path.Combine(ElmJsonRoundTripTests.RepositoryRoot.FullName, relativePath)));
+        var crlfBytes = Encoding.UTF8.GetBytes(Encoding.UTF8.GetString(lfBytes).Replace(Lf, CrLf));
+
+        CollectionAssert.AreEqual(ByteLoop(lfBytes), LibraryJsonSerializer.NormalizeNewLinesUtf8(lfBytes), relativePath);
+        CollectionAssert.AreEqual(ByteLoop(crlfBytes), LibraryJsonSerializer.NormalizeNewLinesUtf8(crlfBytes), relativePath);
+        Assert.AreSame(lfBytes, LibraryJsonSerializer.NormalizeNewLinesUtf8(lfBytes));
+    }
+
+    private static IEnumerable<object[]> CorpusFiles => ElmJsonRoundTripTests.ElmFiles;
+
+    [TestMethod]
+    public void NormalizeNewLinesUtf8_MatchesTheByteLoop_OnEdgeCases()
+    {
+        byte[][] cases =
+        [
+            [],
+            "abc"u8.ToArray(),
+            "\r"u8.ToArray(),
+            "ab\r"u8.ToArray(),
+            "ab\r\n"u8.ToArray(),
+            "a\r\r\nb"u8.ToArray(),
+            "\r\n\r\n"u8.ToArray(),
+            "\n\r"u8.ToArray(),
+        ];
+
+        foreach (var input in cases)
+            AssertMatchesByteLoop(input);
+
+        // A CRLF and a lone CR at every position of buffers up to 130 bytes, which crosses the 16-, 32-
+        // and 64-byte vector boundaries.
+        for (var length = 1; length <= 130; length++)
+        {
+            for (var position = 0; position < length; position++)
+            {
+                var filler = new byte[length];
+                Array.Fill(filler, (byte)'x');
+
+                var lone = (byte[])filler.Clone();
+                lone[position] = (byte)'\r';
+                AssertMatchesByteLoop(lone);
+
+                if (position + 1 < length)
+                {
+                    var pair = (byte[])filler.Clone();
+                    pair[position] = (byte)'\r';
+                    pair[position + 1] = (byte)'\n';
+                    AssertMatchesByteLoop(pair);
+                }
+            }
+        }
+    }
+
+    private static void AssertMatchesByteLoop(byte[] input) =>
+        CollectionAssert.AreEqual(
+            ByteLoop(input),
+            LibraryJsonSerializer.NormalizeNewLinesUtf8((byte[])input.Clone()),
+            $"Input: {System.Convert.ToHexString(input)}");
+
+    private static byte[] ByteLoop(byte[] utf8Json)
+    {
+        var normalized = new byte[utf8Json.Length];
+        var length = 0;
+
+        for (var i = 0; i < utf8Json.Length; i++)
+        {
+            var b = utf8Json[i];
+            if (b == (byte)'\r')
+            {
+                if (i + 1 < utf8Json.Length && utf8Json[i + 1] == (byte)'\n')
+                    i++;
+                b = (byte)'\n';
+            }
+
+            normalized[length++] = b;
+        }
+
+        return normalized[..length];
     }
 
     private static byte[] ToLf(byte[] utf8) =>
