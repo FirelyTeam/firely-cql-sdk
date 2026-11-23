@@ -50,7 +50,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ConvertsToString", "Missing (#1737)." },
             { "ConvertsToTime", "Missing (#1737)." },
             { "SplitOnMatches", "Missing (#1737)." },
-            { "GeometricMean", "Missing (#1737)." },
             { "Size", "Missing (#1737)." },
             { "InCodeSystem", "Missing (#1737)." },
             { "AnyInCodeSystem", "Missing (#1737)." },
