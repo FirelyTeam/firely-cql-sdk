@@ -12,4 +12,4 @@
   the C# was built, now evaluate per CQL §9.B: the result has the unit the quantities share, null elements are
   ignored, and a list with no non-null elements or a null list gives null. Quantities in different units give null
   with a warning, as `Sum`, `StdDev` and `Variance` do. This changes CQL evaluation results for those expressions,
-  and `GeneratorToolVersion` is now 6.2.4.0; the output for every checked-in library is the same (#1961).
+  and `GeneratorToolVersion` is now 6.3.0.0; the output for every checked-in library is the same (#1961).
