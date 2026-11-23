@@ -41,7 +41,7 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
           |                                  |
    read options                       write options
    (old-style discriminators)         (no old-style discriminators;
-                                       a second, indented instance)
+                                       one instance, any indentation)
           |                                  |
           +--------------+-------------------+
                          |
@@ -57,12 +57,23 @@ Library.ParseFromJson / LoadFromJson / SerializeToJson / WriteJson
 
 [LibraryJsonSerializer](LibraryJsonSerializer.cs) is the internal coordinator.
 
-- It builds the read options and the write options once, in static fields, with `BuildSerializerOptions`, plus an
-  indented copy of the write options. A serialize call picks one of the two write instances and never creates options.
+- It builds the read options and the write options once, in static fields, with `BuildSerializerOptions`. There is one
+  write instance for compact and indented output alike, so the serializer's metadata is built once per process. A
+  serialize call never creates options.
 - `DeserializeFromJsonNode` runs `CorrectLegacyConstructs` on the parsed `JsonNode`, deserializes a `LibraryContainer`
   (the `{ "library": ... }` wrapper) with the read options, and validates the library when asked to.
-- `SerializeToJson` and `SerializeToStream` serialize a `LibraryContainer` with the write options.
-- `ReformatUtf8Json` re-indents already serialized JSON without going through the object model.
+- `SerializeToJson` and `SerializeToStream` serialize a `LibraryContainer` with the write options through a
+  `Utf8JsonWriter` that has the indentation set on it, the maximum depth of 4,096 and `Environment.NewLine` as its
+  new line. They write into a buffer rented from `ArrayPool<byte>.Shared` ([PooledByteBufferWriter](PooledByteBufferWriter.cs)).
+  `SerializeToStream` writes the finished bytes to the stream in one call, so a serialization that fails writes
+  nothing, and a file save is a single write of one pooled buffer.
+- `SerializeToUtf8` and `ReformatUtf8Json` write UTF-8 straight into a pooled buffer through a `Utf8JsonWriter` with
+  `"\n"` as its new line and the maximum depth of 4,096, and copy the result out once. They build no UTF-16 string and
+  need no newline pass. `ReformatUtf8Json` re-indents already serialized JSON by copying its tokens from a `Utf8JsonReader`
+  to the writer, building no `JsonDocument` and going nowhere near the object model,
+  with `JavaScriptEncoder.UnsafeRelaxedJsonEscaping`. Serializing costs less once the serializer's metadata is built.
+  A process that serializes nothing else saves building that metadata by re-formatting, and the re-formatted source
+  keeps its content, which serializing does not reproduce.
 
 ### 1.3.2. PolymorphicTypeResolver
 
@@ -214,7 +225,7 @@ Library.SerializeToJson(writeIndented) / WriteJson(...)
 LibraryJsonSerializer.SerializeToJson / SerializeToStream
          |
          +-> new LibraryContainer(library)             ({ "library": ... })
-         +-> JsonSerializer.Serialize(container, write options + WriteIndented)
+         +-> JsonSerializer.Serialize(Utf8JsonWriter { Indented = writeIndented }, container, write options)
                |
                +-> a property whose runtime type differs from its declared type, or whose declared type is
                |   abstract, gets its "type" discriminator from System.Text.Json
@@ -283,8 +294,9 @@ types are accepted through the read options (see [1.4.2](#142-read-and-write-opt
 ## 1.10. Debug assertions
 
 `LibraryJsonSerializer.EnableDebugAssertions` (default `true`) makes `HandleSpecifiedProperties` call `Debug.Fail`
-when a property has a non-default value but its `xxxSpecified` flag is false. The CQL toolkit turns it off to avoid
-interrupting bulk processing.
+when a property has a non-default value but its `xxxSpecified` flag is false. The check is a `[Conditional("DEBUG")]`
+method, so it runs in Debug builds only: a Release build neither reads the flag nor evaluates the check. The CQL
+toolkit turns the flag off to avoid interrupting bulk processing.
 
 ## 1.11. File structure
 

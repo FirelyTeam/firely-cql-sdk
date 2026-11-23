@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Elm.Serialization;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
@@ -80,6 +81,16 @@ public record SaveElmFilesToDirectoryOptions(
     SubdirectoryPreserver? SubdirectoryPreserver = null,
     DirectoryInfoHandler? DirectoryPostProcessingStrategy = null)
 {
+    // The library is serialized into a pooled buffer first and the file is opened only once that has succeeded, so a
+    // library that fails to serialize never touches its target: an existing file keeps its content and nothing is left
+    // behind. The bytes are UTF-8 without a byte order mark, written in one call.
+    private static void WriteElmFile(ElmLibrary elmLibrary, string fileName, bool writeIndented)
+    {
+        using var buffer = LibraryJsonSerializer.SerializeToPooledBuffer(elmLibrary, writeIndented);
+        using var stream = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None);
+        stream.Write(buffer.WrittenSpan);
+    }
+
     internal void Save(CqlToolkit cqlToolkit)
     {
         var directory = Directory;
@@ -114,7 +125,7 @@ public record SaveElmFilesToDirectoryOptions(
             }
 
             var fileName = Path.Combine(targetDirectory.FullName, $"{libraryIdentifier}.json");
-            File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
+            WriteElmFile(elmLibrary, fileName, writeIndented);
             logger.LogInformation("Saved ELM to file: {file}", fileName);
         }
 

@@ -27,8 +27,8 @@ internal static class LibraryJsonSerializer
     internal static bool EnableDebugAssertions = true;
 
     private const int MaxDepth = 4096; // int.MaxValue is not a good idea
+    private const int InitialBufferSize = 64 * 1024;
     private static readonly JsonSerializerOptions _jsonSerializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: false);
-    private static readonly JsonSerializerOptions _jsonSerializerOptionsIndented = new(_jsonSerializerOptions) { WriteIndented = true };
     private static readonly JsonSerializerOptions _jsonDeserializerOptions = BuildSerializerOptions(allowOldStyleTypeDiscriminators: true);
     private static readonly JsonDocumentOptions _jsonDocumentOptions = BuildJsonDocumentOptions();
 
@@ -92,10 +92,8 @@ internal static class LibraryJsonSerializer
     /// <returns>The JSON string representation of the library.</returns>
     internal static string SerializeToJson(Library library, bool writeIndented = true)
     {
-        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
-
-        var container = new LibraryContainer(library);
-        return JsonSerializer.Serialize(container, options);
+        using var buffer = SerializeToPooledBuffer(library, writeIndented);
+        return Encoding.UTF8.GetString(buffer.WrittenSpan);
     }
 
     /// <summary>
@@ -104,12 +102,63 @@ internal static class LibraryJsonSerializer
     /// <param name="library">The library to serialize.</param>
     /// <param name="stream">The stream to write to.</param>
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    /// <remarks>The library is serialized in full before the stream is touched, so a serialization that fails writes nothing.</remarks>
     internal static void SerializeToStream(Library library, Stream stream, bool writeIndented = true)
     {
-        var options = writeIndented ? _jsonSerializerOptionsIndented : _jsonSerializerOptions;
+        using var buffer = SerializeToPooledBuffer(library, writeIndented);
+        stream.Write(buffer.WrittenSpan);
+        stream.Flush();
+    }
 
-        var container = new LibraryContainer(library);
-        JsonSerializer.Serialize(stream, container, options);
+    /// <summary>
+    /// Serializes a Library to UTF-8 JSON with <see cref="Environment.NewLine"/> as its line break, into a pooled buffer
+    /// the caller reads through <see cref="PooledByteBufferWriter.WrittenSpan"/> and disposes.
+    /// </summary>
+    /// <param name="library">The library to serialize.</param>
+    /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    internal static PooledByteBufferWriter SerializeToPooledBuffer(Library library, bool writeIndented)
+    {
+        var buffer = new PooledByteBufferWriter(InitialBufferSize);
+        try
+        {
+            using var writer = new Utf8JsonWriter(buffer, CreateWriterOptions(writeIndented));
+            JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
+        }
+        catch
+        {
+            buffer.Dispose();
+            throw;
+        }
+
+        return buffer;
+    }
+
+    // The one write instance serves both formats: the indentation belongs to the writer, which ignores the
+    // options' WriteIndented, so no second set of serializer metadata is built for indented output.
+    private static JsonWriterOptions CreateWriterOptions(bool writeIndented) =>
+        new()
+        {
+            Indented = writeIndented,
+            MaxDepth = MaxDepth,
+            SkipValidation = true,
+        };
+
+    /// <summary>
+    /// Serializes a Library to UTF-8 JSON with LF line breaks, whatever the platform's new line is.
+    /// </summary>
+    /// <param name="library">The library to serialize.</param>
+    /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
+    internal static byte[] SerializeToUtf8(Library library, bool writeIndented)
+    {
+        using var buffer = new PooledByteBufferWriter(InitialBufferSize);
+        var writerOptions = CreateWriterOptions(writeIndented);
+        writerOptions.NewLine = "\n";
+        using (var writer = new Utf8JsonWriter(buffer, writerOptions))
+        {
+            JsonSerializer.Serialize(writer, new LibraryContainer(library), _jsonSerializerOptions);
+        }
+
+        return buffer.WrittenSpan.ToArray();
     }
 
     /// <summary>
@@ -117,42 +166,95 @@ internal static class LibraryJsonSerializer
     /// </summary>
     /// <param name="utf8Json">The UTF-8 JSON to reformat.</param>
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
-    /// <returns>The same JSON content, differing only in insignificant JSON formatting.</returns>
+    /// <returns>The same JSON content, differing only in insignificant JSON formatting, with LF line breaks.</returns>
     /// <remarks>
-    /// This writes the parsed document straight back out, so it costs a single pass over the text rather
-    /// than a walk over every ELM node through <see cref="PolymorphicTypeResolver"/> and its modifiers.
-    /// Unlike <see cref="SerializeToJson"/> it neither drops empty collections nor applies the corrections
-    /// made while reading, so the content is unchanged. The text is not guaranteed byte-identical to the
-    /// input even when <paramref name="writeIndented"/> matches it: whitespace is regenerated, and string
-    /// escaping is normalized to the writer's encoder.
+    /// This copies the tokens of the text from a <see cref="Utf8JsonReader"/> to a <see cref="Utf8JsonWriter"/>
+    /// one at a time, so it builds no document and does not walk the ELM nodes through
+    /// <see cref="PolymorphicTypeResolver"/> and its modifiers. Empty or malformed JSON, and nesting deeper than
+    /// the maximum depth of 4,096, throw a <see cref="JsonException"/>. Once the
+    /// serializer's metadata is built, serializing costs less than this; a process that serializes nothing
+    /// else saves building that metadata by re-formatting instead. The reason to keep this route is
+    /// fidelity: unlike <see cref="SerializeToJson"/> it neither drops empty collections nor applies the
+    /// corrections made while reading, so it keeps the content of the source, which serializing does not
+    /// reproduce. The text is not guaranteed byte-identical to the input even when
+    /// <paramref name="writeIndented"/> matches it: whitespace is regenerated, and string escaping is
+    /// normalized to the writer's encoder.
     /// </remarks>
     internal static byte[] ReformatUtf8Json(byte[] utf8Json, bool writeIndented)
     {
-        using var document = JsonDocument.Parse(utf8Json, _jsonDocumentOptions);
+        // Indented output is larger than its input, so size for growth.
+        using var buffer = new PooledByteBufferWriter(writeIndented ? utf8Json.Length * 2 : utf8Json.Length);
+        var writerOptions = CreateWriterOptions(writeIndented);
+        writerOptions.NewLine = "\n";
+        // The default encoder escapes characters that are legal unescaped in JSON, such as '<' and
+        // '&', which appear in the CQL annotations ELM carries. Relaxed escaping keeps the output
+        // closer to the source text; it is safe here because this JSON is embedded as an attachment,
+        // never interpolated into HTML.
+        writerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
 
-        // Indented output is larger than its input, so size for growth rather than making the stream
-        // double its buffer part way through.
-        using var buffer = new MemoryStream(writeIndented ? utf8Json.Length * 2 : utf8Json.Length);
-        var writerOptions = new JsonWriterOptions
-        {
-            Indented = writeIndented,
-            SkipValidation = true,
-            // The default encoder escapes characters that are legal unescaped in JSON, such as '<' and
-            // '&', which appear in the CQL annotations ELM carries. Relaxed escaping keeps the output
-            // closer to the source text; it is safe here because this JSON is embedded as an attachment,
-            // never interpolated into HTML.
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        };
-
+        // A reader over the whole input throws a JsonException for empty or whitespace-only input, so the loop
+        // never ends without having read a token.
+        var reader = new Utf8JsonReader(utf8Json, new JsonReaderOptions { MaxDepth = MaxDepth });
         using (var writer = new Utf8JsonWriter(buffer, writerOptions))
         {
-            document.RootElement.WriteTo(writer);
+            while (reader.Read())
+                CopyToken(ref reader, writer);
         }
 
-        // Indented output is broken across lines with Environment.NewLine, so it needs normalizing like
-        // any other text this assembly produces.
-        return NormalizeNewLinesUtf8(buffer.ToArray());
+        return buffer.WrittenSpan.ToArray();
     }
+
+    private static void CopyToken(ref Utf8JsonReader reader, Utf8JsonWriter writer)
+    {
+        switch (reader.TokenType)
+        {
+            case JsonTokenType.StartObject: writer.WriteStartObject(); break;
+            case JsonTokenType.EndObject: writer.WriteEndObject(); break;
+            case JsonTokenType.StartArray: writer.WriteStartArray(); break;
+            case JsonTokenType.EndArray: writer.WriteEndArray(); break;
+            case JsonTokenType.PropertyName:
+            case JsonTokenType.String:
+            {
+                var isName = reader.TokenType == JsonTokenType.PropertyName;
+                if (!reader.ValueIsEscaped)
+                {
+                    if (isName) writer.WritePropertyName(reader.ValueSpan); else writer.WriteStringValue(reader.ValueSpan);
+                    break;
+                }
+
+                var max = reader.ValueSpan.Length;
+                byte[]? rented = null;
+                Span<byte> scratch = max <= 256 ? stackalloc byte[256] : (rented = System.Buffers.ArrayPool<byte>.Shared.Rent(max));
+                try
+                {
+                    var length = reader.CopyString(scratch);
+                    if (isName) writer.WritePropertyName(scratch[..length]); else writer.WriteStringValue(scratch[..length]);
+                }
+                finally
+                {
+                    if (rented is not null) System.Buffers.ArrayPool<byte>.Shared.Return(rented);
+                }
+
+                break;
+            }
+            case JsonTokenType.Number: writer.WriteRawValue(reader.ValueSpan, skipInputValidation: true); break;
+            case JsonTokenType.True: writer.WriteBooleanValue(true); break;
+            case JsonTokenType.False: writer.WriteBooleanValue(false); break;
+            case JsonTokenType.Null: writer.WriteNullValue(); break;
+        }
+    }
+
+    /// <summary>
+    /// Returns UTF-8 JSON without a leading UTF-8 byte order mark: the input itself when it has none, otherwise a copy
+    /// without it.
+    /// </summary>
+    /// <remarks>
+    /// JSON text must not begin with a byte order mark (RFC 8259, section 8.1), and readers that take UTF-8 as bytes or a
+    /// span, such as <see cref="Utf8JsonReader"/> and <see cref="JsonDocument.Parse(ReadOnlyMemory{byte}, JsonDocumentOptions)"/>,
+    /// reject one. ELM bytes read from a file go through this before they are parsed or embedded.
+    /// </remarks>
+    internal static byte[] WithoutUtf8Bom(byte[] utf8Json) =>
+        utf8Json.AsSpan().StartsWith("﻿"u8) ? utf8Json[3..] : utf8Json;
 
     /// <summary>
     /// Rewrites CRLF and lone CR to LF in UTF-8 JSON, returning <paramref name="utf8Json"/> itself when it
@@ -169,27 +271,29 @@ internal static class LibraryJsonSerializer
         const byte cr = (byte)'\r';
         const byte lf = (byte)'\n';
 
-        if (Array.IndexOf(utf8Json, cr) < 0)
+        var source = utf8Json.AsSpan();
+        var next = source.IndexOf(cr);
+        if (next < 0)
             return utf8Json;
 
-        var normalized = new byte[utf8Json.Length];
-        var length = 0;
+        // Every CRLF collapses to one byte, and a lone CR is replaced in place.
+        var normalized = new byte[source.Length - source.Count("\r\n"u8)];
+        var destination = normalized.AsSpan();
 
-        for (var i = 0; i < utf8Json.Length; i++)
+        while (next >= 0)
         {
-            var b = utf8Json[i];
-            if (b == cr)
-            {
-                // CRLF and a lone CR both collapse to a single LF.
-                if (i + 1 < utf8Json.Length && utf8Json[i + 1] == lf)
-                    i++;
-                b = lf;
-            }
+            source[..next].CopyTo(destination);
+            destination[next] = lf;
+            destination = destination[(next + 1)..];
 
-            normalized[length++] = b;
+            // CRLF and a lone CR both collapse to a single LF.
+            var skip = next + 1 < source.Length && source[next + 1] == lf ? next + 2 : next + 1;
+            source = source[skip..];
+            next = source.IndexOf(cr);
         }
 
-        return normalized[..length];
+        source.CopyTo(destination);
+        return normalized;
     }
 
     /// <summary>
@@ -367,9 +471,7 @@ internal static class LibraryJsonSerializer
             prop.ValueProp.ShouldSerialize = (obj, value) =>
             {
                 var shouldSerialize = (bool?)prop.ValuePropSpecified.Get?.Invoke(obj) == true;
-                if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
-                    Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
-                               $"the '{prop.ValuePropSpecified.Name}' is false.");
+                AssertSpecifiedWhenNotDefault(prop, value, shouldSerialize);
 
                 // If the specified flag is false, don't serialize
                 if (!shouldSerialize) return false;
@@ -390,6 +492,15 @@ internal static class LibraryJsonSerializer
                 yield return new PropAndSpecified(valueProp, prop);
             }
         }
+    }
+
+    // Conditional on DEBUG: a Release build drops the call, so it neither reads EnableDebugAssertions nor boxes a default value.
+    [Conditional("DEBUG")]
+    private static void AssertSpecifiedWhenNotDefault(PropAndSpecified prop, object? value, bool shouldSerialize)
+    {
+        if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
+            Debug.Fail($"Property '{prop.ValueProp.Name}' is set to '{value}', but " +
+                       $"the '{prop.ValuePropSpecified.Name}' is false.");
     }
 
     private static void DoNotSerializeDefaultValues(JsonTypeInfo ti)
