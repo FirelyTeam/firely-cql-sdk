@@ -2174,6 +2174,23 @@ namespace Hl7.Cql.Operators
 
         #endregion
 
+        #region Size
+
+        // Size is (end of argument - start of argument) + point-size (§9.B Size), the point-size being the step from a
+        // value to its successor: 1 for Integer and Long, and the Decimal minimum precision for Decimal and Quantity.
+        // It is null when the interval or either boundary is null, or when the result cannot be represented.
+
+        public int? Size(CqlInterval<int?>? argument) => Add(Width(argument), 1);
+
+        public long? Size(CqlInterval<long?>? argument) => Add(Width(argument), 1L);
+
+        public decimal? Size(CqlInterval<decimal?>? argument) => Add(Width(argument), MinDecimalPrecisionValue);
+
+        public CqlQuantity? Size(CqlInterval<CqlQuantity?>? argument) =>
+            Width(argument) is { } width ? Add(width, new CqlQuantity(MinDecimalPrecisionValue, width.unit)) : null;
+
+        #endregion
+
         #region Width
 
         public int? Width(CqlInterval<int?>? @this)
