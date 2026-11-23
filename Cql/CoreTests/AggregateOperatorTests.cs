@@ -227,6 +227,46 @@ public class AggregateOperatorTests
         Assert.IsNull(operators.Median((IEnumerable<long?>)null!));
     }
 
+    /// <summary>
+    /// The Quantity median is the median of the values in their shared unit (§9.B Median:
+    /// <c>Median({ 1.0 'mg', 2.0 'mg', 3.0 'mg' })</c> is <c>2.0 'mg'</c>), with null elements and quantities without a
+    /// value ignored.
+    /// </summary>
+    [TestMethod]
+    public void Median_Quantity_IsTheMedianInTheSharedUnit()
+    {
+        var odd = Operators().Median([new CqlQuantity(3.0m, "mg"), null, new CqlQuantity(1.0m, "mg"), new CqlQuantity(2.0m, "mg")]);
+        Assert.AreEqual(2.0m, odd?.value);
+        Assert.AreEqual("mg", odd?.unit);
+
+        var even = Operators().Median([new CqlQuantity(4m, "mg"), new CqlQuantity(1m, "mg"), new CqlQuantity(null, "mg"), new CqlQuantity(2m, "mg"), new CqlQuantity(3m, "mg")]);
+        Assert.AreEqual(2.5m, even?.value);
+        Assert.AreEqual("mg", even?.unit);
+    }
+
+    /// <summary>
+    /// §9.B Median: a source with no non-null elements, such as <c>{ null as Quantity, null as Quantity }</c>, or a null
+    /// source, gives null.
+    /// </summary>
+    [TestMethod]
+    public void Median_Quantity_NoValuesOrNullSource_IsNull()
+    {
+        var operators = Operators();
+
+        Assert.IsNull(operators.Median(new CqlQuantity?[] { null, null }));
+        Assert.IsNull(operators.Median(new CqlQuantity?[] { }));
+        Assert.IsNull(operators.Median((IEnumerable<CqlQuantity?>?)null));
+    }
+
+    /// <summary>Quantities in different units are not brought to a common unit, so their median is null.</summary>
+    [TestMethod]
+    public void Median_Quantity_DifferentUnits_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(
+            o => o.Median([new CqlQuantity(1m, "mg"), new CqlQuantity(2m, "g")]),
+            "CqlOperators.AggregateFunctions.Median");
+    }
+
     #endregion
 
     #region GeometricMean
@@ -330,7 +370,7 @@ public class AggregateOperatorTests
     [TestMethod]
     public void Avg_NullSource_IsNull()
     {
-        Assert.IsNull(Operators().Avg(null));
+        Assert.IsNull(Operators().Avg((IEnumerable<decimal?>?)null));
     }
 
     [TestMethod]
@@ -371,6 +411,46 @@ public class AggregateOperatorTests
     {
         AssertNullWithOneWarning(o => o.Avg(new decimal?[] { 1e-28m, 0m }), "CqlOperators.AggregateFunctions.Avg");
         AssertNullWithOneWarning(o => o.Avg(new decimal?[] { -1e-28m, null, 0m }), "CqlOperators.AggregateFunctions.Avg");
+    }
+
+    /// <summary>
+    /// The Quantity average is the average of the values in their shared unit (§9.B Avg:
+    /// <c>Avg({ 5.5 'cm', 4.7 'cm', 4.8 'cm' })</c> is <c>5.0 'cm'</c>), with null elements and quantities without a
+    /// value ignored.
+    /// </summary>
+    [TestMethod]
+    public void Avg_Quantity_IsTheAverageInTheSharedUnit()
+    {
+        var average = Operators().Avg([new CqlQuantity(5.5m, "cm"), null, new CqlQuantity(4.7m, "cm"), new CqlQuantity(null, "cm"), new CqlQuantity(4.8m, "cm")]);
+
+        Assert.AreEqual(5.0m, average?.value);
+        Assert.AreEqual("cm", average?.unit);
+    }
+
+    /// <summary>§9.B Avg: a source with no non-null elements, or a null source, gives null.</summary>
+    [TestMethod]
+    public void Avg_Quantity_NoValuesOrNullSource_IsNull()
+    {
+        var operators = Operators();
+
+        Assert.IsNull(operators.Avg(new CqlQuantity?[] { null, null }));
+        Assert.IsNull(operators.Avg(new CqlQuantity?[] { }));
+        Assert.IsNull(operators.Avg((IEnumerable<CqlQuantity?>?)null));
+    }
+
+    /// <summary>
+    /// Quantities in different units are not brought to a common unit, and a total outside the Decimal range cannot
+    /// be represented; either way the average is null, with a warning.
+    /// </summary>
+    [TestMethod]
+    public void Avg_Quantity_DifferentUnitsOrTotalOutsideDecimalRange_IsNullWithOneWarning()
+    {
+        AssertNullWithOneWarning(
+            o => o.Avg([new CqlQuantity(1m, "cm"), new CqlQuantity(1m, "m")]),
+            "CqlOperators.AggregateFunctions.Avg");
+        AssertNullWithOneWarning(
+            o => o.Avg([new CqlQuantity(decimal.MaxValue, "cm"), new CqlQuantity(decimal.MaxValue, "cm")]),
+            "CqlOperators.AggregateFunctions.Avg");
     }
 
     #endregion

@@ -1,1 +1,3 @@
 ﻿#nullable enable
+Hl7.Cql.Operators.ICqlOperators.Avg(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? argument) -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?

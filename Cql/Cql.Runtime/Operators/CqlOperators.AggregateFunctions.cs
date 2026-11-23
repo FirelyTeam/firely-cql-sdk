@@ -82,35 +82,76 @@ namespace Hl7.Cql.Operators
 
         #region Avg
 
-        public decimal? Avg(IEnumerable<decimal?>? argument)
+        public decimal? Avg(IEnumerable<decimal?>? argument) =>
+            argument == null ? null : Average(argument, new { argument }, "type decimal average");
+
+        public CqlQuantity? Avg(IEnumerable<CqlQuantity?>? argument)
         {
             if (argument == null)
                 return null;
-            else
+
+            if (CommonUnitValues(argument, "CqlOperators.AggregateFunctions.Avg", "type CqlQuantity average") is not var (values, unit))
+                return null;
+            return Average(values, new { argument }, "type CqlQuantity average") is { } average
+                ? new CqlQuantity(average, unit)
+                : null;
+        }
+
+        /// <summary>
+        /// The average of the values that are not null, or <see langword="null"/> when there are none or when the
+        /// total or the average cannot be represented, which is reported for <paramref name="source"/>.
+        /// </summary>
+        private decimal? Average(IEnumerable<decimal?> values, object source, string operation)
+        {
+            // One walk of the source: the emptiness test, the total and the count all come out of the same pass.
+            decimal total = 0;
+            var count = 0;
+            foreach (var value in values)
             {
-                // One walk of the source: the emptiness test, the total and the count all come out of the same
-                // pass, where the Where/Select query behind them was walked three times.
-                decimal total = 0;
-                var count = 0;
-                foreach (var value in argument)
+                if (value.HasValue)
                 {
-                    if (value.HasValue)
-                    {
-                        if (OverflowGuard.Add(total, value.Value) is not { } next)
-                            return Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.Avg", "type decimal average");
-                        total = next;
-                        count++;
-                    }
+                    if (OverflowGuard.Add(total, value.Value) is not { } next)
+                        return Overflowed<decimal?>(source, "CqlOperators.AggregateFunctions.Avg", operation);
+                    total = next;
+                    count++;
+                }
+            }
+
+            if (count == 0)
+                return null;
+
+            // The quotient of a total by a count of at least one is no larger than the total, so it cannot
+            // overflow; a nonzero quotient too small in magnitude to represent underflows.
+            return OverflowGuard.Divide(total, count)
+                ?? Overflowed<decimal?>(source, "CqlOperators.AggregateFunctions.Avg", operation);
+        }
+
+        /// <summary>
+        /// The values of the quantities that have one, and the unit they share; or <see langword="null"/> when there
+        /// are none, or when their units differ, which is reported as a warning. A quantity without a unit has the
+        /// unit <c>'1'</c>.
+        /// </summary>
+        private (List<decimal?> Values, string Unit)? CommonUnitValues(IEnumerable<CqlQuantity?> source, string code, string operation)
+        {
+            var values = new List<decimal?>();
+            string? unit = null;
+            foreach (var quantity in source)
+            {
+                if (quantity is not { value: { } value, unit: var quantityUnit })
+                    continue;
+
+                quantityUnit ??= "1";
+                unit ??= quantityUnit;
+                if (unit != quantityUnit)
+                {
+                    InconsistentUnits(new { source }, code, operation);
+                    return null;
                 }
 
-                if (count == 0)
-                    return null;
-
-                // The quotient of a total by a count of at least one is no larger than the total, so it cannot
-                // overflow; a nonzero quotient too small in magnitude to represent underflows.
-                return OverflowGuard.Divide(total, count)
-                    ?? Overflowed<decimal?>(new { argument }, "CqlOperators.AggregateFunctions.Avg", "type decimal average");
+                values.Add(value);
             }
+
+            return unit is null ? null : (values, unit);
         }
 
         #endregion
@@ -285,6 +326,16 @@ namespace Hl7.Cql.Operators
             // decimal holds the sum of any two long values exactly, and the cast back truncates towards zero exactly
             // as a long division of a non-overflowing sum does.
             return isEven ? (long)(((decimal)sorted[middle] + sorted[middle - 1]) / 2m) : sorted[middle];
+        }
+
+        public CqlQuantity? Median(IEnumerable<CqlQuantity?>? source)
+        {
+            if (source == null)
+                return null;
+
+            if (CommonUnitValues(source, "CqlOperators.AggregateFunctions.Median", "type CqlQuantity median") is not var (values, unit))
+                return null;
+            return Median(values) is { } median ? new CqlQuantity(median, unit) : null;
         }
 
         private static List<T> SortedNonNullValues<T>(IEnumerable<T?> source)
