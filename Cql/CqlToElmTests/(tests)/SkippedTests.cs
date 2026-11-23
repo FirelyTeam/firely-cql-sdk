@@ -31,8 +31,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "NullToBoolean", "An untyped null matches the Decimal, Long, Integer and String overloads of ToBoolean with one implicit cast each, so the call is ambiguous (Developer's Guide, Function Resolution: \"If multiple signatures have the same number of required conversions, an ambiguous resolution error is thrown\"). See cqframework/cql-tests#179." },
 
-            { "MedianAllNull", "Median over a List<Quantity> cannot be compiled: ICqlOperators.Median has Decimal, Integer and Long overloads but none for CqlQuantity, although the translator accepts the Quantity signature (§9.B Median). Avg has the same gap. Adding the overloads changes generated C# and needs a GeneratorToolVersion bump (#1951)." },
-
             // To be revisited: these need C# compiler changes before they can run.
             { "SplitOnMatchesNull", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
             { "SplitOnMatchesComma", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
