@@ -282,8 +282,8 @@ namespace Hl7.Cql.Operators
                     // The effective boundaries are only needed, and only computed, when one of the two
                     // intervals has the boundary open and the other has it closed.
                     var (otherHigh, otherHighClosed) = highFromX ? (y.high, y.highClosed) : (x.high, x.highClosed);
-                    var lowMayTie = lowClosed != true && y.lowClosed == true && HaveTheSameUnit(low, y.low);
-                    var highMayTie = highClosed != true && otherHighClosed == true && HaveTheSameUnit(high, otherHigh);
+                    var lowMayTie = lowClosed != true && y.lowClosed == true && haveTheSameUnit(low, y.low);
+                    var highMayTie = highClosed != true && otherHighClosed == true && haveTheSameUnit(high, otherHigh);
                     var lowFromX = true;
                     if (lowMayTie || highMayTie)
                     {
@@ -307,7 +307,7 @@ namespace Hl7.Cql.Operators
                 else return null;
             };
 
-            static bool HaveTheSameUnit(T? left, T? right) =>
+            static bool haveTheSameUnit(T? left, T? right) =>
                 left is not CqlQuantity leftQuantity || right is not CqlQuantity rightQuantity || leftQuantity.unit == rightQuantity.unit;
 
             // Walk the sorted intervals front to back, merging into the interval most recently added to the
