@@ -1104,6 +1104,32 @@
 			<expression>Truncate(-1.9)</expression>
 			<output>-1</output>
 		</test>
+		<test name="TruncateMaxIntegerAsDecimal" version="1.0">
+			<expression>Truncate(2147483647.0)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="TruncateMaxIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Truncate(2147483647.2)</expression>
+			<output>2147483647</output>
+		</test>
+		<test name="TruncateDecimalGreaterThanMaxInteger" version="1.0">
+			<!-- The result is outside the Integer range, so it is null: https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4 -->
+			<expression>Truncate(2147483648.2)</expression>
+			<output>null</output>
+		</test>
+		<test name="TruncateMinIntegerAsDecimal" version="1.0">
+			<expression>Truncate(-2147483648.0)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="TruncateMinIntegerAsDecimalWhereDecimalIsNonZero" version="1.0">
+			<expression>Truncate(-2147483648.2)</expression>
+			<output>-2147483648</output>
+		</test>
+		<test name="TruncateDecimalLessThanMinInteger" version="1.0">
+			<!-- The result is outside the Integer range, so it is null: https://cql.hl7.org/09-b-cqlreference.html#arithmetic-operators-4 -->
+			<expression>Truncate(-2147483649.2)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Truncated Divide" version="1.0">
 		<capability code="arithmetic-operators"/>

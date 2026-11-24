@@ -6,12 +6,12 @@
 		<capability code="type-operators" />
 		<test name="AsQuantity" version="1.0">
 			<capability code="type-operators" />
-			<expression>45.5 'g' as Quantity</expression>
+			<expression>45.5 'g' as System.Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
 		<test name="CastAsQuantity" version="1.0">
 			<capability code="type-operators" />
-			<expression>cast 45.5 'g' as Quantity</expression>
+			<expression>cast 45.5 'g' as System.Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
 		<test name="AsDateTime" version="1.0">
@@ -109,7 +109,8 @@
 		<test name="NullToBoolean" version="1.0">
 			<capability code="type-operators" />
 			<!-- If the argument is null, the result is null: https://cql.hl7.org/09-b-cqlreference.html#toboolean -->
-			<expression>ToBoolean(null)</expression>
+			<!-- The null is typed because an untyped null matches every ToBoolean overload equally, which is an ambiguous call: https://cql.hl7.org/03-developersguide.html#function-resolution -->
+			<expression>ToBoolean(null as String)</expression>
 			<output>null</output>
 		</test>
 		<test name="Integer1ToBoolean" version="1.5">
@@ -247,7 +248,7 @@
 		<test name="StringToRatio" version="1.5">
 			<capability code="type-operators" />
 			<!-- The ToRatio operator accepts strings of the form <quantity>:<quantity>: https://cql.hl7.org/09-b-cqlreference.html#toratio -->
-			<expression>ToRatio('1.0 \'mg\':2.0 \'mg\'') is Ratio</expression>
+			<expression>ToRatio('1.0 \'mg\':2.0 \'mg\'') is System.Ratio</expression>
 			<output>true</output>
 		</test>
 		<test name="StringMalformedToRatio" version="1.5">
