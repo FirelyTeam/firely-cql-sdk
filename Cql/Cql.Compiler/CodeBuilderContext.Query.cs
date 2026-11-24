@@ -364,7 +364,10 @@ partial class CodeBuilderContext
         //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
         using (PushElement(query.sort))
         {
-            foreach (var by in query.sort.by)
+            // CQL sorts by the first item, then by each later item within ties of the earlier ones.
+            // SortBy and ListSort are stable, so applying the items from last to first gives that order:
+            // each pass keeps the order of the previous pass among elements it considers equal.
+            foreach (var by in Enumerable.Reverse(query.sort.by))
             {
                 using (PushElement(by))
                 {
@@ -385,9 +388,10 @@ partial class CodeBuilderContext
                                 var sortMemberExpression = TranslateArg(byExpression.expression);
                                 var lambdaBody = _cqlOperatorsBinder.ConvertToType(sortMemberExpression, typeof(object));
                                 var sortLambda = new CodeLambda([sortMemberParameter], lambdaBody);
-                                return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda,
-                                                       new CodeConstant(order, typeof(ListSortDirection)));
+                                @return = BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda,
+                                                          new CodeConstant(order, typeof(ListSortDirection)));
                             }
+                            break;
                         }
                         case ByColumn byColumn:
                         {
@@ -404,11 +408,13 @@ partial class CodeBuilderContext
                             var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!);
                             var lambdaBody = _cqlOperatorsBinder.ConvertToType(pathExpression, typeof(object));
                             var sortLambda = new CodeLambda([sortMemberParameter], lambdaBody);
-                            return BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, new CodeConstant(order, typeof(ListSortDirection)));
+                            @return = BindCqlOperator(nameof(ICqlOperators.SortBy), @return, sortLambda, new CodeConstant(order, typeof(ListSortDirection)));
+                            break;
                         }
                         default:
                         {
-                            return BindCqlOperator(nameof(ICqlOperators.ListSort), @return, new CodeConstant(order, typeof(ListSortDirection)));
+                            @return = BindCqlOperator(nameof(ICqlOperators.ListSort), @return, new CodeConstant(order, typeof(ListSortDirection)));
+                            break;
                         }
                     }
                 }
