@@ -131,9 +131,10 @@ Several of the entries below **change CQL evaluation results**. See the Upgrade 
 #### Improvements
 
 - `LangVersion` is pinned to a specific C# version instead of `latest`, which resolved to whatever the installed SDK supports rather than to the target framework's default. (#1810)
-- The CQL conformance suite is synced with upstream [cqframework/cql-tests](https://github.com/cqframework/cql-tests), and each XML case shows separately in Test Explorer. Cases that do not hold for this SDK are listed with their reason in `SkippedTests.cs`. (#1901, #1911, #1913, #1915, #1917, #1919, #1921, #1923, #1941, #1947, #1950, #1953, #1964)
+- The CQL conformance suite is synced with upstream [cqframework/cql-tests](https://github.com/cqframework/cql-tests), and each XML case shows separately in Test Explorer. Cases that do not hold for this SDK are listed with their reason in `SkippedTests.cs`. (#1901, #1911, #1913, #1915, #1917, #1919, #1921, #1923, #1941, #1947, #1950, #1953, #1964, #1968, #1969)
 - The translator census loads the QICore and USCore model infos bundled in `Hl7.Cql.Model` instead of XML copies in the test inputs, which are deleted; its results are unchanged. (#1965)
 - Leftovers of the first cleanup sweep are removed, and the internal `ReflectionUtility` moves to the `Hl7.Cql.Abstractions.Infrastructure` namespace. Neither changes public API or behavior. (#1894, #1895)
+- The dead `cql-tests` submodule references are removed, and the conformance corpus README describes its files as unmodified upstream copies. (#1973)
 
 ---
 
@@ -168,6 +169,9 @@ Several of the entries below **change CQL evaluation results**. See the Upgrade 
 
 | PR | Title |
 | --- | --- |
+| [#1973](https://github.com/FirelyTeam/firely-cql-sdk/pull/1973) | Remove the dead cql-tests submodule references and document the corpus as upstream copies |
+| [#1969](https://github.com/FirelyTeam/firely-cql-sdk/pull/1969) | Sync CqlArithmeticFunctionsTest.xml with cql-tests main |
+| [#1968](https://github.com/FirelyTeam/firely-cql-sdk/pull/1968) | Sync CqlTypeOperatorsTest.xml with cql-tests main |
 | [#1965](https://github.com/FirelyTeam/firely-cql-sdk/pull/1965) | Run the census on the bundled model infos |
 | [#1964](https://github.com/FirelyTeam/firely-cql-sdk/pull/1964) | Translate and evaluate Size of an interval; sync CqlIntervalOperatorsTest.xml |
 | [#1961](https://github.com/FirelyTeam/firely-cql-sdk/pull/1961) | Add Avg and Median overloads for Quantities |
