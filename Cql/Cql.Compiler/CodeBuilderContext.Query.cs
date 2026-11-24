@@ -365,8 +365,9 @@ partial class CodeBuilderContext
         using (PushElement(query.sort))
         {
             // CQL sorts by the first item, then by each later item within ties of the earlier ones.
-            // SortBy and ListSort are stable, so applying the items from last to first gives that order:
-            // each pass keeps the order of the previous pass among elements it considers equal.
+            // SortBy keeps elements with equal keys in their source order, in both directions, so applying
+            // the items from last to first gives that order: each pass keeps the order of the previous pass
+            // among elements whose keys are equal. ListSort (a ByDirection item) is only ever the sole item.
             foreach (var by in Enumerable.Reverse(query.sort.by))
             {
                 using (PushElement(by))
