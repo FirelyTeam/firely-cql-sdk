@@ -294,6 +294,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .Combine(binaryWithPrecision<After>(T, T.ToIntervalType(), BooleanType).For(T, IntervalPointTypes.ToArray()))
             .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T, BooleanType).For(T, IntervalPointTypes.ToArray()));
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
+        public static SystemFunction<Size> Size = unary<Size>(T.ToIntervalType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);

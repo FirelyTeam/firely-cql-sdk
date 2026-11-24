@@ -532,6 +532,10 @@ namespace Hl7.Cql.Operators
         IEnumerable<TResult>?                    SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source,Func<TSource, IEnumerable<TCollection>> collectionSelector,Func<TSource, TCollection, TResult> resultSelector);
         IEnumerable<TR>?                         SelectWhere<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select, Func<TR, bool?> lambda);
         T?                                       SingletonFrom<T>(IEnumerable<T>? source);
+        CqlQuantity?                             Size(CqlInterval<CqlQuantity?>? argument);
+        decimal?                                 Size(CqlInterval<decimal?>? argument);
+        int?                                     Size(CqlInterval<int?>? argument);
+        long?                                    Size(CqlInterval<long?>? argument);
         IEnumerable<T>?                          Slice<T>(IEnumerable<T>? source,int? startIndex,int? endIndex);
         IEnumerable<T>?                          SortBy<T>(IEnumerable<T>? source,Func<T, object> sortByExpr,ListSortDirection order);
         IEnumerable<string>?                     Split(string stringToSplit, string separator);
