@@ -164,6 +164,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<CalculateAgeAt> CalculateAgeInMinutesAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInMinutesAt");
         public static SystemFunction<CalculateAgeAt> CalculateAgeInSecondsAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInSecondsAt");
 
+        public static SystemFunction<CanConvertQuantity> CanConvertQuantity = binary<CanConvertQuantity>(QuantityType, StringType, BooleanType);
         public static SystemFunction<Ceiling> Ceiling = unary<Ceiling>(DecimalType, IntegerType);
         public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
         public static OverloadedFunctionDef Collapse = unary<Collapse>(T.ToIntervalType().ToListType(), T.ToIntervalType().ToListType())
@@ -173,7 +174,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
+        public static SystemFunction<ConvertsToBoolean> ConvertsToBoolean = unary<ConvertsToBoolean>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToDate> ConvertsToDate = unary<ConvertsToDate>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToDateTime> ConvertsToDateTime = unary<ConvertsToDateTime>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToDecimal> ConvertsToDecimal = unary<ConvertsToDecimal>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToInteger> ConvertsToInteger = unary<ConvertsToInteger>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToLong> ConvertsToLong = unary<ConvertsToLong>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToQuantity> ConvertsToQuantity = unary<ConvertsToQuantity>(AnyType, BooleanType);
         public static SystemFunction<ConvertsToRatio> ConvertsToRatio = unary<ConvertsToRatio>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToString> ConvertsToString = unary<ConvertsToString>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToTime> ConvertsToTime = unary<ConvertsToTime>(AnyType, BooleanType);
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
         public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);
