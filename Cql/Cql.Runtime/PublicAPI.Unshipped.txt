@@ -1,7 +1,1 @@
 ﻿#nullable enable
-Hl7.Cql.Operators.ICqlOperators.Avg(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? argument) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.Median(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlQuantity?>? source) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.Size(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlQuantity?>? argument) -> Hl7.Cql.Primitives.CqlQuantity?
-Hl7.Cql.Operators.ICqlOperators.Size(Hl7.Cql.Primitives.CqlInterval<decimal?>? argument) -> decimal?
-Hl7.Cql.Operators.ICqlOperators.Size(Hl7.Cql.Primitives.CqlInterval<int?>? argument) -> int?
-Hl7.Cql.Operators.ICqlOperators.Size(Hl7.Cql.Primitives.CqlInterval<long?>? argument) -> long?
