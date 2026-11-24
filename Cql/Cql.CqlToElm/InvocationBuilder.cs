@@ -371,6 +371,11 @@ namespace Hl7.Cql.CqlToElm
             var compatible = matches
                 .Where(result => result.Compatible)
                 .ToArray();
+            // A match that binds its generic parameters only to Any, because its arguments are null or typed Any, ranks
+            // after a match that binds them to an actual type, as in the reference translator: Coalesce({1}, null, {2})
+            // is a List<Integer>, not an Any.
+            if (compatible.Where(result => !infersAny(result)).ToArray() is { Length: > 0 } concrete && concrete.Length < compatible.Length)
+                compatible = concrete;
             SignatureMatchResult? candidate;
             if (match(compatible, out candidate))
                 return candidate;
@@ -383,9 +388,9 @@ namespace Hl7.Cql.CqlToElm
                 ()=>Messaging.CouldNotResolveFunction(firstMatch.Function.Name, arguments));
             return result;
 
-            //bool infersAny(SignatureMatchResult result) =>
-            //    result.GenericInferences.Count > 0
-            //    && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+            bool infersAny(SignatureMatchResult result) =>
+                result.GenericInferences.Count > 0
+                && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
 
             bool match(SignatureMatchResult[] matches, [NotNullWhen(true)] out SignatureMatchResult? result)
             {

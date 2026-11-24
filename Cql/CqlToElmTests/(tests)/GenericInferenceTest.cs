@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class GenericInferenceTest : Base
     {
         [TestMethod]
-        public void Coalesce_Of_Intervals_Of_Any_Types_As_Any()
+        public void Coalesce_Of_Intervals_Of_Any_Types_As_Interval_Of_Any()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library GenericInferenceTest version '1.0.0'
@@ -31,12 +31,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var coalesce = library.statements.Single(s => s.name == "C").expression.Should().BeOfType<Coalesce>().Subject;
-            coalesce.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+            coalesce.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToIntervalType());
             ShouldHaveNoUnboundParameters(coalesce.operand);
         }
 
         [TestMethod]
-        public void Coalesce_Of_Lists_Of_Any_With_List_Demotion_Types_As_Any()
+        public void Coalesce_Of_Lists_Of_Any_With_List_Demotion_Types_As_List_Of_Any()
         {
             var library = CreateCqlToolkit(DisableListDemotion: false).MakeLibrary("""
                 library GenericInferenceTest version '1.0.0'
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var coalesce = library.statements.Single(s => s.name == "C").expression.Should().BeOfType<Coalesce>().Subject;
-            coalesce.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+            coalesce.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
             ShouldHaveNoUnboundParameters(coalesce.operand);
         }
 
