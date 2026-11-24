@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
 /// </para>
 /// <para>
-/// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+/// The default behavior is <see cref="AmbiguousTypeBehavior.PreferModel"/>.
 /// </para>
 /// </param>
 ///
@@ -69,25 +69,25 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// <param name="DisableListDemotion">
 /// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
 /// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-/// The default value is <see langword="true"/>.
+/// The default value is <see langword="false"/>.
 /// </param>
 ///
 /// <param name="DisableListPromotion">
 /// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
 /// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
-/// The default value is <see langword="true"/>.
+/// The default value is <see langword="false"/>.
 /// </param>
 ///
 /// <param name="EnableIntervalPromotion">
 /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
 /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-/// The default value is <see langword="true"/>.
+/// The default value is <see langword="false"/>.
 /// </param>
 ///
 /// <param name="EnableIntervalDemotion">
 /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
 /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-/// The default value is <see langword="true"/>.
+/// The default value is <see langword="false"/>.
 /// </param>
 ///
 /// <param name="AllowNullIntervals">
@@ -117,15 +117,15 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 public record CqlToolkitConfig(
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
-    AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+    AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel,
     string? SystemElmModelUri = "urn:hl7-org:elm-types:r1",
     string? SystemElmModelVersion = "1.0.0",
     // Lists
-    bool DisableListDemotion = true,
-    bool DisableListPromotion = true,
+    bool DisableListDemotion = false,
+    bool DisableListPromotion = false,
     // Intervals
-    bool EnableIntervalDemotion = true,
-    bool EnableIntervalPromotion = true,
+    bool EnableIntervalDemotion = false,
+    bool EnableIntervalPromotion = false,
     bool AllowNullIntervals = true,
     bool ValidateIntervals = true,
     // Longs
@@ -231,14 +231,14 @@ public record CqlToolkitConfig(
     /// <summary>
     /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
     /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-    /// The default value is <see langword="true"/>.
+    /// The default value is <see langword="false"/>.
     /// </summary>
     public bool EnableIntervalPromotion { get; init; } = EnableIntervalPromotion;
 
     /// <summary>
     /// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
     /// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
-    /// The default value is <see langword="true"/>.
+    /// The default value is <see langword="false"/>.
     /// </summary>
     /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
     public bool DisableListPromotion { get; init; } = DisableListPromotion;
@@ -246,7 +246,7 @@ public record CqlToolkitConfig(
     /// <summary>
     /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
     /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-    /// The default value is <see langword="true"/>.
+    /// The default value is <see langword="false"/>.
     /// </summary>
     /// <remarks>
     /// Note that whether an interval is a point interval cannot be known at compile time.
@@ -257,7 +257,7 @@ public record CqlToolkitConfig(
     /// <summary>
     /// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
     /// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-    /// The default value is <see langword="true"/>.
+    /// The default value is <see langword="false"/>.
     /// </summary>
     /// <remarks>
     /// Note that whether a list has only one element cannot be known at compile time.
@@ -272,7 +272,7 @@ public record CqlToolkitConfig(
     /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
     /// </para>
     /// <para>
-    /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+    /// The default behavior is <see cref="AmbiguousTypeBehavior.PreferModel"/>.
     /// </para>
     /// </summary>
     public AmbiguousTypeBehavior AmbiguousTypeBehavior { get; init; } = AmbiguousTypeBehavior;

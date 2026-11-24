@@ -23,6 +23,23 @@ This package provides the conversion functionality that transforms Clinical Qual
 3. **ELM Generation**: Converts AST into ELM JSON representation
 4. **Validation**: Ensures generated ELM is valid and complete
 
+## Reference Configuration
+
+The translator's defaults reproduce the configuration the repository's reference ELM is produced with: the Java CQL
+translator run by [`Demo/Cql/Build/CqlTooling.Targets.xml`](../../Demo/Cql/Build/CqlTooling.Targets.xml) with
+`-locators true -result-types true -signatures All` and no promotion or demotion flags. That ELM records
+`translatorOptions = EnableLocators,EnableResultTypes`.
+
+| Setting | Default |
+|---|---|
+| `DisableListPromotion`, `DisableListDemotion` | `false`: a single value converts to a list and a list to a single value where needed |
+| `EnableIntervalPromotion`, `EnableIntervalDemotion` | `false`: a point and a point interval do not convert into each other |
+| `AmbiguousTypeBehavior` | `PreferModel`: a type name defined by both System and a model resolves to the model's type |
+
+`CqlToolkitConfig` and `CqlToElmOptions` use these defaults, and so does the Packager CLI's default settings file.
+The translator census in `CqlToElmTests` runs on them, so its results compare with the reference ELM. A caller that
+needs other behavior sets the switches on `CqlToolkitConfig`.
+
 ## Usage
 
 This package is used in the CQL compilation pipeline to convert CQL source to ELM.
