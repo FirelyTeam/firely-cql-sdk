@@ -122,15 +122,50 @@ namespace Hl7.Cql.CqlToElm.Test
         public void A_Point_On_Or_After_An_Interval_Becomes_A_Point_Interval_By_Default()
         {
             // SameOrAfter has no point-interval overload; the Java translator converts the point to a point interval
-            // in this phrase even with interval promotion disabled.
+            // in this phrase even with interval promotion disabled, as if 6 is null then null else Interval[6, 6].
             var library = DefaultToolkit().MakeLibrary("""
                 library OnOrAfterPoint version '1.0.0'
 
                 define OnOrAfter: Interval[6, 10] on or after 6
                 """);
 
-            library.statements.Single(s => s.name == "OnOrAfter").expression.Should().BeOfType<SameOrAfter>()
-                   .Which.operand[1].Should().BeOfType<Interval>();
+            var pointInterval = library.statements.Single(s => s.name == "OnOrAfter").expression.Should().BeOfType<SameOrAfter>()
+                                       .Which.operand[1].Should().BeOfType<If>().Subject;
+            pointInterval.condition.Should().BeOfType<IsNull>();
+            pointInterval.then.Should().BeOfType<Null>();
+            pointInterval.@else.Should().BeOfType<Interval>();
+        }
+
+        [DataTestMethod]
+        [DataRow("[Encounter] E where E.period on or after Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00]")]
+        [DataRow("[Observation] O where O.effective on or after Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00]")]
+        [DataRow("[Observation] O where Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00] on or before O.issued")]
+        public void A_Model_Operand_On_Or_After_An_Interval_Translates_By_Default(string expression)
+        {
+            // A FHIR Period converts to an interval itself, a choice is left to overload resolution, and a FHIR instant
+            // is a point; the Java translator translates all three.
+            DefaultToolkit().AddFHIRHelpers().MakeLibrary($"""
+                library ModelOperand version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                include FHIRHelpers version '4.0.1'
+
+                context Patient
+
+                define Result: {expression}
+                """);
+        }
+
+        [TestMethod]
+        public void A_Value_That_Cannot_Be_A_Point_Is_Reported_As_Written()
+        {
+            DefaultToolkit().MakeLibrary("""
+                library NotAPoint version '1.0.0'
+
+                define OnOrAfter: Interval[1, 10] on or after 'a'
+                """,
+                "Could not resolve call to operator SameOrAfter with signature (Interval<Integer>, String)*");
         }
 
         [TestMethod]
