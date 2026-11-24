@@ -40,7 +40,7 @@ public class TranslatorCensusTest
     /// </summary>
     /// <param name="Name">The name of the run; also the stem of its known-pass (or counts) file.</param>
     /// <param name="RelativeDirectory">The directory holding the CQL files, relative to the repository root.</param>
-    /// <param name="ModelInfoFiles">Model info files from <c>Input/ModelInfo</c> supplied to the translator.</param>
+    /// <param name="Models">The bundled models selected in addition to <see cref="CqlToolkitConfig.DefaultCqlModels"/>.</param>
     /// <param name="CountsOnly">
     /// When <see langword="true"/>, the baseline holds only outcome counts, and library names and messages
     /// are written to the report file only.
@@ -51,7 +51,7 @@ public class TranslatorCensusTest
     public sealed record CensusCorpus(
         string Name,
         string RelativeDirectory,
-        string[] ModelInfoFiles,
+        CqlModel[] Models,
         bool CountsOnly = false,
         bool InconclusiveWhenAbsent = false)
     {
@@ -64,8 +64,8 @@ public class TranslatorCensusTest
         public override string ToString() => Name;
     }
 
-    private static readonly string[] QiCore411 = ["qicore-modelinfo-4.1.1.xml", "uscore-modelinfo-3.1.1.xml"];
-    private static readonly string[] QiCore600 = ["qicore-modelinfo-6.0.0.xml", "uscore-modelinfo-6.1.0.xml"];
+    private static readonly CqlModel[] QiCore411 = [CqlModel.QICore411, CqlModel.USCore311];
+    private static readonly CqlModel[] QiCore600 = [CqlModel.QICore600, CqlModel.USCore610];
 
     /// <summary>
     /// All census runs. Corpora that need QICore are run both without and with the QICore and US Core model infos.
@@ -109,7 +109,7 @@ public class TranslatorCensusTest
         }
 
         var stopwatch = Stopwatch.StartNew();
-        var results = Translate(corpusDirectory, LoadModelInfos(corpus.ModelInfoFiles));
+        var results = Translate(corpusDirectory, corpus.Models);
         stopwatch.Stop();
 
         var counts = CensusCounts.Of(results);
@@ -158,7 +158,7 @@ public class TranslatorCensusTest
             File.WriteAllText(Path.Combine(directory.FullName, "b-duplicate.cql"), "library Valid version '1.0.0'\n\ndefine Y: 2\n");
             File.WriteAllText(Path.Combine(directory.FullName, "c-malformed.cql"), "this is not a library declaration\n");
 
-            var results = Translate(directory, LoadModelInfos([]));
+            var results = Translate(directory, []);
 
             Assert.AreEqual(CqlFiles(directory).Count(), results.Count);
             var byId = results.ToDictionary(r => r.Id, StringComparer.Ordinal);
@@ -294,12 +294,12 @@ public class TranslatorCensusTest
     /// Translates each library in the directory individually, so one exception cannot hide the others.
     /// Returns exactly one result per CQL file: a file that cannot be loaded is a <see cref="Outcome.Crash"/>.
     /// </summary>
-    private static IReadOnlyList<LibraryResult> Translate(DirectoryInfo directory, ImmutableHashSet<ModelInfo> modelInfos)
+    private static IReadOnlyList<LibraryResult> Translate(DirectoryInfo directory, CqlModel[] models)
     {
         var (libraries, results) = LoadLibraries(directory);
         var toolkit = new CqlToolkit(
                           NullLoggerFactory.Instance,
-                          new CqlToolkitConfig(ModelInfos: modelInfos, AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferModel))
+                          new CqlToolkitConfig(Models: CqlToolkitConfig.DefaultCqlModels.Union(models), AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferModel))
                       .SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation.Continue);
         toolkit.AddCqlLibraries(libraries);
         var provider = (LibraryBuilderProvider)toolkit.ServiceProvider.GetRequiredService<ILibraryProvider>();
@@ -389,33 +389,6 @@ public class TranslatorCensusTest
         return ($"{exception.GetType().Name}: {exception.Message}", location);
     }
 
-    private static readonly Dictionary<string, ModelInfo> ModelInfoCache = new(StringComparer.Ordinal);
-
-    /// <summary>
-    /// Loads model infos from <c>Input/ModelInfo</c>, each file at most once per test run.
-    /// </summary>
-    private static ImmutableHashSet<ModelInfo> LoadModelInfos(string[] fileNames)
-    {
-        lock (ModelInfoCache)
-        {
-            var serializer = new XmlSerializer(typeof(ModelInfo));
-            return fileNames
-                   .Select(fileName =>
-                   {
-                       if (!ModelInfoCache.TryGetValue(fileName, out var modelInfo))
-                       {
-                           using var stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "Input", "ModelInfo", fileName));
-                           modelInfo = (ModelInfo?)serializer.Deserialize(stream)
-                                       ?? throw new InvalidOperationException($"'{fileName}' is not a valid model info.");
-                           ModelInfoCache[fileName] = modelInfo;
-                       }
-
-                       return modelInfo;
-                   })
-                   .ToImmutableHashSet();
-        }
-    }
-
     #endregion
 
     #region Counts, report and baseline files
@@ -466,7 +439,7 @@ public class TranslatorCensusTest
         var report = new StringBuilder();
         report.AppendLine($"# Translator census: {corpus.Name}");
         report.AppendLine($"Directory: {corpus.RelativeDirectory}");
-        report.AppendLine($"Model infos: {(corpus.ModelInfoFiles.Length == 0 ? "(none)" : string.Join(", ", corpus.ModelInfoFiles))}");
+        report.AppendLine($"Additional models: {(corpus.Models.Length == 0 ? "(none)" : string.Join(", ", corpus.Models))}");
         report.AppendLine($"Framework: {RuntimeInformationDescription}");
         report.AppendLine($"CQL files: {cqlFileCount}");
         report.AppendLine($"Summary: {counts}");
@@ -505,8 +478,8 @@ public class TranslatorCensusTest
     {
         var file = new StringBuilder();
         file.AppendLine($"# Libraries in {corpus.RelativeDirectory} that the .NET translator translates without errors");
-        if (corpus.ModelInfoFiles.Length > 0)
-            file.AppendLine($"# with model infos {string.Join(", ", corpus.ModelInfoFiles)}.");
+        if (corpus.Models.Length > 0)
+            file.AppendLine($"# with models {string.Join(", ", corpus.Models)}.");
         file.AppendLine("# Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.");
         file.AppendLine("# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.");
         foreach (var id in results.Where(r => r.Outcome == Outcome.Clean).Select(r => r.Id).OrderBy(id => id, StringComparer.Ordinal))
