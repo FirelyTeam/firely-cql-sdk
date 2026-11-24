@@ -29,15 +29,18 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing). The Expand signature yields List<T> with T the integer point type; the suite extrapolates the Decimal result from the list overload's example." },
 
-            { "NullToBoolean", "An untyped null matches the Decimal, Long, Integer and String overloads of ToBoolean with one implicit cast each, so the call is ambiguous (Developer's Guide, Function Resolution: \"If multiple signatures have the same number of required conversions, an ambiguous resolution error is thrown\"). See cqframework/cql-tests#179." },
 
-            { "FloorIntegerLessThanMinInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-            { "FloorIntegerGreaterThanMaxInteger", "The suite expects a result from an integer literal outside the Integer range, which its own Ceiling cases with the same literals mark invalid=\"syntax\"; the CQL grammar has no overflow rule for NUMBER and a Long literal needs the L suffix." },
-
+            // To be revisited: these need C# compiler changes before they can run.
+            { "SplitOnMatchesNull", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
+            { "SplitOnMatchesComma", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
+            { "SplitOnMatchesRegex", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
+            { "SplitOnMatchesNotFound", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
+            { "TestMeetsAfterNull", "Expects null, the SDK gives false. Appendix B Start and End say an open null boundary is null, but the 1.5.3 logical specification (Interval) and the Author's Guide treat it as an uncertainty, and CQL 2.0 settles it that way, so the relationship is false. cqframework/cql-tests#188 changes the expectation to false." },
+
             { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },
@@ -63,9 +66,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "TestQuantityMonthsNotEqualMo", "A calendar duration compares as equal to the definite-time UCUM unit 'a' or 'mo' instead of yielding null (#1650)." },
             { "TestYearEquivalentDays", "1 year ~ 365 days returns false because the comparer converts calendar durations through UCUM, where a year is 365.25 days; Appendix B, Equivalent says calendar-time conversions \"shall be performed according to calendar duration semantics\" (1 year ~ 365 days), while the same section also says implementations \"are not required to support unit conversion\"." },
             { "TestMonthEquivalentDays", "1 month ~ 30 days returns false because the comparer converts calendar durations through UCUM, where a month is 30.4375 days; Appendix B, Equivalent says calendar-time conversions \"shall be performed according to calendar duration semantics\" (1 month ~ 30 days), while the same section also says implementations \"are not required to support unit conversion\"." },
-
-            { "TupleEqDifferentNamesWithOneNullId", "Conflicting suite expectation: tuple equality is false when one element differs, even if another is null (specification example: { x: 1, y: 1 } = { x: null, y: 2 } is false, and the suite's own TupleEqJohn1John2WithNullName expects false); this case expects null." },
-            { "TupleNotEqDifferingNamesWithOneNullId", "Conflicting suite expectation: tuple equality is false when one element differs, even if another is null (Author's Guide, Comparison Operators: Tuple { x: 1, y: 1 } = Tuple { x: null, y: 2 } \"returns false because the y elements are known unequal\"), and Not Equal is \"a shorthand for invocation of logical negation (not) of the equal operator\" (Appendix B), so the result is true, as the suite's own TupleNotEqJohn1John2WithNullName expects; this case expects null." },
 
             { "SubstringEmptyAnd0", "Returns null for a startIndex equal to the string's length; the suite expects ''. The specification is ambiguous: Appendix B, Substring leaves \"out of range\" undefined, the Developer's Guide, String Operators says null only when the index is \"greater than the length of the string\", and the suite's own SubstringAB2 expects null for the same situation. See cqframework/cql-tests#149." },
             { "TimeProperContainsFalse", "A point at the boundary of an interval wider than the point is properly included, as the specification's point-interval rule requires (\"the interval is not a unit interval containing only the point\"); the suite expects false, see cqframework/cql-tests#152." },

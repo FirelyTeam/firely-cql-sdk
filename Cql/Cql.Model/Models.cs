@@ -40,6 +40,12 @@ namespace Hl7.Cql.Model
                 ?? throw new ArgumentException($"This resource is not a valid {nameof(ModelInfo)}");
         }
 
+        public static ModelInfo LoadFromXmlReader(XmlReader reader)
+        {
+            return xmlSerializer.Deserialize(reader) as ModelInfo
+                ?? throw new ArgumentException($"This resource is not a valid {nameof(ModelInfo)}");
+        }
+
         private static ModelInfo LoadEmbeddedResource(string resourceName)
         {
             var stream = typeof(Models).Assembly.GetManifestResourceStream(resourceName)

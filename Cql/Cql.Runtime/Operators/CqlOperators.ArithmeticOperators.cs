@@ -125,7 +125,8 @@ namespace Hl7.Cql.Operators
                     rightUnit,
                     MetricServiceExtensions.TryAdd,
                     "Add",
-                    preferMostGranularResultUnit: true);
+                    preferMostGranularResultUnit: true,
+                    requireSameDimension: true);
             }
             else
                 return QuantityOrNull(Add(left.value, right.value), left.unit);
@@ -797,7 +798,8 @@ namespace Hl7.Cql.Operators
                     rightUnit,
                     MetricServiceExtensions.TrySubtract,
                     "Subtract",
-                    preferMostGranularResultUnit: true);
+                    preferMostGranularResultUnit: true,
+                    requireSameDimension: true);
             }
             else return QuantityOrNull(Subtract(left.value, right.value), left.unit);
         }
@@ -813,10 +815,14 @@ namespace Hl7.Cql.Operators
             decimal rightValue, string rightUnit,
             MetricBinaryOp tryOp,
             string opName,
-            bool preferMostGranularResultUnit = false)
+            bool preferMostGranularResultUnit = false,
+            bool requireSameDimension = false)
         {
             try
             {
+                if (requireSameDimension && HaveDifferentDimensions(leftUnit, rightUnit))
+                    return null;
+
                 if (tryOp(MetricService,
                         (leftValue, leftUnit, UcumConversionExtensions.UcumSystemUrl),
                         (rightValue, rightUnit, UcumConversionExtensions.UcumSystemUrl),
@@ -845,6 +851,14 @@ namespace Hl7.Cql.Operators
 
             return null;
         }
+
+        /// <summary>
+        /// Whether both units are known UCUM units whose canonical forms differ, such as 'cm' (m) and 'cm2' (m2).
+        /// </summary>
+        private bool HaveDifferentDimensions(string leftUnit, string rightUnit) =>
+            MetricServiceExtensions.TryCanonicalize(MetricService, (1m, leftUnit, UcumConversionExtensions.UcumSystemUrl), out var canonicalLeft)
+            && MetricServiceExtensions.TryCanonicalize(MetricService, (1m, rightUnit, UcumConversionExtensions.UcumSystemUrl), out var canonicalRight)
+            && canonicalLeft!.Value.Item2 != canonicalRight!.Value.Item2;
 
         private bool TryExpressResultInMostGranularUnit(
             (decimal value, string unit, string? codesystem) result,

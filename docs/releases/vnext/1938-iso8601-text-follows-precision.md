@@ -1,7 +1,10 @@
 ## Potentially Breaking
 
 - **Runtime (`Hl7.Cql.Iso8601`)** — The text of a `DateTimeIso8601`, `DateIso8601` or `TimeIso8601` and its `Precision`
-  property now always describe the same value. Three ways of constructing one made them disagree, and all three change:
+  property now describe the same value for every constructor that takes a precision. Three ways of calling those
+  constructors made them disagree, and all three change. A value constructed from components with one given after a
+  missing one, such as `new DateIso8601(2024, null, 15)`, is unchanged: its `Precision` is `Day` and its text `2024`.
+  The changes:
   - **`DateTimePrecision.Unknown` passed as the precision** keeps every component of the `DateTimeOffset` or `TimeSpan`.
     `Precision` already said so; `ToString()` now shows them too. For example
     `new DateTimeIso8601(dto, DateTimePrecision.Unknown).ToString()` gives `2024-03-15T10:30:45.123+01:00` where it gave

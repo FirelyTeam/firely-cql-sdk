@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlIntervalOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#interval-operators-3" version="1.0">
 	<capability code="interval-operators"/>
 	<group name="After" version="1.0">
@@ -724,6 +724,7 @@
 		<capability code="interval-operators"/>
 		<test name="TestIntegerInMaxIntervalTrue" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- Closed null boundaries => maximum interval [min,max]; per CQL spec "in" (https://cql.hl7.org/09-b-cqlreference.html#in): a null closed boundary comparison is considered true. So 5 is included. -->
 			<expression>5 in Interval[null, null]</expression>
 			<output>true</output>
 		</test>
@@ -1161,22 +1162,22 @@
 		</test>
 		<test name="DateTimeMeetsBeforeTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)]</expression>
+			<expression>Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets before Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)]</expression>
 			<output>true</output>
 		</test>
 		<test name="DateTimeMeetsBeforeFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)]</expression>
+			<expression>Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)] meets before Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)]</expression>
 			<output>false</output>
 		</test>
 		<test name="TimeMeetsBeforeTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:00:00.000, @T19:59:59.999]</expression>
+			<expression>Interval[@T04:59:59.999, @T09:59:59.999] meets before Interval[@T10:00:00.000, @T19:59:59.999]</expression>
 			<output>true</output>
 		</test>
 		<test name="TimeMeetsBeforeFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T04:59:59.999, @T09:59:59.999] meets Interval[@T10:12:00.000, @T19:59:59.999]</expression>
+			<expression>Interval[@T04:59:59.999, @T09:59:59.999] meets before Interval[@T10:12:00.000, @T19:59:59.999]</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1184,8 +1185,9 @@
 		<capability code="interval-operators"/>
 		<test name="TestMeetsAfterNull" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- open/unknown null boundaries make the boundary comparison indeterminate -> null; per CQL spec "meets after" (https://cql.hl7.org/09-b-cqlreference.html#meets-after) -->
 			<expression>Interval(null, 5] meets after Interval[11, null)</expression>
-			<output>false</output>
+			<output>null</output>
 		</test>
 		<test name="IntegerIntervalMeetsAfterTrue" version="1.0">
 			<capability code="interval-operators"/>
@@ -1219,22 +1221,22 @@
 		</test>
 		<test name="DateTimeMeetsAfterTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)] meets Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)]</expression>
+			<expression>Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 25)] meets after Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)]</expression>
 			<output>true</output>
 		</test>
 		<test name="DateTimeMeetsAfterFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)] meets Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)]</expression>
+			<expression>Interval[DateTime(2012, 1, 20), DateTime(2012, 1, 25)] meets after Interval[DateTime(2012, 1, 7), DateTime(2012, 1, 14)]</expression>
 			<output>false</output>
 		</test>
 		<test name="TimeMeetsAfterTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T10:00:00.000, @T19:59:59.999] meets Interval[@T04:59:59.999, @T09:59:59.999]</expression>
+			<expression>Interval[@T10:00:00.000, @T19:59:59.999] meets after Interval[@T04:59:59.999, @T09:59:59.999]</expression>
 			<output>true</output>
 		</test>
 		<test name="TimeMeetsAfterFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T10:12:00.000, @T19:59:59.999] meets Interval[@T04:59:59.999, @T09:59:59.999]</expression>
+			<expression>Interval[@T10:12:00.000, @T19:59:59.999] meets after Interval[@T04:59:59.999, @T09:59:59.999]</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1605,22 +1607,22 @@
 		</test>
 		<test name="DateTimeOverlapsBeforeTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)]</expression>
+			<expression>Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps before Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)]</expression>
 			<output>true</output>
 		</test>
 		<test name="DateTimeOverlapsBeforeFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)]</expression>
+			<expression>Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)] overlaps before Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)]</expression>
 			<output>false</output>
 		</test>
 		<test name="TimeOverlapsBeforeTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T12:00:00.000, @T21:59:59.999]</expression>
+			<expression>Interval[@T10:00:00.000, @T19:59:59.999] overlaps before Interval[@T12:00:00.000, @T21:59:59.999]</expression>
 			<output>true</output>
 		</test>
 		<test name="TimeOverlapsBeforeFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T10:00:00.000, @T19:59:59.999] overlaps Interval[@T20:00:00.000, @T21:59:59.999]</expression>
+			<expression>Interval[@T10:00:00.000, @T19:59:59.999] overlaps before Interval[@T20:00:00.000, @T21:59:59.999]</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1709,22 +1711,22 @@
 		</test>
 		<test name="DateTimeOverlapsAfterTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] overlaps Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]</expression>
+			<expression>Interval[DateTime(2012, 1, 15), DateTime(2012, 1, 28)] overlaps after Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]</expression>
 			<output>true</output>
 		</test>
 		<test name="DateTimeOverlapsAfterFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)] overlaps Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]</expression>
+			<expression>Interval[DateTime(2012, 1, 26), DateTime(2012, 1, 28)] overlaps after Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]</expression>
 			<output>false</output>
 		</test>
 		<test name="TimeOverlapsAfterTrue" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T12:00:00.000, @T21:59:59.999] overlaps Interval[@T10:00:00.000, @T19:59:59.999]</expression>
+			<expression>Interval[@T12:00:00.000, @T21:59:59.999] overlaps after Interval[@T10:00:00.000, @T19:59:59.999]</expression>
 			<output>true</output>
 		</test>
 		<test name="TimeOverlapsAfterFalse" version="1.0">
 			<capability code="interval-operators"/>
-			<expression>Interval[@T20:00:00.000, @T21:59:59.999] overlaps Interval[@T10:00:00.000, @T19:59:59.999]</expression>
+			<expression>Interval[@T20:00:00.000, @T21:59:59.999] overlaps after Interval[@T10:00:00.000, @T19:59:59.999]</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1737,6 +1739,7 @@
 		</test>
 		<test name="TestPointFromMaxIntervalError" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- extracting a point from the maximum interval is a run-time error per spec "point from" (https://cql.hl7.org/09-b-cqlreference.html#point-from): "attempting to extract a point from the maximum interval (Interval[null, null]) will result in an error" -->
 			<expression invalid="true">point from Interval[null, null]</expression>
 		</test>
 		<test name="TestPointFromUnknownIntervalNull" version="1.0">
@@ -2125,10 +2128,12 @@
 		</test>
 		<test name="DateTimeWidth" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- invalid: width is not defined for Date/DateTime/Time intervals (use duration or difference instead); per CQL spec "width" (https://cql.hl7.org/09-b-cqlreference.html#width): "because CQL defines duration and difference operations for date and time valued intervals, width is not defined for intervals of these types" -->
 			<expression invalid="true">width of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]</expression>
 		</test>
 		<test name="TimeWidth" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- invalid: width is not defined for Date/DateTime/Time intervals (use duration or difference instead); per CQL spec "width" (https://cql.hl7.org/09-b-cqlreference.html#width): "because CQL defines duration and difference operations for date and time valued intervals, width is not defined for intervals of these types" -->
 			<expression invalid="true">width of Interval[@T05:59:59.999, @T15:59:59.999]</expression>
 		</test>
 	</group>
@@ -2226,13 +2231,52 @@
 		</test>
 		<test name="InvalidIntegerInterval" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- invalid: the ending boundary must be greater than or equal to the starting boundary; per CQL Author's Guide "Interval Values" (https://cql.hl7.org/02-authorsguide.html#interval-values) an interval's low boundary must be <= its high boundary -->
 			<expression invalid="true">Interval[5, 3]</expression>
-			<!-- EXPECT: Invalid Interval - the ending boundary must be greater than or equal to the starting boundary. -->
 		</test>
 		<test name="InvalidIntegerIntervalA" version="1.0">
 			<capability code="interval-operators"/>
+			<!-- invalid: open high boundary makes the effective end predecessor(5) = 4, which is less than the closed start 5; per CQL Author's Guide "Interval Values" (https://cql.hl7.org/02-authorsguide.html#interval-values) an interval's low boundary must be <= its high boundary -->
 			<expression invalid="true">Interval[5, 5)</expression>
-			<!-- EXPECT: Invalid Interval - the ending boundary must be greater than or equal to the starting boundary. -->
+		</test>
+	</group>
+	<group name="Size" version="1.0">
+		<capability code="interval-operators"/>
+		<test name="SizeTest" version="1.0">
+			<capability code="interval-operators"/>
+			<!-- (end - start) + point-size; [3,7] contains 5 points -->
+			<expression>Size(Interval[3, 7])</expression>
+			<output>5</output>
+		</test>
+		<test name="SizeTestOpen" version="1.0">
+			<capability code="interval-operators"/>
+			<!-- open high: end = predecessor(8) = 7; same 5 points -->
+			<expression>Size(Interval[3, 8))</expression>
+			<output>5</output>
+		</test>
+		<test name="SizeIsNull" version="1.0">
+			<capability code="interval-operators"/>
+			<expression>Size(null as Interval&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="NotEquivalent" version="1.0">
+		<capability code="interval-operators"/>
+		<test name="IntegerIntervalNotEquivalentFalse" version="1.0">
+			<capability code="interval-operators"/>
+			<expression>Interval[0, 5] !~ Interval[0, 5]</expression>
+			<output>false</output>
+		</test>
+		<test name="IntervalNotEquivalentNullBoundaryFalse" version="1.0">
+			<capability code="interval-operators"/>
+			<!-- equivalent even with matching null boundaries -->
+			<expression>Interval[1, null] !~ Interval[1, null]</expression>
+			<output>false</output>
+		</test>
+		<test name="IntegerIntervalNotEquivalentTrue" version="1.0">
+			<capability code="interval-operators"/>
+			<expression>Interval[-1, 7] !~ Interval[0, 7]</expression>
+			<output>true</output>
 		</test>
 	</group>
 </tests>

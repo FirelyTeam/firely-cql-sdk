@@ -83,7 +83,8 @@ internal partial class CqlOperatorsBinder(
             ("SortBy"           ,0 , >=3)  => SortBy(args[0], args[1], args[2]),
             ("Where"            ,0 , >=2)  => Where(args[0], args[1]),
             ("ToList"           ,_ , _)    => ToList(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
-            ("Width"            ,_ , _)    => Width(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+            ("Size"             ,_ , _)    => NullForIntervalOfAny(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
+            ("Width"            ,_ , _)    => NullForIntervalOfAny(args) ?? BindToBestMethodOverload(methodName, args, typeArgs)!,
             _                                        => BindToBestMethodOverload(methodName, args, typeArgs)!,
             // @formatter:on
         };
@@ -93,7 +94,8 @@ internal partial class CqlOperatorsBinder(
         // bottom-up, so this reaches a fixpoint over chains without a second pass.
         return Fuse(result);
 
-        CodeExpression? Width(CodeExpression[] args) =>
+        // Size and Width have no overload for an interval over Any, which can only be null, so either gives null.
+        CodeExpression? NullForIntervalOfAny(CodeExpression[] args) =>
             args is [{ Type:{} t }] && t == typeof(CqlInterval<object>)
                 ? new CodeConstant(null, typeof(int?)) // This should be disallowed but isn't, so handle it:
                 : null;

@@ -396,6 +396,10 @@ namespace Hl7.Cql.CqlToElm
                 if (byCost.Length > 0)
                 {
                     var cheapest = byCost[0].ToArray();
+                    // A library's own function takes precedence over a System one it ties with, as
+                    // SymbolTable.TryResolveFunction lets it replace a System overload of the same signature.
+                    if (cheapest.Length > 1 && cheapest.Where(m => m.Function is not SystemFunction).ToArray() is [var libraryFunction])
+                        cheapest = [libraryFunction];
                     if (cheapest.Length == 1)
                     {
                         result = cheapest[0];

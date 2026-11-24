@@ -24,6 +24,8 @@ This package provides model definitions and metadata that enable the CQL runtime
 
 The QICore and US Core model infos are unmodified copies of the ones in the `quick` artifact of the Java [CQL tooling](https://github.com/cqframework/clinical_quality_language), at the version pinned in [`Demo/Cql/Build/pom.xml`](../../Demo/Cql/Build/pom.xml). Translating CQL against them is opt-in: select them through the `CqlModel` members of `Hl7.Cql.CqlToElm` (`QICore411`, `USCore311`, `QICore600`, `USCore610`).
 
+A model that is not bundled can be read from its model info XML with `ModelInfo.LoadFromFile` or `ModelInfo.LoadFromStream`, and passed to the CQL-to-ELM toolkit through `CqlToolkitConfig.ModelInfos`.
+
 ## Usage
 
 This package provides model metadata used by the CQL compiler and runtime to understand the structure of data being processed.

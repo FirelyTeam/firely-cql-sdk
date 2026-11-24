@@ -1,5 +1,5 @@
 # Libraries in LibrarySets/dqm-content-qicore-2025/Cql that the .NET translator translates without errors
-# with model infos qicore-modelinfo-6.0.0.xml, uscore-modelinfo-6.1.0.xml.
+# with models QICore600, USCore610.
 # Checked by TranslatorCensusTest: a listed library that no longer translates cleanly fails the test.
 # Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
 AdultOutpatientEncounters-4.19.000
