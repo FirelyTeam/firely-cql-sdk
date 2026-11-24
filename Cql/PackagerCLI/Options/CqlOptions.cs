@@ -25,28 +25,34 @@ public record CqlOptions : CqlToolkitConfig, IBindOptions
     }
 
     /// <summary>
-    /// Reads the model info XML files named by the <c>ModelInfos</c> setting, a list of file paths relative to the
-    /// current directory, into <see cref="CqlToolkitConfig.ModelInfos"/>.
+    /// Paths of model info XML files, relative to the current directory, whose models are translated against in
+    /// addition to <see cref="CqlToolkitConfig.Models"/>. The files are read only by the commands that translate CQL,
+    /// through <see cref="WithModelInfoFiles"/>.
     /// </summary>
-    /// <remarks>Called by convention from <see cref="OptionsBinder"/></remarks>
-    /// <exception cref="InvalidOperationException">A file cannot be read or does not hold a model info.</exception>
-    [UsedImplicitly]
-    public static bool TryBindModelInfos(IConfiguration config, out ImmutableHashSet<ModelInfo>? value)
-    {
-        value = config.Get<string[]>()?.Select(LoadModelInfo).ToImmutableHashSet();
-        return value is not null;
-    }
+    public string?[]? ModelInfoFiles { get; init; }
 
-    private static ModelInfo LoadModelInfo(string path)
+    /// <summary>
+    /// Returns this configuration with the models read from <see cref="ModelInfoFiles"/> added to
+    /// <see cref="CqlToolkitConfig.ModelInfos"/>.
+    /// </summary>
+    /// <exception cref="InvalidOperationException">A path is empty, or its file cannot be read or does not hold a usable model info.</exception>
+    public CqlToolkitConfig WithModelInfoFiles() =>
+        ModelInfoFiles is null or []
+            ? this
+            : this with { ModelInfos = ModelInfos.Union(ModelInfoFiles.Select(LoadModelInfo)) };
+
+    private static ModelInfo LoadModelInfo(string? path)
     {
-        var fullPath = Path.GetFullPath(path);
+        if (string.IsNullOrWhiteSpace(path))
+            throw new InvalidOperationException($"{ConfigSection}:{nameof(ModelInfoFiles)} contains an empty file path.");
+
         try
         {
-            return ModelInfo.LoadFromFile(fullPath);
+            return ModelInfo.LoadFromFile(Path.GetFullPath(path));
         }
-        catch (Exception e) when (e is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException)
+        catch (Exception e) when (e is IOException or UnauthorizedAccessException or InvalidOperationException or ArgumentException or NotSupportedException)
         {
-            throw new InvalidOperationException($"Cannot read the model info file '{fullPath}' named in {ConfigSection}:{nameof(ModelInfos)}: {e.Message}", e);
+            throw new InvalidOperationException($"Cannot read the model info file '{path}' named in {ConfigSection}:{nameof(ModelInfoFiles)}: {e.Message}", e);
         }
     }
 }

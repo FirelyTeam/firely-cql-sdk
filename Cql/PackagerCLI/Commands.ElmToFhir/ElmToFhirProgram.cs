@@ -191,7 +191,7 @@ internal sealed class ElmToFhirProgram
 
             if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
             {
-                CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
+                CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt.WithModelInfoFiles())
                                         .SetIgnoreEnumerationExceptions()
                                         .AddCqlLibrariesFromDirectory(
                                             opt.CqlInDir,

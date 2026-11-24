@@ -16,11 +16,11 @@ using Microsoft.Extensions.Options;
 namespace CoreTests;
 
 /// <summary>
-/// Binds the Packager's <c>Cql:ModelInfos</c> setting, a list of model info file paths, into <see cref="CqlOptions"/>
-/// through the same options pipeline the Packager CLI uses.
+/// Binds the Packager's <c>Cql:ModelInfoFiles</c> setting, a list of model info file paths, into <see cref="CqlOptions"/>
+/// through the same options pipeline the Packager CLI uses, and reads the files with <see cref="CqlOptions.WithModelInfoFiles"/>.
 /// </summary>
 [TestClass]
-public class PackagerCqlModelInfosBindingTests
+public class PackagerCqlModelInfoFilesTests
 {
     private const string WidgetModelInfo = """
         <?xml version="1.0" encoding="UTF-8"?>
@@ -45,17 +45,19 @@ public class PackagerCqlModelInfosBindingTests
     }
 
     [TestMethod]
-    public void ModelInfos_Setting_Loads_Each_File_Next_To_The_Selected_Models()
+    public void ModelInfoFiles_Are_Read_Next_To_The_Selected_Models()
     {
         var path = Path.Combine(Path.GetTempPath(), $"widgets-modelinfo-{Guid.NewGuid():N}.xml");
         File.WriteAllText(path, WidgetModelInfo);
         try
         {
-            var options = BindCqlOptions(("Cql:Models:0", "ElmR1"), ("Cql:Models:1", "Fhir401"), ("Cql:ModelInfos:0", path));
+            var options = BindCqlOptions(("Cql:Models:0", "ElmR1"), ("Cql:Models:1", "Fhir401"), ("Cql:ModelInfoFiles:0", path));
 
-            options.ModelInfos.Should().ContainSingle()
-                   .Which.url.Should().Be("urn:example:widgets");
-            options.Models.Should().BeEquivalentTo([CqlModel.ElmR1, CqlModel.Fhir401]);
+            options.ModelInfoFiles.Should().Equal(path);
+            var config = options.WithModelInfoFiles();
+            config.ModelInfos.Should().ContainSingle()
+                  .Which.url.Should().Be("urn:example:widgets");
+            config.Models.Should().BeEquivalentTo([CqlModel.ElmR1, CqlModel.Fhir401]);
         }
         finally
         {
@@ -64,22 +66,35 @@ public class PackagerCqlModelInfosBindingTests
     }
 
     [TestMethod]
-    public void Without_The_Setting_No_Model_Info_Is_Loaded()
+    public void Without_The_Setting_No_Model_Info_Is_Read()
     {
         var options = BindCqlOptions(("Cql:Models:0", "ElmR1"));
 
-        options.ModelInfos.Should().BeEmpty();
+        options.ModelInfoFiles.Should().BeNull();
+        options.WithModelInfoFiles().ModelInfos.Should().BeEmpty();
     }
 
     [TestMethod]
-    public void A_Missing_File_Is_Reported_With_Its_Full_Path_And_The_Setting()
+    public void Binding_Does_Not_Read_The_Files()
     {
+        // Commands that do not translate CQL bind these options too, so a missing file must not fail them.
         var path = Path.Combine(Path.GetTempPath(), $"missing-modelinfo-{Guid.NewGuid():N}.xml");
 
-        var bind = () => BindCqlOptions(("Cql:ModelInfos:0", path));
+        var options = BindCqlOptions(("Cql:ModelInfoFiles:0", path));
 
-        bind.Should().Throw<InvalidOperationException>()
-            .WithMessage($"*'{Path.GetFullPath(path)}'*Cql:ModelInfos*");
+        options.ModelInfoFiles.Should().Equal(path);
+    }
+
+    [TestMethod]
+    public void A_Missing_File_Is_Reported_With_Its_Path_And_The_Setting()
+    {
+        var path = Path.Combine(Path.GetTempPath(), $"missing-modelinfo-{Guid.NewGuid():N}.xml");
+        var options = BindCqlOptions(("Cql:ModelInfoFiles:0", path));
+
+        var read = () => options.WithModelInfoFiles();
+
+        read.Should().Throw<InvalidOperationException>()
+            .WithMessage($"*'{path}'*Cql:ModelInfoFiles*");
     }
 
     [TestMethod]
@@ -89,14 +104,27 @@ public class PackagerCqlModelInfosBindingTests
         File.WriteAllText(path, "<library xmlns=\"urn:hl7-org:elm:r1\"/>");
         try
         {
-            var bind = () => BindCqlOptions(("Cql:ModelInfos:0", path));
+            var options = BindCqlOptions(("Cql:ModelInfoFiles:0", path));
 
-            bind.Should().Throw<InvalidOperationException>()
-                .WithMessage($"*'{path}'*Cql:ModelInfos*");
+            var read = () => options.WithModelInfoFiles();
+
+            read.Should().Throw<InvalidOperationException>()
+                .WithMessage($"*'{path}'*Cql:ModelInfoFiles*");
         }
         finally
         {
             File.Delete(path);
         }
+    }
+
+    [TestMethod]
+    public void An_Empty_Path_Is_Reported_With_The_Setting()
+    {
+        var options = new CqlOptions { ModelInfoFiles = [" "] };
+
+        var read = () => options.WithModelInfoFiles();
+
+        read.Should().Throw<InvalidOperationException>()
+            .WithMessage("Cql:ModelInfoFiles contains an empty file path.");
     }
 }

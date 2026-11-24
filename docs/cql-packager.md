@@ -288,20 +288,25 @@ Select at most one version of each model: `USCore311` and `USCore610` are two ve
 Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
 
 A model that is not bundled, such as a later US Core version or an organization's own model, is loaded from its
-model info XML file with `ModelInfos`, a list of file paths relative to the current directory:
+model info XML file with `ModelInfoFiles`, a list of file paths:
 
 ```jsonc
 "Cql": {
   "Models": [ "ElmR1", "Fhir401" ],
-  "ModelInfos": [ "models/uscore-modelinfo-7.0.0.xml" ]
+  "ModelInfoFiles": [ "models/uscore-modelinfo-7.0.0.xml", "models/qicore-modelinfo-7.0.0.xml" ]
 }
 ```
 
-Each file is added to the models selected in `Models`, which must still include `ElmR1` and any model the file's
-model builds on. The same rule applies as for bundled models: select at most one version of each model, counting the
-files and `Models` together. A file that cannot be read, or that is not a model info, stops the command before any
-library is translated, with a message naming the file. Model info files are not listed in the configuration the
-command prints at startup.
+Relative paths are resolved against the current directory, not against the settings file that lists them; a
+settings file kept next to the Packager executable therefore needs absolute paths. Only the commands that translate
+CQL, `cql` and `elm` with FHIR output, read the files.
+
+Each file's model is added to the models selected in `Models`, which must still include `ElmR1`. The models a file
+builds on (its `requiredModelInfo`) must be selected too, through `Models` or another file; the order of the list
+does not matter. Each model may be selected once: listing a file for a model that `Models` already selects in the
+same version is refused, and as for bundled models, at most one version of each model can be selected. A file that
+cannot be read, is not a model info, declares no `url` or `version`, or contains a document type declaration stops
+the command before any library is translated, with a message naming the file.
 
 ## ELM Attachment Formatting
 

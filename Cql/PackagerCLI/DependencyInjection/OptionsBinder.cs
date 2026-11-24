@@ -68,8 +68,7 @@ public static class OptionsBinder
                         && configuration.GetSection(property.Name) is {} configSection)
                     {
                         object?[] inputs = [configSection, null];
-                        // Unwrapped, so an error a binder reports (e.g. an unreadable file) reaches the user as it was thrown.
-                        var success = (bool)m.Invoke(options, BindingFlags.DoNotWrapExceptions, binder: null, inputs, culture: null)!;
+                        var success = (bool)m.Invoke(options, inputs)!;
                         if (success)
                             property.SetValue(options, inputs[1]);
                     }

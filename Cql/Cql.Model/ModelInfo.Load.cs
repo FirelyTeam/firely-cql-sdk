@@ -14,29 +14,53 @@ namespace Hl7.Cql.Model
     {
         /// <summary>
         /// Reads a model info from its XML form (namespace <c>urn:hl7-org:elm-modelinfo:r1</c>), as published
-        /// with a FHIR implementation guide or by the reference CQL tooling.
+        /// with a FHIR implementation guide or by the reference CQL tooling. A document type declaration (DTD)
+        /// is not allowed.
         /// </summary>
         /// <param name="stream">The stream holding the model info XML; it is read but not closed.</param>
         /// <returns>The model info, ready to pass to the CQL-to-ELM toolkit configuration.</returns>
-        /// <exception cref="InvalidOperationException">The stream does not hold well-formed model info XML.</exception>
-        /// <exception cref="ArgumentException">The XML is not a model info.</exception>
+        /// <exception cref="InvalidOperationException">
+        /// The XML is malformed, contains a DTD, is not a model info, or declares no <c>url</c> or <c>version</c>.
+        /// </exception>
         public static ModelInfo LoadFromStream(System.IO.Stream stream)
         {
             if (stream is null)
                 throw new ArgumentNullException(nameof(stream));
-            return Models.LoadFromStream(stream);
+
+            var settings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null, CloseInput = false };
+            ModelInfo modelInfo;
+            using (var reader = XmlReader.Create(stream, settings))
+            {
+                try
+                {
+                    modelInfo = Models.LoadFromXmlReader(reader);
+                }
+                catch (ArgumentException e)
+                {
+                    throw new InvalidOperationException(e.Message, e);
+                }
+            }
+
+            // The translator keys a model by its url and version, so a model info without them cannot be used.
+            if (string.IsNullOrEmpty(modelInfo.url))
+                throw new InvalidOperationException($"The model info {modelInfo.name} declares no url.");
+            if (string.IsNullOrEmpty(modelInfo.version))
+                throw new InvalidOperationException($"The model info {modelInfo.name} ({modelInfo.url}) declares no version.");
+            return modelInfo;
         }
 
         /// <summary>
         /// Reads a model info from an XML file (namespace <c>urn:hl7-org:elm-modelinfo:r1</c>), as published
-        /// with a FHIR implementation guide or by the reference CQL tooling.
+        /// with a FHIR implementation guide or by the reference CQL tooling. A document type declaration (DTD)
+        /// is not allowed.
         /// </summary>
         /// <param name="path">The path of the model info XML file, relative to the current directory or absolute.</param>
         /// <returns>The model info, ready to pass to the CQL-to-ELM toolkit configuration.</returns>
         /// <exception cref="System.IO.IOException">The file cannot be opened.</exception>
         /// <exception cref="UnauthorizedAccessException">The file cannot be read with the current permissions.</exception>
-        /// <exception cref="InvalidOperationException">The file does not hold well-formed model info XML.</exception>
-        /// <exception cref="ArgumentException">The XML is not a model info.</exception>
+        /// <exception cref="InvalidOperationException">
+        /// The XML is malformed, contains a DTD, is not a model info, or declares no <c>url</c> or <c>version</c>.
+        /// </exception>
         public static ModelInfo LoadFromFile(string path)
         {
             if (path is null)
