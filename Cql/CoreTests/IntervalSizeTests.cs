@@ -70,11 +70,31 @@ public class IntervalSizeTests
         Assert.IsNull(operators.Size(new CqlInterval<decimal?>(null, 7m, false, true)));
     }
 
+    /// <summary>
+    /// A closed null boundary is the type's minimum or maximum (§9.B Start and End), so the size runs to that extreme;
+    /// a Quantity extreme takes the other boundary's unit.
+    /// </summary>
+    [TestMethod]
+    public void Size_ClosedNullBoundary_RunsToTheTypesExtreme()
+    {
+        var operators = Operators();
+
+        Assert.AreEqual(int.MaxValue - 2, operators.Size(new CqlInterval<int?>(3, null, true, true)));
+        Assert.AreEqual(int.MaxValue - 4, operators.Size(new CqlInterval<int?>(null, -6, true, true)));
+        Assert.AreEqual(long.MaxValue - 2, operators.Size(new CqlInterval<long?>(3L, null, true, true)));
+        Assert.AreEqual(decimal.MaxValue - 3m + 0.00000001m, operators.Size(new CqlInterval<decimal?>(3m, null, true, true)));
+
+        var quantity = operators.Size(new CqlInterval<CqlQuantity?>(new CqlQuantity(3m, "mg"), null, true, true));
+        Assert.AreEqual(decimal.MaxValue - 3m + 0.00000001m, quantity?.value);
+        Assert.AreEqual("mg", quantity?.unit);
+    }
+
     /// <summary>A size outside the type's range is null, not the value it wraps around to.</summary>
     [TestMethod]
     public void Size_OutsideTheTypesRange_IsNull()
     {
         Assert.IsNull(Operators().Size(new CqlInterval<int?>(int.MinValue, int.MaxValue, true, true)));
         Assert.IsNull(Operators().Size(new CqlInterval<long?>(0L, long.MaxValue, true, true)));
+        Assert.IsNull(Operators().Size(new CqlInterval<int?>(null, 3, true, true)));
     }
 }
