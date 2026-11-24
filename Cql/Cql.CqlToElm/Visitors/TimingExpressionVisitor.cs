@@ -245,6 +245,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 ? [left, right, Precision(precision)]
                 : [left, right];
 
+        /// <summary>
+        /// The closed interval from <paramref name="point"/> to itself.
+        /// </summary>
+        private static Expression PointInterval(Expression point) =>
+            new Elm.Interval
+            {
+                low = point,
+                high = point,
+                lowClosed = true,
+                highClosed = true,
+            }.WithLocator(point.locator).WithResultType(point.resultTypeSpecifier.ToIntervalType());
+
         // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?
         private Expression HandleBeforeOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context,
             Expression lhs,
@@ -305,6 +317,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // No quantity offset, so a simple "a is before/after (or on) b"
             if (context.quantityOffset() == null)
             {
+                // SameOrBefore and SameOrAfter have no point-interval overloads, so, as the reference translator does
+                // whatever the interval promotion option says, a point compared with an interval becomes a point
+                // interval: Interval[6, 10] on or after 6 is valid with interval promotion disabled. Before and After
+                // take the point as it is. A point typed Any (null) already matches an interval.
+                if (isInclusive)
+                {
+                    (left, right) = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
+                    {
+                        (IntervalTypeSpecifier, not IntervalTypeSpecifier) when right.resultTypeSpecifier != SystemTypes.AnyType => (left, PointInterval(right)),
+                        (not IntervalTypeSpecifier, IntervalTypeSpecifier) when left.resultTypeSpecifier != SystemTypes.AnyType => (PointInterval(left), right),
+                        _ => (left, right),
+                    };
+                }
+
                 var lrArgs = CreateArgArray(left, right, dateTimePrecision);
                 var result = (isInclusive, isBefore) switch
                 {

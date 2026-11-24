@@ -25,7 +25,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Coalesce_Of_Intervals_Of_Any_Types_As_Interval_Of_Any()
         {
-            var library = CreateCqlToolkit().MakeLibrary("""
+            // Coalesce over intervals resolves only through interval promotion and demotion until a generic parameter
+            // can bind to an interval type (#1673).
+            var library = CreateCqlToolkit(EnableIntervalPromotion: true, EnableIntervalDemotion: true).MakeLibrary("""
                 library GenericInferenceTest version '1.0.0'
 
                 define C: Coalesce(Interval[null, null], Interval[null, null])

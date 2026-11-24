@@ -92,7 +92,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FlattenMixedChoiceType()
         {
             // requires list promotion
-            var cqlToolkit = CreateCqlToolkit();
+            var cqlToolkit = CreateCqlToolkit(DisableListPromotion: true);
             var library = cqlToolkit.MakeLibrary( """
                 library Test version '1.0.0'
 

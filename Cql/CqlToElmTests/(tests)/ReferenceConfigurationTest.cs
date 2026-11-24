@@ -86,6 +86,53 @@ namespace Hl7.Cql.CqlToElm.Test
                    .Which.source.Should().BeOfType<ExpandValueSet>();
         }
 
+        [DataTestMethod]
+        [DataRow("Code { code: 'x', system: 'http://example.org' }", "Code")]
+        [DataRow("@2020-01-01", "Date")]
+        public void A_Promoted_Value_Keeps_Its_Own_Type_Over_An_Equally_Costly_Conversion(string value, string elementType)
+        {
+            // Promoting the value and promoting its implicit conversion (Code to Concept, Date to DateTime) cost the
+            // same; the Java translator keeps the value's own type: Count(ToList(value)) with signature List<value type>.
+            var library = DefaultToolkit().MakeLibrary($"""
+                library PromotionInference version '1.0.0'
+
+                define Counted: Count({value})
+                """);
+
+            var toList = library.statements.Single(s => s.name == "Counted").expression.Should().BeOfType<Count>()
+                                .Which.source.Should().BeOfType<ToList>().Subject;
+            toList.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>()
+                  .Which.elementType.Should().BeOfType<NamedTypeSpecifier>()
+                  .Which.name.Name.Should().Be($"{{urn:hl7-org:elm-types:r1}}{elementType}");
+        }
+
+        [TestMethod]
+        [Ignore("A generic parameter does not bind to an interval type, so Coalesce over intervals resolves only through interval promotion and demotion; tracked by #1673.")]
+        public void Coalesce_Of_Intervals_Resolves_Without_Interval_Promotion()
+        {
+            // The Java translator resolves this with interval promotion disabled, binding T to Interval<Integer>.
+            DefaultToolkit().MakeLibrary("""
+                library CoalesceIntervals version '1.0.0'
+
+                define C: Coalesce(Interval[1, 2], Interval[3, 4])
+                """);
+        }
+
+        [TestMethod]
+        public void A_Point_On_Or_After_An_Interval_Becomes_A_Point_Interval_By_Default()
+        {
+            // SameOrAfter has no point-interval overload; the Java translator converts the point to a point interval
+            // in this phrase even with interval promotion disabled.
+            var library = DefaultToolkit().MakeLibrary("""
+                library OnOrAfterPoint version '1.0.0'
+
+                define OnOrAfter: Interval[6, 10] on or after 6
+                """);
+
+            library.statements.Single(s => s.name == "OnOrAfter").expression.Should().BeOfType<SameOrAfter>()
+                   .Which.operand[1].Should().BeOfType<Interval>();
+        }
+
         [TestMethod]
         public void A_Point_Is_Not_Promoted_To_An_Interval_By_Default()
         {
