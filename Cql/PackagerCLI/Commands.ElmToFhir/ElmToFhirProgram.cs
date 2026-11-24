@@ -71,6 +71,11 @@ internal sealed class ElmToFhirProgram
             }
 
             // Create subdirectory preserver if not flattening hierarchy
+            // Read the model info files before any output is written, so an unusable file stops the run unchanged.
+            var cqlToolkitConfig = (opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null)
+                ? cqlOpt.WithModelInfoFiles()
+                : null;
+
             SubdirectoryPreserver? subdirectoryPreserver = opt.FlattenDirHierarchy
                 ? null
                 : new SubdirectoryPreserver();
@@ -189,9 +194,9 @@ internal sealed class ElmToFhirProgram
                 }
             }
 
-            if ((opt.CqlInDir, opt.FhirOutDir ?? opt.LibrariesOutDir ?? opt.MeasuresOutDir) is (not null, not null))
+            if ((opt.CqlInDir, cqlToolkitConfig) is (not null, not null))
             {
-                CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt.WithModelInfoFiles())
+                CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToolkitConfig)
                                         .SetIgnoreEnumerationExceptions()
                                         .AddCqlLibrariesFromDirectory(
                                             opt.CqlInDir,

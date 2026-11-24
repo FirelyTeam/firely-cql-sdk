@@ -8,4 +8,4 @@
 - **Packager CLI** — the `Cql:ModelInfoFiles` setting lists model info XML files, relative to the current
   directory, that the `cql` and `elm` commands translate against next to the models selected in `Cql:Models`. A file
   that cannot be read, or that is not a usable model info, stops the command before any library is translated, with
-  a message naming the file. (#1740, #1970)
+  a message naming the file. Generating C# still needs the SDK to map the model's types to .NET types. (#1740, #1970)

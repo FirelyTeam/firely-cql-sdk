@@ -306,7 +306,11 @@ builds on (its `requiredModelInfo`) must be selected too, through `Models` or an
 does not matter. Each model may be selected once: listing a file for a model that `Models` already selects in the
 same version is refused, and as for bundled models, at most one version of each model can be selected. A file that
 cannot be read, is not a model info, declares no `url` or `version`, or contains a document type declaration stops
-the command before any library is translated, with a message naming the file.
+the command before any library is translated or any output is written, with a message naming the file.
+
+A model loaded this way is available for translating CQL to ELM. Generating C# (`--cs`, `--dll`, `--fhir`) needs
+.NET types for the model's classes; for a model whose types the SDK does not map to .NET types, the C# step fails
+with "Cannot resolve type for typeSpecifier".
 
 ## ELM Attachment Formatting
 
