@@ -28,13 +28,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandEmptyList", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing). The Expand signature yields List<T> with T the integer point type; the suite extrapolates the Decimal result from the list overload's example." },
-
-
-            // To be revisited: these need C# compiler changes before they can run.
-            { "SplitOnMatchesNull", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesComma", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesRegex", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesNotFound", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
