@@ -46,16 +46,7 @@ namespace Hl7.Cql.Iso8601
         // compute the same string.
         private string? _string;
 
-        // The precision the eager implementation passed to Format(...) from whichever constructor ran.
-        // This is deliberately NOT the same thing as Precision: under strict validation, or with an
-        // explicit DateTimePrecision.Unknown, the eager code formatted at the precision *argument* while
-        // Precision was derived from which components have values. Reproducing the argument exactly is
-        // what keeps ToString()/Equals/GetHashCode byte-identical to the eager implementation. Whether that
-        // divergence is the intended contract is tracked separately, in issue #1524. The parse
-        // path leaves this at its default: it stores the original literal in _string, so Format never runs.
-        private readonly DateTimePrecision _stringPrecision;
-
-        private string String => _string ??= Format(Year, Month, Day, _stringPrecision);
+        private string String => _string ??= Format(Year, Month, Day);
 
         /// <summary>
         /// The regular expression used to parse ISO 8601 dates.
@@ -73,7 +64,6 @@ namespace Hl7.Cql.Iso8601
             this(null,
                 year, month, day, strict)
         {
-            _stringPrecision = DateTimePrecision.Day;
         }
 
         /// <summary>
@@ -81,13 +71,13 @@ namespace Hl7.Cql.Iso8601
         /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
         /// </summary>
         /// <param name="dto">The date represented by a <see cref="DateTimeOffset"/>.</param>
-        /// <param name="precision">The desired precision for this ISO date.</param>
+        /// <param name="precision">The precision of the date. <see cref="DateTimePrecision.Unknown"/> keeps the year, month and day,
+        /// and so does a precision finer than <see cref="DateTimePrecision.Day"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
             this(null,
                 dto.Year, dto.Month, dto.Day, strict, precision)
         {
-            _stringPrecision = precision;
         }
 
         internal DateIso8601(string? @string, int year, int? month, int? day,
@@ -138,10 +128,12 @@ namespace Hl7.Cql.Iso8601
                 else
                     Precision = DateTimePrecision.Year;
             }
-            else
-            {
-                Precision = precision;
-            }
+
+            // A requested precision decides how much of the value is kept, whether or not the components were validated.
+            // A date has no component after the day, so a finer precision is the day.
+            if (precision != DateTimePrecision.Unknown)
+                Precision = precision > DateTimePrecision.Day ? DateTimePrecision.Day : precision;
+
             if (Precision > DateTimePrecision.Unknown)
             {
                 Year = year;
@@ -227,15 +219,15 @@ namespace Hl7.Cql.Iso8601
             && month is null or (>= 1 and <= 12)
             && (day is null || (month is { } m && day >= 1 && day <= DateTime.DaysInMonth(year, m)));
 
-        private static string Format(int year, int? month, int? day, DateTimePrecision precision)
+        private static string Format(int year, int? month, int? day)
         {
             var sb = new StringBuilder();
             sb.Append(year.ToString("D4", CultureInfo.InvariantCulture));
-            if (month.HasValue && precision > DateTimePrecision.Year)
+            if (month.HasValue)
             {
                 sb.Append('-');
                 sb.Append(month.Value.ToString("D2", CultureInfo.InvariantCulture));
-                if (day.HasValue && precision > DateTimePrecision.Month)
+                if (day.HasValue)
                 {
                     sb.Append('-');
                     sb.Append(day.Value.ToString("D2", CultureInfo.InvariantCulture));
