@@ -6,6 +6,7 @@
   },
   "Cql": {
     "Models": [ "ElmR1", "Fhir401" ], // any of "ElmR1", "Fhir401", "USCore311", "QICore411", "USCore610" or "QICore600"
+    "ModelInfos": [], // paths of model info XML files to load next to "Models", relative to the current directory
     "AmbiguousTypeBehavior": "PreferModel", // "Error", "PreferSystem" or "PreferModel"
     "SystemElmModelUri": "urn:hl7-org:elm-types:r1",
     "SystemElmModelVersion": "1.0.0",

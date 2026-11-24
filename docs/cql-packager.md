@@ -287,6 +287,22 @@ Select at most one version of each model: `USCore311` and `USCore610` are two ve
 `QICore411` and `QICore600`, and a configuration that selects both is refused before any library is translated.
 Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
 
+A model that is not bundled, such as a later US Core version or an organization's own model, is loaded from its
+model info XML file with `ModelInfos`, a list of file paths relative to the current directory:
+
+```jsonc
+"Cql": {
+  "Models": [ "ElmR1", "Fhir401" ],
+  "ModelInfos": [ "models/uscore-modelinfo-7.0.0.xml" ]
+}
+```
+
+Each file is added to the models selected in `Models`, which must still include `ElmR1` and any model the file's
+model builds on. The same rule applies as for bundled models: select at most one version of each model, counting the
+files and `Models` together. A file that cannot be read, or that is not a model info, stops the command before any
+library is translated, with a message naming the file. Model info files are not listed in the configuration the
+command prints at startup.
+
 ## ELM Attachment Formatting
 
 Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. How that JSON is
