@@ -162,9 +162,10 @@ namespace Hl7.Cql.Operators
 
             // Regex.Split would add captured groups to the result, so the parts are cut between matches instead.
             // Empty parts, leading and trailing ones included, are kept, as the CQL reference engine keeps them.
+            // Matching is culture-invariant, as §9.B Matches requires.
             var parts = new List<string>();
             var start = 0;
-            foreach (Match match in Regex.Matches(stringToSplit, separatorPattern))
+            foreach (Match match in Regex.Matches(stringToSplit, separatorPattern, RegexOptions.CultureInvariant))
             {
                 parts.Add(stringToSplit.Substring(start, match.Index - start));
                 start = match.Index + match.Length;
