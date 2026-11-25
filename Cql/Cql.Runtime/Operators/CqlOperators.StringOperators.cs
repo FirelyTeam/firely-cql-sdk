@@ -153,8 +153,24 @@ namespace Hl7.Cql.Operators
         #region SplitOnMatches
         public IEnumerable<string>? SplitOnMatches(string stringToSplit, string separatorPattern)
         {
-            if (stringToSplit == null || separatorPattern == null) return null;
-            else return Regex.Split(stringToSplit, separatorPattern);
+            // Spec §9.B, SplitOnMatches: a null stringToSplit gives null, and a string with no match gives a
+            // one-element list holding it. A null separatorPattern matches nothing, as a null separator does in Split.
+            if (stringToSplit == null)
+                return null;
+            if (separatorPattern == null)
+                return new[] { stringToSplit };
+
+            // Regex.Split would add captured groups to the result, so the parts are cut between matches instead.
+            // Empty parts, leading and trailing ones included, are kept, as the CQL reference engine keeps them.
+            var parts = new List<string>();
+            var start = 0;
+            foreach (Match match in Regex.Matches(stringToSplit, separatorPattern))
+            {
+                parts.Add(stringToSplit.Substring(start, match.Index - start));
+                start = match.Index + match.Length;
+            }
+            parts.Add(stringToSplit.Substring(start));
+            return parts;
         }
         #endregion
 

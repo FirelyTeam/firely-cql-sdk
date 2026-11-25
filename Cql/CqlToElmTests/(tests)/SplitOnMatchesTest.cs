@@ -42,6 +42,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [DataRow("SplitOnMatches('A,B,C', ',')", new[] { "A", "B", "C" })]
         [DataRow("SplitOnMatches('A1B22C', '[0-9]+')", new[] { "A", "B", "C" })]
         [DataRow("SplitOnMatches('ABC', ',')", new[] { "ABC" })]
+        [DataRow("SplitOnMatches('A1B2C', '([0-9])')", new[] { "A", "B", "C" })]
+        [DataRow("SplitOnMatches('A1B2C', '(?<digit>[0-9])')", new[] { "A", "B", "C" })]
+        [DataRow("SplitOnMatches('A,B,,', ',')", new[] { "A", "B", "", "" })]
+        [DataRow("SplitOnMatches(',A,B', ',')", new[] { "", "A", "B" })]
+        [DataRow("SplitOnMatches('AB', 'x*')", new[] { "", "A", "B", "" })]
+        [DataRow("SplitOnMatches(',', ',')", new[] { "", "" })]
+        [DataRow("SplitOnMatches('', ',')", new[] { "" })]
+        [DataRow("SplitOnMatches('A,B', null as String)", new[] { "A,B" })]
         public void SplitOnMatches_SplitsOnEachMatchOfThePattern(string expression, string[] expected)
         {
             var splitOnMatches = Translate(expression, out var library);
