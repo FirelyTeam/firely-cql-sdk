@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#nullable enable
-
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 
@@ -52,6 +50,44 @@ namespace Hl7.Cql.CqlToElm.Test
             result.Should().NotBeNull();
             result!.low.Should().Be(3);
             result.high.Should().Be(4);
+        }
+
+        [DataTestMethod]
+        [DataRow("Coalesce(null as Interval<Integer>, Interval[3.0, 4.0])")]
+        [DataRow("Coalesce(null as Interval<Integer>, null, Interval[3.0, 4.0])")]
+        public void Coalesce_Of_Intervals_Of_Different_Point_Types_Skips_A_Null_Interval(string expression)
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression(expression);
+            var coalesce = library.statements.Single(s => s.name != "Patient").expression;
+
+            var result = Run<CqlInterval<decimal?>>(coalesce, library);
+            result.Should().NotBeNull();
+            result!.low.Should().Be(3.0m);
+            result.high.Should().Be(4.0m);
+        }
+
+        /// <summary>
+        /// An argument typed Any may hold a value, so it does not give way to an overload that binds to the other
+        /// arguments' type: the call stays typed Any, as in the reference translator.
+        /// </summary>
+        [TestMethod]
+        public void Coalesce_Of_An_Any_Typed_Value_And_A_List_Is_Typed_Any()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Coalesce((1 as Any), {2})");
+
+            var coalesce = library.statements.Single(s => s.name != "Patient").expression.Should().BeOfType<Coalesce>().Subject;
+            coalesce.resultTypeSpecifier.ToString().Should().Be("Any");
+            coalesce.GetErrors().Should().BeEmpty();
+        }
+
+        [TestMethod]
+        [Ignore("The generated C# does not compile; tracked by #1985.")]
+        public void Coalesce_Of_An_Any_Typed_Value_And_A_List_Evaluates_To_The_Value()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Coalesce((1 as Any), {2})");
+            var coalesce = library.statements.Single(s => s.name != "Patient").expression;
+
+            Run<object>(coalesce, library).Should().Be(1);
         }
     }
 }

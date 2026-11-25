@@ -371,11 +371,13 @@ namespace Hl7.Cql.CqlToElm
             var compatible = matches
                 .Where(result => result.Compatible)
                 .ToArray();
-            // A generic match that binds all its generic parameters to Any, because the arguments it infers from are
-            // null or typed Any, ranks after another generic match that binds them to an actual type, as in the
-            // reference translator: Coalesce({1}, null, {2}) is a List<Integer>, not an Any. Non-generic matches are
-            // left to the cost ranking below. See #1982 for aligning inference itself with the reference translator.
-            if (compatible.Any(infersAny) && compatible.Any(bindsActualType))
+            // A generic match that binds all its generic parameters to Any only because some arguments are the null
+            // literal ranks after another generic match that binds them to an actual type, as in the reference
+            // translator: Coalesce({1}, null, {2}) is a List<Integer>, not an Any. An argument that is typed Any but
+            // may hold a value keeps the Any binding in the running, so Coalesce(1 as Any, {2}) stays an Any.
+            // Non-generic matches are left to the cost ranking below. See #1982 for aligning inference itself with
+            // the reference translator.
+            if (compatible.Any(bindsActualType) && arguments.All(argument => argument.resultTypeSpecifier != SystemTypes.AnyType || argument is Null))
                 compatible = compatible.Where(result => !infersAny(result)).ToArray();
             SignatureMatchResult? candidate;
             if (match(compatible, out candidate))

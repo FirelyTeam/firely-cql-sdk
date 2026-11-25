@@ -78,12 +78,19 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Diverges from the reference translator; tracked by #1982.")]
         [DataRow("(null as Any) in { 1 }", "Any")]
         [DataRow("null union { 1 }", "List<Any>")]
+        [DataRow("Coalesce((1 as Any), 'a')", "Any")]
         public void Null_Or_Any_Operand_Binds_The_Generic_Parameter_To_Any(string expression, string expectedFirstOperandType)
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression(expression);
 
             var result = library.statements.Single(s => s.name != "Patient").expression;
-            ((BinaryExpression)result).operand[0].resultTypeSpecifier.ToString().Should().Be(expectedFirstOperandType);
+            var firstOperand = result switch
+            {
+                BinaryExpression binary => binary.operand[0],
+                NaryExpression nary => nary.operand[0],
+                _ => throw new InvalidOperationException($"Unexpected {result.GetType().Name}."),
+            };
+            firstOperand.resultTypeSpecifier.ToString().Should().Be(expectedFirstOperandType);
         }
 
         [TestMethod]
