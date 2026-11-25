@@ -464,7 +464,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 return builder.Invoke(function, args);
 
             // The argument is read several times below, so anything but a reference is bound to an alias first.
-            const string alias = "$argument";
+            // The alias is named after the operator, so that it does not redefine an alias or let of the CQL
+            // around the call: the compiler compares these names without the leading '$'.
+            var alias = $"$argumentOf{function.name}";
             Expression value = argument is OperandRef or AliasRef or QueryLetRef
                 ? argument
                 : new AliasRef { name = alias, locator = argument.locator }.WithResultType(argument.resultTypeSpecifier);
