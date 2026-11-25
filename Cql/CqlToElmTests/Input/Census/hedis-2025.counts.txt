@@ -3,6 +3,6 @@
 # Only counts are kept here because the corpus is licensed content; see README.md.
 # Refresh by copying the candidate file the test writes next to its report over this one.
 total=382
-clean=328
-errors=42
-crash=12
+clean=370
+errors=1
+crash=11

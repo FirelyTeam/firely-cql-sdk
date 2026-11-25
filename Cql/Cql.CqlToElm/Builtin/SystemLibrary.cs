@@ -172,7 +172,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         public static SystemFunction<CanConvertQuantity> CanConvertQuantity = binary<CanConvertQuantity>(QuantityType, StringType, BooleanType);
         public static SystemFunction<Ceiling> Ceiling = unary<Ceiling>(DecimalType, IntegerType);
-        public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
+        public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).WithListAndIntervalVariants(T).Combine(unary<Coalesce>(T.ToListType(), T));
         public static OverloadedFunctionDef Collapse = unary<Collapse>(T.ToIntervalType().ToListType(), T.ToIntervalType().ToListType())
                 .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType)
                 .Combine(binary<Collapse>(T.ToIntervalType().ToListType(), QuantityType, T.ToIntervalType().ToListType())

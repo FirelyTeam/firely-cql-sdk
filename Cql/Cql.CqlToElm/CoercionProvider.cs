@@ -228,7 +228,16 @@ namespace Hl7.Cql.CqlToElm
                     lowClosedExpression = lowClosed,
                     highClosedExpression = highClosed
                 }.WithResultType(toInterval);
-                return interval;
+                // An interval selector is never null. Any other interval may be, and the converted interval is then
+                // null too, not an interval with null boundaries.
+                if (expression is Elm.Interval)
+                    return interval;
+                return new If
+                {
+                    condition = new IsNull { operand = expression }.WithResultType(SystemTypes.BooleanType),
+                    then = As(new Null().WithResultType(SystemTypes.AnyType), toInterval),
+                    @else = interval,
+                }.WithResultType(toInterval);
             }
         }
 
