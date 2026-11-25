@@ -49,7 +49,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ConvertsToQuantity", "Missing (#1737)." },
             { "ConvertsToString", "Missing (#1737)." },
             { "ConvertsToTime", "Missing (#1737)." },
-            { "SplitOnMatches", "Missing (#1737)." },
             { "InCodeSystem", "Missing (#1737)." },
             { "AnyInCodeSystem", "Missing (#1737)." },
             { "ExpandValueSet", "Missing as a callable (#1737); only built as an implicit conversion in CoercionProvider." },
