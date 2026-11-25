@@ -78,6 +78,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null,
             Func<InvocationBuilder, Expression[], Expression>? invoker = null) where T : Expression =>
             new(new[] { argument }, result, name ?? typeof(T).Name, invoker: invoker);
+        // ConvertsToX(argument Any) Boolean. An argument of a model type is first converted to the System value its
+        // model converts it to implicitly, because the operator recognizes System values only and nothing converts
+        // an argument that matches Any as it is.
+        private static SystemFunction<T> convertsTo<T>() where T : Expression
+        {
+            var function = unary<T>(AnyType, BooleanType);
+            return function.InvokeWith((builder, args) =>
+                builder.Invoke(function, args.Select(builder.CoercionProvider.ConvertModelValueToSystemValue).ToArray()));
+        }
         private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : Expression =>
@@ -174,16 +183,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
-        public static SystemFunction<ConvertsToBoolean> ConvertsToBoolean = unary<ConvertsToBoolean>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToDate> ConvertsToDate = unary<ConvertsToDate>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToDateTime> ConvertsToDateTime = unary<ConvertsToDateTime>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToDecimal> ConvertsToDecimal = unary<ConvertsToDecimal>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToInteger> ConvertsToInteger = unary<ConvertsToInteger>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToLong> ConvertsToLong = unary<ConvertsToLong>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToQuantity> ConvertsToQuantity = unary<ConvertsToQuantity>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToRatio> ConvertsToRatio = unary<ConvertsToRatio>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToString> ConvertsToString = unary<ConvertsToString>(AnyType, BooleanType);
-        public static SystemFunction<ConvertsToTime> ConvertsToTime = unary<ConvertsToTime>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToBoolean> ConvertsToBoolean = convertsTo<ConvertsToBoolean>();
+        public static SystemFunction<ConvertsToDate> ConvertsToDate = convertsTo<ConvertsToDate>();
+        public static SystemFunction<ConvertsToDateTime> ConvertsToDateTime = convertsTo<ConvertsToDateTime>();
+        public static SystemFunction<ConvertsToDecimal> ConvertsToDecimal = convertsTo<ConvertsToDecimal>();
+        public static SystemFunction<ConvertsToInteger> ConvertsToInteger = convertsTo<ConvertsToInteger>();
+        public static SystemFunction<ConvertsToLong> ConvertsToLong = convertsTo<ConvertsToLong>();
+        public static SystemFunction<ConvertsToQuantity> ConvertsToQuantity = convertsTo<ConvertsToQuantity>();
+        public static SystemFunction<ConvertsToRatio> ConvertsToRatio = convertsTo<ConvertsToRatio>();
+        public static SystemFunction<ConvertsToString> ConvertsToString = convertsTo<ConvertsToString>();
+        public static SystemFunction<ConvertsToTime> ConvertsToTime = convertsTo<ConvertsToTime>();
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
         public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);

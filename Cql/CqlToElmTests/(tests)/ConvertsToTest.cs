@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -75,6 +76,58 @@ namespace Hl7.Cql.CqlToElm.Test
         [DataRow("CanConvertQuantity(5 'mg', null)", null)]
         public void CanConvertQuantity_returns_whether_the_quantity_converts(string expression, bool? expected) =>
             Evaluate(expression).Should().Be(expected);
+
+        [TestMethod]
+        [DataRow("ConvertsToBoolean(FHIR.boolean { value: true })", true)]
+        [DataRow("ConvertsToBoolean(FHIR.string { value: 'maybe' })", false)]
+        [DataRow("ConvertsToDate(FHIR.date { value: @2014-01-01 })", true)]
+        [DataRow("ConvertsToDate(FHIR.dateTime { value: @2014-01-01T10:00:00.000Z })", true)]
+        [DataRow("ConvertsToDate(FHIR.string { value: '2014-13-01' })", false)]
+        [DataRow("ConvertsToDateTime(FHIR.date { value: @2014-01-01 })", true)]
+        [DataRow("ConvertsToDecimal(FHIR.decimal { value: 1.5 })", true)]
+        [DataRow("ConvertsToInteger(FHIR.integer { value: 12 })", true)]
+        [DataRow("ConvertsToInteger(FHIR.string { value: '12' })", true)]
+        [DataRow("ConvertsToInteger(FHIR.string { value: 'twelve' })", false)]
+        [DataRow("ConvertsToLong(FHIR.integer { value: 12 })", true)]
+        [DataRow("ConvertsToQuantity(FHIR.Quantity { value: FHIR.decimal { value: 5.0 }, unit: FHIR.string { value: 'mg' } })", true)]
+        [DataRow("ConvertsToQuantity(FHIR.Patient { active: FHIR.boolean { value: true } })", false)]
+        [DataRow("ConvertsToRatio(FHIR.string { value: '1:128' })", true)]
+        [DataRow("ConvertsToString(FHIR.code { value: 'final' })", true)]
+        [DataRow("ConvertsToTime(FHIR.time { value: @T10:00:00 })", true)]
+        [DataRow("ConvertsToTime(FHIR.date { value: @2014-01-01 })", false)]
+        [DataRow("ConvertsToInteger(null as FHIR.string)", null)]
+        // Observation.value is a choice, converted by the type the value has at run time.
+        [DataRow("ConvertsToInteger(FHIR.Observation { value: FHIR.string { value: '12' } }.value)", true)]
+        [DataRow("ConvertsToInteger(FHIR.Observation { value: FHIR.integer { value: 12 } }.value)", true)]
+        [DataRow("ConvertsToInteger(FHIR.Observation { value: FHIR.string { value: 'twelve' } }.value)", false)]
+        [DataRow("ConvertsToInteger(FHIR.Observation { value: FHIR.dateTime { value: @2014-01-01T10:00:00.000Z } }.value)", false)]
+        [DataRow("ConvertsToQuantity(FHIR.Observation { value: FHIR.Quantity { value: FHIR.decimal { value: 5.0 } } }.value)", true)]
+        [DataRow("ConvertsToDateTime(FHIR.Observation { value: FHIR.dateTime { value: @2014-01-01T10:00:00.000Z } }.value)", true)]
+        [DataRow("ConvertsToInteger(FHIR.Observation { status: FHIR.ObservationStatus { value: 'final' } }.value)", null)]
+        public void ConvertsTo_converts_a_model_value_to_its_System_value_first(string expression, bool? expected) =>
+            EvaluateWithFhir(expression).Should().Be(expected);
+
+        /// <summary>
+        /// Translates <paramref name="expression"/> in a library that uses FHIR and includes FHIRHelpers, checks it
+        /// becomes the ELM node of the function it calls with a Boolean result, and evaluates it.
+        /// </summary>
+        private static bool? EvaluateWithFhir(string expression)
+        {
+            var cql = CqlLibraryString.Parse($"""
+                library ConvertsToFhir version '1.0.0'
+                using FHIR version '4.0.1'
+                include FHIRHelpers version '4.0.1'
+                define "Result": {expression}
+                """);
+            var toolkit = CreateCqlToolkit().AddFHIRHelpers().AddCqlLibraries([cql]);
+            var lib = toolkit.TranslateToElm().ArtifactsById[cql].ResultElmLibrary!;
+            lib.ShouldSucceed();
+            var node = lib.statements.Should().ContainSingle().Subject.expression;
+            node.GetType().Name.Should().Be(expression[..expression.IndexOf('(')]);
+            node.Should().HaveType(SystemTypes.BooleanType);
+            using var invoker = toolkit.CreateLibrarySetInvoker();
+            return (bool?)invoker.InvokeLibraryDefinition(FhirCqlContext.CreateContext(), cql.LibraryIdentifier, "Result");
+        }
 
         /// <summary>
         /// Translates <paramref name="expression"/>, checks it becomes the ELM node of the function it calls with a
