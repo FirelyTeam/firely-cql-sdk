@@ -371,11 +371,12 @@ namespace Hl7.Cql.CqlToElm
             var compatible = matches
                 .Where(result => result.Compatible)
                 .ToArray();
-            // A match that binds its generic parameters only to Any, because its arguments are null or typed Any, ranks
-            // after a match that binds them to an actual type, as in the reference translator: Coalesce({1}, null, {2})
-            // is a List<Integer>, not an Any.
-            if (compatible.Where(result => !infersAny(result)).ToArray() is { Length: > 0 } concrete && concrete.Length < compatible.Length)
-                compatible = concrete;
+            // A generic match that binds all its generic parameters to Any, because the arguments it infers from are
+            // null or typed Any, ranks after another generic match that binds them to an actual type, as in the
+            // reference translator: Coalesce({1}, null, {2}) is a List<Integer>, not an Any. Non-generic matches are
+            // left to the cost ranking below. See #1982 for aligning inference itself with the reference translator.
+            if (compatible.Any(infersAny) && compatible.Any(bindsActualType))
+                compatible = compatible.Where(result => !infersAny(result)).ToArray();
             SignatureMatchResult? candidate;
             if (match(compatible, out candidate))
                 return candidate;
@@ -388,9 +389,14 @@ namespace Hl7.Cql.CqlToElm
                 ()=>Messaging.CouldNotResolveFunction(firstMatch.Function.Name, arguments));
             return result;
 
+            // Whether every generic parameter of the match is bound to Any.
             bool infersAny(SignatureMatchResult result) =>
                 result.GenericInferences.Count > 0
                 && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+
+            // Whether the match is generic and binds at least one of its parameters to something other than Any.
+            bool bindsActualType(SignatureMatchResult result) =>
+                result.GenericInferences.Count > 0 && !infersAny(result);
 
             bool match(SignatureMatchResult[] matches, [NotNullWhen(true)] out SignatureMatchResult? result)
             {
