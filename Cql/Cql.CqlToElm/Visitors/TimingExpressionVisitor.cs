@@ -247,10 +247,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         /// <summary>
         /// The closed interval from <paramref name="point"/> to itself, or null when the point is null, in the form
-        /// the reference translator emits: <c>if point is null then null else Interval[point, point]</c>.
+        /// the reference translator emits: <c>if point is null then null else Interval[point, point]</c>. A point that
+        /// converts implicitly to the point type of the <paramref name="other"/> interval is converted first, so
+        /// <c>Interval[6.0, 10.0] on or after 6</c> builds an <c>Interval&lt;Decimal&gt;</c> from <c>ToDecimal(6)</c>.
         /// </summary>
-        private Expression PointInterval(Expression point)
+        private Expression PointInterval(Expression point, IntervalTypeSpecifier other)
         {
+            if (point.resultTypeSpecifier != other.pointType
+                && CoercionProvider.Coerce(point, other.pointType) is { Cost: CoercionCost.ImplicitToSimpleType or CoercionCost.ImplicitToClassType } converted)
+                point = converted.Result;
             var intervalType = point.resultTypeSpecifier.ToIntervalType();
             var interval = new Elm.Interval
             {
@@ -348,8 +353,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     (left, right) = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
                     {
-                        (IntervalTypeSpecifier, var point) when IsIntervalPoint(point) => (left, PointInterval(right)),
-                        (var point, IntervalTypeSpecifier) when IsIntervalPoint(point) => (PointInterval(left), right),
+                        (IntervalTypeSpecifier interval, var point) when IsIntervalPoint(point) => (left, PointInterval(right, interval)),
+                        (var point, IntervalTypeSpecifier interval) when IsIntervalPoint(point) => (PointInterval(left, interval), right),
                         _ => (left, right),
                     };
                 }

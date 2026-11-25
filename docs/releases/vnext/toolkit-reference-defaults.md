@@ -8,10 +8,7 @@
   value is expected, is converted instead of reported, and a point passed where an interval is expected, or the
   other way round, is reported instead of converted, except in `on or before` and `on or after` phrases, which
   compare the point as a point interval as the reference translator does. A type name defined by both System and a model resolves to the
-  model's type instead of being reported as ambiguous. One case the reference translator handles regresses:
-  `Coalesce` over intervals resolved only through interval promotion and demotion and is now reported unresolved
-  (#1673). To
-  keep the old behavior, set the five switches explicitly.
+  model's type instead of being reported as ambiguous. To keep the old behavior, set the five switches explicitly.
   `Cql/Cql.CqlToElm/README.md` records the configuration. (#1727)
 - **Packager CLI** — the default settings file uses the same configuration, so the `cql` command translates with
   list promotion and demotion enabled and interval promotion and demotion disabled. A settings file that sets these

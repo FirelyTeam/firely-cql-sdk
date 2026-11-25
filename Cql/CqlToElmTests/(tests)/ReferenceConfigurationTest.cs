@@ -107,15 +107,18 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("A generic parameter does not bind to an interval type, so Coalesce over intervals resolves only through interval promotion and demotion; tracked by #1673.")]
         public void Coalesce_Of_Intervals_Resolves_Without_Interval_Promotion()
         {
             // The Java translator resolves this with interval promotion disabled, binding T to Interval<Integer>.
-            DefaultToolkit().MakeLibrary("""
+            var library = DefaultToolkit().MakeLibrary("""
                 library CoalesceIntervals version '1.0.0'
 
                 define C: Coalesce(Interval[1, 2], Interval[3, 4])
                 """);
+
+            var coalesce = library.statements.Single(s => s.name == "C").expression.Should().BeOfType<Coalesce>().Subject;
+            coalesce.GetErrors().Should().BeEmpty();
+            coalesce.resultTypeSpecifier.ToString().Should().Be("Interval<Integer>");
         }
 
         [TestMethod]
@@ -134,6 +137,27 @@ namespace Hl7.Cql.CqlToElm.Test
             pointInterval.condition.Should().BeOfType<IsNull>();
             pointInterval.then.Should().BeOfType<Null>();
             pointInterval.@else.Should().BeOfType<Interval>();
+        }
+
+        [TestMethod]
+        public void A_Point_On_Or_After_An_Interval_Of_Another_Point_Type_Is_Converted_Before_It_Becomes_A_Point_Interval()
+        {
+            // The Java translator converts the point first: if ToDecimal(6) is null then null else
+            // Interval[ToDecimal(6), ToDecimal(6)], an Interval<Decimal>, not a converted Interval<Integer>.
+            var library = DefaultToolkit().MakeLibrary("""
+                library OnOrAfterPoint version '1.0.0'
+
+                define OnOrAfter: Interval[6.0, 10.0] on or after 6
+                """);
+
+            var pointInterval = library.statements.Single(s => s.name == "OnOrAfter").expression.Should().BeOfType<SameOrAfter>()
+                                       .Which.operand[1].Should().BeOfType<If>().Subject;
+            pointInterval.resultTypeSpecifier.ToString().Should().Be("Interval<Decimal>");
+            pointInterval.condition.Should().BeOfType<IsNull>().Which.operand.Should().BeOfType<As>().Which.operand.Should().BeOfType<ToDecimal>();
+            pointInterval.then.Should().BeOfType<Null>();
+            var interval = pointInterval.@else.Should().BeOfType<Interval>().Subject;
+            interval.low.Should().BeOfType<ToDecimal>();
+            interval.high.Should().BeOfType<ToDecimal>();
         }
 
         [DataTestMethod]
