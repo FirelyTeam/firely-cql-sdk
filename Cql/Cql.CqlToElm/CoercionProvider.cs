@@ -675,6 +675,7 @@ namespace Hl7.Cql.CqlToElm
         /// <remarks>
         /// For an operand declared as <c>Any</c>, which every type matches as a subtype, so that
         /// <see cref="Coerce"/> never converts the argument, but whose operator only knows System values.
+        /// The expression is repeated once for every alternative of a choice, so pass a reference.
         /// </remarks>
         internal Expression ConvertModelValueToSystemValue(Expression expression)
         {

@@ -78,14 +78,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null,
             Func<InvocationBuilder, Expression[], Expression>? invoker = null) where T : Expression =>
             new(new[] { argument }, result, name ?? typeof(T).Name, invoker: invoker);
-        // ConvertsToX(argument Any) Boolean. An argument of a model type is first converted to the System value its
-        // model converts it to implicitly, because the operator recognizes System values only and nothing converts
-        // an argument that matches Any as it is.
+        // ConvertsToX(argument Any) Boolean, tested on the System value of an argument of a model type.
         private static SystemFunction<T> convertsTo<T>() where T : Expression
         {
             var function = unary<T>(AnyType, BooleanType);
-            return function.InvokeWith((builder, args) =>
-                builder.Invoke(function, args.Select(builder.CoercionProvider.ConvertModelValueToSystemValue).ToArray()));
+            return function.InvokeWith((builder, args) => Invokers.ConvertsTo(function, builder, args));
         }
         private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
@@ -454,6 +451,43 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static Expression AgeInSeconds(InvocationBuilder builder, Expression[] args) =>
             builder.Invoke(SystemLibrary.CalculateAgeInSeconds, PatientBirthDateTime);
 
+
+        /// <summary>
+        /// Invokes a ConvertsTo* operator. An argument of a model type is converted to the System value its model
+        /// converts it to implicitly before the operator tests it, because the operator recognizes System values
+        /// only and nothing converts an argument that matches <c>Any</c> as it is. A model value that has no System
+        /// value does not convert, so the result for it is false, and null only for a null argument.
+        /// </summary>
+        public static Expression ConvertsTo(SystemFunction function, InvocationBuilder builder, Expression[] args)
+        {
+            if (args is not [var argument])
+                return builder.Invoke(function, args);
+
+            // The argument is read several times below, so anything but a reference is bound to an alias first.
+            const string alias = "$argument";
+            Expression value = argument is OperandRef or AliasRef or QueryLetRef
+                ? argument
+                : new AliasRef { name = alias, locator = argument.locator }.WithResultType(argument.resultTypeSpecifier);
+            var converted = builder.CoercionProvider.ConvertModelValueToSystemValue(value);
+            if (ReferenceEquals(converted, value))
+                return builder.Invoke(function, args);
+
+            var test = new If
+            {
+                condition = new IsNull { operand = value, locator = argument.locator }.WithResultType(BooleanType),
+                then = builder.ElmFactory.Null(BooleanType),
+                @else = builder.Invoke(SystemLibrary.Coalesce, builder.Invoke(function, converted), builder.ElmFactory.Literal(false)),
+                locator = argument.locator,
+            }.WithResultType(BooleanType);
+            if (ReferenceEquals(value, argument))
+                return test;
+            return new Query
+            {
+                source = [new AliasedQuerySource { alias = alias, expression = argument }.WithResultType(argument.resultTypeSpecifier)],
+                @return = new ReturnClause { distinct = false, expression = test },
+                locator = argument.locator,
+            }.WithResultType(BooleanType);
+        }
 
         public static Expression Flatten(InvocationBuilder builder, Expression[] args)
         {

@@ -18,5 +18,6 @@
 - **CQL to ELM translation** — a `ConvertsTo*` operator, `ConvertsToRatio` included, converts an argument of a model
   type to the System value its model converts it to implicitly before testing it, so `ConvertsToDate(Patient.birthDate)`
   tests the `Date` that `FHIRHelpers.ToDate` returns, and an argument of a choice type such as `Observation.value` is
-  converted by the type its value has at run time. Without the conversion the operator returned `false` for every
-  model value (#1977).
+  converted by the type its value has at run time. A model value that has no System value, such as a `FHIR.string`
+  without a value or a `FHIR.Quantity` that `FHIRHelpers.ToQuantity` rejects, gives `false`. Without the conversion
+  the operator returned `false` for every model value (#1977).
