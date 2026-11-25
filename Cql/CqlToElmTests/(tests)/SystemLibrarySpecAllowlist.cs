@@ -39,7 +39,6 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ConvertQuantity", "Function form missing (#1737); `convert x to unit` is built directly in UnaryExpressionVisitor." },
             { "Children", "Missing (#1737)." },
             { "Descendants", "Missing under its spec name (#1737); only the fluent `descendents` is declared." },
-            { "SplitOnMatches", "Missing (#1737)." },
             { "InCodeSystem", "Missing (#1737)." },
             { "AnyInCodeSystem", "Missing (#1737)." },
             { "ExpandValueSet", "Missing as a callable (#1737); only built as an implicit conversion in CoercionProvider." },

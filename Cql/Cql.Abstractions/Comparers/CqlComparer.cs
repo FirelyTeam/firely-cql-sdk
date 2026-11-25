@@ -81,8 +81,9 @@ internal abstract class CqlComparer<T>(
         [DisallowNull] T y,
         string? precision)
     {
-        // Do a quick check for equality
-        if (DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
+        // Do a quick check for equality. A comparison to a precision has to look at the components: two equal values
+        // that lack a component up to that precision have an unknown result.
+        if (precision is null && DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
            return true;
 
         switch (EqualsImplementation)
@@ -252,8 +253,9 @@ internal abstract class CqlComparer<T>(
         T y,
         string? precision)
     {
-        // Do a quick check for equality
-        if (DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
+        // Do a quick check for equality. A comparison to a precision has to look at the components: two equal values
+        // that lack a component up to that precision have an unknown result.
+        if (precision is null && DefaultEqualityImpliesEquality && EqualityComparer<T>.Default.Equals(x, y))
             return 0;
 
         return CompareValues(x!, y!, precision);

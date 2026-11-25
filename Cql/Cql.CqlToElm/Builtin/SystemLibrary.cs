@@ -307,6 +307,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Size> Size = unary<Size>(T.ToIntervalType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
+        public static SystemFunction<SplitOnMatches> SplitOnMatches = binary<SplitOnMatches>(StringType, StringType, StringType.ToListType());
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
         public static SystemFunction<Starts> Starts = binaryWithPrecision<Starts>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
 
