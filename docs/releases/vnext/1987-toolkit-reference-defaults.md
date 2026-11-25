@@ -9,10 +9,10 @@
   other way round, is reported instead of converted, except in `on or before` and `on or after` phrases, which
   compare the point as a point interval as the reference translator does. A type name defined by both System and a model resolves to the
   model's type instead of being reported as ambiguous. To keep the old behavior, set the five switches explicitly.
-  `Cql/Cql.CqlToElm/README.md` records the configuration. (#1727)
+  `Cql/Cql.CqlToElm/README.md` records the configuration. (#1727, #1987)
 - **Packager CLI** — the default settings file uses the same configuration, so the `cql` command translates with
   list promotion and demotion enabled and interval promotion and demotion disabled. A settings file that sets these
-  switches itself is unaffected. (#1727)
+  switches itself is unaffected. (#1727, #1987)
 
 ## Fixes
 
@@ -20,4 +20,4 @@
   in `Count("Value Set")`, is expanded to its codes (`ExpandValueSet`) instead of promoted to a list holding the
   value set, as the Java translator does. `Count` of a value set therefore counts its codes, where it returned 1
   before. Generic inference now keeps the cheapest of the argument's own type and its implicit conversion targets.
-  (#1727)
+  (#1727, #1987)
