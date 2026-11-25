@@ -675,6 +675,81 @@ namespace Hl7.Cql.CqlToElm
             }
         }
 
+        /// <summary>
+        /// Converts a value of a model type to the System value its model declares an implicit conversion to
+        /// (FHIR.date to Date through FHIRHelpers.ToDate, for example). A choice is converted alternative by
+        /// alternative, by its run-time type. A value whose type has no such conversion, or more than one, is
+        /// returned unchanged.
+        /// </summary>
+        /// <remarks>
+        /// For an operand declared as <c>Any</c>, which every type matches as a subtype, so that
+        /// <see cref="Coerce"/> never converts the argument, but whose operator only knows System values.
+        /// The expression is repeated once for every alternative of a choice, so pass a reference.
+        /// </remarks>
+        internal Expression ConvertModelValueToSystemValue(Expression expression)
+        {
+            var type = expression.resultTypeSpecifier;
+            if (type is not ChoiceTypeSpecifier)
+                return ModelConversionTarget(type) is { } target ? Coerce(expression, target).Result : expression;
+
+            var caseItems = ElmFactory.FlattenChoice(type)
+                .Distinct()
+                .Select(alternative => (alternative, target: ModelConversionTarget(alternative)))
+                .Where(conversion => conversion.target is not null)
+                .Select(conversion => new CaseItem
+                {
+                    when = new Is
+                    {
+                        operand = expression,
+                        isTypeSpecifier = conversion.alternative,
+                        isType = (conversion.alternative as NamedTypeSpecifier)?.name,
+                        locator = expression.locator,
+                    }.WithResultType(SystemTypes.BooleanType),
+                    then = AsType(Coerce(AsType(expression, conversion.alternative), conversion.target!).Result, SystemTypes.AnyType),
+                    locator = expression.locator,
+                }.WithResultType(SystemTypes.AnyType))
+                .ToArray();
+            if (caseItems.Length == 0)
+                return expression;
+            return new Case
+            {
+                caseItem = caseItems,
+                @else = AsType(expression, SystemTypes.AnyType),
+                locator = expression.locator,
+            }.WithResultType(SystemTypes.AnyType);
+
+            static Expression AsType(Expression operand, TypeSpecifier type) =>
+                operand.resultTypeSpecifier == type
+                    ? operand
+                    : new As
+                    {
+                        operand = operand,
+                        asTypeSpecifier = type,
+                        asType = (type as NamedTypeSpecifier)?.name,
+                        locator = operand.locator,
+                    }.WithResultType(type);
+        }
+
+        /// <summary>
+        /// The one type the model of <paramref name="from"/> declares an implicit conversion to, or
+        /// <see langword="null"/> when it declares none or several.
+        /// </summary>
+        private TypeSpecifier? ModelConversionTarget(TypeSpecifier from)
+        {
+            if (from is not NamedTypeSpecifier named
+                || !ModelProvider.TryMakeQualifiedNameFromType(named, out var qualified)
+                || !ModelProvider.TryGetConversionFunctions(qualified!, out var conversions))
+                return null;
+            var targets = conversions!
+                .Select(conversion => ModelProvider.TryGetUrlPrefixedName(conversion.To))
+                .OfType<string>()
+                .Distinct()
+                .ToArray();
+            return targets is [var only]
+                ? new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(only) }
+                : null;
+        }
+
         private int ListDegree(TypeSpecifier type) =>
             type switch
             {
