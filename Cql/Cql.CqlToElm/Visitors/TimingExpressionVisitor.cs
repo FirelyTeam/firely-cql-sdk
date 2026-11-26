@@ -245,6 +245,69 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 ? [left, right, Precision(precision)]
                 : [left, right];
 
+        /// <summary>
+        /// The closed interval from <paramref name="point"/> to itself, or null when the point is null, in the form
+        /// the reference translator emits: <c>if point is null then null else Interval[point, point]</c>. A point that
+        /// converts implicitly to the point type of the <paramref name="other"/> interval is converted first, so
+        /// <c>Interval[6.0, 10.0] on or after 6</c> builds an <c>Interval&lt;Decimal&gt;</c> from <c>ToDecimal(6)</c>.
+        /// A point that does not convert to that type and is not a valid interval point itself, such as a FHIR
+        /// <c>instant</c> compared with an <c>Interval&lt;Date&gt;</c>, is converted to the point type it converts to
+        /// implicitly (<c>DateTime</c>), so the interval is valid; overload resolution then reconciles the two intervals.
+        /// </summary>
+        private Expression PointInterval(Expression point, IntervalTypeSpecifier other)
+        {
+            if (point.resultTypeSpecifier != other.pointType
+                && CoercionProvider.Coerce(point, other.pointType) is { Cost: CoercionCost.ImplicitToSimpleType or CoercionCost.ImplicitToClassType } converted)
+                point = converted.Result;
+            else if (!CoercionProvider.IsValidIntervalType(point.resultTypeSpecifier.ToIntervalType())
+                     && CoercionProvider.GetImplicitConversionTargets(point.resultTypeSpecifier)
+                                        .FirstOrDefault(t => t is NamedTypeSpecifier && CoercionProvider.IsValidIntervalType(t.ToIntervalType())) is { } pointType
+                     && CoercionProvider.Coerce(point, pointType) is { Success: true } toPointType)
+                point = toPointType.Result;
+            var intervalType = point.resultTypeSpecifier.ToIntervalType();
+            var interval = new Elm.Interval
+            {
+                low = point,
+                high = point,
+                lowClosed = true,
+                highClosed = true,
+            }.WithLocator(point.locator).WithResultType(intervalType);
+            return ElmFactory.If(InvocationBuilder.Invoke(SystemLibrary.IsNull, point), ElmFactory.Null(intervalType), interval)
+                             .WithLocator(point.locator);
+        }
+
+        /// <summary>
+        /// <paramref name="expression"/> converted implicitly to an interval of the type of <paramref name="point"/>
+        /// (a FHIR <c>Period</c> to <c>Interval&lt;DateTime&gt;</c> through <c>FHIRHelpers.ToInterval</c>), or
+        /// <see langword="null"/> when its type has no such conversion.
+        /// </summary>
+        private Expression? ToModelInterval(Expression expression, Expression point)
+        {
+            if (expression.resultTypeSpecifier is IntervalTypeSpecifier or ChoiceTypeSpecifier || expression.resultTypeSpecifier == SystemTypes.AnyType)
+                return null;
+            return CoercionProvider.Coerce(expression, point.resultTypeSpecifier.ToIntervalType())
+                       is { Cost: CoercionCost.ImplicitToSimpleType or CoercionCost.ImplicitToClassType } converted
+                       ? converted.Result
+                       : null;
+        }
+
+        /// <summary>
+        /// Whether <paramref name="type"/> is the type of a point that a timing phrase can compare with an interval
+        /// as a point interval: not an interval, not <c>Any</c> or a choice (both left to overload resolution), not a
+        /// model type that converts to an interval itself (such as FHIR <c>Period</c>), and a valid interval point
+        /// type or implicitly convertible to one (such as FHIR <c>dateTime</c>).
+        /// </summary>
+        private bool IsIntervalPoint(TypeSpecifier type)
+        {
+            if (type is IntervalTypeSpecifier or ChoiceTypeSpecifier || type == SystemTypes.AnyType)
+                return false;
+            var targets = CoercionProvider.GetImplicitConversionTargets(type).ToList();
+            if (targets.Any(t => t is IntervalTypeSpecifier))
+                return false;
+            return CoercionProvider.IsValidIntervalType(type.ToIntervalType())
+                   || targets.Any(t => t is NamedTypeSpecifier && CoercionProvider.IsValidIntervalType(t.ToIntervalType()));
+        }
+
         // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?
         private Expression HandleBeforeOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context,
             Expression lhs,
@@ -305,6 +368,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // No quantity offset, so a simple "a is before/after (or on) b"
             if (context.quantityOffset() == null)
             {
+                // SameOrBefore and SameOrAfter have no point-interval overloads, so, as the reference translator does
+                // whatever the interval promotion option says, a point compared with an interval becomes a point
+                // interval: Interval[6, 10] on or after 6 is valid with interval promotion disabled. Before and After
+                // take the point as it is.
+                if (isInclusive)
+                {
+                    // A model value that converts to an interval itself, such as a FHIR Period, is converted first when
+                    // the other operand is a point, as the reference translator does: E.period on or after @2020-01-01
+                    // compares FHIRHelpers.ToInterval(E.period) with a point interval.
+                    if (IsIntervalPoint(right.resultTypeSpecifier) && ToModelInterval(left, right) is { } leftInterval)
+                        left = leftInterval;
+                    else if (IsIntervalPoint(left.resultTypeSpecifier) && ToModelInterval(right, left) is { } rightInterval)
+                        right = rightInterval;
+
+                    (left, right) = (left.resultTypeSpecifier, right.resultTypeSpecifier) switch
+                    {
+                        (IntervalTypeSpecifier interval, var point) when IsIntervalPoint(point) => (left, PointInterval(right, interval)),
+                        (var point, IntervalTypeSpecifier interval) when IsIntervalPoint(point) => (PointInterval(left, interval), right),
+                        _ => (left, right),
+                    };
+                }
+
                 var lrArgs = CreateArgArray(left, right, dateTimePrecision);
                 var result = (isInclusive, isBefore) switch
                 {

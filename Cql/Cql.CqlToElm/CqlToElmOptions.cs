@@ -115,40 +115,40 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
         /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-        /// The default value is <see langword="true"/>.
+        /// The default value is <see langword="false"/>.
         /// </summary>
-        public bool? EnableIntervalPromotion { get; set; } = true;
+        public bool? EnableIntervalPromotion { get; set; } = false;
 
         /// <summary>
         /// When <see langword="true"/>, lists of size 1 will NOT be automatically created from scalar values.
         /// When <see langword="false"/>, lists of size 1 will automatically be created as necessary from scalar values.
-        /// The default value is <see langword="true"/>.
+        /// The default value is <see langword="false"/>.
         /// </summary>
         /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-        public bool? DisableListPromotion { get; set; } = true;
+        public bool? DisableListPromotion { get; set; } = false;
 
         /// <summary>
         /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
         /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
-        /// The default value is <see langword="true"/>.
+        /// The default value is <see langword="false"/>.
         /// </summary>
         /// <remarks>
         /// Note that whether an interval is a point interval cannot be known at compile time.
         /// This type of conversion will issue a warning and could fail at runtime.
         /// </remarks>
-        public bool? EnableIntervalDemotion { get; set; } = true;
+        public bool? EnableIntervalDemotion { get; set; } = false;
 
         /// <summary>
         /// When <see langword="true"/>, lists of size 1 will NOT be automatically converted to scalar values.
         /// When <see langword="false"/>, lists of size 1 will automatically be converted to scalar values as necessary.
-        /// The default value is <see langword="true"/>.
+        /// The default value is <see langword="false"/>.
         /// </summary>
         /// <remarks>
         /// Note that whether a list has only one element cannot be known at compile time.
         /// This type of conversion will issue a warning and could fail at runtime.
         /// </remarks>
         /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-        public bool? DisableListDemotion { get; set; } = true;
+        public bool? DisableListDemotion { get; set; } = false;
 
         /// <summary>
         /// <para>
@@ -170,7 +170,7 @@ namespace Hl7.Cql.CqlToElm
         /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
         /// </para>
         /// <para>
-        /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+        /// The default behavior is <see cref="AmbiguousTypeBehavior.PreferModel"/>.
         /// </para>
         /// </summary>
         public AmbiguousTypeBehavior? AmbiguousTypeBehavior { get; set; } = CqlToElm.AmbiguousTypeBehavior.PreferModel;

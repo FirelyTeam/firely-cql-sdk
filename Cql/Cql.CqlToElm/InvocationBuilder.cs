@@ -196,11 +196,11 @@ namespace Hl7.Cql.CqlToElm
                     }
                 }
             }
-            // If direct inference from argument types didn't find a compatible match,
-            // try implicit conversion targets of each argument as potential type inferences.
-            // This handles cases like Equivalent(FHIR.CodeableConcept, Code) where both can be
-            // implicitly converted to Concept but neither can be directly converted to the other.
-            if (newOperands == null && genericInferences == null)
+            // Also try the implicit conversion targets of each argument as potential type inferences, and keep
+            // whichever inference is cheapest. This handles cases like Equivalent(FHIR.CodeableConcept, Code), where
+            // both can be implicitly converted to Concept but neither can be directly converted to the other, and
+            // Count(ValueSet), where expanding the value set to List<Code> is cheaper than promoting it to
+            // List<ValueSet>.
             {
                 for (int i = 0; i < arguments.Length; i++)
                 {
