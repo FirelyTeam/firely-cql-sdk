@@ -164,11 +164,16 @@ namespace Hl7.Cql.CqlToElm.Test
         [DataRow("[Encounter] E where E.period on or after Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00]")]
         [DataRow("[Observation] O where O.effective on or after Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00]")]
         [DataRow("[Observation] O where Interval[@2020-01-01T00:00:00, @2021-01-01T00:00:00] on or before O.issued")]
-        public void A_Model_Operand_On_Or_After_An_Interval_Translates_By_Default(string expression)
+        [DataRow("[Encounter] E where E.period on or after @2020-01-01T00:00:00")]
+        [DataRow("[Encounter] E where @2020-01-01T00:00:00 on or before E.period")]
+        [DataRow("[Observation] O where O.issued on or after Interval[@2020-01-01, @2021-01-01]")]
+        public void A_Model_Operand_On_Or_Before_Or_After_Translates_And_Compiles_By_Default(string expression)
         {
-            // A FHIR Period converts to an interval itself, a choice is left to overload resolution, and a FHIR instant
-            // is a point; the Java translator translates all three.
-            DefaultToolkit().AddFHIRHelpers().MakeLibrary($"""
+            // A FHIR Period converts to an interval itself, also when the other operand is a point, which becomes a
+            // point interval; a choice is left to overload resolution; and a FHIR instant is a point. The Java translator
+            // translates all of these. The generated C# must compile, so no operand is an interval of an invalid point type.
+            var toolkit = DefaultToolkit().AddFHIRHelpers();
+            toolkit.MakeLibrary($"""
                 library ModelOperand version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -179,6 +184,54 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define Result: {expression}
                 """);
+
+            _ = toolkit.CompileToAssemblies();
+        }
+
+        [TestMethod]
+        public void A_Fhir_Period_On_Or_After_A_Point_Compares_Its_Interval_With_A_Point_Interval()
+        {
+            // As the Java translator does: FHIRHelpers.ToInterval(E.period) on or after Interval[point, point].
+            var library = DefaultToolkit().AddFHIRHelpers().MakeLibrary("""
+                library PeriodPoint version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                include FHIRHelpers version '4.0.1'
+
+                context Patient
+
+                define Result: [Encounter] E where E.period on or after @2020-01-01T00:00:00
+                """);
+
+            var where = library.statements.Single(s => s.name == "Result").expression.Should().BeOfType<Query>().Which.where;
+            var sameOrAfter = where.Should().BeOfType<SameOrAfter>().Subject;
+            sameOrAfter.operand[0].Should().BeOfType<FunctionRef>().Which.name.Should().Be("ToInterval");
+            sameOrAfter.operand[1].Should().BeOfType<If>().Which.@else.Should().BeOfType<Interval>();
+        }
+
+        [TestMethod]
+        public void A_Fhir_Instant_On_Or_After_A_Date_Interval_Becomes_A_DateTime_Point_Interval()
+        {
+            // The instant does not convert to Date, and an Interval<FHIR.instant> is not a valid interval, so it is
+            // converted to DateTime, the point type it converts to. The Java translator instead demotes the Date
+            // interval to a point (PointFrom), which fails at run time for an interval of more than one point.
+            var library = DefaultToolkit().AddFHIRHelpers().MakeLibrary("""
+                library InstantDate version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                include FHIRHelpers version '4.0.1'
+
+                context Patient
+
+                define Result: [Observation] O where O.issued on or after Interval[@2020-01-01, @2021-01-01]
+                """);
+
+            var where = library.statements.Single(s => s.name == "Result").expression.Should().BeOfType<Query>().Which.where;
+            var pointInterval = where.Should().BeOfType<SameOrAfter>().Which.operand[0].Should().BeOfType<If>().Subject;
+            pointInterval.resultTypeSpecifier.ToString().Should().Be("Interval<DateTime>");
+            pointInterval.@else.Should().BeOfType<Interval>().Which.low.Should().BeOfType<FunctionRef>().Which.name.Should().Be("ToDateTime");
         }
 
         [TestMethod]

@@ -7,7 +7,11 @@
   can now translate differently: a single value passed where a list is expected, or a list of one where a single
   value is expected, is converted instead of reported, and a point passed where an interval is expected, or the
   other way round, is reported instead of converted, except in `on or before` and `on or after` phrases, which
-  compare the point as a point interval as the reference translator does. A type name defined by both System and a model resolves to the
+  compare the point as a point interval as the reference translator does. In those phrases a FHIR `Period` compared
+  with a point is converted to its interval first, and a model point such as a FHIR `instant` compared with an
+  interval of another point type, such as `Interval<Date>`, becomes a point interval of the System type it converts
+  to (`DateTime`); the reference translator demotes the interval to a point instead, which fails at run time for an
+  interval of more than one point. A type name defined by both System and a model resolves to the
   model's type instead of being reported as ambiguous. To keep the old behavior, set the five switches explicitly.
   `Cql/Cql.CqlToElm/README.md` records the configuration. (#1727, #1987)
 - **Packager CLI** — the default settings file uses the same configuration, so the `cql` command translates with
