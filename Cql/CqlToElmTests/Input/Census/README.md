@@ -14,16 +14,16 @@ The test fails when the number of outcomes differs from the number of CQL files,
 
 The test has one row per corpus run:
 
-| Run | Directory | Additional models |
-|---|---|---|
-| `demo` | `LibrarySets/Demo/Cql` | none |
-| `rr23` | `LibrarySets/RR23/Cql` | none |
-| `coretests-hl7` | `Cql/CoreTests/Input/ELM/HL7` | none |
-| `authoring` | `Demo/Measures.Authoring/Input/cql` | none |
-| `authoring-qicore-4.1.1` | `Demo/Measures.Authoring/Input/cql` | QICore 4.1.1, US Core 3.1.1 |
-| `dqm-qicore-2025` | `LibrarySets/dqm-content-qicore-2025/Cql` | none |
-| `dqm-qicore-2025-qicore-6.0.0` | `LibrarySets/dqm-content-qicore-2025/Cql` | QICore 6.0.0, US Core 6.1.0 |
-| `hedis-2025` | `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Cql` | none |
+| Run | Directory | Additional models | Reference ELM (see [1.5.](#15-elm-checks)) |
+|---|---|---|---|
+| `demo` | `LibrarySets/Demo/Cql` | none | `LibrarySets/Demo/Elm` |
+| `rr23` | `LibrarySets/RR23/Cql` | none | `LibrarySets/RR23/Elm` |
+| `coretests-hl7` | `Cql/CoreTests/Input/ELM/HL7` | none | the same directory |
+| `authoring` | `Demo/Measures.Authoring/Input/cql` | none | none |
+| `authoring-qicore-4.1.1` | `Demo/Measures.Authoring/Input/cql` | QICore 4.1.1, US Core 3.1.1 | none |
+| `dqm-qicore-2025` | `LibrarySets/dqm-content-qicore-2025/Cql` | none | none: the reference was produced with QICore |
+| `dqm-qicore-2025-qicore-6.0.0` | `LibrarySets/dqm-content-qicore-2025/Cql` | QICore 6.0.0, US Core 6.1.0 | `LibrarySets/dqm-content-qicore-2025/Elm` |
+| `hedis-2025` | `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Cql` | none | `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Elm` |
 
 Every run uses the toolkit's default models (System and FHIR 4.0.1). The QICore runs add the QICore and US Core model infos bundled in `Hl7.Cql.Model`, selected through `CqlToolkitConfig.Models` (see [`Cql/Cql.Model/README.md`](../../../Cql.Model/README.md)). The QICore corpora run both without and with them, so the effect of the model infos stays visible.
 
@@ -46,12 +46,13 @@ In CI, the HEDIS row runs in the HEDIS job (`TestHedisNet10` in [`build/build-te
 
 ## 1.3. The report
 
-Every run writes two files into a `TranslatorCensus` folder in the test results directory (the `--results-directory` of `dotnet test`, by default `Cql/CqlToElmTests/TestResults`) and attaches them to the test result, so a TRX logger, and with it CI, keeps them with the test results. The one exception is the report of the HEDIS run, which names libraries of licensed content: it is written but not attached, and stays on the machine that ran the test.
+Every run writes its files into a `TranslatorCensus` folder in the test results directory (the `--results-directory` of `dotnet test`, by default `Cql/CqlToElmTests/TestResults`) and attaches them to the test result, so a TRX logger, and with it CI, keeps them with the test results. The exceptions are the reports of the HEDIS run, which name libraries of licensed content: they are written but not attached, and stay on the machine that ran the test.
 
 - `<run>.report.txt`: the summary counts, a histogram of error messages and a line per library with its outcome and messages. The histogram groups messages after replacing quoted strings by `'…'` or `"…"` and digit runs by `N`, and is sorted by the number of libraries affected, so the dominant root cause is at the top. Crashes appear as `Crash: <exception type>: <message>` followed by the first stack frame inside the translator.
 - the candidate baseline, named exactly like the committed file it would replace.
+- `<run>.elm-report.txt`: the results of the ELM checks (see [1.5.](#15-elm-checks)). For the HEDIS run, `hedis-2025.elm-counts.txt` with only the counts is attached instead.
 
-The path of both files is printed in the test output.
+The path of each file is printed in the test output.
 
 ## 1.4. Refreshing the baselines
 
@@ -62,3 +63,35 @@ dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --filter FullyQualifiedName~T
 ```
 
 Then copy each candidate baseline from the `TranslatorCensus` folder over the committed file in this directory, and review the diff: removed lines are regressions that need a reason, added lines are libraries that now translate cleanly. Never edit the files by hand.
+
+## 1.5. ELM checks
+
+Every run also checks the ELM the translator emits, in two ways.
+
+### 1.5.1. Independent checkers (a gate)
+
+The ELM of every library that does not crash is written as JSON and checked by two checkers that do not depend on how it was produced:
+
+- **Read-back.** The `Hl7.Cql.Elm` reader reads the JSON, and writing what it read gives the same JSON. An absent collection and an empty one count as the same, since the reader materializes the empty definition lists the writer leaves out.
+- **Schema.** The library as read is written as ELM XML and validated against the ELM schema in [`Cql/Elm/Schema`](../../../Elm/Schema). The library as read is checked, not the translator's own object graph, because what matters is what a consumer of the JSON gets.
+
+A clean library that fails either check **fails** the test. A library with translation errors carries placeholders where translation failed, so its findings are listed in the report but do not fail the test.
+
+### 1.5.2. Structural comparison with the reference ELM (a report)
+
+When the run has reference ELM (see the table in [1.1.](#11-what-the-test-measures)), the ELM of every clean library is compared with the reference ELM of the same library, found by the identifier the reference declares. The comparison never fails the test: legitimate differences between the two translators are expected, and what it is for is showing where they disagree and how that changes from one change to the next.
+
+Both sides are first normalized ([`ElmNormalizer`](../../ElmComparison/ElmNormalizer.cs)), which removes differences in spelling only: source locators, local identifiers, annotations and signatures are dropped; a type named by a qualified name becomes the equivalent type specifier; absent and empty collections, and absent attributes and their schema defaults, count as the same; the members of a choice type and of a tuple type, and the definitions of the library, are sorted. Operands keep their order.
+
+The comparison ([`ElmStructuralDiff`](../../ElmComparison/ElmStructuralDiff.cs)) matches definitions by name (functions by name and operand types) and everything else by position, and classifies every difference:
+
+| Kind | Meaning |
+|---|---|
+| `ConversionPlacement` | one side converts an expression (`As`, `ToDecimal`, a `FHIRHelpers` conversion, …) where the other does not, or converts it differently; the comparison continues with what is converted |
+| `MissingNode` | the reference has a node or definition this translator does not emit |
+| `ExtraNode` | this translator emits a node or definition the reference does not have |
+| `ReplacedNode` | a different kind of node in the same place; what is below it is not compared, so one difference does not cascade |
+| `TypeDifference` | the same node, typed differently; a type present on one side only is not a difference |
+| `ValueDifference` | the same node, with a different attribute value |
+
+The report gives the totals per kind, a histogram of the differences (grouped like the message histogram in [1.3.](#13-the-report), most widespread first), and per library its differences with their paths.
