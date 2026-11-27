@@ -13,9 +13,9 @@ namespace Hl7.Cql.CqlToElm.Test;
 
 /// <summary>
 /// Which function a fluent call resolves to when the calling library and its includes define fluent functions of the
-/// same name. As the reference translator does: a function of the calling library wins, and otherwise the includes are
-/// searched in the order they are declared, and the first library with an applicable overload wins, even when a later
-/// library has an overload that matches better.
+/// same name. As the reference translator does: a function of the calling library or a system operator wins, and
+/// otherwise the includes are searched in the order they are declared, and the first library with an applicable
+/// overload wins, even when a later library has an overload that matches better.
 /// </summary>
 [TestClass]
 public class FluentFunctionResolutionTest
@@ -135,6 +135,97 @@ public class FluentFunctionResolutionTest
             """);
 
         CallsConflict(library).libraryName.Should().Be("F");
+    }
+
+    [TestMethod]
+    public void A_Call_On_The_Sorted_Element_Resolves_To_The_First_Include()
+    {
+        var library = Toolkit(Library("Foo", "Integer"), Library("Bar", "Integer")).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include Foo version '1.0.0' called F
+            include Bar version '1.0.0' called B
+
+            define callsConflict: ({1, 2}) X sort by Conflict()
+            """);
+
+        var sortBy = library.statements.Single(d => d.name == "callsConflict").expression.Should().BeOfType<Query>().Subject
+                            .sort.by.Should().ContainSingle().Which.Should().BeOfType<ByExpression>().Subject;
+        var call = sortBy.expression.Should().BeOfType<FunctionRef>().Subject;
+        call.libraryName.Should().Be("F");
+        call.operand.Should().ContainSingle().Which.Should().BeOfType<IdentifierRef>();
+    }
+
+    [TestMethod]
+    public void A_Call_Qualified_By_A_Library_In_A_Sort_Is_Not_A_Call_On_The_Sorted_Element()
+    {
+        Toolkit(Library("Foo", "Integer"), Library("Bar", "Integer")).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include Foo version '1.0.0'
+            include Bar version '1.0.0'
+
+            define callsConflict: ({1, 2}) X sort by Bar.Conflict()
+            """,
+            "Could not resolve call to operator Conflict with signature ().");
+    }
+
+    [TestMethod]
+    public void Fluent_Calls_In_A_Function_Body_And_A_Query_Search_The_Includes_Of_The_Library()
+    {
+        var library = Toolkit(Library("Foo", "Integer"), Library("Bar", "Integer")).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include Foo version '1.0.0'
+            include Bar version '1.0.0'
+
+            define function G(): 1.Conflict()
+            define callsConflict: ({1, 2}) X return X.Conflict()
+            """);
+
+        library.statements.OfType<FunctionDef>().Single().expression.Should().BeOfType<FunctionRef>()
+               .Which.libraryName.Should().Be("Foo");
+        library.statements.Single(d => d.name == "callsConflict").expression.Should().BeOfType<Query>()
+               .Which.@return.expression.Should().BeOfType<FunctionRef>().Which.libraryName.Should().Be("Foo");
+    }
+
+    [TestMethod]
+    public void A_Candidate_On_Which_The_Call_Is_Ambiguous_Is_Skipped()
+    {
+        // The calling library has two equally good overloads for null, so the call goes on to the include.
+        var library = Toolkit(Library("D", "Decimal")).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include D version '1.0.0'
+
+            define fluent function Conflict(x Integer): 'Integer'
+            define fluent function Conflict(x String): 'String'
+
+            define callsConflict: null.Conflict()
+            """);
+
+        CallsConflict(library).libraryName.Should().Be("D");
+    }
+
+    [TestMethod]
+    public void A_System_Operator_Applicable_To_A_Fluent_Call_Wins_Over_An_Included_Fluent_Function()
+    {
+        // The system Truncate(Decimal) applies to an Integer, so it is the candidate found first; it is not fluent,
+        // so the call is an error, as in the reference translator.
+        var library = Toolkit("""
+            library I version '1.0.0'
+
+            define fluent function Truncate(x Integer): 'I'
+            """).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include I version '1.0.0'
+
+            define callsConflict: 1.Truncate()
+            """,
+            "Function 'Truncate' is called fluently, but its definition is not marked as fluent.");
+
+        library.statements.Single(d => d.name == "callsConflict").expression.Should().BeOfType<Truncate>();
     }
 
     [TestMethod]

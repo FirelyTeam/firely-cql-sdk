@@ -462,6 +462,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent, string locator)
         {
             IFunctionElement? symbolDef = null;
+            // The fluent candidates, looked up once, and only when the call can be fluent.
+            List<(string? LibraryName, IFunctionElement Functions)>? fluentCandidates = null;
+            List<(string? LibraryName, IFunctionElement Functions)> candidates() =>
+                fluentCandidates ??= LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName).ToList();
             // in some contexts, e.g. query sort statements like this:
             //
             // define fluent function foo(i Integer): i
@@ -469,7 +473,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             //
             // we have to test the existence of $this.foo() first.
             // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
-            if (LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
+            // A call qualified by a library name is resolved in that library only, so it is never a call on $this.
+            if (libraryName is null && LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
                 var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
                 if (invokeFirstApplicableFluent(fluentParams) is { } thisInvocation)
@@ -477,16 +482,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             if (fluent)
             {
-                // A fluent call resolves to the first candidate, in search order, with an applicable overload.
-                var candidates = LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName).ToList();
-                if (candidates.Count == 0)
+                // A fluent call resolves to the first candidate, in search order, with an applicable overload. An
+                // ambiguous match is not applicable: the search goes on to the next candidate.
+                if (candidates().Count == 0)
                     return unresolved();
                 if (invokeFirstApplicableFluent(paramList) is { } fluentInvocation)
                     return fluentInvocation;
                 // None is applicable: report the call against the only candidate, or as unresolved when there are several.
-                if (candidates.Count > 1)
+                if (candidates().Count > 1)
                     return unresolved();
-                (libraryName, symbolDef) = candidates[0];
+                (libraryName, symbolDef) = candidates()[0];
             }
             else if (libraryName is null)
             {
@@ -548,7 +553,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // the name of the library that defines it; returns null if no candidate has one.
             Expression? invokeFirstApplicableFluent(Expression[] arguments)
             {
-                foreach (var (candidateLibrary, functions) in LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName))
+                foreach (var (candidateLibrary, functions) in candidates())
                 {
                     var result = functions switch
                     {
