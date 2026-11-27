@@ -256,15 +256,25 @@ public class TranslatorCensusTest
             File.WriteAllText(Path.Combine(directory.FullName, "e.cql"), "library E version '1.0.0'\n\ninclude D version '1.0.0'\n\ndefine Z: D.X\n");
             File.WriteAllText(Path.Combine(directory.FullName, "f.cql"), "library F version '1.0.0'\n\ninclude E version '1.0.0'\n\ndefine W: E.Z\n");
             File.WriteAllText(Path.Combine(directory.FullName, "g.cql"), "library G version '1.0.0'\n\ninclude C version '1.0.0'\n\ndefine V: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "h.cql"), "library H version '1.0.0'\n\ndefine X: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "i.cql"), "library I version '1.0.0'\n\ninclude H version '1.0.0'\n\ndefine Y: H.X\n");
 
             // D translates cleanly; make its ELM uncompilable by pointing Y at a definition that does not exist.
+            // H translates cleanly too; make it a library whose ELM could not be written.
             var results = Translate(directory, [])
-                          .Select(r => r.Id == "D-1.0.0" ? r with { ElmJson = WithDanglingExpressionRef(r.ElmJson!) } : r)
+                          .Select(r => r.Id switch
+                          {
+                              "D-1.0.0" => r with { ElmJson = WithDanglingExpressionRef(r.ElmJson!) },
+                              "H-1.0.0" => r with { ElmJson = null, ElmWriteError = "InvalidOperationException: not writable" },
+                              _         => r,
+                          })
                           .ToList();
 
             var byId = Compile(results).ToDictionary(r => r.Id, StringComparer.Ordinal);
 
-            byId.Keys.Should().BeEquivalentTo("A-1.0.0", "B-1.0.0", "C-1.0.0", "D-1.0.0", "E-1.0.0", "F-1.0.0", "G-1.0.0");
+            byId.Keys.Should().BeEquivalentTo("A-1.0.0", "B-1.0.0", "C-1.0.0", "D-1.0.0", "E-1.0.0", "F-1.0.0", "G-1.0.0", "H-1.0.0", "I-1.0.0");
+            byId["H-1.0.0"].Should().Be(new CompileResult("H-1.0.0", CompileOutcome.Failed, "the ELM could not be written: InvalidOperationException: not writable"));
+            byId["I-1.0.0"].Should().Be(new CompileResult("I-1.0.0", CompileOutcome.Blocked, "includes H-1.0.0, whose ELM could not be written or read back"));
             byId["A-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
             byId["B-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
             byId["C-1.0.0"].Should().Be(new CompileResult("C-1.0.0", CompileOutcome.Blocked, "includes Broken-1.0.0, which did not translate cleanly"));
@@ -885,6 +895,7 @@ public class TranslatorCensusTest
 
         TestContext.WriteLine(string.Create(CultureInfo.InvariantCulture, $"{corpus.Name}: {counts} in {stopwatch.Elapsed.TotalSeconds:F1}s"));
         TestContext.WriteLine($"Compile report: {reportPath}");
+        TestContext.WriteLine($"Candidate compile baseline: {candidatePath}");
         return new CompileSummary(compileResults, counts, candidatePath);
     }
 
@@ -974,7 +985,7 @@ public class TranslatorCensusTest
             {
                 if (!visited.Add(include))
                     continue;
-                if (FailedInclude(include, visited) is { } deeper)
+                if (includes.ContainsKey(include) && FailedInclude(include, visited) is { } deeper)
                     return deeper;
                 if (!compiled.Contains(include))
                     return include;

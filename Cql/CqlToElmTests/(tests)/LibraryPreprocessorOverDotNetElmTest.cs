@@ -12,16 +12,16 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.CqlToElm.Test.ElmComparison;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 /// <summary>
 /// Runs the ELM preprocessor, whose correctors compensate for the reference translator's ELM, over ELM the .NET
-/// translator emits. Each test first shows that the ELM has the shape its corrector looks for, so that it is not
-/// vacuous, and then that the corrector leaves the ELM as it is, because the .NET translator already emits what the
-/// corrector would make of it.
+/// translator emits, and shows per corrector that it leaves that ELM as it is or still corrects it. A test first shows
+/// that the ELM has the shape its corrector looks for, so that it is not vacuous. Most correctors leave the ELM as it
+/// is, because the .NET translator already emits what they would make of it; for <c>Power</c> the test checks the
+/// type after preprocessing; and under QICore the shape the period unit corrector targets does not arise at all.
 /// </summary>
 [TestClass]
 public class LibraryPreprocessorOverDotNetElmTest
@@ -94,7 +94,24 @@ public class LibraryPreprocessorOverDotNetElmTest
             """);
 
         Nodes(before).Where(n => (string?)n["type"] == "Power").Should().HaveCount(3);
-        Nodes(after).Where(n => (string?)n["type"] == "Power").Select(ResultType).Should().Equal(Decimal, Decimal, Decimal);
+        var powers = Nodes(after).Where(n => (string?)n["type"] == "Power").ToList();
+        powers.Select(ResultType).Should().Equal(Decimal, Decimal, Decimal);
+        powers.Select(p => (string?)p["resultTypeName"]).Should().Equal(Decimal, Decimal, Decimal);
+
+        // Nothing but the result type of a Power may change.
+        ShouldBeUnchanged(WithoutPowerResultTypes(before), WithoutPowerResultTypes(after));
+    }
+
+    private static JsonNode WithoutPowerResultTypes(JsonNode library)
+    {
+        var copy = library.DeepClone();
+        foreach (var power in Nodes(copy).Where(n => (string?)n["type"] == "Power"))
+        {
+            power.Remove("resultTypeName");
+            power.Remove("resultTypeSpecifier");
+        }
+
+        return copy;
     }
 
     /// <summary>
