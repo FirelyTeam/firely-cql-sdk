@@ -1,1 +1,3 @@
 #nullable enable
+static Hl7.Cql.Model.ModelInfo.LoadFromFile(string! path) -> Hl7.Cql.Model.ModelInfo!
+static Hl7.Cql.Model.ModelInfo.LoadFromStream(System.IO.Stream! stream) -> Hl7.Cql.Model.ModelInfo!

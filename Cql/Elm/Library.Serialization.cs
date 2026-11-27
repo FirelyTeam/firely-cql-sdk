@@ -85,9 +85,9 @@ public partial class Library
         if (!file.Exists)
             throw new FileNotFoundException($"File {file.FullName} does not exist.");
 
-        var utf8Json = File.ReadAllBytes(file.FullName);
+        var utf8Json = LibraryJsonSerializer.WithoutUtf8Bom(File.ReadAllBytes(file.FullName));
 
-        var node = JsonNode.Parse(utf8Json, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
+        var node = JsonNode.Parse(utf8Json, LibraryJsonSerializer.GetJsonNodeOptions(), LibraryJsonSerializer.GetJsonDocumentOptions()) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         var library = LibraryJsonSerializer.DeserializeFromJsonNode(node, validate, originalFilePath: file.FullName);
@@ -103,7 +103,7 @@ public partial class Library
     /// </summary>
     public static Library LoadFromJson(Stream stream, bool validate = true, string? originalFilePath = null)
     {
-        var node = JsonNode.Parse(stream, documentOptions: LibraryJsonSerializer.GetJsonDocumentOptions()) ??
+        var node = JsonNode.Parse(stream, LibraryJsonSerializer.GetJsonNodeOptions(), LibraryJsonSerializer.GetJsonDocumentOptions()) ??
                    throw new InvalidOperationException("JsonNode.Parse unexpectedly returned null.");
 
         originalFilePath ??= stream switch
@@ -124,20 +124,22 @@ public partial class Library
     }
 
     /// <summary>
-    /// Returns this library as UTF-8 JSON with the requested indentation, reusing the JSON it was read
-    /// from where possible so the ELM graph does not have to be serialized again.
+    /// Returns this library as UTF-8 JSON with LF line breaks and the requested indentation. A library that
+    /// kept the JSON it was read from re-formats that JSON; any other is serialized, both straight into UTF-8.
     /// </summary>
     /// <param name="writeIndented">Whether to format the JSON with indentation.</param>
     /// <remarks>
     /// When <see cref="SourceJsonUtf8"/> is available the result is that JSON with only its insignificant
     /// formatting changed — whitespace, and string escaping normalized by the writer — which is not the
     /// same as serializing: see <see cref="SourceJsonUtf8"/> for how the two differ.
+    /// Serializing costs less once the serializer's metadata is built, while re-formatting saves building it in a
+    /// process that serializes nothing else. Re-formatting is kept for its fidelity: it keeps the source's content,
+    /// which serializing does not reproduce.
     /// </remarks>
     internal byte[] ToJsonUtf8(bool writeIndented) =>
         SourceJsonUtf8 is { } sourceJson
             ? LibraryJsonSerializer.ReformatUtf8Json(sourceJson, writeIndented)
-            // Indented serialization breaks lines with Environment.NewLine, so normalize here too.
-            : LibraryJsonSerializer.NormalizeNewLinesUtf8(Encoding.UTF8.GetBytes(SerializeToJson(writeIndented)));
+            : LibraryJsonSerializer.SerializeToUtf8(this, writeIndented);
 
     /// <summary>
     /// Writes this library in JSON format to <paramref name="stream"/>.

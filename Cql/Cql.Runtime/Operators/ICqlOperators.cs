@@ -77,6 +77,7 @@ namespace Hl7.Cql.Operators
         bool?                                    AnyTrue(IEnumerable<bool?> argument);
         bool?                                    AnyTrue(IEnumerable<Lazy<bool?>> argument);
         decimal?                                 Avg(IEnumerable<decimal?>? argument);
+        CqlQuantity?                             Avg(IEnumerable<CqlQuantity?>? argument);
         bool?                                    Before(CqlDate? right,CqlInterval<CqlDate?>? left,string? precision);
         bool?                                    Before(CqlDateTime? right,CqlInterval<CqlDateTime?>? left,string? precision);
         bool?                                    Before(CqlInterval<CqlDate?>? left,CqlDate? right,string? precision);
@@ -404,6 +405,7 @@ namespace Hl7.Cql.Operators
         decimal?                                 Median(IEnumerable<decimal?> source);
         int?                                     Median(IEnumerable<int?> source);
         long?                                    Median(IEnumerable<long?> source);
+        CqlQuantity?                             Median(IEnumerable<CqlQuantity?>? source);
         bool?                                    Meets(CqlInterval<CqlDate?>? left,CqlInterval<CqlDate?>? right,string? precision);
         bool?                                    Meets(CqlInterval<CqlDateTime?>? left,CqlInterval<CqlDateTime?>? right,string? precision);
         bool?                                    Meets(CqlInterval<CqlQuantity?>? left,CqlInterval<CqlQuantity?>? right,string? precision);
@@ -530,6 +532,10 @@ namespace Hl7.Cql.Operators
         IEnumerable<TResult>?                    SelectManyResults<TSource, TCollection, TResult>(IEnumerable<TSource>? source,Func<TSource, IEnumerable<TCollection>> collectionSelector,Func<TSource, TCollection, TResult> resultSelector);
         IEnumerable<TR>?                         SelectWhere<T, TR>(IEnumerable<T?>? source, Func<T?, TR> select, Func<TR, bool?> lambda);
         T?                                       SingletonFrom<T>(IEnumerable<T>? source);
+        CqlQuantity?                             Size(CqlInterval<CqlQuantity?>? argument);
+        decimal?                                 Size(CqlInterval<decimal?>? argument);
+        int?                                     Size(CqlInterval<int?>? argument);
+        long?                                    Size(CqlInterval<long?>? argument);
         IEnumerable<T>?                          Slice<T>(IEnumerable<T>? source,int? startIndex,int? endIndex);
         IEnumerable<T>?                          SortBy<T>(IEnumerable<T>? source,Func<T, object> sortByExpr,ListSortDirection order);
         IEnumerable<string>?                     Split(string stringToSplit, string separator);

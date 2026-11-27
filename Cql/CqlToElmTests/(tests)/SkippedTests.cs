@@ -28,18 +28,12 @@ namespace Hl7.Cql.CqlToElm.Test
             { "ExpandEmptyList", "Expand over a List<Any> operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandNull", "Expand over an Any operand is ambiguous with every typed interval overload (#1627)." },
             { "ExpandPer0D1IntervalOverload", "Throws NotSupportedException: a fractional per over an integer interval would produce Decimal values (value-dependent typing). The Expand signature yields List<T> with T the integer point type; the suite extrapolates the Decimal result from the list overload's example." },
-
-            { "NullToBoolean", "An untyped null matches the Decimal, Long, Integer and String overloads of ToBoolean with one implicit cast each, so the call is ambiguous (Developer's Guide, Function Resolution: \"If multiple signatures have the same number of required conversions, an ambiguous resolution error is thrown\"). See cqframework/cql-tests#179." },
-
-            // To be revisited: these need C# compiler changes before they can run.
-            { "SplitOnMatchesNull", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesComma", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesRegex", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
-            { "SplitOnMatchesNotFound", "SplitOnMatches is not supported: the translator has no SplitOnMatches system function and the compiler cannot bind the SplitOnMatches ELM node, although the runtime implements ICqlOperators.SplitOnMatches. To be revisited: supporting it needs C# compiler changes (a CodeBuilderContext.GetBindArgs entry) and a GeneratorToolVersion bump (#1737)." },
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
         {
+            { "TestMeetsAfterNull", "Expects null, the SDK gives false. Appendix B Start and End say an open null boundary is null, but the 1.5.3 logical specification (Interval) and the Author's Guide treat it as an uncertainty, and CQL 2.0 settles it that way, so the relationship is false. cqframework/cql-tests#188 changes the expectation to false." },
+
             { "DateTimeDurationBetweenMonthUncertain2", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainAdd", "We don't support uncertainty" },
             { "DateTimeDurationBetweenUncertainDiv", "We don't support uncertainty." },

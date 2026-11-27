@@ -1,1 +1,4 @@
 #nullable enable
+Hl7.Cql.Iso8601.DateIso8601.Equals(Hl7.Cql.Iso8601.DateIso8601? other) -> bool
+Hl7.Cql.Iso8601.DateTimeIso8601.Equals(Hl7.Cql.Iso8601.DateTimeIso8601? other) -> bool
+Hl7.Cql.Iso8601.TimeIso8601.Equals(Hl7.Cql.Iso8601.TimeIso8601? other) -> bool

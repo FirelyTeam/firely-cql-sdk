@@ -49,8 +49,9 @@ public partial class Library
 
     /// <summary>
     /// The UTF-8 JSON this library was loaded from, when it was loaded from a file. Consumers that need
-    /// the library's JSON representation use this in preference to <see cref="SerializeToJson"/>, which
-    /// rebuilds it from the object graph at considerable cost.
+    /// the content of the file rather than of the object graph use this in preference to
+    /// <see cref="SerializeToJson"/>. Serializing costs less once the serializer's metadata is built, but
+    /// re-formatting this saves building that metadata in a process that serializes nothing else.
     /// </summary>
     /// <remarks>
     /// <para>

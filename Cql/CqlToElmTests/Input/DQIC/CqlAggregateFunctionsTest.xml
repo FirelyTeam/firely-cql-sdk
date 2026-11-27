@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlAggregateFunctionsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#aggregate-functions" version="1.5">
 	<capability code="aggregate-functions"/>
 	<group name="AllTrue" version="1.5">
@@ -42,6 +42,11 @@
 		<test name="AllTrueIsTrueWhenNull" version="1.5">
 			<capability code="aggregate-functions"/>
 			<expression>AllTrue(null)</expression>
+			<output>true</output>
+		</test>
+		<test name="AllTrueAllNull" version="1.5">
+			<!-- no non-null elements -> true -->
+			<expression>AllTrue({null, null, null})</expression>
 			<output>true</output>
 		</test>
 	</group>
@@ -97,6 +102,11 @@
 			<expression>AnyTrue(null)</expression>
 			<output>false</output>
 		</test>
+		<test name="AnyTrueAllNull" version="1.5">
+			<!-- no non-null elements -> false -->
+			<expression>AnyTrue({null, null, null})</expression>
+			<output>false</output>
+		</test>
 	</group>
 	<group name="Avg" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -104,6 +114,21 @@
 			<capability code="aggregate-functions"/>
 			<expression>Avg({ 1.0, 2.0, 3.0, 6.0 })</expression>
 			<output>3.0</output>
+		</test>
+		<test name="AvgNullElements" version="1.5">
+			<!-- null elements are excluded -->
+			<expression>Avg({ 1.0, null, 3.0 })</expression>
+			<output>2.0</output>
+		</test>
+		<test name="AvgAllNull" version="1.5">
+			<!-- no non-null elements -> null -->
+			<expression>Avg({ null as Decimal, null as Decimal })</expression>
+			<output>null</output>
+		</test>
+		<test name="AvgIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>Avg(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Product" version="1.5">
@@ -113,6 +138,24 @@
 			<capability code="system.long"/>
 			<expression>Product({5L, 4L, 5L})</expression>
 			<output>100L</output>
+		</test>
+		<test name="ProductInteger" version="1.5">
+			<expression>Product({ 2, 3, 4 })</expression>
+			<output>24</output>
+		</test>
+		<test name="ProductDecimal" version="1.5">
+			<expression>Product({ 1.0, 2.0, 3.0, 4.0 })</expression>
+			<output>24.0</output>
+		</test>
+		<test name="ProductAllNull" version="1.5">
+			<!-- no non-null elements -> null -->
+			<expression>Product({ null as Decimal, null as Decimal })</expression>
+			<output>null</output>
+		</test>
+		<test name="ProductIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>Product(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Count" version="1.5">
@@ -137,6 +180,16 @@
 		<test name="CountTestNull" version="1.5">
 			<capability code="aggregate-functions"/>
 			<expression>Count({})</expression>
+			<output>0</output>
+		</test>
+		<test name="CountAllNull" version="1.5">
+			<!-- non-null count of all-null list is 0 -->
+			<expression>Count({ null, null, null })</expression>
+			<output>0</output>
+		</test>
+		<test name="CountNullSource" version="1.5">
+			<!-- null source -> 0 -->
+			<expression>Count(null as List&lt;Integer&gt;)</expression>
 			<output>0</output>
 		</test>
 	</group>
@@ -170,6 +223,25 @@
 			<expression>Max({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T20:59:59.999</output>
 		</test>
+		<test name="MaxTestDecimal" version="1.5">
+			<expression>Max({ 1.0, 5.0, 3.0 })</expression>
+			<output>5.0</output>
+		</test>
+		<test name="MaxNullElements" version="1.5">
+			<!-- null elements are excluded -->
+			<expression>Max({ 1, null, 5 })</expression>
+			<output>5</output>
+		</test>
+		<test name="MaxAllNull" version="1.5">
+			<!-- no non-null elements -> null -->
+			<expression>Max({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="MaxIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>Max(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Median" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -177,6 +249,19 @@
 			<capability code="aggregate-functions"/>
 			<expression>Median({6.0, 5.0, 4.0, 3.0, 2.0, 1.0})</expression>
 			<output>3.5</output>
+		</test>
+		<test name="MedianOddCount" version="1.5">
+			<!-- odd count -> middle element -->
+			<expression>Median({ 1.0, 2.0, 3.0 })</expression>
+			<output>2.0</output>
+		</test>
+		<test name="MedianAllNull" version="1.5">
+			<expression>Median({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="MedianIsNull" version="1.5">
+			<expression>Median(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Min" version="1.5">
@@ -209,6 +294,18 @@
 			<expression>Min({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
+		<test name="MinTestDecimal" version="1.5">
+			<expression>Min({ 5.0, 1.0, 3.0 })</expression>
+			<output>1.0</output>
+		</test>
+		<test name="MinAllNull" version="1.5">
+			<expression>Min({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="MinIsNull" version="1.5">
+			<expression>Min(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Mode" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -235,6 +332,14 @@
 			<expression>Mode({ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999, @T05:59:59.999 })</expression>
 			<output>@T05:59:59.999</output>
 		</test>
+		<test name="ModeAllNull" version="1.5">
+			<expression>Mode({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="ModeIsNull" version="1.5">
+			<expression>Mode(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="PopulationStdDev" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -247,6 +352,11 @@
 		<test name="PopulationStdDevIsNull" version="1.5">
 			<capability code="aggregate-functions"/>
 			<expression>PopulationStdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="PopulationStdDevIsAlsoNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>PopulationStdDev(null as List&lt;Decimal&gt;)</expression>
 			<output>null</output>
 		</test>
 	</group>
@@ -262,6 +372,11 @@
 			<expression>PopulationVariance({ null as Quantity, null as Quantity, null as Quantity })</expression>
 			<output>null</output>
 		</test>
+		<test name="PopulationVarianceIsAlsoNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>PopulationVariance(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="StdDev" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -274,6 +389,11 @@
 		<test name="StdDevIsNull" version="1.5">
 			<capability code="aggregate-functions"/>
 			<expression>StdDev({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="StdDevIsAlsoNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>StdDev(null as List&lt;Decimal&gt;)</expression>
 			<output>null</output>
 		</test>
 	</group>
@@ -301,6 +421,20 @@
 			<expression>Sum({ null, 1, null })</expression>
 			<output>1</output>
 		</test>
+		<test name="SumInteger" version="1.5">
+			<expression>Sum({ 1, 2, 3 })</expression>
+			<output>6</output>
+		</test>
+		<test name="SumAllNull" version="1.5">
+			<!-- no non-null elements -> null (not 0) -->
+			<expression>Sum({ null as Decimal, null as Decimal })</expression>
+			<output>null</output>
+		</test>
+		<test name="SumIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>Sum(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Variance" version="1.5">
 		<capability code="aggregate-functions"/>
@@ -308,6 +442,32 @@
 			<capability code="aggregate-functions"/>
 			<expression>Variance({ 1.0, 2.0, 3.0, 4.0, 5.0 })</expression>
 			<output>2.5</output>
+		</test>
+		<test name="VarianceAllNull" version="1.5">
+			<expression>Variance({ null as Quantity, null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="VarianceIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>Variance(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="GeometricMean" version="1.5">
+		<capability code="aggregate-functions"/>
+		<test name="GeometricMean4" version="1.5">
+			<!-- Nth root of the product -->
+			<expression>GeometricMean({ 2.0, 8.0 })</expression>
+			<output>4.0</output>
+		</test>
+		<test name="GeometricMeanAllNull" version="1.5">
+			<expression>GeometricMean({ null as Decimal, null as Decimal })</expression>
+			<output>null</output>
+		</test>
+		<test name="GeometricMeanIsNull" version="1.5">
+			<!-- null source -> null -->
+			<expression>GeometricMean(null as List&lt;Decimal&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 </tests>

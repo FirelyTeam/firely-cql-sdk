@@ -82,7 +82,7 @@ public class CqlToFhirProgram
                 ? null
                 : new SubdirectoryPreserver();
 
-            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt);
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt.WithModelInfoFiles());
 
             if (!packOpt.ExitOnError)
                 cqlToolkit = cqlToolkit.SetIgnoreEnumerationExceptions();

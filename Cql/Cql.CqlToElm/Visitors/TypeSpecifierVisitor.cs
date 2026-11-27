@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else if (matches.Count == 2)
             {
-                var behavior = CqlToElmOptions.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
+                var behavior = CqlToElmOptions.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.PreferModel;
                 if (behavior == AmbiguousTypeBehavior.PreferSystem)
                 {
                     var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();

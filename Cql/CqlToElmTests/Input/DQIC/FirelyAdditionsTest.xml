@@ -39,4 +39,36 @@
 			<output>{'abc'}</output>
 		</test>
 	</group>
+	<group name="AvgQuantity">
+		<test name="AvgQuantity">
+			<expression>Avg({ 5.5 'cm', 4.7 'cm', 4.8 'cm' })</expression>
+			<output>5.0 'cm'</output>
+		</test>
+		<test name="AvgQuantityNullElements">
+			<expression>Avg({ 1.0 'cm', null, 3.0 'cm' })</expression>
+			<output>2.0 'cm'</output>
+		</test>
+		<test name="AvgQuantityAllNull">
+			<expression>Avg({ null as Quantity, null as Quantity })</expression>
+			<output>null</output>
+		</test>
+		<test name="AvgQuantityIsNull">
+			<expression>Avg(null as List&lt;Quantity&gt;)</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="MedianQuantity">
+		<test name="MedianQuantityOdd">
+			<expression>Median({ 1.0 'mg', 2.0 'mg', 3.0 'mg' })</expression>
+			<output>2.0 'mg'</output>
+		</test>
+		<test name="MedianQuantityEven">
+			<expression>Median({ 4.0 'mg', 1.0 'mg', null, 2.0 'mg', 3.0 'mg' })</expression>
+			<output>2.5 'mg'</output>
+		</test>
+		<test name="MedianQuantityIsNull">
+			<expression>Median(null as List&lt;Quantity&gt;)</expression>
+			<output>null</output>
+		</test>
+	</group>
 </tests>

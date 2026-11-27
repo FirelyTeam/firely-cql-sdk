@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // Without list promotion the single Code cannot be coerced to List<Code>, which must yield a
             // translation error naming the element instead of throwing (#1416).
-            CreateCqlToolkit()
+            CreateCqlToolkit(DisableListPromotion: true)
                 .MakeLibraryFromExpression(
                     "Concept { codes: Code { code: '8480-6' } }",
                     expectedErrors: ["The value for element codes of type 'Code' cannot be converted to the declared type 'List<Code>'."]);

@@ -21,6 +21,7 @@ namespace Hl7.Cql.Primitives
     [CqlPrimitiveType(CqlPrimitiveType.DateTime)]
     public class CqlDateTime :
         ICqlComparable<CqlDateTime>,
+        IEquatable<CqlDateTime>,
         IEquivalentable<CqlDateTime>,
         IAdditionOperators<CqlDateTime?, CqlQuantity?, CqlDateTime?>,
         ISubtractionOperators<CqlDateTime?, CqlQuantity?, CqlDateTime?>
@@ -510,11 +511,22 @@ namespace Hl7.Cql.Primitives
         public override string ToString() => Value.ToString();
 
         /// <summary>
+        /// Whether <paramref name="other"/> holds the same <see cref="Value"/>. This is the equality of .NET, which
+        /// sets and dictionaries use; it is not the CQL <c>=</c> operator.
+        /// </summary>
+        /// <param name="other">The value to compare with.</param>
+        /// <returns><see langword="true"/> if equal.</returns>
+        public bool Equals(CqlDateTime? other) =>
+            other is not null
+            && other.GetType() == GetType()
+            && Value.Equals(other.Value);
+
+        /// <summary>
         /// Compares this object to <paramref name="obj"/> for equality.
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
-        public override bool Equals(object? obj) => Value.Equals((obj as CqlDateTime)?.Value!);
+        public override bool Equals(object? obj) => Equals(obj as CqlDateTime);
 
         /// <summary>
         /// Gets the value of <see cref="DateTimeIso8601.GetHashCode"/> for <see cref="Value"/>.

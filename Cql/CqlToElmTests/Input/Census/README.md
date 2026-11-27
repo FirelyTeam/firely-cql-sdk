@@ -14,7 +14,7 @@ The test fails when the number of outcomes differs from the number of CQL files,
 
 The test has one row per corpus run:
 
-| Run | Directory | Model infos |
+| Run | Directory | Additional models |
 |---|---|---|
 | `demo` | `LibrarySets/Demo/Cql` | none |
 | `rr23` | `LibrarySets/RR23/Cql` | none |
@@ -25,7 +25,7 @@ The test has one row per corpus run:
 | `dqm-qicore-2025-qicore-6.0.0` | `LibrarySets/dqm-content-qicore-2025/Cql` | QICore 6.0.0, US Core 6.1.0 |
 | `hedis-2025` | `submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Cql` | none |
 
-The QICore corpora run both without and with the model infos, so the effect of the model infos stays visible. The model info files are described in [`../ModelInfo/README.md`](../ModelInfo/README.md).
+Every run uses the toolkit's default models (System and FHIR 4.0.1). The QICore runs add the QICore and US Core model infos bundled in `Hl7.Cql.Model`, selected through `CqlToolkitConfig.Models` (see [`Cql/Cql.Model/README.md`](../../../Cql.Model/README.md)). The QICore corpora run both without and with them, so the effect of the model infos stays visible.
 
 ## 1.2. Baseline files
 

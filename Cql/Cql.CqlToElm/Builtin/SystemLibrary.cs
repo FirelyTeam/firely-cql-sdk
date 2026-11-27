@@ -78,6 +78,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null,
             Func<InvocationBuilder, Expression[], Expression>? invoker = null) where T : Expression =>
             new(new[] { argument }, result, name ?? typeof(T).Name, invoker: invoker);
+        // ConvertsToX(argument Any) Boolean, tested on the System value of an argument of a model type.
+        private static SystemFunction<T> convertsTo<T>() where T : Expression
+        {
+            var function = unary<T>(AnyType, BooleanType);
+            return function.InvokeWith((builder, args) => Invokers.ConvertsTo(function, builder, args));
+        }
         private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : Expression =>
@@ -164,8 +170,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<CalculateAgeAt> CalculateAgeInMinutesAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInMinutesAt");
         public static SystemFunction<CalculateAgeAt> CalculateAgeInSecondsAt = binary<CalculateAgeAt>(DateTimeType, DateTimeType, IntegerType, "CalculateAgeInSecondsAt");
 
+        public static SystemFunction<CanConvertQuantity> CanConvertQuantity = binary<CanConvertQuantity>(QuantityType, StringType, BooleanType);
         public static SystemFunction<Ceiling> Ceiling = unary<Ceiling>(DecimalType, IntegerType);
-        public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
+        public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).WithListAndIntervalVariants(T).Combine(unary<Coalesce>(T.ToListType(), T));
         public static OverloadedFunctionDef Collapse = unary<Collapse>(T.ToIntervalType().ToListType(), T.ToIntervalType().ToListType())
                 .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType)
                 .Combine(binary<Collapse>(T.ToIntervalType().ToListType(), QuantityType, T.ToIntervalType().ToListType())
@@ -173,7 +180,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
-        public static SystemFunction<ConvertsToRatio> ConvertsToRatio = unary<ConvertsToRatio>(AnyType, BooleanType);
+        public static SystemFunction<ConvertsToBoolean> ConvertsToBoolean = convertsTo<ConvertsToBoolean>();
+        public static SystemFunction<ConvertsToDate> ConvertsToDate = convertsTo<ConvertsToDate>();
+        public static SystemFunction<ConvertsToDateTime> ConvertsToDateTime = convertsTo<ConvertsToDateTime>();
+        public static SystemFunction<ConvertsToDecimal> ConvertsToDecimal = convertsTo<ConvertsToDecimal>();
+        public static SystemFunction<ConvertsToInteger> ConvertsToInteger = convertsTo<ConvertsToInteger>();
+        public static SystemFunction<ConvertsToLong> ConvertsToLong = convertsTo<ConvertsToLong>();
+        public static SystemFunction<ConvertsToQuantity> ConvertsToQuantity = convertsTo<ConvertsToQuantity>();
+        public static SystemFunction<ConvertsToRatio> ConvertsToRatio = convertsTo<ConvertsToRatio>();
+        public static SystemFunction<ConvertsToString> ConvertsToString = convertsTo<ConvertsToString>();
+        public static SystemFunction<ConvertsToTime> ConvertsToTime = convertsTo<ConvertsToTime>();
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
         public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);
@@ -205,6 +221,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType(),
             invoker: Invokers.Flatten);
         public static SystemFunction<Floor> Floor = unary<Floor>(DecimalType, IntegerType);
+        public static SystemFunction<GeometricMean> GeometricMean = aggregate<GeometricMean>(DecimalType, DecimalType);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
@@ -293,8 +310,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .Combine(binaryWithPrecision<After>(T, T.ToIntervalType(), BooleanType).For(T, IntervalPointTypes.ToArray()))
             .Combine(binaryWithPrecision<After>(T.ToIntervalType(), T, BooleanType).For(T, IntervalPointTypes.ToArray()));
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
+        public static SystemFunction<Size> Size = unary<Size>(T.ToIntervalType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
+        public static SystemFunction<SplitOnMatches> SplitOnMatches = binary<SplitOnMatches>(StringType, StringType, StringType.ToListType());
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
         public static SystemFunction<Starts> Starts = binaryWithPrecision<Starts>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
 
@@ -432,6 +451,45 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static Expression AgeInSeconds(InvocationBuilder builder, Expression[] args) =>
             builder.Invoke(SystemLibrary.CalculateAgeInSeconds, PatientBirthDateTime);
 
+
+        /// <summary>
+        /// Invokes a ConvertsTo* operator. An argument of a model type is converted to the System value its model
+        /// converts it to implicitly before the operator tests it, because the operator recognizes System values
+        /// only and nothing converts an argument that matches <c>Any</c> as it is. A model value that has no System
+        /// value does not convert, so the result for it is false, and null only for a null argument.
+        /// </summary>
+        public static Expression ConvertsTo(SystemFunction function, InvocationBuilder builder, Expression[] args)
+        {
+            if (args is not [var argument])
+                return builder.Invoke(function, args);
+
+            // The argument is read several times below, so anything but a reference is bound to an alias first.
+            // The alias is named after the operator, so that it does not redefine an alias or let of the CQL
+            // around the call: the compiler compares these names without the leading '$'.
+            var alias = $"$argumentOf{function.name}";
+            Expression value = argument is OperandRef or AliasRef or QueryLetRef
+                ? argument
+                : new AliasRef { name = alias, locator = argument.locator }.WithResultType(argument.resultTypeSpecifier);
+            var converted = builder.CoercionProvider.ConvertModelValueToSystemValue(value);
+            if (ReferenceEquals(converted, value))
+                return builder.Invoke(function, args);
+
+            var test = new If
+            {
+                condition = new IsNull { operand = value, locator = argument.locator }.WithResultType(BooleanType),
+                then = builder.ElmFactory.Null(BooleanType),
+                @else = builder.Invoke(SystemLibrary.Coalesce, builder.Invoke(function, converted), builder.ElmFactory.Literal(false)),
+                locator = argument.locator,
+            }.WithResultType(BooleanType);
+            if (ReferenceEquals(value, argument))
+                return test;
+            return new Query
+            {
+                source = [new AliasedQuerySource { alias = alias, expression = argument }.WithResultType(argument.resultTypeSpecifier)],
+                @return = new ReturnClause { distinct = false, expression = test },
+                locator = argument.locator,
+            }.WithResultType(BooleanType);
+        }
 
         public static Expression Flatten(InvocationBuilder builder, Expression[] args)
         {
