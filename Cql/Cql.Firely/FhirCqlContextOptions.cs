@@ -58,14 +58,17 @@ namespace Hl7.Cql.Fhir
         public ModelInspector? OverrideModelInspector { get; init; }
 
         /// <summary>
-        /// The timezone offset the <see cref="TypeConverter"/> uses when a CQL value without an offset has to be
+        /// The timezone offset the <see cref="TypeConverter"/> uses when a value without an offset has to be
         /// emitted as a FHIR <c>dateTime</c> carrying a time component, which FHIR requires to have an offset.
         /// When <see langword="null"/>, the offset of the <c>now</c> argument — the timestamp of the evaluation
         /// request — is used; when that is <see langword="null"/> too, UTC is used, which matches the UTC
         /// evaluation timestamp the engine synthesizes when <c>now</c> is omitted. Must be a whole number of
         /// minutes within ±14:00.
         /// </summary>
-        /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
+        /// <remarks>
+        /// CQL evaluation already gives every <c>DateTime</c> with a time component the evaluation request's offset,
+        /// so this only applies to offset-less values built outside CQL evaluation, such as in host code.
+        /// Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
         /// <exception cref="ArgumentOutOfRangeException">The value is not a whole number of minutes within ±14:00.</exception>
         public TimeSpan? OverrideConverterTimezoneOffset
         {

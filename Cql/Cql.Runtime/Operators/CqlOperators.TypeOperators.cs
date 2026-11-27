@@ -200,7 +200,18 @@ namespace Hl7.Cql.Operators
             else return null;
         }
 
-        public CqlDateTime? ConvertStringToDateTime(string? s) => ConvertStringToDateTimeImpl(s);
+        public CqlDateTime? ConvertStringToDateTime(string? s) => WithEvaluationRequestOffset(ConvertStringToDateTimeImpl(s));
+
+        // An absent offset is defaulted to the evaluation request's offset whenever an hour is present, as
+        // CqlOperators.DateTime does for the DateTime constructor.
+        private CqlDateTime? WithEvaluationRequestOffset(CqlDateTime? value)
+        {
+            if (value is null || value.Value.Precision <= DateTimePrecision.Day || value.Value.OffsetHour.HasValue)
+                return value;
+            var v = value.Value;
+            return new CqlDateTime(v.Year, v.Month, v.Day, v.Hour, v.Minute, v.Second, v.Millisecond,
+                NowValue.Value.OffsetHour ?? 0, NowValue.Value.OffsetMinute ?? 0);
+        }
 
         internal static CqlDateTime? ConvertStringToDateTimeImpl(string? s)
         {
