@@ -165,6 +165,32 @@ public class ElmStructuralDiffTest
     }
 
     [TestMethod]
+    public void Two_Different_Model_Conversions_Of_The_Same_Operand_Are_One_Conversion_Divergence()
+    {
+        Compare(
+                Expression("""{ "type": "FunctionRef", "libraryName": "FHIRHelpers", "name": "ToDate", "operand": [ { "type": "Null" } ] }"""),
+                Expression("""{ "type": "FunctionRef", "libraryName": "FHIRHelpers", "name": "ToDateTime", "operand": [ { "type": "Null" } ] }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.ConversionPlacement, "statements[X].expression", "FunctionRef ToDate vs FunctionRef ToDateTime"));
+    }
+
+    [TestMethod]
+    public void A_System_And_A_Model_Conversion_Of_A_Function_Call_Are_One_Conversion_Divergence()
+    {
+        // The operand is a FunctionRef, like the model conversion, so the node types alone do not pair the conversions.
+        const string call = """{ "type": "FunctionRef", "libraryName": "Common", "name": "F", "operand": [ { "type": "Null" } ] }""";
+        Compare(
+                Expression($$"""{ "type": "ToDecimal", "operand": {{call}} }"""),
+                Expression($$"""{ "type": "FunctionRef", "libraryName": "FHIRHelpers", "name": "ToDecimal", "operand": [ {{call}} ] }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.ConversionPlacement, "statements[X].expression", "ToDecimal vs FunctionRef ToDecimal"));
+        Compare(
+                Expression($$"""{ "type": "FunctionRef", "libraryName": "FHIRHelpers", "name": "ToDecimal", "operand": [ {{call}} ] }"""),
+                Expression($$"""{ "type": "ToDecimal", "operand": {{call}} }"""))
+            .Should().ContainSingle().Which.Kind.Should().Be(DivergenceKind.ConversionPlacement);
+    }
+
+    [TestMethod]
     public void A_Nested_Conversion_On_One_Side_Only_Is_A_Conversion_Divergence()
     {
         Compare(
