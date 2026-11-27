@@ -179,8 +179,8 @@ internal sealed class ReplaceLibraryAttachmentsProgram
         {
             try
             {
-                var elmJson = Encoding.UTF8.GetString(data);
-                var elmLibrary = ElmLibrary.ParseFromJson(elmJson);
+                using var elmStream = new MemoryStream(data, writable: false);
+                var elmLibrary = ElmLibrary.LoadFromJson(elmStream);
                 library.SetCqlOptionsParameterAndExtension(elmLibrary);
                 logger.LogInformation("Updated CQL options from ELM library");
             }

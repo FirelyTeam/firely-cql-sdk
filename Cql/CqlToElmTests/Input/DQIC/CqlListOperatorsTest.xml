@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlListOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#list-operators-2" version="1.0">
 	<capability code="list-operators" />
 	<group name="Sort" version="1.0">
@@ -103,6 +103,39 @@
 			<output>false</output>
 		</test>
 	</group>
+	<group name="EquivalentContains" version="2.0" reference="https://cql.hl7.org/09-b-cqlreference.html#equivalentcontains">
+		<!-- ~contains was introduced in CQL 2.0 with trial-use status; converse of ~in -->
+		<capability code="list-operators" />
+		<test name="EquivalentContainsIsTrue" version="2.0">
+			<capability code="list-operators" />
+			<!-- equivalent semantics: case-insensitive string equivalence; per CQL spec "EquivalentContains" (https://cql.hl7.org/09-b-cqlreference.html#equivalentcontains) -->
+			<expression>{ 'A', 'B', 'C' } ~contains 'a'</expression>
+			<output>true</output>
+		</test>
+		<test name="EquivalentContainsIsFalse" version="2.0">
+			<capability code="list-operators" />
+			<expression>{ 'B', 'C' } ~contains 'a'</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivalentContainsNullLeftIsFalse" version="2.0">
+			<capability code="list-operators" />
+			<!-- if the first argument is null, the result is false; per CQL spec "EquivalentContains" (https://cql.hl7.org/09-b-cqlreference.html#equivalentcontains) -->
+			<expression>(null as List&lt;String&gt;) ~contains 'a'</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivalentContainsNullIsFalse" version="2.0">
+			<capability code="list-operators" />
+			<!-- second argument null, no null elements => false; per CQL spec "EquivalentContains" (https://cql.hl7.org/09-b-cqlreference.html#equivalentcontains) -->
+			<expression>{ 'A', 'B', 'C' } ~contains (null as String)</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivalentContainsNullIsTrue" version="2.0">
+			<capability code="list-operators" />
+			<!-- second argument null, list contains a null element => true; per CQL spec "EquivalentContains" (https://cql.hl7.org/09-b-cqlreference.html#equivalentcontains) -->
+			<expression>{ 'A', 'B', 'C', null } ~contains (null as String)</expression>
+			<output>true</output>
+		</test>
+	</group>
 	<group name="Descendents" version="1.0">
 		<capability code="list-operators" />
 		<test name="DescendentsEmptyList" version="1.0">
@@ -159,6 +192,12 @@
 			<expression>distinct { @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>{ @T15:59:59.999, @T20:59:59.999 }</output>
 		</test>
+		<test name="DistinctNull" version="1.0">
+			<capability code="list-operators" />
+			<!-- null argument => null; per CQL spec "Distinct" (https://cql.hl7.org/09-b-cqlreference.html#distinct) -->
+			<expression>distinct (null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="Equal" version="1.0">
 		<capability code="list-operators" />
@@ -194,7 +233,8 @@
 		</test>
 		<test name="EqualABCAnd123" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ 'a', 'b', 'c' } as List&lt;Any&gt; ~ { 1, 2, 3 } as List&lt;Any&gt;</expression>
+			<!-- corrected: was using ~ (equivalent) inside the Equal group; = for lists of different element values => false; per CQL spec "Equal" (https://cql.hl7.org/09-b-cqlreference.html#equal-2) -->
+			<expression>{ 'a', 'b', 'c' } as List&lt;Any&gt; = { 1, 2, 3 } as List&lt;Any&gt;</expression>
 			<output>false</output>
 		</test>
 		<test name="Equal123AndABC" version="1.0">
@@ -275,6 +315,18 @@
 			<expression>{ 1, 4 } except null</expression>
 			<output>{1, 4}</output>
 		</test>
+		<test name="ExceptNullLeft" version="1.0">
+			<capability code="list-operators" />
+			<!-- if the first argument is null, the result is null; per CQL spec "Except" (https://cql.hl7.org/09-b-cqlreference.html#except-1) -->
+			<expression>(null as List&lt;Integer&gt;) except { 1, 3, 5 }</expression>
+			<output>null</output>
+		</test>
+		<test name="ExceptWithNull" version="1.0">
+			<capability code="list-operators" />
+			<!-- null elements are considered equal for the difference; per CQL spec "Except" (https://cql.hl7.org/09-b-cqlreference.html#except-1) -->
+			<expression>{ 1, 3, 5, 7, null } except { 1, 3, null }</expression>
+			<output>{ 5, 7 }</output>
+		</test>
 	</group>
 	<group name="Exists" version="1.0">
 		<capability code="list-operators" />
@@ -341,6 +393,11 @@
 			<expression>Flatten({ {@T15:59:59.999}, {@T20:59:59.999} })</expression>
 			<output>{ @T15:59:59.999, @T20:59:59.999 }</output>
 		</test>
+		<test name="FlattenNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>Flatten(null as List&lt;List&lt;Integer&gt;&gt;)</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="First" version="1.0">
 		<capability code="list-operators" />
@@ -373,6 +430,11 @@
 			<capability code="list-operators" />
 			<expression>First({ @T15:59:59.999, @T20:59:59.999 })</expression>
 			<output>@T15:59:59.999</output>
+		</test>
+		<test name="FirstNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>First(null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="In" version="1.0">
@@ -421,6 +483,33 @@
 			<capability code="list-operators" />
 			<expression>@T16:59:59.999 in { @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>false</output>
+		</test>
+	</group>
+	<group name="EquivalentIn" version="2.0" reference="https://cql.hl7.org/09-b-cqlreference.html#equivalentin">
+		<!-- ~in was introduced in CQL 2.0 with trial-use status -->
+		<capability code="list-operators" />
+		<test name="EquivalentInIsTrue" version="2.0">
+			<capability code="list-operators" />
+			<!-- equivalent semantics: case-insensitive string equivalence; per CQL spec "EquivalentIn" (https://cql.hl7.org/09-b-cqlreference.html#equivalentin) -->
+			<expression>'a' ~in { 'A', 'B', 'C' }</expression>
+			<output>true</output>
+		</test>
+		<test name="EquivalentInIsFalse" version="2.0">
+			<capability code="list-operators" />
+			<expression>'a' ~in { 'B', 'C' }</expression>
+			<output>false</output>
+		</test>
+		<test name="EquivalentInNullRightIsFalse" version="2.0">
+			<capability code="list-operators" />
+			<!-- if the second argument is null, the result is false; per CQL spec "EquivalentIn" (https://cql.hl7.org/09-b-cqlreference.html#equivalentin) -->
+			<expression>'a' ~in (null as List&lt;String&gt;)</expression>
+			<output>false</output>
+		</test>
+		<test name="NullEquivalentInIsTrue" version="2.0">
+			<capability code="list-operators" />
+			<!-- first argument null, list contains a null element => true; per CQL spec "EquivalentIn" (https://cql.hl7.org/09-b-cqlreference.html#equivalentin) -->
+			<expression>null ~in { 1, 3, 5, null }</expression>
+			<output>true</output>
 		</test>
 	</group>
 	<group name="Includes" version="1.0">
@@ -648,6 +737,18 @@
 			<expression>{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>{@T15:59:59.999, @T20:59:59.999}</output>
 		</test>
+		<test name="IntersectNull" version="1.0">
+			<capability code="list-operators" />
+			<!-- if either argument is null, the result is null; per CQL spec "Intersect" (https://cql.hl7.org/09-b-cqlreference.html#intersect-1) -->
+			<expression>{ 1, 3, 5 } intersect (null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
+		</test>
+		<test name="IntersectWithNull" version="1.0">
+			<capability code="list-operators" />
+			<!-- null elements are considered equal for the intersection; per CQL spec "Intersect" (https://cql.hl7.org/09-b-cqlreference.html#intersect-1) -->
+			<expression>{ null, 1, 3, 5 } intersect { null, 3, 5, 7 }</expression>
+			<output>{ null, 3, 5 }</output>
+		</test>
 	</group>
 	<group name="Last" version="1.0">
 		<capability code="list-operators" />
@@ -833,12 +934,42 @@
 		</test>
 		<test name="NotEqualTimeTrue" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:59.999 }</expression>
+			<!-- corrected: was using = instead of !=; != is negation of =, lists differ => true; per CQL spec "Not Equal" (https://cql.hl7.org/09-b-cqlreference.html#not-equal-2) -->
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } != { @T15:59:59.999, @T20:59:49.999 }</expression>
 			<output>true</output>
 		</test>
 		<test name="NotEqualTimeFalse" version="1.0">
 			<capability code="list-operators" />
-			<expression>{ @T15:59:59.999, @T20:59:59.999 } = { @T15:59:59.999, @T20:59:49.999 }</expression>
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } != { @T15:59:59.999, @T20:59:59.999 }</expression>
+			<output>false</output>
+		</test>
+	</group>
+	<group name="NotEquivalent" version="1.0" reference="https://cql.hl7.org/09-b-cqlreference.html#not-equivalent-2">
+		<capability code="list-operators" />
+		<test name="NotEquivalentIsFalse" version="1.0">
+			<capability code="list-operators" />
+			<expression>{ 1, 3, 5, 7 } !~ { 1, 3, 5, 7 }</expression>
+			<output>false</output>
+		</test>
+		<test name="NotEquivalentWithNullIsFalse" version="1.0">
+			<capability code="list-operators" />
+			<!-- !~ negates ~, and nulls are equivalent; per CQL spec "Not Equivalent" (https://cql.hl7.org/09-b-cqlreference.html#not-equivalent-2) -->
+			<expression>{ 1, 3, 5, null } !~ { 1, 3, 5, null }</expression>
+			<output>false</output>
+		</test>
+		<test name="NotEquivalentIsTrue" version="1.0">
+			<capability code="list-operators" />
+			<expression>{ 1, 3, 5, 7 } !~ { 1, 3, 5 }</expression>
+			<output>true</output>
+		</test>
+		<test name="NotEquivalentTimeTrue" version="1.0">
+			<capability code="list-operators" />
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } !~ { @T15:59:59.999, @T20:59:59.995 }</expression>
+			<output>true</output>
+		</test>
+		<test name="NotEquivalentTimeFalse" version="1.0">
+			<capability code="list-operators" />
+			<expression>{ @T15:59:59.999, @T20:59:59.999 } !~ { @T15:59:59.999, @T20:59:59.999 }</expression>
 			<output>false</output>
 		</test>
 	</group>
@@ -1114,7 +1245,7 @@
 		<test name="SingletonFrom12" version="1.0">
 			<capability code="list-operators" />
 			<expression invalid="true">singleton from { 1, 2 }</expression>
-			<!-- EXPECT: Expected a list with at most one element, but found a list with multiple elements. -->
+			<!-- invalid: more than one element => run-time error; per CQL spec "Singleton From" (https://cql.hl7.org/09-b-cqlreference.html#singleton-from): "If the list contains more than one element, a run-time error is thrown" -->
 		</test>
 		<test name="SingletonFromDateTime" version="1.0">
 			<capability code="list-operators" />
@@ -1125,6 +1256,11 @@
 			<capability code="list-operators" />
 			<expression>singleton from { @T15:59:59.999 }</expression>
 			<output>@T15:59:59.999</output>
+		</test>
+		<test name="SingletonFromNull" version="1.0">
+			<capability code="list-operators" />
+			<expression>singleton from (null as List&lt;Integer&gt;)</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="Skip" version="1.0">
@@ -1153,6 +1289,18 @@
 			<capability code="list-operators" />
 			<expression>Skip({1,2,3,4,5}, 5)</expression>
 			<output>{}</output>
+		</test>
+		<test name="SkipNullNumber" version="1.0">
+			<capability code="list-operators" />
+			<!-- null number => no elements skipped, entire list returned; per CQL spec "Skip" (https://cql.hl7.org/09-b-cqlreference.html#skip) -->
+			<expression>Skip({ 1, 2, 3 }, null as Integer)</expression>
+			<output>{ 1, 2, 3 }</output>
+		</test>
+		<test name="SkipNegative" version="1.0">
+			<capability code="list-operators" />
+			<!-- number less than zero => empty list; per CQL spec "Skip" (https://cql.hl7.org/09-b-cqlreference.html#skip) -->
+			<expression>Skip({ 1, 2, 3 }, -1)</expression>
+			<output>{ }</output>
 		</test>
 	</group>
 	<group name="Slice" version="2.0" reference="http://cql.hl7.org/09-b-cqlreference.html#slice">
@@ -1238,7 +1386,7 @@
 	</group>
 	<group name="Take" version="1.0">
 		<capability code="list-operators" />
-		<test name="TakeNull">
+		<test name="TakeNull" version="1.0">
 			<capability code="list-operators" />
 			<expression>Take(null, 3)</expression>
 			<output>null</output>
@@ -1267,6 +1415,18 @@
 			<capability code="list-operators" />
 			<expression>Take({1,2,3,4}, 4)</expression>
 			<output>{1, 2, 3, 4}</output>
+		</test>
+		<test name="TakeTooMany" version="1.0">
+			<capability code="list-operators" />
+			<!-- fewer than number elements => result only contains the elements in the list; per CQL spec "Take" (https://cql.hl7.org/09-b-cqlreference.html#take) -->
+			<expression>Take({1, 2}, 3)</expression>
+			<output>{1, 2}</output>
+		</test>
+		<test name="TakeNegative" version="1.0">
+			<capability code="list-operators" />
+			<!-- number 0 or less => empty list; per CQL spec "Take" (https://cql.hl7.org/09-b-cqlreference.html#take) -->
+			<expression>Take({1, 2, 3, 4}, -1)</expression>
+			<output>{}</output>
 		</test>
 	</group>
 	<group name="Union" version="1.0">

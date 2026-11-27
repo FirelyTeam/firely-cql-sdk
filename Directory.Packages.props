@@ -41,8 +41,8 @@
 			The CQL SDK legitimately leads for a while - Vonk moves to this version as part of taking
 			the release that carries it - so the two being unequal between releases is expected.
 			-->
-		<FirelyNetVersion>6.8.0</FirelyNetVersion>
-		<FhirMetricsVersion>1.4.1</FhirMetricsVersion>
+		<FirelyNetVersion>6.9.0</FirelyNetVersion>
+		<FhirMetricsVersion>1.4.2</FhirMetricsVersion>
 
 		<!-- Keep MicrosoftCodeAnalysisVersion in sync with Vonk's property of the same name -->
 		<MicrosoftCodeAnalysisVersion>5.3.0</MicrosoftCodeAnalysisVersion>

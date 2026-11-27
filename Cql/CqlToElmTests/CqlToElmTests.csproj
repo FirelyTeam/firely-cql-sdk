@@ -47,13 +47,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="cql-tests\tests\cql\*.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="Input\DQIC\*.*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Input\ModelInfo\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Input\Census\*.txt">

@@ -33,12 +33,13 @@ which commit last touched that specific test, without the tool itself guessing a
 
 ## This is a review artifact, not an auto-fixer
 
-It does not modify any XML files. Many "differs from upstream" cases are **intentional
-spec-conformance fixes** (see the epic tracking this work,
-[#1193](https://github.com/FirelyTeam/firely-cql-sdk/issues/1193)) where the *local* expectation is
-the spec-correct one and upstream is wrong — the official suite's own `tests.html` page states the
-tests are "informative, not normative," so upstream should never be treated as automatically
-authoritative. Use judgment (and the linked git history) per finding.
+It does not modify any XML files. The files it compares are unmodified copies of cqframework/cql-tests,
+apart from Firely's own `CqlAgeTest.xml` and `FirelyAdditionsTest.xml`, so a test that "differs from upstream"
+means the copy is behind, not that it was edited on purpose. Refresh the copies as the
+[corpus README](../../Cql/CqlToElmTests/Input/DQIC/README.md#14-refreshing) describes; a test that does not
+hold for this SDK goes in `SkippedTests.cs` with its reason, never as an edit to the XML. The suite published
+with the specification can lag cql-tests `main`, and its tests are informative, not normative, so check a
+new expectation against the specification before adopting it.
 
 ## Known upstream data quality issue
 

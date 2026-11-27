@@ -287,6 +287,31 @@ Select at most one version of each model: `USCore311` and `USCore610` are two ve
 `QICore411` and `QICore600`, and a configuration that selects both is refused before any library is translated.
 Libraries written against QICore 4.1.1 and libraries written against QICore 6.0.0 are translated in separate runs.
 
+A model that is not bundled, such as a later US Core version or an organization's own model, is loaded from its
+model info XML file with `ModelInfoFiles`, a list of file paths:
+
+```jsonc
+"Cql": {
+  "Models": [ "ElmR1", "Fhir401" ],
+  "ModelInfoFiles": [ "models/uscore-modelinfo-7.0.0.xml", "models/qicore-modelinfo-7.0.0.xml" ]
+}
+```
+
+Relative paths are resolved against the current directory, not against the settings file that lists them; a
+settings file kept next to the Packager executable therefore needs absolute paths. Only the commands that translate
+CQL, `cql` and `elm` with FHIR output, read the files.
+
+Each file's model is added to the models selected in `Models`, which must still include `ElmR1`. The models a file
+builds on (its `requiredModelInfo`) must be selected too, through `Models` or another file; the order of the list
+does not matter. Each model may be selected once: listing a file for a model that `Models` already selects in the
+same version is refused, and as for bundled models, at most one version of each model can be selected. A file that
+cannot be read, is not a model info, declares no `url` or `version`, or contains a document type declaration stops
+the command before any library is translated or any output is written, with a message naming the file.
+
+A model loaded this way is available for translating CQL to ELM. Generating C# (`--cs`, `--dll`, `--fhir`) needs
+.NET types for the model's classes; for a model whose types the SDK does not map to .NET types, the C# step fails
+with "Cannot resolve type for typeSpecifier".
+
 ## ELM Attachment Formatting
 
 Every packaged FHIR `Library` embeds its ELM as an `application/elm+json` attachment. How that JSON is

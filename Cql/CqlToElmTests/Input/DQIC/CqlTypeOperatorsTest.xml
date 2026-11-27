@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../../testSchema/testSchema.xsd"
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://hl7.org/fhirpath/tests" xsi:schemaLocation="http://hl7.org/fhirpath/tests ../testSchema.xsd"
 	name="CqlTypeOperatorsTest" reference="https://cql.hl7.org/09-b-cqlreference.html#type-operators-1" version="1.0">
 	<capability code="type-operators" />
 	<group name="As" version="1.0">
 		<capability code="type-operators" />
 		<test name="AsQuantity" version="1.0">
 			<capability code="type-operators" />
-			<expression>45.5 'g' as Quantity</expression>
+			<expression>45.5 'g' as System.Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
 		<test name="CastAsQuantity" version="1.0">
 			<capability code="type-operators" />
-			<expression>cast 45.5 'g' as Quantity</expression>
+			<expression>cast 45.5 'g' as System.Quantity</expression>
 			<output>45.5 'g'</output>
 		</test>
 		<test name="AsDateTime" version="1.0">
@@ -79,17 +79,101 @@
 			<expression>ToBoolean('NO')</expression>
 			<output>false</output>
 		</test>
+		<test name="StringTrueToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<expression>ToBoolean('true')</expression>
+			<output>true</output>
+		</test>
+		<test name="StringYToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<!-- 'y' is an accepted true representation in the ToBoolean string table: https://cql.hl7.org/09-b-cqlreference.html#toboolean -->
+			<expression>ToBoolean('y')</expression>
+			<output>true</output>
+		</test>
+		<test name="String1ToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<expression>ToBoolean('1')</expression>
+			<output>true</output>
+		</test>
+		<test name="String0ToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<expression>ToBoolean('0')</expression>
+			<output>false</output>
+		</test>
+		<test name="StringInvalidToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<!-- Strings outside the accepted true/false representations cannot be interpreted, so the result is null: https://cql.hl7.org/09-b-cqlreference.html#toboolean -->
+			<expression>ToBoolean('falsetto')</expression>
+			<output>null</output>
+		</test>
+		<test name="NullToBoolean" version="1.0">
+			<capability code="type-operators" />
+			<!-- If the argument is null, the result is null: https://cql.hl7.org/09-b-cqlreference.html#toboolean -->
+			<!-- The null is typed because an untyped null matches every ToBoolean overload equally, which is an ambiguous call: https://cql.hl7.org/03-developersguide.html#function-resolution -->
+			<expression>ToBoolean(null as String)</expression>
+			<output>null</output>
+		</test>
+		<test name="Integer1ToBoolean" version="1.5">
+			<capability code="type-operators" />
+			<!-- For an Integer input, the result is true if the value is 1: https://cql.hl7.org/09-b-cqlreference.html#toboolean -->
+			<expression>ToBoolean(1)</expression>
+			<output>true</output>
+		</test>
+		<test name="Integer0ToBoolean" version="1.5">
+			<capability code="type-operators" />
+			<expression>ToBoolean(0)</expression>
+			<output>false</output>
+		</test>
 	</group>
 	<group name="ToConcept" version="1.0">
 		<capability code="type-operators" />
 		<test name="CodeToConcept1" version="1.0">
 			<capability code="type-operators" />
 			<expression>ToConcept(Code { code: '8480-6' })</expression>
-			<output>
-				Concept {
-					codes: Code { code: '8480-6' }
-				}
-			</output>
+			<output>Concept { codes: { Code { code: '8480-6' } } }</output>
+		</test>
+		<test name="NullCodeToConcept" version="1.0">
+			<capability code="type-operators" />
+			<!-- If the argument is null, the result is null: https://cql.hl7.org/09-b-cqlreference.html#toconcept -->
+			<expression>ToConcept(null as Code)</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="ToDate" version="1.5">
+		<capability code="type-operators" />
+		<test name="ToDate1" version="1.5">
+			<capability code="type-operators" />
+			<expression>ToDate('2014-01-01')</expression>
+			<output>@2014-01-01</output>
+		</test>
+		<test name="ToDateYearMonth" version="1.5">
+			<capability code="type-operators" />
+			<!-- As with date literals, date values may be specified to any precision: https://cql.hl7.org/09-b-cqlreference.html#todate -->
+			<expression>ToDate('2014-01')</expression>
+			<output>@2014-01</output>
+		</test>
+		<test name="ToDateYear" version="1.5">
+			<capability code="type-operators" />
+			<expression>ToDate('2014')</expression>
+			<output>@2014</output>
+		</test>
+		<test name="ToDateIgnoresTime" version="1.5">
+			<capability code="type-operators" />
+			<!-- The operator can take datetime formatted strings and will ignore the time portions: https://cql.hl7.org/09-b-cqlreference.html#todate -->
+			<expression>ToDate('2014-01-01T12:05:05.955')</expression>
+			<output>@2014-01-01</output>
+		</test>
+		<test name="ToDateFromDateTime" version="1.5">
+			<capability code="type-operators" />
+			<!-- For the DateTime overload, ToDate is equivalent to invoking 'date from' on the DateTime value: https://cql.hl7.org/09-b-cqlreference.html#todate -->
+			<expression>ToDate(DateTime(2014, 01, 01, 12, 30, 0, 0))</expression>
+			<output>@2014-01-01</output>
+		</test>
+		<test name="ToDateMalformed" version="1.5">
+			<capability code="type-operators" />
+			<!-- If the input string is not formatted correctly or is not a valid date, the result is null: https://cql.hl7.org/09-b-cqlreference.html#todate -->
+			<expression>ToDate('2014/01/01')</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="ToDateTime" version="1.0">
@@ -147,6 +231,32 @@
 			<expression>ToDecimal('+25.5')</expression>
 			<output>25.5</output>
 		</test>
+		<test name="StringNeg25D5ToDecimal" version="1.0">
+			<capability code="type-operators" />
+			<expression>ToDecimal('-25.5')</expression>
+			<output>-25.5</output>
+		</test>
+		<test name="StringInvalidToDecimal" version="1.0">
+			<capability code="type-operators" />
+			<!-- If the input string is not formatted correctly, the result is null: https://cql.hl7.org/09-b-cqlreference.html#todecimal -->
+			<expression>ToDecimal('foo')</expression>
+			<output>null</output>
+		</test>
+	</group>
+	<group name="ToRatio" version="1.5">
+		<capability code="type-operators" />
+		<test name="StringToRatio" version="1.5">
+			<capability code="type-operators" />
+			<!-- The ToRatio operator accepts strings of the form <quantity>:<quantity>: https://cql.hl7.org/09-b-cqlreference.html#toratio -->
+			<expression>ToRatio('1.0 \'mg\':2.0 \'mg\'') is System.Ratio</expression>
+			<output>true</output>
+		</test>
+		<test name="StringMalformedToRatio" version="1.5">
+			<capability code="type-operators" />
+			<!-- The quantities must be separated by ':'; a malformed separator cannot be interpreted, so the result is null: https://cql.hl7.org/09-b-cqlreference.html#toratio -->
+			<expression>ToRatio('1.0 \'mg\';2.0 \'mg\'')</expression>
+			<output>null</output>
+		</test>
 	</group>
 	<group name="ToInteger" version="1.4">
 		<capability code="type-operators" />
@@ -154,6 +264,40 @@
 			<capability code="type-operators" />
 			<expression>ToInteger('-25')</expression>
 			<output>-25</output>
+		</test>
+		<test name="StringPos25ToInteger" version="1.0">
+			<capability code="type-operators" />
+			<!-- The optional polarity indicator may be '+': https://cql.hl7.org/09-b-cqlreference.html#tointeger -->
+			<expression>ToInteger('+25')</expression>
+			<output>25</output>
+		</test>
+		<test name="StringInvalidToInteger" version="1.0">
+			<capability code="type-operators" />
+			<!-- If the input string is not formatted correctly, the result is null: https://cql.hl7.org/09-b-cqlreference.html#tointeger -->
+			<expression>ToInteger('foo')</expression>
+			<output>null</output>
+		</test>
+		<test name="BooleanTrueToInteger" version="1.5">
+			<capability code="type-operators" />
+			<!-- For the Boolean overload, true converts to 1 and false to 0: https://cql.hl7.org/09-b-cqlreference.html#tointeger -->
+			<expression>ToInteger(true)</expression>
+			<output>1</output>
+		</test>
+	</group>
+	<group name="ToLong" version="1.5">
+		<capability code="type-operators" />
+		<test name="StringNeg1ToLong" version="1.5">
+			<capability code="type-operators" />
+			<capability code="system.long" />
+			<expression>ToLong('-1')</expression>
+			<output>-1L</output>
+		</test>
+		<test name="StringInvalidToLong" version="1.5">
+			<capability code="type-operators" />
+			<capability code="system.long" />
+			<!-- If the input string cannot be interpreted as a valid Long value, the result is null: https://cql.hl7.org/09-b-cqlreference.html#tolong -->
+			<expression>ToLong('one')</expression>
+			<output>null</output>
 		</test>
 	</group>
 	<group name="ToQuantity" version="1.4">

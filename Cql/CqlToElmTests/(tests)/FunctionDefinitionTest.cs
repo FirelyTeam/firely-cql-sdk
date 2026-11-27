@@ -6,8 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -349,6 +352,47 @@ namespace Hl7.Cql.CqlToElm.Test
                 _ = librarySetInvoker;
             };
             act.Should().NotThrow();
+        }
+
+        /// <summary>
+        /// A library's own function over a concrete interval type ties with a System function over <c>Interval&lt;T&gt;</c>,
+        /// once T is inferred, and is the one called.
+        /// </summary>
+        [DataTestMethod]
+        [DataRow("Size", "Interval<Integer>", "Interval[1, 3]")]
+        [DataRow("Size", "Interval<Date>", "Interval[@2020-01-01, @2020-02-01]")]
+        [DataRow("Width", "Interval<Integer>", "Interval[1, 3]")]
+        public void LibraryFunctionTakesPrecedenceOverATiedSystemFunction(string name, string operandType, string argument)
+        {
+            var library = CreateCqlToolkit().MakeLibrary($"""
+                                                      library FuncTest version '1.0.0'
+                                                      define function {name}(I {operandType}): 42
+                                                      define Result: {name}({argument})
+                                                      """);
+
+            library.ShouldDefine<ExpressionDef>("Result").expression
+                .Should().BeOfType<FunctionRef>().Which.name.Should().Be(name);
+            Evaluate(library, "Result").Should().Be(42);
+        }
+
+        private static object? Evaluate(Library library, string definition)
+        {
+            var elmToolkit = CreateElmToolkit();
+            var definitions = elmToolkit.ProcessLibrary(library);
+            LibrarySet librarySet = new("FuncTest", library);
+            var generated = elmToolkit
+                .GetLibrarySetCSharpCodeGenerator()
+                .GenerateEachLibraryToCSharp(librarySet, definitions)
+                .ToList();
+            var compiled = elmToolkit
+                .GetAssemblyCompiler()
+                .CompileEachLibraryToAssemblies(generated, librarySet, elmToolkit.Config.DebugSymbolsFormat)
+                .ToList();
+
+            using var invoker = new InvocationToolkit()
+                .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = compiled.Single().assemblyBinaryWithSourceCode.AssemblyBytes })
+                .CreateLibrarySetInvoker();
+            return invoker.InvokeLibraryDefinition(FhirCqlContext.ForBundle(), library.VersionedLibraryIdentifier, definition);
         }
     }
 }
