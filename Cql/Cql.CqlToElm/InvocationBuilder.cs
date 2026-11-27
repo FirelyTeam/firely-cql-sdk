@@ -196,11 +196,11 @@ namespace Hl7.Cql.CqlToElm
                     }
                 }
             }
-            // If direct inference from argument types didn't find a compatible match,
-            // try implicit conversion targets of each argument as potential type inferences.
-            // This handles cases like Equivalent(FHIR.CodeableConcept, Code) where both can be
-            // implicitly converted to Concept but neither can be directly converted to the other.
-            if (newOperands == null && genericInferences == null)
+            // Also try the implicit conversion targets of each argument as potential type inferences, and keep
+            // whichever inference is cheapest. This handles cases like Equivalent(FHIR.CodeableConcept, Code), where
+            // both can be implicitly converted to Concept but neither can be directly converted to the other, and
+            // Count(ValueSet), where expanding the value set to List<Code> is cheaper than promoting it to
+            // List<ValueSet>.
             {
                 for (int i = 0; i < arguments.Length; i++)
                 {
@@ -371,6 +371,14 @@ namespace Hl7.Cql.CqlToElm
             var compatible = matches
                 .Where(result => result.Compatible)
                 .ToArray();
+            // A generic match that binds all its generic parameters to Any only because some arguments are the null
+            // literal ranks after another generic match that binds them to an actual type, as in the reference
+            // translator: Coalesce({1}, null, {2}) is a List<Integer>, not an Any. An argument that is typed Any but
+            // may hold a value keeps the Any binding in the running, so Coalesce(1 as Any, {2}) stays an Any.
+            // Non-generic matches are left to the cost ranking below. See #1982 for aligning inference itself with
+            // the reference translator.
+            if (compatible.Any(bindsActualType) && arguments.All(argument => argument.resultTypeSpecifier != SystemTypes.AnyType || argument is Null))
+                compatible = compatible.Where(result => !infersAny(result)).ToArray();
             SignatureMatchResult? candidate;
             if (match(compatible, out candidate))
                 return candidate;
@@ -383,9 +391,14 @@ namespace Hl7.Cql.CqlToElm
                 ()=>Messaging.CouldNotResolveFunction(firstMatch.Function.Name, arguments));
             return result;
 
-            //bool infersAny(SignatureMatchResult result) =>
-            //    result.GenericInferences.Count > 0
-            //    && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+            // Whether every generic parameter of the match is bound to Any.
+            bool infersAny(SignatureMatchResult result) =>
+                result.GenericInferences.Count > 0
+                && result.GenericInferences.All(kvp => kvp.Value == SystemTypes.AnyType);
+
+            // Whether the match is generic and binds at least one of its parameters to something other than Any.
+            bool bindsActualType(SignatureMatchResult result) =>
+                result.GenericInferences.Count > 0 && !infersAny(result);
 
             bool match(SignatureMatchResult[] matches, [NotNullWhen(true)] out SignatureMatchResult? result)
             {
