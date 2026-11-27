@@ -18,8 +18,8 @@ namespace Hl7.Cql.CqlToElm.Test.ElmComparison;
 /// <list type="bullet">
 /// <item>Source positions, identifiers and annotations (<c>locator</c>, <c>localId</c>, <c>annotation</c>) and the
 /// <c>signature</c> a translator records when asked to are dropped.</item>
-/// <item>A type named as a qualified name (<c>resultTypeName</c>, <c>asType</c>, <c>isType</c>, <c>operandType</c>,
-/// <c>parameterType</c>) becomes the equivalent <c>NamedTypeSpecifier</c> (<c>resultTypeSpecifier</c>, …).</item>
+/// <item>A type named as a qualified name (<c>resultTypeName</c>, <c>asType</c>, <c>isType</c>, <c>toType</c>,
+/// <c>operandType</c>, <c>parameterType</c>) becomes the equivalent <c>NamedTypeSpecifier</c> (<c>resultTypeSpecifier</c>, …).</item>
 /// <item>An absent collection, an empty one and an empty <c>def</c> list are the same; an attribute that holds its
 /// schema default is the same as an absent one. The defaults are those of the ELM schema: <c>accessLevel</c>
 /// <c>Public</c>, <c>strict</c> <c>false</c>, an include's <c>mediaType</c> <c>application/elm+xml</c>, an
@@ -57,6 +57,7 @@ internal static class ElmNormalizer
         ["resultTypeName"] = "resultTypeSpecifier",
         ["asType"] = "asTypeSpecifier",
         ["isType"] = "isTypeSpecifier",
+        ["toType"] = "toTypeSpecifier",
         ["operandType"] = "operandTypeSpecifier",
         ["parameterType"] = "parameterTypeSpecifier",
     };

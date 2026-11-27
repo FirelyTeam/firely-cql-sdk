@@ -95,8 +95,9 @@ internal sealed class ElmOutputCheckers
         {
             ValidationType = ValidationType.Schema,
             Schemas = _schemas,
-            ValidationFlags = XmlSchemaValidationFlags.ReportValidationWarnings,
         };
+        // Add to the default flags (identity constraints, xml: attributes) rather than replace them.
+        settings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
         settings.ValidationEventHandler += (_, e) => messages.Add($"{e.Severity}: {e.Message}");
         using var reader = XmlReader.Create(new StringReader(xml), settings);
         while (reader.Read())

@@ -153,6 +153,55 @@ public class ElmStructuralDiffTest
     }
 
     [TestMethod]
+    public void A_Model_Conversion_Around_A_Function_Call_On_One_Side_Only_Is_A_Conversion_Divergence()
+    {
+        // Both sides are a FunctionRef, so the node types alone do not show the extra conversion.
+        const string call = """{ "type": "FunctionRef", "libraryName": "Common", "name": "F", "operand": [ { "type": "Null" } ] }""";
+        Compare(
+                Expression($$"""{ "type": "FunctionRef", "libraryName": "FHIRHelpers", "name": "ToConcept", "operand": [ {{call}} ] }"""),
+                Expression(call))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.ConversionPlacement, "statements[X].expression", "FunctionRef ToConcept vs none"));
+    }
+
+    [TestMethod]
+    public void A_Nested_Conversion_On_One_Side_Only_Is_A_Conversion_Divergence()
+    {
+        Compare(
+                Expression($$"""{ "type": "As", "asType": "{{Integer}}", "operand": { "type": "As", "asType": "{{Decimal}}", "operand": { "type": "Null" } } }"""),
+                Expression($$"""{ "type": "As", "asType": "{{Decimal}}", "operand": { "type": "Null" } }"""))
+            .Should().ContainSingle().Which.Kind.Should().Be(DivergenceKind.ConversionPlacement);
+    }
+
+    [TestMethod]
+    public void The_Same_Conversion_Of_Different_Operands_Is_Compared_Below_It()
+    {
+        Compare(
+                Expression($$"""{ "type": "As", "asType": "{{Integer}}", "operand": {{One}} }"""),
+                Expression($$"""{ "type": "As", "asType": "{{Integer}}", "operand": {{Two}} }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.ValueDifference, "statements[X].expression.operand.value", "\"1\" vs \"2\""));
+    }
+
+    [TestMethod]
+    public void A_Convert_Counts_As_A_Conversion()
+    {
+        Compare(
+                Expression($$"""{ "type": "Convert", "toType": "{{Decimal}}", "operand": {{One}} }"""),
+                Expression(One))
+            .Should().ContainSingle().Which.Kind.Should().Be(DivergenceKind.ConversionPlacement);
+    }
+
+    [TestMethod]
+    public void A_Malformed_Type_Name_Is_Reported_As_Written()
+    {
+        Compare(
+                Expression("""{ "type": "Literal", "valueType": "}X", "value": "1" }"""),
+                Expression($$"""{ "type": "Literal", "valueType": "{{Integer}}", "value": "1" }"""))
+            .Should().ContainSingle().Which.Detail.Should().Be("}X vs Integer");
+    }
+
+    [TestMethod]
     public void A_Result_Type_On_One_Side_Only_Is_Not_A_Divergence()
     {
         Compare(

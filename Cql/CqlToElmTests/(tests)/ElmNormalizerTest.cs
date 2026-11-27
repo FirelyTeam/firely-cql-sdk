@@ -86,6 +86,14 @@ public class ElmNormalizerTest
     }
 
     [TestMethod]
+    public void A_To_Type_Is_The_Same_As_A_To_Type_Specifier()
+    {
+        ShouldNormalizeAlike(
+            Statement($$"""{ "name": "X", "expression": { "type": "Convert", "toType": "{{Decimal}}", "operand": { "type": "Null" } } }"""),
+            Statement($$"""{ "name": "X", "expression": { "type": "Convert", "toTypeSpecifier": { "type": "NamedTypeSpecifier", "name": "{{Decimal}}" }, "operand": { "type": "Null" } } }"""));
+    }
+
+    [TestMethod]
     public void Interval_Closedness_And_Include_Media_Type_Defaults_Are_The_Same_As_Absent()
     {
         ShouldNormalizeAlike(

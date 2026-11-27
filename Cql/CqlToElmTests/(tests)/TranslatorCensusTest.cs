@@ -141,7 +141,18 @@ public class TranslatorCensusTest
         TestContext.WriteLine($"Report: {reportPath}");
         TestContext.WriteLine($"Candidate baseline: {candidatePath}");
 
-        var elmCheck = CheckElm(corpus, repositoryRoot, results, outputDirectory);
+        // An exception in the ELM checks is reported after the census assertions, so it cannot hide a regression.
+        ElmCheckSummary? elmCheck = null;
+        Exception? elmCheckError = null;
+        try
+        {
+            elmCheck = CheckElm(corpus, repositoryRoot, results, outputDirectory);
+        }
+        catch (Exception e)
+        {
+            elmCheckError = e;
+        }
+
         // Every file must have an outcome: a file that cannot be loaded is a crash, not a silent omission.
         if (cqlFileCount != counts.Total)
             Assert.Fail($"{corpus.Name}: {cqlFileCount} CQL files, but {counts.Total} outcomes ({counts}); every file must have exactly one outcome. See the report file for details.");
@@ -154,8 +165,14 @@ public class TranslatorCensusTest
         else
             CompareKnownPass(corpus, results, baselinePath);
 
+        // A counts-only corpus is licensed content, and an exception message can name its files.
+        if (elmCheckError is not null)
+            Assert.Fail(corpus.CountsOnly
+                            ? $"{corpus.Name}: the ELM checks threw {elmCheckError.GetType().Name}."
+                            : $"{corpus.Name}: the ELM checks threw {elmCheckError}");
+
         // The structural comparison with the reference ELM is a report only; the independent checkers are a gate.
-        if (elmCheck.FailedLibraries > 0)
+        if (elmCheck!.FailedLibraries > 0)
             Assert.Fail($"{corpus.Name}: the ELM of {elmCheck.FailedLibraries} of {elmCheck.CheckedLibraries} clean libraries does not read back as written or is not valid against the ELM schema. See {elmCheck.ReportFileName} for details.");
     }
 
@@ -642,16 +659,31 @@ public class TranslatorCensusTest
         return report.ToString();
     }
 
-    private static readonly Regex Bracketed = new(@"\[[^\]]*\]", RegexOptions.Compiled);
-
     /// <summary>
     /// The last property of a divergence path, without indexes or definition names:
-    /// <c>statements[X].expression.operand[0]</c> gives <c>operand</c>.
+    /// <c>statements[X].expression.operand[0]</c> gives <c>operand</c>. A definition key may itself hold brackets and
+    /// dots, such as the operand types of a function, so only a dot outside brackets separates properties.
     /// </summary>
     private static string LastProperty(string path)
     {
-        var withoutIndexes = Bracketed.Replace(path, "");
-        return withoutIndexes[(withoutIndexes.LastIndexOf('.') + 1)..];
+        var depth = 0;
+        var start = 0;
+        for (var i = path.Length - 1; i >= 0; i--)
+        {
+            if (path[i] == ']')
+                depth++;
+            else if (path[i] == '[')
+                depth--;
+            else if (path[i] == '.' && depth == 0)
+            {
+                start = i + 1;
+                break;
+            }
+        }
+
+        var segment = path[start..];
+        var bracket = segment.IndexOf('[');
+        return bracket < 0 ? segment : segment[..bracket];
     }
 
     private static void AppendCheckFailures(StringBuilder report, IEnumerable<CheckFailure> failures)

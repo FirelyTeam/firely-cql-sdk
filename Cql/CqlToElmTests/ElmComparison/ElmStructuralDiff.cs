@@ -59,7 +59,7 @@ internal static class ElmStructuralDiff
 {
     private static readonly HashSet<string> ConversionNodes = new(StringComparer.Ordinal)
     {
-        "As", "ToList", "SingletonFrom", "ToBoolean", "ToConcept", "ToDate", "ToDateTime", "ToDecimal", "ToInteger",
+        "As", "Convert", "ToList", "SingletonFrom", "ToBoolean", "ToConcept", "ToDate", "ToDateTime", "ToDecimal", "ToInteger",
         "ToLong", "ToQuantity", "ToRatio", "ToString", "ToTime", "ToInterval",
     };
 
@@ -150,6 +150,25 @@ internal static class ElmStructuralDiff
     {
         var actualType = NodeType(actual);
         var referenceType = NodeType(reference);
+        if (actualType == referenceType && !SameConversion(actual, reference))
+        {
+            // A conversion on one side only, around a node of its own kind: FHIRHelpers.ToConcept(Common.F(x))
+            // against Common.F(x), or As(As(x)) against As(x).
+            if (IsConversion(actual) && Operand(actual) is { } actualOperand && SameKind(actualOperand, reference))
+            {
+                divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"{Describe(actual)} vs none"));
+                CompareNodes(actualOperand, reference, path, divergences);
+                return;
+            }
+
+            if (IsConversion(reference) && Operand(reference) is { } referenceOperand && SameKind(actual, referenceOperand))
+            {
+                divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"none vs {Describe(reference)}"));
+                CompareNodes(actual, referenceOperand, path, divergences);
+                return;
+            }
+        }
+
         if (actualType != referenceType)
         {
             // A conversion on one side only: report it, then compare what it converts with the other side.
@@ -214,11 +233,11 @@ internal static class ElmStructuralDiff
 
     /// <summary>
     /// The attributes that name a type by its qualified name and have no type specifier spelling: the type of a
-    /// literal, of an instance and of a retrieve.
+    /// literal, of an instance, of a retrieve and of an included related retrieve.
     /// </summary>
     private static readonly HashSet<string> TypeNameProperties = new(StringComparer.Ordinal)
     {
-        "valueType", "classType", "dataType",
+        "valueType", "classType", "dataType", "relatedDataType",
     };
 
     /// <summary>
@@ -238,6 +257,30 @@ internal static class ElmStructuralDiff
                && (string?)node["libraryName"] == "FHIRHelpers"
                && ((string?)node["name"])?.StartsWith("To", StringComparison.Ordinal) == true
                && node["operand"] is JsonArray { Count: 1 };
+    }
+
+    /// <summary>
+    /// What identifies a conversion: its node type, the function it calls and the type it converts to.
+    /// </summary>
+    private static string ConversionKey(JsonObject conversion) =>
+        $"{NodeType(conversion)}|{(string?)conversion["libraryName"]}|{(string?)conversion["name"]}|"
+        + $"{conversion["asTypeSpecifier"]?.ToJsonString()}|{conversion["toTypeSpecifier"]?.ToJsonString()}";
+
+    private static bool SameConversion(JsonObject a, JsonObject b) =>
+        IsConversion(a) && IsConversion(b) && ConversionKey(a) == ConversionKey(b);
+
+    /// <summary>
+    /// Whether two nodes are the same kind of node: the same conversion, or the same function, or otherwise the
+    /// same node type.
+    /// </summary>
+    private static bool SameKind(JsonObject a, JsonObject b)
+    {
+        if (NodeType(a) != NodeType(b))
+            return false;
+        if (IsConversion(a) || IsConversion(b))
+            return SameConversion(a, b);
+        return NodeType(a) != "FunctionRef"
+               || ((string?)a["libraryName"] == (string?)b["libraryName"] && (string?)a["name"] == (string?)b["name"]);
     }
 
     private static JsonObject? Operand(JsonObject conversion) =>
@@ -288,8 +331,10 @@ internal static class ElmStructuralDiff
         if (qualifiedName is null)
             return "?";
         var close = qualifiedName.LastIndexOf('}');
+        if (close < 2 || !qualifiedName.StartsWith('{'))
+            return qualifiedName;
         var name = qualifiedName[(close + 1)..];
-        if (close < 0 || qualifiedName.StartsWith("{urn:hl7-org:elm-types:r1}", StringComparison.Ordinal))
+        if (qualifiedName.StartsWith("{urn:hl7-org:elm-types:r1}", StringComparison.Ordinal))
             return name;
         var model = qualifiedName[1..close].TrimEnd('/');
         return $"{model[(model.LastIndexOfAny(['/', ':']) + 1)..]}.{name}";
