@@ -479,6 +479,12 @@ internal partial class CSharpEmitter
             if (leftExpression is CodeConstant { Value: not null })
                 return child(leftExpression).Code;
 
+            // (a ?? 15) ?? x => a ?? 15: once a coalesce reaches a value-type literal it can never be
+            // null, and C# types "a ?? 15" as the non-nullable underlying type, on which a further
+            // "?? x" does not compile (CS0019).
+            if (EndsInValueTypeLiteral(leftExpression))
+                return child(leftExpression).Code;
+
             var isNullableType = !leftExpression.Type.IsValueType || Nullable.GetUnderlyingType(leftExpression.Type) is not null;
 
             // default ?? x => x
@@ -510,8 +516,14 @@ internal partial class CSharpEmitter
             // literal instead of emitting the (potentially illegal) pattern text. This is only
             // reachable from IsNull (the sole builder of CodeBinaryOp.Equal), so binary.Left is
             // never a boxing-cast-wrapped constant here.
-            CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: ValueType } => "false",
-            CodeBinaryOp.Equal when right is "null" or "default" && binary.Left is CodeConstant { Value: null } => "true",
+            CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is CodeConstant { Value: ValueType } => "false",
+            CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is CodeConstant { Value: null } => "true",
+            // A coalesce that reaches a value-type literal is never null. The check prints as
+            // "false" only when the coalesce reads nothing but locals and literals; a call in it
+            // may raise an error, so that coalesce is evaluated and NullPatternOperand keeps the
+            // check legal.
+            CodeBinaryOp.Equal when right is "null" or "default" && FoldConstantTest(binary.Left) is var operand
+                && EndsInValueTypeLiteral(operand) && ReadsOnlyLocalsAndLiterals(operand) => "false",
             // "default" rewrites to "null" in patterns: a default literal is not a legal
             // pattern (CS8505) — the old writer's rule.
             CodeBinaryOp.Equal when right is "null" or "default" => $"{NullPatternOperand(leftAtom, left)} is null",
@@ -524,6 +536,27 @@ internal partial class CSharpEmitter
             _ => throw new NotSupportedException($"Don't know how to print binary operator {binary.Op}."),
         };
     }
+
+    /// <summary>
+    /// Whether <paramref name="expression"/> is a coalesce chain that reaches a non-null value-type literal, such as
+    /// <c>a ?? 15</c> or <c>(a ?? 15) ?? b</c>, and so can never be null.
+    /// </summary>
+    private static bool EndsInValueTypeLiteral(CodeExpression expression) =>
+        expression is CodeBinary { Op: CodeBinaryOp.Coalesce } coalesce
+        && (coalesce.Right is CodeConstant { Value: ValueType } || EndsInValueTypeLiteral(coalesce.Left));
+
+    /// <summary>
+    /// Whether <paramref name="expression"/> is a local, a literal, or a coalesce of those, so that evaluating it
+    /// cannot raise an error.
+    /// </summary>
+    private static bool ReadsOnlyLocalsAndLiterals(CodeExpression expression) =>
+        expression switch
+        {
+            CodeLocal or CodeConstant or CodeDefault => true,
+            CodeBinary { Op: CodeBinaryOp.Coalesce } coalesce =>
+                ReadsOnlyLocalsAndLiterals(coalesce.Left) && ReadsOnlyLocalsAndLiterals(coalesce.Right),
+            _ => false,
+        };
 
     private static CodeExpression SimplifyCoalesceLeft(CodeExpression expression)
     {
@@ -587,6 +620,7 @@ internal partial class CSharpEmitter
     /// </summary>
     private string NullPatternOperand(Atom leftAtom, string left) =>
         leftAtom.Node is CodeConditional conditional && TernaryPrintsWithoutNaturalNullableType(conditional)
+        || EndsInValueTypeLiteral(FoldConstantTest(leftAtom.Node))
             ? $"(({_typeToCSharpConverter.ToCSharp(leftAtom.Type)}){left})"
             : left;
 

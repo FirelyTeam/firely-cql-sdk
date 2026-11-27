@@ -4,7 +4,7 @@ The XML files in this folder drive `XmlTest` in `CqlToElmTests`. It runs every `
 
 ## 1.1. Source
 
-All files except the two listed in [1.2](#12-firelys-own-files) are unmodified copies of `tests/cql/*.xml` from the HL7 CQL conformance suite, [cqframework/cql-tests](https://github.com/cqframework/cql-tests), at commit `9e921932877bcf7a92e14a19c36a2b9cff077654`.
+All files except the two listed in [1.2](#12-firelys-own-files) are unmodified copies of `tests/cql/*.xml` from the HL7 CQL conformance suite, [cqframework/cql-tests](https://github.com/cqframework/cql-tests), taken from its `main` branch at commit `0a8f7d32809cd1b8f595b89e415bcfc855913b28`.
 
 A test that does not hold for this SDK is listed in `../../(tests)/SkippedTests.cs` with the reason, not edited here.
 
@@ -23,3 +23,5 @@ A test that does not hold for this SDK is listed in `../../(tests)/SkippedTests.
 2. Run `XmlTest` (`dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --filter FullyQualifiedName~XmlTest`).
 3. For each failure, either fix the SDK or add the test to `SkippedTests.cs` with its reason; remove entries for tests the suite no longer has.
 4. Update the commit hash in [1.1](#11-source).
+
+To see what changed before copying, diff each file against the same file in the cql-tests checkout. [tools/dqic_sync](../../../../tools/dqic_sync/README.md) reports the differences test by test, against the suite published with the specification rather than cql-tests `main`.

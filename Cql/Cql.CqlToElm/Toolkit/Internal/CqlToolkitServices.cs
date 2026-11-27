@@ -98,10 +98,26 @@ internal record CqlToolkitServices(
 
         Action<IModelProvider> ConfigureModelProvider()
         {
-            var modelInfos = AllMappedModelsInOrder
-                             .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.GetModelInfo() : null)
-                             .Concat(config.ModelInfos)
-                             .ToList();
+            var modelInfos = InDependencyOrder(
+                AllMappedModelsInOrder
+                    .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.GetModelInfo() : null)
+                    .Concat(config.ModelInfos)
+                    .Distinct()
+                    .ToList());
+
+            // The provider keys a model by url and version, so a second copy of one model, such as a model info
+            // loaded from a file for a model also selected through Models, cannot be added.
+            var duplicateModel = modelInfos
+                                 .GroupBy(m => (m.url, m.version))
+                                 .FirstOrDefault(g => g.Count() > 1);
+            if (duplicateModel is not null)
+            {
+                var first = duplicateModel.First();
+                throw new ArgumentException(
+                    $"Model {first.name} ({first.url}) version '{first.version}' is configured more than once. " +
+                    "Select each model once, either through Models or through ModelInfos.",
+                    nameof(config));
+            }
 
             // A type is identified by its model's url and its name, without the model's version, so the
             // translator can only resolve types when each model url is configured in a single version.
@@ -124,6 +140,30 @@ internal record CqlToolkitServices(
                     modelProvider.Add(modelInfo);
             };
         }
+    }
+
+    /// <summary>
+    /// Orders model infos so that each comes after the models it declares in <c>requiredModelInfo</c>, because the
+    /// model provider refuses a model whose required models were not added before it. Models keep their given order
+    /// otherwise. A required model that is not in the list, or a cycle, is left for the provider to report.
+    /// </summary>
+    internal static List<ModelInfo> InDependencyOrder(IReadOnlyList<ModelInfo> modelInfos)
+    {
+        var ordered = new List<ModelInfo>(modelInfos.Count);
+        var remaining = modelInfos.ToList();
+        while (remaining.Count > 0)
+        {
+            var next = remaining.FirstOrDefault(model => (model.requiredModelInfo ?? [])
+                                                    .All(required => !remaining.Any(other => other != model && Satisfies(other, required))))
+                       ?? remaining[0];
+            remaining.Remove(next);
+            ordered.Add(next);
+        }
+
+        return ordered;
+
+        static bool Satisfies(ModelInfo model, ModelSpecifier required) =>
+            model.name == required.name && (required.version is null || model.version == required.version);
     }
 
     /// <summary>
