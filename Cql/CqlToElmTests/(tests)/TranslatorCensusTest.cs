@@ -7,6 +7,7 @@
  */
 
 using System.Text.RegularExpressions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm.Test.ElmComparison;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
@@ -66,6 +67,11 @@ public class TranslatorCensusTest
         /// The committed baseline file name for this run.
         /// </summary>
         public string BaselineFileName => CountsOnly ? $"{Name}.counts.txt" : $"{Name}.known-pass.txt";
+
+        /// <summary>
+        /// The committed baseline file name for compiling the clean libraries of this run.
+        /// </summary>
+        public string CompileBaselineFileName => CountsOnly ? $"{Name}.compile-counts.txt" : $"{Name}.known-compile.txt";
 
         /// <inheritdoc />
         public override string ToString() => Name;
@@ -153,6 +159,18 @@ public class TranslatorCensusTest
             elmCheckError = e;
         }
 
+        // Compiling the clean libraries is the next level; an exception in it is also reported after the census assertions.
+        CompileSummary? compile = null;
+        Exception? compileError = null;
+        try
+        {
+            compile = CompileCorpus(corpus, results, outputDirectory);
+        }
+        catch (Exception e)
+        {
+            compileError = e;
+        }
+
         // Every file must have an outcome: a file that cannot be loaded is a crash, not a silent omission.
         if (cqlFileCount != counts.Total)
             Assert.Fail($"{corpus.Name}: {cqlFileCount} CQL files, but {counts.Total} outcomes ({counts}); every file must have exactly one outcome. See the report file for details.");
@@ -174,6 +192,19 @@ public class TranslatorCensusTest
         // The structural comparison with the reference ELM is a report only; the independent checkers are a gate.
         if (elmCheck!.FailedLibraries > 0)
             Assert.Fail($"{corpus.Name}: the ELM of {elmCheck.FailedLibraries} of {elmCheck.CheckedLibraries} clean libraries does not read back as written or is not valid against the ELM schema. See {elmCheck.ReportFileName} for details.");
+
+        if (compileError is not null)
+            Assert.Fail(corpus.CountsOnly
+                            ? $"{corpus.Name}: compiling the clean libraries threw {compileError.GetType().Name}."
+                            : $"{corpus.Name}: compiling the clean libraries threw {compileError}");
+
+        var compileBaselinePath = Path.Combine(AppContext.BaseDirectory, "Input", "Census", corpus.CompileBaselineFileName);
+        if (!File.Exists(compileBaselinePath))
+            Assert.Fail($"Baseline file '{corpus.CompileBaselineFileName}' is missing from Input/Census. Copy the candidate '{compile!.CandidatePath}' there.");
+        if (corpus.CountsOnly)
+            CompareCompileCounts(corpus, compile!.Counts, compileBaselinePath);
+        else
+            CompareKnownCompile(corpus, compile!.Results, compileBaselinePath);
     }
 
     /// <summary>
@@ -204,6 +235,68 @@ public class TranslatorCensusTest
         {
             directory.Delete(recursive: true);
         }
+    }
+
+    /// <summary>
+    /// A clean library compiles; one that includes a library with translation errors is blocked; one whose ELM cannot
+    /// be compiled fails; and one that includes it is a cascade. Through a chain of includes, blocked and cascade name
+    /// the library at its root.
+    /// </summary>
+    [TestMethod]
+    public void CompileClassifiesCleanLibrariesByWhyTheyDoNotCompile()
+    {
+        var directory = Directory.CreateDirectory(Path.Combine(Path.GetTempPath(), $"TranslatorCensus-{Guid.NewGuid():N}"));
+        try
+        {
+            File.WriteAllText(Path.Combine(directory.FullName, "a.cql"), "library A version '1.0.0'\n\ndefine X: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "b.cql"), "library B version '1.0.0'\n\ninclude A version '1.0.0'\n\ndefine Y: A.X + 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "broken.cql"), "library Broken version '1.0.0'\n\ndefine X: 1 + 'a'\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "c.cql"), "library C version '1.0.0'\n\ninclude Broken version '1.0.0'\n\ndefine Y: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "d.cql"), "library D version '1.0.0'\n\ndefine X: 1\n\ndefine Y: X\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "e.cql"), "library E version '1.0.0'\n\ninclude D version '1.0.0'\n\ndefine Z: D.X\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "f.cql"), "library F version '1.0.0'\n\ninclude E version '1.0.0'\n\ndefine W: E.Z\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "g.cql"), "library G version '1.0.0'\n\ninclude C version '1.0.0'\n\ndefine V: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "h.cql"), "library H version '1.0.0'\n\ndefine X: 1\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "i.cql"), "library I version '1.0.0'\n\ninclude H version '1.0.0'\n\ndefine Y: H.X\n");
+
+            // D translates cleanly; make its ELM uncompilable by pointing Y at a definition that does not exist.
+            // H translates cleanly too; make it a library whose ELM could not be written.
+            var results = Translate(directory, [])
+                          .Select(r => r.Id switch
+                          {
+                              "D-1.0.0" => r with { ElmJson = WithDanglingExpressionRef(r.ElmJson!) },
+                              "H-1.0.0" => r with { ElmJson = null, ElmWriteError = "InvalidOperationException: not writable" },
+                              _         => r,
+                          })
+                          .ToList();
+
+            var byId = Compile(results).ToDictionary(r => r.Id, StringComparer.Ordinal);
+
+            byId.Keys.Should().BeEquivalentTo("A-1.0.0", "B-1.0.0", "C-1.0.0", "D-1.0.0", "E-1.0.0", "F-1.0.0", "G-1.0.0", "H-1.0.0", "I-1.0.0");
+            byId["H-1.0.0"].Should().Be(new CompileResult("H-1.0.0", CompileOutcome.Failed, "the ELM could not be written: InvalidOperationException: not writable"));
+            byId["I-1.0.0"].Should().Be(new CompileResult("I-1.0.0", CompileOutcome.Blocked, "includes H-1.0.0, whose ELM could not be written or read back"));
+            byId["A-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
+            byId["B-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
+            byId["C-1.0.0"].Should().Be(new CompileResult("C-1.0.0", CompileOutcome.Blocked, "includes Broken-1.0.0, which did not translate cleanly"));
+            byId["D-1.0.0"].Outcome.Should().Be(CompileOutcome.Failed);
+            byId["D-1.0.0"].Detail.Should().Contain("D-1.0.0").And.Contain("Exception");
+            byId["E-1.0.0"].Should().Be(new CompileResult("E-1.0.0", CompileOutcome.Cascade, "includes D-1.0.0, which failed to compile"));
+            // Through a chain, the root cause is named, not the library in between.
+            byId["F-1.0.0"].Should().Be(new CompileResult("F-1.0.0", CompileOutcome.Cascade, "includes D-1.0.0, which failed to compile"));
+            byId["G-1.0.0"].Should().Be(new CompileResult("G-1.0.0", CompileOutcome.Blocked, "includes Broken-1.0.0, which did not translate cleanly"));
+        }
+        finally
+        {
+            directory.Delete(recursive: true);
+        }
+    }
+
+    private static string WithDanglingExpressionRef(string elmJson)
+    {
+        var document = System.Text.Json.Nodes.JsonNode.Parse(elmJson, documentOptions: ElmNormalizer.DocumentOptions)!;
+        var y = document["library"]!["statements"]!["def"]!.AsArray().Single(d => (string?)d!["name"] == "Y")!;
+        y["expression"]!["name"] = "Missing";
+        return document.ToJsonString();
     }
 
     /// <summary>
@@ -715,6 +808,355 @@ public class TranslatorCensusTest
         file.AppendLine(CultureInfo.InvariantCulture, $"comparisonErrors={comparison.ComparisonErrors.Count}");
         foreach (var kind in Enum.GetValues<DivergenceKind>())
             file.AppendLine(CultureInfo.InvariantCulture, $"{kind}={comparison.Total(kind)}");
+        return file.ToString();
+    }
+
+    #endregion
+
+    #region Compilation
+
+    /// <summary>
+    /// The outcome of compiling one clean library to C# and an assembly.
+    /// </summary>
+    public enum CompileOutcome
+    {
+        /// <summary>The library compiled to an assembly.</summary>
+        Compiled,
+
+        /// <summary>A library it includes, directly or indirectly, did not translate cleanly, so it was not compiled.</summary>
+        Blocked,
+
+        /// <summary>The library itself failed to compile: in the ELM preprocessor, the code builder, C# generation or the C# compiler.</summary>
+        Failed,
+
+        /// <summary>A library it includes, directly or indirectly, was compiled with it and failed.</summary>
+        Cascade,
+    }
+
+    /// <summary>
+    /// The compile result of one clean library.
+    /// </summary>
+    /// <param name="Id">The library identifier, as in <see cref="LibraryResult.Id"/>.</param>
+    /// <param name="Outcome">Whether it compiled, and if not, why.</param>
+    /// <param name="Detail">For a library that did not compile, the dependency or the failure responsible.</param>
+    private sealed record CompileResult(string Id, CompileOutcome Outcome, string? Detail = null);
+
+    /// <summary>
+    /// The number of clean libraries per compile outcome.
+    /// </summary>
+    private readonly record struct CompileCounts(int Compiled, int Blocked, int Failed, int Cascade)
+    {
+        public static CompileCounts Of(IReadOnlyList<CompileResult> results) =>
+            new(results.Count(r => r.Outcome == CompileOutcome.Compiled),
+                results.Count(r => r.Outcome == CompileOutcome.Blocked),
+                results.Count(r => r.Outcome == CompileOutcome.Failed),
+                results.Count(r => r.Outcome == CompileOutcome.Cascade));
+
+        /// <summary>
+        /// Parses <c>key=value</c> lines for the keys <c>compiled</c>, <c>blocked</c>, <c>failed</c> and <c>cascade</c>.
+        /// </summary>
+        public static CompileCounts Parse(IEnumerable<string> lines)
+        {
+            var values = lines
+                         .Select(line => line.Split('=', 2))
+                         .ToDictionary(parts => parts[0].Trim(), parts => int.Parse(parts[1].Trim(), CultureInfo.InvariantCulture), StringComparer.OrdinalIgnoreCase);
+            return new(values["compiled"], values["blocked"], values["failed"], values["cascade"]);
+        }
+
+        public override string ToString() => $"compiled {Compiled}, blocked {Blocked}, failed {Failed}, cascade {Cascade}";
+    }
+
+    /// <summary>
+    /// The compile stage of one corpus.
+    /// </summary>
+    /// <param name="Results">One result per clean library.</param>
+    /// <param name="Counts">The number of results per outcome.</param>
+    /// <param name="CandidatePath">Where the candidate compile baseline was written.</param>
+    private sealed record CompileSummary(IReadOnlyList<CompileResult> Results, CompileCounts Counts, string CandidatePath);
+
+    /// <summary>
+    /// Compiles the clean libraries of a corpus, writes the compile report and the candidate compile baseline, and
+    /// attaches them; for a counts-only corpus only the candidate, which holds counts, is attached.
+    /// </summary>
+    private CompileSummary CompileCorpus(CensusCorpus corpus, IReadOnlyList<LibraryResult> results, string outputDirectory)
+    {
+        var stopwatch = Stopwatch.StartNew();
+        var compileResults = Compile(results);
+        stopwatch.Stop();
+        var counts = CompileCounts.Of(compileResults);
+
+        var reportPath = Path.Combine(outputDirectory, $"{corpus.Name}.compile-report.txt");
+        File.WriteAllText(reportPath, BuildCompileReport(corpus, compileResults, counts, stopwatch.Elapsed));
+        var candidatePath = Path.Combine(outputDirectory, corpus.CompileBaselineFileName);
+        File.WriteAllText(candidatePath, corpus.CountsOnly ? BuildCompileCountsFile(corpus, counts) : BuildKnownCompileFile(corpus, compileResults));
+        if (!corpus.CountsOnly)
+            TestContext.AddResultFile(reportPath);
+        TestContext.AddResultFile(candidatePath);
+
+        TestContext.WriteLine(string.Create(CultureInfo.InvariantCulture, $"{corpus.Name}: {counts} in {stopwatch.Elapsed.TotalSeconds:F1}s"));
+        TestContext.WriteLine($"Compile report: {reportPath}");
+        TestContext.WriteLine($"Candidate compile baseline: {candidatePath}");
+        return new CompileSummary(compileResults, counts, candidatePath);
+    }
+
+    /// <summary>
+    /// Compiles the ELM of every clean library to C# and an assembly, as the Java leg compiles the reference ELM.
+    /// The ELM compiled is the JSON read back, which the ELM checks validated: what a consumer of the JSON gets.
+    /// Returns one result per clean library.
+    /// </summary>
+    /// <remarks>
+    /// A library is compiled together with the libraries it includes, so a library whose includes did not all
+    /// translate cleanly is <see cref="CompileOutcome.Blocked"/> and is not compiled at all. Of the libraries compiled,
+    /// one without an assembly has <see cref="CompileOutcome.Failed"/> itself, or, when a library it includes has no
+    /// assembly either, is a <see cref="CompileOutcome.Cascade"/>.
+    /// </remarks>
+    private static IReadOnlyList<CompileResult> Compile(IReadOnlyList<LibraryResult> results)
+    {
+        var compileResults = new Dictionary<string, CompileResult>(StringComparer.Ordinal);
+        var libraries = new Dictionary<string, Library>(StringComparer.Ordinal);
+        foreach (var result in results.Where(r => r.Outcome == Outcome.Clean))
+        {
+            if (result.ElmJson is null)
+            {
+                compileResults[result.Id] = new CompileResult(result.Id, CompileOutcome.Failed, $"the ELM could not be written: {result.ElmWriteError}");
+                continue;
+            }
+
+            try
+            {
+                libraries[result.Id] = Library.ParseFromJson(result.ElmJson);
+            }
+            catch (Exception e)
+            {
+                compileResults[result.Id] = new CompileResult(result.Id, CompileOutcome.Failed, $"the ELM could not be read: {e.GetType().Name}: {e.Message}");
+            }
+        }
+
+        var includes = libraries.ToDictionary(
+            entry => entry.Key,
+            entry => (entry.Value.includes ?? []).Select(include => include.VersionedLibraryIdentifier.ToString()).ToArray(),
+            StringComparer.Ordinal);
+
+        // A library is blocked when any library it includes, directly or indirectly, cannot be compiled with it: one
+        // that did not translate cleanly, or whose ELM could not be written or read back. The blocking library named
+        // is that one, not a library in between that is itself blocked.
+        var blockedBy = new Dictionary<string, string?>(StringComparer.Ordinal);
+        string? BlockingInclude(string id, HashSet<string> visiting)
+        {
+            if (blockedBy.TryGetValue(id, out var known))
+                return known;
+            if (!visiting.Add(id))
+                return null;
+            string? blocking = null;
+            foreach (var include in includes[id])
+            {
+                blocking = libraries.ContainsKey(include) ? BlockingInclude(include, visiting) : include;
+                if (blocking is not null)
+                    break;
+            }
+
+            visiting.Remove(id);
+            blockedBy[id] = blocking;
+            return blocking;
+        }
+
+        var toCompile = new List<(string Id, Library Library)>();
+        foreach (var (id, library) in libraries)
+        {
+            if (BlockingInclude(id, []) is not { } blocking)
+                toCompile.Add((id, library));
+            else if (compileResults.ContainsKey(blocking))
+                compileResults[id] = new CompileResult(id, CompileOutcome.Blocked, $"includes {blocking}, whose ELM could not be written or read back");
+            else
+                compileResults[id] = new CompileResult(id, CompileOutcome.Blocked, $"includes {blocking}, which did not translate cleanly");
+        }
+
+        var loggerFactory = new FailureCollectingLoggerFactory();
+        var toolkit = new ElmToolkit(loggerFactory, new ElmToolkitConfig(AllowInvalidCSharp: false), BatchProcessExceptionContinuation.Continue)
+                      .AddElmLibraries(toCompile.Select(c => c.Library))
+                      .CompileToAssemblies();
+        var compiled = toolkit.GetElmToAssemblyResults().Select(r => r.libraryIdentifier.ToString()).ToHashSet(StringComparer.Ordinal);
+
+        // A library compiled with a library it includes that has no assembly fails because of that library. The one
+        // named is the deepest such library, which failed itself, not a library in between that is itself a cascade.
+        string? FailedInclude(string id, HashSet<string> visited)
+        {
+            foreach (var include in includes[id])
+            {
+                if (!visited.Add(include))
+                    continue;
+                if (includes.ContainsKey(include) && FailedInclude(include, visited) is { } deeper)
+                    return deeper;
+                if (!compiled.Contains(include))
+                    return include;
+            }
+
+            return null;
+        }
+
+        foreach (var (id, _) in toCompile)
+        {
+            if (compiled.Contains(id))
+                compileResults[id] = new CompileResult(id, CompileOutcome.Compiled);
+            else if (FailedInclude(id, []) is { } failedInclude)
+                compileResults[id] = new CompileResult(id, CompileOutcome.Cascade, $"includes {failedInclude}, which failed to compile");
+            else
+                compileResults[id] = new CompileResult(id, CompileOutcome.Failed, loggerFactory.FailureOf(id) ?? "no assembly, and no failure was logged");
+        }
+
+        return compileResults.Values.OrderBy(r => r.Id, StringComparer.Ordinal).ToList();
+    }
+
+    /// <summary>
+    /// Collects the failures the <see cref="ElmToolkit"/> logs, by the library they name. With
+    /// <see cref="BatchProcessExceptionContinuation.Continue"/> it logs a failing library as a warning with the
+    /// exception, and names the library in a <c>lib</c> or <c>id</c> argument.
+    /// </summary>
+    private sealed class FailureCollectingLoggerFactory : ILoggerFactory, ILogger
+    {
+        private readonly Dictionary<string, string> _failures = new(StringComparer.Ordinal);
+
+        /// <summary>
+        /// The first failure logged for the library: the log message, then the innermost exception's type and the first
+        /// line of its message, followed by the line after it when the first ends in a colon, as a list of C# compiler
+        /// errors does.
+        /// </summary>
+        public string? FailureOf(string id)
+        {
+            lock (_failures)
+                return _failures.GetValueOrDefault(id);
+        }
+
+        public ILogger CreateLogger(string categoryName) => this;
+
+        public void AddProvider(ILoggerProvider provider)
+        {
+        }
+
+        public void Dispose()
+        {
+        }
+
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
+
+        public bool IsEnabled(LogLevel logLevel) => logLevel >= LogLevel.Warning;
+
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        {
+            if (exception is null || state is not IReadOnlyList<KeyValuePair<string, object?>> arguments)
+                return;
+            var library = arguments.FirstOrDefault(a => a.Key is "lib" or "id").Value?.ToString();
+            if (library is null)
+                return;
+
+            // Wrappers such as "Exception occurred during expression building" carry the cause as their inner exception.
+            while (exception.InnerException is { } inner)
+                exception = inner;
+            var lines = exception.Message.ReplaceLineEndings("\n").Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            var message = lines.Length switch
+            {
+                0 => "",
+                > 1 when lines[0].EndsWith(':') => $"{lines[0]} {lines[1]}",
+                _ => lines[0],
+            };
+            lock (_failures)
+                _failures.TryAdd(library, $"{formatter(state, null)}: {exception.GetType().Name}: {message}");
+        }
+    }
+
+    /// <summary>
+    /// Fails when a listed library no longer compiles or is no longer clean; reports compiled libraries that are not
+    /// listed as warnings.
+    /// </summary>
+    private void CompareKnownCompile(CensusCorpus corpus, IReadOnlyList<CompileResult> results, string baselinePath)
+    {
+        var expected = new HashSet<string>(ReadBaselineLines(baselinePath), StringComparer.Ordinal);
+        var byId = results.ToDictionary(r => r.Id, StringComparer.Ordinal);
+
+        var lost = expected.Where(id => !byId.ContainsKey(id)).OrderBy(id => id, StringComparer.Ordinal).ToList();
+        var regressed = expected.Where(byId.ContainsKey).Select(id => byId[id]).Where(r => r.Outcome != CompileOutcome.Compiled).OrderBy(r => r.Id, StringComparer.Ordinal).ToList();
+        foreach (var r in results.Where(r => r.Outcome == CompileOutcome.Compiled && !expected.Contains(r.Id)))
+            TestContext.WriteLine($"WARNING: {r.Id} now compiles but is not listed in {corpus.CompileBaselineFileName}; add it.");
+
+        if (lost.Count == 0 && regressed.Count == 0)
+            return;
+
+        var message = new StringBuilder($"{corpus.Name}: libraries listed in {corpus.CompileBaselineFileName} no longer compile.");
+        foreach (var r in regressed)
+            message.AppendLine().Append($"  {r.Id}: {r.Outcome}: {r.Detail}");
+        foreach (var id in lost)
+            message.AppendLine().Append($"  {id}: no longer translates cleanly");
+        Assert.Fail(message.ToString());
+    }
+
+    /// <summary>
+    /// Fails when fewer clean libraries compile than the committed count. Only counts are reported, never library names.
+    /// </summary>
+    private void CompareCompileCounts(CensusCorpus corpus, CompileCounts counts, string baselinePath)
+    {
+        var baseline = CompileCounts.Parse(ReadBaselineLines(baselinePath));
+        if (counts.Compiled > baseline.Compiled)
+            TestContext.WriteLine($"WARNING: {corpus.Name} now has {counts.Compiled} compiling libraries; the baseline has {baseline.Compiled}. Copy the candidate compile counts file into Input/Census.");
+        if (counts.Compiled < baseline.Compiled)
+            Assert.Fail($"{corpus.Name}: {counts.Compiled} libraries compile, below the baseline of {baseline.Compiled}. Now {counts}; baseline {baseline}. See the compile report file for details.");
+    }
+
+    private static string BuildCompileReport(CensusCorpus corpus, IReadOnlyList<CompileResult> results, CompileCounts counts, TimeSpan elapsed)
+    {
+        var report = new StringBuilder();
+        report.AppendLine($"# Compile census: {corpus.Name}");
+        report.AppendLine($"Directory: {corpus.RelativeDirectory}");
+        report.AppendLine($"Clean libraries: {results.Count}");
+        report.AppendLine($"Summary: {counts}");
+        report.AppendLine(CultureInfo.InvariantCulture, $"Elapsed: {elapsed.TotalSeconds:F1}s");
+        report.AppendLine();
+
+        report.AppendLine("## Histogram of failures (libraries, normalized failure)");
+        var histogram = results
+                        .Where(r => r.Outcome == CompileOutcome.Failed)
+                        .GroupBy(r => Normalize(r.Detail ?? ""), StringComparer.Ordinal)
+                        .Select(g => (Failure: g.Key, Libraries: g.Count()))
+                        .OrderByDescending(x => x.Libraries)
+                        .ThenBy(x => x.Failure, StringComparer.Ordinal);
+        foreach (var (failure, libraries) in histogram)
+            report.AppendLine(CultureInfo.InvariantCulture, $"{libraries,5}  {failure}");
+        report.AppendLine();
+
+        report.AppendLine("## Libraries");
+        foreach (var r in results)
+        {
+            report.AppendLine($"{r.Outcome,-8} {r.Id}");
+            if (r.Detail is { } detail)
+                report.AppendLine($"         {detail.ReplaceLineEndings(" ")}");
+        }
+
+        return report.ToString();
+    }
+
+    private static string BuildKnownCompileFile(CensusCorpus corpus, IReadOnlyList<CompileResult> results)
+    {
+        var file = new StringBuilder();
+        file.AppendLine($"# Libraries in {corpus.RelativeDirectory} whose .NET-translated ELM compiles to an assembly");
+        if (corpus.Models.Length > 0)
+            file.AppendLine($"# with models {string.Join(", ", corpus.Models)}.");
+        file.AppendLine("# Checked by TranslatorCensusTest: a listed library that no longer compiles fails the test.");
+        file.AppendLine("# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.");
+        foreach (var id in results.Where(r => r.Outcome == CompileOutcome.Compiled).Select(r => r.Id))
+            file.AppendLine(id);
+        return file.ToString();
+    }
+
+    private static string BuildCompileCountsFile(CensusCorpus corpus, CompileCounts counts)
+    {
+        var file = new StringBuilder();
+        file.AppendLine($"# Compile outcome counts of the clean libraries in {corpus.RelativeDirectory}.");
+        file.AppendLine("# Checked by TranslatorCensusTest: the test fails when fewer libraries than 'compiled' compile to an assembly.");
+        file.AppendLine("# Only counts are kept here because the corpus is licensed content; see README.md.");
+        file.AppendLine("# Refresh by copying the candidate file the test writes next to its report over this one.");
+        file.AppendLine(CultureInfo.InvariantCulture, $"compiled={counts.Compiled}");
+        file.AppendLine(CultureInfo.InvariantCulture, $"blocked={counts.Blocked}");
+        file.AppendLine(CultureInfo.InvariantCulture, $"failed={counts.Failed}");
+        file.AppendLine(CultureInfo.InvariantCulture, $"cascade={counts.Cascade}");
         return file.ToString();
     }
 
