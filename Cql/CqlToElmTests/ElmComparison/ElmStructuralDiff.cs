@@ -150,10 +150,11 @@ internal static class ElmStructuralDiff
     {
         var actualType = NodeType(actual);
         var referenceType = NodeType(reference);
-        if (actualType == referenceType && !SameConversion(actual, reference))
+        if (!SameKind(actual, reference))
         {
-            // A conversion on one side only, around a node of its own kind: FHIRHelpers.ToConcept(Common.F(x))
-            // against Common.F(x), or As(As(x)) against As(x).
+            // A conversion on one side only, around a node of the other side's kind: ToDecimal(x) against x,
+            // FHIRHelpers.ToConcept(Common.F(x)) against Common.F(x), or As(As(x)) against As(x). Report it, then
+            // compare what it converts with the other side.
             if (IsConversion(actual) && Operand(actual) is { } actualOperand && SameKind(actualOperand, reference))
             {
                 divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"{Describe(actual)} vs none"));
@@ -167,33 +168,44 @@ internal static class ElmStructuralDiff
                 CompareNodes(actual, referenceOperand, path, divergences);
                 return;
             }
-        }
 
-        if (actualType != referenceType)
-        {
-            // A conversion on one side only: report it, then compare what it converts with the other side.
-            if (IsConversion(actual) && Operand(actual) is { } actualOperand && (NodeType(actualOperand) == referenceType || IsConversion(actualOperand)))
-            {
-                divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"{Describe(actual)} vs none"));
-                CompareNodes(actualOperand, reference, path, divergences);
-                return;
-            }
-
-            if (IsConversion(reference) && Operand(reference) is { } referenceOperand && (NodeType(referenceOperand) == actualType || IsConversion(referenceOperand)))
-            {
-                divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"none vs {Describe(reference)}"));
-                CompareNodes(actual, referenceOperand, path, divergences);
-                return;
-            }
-
-            // Two different conversions of the same operand.
-            if (IsConversion(actual) && IsConversion(reference) && Operand(actual) is { } a && Operand(reference) is { } r)
+            // Two different conversions of the same operand: As(x) against ToDecimal(x), ToDecimal(x) against
+            // FHIRHelpers.ToDecimal(x), or FHIRHelpers.ToDate(x) against FHIRHelpers.ToDateTime(x). Two conversions of
+            // the same node type other than a function call, such as As(x) to different types, are compared by their
+            // properties instead, so that the type they convert to is a type difference.
+            if (IsConversion(actual) && IsConversion(reference)
+                && (actualType != referenceType || actualType == "FunctionRef")
+                && Operand(actual) is { } a && Operand(reference) is { } r)
             {
                 divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"{Describe(actual)} vs {Describe(reference)}"));
                 CompareNodes(a, r, path, divergences);
                 return;
             }
 
+            // A conversion on one side only, around another conversion, As(ToDecimal(x)) against x, or around a node of
+            // the other side's type that differs from it, ToDecimal(Common.F(x)) against Common.G(x).
+            if (actualType != referenceType)
+            {
+                if (IsConversion(actual) && Operand(actual) is { } convertedActual
+                    && (IsConversion(convertedActual) || (NodeType(convertedActual) == referenceType && !IsConversion(reference))))
+                {
+                    divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"{Describe(actual)} vs none"));
+                    CompareNodes(convertedActual, reference, path, divergences);
+                    return;
+                }
+
+                if (IsConversion(reference) && Operand(reference) is { } convertedReference
+                    && (IsConversion(convertedReference) || (NodeType(convertedReference) == actualType && !IsConversion(actual))))
+                {
+                    divergences.Add(new(DivergenceKind.ConversionPlacement, path, $"none vs {Describe(reference)}"));
+                    CompareNodes(actual, convertedReference, path, divergences);
+                    return;
+                }
+            }
+        }
+
+        if (actualType != referenceType)
+        {
             divergences.Add(new(DivergenceKind.ReplacedNode, path, $"{Describe(actual)} vs {Describe(reference)}"));
             return;
         }
