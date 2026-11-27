@@ -81,17 +81,17 @@ A clean library that fails either check **fails** the test. A library with trans
 
 When the run has reference ELM (see the table in [1.1.](#11-what-the-test-measures)), the ELM of every clean library is compared with the reference ELM of the same library, found by the identifier the reference declares. The comparison never fails the test: legitimate differences between the two translators are expected, and what it is for is showing where they disagree and how that changes from one change to the next.
 
-Both sides are first normalized ([`ElmNormalizer`](../../ElmComparison/ElmNormalizer.cs)), which removes differences in spelling only: source locators, local identifiers, annotations and signatures are dropped; a type named by a qualified name becomes the equivalent type specifier; absent and empty collections, and absent attributes and their schema defaults, count as the same; the members of a choice type and of a tuple type, and the definitions of the library, are sorted. Operands keep their order.
+Both sides are first normalized ([`ElmNormalizer`](../../ElmComparison/ElmNormalizer.cs)), which removes differences in spelling only: source locators, local identifiers, annotations and signatures are dropped; a type named by a qualified name becomes the equivalent type specifier; absent and empty collections, and absent attributes and their schema defaults (including the ones that differ per node, such as `distinct` on a return clause and on an aggregate clause), count as the same; the members of a choice type and of a tuple type, and the definitions of the library, are sorted. Operands keep their order.
 
 The comparison ([`ElmStructuralDiff`](../../ElmComparison/ElmStructuralDiff.cs)) matches definitions by name (functions by name and operand types) and everything else by position, and classifies every difference:
 
 | Kind | Meaning |
 |---|---|
 | `ConversionPlacement` | one side converts an expression (`As`, `ToDecimal`, a `FHIRHelpers` conversion, …) where the other does not, or converts it differently; the comparison continues with what is converted |
-| `MissingNode` | the reference has a node or definition this translator does not emit |
-| `ExtraNode` | this translator emits a node or definition the reference does not have |
+| `MissingNode` | the reference has a node, list or definition this translator does not emit |
+| `ExtraNode` | this translator emits a node, list or definition the reference does not have |
 | `ReplacedNode` | a different kind of node in the same place; what is below it is not compared, so one difference does not cascade |
-| `TypeDifference` | the same node, typed differently; a type present on one side only is not a difference |
-| `ValueDifference` | the same node, with a different attribute value |
+| `TypeDifference` | the same node, typed differently: its result type, the type it converts to, tests or declares, or the type of a literal, instance or retrieve; a result type present on one side only is not a difference |
+| `ValueDifference` | the same node, with a different attribute value, or an attribute present on one side only |
 
-The report gives the totals per kind, a histogram of the differences (grouped like the message histogram in [1.3.](#13-the-report), most widespread first), and per library its differences with their paths.
+The report gives the totals per kind, a histogram of the differences (grouped by kind, property and detail, the detail normalized like the message histogram in [1.3.](#13-the-report), most widespread first), and per library its differences with their paths. A library whose comparison throws is listed as such and does not stop the run.

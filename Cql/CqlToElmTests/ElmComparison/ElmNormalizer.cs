@@ -18,10 +18,13 @@ namespace Hl7.Cql.CqlToElm.Test.ElmComparison;
 /// <list type="bullet">
 /// <item>Source positions, identifiers and annotations (<c>locator</c>, <c>localId</c>, <c>annotation</c>) and the
 /// <c>signature</c> a translator records when asked to are dropped.</item>
-/// <item>A type named as a qualified name (<c>resultTypeName</c>, <c>asType</c>, <c>operandType</c>,
+/// <item>A type named as a qualified name (<c>resultTypeName</c>, <c>asType</c>, <c>isType</c>, <c>operandType</c>,
 /// <c>parameterType</c>) becomes the equivalent <c>NamedTypeSpecifier</c> (<c>resultTypeSpecifier</c>, …).</item>
 /// <item>An absent collection, an empty one and an empty <c>def</c> list are the same; an attribute that holds its
-/// schema default (<c>accessLevel</c> <c>Public</c>, <c>strict</c> <c>false</c>) is the same as an absent one.</item>
+/// schema default is the same as an absent one. The defaults are those of the ELM schema: <c>accessLevel</c>
+/// <c>Public</c>, <c>strict</c> <c>false</c>, an include's <c>mediaType</c> <c>application/elm+xml</c>, an
+/// interval's <c>lowClosed</c> and <c>highClosed</c> <c>true</c>, a return clause's <c>distinct</c> <c>true</c> and
+/// an aggregate clause's <c>distinct</c> <c>false</c>.</item>
 /// <item>A type specifier carries no result type of its own: it is its own type.</item>
 /// <item>The types of a choice type and the elements of a tuple type are sets, and are sorted.</item>
 /// <item>A <c>Property</c> on an alias, written with <c>scope</c>, is the same as one with an <c>AliasRef</c> source.</item>
@@ -53,14 +56,28 @@ internal static class ElmNormalizer
     {
         ["resultTypeName"] = "resultTypeSpecifier",
         ["asType"] = "asTypeSpecifier",
+        ["isType"] = "isTypeSpecifier",
         ["operandType"] = "operandTypeSpecifier",
         ["parameterType"] = "parameterTypeSpecifier",
     };
 
+    /// <summary>
+    /// The schema defaults of attributes whose default is the same wherever they occur.
+    /// </summary>
     private static readonly Dictionary<string, JsonNode> SchemaDefaults = new(StringComparer.Ordinal)
     {
         ["accessLevel"] = JsonValue.Create("Public"),
         ["strict"] = JsonValue.Create(false),
+        ["mediaType"] = JsonValue.Create("application/elm+xml"),
+    };
+
+    /// <summary>
+    /// The schema default of <c>distinct</c> on the clause a query holds under this key: it differs per clause.
+    /// </summary>
+    private static readonly Dictionary<string, bool> ClauseDistinctDefaults = new(StringComparer.Ordinal)
+    {
+        ["return"] = true,
+        ["aggregate"] = false,
     };
 
     /// <summary>
@@ -146,8 +163,17 @@ internal static class ElmNormalizer
                 continue;
             }
 
-            if (Normalize(value) is { } normalized && !IsEmpty(normalized))
+            var normalized = Normalize(value);
+            if (normalized is JsonObject clause && ClauseDistinctDefaults.TryGetValue(key, out var distinctDefault))
+                RemoveIfDefault(clause, "distinct", distinctDefault);
+            if (normalized is not null && !IsEmpty(normalized))
                 result[key] = normalized;
+        }
+
+        if ((string?)result["type"] == "Interval")
+        {
+            RemoveIfDefault(result, "lowClosed", true);
+            RemoveIfDefault(result, "highClosed", true);
         }
 
         // A type specifier is its own type; a result type on it repeats what it already says.
@@ -167,6 +193,12 @@ internal static class ElmNormalizer
         }
 
         return result;
+    }
+
+    private static void RemoveIfDefault(JsonObject node, string key, bool schemaDefault)
+    {
+        if (node[key] is JsonValue value && value.TryGetValue<bool>(out var flag) && flag == schemaDefault)
+            node.Remove(key);
     }
 
     private static JsonArray Sorted(JsonArray array, Func<JsonNode?, string> key) =>

@@ -153,12 +153,46 @@ public class ElmStructuralDiffTest
     }
 
     [TestMethod]
-    public void A_Type_On_One_Side_Only_Is_Not_A_Divergence()
+    public void A_Result_Type_On_One_Side_Only_Is_Not_A_Divergence()
     {
         Compare(
                 Expression($$"""{ "type": "Null", "resultTypeName": "{{Integer}}" }"""),
                 Expression("""{ "type": "Null" }"""))
             .Should().BeEmpty();
+    }
+
+    [TestMethod]
+    public void A_Converted_Type_On_One_Side_Only_Is_A_Type_Difference()
+    {
+        Compare(
+                Expression("""{ "type": "As", "operand": { "type": "Null" } }"""),
+                Expression($$"""{ "type": "As", "asType": "{{Decimal}}", "operand": { "type": "Null" } }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.TypeDifference, "statements[X].expression.asTypeSpecifier", "absent vs Decimal"));
+    }
+
+    [TestMethod]
+    public void A_Different_Literal_Type_Is_A_Type_Difference()
+    {
+        Compare(
+                Expression($$"""{ "type": "Literal", "valueType": "{{Integer}}", "value": "1" }"""),
+                Expression($$"""{ "type": "Literal", "valueType": "{{Decimal}}", "value": "1" }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.TypeDifference, "statements[X].expression.valueType", "Integer vs Decimal"));
+    }
+
+    [TestMethod]
+    public void A_List_On_One_Side_Only_Is_A_Missing_Or_Extra_Node()
+    {
+        Compare(
+                Expression("""{ "type": "Tuple" }"""),
+                Expression($$"""{ "type": "Tuple", "element": [ { "name": "a", "value": {{One}} } ] }"""))
+            .Should().ContainSingle().Which.Should().Be(
+                new Divergence(DivergenceKind.MissingNode, "statements[X].expression.element", "absent vs array of 1"));
+        Compare(
+                Expression($$"""{ "type": "Tuple", "element": [ { "name": "a", "value": {{One}} } ] }"""),
+                Expression("""{ "type": "Tuple" }"""))
+            .Should().ContainSingle().Which.Kind.Should().Be(DivergenceKind.ExtraNode);
     }
 
     [TestMethod]

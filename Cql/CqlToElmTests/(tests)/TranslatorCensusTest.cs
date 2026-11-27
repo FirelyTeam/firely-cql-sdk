@@ -498,11 +498,14 @@ public class TranslatorCensusTest
     /// </summary>
     /// <param name="Divergences">The divergences of each compared library, by library identifier.</param>
     /// <param name="NoReference">The clean libraries for which the reference directory holds no ELM.</param>
-    /// <param name="NotCompared">The libraries that are not compared because they did not translate cleanly.</param>
+    /// <param name="NotCompared">The libraries that are not compared because they did not translate cleanly, or
+    /// because their ELM could not be written.</param>
+    /// <param name="ComparisonErrors">The clean libraries whose comparison threw, with the exception.</param>
     private sealed record ReferenceComparison(
         IReadOnlyDictionary<string, IReadOnlyList<Divergence>> Divergences,
         IReadOnlyList<string> NoReference,
-        int NotCompared)
+        int NotCompared,
+        IReadOnlyDictionary<string, string> ComparisonErrors)
     {
         public int Total(DivergenceKind kind) => Divergences.Values.Sum(list => list.Count(d => d.Kind == kind));
 
@@ -512,7 +515,8 @@ public class TranslatorCensusTest
             $"{Divergences.Count} libraries compared with the reference ELM, {IdenticalLibraries} identical, "
             + $"{Divergences.Values.Sum(list => list.Count)} divergences ("
             + string.Join(", ", Enum.GetValues<DivergenceKind>().Select(kind => $"{kind} {Total(kind)}"))
-            + $"); {NoReference.Count} without reference ELM, {NotCompared} not clean";
+            + $"); {NoReference.Count} without reference ELM, {NotCompared} not clean or not written, "
+            + $"{ComparisonErrors.Count} failed to compare";
     }
 
     private static ReferenceComparison CompareWithReference(IReadOnlyList<LibraryResult> results, DirectoryInfo referenceDirectory)
@@ -520,6 +524,7 @@ public class TranslatorCensusTest
         var references = IndexReferenceElm(referenceDirectory);
         var divergences = new SortedDictionary<string, IReadOnlyList<Divergence>>(StringComparer.Ordinal);
         var noReference = new List<string>();
+        var errors = new SortedDictionary<string, string>(StringComparer.Ordinal);
         foreach (var result in results.Where(r => r.Outcome == Outcome.Clean && r.ElmJson is not null))
         {
             if (!references.TryGetValue(result.Id, out var referenceFile))
@@ -528,12 +533,20 @@ public class TranslatorCensusTest
                 continue;
             }
 
-            var actual = ElmNormalizer.NormalizeLibraryJson(result.ElmJson!);
-            var reference = ElmNormalizer.NormalizeLibraryJson(File.ReadAllText(referenceFile.FullName));
-            divergences.Add(result.Id, ElmStructuralDiff.Compare(actual, reference));
+            try
+            {
+                var actual = ElmNormalizer.NormalizeLibraryJson(result.ElmJson!);
+                var reference = ElmNormalizer.NormalizeLibraryJson(File.ReadAllText(referenceFile.FullName));
+                divergences.Add(result.Id, ElmStructuralDiff.Compare(actual, reference));
+            }
+            catch (Exception e)
+            {
+                // The comparison is a report: one library it cannot compare must not stop the census.
+                errors.Add(result.Id, $"{e.GetType().Name}: {e.Message}");
+            }
         }
 
-        return new ReferenceComparison(divergences, noReference, results.Count(r => r.Outcome != Outcome.Clean));
+        return new ReferenceComparison(divergences, noReference, results.Count(r => r.Outcome != Outcome.Clean || r.ElmJson is null), errors);
     }
 
     /// <summary>
@@ -547,19 +560,20 @@ public class TranslatorCensusTest
             return index;
         foreach (var file in directory.EnumerateFiles("*.json", SearchOption.AllDirectories).OrderBy(f => f.FullName, StringComparer.Ordinal))
         {
-            System.Text.Json.Nodes.JsonNode? identifier;
+            string id;
             try
             {
-                identifier = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(file.FullName), documentOptions: ElmNormalizer.DocumentOptions)?["library"]?["identifier"];
+                var identifier = System.Text.Json.Nodes.JsonNode.Parse(File.ReadAllText(file.FullName), documentOptions: ElmNormalizer.DocumentOptions)?["library"]?["identifier"];
+                if (identifier?["id"] is not System.Text.Json.Nodes.JsonValue nameValue || !nameValue.TryGetValue<string>(out var name))
+                    continue;
+                var version = identifier["version"] is System.Text.Json.Nodes.JsonValue versionValue && versionValue.TryGetValue<string>(out var v) ? v : null;
+                id = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(name, version).ToString();
             }
-            catch (System.Text.Json.JsonException)
+            catch (Exception e) when (e is System.Text.Json.JsonException or ArgumentException or FormatException or InvalidOperationException)
             {
                 continue;
             }
 
-            if ((string?)identifier?["id"] is not { } name)
-                continue;
-            var id = CqlVersionedLibraryIdentifier.ParseFromIdentifierAndVersion(name, (string?)identifier["version"]).ToString();
             index.TryAdd(id, file);
         }
 
@@ -598,11 +612,13 @@ public class TranslatorCensusTest
         report.AppendLine(comparison.Summary);
         foreach (var id in comparison.NoReference)
             report.AppendLine($"No reference ELM: {id}");
+        foreach (var (id, error) in comparison.ComparisonErrors)
+            report.AppendLine($"Failed to compare: {id}: {error.ReplaceLineEndings(" ")}");
         report.AppendLine();
 
-        report.AppendLine("### Histogram (libraries, occurrences, kind, normalized detail)");
+        report.AppendLine("### Histogram (libraries, occurrences, kind, property, normalized detail)");
         var histogram = comparison.Divergences
-                                  .SelectMany(entry => entry.Value.Select(d => (Id: entry.Key, Key: $"{d.Kind}: {Normalize(d.Detail)}")))
+                                  .SelectMany(entry => entry.Value.Select(d => (Id: entry.Key, Key: $"{d.Kind}: {LastProperty(d.Path)}: {Normalize(d.Detail)}")))
                                   .GroupBy(x => x.Key, StringComparer.Ordinal)
                                   .Select(g => (Key: g.Key, Libraries: g.Select(x => x.Id).Distinct(StringComparer.Ordinal).Count(), Occurrences: g.Count()))
                                   .OrderByDescending(x => x.Libraries)
@@ -624,6 +640,18 @@ public class TranslatorCensusTest
         }
 
         return report.ToString();
+    }
+
+    private static readonly Regex Bracketed = new(@"\[[^\]]*\]", RegexOptions.Compiled);
+
+    /// <summary>
+    /// The last property of a divergence path, without indexes or definition names:
+    /// <c>statements[X].expression.operand[0]</c> gives <c>operand</c>.
+    /// </summary>
+    private static string LastProperty(string path)
+    {
+        var withoutIndexes = Bracketed.Replace(path, "");
+        return withoutIndexes[(withoutIndexes.LastIndexOf('.') + 1)..];
     }
 
     private static void AppendCheckFailures(StringBuilder report, IEnumerable<CheckFailure> failures)
@@ -651,7 +679,8 @@ public class TranslatorCensusTest
         file.AppendLine(CultureInfo.InvariantCulture, $"compared={comparison.Divergences.Count}");
         file.AppendLine(CultureInfo.InvariantCulture, $"identical={comparison.IdenticalLibraries}");
         file.AppendLine(CultureInfo.InvariantCulture, $"noReference={comparison.NoReference.Count}");
-        file.AppendLine(CultureInfo.InvariantCulture, $"notClean={comparison.NotCompared}");
+        file.AppendLine(CultureInfo.InvariantCulture, $"notCompared={comparison.NotCompared}");
+        file.AppendLine(CultureInfo.InvariantCulture, $"comparisonErrors={comparison.ComparisonErrors.Count}");
         foreach (var kind in Enum.GetValues<DivergenceKind>())
             file.AppendLine(CultureInfo.InvariantCulture, $"{kind}={comparison.Total(kind)}");
         return file.ToString();

@@ -127,11 +127,11 @@ internal static class ElmStructuralDiff
         {
             case (null, null):
                 return;
-            case (null, JsonObject r):
-                divergences.Add(new(DivergenceKind.MissingNode, path, $"absent vs {Describe(r)}"));
+            case (null, JsonObject or JsonArray):
+                divergences.Add(new(DivergenceKind.MissingNode, path, $"absent vs {Describe(reference)}"));
                 return;
-            case (JsonObject a, null):
-                divergences.Add(new(DivergenceKind.ExtraNode, path, $"{Describe(a)} vs absent"));
+            case (JsonObject or JsonArray, null):
+                divergences.Add(new(DivergenceKind.ExtraNode, path, $"{Describe(actual)} vs absent"));
                 return;
             case (JsonObject a, JsonObject r):
                 CompareObjects(a, r, path, divergences);
@@ -186,8 +186,13 @@ internal static class ElmStructuralDiff
             var childPath = $"{path}.{key}";
             if (IsTypeProperty(key))
             {
-                // Present on one side only is a difference in what the translators annotate, not in the type.
-                if (actual[key] is { } at && reference[key] is { } rt && !JsonNode.DeepEquals(at, rt))
+                var at = actual[key];
+                var rt = reference[key];
+                // A result type present on one side only is a difference in what the translators annotate, not in
+                // the type. Any other type, such as the one an As converts to, is part of what the node means.
+                if (key == "resultTypeSpecifier" && (at is null || rt is null))
+                    continue;
+                if (!JsonNode.DeepEquals(at, rt))
                     divergences.Add(new(DivergenceKind.TypeDifference, childPath, $"{TypeText(at)} vs {TypeText(rt)}"));
                 continue;
             }
@@ -208,10 +213,20 @@ internal static class ElmStructuralDiff
     }
 
     /// <summary>
-    /// Whether the property holds a type: a result type or the type an operation converts to or declares.
+    /// The attributes that name a type by its qualified name and have no type specifier spelling: the type of a
+    /// literal, of an instance and of a retrieve.
+    /// </summary>
+    private static readonly HashSet<string> TypeNameProperties = new(StringComparer.Ordinal)
+    {
+        "valueType", "classType", "dataType",
+    };
+
+    /// <summary>
+    /// Whether the property holds a type: a result type, the type an operation converts to, tests or declares, or
+    /// the type a literal, instance or retrieve has.
     /// </summary>
     private static bool IsTypeProperty(string key) =>
-        key.EndsWith("TypeSpecifier", StringComparison.Ordinal);
+        key.EndsWith("TypeSpecifier", StringComparison.Ordinal) || TypeNameProperties.Contains(key);
 
     private static bool IsConversion(JsonObject node)
     {
@@ -251,7 +266,8 @@ internal static class ElmStructuralDiff
     private static string TypeText(JsonNode? node) =>
         node switch
         {
-            null => "?",
+            null => "absent",
+            JsonValue v when v.TryGetValue<string>(out var qualifiedName) => ShortName(qualifiedName),
             JsonObject o when NodeType(o) == "NamedTypeSpecifier" => ShortName((string?)o["name"]),
             JsonObject o when NodeType(o) == "ListTypeSpecifier"  => $"List<{TypeText(o["elementType"])}>",
             JsonObject o when NodeType(o) == "IntervalTypeSpecifier" => $"Interval<{TypeText(o["pointType"])}>",

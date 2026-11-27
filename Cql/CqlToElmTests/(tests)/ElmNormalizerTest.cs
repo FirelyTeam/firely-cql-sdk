@@ -78,6 +78,40 @@ public class ElmNormalizerTest
     }
 
     [TestMethod]
+    public void An_Is_Type_Is_The_Same_As_An_Is_Type_Specifier()
+    {
+        ShouldNormalizeAlike(
+            Statement($$"""{ "name": "X", "expression": { "type": "Is", "isType": "{{Integer}}", "operand": { "type": "Null" } } }"""),
+            Statement($$"""{ "name": "X", "expression": { "type": "Is", "isTypeSpecifier": { "type": "NamedTypeSpecifier", "name": "{{Integer}}" }, "operand": { "type": "Null" } } }"""));
+    }
+
+    [TestMethod]
+    public void Interval_Closedness_And_Include_Media_Type_Defaults_Are_The_Same_As_Absent()
+    {
+        ShouldNormalizeAlike(
+            """{ "includes": { "def": [ { "localIdentifier": "Y", "path": "Y", "mediaType": "application/elm+xml" } ] }, "statements": { "def": [ { "name": "X", "expression": { "type": "Interval", "lowClosed": true, "highClosed": true, "low": { "type": "Null" } } } ] } }""",
+            """{ "includes": { "def": [ { "localIdentifier": "Y", "path": "Y" } ] }, "statements": { "def": [ { "name": "X", "expression": { "type": "Interval", "low": { "type": "Null" } } } ] } }""");
+        ShouldNormalizeApart(
+            Statement("""{ "name": "X", "expression": { "type": "Interval", "lowClosed": false, "low": { "type": "Null" } } }"""),
+            Statement("""{ "name": "X", "expression": { "type": "Interval", "low": { "type": "Null" } } }"""));
+    }
+
+    [TestMethod]
+    public void The_Distinct_Default_Depends_On_The_Clause()
+    {
+        // The schema defaults distinct to true on a return clause and to false on an aggregate clause.
+        ShouldNormalizeAlike(
+            Statement("""{ "name": "X", "expression": { "type": "Query", "return": { "distinct": true, "expression": { "type": "Null" } }, "aggregate": { "distinct": false, "identifier": "A", "expression": { "type": "Null" } } } }"""),
+            Statement("""{ "name": "X", "expression": { "type": "Query", "return": { "expression": { "type": "Null" } }, "aggregate": { "identifier": "A", "expression": { "type": "Null" } } } }"""));
+        ShouldNormalizeApart(
+            Statement("""{ "name": "X", "expression": { "type": "Query", "return": { "distinct": false, "expression": { "type": "Null" } } } }"""),
+            Statement("""{ "name": "X", "expression": { "type": "Query", "return": { "expression": { "type": "Null" } } } }"""));
+        ShouldNormalizeApart(
+            Statement("""{ "name": "X", "expression": { "type": "Query", "aggregate": { "distinct": true, "identifier": "A", "expression": { "type": "Null" } } } }"""),
+            Statement("""{ "name": "X", "expression": { "type": "Query", "aggregate": { "identifier": "A", "expression": { "type": "Null" } } } }"""));
+    }
+
+    [TestMethod]
     public void A_Result_Type_On_A_Type_Specifier_Is_Dropped()
     {
         ShouldNormalizeAlike(

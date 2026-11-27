@@ -62,7 +62,16 @@ internal sealed class ElmOutputCheckers
         if (FirstDifference(original, roundTripped, "$") is { } difference)
             problems.Add($"round trip: {difference}");
 
-        problems.AddRange(ValidateAgainstSchema(reread).Select(message => $"schema: {message}"));
+        try
+        {
+            problems.AddRange(ValidateAgainstSchema(reread).Select(message => $"schema: {message}"));
+        }
+        catch (Exception e)
+        {
+            // The XML serializer cannot write the library, so it cannot be validated: that fails the check too.
+            problems.Add($"schema: {e.GetType().Name}: {e.Message}");
+        }
+
         return problems;
     }
 
