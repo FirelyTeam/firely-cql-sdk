@@ -471,23 +471,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
             if (LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
-                if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
-                {
-                    var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
-                    var result = symbolDef switch
-                    {
-                        IHasSignature ihs        => InvocationBuilder.MatchSignature(ihs, fluentParams),
-                        OverloadedFunctionDef ov => InvocationBuilder.MatchSignature(ov, fluentParams),
-                        _                        => null
-                    };
-                    if (result?.Compatible ?? false)
-                        return invoke(result.Function, null, fluentParams, true);
-                }
+                var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
+                if (invokeFirstApplicableFluent(fluentParams) is { } thisInvocation)
+                    return thisInvocation;
             }
             if (fluent)
             {
-                if (!LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
+                // A fluent call resolves to the first candidate, in search order, with an applicable overload.
+                var candidates = LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName).ToList();
+                if (candidates.Count == 0)
                     return unresolved();
+                if (invokeFirstApplicableFluent(paramList) is { } fluentInvocation)
+                    return fluentInvocation;
+                // None is applicable: report the call against the only candidate, or as unresolved when there are several.
+                if (candidates.Count > 1)
+                    return unresolved();
+                (libraryName, symbolDef) = candidates[0];
             }
             else if (libraryName is null)
             {
@@ -543,6 +542,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType)
                     .WithLocator(locator)
                     .AddError(result.Error() ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
+            }
+
+            // Invokes the first fluent candidate, in search order, that has an overload applicable to the arguments, under
+            // the name of the library that defines it; returns null if no candidate has one.
+            Expression? invokeFirstApplicableFluent(Expression[] arguments)
+            {
+                foreach (var (candidateLibrary, functions) in LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName))
+                {
+                    var result = functions switch
+                    {
+                        IHasSignature ihs        => InvocationBuilder.MatchSignature(ihs, arguments),
+                        OverloadedFunctionDef ov => InvocationBuilder.MatchSignature(ov, arguments),
+                        _                        => null
+                    };
+                    if (result?.Compatible ?? false)
+                        return invoke(result.Function, candidateLibrary, arguments, true);
+                }
+                return null;
             }
 
             Expression invoke(IFunctionElement? symbolDef, string? libraryName, Expression[] paramList, bool fluent)
