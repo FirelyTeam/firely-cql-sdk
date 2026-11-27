@@ -461,8 +461,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent, string locator)
         {
+            // A fluent call has its target as first argument and is never qualified by a library name.
+            System.Diagnostics.Debug.Assert(!(fluent && libraryName is not null), "A fluent call is never qualified by a library name.");
             IFunctionElement? symbolDef = null;
-            // The fluent candidates, looked up once, and only when the call can be fluent.
+            // The fluent candidates, looked up once: for a fluent call, or for a call that may be one on $this.
             List<(string? LibraryName, IFunctionElement Functions)>? fluentCandidates = null;
             List<(string? LibraryName, IFunctionElement Functions)> candidates() =>
                 fluentCandidates ??= LibraryBuilder.CurrentScope.ResolveFluentFunctionCandidates(funcName).ToList();
@@ -473,8 +475,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             //
             // we have to test the existence of $this.foo() first.
             // If it exists, it takes precedence over other matching non-fluent functions (for some reason).
-            // A call qualified by a library name is resolved in that library only, so it is never a call on $this.
-            if (libraryName is null && LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
+            // Only a call without a target can be a call on $this: not a fluent call, which has its own target, and not a
+            // call qualified by a library name.
+            if (!fluent && libraryName is null && LibraryBuilder.CurrentScope.TryResolveSymbol("$this", out var @this))
             {
                 var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
                 if (invokeFirstApplicableFluent(fluentParams) is { } thisInvocation)

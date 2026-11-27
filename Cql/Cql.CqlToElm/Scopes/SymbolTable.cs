@@ -150,10 +150,23 @@ namespace Hl7.Cql.CqlToElm.Scopes
 
         public IEnumerable<(string? LibraryName, IFunctionElement Functions)> ResolveFluentFunctionCandidates(string identifier)
         {
-            // The functions of this library, together with the system functions, come first: a local overload wins
-            // over one in an included library, even when the included one matches the arguments better.
+            // The functions of this library come first, then the system functions, then the included libraries: an
+            // applicable overload found earlier wins, even when a later one matches the arguments better.
             if (TryResolveFunction(identifier, out var localAndParent))
-                yield return (null, localAndParent);
+            {
+                IReadOnlyList<IHasSignature> functions = localAndParent switch
+                {
+                    OverloadedFunctionDef ol => ol.Functions,
+                    IHasSignature f => [f],
+                    _ => throw new InvalidOperationException("Expecting a function type")
+                };
+                var local = functions.Where(f => f is not SystemFunction).ToArray<IFunctionElement>();
+                if (local.Length > 0)
+                    yield return (null, OverloadedFunctionDef.Create(local));
+                var system = functions.Where(f => f is SystemFunction).ToArray<IFunctionElement>();
+                if (system.Length > 0)
+                    yield return (null, OverloadedFunctionDef.Create(system));
+            }
 
             foreach (var refLib in ReferencedLibraries)
             {
