@@ -656,6 +656,71 @@ namespace Hl7.Cql.CqlToElm.Test
             byExpression.direction.Should().Be(SortDirection.desc);
         }
 
+        private const string SortRows = """
+            { Tuple { id: 1, a: 2, b: 1 },
+              Tuple { id: 2, a: 1, b: 5 },
+              Tuple { id: 3, a: 2, b: 3 },
+              Tuple { id: 4, a: 1, b: 4 } }
+            """;
+
+        [TestMethod]
+        [DataRow("sort by a, b desc", new[] { 2, 4, 3, 1 })]
+        [DataRow("sort by a desc, b", new[] { 1, 3, 4, 2 })]
+        [DataRow("sort by a, b", new[] { 4, 2, 1, 3 })]
+        [DataRow("sort by b", new[] { 1, 3, 4, 2 })]
+        public void Sort_by_two_columns_orders_ties_by_the_second(string sort, int[] expectedIds)
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                $"(({SortRows}) T {sort}) S return S.id");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            var sorted = (Query)query.source[0].expression;
+            // This translator emits ByExpression for a column name; other translators emit ByColumn,
+            // as in published measure ELM. Rewrite the items so the ByColumn path is compiled.
+            sorted.sort.by = sorted.sort.by
+                .Select(by =>
+                {
+                    var property = by.Should().BeOfType<ByExpression>().Subject
+                        .expression.Should().BeOfType<Property>().Subject;
+                    return (SortByItem)new ByColumn
+                    {
+                        path = property.path,
+                        direction = by.direction,
+                        resultTypeName = property.resultTypeName,
+                        resultTypeSpecifier = property.resultTypeSpecifier,
+                    };
+                })
+                .ToArray();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(expectedIds.Cast<int?>());
+        }
+
+        [TestMethod]
+        [DataRow("sort by Abs(a), Abs(b) desc", new[] { 2, 4, 3, 1 })]
+        [DataRow("sort by Abs(a) desc, Abs(b)", new[] { 1, 3, 4, 2 })]
+        public void Sort_by_two_expressions_orders_ties_by_the_second(string sort, int[] expectedIds)
+        {
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression(
+                $"(({SortRows}) T {sort}) S return S.id");
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            ((Query)query.source[0].expression).sort.by.Should().AllBeOfType<ByExpression>();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(expectedIds.Cast<int?>());
+        }
+
+        [TestMethod]
+        [DataRow("sort by a, b", new[] { 2, 4, 3, 1 })]
+        [DataRow("sort by a, b desc", new[] { 4, 2, 1, 3 })]
+        public void Sort_by_two_columns_places_nulls_in_the_second_key(string sort, int[] expectedIds)
+        {
+            // Null sorts first ascending and last descending, within the ties of the first key.
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression($$"""
+                (({ Tuple { id: 1, a: 2, b: 7 },
+                    Tuple { id: 2, a: 1, b: null as Integer },
+                    Tuple { id: 3, a: 2, b: null as Integer },
+                    Tuple { id: 4, a: 1, b: 4 } }) T {{sort}}) S return S.id
+                """);
+            var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            Run<IEnumerable<int?>>(query, lib).Should().Equal(expectedIds.Cast<int?>());
+        }
+
         [TestMethod]
         public void UnresolvedQuerySourceIsReported()
         {
