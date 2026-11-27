@@ -827,6 +827,42 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void NegativeFractionalRequestOffset_IsDefaultedConvertedAndUsedForTimeFrom()
+        {
+            var operators = FhirCqlContext.WithDataSource(now: new DateTimeOffset(2024, 6, 1, 9, 0, 0, new TimeSpan(-5, -30, 0))).Operators;
+            var low = operators.DateTime(2024, 1, 1, 0, 0, 0, 0, offset: null);
+            var high = operators.DateTime(2025, 1, 1, 0, 0, 0, 0, offset: null);
+
+            Assert.AreEqual(-5.5m, operators.TimezoneOffsetFrom(low));
+            var period = operators.Convert<Period>(operators.Interval(low, high, true, false))!;
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(period.Start!));
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(period.End!));
+            Assert.AreEqual("2024-01-01T00:00:00.000-05:30", period.Start);
+            Assert.AreEqual("2024-12-31T23:59:59.999-05:30", period.End);
+
+            // 10:30Z is 05:00 at -05:30.
+            var time = operators.TimeComponent(operators.DateTime(2014, 2, 1, 10, 30, 0, 0, offset: 0m))!.Value;
+            Assert.AreEqual(5, time.Hour);
+            Assert.AreEqual(0, time.Minute);
+        }
+
+        [TestMethod]
+        public void ToDateTimeFromString_WithoutOffset_CarriesTheEvaluationRequestOffset()
+        {
+            var operators = FhirCqlContext.WithDataSource(now: new DateTimeOffset(2024, 6, 1, 9, 0, 0, new TimeSpan(-5, -30, 0))).Operators;
+            var value = operators.ConvertStringToDateTime("2014-02-01T10:30:00")!;
+
+            Assert.AreEqual(-5.5m, value.Value.RationalOffset);
+            var emitted = operators.Convert<FhirDateTime>(value)!.Value;
+            Assert.AreEqual("2014-02-01T10:30:00-05:30", emitted);
+            Assert.IsTrue(M.FhirDateTime.IsValidValue(emitted!));
+            Assert.AreEqual(-2m, operators.TimezoneOffsetFrom(operators.ConvertStringToDateTime("2014-02-01T10:30:00-02:00")));
+            Assert.IsNull(operators.ConvertStringToDateTime("2014-02-01")!.Value.OffsetHour);
+            // 10:30 at -05:30 is 16:00Z.
+            Assert.IsTrue(operators.Before(value, operators.DateTime(2014, 2, 1, 16, 1, 0, 0, offset: 0m), "minute"));
+        }
+
+        [TestMethod]
         public void OverrideConverterTimezoneOffset_SubMinuteOrOutOfRange_ThrowsAtOptionsConstruction()
         {
             var tooWide = Assert.ThrowsExactly<ArgumentOutOfRangeException>(

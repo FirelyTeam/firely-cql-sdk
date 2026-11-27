@@ -1,6 +1,6 @@
 ## Potentially Breaking
 
-- **Runtime** — A CQL `DateTime` constructed without a timezone offset (including every offset-less `DateTime` literal)
+- **Runtime** — A CQL `DateTime` constructed without a timezone offset (including every offset-less `DateTime` literal and `ToDateTime(String)` of an offset-less string)
   now carries the timezone offset of the evaluation request whenever it has an hour component, as the specification
   requires ("If no timezone offset is specified, the timezone offset of the evaluation request timestamp is used").
   This changes CQL evaluation results:

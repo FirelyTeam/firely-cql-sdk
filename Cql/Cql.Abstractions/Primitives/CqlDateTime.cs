@@ -347,7 +347,7 @@ namespace Hl7.Cql.Primitives
                 // to the timezone offset of the evaluation request timestamp, but only when the comparison precision is hours, minutes, seconds, or milliseconds.
                 // https://cql.hl7.org/09-b-cqlreference.html#before
                 // It doesn't actually have to be the request timezone; the dates just have to be in the same (any) timezone.
-                // CqlOperators.DateTime defaults an absent offset to the evaluation request's offset whenever an hour is
+                // CqlOperators.DateTime and ConvertStringToDateTime default an absent offset to the evaluation request's offset whenever an hour is
                 // present, so DateTimes constructed by CQL always carry an offset at these precisions and take the
                 // normalized path. Exactly one side lacks an offset only for values built outside CQL evaluation, which
                 // cannot see the evaluation request here; for those, comparing wall-clock components is the only
