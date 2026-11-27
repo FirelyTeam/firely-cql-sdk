@@ -41,7 +41,13 @@ namespace Hl7.Cql.CqlToElm
         /// Looks in scope and parent scopes for fluent functions.  This function will look into referenced libraries in any scope
         /// to identify fluent functions also.
         /// </summary>
-        bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol);
+        /// <returns>
+        /// The candidates in the order a fluent call searches them: the functions of this scope and its parent scopes
+        /// first, with <see langword="null"/> as library name, then the functions of each referenced library, under its
+        /// local identifier, in the order the libraries are included. The call resolves to the first candidate with an
+        /// applicable overload.
+        /// </returns>
+        IEnumerable<(string? LibraryName, IFunctionElement Functions)> ResolveFluentFunctionCandidates(string identifier);
 
         /// <summary>
         /// Gets any referenced libraries in this scope, including those in <see cref="Parent"/> if defined.

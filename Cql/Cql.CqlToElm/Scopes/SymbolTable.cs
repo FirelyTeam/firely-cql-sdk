@@ -20,6 +20,11 @@ namespace Hl7.Cql.CqlToElm.Scopes
         }
         private Dictionary<string, IDefinitionElement> LocalSymbols { get; } = new();
 
+        /// <summary>
+        /// The libraries included in this scope, in the order they are included, which is the order a fluent call searches them.
+        /// </summary>
+        private List<ReferencedLibrary> LocalReferencedLibraries { get; } = new();
+
         public string Name { get; }
 
         public ISymbolScope? Parent { get; }
@@ -53,7 +58,11 @@ namespace Hl7.Cql.CqlToElm.Scopes
                 else
                     symbol = OverloadedFunctionDef.Create(function);
             }
-            return LocalSymbols.TryAdd(symbol.Name, symbol);
+            if (!LocalSymbols.TryAdd(symbol.Name, symbol))
+                return false;
+            if (symbol is ReferencedLibrary referencedLibrary)
+                LocalReferencedLibraries.Add(referencedLibrary);
+            return true;
         }
 
 
@@ -139,21 +148,43 @@ namespace Hl7.Cql.CqlToElm.Scopes
             }
         }
 
-        public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
+        public IEnumerable<(string? LibraryName, IFunctionElement Functions)> ResolveFluentFunctionCandidates(string identifier)
         {
-            var inLocalAndParent = TryResolveFunction(identifier, out var localAndParent);
-            // list would suffice, but dictionary better for debugging.
-            // may need later.
-            var fromReferences = new Dictionary<VersionedIdentifier, IFunctionElement>();
+            // The functions of this library come first, then the system functions, then the included libraries: an
+            // applicable overload found earlier wins, even when a later one matches the arguments better.
+            if (TryResolveFunction(identifier, out var localAndParent))
+            {
+                IReadOnlyList<IHasSignature> functions = localAndParent switch
+                {
+                    OverloadedFunctionDef ol => ol.Functions,
+                    IHasSignature f => [f],
+                    _ => throw new InvalidOperationException("Expecting a function type")
+                };
+                var local = functions.Where(f => f is not SystemFunction).ToArray<IFunctionElement>();
+                if (local.Length > 0)
+                    yield return (null, OverloadedFunctionDef.Create(local));
+            }
+
+            // The system functions as the system library defines them: a local function replaces a system overload
+            // with the same operands, which can be one with optional operands that still applies where the local
+            // function does not.
+            ISymbolScope root = this;
+            while (root.Parent is not null)
+                root = root.Parent;
+            if (root != this && root.TryResolveFunction(identifier, out var system))
+                yield return (null, system);
+
             foreach (var refLib in ReferencedLibraries)
             {
-                // We don't call TryResolveFleunt because fluent functions are not resolved two libraries apart.
+                // We don't call ResolveFluentFunctionCandidates because fluent functions are not resolved two libraries apart.
                 // In other words,if lib A includes lib B and lib B includes C,
                 // then A cannot resolve fluents in lib C.
-                // If we used TryResolveFluentFunction here, we'd get that behavior.
+                // If we used ResolveFluentFunctionCandidates here, we'd get that behavior.
                 // So, don't.
                 if (refLib.Symbols.TryResolveFunction(identifier, out var refOverload))
                 {
+                    // system functions will be in reference scope through their parent symbol table
+                    // don't include those, as they're already in scope through this library's locals.
                     IFunctionElement? rf = null;
                     if (refOverload is OverloadedFunctionDef ov)
                     {
@@ -169,86 +200,16 @@ namespace Hl7.Cql.CqlToElm.Scopes
                         rf = refOverload;
                     }
                     if (rf is not null)
-                        fromReferences.Add(refLib.Id, rf!);
+                        yield return (refLib.localIdentifier, rf);
                 }
-            }
-            if (inLocalAndParent)
-            {
-                if (fromReferences.Count > 0)
-                {
-
-                    var allLocals = localAndParent switch
-                    {
-                        OverloadedFunctionDef ol => ol.Functions,
-                        FunctionDef f => new[] { f },
-                        DeferredFunctionDef d => new[] { d.Resolve() },
-                        _ => throw new InvalidOperationException("Expecting a function type")
-                    };
-                    // system functions will be in reference scope through their parent symbol table
-                    // don't include those, as they're already in scope through this library's locals.
-                    var functionsInRefScope = fromReferences.Values
-                        .SelectMany(fe => fe switch
-                    {
-                        OverloadedFunctionDef ol => ol.Functions,
-                        FunctionDef f => new[] { f },
-                        DeferredFunctionDef d => new[] { d.Resolve() },
-                        _ => throw new InvalidOperationException("Expecting a function type")
-                    });
-                    var merged = new List<IHasSignature>(functionsInRefScope);
-                    for (int i = 0; i < merged.Count; i++)
-                    {
-                        var currentOperands = merged[i].Operands.Select(op => op.operandTypeSpecifier);
-                        for (int j = 0; j < allLocals.Count; j++)
-                        {
-                            var localOperands = allLocals[j].Operands.Select(op => op.operandTypeSpecifier);
-                            if (localOperands.SequenceEqual(currentOperands))
-                                merged[i] = allLocals[j];
-                        }
-                    }
-                    // if there are new local overloads introduced, add them.
-                    for (int i = 0; i < allLocals.Count; i++)
-                    {
-                        var l = allLocals[i];
-                        var currentOperands = l.Operands.Select(op => op.operandTypeSpecifier);
-                        if (!merged.Any(m => currentOperands.SequenceEqual(m.Operands.Select(op => op.operandTypeSpecifier))))
-                            merged.Add(l);
-                    }
-                    symbol = OverloadedFunctionDef.Create(merged.ToArray());
-                    return true;
-                }
-                else
-                {
-                    symbol = localAndParent;
-                    if (symbol is not null)
-                        return true;
-                    else
-                        return false;
-                }
-            }
-            else if (fromReferences.Count > 0)
-            {
-                var functionsInRefScope = fromReferences.Values.SelectMany(fe => fe switch
-                {
-                    OverloadedFunctionDef ol => ol.Functions,
-                    FunctionDef f => new[] { f },
-                    DeferredFunctionDef dfd => new[] { dfd.Resolve() },
-                    _ => throw new InvalidOperationException("Expecting a function type")
-                }).ToArray();
-                symbol = OverloadedFunctionDef.Create(functionsInRefScope);
-                return true;
-            }
-            else
-            {
-                symbol = null;
-                return false;
             }
         }
 
         public IEnumerable<ReferencedLibrary> ReferencedLibraries =>
             Parent switch
             {
-                { } => LocalSymbols.Values.OfType<ReferencedLibrary>().Concat(Parent.ReferencedLibraries),
-                _ => LocalSymbols.Values.OfType<ReferencedLibrary>()
+                { } => LocalReferencedLibraries.Concat(Parent.ReferencedLibraries),
+                _ => LocalReferencedLibraries
             };
 
         public IEnumerator<IDefinitionElement> GetEnumerator() => LocalSymbols.Values.GetEnumerator();

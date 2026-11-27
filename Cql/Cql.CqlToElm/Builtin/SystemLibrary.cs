@@ -58,12 +58,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return false;
         }
 
-        public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
-        {
-            // there are no fluent functions in the system library
-            symbol = null;
-            return false;
-        }
+        // there are no fluent functions in the system library
+        public IEnumerable<(string? LibraryName, IFunctionElement Functions)> ResolveFluentFunctionCandidates(string identifier) => [];
 
 
         public ISymbolScope EnterScope(string name) => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
