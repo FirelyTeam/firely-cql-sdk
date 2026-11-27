@@ -1127,53 +1127,105 @@ namespace Hl7.Cql.Operators
         {
             if (source == null)
                 return null;
+            if (order is not (ListSortDirection.Ascending or ListSortDirection.Descending))
+                throw new NotSupportedException($"Unknown sort order {order}");
 
-            var nullRecords = source.Where(w => w == null);
-            var nonNullRecords = source.Where(w => w != null);
-
-            if (order == ListSortDirection.Ascending)
-            {
-                var ordered = nonNullRecords
-                    .Cast<object>()
-                    .OrderBy(t => t, DataComparer)
-                    .Cast<T>()
-                    .ToList();
-                return nullRecords.Concat(ordered);
-            }
-            else if (order == ListSortDirection.Descending)
-            {
-                var ordered = nonNullRecords
-                    .Cast<object>()
-                    .OrderBy(t => t, DataComparer)
-                    .Reverse()
-                    .Cast<T>()
-                    .ToList();
-                return ordered.Concat(nullRecords);
-            }
-            else throw new NotSupportedException($"Unknown sort order {order}");
+            return new SortedSequence<T>(() => SortElements(source, order));
         }
 
         public IEnumerable<T>? SortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;
+            if (order is not (ListSortDirection.Ascending or ListSortDirection.Descending))
+                throw new NotSupportedException($"Unknown sort order {order}");
+
+            return new SortedSequence<T>(() => SortByKey(source, sortByExpr, order));
+        }
+
+        /// <summary>
+        /// Reads <paramref name="source"/> once and returns its elements in the order of their values. A null
+        /// element comes first in ascending order and last in descending order. Descending order is the reverse of
+        /// ascending order, so equal elements come out in the reverse of their order in the source.
+        /// </summary>
+        private List<T> SortElements<T>(IEnumerable<T> source, ListSortDirection order)
+        {
+            var nulls = new List<T>();
+            var values = source.TryGetNonEnumeratedCount(out var count) ? new List<object>(count) : new List<object>();
+            foreach (var item in source)
+            {
+                if (item == null)
+                    nulls.Add(item);
+                else
+                    values.Add(item);
+            }
+
+            var ascending = values.OrderBy(value => value, DataComparer).Cast<T>();
+            var sorted = new List<T>(nulls.Count + values.Count);
             if (order == ListSortDirection.Ascending)
             {
-                var nullRecords = source.Where(s => sortByExpr(s) == null);
-                var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderBy(source => sortByExpr(source), DataComparer);
-                var result = nullRecords.Concat(ordered);
-                return result;
+                sorted.AddRange(nulls);
+                sorted.AddRange(ascending);
             }
-            else if (order == ListSortDirection.Descending)
+            else
             {
-                var nullRecords = source.Where(s => sortByExpr(s) == null);
-                var nonNullRecords = source.Where(s => sortByExpr(s) != null);
-                var ordered = nonNullRecords.OrderByDescending(source => sortByExpr(source), DataComparer);
-                var result = ordered.Concat(nullRecords);
-                return result;
+                sorted.AddRange(ascending.Reverse());
+                sorted.AddRange(nulls);
             }
-            else throw new NotSupportedException($"Unknown sort order {order}");
+
+            return sorted;
+        }
+
+        /// <summary>
+        /// Reads <paramref name="source"/> once, calls <paramref name="sortByExpr"/> once per element, and returns the
+        /// elements in the order of their keys. An element without a key comes first in ascending order and last in
+        /// descending order. Elements with equal keys keep their order in the source.
+        /// </summary>
+        private List<T> SortByKey<T>(IEnumerable<T> source, Func<T, object> sortByExpr, ListSortDirection order)
+        {
+            var withoutKey = new List<T>();
+            var withKey = source.TryGetNonEnumeratedCount(out var count)
+                ? new List<(T Item, object Key)>(count)
+                : new List<(T Item, object Key)>();
+            foreach (var item in source)
+            {
+                var key = sortByExpr(item);
+                if (key == null)
+                    withoutKey.Add(item);
+                else
+                    withKey.Add((item, key));
+            }
+
+            var sorted = new List<T>(withoutKey.Count + withKey.Count);
+            if (order == ListSortDirection.Ascending)
+            {
+                sorted.AddRange(withoutKey);
+                sorted.AddRange(withKey.OrderBy(pair => pair.Key, DataComparer).Select(pair => pair.Item));
+            }
+            else
+            {
+                sorted.AddRange(withKey.OrderByDescending(pair => pair.Key, DataComparer).Select(pair => pair.Item));
+                sorted.AddRange(withoutKey);
+            }
+
+            return sorted;
+        }
+
+        /// <summary>
+        /// The result of a sort. Nothing is read or compared until the sequence is enumerated. The first enumeration
+        /// sorts, and every later enumeration returns the same list.
+        /// </summary>
+        /// <remarks>
+        /// Two threads that enumerate for the first time together may each sort; both get the same elements in the
+        /// same order.
+        /// </remarks>
+        private sealed class SortedSequence<T>(Func<List<T>> sort) : IEnumerable<T>
+        {
+            private List<T>? _sorted;
+
+            public IEnumerator<T> GetEnumerator() => (_sorted ??= sort()).GetEnumerator();
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
         #endregion

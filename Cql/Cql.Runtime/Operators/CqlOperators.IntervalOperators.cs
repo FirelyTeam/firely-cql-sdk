@@ -240,12 +240,9 @@ namespace Hl7.Cql.Operators
             Func<CqlInterval<T?>?, CqlInterval<T?>?, string?, bool?> meets, Func<CqlInterval<T?>?, CqlInterval<T?>?> toClosed)
         {
             if (intervals == null) return null;
-            // The type tests this replaced asked about IList<T>/T[] - the point type, not the CqlInterval<T?>
-            // element type the sequence actually holds - so they could never match and were dead code. Count()
-            // already short-circuits on ICollection<T>, so this is a readability fix, not a faster path.
-            if (!intervals.TryGetNonEnumeratedCount(out var count))
-                count = intervals.Count();
-            if (count == 0)
+            // The input is enumerated once, also when it is a deferred sequence such as the result of a sort.
+            var items = intervals as IReadOnlyCollection<CqlInterval<T?>?> ?? intervals.ToList();
+            if (items.Count == 0)
                 return new CqlInterval<T?>[0];
 
             // Sorted on the effective low boundary, because TryCombine below assumes the interval it merges
@@ -254,7 +251,7 @@ namespace Hl7.Cql.Operators
             // the effective ones do not, which would otherwise hand TryCombine its operands the wrong way
             // round and drop the earlier part of the range.
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var sorted = SortBy(intervals, i => i == null ? null! : toClosed(i)!.low!, ListSortDirection.Ascending)?.ToList();
+            var sorted = SortBy(items, i => i == null ? null! : toClosed(i)!.low!, ListSortDirection.Ascending)?.ToList();
             if (sorted is null || sorted.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
