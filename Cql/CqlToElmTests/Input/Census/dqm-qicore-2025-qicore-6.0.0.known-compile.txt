@@ -1,0 +1,5 @@
+# Libraries in LibrarySets/dqm-content-qicore-2025/Cql whose .NET-translated ELM compiles to an assembly
+# with models QICore600, USCore610.
+# Checked by TranslatorCensusTest: a listed library that no longer compiles fails the test.
+# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
+FHIRHelpers-4.4.000

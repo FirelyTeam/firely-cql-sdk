@@ -1,0 +1,15 @@
+# Libraries in LibrarySets/Demo/Cql whose .NET-translated ELM compiles to an assembly
+# Checked by TranslatorCensusTest: a listed library that no longer compiles fails the test.
+# Refresh by copying the candidate file the test writes next to its report over this one; see README.md.
+DevDays-2023.0.0
+FHIRHelpers-4.0.001
+MeasureExample-0.0.1
+NCQACQLBase-1.0.0
+NCQAEncounter-1.0.0
+NCQAFHIRBase-1.0.0
+NCQAHealthPlanEnrollment-1.0.0
+NCQAHospice-1.0.0
+NCQAPalliativeCare-1.0.0
+NCQAStatus-1.0.0
+NCQATerminology-1.0.0
+SupplementalDataElementsFHIR4-2.0.000

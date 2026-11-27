@@ -1,0 +1,8 @@
+# Compile outcome counts of the clean libraries in submodules/Firely.Cql.Sdk.Integration.Runner/Hedis2025/Cql.
+# Checked by TranslatorCensusTest: the test fails when fewer libraries than 'compiled' compile to an assembly.
+# Only counts are kept here because the corpus is licensed content; see README.md.
+# Refresh by copying the candidate file the test writes next to its report over this one.
+compiled=107
+blocked=2
+failed=2
+cascade=259
