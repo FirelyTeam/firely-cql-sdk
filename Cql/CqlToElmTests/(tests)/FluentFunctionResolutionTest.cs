@@ -273,6 +273,29 @@ public class FluentFunctionResolutionTest
     }
 
     [TestMethod]
+    public void A_System_Operator_Is_Still_Found_When_The_Calling_Library_Overloads_It_With_Another_Signature()
+    {
+        // The local Round(Decimal, Integer) replaces the system overload of that signature only; the system
+        // Round(Decimal) is still the candidate found before the include, and it is not fluent.
+        var library = Toolkit("""
+            library R version '1.0.0'
+
+            define fluent function Round(x Decimal): 'R'
+            """).MakeLibrary("""
+            library Caller version '1.0.0'
+
+            include R version '1.0.0'
+
+            define fluent function Round(x Decimal, precision Integer): 'local'
+
+            define callsConflict: 1.0.Round()
+            """,
+            "Function 'Round' is called fluently, but its definition is not marked as fluent.");
+
+        library.statements.Single(d => d.name == "callsConflict").expression.Should().BeOfType<Round>();
+    }
+
+    [TestMethod]
     public void A_Fluent_Call_Without_An_Applicable_Overload_Is_Reported()
     {
         var library = Toolkit(Library("S", "String"), Library("D", "Date")).MakeLibrary("""

@@ -163,10 +163,16 @@ namespace Hl7.Cql.CqlToElm.Scopes
                 var local = functions.Where(f => f is not SystemFunction).ToArray<IFunctionElement>();
                 if (local.Length > 0)
                     yield return (null, OverloadedFunctionDef.Create(local));
-                var system = functions.Where(f => f is SystemFunction).ToArray<IFunctionElement>();
-                if (system.Length > 0)
-                    yield return (null, OverloadedFunctionDef.Create(system));
             }
+
+            // The system functions as the system library defines them: a local function replaces a system overload
+            // with the same operands, which can be one with optional operands that still applies where the local
+            // function does not.
+            ISymbolScope root = this;
+            while (root.Parent is not null)
+                root = root.Parent;
+            if (root != this && root.TryResolveFunction(identifier, out var system))
+                yield return (null, system);
 
             foreach (var refLib in ReferencedLibraries)
             {
