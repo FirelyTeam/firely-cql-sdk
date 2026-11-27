@@ -42,6 +42,10 @@ Every run uses the toolkit's default models (System and FHIR 4.0.1). The QICore 
 
 The HEDIS corpus lives in a private submodule and is licensed content, so nothing that identifies its libraries is committed to this repository: no names in the baseline, and only counts in the test output and failure messages. The per-library detail is written to the report file only, which stays with the test results of the run (see [1.3.](#13-the-report)). When the submodule is not checked out, this row is inconclusive rather than failing.
 
+### 1.2.3. Compile baseline files
+
+The compile stage (see [1.6.](#16-compiling)) has a baseline of its own, with the same rules. `<run>.known-compile.txt` lists the clean libraries whose ELM compiles to an assembly: a listed library that no longer compiles, or no longer translates cleanly, fails the test, and a compiling library that is not listed is a `WARNING`. For HEDIS, `hedis-2025.compile-counts.txt` holds only the number of clean libraries per compile outcome (`compiled`, `blocked`, `failed`, `cascade`), and the test fails when fewer than `compiled` compile.
+
 In CI, the HEDIS row runs in the HEDIS job (`TestHedisNet10` in [`build/build-test-sign.yml`](../../../../build/build-test-sign.yml)), which checks out the submodules and runs the census on .NET 10. The multi-target test jobs check out no submodules, so the row is inconclusive there.
 
 ## 1.3. The report
@@ -51,6 +55,7 @@ Every run writes its files into a `TranslatorCensus` folder in the test results 
 - `<run>.report.txt`: the summary counts, a histogram of error messages and a line per library with its outcome and messages. The histogram groups messages after replacing quoted strings by `'…'` or `"…"` and digit runs by `N`, and is sorted by the number of libraries affected, so the dominant root cause is at the top. Crashes appear as `Crash: <exception type>: <message>` followed by the first stack frame inside the translator.
 - the candidate baseline, named exactly like the committed file it would replace.
 - `<run>.elm-report.txt`: the results of the ELM checks (see [1.5.](#15-elm-checks)). For the HEDIS run, `hedis-2025.elm-counts.txt` with only the counts is attached instead.
+- `<run>.compile-report.txt`: the compile outcome counts, a histogram of the compile failures, normalized like the message histogram, and a line per clean library with its compile outcome (see [1.6.](#16-compiling)), followed by the candidate compile baseline. For the HEDIS run only the candidate, which holds counts, is attached.
 
 The path of each file is printed in the test output.
 
@@ -62,7 +67,7 @@ After a translator change, run only the census:
 dotnet test Cql/CqlToElmTests/CqlToElmTests.csproj --filter FullyQualifiedName~TranslatorCensus
 ```
 
-Then copy each candidate baseline from the `TranslatorCensus` folder over the committed file in this directory, and review the diff: removed lines are regressions that need a reason, added lines are libraries that now translate cleanly. Never edit the files by hand.
+Then copy each candidate baseline from the `TranslatorCensus` folder over the committed file in this directory, and review the diff: removed lines are regressions that need a reason, added lines are libraries that now translate cleanly or compile. Never edit the files by hand.
 
 ## 1.5. ELM checks
 
@@ -95,3 +100,18 @@ The comparison ([`ElmStructuralDiff`](../../ElmComparison/ElmStructuralDiff.cs))
 | `ValueDifference` | the same node, with a different attribute value, or an attribute present on one side only |
 
 The report gives the totals per kind, a histogram of the differences (grouped by kind, property and detail, the detail normalized like the message histogram in [1.3.](#13-the-report), most widespread first), and per library its differences with their paths. A library whose comparison throws is listed as such and does not stop the run.
+
+## 1.6. Compiling
+
+Every run also compiles the clean libraries to C# and an assembly, the next level after translation: the ELM-to-C#-to-assembly pipeline that runs over the reference ELM in the shipped build runs over the .NET translator's ELM here. The ELM compiled is the JSON as read back by the `Hl7.Cql.Elm` reader, which the ELM checks validated, and it is compiled with `ElmToolkitConfig.Default`, except that invalid C# is never allowed.
+
+A library is compiled together with the libraries it includes, so every clean library ends up in one of four outcomes:
+
+| Outcome | Meaning |
+|---|---|
+| `compiled` | it compiled to an assembly |
+| `blocked` | a library it includes, directly or indirectly, did not translate cleanly, so it was not compiled at all |
+| `failed` | it failed to compile itself: in the ELM preprocessor, the code builder, C# generation or the C# compiler; the report gives the innermost exception, and for the C# compiler its first error |
+| `cascade` | a library it includes, directly or indirectly, was compiled with it and failed |
+
+`blocked` and `cascade` point at another library: the root cause is the one that did not translate cleanly or that failed. The baselines are described in [1.2.3.](#123-compile-baseline-files) and the report in [1.3.](#13-the-report).
