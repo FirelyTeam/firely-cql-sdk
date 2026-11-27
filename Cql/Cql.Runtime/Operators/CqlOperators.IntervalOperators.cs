@@ -265,17 +265,50 @@ namespace Hl7.Cql.Operators
                 // In other words, adjacent intervals within a sorted list are merged if they either overlap or meet.
                 if ((meets(x, y, precision) ?? false) || (OverlapsHelper(x, y, precision, toClosed) ?? false))
                 {
-                    if  (IntervalIncludesInterval(x, y, precision!) ?? false)
+                    // The sort puts x no later than y, so the merged interval starts where x starts, and it
+                    // ends where x ends when x includes y and where y ends otherwise.
+                    var highFromX = IntervalIncludesInterval(x, y, precision!) ?? false;
+                    var (low, lowClosed) = (x.low, x.lowClosed);
+                    var (high, highClosed) = highFromX ? (x.high, x.highClosed) : (y.high, y.highClosed);
+
+                    // Two intervals can have a boundary at the same point, one written open and one closed,
+                    // as Interval(1, 7] and Interval[2, 7] do for the Integer 2. The specification does not
+                    // say which form the result has. It takes the closed one, so that which of the two
+                    // intervals comes first in the list does not decide it. Two boundaries are the same
+                    // point here when their values compare as equal at their full precision; two values of
+                    // different precision do not.
+                    // The step of a Quantity is in the unit of the boundary, so the same point written in
+                    // another unit can meet other intervals; a boundary is only replaced by one in its own unit.
+                    // The effective boundaries are only needed, and only computed, when one of the two
+                    // intervals has the boundary open and the other has it closed.
+                    var (otherHigh, otherHighClosed) = highFromX ? (y.high, y.highClosed) : (x.high, x.highClosed);
+                    var lowMayTie = lowClosed != true && y.lowClosed == true && haveTheSameUnit(low, y.low);
+                    var highMayTie = highClosed != true && otherHighClosed == true && haveTheSameUnit(high, otherHigh);
+                    var lowFromX = true;
+                    if (lowMayTie || highMayTie)
                     {
-                        return x;
+                        var closedX = toClosed(x)!;
+                        var closedY = toClosed(y)!;
+                        if (lowMayTie && IsSame(Boundary<T?>.LowOf(closedX), Boundary<T?>.LowOf(closedY), null) == true)
+                        {
+                            (low, lowClosed) = (y.low, y.lowClosed);
+                            lowFromX = false;
+                        }
+
+                        if (highMayTie && IsSame(Boundary<T?>.HighOf(closedX), Boundary<T?>.HighOf(closedY), null) == true)
+                        {
+                            (high, highClosed) = (otherHigh, otherHighClosed);
+                            highFromX = !highFromX;
+                        }
                     }
-                    else
-                    {
-                        return new CqlInterval<T?>(x.low, y.high, x.lowClosed, y.highClosed);
-                    }
+
+                    return lowFromX && highFromX ? x : new CqlInterval<T?>(low, high, lowClosed, highClosed);
                 }
                 else return null;
             };
+
+            static bool haveTheSameUnit(T? left, T? right) =>
+                left is not CqlQuantity leftQuantity || right is not CqlQuantity rightQuantity || leftQuantity.unit == rightQuantity.unit;
 
             // Walk the sorted intervals front to back, merging into the interval most recently added to the
             // result. Taking them off the front of the list instead shifts every remaining element down one slot
