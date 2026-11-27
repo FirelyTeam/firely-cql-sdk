@@ -189,14 +189,14 @@ public class TranslatorCensusTest
                             ? $"{corpus.Name}: the ELM checks threw {elmCheckError.GetType().Name}."
                             : $"{corpus.Name}: the ELM checks threw {elmCheckError}");
 
+        // The structural comparison with the reference ELM is a report only; the independent checkers are a gate.
+        if (elmCheck!.FailedLibraries > 0)
+            Assert.Fail($"{corpus.Name}: the ELM of {elmCheck.FailedLibraries} of {elmCheck.CheckedLibraries} clean libraries does not read back as written or is not valid against the ELM schema. See {elmCheck.ReportFileName} for details.");
+
         if (compileError is not null)
             Assert.Fail(corpus.CountsOnly
                             ? $"{corpus.Name}: compiling the clean libraries threw {compileError.GetType().Name}."
                             : $"{corpus.Name}: compiling the clean libraries threw {compileError}");
-
-        // The structural comparison with the reference ELM is a report only; the independent checkers are a gate.
-        if (elmCheck!.FailedLibraries > 0)
-            Assert.Fail($"{corpus.Name}: the ELM of {elmCheck.FailedLibraries} of {elmCheck.CheckedLibraries} clean libraries does not read back as written or is not valid against the ELM schema. See {elmCheck.ReportFileName} for details.");
 
         var compileBaselinePath = Path.Combine(AppContext.BaseDirectory, "Input", "Census", corpus.CompileBaselineFileName);
         if (!File.Exists(compileBaselinePath))
@@ -239,7 +239,8 @@ public class TranslatorCensusTest
 
     /// <summary>
     /// A clean library compiles; one that includes a library with translation errors is blocked; one whose ELM cannot
-    /// be compiled fails; and one that includes it is a cascade.
+    /// be compiled fails; and one that includes it is a cascade. Through a chain of includes, blocked and cascade name
+    /// the library at its root.
     /// </summary>
     [TestMethod]
     public void CompileClassifiesCleanLibrariesByWhyTheyDoNotCompile()
@@ -253,6 +254,8 @@ public class TranslatorCensusTest
             File.WriteAllText(Path.Combine(directory.FullName, "c.cql"), "library C version '1.0.0'\n\ninclude Broken version '1.0.0'\n\ndefine Y: 1\n");
             File.WriteAllText(Path.Combine(directory.FullName, "d.cql"), "library D version '1.0.0'\n\ndefine X: 1\n\ndefine Y: X\n");
             File.WriteAllText(Path.Combine(directory.FullName, "e.cql"), "library E version '1.0.0'\n\ninclude D version '1.0.0'\n\ndefine Z: D.X\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "f.cql"), "library F version '1.0.0'\n\ninclude E version '1.0.0'\n\ndefine W: E.Z\n");
+            File.WriteAllText(Path.Combine(directory.FullName, "g.cql"), "library G version '1.0.0'\n\ninclude C version '1.0.0'\n\ndefine V: 1\n");
 
             // D translates cleanly; make its ELM uncompilable by pointing Y at a definition that does not exist.
             var results = Translate(directory, [])
@@ -261,13 +264,16 @@ public class TranslatorCensusTest
 
             var byId = Compile(results).ToDictionary(r => r.Id, StringComparer.Ordinal);
 
-            byId.Keys.Should().BeEquivalentTo("A-1.0.0", "B-1.0.0", "C-1.0.0", "D-1.0.0", "E-1.0.0");
+            byId.Keys.Should().BeEquivalentTo("A-1.0.0", "B-1.0.0", "C-1.0.0", "D-1.0.0", "E-1.0.0", "F-1.0.0", "G-1.0.0");
             byId["A-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
             byId["B-1.0.0"].Outcome.Should().Be(CompileOutcome.Compiled);
             byId["C-1.0.0"].Should().Be(new CompileResult("C-1.0.0", CompileOutcome.Blocked, "includes Broken-1.0.0, which did not translate cleanly"));
             byId["D-1.0.0"].Outcome.Should().Be(CompileOutcome.Failed);
             byId["D-1.0.0"].Detail.Should().Contain("D-1.0.0").And.Contain("Exception");
             byId["E-1.0.0"].Should().Be(new CompileResult("E-1.0.0", CompileOutcome.Cascade, "includes D-1.0.0, which failed to compile"));
+            // Through a chain, the root cause is named, not the library in between.
+            byId["F-1.0.0"].Should().Be(new CompileResult("F-1.0.0", CompileOutcome.Cascade, "includes D-1.0.0, which failed to compile"));
+            byId["G-1.0.0"].Should().Be(new CompileResult("G-1.0.0", CompileOutcome.Blocked, "includes Broken-1.0.0, which did not translate cleanly"));
         }
         finally
         {
@@ -920,7 +926,9 @@ public class TranslatorCensusTest
             entry => (entry.Value.includes ?? []).Select(include => include.VersionedLibraryIdentifier.ToString()).ToArray(),
             StringComparer.Ordinal);
 
-        // A library is blocked when any library it includes, directly or indirectly, cannot be compiled with it.
+        // A library is blocked when any library it includes, directly or indirectly, cannot be compiled with it: one
+        // that did not translate cleanly, or whose ELM could not be written or read back. The blocking library named
+        // is that one, not a library in between that is itself blocked.
         var blockedBy = new Dictionary<string, string?>(StringComparer.Ordinal);
         string? BlockingInclude(string id, HashSet<string> visiting)
         {
@@ -931,9 +939,7 @@ public class TranslatorCensusTest
             string? blocking = null;
             foreach (var include in includes[id])
             {
-                blocking = libraries.ContainsKey(include) && !compileResults.ContainsKey(include)
-                               ? BlockingInclude(include, visiting)
-                               : include;
+                blocking = libraries.ContainsKey(include) ? BlockingInclude(include, visiting) : include;
                 if (blocking is not null)
                     break;
             }
@@ -943,38 +949,41 @@ public class TranslatorCensusTest
             return blocking;
         }
 
-        var toCompile = new List<Library>();
+        var toCompile = new List<(string Id, Library Library)>();
         foreach (var (id, library) in libraries)
         {
-            if (BlockingInclude(id, []) is { } blocking)
-                compileResults[id] = new CompileResult(id, CompileOutcome.Blocked, $"includes {blocking}, which did not translate cleanly");
+            if (BlockingInclude(id, []) is not { } blocking)
+                toCompile.Add((id, library));
+            else if (compileResults.ContainsKey(blocking))
+                compileResults[id] = new CompileResult(id, CompileOutcome.Blocked, $"includes {blocking}, whose ELM could not be written or read back");
             else
-                toCompile.Add(library);
+                compileResults[id] = new CompileResult(id, CompileOutcome.Blocked, $"includes {blocking}, which did not translate cleanly");
         }
 
         var loggerFactory = new FailureCollectingLoggerFactory();
         var toolkit = new ElmToolkit(loggerFactory, new ElmToolkitConfig(AllowInvalidCSharp: false), BatchProcessExceptionContinuation.Continue)
-                      .AddElmLibraries(toCompile)
+                      .AddElmLibraries(toCompile.Select(c => c.Library))
                       .CompileToAssemblies();
         var compiled = toolkit.GetElmToAssemblyResults().Select(r => r.libraryIdentifier.ToString()).ToHashSet(StringComparer.Ordinal);
 
-        // A library compiled with a library it includes that has no assembly fails because of that library.
+        // A library compiled with a library it includes that has no assembly fails because of that library. The one
+        // named is the deepest such library, which failed itself, not a library in between that is itself a cascade.
         string? FailedInclude(string id, HashSet<string> visited)
         {
             foreach (var include in includes[id])
             {
                 if (!visited.Add(include))
                     continue;
-                if (!compiled.Contains(include))
-                    return include;
                 if (FailedInclude(include, visited) is { } deeper)
                     return deeper;
+                if (!compiled.Contains(include))
+                    return include;
             }
 
             return null;
         }
 
-        foreach (var id in toCompile.Select(l => l.VersionedLibraryIdentifier.ToString()))
+        foreach (var (id, _) in toCompile)
         {
             if (compiled.Contains(id))
                 compileResults[id] = new CompileResult(id, CompileOutcome.Compiled);

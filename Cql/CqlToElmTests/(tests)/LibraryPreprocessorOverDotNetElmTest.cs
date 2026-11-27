@@ -12,6 +12,7 @@ using Hl7.Cql.Compiler.Preprocessing;
 using Hl7.Cql.CqlToElm.Test.ElmComparison;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.CqlToElm.Test;
@@ -77,11 +78,12 @@ public class LibraryPreprocessorOverDotNetElmTest
 
     /// <summary>
     /// <see cref="PowerResultTypeCorrector"/> declares every <c>Power</c> as <c>Decimal</c>, which is what the runtime
-    /// computes. The .NET translator already declares it so; the specification declares Integer and Long for Integer
-    /// and Long operands (#1757).
+    /// computes. Whatever the translator declares, after preprocessing the declared type matches the runtime. Which type
+    /// the translator itself should declare for Integer and Long operands is not asserted here: the specification says
+    /// Integer and Long, the runtime returns Decimal, and #1757 tracks aligning them.
     /// </summary>
     [TestMethod]
-    public void PowerResultTypeCorrector_Leaves_Power_That_Is_Declared_Decimal()
+    public void PowerResultTypeCorrector_Declares_Power_As_The_Runtime_Computes_It()
     {
         var (before, after) = Preprocess("""
             library Pow version '1.0.0'
@@ -91,9 +93,8 @@ public class LibraryPreprocessorOverDotNetElmTest
             define D: 2.0 ^ 3.0
             """);
 
-        Nodes(before).Where(n => (string?)n["type"] == "Power").Select(ResultType).Should().Equal(Decimal, Decimal, Decimal);
-
-        ShouldBeUnchanged(before, after);
+        Nodes(before).Where(n => (string?)n["type"] == "Power").Should().HaveCount(3);
+        Nodes(after).Where(n => (string?)n["type"] == "Power").Select(ResultType).Should().Equal(Decimal, Decimal, Decimal);
     }
 
     /// <summary>
@@ -144,8 +145,36 @@ public class LibraryPreprocessorOverDotNetElmTest
         ShouldBeUnchanged(before, after);
     }
 
+    /// <summary>
+    /// Under QICore the shape <see cref="ProfiledValueSetPropertyCorrector"/> targets does not arise from the .NET
+    /// translator: <c>QICore.UnitsOfTime</c> has no <c>value</c>, and the expression is reported, as the reference
+    /// translator reports it.
+    /// </summary>
+    [TestMethod]
+    public void A_Period_Unit_Value_Is_Rejected_Under_QICore_As_By_The_Reference_Translator()
+    {
+        var toolkit = new CqlToolkit(config: CqlToolkitConfig.Default with { Models = CqlToolkitConfig.DefaultCqlModels.Union([CqlModel.QICore600, CqlModel.USCore610]) })
+                      .AddFHIRHelpers();
+        toolkit.MakeLibrary("""
+            library PeriodUnit version '1.0.0'
+
+            using QICore version '6.0.0'
+
+            include FHIRHelpers version '4.0.1'
+
+            context Patient
+
+            define U: [MedicationRequest] M return M.dosageInstruction[0].timing.repeat.periodUnit.value
+            """,
+            "Member 'value' not found for type {http://hl7.org/fhir/us/qicore}UnitsOfTime.");
+    }
+
+    /// <summary>
+    /// Asserts the JSON is exactly the same, so that even an empty collection a corrector adds counts as a change.
+    /// </summary>
     private static void ShouldBeUnchanged(JsonNode before, JsonNode after) =>
-        ElmOutputCheckers.FirstDifference(before, after, "$").Should().BeNull("the preprocessor should leave the .NET translator's ELM as it is");
+        JsonNode.DeepEquals(before, after).Should().BeTrue(
+            $"the preprocessor should leave the .NET translator's ELM as it is; first difference: {ElmOutputCheckers.FirstDifference(before, after, "$")}");
 
     private static string? ResultType(JsonObject node) => (string?)node["resultTypeSpecifier"]?["name"];
 
